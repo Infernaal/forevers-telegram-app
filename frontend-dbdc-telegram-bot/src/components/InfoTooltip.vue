@@ -1,12 +1,12 @@
 <template>
   <Transition
     name="tooltip"
-    enter-active-class="transition-all duration-300 ease-out"
-    leave-active-class="transition-all duration-200 ease-in"
-    enter-from-class="opacity-0 scale-95"
-    enter-to-class="opacity-100 scale-100"
-    leave-from-class="opacity-100 scale-100"
-    leave-to-class="opacity-0 scale-95"
+    enter-active-class="transition-all duration-200 ease-out"
+    leave-active-class="transition-all duration-150 ease-in"
+    enter-from-class="opacity-0 scale-90 translate-y-4"
+    enter-to-class="opacity-100 scale-100 translate-y-0"
+    leave-from-class="opacity-100 scale-100 translate-y-0"
+    leave-to-class="opacity-0 scale-95 translate-y-2"
   >
     <div
       v-if="isVisible"
@@ -115,23 +115,23 @@ onBeforeUnmount(() => {
   backdrop-filter: blur(9px);
 }
 
-/* Tooltip animations */
+/* Tooltip animations - Optimized for smooth mobile experience */
 .tooltip-enter-active {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .tooltip-leave-active {
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.6, 1);
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.6, 1);
 }
 
 .tooltip-enter-from {
   opacity: 0;
-  transform: scale(0.9) translateY(20px);
+  transform: scale(0.9) translateY(16px);
 }
 
 .tooltip-leave-to {
   opacity: 0;
-  transform: scale(0.95) translateY(-10px);
+  transform: scale(0.95) translateY(8px);
 }
 
 /* Ensure text is readable on gradient background */

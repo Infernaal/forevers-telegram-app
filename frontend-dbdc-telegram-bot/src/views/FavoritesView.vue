@@ -1,9 +1,9 @@
 <template>
-  <div class="h-screen bg-gray-100 flex flex-col font-sans overflow-hidden">
+  <div class="favorites-view touch-optimized">
     <!-- Main Content -->
-    <main class="flex-1 w-full max-w-md mx-auto px-3.5 pt-4 pb-2 flex flex-col">
+    <main class="main-content">
       <!-- Total Balance Card -->
-      <div class="bg-purple-50 border border-purple-200 rounded-2xl p-3 mb-2 flex-shrink-0">
+      <div class="balance-card">
         <div class="flex items-start justify-between mb-4">
           <h2 class="text-2xl font-semibold text-black leading-7">
             Forevers<br>Balance
@@ -29,7 +29,7 @@
       </div>
 
       <!-- Scroll Content -->
-      <div class="flex-1 overflow-y-auto pt-2 pb-24 space-y-2" v-if="balances.length > 0">
+      <div class="flex-1 overflow-y-auto pt-2 pb-20 sm:pb-24 countries-grid smooth-scroll" v-if="balances.length > 0">
         <div
           v-for="balance in balances"
           :key="balance.id"
@@ -38,7 +38,7 @@
           <!-- Country Header -->
           <div class="flex items-center justify-between mb-3">
             <div class="flex items-center gap-2">
-              <CountryFlag :country="balance.code" class="w-6 h-6" />
+              <CountryFlag :country="balance.code" class="w-8 h-8" />
               <span class="text-gray-700 font-medium text-base">{{ balance.country }} Balance</span>
             </div>
 

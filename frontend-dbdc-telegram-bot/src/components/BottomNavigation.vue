@@ -57,9 +57,9 @@
     </Transition>
 
     <!-- Bottom Navigation -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-lg border-t border-gray-100 z-50">
+    <div class="fixed bottom-1 sm:bottom-2 left-0 right-0 bg-white rounded-t-xl sm:rounded-t-2xl shadow-lg border-t border-gray-100 z-50 container-responsive">
       <!-- Navigation Items -->
-      <div class="flex items-center justify-center px-2 py-3 safe-area-pb">
+      <div class="flex items-center justify-center px-2 py-2 sm:py-3 safe-area-pb">
         <div class="flex items-center gap-2 sm:gap-4 w-full max-w-sm mx-auto px-2">
           <!-- Profile -->
           <button
@@ -92,7 +92,7 @@
                     <img
                       src="https://images.pexels.com/photos/15023413/pexels-photo-15023413.jpeg?auto=compress&cs=tinysrgb&w=400"
                       alt="Profile"
-                      class="w-full h-full object-cover"
+                      class="w-full h-full object-cover rounded-full"
                     />
                   </div>
                   <!-- Silver Badge -->
@@ -319,8 +319,39 @@ const toggleLanguageSelector = () => {
 </script>
 
 <style scoped>
-/* Mobile first approach for Telegram mini app */
-@media (max-width: 375px) {
+/* Comprehensive device support for bottom navigation */
+
+/* Very small phones */
+@media (max-width: 374px) {
+  .fixed {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    bottom: 0px !important;
+  }
+
+  .flex-1 {
+    min-width: 40px;
+  }
+
+  .text-xs {
+    font-size: 10px;
+    line-height: 14px;
+  }
+
+  /* Smaller navigation items */
+  button {
+    padding: 4px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+  }
+
+  svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+}
+
+/* Small phones */
+@media (min-width: 375px) and (max-width: 430px) {
   .fixed {
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
@@ -330,14 +361,18 @@ const toggleLanguageSelector = () => {
   }
 
   .text-xs {
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 11px;
+    line-height: 15px;
   }
 }
 
-@media (min-width: 376px) and (max-width: 768px) {
+/* Large phones */
+@media (min-width: 431px) and (max-width: 767px) {
   .fixed {
     padding-bottom: env(safe-area-inset-bottom, 0px);
+    max-width: 430px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .flex-1 {
@@ -345,18 +380,78 @@ const toggleLanguageSelector = () => {
   }
 }
 
-@media (min-width: 769px) {
+/* Small tablets */
+@media (min-width: 768px) and (max-width: 1023px) {
   .fixed {
     max-width: 480px;
     left: 50%;
     transform: translateX(-50%);
     border-radius: 20px 20px 0 0;
+    margin: 0 20px;
+  }
+
+  .flex-1 {
+    min-width: 60px;
+  }
+
+  button {
+    padding: 12px !important;
+  }
+}
+
+/* Large tablets */
+@media (min-width: 1024px) {
+  .fixed {
+    max-width: 520px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 24px 24px 0 0;
+    margin: 0 40px;
+    box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .flex-1 {
+    min-width: 70px;
+  }
+
+  button {
+    padding: 16px !important;
+    border-radius: 12px !important;
+  }
+
+  .text-xs {
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+
+/* Landscape optimizations */
+@media (max-height: 600px) and (orientation: landscape) {
+  .fixed {
+    bottom: 0px !important;
+    padding: 8px 16px !important;
+  }
+
+  button {
+    padding: 6px !important;
+  }
+
+  .text-xs {
+    display: none; /* Hide labels in landscape */
+  }
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) and (pointer: coarse) {
+  button:active {
+    transform: scale(0.95) !important;
+    transition: transform 0.1s ease !important;
   }
 }
 
 /* Safe area support for iOS */
 .safe-area-pb {
-  padding-bottom: env(safe-area-inset-bottom, 8px);
+  padding-bottom: calc(env(safe-area-inset-bottom, 8px) + 8px);
 }
 
 /* Touch interactions */

@@ -1,0 +1,505 @@
+/* ============================================================================
+   COMPREHENSIVE RESPONSIVE DESIGN SYSTEM
+   Optimized for ALL mobile and tablet devices in Telegram WebApp
+   ============================================================================ */
+
+/* ============================================================================
+   DEVICE BREAKPOINTS
+   ============================================================================ */
+:root {
+  /* Device width breakpoints */
+  --bp-xs: 320px;    /* Very small phones (iPhone SE 1st gen) */
+  --bp-sm: 375px;    /* Small phones (iPhone SE 2nd gen, iPhone 12 mini) */
+  --bp-md: 390px;    /* Medium phones (iPhone 12/13/14) */
+  --bp-lg: 414px;    /* Large phones (iPhone 12/13/14 Plus) */
+  --bp-xl: 430px;    /* Extra large phones (iPhone 14 Pro Max) */
+  --bp-tablet-sm: 768px;   /* Small tablets (iPad mini) */
+  --bp-tablet-md: 820px;   /* Medium tablets (iPad Air) */
+  --bp-tablet-lg: 1024px;  /* Large tablets (iPad Pro 11") */
+  --bp-tablet-xl: 1366px;  /* Extra large tablets (iPad Pro 12.9") */
+  
+  /* Height breakpoints for landscape modes */
+  --bp-h-xs: 568px;  /* iPhone SE landscape */
+  --bp-h-sm: 667px;  /* iPhone 8 landscape */
+  --bp-h-md: 736px;  /* iPhone Plus landscape */
+  --bp-h-lg: 812px;  /* iPhone X/11/12 landscape */
+  
+  /* Container max-widths */
+  --container-xs: 100%;
+  --container-sm: 375px;
+  --container-md: 414px;
+  --container-lg: 430px;
+  --container-tablet: 480px;
+  
+  /* Spacing scale */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 20px;
+  --space-2xl: 24px;
+  --space-3xl: 32px;
+  --space-4xl: 40px;
+  
+  /* Typography scale */
+  --text-xs: 11px;
+  --text-sm: 12px;
+  --text-base: 14px;
+  --text-md: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 28px;
+  
+  /* Touch targets */
+  --touch-target-min: 44px;
+  --touch-target-comfortable: 48px;
+  
+  /* Border radius scale */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-3xl: 24px;
+}
+
+/* ============================================================================
+   BASE RESPONSIVE CLASSES
+   ============================================================================ */
+
+/* Container classes */
+.container-responsive {
+  width: 100%;
+  max-width: var(--container-lg);
+  margin: 0 auto;
+  padding-left: var(--space-lg);
+  padding-right: var(--space-lg);
+}
+
+/* Typography responsive classes */
+.text-responsive-xs { font-size: var(--text-xs); line-height: 1.4; }
+.text-responsive-sm { font-size: var(--text-sm); line-height: 1.4; }
+.text-responsive-base { font-size: var(--text-base); line-height: 1.5; }
+.text-responsive-md { font-size: var(--text-md); line-height: 1.5; }
+.text-responsive-lg { font-size: var(--text-lg); line-height: 1.5; }
+.text-responsive-xl { font-size: var(--text-xl); line-height: 1.4; }
+.text-responsive-2xl { font-size: var(--text-2xl); line-height: 1.3; }
+.text-responsive-3xl { font-size: var(--text-3xl); line-height: 1.3; }
+
+/* Touch-friendly button classes */
+.btn-touch {
+  min-height: var(--touch-target-min);
+  min-width: var(--touch-target-min);
+  padding: var(--space-md) var(--space-xl);
+  border-radius: var(--radius-lg);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.btn-touch-comfortable {
+  min-height: var(--touch-target-comfortable);
+  min-width: var(--touch-target-comfortable);
+}
+
+/* Spacing responsive classes */
+.space-responsive-xs { margin: var(--space-xs); }
+.space-responsive-sm { margin: var(--space-sm); }
+.space-responsive-md { margin: var(--space-md); }
+.space-responsive-lg { margin: var(--space-lg); }
+.space-responsive-xl { margin: var(--space-xl); }
+
+.gap-responsive-xs { gap: var(--space-xs); }
+.gap-responsive-sm { gap: var(--space-sm); }
+.gap-responsive-md { gap: var(--space-md); }
+.gap-responsive-lg { gap: var(--space-lg); }
+.gap-responsive-xl { gap: var(--space-xl); }
+
+/* ============================================================================
+   DEVICE-SPECIFIC BREAKPOINTS
+   ============================================================================ */
+
+/* Very small phones (320px - 374px) - iPhone SE 1st gen, old Android */
+@media (max-width: 374px) {
+  :root {
+    --text-xs: 10px;
+    --text-sm: 11px;
+    --text-base: 12px;
+    --text-md: 14px;
+    --text-lg: 16px;
+    --text-xl: 18px;
+    --text-2xl: 20px;
+    --text-3xl: 24px;
+    
+    --space-xs: 3px;
+    --space-sm: 6px;
+    --space-md: 10px;
+    --space-lg: 12px;
+    --space-xl: 16px;
+    --space-2xl: 20px;
+    --space-3xl: 24px;
+    --space-4xl: 32px;
+  }
+  
+  .container-responsive {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+  
+  .btn-touch {
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--text-sm);
+  }
+  
+  /* Reduce heights for very small screens */
+  .h-96 { height: 280px !important; }
+  .h-80 { height: 240px !important; }
+  .h-64 { height: 200px !important; }
+  .h-52 { height: 160px !important; }
+  .h-48 { height: 140px !important; }
+  
+  /* Smaller modal padding */
+  .modal-content {
+    padding: var(--space-md) !important;
+  }
+}
+
+/* Small phones (375px - 389px) - iPhone SE 2nd gen, iPhone 12 mini */
+@media (min-width: 375px) and (max-width: 389px) {
+  :root {
+    --container-sm: 375px;
+  }
+  
+  .container-responsive {
+    max-width: var(--container-sm);
+  }
+}
+
+/* Medium phones (390px - 413px) - iPhone 12/13/14 */
+@media (min-width: 390px) and (max-width: 413px) {
+  :root {
+    --container-md: 390px;
+  }
+  
+  .container-responsive {
+    max-width: var(--container-md);
+  }
+}
+
+/* Large phones (414px - 429px) - iPhone 12/13/14 Plus, large Android */
+@media (min-width: 414px) and (max-width: 429px) {
+  :root {
+    --container-lg: 414px;
+  }
+  
+  .container-responsive {
+    max-width: var(--container-lg);
+  }
+}
+
+/* Extra large phones (430px+) - iPhone 14 Pro Max */
+@media (min-width: 430px) and (max-width: 767px) {
+  :root {
+    --container-xl: 430px;
+  }
+  
+  .container-responsive {
+    max-width: var(--container-xl);
+  }
+  
+  /* Slightly larger text for bigger screens */
+  :root {
+    --text-base: 15px;
+    --text-md: 17px;
+    --text-lg: 19px;
+  }
+}
+
+/* Small tablets (768px - 819px) - iPad mini */
+@media (min-width: 768px) and (max-width: 819px) {
+  :root {
+    --container-tablet: 500px;
+    
+    --text-base: 16px;
+    --text-md: 18px;
+    --text-lg: 20px;
+    --text-xl: 22px;
+    --text-2xl: 26px;
+    --text-3xl: 32px;
+    
+    --space-lg: 20px;
+    --space-xl: 24px;
+    --space-2xl: 28px;
+    --space-3xl: 36px;
+    --space-4xl: 48px;
+  }
+  
+  .container-responsive {
+    max-width: var(--container-tablet);
+    padding-left: var(--space-2xl);
+    padding-right: var(--space-2xl);
+  }
+  
+  .btn-touch {
+    padding: var(--space-lg) var(--space-2xl);
+  }
+}
+
+/* Medium tablets (820px - 1023px) - iPad Air */
+@media (min-width: 820px) and (max-width: 1023px) {
+  :root {
+    --container-tablet: 520px;
+    
+    --text-base: 17px;
+    --text-md: 19px;
+    --text-lg: 21px;
+    --text-xl: 24px;
+    --text-2xl: 28px;
+    --text-3xl: 36px;
+  }
+  
+  .container-responsive {
+    max-width: var(--container-tablet);
+  }
+}
+
+/* Large tablets (1024px - 1365px) - iPad Pro 11" */
+@media (min-width: 1024px) and (max-width: 1365px) {
+  :root {
+    --container-tablet: 560px;
+    
+    --text-base: 18px;
+    --text-md: 20px;
+    --text-lg: 22px;
+    --text-xl: 26px;
+    --text-2xl: 30px;
+    --text-3xl: 38px;
+  }
+  
+  .container-responsive {
+    max-width: var(--container-tablet);
+    border-radius: var(--radius-2xl);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Extra large tablets (1366px+) - iPad Pro 12.9" */
+@media (min-width: 1366px) {
+  :root {
+    --container-tablet: 600px;
+    
+    --text-base: 19px;
+    --text-md: 21px;
+    --text-lg: 24px;
+    --text-xl: 28px;
+    --text-2xl: 32px;
+    --text-3xl: 40px;
+  }
+  
+  .container-responsive {
+    max-width: var(--container-tablet);
+    margin-top: var(--space-4xl);
+    margin-bottom: var(--space-4xl);
+  }
+}
+
+/* ============================================================================
+   LANDSCAPE ORIENTATIONS
+   ============================================================================ */
+
+/* Small phone landscape */
+@media (max-height: 568px) and (orientation: landscape) {
+  :root {
+    --space-lg: 8px;
+    --space-xl: 12px;
+    --space-2xl: 16px;
+  }
+  
+  .container-responsive {
+    padding-top: var(--space-sm);
+    padding-bottom: var(--space-sm);
+  }
+  
+  /* Reduce vertical spacing */
+  .space-y-4 > * + * { margin-top: 8px !important; }
+  .space-y-5 > * + * { margin-top: 12px !important; }
+  .space-y-6 > * + * { margin-top: 16px !important; }
+  
+  /* Smaller modal heights */
+  .modal-content {
+    max-height: 70vh !important;
+    overflow-y: auto;
+  }
+}
+
+/* Medium phone landscape */
+@media (min-height: 569px) and (max-height: 667px) and (orientation: landscape) {
+  .modal-content {
+    max-height: 75vh !important;
+  }
+}
+
+/* Large phone landscape */
+@media (min-height: 668px) and (max-height: 736px) and (orientation: landscape) {
+  .modal-content {
+    max-height: 80vh !important;
+  }
+}
+
+/* Tablet landscape */
+@media (min-width: 768px) and (orientation: landscape) {
+  .container-responsive {
+    max-width: 70vw;
+  }
+  
+  /* Side-by-side layouts for tablets */
+  .tablet-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+  }
+}
+
+/* ============================================================================
+   ACCESSIBILITY AND TOUCH OPTIMIZATIONS
+   ============================================================================ */
+
+/* Ensure minimum touch targets on all devices */
+@media (pointer: coarse) {
+  button, [role="button"], input[type="button"], input[type="submit"], 
+  .btn, .button, .clickable {
+    min-height: var(--touch-target-min);
+    min-width: var(--touch-target-min);
+  }
+  
+  /* Larger touch targets for small screens */
+  @media (max-width: 374px) {
+    button, [role="button"], .btn, .button, .clickable {
+      min-height: 40px;
+      min-width: 40px;
+    }
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  img, svg {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-color: #ffffff;
+    --bg-color: #000000;
+    --border-color: #333333;
+  }
+}
+
+/* ============================================================================
+   UTILITIES FOR COMMON RESPONSIVE PATTERNS
+   ============================================================================ */
+
+/* Hide on mobile, show on tablet */
+.mobile-hidden {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .mobile-hidden {
+    display: block;
+  }
+  
+  .tablet-hidden {
+    display: none;
+  }
+}
+
+/* Responsive text alignment */
+.text-center-mobile {
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .text-center-mobile {
+    text-align: left;
+  }
+}
+
+/* Responsive flex direction */
+.flex-col-mobile {
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .flex-col-mobile {
+    flex-direction: row;
+  }
+}
+
+/* Responsive grid columns */
+.grid-responsive {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 768px) {
+  .grid-responsive {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2xl);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-responsive {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ============================================================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================================================ */
+
+/* GPU acceleration for smooth animations */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Smooth scrolling */
+.smooth-scroll {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+}
+
+/* Optimize for touch devices */
+.touch-optimized {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+/* Allow text selection for content */
+.text-selectable {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}

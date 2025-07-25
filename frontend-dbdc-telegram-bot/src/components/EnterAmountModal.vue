@@ -30,7 +30,7 @@
         <!-- Exchange Rate Section -->
         <div class="flex justify-center mb-4">
           <div class="bg-white rounded-full border border-gray-100 px-4 py-2 flex items-center shadow-sm">
-            <CountryFlag :country="selectedBalance?.code" class="w-5 h-5 flex-shrink-0 mr-2" />
+            <CountryFlag :country="selectedBalance?.code" class="w-6 h-6 flex-shrink-0 mr-2" />
             <div class="flex items-center text-sm font-medium">
               <span class="text-dbd-dark">1 Forevers {{ selectedBalance?.code }}</span>
               <span class="text-dbd-gray mx-1">/</span>

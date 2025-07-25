@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-white flex flex-col font-sans">
+  <div class="start-view touch-optimized">
     <!-- Main Content -->
     <div class="flex-1 p-4 sm:p-6 md:p-8 flex items-center justify-center">
       <div

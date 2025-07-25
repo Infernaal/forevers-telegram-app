@@ -1,0 +1,403 @@
+/* ============================================================================
+   COMPONENT-SPECIFIC RESPONSIVE STYLES
+   Applied to all components for comprehensive device support
+   ============================================================================ */
+
+/* ============================================================================
+   MODAL AND OVERLAY COMPONENTS
+   ============================================================================ */
+
+/* Delete Confirm Modal */
+.delete-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.delete-modal .modal-content {
+  width: 100%;
+  background-color: white;
+  border-radius: 1rem 1rem 0 0;
+  padding: 1rem;
+  max-width: var(--container-lg);
+}
+
+@media (max-width: 374px) {
+  .delete-modal .modal-content {
+    padding: 12px;
+    border-radius: 16px 16px 0 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .delete-modal {
+    align-items: center;
+  }
+  
+  .delete-modal .modal-content {
+    border-radius: 1rem;
+    max-width: 400px;
+  }
+}
+
+/* Enter Amount Modal */
+.enter-amount-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.enter-amount-modal .modal-content {
+  width: 100%;
+  background-color: white;
+  border-radius: 1.5rem 1.5rem 0 0;
+  max-height: 80vh;
+  max-width: var(--container-lg);
+}
+
+@media (max-width: 374px) {
+  .enter-amount-modal .modal-content {
+    border-radius: 20px 20px 0 0;
+    max-height: 85vh;
+  }
+}
+
+@media (min-width: 768px) {
+  .enter-amount-modal {
+    align-items: center;
+  }
+  
+  .enter-amount-modal .modal-content {
+    border-radius: 1.5rem;
+    max-width: 480px;
+    max-height: 70vh;
+  }
+}
+
+/* Success Modal */
+.success-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.success-modal .modal-content {
+  width: 100%;
+  background-color: white;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  max-width: var(--container-lg);
+}
+
+@media (max-width: 374px) {
+  .success-modal .modal-content {
+    padding: 16px;
+    border-radius: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .success-modal .modal-content {
+    max-width: 400px;
+    padding: 32px;
+  }
+}
+
+/* ============================================================================
+   FORM COMPONENTS
+   ============================================================================ */
+
+/* Country Flag Component */
+.country-flag {
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.country-flag.size-small {
+  width: 1rem;
+  height: 1rem;
+}
+
+.country-flag.size-medium {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.country-flag.size-large {
+  width: 2rem;
+  height: 2rem;
+}
+
+@media (max-width: 374px) {
+  .country-flag.size-small { width: 0.75rem; height: 0.75rem; }
+  .country-flag.size-medium { width: 1.25rem; height: 1.25rem; }
+  .country-flag.size-large { width: 1.5rem; height: 1.5rem; }
+}
+
+@media (min-width: 768px) {
+  .country-flag.size-small { width: 1.25rem; height: 1.25rem; }
+  .country-flag.size-medium { width: 1.75rem; height: 1.75rem; }
+  .country-flag.size-large { width: 2.5rem; height: 2.5rem; }
+}
+
+/* User Rank Component */
+.user-rank {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.user-rank .rank-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.user-rank .rank-text {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+@media (max-width: 374px) {
+  .user-rank .rank-icon { width: 0.75rem; height: 0.75rem; }
+  .user-rank .rank-text { font-size: 0.75rem; }
+}
+
+@media (min-width: 768px) {
+  .user-rank .rank-icon { width: 1.25rem; height: 1.25rem; }
+  .user-rank .rank-text { font-size: 0.875rem; }
+}
+
+/* ============================================================================
+   NOTIFICATION COMPONENTS
+   ============================================================================ */
+
+/* Error Notification */
+.error-notification {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  z-index: 50;
+  background-color: #ef4444;
+  color: white;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  max-width: var(--container-lg);
+  margin: 0 auto;
+}
+
+@media (max-width: 374px) {
+  .error-notification {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    padding: 12px;
+    border-radius: 8px;
+  }
+}
+
+@media (min-width: 768px) {
+  .error-notification {
+    top: 20px;
+    max-width: 400px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+}
+
+/* Success Notification */
+.success-notification {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  z-index: 50;
+  background-color: #22c55e;
+  color: white;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  max-width: var(--container-lg);
+  margin: 0 auto;
+}
+
+@media (max-width: 374px) {
+  .success-notification {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    padding: 12px;
+    border-radius: 8px;
+  }
+}
+
+@media (min-width: 768px) {
+  .success-notification {
+    top: 20px;
+    max-width: 400px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+}
+
+/* ============================================================================
+   VIEW-SPECIFIC RESPONSIVE CLASSES
+   ============================================================================ */
+
+/* FavoritesView */
+.favorites-view {
+  height: 100vh;
+  background-color: #f3f4f6;
+  display: flex;
+  flex-direction: column;
+  font-family: sans-serif;
+  overflow: hidden;
+}
+
+.favorites-view .main-content {
+  flex: 1;
+  width: 100%;
+  padding: 1rem 0.75rem 0.5rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  max-width: var(--container-lg);
+  margin: 0 auto;
+}
+
+.favorites-view .balance-card {
+  background-color: #faf5ff;
+  border: 1px solid #e9d5ff;
+  border-radius: 1rem;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  flex-shrink: 0;
+}
+
+.favorites-view .country-card {
+  background-color: white;
+  border: 1px solid #e9d5ff;
+  border-radius: 1rem;
+  padding: 0.75rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 200px;
+}
+
+@media (max-width: 374px) {
+  .favorites-view .main-content {
+    padding: 12px;
+  }
+  
+  .favorites-view .balance-card,
+  .favorites-view .country-card {
+    padding: 12px;
+    border-radius: 16px;
+    margin-bottom: 8px;
+  }
+  
+  .favorites-view .country-card {
+    min-height: 180px;
+  }
+}
+
+@media (min-width: 768px) {
+  .favorites-view .main-content {
+    padding: 20px;
+    max-width: 480px;
+  }
+  
+  .favorites-view .balance-card {
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  
+  .favorites-view .country-card {
+    padding: 20px;
+    min-height: 240px;
+  }
+  
+  /* Grid layout for tablets */
+  .favorites-view .countries-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .favorites-view .main-content {
+    max-width: 600px;
+  }
+  
+  .favorites-view .countries-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+/* ============================================================================
+   LANDSCAPE AND ORIENTATION OPTIMIZATIONS
+   ============================================================================ */
+
+@media (max-height: 600px) and (orientation: landscape) {
+  /* Reduce vertical spacing in landscape */
+  .space-y-4 > * + * { margin-top: 8px !important; }
+  .space-y-5 > * + * { margin-top: 12px !important; }
+  .space-y-6 > * + * { margin-top: 16px !important; }
+  
+  .mb-4 { margin-bottom: 8px !important; }
+  .mb-6 { margin-bottom: 12px !important; }
+  .mb-8 { margin-bottom: 16px !important; }
+  
+  .pt-4 { padding-top: 8px !important; }
+  .pt-6 { padding-top: 12px !important; }
+  .pb-4 { padding-bottom: 8px !important; }
+  .pb-6 { padding-bottom: 12px !important; }
+  
+  /* Adjust modal heights */
+  .modal-content {
+    max-height: 80vh !important;
+  }
+}
+
+/* ============================================================================
+   ACCESSIBILITY AND PERFORMANCE
+   ============================================================================ */
+
+/* Ensure minimum touch targets */
+@media (pointer: coarse) {
+  button, [role="button"], .btn, .clickable {
+    min-height: var(--touch-target-min);
+    min-width: var(--touch-target-min);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .border { border-width: 2px !important; }
+  .border-t { border-top-width: 2px !important; }
+  .border-b { border-bottom-width: 2px !important; }
+  .border-l { border-left-width: 2px !important; }
+  .border-r { border-right-width: 2px !important; }
+}
+
+/* Print styles */
+@media print {
+  .fixed, .sticky { position: relative !important; }
+  .shadow, .shadow-lg, .shadow-xl { box-shadow: none !important; }
+  .bg-gradient-to-r, .bg-gradient-to-l { background: #f5f5f5 !important; }
+}

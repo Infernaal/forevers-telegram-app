@@ -1,23 +1,23 @@
 <template>
-  <div class="wallet-view w-full max-w-md mx-auto bg-gray-100 min-h-screen">
+  <div class="wallet-view w-full bg-gray-100 min-h-screen container-responsive touch-optimized">
     <!-- Content Container -->
-    <div class="content-container bg-gray-100 pt-4 pb-24 px-4">
+    <div class="content-container bg-gray-100 pt-4 pb-20 sm:pb-24 space-responsive-lg">
 
       <!-- Forevers Balance Section -->
-      <div class="forevers-balance-section mb-4">
-        <div class="balance-card bg-dbd-light-blue rounded-2xl p-4">
+      <div class="forevers-balance-section mb-3 sm:mb-4">
+        <div class="balance-card bg-dbd-light-blue rounded-xl sm:rounded-2xl p-3 sm:p-4">
           <div class="flex items-center justify-between">
             <div class="balance-info">
-              <h2 class="text-lg font-semibold text-dbd-dark mb-1">
+              <h2 class="text-responsive-lg sm:text-responsive-xl font-semibold text-dbd-dark mb-1">
                 Forevers<br>Balance
               </h2>
             </div>
             <div class="balance-amount flex items-center gap-2">
               <!-- Forevers Logo SVG -->
-              <svg class="w-8 h-8" viewBox="0 0 32 32" fill="none">
+              <svg class="w-6 h-6 sm:w-8 sm:h-8" viewBox="0 0 32 32" fill="none">
                 <path d="M30.6666 7.38081V1.33337H7.1291V9.01148H1.33325V15.0589H7.1291V30.1076H13.894V22.7277H19.6153V16.6803H13.894V15.0589H25.1316V9.01148H13.894V7.38081H30.6666Z" fill="#2019CE"/>
               </svg>
-              <span class="text-2xl font-bold text-dbd-primary">10,196</span>
+              <span class="text-responsive-xl sm:text-responsive-2xl font-bold text-dbd-primary">10,196</span>
             </div>
           </div>
         </div>
@@ -124,16 +124,102 @@ const navigateToTransactions = () => {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Mobile first approach for Telegram mini app */
-@media (max-width: 430px) {
+/* Comprehensive device support for Telegram WebApp */
+.wallet-view {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Very small phones */
+@media (max-width: 374px) {
+  .balance-card, .loyalty-card, .bonus-card {
+    padding: 12px !important;
+    border-radius: 12px !important;
+  }
+
+  .icon-wrapper {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .history-btn {
+    padding: 8px 16px !important;
+    font-size: 12px !important;
+  }
+}
+
+/* Small to medium phones */
+@media (min-width: 375px) and (max-width: 430px) {
   .wallet-view {
     max-width: 100%;
   }
 }
 
-@media (min-width: 431px) and (max-width: 768px) {
+/* Large phones and small tablets */
+@media (min-width: 431px) and (max-width: 767px) {
   .wallet-view {
-    max-width: 400px;
+    max-width: 430px;
+    margin: 0 auto;
+  }
+}
+
+/* Tablets */
+@media (min-width: 768px) {
+  .wallet-view {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .content-container {
+    padding: 24px !important;
+  }
+
+  .balance-card, .loyalty-card, .bonus-card {
+    padding: 24px !important;
+  }
+
+  /* Tablet grid layout */
+  .loyalty-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .loyalty-card {
+    grid-column: span 2;
+  }
+}
+
+/* Large tablets */
+@media (min-width: 1024px) {
+  .wallet-view {
+    max-width: 520px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+}
+
+/* Landscape optimizations */
+@media (max-height: 600px) and (orientation: landscape) {
+  .content-container {
+    padding-top: 8px !important;
+    padding-bottom: 60px !important;
+  }
+
+  .forevers-balance-section,
+  .loyalty-section,
+  .bonus-section {
+    margin-bottom: 8px !important;
+  }
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) and (pointer: coarse) {
+  .history-btn:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
   }
 }
 </style>

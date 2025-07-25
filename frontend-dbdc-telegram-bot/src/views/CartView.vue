@@ -1,40 +1,40 @@
 <template>
-  <div class="cart-view w-full max-w-md mx-auto bg-gray-100 min-h-screen flex flex-col font-montserrat">
+  <div class="cart-view w-full bg-gray-100 min-h-screen flex flex-col font-montserrat container-responsive touch-optimized">
     <!-- Content Container -->
-    <div class="content-container bg-gray-100 flex-1 flex flex-col relative">
+    <div class="content-container bg-gray-100 flex-1 flex flex-col relative smooth-scroll">
       <!-- Scrollable Cart Items Area -->
-      <div class="flex-1 overflow-y-auto px-3.5 pt-4 pb-56" v-if="cartItemsCount > 0">
-        <div class="space-y-2">
+      <div class="flex-1 overflow-y-auto pt-4 pb-48 sm:pb-56" v-if="cartItemsCount > 0">
+        <div class="space-y-2 sm:space-y-3">
           <div
             v-for="item in cartItems"
             :key="item.id"
-            class="bg-white rounded-2xl p-3 border border-dbd-primary/20 relative cart-item"
+            class="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 border border-dbd-primary/20 relative cart-item"
           >
             <!-- Country Flag and Code Header -->
-            <div class="flex items-center gap-1 mb-3 h-6">
-              <CountryFlag :country="item.code" class="w-6 h-6" />
+            <div class="flex items-center gap-1 mb-2 sm:mb-3 h-6">
+              <CountryFlag :country="item.code" class="w-6 h-6 sm:w-8 sm:h-8" />
               <div class="flex items-center gap-1">
                 <!-- F Icon -->
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-dbd-dark">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-dbd-dark" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M17.2636 4H6.61925C6.15063 4 5.8159 4.28571 5.8159 4.68571V7.48571H2.80335C2.33473 7.54286 2 7.82857 2 8.22857C2 8.62857 2.33473 8.91429 2.80335 8.91429H5.8159V15.3143C5.8159 15.7143 6.15063 16 6.61925 16C7.08787 16 7.42259 15.7143 7.42259 15.3143V12.3429H10.8368C11.3054 12.3429 11.6402 12.0571 11.6402 11.6571C11.6402 11.2571 11.3054 10.9714 10.8368 10.9714H7.42259V8.85714H13.9163C14.3849 8.85714 14.7197 8.57143 14.7197 8.17143C14.7197 7.77143 14.3849 7.48571 13.9163 7.48571H7.42259V5.37143H17.1967C17.6653 5.37143 18 5.08571 18 4.68571C18 4.28571 17.7322 4 17.2636 4Z" fill="currentColor"/>
                 </svg>
-                <span class="text-dbd-dark font-semibold text-lg leading-6">{{ item.code }}</span>
+                <span class="text-dbd-dark font-semibold text-responsive-md sm:text-responsive-lg leading-6">{{ item.code }}</span>
               </div>
             </div>
 
             <!-- Amount and Price Section -->
-            <div class="flex items-center gap-3 mb-3">
+            <div class="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
               <div class="flex-1">
-                <div class="text-dbd-gray text-base font-medium leading-6 mb-1">Amount</div>
-                <div class="text-dbd-dark font-semibold text-lg leading-6">{{ item.foreversAmount.toLocaleString() }}</div>
+                <div class="text-dbd-gray text-responsive-sm sm:text-responsive-base font-medium leading-6 mb-1">Amount</div>
+                <div class="text-dbd-dark font-semibold text-responsive-md sm:text-responsive-lg leading-6">{{ item.foreversAmount.toLocaleString() }}</div>
               </div>
-              
+
               <!-- Vertical Divider -->
-              <div class="w-px h-14 bg-gray-300"></div>
-              
+              <div class="w-px h-12 sm:h-14 bg-gray-300"></div>
+
               <div class="flex-1">
-                <div class="text-dbd-gray text-base font-medium leading-6 mb-0.5">Price</div>
-                <div class="text-dbd-gray text-base font-medium leading-6">
+                <div class="text-dbd-gray text-responsive-sm sm:text-responsive-base font-medium leading-6 mb-0.5">Price</div>
+                <div class="text-dbd-gray text-responsive-sm sm:text-responsive-base font-medium leading-6">
                   <span>1Forevers {{ item.code }}</span>
                   <span class="text-dbd-dark font-semibold"> = ${{ item.usdRate.toFixed(2) }}</span>
                 </div>
@@ -42,15 +42,15 @@
             </div>
 
             <!-- Purchase Amount -->
-            <div class="flex items-center gap-1">
-              <span class="text-dbd-gray text-base font-medium leading-6">Purchase to pay:</span>
-              <span class="text-dbd-primary font-semibold text-lg leading-6">${{ (item.foreversAmount * item.usdRate).toLocaleString() }}</span>
+            <div class="flex items-center gap-1 flex-wrap">
+              <span class="text-dbd-gray text-responsive-sm sm:text-responsive-base font-medium leading-6">Purchase to pay:</span>
+              <span class="text-dbd-primary font-semibold text-responsive-md sm:text-responsive-lg leading-6">${{ (item.foreversAmount * item.usdRate).toLocaleString() }}</span>
             </div>
 
             <!-- Remove Button -->
             <button
               @click="showDeleteConfirm(item)"
-              class="absolute top-3 right-3 w-10 h-10 flex items-center justify-center hover:bg-gray-100 rounded-lg transition-colors"
+              class="btn-touch absolute top-2 sm:top-3 right-2 sm:right-3 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center hover:bg-gray-100 rounded-lg transition-colors"
             >
               <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M19.25 3.5H14.75V2.75C14.75 1.5095 13.7405 0.5 12.5 0.5H9.5C8.2595 0.5 7.25 1.5095 7.25 2.75V3.5H2.75C1.92275 3.5 1.25 4.17275 1.25 5V5.75C1.25 6.164 1.586 6.5 2 6.5H20C20.414 6.5 20.75 6.164 20.75 5.75V5C20.75 4.17275 20.0772 3.5 19.25 3.5ZM8.75 2.75C8.75 2.33675 9.08675 2 9.5 2H12.5C12.9132 2 13.25 2.33675 13.25 2.75V3.5H8.75V2.75Z" fill="#FF1919"/>
@@ -62,18 +62,18 @@
       </div>
 
       <!-- Empty Cart (takes full space when empty) -->
-      <div v-else class="flex-1 flex items-center justify-center px-3.5 pt-4">
-        <div class="text-center">
-          <div class="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center mb-4 mx-auto">
-            <svg width="20" height="22" viewBox="0 0 18 20" class="text-gray-400">
+      <div v-else class="flex-1 flex items-center justify-center pt-4">
+        <div class="text-center px-4">
+          <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gray-200 rounded-lg flex items-center justify-center mb-4 mx-auto">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-gray-400" viewBox="0 0 18 20">
               <path d="M8.99992 0C11.2937 6.01927e-05 13.1601 1.71665 13.1601 3.82617V4.95801H15.8886C16.2926 4.95801 16.6298 5.24124 16.6659 5.61133L17.9892 19.165C17.996 19.2031 17.9998 19.2424 17.9999 19.2822C17.9999 19.6786 17.6508 19.9999 17.2197 20H0.781174C0.562191 20 0.352885 19.9152 0.205002 19.7666C0.0571058 19.6179 -0.0167136 19.4186 0.00285324 19.2178L1.33195 5.61133C1.3681 5.24123 1.70529 4.95801 2.1093 4.95801H4.83977V3.82617C4.83977 1.71662 6.70624 0 8.99992 0ZM2.82317 6.39355L1.63469 18.5645H16.3632L15.1747 6.39355H13.1601V7.67676C13.1601 8.07321 12.81 8.39551 12.3788 8.39551C11.9478 8.3953 11.5986 8.07308 11.5986 7.67676V6.39355H6.40129V7.67676C6.40129 8.07314 6.05211 8.39539 5.62102 8.39551C5.18982 8.39551 4.83977 8.07321 4.83977 7.67676V6.39355H2.82317ZM8.99992 1.43555C7.56707 1.43555 6.40129 2.50827 6.40129 3.82617V4.95801H11.5986V3.82617C11.5986 2.50828 10.4329 1.43556 8.99992 1.43555Z" fill="currentColor"/>
             </svg>
           </div>
-          <h2 class="text-xl font-semibold text-gray-900 mb-2">Your cart is empty</h2>
-          <p class="text-gray-500 mb-6">Add some Forevers to get started!</p>
+          <h2 class="text-responsive-lg sm:text-responsive-xl font-semibold text-gray-900 mb-2">Your cart is empty</h2>
+          <p class="text-responsive-base text-gray-500 mb-4 sm:mb-6">Add some Forevers to get started!</p>
           <button
             @click="$router.push('/favorites')"
-            class="bg-dbd-primary text-white font-semibold py-3 px-6 rounded-full hover:bg-blue-700 transition-colors"
+            class="btn-touch bg-dbd-primary text-white font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-full hover:bg-blue-700 transition-colors"
           >
             Browse Forevers
           </button>
@@ -238,9 +238,98 @@ const confirmDelete = () => {
   transition: all 0.2s ease;
 }
 
-.cart-item:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+/* Responsive cart item interactions */
+@media (hover: hover) {
+  .cart-item:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+}
+
+/* Very small phones */
+@media (max-width: 374px) {
+  .cart-item {
+    padding: 12px !important;
+    border-radius: 12px !important;
+  }
+
+  .cart-item svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+}
+
+/* Small to medium phones */
+@media (min-width: 375px) and (max-width: 430px) {
+  .cart-view {
+    max-width: 100%;
+  }
+}
+
+/* Large phones and small tablets */
+@media (min-width: 431px) and (max-width: 767px) {
+  .cart-view {
+    max-width: 430px;
+    margin: 0 auto;
+  }
+}
+
+/* Tablets */
+@media (min-width: 768px) {
+  .cart-view {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .content-container {
+    padding: 20px 0;
+  }
+
+  .cart-item {
+    padding: 20px !important;
+  }
+
+  /* Grid layout for larger tablets */
+  @media (min-width: 1024px) {
+    .cart-view {
+      max-width: 600px;
+    }
+
+    .cart-items-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+  }
+}
+
+/* Landscape optimizations */
+@media (max-height: 600px) and (orientation: landscape) {
+  .cart-view {
+    height: 100vh;
+  }
+
+  .content-container {
+    padding-top: 8px;
+  }
+
+  .cart-item {
+    margin-bottom: 8px !important;
+  }
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) and (pointer: coarse) {
+  .cart-item:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+
+  button:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+  }
 }
 
 /* Fixed bottom section styling */
