@@ -16,8 +16,8 @@ dp = Dispatcher()
 async def start(message: Message):
     kb = InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(
-            text="Открыть Dubadu App",
-            web_app=WebAppInfo(url="https://dubadu.com/ru")
+            text="Открыть DBDC Capital Forevers Bot",
+            web_app=WebAppInfo(url="https://dbdc-mini.dubadu.com/")
         )]
     ])
     await message.answer("Добро пожаловать в Dubadu!", reply_markup=kb)
