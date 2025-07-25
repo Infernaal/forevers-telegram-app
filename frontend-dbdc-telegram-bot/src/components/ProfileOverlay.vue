@@ -340,7 +340,7 @@ defineEmits(['close'])
 const profileData = ref({
   name: 'Jason Williams',
   id: '515745',
-  avatar: 'https://cdn.builder.io/api/v1/image/assets%2Fcd0d81f444984dacbac377cc9f78a1aa%2F572074b5aefa4337aec163bd9a21aec3?format=webp&width=800'
+  avatar: 'https://images.pexels.com/photos/15023413/pexels-photo-15023413.jpeg?auto=compress&cs=tinysrgb&w=400'
 })
 
 // Language selector state

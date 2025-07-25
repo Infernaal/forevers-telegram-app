@@ -90,7 +90,7 @@
                 ]">
                   <div class="rounded-full border-2 border-purple-400 overflow-hidden w-6 h-6">
                     <img
-                      src="https://cdn.builder.io/api/v1/image/assets%2Fcd0d81f444984dacbac377cc9f78a1aa%2F572074b5aefa4337aec163bd9a21aec3?format=webp&width=800"
+                      src="https://images.pexels.com/photos/15023413/pexels-photo-15023413.jpeg?auto=compress&cs=tinysrgb&w=400"
                       alt="Profile"
                       class="w-full h-full object-cover"
                     />
