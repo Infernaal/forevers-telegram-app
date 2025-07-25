@@ -198,34 +198,28 @@
           </div>
         </div>
 
-        <!-- Beautiful Bottom Section -->
-        <div class="px-4 py-3">
-          <div class="flex items-center gap-4">
-            <!-- Elegant ID Card with Copy -->
-            <div class="flex-1 relative">
-              <!-- Base Card -->
-              <div
-                class="bg-gradient-to-r from-white/95 to-white/85 backdrop-blur-xl border border-white/50 rounded-2xl px-4 py-3 shadow-2xl cursor-pointer group transition-all duration-300 hover:shadow-3xl hover:scale-[1.02] active:scale-[0.98]"
+        <!-- Figma-styled Bottom Section -->
+        <div class="px-3 pb-4 pt-2">
+          <div class="flex items-center justify-center gap-8 mt-2">
+            <!-- ID Button with Figma Design -->
+            <div class="relative">
+              <button
                 @click="copyUserId"
+                class="flex items-center gap-3 px-4 py-3 bg-white/30 backdrop-blur-[32px] border border-white/40 rounded-full transition-all duration-300 hover:bg-white/35 active:scale-95 min-w-[140px] h-[48px]"
               >
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center gap-3">
-                    <div class="flex items-center gap-1">
-                      <span class="text-gray-500 text-sm font-medium">ID</span>
-                      <div class="w-1 h-1 bg-gray-400 rounded-full"></div>
-                    </div>
-                    <span class="text-gray-900 text-base font-bold tracking-wide">{{ profileData.id }}</span>
-                  </div>
-                  <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 bg-[#2019CE]/10 rounded-full flex items-center justify-center group-hover:bg-[#2019CE]/20 transition-colors">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="text-[#2019CE]">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" stroke="currentColor" stroke-width="2" fill="none"/>
-                        <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke="currentColor" stroke-width="2" fill="none"/>
-                      </svg>
-                    </div>
-                  </div>
+                <!-- ID Text -->
+                <div class="flex items-center gap-1.5">
+                  <span class="text-[#B7B7B7] text-base font-medium">ID:</span>
+                  <span class="text-white text-base font-medium">{{ profileData.id }}</span>
                 </div>
-              </div>
+
+                <!-- Copy Icon Container -->
+                <div class="relative w-7 h-7 bg-white border border-[#D8D8D8] rounded-r-full flex items-center justify-center ml-auto">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18.2806 1.19995H8.98336C8.42322 1.19995 7.88603 1.43348 7.48995 1.84917C7.09387 2.26486 6.87136 2.82866 6.87136 3.41653V4.26906H5.81536C5.2278 4.26906 4.66431 4.51402 4.24885 4.95006C3.83338 5.3861 3.59998 5.97749 3.59998 6.59414V20.4749C3.59998 21.0915 3.83338 21.6829 4.24885 22.119C4.66431 22.555 5.2278 22.8 5.81536 22.8H14.9132C15.5008 22.8 16.0643 22.555 16.4797 22.119C16.8952 21.6829 17.1286 21.0915 17.1286 20.4749V19.6998H18.2806C18.8363 19.6999 19.3699 19.4709 19.7663 19.0621C20.1627 18.6533 20.3903 18.0975 20.4 17.5143V3.41653C20.398 2.82794 20.1739 2.26417 19.7766 1.8487C19.3794 1.43323 18.8414 1.19995 18.2806 1.19995ZM15.6517 20.4749C15.6517 20.6804 15.5739 20.8776 15.4354 21.0229C15.2969 21.1682 15.1091 21.2499 14.9132 21.2499H5.81536C5.61951 21.2499 5.43168 21.1682 5.29319 21.0229C5.1547 20.8776 5.0769 20.6804 5.0769 20.4749V6.59414C5.0769 6.38859 5.1547 6.19146 5.29319 6.04611C5.43168 5.90077 5.61951 5.81911 5.81536 5.81911H14.9132C15.1091 5.81911 15.2969 5.90077 15.4354 6.04611C15.5739 6.19146 15.6517 6.38859 15.6517 6.59414V20.4749ZM18.9231 17.5143C18.9211 17.6918 18.8526 17.8613 18.7323 17.9861C18.612 18.1108 18.4497 18.1808 18.2806 18.1808H17.1286V6.59414C17.1286 5.97749 16.8952 5.3861 16.4797 4.95006C16.0643 4.51402 15.5008 4.26906 14.9132 4.26906H8.34828V3.41653C8.34828 3.23976 8.41519 3.07022 8.53429 2.94523C8.65339 2.82023 8.81493 2.75001 8.98336 2.75001H18.2806C18.3646 2.74898 18.448 2.76546 18.5259 2.7985C18.6038 2.83154 18.6747 2.88047 18.7344 2.94246C18.7942 3.00446 18.8416 3.07828 18.874 3.15966C18.9064 3.24103 18.9231 3.32834 18.9231 3.41653V17.5143Z" fill="#666"/>
+                  </svg>
+                </div>
+              </button>
 
               <!-- Success Toast Overlay -->
               <Transition
@@ -239,39 +233,48 @@
               >
                 <div
                   v-if="showCopyMessage"
-                  class="absolute inset-0 bg-gradient-to-r from-emerald-500 to-green-500 rounded-2xl px-4 py-3 shadow-2xl flex items-center justify-center gap-3 z-10"
+                  class="absolute inset-0 bg-gradient-to-r from-emerald-500 to-green-500 rounded-full px-4 py-3 shadow-2xl flex items-center justify-center gap-3 z-10"
                 >
-                  <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                  <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="text-white">
                       <polyline points="20,6 9,17 4,12" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                     </svg>
                   </div>
-                  <span class="text-white font-bold text-base">ID Copied!</span>
+                  <span class="text-white font-bold text-base">Copied</span>
                 </div>
               </Transition>
             </div>
 
-            <!-- Sophisticated Language Selector -->
+            <!-- Vertical Separator -->
+            <div class="w-0.5 h-8 bg-[#B7B7B7]/40 rounded-full"></div>
+
+            <!-- Language Selector with Figma Design -->
             <div class="relative language-selector-container">
               <button
                 @click="toggleLanguageSelector"
-                class="bg-gradient-to-r from-white/95 to-white/85 backdrop-blur-xl border border-white/50 rounded-2xl px-3 py-2.5 shadow-2xl transition-all duration-300 hover:shadow-3xl hover:scale-105 active:scale-95 flex items-center gap-2 min-w-[90px]"
+                class="flex items-center gap-3 px-4 py-3 bg-white/30 backdrop-blur-[32px] border border-white/40 rounded-full transition-all duration-300 hover:bg-white/35 active:scale-95 min-w-[140px] h-[48px]"
               >
-                <!-- Current Language Flag -->
-                <div class="w-6 h-6 rounded-full overflow-hidden shadow-md border border-white/30 flex items-center justify-center flex-shrink-0">
-                  <CountryFlag :country="selectedLanguage.code" size="small" />
+                <!-- Flag Container -->
+                <div class="w-9 h-9 rounded-full overflow-hidden flex items-center justify-center bg-[#D4D4D4] flex-shrink-0">
+                  <CountryFlag :country="selectedLanguage.code" size="medium" />
                 </div>
-                <span class="text-gray-900 font-bold text-sm">{{ selectedLanguage.name }}</span>
-                <svg
-                  width="10"
-                  height="10"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  class="text-gray-500 transition-transform duration-300"
-                  :class="{ 'rotate-180': isLanguageDropdownOpen }"
-                >
-                  <polyline points="6,9 12,15 18,9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+
+                <!-- Language Text -->
+                <span class="text-[#FAFAFA] text-base font-medium">{{ selectedLanguage.name }}</span>
+
+                <!-- Dropdown Arrow -->
+                <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0 ml-auto">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    class="text-white transition-transform duration-300"
+                    :class="{ 'rotate-180': isLanguageDropdownOpen }"
+                  >
+                    <path d="M5.71387 8.57146L9.99958 12.8572L14.2853 8.57146" stroke="currentColor" stroke-linecap="round"/>
+                  </svg>
+                </div>
               </button>
 
               <!-- Beautiful Dropdown -->
@@ -286,7 +289,7 @@
               >
                 <div
                   v-if="isLanguageDropdownOpen"
-                  class="absolute bottom-full right-0 mb-3 mr-2 bg-white/95 backdrop-blur-xl border border-white/50 rounded-2xl shadow-3xl overflow-hidden z-50 min-w-[140px]"
+                  class="absolute bottom-full right-0 mb-3 bg-white/95 backdrop-blur-xl border border-white/50 rounded-2xl shadow-3xl overflow-hidden z-50 min-w-[140px]"
                 >
                   <div class="p-2 space-y-1">
                     <button
