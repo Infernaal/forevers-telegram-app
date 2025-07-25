@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
 
 /* Import comprehensive responsive design system */
-@import './styles/responsive.css';
+@import '../styles/responsive.css';
 
 /* Import component-specific responsive styles */
-@import './styles/component-responsive.css';
+@import '../styles/component-responsive.css';
 
 @tailwind base;
 @tailwind components;
