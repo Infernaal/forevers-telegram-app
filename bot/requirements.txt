@@ -1,0 +1,6 @@
+aiogram
+python-dotenv
+langdetect
+openai
+redis
+tenacity
