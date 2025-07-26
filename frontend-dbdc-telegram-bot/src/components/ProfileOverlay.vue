@@ -598,8 +598,8 @@ const selectLanguage = (language) => {
   flex: 1;
   overflow: hidden;
   padding: 0 12px;
-  min-height: 120px;
-  max-height: calc(100vh - 320px);
+  min-height: 100px;
+  max-height: calc(100vh - 280px);
 }
 
 .scrollbar-indicator {
@@ -636,7 +636,7 @@ const selectLanguage = (language) => {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 6px;
+  padding: 10px 6px;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -687,7 +687,7 @@ const selectLanguage = (language) => {
 
 /* Upgrade Section */
 .upgrade-section {
-  padding: 12px;
+  padding: 8px 12px;
   flex-shrink: 0;
 }
 
@@ -695,7 +695,7 @@ const selectLanguage = (language) => {
   background: #F1E7FF;
   border: 1px solid #DCCCF1;
   border-radius: 16px;
-  padding: 20px;
+  padding: 16px;
   position: relative;
   overflow: hidden;
 }
@@ -703,12 +703,12 @@ const selectLanguage = (language) => {
 .upgrade-star {
   position: absolute;
   left: 12px;
-  top: 20px;
+  top: 16px;
 }
 
 .star-icon {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
 }
 
 .upgrade-gradient {
@@ -730,19 +730,20 @@ const selectLanguage = (language) => {
 }
 
 .upgrade-info {
-  margin-left: 48px;
+  margin-left: 44px;
 }
 
 .upgrade-title {
   color: #02070E;
   font-weight: 700;
-  font-size: 20px;
-  margin-bottom: 4px;
+  font-size: 18px;
+  margin-bottom: 2px;
 }
 
 .upgrade-subtitle {
-  font-size: 14px;
+  font-size: 13px;
   color: #4B4D50;
+  line-height: 1.3;
 }
 
 .upgrade-number {
@@ -751,12 +752,12 @@ const selectLanguage = (language) => {
 }
 
 .upgrade-button {
-  padding: 12px 24px;
+  padding: 10px 20px;
   background: linear-gradient(90deg, #2019CE 0%, #473FFF 100%);
   color: white;
   font-weight: 600;
-  border-radius: 24px;
-  font-size: 16px;
+  border-radius: 20px;
+  font-size: 14px;
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
