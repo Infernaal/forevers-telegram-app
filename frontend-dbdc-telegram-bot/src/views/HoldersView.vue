@@ -408,8 +408,12 @@ const openTerms = () => {
 
 /* Terms Section */
 .terms-container {
-  width: 100%;
-  margin-bottom: 22px;
+  position: absolute;
+  left: 0;
+  top: 256px;
+  width: 319px;
+  height: 44px;
+  z-index: 20;
 }
 
 .terms-wrapper {
