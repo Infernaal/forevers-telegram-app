@@ -769,29 +769,5 @@ const closeProfileMenu = () => {
   transform: scale(0);
 }
 
-/* ID section transitions */
-.id-section-enter-active,
-.id-section-leave-active {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
 
-.id-section-enter-from {
-  opacity: 0;
-  transform: translateY(100%);
-}
-
-.id-section-enter-to {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.id-section-leave-from {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.id-section-leave-to {
-  opacity: 0;
-  transform: translateY(100%);
-}
 </style>
