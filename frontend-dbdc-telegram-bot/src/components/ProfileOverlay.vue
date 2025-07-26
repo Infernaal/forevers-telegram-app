@@ -461,7 +461,7 @@ const selectLanguage = (language) => {
 
 .overlay-pointer {
   position: absolute;
-  bottom: calc(140px + env(safe-area-inset-bottom, 0));
+  bottom: calc(180px + env(safe-area-inset-bottom, 0));
   left: 32px;
   width: 0;
   height: 0;
@@ -477,7 +477,7 @@ const selectLanguage = (language) => {
   left: 16px;
   right: 16px;
   top: 40px;
-  bottom: calc(140px + env(safe-area-inset-bottom, 0));
+  bottom: calc(180px + env(safe-area-inset-bottom, 0));
   background: linear-gradient(135deg, #120B81 0%, #1A1086 50%, #09074E 100%);
   border-radius: 24px;
   overflow: hidden;
@@ -486,7 +486,7 @@ const selectLanguage = (language) => {
   backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
-  max-height: calc(100vh - 180px - env(safe-area-inset-bottom, 0));
+  max-height: calc(100vh - 220px - env(safe-area-inset-bottom, 0));
 }
 
 /* Profile Header */
@@ -985,10 +985,33 @@ const selectLanguage = (language) => {
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   z-index: 50;
+  max-height: 150px;
 }
 
 .dropdown-content {
   padding: 8px;
+  max-height: 134px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(32, 25, 206, 0.3) transparent;
+}
+
+.dropdown-content::-webkit-scrollbar {
+  width: 4px;
+}
+
+.dropdown-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dropdown-content::-webkit-scrollbar-thumb {
+  background: rgba(32, 25, 206, 0.3);
+  border-radius: 2px;
+}
+
+.dropdown-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(32, 25, 206, 0.5);
 }
 
 .dropdown-item {
