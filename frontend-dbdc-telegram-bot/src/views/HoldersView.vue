@@ -315,7 +315,7 @@ const shareQRCode = () => {
     })
   } else {
     // Web Share API not available, try Telegram-specific sharing
-    telegramFallback()
+    telegramFallback(safetyTimeout)
   }
 }
 
