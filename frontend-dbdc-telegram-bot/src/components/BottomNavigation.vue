@@ -255,7 +255,8 @@ watch(() => route.path, (newPath) => {
     '/favorites': 'favorites',
     '/rent-out': 'favorites', // RentOut is part of Favorites section
     '/cart': 'cart',
-    '/holders': 'holders'
+    '/holders': 'holders',
+    '/profile': 'profile'
   }
   activeTab.value = pathToTab[newPath] || 'wallet'
 }, { immediate: true })
