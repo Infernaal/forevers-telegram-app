@@ -734,6 +734,89 @@ onUnmounted(() => {
   }
 }
 
+/* Dropdown Styles - Match Figma Design Exactly */
+.dropdown-container {
+  width: 164px;
+  height: 145px;
+  position: relative;
+}
+
+.dropdown-background {
+  width: 164px;
+  height: 136px;
+  position: absolute;
+  left: 0;
+  top: 9px;
+  border-radius: 10px;
+  border: 1px solid #F4F4F4;
+  background: #FFF;
+  box-shadow: 2px 3px 6px 0 rgba(2, 7, 14, 0.12);
+}
+
+.dropdown-content {
+  position: absolute;
+  left: 12px;
+  top: 21px;
+  width: 140px;
+  height: 112px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dropdown-option {
+  width: 140px;
+  height: 52px;
+  position: relative;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.dropdown-option-bg {
+  width: 140px;
+  height: 52px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: linear-gradient(102deg, rgba(111, 106, 224, 0.40) 9.35%, rgba(85, 81, 179, 0.40) 95.29%);
+  backdrop-filter: blur(10px);
+}
+
+.dropdown-option-content {
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  width: 85px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dropdown-icon-container {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(64, 64, 64, 0.24);
+  border: 1px solid white;
+}
+
+.dropdown-text {
+  font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #FAFAFA;
+  line-height: 26px;
+}
+
 /* Smooth animations */
 .transaction-card {
   transition: all 0.2s ease-in-out;
