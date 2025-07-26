@@ -1941,88 +1941,88 @@ const selectLanguage = (language) => {
 /* Enhanced safe area support for different iOS versions */
 @supports (padding-bottom: env(safe-area-inset-bottom)) {
   .overlay-pointer {
-    bottom: calc(140px + env(safe-area-inset-bottom));
+    bottom: calc(180px + env(safe-area-inset-bottom));
   }
 
   .profile-container {
-    bottom: calc(140px + env(safe-area-inset-bottom));
-    max-height: calc(100vh - 180px - env(safe-area-inset-bottom));
+    bottom: calc(180px + env(safe-area-inset-bottom));
+    max-height: calc(100vh - 220px - env(safe-area-inset-bottom));
   }
 
   /* Small mobile landscape specific */
   @media (max-width: 374px) {
     .profile-container {
-      bottom: calc(64px + env(safe-area-inset-bottom));
-      max-height: calc(100vh - 84px - env(safe-area-inset-bottom));
+      bottom: calc(160px + env(safe-area-inset-bottom));
+      max-height: calc(100vh - 180px - env(safe-area-inset-bottom));
     }
     .overlay-pointer {
-      bottom: calc(54px + env(safe-area-inset-bottom));
+      bottom: calc(150px + env(safe-area-inset-bottom));
     }
   }
 
   /* Regular mobile specific */
   @media (min-width: 375px) and (max-width: 430px) {
     .profile-container {
-      bottom: calc(68px + env(safe-area-inset-bottom));
-      max-height: calc(100vh - 98px - env(safe-area-inset-bottom));
+      bottom: calc(170px + env(safe-area-inset-bottom));
+      max-height: calc(100vh - 200px - env(safe-area-inset-bottom));
     }
     .overlay-pointer {
-      bottom: calc(58px + env(safe-area-inset-bottom));
+      bottom: calc(160px + env(safe-area-inset-bottom));
     }
   }
 
   /* Landscape specific */
   @media (max-height: 500px) and (orientation: landscape) {
     .profile-container {
-      bottom: calc(56px + env(safe-area-inset-bottom));
-      max-height: calc(100vh - 66px - env(safe-area-inset-bottom));
+      bottom: calc(140px + env(safe-area-inset-bottom));
+      max-height: calc(100vh - 150px - env(safe-area-inset-bottom));
     }
     .overlay-pointer {
-      bottom: calc(46px + env(safe-area-inset-bottom));
+      bottom: calc(130px + env(safe-area-inset-bottom));
     }
   }
 }
 
 @supports (padding-bottom: constant(safe-area-inset-bottom)) {
   .overlay-pointer {
-    bottom: calc(140px + constant(safe-area-inset-bottom));
+    bottom: calc(180px + constant(safe-area-inset-bottom));
   }
 
   .profile-container {
-    bottom: calc(140px + constant(safe-area-inset-bottom));
-    max-height: calc(100vh - 180px - constant(safe-area-inset-bottom));
+    bottom: calc(180px + constant(safe-area-inset-bottom));
+    max-height: calc(100vh - 220px - constant(safe-area-inset-bottom));
   }
 
   /* Small mobile landscape specific */
   @media (max-width: 374px) {
     .profile-container {
-      bottom: calc(64px + constant(safe-area-inset-bottom));
-      max-height: calc(100vh - 84px - constant(safe-area-inset-bottom));
+      bottom: calc(160px + constant(safe-area-inset-bottom));
+      max-height: calc(100vh - 180px - constant(safe-area-inset-bottom));
     }
     .overlay-pointer {
-      bottom: calc(54px + constant(safe-area-inset-bottom));
+      bottom: calc(150px + constant(safe-area-inset-bottom));
     }
   }
 
   /* Regular mobile specific */
   @media (min-width: 375px) and (max-width: 430px) {
     .profile-container {
-      bottom: calc(68px + constant(safe-area-inset-bottom));
-      max-height: calc(100vh - 98px - constant(safe-area-inset-bottom));
+      bottom: calc(170px + constant(safe-area-inset-bottom));
+      max-height: calc(100vh - 200px - constant(safe-area-inset-bottom));
     }
     .overlay-pointer {
-      bottom: calc(58px + constant(safe-area-inset-bottom));
+      bottom: calc(160px + constant(safe-area-inset-bottom));
     }
   }
 
   /* Landscape specific */
   @media (max-height: 500px) and (orientation: landscape) {
     .profile-container {
-      bottom: calc(56px + constant(safe-area-inset-bottom));
-      max-height: calc(100vh - 66px - constant(safe-area-inset-bottom));
+      bottom: calc(140px + constant(safe-area-inset-bottom));
+      max-height: calc(100vh - 150px - constant(safe-area-inset-bottom));
     }
     .overlay-pointer {
-      bottom: calc(46px + constant(safe-area-inset-bottom));
+      bottom: calc(130px + constant(safe-area-inset-bottom));
     }
   }
 }
