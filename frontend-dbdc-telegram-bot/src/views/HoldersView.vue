@@ -297,11 +297,12 @@ const openTerms = () => {
   display: flex;
   width: 347px;
   flex-direction: column;
-  align-items: center;
+  justify-content: flex-end;
+  align-items: flex-start;
   gap: 20px;
   position: relative;
   left: 14px;
-  margin-bottom: 40px;
+  height: 507px;
 }
 
 /* QR Section */
