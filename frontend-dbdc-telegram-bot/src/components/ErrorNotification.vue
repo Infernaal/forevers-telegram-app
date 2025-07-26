@@ -15,11 +15,11 @@
       :class="containerPosition"
     >
       <!-- Triangular pointer pointing UP -->
-      <div class="w-0 h-0 border-l-[6px] border-r-[6px] border-b-[6px] border-transparent border-b-red-500 absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full z-10" style="margin-left: -12px;"></div>
+      <div class="w-0 h-0 border-l-[6px] border-r-[6px] border-b-[6px] border-transparent border-b-red-500 absolute top-0 left-8 transform -translate-y-full z-10"></div>
       
       <!-- Error notification body -->
-      <div class="bg-red-500 text-white rounded-full flex items-center px-3 py-2.5 shadow-lg border border-red-600"
-           style="filter: drop-shadow(4px 8px 12px rgba(255, 25, 25, 0.12)); min-height: 52px;">
+      <div class="bg-red-500 text-white rounded-full flex items-center px-3 py-2 shadow-lg border border-red-600"
+           style="filter: drop-shadow(4px 8px 12px rgba(255, 25, 25, 0.12)); min-height: 44px;">
         
         <!-- Warning Icon -->
         <div class="w-8 h-8 rounded-full bg-black bg-opacity-20 flex items-center justify-center mr-3 flex-shrink-0 border border-white border-opacity-30">
