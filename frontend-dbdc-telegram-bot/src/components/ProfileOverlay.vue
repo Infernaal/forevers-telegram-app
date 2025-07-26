@@ -1383,144 +1383,21 @@ const selectLanguage = (language) => {
   .menu-item:hover {
     background: rgba(255, 255, 255, 0.05);
   }
-  
-  .close-button:hover,
-  .id-button:hover,
-  .language-button:hover,
-  .upgrade-button:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: none;
-  }
-  
-  .close-button:active,
-  .id-button:active,
-  .language-button:active {
-    transform: scale(0.96);
-  }
-  
-  .upgrade-button:active {
-    transform: scale(0.96);
-  }
-}
 
-/* Accessibility and reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .profile-container,
-  .close-button,
-  .menu-item,
-  .id-button,
-  .language-button,
-  .upgrade-button,
-  .arrow-icon {
-    transition: none;
-  }
-  
   .close-button:hover,
   .id-button:hover,
   .language-button:hover,
   .upgrade-button:hover {
     transform: none;
   }
-  
+
   .close-button:active,
   .id-button:active,
   .language-button:active,
   .upgrade-button:active {
-    transform: none;
+    transform: scale(0.96);
   }
 }
-
-/* Enhanced backdrop blur */
-@supports (backdrop-filter: blur(20px)) {
-  .overlay-backdrop {
-    backdrop-filter: blur(20px);
-  }
-  
-  .language-dropdown {
-    backdrop-filter: blur(20px) saturate(180%);
-  }
-}
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .overlay-backdrop {
-    background: rgba(0, 0, 0, 0.3);
-  }
-  
-  .language-dropdown {
-    background: rgba(30, 30, 30, 0.95);
-    border-color: rgba(255, 255, 255, 0.1);
-  }
-  
-  .dropdown-item-inactive {
-    color: #e5e7eb;
-  }
-  
-  .dropdown-item-inactive:hover {
-    color: #f9fafb;
-  }
-}
-
-/* Enhanced safe area support for different iOS versions */
-@supports (padding-bottom: env(safe-area-inset-bottom)) {
-  .overlay-pointer {
-    bottom: calc(180px + env(safe-area-inset-bottom));
-  }
-
-  .profile-container {
-    bottom: calc(180px + env(safe-area-inset-bottom));
-    max-height: calc(100vh - 220px - env(safe-area-inset-bottom));
-  }
-
-  /* Small mobile landscape specific */
-  @media (max-width: 374px) {
-    .profile-container {
-      bottom: calc(160px + env(safe-area-inset-bottom));
-      max-height: calc(100vh - 180px - env(safe-area-inset-bottom));
-    }
-    .overlay-pointer {
-      bottom: calc(150px + env(safe-area-inset-bottom));
-    }
-  }
-
-  /* Regular mobile specific */
-  @media (min-width: 375px) and (max-width: 430px) {
-    .profile-container {
-      bottom: calc(170px + env(safe-area-inset-bottom));
-      max-height: calc(100vh - 200px - env(safe-area-inset-bottom));
-    }
-    .overlay-pointer {
-      bottom: calc(160px + env(safe-area-inset-bottom));
-    }
-  }
-
-  /* Landscape specific */
-  @media (max-height: 500px) and (orientation: landscape) {
-    .profile-container {
-      bottom: calc(140px + env(safe-area-inset-bottom));
-      max-height: calc(100vh - 150px - env(safe-area-inset-bottom));
-    }
-    .overlay-pointer {
-      bottom: calc(130px + env(safe-area-inset-bottom));
-    }
-  }
-}
-
-@supports (padding-bottom: constant(safe-area-inset-bottom)) {
-  .overlay-pointer {
-    bottom: calc(180px + constant(safe-area-inset-bottom));
-  }
-
-  .profile-container {
-    bottom: calc(180px + constant(safe-area-inset-bottom));
-    max-height: calc(100vh - 220px - constant(safe-area-inset-bottom));
-  }
-
-  /* Small mobile landscape specific */
-  @media (max-width: 374px) {
-    .profile-container {
-      bottom: calc(160px + constant(safe-area-inset-bottom));
-      max-height: calc(100vh - 180px - constant(safe-area-inset-bottom));
     }
     .overlay-pointer {
       bottom: calc(150px + constant(safe-area-inset-bottom));
