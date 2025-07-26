@@ -14,12 +14,12 @@
       @click="closeTooltip"
     >
       <!-- Blur backdrop -->
-      <div class="absolute inset-0 bg-black bg-opacity-20 backdrop-blur-sm"></div>
-      
+      <div class="absolute inset-0 bg-black bg-opacity-20 backdrop-blur-sm tooltip-backdrop"></div>
+
       <!-- Tooltip content -->
       <div
         @click.stop
-        class="relative bg-white rounded-3xl p-4 shadow-xl border border-gray-100 w-full max-w-[300px] mx-auto"
+        class="relative bg-white rounded-3xl p-4 shadow-xl border border-gray-100 w-full max-w-[300px] mx-auto tooltip-content"
         style="min-height: 154px;"
       >
         <!-- Close button -->
