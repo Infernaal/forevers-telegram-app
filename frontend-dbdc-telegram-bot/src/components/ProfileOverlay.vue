@@ -1054,13 +1054,13 @@ const selectLanguage = (language) => {
     left: 8px;
     right: 8px;
     top: 20px;
-    bottom: calc(64px + env(safe-area-inset-bottom, 0));
+    bottom: calc(120px + env(safe-area-inset-bottom, 0));
     border-radius: 20px;
-    max-height: calc(100vh - 84px - env(safe-area-inset-bottom, 0));
+    max-height: calc(100vh - 140px - env(safe-area-inset-bottom, 0));
   }
 
   .overlay-pointer {
-    bottom: calc(54px + env(safe-area-inset-bottom, 0));
+    bottom: calc(110px + env(safe-area-inset-bottom, 0));
     left: 24px;
     border-left-width: 10px;
     border-right-width: 10px;
@@ -1212,13 +1212,13 @@ const selectLanguage = (language) => {
     left: 12px;
     right: 12px;
     top: 30px;
-    bottom: calc(68px + env(safe-area-inset-bottom, 0));
+    bottom: calc(130px + env(safe-area-inset-bottom, 0));
     border-radius: 22px;
-    max-height: calc(100vh - 98px - env(safe-area-inset-bottom, 0));
+    max-height: calc(100vh - 160px - env(safe-area-inset-bottom, 0));
   }
 
   .overlay-pointer {
-    bottom: calc(58px + env(safe-area-inset-bottom, 0));
+    bottom: calc(120px + env(safe-area-inset-bottom, 0));
     left: 28px;
   }
 
@@ -1366,13 +1366,13 @@ const selectLanguage = (language) => {
     left: 20px;
     right: 20px;
     top: 40px;
-    bottom: calc(76px + env(safe-area-inset-bottom, 0));
+    bottom: calc(140px + env(safe-area-inset-bottom, 0));
     border-radius: 28px;
-    max-height: calc(100vh - 116px - env(safe-area-inset-bottom, 0));
+    max-height: calc(100vh - 180px - env(safe-area-inset-bottom, 0));
   }
 
   .overlay-pointer {
-    bottom: calc(66px + env(safe-area-inset-bottom, 0));
+    bottom: calc(130px + env(safe-area-inset-bottom, 0));
     left: 36px;
     border-left-width: 14px;
     border-right-width: 14px;
@@ -1523,15 +1523,15 @@ const selectLanguage = (language) => {
     left: 40px;
     right: 40px;
     top: 60px;
-    bottom: calc(82px + env(safe-area-inset-bottom, 0));
+    bottom: calc(140px + env(safe-area-inset-bottom, 0));
     border-radius: 32px;
     max-width: 400px;
     margin: 0 auto;
-    max-height: calc(100vh - 142px - env(safe-area-inset-bottom, 0));
+    max-height: calc(100vh - 200px - env(safe-area-inset-bottom, 0));
   }
 
   .overlay-pointer {
-    bottom: calc(72px + env(safe-area-inset-bottom, 0));
+    bottom: calc(130px + env(safe-area-inset-bottom, 0));
     left: 50%;
     transform: translateX(-50%);
     border-left-width: 16px;
@@ -1681,13 +1681,13 @@ const selectLanguage = (language) => {
 @media (max-height: 500px) and (orientation: landscape) {
   .profile-container {
     top: 10px;
-    bottom: calc(56px + env(safe-area-inset-bottom, 0));
+    bottom: calc(100px + env(safe-area-inset-bottom, 0));
     border-radius: 16px;
-    max-height: calc(100vh - 66px - env(safe-area-inset-bottom, 0));
+    max-height: calc(100vh - 110px - env(safe-area-inset-bottom, 0));
   }
 
   .overlay-pointer {
-    bottom: calc(46px + env(safe-area-inset-bottom, 0));
+    bottom: calc(90px + env(safe-area-inset-bottom, 0));
     border-left-width: 8px;
     border-right-width: 8px;
     border-top-width: 8px;
