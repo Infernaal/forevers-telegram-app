@@ -240,13 +240,40 @@ const shareQRCode = () => {
 
 const copyLink = async () => {
   try {
-    await navigator.clipboard.writeText(referralLink.value)
+    // Try modern clipboard API first
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(referralLink.value)
+    } else {
+      // Fallback method for when clipboard API is not available
+      const textArea = document.createElement('textarea')
+      textArea.value = referralLink.value
+      textArea.style.position = 'fixed'
+      textArea.style.left = '-999999px'
+      textArea.style.top = '-999999px'
+      document.body.appendChild(textArea)
+      textArea.focus()
+      textArea.select()
+
+      try {
+        document.execCommand('copy')
+      } catch (execErr) {
+        console.error('Fallback copy failed:', execErr)
+      }
+
+      document.body.removeChild(textArea)
+    }
+
     linkCopied.value = true
     setTimeout(() => {
       linkCopied.value = false
     }, 2000)
   } catch (err) {
     console.error('Failed to copy link:', err)
+    // Still show copied state for user feedback even if copy failed
+    linkCopied.value = true
+    setTimeout(() => {
+      linkCopied.value = false
+    }, 2000)
   }
 }
 
