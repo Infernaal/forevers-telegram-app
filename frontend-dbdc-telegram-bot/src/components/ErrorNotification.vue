@@ -13,20 +13,20 @@
       @click="$emit('close')"
       :class="['error-notification-container mx-auto cursor-pointer w-full max-w-lg', containerPosition]"
     >
-      <!-- Треугольник-указатель слева -->
+      <!-- Уменьшенный треугольник слева -->
       <div
-        class="w-0 h-0 border-l-[8px] border-r-[8px] border-b-[8px] border-transparent border-b-red-500
+        class="w-0 h-0 border-l-[6px] border-r-[6px] border-b-[6px] border-transparent border-b-red-500
                absolute top-0 left-12 transform -translate-x-1/2 -translate-y-full z-10"
       ></div>
 
-      <!-- Тело уведомления -->
+      <!-- Уведомление с новой высотой -->
       <div
         class="bg-red-500 text-white rounded-full flex items-center px-4 py-2 shadow-lg border border-red-600"
         style="filter: drop-shadow(4px 8px 12px rgba(255,25,25,0.12));"
       >
         <!-- Иконка -->
         <div
-          class="w-8 h-8 rounded-full bg-black bg-opacity-20 flex items-center justify-center mr-4 flex-shrink-0
+          class="w-8 h-8 rounded-full bg-black bg-opacity-20 flex items-center justify-center mr-3 flex-shrink-0
                  border border-white border-opacity-30"
         >
           <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -39,10 +39,10 @@
 
         <!-- Текст -->
         <div class="flex-1 min-w-0">
-          <div class="text-white font-semibold text-lg leading-6 mb-1">
+          <div class="text-white font-semibold text-base leading-5 mb-1">
             {{ title || "Can't be used" }}
           </div>
-          <div class="text-white font-medium text-base leading-snug opacity-95">
+          <div class="text-white font-medium text-sm leading-tight opacity-95">
             {{ message }}
           </div>
         </div>
@@ -96,3 +96,4 @@ defineEmits(['close'])
   }
 }
 </style>
+
