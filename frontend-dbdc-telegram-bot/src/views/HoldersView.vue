@@ -438,7 +438,7 @@ const openTerms = () => {
 /* Terms Section */
 .terms-container {
   position: absolute;
-  left: 0;
+  left: 20px;
   top: 256px;
   width: 319px;
   height: 44px;
