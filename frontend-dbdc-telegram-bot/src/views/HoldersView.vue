@@ -583,6 +583,26 @@ const agreeToTerms = () => {
   cursor: pointer;
   flex-shrink: 0;
   margin-top: 2px;
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.terms-checkbox:checked {
+  background: #2019CE;
+  border-color: #2019CE;
+}
+
+.terms-checkbox:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #FAFAFA;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .terms-text {
