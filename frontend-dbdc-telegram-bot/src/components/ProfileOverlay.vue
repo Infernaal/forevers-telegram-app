@@ -628,13 +628,17 @@ const selectLanguage = (language) => {
   flex-shrink: 0;
 }
 
+/* Unified Bottom Section */
+.unified-bottom-section {
+  background: rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}
+
 /* Bottom Controls */
 .bottom-controls {
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.05);
+  padding: 1rem 1rem 0.75rem 1rem;
   display: flex;
   gap: 0.75rem;
-  flex-shrink: 0;
   justify-content: space-between;
   align-items: center;
 }
