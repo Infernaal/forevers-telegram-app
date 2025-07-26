@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-white telegram-webapp">
+  <div class="telegram-webapp-container">
     <RouterView />
   </div>
 </template>
@@ -45,15 +45,65 @@ export default {
 </script>
 
 <style>
-/* Telegram WebApp viewport height */
-.telegram-webapp {
+/* Telegram WebApp container with enhanced scroll prevention */
+.telegram-webapp-container {
+  /* Viewport and positioning */
+  width: 100%;
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
+  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
+
+  /* Background and appearance */
+  background: white;
+
+  /* Enhanced scroll and overscroll prevention */
+  overflow: hidden;
+  overscroll-behavior: none;
+  overscroll-behavior-y: none;
+  overscroll-behavior-x: none;
+
+  /* Disable iOS rubber band effect */
+  -webkit-overflow-scrolling: auto;
+
+  /* Prevent touch callouts and selections that can interfere */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  /* Position and layout */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  /* GPU acceleration for better performance */
+  transform: translateZ(0);
+  will-change: transform;
+
+  /* Prevent content shifting */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
-/* Prevent overscroll bouncing */
-.telegram-webapp {
-  overscroll-behavior: none;
+/* Fix for content area to allow proper scrolling within views */
+.telegram-webapp-container > * {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Additional body and html fixes for mobile */
+body, html {
+  overflow: hidden;
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: auto;
+  touch-action: pan-y;
+  height: 100%;
+  width: 100%;
 }
 </style>
