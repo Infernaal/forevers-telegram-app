@@ -319,7 +319,7 @@ const shareQRCode = () => {
   }
 }
 
-const telegramFallback = () => {
+const telegramFallback = (safetyTimeout = null) => {
   // Use Telegram WebApp sharing if available
   if (window.Telegram && window.Telegram.WebApp) {
     const tg = window.Telegram.WebApp
@@ -333,6 +333,7 @@ const telegramFallback = () => {
       const handleVisibilityChange = () => {
         if (!document.hidden) {
           // User returned to the app, likely after sharing
+          if (safetyTimeout) clearTimeout(safetyTimeout)
           isSharing.value = false
           setTimeout(() => {
             showSuccessMessage('Referral QR-code sent successfully')
@@ -346,17 +347,20 @@ const telegramFallback = () => {
       // Cleanup listener after 30 seconds if user doesn't return
       setTimeout(() => {
         document.removeEventListener('visibilitychange', handleVisibilityChange)
+        if (safetyTimeout) clearTimeout(safetyTimeout)
         isSharing.value = false
       }, 30000)
 
     } catch (error) {
       console.error('Telegram share failed:', error)
+      if (safetyTimeout) clearTimeout(safetyTimeout)
       isSharing.value = false
       // Final fallback to clipboard
       copyLink()
     }
   } else {
     // Not in Telegram environment, copy to clipboard
+    if (safetyTimeout) clearTimeout(safetyTimeout)
     isSharing.value = false
     copyLink()
   }
