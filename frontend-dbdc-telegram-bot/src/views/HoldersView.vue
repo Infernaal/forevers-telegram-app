@@ -529,7 +529,7 @@ const openTerms = () => {
 .how-to-section {
   position: relative;
   left: 14px;
-  top: 30px;
+  top: 10px;
   width: 347px;
   height: 410px;
 }
