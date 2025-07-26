@@ -394,7 +394,10 @@ const copyLink = async () => {
     }
   }
 
-  // Always show copied state for user feedback
+  // Show success notification when called from share button
+  showSuccessMessage('Link copied to clipboard')
+
+  // Also show copied state for user feedback
   linkCopied.value = true
   setTimeout(() => {
     linkCopied.value = false
