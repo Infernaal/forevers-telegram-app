@@ -310,7 +310,7 @@ const shareQRCode = () => {
 
       // If user didn't cancel (AbortError), try Telegram-specific sharing
       if (error.name !== 'AbortError') {
-        telegramFallback()
+        telegramFallback(safetyTimeout)
       }
     })
   } else {
