@@ -1,60 +1,7 @@
 <template>
   <div>
-    <!-- Profile Overlay Component -->
-    <ProfileOverlay
-      :is-visible="isProfileMenuOpen"
-      @close="closeProfileMenu"
-    />
 
-    <!-- ID and Language Section - Above Navigation -->
-    <Transition
-      name="id-section"
-      enter-active-class="transition-all duration-300 ease-out"
-      leave-active-class="transition-all duration-200 ease-in"
-      enter-from-class="opacity-0 translate-y-full"
-      enter-to-class="opacity-100 translate-y-0"
-      leave-from-class="opacity-100 translate-y-0"
-      leave-to-class="opacity-0 translate-y-full"
-    >
-      <div v-if="isProfileMenuOpen" class="fixed bottom-20 left-0 right-0 px-4 pb-2 z-40">
-        <div class="flex items-center justify-between gap-3 max-w-sm mx-auto">
-          <!-- User ID с копированием - Enhanced visibility -->
-          <div class="flex items-center bg-white/80 border-2 border-white rounded-full backdrop-blur-sm shadow-xl">
-            <div class="px-4 py-3">
-              <span class="text-[#555] text-sm font-bold">ID: </span>
-              <span class="text-[#000] text-sm font-bold">515745</span>
-            </div>
-            <button @click="copyUserId" class="w-8 h-8 bg-white rounded-r-full border border-[#D8D8D8] flex items-center justify-center shadow-sm">
-              <svg width="14" height="16" viewBox="0 0 14 16" fill="none" class="text-gray-700">
-                <path d="M10.1875 0H4.3125C3.86929 0 3.44433 0.1939 3.13388 0.539053C2.82343 0.884206 2.65625 1.35544 2.65625 1.84615V2.46154H2.09375C1.5378 2.46154 1.00476 2.68561 0.608253 3.08005C0.211748 3.47448 0 4.00354 0 4.55385V13.5385C0 14.0888 0.211748 14.6178 0.608253 15.0123C1.00476 15.4067 1.5378 15.6308 2.09375 15.6308H8.5C9.0560 15.6308 9.589 15.4067 9.98551 15.0123C10.382 14.6178 10.5938 14.0888 10.5938 13.5385V12.9231H10.1875C10.6205 12.9231 11.0356 12.7359 11.3414 12.3974C11.6472 12.0589 11.8125 11.5967 11.8125 11.1154V1.84615C11.8125 1.35544 11.6453 0.884206 11.3349 0.539053C11.0244 0.1939 10.5995 0 10.1875 0ZM10.1875 1.23077C10.3685 1.23077 10.5421 1.30339 10.6704 1.43292C10.7987 1.56244 10.8906 1.73846 10.8906 1.92308V11.1154C10.8906 11.3 10.7987 11.476 10.6704 11.6055C10.5421 11.735 10.3685 11.8077 10.1875 11.8077H2.65625V1.84615C2.65625 1.65154 2.74813 1.46552 2.87643 1.33599C3.00473 1.20647 3.17832 1.13385 3.35938 1.13385H10.1875Z" fill="currentColor"/>
-              </svg>
-            </button>
-          </div>
 
-          <!-- Language Selector с флагом - Enhanced visibility -->
-          <button
-            @click="toggleLanguageSelector"
-            class="flex items-center gap-2 px-4 py-3 bg-white/80 border-2 border-white rounded-full backdrop-blur-sm transition-all hover:bg-white/90 shadow-xl"
-          >
-            <div class="w-8 h-8 rounded-full overflow-hidden">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="16" cy="16" r="16" fill="#F0F0F0"/>
-                <path d="M15.3438 16.0025H31.0573C31.0573 14.6433 30.8761 13.3266 30.5385 12.0741H15.3438V16.0025Z" fill="#D80027"/>
-                <path d="M15.3438 8.14179H28.847C27.9252 6.63756 26.7466 5.30797 25.3723 4.21338H15.3438V8.14179Z" fill="#D80027"/>
-                <path d="M16.0038 31.06C19.5478 31.06 22.8053 29.8351 25.3776 27.7864H6.62988C9.20224 29.8351 12.4597 31.06 16.0038 31.06Z" fill="#D80027"/>
-                <path d="M3.15241 23.855H28.8496C29.5896 22.6475 30.1636 21.3275 30.5411 19.9266H1.46094C1.83841 21.3275 2.41235 22.6475 3.15241 23.855Z" fill="#D80027"/>
-                <path d="M7.91596 3.29305H9.28825L8.01178 4.22041L8.49937 5.72094L7.22296 4.79358L5.94655 5.72094L6.36772 4.42464C5.24384 5.36082 4.25878 6.45764 3.44702 7.67976H3.88672L3.07419 8.27005C2.94761 8.48123 2.82619 8.69576 2.70984 8.91346L3.09784 10.1076L2.37396 9.5817C2.19402 9.96294 2.02943 10.3528 1.88149 10.7507L2.30896 12.0665H3.88672L2.61025 12.9938L3.09784 14.4943L1.82143 13.567L1.05684 14.1225C0.980312 14.7377 0.94043 15.3643 0.94043 16.0002H15.9993C15.9993 7.68352 15.9993 6.70305 15.9993 0.941406C13.0244 0.941406 10.2513 1.80435 7.91596 3.29305ZM8.49937 14.4943L7.22296 13.567L5.94655 14.4943L6.43414 12.9938L5.15767 12.0665H6.73543L7.22296 10.5659L7.71049 12.0665H9.28825L8.01178 12.9938L8.49937 14.4943ZM8.01178 8.60711L8.49937 10.1076L7.22296 9.18029L5.94655 10.1076L6.43414 8.60711L5.15767 7.67976H6.73543L7.22296 6.17923L7.71049 7.67976H9.28825L8.01178 8.60711ZM13.9009 14.4943L12.6245 13.567L11.3481 14.4943L11.8357 12.9938L10.5592 12.0665H12.137L12.6245 10.5659L13.112 12.0665H14.6898L13.4133 12.9938L13.9009 14.4943ZM13.4133 8.60711L13.9009 10.1076L12.6245 9.18029L11.3481 10.1076L11.8357 8.60711L10.5592 7.67976H12.137L12.6245 6.17923L13.112 7.67976H14.6898L13.4133 8.60711ZM13.4133 4.22041L13.9009 5.72094L12.6245 4.79358L11.3481 5.72094L11.8357 4.22041L10.5592 3.29305H12.137L12.6245 1.79252L13.112 3.29305H14.6898L13.4133 4.22041Z" fill="#0052B4"/>
-              </svg>
-            </div>
-            <span class="text-[#333] text-sm font-bold">ENG</span>
-            <svg width="12" height="12" viewBox="0 0 20 20" fill="none" class="text-gray-600">
-              <circle opacity="0.2" cx="10" cy="10" r="10" fill="gray"/>
-              <path d="M5.71387 8.57146L9.99958 12.8572L14.2853 8.57146" stroke="currentColor" stroke-linecap="round"/>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </Transition>
 
     <!-- Bottom Navigation -->
     <div class="bottom-nav-container">
@@ -66,25 +13,19 @@
             @click="toggleProfile"
             :class="[
               'nav-item-button',
-              isProfileMenuOpen ? 'text-blue-700' : 'text-gray-600'
+              activeTab === 'profile' ? 'text-blue-700' : 'text-gray-600'
             ]"
           >
             <div class="relative">
               <div
                 :class="[
-                  isProfileMenuOpen
+                  activeTab === 'profile'
                     ? 'nav-icon-active'
                     : 'nav-icon-inactive',
                   'nav-icon-container'
                 ]"
               >
-                <!-- Show close icon when profile menu is open, otherwise show profile -->
-                <div v-if="isProfileMenuOpen" class="text-white">
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-                <div v-else class="relative profile-avatar">
+                <div class="relative profile-avatar">
                   <div class="rounded-full border-2 border-purple-400 overflow-hidden profile-image">
                     <img
                       src="https://images.pexels.com/photos/15023413/pexels-photo-15023413.jpeg?auto=compress&cs=tinysrgb&w=400"
@@ -100,7 +41,7 @@
                   </div>
                   <!-- Dropdown Arrow -->
                   <div class="profile-arrow">
-                    <svg :class="isProfileMenuOpen ? 'rotate-180 profile-arrow-icon transition-transform duration-200 text-gray-600' : 'profile-arrow-icon transition-transform duration-200 text-gray-600'" viewBox="0 0 8 6">
+                    <svg class="profile-arrow-icon transition-transform duration-200 text-gray-600" viewBox="0 0 8 6">
                       <path d="M1 1L4 4L7 1" stroke="currentColor" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </div>
@@ -245,7 +186,7 @@
 import { ref, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useCart } from '../composables/useCart.js'
-import ProfileOverlay from './ProfileOverlay.vue'
+
 
 // Router
 const router = useRouter()
@@ -254,8 +195,7 @@ const route = useRoute()
 // Cart
 const { cartItemsCount } = useCart()
 
-// Profile menu state
-const isProfileMenuOpen = ref(false)
+
 
 // Computed active tab based on current route
 const activeTab = ref('wallet')
@@ -267,18 +207,14 @@ watch(() => route.path, (newPath) => {
     '/favorites': 'favorites',
     '/rent-out': 'favorites', // RentOut is part of Favorites section
     '/cart': 'cart',
-    '/holders': 'holders'
+    '/holders': 'holders',
+    '/profile': 'profile'
   }
   activeTab.value = pathToTab[newPath] || 'wallet'
 }, { immediate: true })
 
 // Methods
 const navigateTo = (tab) => {
-  // Close profile menu if open
-  if (isProfileMenuOpen.value) {
-    isProfileMenuOpen.value = false
-  }
-
   // Map tab names to routes
   const routeMap = {
     wallet: '/wallet',
@@ -291,27 +227,10 @@ const navigateTo = (tab) => {
 }
 
 const toggleProfile = () => {
-  isProfileMenuOpen.value = !isProfileMenuOpen.value
+  router.push('/profile')
 }
 
-const closeProfileMenu = () => {
-  isProfileMenuOpen.value = false
-}
 
-const copyUserId = async () => {
-  try {
-    await navigator.clipboard.writeText('515745')
-    console.log('User ID copied to clipboard')
-    // TODO: Show success notification
-  } catch (err) {
-    console.error('Failed to copy user ID:', err)
-  }
-}
-
-const toggleLanguageSelector = () => {
-  console.log('Language selector clicked')
-  // TODO: Add language selection logic
-}
 </script>
 
 <style scoped>
@@ -515,77 +434,239 @@ const toggleLanguageSelector = () => {
   border-radius: 12px;
 }
 
-/* Small mobile devices (iPhone SE, small Android) - под 375px */
-@media (max-width: 374px) {
+/* Very small mobile devices (до 320px) */
+@media (max-width: 320px) {
+  .nav-content {
+    padding: 6px 4px;
+    padding-bottom: calc(6px + env(safe-area-inset-bottom, 0px));
+    min-height: 56px;
+  }
+
+  .nav-items-container {
+    gap: 2px;
+    padding: 0 2px;
+  }
+
+  .nav-item-button {
+    min-width: 38px;
+    max-width: 50px;
+    padding: 4px 2px;
+    gap: 2px;
+  }
+
+  .nav-item-label {
+    font-size: 9px;
+    line-height: 1.0;
+  }
+
+  .nav-icon-inactive {
+    width: 20px;
+    height: 20px;
+  }
+
+  .nav-icon-active {
+    width: 26px;
+    height: 26px;
+  }
+
+  .nav-icon-svg-inactive {
+    width: 14px;
+    height: 14px;
+  }
+
+  .nav-icon-svg-active {
+    width: 16px;
+    height: 16px;
+  }
+
+  .profile-avatar,
+  .profile-image {
+    width: 20px;
+    height: 20px;
+  }
+
+  .profile-badge {
+    width: 8px;
+    height: 8px;
+  }
+
+  .profile-star {
+    width: 4px;
+    height: 4px;
+  }
+
+  .profile-arrow {
+    width: 6px;
+    height: 6px;
+  }
+
+  .profile-arrow-icon {
+    width: 3px;
+    height: 2px;
+  }
+
+  .cart-counter-badge {
+    width: 14px;
+    height: 14px;
+    font-size: 7px;
+    top: -1px;
+    right: -1px;
+    min-width: 14px;
+  }
+}
+
+/* Small mobile devices (321px - 374px) */
+@media (min-width: 321px) and (max-width: 374px) {
+  .nav-content {
+    padding: 8px 5px;
+    padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+    min-height: 60px;
+  }
+
+  .nav-items-container {
+    gap: 3px;
+    padding: 0 3px;
+  }
+
+  .nav-item-button {
+    min-width: 42px;
+    max-width: 54px;
+    padding: 5px 2px;
+    gap: 3px;
+  }
+
+  .nav-item-label {
+    font-size: 9px;
+    line-height: 1.05;
+  }
+
+  .nav-icon-inactive {
+    width: 22px;
+    height: 22px;
+  }
+
+  .nav-icon-active {
+    width: 28px;
+    height: 28px;
+  }
+
+  .nav-icon-svg-inactive {
+    width: 15px;
+    height: 15px;
+  }
+
+  .nav-icon-svg-active {
+    width: 17px;
+    height: 17px;
+  }
+
+  .profile-avatar,
+  .profile-image {
+    width: 22px;
+    height: 22px;
+  }
+
+  .profile-badge {
+    width: 9px;
+    height: 9px;
+  }
+
+  .profile-star {
+    width: 4px;
+    height: 4px;
+  }
+
+  .profile-arrow {
+    width: 7px;
+    height: 7px;
+  }
+
+  .profile-arrow-icon {
+    width: 3px;
+    height: 2px;
+  }
+
+  .cart-counter-badge {
+    width: 15px;
+    height: 15px;
+    font-size: 7px;
+    top: -1px;
+    right: -1px;
+    min-width: 15px;
+  }
+}
+
+/* Regular small mobile devices (375px - 374px) */
+@media (min-width: 375px) and (max-width: 374px) {
   .nav-content {
     padding: 10px 6px;
     padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
     min-height: 64px;
   }
-  
+
   .nav-items-container {
     gap: 4px;
     padding: 0 4px;
   }
-  
+
   .nav-item-button {
     min-width: 44px;
     max-width: 58px;
     padding: 6px 3px;
     gap: 4px;
   }
-  
+
   .nav-item-label {
     font-size: 10px;
     line-height: 1.1;
   }
-  
+
   .nav-icon-inactive {
     width: 24px;
     height: 24px;
   }
-  
+
   .nav-icon-active {
     width: 30px;
     height: 30px;
   }
-  
+
   .nav-icon-svg-inactive {
     width: 16px;
     height: 16px;
   }
-  
+
   .nav-icon-svg-active {
     width: 18px;
     height: 18px;
   }
-  
+
   .profile-avatar,
   .profile-image {
     width: 24px;
     height: 24px;
   }
-  
+
   .profile-badge {
     width: 10px;
     height: 10px;
   }
-  
+
   .profile-star {
     width: 5px;
     height: 5px;
   }
-  
+
   .profile-arrow {
     width: 8px;
     height: 8px;
   }
-  
+
   .profile-arrow-icon {
     width: 4px;
     height: 3px;
   }
-  
+
   .cart-counter-badge {
     width: 16px;
     height: 16px;
