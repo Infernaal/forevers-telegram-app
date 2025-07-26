@@ -156,132 +156,135 @@
           </div>
         </div>
 
-        <!-- Bottom Controls -->
-        <div class="bottom-controls">
-          <!-- ID Section -->
-          <div class="control-item id-section">
-            <button @click="copyUserId" class="control-button">
-              <div class="control-content">
-                <span class="control-label">ID:</span>
-                <span class="control-value">{{ profileData.id }}</span>
-              </div>
-              <div class="control-action">
-                <Transition
-                  name="copy-success"
-                  enter-active-class="transition-all duration-300"
-                  leave-active-class="transition-all duration-300"
-                  enter-from-class="opacity-0 scale-90"
-                  enter-to-class="opacity-100 scale-100"
-                  leave-from-class="opacity-100 scale-100"
-                  leave-to-class="opacity-0 scale-90"
-                >
-                  <div v-if="showCopySuccess" class="copy-success-indicator">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                      <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                  </div>
-                  <div v-else class="copy-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                      <path d="M18.2806 1.19995H8.98336C8.42322 1.19995 7.88603 1.43348 7.48995 1.84917C7.09387 2.26486 6.87136 2.82866 6.87136 3.41653V4.26906H5.81536C5.2278 4.26906 4.66431 4.51402 4.24885 4.95006C3.83338 5.3861 3.59998 5.97749 3.59998 6.59414V20.4749C3.59998 21.0915 3.83338 21.6829 4.24885 22.119C4.66431 22.555 5.2278 22.8 5.81536 22.8H14.9132C15.5008 22.8 16.0643 22.555 16.4797 22.119C16.8952 21.6829 17.1286 21.0915 17.1286 20.4749V19.6998H18.2806C18.8363 19.6999 19.3699 19.4709 19.7663 19.0621C20.1627 18.6533 20.3903 18.0975 20.4 17.5143V3.41653C20.398 2.82794 20.1739 2.26417 19.7766 1.8487C19.3794 1.43323 18.8414 1.19995 18.2806 1.19995ZM15.6517 20.4749C15.6517 20.6804 15.5739 20.8776 15.4354 21.0229C15.2969 21.1682 15.1091 21.2499 14.9132 21.2499H5.81536C5.61951 21.2499 5.43168 21.1682 5.29319 21.0229C5.1547 20.8776 5.0769 20.6804 5.0769 20.4749V6.59414C5.0769 6.38859 5.1547 6.19146 5.29319 6.04611C5.43168 5.90077 5.61951 5.81911 5.81536 5.81911H14.9132C15.1091 5.81911 15.2969 5.90077 15.4354 6.04611C15.5739 6.19146 15.6517 6.38859 15.6517 6.59414V20.4749ZM18.9231 17.5143C18.9211 17.6918 18.8526 17.8613 18.7323 17.9861C18.612 18.1108 18.4497 18.1808 18.2806 18.1808H17.1286V6.59414C17.1286 5.97749 16.8952 5.3861 16.4797 4.95006C16.0643 4.51402 15.5008 4.26906 14.9132 4.26906H8.34828V3.41653C8.34828 3.23976 8.41519 3.07022 8.53429 2.94523C8.65339 2.82023 8.81493 2.75001 8.98336 2.75001H18.2806C18.3646 2.74898 18.448 2.76546 18.5259 2.7985C18.6038 2.83154 18.6747 2.88047 18.7344 2.94246C18.7942 3.00446 18.8416 3.07828 18.874 3.15966C18.9064 3.24103 18.9231 3.32834 18.9231 3.41653V17.5143Z" fill="white"/>
-                    </svg>
-                  </div>
-                </Transition>
-              </div>
-            </button>
-          </div>
-
-          <!-- Language Section -->
-          <div class="control-item language-section">
-            <button @click="toggleLanguageSelector" class="control-button">
-              <div class="control-content">
-                <div class="flag-container">
-                  <CountryFlag :country="selectedLanguage.code" size="small" />
+        <!-- Unified Bottom Section -->
+        <div class="unified-bottom-section">
+          <!-- Bottom Controls -->
+          <div class="bottom-controls">
+            <!-- ID Section -->
+            <div class="control-item id-section">
+              <button @click="copyUserId" class="control-button">
+                <div class="control-content">
+                  <span class="control-label">ID:</span>
+                  <span class="control-value">{{ profileData.id }}</span>
                 </div>
-                <span class="control-value">{{ selectedLanguage.name }}</span>
-              </div>
-              <div class="control-action">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="dropdown-arrow" :class="{ 'rotate-180': isLanguageDropdownOpen }">
-                  <circle opacity="0.2" cx="10" cy="10" r="10" fill="white"/>
-                  <path d="M5.71387 8.57146L9.99958 12.8572L14.2853 8.57146" stroke="white" stroke-linecap="round"/>
-                </svg>
-              </div>
-            </button>
-
-            <!-- Language Dropdown -->
-            <Transition
-              name="dropdown"
-              enter-active-class="transition-all duration-300 ease-out"
-              leave-active-class="transition-all duration-200 ease-in"
-              enter-from-class="opacity-0 scale-95 translate-y-1"
-              enter-to-class="opacity-100 scale-100 translate-y-0"
-              leave-from-class="opacity-100 scale-100 translate-y-0"
-              leave-to-class="opacity-0 scale-95 translate-y-1"
-            >
-              <div v-if="isLanguageDropdownOpen" class="language-dropdown">
-                <div class="dropdown-content">
-                  <button
-                    v-for="language in availableLanguages"
-                    :key="language.code"
-                    @click="selectLanguage(language)"
-                    class="dropdown-item"
-                    :class="{ 'dropdown-item-active': selectedLanguage.code === language.code }"
+                <div class="control-action">
+                  <Transition
+                    name="copy-success"
+                    enter-active-class="transition-all duration-300"
+                    leave-active-class="transition-all duration-300"
+                    enter-from-class="opacity-0 scale-90"
+                    enter-to-class="opacity-100 scale-100"
+                    leave-from-class="opacity-100 scale-100"
+                    leave-to-class="opacity-0 scale-90"
                   >
-                    <div class="dropdown-flag">
-                      <CountryFlag :country="language.code" size="small" />
+                    <div v-if="showCopySuccess" class="copy-success-indicator">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                        <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      </svg>
                     </div>
-                    <span class="dropdown-text">{{ language.name }}</span>
-                    <div v-if="selectedLanguage.code === language.code" class="dropdown-indicator"></div>
-                  </button>
+                    <div v-else class="copy-icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M18.2806 1.19995H8.98336C8.42322 1.19995 7.88603 1.43348 7.48995 1.84917C7.09387 2.26486 6.87136 2.82866 6.87136 3.41653V4.26906H5.81536C5.2278 4.26906 4.66431 4.51402 4.24885 4.95006C3.83338 5.3861 3.59998 5.97749 3.59998 6.59414V20.4749C3.59998 21.0915 3.83338 21.6829 4.24885 22.119C4.66431 22.555 5.2278 22.8 5.81536 22.8H14.9132C15.5008 22.8 16.0643 22.555 16.4797 22.119C16.8952 21.6829 17.1286 21.0915 17.1286 20.4749V19.6998H18.2806C18.8363 19.6999 19.3699 19.4709 19.7663 19.0621C20.1627 18.6533 20.3903 18.0975 20.4 17.5143V3.41653C20.398 2.82794 20.1739 2.26417 19.7766 1.8487C19.3794 1.43323 18.8414 1.19995 18.2806 1.19995ZM15.6517 20.4749C15.6517 20.6804 15.5739 20.8776 15.4354 21.0229C15.2969 21.1682 15.1091 21.2499 14.9132 21.2499H5.81536C5.61951 21.2499 5.43168 21.1682 5.29319 21.0229C5.1547 20.8776 5.0769 20.6804 5.0769 20.4749V6.59414C5.0769 6.38859 5.1547 6.19146 5.29319 6.04611C5.43168 5.90077 5.61951 5.81911 5.81536 5.81911H14.9132C15.1091 5.81911 15.2969 5.90077 15.4354 6.04611C15.5739 6.19146 15.6517 6.38859 15.6517 6.59414V20.4749ZM18.9231 17.5143C18.9211 17.6918 18.8526 17.8613 18.7323 17.9861C18.612 18.1108 18.4497 18.1808 18.2806 18.1808H17.1286V6.59414C17.1286 5.97749 16.8952 5.3861 16.4797 4.95006C16.0643 4.51402 15.5008 4.26906 14.9132 4.26906H8.34828V3.41653C8.34828 3.23976 8.41519 3.07022 8.53429 2.94523C8.65339 2.82023 8.81493 2.75001 8.98336 2.75001H18.2806C18.3646 2.74898 18.448 2.76546 18.5259 2.7985C18.6038 2.83154 18.6747 2.88047 18.7344 2.94246C18.7942 3.00446 18.8416 3.07828 18.874 3.15966C18.9064 3.24103 18.9231 3.32834 18.9231 3.41653V17.5143Z" fill="white"/>
+                      </svg>
+                    </div>
+                  </Transition>
                 </div>
-              </div>
-            </Transition>
-          </div>
-        </div>
-
-        <!-- Upgrade Section -->
-        <div class="upgrade-section">
-          <div class="upgrade-card">
-            <div class="upgrade-content">
-              <!-- Star Icon -->
-              <div class="upgrade-icon">
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                  <g clip-path="url(#clip0_2_21309)">
-                    <path d="M16 31.0588C24.3167 31.0588 31.0588 24.3167 31.0588 16C31.0588 7.68323 24.3167 0.941162 16 0.941162C7.68323 0.941162 0.941162 7.68323 0.941162 16C0.941162 24.3167 7.68323 31.0588 16 31.0588Z" fill="#8C4CD1"/>
-                    <path d="M28.998 8.39055C26.1133 12.4471 21.365 15.0918 16.0003 15.0918C10.6356 15.0918 5.88739 12.4471 3.00269 8.39055C5.61916 3.9341 10.4615 0.941162 16.0003 0.941162C21.5392 0.941162 26.3815 3.9341 28.998 8.39055Z" fill="#9C68E1"/>
-                    <path d="M15.9997 5.11792V15.4117L19.3443 11.8949L15.9997 5.11792Z" fill="#FF9F00"/>
-                    <path d="M15.9996 5.11792V15.4117L12.655 11.8949L15.9996 5.11792Z" fill="#FED110"/>
-                    <path d="M26.8232 12.982L19.3443 11.8953L15.9997 15.412L26.8232 12.982Z" fill="#FED110"/>
-                    <path d="M26.8232 12.9825L21.4115 18.2577L15.9997 15.4126L26.8232 12.9825Z" fill="#FF9F00"/>
-                    <path d="M5.17645 12.982L12.6553 11.8953L16 15.412L5.17645 12.982Z" fill="#FF9F00"/>
-                    <path d="M5.17645 12.9825L10.5882 18.2577L16 15.4126L5.17645 12.9825Z" fill="#FED110"/>
-                    <path d="M15.9997 15.4124L21.4115 18.2575L22.689 25.7061L15.9997 15.4124Z" fill="#FED110"/>
-                    <path d="M22.689 25.7061L15.9997 22.1894V15.4124L22.689 25.7061Z" fill="#FF9F00"/>
-                    <path d="M15.9996 15.4124L10.5878 18.2575L9.31024 25.7061L15.9996 15.4124Z" fill="#FF9F00"/>
-                    <path d="M9.31024 25.7061L15.9996 22.1894V15.4124L9.31024 25.7061Z" fill="#FED110"/>
-                    <g opacity="0.3">
-                      <path d="M16.0003 27.5882C20.9059 27.5882 24.8826 27.3442 24.8826 27.0432C24.8826 26.7423 20.9059 26.4983 16.0003 26.4983C11.0947 26.4983 7.11792 26.7423 7.11792 27.0432C7.11792 27.3442 11.0947 27.5882 16.0003 27.5882Z" fill="#20273A"/>
-                    </g>
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_2_21309">
-                      <rect width="32" height="32" fill="white"/>
-                    </clipPath>
-                  </defs>
-                </svg>
-              </div>
-              
-              <!-- Upgrade Info -->
-              <div class="upgrade-info">
-                <div class="upgrade-title">Start</div>
-                <div class="upgrade-description">
-                  buy <span class="upgrade-number">123</span> more Forevers to upgrade
-                </div>
-              </div>
-              
-              <!-- Upgrade Button -->
-              <button @click="handleUpgrade" class="upgrade-button">
-                Upgrade
               </button>
+            </div>
+
+            <!-- Language Section -->
+            <div class="control-item language-section">
+              <button @click="toggleLanguageSelector" class="control-button">
+                <div class="control-content">
+                  <div class="flag-container">
+                    <CountryFlag :country="selectedLanguage.code" size="small" />
+                  </div>
+                  <span class="control-value">{{ selectedLanguage.name }}</span>
+                </div>
+                <div class="control-action">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="dropdown-arrow" :class="{ 'rotate-180': isLanguageDropdownOpen }">
+                    <circle opacity="0.2" cx="10" cy="10" r="10" fill="white"/>
+                    <path d="M5.71387 8.57146L9.99958 12.8572L14.2853 8.57146" stroke="white" stroke-linecap="round"/>
+                  </svg>
+                </div>
+              </button>
+
+              <!-- Language Dropdown -->
+              <Transition
+                name="dropdown"
+                enter-active-class="transition-all duration-300 ease-out"
+                leave-active-class="transition-all duration-200 ease-in"
+                enter-from-class="opacity-0 scale-95 translate-y-1"
+                enter-to-class="opacity-100 scale-100 translate-y-0"
+                leave-from-class="opacity-100 scale-100 translate-y-0"
+                leave-to-class="opacity-0 scale-95 translate-y-1"
+              >
+                <div v-if="isLanguageDropdownOpen" class="language-dropdown">
+                  <div class="dropdown-content">
+                    <button
+                      v-for="language in availableLanguages"
+                      :key="language.code"
+                      @click="selectLanguage(language)"
+                      class="dropdown-item"
+                      :class="{ 'dropdown-item-active': selectedLanguage.code === language.code }"
+                    >
+                      <div class="dropdown-flag">
+                        <CountryFlag :country="language.code" size="small" />
+                      </div>
+                      <span class="dropdown-text">{{ language.name }}</span>
+                      <div v-if="selectedLanguage.code === language.code" class="dropdown-indicator"></div>
+                    </button>
+                  </div>
+                </div>
+              </Transition>
+            </div>
+          </div>
+
+          <!-- Upgrade Section -->
+          <div class="upgrade-section">
+            <div class="upgrade-card">
+              <div class="upgrade-content">
+                <!-- Star Icon -->
+                <div class="upgrade-icon">
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <g clip-path="url(#clip0_2_21309)">
+                      <path d="M16 31.0588C24.3167 31.0588 31.0588 24.3167 31.0588 16C31.0588 7.68323 24.3167 0.941162 16 0.941162C7.68323 0.941162 0.941162 7.68323 0.941162 16C0.941162 24.3167 7.68323 31.0588 16 31.0588Z" fill="#8C4CD1"/>
+                      <path d="M28.998 8.39055C26.1133 12.4471 21.365 15.0918 16.0003 15.0918C10.6356 15.0918 5.88739 12.4471 3.00269 8.39055C5.61916 3.9341 10.4615 0.941162 16.0003 0.941162C21.5392 0.941162 26.3815 3.9341 28.998 8.39055Z" fill="#9C68E1"/>
+                      <path d="M15.9997 5.11792V15.4117L19.3443 11.8949L15.9997 5.11792Z" fill="#FF9F00"/>
+                      <path d="M15.9996 5.11792V15.4117L12.655 11.8949L15.9996 5.11792Z" fill="#FED110"/>
+                      <path d="M26.8232 12.982L19.3443 11.8953L15.9997 15.412L26.8232 12.982Z" fill="#FED110"/>
+                      <path d="M26.8232 12.9825L21.4115 18.2577L15.9997 15.4126L26.8232 12.9825Z" fill="#FF9F00"/>
+                      <path d="M5.17645 12.982L12.6553 11.8953L16 15.412L5.17645 12.982Z" fill="#FF9F00"/>
+                      <path d="M5.17645 12.9825L10.5882 18.2577L16 15.4126L5.17645 12.9825Z" fill="#FED110"/>
+                      <path d="M15.9997 15.4124L21.4115 18.2575L22.689 25.7061L15.9997 15.4124Z" fill="#FED110"/>
+                      <path d="M22.689 25.7061L15.9997 22.1894V15.4124L22.689 25.7061Z" fill="#FF9F00"/>
+                      <path d="M15.9996 15.4124L10.5878 18.2575L9.31024 25.7061L15.9996 15.4124Z" fill="#FF9F00"/>
+                      <path d="M9.31024 25.7061L15.9996 22.1894V15.4124L9.31024 25.7061Z" fill="#FED110"/>
+                      <g opacity="0.3">
+                        <path d="M16.0003 27.5882C20.9059 27.5882 24.8826 27.3442 24.8826 27.0432C24.8826 26.7423 20.9059 26.4983 16.0003 26.4983C11.0947 26.4983 7.11792 26.7423 7.11792 27.0432C7.11792 27.3442 11.0947 27.5882 16.0003 27.5882Z" fill="#20273A"/>
+                      </g>
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_2_21309">
+                        <rect width="32" height="32" fill="white"/>
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </div>
+
+                <!-- Upgrade Info -->
+                <div class="upgrade-info">
+                  <div class="upgrade-title">Start</div>
+                  <div class="upgrade-description">
+                    buy <span class="upgrade-number">123</span> more Forevers to upgrade
+                  </div>
+                </div>
+
+                <!-- Upgrade Button -->
+                <button @click="handleUpgrade" class="upgrade-button">
+                  Upgrade
+                </button>
+              </div>
             </div>
           </div>
         </div>
