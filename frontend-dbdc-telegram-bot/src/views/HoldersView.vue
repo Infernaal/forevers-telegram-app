@@ -256,7 +256,7 @@ const openTerms = () => {
   min-height: 100vh;
   background: #F0F0F0;
   position: relative;
-  padding: 20px 0 120px 0; /* Added bottom padding to prevent overlap with bottom navigation */
+  padding: 20px 0 160px 0; /* Increased bottom padding to prevent clash with bottom navigation */
 }
 
 /* Referral Program Header */
