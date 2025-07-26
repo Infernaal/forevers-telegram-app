@@ -249,8 +249,7 @@ const route = useRoute()
 // Cart
 const { cartItemsCount } = useCart()
 
-// Profile menu state
-const isProfileMenuOpen = ref(false)
+
 
 // Computed active tab based on current route
 const activeTab = ref('wallet')
