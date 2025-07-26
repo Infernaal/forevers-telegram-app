@@ -614,28 +614,11 @@ onUnmounted(() => {
 
 <style scoped>
 .rent-out-transaction-view {
-  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  min-height: 100vh;
-  min-height: 100dvh; /* Dynamic viewport height */
-  background: #f3f4f6;
-  overflow-x: hidden;
-  overscroll-behavior: none;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .transaction-card {
   box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.04);
-  transition: all 0.2s ease-in-out;
-}
-
-.transaction-card:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-}
-
-.export-btn {
-  transition: all 0.2s ease;
 }
 
 .export-btn:hover {
@@ -643,18 +626,23 @@ onUnmounted(() => {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Header section responsive adjustments */
-.header-section {
-  background: #f3f4f6;
-  padding-bottom: 8px;
+/* Mobile first approach for Telegram mini app */
+@media (max-width: 430px) {
+  .rent-out-transaction-view {
+    max-width: 100%;
+  }
 }
 
-/* Content container responsive */
+@media (min-width: 431px) and (max-width: 768px) {
+  .rent-out-transaction-view {
+    max-width: 400px;
+  }
+}
+
+/* Scrollable content */
 .content-container {
   max-height: calc(100vh - 140px);
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain;
 }
 
 /* Custom scrollbar */
@@ -665,468 +653,6 @@ onUnmounted(() => {
 .content-container {
   -ms-overflow-style: none;
   scrollbar-width: none;
-}
-
-/* Very small mobile devices (до 320px) */
-@media (max-width: 320px) {
-  .rent-out-transaction-view {
-    max-width: 100%;
-  }
-
-  .header-section {
-    padding-bottom: 4px;
-  }
-
-  .header-section .flex.justify-between {
-    padding: 8px 12px 12px 12px;
-  }
-
-  .header-section h1 {
-    font-size: 18px;
-    line-height: 1.2;
-  }
-
-  .export-btn {
-    width: 100px;
-    height: 36px;
-    padding: 6px 12px;
-  }
-
-  .export-btn span {
-    font-size: 12px;
-  }
-
-  .export-btn svg {
-    width: 24px;
-    height: 24px;
-  }
-
-  .content-container {
-    padding: 12px 8px 80px 8px;
-    max-height: calc(100vh - 120px);
-  }
-
-  .transaction-card {
-    border-radius: 16px;
-    padding: 10px;
-    margin-bottom: 8px;
-  }
-
-  .transaction-card .flex.justify-between {
-    margin-bottom: 10px;
-  }
-
-  .transaction-card .w-10.h-10 {
-    width: 32px;
-    height: 32px;
-  }
-
-  .transaction-card .w-10.h-10 svg {
-    width: 16px;
-    height: 16px;
-  }
-
-  .transaction-card .w-6.h-6 {
-    width: 20px;
-    height: 20px;
-  }
-
-  .transaction-card .text-sm {
-    font-size: 11px;
-  }
-
-  .transaction-card .text-base {
-    font-size: 12px;
-  }
-
-  .empty-state {
-    min-height: calc(100vh - 160px) !important;
-    padding: 16px 12px;
-  }
-
-  .empty-state .text-xl {
-    font-size: 18px;
-    line-height: 1.3;
-  }
-
-  .empty-state .text-base {
-    font-size: 14px;
-    line-height: 1.4;
-  }
-
-  /* Modal adjustments for very small screens */
-  .fixed.inset-0 .w-full.max-w-md {
-    max-width: calc(100vw - 16px);
-    margin: 8px;
-  }
-
-  .fixed.inset-0 .rounded-t-3xl {
-    border-radius: 16px 16px 0 0;
-  }
-
-  .fixed.inset-0 .p-4 {
-    padding: 12px;
-  }
-
-  .fixed.inset-0 .text-base {
-    font-size: 14px;
-  }
-
-  .fixed.inset-0 .w-11.h-11 {
-    width: 36px;
-    height: 36px;
-  }
-
-  .copy-btn-default,
-  .copy-btn-copied {
-    min-width: 60px;
-    padding: 6px 8px;
-  }
-
-  .copy-btn-default span,
-  .copy-btn-copied span {
-    font-size: 11px;
-  }
-
-  .copy-btn-default svg,
-  .copy-btn-copied svg {
-    width: 12px;
-    height: 12px;
-  }
-}
-
-/* Small mobile devices (321px - 374px) */
-@media (min-width: 321px) and (max-width: 374px) {
-  .rent-out-transaction-view {
-    max-width: 100%;
-  }
-
-  .header-section .flex.justify-between {
-    padding: 10px 14px 14px 14px;
-  }
-
-  .header-section h1 {
-    font-size: 20px;
-    line-height: 1.25;
-  }
-
-  .export-btn {
-    width: 110px;
-    height: 40px;
-    padding: 8px 14px;
-  }
-
-  .export-btn span {
-    font-size: 13px;
-  }
-
-  .export-btn svg {
-    width: 26px;
-    height: 26px;
-  }
-
-  .content-container {
-    padding: 14px 12px 85px 12px;
-    max-height: calc(100vh - 130px);
-  }
-
-  .transaction-card {
-    border-radius: 18px;
-    padding: 12px;
-    margin-bottom: 10px;
-  }
-
-  .transaction-card .w-10.h-10 {
-    width: 36px;
-    height: 36px;
-  }
-
-  .transaction-card .w-10.h-10 svg {
-    width: 18px;
-    height: 18px;
-  }
-
-  .transaction-card .text-sm {
-    font-size: 12px;
-  }
-
-  .transaction-card .text-base {
-    font-size: 13px;
-  }
-
-  .empty-state {
-    min-height: calc(100vh - 170px) !important;
-    padding: 18px 14px;
-  }
-
-  .empty-state .text-xl {
-    font-size: 19px;
-  }
-
-  .empty-state .text-base {
-    font-size: 15px;
-  }
-
-  .copy-btn-default,
-  .copy-btn-copied {
-    min-width: 65px;
-    padding: 7px 10px;
-  }
-
-  .copy-btn-default span,
-  .copy-btn-copied span {
-    font-size: 12px;
-  }
-}
-
-/* Regular small mobile devices (375px - 430px) */
-@media (min-width: 375px) and (max-width: 430px) {
-  .rent-out-transaction-view {
-    max-width: 100%;
-  }
-
-  .content-container {
-    padding: 16px 14px 90px 14px;
-    max-height: calc(100vh - 140px);
-  }
-
-  .transaction-card {
-    padding: 12px;
-    margin-bottom: 8px;
-  }
-
-  .export-btn {
-    width: 120px;
-    height: 44px;
-  }
-
-  .export-btn span {
-    font-size: 14px;
-  }
-
-  .export-btn svg {
-    width: 28px;
-    height: 28px;
-  }
-
-  .empty-state {
-    min-height: calc(100vh - 180px) !important;
-  }
-
-  .copy-btn-default,
-  .copy-btn-copied {
-    min-width: 70px;
-  }
-}
-
-/* Large mobile and small tablets (431px - 768px) */
-@media (min-width: 431px) and (max-width: 768px) {
-  .rent-out-transaction-view {
-    max-width: 480px;
-    margin: 0 auto;
-  }
-
-  .content-container {
-    padding: 20px 18px 95px 18px;
-    max-height: calc(100vh - 150px);
-  }
-
-  .transaction-card {
-    padding: 16px;
-    border-radius: 20px;
-    margin-bottom: 12px;
-  }
-
-  .transaction-card .w-10.h-10 {
-    width: 44px;
-    height: 44px;
-  }
-
-  .transaction-card .w-10.h-10 svg {
-    width: 22px;
-    height: 22px;
-  }
-
-  .transaction-card .text-sm {
-    font-size: 14px;
-  }
-
-  .transaction-card .text-base {
-    font-size: 16px;
-  }
-
-  .export-btn {
-    width: 140px;
-    height: 48px;
-  }
-
-  .export-btn span {
-    font-size: 15px;
-  }
-
-  .export-btn svg {
-    width: 32px;
-    height: 32px;
-  }
-
-  .empty-state .text-xl {
-    font-size: 24px;
-  }
-
-  .empty-state .text-base {
-    font-size: 17px;
-  }
-
-  .copy-btn-default,
-  .copy-btn-copied {
-    min-width: 80px;
-    padding: 8px 12px;
-  }
-}
-
-/* Tablets and desktop (769px+) */
-@media (min-width: 769px) {
-  .rent-out-transaction-view {
-    max-width: 480px;
-    margin: 20px auto;
-    border-radius: 20px;
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-  }
-
-  .content-container {
-    padding: 24px 24px 110px 24px;
-    max-height: calc(100vh - 170px);
-  }
-
-  .transaction-card {
-    padding: 20px;
-    border-radius: 24px;
-    margin-bottom: 16px;
-  }
-
-  .transaction-card .w-10.h-10 {
-    width: 48px;
-    height: 48px;
-  }
-
-  .transaction-card .w-10.h-10 svg {
-    width: 24px;
-    height: 24px;
-  }
-
-  .transaction-card .text-sm {
-    font-size: 15px;
-  }
-
-  .transaction-card .text-base {
-    font-size: 17px;
-  }
-
-  .export-btn {
-    width: 160px;
-    height: 52px;
-  }
-
-  .export-btn span {
-    font-size: 16px;
-  }
-
-  .export-btn svg {
-    width: 36px;
-    height: 36px;
-  }
-
-  .empty-state .text-xl {
-    font-size: 28px;
-  }
-
-  .empty-state .text-base {
-    font-size: 18px;
-  }
-
-  .copy-btn-default,
-  .copy-btn-copied {
-    min-width: 90px;
-    padding: 10px 16px;
-  }
-}
-
-/* Landscape orientation adjustments for phones */
-@media (max-height: 500px) and (orientation: landscape) {
-  .header-section {
-    padding-bottom: 4px;
-  }
-
-  .header-section .h-12 {
-    height: 8px;
-  }
-
-  .header-section h1 {
-    font-size: 16px;
-    line-height: 1.2;
-  }
-
-  .content-container {
-    padding: 8px 16px 70px 16px;
-    max-height: calc(100vh - 100px);
-  }
-
-  .transaction-card {
-    padding: 8px;
-    border-radius: 12px;
-    margin-bottom: 6px;
-  }
-
-  .transaction-card .flex.justify-between {
-    margin-bottom: 6px;
-  }
-
-  .transaction-card .w-10.h-10 {
-    width: 28px;
-    height: 28px;
-  }
-
-  .transaction-card .w-10.h-10 svg {
-    width: 14px;
-    height: 14px;
-  }
-
-  .transaction-card .text-sm {
-    font-size: 10px;
-  }
-
-  .transaction-card .text-base {
-    font-size: 11px;
-  }
-
-  .export-btn {
-    width: 90px;
-    height: 32px;
-    padding: 4px 8px;
-  }
-
-  .export-btn span {
-    font-size: 11px;
-  }
-
-  .export-btn svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  .empty-state {
-    min-height: calc(100vh - 120px) !important;
-    padding: 12px;
-  }
-
-  .empty-state .text-xl {
-    font-size: 16px;
-  }
-
-  .empty-state .text-base {
-    font-size: 13px;
-  }
 }
 
 /* Telegram WebApp optimizations */
@@ -1144,24 +670,36 @@ onUnmounted(() => {
   }
 }
 
-/* Modal responsive adjustments */
-@media (max-height: 700px) {
-  .max-h-96 {
-    max-height: 280px;
+/* Mobile touch optimizations for Telegram */
+.rent-out-transaction-view {
+  -webkit-overflow-scrolling: touch;
+  touch-action: manipulation;
+}
+
+/* Export dropdown responsive adjustments */
+@media (max-width: 380px) {
+  .export-btn {
+    width: 120px;
+    height: 48px;
+  }
+
+  .export-btn span {
+    font-size: 0.875rem;
   }
 }
 
-@media (max-width: 380px) {
-  .fixed.inset-0 .max-h-96 {
-    max-height: 240px;
+/* Transaction modal optimizations for Telegram */
+@media (max-height: 700px) {
+  .transaction-modal .max-h-96 {
+    max-height: 280px;
   }
 }
 
 /* Copy button fixed width to prevent layout shifts */
 .copy-btn-default,
 .copy-btn-copied {
+  min-width: 70px;
   justify-content: center;
-  transition: all 0.2s ease;
 }
 
 /* Touch-friendly targets for Telegram WebApp */
@@ -1169,7 +707,6 @@ onUnmounted(() => {
   button {
     min-height: 44px;
     min-width: 44px;
-    touch-action: manipulation;
   }
 
   .transaction-card {
@@ -1180,6 +717,16 @@ onUnmounted(() => {
     padding: 8px;
     margin: -8px;
   }
+}
+
+/* Smooth animations */
+.transaction-card {
+  transition: all 0.2s ease-in-out;
+}
+
+.transaction-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 }
 
 /* Modal animations */
@@ -1201,124 +748,5 @@ onUnmounted(() => {
 /* Checkbox animations */
 .transition-colors {
   transition: all 0.2s ease-in-out;
-}
-
-/* High DPI displays */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .transaction-card svg,
-  .export-btn svg,
-  .copy-btn-default svg,
-  .copy-btn-copied svg {
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-  }
-}
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .rent-out-transaction-view {
-    background: #1a1a1a;
-  }
-
-  .header-section {
-    background: #1a1a1a;
-  }
-
-  .transaction-card {
-    background: #2a2a2a;
-    border-color: rgba(255, 255, 255, 0.1);
-  }
-
-  .export-btn {
-    background: #2a2a2a;
-    border-color: rgba(255, 255, 255, 0.2);
-    color: #ffffff;
-  }
-
-  .copy-btn-default {
-    background: #2a2a2a;
-    border-color: rgba(255, 255, 255, 0.2);
-    color: #ffffff;
-  }
-
-  .empty-state h2 {
-    color: #ffffff;
-  }
-
-  .empty-state p {
-    color: #a0a0a0;
-  }
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-  .transaction-card,
-  .export-btn,
-  .copy-btn-default,
-  .copy-btn-copied {
-    transition: none;
-  }
-
-  .transaction-card:hover,
-  .export-btn:hover {
-    transform: none;
-  }
-
-  .animate-slide-up {
-    animation: none;
-  }
-}
-
-/* Touch optimizations */
-@media (hover: none) and (pointer: coarse) {
-  .transaction-card:hover,
-  .export-btn:hover {
-    transform: none;
-    box-shadow: inherit;
-  }
-
-  .transaction-card:active {
-    transform: scale(0.98);
-    background: rgba(0, 0, 0, 0.02);
-  }
-
-  .export-btn:active {
-    transform: scale(0.96);
-    opacity: 0.9;
-  }
-}
-
-/* Safe area support for different iOS versions */
-@supports (padding-bottom: env(safe-area-inset-bottom)) {
-  .content-container {
-    padding-bottom: calc(90px + env(safe-area-inset-bottom));
-  }
-}
-
-@supports (padding-bottom: constant(safe-area-inset-bottom)) {
-  .content-container {
-    padding-bottom: calc(90px + constant(safe-area-inset-bottom));
-  }
-}
-
-/* Performance optimizations */
-.transaction-card,
-.export-btn,
-.copy-btn-default,
-.copy-btn-copied {
-  will-change: transform;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-/* Telegram WebApp specific optimizations */
-* {
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* Mobile touch optimizations for Telegram */
-.rent-out-transaction-view {
-  -webkit-overflow-scrolling: touch;
-  touch-action: manipulation;
 }
 </style>
