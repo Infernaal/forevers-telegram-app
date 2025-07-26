@@ -361,17 +361,24 @@ const openTerms = () => {
   position: relative;
   margin: 0 auto;
   max-width: 375px;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* Hide scrollbar for webkit browsers */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.holders-view::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 /* Content Container - now starts from top */
 .content-container {
   width: 375px;
-  min-height: 100vh;
+  min-height: calc(100vh + 200px); /* Allow content to extend beyond viewport */
   background: #F0F0F0;
   position: relative;
   padding: 20px 0 160px 0; /* Increased bottom padding to prevent clash with bottom navigation */
-  overflow: hidden;
 }
 
 /* Referral Program Header */
