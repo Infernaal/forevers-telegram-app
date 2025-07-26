@@ -217,10 +217,12 @@ const confirmDelete = () => {
   font-family: 'Montserrat', sans-serif;
   height: 100vh;
   height: 100dvh; /* Dynamic viewport height for mobile */
+  background: #f3f4f6 !important;
 }
 
 .content-container {
   min-height: 0; /* Allow flex child to shrink */
+  background: #f3f4f6 !important;
 }
 
 .scrollable-content {
@@ -287,6 +289,39 @@ const confirmDelete = () => {
   box-shadow: 0 4px 12px rgba(32, 25, 206, 0.3);
 }
 
+/* Transaction Details Modal Styles (if used in cart context) */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #02070E;
+  margin: 0;
+}
+
+.modal-close-btn {
+  width: 2.75rem;
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #FAFAFA;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background-color: #f3f4f6;
+}
+
 /* Mobile optimizations for Telegram mini app */
 @media (max-width: 375px) {
   .cart-view {
@@ -339,6 +374,16 @@ const confirmDelete = () => {
   .text-lg {
     font-size: 16px;
     line-height: 20px;
+  }
+
+  /* Modal responsive styles for mobile */
+  .modal-title {
+    font-size: 0.875rem;
+  }
+
+  .modal-close-btn {
+    width: 2.25rem;
+    height: 2.25rem;
   }
 }
 
@@ -393,6 +438,16 @@ const confirmDelete = () => {
   .text-lg {
     font-size: 18px !important;
   }
+
+  /* Modal styles for tablets */
+  .modal-title {
+    font-size: 1.125rem;
+  }
+
+  .modal-close-btn {
+    width: 3rem;
+    height: 3rem;
+  }
 }
 
 /* Desktop and large tablets */
@@ -407,6 +462,21 @@ const confirmDelete = () => {
 
   .fixed-bottom-section {
     max-width: 480px;
+  }
+
+  /* Modal styles for desktop */
+  .modal-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .modal-close-btn {
+    width: 3.25rem;
+    height: 3.25rem;
+  }
+
+  .modal-header {
+    padding: 1.5rem;
   }
 }
 

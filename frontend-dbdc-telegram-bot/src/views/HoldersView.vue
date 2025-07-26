@@ -1,7 +1,7 @@
 <template>
-  <div class="holders-view w-full max-w-md mx-auto bg-gray-100 min-h-screen">
+  <div class="holders-view w-full max-w-md mx-auto min-h-screen">
     <!-- Content Container -->
-    <div class="content-container bg-gray-100 px-4 pb-24 flex items-center justify-center" style="min-height: calc(100vh - 96px);">
+    <div class="content-container px-4 pb-24 flex items-center justify-center" style="min-height: calc(100vh - 96px);">
       
       <!-- Holders Section -->
       <div class="holders-section">
@@ -39,6 +39,44 @@ export default {
 <style scoped>
 .holders-view {
   font-family: 'Montserrat', sans-serif;
+  background: #f3f4f6;
+}
+
+.content-container {
+  background: #f3f4f6;
+}
+
+/* Transaction Details Modal Styles (if used in holders context) */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #02070E;
+  margin: 0;
+}
+
+.modal-close-btn {
+  width: 2.75rem;
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #FAFAFA;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background-color: #f3f4f6;
 }
 
 /* Mobile first approach for Telegram mini app */
@@ -46,11 +84,53 @@ export default {
   .holders-view {
     max-width: 100%;
   }
+
+  /* Modal responsive styles for mobile */
+  .modal-title {
+    font-size: 0.875rem;
+  }
+
+  .modal-close-btn {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
 }
 
 @media (min-width: 431px) and (max-width: 768px) {
   .holders-view {
     max-width: 400px;
+  }
+
+  /* Modal styles for tablets */
+  .modal-title {
+    font-size: 1.125rem;
+  }
+
+  .modal-close-btn {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+/* Desktop and large tablets */
+@media (min-width: 769px) {
+  .holders-view {
+    max-width: 480px;
+  }
+
+  /* Modal styles for desktop */
+  .modal-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .modal-close-btn {
+    width: 3.25rem;
+    height: 3.25rem;
+  }
+
+  .modal-header {
+    padding: 1.5rem;
   }
 }
 </style>
