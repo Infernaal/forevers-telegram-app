@@ -1399,55 +1399,7 @@ const selectLanguage = (language) => {
   }
 }
 
-  /* Regular mobile specific */
-  @media (min-width: 375px) and (max-width: 430px) {
-    .profile-container {
-      bottom: calc(170px + constant(safe-area-inset-bottom));
-      max-height: calc(100vh - 200px - constant(safe-area-inset-bottom));
-    }
-    .overlay-pointer {
-      bottom: calc(160px + constant(safe-area-inset-bottom));
-    }
-  }
 
-  /* Landscape specific */
-  @media (max-height: 500px) and (orientation: landscape) {
-    .profile-container {
-      bottom: calc(140px + constant(safe-area-inset-bottom));
-      max-height: calc(100vh - 150px - constant(safe-area-inset-bottom));
-    }
-    .overlay-pointer {
-      bottom: calc(130px + constant(safe-area-inset-bottom));
-    }
-  }
-}
-
-/* Additional protection for devices with extremely large safe areas */
-@media (min-height: 800px) {
-  .profile-container {
-    min-height: 400px;
-  }
-}
-
-@media (max-height: 600px) {
-  .profile-container {
-    top: 20px;
-    max-height: calc(100vh - 92px - env(safe-area-inset-bottom, 0));
-  }
-
-  .profile-header {
-    padding: 8px;
-  }
-
-  .upgrade-section {
-    padding: 8px;
-  }
-
-  .bottom-section {
-    padding: 8px;
-    min-height: 56px;
-  }
-}
 
 /* iPhone 14 Pro Max and similar with large safe areas */
 @media (min-width: 428px) and (min-height: 926px) {
