@@ -33,7 +33,7 @@
         <div
           v-for="balance in balances"
           :key="balance.id"
-          class="bg-white border border-purple-200 rounded-2xl p-3 relative min-h-[216px] flex flex-col justify-between"
+          class="bg-white border border-purple-200 rounded-2xl balance-card relative flex flex-col justify-between"
         >
           <!-- Country Header -->
           <div class="flex items-center justify-between mb-3">
@@ -669,9 +669,38 @@ onBeforeUnmount(() => {
   }
 }
 
-/* Ensure consistent heights for balance cards */
-.min-h-\[216px\] {
-  min-height: 216px;
+/* Responsive balance cards */
+.balance-card {
+  padding: 12px;
+  min-height: 180px;
+}
+
+@media (max-width: 375px) {
+  .balance-card {
+    padding: 10px;
+    min-height: 160px;
+  }
+}
+
+@media (min-width: 376px) and (max-width: 480px) {
+  .balance-card {
+    padding: 12px;
+    min-height: 170px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .balance-card {
+    padding: 14px;
+    min-height: 190px;
+  }
+}
+
+@media (min-width: 769px) {
+  .balance-card {
+    padding: 16px;
+    min-height: 210px;
+  }
 }
 
 /* Make sure content properly fits */
