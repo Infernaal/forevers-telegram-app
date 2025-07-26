@@ -1,5 +1,5 @@
 <template>
-  <div class="holders-view w-full max-w-md mx-auto min-h-screen" style="background: #f3f4f6 !important;">
+  <div class="holders-view">
     <!-- Content Container -->
     <div class="content-container">
       
@@ -120,6 +120,12 @@
       <div class="how-to-section">
         <!-- Steps Container -->
         <div class="steps-container">
+          <!-- Header -->
+          <div class="how-to-header">
+            <h2 class="how-to-title">How to use the Link</h2>
+            <p class="how-to-subtitle">Follow these 3 simple steps</p>
+          </div>
+
           <!-- Step Indicators -->
           <div class="step-indicators">
             <div class="step-indicator-row">
@@ -129,12 +135,6 @@
               <div class="step-indicator step-indicator-2"></div>
               <div class="step-indicator step-indicator-3"></div>
             </div>
-          </div>
-
-          <!-- Header -->
-          <div class="how-to-header">
-            <h2 class="how-to-title">How to use the Link</h2>
-            <p class="how-to-subtitle">Follow these 3 simple steps</p>
           </div>
 
           <!-- Step Descriptions -->
@@ -242,25 +242,37 @@ const openTerms = () => {
 <style scoped>
 .holders-view {
   font-family: 'Montserrat', sans-serif;
+  width: 375px;
+  height: 812px;
+  background: #fff;
+  position: relative;
+  margin: 0 auto;
+  max-width: 375px;
 }
 
 /* Content Container */
 .content-container {
   width: 375px;
+  height: 737px;
   background: #F0F0F0;
   border-radius: 16px 16px 0 0;
-  position: relative;
-  padding: 14px;
-  min-height: calc(100vh - 100px);
+  position: absolute;
+  left: 0;
+  top: 76px;
+  padding: 0;
 }
 
 /* Referral Program Header */
 .referral-header {
   display: flex;
+  width: 299px;
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
-  margin-bottom: 20px;
+  position: absolute;
+  left: 14px;
+  top: 66px;
+  height: 52px;
 }
 
 .referral-title {
@@ -270,6 +282,7 @@ const openTerms = () => {
   font-weight: 700;
   line-height: 24px;
   margin: 0;
+  align-self: stretch;
 }
 
 .referral-subtitle {
@@ -279,25 +292,30 @@ const openTerms = () => {
   font-weight: 500;
   line-height: 24px;
   margin: 0;
+  align-self: stretch;
 }
 
 /* Scroll Content */
 .scroll-content {
   display: flex;
+  width: 347px;
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-start;
   gap: 20px;
-  width: 347px;
+  position: absolute;
+  left: 14px;
+  top: 138px;
   height: 507px;
-  position: relative;
 }
 
 /* QR Section */
 .qr-section {
   width: 347px;
   height: 396px;
-  position: relative;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .qr-background {
@@ -351,6 +369,8 @@ const openTerms = () => {
 
 /* QR Code Container */
 .qr-code-container {
+  width: 222px;
+  height: 220px;
   position: absolute;
   left: 63px;
   top: 24px;
@@ -364,19 +384,16 @@ const openTerms = () => {
   border: 1px solid #F2F2F2;
   background: #FAFAFA;
   box-shadow: 2px 4px 12px 0 rgba(0, 0, 0, 0.04);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  box-sizing: border-box;
+  position: relative;
 }
 
 .qr-code-image {
   width: 140px;
   height: 140px;
   aspect-ratio: 1/1;
-  margin-bottom: 16px;
+  position: absolute;
+  left: 41px;
+  top: 20px;
 }
 
 .qr-code-link {
@@ -385,14 +402,18 @@ const openTerms = () => {
   font-size: 17px;
   font-weight: 600;
   line-height: 24px;
-  text-align: center;
+  position: absolute;
+  left: 20px;
+  top: 176px;
+  width: 182px;
+  height: 24px;
 }
 
 /* Terms Section */
 .terms-container {
   position: absolute;
-  left: 0;
-  top: 322px;
+  left: 14px;
+  top: 256px;
   width: 319px;
   height: 44px;
   z-index: 20;
@@ -423,6 +444,7 @@ const openTerms = () => {
 }
 
 .terms-text {
+  width: 287px;
   color: #4B4D50;
   font-family: Montserrat;
   font-size: 16px;
@@ -439,7 +461,7 @@ const openTerms = () => {
 .share-button-container {
   position: absolute;
   left: 23px;
-  top: 388px;
+  top: 322px;
   z-index: 20;
 }
 
@@ -479,7 +501,7 @@ const openTerms = () => {
 .how-to-section {
   position: absolute;
   left: 0;
-  top: 482px;
+  top: 416px;
   width: 347px;
   height: 410px;
 }
@@ -488,6 +510,38 @@ const openTerms = () => {
   position: relative;
   width: 100%;
   height: 100%;
+}
+
+/* How to Header */
+.how-to-header {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 229px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.how-to-title {
+  color: #02070E;
+  font-family: Montserrat;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  margin: 0;
+}
+
+.how-to-subtitle {
+  color: #4B4D50;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  margin: 0;
+  align-self: stretch;
 }
 
 /* Step Indicators */
@@ -552,37 +606,6 @@ const openTerms = () => {
   top: 0;
 }
 
-/* How to Header */
-.how-to-header {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 229px;
-  height: 60px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-}
-
-.how-to-title {
-  color: #02070E;
-  font-family: Montserrat;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 24px;
-  margin: 0;
-}
-
-.how-to-subtitle {
-  color: #4B4D50;
-  font-family: Montserrat;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-  margin: 0;
-}
-
 /* Step Descriptions */
 .step-descriptions {
   position: absolute;
@@ -608,10 +631,12 @@ const openTerms = () => {
 
 .step-description-2 {
   width: 96px;
+  justify-content: center;
 }
 
 .step-description-3 {
   width: 74px;
+  justify-content: center;
 }
 
 .step-number {
@@ -662,7 +687,9 @@ const openTerms = () => {
 }
 
 .web-link-header {
-  margin-bottom: 48px;
+  width: 204px;
+  height: 86px;
+  margin-bottom: 28px;
 }
 
 .web-link-title {
@@ -673,6 +700,7 @@ const openTerms = () => {
   line-height: 30px;
   margin: 0 0 12px 0;
   width: 244px;
+  height: 30px;
 }
 
 .web-link-description {
@@ -683,6 +711,7 @@ const openTerms = () => {
   line-height: 24px;
   margin: 0;
   width: 204px;
+  height: 48px;
 }
 
 /* Copy Link Container */
@@ -709,6 +738,8 @@ const openTerms = () => {
   font-weight: 600;
   line-height: 24px;
   text-decoration: underline;
+  width: 182px;
+  height: 24px;
 }
 
 .copy-button {
@@ -743,6 +774,8 @@ const openTerms = () => {
   position: absolute;
   left: -18px;
   white-space: nowrap;
+  width: 37px;
+  height: 22px;
 }
 
 .copy-icon {
@@ -760,102 +793,22 @@ const openTerms = () => {
   font-weight: bold;
 }
 
-/* Mobile Responsiveness */
+/* Responsive Design */
 @media (max-width: 375px) {
-  .content-container {
-    width: 100%;
-    padding: 12px;
-  }
-  
-  .scroll-content {
-    width: calc(100vw - 24px);
-    max-width: 347px;
-  }
-  
-  .qr-section,
-  .how-to-section,
-  .web-link-section {
-    width: 100%;
-    max-width: 347px;
-  }
-  
-  .qr-background,
-  .web-link-background {
-    width: 100%;
-    max-width: 347px;
-  }
-  
-  .qr-code-container {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  
-  .terms-container {
-    width: 100%;
-    max-width: 319px;
-  }
-  
-  .share-button {
-    width: 100%;
-    max-width: 300px;
-  }
-  
-  .copy-link-container {
-    width: 100%;
-    max-width: 307px;
-  }
-}
-
-@media (max-width: 320px) {
-  .content-container {
-    padding: 8px;
-  }
-  
-  .qr-code-wrapper {
-    width: calc(100vw - 80px);
-    max-width: 200px;
-  }
-  
-  .qr-code-image {
-    width: 120px;
-    height: 120px;
-  }
-  
-  .web-link-title {
-    font-size: 22px;
-    line-height: 26px;
-  }
-}
-
-/* Tablet Responsiveness */
-@media (min-width: 376px) and (max-width: 768px) {
   .holders-view {
-    max-width: 400px;
-    background: #f3f4f6 !important;
+    width: 100vw;
+    max-width: 375px;
   }
   
   .content-container {
-    max-width: 400px;
-  }
-  
-  body {
-    background: #f3f4f6 !important;
+    width: 100vw;
+    max-width: 375px;
   }
 }
 
-/* Desktop optimizations */
-@media (min-width: 769px) {
+@media (min-width: 376px) {
   .holders-view {
-    max-width: 480px;
-    background: #f3f4f6 !important;
-  }
-  
-  .content-container {
-    max-width: 480px;
-  }
-  
-  body {
-    background: #f3f4f6 !important;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   }
 }
 
