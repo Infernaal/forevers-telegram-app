@@ -754,6 +754,12 @@ const openTerms = () => {
   background: rgba(255, 255, 255, 0.10);
   display: flex;
   align-items: center;
+  transition: all 0.3s ease;
+}
+
+.copy-link-copied-state {
+  border: 1px solid #07B80E;
+  background: #129E0F;
 }
 
 .copy-link-input-wrapper {
@@ -770,6 +776,35 @@ const openTerms = () => {
   text-decoration: underline;
   width: 182px;
   height: 24px;
+}
+
+.copy-link-copied-full {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 24px;
+  box-sizing: border-box;
+}
+
+.copy-link-copied-text {
+  color: #FFF;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 22px;
+  text-align: center;
+}
+
+.copy-link-copied-icon {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .copy-button {
@@ -791,40 +826,6 @@ const openTerms = () => {
   background: #e8e8ff;
 }
 
-.copy-button-copied {
-  width: 118px !important;
-  left: -68px !important;
-  border: 1px solid #07B80E !important;
-  background: #129E0F !important;
-  border-radius: 100px !important;
-}
-
-.copy-button-text {
-  color: #FFF;
-  font-family: Montserrat;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 22px;
-  position: absolute;
-  left: -18px;
-  white-space: nowrap;
-  width: 37px;
-  height: 22px;
-}
-
-.copy-button-text-copied {
-  color: #FFF;
-  font-family: Montserrat;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 22px;
-  position: absolute;
-  left: -56px;
-  white-space: nowrap;
-  width: 51px;
-  height: 22px;
-}
-
 .copy-icon {
   display: flex;
   width: 24px;
@@ -833,15 +834,6 @@ const openTerms = () => {
   justify-content: center;
   align-items: center;
   color: #443FCC;
-}
-
-.copy-tick-container {
-  position: relative;
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .copy-tick-svg {
