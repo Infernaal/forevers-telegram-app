@@ -300,10 +300,12 @@ const shareQRCode = () => {
       url: referralLink.value
     }).then(() => {
       // Sharing was successful
+      clearTimeout(safetyTimeout)
       isSharing.value = false
       showSuccessMessage('Referral QR-code sent successfully')
     }).catch((error) => {
       console.log('Web Share API failed or cancelled:', error)
+      clearTimeout(safetyTimeout)
       isSharing.value = false
 
       // If user didn't cancel (AbortError), try Telegram-specific sharing
