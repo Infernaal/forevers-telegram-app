@@ -67,7 +67,7 @@ defineEmits(['close'])
   background: #129E0F;
   box-shadow: 4px 8px 12px 0 rgba(7, 184, 14, 0.13);
   padding: 10px 16px;
-  width: 304px;
+  width: 343px;
   justify-content: center;
   align-items: center;
   flex-direction: row;
