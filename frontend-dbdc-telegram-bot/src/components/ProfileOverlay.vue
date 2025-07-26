@@ -1602,57 +1602,57 @@ const selectLanguage = (language) => {
   }
 
   .upgrade-section {
-    padding: 18px;
+    padding: 12px 18px;
   }
 
   .upgrade-card {
-    padding: 26px;
+    padding: 20px;
     border-radius: 20px;
   }
 
   .upgrade-star {
     left: 18px;
-    top: 26px;
+    top: 20px;
   }
 
   .star-icon {
-    width: 44px;
-    height: 44px;
+    width: 38px;
+    height: 38px;
   }
 
   .upgrade-info {
-    margin-left: 62px;
+    margin-left: 56px;
   }
 
   .upgrade-title {
-    font-size: 24px;
-    margin-bottom: 6px;
+    font-size: 22px;
+    margin-bottom: 4px;
   }
 
   .upgrade-subtitle {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .upgrade-button {
-    padding: 16px 32px;
-    font-size: 18px;
-    border-radius: 32px;
+    padding: 14px 28px;
+    font-size: 16px;
+    border-radius: 28px;
   }
 
   .bottom-section {
-    padding: 18px;
+    padding: 12px 18px;
   }
 
   .bottom-controls {
-    gap: 20px;
-    max-width: 360px;
+    gap: 16px;
+    max-width: 340px;
   }
 
   .id-button,
   .language-button {
-    height: 48px;
-    padding: 14px 18px;
-    border-radius: 20px;
+    height: 44px;
+    padding: 12px 16px;
+    border-radius: 18px;
   }
 
   .id-label,
@@ -1757,57 +1757,57 @@ const selectLanguage = (language) => {
   }
 
   .upgrade-section {
-    padding: 6px;
+    padding: 4px 6px;
   }
 
   .upgrade-card {
-    padding: 10px;
-    border-radius: 10px;
+    padding: 8px;
+    border-radius: 8px;
   }
 
   .upgrade-star {
     left: 6px;
-    top: 10px;
+    top: 8px;
   }
 
   .star-icon {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
   }
 
   .upgrade-info {
-    margin-left: 26px;
+    margin-left: 24px;
   }
 
   .upgrade-title {
-    font-size: 14px;
-    margin-bottom: 1px;
+    font-size: 12px;
+    margin-bottom: 0px;
   }
 
   .upgrade-subtitle {
-    font-size: 10px;
+    font-size: 9px;
   }
 
   .upgrade-button {
-    padding: 6px 12px;
-    font-size: 11px;
-    border-radius: 12px;
+    padding: 5px 10px;
+    font-size: 10px;
+    border-radius: 10px;
   }
 
   .bottom-section {
-    padding: 6px;
+    padding: 4px 6px;
   }
 
   .bottom-controls {
-    gap: 8px;
-    max-width: 240px;
+    gap: 6px;
+    max-width: 220px;
   }
 
   .id-button,
   .language-button {
-    height: 28px;
-    padding: 5px 8px;
-    border-radius: 10px;
+    height: 24px;
+    padding: 4px 6px;
+    border-radius: 8px;
   }
 
   .id-label,
