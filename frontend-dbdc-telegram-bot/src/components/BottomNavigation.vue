@@ -286,7 +286,7 @@ const navigateTo = (tab) => {
 }
 
 const toggleProfile = () => {
-  isProfileMenuOpen.value = !isProfileMenuOpen.value
+  router.push('/profile')
 }
 
 const closeProfileMenu = () => {
