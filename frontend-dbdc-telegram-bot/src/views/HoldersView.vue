@@ -775,8 +775,14 @@ const openTerms = () => {
   line-height: 16px;
 }
 
+.step-number-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+}
+
 .step-icon {
-  margin-top: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
