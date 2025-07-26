@@ -279,6 +279,14 @@ const shareQRCode = () => {
   console.log('Sharing QR code...')
   isSharing.value = true
 
+  // Safety timeout to prevent spinner from getting stuck
+  const safetyTimeout = setTimeout(() => {
+    if (isSharing.value) {
+      console.log('Safety timeout triggered - stopping spinner')
+      isSharing.value = false
+    }
+  }, 15000) // 15 seconds safety timeout
+
   // Add haptic feedback
   if (window.triggerHaptic) {
     window.triggerHaptic('impact', 'light')
