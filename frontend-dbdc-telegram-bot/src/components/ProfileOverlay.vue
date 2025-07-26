@@ -2001,6 +2001,61 @@ const selectLanguage = (language) => {
   }
 }
 
+/* Additional protection for devices with extremely large safe areas */
+@media (min-height: 800px) {
+  .profile-container {
+    min-height: 400px;
+  }
+}
+
+@media (max-height: 600px) {
+  .profile-container {
+    top: 20px;
+    max-height: calc(100vh - 92px - env(safe-area-inset-bottom, 0));
+  }
+
+  .profile-header {
+    padding: 8px;
+  }
+
+  .upgrade-section {
+    padding: 8px;
+  }
+
+  .bottom-section {
+    padding: 8px;
+    min-height: 56px;
+  }
+}
+
+/* iPhone 14 Pro Max and similar with large safe areas */
+@media (min-width: 428px) and (min-height: 926px) {
+  .profile-container {
+    bottom: calc(82px + env(safe-area-inset-bottom, 0));
+    max-height: calc(100vh - 142px - env(safe-area-inset-bottom, 0));
+  }
+
+  .overlay-pointer {
+    bottom: calc(72px + env(safe-area-inset-bottom, 0));
+  }
+}
+
+/* Very small screens with safe areas */
+@media (max-width: 320px) {
+  .profile-container {
+    left: 4px;
+    right: 4px;
+    top: 16px;
+    bottom: calc(60px + env(safe-area-inset-bottom, 0));
+    max-height: calc(100vh - 76px - env(safe-area-inset-bottom, 0));
+  }
+
+  .overlay-pointer {
+    bottom: calc(50px + env(safe-area-inset-bottom, 0));
+    left: 20px;
+  }
+}
+
 /* Performance optimizations */
 .profile-container,
 .close-button,
