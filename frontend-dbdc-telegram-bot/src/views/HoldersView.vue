@@ -1,7 +1,7 @@
 <template>
-  <div class="holders-view w-full max-w-md mx-auto bg-gray-100 min-h-screen">
+  <div class="holders-view w-full max-w-md mx-auto min-h-screen">
     <!-- Content Container -->
-    <div class="content-container bg-gray-100 px-4 pb-24 flex items-center justify-center" style="min-height: calc(100vh - 96px);">
+    <div class="content-container px-4 pb-24 flex items-center justify-center" style="min-height: calc(100vh - 96px);">
       
       <!-- Holders Section -->
       <div class="holders-section">
