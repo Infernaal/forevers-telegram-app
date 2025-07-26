@@ -343,6 +343,7 @@ const shareQRCode = () => {
 
     } catch (error) {
       console.error('Telegram share failed:', error)
+      isSharing.value = false
       // Fallback to standard sharing
       fallbackShare()
     }
