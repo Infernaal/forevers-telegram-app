@@ -237,6 +237,13 @@
       @close="closeTermsModal"
       @agree="agreeToTerms"
     />
+
+    <!-- Success Notification -->
+    <SuccessNotification
+      :is-visible="showSuccessNotification"
+      :message="successMessage"
+      @close="hideSuccessNotification"
+    />
   </div>
 </template>
 
@@ -244,6 +251,7 @@
 import { ref } from 'vue'
 import BottomNavigation from '../components/BottomNavigation.vue'
 import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
+import SuccessNotification from '../components/SuccessNotification.vue'
 
 // Reactive data
 const termsAccepted = ref(false)
@@ -251,18 +259,62 @@ const linkCopied = ref(false)
 const referralLink = ref('vm.dubadu/jjhI1uT4S')
 const showTermsModal = ref(false)
 
+// Success notification
+const showSuccessNotification = ref(false)
+const successMessage = ref('')
+let successTimeout = null
+
 // Methods
 const shareQRCode = () => {
   if (!termsAccepted.value) return
-  
+
   console.log('Sharing QR code...')
-  
+
+  // Add haptic feedback
+  if (window.triggerHaptic) {
+    window.triggerHaptic('impact', 'light')
+  }
+
+  // Use Telegram WebApp sharing if available
+  if (window.Telegram && window.Telegram.WebApp) {
+    const tg = window.Telegram.WebApp
+
+    // Create the share URL with proper referral link
+    const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(referralLink.value)}&text=${encodeURIComponent('Join me on DBD Capital Forevers Bot! 🚀')}`
+
+    try {
+      // Use Telegram's openTelegramLink for sharing within Telegram
+      tg.openTelegramLink(shareUrl)
+
+      // Show success notification after a short delay (simulating successful share)
+      setTimeout(() => {
+        showSuccessMessage('Referral QR-code sent successfully')
+      }, 1000)
+
+    } catch (error) {
+      console.error('Telegram share failed:', error)
+      // Fallback to standard sharing
+      fallbackShare()
+    }
+  } else {
+    // Fallback for non-Telegram environments
+    fallbackShare()
+  }
+}
+
+const fallbackShare = () => {
   if (navigator.share) {
     navigator.share({
       title: 'DBD Capital Forevers Bot',
-      text: 'Join me on DBD Capital Forevers Bot!',
+      text: 'Join me on DBD Capital Forevers Bot! 🚀',
       url: referralLink.value
-    }).catch(console.error)
+    }).then(() => {
+      // Show success notification if sharing was successful
+      showSuccessMessage('Referral QR-code sent successfully')
+    }).catch((error) => {
+      console.log('Native share cancelled or failed:', error)
+      // Don't show notification if user cancelled
+    })
   } else {
     copyLink()
   }
@@ -367,6 +419,34 @@ const closeTermsModal = () => {
 const agreeToTerms = () => {
   termsAccepted.value = true
   showTermsModal.value = false
+}
+
+const showSuccessMessage = (message) => {
+  successMessage.value = message
+  showSuccessNotification.value = true
+
+  // Add haptic feedback for success
+  if (window.triggerHaptic) {
+    window.triggerHaptic('notification', 'success')
+  }
+
+  // Clear existing timeout
+  if (successTimeout) {
+    clearTimeout(successTimeout)
+  }
+
+  // Auto-hide after 3 seconds
+  successTimeout = setTimeout(() => {
+    showSuccessNotification.value = false
+  }, 3000)
+}
+
+const hideSuccessNotification = () => {
+  showSuccessNotification.value = false
+  if (successTimeout) {
+    clearTimeout(successTimeout)
+    successTimeout = null
+  }
 }
 </script>
 
