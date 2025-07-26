@@ -1,6 +1,6 @@
 <template>
-  <div class="holders-view w-full max-w-md mx-auto min-h-screen" style="background: #f3f4f6 !important;">
-    <!-- Content Container -->
+  <div class="holders-view">
+    <!-- Content Container - stretched to top -->
     <div class="content-container">
       
       <!-- Referral Program Header -->
@@ -120,6 +120,12 @@
       <div class="how-to-section">
         <!-- Steps Container -->
         <div class="steps-container">
+          <!-- Header -->
+          <div class="how-to-header">
+            <h2 class="how-to-title">How to use the Link</h2>
+            <p class="how-to-subtitle">Follow these 3 simple steps</p>
+          </div>
+
           <!-- Step Indicators -->
           <div class="step-indicators">
             <div class="step-indicator-row">
@@ -131,24 +137,39 @@
             </div>
           </div>
 
-          <!-- Header -->
-          <div class="how-to-header">
-            <h2 class="how-to-title">How to use the Link</h2>
-            <p class="how-to-subtitle">Follow these 3 simple steps</p>
-          </div>
-
           <!-- Step Descriptions -->
           <div class="step-descriptions">
             <div class="step-description step-description-1">
-              <span class="step-number">1</span>
+              <div class="step-number-row">
+                <div class="step-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 16.08C17.24 16.08 16.56 16.38 16.04 16.85L8.91 12.7C8.96 12.47 9 12.24 9 12C9 11.76 8.96 11.53 8.91 11.3L15.96 7.19C16.5 7.69 17.21 8 18 8C19.66 8 21 6.66 21 5C21 3.34 19.66 2 18 2C16.34 2 15 3.34 15 5C15 5.24 15.04 5.47 15.09 5.7L8.04 9.81C7.5 9.31 6.79 9 6 9C4.34 9 3 10.34 3 12C3 13.66 4.34 15 6 15C6.79 15 7.5 14.69 8.04 14.19L15.16 18.34C15.11 18.55 15.08 18.77 15.08 19C15.08 20.61 16.39 21.92 18 21.92C19.61 21.92 20.92 20.61 20.92 19C20.92 17.39 19.61 16.08 18 16.08Z" fill="#7E7E7E"/>
+                  </svg>
+                </div>
+                <span class="step-number">1</span>
+              </div>
               <span class="step-text">Share your link</span>
             </div>
             <div class="step-description step-description-2">
-              <span class="step-number">2</span>
+              <div class="step-number-row">
+                <div class="step-icon">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM17 13H11V7H13V11H17V13Z" fill="#7E7E7E"/>
+                  </svg>
+                </div>
+                <span class="step-number">2</span>
+              </div>
               <span class="step-text">Wait for joining</span>
             </div>
             <div class="step-description step-description-3">
-              <span class="step-number">3</span>
+              <div class="step-number-row">
+                <div class="step-icon">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L15.09 8.26L22 9L17 13.74L18.18 20.74L12 17.77L5.82 20.74L7 13.74L2 9L8.91 8.26L12 2Z" fill="#7E7E7E"/>
+                  </svg>
+                </div>
+                <span class="step-number">3</span>
+              </div>
               <span class="step-text">Get rewards</span>
             </div>
           </div>
@@ -167,21 +188,37 @@
             </div>
             
             <!-- Copy Link Container -->
-            <div class="copy-link-container">
-              <div class="copy-link-input-wrapper">
+            <div class="copy-link-container" :class="{ 'copy-link-copied-state': linkCopied }">
+              <div v-if="!linkCopied" class="copy-link-input-wrapper">
                 <span class="copy-link-text">vm.dubadu/jjhI1uT4S</span>
               </div>
-              <button 
-                class="copy-button"
-                :class="{ 'copy-button-copied': linkCopied }"
-                @click="copyLink"
-              >
-                <span class="copy-button-text">Copy</span>
-                <div class="copy-icon">
-                  <svg v-if="!linkCopied" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M16 4H18C19.1046 4 20 4.89543 20 6V18C20 19.1046 19.1046 20 18 20H6C4.89543 20 4 19.1046 4 18V16M16 4L4 16M16 4V16H4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <div v-if="linkCopied" class="copy-link-copied-full">
+                <span class="copy-link-copied-text">Copied</span>
+                <div class="copy-link-copied-icon">
+                  <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="14" cy="14" r="14" fill="white"/>
                   </svg>
-                  <div v-else class="copy-tick">✓</div>
+                  <svg class="copy-tick-svg" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_2_22327)">
+                      <path d="M11.3242 0.926106C10.7978 0.642629 10.2106 1.18934 9.86633 1.51331C9.07667 2.28275 8.40848 3.17368 7.65925 3.98362C6.82907 4.87455 6.05963 5.76548 5.20919 6.6362C4.72323 7.12216 4.19677 7.64862 3.8728 8.25607C3.14385 7.54734 2.51615 6.7779 1.70621 6.15023C1.11901 5.70477 0.147086 5.38079 0.167334 6.45396C0.207831 7.85113 1.44299 9.34952 2.35416 10.3012C2.73888 10.7061 3.24509 11.1313 3.8323 11.1516C4.54099 11.1921 5.26994 10.3417 5.69515 9.87594C6.44438 9.06601 7.05183 8.15479 7.74024 7.32464C8.63118 6.23123 9.54236 5.15803 10.413 4.04436C10.9597 3.35592 12.6809 1.65502 11.3242 0.926106ZM1.05823 6.37297C1.03798 6.37297 1.01773 6.37297 0.977238 6.39318C0.896244 6.37297 0.835499 6.35268 0.754505 6.31219C0.815251 6.27169 0.916493 6.29194 1.05823 6.37297Z" fill="#07B80E"/>
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_2_22327">
+                        <rect width="11.6667" height="11.6667" fill="white" transform="translate(0.166992 0.166504)"/>
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </div>
+              </div>
+              <button
+                v-if="!linkCopied"
+                class="copy-button"
+                @click="copyWebLink"
+              >
+                <div class="copy-icon">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18.0655 0.5H7.60611C6.97596 0.5 6.37161 0.727045 5.92603 1.13119C5.48044 1.53533 5.23011 2.08346 5.23011 2.65501V3.48385H4.04211C3.38111 3.48385 2.74718 3.72201 2.27978 4.14594C1.81239 4.56986 1.5498 5.14483 1.5498 5.74435V19.2395C1.5498 19.839 1.81239 20.414 2.27978 20.8379C2.74718 21.2618 3.38111 21.5 4.04211 21.5H14.2772C14.9382 21.5 15.5721 21.2618 16.0395 20.8379C16.5069 20.414 16.7695 19.839 16.7695 19.2395V18.486H18.0655C18.6907 18.4861 19.291 18.2634 19.7369 17.866C20.1829 17.4685 20.4389 16.9281 20.4498 16.3611V2.65501C20.4476 2.08277 20.1954 1.53465 19.7485 1.13073C19.3016 0.7268 18.6964 0.499997 18.0655 0.5ZM15.108 19.2395C15.108 19.4393 15.0204 19.631 14.8646 19.7723C14.7088 19.9136 14.4975 19.993 14.2772 19.993H4.04211C3.82178 19.993 3.61047 19.9136 3.45467 19.7723C3.29887 19.631 3.21134 19.4393 3.21134 19.2395V5.74435C3.21134 5.54451 3.29887 5.35285 3.45467 5.21154C3.61047 5.07024 3.82178 4.99085 4.04211 4.99085H14.2772C14.4975 4.99085 14.7088 5.07024 14.8646 5.21154C15.0204 5.35285 15.108 5.54451 15.108 5.74435V19.2395ZM18.7883 16.3611C18.7861 16.5337 18.709 16.6985 18.5737 16.8198C18.4383 16.9411 18.2558 17.0092 18.0655 17.0092H16.7695V5.74435C16.7695 5.14483 16.5069 4.56986 16.0395 4.14594C15.5721 3.72201 14.9382 3.48385 14.2772 3.48385H6.89165V2.65501C6.89165 2.48314 6.96693 2.31832 7.10091 2.19679C7.2349 2.07527 7.41663 2.007 7.60611 2.007H18.0655C18.16 2.006 18.2538 2.02203 18.3415 2.05414C18.4291 2.08626 18.5089 2.13384 18.5761 2.19411C18.6433 2.25438 18.6967 2.32616 18.7331 2.40527C18.7695 2.48439 18.7883 2.56927 18.7883 2.65501V16.3611Z" fill="#2019CE"/>
+                  </svg>
                 </div>
               </button>
             </div>
@@ -223,15 +260,91 @@ const shareQRCode = () => {
 }
 
 const copyLink = async () => {
-  try {
-    await navigator.clipboard.writeText(referralLink.value)
-    linkCopied.value = true
-    setTimeout(() => {
-      linkCopied.value = false
-    }, 2000)
-  } catch (err) {
-    console.error('Failed to copy link:', err)
+  let copySuccess = false
+
+  // Try modern clipboard API first
+  if (navigator.clipboard) {
+    try {
+      await navigator.clipboard.writeText(referralLink.value)
+      copySuccess = true
+    } catch (clipboardErr) {
+      console.log('Clipboard API failed, trying fallback method')
+    }
   }
+
+  // If clipboard API failed or is not available, use fallback
+  if (!copySuccess) {
+    try {
+      const textArea = document.createElement('textarea')
+      textArea.value = referralLink.value
+      textArea.style.position = 'fixed'
+      textArea.style.left = '-999999px'
+      textArea.style.top = '-999999px'
+      textArea.style.opacity = '0'
+      document.body.appendChild(textArea)
+      textArea.focus()
+      textArea.select()
+
+      const successful = document.execCommand('copy')
+      document.body.removeChild(textArea)
+
+      if (!successful) {
+        console.log('Fallback copy method also failed')
+      }
+    } catch (fallbackErr) {
+      console.error('Fallback copy failed:', fallbackErr)
+    }
+  }
+
+  // Always show copied state for user feedback
+  linkCopied.value = true
+  setTimeout(() => {
+    linkCopied.value = false
+  }, 2000)
+}
+
+const copyWebLink = async () => {
+  let copySuccess = false
+
+  // Try modern clipboard API first
+  if (navigator.clipboard) {
+    try {
+      await navigator.clipboard.writeText(referralLink.value)
+      copySuccess = true
+    } catch (clipboardErr) {
+      console.log('Clipboard API failed, trying fallback method')
+    }
+  }
+
+  // If clipboard API failed or is not available, use fallback
+  if (!copySuccess) {
+    try {
+      const textArea = document.createElement('textarea')
+      textArea.value = referralLink.value
+      textArea.style.position = 'fixed'
+      textArea.style.left = '-999999px'
+      textArea.style.top = '-999999px'
+      textArea.style.opacity = '0'
+      document.body.appendChild(textArea)
+      textArea.focus()
+      textArea.select()
+
+      const successful = document.execCommand('copy')
+      document.body.removeChild(textArea)
+
+      if (!successful) {
+        console.log('Fallback copy method also failed')
+      }
+    } catch (fallbackErr) {
+      console.error('Fallback copy failed:', fallbackErr)
+    }
+  }
+
+  // Always show copied state for user feedback
+  linkCopied.value = true
+  setTimeout(() => {
+    linkCopied.value = false
+  }, 3000)
 }
 
 const openTerms = () => {
@@ -242,25 +355,34 @@ const openTerms = () => {
 <style scoped>
 .holders-view {
   font-family: 'Montserrat', sans-serif;
+  width: 375px;
+  min-height: 100vh;
+  background: #F0F0F0;
+  position: relative;
+  margin: 0 auto;
+  max-width: 375px;
 }
 
-/* Content Container */
+/* Content Container - now starts from top */
 .content-container {
   width: 375px;
+  min-height: 100vh;
   background: #F0F0F0;
-  border-radius: 16px 16px 0 0;
   position: relative;
-  padding: 14px;
-  min-height: calc(100vh - 100px);
+  padding: 20px 0 160px 0; /* Increased bottom padding to prevent clash with bottom navigation */
 }
 
 /* Referral Program Header */
 .referral-header {
   display: flex;
+  width: 299px;
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
+  position: relative;
+  left: 14px;
   margin-bottom: 20px;
+  height: 52px;
 }
 
 .referral-title {
@@ -270,6 +392,7 @@ const openTerms = () => {
   font-weight: 700;
   line-height: 24px;
   margin: 0;
+  align-self: stretch;
 }
 
 .referral-subtitle {
@@ -279,41 +402,48 @@ const openTerms = () => {
   font-weight: 500;
   line-height: 24px;
   margin: 0;
+  align-self: stretch;
 }
 
 /* Scroll Content */
 .scroll-content {
   display: flex;
+  width: 347px;
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-start;
   gap: 20px;
-  width: 347px;
-  height: 507px;
   position: relative;
+  left: 14px;
+  height: 507px;
+  margin-top: 60px;
 }
 
 /* QR Section */
 .qr-section {
   width: 347px;
   height: 396px;
-  position: relative;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .qr-background {
-  width: 347px;
-  height: 396px;
+  width: 100%;
+  height: 100%;
   border-radius: 24px;
   background: linear-gradient(93deg, #000482 33.15%, rgba(3, 0, 155, 0.84) 76.97%);
   backdrop-filter: blur(32px);
   position: absolute;
   top: 0;
   left: 0;
+  overflow: hidden;
 }
 
 /* Decorative F Icons */
 .f-icon {
   position: absolute;
+  z-index: 1;
   opacity: 0.1;
 }
 
@@ -351,6 +481,8 @@ const openTerms = () => {
 
 /* QR Code Container */
 .qr-code-container {
+  width: 222px;
+  height: 220px;
   position: absolute;
   left: 63px;
   top: 24px;
@@ -364,19 +496,17 @@ const openTerms = () => {
   border: 1px solid #F2F2F2;
   background: #FAFAFA;
   box-shadow: 2px 4px 12px 0 rgba(0, 0, 0, 0.04);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  box-sizing: border-box;
+  position: relative;
 }
 
 .qr-code-image {
   width: 140px;
   height: 140px;
   aspect-ratio: 1/1;
-  margin-bottom: 16px;
+  object-fit: contain;
+  position: absolute;
+  left: 41px;
+  top: 20px;
 }
 
 .qr-code-link {
@@ -385,32 +515,36 @@ const openTerms = () => {
   font-size: 17px;
   font-weight: 600;
   line-height: 24px;
-  text-align: center;
+  position: absolute;
+  left: 20px;
+  top: 176px;
+  width: 182px;
+  height: 24px;
 }
 
 /* Terms Section */
 .terms-container {
   position: absolute;
-  left: 0;
-  top: 322px;
+  left: 20px;
+  top: 256px;
   width: 319px;
   height: 44px;
   z-index: 20;
 }
 
 .terms-wrapper {
-  display: inline-flex;
-  align-items: center;
+  display: flex;
+  align-items: flex-start;
   gap: 8px;
   width: 100%;
-  height: 100%;
 }
 
 .terms-label {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
   cursor: pointer;
+  width: 100%;
 }
 
 .terms-checkbox {
@@ -420,10 +554,13 @@ const openTerms = () => {
   border: 1px solid #7E7E7E;
   background: #FAFAFA;
   cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .terms-text {
-  color: #4B4D50;
+  flex: 1;
+  color: #FAFAFA;
   font-family: Montserrat;
   font-size: 16px;
   font-weight: 500;
@@ -439,7 +576,7 @@ const openTerms = () => {
 .share-button-container {
   position: absolute;
   left: 23px;
-  top: 388px;
+  top: 322px;
   z-index: 20;
 }
 
@@ -477,9 +614,9 @@ const openTerms = () => {
 
 /* How to Section */
 .how-to-section {
-  position: absolute;
-  left: 0;
-  top: 482px;
+  position: relative;
+  left: 14px;
+  top: -25px;
   width: 347px;
   height: 410px;
 }
@@ -488,6 +625,38 @@ const openTerms = () => {
   position: relative;
   width: 100%;
   height: 100%;
+}
+
+/* How to Header */
+.how-to-header {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 229px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.how-to-title {
+  color: #02070E;
+  font-family: Montserrat;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  margin: 0;
+}
+
+.how-to-subtitle {
+  color: #4B4D50;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  margin: 0;
+  align-self: stretch;
 }
 
 /* Step Indicators */
@@ -552,37 +721,6 @@ const openTerms = () => {
   top: 0;
 }
 
-/* How to Header */
-.how-to-header {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 229px;
-  height: 60px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-}
-
-.how-to-title {
-  color: #02070E;
-  font-family: Montserrat;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 24px;
-  margin: 0;
-}
-
-.how-to-subtitle {
-  color: #4B4D50;
-  font-family: Montserrat;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-  margin: 0;
-}
-
 /* Step Descriptions */
 .step-descriptions {
   position: absolute;
@@ -608,10 +746,12 @@ const openTerms = () => {
 
 .step-description-2 {
   width: 96px;
+  justify-content: center;
 }
 
 .step-description-3 {
   width: 74px;
+  justify-content: center;
 }
 
 .step-number {
@@ -633,6 +773,19 @@ const openTerms = () => {
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
+}
+
+.step-number-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+}
+
+.step-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Web Referral Link Section */
@@ -662,7 +815,9 @@ const openTerms = () => {
 }
 
 .web-link-header {
-  margin-bottom: 48px;
+  width: 204px;
+  height: 86px;
+  margin-bottom: 28px;
 }
 
 .web-link-title {
@@ -673,6 +828,7 @@ const openTerms = () => {
   line-height: 30px;
   margin: 0 0 12px 0;
   width: 244px;
+  height: 30px;
 }
 
 .web-link-description {
@@ -683,6 +839,7 @@ const openTerms = () => {
   line-height: 24px;
   margin: 0;
   width: 204px;
+  height: 48px;
 }
 
 /* Copy Link Container */
@@ -695,6 +852,12 @@ const openTerms = () => {
   background: rgba(255, 255, 255, 0.10);
   display: flex;
   align-items: center;
+  transition: all 0.3s ease;
+}
+
+.copy-link-copied-state {
+  border: 1px solid #07B80E;
+  background: #129E0F;
 }
 
 .copy-link-input-wrapper {
@@ -709,6 +872,37 @@ const openTerms = () => {
   font-weight: 600;
   line-height: 24px;
   text-decoration: underline;
+  width: 182px;
+  height: 24px;
+}
+
+.copy-link-copied-full {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 24px;
+  box-sizing: border-box;
+}
+
+.copy-link-copied-text {
+  color: #FFF;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 22px;
+  text-align: center;
+}
+
+.copy-link-copied-icon {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .copy-button {
@@ -722,27 +916,12 @@ const openTerms = () => {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   position: relative;
 }
 
 .copy-button:hover {
   background: #e8e8ff;
-}
-
-.copy-button-copied {
-  background: #4caf50 !important;
-}
-
-.copy-button-text {
-  color: #FFF;
-  font-family: Montserrat;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 22px;
-  position: absolute;
-  left: -18px;
-  white-space: nowrap;
 }
 
 .copy-icon {
@@ -755,107 +934,29 @@ const openTerms = () => {
   color: #443FCC;
 }
 
-.copy-tick {
-  color: white;
-  font-weight: bold;
+.copy-tick-svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-/* Mobile Responsiveness */
+/* Responsive Design */
 @media (max-width: 375px) {
-  .content-container {
-    width: 100%;
-    padding: 12px;
-  }
-  
-  .scroll-content {
-    width: calc(100vw - 24px);
-    max-width: 347px;
-  }
-  
-  .qr-section,
-  .how-to-section,
-  .web-link-section {
-    width: 100%;
-    max-width: 347px;
-  }
-  
-  .qr-background,
-  .web-link-background {
-    width: 100%;
-    max-width: 347px;
-  }
-  
-  .qr-code-container {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  
-  .terms-container {
-    width: 100%;
-    max-width: 319px;
-  }
-  
-  .share-button {
-    width: 100%;
-    max-width: 300px;
-  }
-  
-  .copy-link-container {
-    width: 100%;
-    max-width: 307px;
-  }
-}
-
-@media (max-width: 320px) {
-  .content-container {
-    padding: 8px;
-  }
-  
-  .qr-code-wrapper {
-    width: calc(100vw - 80px);
-    max-width: 200px;
-  }
-  
-  .qr-code-image {
-    width: 120px;
-    height: 120px;
-  }
-  
-  .web-link-title {
-    font-size: 22px;
-    line-height: 26px;
-  }
-}
-
-/* Tablet Responsiveness */
-@media (min-width: 376px) and (max-width: 768px) {
   .holders-view {
-    max-width: 400px;
-    background: #f3f4f6 !important;
+    width: 100vw;
+    max-width: 375px;
   }
   
   .content-container {
-    max-width: 400px;
-  }
-  
-  body {
-    background: #f3f4f6 !important;
+    width: 100vw;
+    max-width: 375px;
   }
 }
 
-/* Desktop optimizations */
-@media (min-width: 769px) {
+@media (min-width: 376px) {
   .holders-view {
-    max-width: 480px;
-    background: #f3f4f6 !important;
-  }
-  
-  .content-container {
-    max-width: 480px;
-  }
-  
-  body {
-    background: #f3f4f6 !important;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   }
 }
 
