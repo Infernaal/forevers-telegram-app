@@ -194,10 +194,6 @@ onBeforeUnmount(() => {
   transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.tooltip-enter-active .tooltip-close-btn {
-  animation: closeButtonFadeIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1) 0.4s both;
-}
-
 .tooltip-close-btn:hover {
   transform: scale(1.1) rotate(90deg);
 }
@@ -206,44 +202,10 @@ onBeforeUnmount(() => {
   transform: scale(0.95) rotate(90deg);
 }
 
-@keyframes closeButtonFadeIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.5) rotate(-90deg);
-  }
-  70% {
-    opacity: 0.8;
-    transform: scale(1.1) rotate(10deg);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) rotate(0deg);
-  }
-}
-
-/* Text elements with staggered animations */
+/* Text elements with proper z-index */
 h3, p {
   position: relative;
   z-index: 1;
-}
-
-.tooltip-enter-active h3 {
-  animation: textSlideIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1) 0.2s both;
-}
-
-.tooltip-enter-active p {
-  animation: textSlideIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1) 0.3s both;
-}
-
-@keyframes textSlideIn {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0px);
-  }
 }
 
 /* Mobile optimizations */
