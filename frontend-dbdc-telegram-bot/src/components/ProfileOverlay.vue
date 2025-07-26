@@ -1071,8 +1071,168 @@ const selectLanguage = (language) => {
   border-radius: 50%;
 }
 
+/* Extra small mobile devices - ≤320px */
+@media (max-width: 320px) {
+  .profile-container {
+    left: 4px;
+    right: 4px;
+    top: 10px;
+    bottom: calc(140px + env(safe-area-inset-bottom, 0));
+    border-radius: 16px;
+    max-height: calc(100vh - 150px - env(safe-area-inset-bottom, 0));
+  }
+
+  .overlay-pointer {
+    bottom: calc(130px + env(safe-area-inset-bottom, 0));
+    left: 20px;
+    border-left-width: 8px;
+    border-right-width: 8px;
+    border-top-width: 8px;
+  }
+
+  .profile-header {
+    padding: 4px;
+  }
+
+  .profile-card {
+    padding: 8px;
+    border-radius: 32px 12px 12px 32px;
+  }
+
+  .profile-content {
+    gap: 8px;
+  }
+
+  .avatar-frame {
+    width: 50px;
+    height: 50px;
+  }
+
+  .badge-container {
+    padding: 2px 8px;
+  }
+
+  .badge-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .badge-text {
+    font-size: 10px;
+  }
+
+  .user-name {
+    font-size: 14px;
+  }
+
+  .close-button {
+    width: 28px;
+    height: 28px;
+  }
+
+  .menu-section {
+    padding: 0 4px;
+    max-height: calc(100vh - 280px);
+    min-height: 60px;
+  }
+
+  .menu-item {
+    padding: 6px 2px;
+    gap: 6px;
+  }
+
+  .menu-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .menu-text {
+    font-size: 11px;
+  }
+
+  .verification-badge {
+    width: 16px;
+    height: 16px;
+  }
+
+  .upgrade-section {
+    padding: 4px;
+  }
+
+  .upgrade-card {
+    padding: 8px;
+    border-radius: 8px;
+  }
+
+  .upgrade-star {
+    left: 6px;
+    top: 8px;
+  }
+
+  .star-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .upgrade-info {
+    margin-left: 24px;
+  }
+
+  .upgrade-title {
+    font-size: 12px;
+    margin-bottom: 0px;
+  }
+
+  .upgrade-subtitle {
+    font-size: 9px;
+  }
+
+  .upgrade-button {
+    padding: 6px 12px;
+    font-size: 10px;
+    border-radius: 12px;
+  }
+
+  .bottom-section {
+    padding: 4px;
+  }
+
+  .bottom-controls {
+    gap: 6px;
+    max-width: 240px;
+  }
+
+  .id-button,
+  .language-button {
+    height: 28px;
+    padding: 4px 6px;
+    border-radius: 8px;
+  }
+
+  .id-label,
+  .id-value,
+  .language-text {
+    font-size: 10px;
+  }
+
+  .copy-icon {
+    width: 12px;
+    height: 12px;
+  }
+
+  .flag-wrapper {
+    width: 16px;
+    height: 16px;
+  }
+
+  .arrow-wrapper {
+    width: 12px;
+    height: 12px;
+  }
+}
+
 /* Small mobile devices (iPhone SE, small Android) - ≤374px */
-@media (max-width: 374px) {
+@media (min-width: 321px) and (max-width: 374px) {
   .profile-container {
     left: 8px;
     right: 8px;
