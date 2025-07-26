@@ -458,9 +458,10 @@ const openTerms = () => {
 
 /* Share Button */
 .share-button-container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+  position: absolute;
+  left: 23px;
+  top: 322px;
+  z-index: 20;
 }
 
 .share-button {
