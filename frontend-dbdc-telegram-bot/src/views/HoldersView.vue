@@ -89,9 +89,9 @@
         <div class="terms-container">
           <div class="terms-wrapper">
             <label class="terms-label">
-              <input 
-                type="checkbox" 
-                v-model="termsAccepted" 
+              <input
+                type="checkbox"
+                v-model="termsAccepted"
                 class="terms-checkbox"
               />
               <span class="terms-text">
@@ -230,17 +230,26 @@
 
     <!-- Bottom Navigation Component -->
     <BottomNavigation />
+
+    <!-- Terms and Conditions Modal -->
+    <TermsAndConditionsModal
+      :isVisible="showTermsModal"
+      @close="closeTermsModal"
+      @agree="agreeToTerms"
+    />
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import BottomNavigation from '../components/BottomNavigation.vue'
+import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
 
 // Reactive data
 const termsAccepted = ref(false)
 const linkCopied = ref(false)
 const referralLink = ref('vm.dubadu/jjhI1uT4S')
+const showTermsModal = ref(false)
 
 // Methods
 const shareQRCode = () => {
@@ -344,11 +353,20 @@ const copyWebLink = async () => {
   linkCopied.value = true
   setTimeout(() => {
     linkCopied.value = false
-  }, 3000)
+  }, 2500)
 }
 
 const openTerms = () => {
-  console.log('Opening terms and conditions...')
+  showTermsModal.value = true
+}
+
+const closeTermsModal = () => {
+  showTermsModal.value = false
+}
+
+const agreeToTerms = () => {
+  termsAccepted.value = true
+  showTermsModal.value = false
 }
 </script>
 
@@ -361,15 +379,24 @@ const openTerms = () => {
   position: relative;
   margin: 0 auto;
   max-width: 375px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* Hide scrollbar for webkit browsers */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.holders-view::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 /* Content Container - now starts from top */
 .content-container {
   width: 375px;
-  min-height: 100vh;
+  min-height: calc(100vh + 200px); /* Allow content to extend beyond viewport */
   background: #F0F0F0;
   position: relative;
-  padding: 20px 0 160px 0; /* Increased bottom padding to prevent clash with bottom navigation */
+  padding: 20px 0 80px 0; /* Further reduced bottom padding */
 }
 
 /* Referral Program Header */
@@ -448,35 +475,35 @@ const openTerms = () => {
 }
 
 .f-icon-1 {
-  width: 96px;
-  height: 96px;
+  width: 120px;
+  height: 120px;
   transform: rotate(46.848deg);
-  left: -16px;
-  top: -6px;
+  left: -20px;
+  top: -10px;
 }
 
 .f-icon-2 {
-  width: 48px;
-  height: 48px;
+  width: 60px;
+  height: 60px;
   transform: rotate(150.638deg);
-  left: 280px;
-  top: 189px;
+  left: 270px;
+  top: 180px;
 }
 
 .f-icon-3 {
-  width: 128px;
-  height: 128px;
+  width: 150px;
+  height: 150px;
   transform: rotate(-31.597deg);
-  left: -22px;
-  top: 194px;
+  left: -30px;
+  top: 185px;
 }
 
 .f-icon-4 {
-  width: 96px;
-  height: 96px;
+  width: 120px;
+  height: 120px;
   transform: rotate(121.978deg);
-  left: 211px;
-  top: 21px;
+  left: 200px;
+  top: 15px;
 }
 
 /* QR Code Container */
@@ -556,6 +583,26 @@ const openTerms = () => {
   cursor: pointer;
   flex-shrink: 0;
   margin-top: 2px;
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.terms-checkbox:checked {
+  background: #2019CE;
+  border-color: #2019CE;
+}
+
+.terms-checkbox:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #FAFAFA;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .terms-text {
@@ -616,7 +663,7 @@ const openTerms = () => {
 .how-to-section {
   position: relative;
   left: 14px;
-  top: -25px;
+  top: -60px;
   width: 347px;
   height: 410px;
 }
@@ -852,12 +899,13 @@ const openTerms = () => {
   background: rgba(255, 255, 255, 0.10);
   display: flex;
   align-items: center;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .copy-link-copied-state {
   border: 1px solid #07B80E;
   background: #129E0F;
+  transform: scale(1.02);
 }
 
 .copy-link-input-wrapper {
@@ -885,6 +933,22 @@ const openTerms = () => {
   gap: 12px;
   padding: 14px 24px;
   box-sizing: border-box;
+  animation: fadeInScale 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .copy-link-copied-text {
@@ -894,6 +958,18 @@ const openTerms = () => {
   font-weight: 600;
   line-height: 22px;
   text-align: center;
+  animation: slideInLeft 0.3s ease-out 0.1s both;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .copy-link-copied-icon {
@@ -903,6 +979,25 @@ const openTerms = () => {
   display: flex;
   align-items: center;
   justify-content: center;
+  animation: bounceIn 0.5s ease-out 0.2s both;
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(-10deg);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.1) rotate(5deg);
+  }
+  80% {
+    transform: scale(0.95) rotate(-2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
 }
 
 .copy-button {
@@ -916,12 +1011,18 @@ const openTerms = () => {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
 }
 
 .copy-button:hover {
   background: #e8e8ff;
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(68, 63, 204, 0.3);
+}
+
+.copy-button:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .copy-icon {
@@ -932,6 +1033,11 @@ const openTerms = () => {
   justify-content: center;
   align-items: center;
   color: #443FCC;
+  transition: transform 0.2s ease;
+}
+
+.copy-button:hover .copy-icon {
+  transform: scale(1.1);
 }
 
 .copy-tick-svg {
@@ -947,15 +1053,31 @@ const openTerms = () => {
     width: 100vw;
     max-width: 375px;
   }
-  
+
   .content-container {
     width: 100vw;
     max-width: 375px;
   }
 }
 
-@media (min-width: 376px) {
+/* Tablet styles - remove white stripes */
+@media (min-width: 376px) and (max-width: 1024px) {
   .holders-view {
+    width: 100vw;
+    max-width: 100vw;
+    box-shadow: none;
+  }
+
+  .content-container {
+    width: 100vw;
+    max-width: 100vw;
+  }
+}
+
+@media (min-width: 1025px) {
+  .holders-view {
+    width: 375px;
+    max-width: 375px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   }
 }
