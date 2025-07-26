@@ -798,6 +798,53 @@ const hideSuccessNotification = () => {
   cursor: not-allowed;
 }
 
+.share-button-loading {
+  background: linear-gradient(90deg, #1a16a8 0%, #3830d9 100%) !important;
+  cursor: wait !important;
+}
+
+/* Tailwind utility classes for the loading spinner */
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.gap-2 {
+  gap: 8px;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.h-4 {
+  height: 16px;
+}
+
+.w-4 {
+  width: 16px;
+}
+
+.opacity-25 {
+  opacity: 0.25;
+}
+
+.opacity-75 {
+  opacity: 0.75;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* How to Section */
 .how-to-section {
   position: relative;
