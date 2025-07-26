@@ -278,43 +278,47 @@ const copyLink = async () => {
 }
 
 const copyWebLink = async () => {
-  try {
-    // Try modern clipboard API first
-    if (navigator.clipboard && window.isSecureContext) {
+  let copySuccess = false
+
+  // Try modern clipboard API first
+  if (navigator.clipboard) {
+    try {
       await navigator.clipboard.writeText(referralLink.value)
-    } else {
-      // Fallback method for when clipboard API is not available
+      copySuccess = true
+    } catch (clipboardErr) {
+      console.log('Clipboard API failed, trying fallback method')
+    }
+  }
+
+  // If clipboard API failed or is not available, use fallback
+  if (!copySuccess) {
+    try {
       const textArea = document.createElement('textarea')
       textArea.value = referralLink.value
       textArea.style.position = 'fixed'
       textArea.style.left = '-999999px'
       textArea.style.top = '-999999px'
+      textArea.style.opacity = '0'
       document.body.appendChild(textArea)
       textArea.focus()
       textArea.select()
 
-      try {
-        document.execCommand('copy')
-      } catch (execErr) {
-        console.error('Fallback copy failed:', execErr)
-        // If both methods fail, at least show the copied state for visual feedback
-      }
-
+      const successful = document.execCommand('copy')
       document.body.removeChild(textArea)
-    }
 
-    linkCopied.value = true
-    setTimeout(() => {
-      linkCopied.value = false
-    }, 3000)
-  } catch (err) {
-    console.error('Failed to copy web link:', err)
-    // Still show copied state for user feedback even if copy failed
-    linkCopied.value = true
-    setTimeout(() => {
-      linkCopied.value = false
-    }, 3000)
+      if (!successful) {
+        console.log('Fallback copy method also failed')
+      }
+    } catch (fallbackErr) {
+      console.error('Fallback copy failed:', fallbackErr)
+    }
   }
+
+  // Always show copied state for user feedback
+  linkCopied.value = true
+  setTimeout(() => {
+    linkCopied.value = false
+  }, 3000)
 }
 
 const openTerms = () => {
