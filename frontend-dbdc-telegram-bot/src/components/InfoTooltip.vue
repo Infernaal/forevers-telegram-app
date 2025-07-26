@@ -1,12 +1,12 @@
 <template>
   <Transition
     name="tooltip"
-    enter-active-class="transition-all duration-300 ease-out"
-    leave-active-class="transition-all duration-200 ease-in"
-    enter-from-class="opacity-0 scale-95"
-    enter-to-class="opacity-100 scale-100"
-    leave-from-class="opacity-100 scale-100"
-    leave-to-class="opacity-0 scale-95"
+    enter-active-class="transition-all duration-500 ease-out"
+    leave-active-class="transition-all duration-300 ease-in"
+    enter-from-class="opacity-0 scale-90 translate-y-4"
+    enter-to-class="opacity-100 scale-100 translate-y-0"
+    leave-from-class="opacity-100 scale-100 translate-y-0"
+    leave-to-class="opacity-0 scale-95 translate-y-2"
   >
     <div
       v-if="isVisible"
@@ -14,7 +14,7 @@
       @click="closeTooltip"
     >
       <!-- Blur backdrop -->
-      <div class="absolute inset-0 bg-black bg-opacity-20 backdrop-blur-sm"></div>
+      <div class="absolute inset-0 bg-black bg-opacity-20 backdrop-blur-sm transition-all duration-500 ease-out"></div>
       
       <!-- Tooltip content -->
       <div
@@ -117,21 +117,40 @@ onBeforeUnmount(() => {
 
 /* Tooltip animations */
 .tooltip-enter-active {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .tooltip-leave-active {
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.6, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .tooltip-enter-from {
   opacity: 0;
-  transform: scale(0.9) translateY(20px);
+  transform: scale(0.9) translateY(16px);
+}
+
+.tooltip-enter-to {
+  opacity: 1;
+  transform: scale(1) translateY(0px);
+}
+
+.tooltip-leave-from {
+  opacity: 1;
+  transform: scale(1) translateY(0px);
 }
 
 .tooltip-leave-to {
   opacity: 0;
-  transform: scale(0.95) translateY(-10px);
+  transform: scale(0.95) translateY(8px);
+}
+
+/* Backdrop animation */
+.tooltip-enter-active .backdrop-blur-sm {
+  transition: backdrop-filter 0.5s ease-out, background-color 0.5s ease-out;
+}
+
+.tooltip-leave-active .backdrop-blur-sm {
+  transition: backdrop-filter 0.3s ease-in, background-color 0.3s ease-in;
 }
 
 /* Ensure text is readable on gradient background */
