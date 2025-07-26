@@ -636,7 +636,7 @@ const selectLanguage = (language) => {
 
 /* Bottom Controls */
 .bottom-controls {
-  padding: 0.75rem 1rem 1rem 1rem;
+  padding: 0.5rem 1rem 1rem 1rem;
   display: flex;
   gap: 0.75rem;
   justify-content: space-between;
