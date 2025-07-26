@@ -515,77 +515,239 @@ const toggleLanguageSelector = () => {
   border-radius: 12px;
 }
 
-/* Small mobile devices (iPhone SE, small Android) - под 375px */
-@media (max-width: 374px) {
+/* Very small mobile devices (до 320px) */
+@media (max-width: 320px) {
+  .nav-content {
+    padding: 6px 4px;
+    padding-bottom: calc(6px + env(safe-area-inset-bottom, 0px));
+    min-height: 56px;
+  }
+
+  .nav-items-container {
+    gap: 2px;
+    padding: 0 2px;
+  }
+
+  .nav-item-button {
+    min-width: 38px;
+    max-width: 50px;
+    padding: 4px 2px;
+    gap: 2px;
+  }
+
+  .nav-item-label {
+    font-size: 9px;
+    line-height: 1.0;
+  }
+
+  .nav-icon-inactive {
+    width: 20px;
+    height: 20px;
+  }
+
+  .nav-icon-active {
+    width: 26px;
+    height: 26px;
+  }
+
+  .nav-icon-svg-inactive {
+    width: 14px;
+    height: 14px;
+  }
+
+  .nav-icon-svg-active {
+    width: 16px;
+    height: 16px;
+  }
+
+  .profile-avatar,
+  .profile-image {
+    width: 20px;
+    height: 20px;
+  }
+
+  .profile-badge {
+    width: 8px;
+    height: 8px;
+  }
+
+  .profile-star {
+    width: 4px;
+    height: 4px;
+  }
+
+  .profile-arrow {
+    width: 6px;
+    height: 6px;
+  }
+
+  .profile-arrow-icon {
+    width: 3px;
+    height: 2px;
+  }
+
+  .cart-counter-badge {
+    width: 14px;
+    height: 14px;
+    font-size: 7px;
+    top: -1px;
+    right: -1px;
+    min-width: 14px;
+  }
+}
+
+/* Small mobile devices (321px - 374px) */
+@media (min-width: 321px) and (max-width: 374px) {
+  .nav-content {
+    padding: 8px 5px;
+    padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+    min-height: 60px;
+  }
+
+  .nav-items-container {
+    gap: 3px;
+    padding: 0 3px;
+  }
+
+  .nav-item-button {
+    min-width: 42px;
+    max-width: 54px;
+    padding: 5px 2px;
+    gap: 3px;
+  }
+
+  .nav-item-label {
+    font-size: 9px;
+    line-height: 1.05;
+  }
+
+  .nav-icon-inactive {
+    width: 22px;
+    height: 22px;
+  }
+
+  .nav-icon-active {
+    width: 28px;
+    height: 28px;
+  }
+
+  .nav-icon-svg-inactive {
+    width: 15px;
+    height: 15px;
+  }
+
+  .nav-icon-svg-active {
+    width: 17px;
+    height: 17px;
+  }
+
+  .profile-avatar,
+  .profile-image {
+    width: 22px;
+    height: 22px;
+  }
+
+  .profile-badge {
+    width: 9px;
+    height: 9px;
+  }
+
+  .profile-star {
+    width: 4px;
+    height: 4px;
+  }
+
+  .profile-arrow {
+    width: 7px;
+    height: 7px;
+  }
+
+  .profile-arrow-icon {
+    width: 3px;
+    height: 2px;
+  }
+
+  .cart-counter-badge {
+    width: 15px;
+    height: 15px;
+    font-size: 7px;
+    top: -1px;
+    right: -1px;
+    min-width: 15px;
+  }
+}
+
+/* Regular small mobile devices (375px - 374px) */
+@media (min-width: 375px) and (max-width: 374px) {
   .nav-content {
     padding: 10px 6px;
     padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
     min-height: 64px;
   }
-  
+
   .nav-items-container {
     gap: 4px;
     padding: 0 4px;
   }
-  
+
   .nav-item-button {
     min-width: 44px;
     max-width: 58px;
     padding: 6px 3px;
     gap: 4px;
   }
-  
+
   .nav-item-label {
     font-size: 10px;
     line-height: 1.1;
   }
-  
+
   .nav-icon-inactive {
     width: 24px;
     height: 24px;
   }
-  
+
   .nav-icon-active {
     width: 30px;
     height: 30px;
   }
-  
+
   .nav-icon-svg-inactive {
     width: 16px;
     height: 16px;
   }
-  
+
   .nav-icon-svg-active {
     width: 18px;
     height: 18px;
   }
-  
+
   .profile-avatar,
   .profile-image {
     width: 24px;
     height: 24px;
   }
-  
+
   .profile-badge {
     width: 10px;
     height: 10px;
   }
-  
+
   .profile-star {
     width: 5px;
     height: 5px;
   }
-  
+
   .profile-arrow {
     width: 8px;
     height: 8px;
   }
-  
+
   .profile-arrow-icon {
     width: 4px;
     height: 3px;
   }
-  
+
   .cart-counter-badge {
     width: 16px;
     height: 16px;
