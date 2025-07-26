@@ -440,7 +440,7 @@ const openTerms = () => {
 
 .terms-text {
   flex: 1;
-  color: #4B4D50;
+  color: #FAFAFA;
   font-family: Montserrat;
   font-size: 16px;
   font-weight: 500;
