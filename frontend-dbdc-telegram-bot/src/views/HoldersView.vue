@@ -368,28 +368,33 @@ const openTerms = () => {
   width: 222px;
   height: 220px;
   position: absolute;
-  left: 63px;
+  left: 50%;
   top: 24px;
+  transform: translateX(-50%);
   z-index: 10;
 }
 
 .qr-code-wrapper {
-  width: 222px;
-  height: 220px;
+  width: 100%;
+  height: 100%;
   border-radius: 20px;
   border: 1px solid #F2F2F2;
   background: #FAFAFA;
   box-shadow: 2px 4px 12px 0 rgba(0, 0, 0, 0.04);
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .qr-code-image {
   width: 140px;
   height: 140px;
   aspect-ratio: 1/1;
-  position: absolute;
-  left: 41px;
-  top: 20px;
+  object-fit: contain;
+  margin-bottom: 16px;
 }
 
 .qr-code-link {
@@ -398,11 +403,8 @@ const openTerms = () => {
   font-size: 17px;
   font-weight: 600;
   line-height: 24px;
-  position: absolute;
-  left: 20px;
-  top: 176px;
-  width: 182px;
-  height: 24px;
+  text-align: center;
+  word-break: break-all;
 }
 
 /* Terms Section */
