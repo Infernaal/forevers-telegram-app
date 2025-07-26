@@ -279,11 +279,47 @@ const shareQRCode = () => {
   console.log('Sharing QR code...')
   isSharing.value = true
 
+  // Safety timeout to prevent spinner from getting stuck
+  const safetyTimeout = setTimeout(() => {
+    if (isSharing.value) {
+      console.log('Safety timeout triggered - stopping spinner')
+      isSharing.value = false
+    }
+  }, 15000) // 15 seconds safety timeout
+
   // Add haptic feedback
   if (window.triggerHaptic) {
     window.triggerHaptic('impact', 'light')
   }
 
+  // Try standard Web Share API first (works on most platforms including Telegram, Viber, etc.)
+  if (navigator.share) {
+    navigator.share({
+      title: 'DBD Capital Forevers Bot',
+      text: 'Join me on DBD Capital Forevers Bot! 🚀',
+      url: referralLink.value
+    }).then(() => {
+      // Sharing was successful
+      clearTimeout(safetyTimeout)
+      isSharing.value = false
+      showSuccessMessage('Referral QR-code sent successfully')
+    }).catch((error) => {
+      console.log('Web Share API failed or cancelled:', error)
+      clearTimeout(safetyTimeout)
+      isSharing.value = false
+
+      // If user didn't cancel (AbortError), try Telegram-specific sharing
+      if (error.name !== 'AbortError') {
+        telegramFallback(safetyTimeout)
+      }
+    })
+  } else {
+    // Web Share API not available, try Telegram-specific sharing
+    telegramFallback(safetyTimeout)
+  }
+}
+
+const telegramFallback = (safetyTimeout = null) => {
   // Use Telegram WebApp sharing if available
   if (window.Telegram && window.Telegram.WebApp) {
     const tg = window.Telegram.WebApp
@@ -297,6 +333,7 @@ const shareQRCode = () => {
       const handleVisibilityChange = () => {
         if (!document.hidden) {
           // User returned to the app, likely after sharing
+          if (safetyTimeout) clearTimeout(safetyTimeout)
           isSharing.value = false
           setTimeout(() => {
             showSuccessMessage('Referral QR-code sent successfully')
@@ -310,45 +347,28 @@ const shareQRCode = () => {
       // Cleanup listener after 30 seconds if user doesn't return
       setTimeout(() => {
         document.removeEventListener('visibilitychange', handleVisibilityChange)
+        if (safetyTimeout) clearTimeout(safetyTimeout)
         isSharing.value = false
       }, 30000)
 
     } catch (error) {
       console.error('Telegram share failed:', error)
+      if (safetyTimeout) clearTimeout(safetyTimeout)
       isSharing.value = false
-      // Fallback to standard sharing
-      fallbackShare()
+      // Final fallback to clipboard
+      copyLink()
     }
   } else {
-    // Fallback for non-Telegram environments
-    fallbackShare()
+    // Not in Telegram environment, copy to clipboard
+    if (safetyTimeout) clearTimeout(safetyTimeout)
+    isSharing.value = false
+    copyLink()
   }
 }
 
 const fallbackShare = () => {
-  if (navigator.share) {
-    navigator.share({
-      title: 'DBD Capital Forevers Bot',
-      text: 'Join me on DBD Capital Forevers Bot! 🚀',
-      url: referralLink.value
-    }).then(() => {
-      // Show success notification if sharing was successful
-      isSharing.value = false
-      showSuccessMessage('Referral QR-code sent successfully')
-    }).catch((error) => {
-      console.log('Native share cancelled or failed:', error)
-      isSharing.value = false
-      // Check if it was actually cancelled by the user (AbortError)
-      if (error.name !== 'AbortError') {
-        // If it wasn't cancelled, copy to clipboard as fallback
-        copyLink()
-      }
-      // Don't show notification if user cancelled
-    })
-  } else {
-    isSharing.value = false
-    copyLink()
-  }
+  // This function is no longer used, but keeping for backwards compatibility
+  telegramFallback()
 }
 
 const copyLink = async () => {
@@ -388,7 +408,10 @@ const copyLink = async () => {
     }
   }
 
-  // Always show copied state for user feedback
+  // Show success notification when called from share button
+  showSuccessMessage('Link copied to clipboard')
+
+  // Also show copied state for user feedback
   linkCopied.value = true
   setTimeout(() => {
     linkCopied.value = false
