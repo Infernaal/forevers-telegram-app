@@ -39,6 +39,11 @@ export default {
 <style scoped>
 .holders-view {
   font-family: 'Montserrat', sans-serif;
+  background: #f3f4f6;
+}
+
+.content-container {
+  background: #f3f4f6;
 }
 
 /* Transaction Details Modal Styles (if used in holders context) */
