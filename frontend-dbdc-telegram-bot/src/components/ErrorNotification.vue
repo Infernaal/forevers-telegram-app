@@ -11,7 +11,7 @@
     <div
       v-if="isVisible"
       @click="$emit('close')"
-      class="error-notification-container w-full max-w-[260px] mx-auto cursor-pointer"
+      class="error-notification-container w-full max-w-[340px] mx-auto cursor-pointer"
       :class="containerPosition"
     >
       <!-- Triangular pointer pointing UP -->

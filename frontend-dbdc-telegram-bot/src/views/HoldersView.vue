@@ -1,5 +1,5 @@
 <template>
-  <div class="holders-view w-full max-w-md mx-auto min-h-screen">
+  <div class="holders-view w-full max-w-md mx-auto min-h-screen" style="background: #f3f4f6 !important;">
     <!-- Content Container -->
     <div class="content-container px-4 pb-24 flex items-center justify-center" style="min-height: calc(100vh - 96px);">
       
@@ -99,6 +99,11 @@ export default {
 @media (min-width: 431px) and (max-width: 768px) {
   .holders-view {
     max-width: 400px;
+    background: #f3f4f6 !important;
+  }
+
+  body {
+    background: #f3f4f6 !important;
   }
 
   /* Modal styles for tablets */
@@ -116,6 +121,11 @@ export default {
 @media (min-width: 769px) {
   .holders-view {
     max-width: 480px;
+    background: #f3f4f6 !important;
+  }
+
+  body {
+    background: #f3f4f6 !important;
   }
 
   /* Modal styles for desktop */
