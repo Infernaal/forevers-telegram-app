@@ -461,7 +461,7 @@ const selectLanguage = (language) => {
 
 .overlay-pointer {
   position: absolute;
-  bottom: calc(180px + env(safe-area-inset-bottom, 0));
+  bottom: calc(80px + env(safe-area-inset-bottom, 0));
   left: 32px;
   width: 0;
   height: 0;
@@ -477,7 +477,7 @@ const selectLanguage = (language) => {
   left: 16px;
   right: 16px;
   top: 40px;
-  bottom: calc(180px + env(safe-area-inset-bottom, 0));
+  bottom: calc(90px + env(safe-area-inset-bottom, 0));
   background: linear-gradient(135deg, #120B81 0%, #1A1086 50%, #09074E 100%);
   border-radius: 24px;
   overflow: hidden;
@@ -486,7 +486,7 @@ const selectLanguage = (language) => {
   backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
-  max-height: calc(100vh - 220px - env(safe-area-inset-bottom, 0));
+  max-height: calc(100vh - 130px - env(safe-area-inset-bottom, 0));
 }
 
 /* Profile Header */
