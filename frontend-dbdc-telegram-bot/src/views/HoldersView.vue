@@ -309,30 +309,52 @@ const shareQRCode = () => {
   }
 }
 
-const fallbackShare = () => {
-  if (navigator.share) {
-    navigator.share({
-      title: 'DBD Capital Forevers Bot',
-      text: 'Join me on DBD Capital Forevers Bot! 🚀',
-      url: referralLink.value
-    }).then(() => {
-      // Show success notification if sharing was successful
-      isSharing.value = false
-      showSuccessMessage('Referral QR-code sent successfully')
-    }).catch((error) => {
-      console.log('Native share cancelled or failed:', error)
-      isSharing.value = false
-      // Check if it was actually cancelled by the user (AbortError)
-      if (error.name !== 'AbortError') {
-        // If it wasn't cancelled, copy to clipboard as fallback
-        copyLink()
+const telegramFallback = () => {
+  // Use Telegram WebApp sharing if available
+  if (window.Telegram && window.Telegram.WebApp) {
+    const tg = window.Telegram.WebApp
+
+    try {
+      // Use Telegram's openTelegramLink for sharing (compatible with version 6.0)
+      const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(referralLink.value)}&text=${encodeURIComponent('Join me on DBD Capital Forevers Bot! 🚀')}`
+      tg.openTelegramLink(shareUrl)
+
+      // Set up event listener for when user returns to app
+      const handleVisibilityChange = () => {
+        if (!document.hidden) {
+          // User returned to the app, likely after sharing
+          isSharing.value = false
+          setTimeout(() => {
+            showSuccessMessage('Referral QR-code sent successfully')
+          }, 500)
+          document.removeEventListener('visibilitychange', handleVisibilityChange)
+        }
       }
-      // Don't show notification if user cancelled
-    })
+
+      document.addEventListener('visibilitychange', handleVisibilityChange)
+
+      // Cleanup listener after 30 seconds if user doesn't return
+      setTimeout(() => {
+        document.removeEventListener('visibilitychange', handleVisibilityChange)
+        isSharing.value = false
+      }, 30000)
+
+    } catch (error) {
+      console.error('Telegram share failed:', error)
+      isSharing.value = false
+      // Final fallback to clipboard
+      copyLink()
+    }
   } else {
+    // Not in Telegram environment, copy to clipboard
     isSharing.value = false
     copyLink()
   }
+}
+
+const fallbackShare = () => {
+  // This function is no longer used, but keeping for backwards compatibility
+  telegramFallback()
 }
 
 const copyLink = async () => {
