@@ -1131,57 +1131,57 @@ const selectLanguage = (language) => {
   }
 
   .upgrade-section {
-    padding: 8px;
+    padding: 6px 8px;
   }
 
   .upgrade-card {
-    padding: 16px;
+    padding: 12px;
     border-radius: 12px;
   }
 
   .upgrade-star {
     left: 8px;
-    top: 16px;
+    top: 12px;
   }
 
   .star-icon {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
   }
 
   .upgrade-info {
-    margin-left: 36px;
+    margin-left: 32px;
   }
 
   .upgrade-title {
-    font-size: 18px;
-    margin-bottom: 2px;
+    font-size: 16px;
+    margin-bottom: 1px;
   }
 
   .upgrade-subtitle {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .upgrade-button {
-    padding: 10px 20px;
-    font-size: 14px;
-    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 12px;
+    border-radius: 16px;
   }
 
   .bottom-section {
-    padding: 8px;
+    padding: 6px 8px;
   }
 
   .bottom-controls {
-    gap: 12px;
-    max-width: 280px;
+    gap: 8px;
+    max-width: 260px;
   }
 
   .id-button,
   .language-button {
-    height: 36px;
-    padding: 8px 10px;
-    border-radius: 12px;
+    height: 32px;
+    padding: 6px 8px;
+    border-radius: 10px;
   }
 
   .id-label,
@@ -1285,57 +1285,57 @@ const selectLanguage = (language) => {
   }
 
   .upgrade-section {
-    padding: 10px;
+    padding: 8px 10px;
   }
 
   .upgrade-card {
-    padding: 18px;
+    padding: 14px;
     border-radius: 14px;
   }
 
   .upgrade-star {
     left: 10px;
-    top: 18px;
+    top: 14px;
   }
 
   .star-icon {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
   }
 
   .upgrade-info {
-    margin-left: 42px;
+    margin-left: 38px;
   }
 
   .upgrade-title {
-    font-size: 19px;
-    margin-bottom: 3px;
+    font-size: 17px;
+    margin-bottom: 2px;
   }
 
   .upgrade-subtitle {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .upgrade-button {
-    padding: 11px 22px;
-    font-size: 15px;
-    border-radius: 22px;
+    padding: 9px 18px;
+    font-size: 13px;
+    border-radius: 18px;
   }
 
   .bottom-section {
-    padding: 10px;
+    padding: 8px 10px;
   }
 
   .bottom-controls {
-    gap: 14px;
-    max-width: 300px;
+    gap: 10px;
+    max-width: 280px;
   }
 
   .id-button,
   .language-button {
-    height: 38px;
-    padding: 9px 12px;
-    border-radius: 14px;
+    height: 34px;
+    padding: 7px 10px;
+    border-radius: 12px;
   }
 
   .id-label,
@@ -1442,57 +1442,57 @@ const selectLanguage = (language) => {
   }
 
   .upgrade-section {
-    padding: 14px;
+    padding: 10px 14px;
   }
 
   .upgrade-card {
-    padding: 22px;
+    padding: 18px;
     border-radius: 18px;
   }
 
   .upgrade-star {
     left: 14px;
-    top: 22px;
+    top: 18px;
   }
 
   .star-icon {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
   }
 
   .upgrade-info {
-    margin-left: 54px;
+    margin-left: 50px;
   }
 
   .upgrade-title {
-    font-size: 22px;
-    margin-bottom: 5px;
+    font-size: 20px;
+    margin-bottom: 3px;
   }
 
   .upgrade-subtitle {
-    font-size: 15px;
+    font-size: 14px;
   }
 
   .upgrade-button {
-    padding: 14px 28px;
-    font-size: 17px;
-    border-radius: 28px;
+    padding: 12px 24px;
+    font-size: 15px;
+    border-radius: 24px;
   }
 
   .bottom-section {
-    padding: 14px;
+    padding: 10px 14px;
   }
 
   .bottom-controls {
-    gap: 18px;
-    max-width: 340px;
+    gap: 14px;
+    max-width: 320px;
   }
 
   .id-button,
   .language-button {
-    height: 44px;
-    padding: 12px 16px;
-    border-radius: 18px;
+    height: 40px;
+    padding: 10px 14px;
+    border-radius: 16px;
   }
 
   .id-label,
