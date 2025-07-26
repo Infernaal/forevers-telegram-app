@@ -268,11 +268,6 @@ watch(() => route.path, (newPath) => {
 
 // Methods
 const navigateTo = (tab) => {
-  // Close profile menu if open
-  if (isProfileMenuOpen.value) {
-    isProfileMenuOpen.value = false
-  }
-
   // Map tab names to routes
   const routeMap = {
     wallet: '/wallet',
