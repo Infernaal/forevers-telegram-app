@@ -355,42 +355,44 @@ const openTerms = () => {
 <style scoped>
 .holders-view {
   font-family: 'Montserrat', sans-serif;
-  width: 375px;
+  width: 100%;
   min-height: 100vh;
   background: #F0F0F0;
   position: relative;
   margin: 0 auto;
-  max-width: 375px;
+  max-width: 100%;
 }
 
 /* Content Container - now starts from top */
 .content-container {
-  width: 375px;
+  width: 100%;
   min-height: 100vh;
   background: #F0F0F0;
   position: relative;
-  padding: 20px 0 160px 0; /* Increased bottom padding to prevent clash with bottom navigation */
+  padding: 5vw 0 120px 0;
+  box-sizing: border-box;
 }
 
 /* Referral Program Header */
 .referral-header {
   display: flex;
-  width: 299px;
+  width: calc(100% - 28px);
+  max-width: 299px;
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
   position: relative;
-  left: 14px;
-  margin-bottom: 20px;
-  height: 52px;
+  margin: 0 auto 5vw auto;
+  padding: 0 14px;
+  box-sizing: border-box;
 }
 
 .referral-title {
   color: #02070E;
   font-family: Montserrat;
-  font-size: 20px;
+  font-size: clamp(18px, 5.3vw, 24px);
   font-weight: 700;
-  line-height: 24px;
+  line-height: 1.2;
   margin: 0;
   align-self: stretch;
 }
@@ -398,9 +400,9 @@ const openTerms = () => {
 .referral-subtitle {
   color: #4B4D50;
   font-family: Montserrat;
-  font-size: 16px;
+  font-size: clamp(14px, 4.3vw, 18px);
   font-weight: 500;
-  line-height: 24px;
+  line-height: 1.5;
   margin: 0;
   align-self: stretch;
 }
@@ -408,24 +410,25 @@ const openTerms = () => {
 /* Scroll Content */
 .scroll-content {
   display: flex;
-  width: 347px;
+  width: calc(100% - 28px);
+  max-width: 347px;
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-start;
-  gap: 20px;
+  gap: 5vw;
   position: relative;
-  left: 14px;
-  height: 507px;
-  margin-top: 60px;
+  margin: 0 auto;
+  padding: 0 14px;
+  box-sizing: border-box;
+  min-height: 400px;
 }
 
 /* QR Section */
 .qr-section {
-  width: 347px;
-  height: 396px;
-  position: absolute;
-  left: 0;
-  top: 0;
+  width: 100%;
+  height: clamp(350px, 105vw, 450px);
+  position: relative;
+  margin-bottom: 5vw;
 }
 
 .qr-background {
@@ -448,51 +451,52 @@ const openTerms = () => {
 }
 
 .f-icon-1 {
-  width: 96px;
-  height: 96px;
+  width: clamp(60px, 20vw, 96px);
+  height: clamp(60px, 20vw, 96px);
   transform: rotate(46.848deg);
-  left: -16px;
-  top: -6px;
+  left: -4%;
+  top: -2%;
 }
 
 .f-icon-2 {
-  width: 48px;
-  height: 48px;
+  width: clamp(32px, 10vw, 48px);
+  height: clamp(32px, 10vw, 48px);
   transform: rotate(150.638deg);
-  left: 280px;
-  top: 189px;
+  right: 5%;
+  top: 48%;
 }
 
 .f-icon-3 {
-  width: 128px;
-  height: 128px;
+  width: clamp(80px, 25vw, 128px);
+  height: clamp(80px, 25vw, 128px);
   transform: rotate(-31.597deg);
-  left: -22px;
-  top: 194px;
+  left: -6%;
+  bottom: 15%;
 }
 
 .f-icon-4 {
-  width: 96px;
-  height: 96px;
+  width: clamp(60px, 20vw, 96px);
+  height: clamp(60px, 20vw, 96px);
   transform: rotate(121.978deg);
-  left: 211px;
-  top: 21px;
+  right: 15%;
+  top: 5%;
 }
 
 /* QR Code Container */
 .qr-code-container {
-  width: 222px;
-  height: 220px;
+  width: clamp(200px, 60vw, 280px);
+  height: clamp(200px, 58vw, 280px);
   position: absolute;
-  left: 63px;
-  top: 24px;
+  left: 50%;
+  top: 6%;
+  transform: translateX(-50%);
   z-index: 10;
 }
 
 .qr-code-wrapper {
-  width: 222px;
-  height: 220px;
-  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  border-radius: clamp(16px, 4vw, 24px);
   border: 1px solid #F2F2F2;
   background: #FAFAFA;
   box-shadow: 2px 4px 12px 0 rgba(0, 0, 0, 0.04);
@@ -500,36 +504,38 @@ const openTerms = () => {
 }
 
 .qr-code-image {
-  width: 140px;
-  height: 140px;
+  width: clamp(120px, 35vw, 160px);
+  height: clamp(120px, 35vw, 160px);
   aspect-ratio: 1/1;
   object-fit: contain;
   position: absolute;
-  left: 41px;
-  top: 20px;
+  left: 50%;
+  top: 12%;
+  transform: translateX(-50%);
 }
 
 .qr-code-link {
   color: #2019CE;
   font-family: Montserrat;
-  font-size: 17px;
+  font-size: clamp(14px, 4.5vw, 18px);
   font-weight: 600;
-  line-height: 24px;
+  line-height: 1.4;
   position: absolute;
-  left: 20px;
-  top: 176px;
-  width: 182px;
-  height: 24px;
+  left: 50%;
+  bottom: 8%;
+  transform: translateX(-50%);
+  text-align: center;
+  white-space: nowrap;
 }
 
 /* Terms Section */
 .terms-container {
-  position: absolute;
-  left: 20px;
-  top: 256px;
-  width: 319px;
-  height: 44px;
+  position: relative;
+  width: 100%;
+  margin: 5vw 0;
   z-index: 20;
+  padding: 0 5%;
+  box-sizing: border-box;
 }
 
 .terms-wrapper {
@@ -548,8 +554,8 @@ const openTerms = () => {
 }
 
 .terms-checkbox {
-  width: 24px;
-  height: 24px;
+  width: clamp(20px, 5.5vw, 28px);
+  height: clamp(20px, 5.5vw, 28px);
   border-radius: 4px;
   border: 1px solid #7E7E7E;
   background: #FAFAFA;
@@ -562,9 +568,9 @@ const openTerms = () => {
   flex: 1;
   color: #FAFAFA;
   font-family: Montserrat;
-  font-size: 16px;
+  font-size: clamp(13px, 3.8vw, 16px);
   font-weight: 500;
-  line-height: 22px;
+  line-height: 1.4;
 }
 
 .terms-link {
@@ -574,16 +580,19 @@ const openTerms = () => {
 
 /* Share Button */
 .share-button-container {
-  position: absolute;
-  left: 23px;
-  top: 322px;
+  position: relative;
+  width: 100%;
+  margin: 5vw 0;
   z-index: 20;
+  padding: 0 5%;
+  box-sizing: border-box;
 }
 
 .share-button {
   display: flex;
-  width: 300px;
-  padding: 12px 48px;
+  width: 100%;
+  max-width: 340px;
+  padding: clamp(10px, 3vw, 16px) clamp(24px, 8vw, 48px);
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -591,14 +600,15 @@ const openTerms = () => {
   background: linear-gradient(90deg, #2019CE 0%, #473FFF 100%);
   border: none;
   cursor: pointer;
-  height: 50px;
+  min-height: clamp(44px, 12vw, 56px);
   color: #FFF;
   text-align: center;
   font-family: Montserrat;
-  font-size: 16px;
+  font-size: clamp(14px, 4vw, 18px);
   font-weight: 600;
-  line-height: 26px;
+  line-height: 1.4;
   transition: all 0.2s ease;
+  margin: 0 auto;
 }
 
 .share-button:hover:not(:disabled) {
@@ -615,10 +625,11 @@ const openTerms = () => {
 /* How to Section */
 .how-to-section {
   position: relative;
-  left: 14px;
-  top: -25px;
-  width: 347px;
-  height: 410px;
+  width: calc(100% - 28px);
+  max-width: 347px;
+  margin: 8vw auto 0 auto;
+  padding: 0 14px;
+  box-sizing: border-box;
 }
 
 .steps-container {
@@ -629,150 +640,134 @@ const openTerms = () => {
 
 /* How to Header */
 .how-to-header {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 229px;
-  height: 60px;
+  width: 100%;
+  margin-bottom: 8vw;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 12px;
+  gap: clamp(8px, 2.5vw, 12px);
 }
 
 .how-to-title {
   color: #02070E;
   font-family: Montserrat;
-  font-size: 20px;
+  font-size: clamp(18px, 5.3vw, 24px);
   font-weight: 700;
-  line-height: 24px;
+  line-height: 1.2;
   margin: 0;
 }
 
 .how-to-subtitle {
   color: #4B4D50;
   font-family: Montserrat;
-  font-size: 16px;
+  font-size: clamp(14px, 4.3vw, 18px);
   font-weight: 500;
-  line-height: 24px;
+  line-height: 1.5;
   margin: 0;
   align-self: stretch;
 }
 
 /* Step Indicators */
 .step-indicators {
-  position: absolute;
-  left: 27px;
-  top: 88px;
-  width: 298px;
-  height: 40px;
+  width: 100%;
+  margin-bottom: 6vw;
+  height: clamp(32px, 8vw, 48px);
 }
 
 .step-indicator-row {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 24px;
+  gap: clamp(16px, 5vw, 32px);
   width: 100%;
   height: 100%;
   position: relative;
 }
 
 .step-line {
-  width: 44px;
+  width: clamp(24px, 8vw, 48px);
   height: 1px;
   background: #7E7E7E;
 }
 
 .step-line-1 {
   position: absolute;
-  left: 62px;
-  top: 20px;
+  left: calc(16.67% + clamp(12px, 3vw, 20px));
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .step-line-2 {
   position: absolute;
-  left: 192px;
-  top: 19px;
+  right: calc(16.67% + clamp(12px, 3vw, 20px));
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .step-indicator {
-  width: 38px;
-  height: 40px;
+  width: clamp(28px, 7vw, 42px);
+  height: clamp(32px, 8vw, 48px);
   border-radius: 0 100px 100px 0;
   background: #2019CE;
+  flex-shrink: 0;
 }
 
 .step-indicator-1 {
-  position: absolute;
-  left: 0;
-  top: 0;
+  order: 1;
 }
 
 .step-indicator-2 {
-  position: absolute;
-  left: 130px;
-  top: 0;
+  order: 3;
 }
 
 .step-indicator-3 {
-  position: absolute;
-  left: 260px;
-  top: 0;
+  order: 5;
 }
 
 /* Step Descriptions */
 .step-descriptions {
-  position: absolute;
-  left: 0;
-  top: 144px;
   width: 100%;
-  height: 44px;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 8vw;
 }
 
 .step-description {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: clamp(2px, 1vw, 6px);
   text-align: center;
+  flex: 1;
+  max-width: 33.33%;
 }
 
 .step-description-1 {
-  width: 92px;
+  text-align: left;
 }
 
 .step-description-2 {
-  width: 96px;
-  justify-content: center;
+  text-align: center;
 }
 
 .step-description-3 {
-  width: 74px;
-  justify-content: center;
+  text-align: right;
 }
 
 .step-number {
   color: #4B4D50;
   font-family: Montserrat;
-  font-size: 16px;
+  font-size: clamp(12px, 3.5vw, 16px);
   font-weight: 500;
-  line-height: 24px;
-}
-
-.step-description-2 .step-number,
-.step-description-3 .step-number {
-  font-size: 14px;
+  line-height: 1.4;
 }
 
 .step-text {
   color: #4B4D50;
   font-family: Montserrat;
-  font-size: 12px;
+  font-size: clamp(10px, 2.8vw, 14px);
   font-weight: 500;
-  line-height: 16px;
+  line-height: 1.3;
 }
 
 .step-number-row {
@@ -788,64 +783,62 @@ const openTerms = () => {
   align-items: center;
 }
 
+.step-icon svg {
+  width: clamp(12px, 3.5vw, 18px);
+  height: clamp(12px, 3.5vw, 18px);
+}
+
 /* Web Referral Link Section */
 .web-link-section {
-  position: absolute;
-  left: 0;
-  top: 202px;
-  width: 347px;
-  height: 208px;
+  position: relative;
+  width: 100%;
+  margin-top: 5vw;
 }
 
 .web-link-background {
-  width: 347px;
-  height: 206px;
-  border-radius: 24px;
+  width: 100%;
+  height: 100%;
+  border-radius: clamp(16px, 4vw, 24px);
   background: linear-gradient(93deg, #000482 33.15%, rgba(3, 0, 155, 0.84) 76.97%);
   backdrop-filter: blur(32px);
   position: absolute;
   left: 0;
-  top: 2px;
+  top: 0;
 }
 
 .web-link-content {
   position: relative;
   z-index: 10;
-  padding: 20px;
+  padding: clamp(16px, 4vw, 24px);
 }
 
 .web-link-header {
-  width: 204px;
-  height: 86px;
-  margin-bottom: 28px;
+  width: 100%;
+  margin-bottom: clamp(20px, 5vw, 32px);
 }
 
 .web-link-title {
   color: #FFF;
   font-family: Montserrat;
-  font-size: 26px;
+  font-size: clamp(20px, 6vw, 30px);
   font-weight: 700;
-  line-height: 30px;
-  margin: 0 0 12px 0;
-  width: 244px;
-  height: 30px;
+  line-height: 1.2;
+  margin: 0 0 clamp(8px, 2vw, 16px) 0;
 }
 
 .web-link-description {
   color: #FFF;
   font-family: Montserrat;
-  font-size: 16px;
+  font-size: clamp(14px, 4vw, 18px);
   font-weight: 500;
-  line-height: 24px;
+  line-height: 1.5;
   margin: 0;
-  width: 204px;
-  height: 48px;
 }
 
 /* Copy Link Container */
 .copy-link-container {
-  width: 307px;
-  height: 52px;
+  width: 100%;
+  height: clamp(44px, 10vw, 56px);
   position: relative;
   border-radius: 100px;
   border: 1px solid rgba(32, 25, 206, 0.60);
@@ -862,18 +855,19 @@ const openTerms = () => {
 
 .copy-link-input-wrapper {
   flex: 1;
-  padding: 14px 24px;
+  padding: clamp(8px, 2.5vw, 16px) clamp(12px, 4vw, 24px);
 }
 
 .copy-link-text {
   color: #FAFAFA;
   font-family: Montserrat;
-  font-size: 17px;
+  font-size: clamp(13px, 4vw, 18px);
   font-weight: 600;
-  line-height: 24px;
+  line-height: 1.4;
   text-decoration: underline;
-  width: 182px;
-  height: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .copy-link-copied-full {
@@ -882,32 +876,33 @@ const openTerms = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  padding: 14px 24px;
+  gap: clamp(8px, 2.5vw, 16px);
+  padding: clamp(8px, 2.5vw, 16px) clamp(12px, 4vw, 24px);
   box-sizing: border-box;
 }
 
 .copy-link-copied-text {
   color: #FFF;
   font-family: Montserrat;
-  font-size: 14px;
+  font-size: clamp(12px, 3.5vw, 16px);
   font-weight: 600;
-  line-height: 22px;
+  line-height: 1.4;
   text-align: center;
 }
 
 .copy-link-copied-icon {
   position: relative;
-  width: 28px;
-  height: 28px;
+  width: clamp(20px, 5vw, 32px);
+  height: clamp(20px, 5vw, 32px);
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .copy-button {
-  width: 50px;
-  height: 52px;
+  width: clamp(44px, 10vw, 56px);
+  height: 100%;
   border-radius: 0 100px 100px 0;
   border: 1px solid #443FCC;
   background: #FAFAFA;
@@ -918,6 +913,7 @@ const openTerms = () => {
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
+  flex-shrink: 0;
 }
 
 .copy-button:hover {
@@ -926,12 +922,17 @@ const openTerms = () => {
 
 .copy-icon {
   display: flex;
-  width: 24px;
-  height: 24px;
+  width: clamp(18px, 4.5vw, 28px);
+  height: clamp(18px, 4.5vw, 28px);
   padding: 1.5px;
   justify-content: center;
   align-items: center;
   color: #443FCC;
+}
+
+.copy-icon svg {
+  width: 100%;
+  height: 100%;
 }
 
 .copy-tick-svg {
@@ -942,21 +943,117 @@ const openTerms = () => {
 }
 
 /* Responsive Design */
+/* Small Mobile (320px - 375px) */
 @media (max-width: 375px) {
-  .holders-view {
-    width: 100vw;
-    max-width: 375px;
-  }
-  
   .content-container {
-    width: 100vw;
-    max-width: 375px;
+    padding: 4vw 0 100px 0;
+  }
+
+  .referral-header {
+    margin-bottom: 4vw;
+  }
+
+  .scroll-content {
+    gap: 4vw;
+  }
+
+  .qr-section {
+    height: clamp(300px, 95vw, 380px);
+  }
+
+  .terms-container,
+  .share-button-container {
+    margin: 4vw 0;
+    padding: 0 4%;
   }
 }
 
-@media (min-width: 376px) {
+/* Mobile (376px - 480px) */
+@media (min-width: 376px) and (max-width: 480px) {
   .holders-view {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .content-container {
+    padding: 4.5vw 0 120px 0;
+  }
+}
+
+/* Large Mobile / Small Tablet (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .holders-view {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+  }
+
+  .content-container {
+    padding: 3.5vw 0 140px 0;
+  }
+
+  .referral-header,
+  .scroll-content,
+  .how-to-section {
+    max-width: 450px;
+  }
+}
+
+/* Tablet (769px - 1024px) */
+@media (min-width: 769px) {
+  .holders-view {
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+    max-width: 600px;
+  }
+
+  .content-container {
+    padding: 3vw 0 160px 0;
+  }
+
+  .referral-header,
+  .scroll-content,
+  .how-to-section {
+    max-width: 500px;
+  }
+
+  .qr-section {
+    height: clamp(400px, 45vw, 500px);
+  }
+
+  /* Larger typography for tablets */
+  .referral-title {
+    font-size: clamp(22px, 3vw, 28px);
+  }
+
+  .referral-subtitle {
+    font-size: clamp(16px, 2.5vw, 20px);
+  }
+
+  .how-to-title {
+    font-size: clamp(22px, 3vw, 28px);
+  }
+
+  .how-to-subtitle {
+    font-size: clamp(16px, 2.5vw, 20px);
+  }
+
+  .web-link-title {
+    font-size: clamp(24px, 3.5vw, 32px);
+  }
+
+  .web-link-description {
+    font-size: clamp(16px, 2.5vw, 20px);
+  }
+}
+
+/* Large Tablet and above (1025px+) */
+@media (min-width: 1025px) {
+  .holders-view {
+    max-width: 700px;
+  }
+
+  .referral-header,
+  .scroll-content,
+  .how-to-section {
+    max-width: 600px;
   }
 }
 
