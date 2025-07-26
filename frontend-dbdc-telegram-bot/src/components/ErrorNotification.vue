@@ -21,7 +21,7 @@
 
       <!-- Тело уведомления -->
       <div
-        class="bg-red-500 text-white rounded-full flex items-center px-5 py-3 shadow-lg border border-red-600"
+        class="bg-red-500 text-white rounded-full flex items-center px-4 py-2 shadow-lg border border-red-600"
         style="filter: drop-shadow(4px 8px 12px rgba(255,25,25,0.12));"
       >
         <!-- Иконка -->
