@@ -758,6 +758,14 @@ onUnmounted(() => {
   gap: 8px;
 }
 
+@media (max-width: 640px) {
+  .export-dropdown-container {
+    border-color: #3A33D3;
+    background-color: #3A33D3;
+    box-shadow: 2px 3px 6px 0 #3A33D3;
+  }
+}
+
 .export-option {
   width: 140px;
   height: 52px;
@@ -771,6 +779,13 @@ onUnmounted(() => {
   padding: 6px;
   cursor: pointer;
   transition: all 0.2s ease;
+}
+
+@media (max-width: 640px) {
+  .export-option {
+    border-color: #3A33D3;
+    background-color: #3A33D3;
+  }
 }
 
 .export-option:hover {
