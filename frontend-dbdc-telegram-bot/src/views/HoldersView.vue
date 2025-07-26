@@ -409,27 +409,23 @@ const openTerms = () => {
 
 /* Terms Section */
 .terms-container {
-  position: absolute;
-  left: 0;
-  top: 256px;
-  width: 319px;
-  height: 44px;
-  z-index: 20;
+  width: 100%;
+  margin-bottom: 22px;
 }
 
 .terms-wrapper {
-  display: inline-flex;
-  align-items: center;
+  display: flex;
+  align-items: flex-start;
   gap: 8px;
   width: 100%;
-  height: 100%;
 }
 
 .terms-label {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
   cursor: pointer;
+  width: 100%;
 }
 
 .terms-checkbox {
@@ -439,10 +435,12 @@ const openTerms = () => {
   border: 1px solid #7E7E7E;
   background: #FAFAFA;
   cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .terms-text {
-  width: 287px;
+  flex: 1;
   color: #4B4D50;
   font-family: Montserrat;
   font-size: 16px;
@@ -457,10 +455,9 @@ const openTerms = () => {
 
 /* Share Button */
 .share-button-container {
-  position: absolute;
-  left: 23px;
-  top: 322px;
-  z-index: 20;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .share-button {
