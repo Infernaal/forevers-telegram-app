@@ -337,6 +337,7 @@ const shareQRCode = () => {
 
         setTimeout(() => {
           document.removeEventListener('visibilitychange', handleVisibilityChange)
+          isSharing.value = false
         }, 30000)
       }
 
