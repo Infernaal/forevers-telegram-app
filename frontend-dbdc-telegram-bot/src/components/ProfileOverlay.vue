@@ -644,6 +644,7 @@ const selectLanguage = (language) => {
   position: relative;
   outline: none;
   -webkit-tap-highlight-color: transparent;
+  scroll-snap-align: start;
 }
 
 .menu-item:hover {
