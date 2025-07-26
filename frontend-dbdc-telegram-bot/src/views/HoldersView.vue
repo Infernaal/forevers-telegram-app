@@ -284,44 +284,28 @@ const shareQRCode = () => {
     window.triggerHaptic('impact', 'light')
   }
 
-  // Use Telegram WebApp sharing if available
-  if (window.Telegram && window.Telegram.WebApp) {
-    const tg = window.Telegram.WebApp
-
-    try {
-      // Use Telegram's openTelegramLink for sharing (compatible with version 6.0)
-      const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(referralLink.value)}&text=${encodeURIComponent('Join me on DBD Capital Forevers Bot! 🚀')}`
-      tg.openTelegramLink(shareUrl)
-
-      // Set up event listener for when user returns to app
-      const handleVisibilityChange = () => {
-        if (!document.hidden) {
-          // User returned to the app, likely after sharing
-          isSharing.value = false
-          setTimeout(() => {
-            showSuccessMessage('Referral QR-code sent successfully')
-          }, 500)
-          document.removeEventListener('visibilitychange', handleVisibilityChange)
-        }
-      }
-
-      document.addEventListener('visibilitychange', handleVisibilityChange)
-
-      // Cleanup listener after 30 seconds if user doesn't return
-      setTimeout(() => {
-        document.removeEventListener('visibilitychange', handleVisibilityChange)
-        isSharing.value = false
-      }, 30000)
-
-    } catch (error) {
-      console.error('Telegram share failed:', error)
+  // Try standard Web Share API first (works on most platforms including Telegram, Viber, etc.)
+  if (navigator.share) {
+    navigator.share({
+      title: 'DBD Capital Forevers Bot',
+      text: 'Join me on DBD Capital Forevers Bot! 🚀',
+      url: referralLink.value
+    }).then(() => {
+      // Sharing was successful
       isSharing.value = false
-      // Fallback to standard sharing
-      fallbackShare()
-    }
+      showSuccessMessage('Referral QR-code sent successfully')
+    }).catch((error) => {
+      console.log('Web Share API failed or cancelled:', error)
+      isSharing.value = false
+
+      // If user didn't cancel (AbortError), try Telegram-specific sharing
+      if (error.name !== 'AbortError') {
+        telegramFallback()
+      }
+    })
   } else {
-    // Fallback for non-Telegram environments
-    fallbackShare()
+    // Web Share API not available, try Telegram-specific sharing
+    telegramFallback()
   }
 }
 
