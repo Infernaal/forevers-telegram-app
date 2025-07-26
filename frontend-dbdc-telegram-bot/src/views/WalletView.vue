@@ -340,6 +340,8 @@ const navigateToTransactions = () => {
   .icon-wrapper {
     width: 36px;
     height: 36px;
+    background: #FAFAFA;
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.04);
   }
   
   .loyalty-title,
@@ -415,6 +417,8 @@ const navigateToTransactions = () => {
   .icon-wrapper {
     width: 38px;
     height: 38px;
+    background: #FAFAFA;
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.04);
   }
   
   .loyalty-title,
@@ -490,6 +494,8 @@ const navigateToTransactions = () => {
   .icon-wrapper {
     width: 44px;
     height: 44px;
+    background: #FAFAFA;
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.04);
   }
   
   .loyalty-title,
@@ -569,6 +575,8 @@ const navigateToTransactions = () => {
   .icon-wrapper {
     width: 48px;
     height: 48px;
+    background: #FAFAFA;
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.04);
   }
   
   .loyalty-title,
@@ -640,6 +648,8 @@ const navigateToTransactions = () => {
   .icon-wrapper {
     width: 32px;
     height: 32px;
+    background: #FAFAFA;
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.04);
   }
   
   .loyalty-title,
