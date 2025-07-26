@@ -378,7 +378,7 @@ const openTerms = () => {
   min-height: calc(100vh + 200px); /* Allow content to extend beyond viewport */
   background: #F0F0F0;
   position: relative;
-  padding: 20px 0 100px 0; /* Reduced bottom padding */
+  padding: 20px 0 80px 0; /* Further reduced bottom padding */
 }
 
 /* Referral Program Header */
@@ -956,15 +956,31 @@ const openTerms = () => {
     width: 100vw;
     max-width: 375px;
   }
-  
+
   .content-container {
     width: 100vw;
     max-width: 375px;
   }
 }
 
-@media (min-width: 376px) {
+/* Tablet styles - remove white stripes */
+@media (min-width: 376px) and (max-width: 1024px) {
   .holders-view {
+    width: 100vw;
+    max-width: 100vw;
+    box-shadow: none;
+  }
+
+  .content-container {
+    width: 100vw;
+    max-width: 100vw;
+  }
+}
+
+@media (min-width: 1025px) {
+  .holders-view {
+    width: 375px;
+    max-width: 375px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   }
 }
