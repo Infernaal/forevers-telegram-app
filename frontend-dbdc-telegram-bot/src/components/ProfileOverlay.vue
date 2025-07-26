@@ -1918,12 +1918,12 @@ const selectLanguage = (language) => {
 /* Enhanced safe area support for different iOS versions */
 @supports (padding-bottom: env(safe-area-inset-bottom)) {
   .overlay-pointer {
-    bottom: calc(72px + env(safe-area-inset-bottom));
+    bottom: calc(140px + env(safe-area-inset-bottom));
   }
 
   .profile-container {
-    bottom: calc(72px + env(safe-area-inset-bottom));
-    max-height: calc(100vh - 112px - env(safe-area-inset-bottom));
+    bottom: calc(140px + env(safe-area-inset-bottom));
+    max-height: calc(100vh - 180px - env(safe-area-inset-bottom));
   }
 
   /* Small mobile landscape specific */
