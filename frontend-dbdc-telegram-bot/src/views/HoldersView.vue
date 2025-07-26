@@ -249,6 +249,18 @@ const copyLink = async () => {
   }
 }
 
+const copyWebLink = async () => {
+  try {
+    await navigator.clipboard.writeText(referralLink.value)
+    linkCopied.value = true
+    setTimeout(() => {
+      linkCopied.value = false
+    }, 3000)
+  } catch (err) {
+    console.error('Failed to copy web link:', err)
+  }
+}
+
 const openTerms = () => {
   console.log('Opening terms and conditions...')
 }
