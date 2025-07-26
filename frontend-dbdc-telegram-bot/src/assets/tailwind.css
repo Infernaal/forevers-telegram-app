@@ -56,13 +56,25 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
+
+    /* Enhanced scroll and overscroll prevention */
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    overscroll-behavior: none;
+    overscroll-behavior-y: none;
+    overscroll-behavior-x: none;
+
+    /* Disable iOS rubber band and pull-to-refresh */
+    -webkit-overflow-scrolling: auto;
+    touch-action: pan-y;
+
     /* Support for iOS safe areas */
     padding-top: var(--safe-area-top);
     padding-bottom: var(--safe-area-bottom);
     padding-left: var(--safe-area-left);
     padding-right: var(--safe-area-right);
-    /* Prevent scrolling */
-    overflow-x: hidden;
+
     /* Telegram WebApp viewport settings */
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -70,25 +82,66 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+
+    /* Position and layout fixes */
+    position: fixed;
+    width: 100%;
+    height: 100%;
+
+    /* Performance optimizations */
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
-/* Telegram WebApp specific styles */
+/* Telegram WebApp specific styles with scroll fixes */
 .tg-webapp {
     background: var(--tg-theme-bg-color, #ffffff);
     color: var(--tg-theme-text-color, #000000);
     font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+    /* Enhanced scroll prevention */
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: auto;
+    touch-action: pan-y;
+
+    /* Layout fixes */
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Mobile-first responsive design */
+/* Mobile-first responsive design with enhanced scroll control */
 #app {
     width: 100%;
     max-width: 430px;
     margin: 0 auto;
     min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height */
     background: var(--tg-theme-bg-color, #ffffff);
     position: relative;
-    /* Ensure app fills viewport on mobile */
-    min-height: 100dvh; /* Dynamic viewport height */
+
+    /* Enhanced scroll control for main app container */
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: auto;
+
+    /* Layout and positioning */
+    display: flex;
+    flex-direction: column;
+
+    /* Performance optimizations */
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+
+    /* Touch behavior */
+    touch-action: pan-y;
 }
 
 /* Prevent zoom on inputs in iOS */
@@ -98,7 +151,7 @@ input, select, textarea {
     border-radius: 0;
 }
 
-/* Button styles for Telegram WebApp */
+/* Button styles for Telegram WebApp with enhanced touch handling */
 button {
     font-family: inherit;
     background: none;
@@ -106,6 +159,18 @@ button {
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     user-select: none;
+    touch-action: manipulation;
+
+    /* Prevent button from causing scroll issues */
+    position: relative;
+    z-index: 1;
+
+    /* Enhanced touch feedback */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+
+    /* Prevent double-tap zoom */
     touch-action: manipulation;
 }
 
