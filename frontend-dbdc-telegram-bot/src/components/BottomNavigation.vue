@@ -250,20 +250,7 @@ const closeProfileMenu = () => {
   isProfileMenuOpen.value = false
 }
 
-const copyUserId = async () => {
-  try {
-    await navigator.clipboard.writeText('515745')
-    console.log('User ID copied to clipboard')
-    // TODO: Show success notification
-  } catch (err) {
-    console.error('Failed to copy user ID:', err)
-  }
-}
 
-const toggleLanguageSelector = () => {
-  console.log('Language selector clicked')
-  // TODO: Add language selection logic
-}
 </script>
 
 <style scoped>
