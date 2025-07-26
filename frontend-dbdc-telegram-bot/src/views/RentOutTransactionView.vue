@@ -784,7 +784,8 @@ onUnmounted(() => {
 @media (max-width: 640px) {
   .export-option {
     border-color: #3A33D3;
-    background-color: #3A33D3;
+    background: #3A33D3;
+    background-image: none;
   }
 }
 
