@@ -230,17 +230,26 @@
 
     <!-- Bottom Navigation Component -->
     <BottomNavigation />
+
+    <!-- Terms and Conditions Modal -->
+    <TermsAndConditionsModal
+      :isVisible="showTermsModal"
+      @close="closeTermsModal"
+      @agree="agreeToTerms"
+    />
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import BottomNavigation from '../components/BottomNavigation.vue'
+import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
 
 // Reactive data
 const termsAccepted = ref(false)
 const linkCopied = ref(false)
 const referralLink = ref('vm.dubadu/jjhI1uT4S')
+const showTermsModal = ref(false)
 
 // Methods
 const shareQRCode = () => {
@@ -344,11 +353,20 @@ const copyWebLink = async () => {
   linkCopied.value = true
   setTimeout(() => {
     linkCopied.value = false
-  }, 3000)
+  }, 2500)
 }
 
 const openTerms = () => {
-  console.log('Opening terms and conditions...')
+  showTermsModal.value = true
+}
+
+const closeTermsModal = () => {
+  showTermsModal.value = false
+}
+
+const agreeToTerms = () => {
+  termsAccepted.value = true
+  showTermsModal.value = false
 }
 </script>
 
@@ -861,12 +879,13 @@ const openTerms = () => {
   background: rgba(255, 255, 255, 0.10);
   display: flex;
   align-items: center;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .copy-link-copied-state {
   border: 1px solid #07B80E;
   background: #129E0F;
+  transform: scale(1.02);
 }
 
 .copy-link-input-wrapper {
@@ -894,6 +913,22 @@ const openTerms = () => {
   gap: 12px;
   padding: 14px 24px;
   box-sizing: border-box;
+  animation: fadeInScale 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .copy-link-copied-text {
@@ -903,6 +938,18 @@ const openTerms = () => {
   font-weight: 600;
   line-height: 22px;
   text-align: center;
+  animation: slideInLeft 0.3s ease-out 0.1s both;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .copy-link-copied-icon {
@@ -912,6 +959,25 @@ const openTerms = () => {
   display: flex;
   align-items: center;
   justify-content: center;
+  animation: bounceIn 0.5s ease-out 0.2s both;
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(-10deg);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.1) rotate(5deg);
+  }
+  80% {
+    transform: scale(0.95) rotate(-2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
 }
 
 .copy-button {
@@ -925,12 +991,18 @@ const openTerms = () => {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
 }
 
 .copy-button:hover {
   background: #e8e8ff;
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(68, 63, 204, 0.3);
+}
+
+.copy-button:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .copy-icon {
@@ -941,6 +1013,11 @@ const openTerms = () => {
   justify-content: center;
   align-items: center;
   color: #443FCC;
+  transition: transform 0.2s ease;
+}
+
+.copy-button:hover .copy-icon {
+  transform: scale(1.1);
 }
 
 .copy-tick-svg {
