@@ -652,6 +652,17 @@ onUnmounted(() => {
   scrollbar-width: none;
 }
 
+/* Transaction Details Modal Invisible Scroll */
+.transaction-details-scroll {
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.transaction-details-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
 /* Telegram WebApp optimizations */
 @media (max-height: 600px) {
   .content-container {
