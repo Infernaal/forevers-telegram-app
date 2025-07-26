@@ -598,7 +598,7 @@ const selectLanguage = (language) => {
   flex: 1;
   overflow: hidden;
   padding: 0 12px;
-  min-height: 100px;
+  min-height: 80px;
   max-height: calc(100vh - 280px);
 }
 
@@ -1132,20 +1132,21 @@ const selectLanguage = (language) => {
 
   .menu-section {
     padding: 0 8px;
+    max-height: calc(100vh - 350px);
   }
 
   .menu-item {
-    padding: 10px 4px;
-    gap: 10px;
+    padding: 8px 4px;
+    gap: 8px;
   }
 
   .menu-icon {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
   }
 
   .menu-text {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .verification-badge {
@@ -1286,20 +1287,21 @@ const selectLanguage = (language) => {
 
   .menu-section {
     padding: 0 10px;
+    max-height: calc(100vh - 380px);
   }
 
   .menu-item {
-    padding: 11px 5px;
-    gap: 11px;
+    padding: 9px 5px;
+    gap: 10px;
   }
 
   .menu-icon {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
   }
 
   .menu-text {
-    font-size: 15px;
+    font-size: 14px;
   }
 
   .verification-badge {
@@ -1443,20 +1445,21 @@ const selectLanguage = (language) => {
 
   .menu-section {
     padding: 0 14px;
+    max-height: calc(100vh - 420px);
   }
 
   .menu-item {
-    padding: 14px 8px;
-    gap: 14px;
+    padding: 12px 8px;
+    gap: 12px;
   }
 
   .menu-icon {
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
   }
 
   .menu-text {
-    font-size: 17px;
+    font-size: 16px;
   }
 
   .verification-badge {
@@ -1758,20 +1761,21 @@ const selectLanguage = (language) => {
 
   .menu-section {
     padding: 0 6px;
+    max-height: calc(100vh - 200px);
   }
 
   .menu-item {
-    padding: 6px 3px;
-    gap: 6px;
+    padding: 4px 2px;
+    gap: 4px;
   }
 
   .menu-icon {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
   }
 
   .menu-text {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .verification-badge {
