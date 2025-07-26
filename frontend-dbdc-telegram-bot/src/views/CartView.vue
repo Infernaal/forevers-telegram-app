@@ -217,10 +217,12 @@ const confirmDelete = () => {
   font-family: 'Montserrat', sans-serif;
   height: 100vh;
   height: 100dvh; /* Dynamic viewport height for mobile */
+  background: #f3f4f6 !important;
 }
 
 .content-container {
   min-height: 0; /* Allow flex child to shrink */
+  background: #f3f4f6 !important;
 }
 
 .scrollable-content {
