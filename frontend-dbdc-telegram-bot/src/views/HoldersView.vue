@@ -288,58 +288,30 @@ const shareQRCode = () => {
   if (window.Telegram && window.Telegram.WebApp) {
     const tg = window.Telegram.WebApp
 
-    // Use Telegram's native sharing functionality
-    const shareText = `Join me on DBD Capital Forevers Bot! 🚀\n\n${referralLink.value}`
-
     try {
-      // Check if we can use Telegram's switchInlineQuery (for bots)
-      if (tg.switchInlineQuery) {
-        // This is the most reliable way to share within Telegram
-        tg.switchInlineQuery(shareText, ['users', 'groups', 'channels'])
+      // Use Telegram's openTelegramLink for sharing (compatible with version 6.0)
+      const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(referralLink.value)}&text=${encodeURIComponent('Join me on DBD Capital Forevers Bot! 🚀')}`
+      tg.openTelegramLink(shareUrl)
 
-        // Set up event listener for when user returns to app
-        const handleVisibilityChange = () => {
-          if (!document.hidden) {
-            // User returned to the app, likely after sharing
-            isSharing.value = false
-            setTimeout(() => {
-              showSuccessMessage('Referral QR-code sent successfully')
-            }, 500)
-            document.removeEventListener('visibilitychange', handleVisibilityChange)
-          }
-        }
-
-        document.addEventListener('visibilitychange', handleVisibilityChange)
-
-        // Cleanup listener after 30 seconds if user doesn't return
-        setTimeout(() => {
-          document.removeEventListener('visibilitychange', handleVisibilityChange)
+      // Set up event listener for when user returns to app
+      const handleVisibilityChange = () => {
+        if (!document.hidden) {
+          // User returned to the app, likely after sharing
           isSharing.value = false
-        }, 30000)
-
-      } else {
-        // Fallback to opening sharing URL
-        const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(referralLink.value)}&text=${encodeURIComponent('Join me on DBD Capital Forevers Bot! 🚀')}`
-        tg.openTelegramLink(shareUrl)
-
-        // Use the same visibility change detection
-        const handleVisibilityChange = () => {
-          if (!document.hidden) {
-            isSharing.value = false
-            setTimeout(() => {
-              showSuccessMessage('Referral QR-code sent successfully')
-            }, 500)
-            document.removeEventListener('visibilitychange', handleVisibilityChange)
-          }
-        }
-
-        document.addEventListener('visibilitychange', handleVisibilityChange)
-
-        setTimeout(() => {
+          setTimeout(() => {
+            showSuccessMessage('Referral QR-code sent successfully')
+          }, 500)
           document.removeEventListener('visibilitychange', handleVisibilityChange)
-          isSharing.value = false
-        }, 30000)
+        }
       }
+
+      document.addEventListener('visibilitychange', handleVisibilityChange)
+
+      // Cleanup listener after 30 seconds if user doesn't return
+      setTimeout(() => {
+        document.removeEventListener('visibilitychange', handleVisibilityChange)
+        isSharing.value = false
+      }, 30000)
 
     } catch (error) {
       console.error('Telegram share failed:', error)
