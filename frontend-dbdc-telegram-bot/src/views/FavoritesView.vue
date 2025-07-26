@@ -669,9 +669,38 @@ onBeforeUnmount(() => {
   }
 }
 
-/* Ensure consistent heights for balance cards */
-.min-h-\[216px\] {
-  min-height: 216px;
+/* Responsive balance cards */
+.balance-card {
+  padding: 12px;
+  min-height: 180px;
+}
+
+@media (max-width: 375px) {
+  .balance-card {
+    padding: 10px;
+    min-height: 160px;
+  }
+}
+
+@media (min-width: 376px) and (max-width: 480px) {
+  .balance-card {
+    padding: 12px;
+    min-height: 170px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .balance-card {
+    padding: 14px;
+    min-height: 190px;
+  }
+}
+
+@media (min-width: 769px) {
+  .balance-card {
+    padding: 16px;
+    min-height: 210px;
+  }
 }
 
 /* Make sure content properly fits */
