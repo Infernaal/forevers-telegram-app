@@ -309,8 +309,9 @@ const openTerms = () => {
 .qr-section {
   width: 347px;
   height: 396px;
-  position: relative;
-  margin-bottom: 20px;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .qr-background {
