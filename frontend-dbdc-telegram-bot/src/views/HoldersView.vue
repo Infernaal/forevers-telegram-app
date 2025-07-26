@@ -262,6 +262,7 @@ const showTermsModal = ref(false)
 // Success notification
 const showSuccessNotification = ref(false)
 const successMessage = ref('')
+const isSharing = ref(false)
 let successTimeout = null
 
 // Methods
