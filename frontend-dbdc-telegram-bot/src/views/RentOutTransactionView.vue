@@ -600,6 +600,8 @@ const handleClickOutside = (event) => {
 
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
+  // Temporary: pre-select first transaction for testing dropdown
+  selectedTransactions.value = [0]
 })
 
 onUnmounted(() => {
