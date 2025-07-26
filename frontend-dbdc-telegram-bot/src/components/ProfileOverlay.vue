@@ -630,29 +630,33 @@ const selectLanguage = (language) => {
   padding: 1rem;
   background: rgba(255, 255, 255, 0.05);
   display: flex;
-  gap: 2rem;
+  gap: 0.75rem;
   flex-shrink: 0;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
 .control-item {
   position: relative;
+  flex: 1;
 }
 
 .id-section {
-  flex: 0 0 auto;
+  flex: 1;
+  max-width: 48%;
 }
 
 .language-section {
-  flex: 0 0 auto;
+  flex: 1;
+  max-width: 48%;
 }
 
 .control-button {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.75rem;
   background: rgba(255, 255, 255, 0.30);
   border: 1px solid rgba(255, 255, 255, 0.40);
   border-radius: 100px;
@@ -660,6 +664,7 @@ const selectLanguage = (language) => {
   transition: all 0.2s ease;
   backdrop-filter: blur(32px);
   gap: 0.5rem;
+  min-height: 2.75rem;
 }
 
 .control-button:hover {
@@ -792,7 +797,7 @@ const selectLanguage = (language) => {
 
 /* Upgrade Section */
 .upgrade-section {
-  padding: 1rem;
+  padding: 0.75rem 1rem;
   flex-shrink: 0;
 }
 
@@ -803,6 +808,7 @@ const selectLanguage = (language) => {
   padding: 0;
   position: relative;
   overflow: hidden;
+  min-height: 4.5rem;
 }
 
 .upgrade-card::before {
@@ -810,7 +816,7 @@ const selectLanguage = (language) => {
   position: absolute;
   left: 0;
   top: 0;
-  width: 8.75rem;
+  width: 7rem;
   height: 100%;
   background: linear-gradient(90deg, #8C4CD1 0%, #C497FF 100%);
   opacity: 0.4;
@@ -820,8 +826,8 @@ const selectLanguage = (language) => {
 .upgrade-content {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 1rem;
+  gap: 0.75rem;
+  padding: 0.75rem;
   position: relative;
   z-index: 1;
 }
@@ -837,18 +843,18 @@ const selectLanguage = (language) => {
 .upgrade-title {
   color: #02070E;
   font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 1.1875rem;
+  font-size: 1rem;
   font-weight: 600;
-  line-height: 1.5rem;
-  margin-bottom: 0.5rem;
+  line-height: 1.25rem;
+  margin-bottom: 0.25rem;
 }
 
 .upgrade-description {
   color: #4B4D50;
   font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   font-weight: 500;
-  line-height: 1.375rem;
+  line-height: 1.125rem;
 }
 
 .upgrade-number {
@@ -857,19 +863,20 @@ const selectLanguage = (language) => {
 }
 
 .upgrade-button {
-  padding: 0.75rem 1.5rem;
+  padding: 0.5rem 1rem;
   background: linear-gradient(90deg, #2019CE 0%, #473FFF 100%);
   color: white;
   font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 600;
-  line-height: 1.25rem;
+  line-height: 1rem;
   border-radius: 1000px;
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
   flex-shrink: 0;
   text-transform: capitalize;
+  min-height: 2.5rem;
 }
 
 .upgrade-button:hover {
@@ -919,12 +926,41 @@ const selectLanguage = (language) => {
   }
 
   .bottom-controls {
-    gap: 1rem;
-    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: space-between;
   }
 
-  .control-item {
-    width: 100%;
+  .control-button {
+    padding: 0.375rem 0.5rem;
+    min-height: 2.5rem;
+  }
+
+  .control-label,
+  .control-value {
+    font-size: 0.75rem;
+  }
+
+  .upgrade-card {
+    min-height: 4rem;
+  }
+
+  .upgrade-content {
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .upgrade-title {
+    font-size: 0.875rem;
+  }
+
+  .upgrade-description {
+    font-size: 0.625rem;
+  }
+
+  .upgrade-button {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+    min-height: 2rem;
   }
 }
 
@@ -946,12 +982,37 @@ const selectLanguage = (language) => {
     font-size: 1rem;
   }
 
+  .control-button {
+    padding: 0.25rem 0.375rem;
+    min-height: 2.25rem;
+  }
+
+  .control-label,
+  .control-value {
+    font-size: 0.625rem;
+  }
+
+  .upgrade-card {
+    min-height: 3.5rem;
+  }
+
+  .upgrade-content {
+    gap: 0.375rem;
+    padding: 0.375rem;
+  }
+
   .upgrade-title {
-    font-size: 1rem;
+    font-size: 0.75rem;
   }
 
   .upgrade-description {
-    font-size: 0.75rem;
+    font-size: 0.5rem;
+  }
+
+  .upgrade-button {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.625rem;
+    min-height: 1.75rem;
   }
 }
 
