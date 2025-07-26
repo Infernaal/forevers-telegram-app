@@ -734,7 +734,7 @@ const hideSuccessNotification = () => {
 .share-button-container {
   position: absolute;
   left: 23px;
-  top: 306px;
+  top: 322px;
   z-index: 20;
 }
 
