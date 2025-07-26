@@ -89,10 +89,11 @@
         <div class="terms-container">
           <div class="terms-wrapper">
             <label class="terms-label">
-              <input 
-                type="checkbox" 
-                v-model="termsAccepted" 
+              <input
+                type="checkbox"
+                v-model="termsAccepted"
                 class="terms-checkbox"
+                @click="openTerms"
               />
               <span class="terms-text">
                 I agree that I have read the 
