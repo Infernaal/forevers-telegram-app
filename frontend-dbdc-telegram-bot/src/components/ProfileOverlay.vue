@@ -1239,12 +1239,15 @@ const selectLanguage = (language) => {
   .profile-container {
     left: 12px;
     right: 12px;
-    top: 30px;
+    top: 20px;
+    bottom: calc(75px + env(safe-area-inset-bottom, 0));
     border-radius: 20px;
+    max-height: calc(100vh - 95px - env(safe-area-inset-bottom, 0));
   }
 
   .overlay-pointer {
     left: 24px;
+    bottom: calc(65px + env(safe-area-inset-bottom, 0));
     border-left-width: 10px;
     border-right-width: 10px;
     border-top-width: 10px;
@@ -1287,14 +1290,16 @@ const selectLanguage = (language) => {
     left: 20px;
     right: 20px;
     top: 50px;
+    bottom: calc(95px + env(safe-area-inset-bottom, 0));
     border-radius: 28px;
     max-width: 400px;
     margin: 0 auto;
+    max-height: calc(100vh - 145px - env(safe-area-inset-bottom, 0));
   }
 
   .overlay-pointer {
-    left: 50%;
-    transform: translateX(-50%);
+    left: 60px;
+    bottom: calc(85px + env(safe-area-inset-bottom, 0));
     border-left-width: 14px;
     border-right-width: 14px;
     border-top-width: 14px;
@@ -1334,14 +1339,15 @@ const selectLanguage = (language) => {
 /* Landscape mode - compact everything */
 @media (max-height: 500px) and (orientation: landscape) {
   .profile-container {
-    top: 20px;
-    bottom: calc(140px + env(safe-area-inset-bottom, 0));
+    top: 15px;
+    bottom: calc(70px + env(safe-area-inset-bottom, 0));
     border-radius: 18px;
-    max-height: calc(100vh - 160px - env(safe-area-inset-bottom, 0));
+    max-height: calc(100vh - 85px - env(safe-area-inset-bottom, 0));
   }
 
   .overlay-pointer {
-    bottom: calc(130px + env(safe-area-inset-bottom, 0));
+    bottom: calc(60px + env(safe-area-inset-bottom, 0));
+    left: 24px;
     border-left-width: 8px;
     border-right-width: 8px;
     border-top-width: 8px;
