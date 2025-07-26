@@ -329,7 +329,7 @@ const openTerms = () => {
   position: relative;
   left: 14px;
   height: 507px;
-  margin-top: 40px;
+  margin-top: 60px;
 }
 
 /* QR Section */
