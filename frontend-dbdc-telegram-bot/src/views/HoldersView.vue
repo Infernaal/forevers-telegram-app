@@ -328,38 +328,39 @@ const openTerms = () => {
 .f-icon {
   position: absolute;
   z-index: 1;
+  opacity: 0.1;
 }
 
 .f-icon-1 {
-  width: 120px;
-  height: 131px;
-  left: -20px;
-  top: -10px;
-  opacity: 0.15;
+  width: 96px;
+  height: 96px;
+  transform: rotate(46.848deg);
+  left: -16px;
+  top: -6px;
 }
 
 .f-icon-2 {
-  width: 66px;
-  height: 66px;
-  right: 20px;
-  top: 60%;
-  opacity: 0.2;
+  width: 48px;
+  height: 48px;
+  transform: rotate(150.638deg);
+  left: 280px;
+  top: 189px;
 }
 
 .f-icon-3 {
-  width: 155px;
-  height: 177px;
-  left: -40px;
-  bottom: -20px;
-  opacity: 0.12;
+  width: 128px;
+  height: 128px;
+  transform: rotate(-31.597deg);
+  left: -22px;
+  top: 194px;
 }
 
 .f-icon-4 {
-  width: 133px;
-  height: 134px;
-  right: -30px;
-  top: -20px;
-  opacity: 0.18;
+  width: 96px;
+  height: 96px;
+  transform: rotate(121.978deg);
+  left: 211px;
+  top: 21px;
 }
 
 /* QR Code Container */
