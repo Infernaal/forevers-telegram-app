@@ -287,6 +287,39 @@ const confirmDelete = () => {
   box-shadow: 0 4px 12px rgba(32, 25, 206, 0.3);
 }
 
+/* Transaction Details Modal Styles (if used in cart context) */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #02070E;
+  margin: 0;
+}
+
+.modal-close-btn {
+  width: 2.75rem;
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #FAFAFA;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background-color: #f3f4f6;
+}
+
 /* Mobile optimizations for Telegram mini app */
 @media (max-width: 375px) {
   .cart-view {
@@ -339,6 +372,16 @@ const confirmDelete = () => {
   .text-lg {
     font-size: 16px;
     line-height: 20px;
+  }
+
+  /* Modal responsive styles for mobile */
+  .modal-title {
+    font-size: 0.875rem;
+  }
+
+  .modal-close-btn {
+    width: 2.25rem;
+    height: 2.25rem;
   }
 }
 
