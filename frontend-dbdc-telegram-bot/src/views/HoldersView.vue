@@ -93,7 +93,6 @@
                 type="checkbox"
                 v-model="termsAccepted"
                 class="terms-checkbox"
-                @click="openTerms"
               />
               <span class="terms-text">
                 I agree that I have read the 
