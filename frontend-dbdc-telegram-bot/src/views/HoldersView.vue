@@ -664,7 +664,7 @@ const hideSuccessNotification = () => {
 .terms-container {
   position: absolute;
   left: 20px;
-  top: 256px;
+  top: 240px;
   width: 319px;
   height: 44px;
   z-index: 20;
