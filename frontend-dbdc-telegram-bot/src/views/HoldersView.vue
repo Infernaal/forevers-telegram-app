@@ -769,6 +769,13 @@ const openTerms = () => {
   line-height: 16px;
 }
 
+.step-icon {
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Web Referral Link Section */
 .web-link-section {
   position: absolute;
