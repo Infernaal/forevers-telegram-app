@@ -184,17 +184,9 @@ onBeforeUnmount(() => {
   opacity: 0;
 }
 
-/* Close button animation */
+/* Close button - static, no animations */
 .tooltip-close-btn {
-  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.tooltip-close-btn:hover {
-  transform: scale(1.1) rotate(90deg);
-}
-
-.tooltip-close-btn:active {
-  transform: scale(0.95) rotate(90deg);
+  /* No transitions or animations */
 }
 
 /* Text elements with proper z-index */
