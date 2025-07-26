@@ -116,6 +116,7 @@ defineEmits(['close'])
   .success-notification-content {
     width: calc(100vw - 32px);
     max-width: 343px;
+    white-space: nowrap;
   }
 }
 
