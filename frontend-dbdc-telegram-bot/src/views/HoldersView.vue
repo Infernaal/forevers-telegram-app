@@ -325,6 +325,7 @@ const shareQRCode = () => {
         // Use the same visibility change detection
         const handleVisibilityChange = () => {
           if (!document.hidden) {
+            isSharing.value = false
             setTimeout(() => {
               showSuccessMessage('Referral QR-code sent successfully')
             }, 500)
