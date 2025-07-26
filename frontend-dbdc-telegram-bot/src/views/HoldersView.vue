@@ -782,7 +782,7 @@ const openTerms = () => {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   position: relative;
 }
 
@@ -791,7 +791,11 @@ const openTerms = () => {
 }
 
 .copy-button-copied {
-  background: #4caf50 !important;
+  width: 118px !important;
+  left: -68px !important;
+  border: 1px solid #07B80E !important;
+  background: #129E0F !important;
+  border-radius: 100px !important;
 }
 
 .copy-button-text {
@@ -807,6 +811,19 @@ const openTerms = () => {
   height: 22px;
 }
 
+.copy-button-text-copied {
+  color: #FFF;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 22px;
+  position: absolute;
+  left: -56px;
+  white-space: nowrap;
+  width: 51px;
+  height: 22px;
+}
+
 .copy-icon {
   display: flex;
   width: 24px;
@@ -817,9 +834,20 @@ const openTerms = () => {
   color: #443FCC;
 }
 
-.copy-tick {
-  color: white;
-  font-weight: bold;
+.copy-tick-container {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.copy-tick-svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* Responsive Design */
