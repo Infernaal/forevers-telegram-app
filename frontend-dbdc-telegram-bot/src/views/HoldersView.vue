@@ -361,6 +361,7 @@ const openTerms = () => {
   position: relative;
   margin: 0 auto;
   max-width: 375px;
+  overflow: hidden;
 }
 
 /* Content Container - now starts from top */
@@ -370,6 +371,7 @@ const openTerms = () => {
   background: #F0F0F0;
   position: relative;
   padding: 20px 0 160px 0; /* Increased bottom padding to prevent clash with bottom navigation */
+  overflow: hidden;
 }
 
 /* Referral Program Header */
@@ -448,35 +450,35 @@ const openTerms = () => {
 }
 
 .f-icon-1 {
-  width: 96px;
-  height: 96px;
+  width: 120px;
+  height: 120px;
   transform: rotate(46.848deg);
-  left: -16px;
-  top: -6px;
+  left: -20px;
+  top: -10px;
 }
 
 .f-icon-2 {
-  width: 48px;
-  height: 48px;
+  width: 60px;
+  height: 60px;
   transform: rotate(150.638deg);
-  left: 280px;
-  top: 189px;
+  left: 270px;
+  top: 180px;
 }
 
 .f-icon-3 {
-  width: 128px;
-  height: 128px;
+  width: 150px;
+  height: 150px;
   transform: rotate(-31.597deg);
-  left: -22px;
-  top: 194px;
+  left: -30px;
+  top: 185px;
 }
 
 .f-icon-4 {
-  width: 96px;
-  height: 96px;
+  width: 120px;
+  height: 120px;
   transform: rotate(121.978deg);
-  left: 211px;
-  top: 21px;
+  left: 200px;
+  top: 15px;
 }
 
 /* QR Code Container */
@@ -616,7 +618,7 @@ const openTerms = () => {
 .how-to-section {
   position: relative;
   left: 14px;
-  top: -25px;
+  top: -60px;
   width: 347px;
   height: 410px;
 }
