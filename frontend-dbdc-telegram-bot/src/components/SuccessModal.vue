@@ -10,14 +10,14 @@
   >
     <div
       v-if="isVisible"
-      class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-20 backdrop-blur-md"
+      class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-20 backdrop-blur-md px-4"
       @click.self="handleBackdropClick"
     >
       <!-- Modal Content -->
       <div
         @click.stop
-        class="relative bg-white rounded-[20px] shadow-xl font-montserrat"
-        style="width: 347px; height: 396px;"
+        class="relative bg-white rounded-[20px] shadow-xl font-montserrat w-full max-w-[347px] mx-auto"
+        style="height: 396px;"
       >
         <!-- Success Icon -->
         <div class="absolute left-[142px] top-8 w-16 h-16">
@@ -182,16 +182,48 @@ onUnmounted(() => {
 <style scoped>
 /* Modal responsive sizing for Telegram WebApp */
 @media (max-width: 375px) {
-  .modal-content {
-    width: calc(100vw - 32px) !important;
-    max-width: 347px;
-    margin: 0 16px;
+  .fixed.inset-0 {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .max-w-\[347px\] {
+    max-width: calc(100vw - 32px) !important;
+    min-width: 280px;
+  }
+}
+
+@media (max-width: 320px) {
+  .fixed.inset-0 {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .max-w-\[347px\] {
+    max-width: calc(100vw - 24px) !important;
+    min-width: 260px;
   }
 }
 
 @media (min-width: 376px) and (max-width: 768px) {
-  .modal-content {
-    width: 347px !important;
+  .fixed.inset-0 {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .max-w-\[347px\] {
+    max-width: 347px !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .fixed.inset-0 {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .max-w-\[347px\] {
+    max-width: 347px !important;
   }
 }
 

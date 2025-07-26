@@ -10,7 +10,7 @@
   >
     <div
       v-if="isVisible"
-      class="fixed inset-0 z-50 flex items-center justify-center px-9"
+      class="fixed inset-0 z-50 flex items-center justify-center px-4"
       @click="closeTooltip"
     >
       <!-- Blur backdrop -->
@@ -19,8 +19,8 @@
       <!-- Tooltip content -->
       <div
         @click.stop
-        class="relative bg-white rounded-3xl p-4 shadow-xl border border-gray-100"
-        style="width: 300px; min-height: 154px;"
+        class="relative bg-white rounded-3xl p-4 shadow-xl border border-gray-100 w-full max-w-[300px] mx-auto"
+        style="min-height: 154px;"
       >
         <!-- Close button -->
         <button
@@ -161,9 +161,13 @@ h3, p {
 
 /* Mobile optimizations */
 @media (max-width: 375px) {
-  div[style*="width: 300px"] {
-    width: calc(100vw - 72px) !important;
-    max-width: 300px;
+  .fixed.inset-0 {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .max-w-\[300px\] {
+    max-width: calc(100vw - 32px) !important;
     min-height: 140px !important;
   }
 
@@ -179,9 +183,13 @@ h3, p {
 }
 
 @media (max-width: 320px) {
-  div[style*="width: 300px"] {
-    width: calc(100vw - 40px) !important;
-    max-width: 280px;
+  .fixed.inset-0 {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .max-w-\[300px\] {
+    max-width: calc(100vw - 24px) !important;
     min-height: 130px !important;
   }
 
@@ -193,6 +201,29 @@ h3, p {
   .text-sm {
     font-size: 12px;
     line-height: 16px;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 376px) and (max-width: 768px) {
+  .fixed.inset-0 {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .max-w-\[300px\] {
+    max-width: 300px !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .fixed.inset-0 {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .max-w-\[300px\] {
+    max-width: 300px !important;
   }
 }
 </style>
