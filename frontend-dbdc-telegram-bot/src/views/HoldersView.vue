@@ -355,13 +355,12 @@ const openTerms = () => {
 <style scoped>
 .holders-view {
   font-family: 'Montserrat', sans-serif;
-  width: 100vw;
-  min-width: 320px;
-  max-width: 100vw;
+  width: 375px;
   min-height: 100vh;
   background: #F0F0F0;
   position: relative;
   margin: 0 auto;
+  max-width: 375px;
   overflow-y: auto;
   overflow-x: hidden;
   /* Hide scrollbar for webkit browsers */
@@ -375,34 +374,32 @@ const openTerms = () => {
 
 /* Content Container - now starts from top */
 .content-container {
-  width: 100%;
+  width: 375px;
   min-height: calc(100vh + 200px); /* Allow content to extend beyond viewport */
   background: #F0F0F0;
   position: relative;
-  padding: 20px 4vw 160px 4vw;
-  box-sizing: border-box;
+  padding: 20px 0 160px 0; /* Increased bottom padding to prevent clash with bottom navigation */
 }
 
 /* Referral Program Header */
 .referral-header {
   display: flex;
-  width: calc(100% - 28px);
-  max-width: 600px;
+  width: 299px;
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
   position: relative;
-  margin: 0 auto 20px auto;
-  height: auto;
-  min-height: 52px;
+  left: 14px;
+  margin-bottom: 20px;
+  height: 52px;
 }
 
 .referral-title {
   color: #02070E;
   font-family: Montserrat;
-  font-size: clamp(18px, 5vw, 24px);
+  font-size: 20px;
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 24px;
   margin: 0;
   align-self: stretch;
 }
@@ -410,9 +407,9 @@ const openTerms = () => {
 .referral-subtitle {
   color: #4B4D50;
   font-family: Montserrat;
-  font-size: clamp(14px, 4vw, 18px);
+  font-size: 16px;
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 24px;
   margin: 0;
   align-self: stretch;
 }
@@ -420,24 +417,24 @@ const openTerms = () => {
 /* Scroll Content */
 .scroll-content {
   display: flex;
-  width: calc(100% - 28px);
-  max-width: 600px;
+  width: 347px;
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-start;
   gap: 20px;
   position: relative;
-  margin: 60px auto 0 auto;
-  height: auto;
-  min-height: 507px;
+  left: 14px;
+  height: 507px;
+  margin-top: 60px;
 }
 
 /* QR Section */
 .qr-section {
-  width: 100%;
-  height: clamp(350px, 80vw, 450px);
-  position: relative;
-  margin-bottom: 20px;
+  width: 347px;
+  height: 396px;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .qr-background {
@@ -457,55 +454,53 @@ const openTerms = () => {
   position: absolute;
   z-index: 1;
   opacity: 0.1;
-  transition: all 0.3s ease;
 }
 
 .f-icon-1 {
-  width: clamp(80px, 20vw, 160px);
-  height: clamp(80px, 20vw, 160px);
+  width: 120px;
+  height: 120px;
   transform: rotate(46.848deg);
-  left: -25px;
-  top: -15px;
+  left: -20px;
+  top: -10px;
 }
 
 .f-icon-2 {
-  width: clamp(40px, 12vw, 100px);
-  height: clamp(40px, 12vw, 100px);
+  width: 60px;
+  height: 60px;
   transform: rotate(150.638deg);
-  left: calc(100% - clamp(50px, 15vw, 110px));
-  top: calc(100% - clamp(50px, 15vw, 110px));
+  left: 270px;
+  top: 180px;
 }
 
 .f-icon-3 {
-  width: clamp(100px, 25vw, 200px);
-  height: clamp(100px, 25vw, 200px);
+  width: 150px;
+  height: 150px;
   transform: rotate(-31.597deg);
-  left: -40px;
-  top: calc(100% - clamp(120px, 30vw, 220px));
+  left: -30px;
+  top: 185px;
 }
 
 .f-icon-4 {
-  width: clamp(80px, 20vw, 160px);
-  height: clamp(80px, 20vw, 160px);
+  width: 120px;
+  height: 120px;
   transform: rotate(121.978deg);
-  left: calc(100% - clamp(90px, 22vw, 170px));
-  top: clamp(10px, 3vw, 25px);
+  left: 200px;
+  top: 15px;
 }
 
 /* QR Code Container */
 .qr-code-container {
-  width: clamp(200px, 60vw, 280px);
-  height: clamp(200px, 60vw, 260px);
+  width: 222px;
+  height: 220px;
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  left: 63px;
+  top: 24px;
   z-index: 10;
 }
 
 .qr-code-wrapper {
-  width: 100%;
-  height: 100%;
+  width: 222px;
+  height: 220px;
   border-radius: 20px;
   border: 1px solid #F2F2F2;
   background: #FAFAFA;
@@ -514,38 +509,35 @@ const openTerms = () => {
 }
 
 .qr-code-image {
-  width: clamp(120px, 35vw, 160px);
-  height: clamp(120px, 35vw, 160px);
+  width: 140px;
+  height: 140px;
   aspect-ratio: 1/1;
   object-fit: contain;
   position: absolute;
-  left: 50%;
-  top: 15%;
-  transform: translateX(-50%);
+  left: 41px;
+  top: 20px;
 }
 
 .qr-code-link {
   color: #2019CE;
   font-family: Montserrat;
-  font-size: clamp(14px, 4vw, 18px);
+  font-size: 17px;
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 24px;
   position: absolute;
-  left: 50%;
-  bottom: 15px;
-  transform: translateX(-50%);
-  text-align: center;
-  width: calc(100% - 40px);
+  left: 20px;
+  top: 176px;
+  width: 182px;
+  height: 24px;
 }
 
 /* Terms Section */
 .terms-container {
-  position: relative;
-  margin: 20px auto;
-  width: calc(100% - 40px);
-  max-width: 500px;
-  height: auto;
-  min-height: 44px;
+  position: absolute;
+  left: 20px;
+  top: 256px;
+  width: 319px;
+  height: 44px;
   z-index: 20;
 }
 
@@ -579,9 +571,9 @@ const openTerms = () => {
   flex: 1;
   color: #FAFAFA;
   font-family: Montserrat;
-  font-size: clamp(14px, 3.5vw, 16px);
+  font-size: 16px;
   font-weight: 500;
-  line-height: 1.4;
+  line-height: 22px;
 }
 
 .terms-link {
@@ -591,15 +583,15 @@ const openTerms = () => {
 
 /* Share Button */
 .share-button-container {
-  position: relative;
-  margin: 20px auto;
-  width: fit-content;
+  position: absolute;
+  left: 23px;
+  top: 322px;
   z-index: 20;
 }
 
 .share-button {
   display: flex;
-  width: clamp(280px, 80vw, 400px);
+  width: 300px;
   padding: 12px 48px;
   justify-content: center;
   align-items: center;
@@ -612,9 +604,9 @@ const openTerms = () => {
   color: #FFF;
   text-align: center;
   font-family: Montserrat;
-  font-size: clamp(14px, 4vw, 16px);
+  font-size: 16px;
   font-weight: 600;
-  line-height: 1.6;
+  line-height: 26px;
   transition: all 0.2s ease;
 }
 
@@ -632,11 +624,10 @@ const openTerms = () => {
 /* How to Section */
 .how-to-section {
   position: relative;
-  margin: -40px auto 0 auto;
-  width: calc(100% - 28px);
-  max-width: 600px;
-  height: auto;
-  min-height: 410px;
+  left: 14px;
+  top: -60px;
+  width: 347px;
+  height: 410px;
 }
 
 .steps-container {
@@ -647,42 +638,42 @@ const openTerms = () => {
 
 /* How to Header */
 .how-to-header {
-  position: relative;
-  width: 100%;
-  max-width: 400px;
-  height: auto;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 229px;
+  height: 60px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 12px;
-  margin-bottom: 40px;
 }
 
 .how-to-title {
   color: #02070E;
   font-family: Montserrat;
-  font-size: clamp(18px, 5vw, 24px);
+  font-size: 20px;
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 24px;
   margin: 0;
 }
 
 .how-to-subtitle {
   color: #4B4D50;
   font-family: Montserrat;
-  font-size: clamp(14px, 4vw, 18px);
+  font-size: 16px;
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 24px;
   margin: 0;
   align-self: stretch;
 }
 
 /* Step Indicators */
 .step-indicators {
-  position: relative;
-  margin: 0 auto 40px auto;
-  width: 100%;
-  max-width: 400px;
+  position: absolute;
+  left: 27px;
+  top: 88px;
+  width: 298px;
   height: 40px;
 }
 
@@ -697,25 +688,25 @@ const openTerms = () => {
 }
 
 .step-line {
-  width: clamp(30px, 8vw, 60px);
+  width: 44px;
   height: 1px;
   background: #7E7E7E;
 }
 
 .step-line-1 {
   position: absolute;
-  left: calc(19px + clamp(30px, 8vw, 60px));
+  left: 62px;
   top: 20px;
 }
 
 .step-line-2 {
   position: absolute;
-  left: calc(50% + clamp(15px, 4vw, 30px));
+  left: 192px;
   top: 19px;
 }
 
 .step-indicator {
-  width: clamp(30px, 8vw, 45px);
+  width: 38px;
   height: 40px;
   border-radius: 0 100px 100px 0;
   background: #2019CE;
@@ -729,26 +720,25 @@ const openTerms = () => {
 
 .step-indicator-2 {
   position: absolute;
-  left: 50%;
+  left: 130px;
   top: 0;
-  transform: translateX(-50%);
 }
 
 .step-indicator-3 {
   position: absolute;
-  right: 0;
+  left: 260px;
   top: 0;
 }
 
 /* Step Descriptions */
 .step-descriptions {
-  position: relative;
+  position: absolute;
+  left: 0;
+  top: 144px;
   width: 100%;
-  height: auto;
+  height: 44px;
   display: flex;
   justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 40px;
 }
 
 .step-description {
@@ -757,42 +747,41 @@ const openTerms = () => {
   align-items: center;
   gap: 4px;
   text-align: center;
-  flex: 1;
 }
 
 .step-description-1 {
-  max-width: none;
+  width: 92px;
 }
 
 .step-description-2 {
-  max-width: none;
+  width: 96px;
   justify-content: center;
 }
 
 .step-description-3 {
-  max-width: none;
+  width: 74px;
   justify-content: center;
 }
 
 .step-number {
   color: #4B4D50;
   font-family: Montserrat;
-  font-size: clamp(14px, 4vw, 16px);
+  font-size: 16px;
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 24px;
 }
 
 .step-description-2 .step-number,
 .step-description-3 .step-number {
-  font-size: clamp(12px, 3.5vw, 14px);
+  font-size: 14px;
 }
 
 .step-text {
   color: #4B4D50;
   font-family: Montserrat;
-  font-size: clamp(10px, 3vw, 12px);
+  font-size: 12px;
   font-weight: 500;
-  line-height: 1.3;
+  line-height: 16px;
 }
 
 .step-number-row {
@@ -810,60 +799,61 @@ const openTerms = () => {
 
 /* Web Referral Link Section */
 .web-link-section {
-  position: relative;
-  width: 100%;
-  height: auto;
-  min-height: 208px;
+  position: absolute;
+  left: 0;
+  top: 202px;
+  width: 347px;
+  height: 208px;
 }
 
 .web-link-background {
-  width: 100%;
-  height: 100%;
+  width: 347px;
+  height: 206px;
   border-radius: 24px;
   background: linear-gradient(93deg, #000482 33.15%, rgba(3, 0, 155, 0.84) 76.97%);
   backdrop-filter: blur(32px);
   position: absolute;
   left: 0;
-  top: 0;
+  top: 2px;
 }
 
 .web-link-content {
   position: relative;
   z-index: 10;
-  padding: clamp(16px, 5vw, 24px);
+  padding: 20px;
 }
 
 .web-link-header {
-  width: 100%;
-  max-width: 400px;
-  height: auto;
-  margin-bottom: clamp(20px, 6vw, 32px);
+  width: 204px;
+  height: 86px;
+  margin-bottom: 28px;
 }
 
 .web-link-title {
   color: #FFF;
   font-family: Montserrat;
-  font-size: clamp(20px, 6vw, 28px);
+  font-size: 26px;
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 30px;
   margin: 0 0 12px 0;
-  width: 100%;
+  width: 244px;
+  height: 30px;
 }
 
 .web-link-description {
   color: #FFF;
   font-family: Montserrat;
-  font-size: clamp(14px, 4vw, 18px);
+  font-size: 16px;
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 24px;
   margin: 0;
-  width: 100%;
+  width: 204px;
+  height: 48px;
 }
 
 /* Copy Link Container */
 .copy-link-container {
-  width: 100%;
-  max-width: 500px;
+  width: 307px;
   height: 52px;
   position: relative;
   border-radius: 100px;
@@ -887,12 +877,12 @@ const openTerms = () => {
 .copy-link-text {
   color: #FAFAFA;
   font-family: Montserrat;
-  font-size: clamp(14px, 4vw, 17px);
+  font-size: 17px;
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 24px;
   text-decoration: underline;
-  width: auto;
-  flex: 1;
+  width: 182px;
+  height: 24px;
 }
 
 .copy-link-copied-full {
@@ -909,9 +899,9 @@ const openTerms = () => {
 .copy-link-copied-text {
   color: #FFF;
   font-family: Montserrat;
-  font-size: clamp(12px, 3.5vw, 14px);
+  font-size: 14px;
   font-weight: 600;
-  line-height: 1.6;
+  line-height: 22px;
   text-align: center;
 }
 
@@ -961,121 +951,21 @@ const openTerms = () => {
 }
 
 /* Responsive Design */
-/* Mobile First - Telegram WebApp */
-@media (max-width: 480px) {
+@media (max-width: 375px) {
+  .holders-view {
+    width: 100vw;
+    max-width: 375px;
+  }
+  
   .content-container {
-    padding: 16px 3vw 140px 3vw;
-  }
-  
-  .f-icon-1 {
-    width: 80px;
-    height: 80px;
-    left: -15px;
-    top: -8px;
-  }
-  
-  .f-icon-2 {
-    width: 40px;
-    height: 40px;
-    left: calc(100% - 50px);
-    top: calc(100% - 50px);
-  }
-  
-  .f-icon-3 {
-    width: 100px;
-    height: 100px;
-    left: -25px;
-    top: calc(100% - 120px);
-  }
-  
-  .f-icon-4 {
-    width: 80px;
-    height: 80px;
-    left: calc(100% - 90px);
-    top: 10px;
+    width: 100vw;
+    max-width: 375px;
   }
 }
 
-/* Tablet - Portrait */
-@media (min-width: 481px) and (max-width: 768px) {
+@media (min-width: 376px) {
   .holders-view {
-    background: #F0F0F0;
-    padding: 0;
-  }
-  
-  .content-container {
-    padding: 24px 6vw 160px 6vw;
-  }
-  
-  .f-icon-1 {
-    width: 140px;
-    height: 140px;
-    left: -25px;
-    top: -15px;
-  }
-  
-  .f-icon-2 {
-    width: 80px;
-    height: 80px;
-    left: calc(100% - 90px);
-    top: calc(100% - 90px);
-  }
-  
-  .f-icon-3 {
-    width: 180px;
-    height: 180px;
-    left: -40px;
-    top: calc(100% - 200px);
-  }
-  
-  .f-icon-4 {
-    width: 140px;
-    height: 140px;
-    left: calc(100% - 150px);
-    top: 20px;
-  }
-}
-
-/* Tablet - Landscape and Desktop */
-@media (min-width: 769px) {
-  .holders-view {
-    background: #F0F0F0;
-    margin: 0 auto;
-    max-width: 800px;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-  }
-  
-  .content-container {
-    padding: 32px 8vw 180px 8vw;
-    max-width: 800px;
-  }
-  
-  .f-icon-1 {
-    width: 160px;
-    height: 160px;
-    left: -30px;
-    top: -20px;
-  }
-  
-  .f-icon-2 {
-    width: 100px;
-    height: 100px;
-    left: calc(100% - 110px);
-    top: calc(100% - 110px);
-  }
-  
-  .f-icon-3 {
-    width: 200px;
-    height: 200px;
-    left: -50px;
-    top: calc(100% - 220px);
-  }
-  
-  .f-icon-4 {
-    width: 160px;
-    height: 160px;
-    left: calc(100% - 170px);
-    top: 25px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   }
 }
 
