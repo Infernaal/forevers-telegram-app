@@ -14,7 +14,7 @@
       @click="closeTooltip"
     >
       <!-- Blur backdrop -->
-      <div class="absolute inset-0 bg-black bg-opacity-20 backdrop-blur-sm tooltip-backdrop"></div>
+      <div class="absolute inset-0 bg-black bg-opacity-20 backdrop-blur-sm"></div>
       
       <!-- Tooltip content -->
       <div
