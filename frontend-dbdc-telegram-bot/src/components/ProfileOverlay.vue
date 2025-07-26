@@ -1073,805 +1073,271 @@ const selectLanguage = (language) => {
   border-radius: 50%;
 }
 
-/* Extra small mobile devices - ≤320px */
-@media (max-width: 320px) {
-  .profile-container {
-    left: 4px;
-    right: 4px;
-    top: 10px;
-    bottom: calc(140px + env(safe-area-inset-bottom, 0));
-    border-radius: 16px;
-    max-height: calc(100vh - 150px - env(safe-area-inset-bottom, 0));
-  }
+/* Unified responsive design - one design scaled for all screens */
 
-  .overlay-pointer {
-    bottom: calc(130px + env(safe-area-inset-bottom, 0));
-    left: 20px;
-    border-left-width: 8px;
-    border-right-width: 8px;
-    border-top-width: 8px;
-  }
-
-  .profile-header {
-    padding: 4px;
-  }
-
-  .profile-card {
-    padding: 8px;
-    border-radius: 32px 12px 12px 32px;
-  }
-
-  .profile-content {
-    gap: 8px;
-  }
-
-  .avatar-frame {
-    width: 50px;
-    height: 50px;
-  }
-
-  .badge-container {
-    padding: 2px 8px;
-  }
-
-  .badge-icon {
-    width: 20px;
-    height: 20px;
-  }
-
-  .badge-text {
-    font-size: 10px;
-  }
-
-  .user-name {
-    font-size: 14px;
-  }
-
-  .close-button {
-    width: 28px;
-    height: 28px;
-  }
-
-  .menu-section {
-    padding: 0 4px;
-    max-height: calc(100vh - 280px);
-    min-height: 60px;
-  }
-
-  .menu-item {
-    padding: 6px 2px;
-    gap: 6px;
-  }
-
-  .menu-icon {
-    width: 28px;
-    height: 28px;
-  }
-
-  .menu-text {
-    font-size: 11px;
-  }
-
-  .verification-badge {
-    width: 16px;
-    height: 16px;
-  }
-
-  .upgrade-section {
-    padding: 4px;
-  }
-
-  .upgrade-card {
-    padding: 8px;
-    border-radius: 8px;
-  }
-
-  .upgrade-star {
-    left: 6px;
-    top: 8px;
-  }
-
-  .star-icon {
-    width: 18px;
-    height: 18px;
-  }
-
-  .upgrade-info {
-    margin-left: 24px;
-  }
-
-  .upgrade-title {
-    font-size: 12px;
-    margin-bottom: 0px;
-  }
-
-  .upgrade-subtitle {
-    font-size: 9px;
-  }
-
-  .upgrade-button {
-    padding: 6px 12px;
-    font-size: 10px;
-    border-radius: 12px;
-  }
-
-  .bottom-section {
-    padding: 4px;
-  }
-
-  .bottom-controls {
-    gap: 6px;
-    max-width: 240px;
-  }
-
-  .id-button,
-  .language-button {
-    height: 28px;
-    padding: 4px 6px;
-    border-radius: 8px;
-  }
-
-  .id-label,
-  .id-value,
-  .language-text {
-    font-size: 10px;
-  }
-
-  .copy-icon {
-    width: 12px;
-    height: 12px;
-  }
-
-  .flag-wrapper {
-    width: 16px;
-    height: 16px;
-  }
-
-  .arrow-wrapper {
-    width: 12px;
-    height: 12px;
-  }
+/* Base/Mobile First - 320px+ */
+.profile-container {
+  left: 16px;
+  right: 16px;
+  top: 40px;
+  bottom: calc(180px + env(safe-area-inset-bottom, 0));
+  border-radius: 24px;
+  max-height: calc(100vh - 220px - env(safe-area-inset-bottom, 0));
 }
 
-/* Small mobile devices (iPhone SE, small Android) - ≤374px */
-@media (min-width: 321px) and (max-width: 374px) {
+.overlay-pointer {
+  bottom: calc(170px + env(safe-area-inset-bottom, 0));
+  left: 32px;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 12px solid #120B81;
+}
+
+.profile-header {
+  padding: 12px;
+}
+
+.profile-card {
+  padding: 16px;
+  border-radius: 50px 20px 20px 50px;
+}
+
+.profile-content {
+  gap: 16px;
+}
+
+.avatar-frame {
+  width: 80px;
+  height: 80px;
+}
+
+.badge-container {
+  padding: 6px 16px;
+}
+
+.badge-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.badge-text {
+  font-size: 14px;
+}
+
+.user-name {
+  font-size: 20px;
+}
+
+.close-button {
+  width: 44px;
+  height: 44px;
+}
+
+.menu-section {
+  padding: 0 12px;
+  min-height: 200px;
+  max-height: calc(100vh - 400px);
+}
+
+.menu-item {
+  padding: 12px 6px;
+  gap: 12px;
+}
+
+.menu-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.menu-text {
+  font-size: 16px;
+}
+
+.verification-badge {
+  width: 24px;
+  height: 24px;
+}
+
+.upgrade-section {
+  padding: 8px 12px;
+}
+
+.upgrade-card {
+  padding: 16px;
+  border-radius: 16px;
+}
+
+.upgrade-star {
+  left: 12px;
+  top: 16px;
+}
+
+.star-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.upgrade-info {
+  margin-left: 44px;
+}
+
+.upgrade-title {
+  font-size: 18px;
+  margin-bottom: 2px;
+}
+
+.upgrade-subtitle {
+  font-size: 13px;
+}
+
+.upgrade-button {
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 20px;
+}
+
+.bottom-section {
+  padding: 8px 12px;
+  min-height: 56px;
+}
+
+.bottom-controls {
+  gap: 12px;
+  max-width: 300px;
+}
+
+.id-button,
+.language-button {
+  height: 36px;
+  padding: 8px 12px;
+  border-radius: 14px;
+}
+
+.id-label,
+.id-value,
+.language-text {
+  font-size: 14px;
+}
+
+.copy-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.flag-wrapper {
+  width: 22px;
+  height: 22px;
+}
+
+.arrow-wrapper {
+  width: 18px;
+  height: 18px;
+}
+
+/* Small screens scale down */
+@media (max-width: 360px) {
   .profile-container {
-    left: 8px;
-    right: 8px;
-    top: 20px;
-    bottom: calc(160px + env(safe-area-inset-bottom, 0));
+    left: 12px;
+    right: 12px;
+    top: 30px;
     border-radius: 20px;
-    max-height: calc(100vh - 180px - env(safe-area-inset-bottom, 0));
   }
 
   .overlay-pointer {
-    bottom: calc(150px + env(safe-area-inset-bottom, 0));
     left: 24px;
     border-left-width: 10px;
     border-right-width: 10px;
     border-top-width: 10px;
   }
 
-  .profile-header {
-    padding: 8px;
-  }
-
-  .profile-card {
-    padding: 12px;
-    border-radius: 40px 16px 16px 40px;
-  }
-
-  .profile-content {
-    gap: 12px;
-  }
-
-  .avatar-frame {
-    width: 60px;
-    height: 60px;
-  }
-
-  .badge-container {
-    padding: 4px 12px;
-  }
-
-  .badge-icon {
-    width: 24px;
-    height: 24px;
-  }
-
-  .badge-text {
-    font-size: 12px;
-  }
-
-  .user-name {
-    font-size: 18px;
-  }
-
-  .close-button {
-    width: 36px;
-    height: 36px;
-  }
-
-  .menu-section {
-    padding: 0 8px;
-    max-height: calc(100vh - 350px);
-  }
-
-  .menu-item {
-    padding: 8px 4px;
-    gap: 8px;
-  }
-
-  .menu-icon {
-    width: 32px;
-    height: 32px;
-  }
-
-  .menu-text {
-    font-size: 13px;
-  }
-
-  .verification-badge {
-    width: 20px;
-    height: 20px;
-  }
-
-  .upgrade-section {
-    padding: 6px 8px;
-  }
-
-  .upgrade-card {
-    padding: 12px;
-    border-radius: 12px;
-  }
-
-  .upgrade-star {
-    left: 8px;
-    top: 12px;
-  }
-
-  .star-icon {
-    width: 24px;
-    height: 24px;
-  }
-
-  .upgrade-info {
-    margin-left: 32px;
-  }
-
-  .upgrade-title {
-    font-size: 16px;
-    margin-bottom: 1px;
-  }
-
-  .upgrade-subtitle {
-    font-size: 11px;
-  }
-
-  .upgrade-button {
-    padding: 8px 16px;
-    font-size: 12px;
-    border-radius: 16px;
-  }
-
-  .bottom-section {
-    padding: 6px 8px;
-  }
-
-  .bottom-controls {
-    gap: 8px;
-    max-width: 260px;
-  }
-
-  .id-button,
-  .language-button {
-    height: 32px;
-    padding: 6px 8px;
-    border-radius: 10px;
-  }
-
-  .id-label,
-  .id-value,
-  .language-text {
-    font-size: 12px;
-  }
-
-  .copy-icon {
-    width: 16px;
-    height: 16px;
-  }
-
-  .flag-wrapper {
-    width: 20px;
-    height: 20px;
-  }
-
-  .arrow-wrapper {
-    width: 16px;
-    height: 16px;
-  }
+  .profile-header { padding: 10px; }
+  .profile-card { padding: 14px; border-radius: 45px 18px 18px 45px; }
+  .profile-content { gap: 14px; }
+  .avatar-frame { width: 70px; height: 70px; }
+  .badge-container { padding: 5px 14px; }
+  .badge-icon { width: 26px; height: 26px; }
+  .badge-text { font-size: 13px; }
+  .user-name { font-size: 18px; }
+  .close-button { width: 40px; height: 40px; }
+  .menu-section { padding: 0 10px; min-height: 180px; max-height: calc(100vh - 380px); }
+  .menu-item { padding: 10px 5px; gap: 10px; }
+  .menu-icon { width: 36px; height: 36px; }
+  .menu-text { font-size: 15px; }
+  .verification-badge { width: 22px; height: 22px; }
+  .upgrade-section { padding: 7px 10px; }
+  .upgrade-card { padding: 14px; border-radius: 14px; }
+  .upgrade-star { left: 10px; top: 14px; }
+  .star-icon { width: 28px; height: 28px; }
+  .upgrade-info { margin-left: 38px; }
+  .upgrade-title { font-size: 16px; }
+  .upgrade-subtitle { font-size: 12px; }
+  .upgrade-button { padding: 9px 18px; font-size: 13px; border-radius: 18px; }
+  .bottom-section { padding: 7px 10px; }
+  .bottom-controls { gap: 10px; max-width: 270px; }
+  .id-button, .language-button { height: 32px; padding: 6px 10px; border-radius: 12px; }
+  .id-label, .id-value, .language-text { font-size: 13px; }
+  .copy-icon { width: 16px; height: 16px; }
+  .flag-wrapper { width: 20px; height: 20px; }
+  .arrow-wrapper { width: 16px; height: 16px; }
 }
 
-/* Regular mobile devices (iPhone 12, 13, 14) - 375px to 430px */
-@media (min-width: 375px) and (max-width: 430px) {
-  .profile-container {
-    left: 12px;
-    right: 12px;
-    top: 30px;
-    bottom: calc(170px + env(safe-area-inset-bottom, 0));
-    border-radius: 22px;
-    max-height: calc(100vh - 200px - env(safe-area-inset-bottom, 0));
-  }
-
-  .overlay-pointer {
-    bottom: calc(160px + env(safe-area-inset-bottom, 0));
-    left: 28px;
-  }
-
-  .profile-header {
-    padding: 10px;
-  }
-
-  .profile-card {
-    padding: 14px;
-  }
-
-  .profile-content {
-    gap: 14px;
-  }
-
-  .avatar-frame {
-    width: 70px;
-    height: 70px;
-  }
-
-  .badge-container {
-    padding: 5px 14px;
-  }
-
-  .badge-icon {
-    width: 26px;
-    height: 26px;
-  }
-
-  .badge-text {
-    font-size: 13px;
-  }
-
-  .user-name {
-    font-size: 19px;
-  }
-
-  .close-button {
-    width: 40px;
-    height: 40px;
-  }
-
-  .menu-section {
-    padding: 0 10px;
-    max-height: calc(100vh - 380px);
-  }
-
-  .menu-item {
-    padding: 9px 5px;
-    gap: 10px;
-  }
-
-  .menu-icon {
-    width: 36px;
-    height: 36px;
-  }
-
-  .menu-text {
-    font-size: 14px;
-  }
-
-  .verification-badge {
-    width: 22px;
-    height: 22px;
-  }
-
-  .upgrade-section {
-    padding: 8px 10px;
-  }
-
-  .upgrade-card {
-    padding: 14px;
-    border-radius: 14px;
-  }
-
-  .upgrade-star {
-    left: 10px;
-    top: 14px;
-  }
-
-  .star-icon {
-    width: 28px;
-    height: 28px;
-  }
-
-  .upgrade-info {
-    margin-left: 38px;
-  }
-
-  .upgrade-title {
-    font-size: 17px;
-    margin-bottom: 2px;
-  }
-
-  .upgrade-subtitle {
-    font-size: 12px;
-  }
-
-  .upgrade-button {
-    padding: 9px 18px;
-    font-size: 13px;
-    border-radius: 18px;
-  }
-
-  .bottom-section {
-    padding: 8px 10px;
-  }
-
-  .bottom-controls {
-    gap: 10px;
-    max-width: 280px;
-  }
-
-  .id-button,
-  .language-button {
-    height: 34px;
-    padding: 7px 10px;
-    border-radius: 12px;
-  }
-
-  .id-label,
-  .id-value,
-  .language-text {
-    font-size: 13px;
-  }
-
-  .copy-icon {
-    width: 18px;
-    height: 18px;
-  }
-
-  .flag-wrapper {
-    width: 22px;
-    height: 22px;
-  }
-
-  .arrow-wrapper {
-    width: 18px;
-    height: 18px;
-  }
-}
-
-/* Large mobile and small tablets - 431px to 768px */
-@media (min-width: 431px) and (max-width: 768px) {
+/* Large screens scale up */
+@media (min-width: 480px) {
   .profile-container {
     left: 20px;
     right: 20px;
-    top: 40px;
-    bottom: calc(180px + env(safe-area-inset-bottom, 0));
+    top: 50px;
     border-radius: 28px;
-    max-height: calc(100vh - 220px - env(safe-area-inset-bottom, 0));
+    max-width: 400px;
+    margin: 0 auto;
   }
 
   .overlay-pointer {
-    bottom: calc(170px + env(safe-area-inset-bottom, 0));
-    left: 36px;
+    left: 50%;
+    transform: translateX(-50%);
     border-left-width: 14px;
     border-right-width: 14px;
     border-top-width: 14px;
   }
 
-  .profile-header {
-    padding: 14px;
-  }
-
-  .profile-card {
-    padding: 18px;
-  }
-
-  .profile-content {
-    gap: 18px;
-  }
-
-  .avatar-frame {
-    width: 90px;
-    height: 90px;
-  }
-
-  .badge-container {
-    padding: 8px 18px;
-  }
-
-  .badge-icon {
-    width: 30px;
-    height: 30px;
-  }
-
-  .badge-text {
-    font-size: 15px;
-  }
-
-  .user-name {
-    font-size: 22px;
-  }
-
-  .close-button {
-    width: 48px;
-    height: 48px;
-  }
-
-  .menu-section {
-    padding: 0 14px;
-    max-height: calc(100vh - 420px);
-  }
-
-  .menu-item {
-    padding: 12px 8px;
-    gap: 12px;
-  }
-
-  .menu-icon {
-    width: 42px;
-    height: 42px;
-  }
-
-  .menu-text {
-    font-size: 16px;
-  }
-
-  .verification-badge {
-    width: 26px;
-    height: 26px;
-  }
-
-  .upgrade-section {
-    padding: 10px 14px;
-  }
-
-  .upgrade-card {
-    padding: 18px;
-    border-radius: 18px;
-  }
-
-  .upgrade-star {
-    left: 14px;
-    top: 18px;
-  }
-
-  .star-icon {
-    width: 36px;
-    height: 36px;
-  }
-
-  .upgrade-info {
-    margin-left: 50px;
-  }
-
-  .upgrade-title {
-    font-size: 20px;
-    margin-bottom: 3px;
-  }
-
-  .upgrade-subtitle {
-    font-size: 14px;
-  }
-
-  .upgrade-button {
-    padding: 12px 24px;
-    font-size: 15px;
-    border-radius: 24px;
-  }
-
-  .bottom-section {
-    padding: 10px 14px;
-  }
-
-  .bottom-controls {
-    gap: 14px;
-    max-width: 320px;
-  }
-
-  .id-button,
-  .language-button {
-    height: 40px;
-    padding: 10px 14px;
-    border-radius: 16px;
-  }
-
-  .id-label,
-  .id-value,
-  .language-text {
-    font-size: 15px;
-  }
-
-  .copy-icon {
-    width: 22px;
-    height: 22px;
-  }
-
-  .flag-wrapper {
-    width: 28px;
-    height: 28px;
-  }
-
-  .arrow-wrapper {
-    width: 22px;
-    height: 22px;
-  }
+  .profile-header { padding: 16px; }
+  .profile-card { padding: 20px; border-radius: 55px 22px 22px 55px; }
+  .profile-content { gap: 20px; }
+  .avatar-frame { width: 90px; height: 90px; }
+  .badge-container { padding: 8px 18px; }
+  .badge-icon { width: 30px; height: 30px; }
+  .badge-text { font-size: 15px; }
+  .user-name { font-size: 22px; }
+  .close-button { width: 48px; height: 48px; }
+  .menu-section { padding: 0 16px; min-height: 220px; max-height: calc(100vh - 440px); }
+  .menu-item { padding: 14px 8px; gap: 14px; }
+  .menu-icon { width: 44px; height: 44px; }
+  .menu-text { font-size: 17px; }
+  .verification-badge { width: 26px; height: 26px; }
+  .upgrade-section { padding: 10px 16px; }
+  .upgrade-card { padding: 18px; border-radius: 18px; }
+  .upgrade-star { left: 16px; top: 18px; }
+  .star-icon { width: 34px; height: 34px; }
+  .upgrade-info { margin-left: 50px; }
+  .upgrade-title { font-size: 20px; margin-bottom: 3px; }
+  .upgrade-subtitle { font-size: 14px; }
+  .upgrade-button { padding: 12px 24px; font-size: 15px; border-radius: 22px; }
+  .bottom-section { padding: 10px 16px; }
+  .bottom-controls { gap: 14px; max-width: 320px; }
+  .id-button, .language-button { height: 40px; padding: 10px 14px; border-radius: 16px; }
+  .id-label, .id-value, .language-text { font-size: 15px; }
+  .copy-icon { width: 20px; height: 20px; }
+  .flag-wrapper { width: 26px; height: 26px; }
+  .arrow-wrapper { width: 20px; height: 20px; }
 }
 
-/* Tablets and desktop - ≥769px */
-@media (min-width: 769px) {
-  .profile-container {
-    left: 40px;
-    right: 40px;
-    top: 60px;
-    bottom: calc(180px + env(safe-area-inset-bottom, 0));
-    border-radius: 32px;
-    max-width: 400px;
-    margin: 0 auto;
-    max-height: calc(100vh - 240px - env(safe-area-inset-bottom, 0));
-  }
-
-  .overlay-pointer {
-    bottom: calc(170px + env(safe-area-inset-bottom, 0));
-    left: 50%;
-    transform: translateX(-50%);
-    border-left-width: 16px;
-    border-right-width: 16px;
-    border-top-width: 16px;
-  }
-
-  .profile-header {
-    padding: 18px;
-  }
-
-  .profile-card {
-    padding: 22px;
-  }
-
-  .profile-content {
-    gap: 20px;
-  }
-
-  .avatar-frame {
-    width: 100px;
-    height: 100px;
-  }
-
-  .badge-container {
-    padding: 10px 20px;
-  }
-
-  .badge-icon {
-    width: 32px;
-    height: 32px;
-  }
-
-  .badge-text {
-    font-size: 16px;
-  }
-
-  .user-name {
-    font-size: 24px;
-  }
-
-  .close-button {
-    width: 52px;
-    height: 52px;
-  }
-
-  .menu-section {
-    padding: 0 18px;
-  }
-
-  .menu-item {
-    padding: 16px 10px;
-    gap: 16px;
-  }
-
-  .menu-icon {
-    width: 48px;
-    height: 48px;
-  }
-
-  .menu-text {
-    font-size: 18px;
-  }
-
-  .verification-badge {
-    width: 28px;
-    height: 28px;
-  }
-
-  .upgrade-section {
-    padding: 12px 18px;
-  }
-
-  .upgrade-card {
-    padding: 20px;
-    border-radius: 20px;
-  }
-
-  .upgrade-star {
-    left: 18px;
-    top: 20px;
-  }
-
-  .star-icon {
-    width: 38px;
-    height: 38px;
-  }
-
-  .upgrade-info {
-    margin-left: 56px;
-  }
-
-  .upgrade-title {
-    font-size: 22px;
-    margin-bottom: 4px;
-  }
-
-  .upgrade-subtitle {
-    font-size: 15px;
-  }
-
-  .upgrade-button {
-    padding: 14px 28px;
-    font-size: 16px;
-    border-radius: 28px;
-  }
-
-  .bottom-section {
-    padding: 12px 18px;
-  }
-
-  .bottom-controls {
-    gap: 16px;
-    max-width: 340px;
-  }
-
-  .id-button,
-  .language-button {
-    height: 44px;
-    padding: 12px 16px;
-    border-radius: 18px;
-  }
-
-  .id-label,
-  .id-value,
-  .language-text {
-    font-size: 16px;
-  }
-
-  .copy-icon {
-    width: 24px;
-    height: 24px;
-  }
-
-  .flag-wrapper {
-    width: 32px;
-    height: 32px;
-  }
-
-  .arrow-wrapper {
-    width: 24px;
-    height: 24px;
-  }
-}
-
-/* Landscape orientation adjustments for phones */
+/* Landscape mode - compact everything */
 @media (max-height: 500px) and (orientation: landscape) {
   .profile-container {
-    top: 10px;
+    top: 20px;
     bottom: calc(140px + env(safe-area-inset-bottom, 0));
-    border-radius: 16px;
-    max-height: calc(100vh - 150px - env(safe-area-inset-bottom, 0));
+    border-radius: 18px;
+    max-height: calc(100vh - 160px - env(safe-area-inset-bottom, 0));
   }
 
   .overlay-pointer {
@@ -1881,144 +1347,35 @@ const selectLanguage = (language) => {
     border-top-width: 8px;
   }
 
-  .profile-header {
-    padding: 6px;
-  }
-
-  .profile-card {
-    padding: 8px;
-    border-radius: 30px 12px 12px 30px;
-  }
-
-  .profile-content {
-    gap: 8px;
-  }
-
-  .avatar-frame {
-    width: 50px;
-    height: 50px;
-  }
-
-  .badge-container {
-    padding: 3px 8px;
-  }
-
-  .badge-icon {
-    width: 20px;
-    height: 20px;
-  }
-
-  .badge-text {
-    font-size: 10px;
-  }
-
-  .user-name {
-    font-size: 14px;
-  }
-
-  .close-button {
-    width: 30px;
-    height: 30px;
-  }
-
-  .menu-section {
-    padding: 0 6px;
-    max-height: calc(100vh - 200px);
-  }
-
-  .menu-item {
-    padding: 4px 2px;
-    gap: 4px;
-  }
-
-  .menu-icon {
-    width: 24px;
-    height: 24px;
-  }
-
-  .menu-text {
-    font-size: 11px;
-  }
-
-  .verification-badge {
-    width: 16px;
-    height: 16px;
-  }
-
-  .upgrade-section {
-    padding: 4px 6px;
-  }
-
-  .upgrade-card {
-    padding: 8px;
-    border-radius: 8px;
-  }
-
-  .upgrade-star {
-    left: 6px;
-    top: 8px;
-  }
-
-  .star-icon {
-    width: 18px;
-    height: 18px;
-  }
-
-  .upgrade-info {
-    margin-left: 24px;
-  }
-
-  .upgrade-title {
-    font-size: 12px;
-    margin-bottom: 0px;
-  }
-
-  .upgrade-subtitle {
-    font-size: 9px;
-  }
-
-  .upgrade-button {
-    padding: 5px 10px;
-    font-size: 10px;
-    border-radius: 10px;
-  }
-
-  .bottom-section {
-    padding: 4px 6px;
-  }
-
-  .bottom-controls {
-    gap: 6px;
-    max-width: 220px;
-  }
-
-  .id-button,
-  .language-button {
-    height: 24px;
-    padding: 4px 6px;
-    border-radius: 8px;
-  }
-
-  .id-label,
-  .id-value,
-  .language-text {
-    font-size: 10px;
-  }
-
-  .copy-icon {
-    width: 14px;
-    height: 14px;
-  }
-
-  .flag-wrapper {
-    width: 18px;
-    height: 18px;
-  }
-
-  .arrow-wrapper {
-    width: 14px;
-    height: 14px;
-  }
+  .profile-header { padding: 8px; }
+  .profile-card { padding: 10px; border-radius: 35px 14px 14px 35px; }
+  .profile-content { gap: 10px; }
+  .avatar-frame { width: 50px; height: 50px; }
+  .badge-container { padding: 3px 8px; }
+  .badge-icon { width: 20px; height: 20px; }
+  .badge-text { font-size: 11px; }
+  .user-name { font-size: 15px; }
+  .close-button { width: 32px; height: 32px; }
+  .menu-section { padding: 0 8px; min-height: 80px; max-height: calc(100vh - 220px); }
+  .menu-item { padding: 6px 4px; gap: 8px; }
+  .menu-icon { width: 28px; height: 28px; }
+  .menu-text { font-size: 12px; }
+  .verification-badge { width: 18px; height: 18px; }
+  .upgrade-section { padding: 5px 8px; }
+  .upgrade-card { padding: 10px; border-radius: 12px; }
+  .upgrade-star { left: 8px; top: 10px; }
+  .star-icon { width: 22px; height: 22px; }
+  .upgrade-info { margin-left: 30px; }
+  .upgrade-title { font-size: 14px; margin-bottom: 1px; }
+  .upgrade-subtitle { font-size: 10px; }
+  .upgrade-button { padding: 6px 12px; font-size: 11px; border-radius: 14px; }
+  .bottom-section { padding: 5px 8px; }
+  .bottom-controls { gap: 8px; max-width: 250px; }
+  .id-button, .language-button { height: 28px; padding: 5px 8px; border-radius: 10px; }
+  .id-label, .id-value, .language-text { font-size: 11px; }
+  .copy-icon { width: 14px; height: 14px; }
+  .flag-wrapper { width: 18px; height: 18px; }
+  .arrow-wrapper { width: 14px; height: 14px; }
 }
 
 /* Touch optimizations */
