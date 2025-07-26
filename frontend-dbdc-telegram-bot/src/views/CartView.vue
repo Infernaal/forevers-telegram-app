@@ -1,5 +1,5 @@
 <template>
-  <div class="cart-view w-full max-w-md mx-auto bg-gray-100 min-h-screen flex flex-col font-montserrat">
+  <div class="cart-view w-full max-w-md mx-auto bg-gray-100 min-h-screen flex flex-col font-montserrat" style="background: #f3f4f6 !important;">
     <!-- Content Container -->
     <div class="content-container bg-gray-100 flex-1 flex flex-col relative">
       <!-- Scrollable Cart Items Area -->
@@ -417,6 +417,11 @@ const confirmDelete = () => {
 @media (min-width: 431px) and (max-width: 768px) {
   .cart-view {
     max-width: 420px;
+    background: #f3f4f6 !important;
+  }
+
+  body {
+    background: #f3f4f6 !important;
   }
 
   .overflow-y-auto {
@@ -454,6 +459,11 @@ const confirmDelete = () => {
 @media (min-width: 769px) {
   .cart-view {
     max-width: 480px;
+    background: #f3f4f6 !important;
+  }
+
+  body {
+    background: #f3f4f6 !important;
   }
 
   .overflow-y-auto {

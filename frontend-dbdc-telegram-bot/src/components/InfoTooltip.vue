@@ -1,26 +1,26 @@
 <template>
   <Transition
     name="tooltip"
-    enter-active-class="transition-all duration-300 ease-out"
-    leave-active-class="transition-all duration-200 ease-in"
-    enter-from-class="opacity-0 scale-95"
-    enter-to-class="opacity-100 scale-100"
-    leave-from-class="opacity-100 scale-100"
-    leave-to-class="opacity-0 scale-95"
+    enter-active-class="transition-all duration-500 ease-out"
+    leave-active-class="transition-all duration-300 ease-in"
+    enter-from-class="opacity-0 scale-90 translate-y-4"
+    enter-to-class="opacity-100 scale-100 translate-y-0"
+    leave-from-class="opacity-100 scale-100 translate-y-0"
+    leave-to-class="opacity-0 scale-95 translate-y-2"
   >
     <div
       v-if="isVisible"
-      class="fixed inset-0 z-50 flex items-center justify-center px-9"
+      class="fixed inset-0 z-50 flex items-center justify-center px-4"
       @click="closeTooltip"
     >
       <!-- Blur backdrop -->
-      <div class="absolute inset-0 bg-black bg-opacity-20 backdrop-blur-sm"></div>
+      <div class="absolute inset-0 bg-black bg-opacity-20 backdrop-blur-sm transition-all duration-500 ease-out"></div>
       
       <!-- Tooltip content -->
       <div
         @click.stop
-        class="relative bg-white rounded-3xl p-4 shadow-xl border border-gray-100"
-        style="width: 300px; min-height: 154px;"
+        class="relative bg-white rounded-3xl p-4 shadow-xl border border-gray-100 w-full max-w-[300px] mx-auto"
+        style="min-height: 154px;"
       >
         <!-- Close button -->
         <button
@@ -117,21 +117,40 @@ onBeforeUnmount(() => {
 
 /* Tooltip animations */
 .tooltip-enter-active {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .tooltip-leave-active {
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.6, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .tooltip-enter-from {
   opacity: 0;
-  transform: scale(0.9) translateY(20px);
+  transform: scale(0.9) translateY(16px);
+}
+
+.tooltip-enter-to {
+  opacity: 1;
+  transform: scale(1) translateY(0px);
+}
+
+.tooltip-leave-from {
+  opacity: 1;
+  transform: scale(1) translateY(0px);
 }
 
 .tooltip-leave-to {
   opacity: 0;
-  transform: scale(0.95) translateY(-10px);
+  transform: scale(0.95) translateY(8px);
+}
+
+/* Backdrop animation */
+.tooltip-enter-active .backdrop-blur-sm {
+  transition: backdrop-filter 0.5s ease-out, background-color 0.5s ease-out;
+}
+
+.tooltip-leave-active .backdrop-blur-sm {
+  transition: backdrop-filter 0.3s ease-in, background-color 0.3s ease-in;
 }
 
 /* Ensure text is readable on gradient background */
@@ -142,9 +161,13 @@ h3, p {
 
 /* Mobile optimizations */
 @media (max-width: 375px) {
-  div[style*="width: 300px"] {
-    width: calc(100vw - 72px) !important;
-    max-width: 300px;
+  .fixed.inset-0 {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .max-w-\[300px\] {
+    max-width: calc(100vw - 32px) !important;
     min-height: 140px !important;
   }
 
@@ -160,9 +183,13 @@ h3, p {
 }
 
 @media (max-width: 320px) {
-  div[style*="width: 300px"] {
-    width: calc(100vw - 40px) !important;
-    max-width: 280px;
+  .fixed.inset-0 {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .max-w-\[300px\] {
+    max-width: calc(100vw - 24px) !important;
     min-height: 130px !important;
   }
 
@@ -174,6 +201,29 @@ h3, p {
   .text-sm {
     font-size: 12px;
     line-height: 16px;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 376px) and (max-width: 768px) {
+  .fixed.inset-0 {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .max-w-\[300px\] {
+    max-width: 300px !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .fixed.inset-0 {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .max-w-\[300px\] {
+    max-width: 300px !important;
   }
 }
 </style>
