@@ -61,25 +61,19 @@
             @click="toggleProfile"
             :class="[
               'nav-item-button',
-              isProfileMenuOpen ? 'text-blue-700' : 'text-gray-600'
+              activeTab === 'profile' ? 'text-blue-700' : 'text-gray-600'
             ]"
           >
             <div class="relative">
               <div
                 :class="[
-                  isProfileMenuOpen
+                  activeTab === 'profile'
                     ? 'nav-icon-active'
                     : 'nav-icon-inactive',
                   'nav-icon-container'
                 ]"
               >
-                <!-- Show close icon when profile menu is open, otherwise show profile -->
-                <div v-if="isProfileMenuOpen" class="text-white">
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-                <div v-else class="relative profile-avatar">
+                <div class="relative profile-avatar">
                   <div class="rounded-full border-2 border-purple-400 overflow-hidden profile-image">
                     <img
                       src="https://images.pexels.com/photos/15023413/pexels-photo-15023413.jpeg?auto=compress&cs=tinysrgb&w=400"
@@ -95,7 +89,7 @@
                   </div>
                   <!-- Dropdown Arrow -->
                   <div class="profile-arrow">
-                    <svg :class="isProfileMenuOpen ? 'rotate-180 profile-arrow-icon transition-transform duration-200 text-gray-600' : 'profile-arrow-icon transition-transform duration-200 text-gray-600'" viewBox="0 0 8 6">
+                    <svg class="profile-arrow-icon transition-transform duration-200 text-gray-600" viewBox="0 0 8 6">
                       <path d="M1 1L4 4L7 1" stroke="currentColor" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </div>
