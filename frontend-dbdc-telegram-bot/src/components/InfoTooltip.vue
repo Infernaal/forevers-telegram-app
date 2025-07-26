@@ -116,77 +116,72 @@ onBeforeUnmount(() => {
 }
 
 /* Tooltip animations - Synchronized smooth effects */
-.tooltip-enter-active {
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.tooltip-enter-active,
+.tooltip-enter-active .tooltip-backdrop,
+.tooltip-enter-active .tooltip-content {
+  transition: all 0.3s ease-out;
 }
 
-.tooltip-leave-active {
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+.tooltip-leave-active,
+.tooltip-leave-active .tooltip-backdrop,
+.tooltip-leave-active .tooltip-content {
+  transition: all 0.2s ease-in;
 }
 
 .tooltip-enter-from {
   opacity: 0;
 }
 
-.tooltip-enter-from .backdrop-blur-sm {
+.tooltip-enter-from .tooltip-backdrop {
   opacity: 0;
   backdrop-filter: blur(0px);
 }
 
-.tooltip-enter-from .relative {
-  transform: scale(0.8) translateY(20px) rotateX(10deg);
-  filter: blur(4px);
+.tooltip-enter-from .tooltip-content {
+  transform: scale(0.8) translateY(20px);
+  opacity: 0;
 }
 
 .tooltip-enter-to {
   opacity: 1;
 }
 
-.tooltip-enter-to .backdrop-blur-sm {
+.tooltip-enter-to .tooltip-backdrop {
   opacity: 1;
   backdrop-filter: blur(9px);
 }
 
-.tooltip-enter-to .relative {
-  transform: scale(1) translateY(0px) rotateX(0deg);
-  filter: blur(0px);
+.tooltip-enter-to .tooltip-content {
+  transform: scale(1) translateY(0px);
+  opacity: 1;
 }
 
 .tooltip-leave-from {
   opacity: 1;
 }
 
-.tooltip-leave-from .backdrop-blur-sm {
+.tooltip-leave-from .tooltip-backdrop {
   opacity: 1;
   backdrop-filter: blur(9px);
 }
 
-.tooltip-leave-from .relative {
-  transform: scale(1) translateY(0px) rotateX(0deg);
-  filter: blur(0px);
+.tooltip-leave-from .tooltip-content {
+  transform: scale(1) translateY(0px);
+  opacity: 1;
 }
 
 .tooltip-leave-to {
   opacity: 0;
 }
 
-.tooltip-leave-to .backdrop-blur-sm {
+.tooltip-leave-to .tooltip-backdrop {
   opacity: 0;
   backdrop-filter: blur(0px);
 }
 
-.tooltip-leave-to .relative {
-  transform: scale(0.9) translateY(-10px) rotateX(-5deg);
-  filter: blur(2px);
-}
-
-/* Synchronized backdrop and content transitions */
-.backdrop-blur-sm {
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.relative {
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.tooltip-leave-to .tooltip-content {
+  transform: scale(0.9) translateY(-10px);
+  opacity: 0;
 }
 
 /* Close button animation */
