@@ -626,6 +626,7 @@ const selectLanguage = (language) => {
   touch-action: pan-y;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  scroll-snap-type: y proximity;
 }
 
 .menu-items::-webkit-scrollbar {
