@@ -1,12 +1,12 @@
 <template>
   <Transition
     name="tooltip"
-    enter-active-class="transition-all duration-500 ease-out"
-    leave-active-class="transition-all duration-300 ease-in"
-    enter-from-class="opacity-0 scale-90 translate-y-4"
-    enter-to-class="opacity-100 scale-100 translate-y-0"
-    leave-from-class="opacity-100 scale-100 translate-y-0"
-    leave-to-class="opacity-0 scale-95 translate-y-2"
+    enter-active-class="tooltip-enter-active"
+    leave-active-class="tooltip-leave-active"
+    enter-from-class="tooltip-enter-from"
+    enter-to-class="tooltip-enter-to"
+    leave-from-class="tooltip-leave-from"
+    leave-to-class="tooltip-leave-to"
   >
     <div
       v-if="isVisible"
