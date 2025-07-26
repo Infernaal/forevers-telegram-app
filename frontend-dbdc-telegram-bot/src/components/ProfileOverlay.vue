@@ -201,83 +201,72 @@
         <!-- Bottom Section - ID and Language -->
         <div class="bottom-section">
           <div class="bottom-controls">
-            <!-- ID Button -->
+            <!-- ID Container -->
             <div class="id-container">
               <button
                 @click="copyUserId"
                 class="id-button"
               >
-                <!-- ID Text -->
                 <div class="id-content">
                   <span class="id-label">ID:</span>
                   <span class="id-value">{{ profileData.id }}</span>
                 </div>
-
-                <!-- Copy Icon Container -->
-                <div class="copy-icon-container">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M18.2806 1.19995H8.98336C8.42322 1.19995 7.88603 1.43348 7.48995 1.84917C7.09387 2.26486 6.87136 2.82866 6.87136 3.41653V4.26906H5.81536C5.2278 4.26906 4.66431 4.51402 4.24885 4.95006C3.83338 5.3861 3.59998 5.97749 3.59998 6.59414V20.4749C3.59998 21.0915 3.83338 21.6829 4.24885 22.119C4.66431 22.555 5.2278 22.8 5.81536 22.8H14.9132C15.5008 22.8 16.0643 22.555 16.4797 22.119C16.8952 21.6829 17.1286 21.0915 17.1286 20.4749V19.6998H18.2806C18.8363 19.6999 19.3699 19.4709 19.7663 19.0621C20.1627 18.6533 20.3903 18.0975 20.4 17.5143V3.41653C20.398 2.82794 20.1739 2.26417 19.7766 1.8487C19.3794 1.43323 18.8414 1.19995 18.2806 1.19995ZM15.6517 20.4749C15.6517 20.6804 15.5739 20.8776 15.4354 21.0229C15.2969 21.1682 15.1091 21.2499 14.9132 21.2499H5.81536C5.61951 21.2499 5.43168 21.1682 5.29319 21.0229C5.1547 20.8776 5.0769 20.6804 5.0769 20.4749V6.59414C5.0769 6.38859 5.1547 6.19146 5.29319 6.04611C5.43168 5.90077 5.61951 5.81911 5.81536 5.81911H14.9132C15.1091 5.81911 15.2969 5.90077 15.4354 6.04611C15.5739 6.19146 15.6517 6.38859 15.6517 6.59414V20.4749ZM18.9231 17.5143C18.9211 17.6918 18.8526 17.8613 18.7323 17.9861C18.612 18.1108 18.4497 18.1808 18.2806 18.1808H17.1286V6.59414C17.1286 5.97749 16.8952 5.3861 16.4797 4.95006C16.0643 4.51402 15.5008 4.26906 14.9132 4.26906H8.34828V3.41653C8.34828 3.23976 8.41519 3.07022 8.53429 2.94523C8.65339 2.82023 8.81493 2.75001 8.98336 2.75001H18.2806C18.3646 2.74898 18.448 2.76546 18.5259 2.7985C18.6038 2.83154 18.6747 2.88047 18.7344 2.94246C18.7942 3.00446 18.8416 3.07828 18.874 3.15966C18.9064 3.24103 18.9231 3.32834 18.9231 3.41653V17.5143Z" fill="#666"/>
+                <div class="copy-icon">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 9H11C9.9 9 9 9.9 9 11V20C9 21.1 9.9 22 11 22H20C21.1 22 22 21.1 22 20V11C22 9.9 21.1 9 20 9ZM20 20H11V11H20V20ZM17 6H15V4C15 2.9 14.1 2 13 2H4C2.9 2 2 2.9 2 4V13C2 14.1 2.9 15 4 15H6V13H4V4H13V6H15V6Z" fill="#888"/>
                   </svg>
                 </div>
               </button>
 
-              <!-- Success Toast Overlay -->
+              <!-- Success Toast -->
               <Transition
-                name="copy-success"
-                enter-active-class="transition-all duration-500 ease-out"
+                name="copy-toast"
+                enter-active-class="transition-all duration-400 ease-out"
                 leave-active-class="transition-all duration-300 ease-in"
-                enter-from-class="opacity-0 scale-95 translate-y-2"
-                enter-to-class="opacity-100 scale-100 translate-y-0"
-                leave-from-class="opacity-100 scale-100 translate-y-0"
-                leave-to-class="opacity-0 scale-95 -translate-y-2"
+                enter-from-class="opacity-0 scale-90"
+                enter-to-class="opacity-100 scale-100"
+                leave-from-class="opacity-100 scale-100"
+                leave-to-class="opacity-0 scale-90"
               >
                 <div
                   v-if="showCopyMessage"
-                  class="copy-success-toast"
+                  class="copy-toast"
                 >
-                  <div class="copy-success-icon">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="text-white">
-                      <polyline points="20,6 9,17 4,12" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                  <div class="toast-icon">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                      <polyline points="20,6 9,17 4,12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </div>
-                  <span class="copy-success-text">Copied</span>
+                  <span class="toast-text">Copied</span>
                 </div>
               </Transition>
             </div>
 
-            <!-- Vertical Separator -->
-            <div class="separator"></div>
-
-            <!-- Language Selector -->
+            <!-- Language Container -->
             <div class="language-container">
               <button
                 @click="toggleLanguageSelector"
                 class="language-button"
               >
-                <!-- Flag Container -->
-                <div class="flag-container">
-                  <CountryFlag :country="selectedLanguage.code" size="medium" />
+                <div class="flag-wrapper">
+                  <CountryFlag :country="selectedLanguage.code" size="small" />
                 </div>
-
-                <!-- Language Text -->
                 <span class="language-text">{{ selectedLanguage.name }}</span>
-
-                <!-- Dropdown Arrow -->
-                <div class="dropdown-arrow">
+                <div class="arrow-wrapper">
                   <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 20 20"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
                     fill="none"
                     class="arrow-icon"
                     :class="{ 'rotate-180': isLanguageDropdownOpen }"
                   >
-                    <path d="M5.71387 8.57146L9.99958 12.8572L14.2853 8.57146" stroke="currentColor" stroke-linecap="round"/>
+                    <path d="M4 6L8 10L12 6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </div>
               </button>
 
-              <!-- Beautiful Dropdown -->
+              <!-- Language Dropdown -->
               <Transition
                 name="dropdown"
                 enter-active-class="transition-all duration-300 ease-out"
@@ -787,177 +776,193 @@ const selectLanguage = (language) => {
 .bottom-section {
   padding: 12px;
   flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
 }
 
 .bottom-controls {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 32px;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 320px;
+  margin: 0 auto;
 }
 
 /* ID Container */
 .id-container {
   position: relative;
+  flex: 1;
 }
 
 .id-button {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  background: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(32px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 24px;
-  transition: all 0.3s ease;
-  min-width: 140px;
-  height: 48px;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  transition: all 0.25s ease;
+  width: 100%;
+  height: 40px;
   cursor: pointer;
   outline: none;
   -webkit-tap-highlight-color: transparent;
 }
 
 .id-button:hover {
-  background: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .id-button:active {
-  transform: scale(0.95);
+  transform: scale(0.97);
 }
 
 .id-content {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
 }
 
 .id-label {
   color: #B7B7B7;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .id-value {
   color: white;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
-.copy-icon-container {
-  position: relative;
-  width: 28px;
-  height: 28px;
-  background: white;
-  border: 1px solid #D8D8D8;
-  border-radius: 0 24px 24px 0;
+.copy-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: auto;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
 }
 
-.copy-success-toast {
+.id-button:hover .copy-icon {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.copy-toast {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, #10b981 0%, #059669 100%);
-  border-radius: 24px;
-  padding: 12px 16px;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border-radius: 16px;
+  padding: 10px 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  z-index: 10;
+  gap: 8px;
+  z-index: 20;
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
 }
 
-.copy-success-icon {
-  width: 24px;
-  height: 24px;
+.toast-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(4px);
+  flex-shrink: 0;
 }
 
-.copy-success-text {
+.toast-text {
   color: white;
-  font-weight: 700;
-  font-size: 16px;
-}
-
-/* Separator */
-.separator {
-  width: 2px;
-  height: 32px;
-  background: rgba(183, 183, 183, 0.4);
-  border-radius: 2px;
+  font-weight: 600;
+  font-size: 14px;
 }
 
 /* Language Container */
 .language-container {
   position: relative;
+  flex: 1;
 }
 
 .language-button {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  background: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(32px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 24px;
-  transition: all 0.3s ease;
-  min-width: 140px;
-  height: 48px;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  transition: all 0.25s ease;
+  width: 100%;
+  height: 40px;
   cursor: pointer;
   outline: none;
   -webkit-tap-highlight-color: transparent;
 }
 
 .language-button:hover {
-  background: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .language-button:active {
-  transform: scale(0.95);
+  transform: scale(0.97);
 }
 
-.flag-container {
-  width: 36px;
-  height: 36px;
+.flag-wrapper {
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #D4D4D4;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   flex-shrink: 0;
 }
 
 .language-text {
-  color: #FAFAFA;
-  font-size: 16px;
-  font-weight: 500;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  flex: 1;
+  text-align: left;
 }
 
-.dropdown-arrow {
-  width: 24px;
-  height: 24px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
+.arrow-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
   flex-shrink: 0;
-  margin-left: auto;
+  transition: all 0.2s ease;
+}
+
+.language-button:hover .arrow-wrapper {
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .arrow-icon {
-  color: white;
   transition: transform 0.3s ease;
 }
 
@@ -965,16 +970,16 @@ const selectLanguage = (language) => {
 .language-dropdown {
   position: absolute;
   bottom: 100%;
+  left: 0;
   right: 0;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 16px;
-  box-shadow: 0 35px 60px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   z-index: 50;
-  min-width: 140px;
 }
 
 .dropdown-content {
@@ -1047,7 +1052,7 @@ const selectLanguage = (language) => {
     bottom: 70px;
     border-radius: 20px;
   }
-  
+
   .overlay-pointer {
     bottom: 60px;
     left: 24px;
@@ -1055,147 +1060,143 @@ const selectLanguage = (language) => {
     border-right-width: 10px;
     border-top-width: 10px;
   }
-  
+
   .profile-header {
     padding: 8px;
   }
-  
+
   .profile-card {
     padding: 12px;
     border-radius: 40px 16px 16px 40px;
   }
-  
+
   .profile-content {
     gap: 12px;
   }
-  
+
   .avatar-frame {
     width: 60px;
     height: 60px;
   }
-  
+
   .badge-container {
     padding: 4px 12px;
   }
-  
+
   .badge-icon {
     width: 24px;
     height: 24px;
   }
-  
+
   .badge-text {
     font-size: 12px;
   }
-  
+
   .user-name {
     font-size: 18px;
   }
-  
+
   .close-button {
     width: 36px;
     height: 36px;
   }
-  
+
   .menu-section {
     padding: 0 8px;
   }
-  
+
   .menu-item {
     padding: 10px 4px;
     gap: 10px;
   }
-  
+
   .menu-icon {
     width: 36px;
     height: 36px;
   }
-  
+
   .menu-text {
     font-size: 14px;
   }
-  
+
   .verification-badge {
     width: 20px;
     height: 20px;
   }
-  
+
   .upgrade-section {
     padding: 8px;
   }
-  
+
   .upgrade-card {
     padding: 16px;
     border-radius: 12px;
   }
-  
+
   .upgrade-star {
     left: 8px;
     top: 16px;
   }
-  
+
   .star-icon {
     width: 28px;
     height: 28px;
   }
-  
+
   .upgrade-info {
     margin-left: 36px;
   }
-  
+
   .upgrade-title {
     font-size: 18px;
     margin-bottom: 2px;
   }
-  
+
   .upgrade-subtitle {
     font-size: 12px;
   }
-  
+
   .upgrade-button {
     padding: 10px 20px;
     font-size: 14px;
     border-radius: 20px;
   }
-  
+
   .bottom-section {
     padding: 8px;
   }
-  
+
   .bottom-controls {
-    gap: 16px;
+    gap: 12px;
+    max-width: 280px;
   }
-  
+
   .id-button,
   .language-button {
-    min-width: 120px;
-    height: 40px;
-    padding: 8px 12px;
-    border-radius: 20px;
+    height: 36px;
+    padding: 8px 10px;
+    border-radius: 12px;
   }
-  
+
   .id-label,
   .id-value,
   .language-text {
-    font-size: 14px;
+    font-size: 12px;
   }
-  
-  .copy-icon-container {
-    width: 24px;
-    height: 24px;
+
+  .copy-icon {
+    width: 16px;
+    height: 16px;
   }
-  
-  .flag-container {
-    width: 28px;
-    height: 28px;
-  }
-  
-  .dropdown-arrow {
+
+  .flag-wrapper {
     width: 20px;
     height: 20px;
   }
-  
-  .separator {
-    height: 24px;
+
+  .arrow-wrapper {
+    width: 16px;
+    height: 16px;
   }
 }
 
@@ -1208,151 +1209,147 @@ const selectLanguage = (language) => {
     bottom: 80px;
     border-radius: 22px;
   }
-  
+
   .overlay-pointer {
     bottom: 65px;
     left: 28px;
   }
-  
+
   .profile-header {
     padding: 10px;
   }
-  
+
   .profile-card {
     padding: 14px;
   }
-  
+
   .profile-content {
     gap: 14px;
   }
-  
+
   .avatar-frame {
     width: 70px;
     height: 70px;
   }
-  
+
   .badge-container {
     padding: 5px 14px;
   }
-  
+
   .badge-icon {
     width: 26px;
     height: 26px;
   }
-  
+
   .badge-text {
     font-size: 13px;
   }
-  
+
   .user-name {
     font-size: 19px;
   }
-  
+
   .close-button {
     width: 40px;
     height: 40px;
   }
-  
+
   .menu-section {
     padding: 0 10px;
   }
-  
+
   .menu-item {
     padding: 11px 5px;
     gap: 11px;
   }
-  
+
   .menu-icon {
     width: 38px;
     height: 38px;
   }
-  
+
   .menu-text {
     font-size: 15px;
   }
-  
+
   .verification-badge {
     width: 22px;
     height: 22px;
   }
-  
+
   .upgrade-section {
     padding: 10px;
   }
-  
+
   .upgrade-card {
     padding: 18px;
     border-radius: 14px;
   }
-  
+
   .upgrade-star {
     left: 10px;
     top: 18px;
   }
-  
+
   .star-icon {
     width: 32px;
     height: 32px;
   }
-  
+
   .upgrade-info {
     margin-left: 42px;
   }
-  
+
   .upgrade-title {
     font-size: 19px;
     margin-bottom: 3px;
   }
-  
+
   .upgrade-subtitle {
     font-size: 13px;
   }
-  
+
   .upgrade-button {
     padding: 11px 22px;
     font-size: 15px;
     border-radius: 22px;
   }
-  
+
   .bottom-section {
     padding: 10px;
   }
-  
+
   .bottom-controls {
-    gap: 24px;
+    gap: 14px;
+    max-width: 300px;
   }
-  
+
   .id-button,
   .language-button {
-    min-width: 130px;
-    height: 44px;
-    padding: 10px 14px;
-    border-radius: 22px;
+    height: 38px;
+    padding: 9px 12px;
+    border-radius: 14px;
   }
-  
+
   .id-label,
   .id-value,
   .language-text {
-    font-size: 15px;
+    font-size: 13px;
   }
-  
-  .copy-icon-container {
-    width: 26px;
-    height: 26px;
+
+  .copy-icon {
+    width: 18px;
+    height: 18px;
   }
-  
-  .flag-container {
-    width: 32px;
-    height: 32px;
-  }
-  
-  .dropdown-arrow {
+
+  .flag-wrapper {
     width: 22px;
     height: 22px;
   }
-  
-  .separator {
-    height: 28px;
+
+  .arrow-wrapper {
+    width: 18px;
+    height: 18px;
   }
 }
 
@@ -1365,7 +1362,7 @@ const selectLanguage = (language) => {
     bottom: 90px;
     border-radius: 28px;
   }
-  
+
   .overlay-pointer {
     bottom: 75px;
     left: 36px;
@@ -1373,146 +1370,142 @@ const selectLanguage = (language) => {
     border-right-width: 14px;
     border-top-width: 14px;
   }
-  
+
   .profile-header {
     padding: 14px;
   }
-  
+
   .profile-card {
     padding: 18px;
   }
-  
+
   .profile-content {
     gap: 18px;
   }
-  
+
   .avatar-frame {
     width: 90px;
     height: 90px;
   }
-  
+
   .badge-container {
     padding: 8px 18px;
   }
-  
+
   .badge-icon {
     width: 30px;
     height: 30px;
   }
-  
+
   .badge-text {
     font-size: 15px;
   }
-  
+
   .user-name {
     font-size: 22px;
   }
-  
+
   .close-button {
     width: 48px;
     height: 48px;
   }
-  
+
   .menu-section {
     padding: 0 14px;
   }
-  
+
   .menu-item {
     padding: 14px 8px;
     gap: 14px;
   }
-  
+
   .menu-icon {
     width: 44px;
     height: 44px;
   }
-  
+
   .menu-text {
     font-size: 17px;
   }
-  
+
   .verification-badge {
     width: 26px;
     height: 26px;
   }
-  
+
   .upgrade-section {
     padding: 14px;
   }
-  
+
   .upgrade-card {
     padding: 22px;
     border-radius: 18px;
   }
-  
+
   .upgrade-star {
     left: 14px;
     top: 22px;
   }
-  
+
   .star-icon {
     width: 40px;
     height: 40px;
   }
-  
+
   .upgrade-info {
     margin-left: 54px;
   }
-  
+
   .upgrade-title {
     font-size: 22px;
     margin-bottom: 5px;
   }
-  
+
   .upgrade-subtitle {
     font-size: 15px;
   }
-  
+
   .upgrade-button {
     padding: 14px 28px;
     font-size: 17px;
     border-radius: 28px;
   }
-  
+
   .bottom-section {
     padding: 14px;
   }
-  
+
   .bottom-controls {
-    gap: 40px;
+    gap: 18px;
+    max-width: 340px;
   }
-  
+
   .id-button,
   .language-button {
-    min-width: 160px;
-    height: 52px;
-    padding: 14px 18px;
-    border-radius: 26px;
+    height: 44px;
+    padding: 12px 16px;
+    border-radius: 18px;
   }
-  
+
   .id-label,
   .id-value,
   .language-text {
-    font-size: 17px;
+    font-size: 15px;
   }
-  
-  .copy-icon-container {
-    width: 32px;
-    height: 32px;
+
+  .copy-icon {
+    width: 22px;
+    height: 22px;
   }
-  
-  .flag-container {
-    width: 40px;
-    height: 40px;
-  }
-  
-  .dropdown-arrow {
+
+  .flag-wrapper {
     width: 28px;
     height: 28px;
   }
-  
-  .separator {
-    height: 36px;
+
+  .arrow-wrapper {
+    width: 22px;
+    height: 22px;
   }
 }
 
@@ -1527,7 +1520,7 @@ const selectLanguage = (language) => {
     max-width: 400px;
     margin: 0 auto;
   }
-  
+
   .overlay-pointer {
     bottom: 100px;
     left: 50%;
@@ -1536,146 +1529,142 @@ const selectLanguage = (language) => {
     border-right-width: 16px;
     border-top-width: 16px;
   }
-  
+
   .profile-header {
     padding: 18px;
   }
-  
+
   .profile-card {
     padding: 22px;
   }
-  
+
   .profile-content {
     gap: 20px;
   }
-  
+
   .avatar-frame {
     width: 100px;
     height: 100px;
   }
-  
+
   .badge-container {
     padding: 10px 20px;
   }
-  
+
   .badge-icon {
     width: 32px;
     height: 32px;
   }
-  
+
   .badge-text {
     font-size: 16px;
   }
-  
+
   .user-name {
     font-size: 24px;
   }
-  
+
   .close-button {
     width: 52px;
     height: 52px;
   }
-  
+
   .menu-section {
     padding: 0 18px;
   }
-  
+
   .menu-item {
     padding: 16px 10px;
     gap: 16px;
   }
-  
+
   .menu-icon {
     width: 48px;
     height: 48px;
   }
-  
+
   .menu-text {
     font-size: 18px;
   }
-  
+
   .verification-badge {
     width: 28px;
     height: 28px;
   }
-  
+
   .upgrade-section {
     padding: 18px;
   }
-  
+
   .upgrade-card {
     padding: 26px;
     border-radius: 20px;
   }
-  
+
   .upgrade-star {
     left: 18px;
     top: 26px;
   }
-  
+
   .star-icon {
     width: 44px;
     height: 44px;
   }
-  
+
   .upgrade-info {
     margin-left: 62px;
   }
-  
+
   .upgrade-title {
     font-size: 24px;
     margin-bottom: 6px;
   }
-  
+
   .upgrade-subtitle {
     font-size: 16px;
   }
-  
+
   .upgrade-button {
     padding: 16px 32px;
     font-size: 18px;
     border-radius: 32px;
   }
-  
+
   .bottom-section {
     padding: 18px;
   }
-  
+
   .bottom-controls {
-    gap: 48px;
+    gap: 20px;
+    max-width: 360px;
   }
-  
+
   .id-button,
   .language-button {
-    min-width: 180px;
-    height: 56px;
-    padding: 16px 20px;
-    border-radius: 28px;
+    height: 48px;
+    padding: 14px 18px;
+    border-radius: 20px;
   }
-  
+
   .id-label,
   .id-value,
   .language-text {
-    font-size: 18px;
+    font-size: 16px;
   }
-  
-  .copy-icon-container {
-    width: 36px;
-    height: 36px;
+
+  .copy-icon {
+    width: 24px;
+    height: 24px;
   }
-  
-  .flag-container {
-    width: 44px;
-    height: 44px;
-  }
-  
-  .dropdown-arrow {
+
+  .flag-wrapper {
     width: 32px;
     height: 32px;
   }
-  
-  .separator {
-    height: 40px;
+
+  .arrow-wrapper {
+    width: 24px;
+    height: 24px;
   }
 }
 
@@ -1686,154 +1675,150 @@ const selectLanguage = (language) => {
     bottom: 50px;
     border-radius: 16px;
   }
-  
+
   .overlay-pointer {
     bottom: 40px;
     border-left-width: 8px;
     border-right-width: 8px;
     border-top-width: 8px;
   }
-  
+
   .profile-header {
     padding: 6px;
   }
-  
+
   .profile-card {
     padding: 8px;
     border-radius: 30px 12px 12px 30px;
   }
-  
+
   .profile-content {
     gap: 8px;
   }
-  
+
   .avatar-frame {
     width: 50px;
     height: 50px;
   }
-  
+
   .badge-container {
     padding: 3px 8px;
   }
-  
+
   .badge-icon {
     width: 20px;
     height: 20px;
   }
-  
+
   .badge-text {
     font-size: 10px;
   }
-  
+
   .user-name {
     font-size: 14px;
   }
-  
+
   .close-button {
     width: 30px;
     height: 30px;
   }
-  
+
   .menu-section {
     padding: 0 6px;
   }
-  
+
   .menu-item {
     padding: 6px 3px;
     gap: 6px;
   }
-  
+
   .menu-icon {
     width: 28px;
     height: 28px;
   }
-  
+
   .menu-text {
     font-size: 12px;
   }
-  
+
   .verification-badge {
     width: 16px;
     height: 16px;
   }
-  
+
   .upgrade-section {
     padding: 6px;
   }
-  
+
   .upgrade-card {
     padding: 10px;
     border-radius: 10px;
   }
-  
+
   .upgrade-star {
     left: 6px;
     top: 10px;
   }
-  
+
   .star-icon {
     width: 20px;
     height: 20px;
   }
-  
+
   .upgrade-info {
     margin-left: 26px;
   }
-  
+
   .upgrade-title {
     font-size: 14px;
     margin-bottom: 1px;
   }
-  
+
   .upgrade-subtitle {
     font-size: 10px;
   }
-  
+
   .upgrade-button {
     padding: 6px 12px;
     font-size: 11px;
     border-radius: 12px;
   }
-  
+
   .bottom-section {
     padding: 6px;
   }
-  
+
   .bottom-controls {
-    gap: 12px;
+    gap: 8px;
+    max-width: 240px;
   }
-  
+
   .id-button,
   .language-button {
-    min-width: 100px;
-    height: 32px;
-    padding: 6px 8px;
-    border-radius: 16px;
+    height: 28px;
+    padding: 5px 8px;
+    border-radius: 10px;
   }
-  
+
   .id-label,
   .id-value,
   .language-text {
-    font-size: 11px;
+    font-size: 10px;
   }
-  
-  .copy-icon-container {
-    width: 20px;
-    height: 20px;
+
+  .copy-icon {
+    width: 14px;
+    height: 14px;
   }
-  
-  .flag-container {
-    width: 24px;
-    height: 24px;
+
+  .flag-wrapper {
+    width: 18px;
+    height: 18px;
   }
-  
-  .dropdown-arrow {
-    width: 16px;
-    height: 16px;
-  }
-  
-  .separator {
-    height: 20px;
+
+  .arrow-wrapper {
+    width: 14px;
+    height: 14px;
   }
 }
 
