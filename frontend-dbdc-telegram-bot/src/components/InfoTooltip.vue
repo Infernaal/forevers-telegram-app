@@ -148,13 +148,88 @@ onBeforeUnmount(() => {
   filter: blur(2px);
 }
 
-/* Backdrop animation */
-.tooltip-enter-active .backdrop-blur-sm {
-  transition: backdrop-filter 0.5s ease-out, background-color 0.5s ease-out;
+/* Backdrop animation - improved smooth transitions */
+.tooltip-backdrop {
+  transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.tooltip-leave-active .backdrop-blur-sm {
-  transition: backdrop-filter 0.3s ease-in, background-color 0.3s ease-in;
+.tooltip-enter-active .tooltip-backdrop {
+  animation: backdropFadeIn 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.tooltip-leave-active .tooltip-backdrop {
+  animation: backdropFadeOut 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes backdropFadeIn {
+  0% {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  50% {
+    opacity: 0.5;
+    backdrop-filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    backdrop-filter: blur(9px);
+  }
+}
+
+@keyframes backdropFadeOut {
+  0% {
+    opacity: 1;
+    backdrop-filter: blur(9px);
+  }
+  100% {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+}
+
+/* Content container with staggered animation */
+.tooltip-enter-active .relative {
+  animation: contentSlideIn 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.1s both;
+}
+
+.tooltip-leave-active .relative {
+  animation: contentSlideOut 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes contentSlideIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(30px) rotateX(15deg);
+    filter: blur(6px);
+  }
+  30% {
+    opacity: 0.3;
+    transform: scale(0.9) translateY(15px) rotateX(8deg);
+    filter: blur(3px);
+  }
+  60% {
+    opacity: 0.7;
+    transform: scale(1.02) translateY(-2px) rotateX(-1deg);
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0px) rotateX(0deg);
+    filter: blur(0px);
+  }
+}
+
+@keyframes contentSlideOut {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0px) rotateX(0deg);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.9) translateY(-15px) rotateX(-10deg);
+    filter: blur(3px);
+  }
 }
 
 /* Ensure text is readable on gradient background */
