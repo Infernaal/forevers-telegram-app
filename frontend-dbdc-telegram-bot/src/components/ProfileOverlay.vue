@@ -778,20 +778,20 @@ const selectLanguage = (language) => {
 
 /* Bottom Section */
 .bottom-section {
-  padding: 12px;
+  padding: 8px 12px;
   flex-shrink: 0;
   background: rgba(255, 255, 255, 0.05);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
-  min-height: 64px;
+  min-height: 56px;
 }
 
 .bottom-controls {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  max-width: 320px;
+  gap: 12px;
+  max-width: 300px;
   margin: 0 auto;
 }
 
@@ -804,15 +804,15 @@ const selectLanguage = (language) => {
 .id-button {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
+  gap: 6px;
+  padding: 8px 12px;
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
+  border-radius: 14px;
   transition: all 0.25s ease;
   width: 100%;
-  height: 40px;
+  height: 36px;
   cursor: pointer;
   outline: none;
   -webkit-tap-highlight-color: transparent;
@@ -855,10 +855,10 @@ const selectLanguage = (language) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   background: rgba(255, 255, 255, 0.2);
-  border-radius: 6px;
+  border-radius: 5px;
   flex-shrink: 0;
   transition: all 0.2s ease;
 }
@@ -907,15 +907,15 @@ const selectLanguage = (language) => {
 .language-button {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
+  gap: 6px;
+  padding: 8px 12px;
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
+  border-radius: 14px;
   transition: all 0.25s ease;
   width: 100%;
-  height: 40px;
+  height: 36px;
   cursor: pointer;
   outline: none;
   -webkit-tap-highlight-color: transparent;
@@ -931,8 +931,8 @@ const selectLanguage = (language) => {
 }
 
 .flag-wrapper {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   overflow: hidden;
   display: flex;
@@ -955,10 +955,10 @@ const selectLanguage = (language) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   background: rgba(255, 255, 255, 0.2);
-  border-radius: 6px;
+  border-radius: 5px;
   flex-shrink: 0;
   transition: all 0.2s ease;
 }
