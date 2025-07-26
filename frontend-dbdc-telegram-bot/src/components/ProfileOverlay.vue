@@ -598,6 +598,8 @@ const selectLanguage = (language) => {
   flex: 1;
   overflow: hidden;
   padding: 0 12px;
+  min-height: 120px;
+  max-height: calc(100vh - 320px);
 }
 
 .scrollbar-indicator {
