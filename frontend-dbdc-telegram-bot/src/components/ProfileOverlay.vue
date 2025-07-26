@@ -461,7 +461,7 @@ const selectLanguage = (language) => {
 
 .overlay-pointer {
   position: absolute;
-  bottom: 72px;
+  bottom: calc(72px + env(safe-area-inset-bottom, 0));
   left: 32px;
   width: 0;
   height: 0;
@@ -477,7 +477,7 @@ const selectLanguage = (language) => {
   left: 16px;
   right: 16px;
   top: 40px;
-  bottom: 90px;
+  bottom: calc(72px + env(safe-area-inset-bottom, 0));
   background: linear-gradient(135deg, #120B81 0%, #1A1086 50%, #09074E 100%);
   border-radius: 24px;
   overflow: hidden;
@@ -486,6 +486,7 @@ const selectLanguage = (language) => {
   backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
+  max-height: calc(100vh - 112px - env(safe-area-inset-bottom, 0));
 }
 
 /* Profile Header */
@@ -779,6 +780,7 @@ const selectLanguage = (language) => {
   background: rgba(255, 255, 255, 0.05);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
+  min-height: 64px;
 }
 
 .bottom-controls {
@@ -1049,12 +1051,13 @@ const selectLanguage = (language) => {
     left: 8px;
     right: 8px;
     top: 20px;
-    bottom: 70px;
+    bottom: calc(64px + env(safe-area-inset-bottom, 0));
     border-radius: 20px;
+    max-height: calc(100vh - 84px - env(safe-area-inset-bottom, 0));
   }
 
   .overlay-pointer {
-    bottom: 60px;
+    bottom: calc(54px + env(safe-area-inset-bottom, 0));
     left: 24px;
     border-left-width: 10px;
     border-right-width: 10px;
@@ -1206,12 +1209,13 @@ const selectLanguage = (language) => {
     left: 12px;
     right: 12px;
     top: 30px;
-    bottom: 80px;
+    bottom: calc(68px + env(safe-area-inset-bottom, 0));
     border-radius: 22px;
+    max-height: calc(100vh - 98px - env(safe-area-inset-bottom, 0));
   }
 
   .overlay-pointer {
-    bottom: 65px;
+    bottom: calc(58px + env(safe-area-inset-bottom, 0));
     left: 28px;
   }
 
@@ -1359,12 +1363,13 @@ const selectLanguage = (language) => {
     left: 20px;
     right: 20px;
     top: 40px;
-    bottom: 90px;
+    bottom: calc(76px + env(safe-area-inset-bottom, 0));
     border-radius: 28px;
+    max-height: calc(100vh - 116px - env(safe-area-inset-bottom, 0));
   }
 
   .overlay-pointer {
-    bottom: 75px;
+    bottom: calc(66px + env(safe-area-inset-bottom, 0));
     left: 36px;
     border-left-width: 14px;
     border-right-width: 14px;
@@ -1515,14 +1520,15 @@ const selectLanguage = (language) => {
     left: 40px;
     right: 40px;
     top: 60px;
-    bottom: 120px;
+    bottom: calc(82px + env(safe-area-inset-bottom, 0));
     border-radius: 32px;
     max-width: 400px;
     margin: 0 auto;
+    max-height: calc(100vh - 142px - env(safe-area-inset-bottom, 0));
   }
 
   .overlay-pointer {
-    bottom: 100px;
+    bottom: calc(72px + env(safe-area-inset-bottom, 0));
     left: 50%;
     transform: translateX(-50%);
     border-left-width: 16px;
@@ -1672,12 +1678,13 @@ const selectLanguage = (language) => {
 @media (max-height: 500px) and (orientation: landscape) {
   .profile-container {
     top: 10px;
-    bottom: 50px;
+    bottom: calc(56px + env(safe-area-inset-bottom, 0));
     border-radius: 16px;
+    max-height: calc(100vh - 66px - env(safe-area-inset-bottom, 0));
   }
 
   .overlay-pointer {
-    bottom: 40px;
+    bottom: calc(46px + env(safe-area-inset-bottom, 0));
     border-left-width: 8px;
     border-right-width: 8px;
     border-top-width: 8px;
@@ -1905,24 +1912,92 @@ const selectLanguage = (language) => {
   }
 }
 
-/* Safe area support for different iOS versions */
+/* Enhanced safe area support for different iOS versions */
 @supports (padding-bottom: env(safe-area-inset-bottom)) {
-  .profile-container {
-    bottom: calc(90px + env(safe-area-inset-bottom));
-  }
-  
   .overlay-pointer {
     bottom: calc(72px + env(safe-area-inset-bottom));
+  }
+
+  .profile-container {
+    bottom: calc(72px + env(safe-area-inset-bottom));
+    max-height: calc(100vh - 112px - env(safe-area-inset-bottom));
+  }
+
+  /* Small mobile landscape specific */
+  @media (max-width: 374px) {
+    .profile-container {
+      bottom: calc(64px + env(safe-area-inset-bottom));
+      max-height: calc(100vh - 84px - env(safe-area-inset-bottom));
+    }
+    .overlay-pointer {
+      bottom: calc(54px + env(safe-area-inset-bottom));
+    }
+  }
+
+  /* Regular mobile specific */
+  @media (min-width: 375px) and (max-width: 430px) {
+    .profile-container {
+      bottom: calc(68px + env(safe-area-inset-bottom));
+      max-height: calc(100vh - 98px - env(safe-area-inset-bottom));
+    }
+    .overlay-pointer {
+      bottom: calc(58px + env(safe-area-inset-bottom));
+    }
+  }
+
+  /* Landscape specific */
+  @media (max-height: 500px) and (orientation: landscape) {
+    .profile-container {
+      bottom: calc(56px + env(safe-area-inset-bottom));
+      max-height: calc(100vh - 66px - env(safe-area-inset-bottom));
+    }
+    .overlay-pointer {
+      bottom: calc(46px + env(safe-area-inset-bottom));
+    }
   }
 }
 
 @supports (padding-bottom: constant(safe-area-inset-bottom)) {
-  .profile-container {
-    bottom: calc(90px + constant(safe-area-inset-bottom));
-  }
-  
   .overlay-pointer {
     bottom: calc(72px + constant(safe-area-inset-bottom));
+  }
+
+  .profile-container {
+    bottom: calc(72px + constant(safe-area-inset-bottom));
+    max-height: calc(100vh - 112px - constant(safe-area-inset-bottom));
+  }
+
+  /* Small mobile landscape specific */
+  @media (max-width: 374px) {
+    .profile-container {
+      bottom: calc(64px + constant(safe-area-inset-bottom));
+      max-height: calc(100vh - 84px - constant(safe-area-inset-bottom));
+    }
+    .overlay-pointer {
+      bottom: calc(54px + constant(safe-area-inset-bottom));
+    }
+  }
+
+  /* Regular mobile specific */
+  @media (min-width: 375px) and (max-width: 430px) {
+    .profile-container {
+      bottom: calc(68px + constant(safe-area-inset-bottom));
+      max-height: calc(100vh - 98px - constant(safe-area-inset-bottom));
+    }
+    .overlay-pointer {
+      bottom: calc(58px + constant(safe-area-inset-bottom));
+    }
+  }
+
+  /* Landscape specific */
+  @media (max-height: 500px) and (orientation: landscape) {
+    .profile-container {
+      bottom: calc(56px + constant(safe-area-inset-bottom));
+      max-height: calc(100vh - 66px - constant(safe-area-inset-bottom));
+    }
+    .overlay-pointer {
+      bottom: calc(46px + constant(safe-area-inset-bottom));
+    }
   }
 }
 
