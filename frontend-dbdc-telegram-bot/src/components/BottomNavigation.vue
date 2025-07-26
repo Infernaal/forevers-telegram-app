@@ -1,10 +1,5 @@
 <template>
   <div>
-    <!-- Profile Overlay Component -->
-    <ProfileOverlay
-      :is-visible="isProfileMenuOpen"
-      @close="closeProfileMenu"
-    />
 
     <!-- ID and Language Section - Above Navigation -->
     <Transition
