@@ -1962,12 +1962,12 @@ const selectLanguage = (language) => {
 
 @supports (padding-bottom: constant(safe-area-inset-bottom)) {
   .overlay-pointer {
-    bottom: calc(72px + constant(safe-area-inset-bottom));
+    bottom: calc(140px + constant(safe-area-inset-bottom));
   }
 
   .profile-container {
-    bottom: calc(72px + constant(safe-area-inset-bottom));
-    max-height: calc(100vh - 112px - constant(safe-area-inset-bottom));
+    bottom: calc(140px + constant(safe-area-inset-bottom));
+    max-height: calc(100vh - 180px - constant(safe-area-inset-bottom));
   }
 
   /* Small mobile landscape specific */
