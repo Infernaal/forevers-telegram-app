@@ -1,7 +1,92 @@
 <template>
   <div class="holders-view">
+    <!-- Top Status Bar -->
+    <div class="top-status-bar">
+      <div class="status-content">
+        <!-- Time -->
+        <div class="time-section">
+          <div class="time">9:41</div>
+        </div>
+        
+        <!-- Telegram Badge -->
+        <div class="telegram-badge">
+          <div class="telegram-bg"></div>
+          <div class="telegram-text">TELEGRAM</div>
+        </div>
+        
+        <!-- Status Icons -->
+        <div class="status-icons">
+          <!-- Signal bars -->
+          <svg width="118" height="14" viewBox="0 0 118 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M43.615 2.03295C43.615 1.3999 43.1375 0.886719 42.5484 0.886719H41.4817C40.8926 0.886719 40.415 1.3999 40.415 2.03295V11.9669C40.415 12.5999 40.8926 13.1131 41.4817 13.1131H42.5484C43.1375 13.1131 43.615 12.5999 43.615 11.9669V2.03295ZM36.1809 3.332H37.2476C37.8367 3.332 38.3143 3.8575 38.3143 4.50574V11.9394C38.3143 12.5876 37.8367 13.1131 37.2476 13.1131H36.1809C35.5918 13.1131 35.1143 12.5876 35.1143 11.9394V4.50574C35.1143 3.8575 35.5918 3.332 36.1809 3.332ZM31.8492 5.98105H30.7825C30.1934 5.98105 29.7158 6.51324 29.7158 7.16973V11.9244C29.7158 12.5809 30.1934 13.1131 30.7825 13.1131H31.8492C32.4383 13.1131 32.9158 12.5809 32.9158 11.9244V7.16973C32.9158 6.51324 32.4383 5.98105 31.8492 5.98105ZM26.5484 8.42634H25.4817C24.8926 8.42634 24.415 8.95093 24.415 9.59804V11.9414C24.415 12.5885 24.8926 13.1131 25.4817 13.1131H26.5484C27.1375 13.1131 27.615 12.5885 27.615 11.9414V9.59804C27.615 8.95093 27.1375 8.42634 26.5484 8.42634Z" fill="#02070E"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M58.1865 3.30222C60.6736 3.30232 63.0657 4.22441 64.8682 5.87789C65.0039 6.00554 65.2209 6.00393 65.3545 5.87428L66.652 4.61081C66.7197 4.54505 66.7575 4.45597 66.7569 4.36329C66.7563 4.27061 66.7175 4.18197 66.649 4.11697C61.918 -0.257741 54.4543 -0.257741 49.7233 4.11697C49.6548 4.18192 49.6159 4.27054 49.6152 4.36322C49.6146 4.4559 49.6523 4.545 49.7199 4.61081L51.0178 5.87428C51.1514 6.00413 51.3685 6.00574 51.5042 5.87789C53.3069 4.2243 55.6992 3.30221 58.1865 3.30222ZM58.1832 7.5225C59.5405 7.52241 60.8494 8.03415 61.8555 8.95828C61.9916 9.08943 62.2059 9.08659 62.3386 8.95187L63.6259 7.63256C63.6937 7.56336 63.7313 7.46948 63.7303 7.37193C63.7293 7.27438 63.6898 7.1813 63.6207 7.11351C60.5568 4.22266 55.8121 4.22266 52.7483 7.11351C52.6791 7.1813 52.6396 7.27443 52.6387 7.37201C52.6378 7.46959 52.6755 7.56346 52.7435 7.63256L54.0304 8.95187C54.163 9.08659 54.3774 9.08943 54.5135 8.95828C55.5189 8.03476 56.8268 7.52307 58.1832 7.5225ZM60.7076 10.316C60.7095 10.4214 60.6725 10.523 60.6052 10.5968L58.4285 13.0515C58.3647 13.1236 58.2777 13.1642 58.1869 13.1642C58.0962 13.1642 58.0092 13.1236 57.9454 13.0515L55.7683 10.5968C55.7011 10.5229 55.6641 10.4213 55.6661 10.316C55.6681 10.2106 55.7089 10.1108 55.7789 10.0402C57.169 8.72634 59.2049 8.72634 60.595 10.0402C60.6649 10.1109 60.7057 10.2107 60.7076 10.316Z" fill="#02070E"/>
+            <rect opacity="0.35" x="73.2568" y="1" width="24" height="12" rx="3.8" stroke="#02070E"/>
+            <path opacity="0.4" d="M98.7568 5.28125V9.35672C99.5616 9.01155 100.085 8.20859 100.085 7.31899C100.085 6.42938 99.5616 5.62642 98.7568 5.28125Z" fill="#02070E"/>
+            <rect x="74.7568" y="2.5" width="21" height="9" rx="2.5" fill="#02070E"/>
+          </svg>
+        </div>
+      </div>
+      
+      <!-- DBD Logo -->
+      <div class="dbd-logo">
+        <svg width="60" height="42" viewBox="0 0 60 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_177_9646)">
+            <path d="M2.39308 40.809C1.64947 40.4113 1.05458 39.849 0.635451 39.1359C0.202803 38.4228 0 37.6 0 36.6949C0 35.7899 0.216323 34.9808 0.635451 34.254C1.0681 33.5409 1.64947 32.9786 2.39308 32.5809C3.1367 32.1832 3.97495 31.9775 4.92137 31.9775C5.7461 31.9775 6.47619 32.1284 7.13868 32.4164C7.80118 32.7043 8.34199 33.1295 8.77463 33.6917L7.15221 35.1728C6.57084 34.4597 5.86778 34.1031 5.04305 34.1031C4.55632 34.1031 4.12367 34.2128 3.74511 34.4322C3.36654 34.6516 3.06909 34.9533 2.86629 35.351C2.66349 35.7487 2.55532 36.2013 2.55532 36.7087C2.55532 37.2161 2.66349 37.6686 2.86629 38.0663C3.06909 38.464 3.36654 38.7657 3.74511 38.9851C4.12367 39.2045 4.55632 39.3142 5.04305 39.3142C5.86778 39.3142 6.57084 38.9576 7.15221 38.2446L8.76111 39.7256C8.32847 40.2741 7.77414 40.6993 7.12517 41.0009C6.46267 41.2889 5.73258 41.4398 4.90785 41.4398C3.98847 41.4123 3.1367 41.2204 2.39308 40.809Z" fill="#54565A"/>
+            <path d="M15.8592 39.465H12.0735L11.3705 41.234H8.78809L12.736 32.1558H15.2237L19.1851 41.234H16.5487L15.8592 39.465ZM15.1156 37.5725L13.9663 34.6653L12.8171 37.5725H15.1156Z" fill="#54565A"/>
+            <path d="M26.2428 32.5671C26.8377 32.8413 27.2974 33.2253 27.6219 33.7327C27.9464 34.2401 28.1086 34.8298 28.1086 35.5155C28.1086 36.2011 27.9464 36.7908 27.6219 37.2982C27.2974 37.8056 26.8377 38.1896 26.2428 38.4638C25.6479 38.7381 24.9449 38.8752 24.1337 38.8752H22.5788V41.2477H20.0505V32.1694H24.1472C24.9449 32.1557 25.6479 32.2928 26.2428 32.5671ZM25.1612 36.4891C25.4316 36.256 25.5533 35.9269 25.5533 35.5155C25.5533 35.0903 25.4181 34.7612 25.1612 34.5281C24.9043 34.295 24.4987 34.1715 23.9849 34.1715H22.5788V36.8319H23.9849C24.4987 36.8457 24.8908 36.7222 25.1612 36.4891Z" fill="#54565A"/>
+            <path d="M29.366 32.1558H31.8943V41.234H29.366V32.1558Z" fill="#54565A"/>
+            <path d="M36.1531 34.199H33.4084V32.1694H41.4259V34.199H38.6949V41.234H36.1666V34.199H36.1531Z" fill="#54565A"/>
+            <path d="M47.7264 39.465H43.9407L43.2376 41.234H40.6553L44.6032 32.1558H47.0909L51.0523 41.234H48.4159L47.7264 39.465ZM46.9827 37.5725L45.8335 34.6653L44.6843 37.5725H46.9827Z" fill="#54565A"/>
+            <path d="M51.9043 32.1558H54.4326V39.1907H58.705V41.2203H51.9043V32.1558Z" fill="#54565A"/>
+            <path d="M58.9213 25.9026H0.270508V28.1927H58.9213V25.9026Z" fill="#FF6800"/>
+            <path d="M58.3804 5.66168C57.3799 4.0435 55.9873 2.78187 54.1756 1.8905C52.3639 1.01284 50.2953 0.560303 47.9698 0.560303H37.8972V2.65845C38.6814 3.64581 39.0735 4.83888 39.0735 6.21022C39.0735 7.38957 38.7896 8.4455 38.2082 9.39172C38.1136 9.55628 38.0054 9.70713 37.8972 9.84426V11.3939C38.2758 11.7093 38.6138 12.0521 38.9112 12.4498C39.7089 13.5057 40.101 14.7811 40.101 16.2484C40.101 18.2369 39.3574 19.8413 37.8972 20.9932V22.1726H47.9698C50.3088 22.1726 52.3774 21.7338 54.1756 20.8424C55.9873 19.9647 57.3799 18.7031 58.3804 17.0712C59.3674 15.4393 59.8676 13.5469 59.8676 11.3664C59.8676 9.18602 59.3674 7.29357 58.3804 5.66168ZM52.1205 15.7273C51.0119 16.7832 49.5517 17.3043 47.7264 17.3043H43.9272V5.45598H47.7264C49.5517 5.45598 51.0119 5.97709 52.1205 7.03302C53.2292 8.08895 53.7835 9.52885 53.7835 11.3802C53.7835 13.2315 53.2292 14.6714 52.1205 15.7273ZM20.4832 17.0849C21.4701 15.453 21.9704 13.5606 21.9704 11.3802C21.9704 9.19973 21.4701 7.29357 20.4832 5.67539C19.4827 4.05721 18.0901 2.79558 16.2784 1.90421C14.4667 1.02656 12.3981 0.574015 10.0726 0.574015H0V22.1726H10.0726C12.4116 22.1726 14.4802 21.7338 16.2784 20.8424C18.0901 19.9647 19.4962 18.7031 20.4832 17.0849ZM14.2368 15.7273C13.1281 16.7832 11.668 17.3043 9.84273 17.3043H6.04355V5.45598H9.84273C11.668 5.45598 13.1281 5.97709 14.2368 7.03302C15.3455 8.08895 15.8998 9.52885 15.8998 11.3802C15.8998 13.2315 15.3455 14.6714 14.2368 15.7273ZM38.3028 12.9298C37.6133 12.011 36.6534 11.339 35.4365 10.9139C36.3559 10.4339 37.059 9.80312 37.5457 8.98032C38.0459 8.17123 38.2893 7.25243 38.2893 6.22393C38.2893 4.49604 37.5727 3.1247 36.1531 2.10991C34.7335 1.09512 32.6649 0.587729 29.9473 0.587729H19.05V2.82301C19.8612 3.53611 20.5643 4.3452 21.1321 5.27771C22.2002 7.01931 22.741 9.07631 22.741 11.4076C22.741 13.7389 22.2002 15.7822 21.1321 17.5375C20.5643 18.47 19.8612 19.2791 19.05 19.9922V22.2274H30.5557C33.395 22.2274 35.5717 21.7201 37.0725 20.6778C38.5732 19.6493 39.3304 18.182 39.3304 16.2896C39.3304 14.9456 38.9924 13.8486 38.3028 12.9298ZM25.026 4.97601H29.1632C31.1912 4.97601 32.2052 5.66168 32.2052 7.04673C32.2052 8.4455 31.1912 9.14488 29.1632 9.14488H25.026V4.97601ZM30.0825 17.7569H25.026V13.3686H30.0825C32.1917 13.3686 33.2463 14.0954 33.2463 15.5627C33.2463 17.0301 32.1917 17.7569 30.0825 17.7569Z" fill="#2019CE"/>
+          </g>
+          <defs>
+            <clipPath id="clip0_177_9646">
+              <rect width="60" height="42" fill="white"/>
+            </clipPath>
+          </defs>
+        </svg>
+      </div>
+    </div>
+
     <!-- Content Container -->
     <div class="content-container">
+      <!-- Header Bar -->
+      <div class="header-bar">
+        <!-- Title -->
+        <div class="title">
+          <span class="dbd-orange">DBD Capital</span>
+          <span class="dbd-blue"> Forevers Bot</span>
+        </div>
+        <div class="mini-app">mini App</div>
+        
+        <!-- Close Button -->
+        <div class="close-btn">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="16" cy="16" r="15.5" fill="#FAFAFA" stroke="#C7C7C7"/>
+          </svg>
+          <div class="close-icon">
+            <div class="line line-1"></div>
+            <div class="line line-2"></div>
+          </div>
+        </div>
+        
+        <!-- Options Menu -->
+        <div class="options-menu">
+          <div class="dots">
+            <svg width="4" height="4" viewBox="0 0 4 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="2" cy="2" r="2" fill="#02070E"/>
+            </svg>
+            <svg width="4" height="4" viewBox="0 0 4 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="2" cy="2" r="2" fill="#02070E"/>
+            </svg>
+            <svg width="4" height="4" viewBox="0 0 4 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="2" cy="2" r="2" fill="#02070E"/>
+            </svg>
+          </div>
+        </div>
+      </div>
       
       <!-- Referral Program Header -->
       <div class="referral-header">
@@ -250,6 +335,93 @@ const openTerms = () => {
   max-width: 375px;
 }
 
+/* Top Status Bar */
+.top-status-bar {
+  width: 375px;
+  height: 68px;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.00) 0%, #FFF 100%);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.status-content {
+  display: flex;
+  width: 375px;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  top: 16px;
+  height: 36px;
+}
+
+.time-section {
+  display: flex;
+  padding-right: 6px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex: 1 0 0;
+}
+
+.time {
+  color: #02070E;
+  text-align: center;
+  font-family: 'SF Pro', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 17px;
+  font-weight: 590;
+  line-height: 22px;
+}
+
+.telegram-badge {
+  width: 140px;
+  height: 36px;
+  position: relative;
+}
+
+.telegram-bg {
+  width: 140px;
+  height: 36px;
+  border-radius: 30px;
+  background: #027BFD;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.telegram-text {
+  color: #FFF;
+  text-align: center;
+  font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  position: absolute;
+  left: 36px;
+  top: 8px;
+  width: 92px;
+  height: 20px;
+}
+
+.status-icons {
+  display: flex;
+  padding-left: 6px;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  flex: 1 0 0;
+}
+
+/* DBD Logo */
+.dbd-logo {
+  width: 60px;
+  height: 42px;
+  position: absolute;
+  left: 157px;
+  top: 13px;
+}
+
 /* Content Container */
 .content-container {
   width: 375px;
@@ -260,6 +432,107 @@ const openTerms = () => {
   left: 0;
   top: 76px;
   padding: 0;
+}
+
+/* Header Bar */
+.header-bar {
+  width: 375px;
+  height: 44px;
+  position: absolute;
+  left: 0;
+  top: 8px;
+}
+
+.title {
+  text-align: center;
+  font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
+  position: absolute;
+  left: 71px;
+  top: 4px;
+  width: 233px;
+  height: 20px;
+}
+
+.dbd-orange {
+  color: #FF6800;
+}
+
+.dbd-blue {
+  color: #2019CE;
+}
+
+.mini-app {
+  color: #7E7E7E;
+  text-align: center;
+  font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  position: absolute;
+  left: 159px;
+  top: 24px;
+  width: 56px;
+  height: 16px;
+}
+
+.close-btn {
+  width: 44px;
+  height: 44px;
+  position: absolute;
+  left: 8px;
+  top: 0;
+}
+
+.close-btn svg {
+  position: absolute;
+  left: 6px;
+  top: 6px;
+}
+
+.close-icon {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: 12px;
+  top: 12px;
+}
+
+.line {
+  width: 18px;
+  height: 2px;
+  border-radius: 10px;
+  background: #02070E;
+  position: absolute;
+  left: 1px;
+  top: 9px;
+}
+
+.line-1 {
+  transform: rotate(45deg);
+}
+
+.line-2 {
+  transform: rotate(-45deg);
+}
+
+.options-menu {
+  width: 44px;
+  height: 44px;
+  position: absolute;
+  left: 331px;
+  top: 0;
+}
+
+.dots {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  position: absolute;
+  left: 20px;
+  top: 13px;
 }
 
 /* Referral Program Header */
@@ -412,7 +685,7 @@ const openTerms = () => {
 /* Terms Section */
 .terms-container {
   position: absolute;
-  left: 14px;
+  left: 0;
   top: 256px;
   width: 319px;
   height: 44px;
@@ -801,6 +1074,16 @@ const openTerms = () => {
   }
   
   .content-container {
+    width: 100vw;
+    max-width: 375px;
+  }
+  
+  .top-status-bar {
+    width: 100vw;
+    max-width: 375px;
+  }
+  
+  .status-content {
     width: 100vw;
     max-width: 375px;
   }
