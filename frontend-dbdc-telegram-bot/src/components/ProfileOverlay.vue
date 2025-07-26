@@ -804,8 +804,7 @@ const selectLanguage = (language) => {
 
 /* Upgrade Section */
 .upgrade-section {
-  padding: 0.75rem 1rem;
-  flex-shrink: 0;
+  padding: 0.75rem 1rem 1rem 1rem;
 }
 
 .upgrade-card {
