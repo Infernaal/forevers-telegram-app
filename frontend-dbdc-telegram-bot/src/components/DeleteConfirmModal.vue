@@ -10,50 +10,53 @@
   >
     <div
       v-if="isVisible"
-      class="fixed inset-0 z-50 flex items-center justify-center px-4"
+      class="modal-overlay"
       @click="onCancel"
     >
-      <!-- Blur backdrop -->
-      <div class="absolute inset-0 bg-black bg-opacity-20 backdrop-blur-sm"></div>
+      <!-- Background Blur -->
+      <div class="modal-backdrop"></div>
       
-      <!-- Modal content -->
+      <!-- Modal Content -->
       <div
         @click.stop
-        class="relative bg-dbd-off-white rounded-2xl shadow-xl"
-        style="width: 229px; height: 198px;"
+        class="modal-content"
       >
-        <!-- Title -->
-        <div class="absolute left-9 top-6 w-38 h-6">
-          <h3 class="text-lg font-semibold text-dbd-dark text-center">
-            Delete Position?
-          </h3>
+        <!-- Icon Container -->
+        <div class="modal-icon">
+          <div class="icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12 9V13M12 17H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
         </div>
 
-        <!-- Description -->
-        <div class="absolute left-6 top-16 w-45 h-11">
-          <p class="text-base text-dbd-gray text-center leading-5">
-            Are you sure you want<br>to delete this item?
+        <!-- Content -->
+        <div class="modal-body">
+          <!-- Title -->
+          <h3 class="modal-title">Delete Position?</h3>
+
+          <!-- Description -->
+          <p class="modal-description">
+            Are you sure you want to delete this item?
           </p>
         </div>
 
-        <!-- Action Buttons Container -->
-        <div class="absolute left-6 top-32 flex items-center gap-3" style="width: 181px; height: 44px;">
-          <!-- No Button -->
+        <!-- Actions -->
+        <div class="modal-actions">
+          <!-- Cancel Button -->
           <button
             @click="onCancel"
-            class="flex items-center justify-center rounded-full border border-dbd-gray bg-dbd-off-white hover:bg-gray-50 transition-colors"
-            style="width: 84px; height: 44px; padding: 12px 24px;"
+            class="action-button action-button-secondary"
           >
-            <span class="text-dbd-gray text-base font-medium">No</span>
+            <span>No</span>
           </button>
 
-          <!-- Yes Button -->
+          <!-- Confirm Button -->
           <button
             @click="onConfirm"
-            class="flex items-center justify-center rounded-full border border-white text-white hover:bg-red-600 transition-colors"
-            style="width: 85px; height: 44px; padding: 12px 24px; background: #FF1919;"
+            class="action-button action-button-danger"
           >
-            <span class="text-white text-base font-medium">Yes</span>
+            <span>Yes</span>
           </button>
         </div>
       </div>
@@ -74,16 +77,24 @@ const props = defineProps({
 const emit = defineEmits(['cancel', 'confirm'])
 
 const onCancel = () => {
+  if (window.triggerHaptic) {
+    window.triggerHaptic('impact', 'light')
+  }
   emit('cancel')
 }
 
 const onConfirm = () => {
+  if (window.triggerHaptic) {
+    window.triggerHaptic('notification', 'warning')
+  }
   emit('confirm')
 }
 
 const handleKeyDown = (event) => {
   if (event.key === 'Escape' && props.isVisible) {
     onCancel()
+  } else if (event.key === 'Enter' && props.isVisible) {
+    onConfirm()
   }
 }
 
@@ -91,29 +102,330 @@ const handleKeyDown = (event) => {
 watch(() => props.isVisible, (isVisible) => {
   if (isVisible) {
     document.addEventListener('keydown', handleKeyDown)
-    // Prevent body scroll when modal is open
     document.body.style.overflow = 'hidden'
   } else {
     document.removeEventListener('keydown', handleKeyDown)
-    // Restore body scroll
     document.body.style.overflow = ''
   }
 })
 </script>
 
 <style scoped>
-/* Use exact colors from Figma design */
-.bg-red-500 {
-  background-color: #FF1919 !important;
+/* Base Modal Styles */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
 }
 
-.hover\:bg-red-600:hover {
-  background-color: #E60000 !important;
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
-/* Modal animations */
+.modal-content {
+  position: relative;
+  background: #FAFAFA;
+  border-radius: 1.25rem;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 20rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Icon */
+.modal-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-wrapper {
+  width: 3.5rem;
+  height: 3.5rem;
+  background: #fef2f2;
+  border: 2px solid #fecaca;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Content */
+.modal-body {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.modal-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #02070E;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.modal-description {
+  font-size: 0.875rem;
+  color: #4B4D50;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Actions */
+.modal-actions {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.action-button {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  border-radius: 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  min-height: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-button-secondary {
+  background: #FAFAFA;
+  color: #4B4D50;
+  border: 1px solid #d1d5db;
+}
+
+.action-button-secondary:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.action-button-secondary:active {
+  transform: scale(0.98);
+  background: #e5e7eb;
+}
+
+.action-button-danger {
+  background: #FF1919;
+  color: white;
+  border: 1px solid #FF1919;
+}
+
+.action-button-danger:hover {
+  background: #dc2626;
+  border-color: #dc2626;
+}
+
+.action-button-danger:active {
+  transform: scale(0.98);
+  background: #b91c1c;
+}
+
+/* Responsive Styles */
+
+/* Small Mobile (≤374px) */
+@media (max-width: 374px) {
+  .modal-overlay {
+    padding: 0.75rem;
+  }
+
+  .modal-content {
+    max-width: 100%;
+    padding: 1.25rem;
+    gap: 1.25rem;
+    border-radius: 1rem;
+  }
+
+  .icon-wrapper {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .modal-title {
+    font-size: 1rem;
+  }
+
+  .modal-description {
+    font-size: 0.8125rem;
+  }
+
+  .action-button {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.8125rem;
+    min-height: 2.5rem;
+    border-radius: 1.25rem;
+  }
+
+  .modal-actions {
+    gap: 0.5rem;
+  }
+}
+
+/* Regular Mobile (375px-430px) */
+@media (min-width: 375px) and (max-width: 430px) {
+  .modal-overlay {
+    padding: 1rem;
+  }
+
+  .modal-content {
+    max-width: 18rem;
+    padding: 1.375rem;
+    gap: 1.375rem;
+  }
+
+  .icon-wrapper {
+    width: 3.25rem;
+    height: 3.25rem;
+  }
+
+  .modal-title {
+    font-size: 1.0625rem;
+  }
+
+  .modal-description {
+    font-size: 0.875rem;
+  }
+
+  .action-button {
+    min-height: 2.625rem;
+  }
+}
+
+/* Tablets (431px-768px) */
+@media (min-width: 431px) and (max-width: 768px) {
+  .modal-overlay {
+    padding: 1.5rem;
+  }
+
+  .modal-content {
+    max-width: 22rem;
+    padding: 2rem;
+    gap: 1.75rem;
+    border-radius: 1.5rem;
+  }
+
+  .icon-wrapper {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .modal-title {
+    font-size: 1.25rem;
+  }
+
+  .modal-description {
+    font-size: 1rem;
+  }
+
+  .action-button {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    min-height: 3rem;
+    border-radius: 1.75rem;
+  }
+
+  .modal-actions {
+    gap: 1rem;
+  }
+}
+
+/* Desktop (≥769px) */
+@media (min-width: 769px) {
+  .modal-overlay {
+    padding: 2rem;
+  }
+
+  .modal-content {
+    max-width: 24rem;
+    padding: 2.5rem;
+    gap: 2rem;
+    border-radius: 1.75rem;
+  }
+
+  .icon-wrapper {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+
+  .modal-title {
+    font-size: 1.375rem;
+  }
+
+  .modal-description {
+    font-size: 1.125rem;
+  }
+
+  .action-button {
+    padding: 1.125rem 2.25rem;
+    font-size: 1.125rem;
+    min-height: 3.25rem;
+    border-radius: 2rem;
+  }
+
+  .modal-actions {
+    gap: 1.25rem;
+  }
+}
+
+/* Landscape (height ≤500px) */
+@media (max-height: 500px) and (orientation: landscape) {
+  .modal-content {
+    padding: 1rem;
+    gap: 1rem;
+    max-width: 16rem;
+  }
+
+  .icon-wrapper {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .modal-title {
+    font-size: 0.875rem;
+  }
+
+  .modal-description {
+    font-size: 0.75rem;
+  }
+
+  .action-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    min-height: 2rem;
+    border-radius: 1rem;
+  }
+
+  .modal-actions {
+    gap: 0.5rem;
+  }
+}
+
+/* Animation Classes */
 .modal-enter-active {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .modal-leave-active {
@@ -130,58 +442,83 @@ watch(() => props.isVisible, (isVisible) => {
   transform: scale(0.95) translateY(-10px);
 }
 
-/* Backdrop blur effect */
-.backdrop-blur-sm {
-  backdrop-filter: blur(9px);
-}
-
-/* Mobile optimizations */
-@media (max-width: 375px) {
-  div[style*="width: 229px"] {
-    width: calc(100vw - 32px) !important;
-    max-width: 229px;
+/* Touch Optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .action-button:hover {
+    background: inherit;
+    border-color: inherit;
   }
 
-  /* Maintain exact proportions for smaller screens */
-  .absolute.left-6 {
-    left: calc(6/229 * 100%) !important;
+  .action-button-secondary:active {
+    background: #e5e7eb;
   }
 
-  .absolute.left-9 {
-    left: calc(9/229 * 100%) !important;
-  }
-
-  .absolute.top-6 {
-    top: calc(6/198 * 100%) !important;
-  }
-
-  .absolute.top-16 {
-    top: calc(16/198 * 100%) !important;
-  }
-
-  .absolute.top-32 {
-    top: calc(32/198 * 100%) !important;
+  .action-button-danger:active {
+    background: #b91c1c;
   }
 }
 
-@media (max-width: 320px) {
-  div[style*="width: 229px"] {
-    width: calc(100vw - 24px) !important;
-    max-width: 220px;
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .modal-enter-active,
+  .modal-leave-active,
+  .action-button {
+    transition: none;
   }
 
-  button[style*="width: 84px"] {
-    width: calc(84/229 * 100%) !important;
-    min-width: 70px;
+  .action-button:active {
+    transform: none;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .modal-content {
+    background: #1a1a1a;
+    border: 1px solid #374151;
   }
 
-  button[style*="width: 85px"] {
-    width: calc(85/229 * 100%) !important;
-    min-width: 70px;
+  .modal-title {
+    color: #ffffff;
   }
 
-  div[style*="width: 181px"] {
-    width: calc(181/229 * 100%) !important;
+  .modal-description {
+    color: #d1d5db;
   }
+
+  .action-button-secondary {
+    background: #2a2a2a;
+    color: #d1d5db;
+    border-color: #4b5563;
+  }
+
+  .action-button-secondary:hover {
+    background: #374151;
+  }
+
+  .action-button-secondary:active {
+    background: #4b5563;
+  }
+
+  .icon-wrapper {
+    background: #2a1f1f;
+    border-color: #4b1f1f;
+  }
+}
+
+/* Performance */
+.modal-content,
+.action-button {
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Typography */
+* {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
 }
 </style>
