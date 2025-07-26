@@ -361,9 +361,11 @@ const fallbackShare = () => {
       url: referralLink.value
     }).then(() => {
       // Show success notification if sharing was successful
+      isSharing.value = false
       showSuccessMessage('Referral QR-code sent successfully')
     }).catch((error) => {
       console.log('Native share cancelled or failed:', error)
+      isSharing.value = false
       // Check if it was actually cancelled by the user (AbortError)
       if (error.name !== 'AbortError') {
         // If it wasn't cancelled, copy to clipboard as fallback
@@ -372,6 +374,7 @@ const fallbackShare = () => {
       // Don't show notification if user cancelled
     })
   } else {
+    isSharing.value = false
     copyLink()
   }
 }
