@@ -725,82 +725,71 @@ onUnmounted(() => {
   }
 }
 
-/* Dropdown Styles - Match Figma Design Exactly */
-.dropdown-container {
-  width: 164px;
-  height: 145px;
-  position: relative;
+/* Export Dropdown - Match Figma Design Exactly */
+.export-dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 8px;
+  z-index: 50;
 }
 
-.dropdown-background {
-  width: 164px;
-  height: 136px;
+.export-dropdown-arrow {
   position: absolute;
-  left: 0;
-  top: 9px;
+  top: -8px;
+  right: 40px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid #3A33D3;
+  z-index: 10;
+}
+
+.export-dropdown-container {
+  width: 164px;
+  padding: 12px;
+  background: white;
   border-radius: 10px;
   border: 1px solid #F4F4F4;
-  background: #FFF;
   box-shadow: 2px 3px 6px 0 rgba(2, 7, 14, 0.12);
-}
-
-.dropdown-content {
-  position: absolute;
-  left: 12px;
-  top: 21px;
-  width: 140px;
-  height: 112px;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.dropdown-option {
+.export-option {
   width: 140px;
   height: 52px;
-  position: relative;
-  border: none;
-  background: none;
-  cursor: pointer;
-  padding: 0;
-}
-
-.dropdown-option-bg {
-  width: 140px;
-  height: 52px;
-  position: absolute;
-  left: 0;
-  top: 0;
-  border-radius: 100px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
   background: linear-gradient(102deg, rgba(111, 106, 224, 0.40) 9.35%, rgba(85, 81, 179, 0.40) 95.29%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 100px;
   backdrop-filter: blur(10px);
-}
-
-.dropdown-option-content {
-  position: absolute;
-  left: 6px;
-  top: 6px;
-  width: 85px;
-  height: 40px;
   display: flex;
   align-items: center;
   gap: 12px;
+  padding: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.dropdown-icon-container {
+.export-option:hover {
+  background: linear-gradient(102deg, rgba(111, 106, 224, 0.5) 9.35%, rgba(85, 81, 179, 0.5) 95.29%);
+}
+
+.export-option-icon {
   width: 40px;
   height: 40px;
-  position: relative;
+  background: rgba(64, 64, 64, 0.24);
+  border: 1px solid white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(64, 64, 64, 0.24);
-  border: 1px solid white;
+  flex-shrink: 0;
 }
 
-.dropdown-text {
+.export-option-text {
   font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
   font-weight: 400;
   font-size: 16px;
