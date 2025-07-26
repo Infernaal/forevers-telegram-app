@@ -164,9 +164,9 @@ const agreeToTerms = () => {
   backdrop-filter: blur(9px);
   z-index: 1000;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  padding: 20px;
+  padding: 60px 20px 20px 20px;
   animation: fadeIn 0.3s ease-out;
 }
 
