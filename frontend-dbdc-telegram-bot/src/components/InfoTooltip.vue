@@ -115,35 +115,67 @@ onBeforeUnmount(() => {
   backdrop-filter: blur(9px);
 }
 
-/* Tooltip animations - Modern smooth effects */
+/* Tooltip animations - Synchronized smooth effects */
 .tooltip-enter-active {
-  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .tooltip-leave-active {
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .tooltip-enter-from {
   opacity: 0;
+}
+
+.tooltip-enter-from .backdrop-blur-sm {
+  opacity: 0;
+  backdrop-filter: blur(0px);
+}
+
+.tooltip-enter-from .relative {
   transform: scale(0.8) translateY(20px) rotateX(10deg);
   filter: blur(4px);
 }
 
 .tooltip-enter-to {
   opacity: 1;
+}
+
+.tooltip-enter-to .backdrop-blur-sm {
+  opacity: 1;
+  backdrop-filter: blur(9px);
+}
+
+.tooltip-enter-to .relative {
   transform: scale(1) translateY(0px) rotateX(0deg);
   filter: blur(0px);
 }
 
 .tooltip-leave-from {
   opacity: 1;
+}
+
+.tooltip-leave-from .backdrop-blur-sm {
+  opacity: 1;
+  backdrop-filter: blur(9px);
+}
+
+.tooltip-leave-from .relative {
   transform: scale(1) translateY(0px) rotateX(0deg);
   filter: blur(0px);
 }
 
 .tooltip-leave-to {
   opacity: 0;
+}
+
+.tooltip-leave-to .backdrop-blur-sm {
+  opacity: 0;
+  backdrop-filter: blur(0px);
+}
+
+.tooltip-leave-to .relative {
   transform: scale(0.9) translateY(-10px) rotateX(-5deg);
   filter: blur(2px);
 }
