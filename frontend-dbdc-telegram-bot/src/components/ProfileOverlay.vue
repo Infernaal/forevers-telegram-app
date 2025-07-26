@@ -1398,11 +1398,6 @@ const selectLanguage = (language) => {
     transform: scale(0.96);
   }
 }
-    }
-    .overlay-pointer {
-      bottom: calc(150px + constant(safe-area-inset-bottom));
-    }
-  }
 
   /* Regular mobile specific */
   @media (min-width: 375px) and (max-width: 430px) {
