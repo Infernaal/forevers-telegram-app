@@ -1,55 +1,7 @@
 <template>
   <div>
 
-    <!-- ID and Language Section - Above Navigation -->
-    <Transition
-      name="id-section"
-      enter-active-class="transition-all duration-300 ease-out"
-      leave-active-class="transition-all duration-200 ease-in"
-      enter-from-class="opacity-0 translate-y-full"
-      enter-to-class="opacity-100 translate-y-0"
-      leave-from-class="opacity-100 translate-y-0"
-      leave-to-class="opacity-0 translate-y-full"
-    >
-      <div v-if="isProfileMenuOpen" class="fixed bottom-20 left-0 right-0 px-4 pb-2 z-40">
-        <div class="flex items-center justify-between gap-3 max-w-sm mx-auto">
-          <!-- User ID с копированием - Enhanced visibility -->
-          <div class="flex items-center bg-white/80 border-2 border-white rounded-full backdrop-blur-sm shadow-xl">
-            <div class="px-4 py-3">
-              <span class="text-[#555] text-sm font-bold">ID: </span>
-              <span class="text-[#000] text-sm font-bold">515745</span>
-            </div>
-            <button @click="copyUserId" class="w-8 h-8 bg-white rounded-r-full border border-[#D8D8D8] flex items-center justify-center shadow-sm">
-              <svg width="14" height="16" viewBox="0 0 14 16" fill="none" class="text-gray-700">
-                <path d="M10.1875 0H4.3125C3.86929 0 3.44433 0.1939 3.13388 0.539053C2.82343 0.884206 2.65625 1.35544 2.65625 1.84615V2.46154H2.09375C1.5378 2.46154 1.00476 2.68561 0.608253 3.08005C0.211748 3.47448 0 4.00354 0 4.55385V13.5385C0 14.0888 0.211748 14.6178 0.608253 15.0123C1.00476 15.4067 1.5378 15.6308 2.09375 15.6308H8.5C9.0560 15.6308 9.589 15.4067 9.98551 15.0123C10.382 14.6178 10.5938 14.0888 10.5938 13.5385V12.9231H10.1875C10.6205 12.9231 11.0356 12.7359 11.3414 12.3974C11.6472 12.0589 11.8125 11.5967 11.8125 11.1154V1.84615C11.8125 1.35544 11.6453 0.884206 11.3349 0.539053C11.0244 0.1939 10.5995 0 10.1875 0ZM10.1875 1.23077C10.3685 1.23077 10.5421 1.30339 10.6704 1.43292C10.7987 1.56244 10.8906 1.73846 10.8906 1.92308V11.1154C10.8906 11.3 10.7987 11.476 10.6704 11.6055C10.5421 11.735 10.3685 11.8077 10.1875 11.8077H2.65625V1.84615C2.65625 1.65154 2.74813 1.46552 2.87643 1.33599C3.00473 1.20647 3.17832 1.13385 3.35938 1.13385H10.1875Z" fill="currentColor"/>
-              </svg>
-            </button>
-          </div>
 
-          <!-- Language Selector с флагом - Enhanced visibility -->
-          <button
-            @click="toggleLanguageSelector"
-            class="flex items-center gap-2 px-4 py-3 bg-white/80 border-2 border-white rounded-full backdrop-blur-sm transition-all hover:bg-white/90 shadow-xl"
-          >
-            <div class="w-8 h-8 rounded-full overflow-hidden">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="16" cy="16" r="16" fill="#F0F0F0"/>
-                <path d="M15.3438 16.0025H31.0573C31.0573 14.6433 30.8761 13.3266 30.5385 12.0741H15.3438V16.0025Z" fill="#D80027"/>
-                <path d="M15.3438 8.14179H28.847C27.9252 6.63756 26.7466 5.30797 25.3723 4.21338H15.3438V8.14179Z" fill="#D80027"/>
-                <path d="M16.0038 31.06C19.5478 31.06 22.8053 29.8351 25.3776 27.7864H6.62988C9.20224 29.8351 12.4597 31.06 16.0038 31.06Z" fill="#D80027"/>
-                <path d="M3.15241 23.855H28.8496C29.5896 22.6475 30.1636 21.3275 30.5411 19.9266H1.46094C1.83841 21.3275 2.41235 22.6475 3.15241 23.855Z" fill="#D80027"/>
-                <path d="M7.91596 3.29305H9.28825L8.01178 4.22041L8.49937 5.72094L7.22296 4.79358L5.94655 5.72094L6.36772 4.42464C5.24384 5.36082 4.25878 6.45764 3.44702 7.67976H3.88672L3.07419 8.27005C2.94761 8.48123 2.82619 8.69576 2.70984 8.91346L3.09784 10.1076L2.37396 9.5817C2.19402 9.96294 2.02943 10.3528 1.88149 10.7507L2.30896 12.0665H3.88672L2.61025 12.9938L3.09784 14.4943L1.82143 13.567L1.05684 14.1225C0.980312 14.7377 0.94043 15.3643 0.94043 16.0002H15.9993C15.9993 7.68352 15.9993 6.70305 15.9993 0.941406C13.0244 0.941406 10.2513 1.80435 7.91596 3.29305ZM8.49937 14.4943L7.22296 13.567L5.94655 14.4943L6.43414 12.9938L5.15767 12.0665H6.73543L7.22296 10.5659L7.71049 12.0665H9.28825L8.01178 12.9938L8.49937 14.4943ZM8.01178 8.60711L8.49937 10.1076L7.22296 9.18029L5.94655 10.1076L6.43414 8.60711L5.15767 7.67976H6.73543L7.22296 6.17923L7.71049 7.67976H9.28825L8.01178 8.60711ZM13.9009 14.4943L12.6245 13.567L11.3481 14.4943L11.8357 12.9938L10.5592 12.0665H12.137L12.6245 10.5659L13.112 12.0665H14.6898L13.4133 12.9938L13.9009 14.4943ZM13.4133 8.60711L13.9009 10.1076L12.6245 9.18029L11.3481 10.1076L11.8357 8.60711L10.5592 7.67976H12.137L12.6245 6.17923L13.112 7.67976H14.6898L13.4133 8.60711ZM13.4133 4.22041L13.9009 5.72094L12.6245 4.79358L11.3481 5.72094L11.8357 4.22041L10.5592 3.29305H12.137L12.6245 1.79252L13.112 3.29305H14.6898L13.4133 4.22041Z" fill="#0052B4"/>
-              </svg>
-            </div>
-            <span class="text-[#333] text-sm font-bold">ENG</span>
-            <svg width="12" height="12" viewBox="0 0 20 20" fill="none" class="text-gray-600">
-              <circle opacity="0.2" cx="10" cy="10" r="10" fill="gray"/>
-              <path d="M5.71387 8.57146L9.99958 12.8572L14.2853 8.57146" stroke="currentColor" stroke-linecap="round"/>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </Transition>
 
     <!-- Bottom Navigation -->
     <div class="bottom-nav-container">
