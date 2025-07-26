@@ -314,6 +314,7 @@ const shareQRCode = () => {
         // Cleanup listener after 30 seconds if user doesn't return
         setTimeout(() => {
           document.removeEventListener('visibilitychange', handleVisibilityChange)
+          isSharing.value = false
         }, 30000)
 
       } else {
