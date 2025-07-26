@@ -436,6 +436,16 @@ const confirmDelete = () => {
   .text-lg {
     font-size: 18px !important;
   }
+
+  /* Modal styles for tablets */
+  .modal-title {
+    font-size: 1.125rem;
+  }
+
+  .modal-close-btn {
+    width: 3rem;
+    height: 3rem;
+  }
 }
 
 /* Desktop and large tablets */
@@ -450,6 +460,21 @@ const confirmDelete = () => {
 
   .fixed-bottom-section {
     max-width: 480px;
+  }
+
+  /* Modal styles for desktop */
+  .modal-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .modal-close-btn {
+    width: 3.25rem;
+    height: 3.25rem;
+  }
+
+  .modal-header {
+    padding: 1.5rem;
   }
 }
 
