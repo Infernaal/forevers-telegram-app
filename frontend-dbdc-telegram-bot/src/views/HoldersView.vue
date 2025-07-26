@@ -309,58 +309,58 @@ const openTerms = () => {
 .qr-section {
   width: 347px;
   height: 396px;
-  position: absolute;
-  left: 0;
-  top: 0;
+  position: relative;
+  margin-bottom: 20px;
 }
 
 .qr-background {
-  width: 347px;
-  height: 396px;
+  width: 100%;
+  height: 100%;
   border-radius: 24px;
   background: linear-gradient(93deg, #000482 33.15%, rgba(3, 0, 155, 0.84) 76.97%);
   backdrop-filter: blur(32px);
   position: absolute;
   top: 0;
   left: 0;
+  overflow: hidden;
 }
 
 /* Decorative F Icons */
 .f-icon {
   position: absolute;
-  opacity: 0.1;
+  z-index: 1;
 }
 
 .f-icon-1 {
-  width: 96px;
-  height: 96px;
-  transform: rotate(46.848deg);
-  left: -16px;
-  top: -6px;
+  width: 120px;
+  height: 131px;
+  left: -20px;
+  top: -10px;
+  opacity: 0.15;
 }
 
 .f-icon-2 {
-  width: 48px;
-  height: 48px;
-  transform: rotate(150.638deg);
-  left: 280px;
-  top: 189px;
+  width: 66px;
+  height: 66px;
+  right: 20px;
+  top: 60%;
+  opacity: 0.2;
 }
 
 .f-icon-3 {
-  width: 128px;
-  height: 128px;
-  transform: rotate(-31.597deg);
-  left: -22px;
-  top: 194px;
+  width: 155px;
+  height: 177px;
+  left: -40px;
+  bottom: -20px;
+  opacity: 0.12;
 }
 
 .f-icon-4 {
-  width: 96px;
-  height: 96px;
-  transform: rotate(121.978deg);
-  left: 211px;
-  top: 21px;
+  width: 133px;
+  height: 134px;
+  right: -30px;
+  top: -20px;
+  opacity: 0.18;
 }
 
 /* QR Code Container */
