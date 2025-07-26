@@ -198,7 +198,7 @@
         </div>
 
         <!-- Modal Content -->
-        <div v-if="selectedTransaction" class="p-4 space-y-4 max-h-96 overflow-y-auto">
+        <div v-if="selectedTransaction" class="p-4 space-y-4 max-h-96 transaction-details-scroll">
           <!-- ID Contract -->
           <div class="flex justify-between items-center">
             <div class="flex items-center gap-2">
@@ -650,6 +650,17 @@ onUnmounted(() => {
 .content-container {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Transaction Details Modal Invisible Scroll */
+.transaction-details-scroll {
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.transaction-details-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 /* Telegram WebApp optimizations */

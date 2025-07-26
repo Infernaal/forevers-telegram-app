@@ -192,7 +192,7 @@ onMounted(() => {
 
 /* Features section */
 .features-section {
-  margin-top: auto;
+  margin-top: 16px;
 }
 
 .features-title {

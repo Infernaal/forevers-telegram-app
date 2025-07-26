@@ -1,12 +1,12 @@
 <template>
   <Transition
     name="tooltip"
-    enter-active-class="transition-all duration-500 ease-out"
-    leave-active-class="transition-all duration-300 ease-in"
-    enter-from-class="opacity-0 scale-90 translate-y-4"
-    enter-to-class="opacity-100 scale-100 translate-y-0"
-    leave-from-class="opacity-100 scale-100 translate-y-0"
-    leave-to-class="opacity-0 scale-95 translate-y-2"
+    enter-active-class="tooltip-enter-active"
+    leave-active-class="tooltip-leave-active"
+    enter-from-class="tooltip-enter-from"
+    enter-to-class="tooltip-enter-to"
+    leave-from-class="tooltip-leave-from"
+    leave-to-class="tooltip-leave-to"
   >
     <div
       v-if="isVisible"
@@ -14,7 +14,7 @@
       @click="closeTooltip"
     >
       <!-- Blur backdrop -->
-      <div class="absolute inset-0 bg-black bg-opacity-20 backdrop-blur-sm transition-all duration-500 ease-out"></div>
+      <div class="absolute inset-0 bg-black bg-opacity-20 backdrop-blur-sm"></div>
       
       <!-- Tooltip content -->
       <div
@@ -25,7 +25,7 @@
         <!-- Close button -->
         <button
           @click="closeTooltip"
-          class="absolute top-1 right-1 w-11 h-11 flex items-center justify-center"
+          class="absolute top-1 right-1 w-11 h-11 flex items-center justify-center tooltip-close-btn"
         >
           <!-- White circle with gray border -->
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute">
@@ -115,45 +115,94 @@ onBeforeUnmount(() => {
   backdrop-filter: blur(9px);
 }
 
-/* Tooltip animations */
+/* Tooltip animations - Synchronized smooth effects */
 .tooltip-enter-active {
-  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .tooltip-leave-active {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .tooltip-enter-from {
   opacity: 0;
-  transform: scale(0.9) translateY(16px);
+}
+
+.tooltip-enter-from .backdrop-blur-sm {
+  opacity: 0;
+  backdrop-filter: blur(0px);
+}
+
+.tooltip-enter-from .relative {
+  transform: scale(0.8) translateY(20px) rotateX(10deg);
+  filter: blur(4px);
 }
 
 .tooltip-enter-to {
   opacity: 1;
-  transform: scale(1) translateY(0px);
+}
+
+.tooltip-enter-to .backdrop-blur-sm {
+  opacity: 1;
+  backdrop-filter: blur(9px);
+}
+
+.tooltip-enter-to .relative {
+  transform: scale(1) translateY(0px) rotateX(0deg);
+  filter: blur(0px);
 }
 
 .tooltip-leave-from {
   opacity: 1;
-  transform: scale(1) translateY(0px);
+}
+
+.tooltip-leave-from .backdrop-blur-sm {
+  opacity: 1;
+  backdrop-filter: blur(9px);
+}
+
+.tooltip-leave-from .relative {
+  transform: scale(1) translateY(0px) rotateX(0deg);
+  filter: blur(0px);
 }
 
 .tooltip-leave-to {
   opacity: 0;
-  transform: scale(0.95) translateY(8px);
 }
 
-/* Backdrop animation */
-.tooltip-enter-active .backdrop-blur-sm {
-  transition: backdrop-filter 0.5s ease-out, background-color 0.5s ease-out;
+.tooltip-leave-to .backdrop-blur-sm {
+  opacity: 0;
+  backdrop-filter: blur(0px);
 }
 
-.tooltip-leave-active .backdrop-blur-sm {
-  transition: backdrop-filter 0.3s ease-in, background-color 0.3s ease-in;
+.tooltip-leave-to .relative {
+  transform: scale(0.9) translateY(-10px) rotateX(-5deg);
+  filter: blur(2px);
 }
 
-/* Ensure text is readable on gradient background */
+/* Synchronized backdrop and content transitions */
+.backdrop-blur-sm {
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.relative {
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Close button animation */
+.tooltip-close-btn {
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.tooltip-close-btn:hover {
+  transform: scale(1.1) rotate(90deg);
+}
+
+.tooltip-close-btn:active {
+  transform: scale(0.95) rotate(90deg);
+}
+
+/* Text elements with proper z-index */
 h3, p {
   position: relative;
   z-index: 1;

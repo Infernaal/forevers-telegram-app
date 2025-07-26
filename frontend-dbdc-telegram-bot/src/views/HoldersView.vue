@@ -104,13 +104,20 @@
 
         <!-- Share Button -->
         <div class="share-button-container">
-          <button 
+          <button
             class="share-button"
-            :class="{ 'share-button-disabled': !termsAccepted }"
-            :disabled="!termsAccepted"
+            :class="{ 'share-button-disabled': !termsAccepted, 'share-button-loading': isSharing }"
+            :disabled="!termsAccepted || isSharing"
             @click="shareQRCode"
           >
-            Share QR code
+            <span v-if="!isSharing">Share QR code</span>
+            <span v-else class="flex items-center gap-2">
+              <svg class="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Sharing...
+            </span>
           </button>
         </div>
 
@@ -237,6 +244,13 @@
       @close="closeTermsModal"
       @agree="agreeToTerms"
     />
+
+    <!-- Success Notification -->
+    <SuccessNotification
+      :is-visible="showSuccessNotification"
+      :message="successMessage"
+      @close="hideSuccessNotification"
+    />
   </div>
 </template>
 
@@ -244,6 +258,7 @@
 import { ref } from 'vue'
 import BottomNavigation from '../components/BottomNavigation.vue'
 import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
+import SuccessNotification from '../components/SuccessNotification.vue'
 
 // Reactive data
 const termsAccepted = ref(false)
@@ -251,19 +266,87 @@ const linkCopied = ref(false)
 const referralLink = ref('vm.dubadu/jjhI1uT4S')
 const showTermsModal = ref(false)
 
+// Success notification
+const showSuccessNotification = ref(false)
+const successMessage = ref('')
+const isSharing = ref(false)
+let successTimeout = null
+
 // Methods
 const shareQRCode = () => {
-  if (!termsAccepted.value) return
-  
+  if (!termsAccepted.value || isSharing.value) return
+
   console.log('Sharing QR code...')
-  
+  isSharing.value = true
+
+  // Add haptic feedback
+  if (window.triggerHaptic) {
+    window.triggerHaptic('impact', 'light')
+  }
+
+  // Use Telegram WebApp sharing if available
+  if (window.Telegram && window.Telegram.WebApp) {
+    const tg = window.Telegram.WebApp
+
+    try {
+      // Use Telegram's openTelegramLink for sharing (compatible with version 6.0)
+      const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(referralLink.value)}&text=${encodeURIComponent('Join me on DBD Capital Forevers Bot! 🚀')}`
+      tg.openTelegramLink(shareUrl)
+
+      // Set up event listener for when user returns to app
+      const handleVisibilityChange = () => {
+        if (!document.hidden) {
+          // User returned to the app, likely after sharing
+          isSharing.value = false
+          setTimeout(() => {
+            showSuccessMessage('Referral QR-code sent successfully')
+          }, 500)
+          document.removeEventListener('visibilitychange', handleVisibilityChange)
+        }
+      }
+
+      document.addEventListener('visibilitychange', handleVisibilityChange)
+
+      // Cleanup listener after 30 seconds if user doesn't return
+      setTimeout(() => {
+        document.removeEventListener('visibilitychange', handleVisibilityChange)
+        isSharing.value = false
+      }, 30000)
+
+    } catch (error) {
+      console.error('Telegram share failed:', error)
+      isSharing.value = false
+      // Fallback to standard sharing
+      fallbackShare()
+    }
+  } else {
+    // Fallback for non-Telegram environments
+    fallbackShare()
+  }
+}
+
+const fallbackShare = () => {
   if (navigator.share) {
     navigator.share({
       title: 'DBD Capital Forevers Bot',
-      text: 'Join me on DBD Capital Forevers Bot!',
+      text: 'Join me on DBD Capital Forevers Bot! 🚀',
       url: referralLink.value
-    }).catch(console.error)
+    }).then(() => {
+      // Show success notification if sharing was successful
+      isSharing.value = false
+      showSuccessMessage('Referral QR-code sent successfully')
+    }).catch((error) => {
+      console.log('Native share cancelled or failed:', error)
+      isSharing.value = false
+      // Check if it was actually cancelled by the user (AbortError)
+      if (error.name !== 'AbortError') {
+        // If it wasn't cancelled, copy to clipboard as fallback
+        copyLink()
+      }
+      // Don't show notification if user cancelled
+    })
   } else {
+    isSharing.value = false
     copyLink()
   }
 }
@@ -367,6 +450,34 @@ const closeTermsModal = () => {
 const agreeToTerms = () => {
   termsAccepted.value = true
   showTermsModal.value = false
+}
+
+const showSuccessMessage = (message) => {
+  successMessage.value = message
+  showSuccessNotification.value = true
+
+  // Add haptic feedback for success
+  if (window.triggerHaptic) {
+    window.triggerHaptic('notification', 'success')
+  }
+
+  // Clear existing timeout
+  if (successTimeout) {
+    clearTimeout(successTimeout)
+  }
+
+  // Auto-hide after 3 seconds
+  successTimeout = setTimeout(() => {
+    showSuccessNotification.value = false
+  }, 3000)
+}
+
+const hideSuccessNotification = () => {
+  showSuccessNotification.value = false
+  if (successTimeout) {
+    clearTimeout(successTimeout)
+    successTimeout = null
+  }
 }
 </script>
 
@@ -657,6 +768,53 @@ const agreeToTerms = () => {
   background: #E2E2E2 !important;
   color: #989898 !important;
   cursor: not-allowed;
+}
+
+.share-button-loading {
+  background: linear-gradient(90deg, #1a16a8 0%, #3830d9 100%) !important;
+  cursor: wait !important;
+}
+
+/* Tailwind utility classes for the loading spinner */
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.gap-2 {
+  gap: 8px;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.h-4 {
+  height: 16px;
+}
+
+.w-4 {
+  width: 16px;
+}
+
+.opacity-25 {
+  opacity: 0.25;
+}
+
+.opacity-75 {
+  opacity: 0.75;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* How to Section */
