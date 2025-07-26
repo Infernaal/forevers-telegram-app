@@ -1234,8 +1234,58 @@ const selectLanguage = (language) => {
   height: 18px;
 }
 
+/* Extra small screens (XS) - under 320px */
+@media (max-width: 320px) {
+  .profile-container {
+    left: 8px;
+    right: 8px;
+    top: 15px;
+    bottom: calc(65px + env(safe-area-inset-bottom, 0));
+    border-radius: 16px;
+    max-height: calc(100vh - 80px - env(safe-area-inset-bottom, 0));
+  }
+
+  .overlay-pointer {
+    left: 20px;
+    bottom: calc(55px + env(safe-area-inset-bottom, 0));
+    border-left-width: 8px;
+    border-right-width: 8px;
+    border-top-width: 8px;
+  }
+
+  .profile-header { padding: 6px; }
+  .profile-card { padding: 10px; border-radius: 40px 14px 14px 40px; }
+  .profile-content { gap: 10px; }
+  .avatar-frame { width: 50px; height: 50px; }
+  .badge-container { padding: 3px 8px; }
+  .badge-icon { width: 20px; height: 20px; }
+  .badge-text { font-size: 10px; }
+  .user-name { font-size: 14px; }
+  .close-button { width: 28px; height: 28px; }
+  .menu-section { padding: 0 6px; min-height: 140px; max-height: calc(100vh - 240px); }
+  .menu-item { padding: 6px 3px; gap: 6px; }
+  .menu-icon { width: 28px; height: 28px; }
+  .menu-text { font-size: 11px; }
+  .verification-badge { width: 16px; height: 16px; }
+  .upgrade-section { padding: 4px 6px; }
+  .upgrade-card { padding: 8px; border-radius: 10px; }
+  .upgrade-star { left: 6px; top: 8px; }
+  .star-icon { width: 20px; height: 20px; }
+  .upgrade-info { margin-left: 26px; }
+  .upgrade-title { font-size: 12px; margin-bottom: 1px; }
+  .upgrade-subtitle { font-size: 9px; }
+  .upgrade-button { padding: 5px 10px; font-size: 10px; border-radius: 12px; }
+  .bottom-section { padding: 4px 6px; }
+  .bottom-controls { gap: 6px; max-width: 220px; }
+  .id-button, .language-button { height: 26px; padding: 4px 6px; border-radius: 8px; }
+  .id-label, .id-value, .language-text { font-size: 10px; }
+  .copy-icon { width: 12px; height: 12px; }
+  .flag-wrapper { width: 16px; height: 16px; }
+  .arrow-wrapper { width: 12px; height: 12px; }
+}
+
 /* Small screens scale down */
-@media (max-width: 360px) {
+@media (min-width: 321px) and (max-width: 360px) {
   .profile-container {
     left: 12px;
     right: 12px;
