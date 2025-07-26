@@ -274,9 +274,10 @@ let successTimeout = null
 
 // Methods
 const shareQRCode = () => {
-  if (!termsAccepted.value) return
+  if (!termsAccepted.value || isSharing.value) return
 
   console.log('Sharing QR code...')
+  isSharing.value = true
 
   // Add haptic feedback
   if (window.triggerHaptic) {
