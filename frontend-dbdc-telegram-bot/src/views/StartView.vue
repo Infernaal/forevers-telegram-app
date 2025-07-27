@@ -485,10 +485,8 @@ onMounted(() => {
 /* Tablets and desktop - ≥769px */
 @media (min-width: 769px) {
   .start-view-container {
-    max-width: 480px;
-    margin: 0 auto;
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
-    border-radius: 20px 20px 0 0;
+    width: 100%;
+    margin: 0;
     overflow: hidden;
   }
   
@@ -497,7 +495,9 @@ onMounted(() => {
   }
   
   .content-card {
-    max-width: 420px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
     border-radius: 48px;
     padding: 32px;
     min-height: 460px;
@@ -555,7 +555,7 @@ onMounted(() => {
     height: 60px;
     font-size: 18px;
     border-radius: 30px;
-    max-width: 420px;
+    max-width: 600px;
   }
 }
 
