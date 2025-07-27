@@ -1,14 +1,14 @@
 <template>
-  <div class="cart-view w-full max-w-md mx-auto bg-gray-100 min-h-screen flex flex-col font-montserrat" style="background: #f3f4f6 !important;">
+  <div class="cart-view w-full xs:max-w-full sm:max-w-full ml:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto bg-gray-100 min-h-screen flex flex-col font-montserrat" style="background: #f3f4f6 !important;">
     <!-- Content Container -->
     <div class="content-container bg-gray-100 flex-1 flex flex-col relative">
       <!-- Scrollable Cart Items Area -->
-      <div class="flex-1 overflow-y-auto px-3.5 pt-4 pb-56" v-if="cartItemsCount > 0">
-        <div class="space-y-2">
+      <div class="flex-1 overflow-y-auto xs:px-3 sm:px-3.5 ml:px-4 md:px-5 lg:px-6 xs:pt-3 sm:pt-4 md:pt-5 lg:pt-6 xs:pb-52 sm:pb-56 md:pb-60 lg:pb-64" v-if="cartItemsCount > 0">
+        <div class="xs:space-y-2 sm:space-y-2 md:space-y-3 lg:space-y-4">
           <div
             v-for="item in cartItems"
             :key="item.id"
-            class="bg-white rounded-2xl p-3 border border-dbd-primary/20 relative cart-item"
+            class="bg-white xs:rounded-xl sm:rounded-2xl xs:p-2.5 sm:p-3 md:p-4 lg:p-5 border border-dbd-primary/20 relative cart-item"
           >
             <!-- Country Flag and Code Header -->
             <div class="flex items-center gap-1 mb-3 h-6">
