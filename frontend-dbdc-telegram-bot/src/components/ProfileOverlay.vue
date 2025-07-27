@@ -980,7 +980,16 @@ const selectLanguage = (language) => {
 }
 
 .dropdown-arrow-open {
-  transform: rotate(180deg);
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* Prevent flag icon from being squished */
+.language-content .country-flag {
+  flex-shrink: 0;
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px;
+  min-height: 32px;
 }
 
 /* Language Dropdown */
