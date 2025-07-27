@@ -1046,10 +1046,24 @@ const selectLanguage = (language) => {
   font-weight: 500;
   line-height: 20px;
   flex: 1;
+  margin-right: 24px;
 }
 
 .language-item-check {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
   flex-shrink: 0;
+}
+
+/* Prevent flag icon from being squished in dropdown */
+.language-dropdown-item .country-flag {
+  flex-shrink: 0;
+  width: 24px !important;
+  height: 24px !important;
+  min-width: 24px;
+  min-height: 24px;
 }
 
 @keyframes dropdownSlideUp {
