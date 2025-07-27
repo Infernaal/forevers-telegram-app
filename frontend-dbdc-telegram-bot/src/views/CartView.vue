@@ -249,30 +249,25 @@ const confirmDelete = () => {
 .fixed-bottom-section {
   position: fixed;
   bottom: 0;
-  left: 0;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 10;
-  margin: 0 auto;
+  width: 100%;
 }
 
-/* Responsive max-widths handled by Tailwind classes in template */
-@media (max-width: 320px) {
-  .fixed-bottom-section { max-width: 100%; }
+/* Match parent container max-width to prevent white bars */
+@media (max-width: 639px) {
+  .fixed-bottom-section {
+    max-width: 100vw;
+    left: 0;
+    transform: none;
+  }
 }
-@media (min-width: 321px) and (max-width: 375px) {
-  .fixed-bottom-section { max-width: 100%; }
-}
-@media (min-width: 376px) and (max-width: 430px) {
-  .fixed-bottom-section { max-width: 430px; }
-}
-@media (min-width: 431px) and (max-width: 640px) {
-  .fixed-bottom-section { max-width: 500px; }
-}
-@media (min-width: 641px) and (max-width: 768px) {
-  .fixed-bottom-section { max-width: 600px; }
-}
-@media (min-width: 769px) {
-  .fixed-bottom-section { max-width: 700px; }
+
+@media (min-width: 640px) {
+  .fixed-bottom-section {
+    max-width: 480px;
+  }
 }
 
 .fixed-bottom-section::before {
