@@ -960,6 +960,7 @@ const selectLanguage = (language) => {
   line-height: 26px;
   flex-shrink: 0;
   white-space: nowrap;
+  min-width: 0;
 }
 
 .dropdown-arrow {
