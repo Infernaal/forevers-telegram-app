@@ -273,6 +273,11 @@ const foreversList = ref([
 
 // Modal handlers
 const openRentModal = (item) => {
+  // Don't open modal if no forevers available
+  if (item.availableAmount === 0) {
+    return
+  }
+
   selectedBalance.value = item
   showRentModal.value = true
 
