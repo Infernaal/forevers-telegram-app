@@ -28,16 +28,18 @@
 
         <!-- Exchange Rate Section -->
         <div class="flex justify-center mb-4">
-          <div class="bg-white rounded-full border border-gray-100 px-4 py-2.5 flex items-center shadow-sm w-[236px] h-11">
-            <CountryFlag :country="selectedBalance?.code || 'AE'" class="w-6 h-6 flex-shrink-0 mr-2" />
-            <div class="flex items-center text-sm font-medium">
-              <span class="text-dbd-dark">Forevers {{ selectedBalance?.code || 'UAE' }}</span>
-            </div>
-            <div class="ml-auto flex items-center gap-2">
+          <div class="bg-white rounded-full border border-gray-100 px-3 py-2.5 flex items-center shadow-sm w-[236px] h-11">
+            <!-- F Logo and Amount -->
+            <div class="flex items-center gap-2">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M23 5.53558V1H5.34689V6.75858H1V11.2942H5.34689V22.5807H10.4206V17.0457H14.7116V12.5102H10.4206V11.2942H18.8488V6.75858H10.4206V5.53558H23Z" fill="#2019CE"/>
               </svg>
               <span class="text-dbd-primary font-bold text-xl">{{ rentAmount || '1,225' }}</span>
+            </div>
+            <!-- Country Flag and Name -->
+            <div class="ml-auto flex items-center gap-1">
+              <CountryFlag :country="selectedBalance?.code || 'AE'" class="w-6 h-6 flex-shrink-0" />
+              <span class="text-dbd-dark text-sm font-medium">Forevers {{ selectedBalance?.code || 'UAE' }}</span>
             </div>
           </div>
         </div>
@@ -51,21 +53,52 @@
                 <path d="M22.0457 2.40039H7.50852C6.86852 2.40039 6.41138 2.85753 6.41138 3.49753V7.97753H2.29709C1.65709 8.06896 1.19995 8.52611 1.19995 9.16611C1.19995 9.80611 1.65709 10.2632 2.29709 10.2632H6.41138V20.5033C6.41138 21.1432 6.86852 21.6004 7.50852 21.6004C8.14852 21.6004 8.60567 21.1432 8.60567 20.5033V15.749H13.2685C13.9085 15.749 14.3657 15.2918 14.3657 14.6518C14.3657 14.0118 13.9085 13.5547 13.2685 13.5547H8.60567V10.1718H17.4742C18.1142 10.1718 18.5714 9.71468 18.5714 9.07468C18.5714 8.43468 18.1142 7.97753 17.4742 7.97753H8.60567V4.59468H21.9542C22.5942 4.59468 23.0514 4.13753 23.0514 3.49753C23.0514 2.85753 22.6857 2.40039 22.0457 2.40039Z" fill="#02070E"/>
               </svg>
             </div>
-            
-            <!-- Text Content -->
-            <div class="flex flex-col min-w-0">
+
+            <!-- Input Content -->
+            <div class="flex flex-col flex-1 min-w-0">
               <span class="text-dbd-gray text-xs font-medium">Forevers {{ selectedBalance?.code || 'UAE' }}</span>
-              <span class="text-dbd-dark text-base font-semibold">{{ inputAmount || '250' }}</span>
+              <input
+                ref="inputField"
+                v-model="inputValue"
+                type="number"
+                class="text-dbd-dark text-base font-semibold bg-transparent border-none outline-none w-full p-0 m-0"
+                placeholder="250"
+                @input="handleInput"
+              />
             </div>
           </div>
         </div>
 
         <!-- Terms Checkbox -->
         <div class="px-4 mb-6">
-          <TermsCheckbox 
-            v-model="termsAccepted"
-            @open-terms="$emit('open-terms')"
-          />
+          <div class="flex items-start gap-2">
+            <div
+              @click="termsAccepted = !termsAccepted"
+              class="w-6 h-6 rounded border cursor-pointer flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors"
+              :class="termsAccepted ? 'bg-green-500 border-green-500' : 'bg-white border-dbd-gray'"
+            >
+              <svg v-if="termsAccepted" width="12" height="12" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_200_2862)">
+                  <path d="M9.56331 0.651646C9.11206 0.408665 8.60874 0.877271 8.31369 1.15496C7.63684 1.81448 7.0641 2.57814 6.42191 3.27237C5.71032 4.03603 5.0508 4.79968 4.32186 5.54601C3.90532 5.96255 3.45407 6.4138 3.17638 6.93447C2.55157 6.32699 2.01354 5.66747 1.31931 5.12947C0.815989 4.74764 -0.0170889 4.46995 0.000266917 5.38981C0.0349785 6.58738 1.09368 7.87171 1.87469 8.68741C2.20445 9.03452 2.63835 9.39899 3.14167 9.41635C3.74912 9.45106 4.37393 8.72212 4.7384 8.32294C5.38059 7.6287 5.90126 6.84766 6.49133 6.13611C7.25499 5.19889 8.036 4.27901 8.7823 3.32444C9.2509 2.73434 10.7261 1.27643 9.56331 0.651646ZM0.763893 5.32038C0.746538 5.32038 0.729182 5.32038 0.69447 5.33771C0.625047 5.32038 0.57298 5.303 0.503557 5.26829C0.555624 5.23358 0.642403 5.25093 0.763893 5.32038Z" fill="white"/>
+                </g>
+                <defs>
+                  <clipPath id="clip0_200_2862">
+                    <rect width="10" height="10" fill="white"/>
+                  </clipPath>
+                </defs>
+              </svg>
+            </div>
+            <div class="flex-1 text-base text-dbd-gray leading-relaxed">
+              <span>I agree that I have read the </span>
+              <a
+                href="#"
+                @click.prevent="$emit('open-terms')"
+                class="text-dbd-orange underline"
+              >
+                Terms and Conditions
+              </a>
+            </div>
+          </div>
         </div>
 
         <!-- Buttons -->
@@ -122,6 +155,12 @@ const props = defineProps({
 const emit = defineEmits(['close', 'rent-out', 'open-terms'])
 
 const termsAccepted = ref(false)
+const inputValue = ref(props.inputAmount || '250')
+
+const handleInput = () => {
+  // Remove non-numeric characters
+  inputValue.value = inputValue.value.replace(/[^0-9]/g, '')
+}
 
 const handleRentOut = () => {
   if (!termsAccepted.value) {
@@ -134,7 +173,7 @@ const handleRentOut = () => {
   }
 
   emit('rent-out', {
-    amount: props.inputAmount,
+    amount: inputValue.value,
     balance: props.selectedBalance,
     rentAmount: props.rentAmount
   })
@@ -148,6 +187,7 @@ const closeModal = () => {
   }
 
   termsAccepted.value = false
+  inputValue.value = props.inputAmount || '250'
   emit('close')
 }
 
