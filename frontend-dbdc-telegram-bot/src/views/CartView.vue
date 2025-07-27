@@ -288,12 +288,12 @@ const confirmDelete = () => {
 }
 
 .back-button {
-  @apply xs:h-10 sm:h-12 md:h-14 lg:h-16;
-  @apply xs:min-w-20 sm:min-w-24 md:min-w-28 lg:min-w-32;
+  height: 52px;
+  min-width: 119px;
 }
 
 .buy-button {
-  @apply xs:h-10 sm:h-12 md:h-14 lg:h-16;
+  height: 52px;
   background: linear-gradient(90deg, #2019CE 0%, #473FFF 100%);
   transition: all 0.2s ease;
 }
