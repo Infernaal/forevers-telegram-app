@@ -95,40 +95,40 @@
           </div>
 
           <!-- Values Section -->
-          <div class="bg-purple-50 rounded-xl p-3 mb-3">
-            <div class="flex justify-between items-center mb-2">
-              <span class="text-sm text-gray-600 font-medium">Current value</span>
-              <span class="text-base font-semibold text-gray-700">${{ balance.currentValue.toLocaleString() }}</span>
+          <div class="bg-purple-50 rounded-lg xs:rounded-xl sm:rounded-xl ml:rounded-xl md:rounded-xl lg:rounded-xl xl:rounded-xl p-2.5 xs:p-3 sm:p-3 ml:p-3 md:p-3.5 lg:p-3.5 xl:p-3.5 mb-2.5 xs:mb-3 sm:mb-3 ml:mb-3 md:mb-3.5 lg:mb-3.5 xl:mb-3.5">
+            <div class="flex justify-between items-center mb-1.5 xs:mb-2 sm:mb-2 ml:mb-2 md:mb-2.5 lg:mb-2.5 xl:mb-2.5">
+              <span class="text-xs xs:text-sm sm:text-sm ml:text-sm md:text-base lg:text-base xl:text-base text-gray-600 font-medium">Current value</span>
+              <span class="text-sm xs:text-base sm:text-base ml:text-base md:text-lg lg:text-lg xl:text-lg font-semibold text-gray-700">${{ balance.currentValue.toLocaleString() }}</span>
             </div>
             <div class="flex justify-between items-center">
-              <span class="text-sm text-gray-600 font-medium">Potential worth</span>
-              <span class="text-base font-semibold text-gray-700">${{ balance.potentialWorth.toLocaleString() }}</span>
+              <span class="text-xs xs:text-sm sm:text-sm ml:text-sm md:text-base lg:text-base xl:text-base text-gray-600 font-medium">Potential worth</span>
+              <span class="text-sm xs:text-base sm:text-base ml:text-base md:text-lg lg:text-lg xl:text-lg font-semibold text-gray-700">${{ balance.potentialWorth.toLocaleString() }}</span>
             </div>
           </div>
 
           <!-- Available Section -->
-          <div class="bg-green-100 rounded-xl p-3 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <span class="text-sm text-gray-600 font-medium">Available</span>
+          <div class="bg-green-100 rounded-lg xs:rounded-xl sm:rounded-xl ml:rounded-xl md:rounded-xl lg:rounded-xl xl:rounded-xl p-2.5 xs:p-3 sm:p-3 ml:p-3 md:p-3.5 lg:p-3.5 xl:p-3.5 flex items-center justify-between">
+            <div class="flex items-center gap-1.5 xs:gap-2 sm:gap-2 ml:gap-2 md:gap-2.5 lg:gap-2.5 xl:gap-2.5">
+              <span class="text-xs xs:text-sm sm:text-sm ml:text-sm md:text-base lg:text-base xl:text-base text-gray-600 font-medium">Available</span>
               <template v-if="balance.availableAmount">
-                <span class="w-1.5 h-1.5 bg-gray-400 rounded-full"></span>
-                <div class="flex items-center gap-1">
-                  <svg width="14" height="14" viewBox="0 0 14 14" class="text-black">
+                <span class="w-1 h-1 xs:w-1.5 xs:h-1.5 sm:w-1.5 sm:h-1.5 ml:w-1.5 ml:h-1.5 md:w-2 md:h-2 lg:w-2 lg:h-2 xl:w-2 xl:h-2 bg-gray-400 rounded-full"></span>
+                <div class="flex items-center gap-0.5 xs:gap-1 sm:gap-1 ml:gap-1 md:gap-1 lg:gap-1 xl:gap-1">
+                  <svg class="w-3 h-3 xs:w-3.5 xs:h-3.5 sm:w-3.5 sm:h-3.5 ml:w-3.5 ml:h-3.5 md:w-4 md:h-4 lg:w-4 lg:h-4 xl:w-4 xl:h-4 text-black" viewBox="0 0 14 14">
                     <path d="M12.86 1.4H4.38C4.007 1.4 3.74 1.667 3.74 2.04V4.654H1.34C0.967 4.707 0.7 4.974 0.7 5.347C0.7 5.72 0.967 5.987 1.34 5.987H3.74V11.96C3.74 12.334 4.007 12.6 4.38 12.6C4.754 12.6 5.02 12.334 5.02 11.96V9.187H7.74C8.114 9.187 8.38 8.92 8.38 8.547C8.38 8.174 8.114 7.907 7.74 7.907H5.02V5.934H10.194C10.567 5.934 10.834 5.667 10.834 5.294C10.834 4.92 10.567 4.654 10.194 4.654H5.02V2.68H12.807C13.18 2.68 13.447 2.414 13.447 2.04C13.447 1.667 13.234 1.4 12.86 1.4Z" fill="currentColor"/>
                   </svg>
-                  <span class="text-sm font-medium text-black">{{ balance.availableAmount }}</span>
+                  <span class="text-xs xs:text-sm sm:text-sm ml:text-sm md:text-base lg:text-base xl:text-base font-medium text-black">{{ balance.availableAmount }}</span>
                 </div>
               </template>
               <template v-else>
-                <span class="text-sm text-gray-600 font-medium">without restrictions</span>
+                <span class="text-xs xs:text-sm sm:text-sm ml:text-sm md:text-base lg:text-base xl:text-base text-gray-600 font-medium">without restrictions</span>
               </template>
             </div>
 
             <button
               @click="showInfoTooltip = true"
-              class="w-6 h-6 border border-gray-300 bg-white rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors"
+              class="w-5 h-5 xs:w-6 xs:h-6 sm:w-6 sm:h-6 ml:w-6 ml:h-6 md:w-7 md:h-7 lg:w-7 lg:h-7 xl:w-7 xl:h-7 border border-gray-300 bg-white rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors"
             >
-              <svg width="20" height="20" viewBox="0 0 20 20" class="text-gray-600">
+              <svg class="w-4 h-4 xs:w-5 xs:h-5 sm:w-5 sm:h-5 ml:w-5 ml:h-5 md:w-6 md:h-6 lg:w-6 lg:h-6 xl:w-6 xl:h-6 text-gray-600" viewBox="0 0 20 20">
                 <path d="M10 2C5.5888 2 2 5.58885 2 10C2 14.4112 5.5888 18 10 18C14.4112 18 18 14.4112 18 10C18 5.58885 14.4112 2 10 2ZM10 16.5455C6.39079 16.5455 3.45455 13.6092 3.45455 10C3.45455 6.39088 6.39079 3.45455 10 3.45455C13.6092 3.45455 16.5455 6.39088 16.5455 10C16.5455 13.6092 13.6092 16.5455 10 16.5455Z" fill="currentColor"/>
                 <path d="M10 5.39453C9.46543 5.39453 9.03052 5.82973 9.03052 6.36466C9.03052 6.89911 9.46543 7.33393 10 7.33393C10.5346 7.33393 10.9695 6.89911 10.9695 6.36466C10.9695 5.82973 10.5346 5.39453 10 5.39453Z" fill="currentColor"/>
                 <path d="M9.99998 8.78711C9.59833 8.78711 9.27271 9.11273 9.27271 9.51438V13.878C9.27271 14.2797 9.59833 14.6053 9.99998 14.6053C10.4016 14.6053 10.7273 14.2797 10.7273 13.878V9.51438C10.7273 9.11273 10.4016 8.78711 9.99998 8.78711Z" fill="currentColor"/>
