@@ -336,6 +336,100 @@ const copyUserID = async () => {
   -webkit-backdrop-filter: blur(32px);
 }
 
+/* Profile Header Section */
+.profile-header-section {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  z-index: 2;
+}
+
+.profile-header-container {
+  width: 100%;
+  height: 96px;
+  background: rgba(96, 95, 135, 0.24);
+  border: 1px solid #D8D8D8;
+  border-radius: 1000px 20px 20px 1000px;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  gap: 12px;
+}
+
+.profile-avatar {
+  flex-shrink: 0;
+}
+
+.avatar-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 0.727px solid #7E73D6;
+}
+
+.profile-user-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 8px;
+}
+
+.silver-badge-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 16px 2px 2px;
+  background: rgba(110, 107, 169, 0.90);
+  border: 1px solid #D8D8D8;
+  border-radius: 24px;
+  width: fit-content;
+}
+
+.silver-badge-icon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.silver-badge-text {
+  color: #FAFAFA;
+  font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.profile-user-name {
+  color: white;
+  font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 26px;
+  margin: 0;
+}
+
+.profile-arrow-btn {
+  width: 44px;
+  height: 44px;
+  background: #EFEEFF;
+  border: 1px solid #2019CE;
+  border-radius: 0 1000px 1000px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.profile-arrow-btn:hover {
+  background: #E0D9FF;
+  transform: scale(1.05);
+}
+
 /* Menu Container */
 .menu-container {
   position: relative;
