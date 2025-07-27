@@ -971,6 +971,7 @@ const selectLanguage = (language) => {
   justify-content: center;
   flex-shrink: 0;
   transition: transform 0.2s ease;
+  margin-left: auto;
 }
 
 .dropdown-arrow-open {
