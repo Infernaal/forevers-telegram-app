@@ -82,6 +82,7 @@
           <TermsCheckbox
             v-model="termsAccepted"
             @open-terms="$emit('open-terms')"
+            class="terms-checkbox-dark"
           />
         </div>
 
