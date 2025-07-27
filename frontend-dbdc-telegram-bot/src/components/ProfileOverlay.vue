@@ -354,6 +354,7 @@ const copyUserID = async () => {
   align-items: center;
   padding: 8px;
   gap: 12px;
+  overflow: hidden;
 }
 
 .profile-avatar {
