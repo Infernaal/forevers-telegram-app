@@ -224,6 +224,9 @@
           </button>
         </div>
 
+        <!-- Vertical Divider -->
+        <div class="vertical-divider"></div>
+
         <!-- Language Section -->
         <div class="language-section" @click="toggleLanguageDropdown">
           <div class="language-content">
@@ -714,13 +717,13 @@ const selectLanguage = (language) => {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 33px;
+  gap: 20px;
   height: 44px;
 }
 
 /* ID Section */
 .id-section {
-  width: 131px;
+  width: 145px;
   height: 44px;
   background: rgba(255, 255, 255, 0.30);
   border: 1px solid rgba(255, 255, 255, 0.40);
@@ -733,6 +736,17 @@ const selectLanguage = (language) => {
   padding: 6px;
   position: relative;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Vertical Divider */
+.vertical-divider {
+  width: 2px;
+  height: 24px;
+  background: #E2E2E2;
+  border: 1px solid #B7B7B7;
+  border-radius: 30px;
+  opacity: 0.4;
+  flex-shrink: 0;
 }
 
 .id-section-copied {
