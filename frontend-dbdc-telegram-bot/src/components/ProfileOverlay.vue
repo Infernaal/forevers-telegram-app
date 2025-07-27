@@ -977,12 +977,13 @@ const selectLanguage = (language) => {
 .language-dropdown-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
+  gap: 10px;
+  padding: 6px 12px;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
-  min-height: 40px;
+  min-height: 36px;
+  justify-content: space-between;
 }
 
 .language-dropdown-item:hover {
@@ -993,19 +994,12 @@ const selectLanguage = (language) => {
   background: rgba(255, 255, 255, 0.15);
 }
 
-.language-item-text {
+.language-item-code {
   color: #FAFAFA;
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
   flex: 1;
-}
-
-.language-item-code {
-  color: #B7B7B7;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 16px;
 }
 
 .language-item-check {
