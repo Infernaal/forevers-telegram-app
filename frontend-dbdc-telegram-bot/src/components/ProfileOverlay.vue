@@ -262,9 +262,8 @@ const copyUserID = async () => {
 /* Triangle Pointer */
 .triangle-pointer {
   position: absolute;
-  left: 50%;
-  bottom: 110px;
-  transform: translateX(-50%);
+  left: 24px;
+  bottom: 832px;
   z-index: 60;
 }
 
