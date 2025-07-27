@@ -254,502 +254,73 @@ const closeProfileMenu = () => {
 </script>
 
 <style scoped>
-/* Bottom Navigation Container - Fixed positioning and scroll prevention */
-.bottom-nav-container {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: white;
-  border-radius: 16px 16px 0 0;
-  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08), 0 -2px 6px rgba(0, 0, 0, 0.04);
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
-  z-index: 50;
-  
-  /* Prevent scroll interference and rubber band effect */
+/* Performance optimizations and accessibility */
+* {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+/* Prevent scroll interference */
+.fixed {
   touch-action: none;
   overscroll-behavior: none;
   -webkit-overflow-scrolling: auto;
   transform: translateZ(0);
   will-change: transform;
-  
-  /* Enhanced safe area support */
-  padding-bottom: env(safe-area-inset-bottom, 0px);
-  
-  /* Prevent content shift during interaction */
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
 
-/* Navigation content container */
-.nav-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 14px 12px;
-  padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px));
-  min-height: 72px;
-  box-sizing: border-box;
-}
-
-/* Navigation items container */
-.nav-items-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 100%;
-  margin: 0 auto;
-  gap: 8px;
-  padding: 0 8px;
-}
-
-/* Individual navigation buttons */
-.nav-item-button {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-  gap: 6px;
-  padding: 8px 6px;
-  min-width: 52px;
-  max-width: 80px;
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  position: relative;
-  
-  /* Enhanced touch interaction */
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
-  user-select: none;
-  
-  /* Smooth transitions */
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  
-  /* Prevent layout shift */
-  transform: translateZ(0);
-}
-
-/* Navigation item labels */
-.nav-item-label {
-  font-size: 11px;
-  line-height: 1.2;
-  font-weight: 500;
-  display: block;
-  width: 100%;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  text-align: center;
-}
-
-/* Icon containers */
-.nav-icon-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 12px;
-}
-
-.nav-icon-inactive {
-  width: 28px;
-  height: 28px;
-}
-
-.nav-icon-active {
-  width: 36px;
-  height: 36px;
-  background: #2563eb;
-}
-
-/* Icon SVG sizing */
-.nav-icon-svg-inactive {
-  width: 20px;
-  height: 20px;
-}
-
-.nav-icon-svg-active {
-  width: 22px;
-  height: 22px;
-}
-
-/* Profile specific styles */
-.profile-avatar {
-  width: 28px;
-  height: 28px;
-}
-
-.profile-image {
-  width: 28px;
-  height: 28px;
-}
-
-.profile-badge {
-  position: absolute;
-  bottom: -2px;
-  right: -2px;
-  background: #d1d5db;
-  border-radius: 50%;
-  border: 2px solid white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 12px;
-  height: 12px;
-}
-
-.profile-star {
-  width: 6px;
-  height: 6px;
-  color: white;
-}
-
-.profile-arrow {
-  position: absolute;
-  bottom: -2px;
-  right: -2px;
-  background: #f3f4f6;
-  border: 1px solid #d1d5db;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 10px;
-  height: 10px;
-}
-
-.profile-arrow-icon {
-  width: 6px;
-  height: 4px;
-}
-
-/* Cart badge styles */
-.cart-counter-badge {
-  position: absolute;
-  top: -4px;
-  right: -4px;
-  background: #f97316;
-  color: white;
-  font-size: 10px;
-  font-weight: 700;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 20px;
-  line-height: 1;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-}
-
-/* Touch feedback */
-.nav-item-button:active {
-  transform: scale(0.95);
-  background: rgba(0, 0, 0, 0.02);
-  border-radius: 12px;
-}
-
-/* Small mobile devices (iPhone SE, small Android) - под 375px */
-@media (max-width: 374px) {
-  .nav-content {
-    padding: 10px 6px;
-    padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
-    min-height: 64px;
-  }
-  
-  .nav-items-container {
-    gap: 4px;
-    padding: 0 4px;
-  }
-  
-  .nav-item-button {
-    min-width: 44px;
-    max-width: 58px;
-    padding: 6px 3px;
-    gap: 4px;
-  }
-  
-  .nav-item-label {
-    font-size: 10px;
-    line-height: 1.1;
-  }
-  
-  .nav-icon-inactive {
-    width: 24px;
-    height: 24px;
-  }
-  
-  .nav-icon-active {
-    width: 30px;
-    height: 30px;
-  }
-  
-  .nav-icon-svg-inactive {
-    width: 16px;
-    height: 16px;
-  }
-  
-  .nav-icon-svg-active {
-    width: 18px;
-    height: 18px;
-  }
-  
-  .profile-avatar,
-  .profile-image {
-    width: 24px;
-    height: 24px;
-  }
-  
-  .profile-badge {
-    width: 10px;
-    height: 10px;
-  }
-  
-  .profile-star {
-    width: 5px;
-    height: 5px;
-  }
-  
-  .profile-arrow {
-    width: 8px;
-    height: 8px;
-  }
-  
-  .profile-arrow-icon {
-    width: 4px;
-    height: 3px;
-  }
-  
-  .cart-counter-badge {
-    width: 16px;
-    height: 16px;
-    font-size: 8px;
-    top: -2px;
-    right: -2px;
-  }
-}
-
-/* Regular mobile devices 375px - 430px */
-@media (min-width: 375px) and (max-width: 430px) {
-  .nav-content {
-    padding: 12px 8px;
-    padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
-    min-height: 68px;
-  }
-  
-  .nav-items-container {
-    gap: 6px;
-    padding: 0 6px;
-  }
-  
-  .nav-item-button {
-    min-width: 50px;
-    max-width: 70px;
-    padding: 8px 5px;
-  }
-  
-  .nav-item-label {
-    font-size: 11px;
-  }
-}
-
-/* Large mobile and small tablets 431px - 768px */
-@media (min-width: 431px) and (max-width: 768px) {
-  .nav-content {
-    padding: 16px 16px;
-    padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
-    min-height: 76px;
-  }
-  
-  .nav-items-container {
-    max-width: 480px;
-    gap: 12px;
-    padding: 0 12px;
-  }
-  
-  .nav-item-button {
-    min-width: 60px;
-    max-width: 90px;
-    padding: 10px 8px;
-    gap: 8px;
-  }
-  
-  .nav-item-label {
-    font-size: 12px;
-    font-weight: 600;
-  }
-  
-  .nav-icon-inactive {
-    width: 32px;
-    height: 32px;
-  }
-  
-  .nav-icon-active {
-    width: 40px;
-    height: 40px;
-  }
-  
-  .nav-icon-svg-inactive {
-    width: 22px;
-    height: 22px;
-  }
-  
-  .nav-icon-svg-active {
-    width: 24px;
-    height: 24px;
-  }
-}
-
-/* Tablets and desktop 769px+ */
-@media (min-width: 769px) {
-  .bottom-nav-container {
-    max-width: 480px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 20px 20px 0 0;
-    border-left: 1px solid rgba(0, 0, 0, 0.1);
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
-  }
-  
-  .nav-content {
-    padding: 18px 20px;
-    padding-bottom: calc(18px + env(safe-area-inset-bottom, 0px));
-    min-height: 82px;
-  }
-  
-  .nav-items-container {
-    max-width: 400px;
-    gap: 16px;
-    padding: 0 16px;
-  }
-  
-  .nav-item-button {
-    min-width: 65px;
-    max-width: 100px;
-    padding: 12px 10px;
-    gap: 10px;
-  }
-  
-  .nav-item-label {
-    font-size: 13px;
-    font-weight: 600;
-  }
-  
-  .nav-icon-inactive {
-    width: 34px;
-    height: 34px;
-  }
-  
-  .nav-icon-active {
-    width: 42px;
-    height: 42px;
-  }
-  
-  .nav-icon-svg-inactive {
-    width: 24px;
-    height: 24px;
-  }
-  
-  .nav-icon-svg-active {
-    width: 26px;
-    height: 26px;
-  }
-}
-
 /* Landscape orientation adjustments */
 @media (max-height: 500px) and (orientation: landscape) {
-  .nav-content {
-    padding: 8px 8px;
-    padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
-    min-height: 56px;
+  .min-h-16 {
+    min-height: 3.5rem !important;
   }
-  
-  .nav-item-button {
-    padding: 6px 4px;
-    gap: 3px;
+
+  .py-2\.5 {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
   }
-  
-  .nav-item-label {
-    font-size: 9px;
+
+  .gap-1 {
+    gap: 0.1875rem !important;
   }
-  
-  .nav-icon-inactive {
-    width: 22px;
-    height: 22px;
-  }
-  
-  .nav-icon-active {
-    width: 28px;
-    height: 28px;
-  }
-  
-  .nav-icon-svg-inactive {
-    width: 14px;
-    height: 14px;
-  }
-  
-  .nav-icon-svg-active {
-    width: 16px;
-    height: 16px;
+
+  .text-\[10px\] {
+    font-size: 9px !important;
   }
 }
 
 /* High DPI displays */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .bottom-nav-container {
-    border-top: 0.5px solid rgba(0, 0, 0, 0.1);
+  .border-t {
+    border-top-width: 0.5px !important;
   }
 }
 
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
-  .bottom-nav-container {
-    background-color: #1a1a1a;
-    border-top-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.3), 0 -2px 6px rgba(0, 0, 0, 0.2);
+  .bg-white {
+    background-color: #1a1a1a !important;
+    border-top-color: rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.3), 0 -2px 6px rgba(0, 0, 0, 0.2) !important;
   }
-  
-  .nav-item-button:active {
-    background: rgba(255, 255, 255, 0.05);
+
+  .active\:bg-black:active {
+    background: rgba(255, 255, 255, 0.05) !important;
   }
 }
 
-/* Accessibility and reduced motion */
+/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-  .nav-item-button,
-  .nav-icon-container,
-  .profile-arrow-icon {
-    transition: none;
+  .transition-all,
+  .transition-transform {
+    transition: none !important;
   }
-  
-  .nav-item-button:active {
-    transform: none;
-  }
-}
 
-/* Enhanced safe area support for different iOS versions */
-@supports (padding-bottom: env(safe-area-inset-bottom)) {
-  .bottom-nav-container {
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-  
-  .nav-content {
-    padding-bottom: calc(14px + env(safe-area-inset-bottom));
-  }
-}
-
-@supports (padding-bottom: constant(safe-area-inset-bottom)) {
-  .bottom-nav-container {
-    padding-bottom: constant(safe-area-inset-bottom);
-  }
-  
-  .nav-content {
-    padding-bottom: calc(14px + constant(safe-area-inset-bottom));
+  .active\:scale-95:active {
+    transform: none !important;
   }
 }
 
@@ -768,6 +339,4 @@ const closeProfileMenu = () => {
   opacity: 0;
   transform: scale(0);
 }
-
-
 </style>
