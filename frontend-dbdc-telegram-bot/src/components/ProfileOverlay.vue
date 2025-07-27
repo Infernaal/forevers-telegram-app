@@ -391,7 +391,7 @@ const selectLanguage = (language) => {
 .triangle-pointer {
   position: absolute;
   left: 34px;
-  bottom: calc(125px + env(safe-area-inset-bottom, 0px));
+  bottom: calc(110px + env(safe-area-inset-bottom, 0px));
   z-index: 65;
 }
 
@@ -409,7 +409,7 @@ const selectLanguage = (language) => {
   position: absolute;
   left: 8px;
   right: 8px;
-  bottom: calc(125px + env(safe-area-inset-bottom, 0px));
+  bottom: calc(110px + env(safe-area-inset-bottom, 0px));
   height: calc(580px - env(safe-area-inset-bottom, 0px));
   max-height: calc(100vh - 130px - env(safe-area-inset-bottom, 0px));
   border-radius: 20px;
@@ -1086,13 +1086,13 @@ const selectLanguage = (language) => {
   .profile-dropdown {
     left: 4px;
     right: 4px;
-    bottom: calc(100px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(115px + env(safe-area-inset-bottom, 0px));
     height: calc(560px - env(safe-area-inset-bottom, 0px));
     max-height: calc(100vh - 120px - env(safe-area-inset-bottom, 0px));
   }
 
   .triangle-pointer {
-    bottom: calc(90px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(105px + env(safe-area-inset-bottom, 0px));
     left: 30px;
   }
 
@@ -1109,11 +1109,11 @@ const selectLanguage = (language) => {
 /* iPhone Pro Max and larger screens */
 @media (min-width: 376px) and (max-width: 430px) {
   .triangle-pointer {
-    bottom: calc(105px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(120px + env(safe-area-inset-bottom, 0px));
   }
 
   .profile-dropdown {
-    bottom: calc(115px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(130px + env(safe-area-inset-bottom, 0px));
     height: calc(580px - env(safe-area-inset-bottom, 0px));
     max-height: calc(100vh - 135px - env(safe-area-inset-bottom, 0px));
   }
@@ -1149,11 +1149,11 @@ const selectLanguage = (language) => {
 /* Ensure triangle doesn't overlap with Telegram's bottom UI on shorter screens */
 @media (max-height: 667px) {
   .triangle-pointer {
-    bottom: calc(85px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(100px + env(safe-area-inset-bottom, 0px));
   }
 
   .profile-dropdown {
-    bottom: calc(95px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(110px + env(safe-area-inset-bottom, 0px));
     height: calc(500px - env(safe-area-inset-bottom, 0px));
   }
 }
@@ -1161,11 +1161,11 @@ const selectLanguage = (language) => {
 /* iPhone SE and very small screens */
 @media (max-height: 568px) {
   .triangle-pointer {
-    bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(95px + env(safe-area-inset-bottom, 0px));
   }
 
   .profile-dropdown {
-    bottom: calc(90px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(105px + env(safe-area-inset-bottom, 0px));
     height: calc(450px - env(safe-area-inset-bottom, 0px));
   }
 }
@@ -1173,11 +1173,11 @@ const selectLanguage = (language) => {
 /* Landscape mode adaptations for mobile */
 @media (orientation: landscape) and (max-height: 500px) {
   .triangle-pointer {
-    bottom: calc(70px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(85px + env(safe-area-inset-bottom, 0px));
   }
 
   .profile-dropdown {
-    bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(95px + env(safe-area-inset-bottom, 0px));
     height: calc(350px - env(safe-area-inset-bottom, 0px));
   }
 }
