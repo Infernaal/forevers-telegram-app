@@ -1064,7 +1064,11 @@ const selectLanguage = (language) => {
   }
   
   .start-section {
-    bottom: 96px;
+    bottom: 84px;
+  }
+
+  .triangle-pointer {
+    bottom: 94px;
   }
   
   .bottom-controls {
