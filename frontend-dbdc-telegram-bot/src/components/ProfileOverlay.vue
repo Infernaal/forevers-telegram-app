@@ -699,6 +699,13 @@ const copyUserID = async () => {
   justify-content: space-between;
   padding: 6px;
   position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.id-section-copied {
+  border: 1px solid #07B80E;
+  background: #129E0F;
+  transform: scale(1.02);
 }
 
 .id-content {
@@ -739,6 +746,97 @@ const copyUserID = async () => {
 
 .copy-button:hover {
   background: #f3f4f6;
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(32, 25, 206, 0.3);
+}
+
+.copy-button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* ID Copied Content */
+.id-copied-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 6px;
+  box-sizing: border-box;
+  animation: fadeInScale 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.id-copied-text {
+  color: #FFF;
+  font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 22px;
+  text-align: center;
+  animation: slideInLeft 0.3s ease-out 0.1s both;
+}
+
+.id-copied-icon {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: bounceIn 0.5s ease-out 0.2s both;
+}
+
+.id-tick-svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Animations */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(-10deg);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.1) rotate(5deg);
+  }
+  80% {
+    transform: scale(0.95) rotate(-2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
 }
 
 /* Language Section */
