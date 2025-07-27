@@ -110,7 +110,6 @@ const navigateToTransactions = () => {
 <style scoped>
 .wallet-view {
   width: 100%;
-  max-width: 430px;
   margin: 0 auto;
   background: #f3f4f6;
   min-height: 100vh;
@@ -454,158 +453,160 @@ const navigateToTransactions = () => {
 /* Large mobile and small tablets - 431px to 768px */
 @media (min-width: 431px) and (max-width: 768px) {
   .wallet-view {
-    max-width: 480px;
+    width: 100%;
   }
-  
+
   .content-container {
-    padding: 18px 18px 100px 18px;
+    padding: 24px 24px 110px 24px;
+    max-width: 800px;
+    margin: 0 auto;
   }
-  
+
   .forevers-balance-section,
   .loyalty-section {
-    margin-bottom: 18px;
+    margin-bottom: 24px;
   }
-  
+
   .balance-card,
   .loyalty-card,
   .bonus-card {
-    border-radius: 18px;
-    padding: 18px;
+    border-radius: 24px;
+    padding: 28px;
   }
-  
+
   .balance-title {
-    font-size: 20px;
-  }
-  
-  .forevers-logo {
-    width: 36px;
-    height: 36px;
-  }
-  
-  .balance-value {
     font-size: 28px;
   }
-  
+
+  .forevers-logo {
+    width: 48px;
+    height: 48px;
+  }
+
+  .balance-value {
+    font-size: 36px;
+  }
+
   .loyalty-header,
   .bonus-header {
-    margin-bottom: 18px;
+    margin-bottom: 24px;
   }
-  
+
   .icon-wrapper {
-    width: 44px;
-    height: 44px;
+    width: 56px;
+    height: 56px;
     background: #FAFAFA;
     box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.04);
   }
-  
+
   .loyalty-title,
   .bonus-title {
-    font-size: 17px;
+    font-size: 22px;
   }
-  
+
   .amount-display {
-    padding: 18px;
-    margin-bottom: 18px;
-    border-radius: 18px;
-  }
-  
-  .amount-value {
-    font-size: 28px;
-  }
-  
-  .amount-label {
-    font-size: 15px;
-  }
-  
-  .history-btn {
-    padding: 14px 28px;
-    font-size: 15px;
-    border-radius: 28px;
-  }
-  
-  .bonus-section {
+    padding: 24px;
     margin-bottom: 24px;
+    border-radius: 24px;
+  }
+
+  .amount-value {
+    font-size: 36px;
+  }
+
+  .amount-label {
+    font-size: 18px;
+  }
+
+  .history-btn {
+    padding: 18px 36px;
+    font-size: 18px;
+    border-radius: 36px;
+  }
+
+  .bonus-section {
+    margin-bottom: 32px;
   }
 }
 
 /* Tablets and desktop - ≥769px */
 @media (min-width: 769px) {
   .wallet-view {
-    max-width: 480px;
-    margin: 20px auto;
-    border-radius: 20px;
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin: 0;
     overflow: hidden;
   }
-  
+
   .content-container {
-    padding: 24px 24px 110px 24px;
+    padding: 40px 40px 120px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
   }
-  
+
   .forevers-balance-section,
   .loyalty-section {
-    margin-bottom: 24px;
+    margin-bottom: 32px;
   }
-  
+
   .balance-card,
   .loyalty-card,
   .bonus-card {
-    border-radius: 20px;
-    padding: 24px;
+    border-radius: 32px;
+    padding: 40px;
   }
-  
+
   .balance-title {
-    font-size: 22px;
+    font-size: 36px;
   }
-  
+
   .forevers-logo {
-    width: 40px;
-    height: 40px;
+    width: 64px;
+    height: 64px;
   }
-  
+
   .balance-value {
-    font-size: 32px;
+    font-size: 48px;
   }
-  
+
   .loyalty-header,
   .bonus-header {
-    margin-bottom: 20px;
+    margin-bottom: 32px;
   }
-  
+
   .icon-wrapper {
-    width: 48px;
-    height: 48px;
+    width: 72px;
+    height: 72px;
     background: #FAFAFA;
     box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.04);
   }
-  
+
   .loyalty-title,
   .bonus-title {
-    font-size: 18px;
+    font-size: 28px;
   }
-  
+
   .amount-display {
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 20px;
-  }
-  
-  .amount-value {
-    font-size: 32px;
-  }
-  
-  .amount-label {
-    font-size: 16px;
-  }
-  
-  .history-btn {
-    padding: 16px 32px;
-    font-size: 16px;
+    padding: 32px;
+    margin-bottom: 32px;
     border-radius: 32px;
   }
-  
+
+  .amount-value {
+    font-size: 48px;
+  }
+
+  .amount-label {
+    font-size: 22px;
+  }
+
+  .history-btn {
+    padding: 24px 48px;
+    font-size: 22px;
+    border-radius: 48px;
+  }
+
   .bonus-section {
-    margin-bottom: 32px;
+    margin-bottom: 48px;
   }
 }
 
