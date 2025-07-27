@@ -341,172 +341,36 @@ const confirmDelete = () => {
   background-color: #f3f4f6;
 }
 
-/* Mobile optimizations for Telegram mini app */
-@media (max-width: 375px) {
-  .cart-view {
-    max-width: 100%;
-  }
-
-  .overflow-y-auto {
-    padding-left: 12px;
-    padding-right: 12px;
-    padding-bottom: 220px; /* Space for fixed bottom */
-  }
-
-  .fixed-bottom-section {
-    max-width: 100%;
-  }
-
-  /* Bottom section for mobile */
-  .px-3-5 {
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-  }
-
-  .cart-item {
-    padding: 12px;
-  }
-
-  /* Mobile button optimizations */
-  .h-12 {
-    height: 44px !important;
-  }
-
-  .min-w-24 {
-    min-width: 90px !important;
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-  }
-
-  .flex-1 {
-    font-size: 16px !important;
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-  }
-
-  /* Smaller text for mobile */
-  .text-xl {
-    font-size: 18px;
-    line-height: 22px;
-  }
-
-  .text-lg {
-    font-size: 16px;
-    line-height: 20px;
-  }
-
-  /* Modal responsive styles for mobile */
-  .modal-title {
-    font-size: 0.875rem;
-  }
-
-  .modal-close-btn {
-    width: 2.25rem;
-    height: 2.25rem;
-  }
+/* Responsive modal styling - using Tailwind's responsive approach where possible */
+.modal-title {
+  @apply xs:text-sm sm:text-base md:text-lg lg:text-xl;
+  color: #02070E;
+  margin: 0;
+  font-weight: 500;
 }
 
-@media (min-width: 376px) and (max-width: 430px) {
-  .cart-view {
-    max-width: 100%;
-  }
-
-  .overflow-y-auto {
-    padding-left: 14px;
-    padding-right: 14px;
-    padding-bottom: 220px; /* Space for fixed bottom */
-  }
-
-  .fixed-bottom-section {
-    max-width: 430px;
-  }
-
-  /* Bottom section padding */
-  .px-3-5 {
-    padding-left: 14px !important;
-    padding-right: 14px !important;
-  }
-
-  .cart-item {
-    padding: 12px;
-  }
+.modal-close-btn {
+  @apply xs:w-9 xs:h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #FAFAFA;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
-/* Tablets and larger phones */
-@media (min-width: 431px) and (max-width: 768px) {
-  .cart-view {
-    max-width: 420px;
-    background: #f3f4f6 !important;
-  }
-
-  body {
-    background: #f3f4f6 !important;
-  }
-
-  .overflow-y-auto {
-    padding-bottom: 220px; /* Space for fixed bottom */
-  }
-
-  .fixed-bottom-section {
-    max-width: 420px;
-  }
-
-  .h-12 {
-    height: 52px !important;
-  }
-
-  .min-w-24 {
-    min-width: 120px !important;
-  }
-
-  .text-lg {
-    font-size: 18px !important;
-  }
-
-  /* Modal styles for tablets */
-  .modal-title {
-    font-size: 1.125rem;
-  }
-
-  .modal-close-btn {
-    width: 3rem;
-    height: 3rem;
-  }
+.modal-close-btn:hover {
+  background-color: #f3f4f6;
 }
 
-/* Desktop and large tablets */
-@media (min-width: 769px) {
-  .cart-view {
-    max-width: 480px;
-    background: #f3f4f6 !important;
-  }
-
-  body {
-    background: #f3f4f6 !important;
-  }
-
-  .overflow-y-auto {
-    padding-bottom: 220px; /* Space for fixed bottom */
-  }
-
-  .fixed-bottom-section {
-    max-width: 480px;
-  }
-
-  /* Modal styles for desktop */
-  .modal-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-  }
-
-  .modal-close-btn {
-    width: 3.25rem;
-    height: 3.25rem;
-  }
-
-  .modal-header {
-    padding: 1.5rem;
-  }
+.modal-header {
+  @apply xs:p-4 sm:p-5 md:p-6 lg:p-7;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 /* Support for safe areas on iOS - handled by BottomNavigation */
