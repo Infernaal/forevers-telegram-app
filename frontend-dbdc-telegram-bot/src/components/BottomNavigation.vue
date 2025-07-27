@@ -72,7 +72,7 @@
           >
             <div
               :class="[
-                'flex items-center justify-center transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] rounded-3',
+                'flex items-center justify-center transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] rounded-xl xs:rounded-xl sm:rounded-xl ml:rounded-2xl md:rounded-2xl lg:rounded-2xl xl:rounded-2xl 2xl:rounded-2xl',
                 activeTab === 'wallet'
                   ? 'w-7 h-7 xs:w-7 xs:h-7 sm:w-8 sm:h-8 ml:w-10 ml:h-10 md:w-[42px] md:h-[42px] lg:w-[42px] lg:h-[42px] bg-blue-600'
                   : 'w-6 h-6 xs:w-6 xs:h-6 sm:w-7 sm:h-7 ml:w-8 ml:h-8 md:w-[34px] md:h-[34px] lg:w-[34px] lg:h-[34px]'
