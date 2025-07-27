@@ -237,8 +237,7 @@
         </div>
       </div>
 
-      <!-- Scroll indicator -->
-      <div class="scroll-indicator"></div>
+
     </div>
   </div>
 </template>
@@ -321,7 +320,7 @@ const copyUserID = async () => {
   left: 8px;
   right: 8px;
   bottom: 110px;
-  height: 722px;
+  height: 580px;
   border-radius: 20px;
   overflow: hidden;
   z-index: 55;
@@ -436,7 +435,7 @@ const copyUserID = async () => {
   z-index: 1;
   padding: 12px;
   padding-top: 120px;
-  padding-bottom: 180px;
+  padding-bottom: 160px;
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
@@ -725,19 +724,7 @@ const copyUserID = async () => {
   flex-shrink: 0;
 }
 
-/* Scroll indicator */
-.scroll-indicator {
-  position: absolute;
-  right: 12px;
-  top: 200px;
-  width: 2px;
-  height: 24px;
-  background: #E2E2E2;
-  border: 1px solid #B7B7B7;
-  border-radius: 30px;
-  opacity: 0.4;
-  z-index: 1;
-}
+
 
 /* Responsive */
 @media (max-width: 375px) {
