@@ -64,7 +64,7 @@ if (window.Telegram && window.Telegram.WebApp) {
   // Handle window resize for breakpoint updates
   window.addEventListener('resize', updateBreakpoints)
 
-  // Handle theme changes
+  // Handle theme changes with responsive considerations
   tg.onEvent('themeChanged', () => {
     // Update CSS variables based on theme
     const themeParams = tg.themeParams
@@ -74,6 +74,21 @@ if (window.Telegram && window.Telegram.WebApp) {
     if (themeParams.text_color) {
       document.documentElement.style.setProperty('--tg-text-color', themeParams.text_color)
     }
+    if (themeParams.hint_color) {
+      document.documentElement.style.setProperty('--tg-hint-color', themeParams.hint_color)
+    }
+    if (themeParams.link_color) {
+      document.documentElement.style.setProperty('--tg-link-color', themeParams.link_color)
+    }
+    if (themeParams.button_color) {
+      document.documentElement.style.setProperty('--tg-button-color', themeParams.button_color)
+    }
+    if (themeParams.button_text_color) {
+      document.documentElement.style.setProperty('--tg-button-text-color', themeParams.button_text_color)
+    }
+
+    // Apply theme class for responsive styling
+    document.documentElement.setAttribute('data-theme', tg.colorScheme || 'light')
   })
 
   // Add haptic feedback support
