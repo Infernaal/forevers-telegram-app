@@ -735,13 +735,18 @@ const copyUserID = async () => {
   height: 32px;
   background: white;
   border: 1.2px solid #D8D8D8;
-  border-radius: 50%;
+  border-radius: 0 100px 100px 0;
+  border-left: none;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s ease;
   flex-shrink: 0;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .copy-button:hover {
