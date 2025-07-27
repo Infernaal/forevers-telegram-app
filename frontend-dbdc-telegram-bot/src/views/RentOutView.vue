@@ -171,6 +171,7 @@ const showTermsModal = ref(false)
 const showSuccessNotification = ref(false)
 const selectedBalance = ref(null)
 const inputAmount = ref('250')
+const termsAgreed = ref(false)
 
 // Computed property for rent amount calculation
 const calculatedRentAmount = computed(() => {
