@@ -332,7 +332,7 @@ const closeTermsModal = () => {
 const agreeToTerms = () => {
   showTermsModal.value = false
   // Auto-check the terms checkbox in the rent modal
-  // This is handled by emitting an event to the RentOutModal
+  termsAgreed.value = true
 }
 
 const goBack = () => {
