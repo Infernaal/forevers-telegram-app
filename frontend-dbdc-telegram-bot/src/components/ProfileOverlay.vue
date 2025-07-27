@@ -355,6 +355,16 @@ const copyUserID = async () => {
     showCopySuccess.value = false
   }, 2500)
 }
+
+const toggleLanguageDropdown = () => {
+  showLanguageDropdown.value = !showLanguageDropdown.value
+}
+
+const selectLanguage = (language) => {
+  selectedLanguage.value = language
+  showLanguageDropdown.value = false
+  console.log('Language selected:', language)
+}
 </script>
 
 <style scoped>
