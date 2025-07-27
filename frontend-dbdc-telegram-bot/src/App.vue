@@ -1,7 +1,7 @@
 <template>
   <div class="telegram-webapp-container">
     <!-- Mobile-first responsive wrapper -->
-    <div class="w-full h-full md:max-w-[480px] md:mx-auto md:shadow-lg md:border-x md:border-gray-200">
+    <div class="w-full h-full xs:max-w-full sm:max-w-full ml:max-w-[480px] ml:mx-auto ml:shadow-lg ml:border-x ml:border-gray-200 md:max-w-full md:mx-0 md:shadow-none md:border-x-0 lg:max-w-full lg:mx-0 lg:shadow-none lg:border-x-0 xl:max-w-full xl:mx-0 xl:shadow-none xl:border-x-0 2xl:max-w-full 2xl:mx-0 2xl:shadow-none 2xl:border-x-0">
       <RouterView />
     </div>
   </div>
