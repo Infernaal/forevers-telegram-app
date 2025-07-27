@@ -251,7 +251,6 @@
                 @click.stop="selectLanguage(language)"
               >
                 <CountryFlag :country="language.country" size="small" />
-                <span class="language-item-text">{{ language.name }}</span>
                 <span class="language-item-code">{{ language.code }}</span>
                 <svg v-if="language.code === selectedLanguage.code" class="language-item-check" width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path d="M13.5 4.5L6 12L2.5 8.5" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
