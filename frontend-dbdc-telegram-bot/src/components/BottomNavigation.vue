@@ -9,22 +9,22 @@
 
 
     <!-- Bottom Navigation -->
-    <div class="fixed bottom-0 left-0 right-0 md:right-auto bg-white rounded-t-4 xs:rounded-t-4 sm:rounded-t-4 ml:rounded-t-5 md:rounded-t-5 md:max-w-[480px] md:left-1/2 md:-translate-x-1/2 md:rounded-t-5 md:border-l md:border-r md:border-black md:border-opacity-10 shadow-[0_-4px_16px_rgba(0,0,0,0.08),0_-2px_6px_rgba(0,0,0,0.04)] border-t border-black border-opacity-[0.06] z-50 pb-[env(safe-area-inset-bottom,0px)]">
+    <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-[20px] xs:rounded-t-[20px] sm:rounded-t-[24px] ml:rounded-t-[28px] md:rounded-t-[32px] lg:rounded-t-[32px] xl:rounded-t-[36px] 2xl:rounded-t-[36px] shadow-[0_-4px_16px_rgba(0,0,0,0.08),0_-2px_6px_rgba(0,0,0,0.04)] border-t border-black border-opacity-[0.06] z-50 pb-[env(safe-area-inset-bottom,0px)]">
       <!-- Navigation Items -->
       <div class="flex items-center justify-center px-1.5 xs:px-1.5 sm:px-2 ml:px-4 md:px-5 lg:px-5 py-2.5 xs:py-2.5 sm:py-3 ml:py-4 md:py-[18px] lg:py-[18px] pb-[calc(0.625rem+env(safe-area-inset-bottom,0px))] xs:pb-[calc(0.625rem+env(safe-area-inset-bottom,0px))] sm:pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))] ml:pb-[calc(1rem+env(safe-area-inset-bottom,0px))] md:pb-[calc(1.125rem+env(safe-area-inset-bottom,0px))] lg:pb-[calc(1.125rem+env(safe-area-inset-bottom,0px))] min-h-16 xs:min-h-16 sm:min-h-[68px] ml:min-h-[76px] md:min-h-[82px] lg:min-h-[82px] box-border">
-        <div class="flex items-center justify-between w-full max-w-full xs:max-w-full sm:max-w-full ml:max-w-[480px] md:max-w-[400px] lg:max-w-[400px] mx-auto gap-1 xs:gap-1 sm:gap-1.5 ml:gap-3 md:gap-4 lg:gap-4 px-1 xs:px-1 sm:px-1.5 ml:px-3 md:px-4 lg:px-4">
+        <div class="flex items-center justify-between w-full max-w-full xs:max-w-full sm:max-w-full ml:max-w-[480px] md:max-w-full lg:max-w-full xl:max-w-full 2xl:max-w-full mx-auto px-1 xs:px-1 sm:px-1.5 ml:px-3 md:px-6 lg:px-12 xl:px-16 2xl:px-20">
           <!-- Profile -->
           <button
             @click="toggleProfile"
             :class="[
-              'flex flex-col items-center justify-center flex-1 gap-1 xs:gap-1 sm:gap-1.5 ml:gap-2 md:gap-2.5 lg:gap-2.5 px-1 xs:px-1 sm:px-1.5 ml:px-2 md:px-2.5 lg:px-2.5 py-1.5 xs:py-1.5 sm:py-2 ml:py-2.5 md:py-3 lg:py-3 min-w-11 xs:min-w-11 sm:min-w-[50px] ml:min-w-[60px] md:min-w-[65px] lg:min-w-[65px] max-w-14 xs:max-w-14 sm:max-w-[70px] ml:max-w-[90px] md:max-w-[100px] lg:max-w-[100px] text-center whitespace-nowrap overflow-hidden relative transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] transform translate-z-0 active:scale-95 active:bg-black active:bg-opacity-[0.02] active:rounded-3',
+              'flex flex-col items-center justify-center gap-1 xs:gap-1 sm:gap-1.5 ml:gap-2 md:gap-2 lg:gap-2.5 xl:gap-3 2xl:gap-3 px-1 xs:px-1 sm:px-1.5 ml:px-2 md:px-2 lg:px-5 xl:px-6 2xl:px-7 py-1.5 xs:py-1.5 sm:py-2 ml:py-2.5 md:py-2.5 lg:py-3 xl:py-3.5 2xl:py-4 min-w-11 xs:min-w-11 sm:min-w-[50px] ml:min-w-[60px] md:min-w-[70px] lg:min-w-[90px] xl:min-w-[100px] 2xl:min-w-[110px] max-w-14 xs:max-w-14 sm:max-w-[70px] ml:max-w-[90px] md:max-w-[110px] lg:max-w-[160px] xl:max-w-[180px] 2xl:max-w-[200px] text-center whitespace-nowrap overflow-hidden relative transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] transform translate-z-0 active:scale-95 active:bg-black active:bg-opacity-[0.02] active:rounded-xl active:xs:rounded-xl active:sm:rounded-xl active:ml:rounded-2xl active:md:rounded-2xl active:lg:rounded-2xl active:xl:rounded-2xl active:2xl:rounded-2xl',
               isProfileMenuOpen ? 'text-blue-700' : 'text-gray-600'
             ]"
           >
             <div class="relative">
               <div
                 :class="[
-                  'flex items-center justify-center transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] rounded-3',
+                  'flex items-center justify-center transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] rounded-xl xs:rounded-xl sm:rounded-xl ml:rounded-2xl md:rounded-2xl lg:rounded-2xl xl:rounded-2xl 2xl:rounded-2xl',
                   isProfileMenuOpen
                     ? 'w-7 h-7 xs:w-7 xs:h-7 sm:w-8 sm:h-8 ml:w-10 ml:h-10 md:w-[42px] md:h-[42px] lg:w-[42px] lg:h-[42px] bg-blue-600'
                     : 'w-6 h-6 xs:w-6 xs:h-6 sm:w-7 sm:h-7 ml:w-8 ml:h-8 md:w-[34px] md:h-[34px] lg:w-[34px] lg:h-[34px]'
@@ -66,13 +66,13 @@
           <button
             @click="navigateTo('wallet')"
             :class="[
-              'flex flex-col items-center justify-center flex-1 gap-1 xs:gap-1 sm:gap-1.5 ml:gap-2 md:gap-2.5 lg:gap-2.5 px-1 xs:px-1 sm:px-1.5 ml:px-2 md:px-2.5 lg:px-2.5 py-1.5 xs:py-1.5 sm:py-2 ml:py-2.5 md:py-3 lg:py-3 min-w-11 xs:min-w-11 sm:min-w-[50px] ml:min-w-[60px] md:min-w-[65px] lg:min-w-[65px] max-w-14 xs:max-w-14 sm:max-w-[70px] ml:max-w-[90px] md:max-w-[100px] lg:max-w-[100px] text-center whitespace-nowrap overflow-hidden relative transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] transform translate-z-0 active:scale-95 active:bg-black active:bg-opacity-[0.02] active:rounded-3',
+              'flex flex-col items-center justify-center gap-1 xs:gap-1 sm:gap-1.5 ml:gap-2 md:gap-2 lg:gap-2.5 xl:gap-3 2xl:gap-3 px-1 xs:px-1 sm:px-1.5 ml:px-2 md:px-2 lg:px-5 xl:px-6 2xl:px-7 py-1.5 xs:py-1.5 sm:py-2 ml:py-2.5 md:py-2.5 lg:py-3 xl:py-3.5 2xl:py-4 min-w-11 xs:min-w-11 sm:min-w-[50px] ml:min-w-[60px] md:min-w-[70px] lg:min-w-[90px] xl:min-w-[100px] 2xl:min-w-[110px] max-w-14 xs:max-w-14 sm:max-w-[70px] ml:max-w-[90px] md:max-w-[110px] lg:max-w-[160px] xl:max-w-[180px] 2xl:max-w-[200px] text-center whitespace-nowrap overflow-hidden relative transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] transform translate-z-0 active:scale-95 active:bg-black active:bg-opacity-[0.02] active:rounded-xl active:xs:rounded-xl active:sm:rounded-xl active:ml:rounded-2xl active:md:rounded-2xl active:lg:rounded-2xl active:xl:rounded-2xl active:2xl:rounded-2xl',
               activeTab === 'wallet' ? 'text-blue-700' : 'text-gray-600'
             ]"
           >
             <div
               :class="[
-                'flex items-center justify-center transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] rounded-3',
+                'flex items-center justify-center transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] rounded-xl xs:rounded-xl sm:rounded-xl ml:rounded-2xl md:rounded-2xl lg:rounded-2xl xl:rounded-2xl 2xl:rounded-2xl',
                 activeTab === 'wallet'
                   ? 'w-7 h-7 xs:w-7 xs:h-7 sm:w-8 sm:h-8 ml:w-10 ml:h-10 md:w-[42px] md:h-[42px] lg:w-[42px] lg:h-[42px] bg-blue-600'
                   : 'w-6 h-6 xs:w-6 xs:h-6 sm:w-7 sm:h-7 ml:w-8 ml:h-8 md:w-[34px] md:h-[34px] lg:w-[34px] lg:h-[34px]'
@@ -92,13 +92,13 @@
           <button
             @click="navigateTo('favorites')"
             :class="[
-              'flex flex-col items-center justify-center flex-1 gap-1 xs:gap-1 sm:gap-1.5 ml:gap-2 md:gap-2.5 lg:gap-2.5 px-1 xs:px-1 sm:px-1.5 ml:px-2 md:px-2.5 lg:px-2.5 py-1.5 xs:py-1.5 sm:py-2 ml:py-2.5 md:py-3 lg:py-3 min-w-11 xs:min-w-11 sm:min-w-[50px] ml:min-w-[60px] md:min-w-[65px] lg:min-w-[65px] max-w-14 xs:max-w-14 sm:max-w-[70px] ml:max-w-[90px] md:max-w-[100px] lg:max-w-[100px] text-center whitespace-nowrap overflow-hidden relative transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] transform translate-z-0 active:scale-95 active:bg-black active:bg-opacity-[0.02] active:rounded-3',
+              'flex flex-col items-center justify-center gap-1 xs:gap-1 sm:gap-1.5 ml:gap-2 md:gap-2 lg:gap-2.5 xl:gap-3 2xl:gap-3 px-1 xs:px-1 sm:px-1.5 ml:px-2 md:px-2 lg:px-5 xl:px-6 2xl:px-7 py-1.5 xs:py-1.5 sm:py-2 ml:py-2.5 md:py-2.5 lg:py-3 xl:py-3.5 2xl:py-4 min-w-11 xs:min-w-11 sm:min-w-[50px] ml:min-w-[60px] md:min-w-[70px] lg:min-w-[90px] xl:min-w-[100px] 2xl:min-w-[110px] max-w-14 xs:max-w-14 sm:max-w-[70px] ml:max-w-[90px] md:max-w-[110px] lg:max-w-[160px] xl:max-w-[180px] 2xl:max-w-[200px] text-center whitespace-nowrap overflow-hidden relative transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] transform translate-z-0 active:scale-95 active:bg-black active:bg-opacity-[0.02] active:rounded-xl active:xs:rounded-xl active:sm:rounded-xl active:ml:rounded-2xl active:md:rounded-2xl active:lg:rounded-2xl active:xl:rounded-2xl active:2xl:rounded-2xl',
               activeTab === 'favorites' ? 'text-blue-700' : 'text-gray-600'
             ]"
           >
             <div
               :class="[
-                'flex items-center justify-center transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] rounded-3',
+                'flex items-center justify-center transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] rounded-xl xs:rounded-xl sm:rounded-xl ml:rounded-2xl md:rounded-2xl lg:rounded-2xl xl:rounded-2xl 2xl:rounded-2xl',
                 activeTab === 'favorites'
                   ? 'w-7 h-7 xs:w-7 xs:h-7 sm:w-8 sm:h-8 ml:w-10 ml:h-10 md:w-[42px] md:h-[42px] lg:w-[42px] lg:h-[42px] bg-blue-600'
                   : 'w-6 h-6 xs:w-6 xs:h-6 sm:w-7 sm:h-7 ml:w-8 ml:h-8 md:w-[34px] md:h-[34px] lg:w-[34px] lg:h-[34px]'
@@ -120,14 +120,14 @@
           <button
             @click="navigateTo('cart')"
             :class="[
-              'flex flex-col items-center justify-center flex-1 gap-1 xs:gap-1 sm:gap-1.5 ml:gap-2 md:gap-2.5 lg:gap-2.5 px-1 xs:px-1 sm:px-1.5 ml:px-2 md:px-2.5 lg:px-2.5 py-1.5 xs:py-1.5 sm:py-2 ml:py-2.5 md:py-3 lg:py-3 min-w-11 xs:min-w-11 sm:min-w-[50px] ml:min-w-[60px] md:min-w-[65px] lg:min-w-[65px] max-w-14 xs:max-w-14 sm:max-w-[70px] ml:max-w-[90px] md:max-w-[100px] lg:max-w-[100px] text-center whitespace-nowrap overflow-hidden relative transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] transform translate-z-0 active:scale-95 active:bg-black active:bg-opacity-[0.02] active:rounded-3',
+              'flex flex-col items-center justify-center gap-1 xs:gap-1 sm:gap-1.5 ml:gap-2 md:gap-2 lg:gap-2.5 xl:gap-3 2xl:gap-3 px-1 xs:px-1 sm:px-1.5 ml:px-2 md:px-2 lg:px-5 xl:px-6 2xl:px-7 py-1.5 xs:py-1.5 sm:py-2 ml:py-2.5 md:py-2.5 lg:py-3 xl:py-3.5 2xl:py-4 min-w-11 xs:min-w-11 sm:min-w-[50px] ml:min-w-[60px] md:min-w-[70px] lg:min-w-[90px] xl:min-w-[100px] 2xl:min-w-[110px] max-w-14 xs:max-w-14 sm:max-w-[70px] ml:max-w-[90px] md:max-w-[110px] lg:max-w-[160px] xl:max-w-[180px] 2xl:max-w-[200px] text-center whitespace-nowrap overflow-hidden relative transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] transform translate-z-0 active:scale-95 active:bg-black active:bg-opacity-[0.02] active:rounded-xl active:xs:rounded-xl active:sm:rounded-xl active:ml:rounded-2xl active:md:rounded-2xl active:lg:rounded-2xl active:xl:rounded-2xl active:2xl:rounded-2xl',
               activeTab === 'cart' ? 'text-blue-700' : 'text-gray-600'
             ]"
           >
             <div class="relative">
               <div
                 :class="[
-                  'flex items-center justify-center transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] rounded-3',
+                  'flex items-center justify-center transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] rounded-xl xs:rounded-xl sm:rounded-xl ml:rounded-2xl md:rounded-2xl lg:rounded-2xl xl:rounded-2xl 2xl:rounded-2xl',
                   activeTab === 'cart'
                     ? 'w-7 h-7 xs:w-7 xs:h-7 sm:w-8 sm:h-8 ml:w-10 ml:h-10 md:w-[42px] md:h-[42px] lg:w-[42px] lg:h-[42px] bg-blue-600'
                     : 'w-6 h-6 xs:w-6 xs:h-6 sm:w-7 sm:h-7 ml:w-8 ml:h-8 md:w-[34px] md:h-[34px] lg:w-[34px] lg:h-[34px]'
@@ -166,13 +166,13 @@
           <button
             @click="navigateTo('holders')"
             :class="[
-              'flex flex-col items-center justify-center flex-1 gap-1 xs:gap-1 sm:gap-1.5 ml:gap-2 md:gap-2.5 lg:gap-2.5 px-1 xs:px-1 sm:px-1.5 ml:px-2 md:px-2.5 lg:px-2.5 py-1.5 xs:py-1.5 sm:py-2 ml:py-2.5 md:py-3 lg:py-3 min-w-11 xs:min-w-11 sm:min-w-[50px] ml:min-w-[60px] md:min-w-[65px] lg:min-w-[65px] max-w-14 xs:max-w-14 sm:max-w-[70px] ml:max-w-[90px] md:max-w-[100px] lg:max-w-[100px] text-center whitespace-nowrap overflow-hidden relative transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] transform translate-z-0 active:scale-95 active:bg-black active:bg-opacity-[0.02] active:rounded-3',
+              'flex flex-col items-center justify-center gap-1 xs:gap-1 sm:gap-1.5 ml:gap-2 md:gap-2 lg:gap-2.5 xl:gap-3 2xl:gap-3 px-1 xs:px-1 sm:px-1.5 ml:px-2 md:px-2 lg:px-5 xl:px-6 2xl:px-7 py-1.5 xs:py-1.5 sm:py-2 ml:py-2.5 md:py-2.5 lg:py-3 xl:py-3.5 2xl:py-4 min-w-11 xs:min-w-11 sm:min-w-[50px] ml:min-w-[60px] md:min-w-[70px] lg:min-w-[90px] xl:min-w-[100px] 2xl:min-w-[110px] max-w-14 xs:max-w-14 sm:max-w-[70px] ml:max-w-[90px] md:max-w-[110px] lg:max-w-[160px] xl:max-w-[180px] 2xl:max-w-[200px] text-center whitespace-nowrap overflow-hidden relative transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] transform translate-z-0 active:scale-95 active:bg-black active:bg-opacity-[0.02] active:rounded-xl active:xs:rounded-xl active:sm:rounded-xl active:ml:rounded-2xl active:md:rounded-2xl active:lg:rounded-2xl active:xl:rounded-2xl active:2xl:rounded-2xl',
               activeTab === 'holders' ? 'text-blue-700' : 'text-gray-600'
             ]"
           >
             <div
               :class="[
-                'flex items-center justify-center transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] rounded-3',
+                'flex items-center justify-center transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] rounded-xl xs:rounded-xl sm:rounded-xl ml:rounded-2xl md:rounded-2xl lg:rounded-2xl xl:rounded-2xl 2xl:rounded-2xl',
                 activeTab === 'holders'
                   ? 'w-7 h-7 xs:w-7 xs:h-7 sm:w-8 sm:h-8 ml:w-10 ml:h-10 md:w-[42px] md:h-[42px] lg:w-[42px] lg:h-[42px] bg-blue-600'
                   : 'w-6 h-6 xs:w-6 xs:h-6 sm:w-7 sm:h-7 ml:w-8 ml:h-8 md:w-[34px] md:h-[34px] lg:w-[34px] lg:h-[34px]'
