@@ -221,6 +221,13 @@ watch(() => props.isVisible, (isVisible) => {
     document.body.style.overflow = ''
   }
 })
+
+// Watch for termsAgreed changes to auto-check the checkbox
+watch(() => props.termsAgreed, (agreed) => {
+  if (agreed) {
+    termsAccepted.value = true
+  }
+})
 </script>
 
 <style scoped>
