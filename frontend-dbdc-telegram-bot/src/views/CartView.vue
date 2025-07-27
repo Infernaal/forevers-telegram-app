@@ -1,40 +1,40 @@
 <template>
-  <div class="cart-view w-full max-w-md mx-auto bg-gray-100 min-h-screen flex flex-col font-montserrat" style="background: #f3f4f6 !important;">
+  <div class="cart-view w-full max-w-md lg:max-w-6xl xl:max-w-7xl mx-auto bg-gray-100 min-h-screen flex flex-col font-montserrat" style="background: #f3f4f6 !important;">
     <!-- Content Container -->
     <div class="content-container bg-gray-100 flex-1 flex flex-col relative">
       <!-- Scrollable Cart Items Area -->
-      <div class="flex-1 overflow-y-auto px-3.5 pt-4 pb-56" v-if="cartItemsCount > 0">
-        <div class="space-y-2">
+      <div class="flex-1 overflow-y-auto px-3.5 lg:px-12 xl:px-16 pt-4 lg:pt-8 xl:pt-12 pb-56 lg:pb-72 xl:pb-80" v-if="cartItemsCount > 0">
+        <div class="space-y-2 lg:space-y-4 xl:space-y-6">
           <div
             v-for="item in cartItems"
             :key="item.id"
-            class="bg-white rounded-2xl p-3 border border-dbd-primary/20 relative cart-item"
+            class="bg-white rounded-2xl lg:rounded-3xl xl:rounded-4xl p-3 lg:p-8 xl:p-12 border border-dbd-primary/20 relative cart-item"
           >
             <!-- Country Flag and Code Header -->
-            <div class="flex items-center gap-1 mb-3 h-6">
-              <CountryFlag :country="item.code" class="w-6 h-6" />
-              <div class="flex items-center gap-1">
+            <div class="flex items-center gap-1 lg:gap-3 xl:gap-4 mb-3 lg:mb-6 xl:mb-8 h-6 lg:h-12 xl:h-16">
+              <CountryFlag :country="item.code" class="w-6 h-6 lg:w-12 lg:h-12 xl:w-16 xl:h-16" />
+              <div class="flex items-center gap-1 lg:gap-2 xl:gap-3">
                 <!-- F Icon -->
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-dbd-dark">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-dbd-dark lg:w-8 lg:h-8 xl:w-12 xl:h-12">
                   <path d="M17.2636 4H6.61925C6.15063 4 5.8159 4.28571 5.8159 4.68571V7.48571H2.80335C2.33473 7.54286 2 7.82857 2 8.22857C2 8.62857 2.33473 8.91429 2.80335 8.91429H5.8159V15.3143C5.8159 15.7143 6.15063 16 6.61925 16C7.08787 16 7.42259 15.7143 7.42259 15.3143V12.3429H10.8368C11.3054 12.3429 11.6402 12.0571 11.6402 11.6571C11.6402 11.2571 11.3054 10.9714 10.8368 10.9714H7.42259V8.85714H13.9163C14.3849 8.85714 14.7197 8.57143 14.7197 8.17143C14.7197 7.77143 14.3849 7.48571 13.9163 7.48571H7.42259V5.37143H17.1967C17.6653 5.37143 18 5.08571 18 4.68571C18 4.28571 17.7322 4 17.2636 4Z" fill="currentColor"/>
                 </svg>
-                <span class="text-dbd-dark font-semibold text-lg leading-6">{{ item.code }}</span>
+                <span class="text-dbd-dark font-semibold text-lg lg:text-2xl xl:text-3xl leading-6">{{ item.code }}</span>
               </div>
             </div>
 
             <!-- Amount and Price Section -->
-            <div class="flex items-center gap-3 mb-3">
+            <div class="flex items-center gap-3 lg:gap-6 xl:gap-8 mb-3 lg:mb-6 xl:mb-8">
               <div class="flex-1">
-                <div class="text-dbd-gray text-base font-medium leading-6 mb-1">Amount</div>
-                <div class="text-dbd-dark font-semibold text-lg leading-6">{{ item.foreversAmount.toLocaleString() }}</div>
+                <div class="text-dbd-gray text-base lg:text-xl xl:text-2xl font-medium leading-6 mb-1 lg:mb-2 xl:mb-3">Amount</div>
+                <div class="text-dbd-dark font-semibold text-lg lg:text-2xl xl:text-3xl leading-6">{{ item.foreversAmount.toLocaleString() }}</div>
               </div>
               
               <!-- Vertical Divider -->
-              <div class="w-px h-14 bg-gray-300"></div>
+              <div class="w-px h-14 lg:h-20 xl:h-24 bg-gray-300"></div>
               
               <div class="flex-1">
-                <div class="text-dbd-gray text-base font-medium leading-6 mb-0.5">Price</div>
-                <div class="text-dbd-gray text-base font-medium leading-6">
+                <div class="text-dbd-gray text-base lg:text-xl xl:text-2xl font-medium leading-6 mb-0.5 lg:mb-2 xl:mb-3">Price</div>
+                <div class="text-dbd-gray text-base lg:text-xl xl:text-2xl font-medium leading-6">
                   <span>1Forevers {{ item.code }}</span>
                   <span class="text-dbd-dark font-semibold"> = ${{ item.usdRate.toFixed(2) }}</span>
                 </div>
@@ -42,17 +42,17 @@
             </div>
 
             <!-- Purchase Amount -->
-            <div class="flex items-center gap-1">
-              <span class="text-dbd-gray text-base font-medium leading-6">Purchase to pay:</span>
-              <span class="text-dbd-primary font-semibold text-lg leading-6">${{ (item.foreversAmount * item.usdRate).toLocaleString() }}</span>
+            <div class="flex items-center gap-1 lg:gap-3 xl:gap-4">
+              <span class="text-dbd-gray text-base lg:text-xl xl:text-2xl font-medium leading-6">Purchase to pay:</span>
+              <span class="text-dbd-primary font-semibold text-lg lg:text-2xl xl:text-3xl leading-6">${{ (item.foreversAmount * item.usdRate).toLocaleString() }}</span>
             </div>
 
             <!-- Remove Button -->
             <button
               @click="showDeleteConfirm(item)"
-              class="absolute top-3 right-3 w-10 h-10 flex items-center justify-center hover:bg-gray-100 rounded-lg transition-colors"
+              class="absolute top-3 lg:top-8 xl:top-12 right-3 lg:right-8 xl:right-12 w-10 h-10 lg:w-16 lg:h-16 xl:w-20 xl:h-20 flex items-center justify-center hover:bg-gray-100 rounded-lg transition-colors"
             >
-              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" class="lg:w-8 lg:h-8 xl:w-12 xl:h-12">
                 <path d="M19.25 3.5H14.75V2.75C14.75 1.5095 13.7405 0.5 12.5 0.5H9.5C8.2595 0.5 7.25 1.5095 7.25 2.75V3.5H2.75C1.92275 3.5 1.25 4.17275 1.25 5V5.75C1.25 6.164 1.586 6.5 2 6.5H20C20.414 6.5 20.75 6.164 20.75 5.75V5C20.75 4.17275 20.0772 3.5 19.25 3.5ZM8.75 2.75C8.75 2.33675 9.08675 2 9.5 2H12.5C12.9132 2 13.25 2.33675 13.25 2.75V3.5H8.75V2.75Z" fill="#FF1919"/>
                 <path d="M3.5 8V19.25C3.5 20.4905 4.5095 21.5 5.75 21.5H16.25C17.4905 21.5 18.5 20.4905 18.5 19.25V8H3.5ZM13.7803 15.7197C14.0735 16.013 14.0735 16.487 13.7803 16.7803C13.487 17.0735 13.013 17.0735 12.7197 16.7803L11 15.0605L9.28025 16.7803C8.987 17.0735 8.513 17.0735 8.21975 16.7803C7.9265 16.487 7.9265 16.013 8.21975 15.7197L9.9395 14L8.21975 12.2803C7.9265 11.987 7.9265 11.513 8.21975 11.2197C8.513 10.9265 8.987 10.9265 9.28025 11.2197L11 12.9395L12.7197 11.2197C13.013 10.9265 13.487 10.9265 13.7803 11.2197C14.0735 11.513 14.0735 11.987 13.7803 12.2803L12.0605 14L13.7803 15.7197Z" fill="#FF1919"/>
               </svg>
@@ -62,18 +62,18 @@
       </div>
 
       <!-- Empty Cart (takes full space when empty) -->
-      <div v-else class="flex-1 flex items-center justify-center px-3.5 pt-4">
+      <div v-else class="flex-1 flex items-center justify-center px-3.5 lg:px-12 xl:px-16 pt-4 lg:pt-8 xl:pt-12">
         <div class="text-center">
-          <div class="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center mb-4 mx-auto">
-            <svg width="20" height="22" viewBox="0 0 18 20" class="text-gray-400">
+          <div class="w-16 h-16 lg:w-32 lg:h-32 xl:w-40 xl:h-40 bg-gray-200 rounded-lg lg:rounded-2xl xl:rounded-3xl flex items-center justify-center mb-4 lg:mb-8 xl:mb-12 mx-auto">
+            <svg width="20" height="22" viewBox="0 0 18 20" class="text-gray-400 lg:w-12 lg:h-12 xl:w-16 xl:h-16">
               <path d="M8.99992 0C11.2937 6.01927e-05 13.1601 1.71665 13.1601 3.82617V4.95801H15.8886C16.2926 4.95801 16.6298 5.24124 16.6659 5.61133L17.9892 19.165C17.996 19.2031 17.9998 19.2424 17.9999 19.2822C17.9999 19.6786 17.6508 19.9999 17.2197 20H0.781174C0.562191 20 0.352885 19.9152 0.205002 19.7666C0.0571058 19.6179 -0.0167136 19.4186 0.00285324 19.2178L1.33195 5.61133C1.3681 5.24123 1.70529 4.95801 2.1093 4.95801H4.83977V3.82617C4.83977 1.71662 6.70624 0 8.99992 0ZM2.82317 6.39355L1.63469 18.5645H16.3632L15.1747 6.39355H13.1601V7.67676C13.1601 8.07321 12.81 8.39551 12.3788 8.39551C11.9478 8.3953 11.5986 8.07308 11.5986 7.67676V6.39355H6.40129V7.67676C6.40129 8.07314 6.05211 8.39539 5.62102 8.39551C5.18982 8.39551 4.83977 8.07321 4.83977 7.67676V6.39355H2.82317ZM8.99992 1.43555C7.56707 1.43555 6.40129 2.50827 6.40129 3.82617V4.95801H11.5986V3.82617C11.5986 2.50828 10.4329 1.43556 8.99992 1.43555Z" fill="currentColor"/>
             </svg>
           </div>
-          <h2 class="text-xl font-semibold text-gray-900 mb-2">Your cart is empty</h2>
-          <p class="text-gray-500 mb-6">Add some Forevers to get started!</p>
+          <h2 class="text-xl lg:text-4xl xl:text-5xl font-semibold text-gray-900 mb-2 lg:mb-4 xl:mb-6">Your cart is empty</h2>
+          <p class="text-gray-500 lg:text-xl xl:text-2xl mb-6 lg:mb-12 xl:mb-16">Add some Forevers to get started!</p>
           <button
             @click="$router.push('/favorites')"
-            class="bg-dbd-primary text-white font-semibold py-3 px-6 rounded-full hover:bg-blue-700 transition-colors"
+            class="bg-dbd-primary text-white font-semibold py-3 lg:py-6 xl:py-8 px-6 lg:px-12 xl:px-16 rounded-full lg:rounded-2xl xl:rounded-3xl hover:bg-blue-700 transition-colors text-base lg:text-xl xl:text-2xl"
           >
             Browse Forevers
           </button>
