@@ -407,10 +407,13 @@ const copyUserID = async () => {
 .profile-user-name {
   color: white;
   font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 21px;
+  font-size: 18px;
   font-weight: 700;
-  line-height: 26px;
+  line-height: 22px;
   margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .profile-arrow-btn {
