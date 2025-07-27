@@ -391,7 +391,7 @@ const selectLanguage = (language) => {
 .triangle-pointer {
   position: absolute;
   left: 34px;
-  bottom: 100px;
+  bottom: calc(110px + env(safe-area-inset-bottom, 0px));
   z-index: 65;
 }
 
@@ -409,8 +409,9 @@ const selectLanguage = (language) => {
   position: absolute;
   left: 8px;
   right: 8px;
-  bottom: 110px;
-  height: 580px;
+  bottom: calc(110px + env(safe-area-inset-bottom, 0px));
+  height: calc(580px - env(safe-area-inset-bottom, 0px));
+  max-height: calc(100vh - 130px - env(safe-area-inset-bottom, 0px));
   border-radius: 20px;
   overflow: hidden;
   z-index: 55;
@@ -1080,27 +1081,41 @@ const selectLanguage = (language) => {
 
 
 /* Responsive */
+/* iPhone and small devices - Telegram WebApp optimized */
 @media (max-width: 375px) {
   .profile-dropdown {
     left: 4px;
     right: 4px;
+    bottom: calc(100px + env(safe-area-inset-bottom, 0px));
+    height: calc(560px - env(safe-area-inset-bottom, 0px));
+    max-height: calc(100vh - 120px - env(safe-area-inset-bottom, 0px));
   }
-  
+
   .triangle-pointer {
-    bottom: 105px;
+    bottom: calc(90px + env(safe-area-inset-bottom, 0px));
+    left: 30px;
   }
-  
+
   .start-section {
     bottom: 84px;
   }
 
-  .triangle-pointer {
-    bottom: 94px;
-  }
-  
   .bottom-controls {
     gap: 20px;
-    bottom: 8px;
+    bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* iPhone Pro Max and larger screens */
+@media (min-width: 376px) and (max-width: 430px) {
+  .triangle-pointer {
+    bottom: calc(105px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .profile-dropdown {
+    bottom: calc(115px + env(safe-area-inset-bottom, 0px));
+    height: calc(580px - env(safe-area-inset-bottom, 0px));
+    max-height: calc(100vh - 135px - env(safe-area-inset-bottom, 0px));
   }
 }
 
