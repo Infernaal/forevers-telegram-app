@@ -118,7 +118,6 @@ body {
 /* Mobile-first responsive design with enhanced scroll control */
 #app {
     width: 100%;
-    max-width: 430px;
     margin: 0 auto;
     min-height: 100vh;
     min-height: 100dvh; /* Dynamic viewport height */
@@ -291,7 +290,6 @@ a {
 /* Mobile optimizations */
 @media (max-width: 430px) {
     #app {
-        max-width: 100%;
         padding: 0;
     }
 
@@ -325,19 +323,16 @@ a {
 /* Tablet optimizations */
 @media (min-width: 431px) and (max-width: 768px) {
     #app {
-        max-width: 430px;
-        margin: 0 auto;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        margin: 0;
     }
 }
 
 /* Desktop optimizations */
 @media (min-width: 769px) {
     #app {
-        max-width: 430px;
-        margin: 20px auto;
-        border-radius: 20px;
-        box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        margin: 0;
         overflow: hidden;
     }
 }
