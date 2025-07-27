@@ -54,15 +54,15 @@
           </div>
 
           <!-- Token Info -->
-          <div class="flex items-center gap-1 mb-3 flex-wrap">
-            <svg width="24" height="24" viewBox="0 0 24 24" class="text-blue-700">
+          <div class="flex items-center gap-0.5 xs:gap-1 sm:gap-1 ml:gap-1 md:gap-1.5 lg:gap-1.5 xl:gap-1.5 mb-2.5 xs:mb-3 sm:mb-3 ml:mb-3 md:mb-3.5 lg:mb-3.5 xl:mb-3.5 flex-wrap">
+            <svg class="w-5 h-5 xs:w-6 xs:h-6 sm:w-6 sm:h-6 ml:w-6 ml:h-6 md:w-7 md:h-7 lg:w-7 lg:h-7 xl:w-7 xl:h-7 text-blue-700" viewBox="0 0 24 24">
               <path d="M23 5.536V1H5.347V6.759H1V11.294H5.347V22.581H10.421V17.046H14.712V12.510H10.421V11.294H18.849V6.759H10.421V5.536H23Z" fill="currentColor"/>
             </svg>
-            <span class="text-lg font-semibold text-blue-700">{{ balance.amount.toLocaleString() }}</span>
+            <span class="text-base xs:text-lg sm:text-lg ml:text-lg md:text-xl lg:text-xl xl:text-xl font-semibold text-blue-700">{{ balance.amount.toLocaleString() }}</span>
             <span class="w-1 h-1 bg-gray-400 rounded-full"></span>
-            <div class="flex items-center gap-0.5 text-sm text-gray-600 font-medium">
+            <div class="flex items-center gap-0.5 text-xs xs:text-sm sm:text-sm ml:text-sm md:text-base lg:text-base xl:text-base text-gray-600 font-medium">
               <span>1</span>
-              <svg width="16" height="16" viewBox="0 0 16 16" class="text-gray-600">
+              <svg class="w-3 h-3 xs:w-4 xs:h-4 sm:w-4 sm:h-4 ml:w-4 ml:h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-5 xl:h-5 text-gray-600" viewBox="0 0 16 16">
                 <path d="M15.2636 2H4.61925C4.15063 2 3.8159 2.28571 3.8159 2.68571V5.48571H0.803347C0.334728 5.54286 0 5.82857 0 6.22857C0 6.62857 0.334728 6.91429 0.803347 6.91429H3.8159V13.3143C3.8159 13.7143 4.15063 14 4.61925 14C5.08787 14 5.42259 13.7143 5.42259 13.3143V10.3429H8.83682C9.30544 10.3429 9.64017 10.0571 9.64017 9.65714C9.64017 9.25714 9.30544 8.97143 8.83682 8.97143H5.42259V6.85714H11.9163C12.3849 6.85714 12.7197 6.57143 12.7197 6.17143C12.7197 5.77143 12.3849 5.48571 11.9163 5.48571H5.42259V3.37143H15.1967C15.6653 3.37143 16 3.08571 16 2.68571C16 2.28571 15.7322 2 15.2636 2Z" fill="currentColor"/>
               </svg>
               <span>{{ balance.code }}/{{ balance.usdRate }} USD</span>
@@ -70,13 +70,13 @@
 
             <div
               :class="[
-                'px-2 py-0.5 rounded text-xs font-semibold flex items-center gap-1 ml-1',
+                'px-1.5 xs:px-2 sm:px-2 ml:px-2 md:px-2.5 lg:px-2.5 xl:px-2.5 py-0.5 rounded text-[10px] xs:text-xs sm:text-xs ml:text-xs md:text-sm lg:text-sm xl:text-sm font-semibold flex items-center gap-0.5 xs:gap-1 sm:gap-1 ml:gap-1 md:gap-1 lg:gap-1 xl:gap-1 ml-0.5 xs:ml-1 sm:ml-1 ml:ml-1 md:ml-1.5 lg:ml-1.5 xl:ml-1.5',
                 balance.priceChange > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
               ]"
             >
               <svg
                 :class="[
-                  'w-2 h-2 transform',
+                  'w-1.5 h-1.5 xs:w-2 xs:h-2 sm:w-2 sm:h-2 ml:w-2 ml:h-2 md:w-2.5 md:h-2.5 lg:w-2.5 lg:h-2.5 xl:w-2.5 xl:h-2.5 transform',
                   balance.priceChange > 0 ? '-rotate-45' : 'rotate-45'
                 ]"
                 viewBox="0 0 10 13"
