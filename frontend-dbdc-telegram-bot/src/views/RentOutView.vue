@@ -163,6 +163,7 @@ const router = useRouter()
 const showInfoTooltip = ref(false)
 const showRentModal = ref(false)
 const showTermsModal = ref(false)
+const showSuccessNotification = ref(false)
 const selectedBalance = ref(null)
 const inputAmount = ref('250')
 
