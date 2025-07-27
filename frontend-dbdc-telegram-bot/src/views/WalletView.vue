@@ -534,7 +534,14 @@ const navigateToTransactions = () => {
   .wallet-view {
     width: 100%;
     margin: 0;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+
+  .wallet-view::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
   }
 
   .content-container {
