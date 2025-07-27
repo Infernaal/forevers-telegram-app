@@ -739,6 +739,24 @@ const hideSuccessNotification = () => {
   z-index: 10;
 }
 
+@media (min-width: 431px) and (max-width: 768px) {
+  .qr-code-container {
+    width: 320px;
+    height: 300px;
+    left: 100px;
+    top: 32px;
+  }
+}
+
+@media (min-width: 769px) {
+  .qr-code-container {
+    width: 400px;
+    height: 380px;
+    left: 150px;
+    top: 40px;
+  }
+}
+
 .qr-code-wrapper {
   width: 222px;
   height: 220px;
@@ -749,6 +767,22 @@ const hideSuccessNotification = () => {
   position: relative;
 }
 
+@media (min-width: 431px) and (max-width: 768px) {
+  .qr-code-wrapper {
+    width: 320px;
+    height: 300px;
+    border-radius: 28px;
+  }
+}
+
+@media (min-width: 769px) {
+  .qr-code-wrapper {
+    width: 400px;
+    height: 380px;
+    border-radius: 36px;
+  }
+}
+
 .qr-code-image {
   width: 140px;
   height: 140px;
@@ -757,6 +791,24 @@ const hideSuccessNotification = () => {
   position: absolute;
   left: 41px;
   top: 20px;
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+  .qr-code-image {
+    width: 200px;
+    height: 200px;
+    left: 60px;
+    top: 30px;
+  }
+}
+
+@media (min-width: 769px) {
+  .qr-code-image {
+    width: 250px;
+    height: 250px;
+    left: 75px;
+    top: 40px;
+  }
 }
 
 .qr-code-link {
@@ -770,6 +822,29 @@ const hideSuccessNotification = () => {
   top: 176px;
   width: 182px;
   height: 24px;
+  text-align: center;
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+  .qr-code-link {
+    font-size: 22px;
+    line-height: 30px;
+    left: 30px;
+    top: 250px;
+    width: 260px;
+    height: 30px;
+  }
+}
+
+@media (min-width: 769px) {
+  .qr-code-link {
+    font-size: 28px;
+    line-height: 36px;
+    left: 40px;
+    top: 320px;
+    width: 320px;
+    height: 36px;
+  }
 }
 
 /* Terms Section */
@@ -912,6 +987,24 @@ const hideSuccessNotification = () => {
   height: 410px;
 }
 
+@media (min-width: 431px) and (max-width: 768px) {
+  .how-to-section {
+    left: 32px;
+    top: -80px;
+    width: 520px;
+    height: 520px;
+  }
+}
+
+@media (min-width: 769px) {
+  .how-to-section {
+    left: 48px;
+    top: -100px;
+    width: 700px;
+    height: 650px;
+  }
+}
+
 .steps-container {
   position: relative;
   width: 100%;
@@ -940,6 +1033,20 @@ const hideSuccessNotification = () => {
   margin: 0;
 }
 
+@media (min-width: 431px) and (max-width: 768px) {
+  .how-to-title {
+    font-size: 28px;
+    line-height: 34px;
+  }
+}
+
+@media (min-width: 769px) {
+  .how-to-title {
+    font-size: 36px;
+    line-height: 44px;
+  }
+}
+
 .how-to-subtitle {
   color: #4B4D50;
   font-family: Montserrat;
@@ -948,6 +1055,20 @@ const hideSuccessNotification = () => {
   line-height: 24px;
   margin: 0;
   align-self: stretch;
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+  .how-to-subtitle {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
+
+@media (min-width: 769px) {
+  .how-to-subtitle {
+    font-size: 24px;
+    line-height: 32px;
+  }
 }
 
 /* Step Indicators */
