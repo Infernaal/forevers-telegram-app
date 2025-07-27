@@ -643,7 +643,7 @@ const closeProfileMenu = () => {
 @media (min-width: 769px) {
   .bottom-nav-container {
     width: 100%;
-    border-radius: 0;
+    border-radius: 20px 20px 0 0;
     border-left: none;
     border-right: none;
   }
