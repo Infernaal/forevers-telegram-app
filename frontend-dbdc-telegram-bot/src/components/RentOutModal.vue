@@ -393,6 +393,15 @@ input:focus {
   overflow-wrap: break-word;
 }
 
+/* Override TermsCheckbox text color for light background */
+:deep(.terms-checkbox-dark .terms-text) {
+  color: #4B4D50 !important;
+}
+
+:deep(.terms-checkbox-dark .terms-link) {
+  color: #FF6800 !important;
+}
+
 /* Responsive input adjustments */
 @media (max-width: 375px) {
   .w-\[236px\] {
