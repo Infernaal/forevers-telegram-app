@@ -499,11 +499,12 @@ const hideSuccessNotification = () => {
 <style scoped>
 .holders-view {
   font-family: 'Montserrat', sans-serif;
-  width: 100%;
+  width: 375px;
   min-height: 100vh;
   background: #F0F0F0;
   position: relative;
   margin: 0 auto;
+  max-width: 375px;
   overflow-y: auto;
   overflow-x: hidden;
   /* Hide scrollbar for webkit browsers */
@@ -517,29 +518,11 @@ const hideSuccessNotification = () => {
 
 /* Content Container - now starts from top */
 .content-container {
-  width: 100%;
-  max-width: 375px;
+  width: 375px;
   min-height: calc(100vh + 200px); /* Allow content to extend beyond viewport */
   background: #F0F0F0;
   position: relative;
   padding: 20px 0 80px 0; /* Further reduced bottom padding */
-  margin: 0 auto;
-}
-
-@media (min-width: 431px) and (max-width: 768px) {
-  .content-container {
-    max-width: 100%;
-    padding: 32px 0 120px 0;
-    min-height: auto;
-  }
-}
-
-@media (min-width: 769px) {
-  .content-container {
-    max-width: 100%;
-    padding: 48px 0 160px 0;
-    min-height: auto;
-  }
 }
 
 /* Referral Program Header */
@@ -555,9 +538,9 @@ const hideSuccessNotification = () => {
   height: 52px;
 }
 
-@media (min-width: 431px) and (max-width: 768px) {
+@media (min-width: 376px) and (max-width: 1024px) {
   .referral-header {
-    width: 450px;
+    width: calc(100vw - 64px);
     left: 32px;
     gap: 8px;
     height: 70px;
@@ -565,13 +548,13 @@ const hideSuccessNotification = () => {
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .referral-header {
-    width: 600px;
-    left: 48px;
-    gap: 12px;
-    height: 90px;
-    margin-bottom: 48px;
+    width: 299px;
+    left: 38px;
+    gap: 6px;
+    height: 60px;
+    margin-bottom: 24px;
   }
 }
 
@@ -585,17 +568,17 @@ const hideSuccessNotification = () => {
   align-self: stretch;
 }
 
-@media (min-width: 431px) and (max-width: 768px) {
+@media (min-width: 376px) and (max-width: 1024px) {
   .referral-title {
     font-size: 28px;
     line-height: 34px;
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .referral-title {
-    font-size: 36px;
-    line-height: 44px;
+    font-size: 24px;
+    line-height: 28px;
   }
 }
 
@@ -609,17 +592,17 @@ const hideSuccessNotification = () => {
   align-self: stretch;
 }
 
-@media (min-width: 431px) and (max-width: 768px) {
+@media (min-width: 376px) and (max-width: 1024px) {
   .referral-subtitle {
     font-size: 20px;
     line-height: 28px;
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .referral-subtitle {
-    font-size: 24px;
-    line-height: 32px;
+    font-size: 18px;
+    line-height: 26px;
   }
 }
 
@@ -637,25 +620,24 @@ const hideSuccessNotification = () => {
   margin-top: 60px;
 }
 
-@media (min-width: 431px) and (max-width: 768px) {
+@media (min-width: 376px) and (max-width: 1024px) {
   .scroll-content {
-    width: 520px;
+    width: calc(100vw - 64px);
     left: 32px;
-    gap: 32px;
+    gap: 24px;
     height: auto;
     min-height: 650px;
     margin-top: 80px;
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .scroll-content {
-    width: 700px;
-    left: 48px;
-    gap: 48px;
-    height: auto;
-    min-height: 800px;
-    margin-top: 100px;
+    width: 347px;
+    left: 14px;
+    gap: 20px;
+    height: 507px;
+    margin-top: 60px;
   }
 }
 
@@ -663,23 +645,27 @@ const hideSuccessNotification = () => {
 .qr-section {
   width: 347px;
   height: 396px;
-  position: relative;
-  margin-bottom: 20px;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
-@media (min-width: 431px) and (max-width: 768px) {
+@media (min-width: 376px) and (max-width: 1024px) {
   .qr-section {
-    width: 520px;
+    width: 100%;
     height: 500px;
+    position: relative;
     margin-bottom: 32px;
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .qr-section {
-    width: 700px;
-    height: 600px;
-    margin-bottom: 48px;
+    width: 347px;
+    height: 396px;
+    position: absolute;
+    left: 0;
+    top: 0;
   }
 }
 
@@ -744,21 +730,23 @@ const hideSuccessNotification = () => {
   z-index: 10;
 }
 
-@media (min-width: 431px) and (max-width: 768px) {
+@media (min-width: 376px) and (max-width: 1024px) {
   .qr-code-container {
-    width: 320px;
-    height: 300px;
-    left: 100px;
-    top: 32px;
+    width: 300px;
+    height: 280px;
+    left: 50%;
+    top: 40px;
+    transform: translateX(-50%);
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .qr-code-container {
-    width: 400px;
-    height: 380px;
-    left: 150px;
-    top: 40px;
+    width: 222px;
+    height: 220px;
+    left: 63px;
+    top: 24px;
+    transform: none;
   }
 }
 
@@ -772,19 +760,25 @@ const hideSuccessNotification = () => {
   position: relative;
 }
 
-@media (min-width: 431px) and (max-width: 768px) {
+@media (min-width: 376px) and (max-width: 1024px) {
   .qr-code-wrapper {
-    width: 320px;
-    height: 300px;
-    border-radius: 28px;
+    width: 100%;
+    height: 100%;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    box-sizing: border-box;
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .qr-code-wrapper {
-    width: 400px;
-    height: 380px;
-    border-radius: 36px;
+    width: 222px;
+    height: 220px;
+    border-radius: 20px;
   }
 }
 
@@ -798,21 +792,22 @@ const hideSuccessNotification = () => {
   top: 20px;
 }
 
-@media (min-width: 431px) and (max-width: 768px) {
+@media (min-width: 376px) and (max-width: 1024px) {
   .qr-code-image {
-    width: 200px;
-    height: 200px;
-    left: 60px;
-    top: 30px;
+    width: 180px;
+    height: 180px;
+    position: static;
+    margin-bottom: 20px;
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .qr-code-image {
-    width: 250px;
-    height: 250px;
-    left: 75px;
-    top: 40px;
+    width: 140px;
+    height: 140px;
+    position: absolute;
+    left: 41px;
+    top: 20px;
   }
 }
 
@@ -830,25 +825,26 @@ const hideSuccessNotification = () => {
   text-align: center;
 }
 
-@media (min-width: 431px) and (max-width: 768px) {
+@media (min-width: 376px) and (max-width: 1024px) {
   .qr-code-link {
-    font-size: 22px;
-    line-height: 30px;
-    left: 30px;
-    top: 250px;
-    width: 260px;
-    height: 30px;
+    font-size: 20px;
+    line-height: 28px;
+    position: static;
+    width: auto;
+    height: auto;
+    text-align: center;
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .qr-code-link {
-    font-size: 28px;
-    line-height: 36px;
-    left: 40px;
-    top: 320px;
-    width: 320px;
-    height: 36px;
+    font-size: 17px;
+    line-height: 24px;
+    position: absolute;
+    left: 20px;
+    top: 176px;
+    width: 182px;
+    height: 24px;
   }
 }
 
@@ -860,23 +856,23 @@ const hideSuccessNotification = () => {
   z-index: 20;
 }
 
-@media (min-width: 431px) and (max-width: 768px) {
+@media (min-width: 376px) and (max-width: 1024px) {
   .terms-checkbox-wrapper {
     position: relative;
-    left: 35px;
-    top: auto;
-    transform: scale(1.2);
+    left: 0;
+    top: 0;
+    transform: scale(1.15);
+    transform-origin: left center;
     margin: 20px 0;
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .terms-checkbox-wrapper {
-    position: relative;
-    left: 50px;
-    top: auto;
-    transform: scale(1.5);
-    margin: 30px 0;
+    position: absolute;
+    left: 20px;
+    top: 256px;
+    transform: none;
   }
 }
 
@@ -888,21 +884,22 @@ const hideSuccessNotification = () => {
   z-index: 20;
 }
 
-@media (min-width: 431px) and (max-width: 768px) {
+@media (min-width: 376px) and (max-width: 1024px) {
   .share-button-container {
     position: relative;
-    left: 35px;
-    top: auto;
+    left: 0;
+    top: 0;
     margin: 20px 0;
+    display: flex;
+    justify-content: center;
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .share-button-container {
-    position: relative;
-    left: 50px;
-    top: auto;
-    margin: 30px 0;
+    position: absolute;
+    left: 23px;
+    top: 322px;
   }
 }
 
@@ -927,25 +924,23 @@ const hideSuccessNotification = () => {
   transition: all 0.2s ease;
 }
 
-@media (min-width: 431px) and (max-width: 768px) {
+@media (min-width: 376px) and (max-width: 1024px) {
   .share-button {
-    width: 450px;
+    width: 400px;
     padding: 16px 64px;
     height: 60px;
-    font-size: 20px;
-    line-height: 30px;
-    gap: 16px;
+    font-size: 18px;
+    line-height: 28px;
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .share-button {
-    width: 600px;
-    padding: 20px 80px;
-    height: 72px;
-    font-size: 24px;
-    line-height: 36px;
-    gap: 20px;
+    width: 300px;
+    padding: 12px 48px;
+    height: 50px;
+    font-size: 16px;
+    line-height: 26px;
   }
 }
 
@@ -1011,29 +1006,28 @@ const hideSuccessNotification = () => {
 .how-to-section {
   position: relative;
   left: 14px;
-  top: 0;
+  top: -60px;
   width: 347px;
   height: 410px;
-  margin-top: 40px;
 }
 
-@media (min-width: 431px) and (max-width: 768px) {
+@media (min-width: 376px) and (max-width: 1024px) {
   .how-to-section {
-    left: 32px;
+    left: 0;
     top: 0;
-    width: 520px;
-    height: 520px;
-    margin-top: 60px;
+    width: 100%;
+    height: auto;
+    min-height: 480px;
+    margin-top: 40px;
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .how-to-section {
-    left: 48px;
-    top: 0;
-    width: 700px;
-    height: 650px;
-    margin-top: 80px;
+    left: 14px;
+    top: -60px;
+    width: 347px;
+    height: 410px;
   }
 }
 
@@ -1065,17 +1059,17 @@ const hideSuccessNotification = () => {
   margin: 0;
 }
 
-@media (min-width: 431px) and (max-width: 768px) {
+@media (min-width: 376px) and (max-width: 1024px) {
   .how-to-title {
     font-size: 28px;
     line-height: 34px;
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .how-to-title {
-    font-size: 36px;
-    line-height: 44px;
+    font-size: 20px;
+    line-height: 24px;
   }
 }
 
@@ -1089,17 +1083,17 @@ const hideSuccessNotification = () => {
   align-self: stretch;
 }
 
-@media (min-width: 431px) and (max-width: 768px) {
+@media (min-width: 376px) and (max-width: 1024px) {
   .how-to-subtitle {
     font-size: 20px;
     line-height: 28px;
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .how-to-subtitle {
-    font-size: 24px;
-    line-height: 32px;
+    font-size: 16px;
+    line-height: 24px;
   }
 }
 
@@ -1110,6 +1104,26 @@ const hideSuccessNotification = () => {
   top: 88px;
   width: 298px;
   height: 40px;
+}
+
+@media (min-width: 376px) and (max-width: 1024px) {
+  .step-indicators {
+    left: 50%;
+    top: 120px;
+    width: 400px;
+    height: 48px;
+    transform: translateX(-50%);
+  }
+}
+
+@media (min-width: 1025px) {
+  .step-indicators {
+    left: 27px;
+    top: 88px;
+    width: 298px;
+    height: 40px;
+    transform: none;
+  }
 }
 
 .step-indicator-row {
@@ -1174,6 +1188,24 @@ const hideSuccessNotification = () => {
   height: 44px;
   display: flex;
   justify-content: space-between;
+}
+
+@media (min-width: 376px) and (max-width: 1024px) {
+  .step-descriptions {
+    top: 190px;
+    height: 56px;
+    justify-content: center;
+    gap: 80px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .step-descriptions {
+    top: 144px;
+    height: 44px;
+    justify-content: space-between;
+    gap: 0;
+  }
 }
 
 .step-description {
@@ -1241,6 +1273,27 @@ const hideSuccessNotification = () => {
   height: 208px;
 }
 
+@media (min-width: 376px) and (max-width: 1024px) {
+  .web-link-section {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 260px;
+    margin-top: 80px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .web-link-section {
+    position: absolute;
+    left: 0;
+    top: 202px;
+    width: 347px;
+    height: 208px;
+  }
+}
+
 .web-link-background {
   width: 347px;
   height: 206px;
@@ -1250,6 +1303,22 @@ const hideSuccessNotification = () => {
   position: absolute;
   left: 0;
   top: 2px;
+}
+
+@media (min-width: 376px) and (max-width: 1024px) {
+  .web-link-background {
+    width: 100%;
+    height: 258px;
+    top: 0;
+  }
+}
+
+@media (min-width: 1025px) {
+  .web-link-background {
+    width: 347px;
+    height: 206px;
+    top: 2px;
+  }
 }
 
 .web-link-content {
@@ -1275,6 +1344,24 @@ const hideSuccessNotification = () => {
   height: 30px;
 }
 
+@media (min-width: 376px) and (max-width: 1024px) {
+  .web-link-title {
+    font-size: 32px;
+    line-height: 38px;
+    width: auto;
+    height: auto;
+  }
+}
+
+@media (min-width: 1025px) {
+  .web-link-title {
+    font-size: 26px;
+    line-height: 30px;
+    width: 244px;
+    height: 30px;
+  }
+}
+
 .web-link-description {
   color: #FFF;
   font-family: Montserrat;
@@ -1284,6 +1371,24 @@ const hideSuccessNotification = () => {
   margin: 0;
   width: 204px;
   height: 48px;
+}
+
+@media (min-width: 376px) and (max-width: 1024px) {
+  .web-link-description {
+    font-size: 20px;
+    line-height: 28px;
+    width: auto;
+    height: auto;
+  }
+}
+
+@media (min-width: 1025px) {
+  .web-link-description {
+    font-size: 16px;
+    line-height: 24px;
+    width: 204px;
+    height: 48px;
+  }
 }
 
 /* Copy Link Container */
@@ -1297,6 +1402,21 @@ const hideSuccessNotification = () => {
   display: flex;
   align-items: center;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 376px) and (max-width: 1024px) {
+  .copy-link-container {
+    width: calc(100% - 40px);
+    height: 60px;
+    max-width: 500px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .copy-link-container {
+    width: 307px;
+    height: 52px;
+  }
 }
 
 .copy-link-copied-state {
@@ -1319,6 +1439,24 @@ const hideSuccessNotification = () => {
   text-decoration: underline;
   width: 182px;
   height: 24px;
+}
+
+@media (min-width: 376px) and (max-width: 1024px) {
+  .copy-link-text {
+    font-size: 20px;
+    line-height: 28px;
+    width: auto;
+    height: auto;
+  }
+}
+
+@media (min-width: 1025px) {
+  .copy-link-text {
+    font-size: 17px;
+    line-height: 24px;
+    width: 182px;
+    height: 24px;
+  }
 }
 
 .copy-link-copied-full {
@@ -1412,6 +1550,20 @@ const hideSuccessNotification = () => {
   position: relative;
 }
 
+@media (min-width: 376px) and (max-width: 1024px) {
+  .copy-button {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .copy-button {
+    width: 50px;
+    height: 52px;
+  }
+}
+
 .copy-button:hover {
   background: #e8e8ff;
   transform: translateY(-1px) scale(1.02);
@@ -1448,6 +1600,7 @@ const hideSuccessNotification = () => {
 @media (max-width: 375px) {
   .holders-view {
     width: 100vw;
+    max-width: 375px;
   }
 
   .content-container {
@@ -1457,97 +1610,24 @@ const hideSuccessNotification = () => {
 }
 
 /* Tablet styles - remove white stripes */
-@media (min-width: 376px) and (max-width: 768px) {
+@media (min-width: 376px) and (max-width: 1024px) {
   .holders-view {
     width: 100vw;
+    max-width: 100vw;
     box-shadow: none;
   }
 
   .content-container {
     width: 100vw;
-  }
-
-  /* Adjust web link section for tablets */
-  .web-link-section {
-    width: 520px;
-    height: 260px;
-  }
-
-  .web-link-background {
-    width: 520px;
-    height: 258px;
-  }
-
-  .web-link-title {
-    font-size: 32px;
-    line-height: 38px;
-  }
-
-  .web-link-description {
-    font-size: 20px;
-    line-height: 28px;
-  }
-
-  .copy-link-container {
-    width: 460px;
-    height: 60px;
-  }
-
-  .copy-link-text {
-    font-size: 20px;
-    line-height: 28px;
+    max-width: 100vw;
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .holders-view {
-    width: 100vw;
-    box-shadow: none;
-  }
-
-  .content-container {
-    width: 100vw;
-  }
-
-  /* Adjust web link section for desktop */
-  .web-link-section {
-    width: 700px;
-    height: 320px;
-  }
-
-  .web-link-background {
-    width: 700px;
-    height: 318px;
-  }
-
-  .web-link-title {
-    font-size: 40px;
-    line-height: 48px;
-  }
-
-  .web-link-description {
-    font-size: 24px;
-    line-height: 32px;
-  }
-
-  .copy-link-container {
-    width: 620px;
-    height: 72px;
-  }
-
-  .copy-link-text {
-    font-size: 24px;
-    line-height: 32px;
-  }
-
-  .copy-button {
-    width: 72px;
-    height: 72px;
-  }
-
-  .copy-icon {
-    width: 32px;
-    height: 32px;
+    width: 375px;
+    max-width: 375px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   }
 }
 
