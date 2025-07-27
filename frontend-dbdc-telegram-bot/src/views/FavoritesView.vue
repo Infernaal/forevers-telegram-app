@@ -581,27 +581,6 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-/* Mobile first approach for Telegram mini app */
-@media (max-width: 375px) {
-  main {
-    max-width: 100%;
-    padding-left: 14px;
-    padding-right: 14px;
-  }
-}
-
-@media (min-width: 376px) and (max-width: 768px) {
-  main {
-    max-width: 420px;
-  }
-}
-
-@media (min-width: 769px) {
-  main {
-    max-width: 480px;
-  }
-}
-
 /* Ensure proper touch scrolling on iOS */
 * {
   -webkit-tap-highlight-color: transparent;
@@ -629,111 +608,9 @@ onBeforeUnmount(() => {
   -webkit-overflow-scrolling: touch;
 }
 
-
-
-/* Optimize font sizes for mobile */
-@media (max-width: 375px) {
-  .text-xl {
-    font-size: 20px;
-    line-height: 24px;
-  }
-
-  .text-2xl {
-    font-size: 26px;
-    line-height: 30px;
-  }
-
-  .text-3xl {
-    font-size: 34px;
-    line-height: 40px;
-  }
-
-  .text-lg {
-    font-size: 18px;
-    line-height: 22px;
-  }
-
-  .text-base {
-    font-size: 16px;
-    line-height: 18px;
-  }
-
-  .text-sm {
-    font-size: 14px;
-    line-height: 20px;
-  }
-
-  .text-xs {
-    font-size: 12px;
-    line-height: 16px;
-  }
-}
-
-/* Responsive balance cards */
-.balance-card {
-  padding: 12px;
-  min-height: 180px;
-}
-
-@media (max-width: 375px) {
-  .balance-card {
-    padding: 10px;
-    min-height: 160px;
-  }
-}
-
-@media (min-width: 376px) and (max-width: 480px) {
-  .balance-card {
-    padding: 12px;
-    min-height: 170px;
-  }
-}
-
-@media (min-width: 481px) and (max-width: 768px) {
-  .balance-card {
-    padding: 14px;
-    min-height: 190px;
-  }
-}
-
-@media (min-width: 769px) {
-  .balance-card {
-    padding: 16px;
-    min-height: 210px;
-  }
-}
-
-/* Make sure content properly fits */
-main {
-  height: calc(100vh - 89px); /* Subtract bottom navigation height */
-}
-
 /* Modal styles */
 .modal-backdrop {
   backdrop-filter: blur(9px);
-}
-
-/* Enhanced responsive modal sizing */
-@media (max-width: 375px) {
-  .modal-content {
-    width: calc(100vw - 32px);
-    max-width: 311px;
-    margin: 0 16px;
-  }
-}
-
-@media (min-width: 376px) and (max-width: 768px) {
-  .modal-content {
-    width: 311px;
-    margin: 0 auto;
-  }
-}
-
-@media (min-width: 769px) {
-  .modal-content {
-    width: 350px;
-    margin: 0 auto;
-  }
 }
 
 /* Ensure modal inputs are touch-friendly */
@@ -793,20 +670,6 @@ main {
   z-index: 9999;
 }
 
-
-
-/* Cart badge responsive sizing */
-@media (max-width: 375px) {
-  .cart-badge {
-    width: 18px !important;
-    height: 18px !important;
-    font-size: 9px !important;
-    min-width: 18px !important;
-  }
-}
-
-
-
 /* Error message animations */
 .error-message-enter-active,
 .error-message-leave-active {
@@ -822,8 +685,6 @@ main {
   opacity: 0;
   transform: translateY(-5px) scale(0.98);
 }
-
-
 
 /* Cart badge animations */
 .cart-badge-enter-active,
@@ -852,5 +713,55 @@ main {
   box-shadow: 0 0 0 2px rgba(255, 25, 25, 0.1);
 }
 
+/* Landscape orientation adjustments */
+@media (max-height: 500px) and (orientation: landscape) {
+  main {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+  }
+}
 
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .bg-gray-100 {
+    background-color: #1a1a1a !important;
+  }
+
+  .bg-white {
+    background-color: #2a2a2a !important;
+  }
+
+  .bg-purple-50 {
+    background-color: #2d2b3a !important;
+  }
+
+  .bg-green-100 {
+    background-color: #1f3a1f !important;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  svg {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .transition-all,
+  .transition-colors {
+    transition: none !important;
+  }
+
+  .modal-enter-active,
+  .modal-leave-active,
+  .error-message-enter-active,
+  .error-message-leave-active,
+  .cart-badge-enter-active,
+  .cart-badge-leave-active {
+    transition: none !important;
+  }
+}
 </style>
