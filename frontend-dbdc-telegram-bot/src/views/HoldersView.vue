@@ -628,12 +628,11 @@ const hideSuccessNotification = () => {
   display: flex;
   width: 347px;
   flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-start;
+  justify-content: flex-start;
+  align-items: center;
   gap: 20px;
   position: relative;
   left: 14px;
-  height: 507px;
   margin-top: 60px;
 }
 
@@ -641,9 +640,7 @@ const hideSuccessNotification = () => {
   .scroll-content {
     width: 520px;
     left: 32px;
-    gap: 32px;
-    height: auto;
-    min-height: 650px;
+    gap: 24px;
     margin-top: 80px;
   }
 }
@@ -652,9 +649,7 @@ const hideSuccessNotification = () => {
   .scroll-content {
     width: 700px;
     left: 48px;
-    gap: 48px;
-    height: auto;
-    min-height: 800px;
+    gap: 32px;
     margin-top: 100px;
   }
 }
@@ -703,35 +698,101 @@ const hideSuccessNotification = () => {
 }
 
 .f-icon-1 {
-  width: 120px;
-  height: 120px;
+  width: 96px;
+  height: 96px;
   transform: rotate(46.848deg);
-  left: -20px;
-  top: -10px;
+  left: -16px;
+  top: -6px;
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+  .f-icon-1 {
+    width: 120px;
+    height: 120px;
+    left: -20px;
+    top: -10px;
+  }
+}
+
+@media (min-width: 769px) {
+  .f-icon-1 {
+    width: 140px;
+    height: 140px;
+    left: -24px;
+    top: -12px;
+  }
 }
 
 .f-icon-2 {
-  width: 60px;
-  height: 60px;
+  width: 48px;
+  height: 48px;
   transform: rotate(150.638deg);
-  left: 270px;
-  top: 180px;
+  right: 16px;
+  top: 60%;
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+  .f-icon-2 {
+    width: 60px;
+    height: 60px;
+    right: 20px;
+  }
+}
+
+@media (min-width: 769px) {
+  .f-icon-2 {
+    width: 72px;
+    height: 72px;
+    right: 24px;
+  }
 }
 
 .f-icon-3 {
-  width: 150px;
-  height: 150px;
+  width: 128px;
+  height: 128px;
   transform: rotate(-31.597deg);
-  left: -30px;
-  top: 185px;
+  left: -22px;
+  bottom: 20px;
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+  .f-icon-3 {
+    width: 150px;
+    height: 150px;
+    left: -30px;
+  }
+}
+
+@media (min-width: 769px) {
+  .f-icon-3 {
+    width: 180px;
+    height: 180px;
+    left: -36px;
+  }
 }
 
 .f-icon-4 {
-  width: 120px;
-  height: 120px;
+  width: 96px;
+  height: 96px;
   transform: rotate(121.978deg);
-  left: 200px;
-  top: 15px;
+  right: 10px;
+  top: 10px;
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+  .f-icon-4 {
+    width: 120px;
+    height: 120px;
+    right: 15px;
+  }
+}
+
+@media (min-width: 769px) {
+  .f-icon-4 {
+    width: 140px;
+    height: 140px;
+    right: 20px;
+  }
 }
 
 /* QR Code Container */
@@ -739,52 +800,55 @@ const hideSuccessNotification = () => {
   width: 222px;
   height: 220px;
   position: absolute;
-  left: 63px;
+  left: 50%;
   top: 24px;
+  transform: translateX(-50%);
   z-index: 10;
 }
 
 @media (min-width: 431px) and (max-width: 768px) {
   .qr-code-container {
-    width: 320px;
-    height: 300px;
-    left: 100px;
-    top: 32px;
+    width: 300px;
+    height: 280px;
+    top: 40px;
   }
 }
 
 @media (min-width: 769px) {
   .qr-code-container {
-    width: 400px;
-    height: 380px;
-    left: 150px;
-    top: 40px;
+    width: 380px;
+    height: 360px;
+    top: 50px;
   }
 }
 
 .qr-code-wrapper {
-  width: 222px;
-  height: 220px;
+  width: 100%;
+  height: 100%;
   border-radius: 20px;
   border: 1px solid #F2F2F2;
   background: #FAFAFA;
   box-shadow: 2px 4px 12px 0 rgba(0, 0, 0, 0.04);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 @media (min-width: 431px) and (max-width: 768px) {
   .qr-code-wrapper {
-    width: 320px;
-    height: 300px;
-    border-radius: 28px;
+    border-radius: 24px;
+    padding: 24px;
   }
 }
 
 @media (min-width: 769px) {
   .qr-code-wrapper {
-    width: 400px;
-    height: 380px;
-    border-radius: 36px;
+    border-radius: 28px;
+    padding: 32px;
   }
 }
 
@@ -793,26 +857,23 @@ const hideSuccessNotification = () => {
   height: 140px;
   aspect-ratio: 1/1;
   object-fit: contain;
-  position: absolute;
-  left: 41px;
-  top: 20px;
+  flex-shrink: 0;
+  margin-bottom: 16px;
 }
 
 @media (min-width: 431px) and (max-width: 768px) {
   .qr-code-image {
-    width: 200px;
-    height: 200px;
-    left: 60px;
-    top: 30px;
+    width: 180px;
+    height: 180px;
+    margin-bottom: 20px;
   }
 }
 
 @media (min-width: 769px) {
   .qr-code-image {
-    width: 250px;
-    height: 250px;
-    left: 75px;
-    top: 40px;
+    width: 220px;
+    height: 220px;
+    margin-bottom: 24px;
   }
 }
 
@@ -822,87 +883,62 @@ const hideSuccessNotification = () => {
   font-size: 17px;
   font-weight: 600;
   line-height: 24px;
-  position: absolute;
-  left: 20px;
-  top: 176px;
-  width: 182px;
-  height: 24px;
   text-align: center;
+  flex-shrink: 0;
 }
 
 @media (min-width: 431px) and (max-width: 768px) {
   .qr-code-link {
-    font-size: 22px;
-    line-height: 30px;
-    left: 30px;
-    top: 250px;
-    width: 260px;
-    height: 30px;
+    font-size: 20px;
+    line-height: 28px;
   }
 }
 
 @media (min-width: 769px) {
   .qr-code-link {
-    font-size: 28px;
-    line-height: 36px;
-    left: 40px;
-    top: 320px;
-    width: 320px;
-    height: 36px;
+    font-size: 24px;
+    line-height: 32px;
   }
 }
 
 /* Terms Section */
 .terms-checkbox-wrapper {
-  position: absolute;
-  left: 20px;
-  top: 256px;
+  align-self: flex-start;
+  margin-left: 6px;
   z-index: 20;
 }
 
 @media (min-width: 431px) and (max-width: 768px) {
   .terms-checkbox-wrapper {
-    position: relative;
-    left: 35px;
-    top: auto;
-    transform: scale(1.2);
-    margin: 20px 0;
+    transform: scale(1.15);
+    transform-origin: left center;
+    margin: 16px 0 16px 20px;
   }
 }
 
 @media (min-width: 769px) {
   .terms-checkbox-wrapper {
-    position: relative;
-    left: 50px;
-    top: auto;
-    transform: scale(1.5);
-    margin: 30px 0;
+    transform: scale(1.3);
+    transform-origin: left center;
+    margin: 24px 0 24px 36px;
   }
 }
 
 /* Share Button */
 .share-button-container {
-  position: absolute;
-  left: 23px;
-  top: 322px;
+  align-self: center;
   z-index: 20;
 }
 
 @media (min-width: 431px) and (max-width: 768px) {
   .share-button-container {
-    position: relative;
-    left: 35px;
-    top: auto;
     margin: 20px 0;
   }
 }
 
 @media (min-width: 769px) {
   .share-button-container {
-    position: relative;
-    left: 50px;
-    top: auto;
-    margin: 30px 0;
+    margin: 32px 0;
   }
 }
 
