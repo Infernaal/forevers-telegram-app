@@ -89,21 +89,21 @@
     <div class="content-container bg-gray-100 pb-24 lg:pb-40 xl:pb-48 px-4 lg:px-12 xl:px-16">
       <!-- Empty State -->
       <div v-if="transactions.length === 0" class="empty-state flex flex-col items-center justify-center text-center" style="min-height: calc(100vh - 200px);">
-        <h2 class="text-xl font-bold text-dbd-dark mb-4 leading-tight max-w-60">
+        <h2 class="text-xl lg:text-4xl xl:text-5xl font-bold text-dbd-dark mb-4 lg:mb-8 xl:mb-12 leading-tight max-w-60 lg:max-w-none">
           No deals<br>have been opened yet.
         </h2>
-        <p class="text-base font-medium text-dbd-gray leading-relaxed max-w-72">
+        <p class="text-base lg:text-2xl xl:text-3xl font-medium text-dbd-gray leading-relaxed max-w-72 lg:max-w-none">
           All the transaction will be displayed inside this table after you make one.
         </p>
       </div>
 
       <!-- Scrollable Transaction List -->
-      <div v-else class="transaction-list space-y-2 pt-4">
+      <div v-else class="transaction-list space-y-2 lg:space-y-4 xl:space-y-6 pt-4 lg:pt-8 xl:pt-12">
         <!-- Transaction Cards -->
         <div
           v-for="(transaction, index) in transactions"
           :key="index"
-          class="transaction-card bg-dbd-off-white rounded-3xl border border-gray-200 p-3 cursor-pointer hover:bg-gray-50 transition-colors"
+          class="transaction-card bg-dbd-off-white rounded-3xl lg:rounded-4xl xl:rounded-5xl border border-gray-200 p-3 lg:p-6 xl:p-8 cursor-pointer hover:bg-gray-50 transition-colors"
           @click="openTransactionDetails(transaction, index)"
         >
           <!-- Date and Time Row -->
