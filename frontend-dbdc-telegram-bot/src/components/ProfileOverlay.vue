@@ -610,6 +610,8 @@ const selectLanguage = (language) => {
 .error-badge {
   position: absolute;
   right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -924,8 +926,7 @@ const selectLanguage = (language) => {
   border-radius: 1000px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 6px 8px 6px 6px;
+  padding: 6px;
   cursor: pointer;
   transition: all 0.2s ease;
   position: relative;
@@ -942,7 +943,7 @@ const selectLanguage = (language) => {
   gap: 6px;
   flex: 1;
   min-width: 0;
-  overflow: visible;
+  padding-right: 24px;
 }
 
 .flag-wrapper {
@@ -960,7 +961,7 @@ const selectLanguage = (language) => {
   line-height: 26px;
   flex-shrink: 0;
   white-space: nowrap;
-  min-width: 40px;
+  width: 40px;
   text-align: left;
 }
 
@@ -973,7 +974,9 @@ const selectLanguage = (language) => {
   flex-shrink: 0;
   transition: transform 0.2s ease;
   position: absolute;
-  right: 8px;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .dropdown-arrow-open {
