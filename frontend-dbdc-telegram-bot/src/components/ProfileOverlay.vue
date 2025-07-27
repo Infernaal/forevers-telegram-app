@@ -225,33 +225,36 @@
         </div>
 
         <!-- Language Section -->
-        <div class="language-section">
+        <div class="language-section" @click="toggleLanguageDropdown">
           <div class="language-content">
-            <div class="flag-wrapper">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                <circle cx="16" cy="16" r="16" fill="#D4D4D4"/>
-                <g clip-path="url(#clip0_flag)">
-                  <path d="M15.9993 31.0591C24.316 31.0591 31.0581 24.317 31.0581 16.0002C31.0581 7.68347 24.316 0.941406 15.9993 0.941406C7.68249 0.941406 0.94043 7.68347 0.94043 16.0002C0.94043 24.317 7.68249 31.0591 15.9993 31.0591Z" fill="#F0F0F0"/>
-                  <path d="M15.3438 16.0025H31.0573C31.0573 14.6433 30.8761 13.3266 30.5385 12.0741H15.3438V16.0025Z" fill="#D80027"/>
-                  <path d="M15.3438 8.14179H28.847C27.9252 6.63756 26.7466 5.30797 25.3723 4.21338H15.3438V8.14179Z" fill="#D80027"/>
-                  <path d="M16.0038 31.06C19.5478 31.06 22.8053 29.8351 25.3776 27.7864H6.62988C9.20224 29.8351 12.4597 31.06 16.0038 31.06Z" fill="#D80027"/>
-                  <path d="M3.15241 23.855H28.8496C29.5896 22.6475 30.1636 21.3275 30.5411 19.9266H1.46094C1.83841 21.3275 2.41235 22.6475 3.15241 23.855Z" fill="#D80027"/>
-                  <path d="M7.91596 3.29305H9.28825L8.01178 4.22041L8.49937 5.72094L7.22296 4.79358L5.94655 5.72094L6.36772 4.42464C5.24384 5.36082 4.25878 6.45764 3.44702 7.67976H3.88672L3.07419 8.27005C2.94761 8.48123 2.82619 8.69576 2.70984 8.91346L3.09784 10.1076L2.37396 9.5817C2.19402 9.96294 2.02943 10.3528 1.88149 10.7507L2.30896 12.0665H3.88672L2.61025 12.9938L3.09784 14.4943L1.82143 13.567L1.05684 14.1225C0.980312 14.7377 0.94043 15.3643 0.94043 16.0002H15.9993C15.9993 7.68352 15.9993 6.70305 15.9993 0.941406C13.0244 0.941406 10.2513 1.80435 7.91596 3.29305ZM8.49937 14.4943L7.22296 13.567L5.94655 14.4943L6.43414 12.9938L5.15767 12.0665H6.73543L7.22296 10.5659L7.71049 12.0665H9.28825L8.01178 12.9938L8.49937 14.4943ZM8.01178 8.60711L8.49937 10.1076L7.22296 9.18029L5.94655 10.1076L6.43414 8.60711L5.15767 7.67976H6.73543L7.22296 6.17923L7.71049 7.67976H9.28825L8.01178 8.60711ZM13.9009 14.4943L12.6245 13.567L11.3481 14.4943L11.8357 12.9938L10.5592 12.0665H12.137L12.6245 10.5659L13.112 12.0665H14.6898L13.4133 12.9938L13.9009 14.4943ZM13.4133 8.60711L13.9009 10.1076L12.6245 9.18029L11.3481 10.1076L11.8357 8.60711L10.5592 7.67976H12.137L12.6245 6.17923L13.112 7.67976H14.6898L13.4133 8.60711ZM13.4133 4.22041L13.9009 5.72094L12.6245 4.79358L11.3481 5.72094L11.8357 4.22041L10.5592 3.29305H12.137L12.6245 1.79252L13.112 3.29305H14.6898L13.4133 4.22041Z" fill="#0052B4"/>
-                </g>
-                <defs>
-                  <clipPath id="clip0_flag">
-                    <rect width="30.1176" height="30.1176" fill="white" transform="translate(0.94043 0.941406)"/>
-                  </clipPath>
-                </defs>
-              </svg>
-            </div>
-            <span class="language-text">ENG</span>
+            <CountryFlag :country="selectedLanguage.country" size="medium" />
+            <span class="language-text">{{ selectedLanguage.code }}</span>
           </div>
-          <div class="dropdown-arrow">
+          <div class="dropdown-arrow" :class="{ 'dropdown-arrow-open': showLanguageDropdown }">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <circle opacity="0.2" cx="10" cy="10" r="10" fill="white"/>
               <path d="M5.71387 8.57146L9.99958 12.8572L14.2853 8.57146" stroke="white" stroke-linecap="round"/>
             </svg>
+          </div>
+
+          <!-- Language Dropdown -->
+          <div v-if="showLanguageDropdown" class="language-dropdown">
+            <div class="language-dropdown-content">
+              <div
+                v-for="(language, index) in languages"
+                :key="language.code"
+                class="language-dropdown-item"
+                :class="{ 'language-item-selected': language.code === selectedLanguage.code }"
+                @click.stop="selectLanguage(language)"
+              >
+                <CountryFlag :country="language.country" size="small" />
+                <span class="language-item-text">{{ language.name }}</span>
+                <span class="language-item-code">{{ language.code }}</span>
+                <svg v-if="language.code === selectedLanguage.code" class="language-item-check" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M13.5 4.5L6 12L2.5 8.5" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -263,6 +266,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import CountryFlag from './CountryFlag.vue'
 
 // Props
 defineProps({
@@ -277,6 +281,25 @@ const emit = defineEmits(['close'])
 
 // State
 const showCopySuccess = ref(false)
+const showLanguageDropdown = ref(false)
+
+// Language state
+const languages = ref([
+  { code: 'ENG', name: 'English', country: 'uk' },
+  { code: 'ESP', name: 'Español', country: 'spain' },
+  { code: 'FRA', name: 'Français', country: 'france' },
+  { code: 'DEU', name: 'Deutsch', country: 'germany' },
+  { code: 'ITA', name: 'Italiano', country: 'italy' },
+  { code: 'RUS', name: 'Русский', country: 'ukraine' },
+  { code: 'CHN', name: '中文', country: 'china' },
+  { code: 'JPN', name: '日本語', country: 'japan' },
+  { code: 'KOR', name: '한국어', country: 'new zealand' },
+  { code: 'ARA', name: 'العربية', country: 'uae' },
+  { code: 'POR', name: 'Português', country: 'spain' },
+  { code: 'NLD', name: 'Nederlands', country: 'norway' }
+])
+
+const selectedLanguage = ref(languages.value[0])
 
 // Methods
 const handleMenuClick = (menuItem) => {
