@@ -286,11 +286,28 @@ const closeRentModal = () => {
 const handleRentOut = (data) => {
   console.log('Rent out data:', data)
 
-  // Show success message or navigate
-  // TODO: Implement actual rent out logic
+  // Update the available amount for the selected balance
+  const rentedAmount = parseInt(data.amount) || 0
+  const balanceItem = foreversList.value.find(item => item.id === data.balance.id)
+  if (balanceItem) {
+    balanceItem.availableAmount = Math.max(0, balanceItem.availableAmount - rentedAmount)
+  }
 
-  // For now, just close the modal
+  // Close the modal first
   closeRentModal()
+
+  // Show success notification
+  showSuccessNotification.value = true
+
+  // Auto-hide notification after 3 seconds
+  setTimeout(() => {
+    showSuccessNotification.value = false
+  }, 3000)
+
+  // Haptic feedback for success
+  if (window.triggerHaptic) {
+    window.triggerHaptic('notification', 'success')
+  }
 }
 
 const openTermsModal = () => {
