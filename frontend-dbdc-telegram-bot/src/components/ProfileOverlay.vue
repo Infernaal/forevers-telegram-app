@@ -87,10 +87,10 @@
           <span class="menu-label">Verification</span>
           <!-- Error Badge -->
           <div class="error-badge">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M14.9228 7.16821C14.7585 6.94745 14.6305 6.70193 14.5436 6.4409C14.5201 6.18054 14.5379 5.91813 14.5962 5.66333C14.7477 5.12283 14.7046 4.54628 14.4744 4.0341C14.1456 3.57863 13.6671 3.25299 13.1226 3.11407C12.8728 3.03698 12.6365 2.92116 12.4226 2.77084C12.2398 2.5653 12.0911 2.33194 11.9819 2.07958C11.7892 1.56689 11.4246 1.13678 10.9502 0.862631C10.4256 0.692048 9.8579 0.709823 9.34519 0.912887C9.08843 0.99967 8.81951 1.04525 8.54844 1.04795C8.28733 0.989378 8.03727 0.889426 7.80776 0.751882C7.34444 0.444166 6.78837 0.307359 6.23518 0.364993C5.72041 0.534107 5.28002 0.875815 4.98858 1.33226C4.82575 1.56079 4.62746 1.76187 4.40119 1.92794C4.14391 2.04102 3.87014 2.11219 3.5903 2.13875C3.04904 2.16266 2.53279 2.37289 2.12909 2.73379C1.80194 3.18287 1.64241 3.73224 1.67814 4.28669C1.68201 4.55398 1.64344 4.82018 1.56385 5.07536C1.42625 5.30891 1.25231 5.51905 1.04854 5.6979C0.616901 6.04079 0.317739 6.52274 0.202076 7.06155C0.203417 7.60886 0.394039 8.13897 0.741655 8.56208C0.905939 8.78283 1.03392 9.02836 1.12078 9.28939C1.14429 9.54974 1.12656 9.81216 1.06823 10.067C0.916691 10.6074 0.959774 11.184 1.18997 11.6962C1.51892 12.1515 1.99733 12.4771 2.54179 12.6162C2.79166 12.6933 3.02788 12.8091 3.24182 12.9594C3.42458 13.165 3.57336 13.3983 3.68254 13.6507C3.87516 14.1634 4.23981 14.5935 4.71426 14.8676C4.77988 14.8969 4.84771 14.9209 4.91712 14.9394C5.38717 15.022 5.87062 14.9799 6.31921 14.8174C6.57597 14.7306 6.84489 14.685 7.11596 14.6823C7.37691 14.7414 7.62688 14.8413 7.85663 14.9784C8.32008 15.2858 8.87605 15.4226 9.42921 15.3653C9.94398 15.1962 10.3844 14.8545 10.6758 14.398C10.8386 14.1695 11.0369 13.9684 11.2632 13.8023C11.5205 13.6892 11.7943 13.6181 12.0741 13.5915C12.6154 13.5676 13.1316 13.3574 13.5353 12.9965C13.8625 12.5474 14.022 11.998 13.9863 11.4436C13.9824 11.1763 14.021 10.9101 14.1005 10.6549C14.2381 10.4214 14.4121 10.2112 14.6158 10.0324C15.0475 9.6895 15.3466 9.20755 15.4623 8.66874C15.461 8.12143 15.2704 7.59133 14.9228 7.16821Z" fill="#FF1919"/>
-              <path d="M15.1261 9.67421L9.56268 15.2377C9.28451 15.5158 8.91361 15.5158 8.63544 15.2377C8.35726 14.9595 8.35726 14.5886 8.63544 14.3104L14.1989 8.74697C14.4771 8.46879 14.848 8.46879 15.1261 8.74697C15.4043 9.02514 15.4043 9.39604 15.1261 9.67421Z" fill="white"/>
-              <path d="M15.1262 15.2377C14.848 15.5158 14.4771 15.5158 14.199 15.2377L8.6355 9.67419C8.35732 9.39602 8.35732 9.02512 8.6355 8.74695C8.91367 8.46878 9.28457 8.46878 9.56274 8.74695L15.1262 14.3104C15.4044 14.5886 15.4044 14.9595 15.1262 15.2377Z" fill="white"/>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M7 0C10.866 0 14 3.134 14 7C14 10.866 10.866 14 7 14C3.134 14 0 10.866 0 7C0 3.134 3.134 0 7 0Z" fill="#FF1919"/>
+              <path d="M10.5 4.5L4.5 10.5M4.5 4.5L10.5 10.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
             </svg>
           </div>
         </div>
@@ -149,41 +149,45 @@
       <!-- Start Section -->
       <div class="start-section">
         <div class="start-card">
-          <div class="start-icon">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-              <g clip-path="url(#clip0_2_21309)">
-                <path d="M16 31.0588C24.3167 31.0588 31.0588 24.3167 31.0588 16C31.0588 7.68323 24.3167 0.941162 16 0.941162C7.68323 0.941162 0.941162 7.68323 0.941162 16C0.941162 24.3167 7.68323 31.0588 16 31.0588Z" fill="#8C4CD1"/>
-                <path d="M28.998 8.39055C26.1133 12.4471 21.365 15.0918 16.0003 15.0918C10.6356 15.0918 5.88739 12.4471 3.00269 8.39055C5.61916 3.9341 10.4615 0.941162 16.0003 0.941162C21.5392 0.941162 26.3815 3.9341 28.998 8.39055Z" fill="#9C68E1"/>
-                <path d="M15.9997 5.11792V15.4117L19.3443 11.8949L15.9997 5.11792Z" fill="#FF9F00"/>
-                <path d="M15.9996 5.11792V15.4117L12.655 11.8949L15.9996 5.11792Z" fill="#FED110"/>
-                <path d="M26.8232 12.982L19.3443 11.8953L15.9997 15.412L26.8232 12.982Z" fill="#FED110"/>
-                <path d="M26.8232 12.9825L21.4115 18.2577L15.9997 15.4126L26.8232 12.9825Z" fill="#FF9F00"/>
-                <path d="M5.17645 12.982L12.6553 11.8953L16 15.412L5.17645 12.982Z" fill="#FF9F00"/>
-                <path d="M5.17645 12.9825L10.5882 18.2577L16 15.4126L5.17645 12.9825Z" fill="#FED110"/>
-                <path d="M15.9997 15.4124L21.4115 18.2575L22.689 25.7061L15.9997 15.4124Z" fill="#FED110"/>
-                <path d="M22.689 25.7061L15.9997 22.1894V15.4124L22.689 25.7061Z" fill="#FF9F00"/>
-                <path d="M15.9996 15.4124L10.5878 18.2575L9.31024 25.7061L15.9996 15.4124Z" fill="#FF9F00"/>
-                <path d="M9.31024 25.7061L15.9996 22.1894V15.4124L9.31024 25.7061Z" fill="#FED110"/>
-                <g opacity="0.3">
-                  <path d="M16.0003 27.5882C20.9059 27.5882 24.8826 27.3442 24.8826 27.0432C24.8826 26.7423 20.9059 26.4983 16.0003 26.4983C11.0947 26.4983 7.11792 26.7423 7.11792 27.0432C7.11792 27.3442 11.0947 27.5882 16.0003 27.5882Z" fill="#20273A"/>
-                </g>
-              </g>
-              <defs>
-                <clipPath id="clip0_2_21309">
-                  <rect width="32" height="32" fill="white"/>
-                </clipPath>
-              </defs>
-            </svg>
+          <div class="start-header">
+            <div class="start-header-left">
+              <div class="start-icon">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <g clip-path="url(#clip0_2_21309)">
+                    <path d="M16 31.0588C24.3167 31.0588 31.0588 24.3167 31.0588 16C31.0588 7.68323 24.3167 0.941162 16 0.941162C7.68323 0.941162 0.941162 7.68323 0.941162 16C0.941162 24.3167 7.68323 31.0588 16 31.0588Z" fill="#8C4CD1"/>
+                    <path d="M28.998 8.39055C26.1133 12.4471 21.365 15.0918 16.0003 15.0918C10.6356 15.0918 5.88739 12.4471 3.00269 8.39055C5.61916 3.9341 10.4615 0.941162 16.0003 0.941162C21.5392 0.941162 26.3815 3.9341 28.998 8.39055Z" fill="#9C68E1"/>
+                    <path d="M15.9997 5.11792V15.4117L19.3443 11.8949L15.9997 5.11792Z" fill="#FF9F00"/>
+                    <path d="M15.9996 5.11792V15.4117L12.655 11.8949L15.9996 5.11792Z" fill="#FED110"/>
+                    <path d="M26.8232 12.982L19.3443 11.8953L15.9997 15.412L26.8232 12.982Z" fill="#FED110"/>
+                    <path d="M26.8232 12.9825L21.4115 18.2577L15.9997 15.4126L26.8232 12.9825Z" fill="#FF9F00"/>
+                    <path d="M5.17645 12.982L12.6553 11.8953L16 15.412L5.17645 12.982Z" fill="#FF9F00"/>
+                    <path d="M5.17645 12.9825L10.5882 18.2577L16 15.4126L5.17645 12.9825Z" fill="#FED110"/>
+                    <path d="M15.9997 15.4124L21.4115 18.2575L22.689 25.7061L15.9997 15.4124Z" fill="#FED110"/>
+                    <path d="M22.689 25.7061L15.9997 22.1894V15.4124L22.689 25.7061Z" fill="#FF9F00"/>
+                    <path d="M15.9996 15.4124L10.5878 18.2575L9.31024 25.7061L15.9996 15.4124Z" fill="#FF9F00"/>
+                    <path d="M9.31024 25.7061L15.9996 22.1894V15.4124L9.31024 25.7061Z" fill="#FED110"/>
+                    <g opacity="0.3">
+                      <path d="M16.0003 27.5882C20.9059 27.5882 24.8826 27.3442 24.8826 27.0432C24.8826 26.7423 20.9059 26.4983 16.0003 26.4983C11.0947 26.4983 7.11792 26.7423 7.11792 27.0432C7.11792 27.3442 11.0947 27.5882 16.0003 27.5882Z" fill="#20273A"/>
+                    </g>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_2_21309">
+                      <rect width="32" height="32" fill="white"/>
+                    </clipPath>
+                  </defs>
+                </svg>
+              </div>
+              <div class="start-title">Start</div>
+            </div>
+            <button class="upgrade-button" @click="handleUpgrade">
+              Upgrade
+            </button>
           </div>
           <div class="start-content">
-            <div class="start-title">Start</div>
             <div class="start-description">
               buy <span class="start-number">123</span> more Forevers to upgrade
             </div>
           </div>
-          <button class="upgrade-button" @click="handleUpgrade">
-            Upgrade
-          </button>
         </div>
       </div>
 
@@ -387,7 +391,7 @@ const selectLanguage = (language) => {
 .triangle-pointer {
   position: absolute;
   left: 34px;
-  bottom: 100px;
+  bottom: calc(110px + env(safe-area-inset-bottom, 0px));
   z-index: 65;
 }
 
@@ -405,8 +409,9 @@ const selectLanguage = (language) => {
   position: absolute;
   left: 8px;
   right: 8px;
-  bottom: 110px;
-  height: 580px;
+  bottom: calc(110px + env(safe-area-inset-bottom, 0px));
+  height: calc(580px - env(safe-area-inset-bottom, 0px));
+  max-height: calc(100vh - 130px - env(safe-area-inset-bottom, 0px));
   border-radius: 20px;
   overflow: hidden;
   z-index: 55;
@@ -525,7 +530,7 @@ const selectLanguage = (language) => {
 .menu-container {
   position: absolute;
   top: 130px;
-  bottom: 190px;
+  bottom: 178px;
   left: 12px;
   right: 12px;
   z-index: 1;
@@ -606,6 +611,8 @@ const selectLanguage = (language) => {
 .error-badge {
   position: absolute;
   right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -614,12 +621,19 @@ const selectLanguage = (language) => {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+}
+
+.error-badge svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
 }
 
 /* Start Section */
 .start-section {
   position: absolute;
-  bottom: 96px;
+  bottom: 86px;
   left: 12px;
   right: 12px;
   z-index: 1;
@@ -632,8 +646,8 @@ const selectLanguage = (language) => {
   border: 1px solid #DCCCF1;
   border-radius: 16px;
   display: flex;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column;
+  justify-content: center;
   padding: 8px;
   position: relative;
   overflow: hidden;
@@ -651,16 +665,29 @@ const selectLanguage = (language) => {
   border-radius: 16px 0 0 16px;
 }
 
-.start-icon {
+.start-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
   position: relative;
   z-index: 1;
+}
+
+.start-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.start-icon {
   flex-shrink: 0;
 }
 
 .start-content {
   position: relative;
   z-index: 1;
-  flex: 1;
 }
 
 .start-title {
@@ -900,11 +927,11 @@ const selectLanguage = (language) => {
   border-radius: 1000px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 6px;
   cursor: pointer;
   transition: all 0.2s ease;
   position: relative;
+  overflow: visible;
 }
 
 .language-section:hover {
@@ -914,8 +941,10 @@ const selectLanguage = (language) => {
 .language-content {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 6px;
   flex: 1;
+  min-width: 0;
+  padding-right: 24px;
 }
 
 .flag-wrapper {
@@ -931,6 +960,10 @@ const selectLanguage = (language) => {
   font-size: 16px;
   font-weight: 400;
   line-height: 26px;
+  flex-shrink: 0;
+  white-space: nowrap;
+  width: 40px;
+  text-align: left;
 }
 
 .dropdown-arrow {
@@ -941,10 +974,23 @@ const selectLanguage = (language) => {
   justify-content: center;
   flex-shrink: 0;
   transition: transform 0.2s ease;
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .dropdown-arrow-open {
-  transform: rotate(180deg);
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* Prevent flag icon from being squished */
+.language-content .country-flag {
+  flex-shrink: 0;
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px;
+  min-height: 32px;
 }
 
 /* Language Dropdown */
@@ -953,7 +999,7 @@ const selectLanguage = (language) => {
   bottom: 50px;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: 1000;
   animation: dropdownSlideUp 0.2s ease-out;
 }
 
@@ -968,6 +1014,7 @@ const selectLanguage = (language) => {
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .language-dropdown-content::-webkit-scrollbar {
@@ -983,7 +1030,7 @@ const selectLanguage = (language) => {
   cursor: pointer;
   transition: all 0.2s ease;
   min-height: 36px;
-  justify-content: space-between;
+  position: relative;
 }
 
 .language-dropdown-item:hover {
@@ -1000,10 +1047,24 @@ const selectLanguage = (language) => {
   font-weight: 500;
   line-height: 20px;
   flex: 1;
+  margin-right: 24px;
 }
 
 .language-item-check {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
   flex-shrink: 0;
+}
+
+/* Prevent flag icon from being squished in dropdown */
+.language-dropdown-item .country-flag {
+  flex-shrink: 0;
+  width: 24px !important;
+  height: 24px !important;
+  min-width: 24px;
+  min-height: 24px;
 }
 
 @keyframes dropdownSlideUp {
@@ -1020,23 +1081,41 @@ const selectLanguage = (language) => {
 
 
 /* Responsive */
+/* iPhone and small devices - Telegram WebApp optimized */
 @media (max-width: 375px) {
   .profile-dropdown {
     left: 4px;
     right: 4px;
+    bottom: calc(100px + env(safe-area-inset-bottom, 0px));
+    height: calc(560px - env(safe-area-inset-bottom, 0px));
+    max-height: calc(100vh - 120px - env(safe-area-inset-bottom, 0px));
   }
-  
+
   .triangle-pointer {
-    bottom: 105px;
+    bottom: calc(90px + env(safe-area-inset-bottom, 0px));
+    left: 30px;
   }
-  
+
   .start-section {
-    bottom: 107px;
+    bottom: 84px;
   }
-  
+
   .bottom-controls {
     gap: 20px;
-    bottom: 8px;
+    bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* iPhone Pro Max and larger screens */
+@media (min-width: 376px) and (max-width: 430px) {
+  .triangle-pointer {
+    bottom: calc(105px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .profile-dropdown {
+    bottom: calc(115px + env(safe-area-inset-bottom, 0px));
+    height: calc(580px - env(safe-area-inset-bottom, 0px));
+    max-height: calc(100vh - 135px - env(safe-area-inset-bottom, 0px));
   }
 }
 
@@ -1058,5 +1137,48 @@ const selectLanguage = (language) => {
   will-change: transform;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+}
+
+/* Telegram WebApp profile overlay adaptations */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .profile-overlay {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Ensure triangle doesn't overlap with Telegram's bottom UI on shorter screens */
+@media (max-height: 667px) {
+  .triangle-pointer {
+    bottom: calc(85px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .profile-dropdown {
+    bottom: calc(95px + env(safe-area-inset-bottom, 0px));
+    height: calc(500px - env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* iPhone SE and very small screens */
+@media (max-height: 568px) {
+  .triangle-pointer {
+    bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .profile-dropdown {
+    bottom: calc(90px + env(safe-area-inset-bottom, 0px));
+    height: calc(450px - env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* Landscape mode adaptations for mobile */
+@media (orientation: landscape) and (max-height: 500px) {
+  .triangle-pointer {
+    bottom: calc(70px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .profile-dropdown {
+    bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+    height: calc(350px - env(safe-area-inset-bottom, 0px));
+  }
 }
 </style>
