@@ -425,6 +425,22 @@ const goBack = () => {
   gap: 2px;
 }
 
+/* Adjust spacing for larger screens */
+@media (min-width: 431px) and (max-width: 768px) {
+  .available-tight {
+    gap: 8px !important;
+  }
+
+  .available-dot {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .available-f-section {
+    gap: 6px !important;
+  }
+}
+
 /* Mobile ultra-tight spacing */
 @media (max-width: 375px) {
   .available-dot {
@@ -453,27 +469,82 @@ const goBack = () => {
 /* Tablets and larger phones */
 @media (min-width: 481px) and (max-width: 768px) {
   .w-full.max-w-md {
-    max-width: 420px;
+    max-width: 100%;
   }
 
   .bg-dbd-light-blue {
-    padding: 20px;
+    padding: 24px;
   }
 
   .text-4xl {
-    font-size: 32px;
-    line-height: 36px;
+    font-size: 48px;
+    line-height: 52px;
   }
 
   .text-2xl {
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 32px;
+    line-height: 38px;
+  }
+
+  .space-y-4 > * + * {
+    margin-top: 24px;
+  }
+
+  .bg-dbd-off-white {
+    padding: 20px;
+  }
+
+  /* Larger buttons for tablets */
+  button {
+    min-height: 52px;
+    min-width: 52px;
   }
 }
 
 @media (min-width: 769px) {
   .w-full.max-w-md {
-    max-width: 480px;
+    max-width: 100%;
+  }
+
+  .bg-dbd-light-blue {
+    padding: 32px;
+  }
+
+  .text-4xl {
+    font-size: 64px;
+    line-height: 72px;
+  }
+
+  .text-2xl {
+    font-size: 40px;
+    line-height: 48px;
+  }
+
+  .space-y-4 > * + * {
+    margin-top: 32px;
+  }
+
+  .bg-dbd-off-white {
+    padding: 32px;
+  }
+
+  /* Larger buttons for desktop */
+  button {
+    min-height: 64px;
+    min-width: 64px;
+  }
+
+  .available-tight {
+    gap: 12px !important;
+  }
+
+  .available-dot {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .available-f-section {
+    gap: 8px !important;
   }
 }
 
