@@ -1,12 +1,12 @@
 <template>
-  <div class="rent-out-transaction-view w-full max-w-md mx-auto bg-gray-100 min-h-screen relative">
+  <div class="rent-out-transaction-view w-full max-w-md lg:max-w-6xl xl:max-w-7xl mx-auto bg-gray-100 min-h-screen relative">
     <!-- Header Section -->
     <div class="header-section sticky top-0 bg-gray-100 z-40 pb-2">
       <!-- Status Bar Spacing -->
       <div class="h-12"></div>
       
       <!-- Header Content -->
-      <div class="flex justify-between items-center px-4 py-3">
+      <div class="flex justify-between items-center px-4 lg:px-12 xl:px-16 py-3 lg:py-6 xl:py-8">
         <!-- Close Button -->
         <button 
           @click="goBack"
@@ -20,7 +20,7 @@
 
         <!-- Title -->
         <div class="flex-1 text-center">
-          <h1 class="text-2xl font-semibold text-dbd-dark leading-tight">
+          <h1 class="text-2xl lg:text-5xl xl:text-6xl font-semibold text-dbd-dark leading-tight">
             Rented Out<br>History
           </h1>
         </div>
@@ -86,7 +86,7 @@
     </div>
 
     <!-- Content Container -->
-    <div class="content-container bg-gray-100 pb-24 px-4">
+    <div class="content-container bg-gray-100 pb-24 lg:pb-40 xl:pb-48 px-4 lg:px-12 xl:px-16">
       <!-- Empty State -->
       <div v-if="transactions.length === 0" class="empty-state flex flex-col items-center justify-center text-center" style="min-height: calc(100vh - 200px);">
         <h2 class="text-xl font-bold text-dbd-dark mb-4 leading-tight max-w-60">
