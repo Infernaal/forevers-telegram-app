@@ -29,11 +29,11 @@
       </div>
 
       <!-- Scroll Content -->
-      <div class="flex-1 overflow-y-auto pt-2 pb-24 space-y-2" v-if="balances.length > 0">
+      <div class="flex-1 overflow-y-auto pt-1.5 xs:pt-2 sm:pt-2 ml:pt-2.5 md:pt-3 lg:pt-3 xl:pt-3 pb-20 xs:pb-24 sm:pb-24 ml:pb-24 md:pb-28 lg:pb-28 xl:pb-28 space-y-1.5 xs:space-y-2 sm:space-y-2 ml:space-y-2.5 md:space-y-3 lg:space-y-3 xl:space-y-3" v-if="balances.length > 0">
         <div
           v-for="balance in balances"
           :key="balance.id"
-          class="bg-white border border-purple-200 rounded-2xl balance-card relative flex flex-col justify-between"
+          class="bg-white border border-purple-200 rounded-xl xs:rounded-2xl sm:rounded-2xl ml:rounded-2xl md:rounded-2xl lg:rounded-2xl xl:rounded-2xl p-2.5 xs:p-3 sm:p-3 ml:p-3.5 md:p-4 lg:p-4 xl:p-4 relative flex flex-col justify-between min-h-[160px] xs:min-h-[180px] sm:min-h-[180px] ml:min-h-[190px] md:min-h-[210px] lg:min-h-[210px] xl:min-h-[210px]"
         >
           <!-- Country Header -->
           <div class="flex items-center justify-between mb-3">
