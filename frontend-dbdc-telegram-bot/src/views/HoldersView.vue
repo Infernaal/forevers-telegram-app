@@ -855,6 +855,22 @@ const hideSuccessNotification = () => {
   z-index: 20;
 }
 
+@media (min-width: 431px) and (max-width: 768px) {
+  .terms-checkbox-wrapper {
+    left: 35px;
+    top: 340px;
+    transform: scale(1.2);
+  }
+}
+
+@media (min-width: 769px) {
+  .terms-checkbox-wrapper {
+    left: 50px;
+    top: 400px;
+    transform: scale(1.5);
+  }
+}
+
 /* Share Button */
 .share-button-container {
   position: absolute;
@@ -1416,7 +1432,6 @@ const hideSuccessNotification = () => {
 @media (max-width: 375px) {
   .holders-view {
     width: 100vw;
-    max-width: 375px;
   }
 
   .content-container {
@@ -1426,24 +1441,97 @@ const hideSuccessNotification = () => {
 }
 
 /* Tablet styles - remove white stripes */
-@media (min-width: 376px) and (max-width: 1024px) {
+@media (min-width: 376px) and (max-width: 768px) {
   .holders-view {
     width: 100vw;
-    max-width: 100vw;
     box-shadow: none;
   }
 
   .content-container {
     width: 100vw;
-    max-width: 100vw;
+  }
+
+  /* Adjust web link section for tablets */
+  .web-link-section {
+    width: 520px;
+    height: 260px;
+  }
+
+  .web-link-background {
+    width: 520px;
+    height: 258px;
+  }
+
+  .web-link-title {
+    font-size: 32px;
+    line-height: 38px;
+  }
+
+  .web-link-description {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .copy-link-container {
+    width: 460px;
+    height: 60px;
+  }
+
+  .copy-link-text {
+    font-size: 20px;
+    line-height: 28px;
   }
 }
 
-@media (min-width: 1025px) {
+@media (min-width: 769px) {
   .holders-view {
-    width: 375px;
-    max-width: 375px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 100vw;
+    box-shadow: none;
+  }
+
+  .content-container {
+    width: 100vw;
+  }
+
+  /* Adjust web link section for desktop */
+  .web-link-section {
+    width: 700px;
+    height: 320px;
+  }
+
+  .web-link-background {
+    width: 700px;
+    height: 318px;
+  }
+
+  .web-link-title {
+    font-size: 40px;
+    line-height: 48px;
+  }
+
+  .web-link-description {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .copy-link-container {
+    width: 620px;
+    height: 72px;
+  }
+
+  .copy-link-text {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .copy-button {
+    width: 72px;
+    height: 72px;
+  }
+
+  .copy-icon {
+    width: 32px;
+    height: 32px;
   }
 }
 
