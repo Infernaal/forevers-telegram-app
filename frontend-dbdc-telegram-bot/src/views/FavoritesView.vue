@@ -592,13 +592,17 @@ onBeforeUnmount(() => {
 
 @media (min-width: 376px) and (max-width: 768px) {
   main {
-    max-width: 420px;
+    max-width: 100%;
+    padding-left: 24px;
+    padding-right: 24px;
   }
 }
 
 @media (min-width: 769px) {
   main {
-    max-width: 480px;
+    max-width: 100%;
+    padding-left: 48px;
+    padding-right: 48px;
   }
 }
 
@@ -691,21 +695,27 @@ onBeforeUnmount(() => {
 
 @media (min-width: 481px) and (max-width: 768px) {
   .balance-card {
-    padding: 14px;
-    min-height: 190px;
+    padding: 20px;
+    min-height: 240px;
   }
 }
 
 @media (min-width: 769px) {
   .balance-card {
-    padding: 16px;
-    min-height: 210px;
+    padding: 32px;
+    min-height: 320px;
   }
 }
 
 /* Make sure content properly fits */
 main {
   height: calc(100vh - 89px); /* Subtract bottom navigation height */
+}
+
+@media (min-width: 769px) {
+  main {
+    height: calc(100vh - 120px); /* Larger bottom nav on desktop */
+  }
 }
 
 /* Modal styles */
@@ -731,8 +741,19 @@ main {
 
 @media (min-width: 769px) {
   .modal-content {
-    width: 350px;
+    width: 500px;
     margin: 0 auto;
+  }
+
+  .modal-content input {
+    min-height: 32px;
+    padding: 8px 0;
+    font-size: 24px;
+  }
+
+  .modal-content button {
+    padding: 16px 32px;
+    font-size: 18px;
   }
 }
 
