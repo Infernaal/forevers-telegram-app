@@ -517,7 +517,7 @@ const copyUserID = async () => {
 /* Start Section */
 .start-section {
   position: absolute;
-  bottom: 112px;
+  bottom: 96px;
   left: 12px;
   right: 12px;
   z-index: 1;
