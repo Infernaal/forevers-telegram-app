@@ -32,13 +32,39 @@ if (window.Telegram && window.Telegram.WebApp) {
   document.documentElement.style.setProperty('--tg-viewport-height', tg.viewportHeight + 'px')
   document.documentElement.style.setProperty('--tg-viewport-stable-height', tg.viewportStableHeight + 'px')
 
+  // Set responsive breakpoint variables
+  const updateBreakpoints = () => {
+    const width = window.innerWidth
+    document.documentElement.style.setProperty('--screen-width', width + 'px')
+
+    // Set current breakpoint
+    if (width < 375) {
+      document.documentElement.setAttribute('data-breakpoint', 'xs')
+    } else if (width < 430) {
+      document.documentElement.setAttribute('data-breakpoint', 'sm')
+    } else if (width < 640) {
+      document.documentElement.setAttribute('data-breakpoint', 'ml')
+    } else if (width < 768) {
+      document.documentElement.setAttribute('data-breakpoint', 'md')
+    } else if (width < 1024) {
+      document.documentElement.setAttribute('data-breakpoint', 'lg')
+    } else {
+      document.documentElement.setAttribute('data-breakpoint', 'xl')
+    }
+  }
+  updateBreakpoints()
+
   // Handle viewport changes
   tg.onEvent('viewportChanged', () => {
     document.documentElement.style.setProperty('--tg-viewport-height', tg.viewportHeight + 'px')
     document.documentElement.style.setProperty('--tg-viewport-stable-height', tg.viewportStableHeight + 'px')
+    updateBreakpoints()
   })
 
-  // Handle theme changes
+  // Handle window resize for breakpoint updates
+  window.addEventListener('resize', updateBreakpoints)
+
+  // Handle theme changes with responsive considerations
   tg.onEvent('themeChanged', () => {
     // Update CSS variables based on theme
     const themeParams = tg.themeParams
@@ -48,6 +74,21 @@ if (window.Telegram && window.Telegram.WebApp) {
     if (themeParams.text_color) {
       document.documentElement.style.setProperty('--tg-text-color', themeParams.text_color)
     }
+    if (themeParams.hint_color) {
+      document.documentElement.style.setProperty('--tg-hint-color', themeParams.hint_color)
+    }
+    if (themeParams.link_color) {
+      document.documentElement.style.setProperty('--tg-link-color', themeParams.link_color)
+    }
+    if (themeParams.button_color) {
+      document.documentElement.style.setProperty('--tg-button-color', themeParams.button_color)
+    }
+    if (themeParams.button_text_color) {
+      document.documentElement.style.setProperty('--tg-button-text-color', themeParams.button_text_color)
+    }
+
+    // Apply theme class for responsive styling
+    document.documentElement.setAttribute('data-theme', tg.colorScheme || 'light')
   })
 
   // Add haptic feedback support
@@ -92,4 +133,3 @@ if (window.Telegram && window.Telegram.WebApp) {
 app.use(router)
 
 app.mount('#app')
-

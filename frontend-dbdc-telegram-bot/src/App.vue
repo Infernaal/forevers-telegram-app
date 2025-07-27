@@ -1,6 +1,9 @@
 <template>
   <div class="telegram-webapp-container">
-    <RouterView />
+    <!-- Mobile-first responsive wrapper -->
+    <div class="w-full h-full md:max-w-[480px] md:mx-auto md:shadow-lg md:border-x md:border-gray-200">
+      <RouterView />
+    </div>
   </div>
 </template>
 
@@ -54,7 +57,7 @@ export default {
   min-height: 100vh;
   min-height: calc(var(--vh, 1vh) * 100);
 
-  /* Background and appearance */
+  /* Background - responsive */
   background: white;
 
   /* Enhanced scroll and overscroll prevention */
@@ -88,13 +91,40 @@ export default {
   -webkit-backface-visibility: hidden;
 }
 
+/* Responsive desktop background */
+@media (min-width: 640px) {
+  .telegram-webapp-container {
+    background: #f5f5f5;
+    padding: 20px 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .telegram-webapp-container {
+    background: #f0f0f0;
+    padding: 40px 0;
+  }
+}
+
 /* Fix for content area to allow proper scrolling within views */
-.telegram-webapp-container > * {
+.telegram-webapp-container > div {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
+
+  /* Responsive container styles */
+  position: relative;
+}
+
+/* Desktop container styling */
+@media (min-width: 640px) {
+  .telegram-webapp-container > div {
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+    background: white;
+  }
 }
 
 /* Additional body and html fixes for mobile */
@@ -105,5 +135,66 @@ body, html {
   touch-action: pan-y;
   height: 100%;
   width: 100%;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Responsive font scaling */
+@media (max-width: 374px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 430px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 769px) {
+  html {
+    font-size: 17px;
+  }
+}
+
+/* High DPI displays optimization */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  * {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .telegram-webapp-container {
+    background: #1a1a1a;
+  }
+
+  .telegram-webapp-container > div {
+    background: #1a1a1a;
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (max-height: 500px) and (orientation: landscape) {
+  .telegram-webapp-container {
+    padding: 10px 0;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 </style>
