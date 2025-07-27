@@ -458,13 +458,21 @@ const copyUserID = async () => {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 6px;
+  padding: 6px 12px;
   height: 52px;
   cursor: pointer;
   transition: all 0.2s ease;
   border-radius: 8px;
   margin-bottom: 8px;
   position: relative;
+}
+
+.menu-item:first-child {
+  margin-top: 12px;
+}
+
+.menu-item:last-child {
+  margin-bottom: 12px;
 }
 
 .menu-item:hover {
