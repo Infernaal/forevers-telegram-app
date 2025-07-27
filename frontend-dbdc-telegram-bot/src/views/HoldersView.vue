@@ -528,15 +528,17 @@ const hideSuccessNotification = () => {
 
 @media (min-width: 431px) and (max-width: 768px) {
   .content-container {
-    max-width: 600px;
+    max-width: 100%;
     padding: 32px 0 120px 0;
+    min-height: auto;
   }
 }
 
 @media (min-width: 769px) {
   .content-container {
-    max-width: 800px;
+    max-width: 100%;
     padding: 48px 0 160px 0;
+    min-height: auto;
   }
 }
 
