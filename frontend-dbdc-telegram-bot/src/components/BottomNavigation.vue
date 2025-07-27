@@ -9,7 +9,7 @@
 
 
     <!-- Bottom Navigation -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-4 xs:rounded-t-4 sm:rounded-t-4 ml:rounded-t-5 md:rounded-t-5 lg:rounded-t-5 xl:rounded-t-5 2xl:rounded-t-5 shadow-[0_-4px_16px_rgba(0,0,0,0.08),0_-2px_6px_rgba(0,0,0,0.04)] border-t border-black border-opacity-[0.06] z-50 pb-[env(safe-area-inset-bottom,0px)]">
+    <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-[20px] xs:rounded-t-[20px] sm:rounded-t-[24px] ml:rounded-t-[28px] md:rounded-t-[32px] lg:rounded-t-[32px] xl:rounded-t-[36px] 2xl:rounded-t-[36px] shadow-[0_-4px_16px_rgba(0,0,0,0.08),0_-2px_6px_rgba(0,0,0,0.04)] border-t border-black border-opacity-[0.06] z-50 pb-[env(safe-area-inset-bottom,0px)]">
       <!-- Navigation Items -->
       <div class="flex items-center justify-center px-1.5 xs:px-1.5 sm:px-2 ml:px-4 md:px-5 lg:px-5 py-2.5 xs:py-2.5 sm:py-3 ml:py-4 md:py-[18px] lg:py-[18px] pb-[calc(0.625rem+env(safe-area-inset-bottom,0px))] xs:pb-[calc(0.625rem+env(safe-area-inset-bottom,0px))] sm:pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))] ml:pb-[calc(1rem+env(safe-area-inset-bottom,0px))] md:pb-[calc(1.125rem+env(safe-area-inset-bottom,0px))] lg:pb-[calc(1.125rem+env(safe-area-inset-bottom,0px))] min-h-16 xs:min-h-16 sm:min-h-[68px] ml:min-h-[76px] md:min-h-[82px] lg:min-h-[82px] box-border">
         <div class="flex items-center justify-between w-full max-w-full xs:max-w-full sm:max-w-full ml:max-w-[480px] md:max-w-[600px] lg:max-w-[600px] xl:max-w-[600px] 2xl:max-w-[600px] mx-auto gap-1 xs:gap-1 sm:gap-1.5 ml:gap-3 md:gap-4 lg:gap-4 xl:gap-5 2xl:gap-5 px-1 xs:px-1 sm:px-1.5 ml:px-3 md:px-4 lg:px-4 xl:px-5 2xl:px-5">
