@@ -48,6 +48,11 @@ const router = createRouter({
       name: 'rent-out-transactions',
       component: RentOutTransactionView,
     },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: ProfileView,
+    },
 
     // Redirect /home to /wallet as default
     {
