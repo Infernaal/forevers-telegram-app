@@ -292,6 +292,7 @@ const openRentModal = (item) => {
 const closeRentModal = () => {
   showRentModal.value = false
   selectedBalance.value = null
+  termsAgreed.value = false
 }
 
 const handleRentOut = (data) => {
