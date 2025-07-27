@@ -208,7 +208,7 @@ const agreeToTerms = () => {
   display: flex;
   flex-direction: column;
   height: 100%;
-  max-height: 80vh;
+  max-height: 88vh;
 }
 
 .terms-header {
