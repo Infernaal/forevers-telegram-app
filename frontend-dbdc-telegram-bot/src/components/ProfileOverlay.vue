@@ -630,7 +630,7 @@ const selectLanguage = (language) => {
 /* Start Section */
 .start-section {
   position: absolute;
-  bottom: 108px;
+  bottom: 86px;
   left: 12px;
   right: 12px;
   z-index: 1;
