@@ -360,6 +360,16 @@ const goBack = () => {
   .space-y-4 > * + * {
     margin-top: 12px;
   }
+
+  /* Tighter spacing for Available section on mobile */
+  .space-x-1 > * + * {
+    margin-left: 2px !important;
+  }
+
+  /* Even tighter for very small screens */
+  .bg-green-100 .flex.items-center {
+    gap: 2px;
+  }
 }
 
 /* Small mobile devices */
