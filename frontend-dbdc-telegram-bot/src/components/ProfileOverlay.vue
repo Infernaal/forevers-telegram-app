@@ -149,41 +149,45 @@
       <!-- Start Section -->
       <div class="start-section">
         <div class="start-card">
-          <div class="start-icon">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-              <g clip-path="url(#clip0_2_21309)">
-                <path d="M16 31.0588C24.3167 31.0588 31.0588 24.3167 31.0588 16C31.0588 7.68323 24.3167 0.941162 16 0.941162C7.68323 0.941162 0.941162 7.68323 0.941162 16C0.941162 24.3167 7.68323 31.0588 16 31.0588Z" fill="#8C4CD1"/>
-                <path d="M28.998 8.39055C26.1133 12.4471 21.365 15.0918 16.0003 15.0918C10.6356 15.0918 5.88739 12.4471 3.00269 8.39055C5.61916 3.9341 10.4615 0.941162 16.0003 0.941162C21.5392 0.941162 26.3815 3.9341 28.998 8.39055Z" fill="#9C68E1"/>
-                <path d="M15.9997 5.11792V15.4117L19.3443 11.8949L15.9997 5.11792Z" fill="#FF9F00"/>
-                <path d="M15.9996 5.11792V15.4117L12.655 11.8949L15.9996 5.11792Z" fill="#FED110"/>
-                <path d="M26.8232 12.982L19.3443 11.8953L15.9997 15.412L26.8232 12.982Z" fill="#FED110"/>
-                <path d="M26.8232 12.9825L21.4115 18.2577L15.9997 15.4126L26.8232 12.9825Z" fill="#FF9F00"/>
-                <path d="M5.17645 12.982L12.6553 11.8953L16 15.412L5.17645 12.982Z" fill="#FF9F00"/>
-                <path d="M5.17645 12.9825L10.5882 18.2577L16 15.4126L5.17645 12.9825Z" fill="#FED110"/>
-                <path d="M15.9997 15.4124L21.4115 18.2575L22.689 25.7061L15.9997 15.4124Z" fill="#FED110"/>
-                <path d="M22.689 25.7061L15.9997 22.1894V15.4124L22.689 25.7061Z" fill="#FF9F00"/>
-                <path d="M15.9996 15.4124L10.5878 18.2575L9.31024 25.7061L15.9996 15.4124Z" fill="#FF9F00"/>
-                <path d="M9.31024 25.7061L15.9996 22.1894V15.4124L9.31024 25.7061Z" fill="#FED110"/>
-                <g opacity="0.3">
-                  <path d="M16.0003 27.5882C20.9059 27.5882 24.8826 27.3442 24.8826 27.0432C24.8826 26.7423 20.9059 26.4983 16.0003 26.4983C11.0947 26.4983 7.11792 26.7423 7.11792 27.0432C7.11792 27.3442 11.0947 27.5882 16.0003 27.5882Z" fill="#20273A"/>
-                </g>
-              </g>
-              <defs>
-                <clipPath id="clip0_2_21309">
-                  <rect width="32" height="32" fill="white"/>
-                </clipPath>
-              </defs>
-            </svg>
+          <div class="start-header">
+            <div class="start-header-left">
+              <div class="start-icon">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <g clip-path="url(#clip0_2_21309)">
+                    <path d="M16 31.0588C24.3167 31.0588 31.0588 24.3167 31.0588 16C31.0588 7.68323 24.3167 0.941162 16 0.941162C7.68323 0.941162 0.941162 7.68323 0.941162 16C0.941162 24.3167 7.68323 31.0588 16 31.0588Z" fill="#8C4CD1"/>
+                    <path d="M28.998 8.39055C26.1133 12.4471 21.365 15.0918 16.0003 15.0918C10.6356 15.0918 5.88739 12.4471 3.00269 8.39055C5.61916 3.9341 10.4615 0.941162 16.0003 0.941162C21.5392 0.941162 26.3815 3.9341 28.998 8.39055Z" fill="#9C68E1"/>
+                    <path d="M15.9997 5.11792V15.4117L19.3443 11.8949L15.9997 5.11792Z" fill="#FF9F00"/>
+                    <path d="M15.9996 5.11792V15.4117L12.655 11.8949L15.9996 5.11792Z" fill="#FED110"/>
+                    <path d="M26.8232 12.982L19.3443 11.8953L15.9997 15.412L26.8232 12.982Z" fill="#FED110"/>
+                    <path d="M26.8232 12.9825L21.4115 18.2577L15.9997 15.4126L26.8232 12.9825Z" fill="#FF9F00"/>
+                    <path d="M5.17645 12.982L12.6553 11.8953L16 15.412L5.17645 12.982Z" fill="#FF9F00"/>
+                    <path d="M5.17645 12.9825L10.5882 18.2577L16 15.4126L5.17645 12.9825Z" fill="#FED110"/>
+                    <path d="M15.9997 15.4124L21.4115 18.2575L22.689 25.7061L15.9997 15.4124Z" fill="#FED110"/>
+                    <path d="M22.689 25.7061L15.9997 22.1894V15.4124L22.689 25.7061Z" fill="#FF9F00"/>
+                    <path d="M15.9996 15.4124L10.5878 18.2575L9.31024 25.7061L15.9996 15.4124Z" fill="#FF9F00"/>
+                    <path d="M9.31024 25.7061L15.9996 22.1894V15.4124L9.31024 25.7061Z" fill="#FED110"/>
+                    <g opacity="0.3">
+                      <path d="M16.0003 27.5882C20.9059 27.5882 24.8826 27.3442 24.8826 27.0432C24.8826 26.7423 20.9059 26.4983 16.0003 26.4983C11.0947 26.4983 7.11792 26.7423 7.11792 27.0432C7.11792 27.3442 11.0947 27.5882 16.0003 27.5882Z" fill="#20273A"/>
+                    </g>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_2_21309">
+                      <rect width="32" height="32" fill="white"/>
+                    </clipPath>
+                  </defs>
+                </svg>
+              </div>
+              <div class="start-title">Start</div>
+            </div>
+            <button class="upgrade-button" @click="handleUpgrade">
+              Upgrade
+            </button>
           </div>
           <div class="start-content">
-            <div class="start-title">Start</div>
             <div class="start-description">
               buy <span class="start-number">123</span> more Forevers to upgrade
             </div>
           </div>
-          <button class="upgrade-button" @click="handleUpgrade">
-            Upgrade
-          </button>
         </div>
       </div>
 
@@ -614,12 +618,19 @@ const selectLanguage = (language) => {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+}
+
+.error-badge svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
 }
 
 /* Start Section */
 .start-section {
   position: absolute;
-  bottom: 96px;
+  bottom: 108px;
   left: 12px;
   right: 12px;
   z-index: 1;
@@ -632,8 +643,8 @@ const selectLanguage = (language) => {
   border: 1px solid #DCCCF1;
   border-radius: 16px;
   display: flex;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column;
+  justify-content: center;
   padding: 8px;
   position: relative;
   overflow: hidden;
@@ -651,16 +662,29 @@ const selectLanguage = (language) => {
   border-radius: 16px 0 0 16px;
 }
 
-.start-icon {
+.start-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
   position: relative;
   z-index: 1;
+}
+
+.start-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.start-icon {
   flex-shrink: 0;
 }
 
 .start-content {
   position: relative;
   z-index: 1;
-  flex: 1;
 }
 
 .start-title {
@@ -916,6 +940,8 @@ const selectLanguage = (language) => {
   align-items: center;
   gap: 12px;
   flex: 1;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .flag-wrapper {
@@ -931,6 +957,8 @@ const selectLanguage = (language) => {
   font-size: 16px;
   font-weight: 400;
   line-height: 26px;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .dropdown-arrow {
@@ -1031,7 +1059,7 @@ const selectLanguage = (language) => {
   }
   
   .start-section {
-    bottom: 107px;
+    bottom: 115px;
   }
   
   .bottom-controls {
