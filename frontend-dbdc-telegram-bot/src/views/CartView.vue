@@ -11,30 +11,30 @@
             class="bg-white rounded-2xl p-4 border border-dbd-primary/20 relative cart-item"
           >
             <!-- Country Flag and Code Header -->
-            <div class="flex items-center xs:gap-1 sm:gap-1 md:gap-2 xs:mb-2 sm:mb-3 md:mb-4 xs:h-5 sm:h-6 md:h-7">
-              <CountryFlag :country="item.code" class="xs:w-5 xs:h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
-              <div class="flex items-center xs:gap-1 sm:gap-1 md:gap-2">
+            <div class="flex items-center gap-2 mb-3 h-6">
+              <CountryFlag :country="item.code" class="w-6 h-6" />
+              <div class="flex items-center gap-2">
                 <!-- F Icon -->
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-dbd-dark xs:w-4 xs:h-4 sm:w-5 sm:h-5 md:w-6 md:h-6">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-dbd-dark w-5 h-5">
                   <path d="M17.2636 4H6.61925C6.15063 4 5.8159 4.28571 5.8159 4.68571V7.48571H2.80335C2.33473 7.54286 2 7.82857 2 8.22857C2 8.62857 2.33473 8.91429 2.80335 8.91429H5.8159V15.3143C5.8159 15.7143 6.15063 16 6.61925 16C7.08787 16 7.42259 15.7143 7.42259 15.3143V12.3429H10.8368C11.3054 12.3429 11.6402 12.0571 11.6402 11.6571C11.6402 11.2571 11.3054 10.9714 10.8368 10.9714H7.42259V8.85714H13.9163C14.3849 8.85714 14.7197 8.57143 14.7197 8.17143C14.7197 7.77143 14.3849 7.48571 13.9163 7.48571H7.42259V5.37143H17.1967C17.6653 5.37143 18 5.08571 18 4.68571C18 4.28571 17.7322 4 17.2636 4Z" fill="currentColor"/>
                 </svg>
-                <span class="text-dbd-dark font-semibold xs:text-base sm:text-lg md:text-xl lg:text-2xl leading-6">{{ item.code }}</span>
+                <span class="text-dbd-dark font-semibold text-lg leading-6">{{ item.code }}</span>
               </div>
             </div>
 
             <!-- Amount and Price Section -->
-            <div class="flex items-center xs:gap-2 sm:gap-3 md:gap-4 xs:mb-2 sm:mb-3 md:mb-4">
+            <div class="flex items-center gap-3 mb-3">
               <div class="flex-1">
-                <div class="text-dbd-gray xs:text-sm sm:text-base md:text-lg font-medium leading-6 mb-1">Amount</div>
-                <div class="text-dbd-dark font-semibold xs:text-base sm:text-lg md:text-xl lg:text-2xl leading-6">{{ item.foreversAmount.toLocaleString() }}</div>
+                <div class="text-dbd-gray text-base font-medium leading-6 mb-1">Amount</div>
+                <div class="text-dbd-dark font-semibold text-lg leading-6">{{ item.foreversAmount.toLocaleString() }}</div>
               </div>
 
               <!-- Vertical Divider -->
-              <div class="w-px xs:h-12 sm:h-14 md:h-16 bg-gray-300"></div>
+              <div class="w-px h-14 bg-gray-300"></div>
 
               <div class="flex-1">
-                <div class="text-dbd-gray xs:text-sm sm:text-base md:text-lg font-medium leading-6 mb-0.5">Price</div>
-                <div class="text-dbd-gray xs:text-sm sm:text-base md:text-lg font-medium leading-6">
+                <div class="text-dbd-gray text-base font-medium leading-6 mb-0.5">Price</div>
+                <div class="text-dbd-gray text-base font-medium leading-6">
                   <span>1Forevers {{ item.code }}</span>
                   <span class="text-dbd-dark font-semibold"> = ${{ item.usdRate.toFixed(2) }}</span>
                 </div>
@@ -42,15 +42,15 @@
             </div>
 
             <!-- Purchase Amount -->
-            <div class="flex items-center xs:gap-1 sm:gap-1 md:gap-2">
-              <span class="text-dbd-gray xs:text-sm sm:text-base md:text-lg font-medium leading-6">Purchase to pay:</span>
-              <span class="text-dbd-primary font-semibold xs:text-base sm:text-lg md:text-xl lg:text-2xl leading-6">${{ (item.foreversAmount * item.usdRate).toLocaleString() }}</span>
+            <div class="flex items-center gap-2">
+              <span class="text-dbd-gray text-base font-medium leading-6">Purchase to pay:</span>
+              <span class="text-dbd-primary font-semibold text-lg leading-6">${{ (item.foreversAmount * item.usdRate).toLocaleString() }}</span>
             </div>
 
             <!-- Remove Button -->
             <button
               @click="showDeleteConfirm(item)"
-              class="absolute xs:top-2 sm:top-3 md:top-4 xs:right-2 sm:right-3 md:right-4 xs:w-8 xs:h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center hover:bg-gray-100 rounded-lg transition-colors"
+              class="absolute top-3 right-3 w-10 h-10 flex items-center justify-center hover:bg-gray-100 rounded-lg transition-colors"
             >
               <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M19.25 3.5H14.75V2.75C14.75 1.5095 13.7405 0.5 12.5 0.5H9.5C8.2595 0.5 7.25 1.5095 7.25 2.75V3.5H2.75C1.92275 3.5 1.25 4.17275 1.25 5V5.75C1.25 6.164 1.586 6.5 2 6.5H20C20.414 6.5 20.75 6.164 20.75 5.75V5C20.75 4.17275 20.0772 3.5 19.25 3.5ZM8.75 2.75C8.75 2.33675 9.08675 2 9.5 2H12.5C12.9132 2 13.25 2.33675 13.25 2.75V3.5H8.75V2.75Z" fill="#FF1919"/>
