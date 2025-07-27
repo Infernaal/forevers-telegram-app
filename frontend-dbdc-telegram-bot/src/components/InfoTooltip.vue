@@ -1,25 +1,24 @@
 <template>
   <Transition
-    name="tooltip"
-    enter-active-class="tooltip-enter-active"
-    leave-active-class="tooltip-leave-active"
-    enter-from-class="tooltip-enter-from"
-    enter-to-class="tooltip-enter-to"
-    leave-from-class="tooltip-leave-from"
-    leave-to-class="tooltip-leave-to"
+    name="modal"
+    enter-active-class="transition-all duration-300 ease-out"
+    leave-active-class="transition-all duration-200 ease-in"
+    enter-from-class="opacity-0 backdrop-blur-0 scale-95"
+    enter-to-class="opacity-100 backdrop-blur-md scale-100"
+    leave-from-class="opacity-100 backdrop-blur-md scale-100"
+    leave-to-class="opacity-0 backdrop-blur-0 scale-95"
   >
     <div
       v-if="isVisible"
       class="fixed inset-0 z-50 flex items-center justify-center px-4"
+      style="background: rgba(2, 7, 14, 0.20); backdrop-filter: blur(9px);"
       @click="closeTooltip"
     >
-      <!-- Blur backdrop -->
-      <div class="absolute inset-0 bg-black bg-opacity-20 backdrop-blur-sm tooltip-backdrop"></div>
 
       <!-- Tooltip content -->
       <div
         @click.stop
-        class="relative bg-white rounded-3xl p-4 shadow-xl border border-gray-100 w-full max-w-[300px] mx-auto tooltip-content"
+        class="relative bg-white rounded-3xl p-4 shadow-xl border border-gray-100 w-full max-w-[300px] mx-auto transition-all duration-300"
         style="min-height: 154px;"
       >
         <!-- Close button -->
