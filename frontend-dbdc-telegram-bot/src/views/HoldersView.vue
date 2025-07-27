@@ -499,11 +499,12 @@ const hideSuccessNotification = () => {
 <style scoped>
 .holders-view {
   font-family: 'Montserrat', sans-serif;
-  width: 100%;
+  width: 375px;
   min-height: 100vh;
   background: #F0F0F0;
   position: relative;
   margin: 0 auto;
+  max-width: 375px;
   overflow-y: auto;
   overflow-x: hidden;
   /* Hide scrollbar for webkit browsers */
@@ -517,29 +518,11 @@ const hideSuccessNotification = () => {
 
 /* Content Container - now starts from top */
 .content-container {
-  width: 100%;
-  max-width: 375px;
+  width: 375px;
   min-height: calc(100vh + 200px); /* Allow content to extend beyond viewport */
   background: #F0F0F0;
   position: relative;
   padding: 20px 0 80px 0; /* Further reduced bottom padding */
-  margin: 0 auto;
-}
-
-@media (min-width: 431px) and (max-width: 768px) {
-  .content-container {
-    max-width: 100%;
-    padding: 32px 0 120px 0;
-    min-height: auto;
-  }
-}
-
-@media (min-width: 769px) {
-  .content-container {
-    max-width: 100%;
-    padding: 48px 0 160px 0;
-    min-height: auto;
-  }
 }
 
 /* Referral Program Header */
@@ -555,26 +538,6 @@ const hideSuccessNotification = () => {
   height: 52px;
 }
 
-@media (min-width: 431px) and (max-width: 768px) {
-  .referral-header {
-    width: 450px;
-    left: 32px;
-    gap: 8px;
-    height: 70px;
-    margin-bottom: 32px;
-  }
-}
-
-@media (min-width: 769px) {
-  .referral-header {
-    width: 600px;
-    left: 48px;
-    gap: 12px;
-    height: 90px;
-    margin-bottom: 48px;
-  }
-}
-
 .referral-title {
   color: #02070E;
   font-family: Montserrat;
@@ -583,20 +546,6 @@ const hideSuccessNotification = () => {
   line-height: 24px;
   margin: 0;
   align-self: stretch;
-}
-
-@media (min-width: 431px) and (max-width: 768px) {
-  .referral-title {
-    font-size: 28px;
-    line-height: 34px;
-  }
-}
-
-@media (min-width: 769px) {
-  .referral-title {
-    font-size: 36px;
-    line-height: 44px;
-  }
 }
 
 .referral-subtitle {
@@ -609,73 +558,27 @@ const hideSuccessNotification = () => {
   align-self: stretch;
 }
 
-@media (min-width: 431px) and (max-width: 768px) {
-  .referral-subtitle {
-    font-size: 20px;
-    line-height: 28px;
-  }
-}
-
-@media (min-width: 769px) {
-  .referral-subtitle {
-    font-size: 24px;
-    line-height: 32px;
-  }
-}
-
 /* Scroll Content */
 .scroll-content {
   display: flex;
   width: 347px;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  justify-content: flex-end;
+  align-items: flex-start;
   gap: 20px;
   position: relative;
   left: 14px;
+  height: 507px;
   margin-top: 60px;
-}
-
-@media (min-width: 431px) and (max-width: 768px) {
-  .scroll-content {
-    width: 520px;
-    left: 32px;
-    gap: 24px;
-    margin-top: 80px;
-  }
-}
-
-@media (min-width: 769px) {
-  .scroll-content {
-    width: 700px;
-    left: 48px;
-    gap: 32px;
-    margin-top: 100px;
-  }
 }
 
 /* QR Section */
 .qr-section {
   width: 347px;
   height: 396px;
-  position: relative;
-  margin-bottom: 20px;
-}
-
-@media (min-width: 431px) and (max-width: 768px) {
-  .qr-section {
-    width: 520px;
-    height: 500px;
-    margin-bottom: 32px;
-  }
-}
-
-@media (min-width: 769px) {
-  .qr-section {
-    width: 700px;
-    height: 600px;
-    margin-bottom: 48px;
-  }
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .qr-background {
@@ -698,101 +601,35 @@ const hideSuccessNotification = () => {
 }
 
 .f-icon-1 {
-  width: 96px;
-  height: 96px;
+  width: 120px;
+  height: 120px;
   transform: rotate(46.848deg);
-  left: -16px;
-  top: -6px;
-}
-
-@media (min-width: 431px) and (max-width: 768px) {
-  .f-icon-1 {
-    width: 120px;
-    height: 120px;
-    left: -20px;
-    top: -10px;
-  }
-}
-
-@media (min-width: 769px) {
-  .f-icon-1 {
-    width: 140px;
-    height: 140px;
-    left: -24px;
-    top: -12px;
-  }
+  left: -20px;
+  top: -10px;
 }
 
 .f-icon-2 {
-  width: 48px;
-  height: 48px;
+  width: 60px;
+  height: 60px;
   transform: rotate(150.638deg);
-  right: 16px;
-  top: 60%;
-}
-
-@media (min-width: 431px) and (max-width: 768px) {
-  .f-icon-2 {
-    width: 60px;
-    height: 60px;
-    right: 20px;
-  }
-}
-
-@media (min-width: 769px) {
-  .f-icon-2 {
-    width: 72px;
-    height: 72px;
-    right: 24px;
-  }
+  left: 270px;
+  top: 180px;
 }
 
 .f-icon-3 {
-  width: 128px;
-  height: 128px;
+  width: 150px;
+  height: 150px;
   transform: rotate(-31.597deg);
-  left: -22px;
-  bottom: 20px;
-}
-
-@media (min-width: 431px) and (max-width: 768px) {
-  .f-icon-3 {
-    width: 150px;
-    height: 150px;
-    left: -30px;
-  }
-}
-
-@media (min-width: 769px) {
-  .f-icon-3 {
-    width: 180px;
-    height: 180px;
-    left: -36px;
-  }
+  left: -30px;
+  top: 185px;
 }
 
 .f-icon-4 {
-  width: 96px;
-  height: 96px;
+  width: 120px;
+  height: 120px;
   transform: rotate(121.978deg);
-  right: 10px;
-  top: 10px;
-}
-
-@media (min-width: 431px) and (max-width: 768px) {
-  .f-icon-4 {
-    width: 120px;
-    height: 120px;
-    right: 15px;
-  }
-}
-
-@media (min-width: 769px) {
-  .f-icon-4 {
-    width: 140px;
-    height: 140px;
-    right: 20px;
-  }
+  left: 200px;
+  top: 15px;
 }
 
 /* QR Code Container */
@@ -800,56 +637,19 @@ const hideSuccessNotification = () => {
   width: 222px;
   height: 220px;
   position: absolute;
-  left: 50%;
+  left: 63px;
   top: 24px;
-  transform: translateX(-50%);
   z-index: 10;
 }
 
-@media (min-width: 431px) and (max-width: 768px) {
-  .qr-code-container {
-    width: 300px;
-    height: 280px;
-    top: 40px;
-  }
-}
-
-@media (min-width: 769px) {
-  .qr-code-container {
-    width: 380px;
-    height: 360px;
-    top: 50px;
-  }
-}
-
 .qr-code-wrapper {
-  width: 100%;
-  height: 100%;
+  width: 222px;
+  height: 220px;
   border-radius: 20px;
   border: 1px solid #F2F2F2;
   background: #FAFAFA;
   box-shadow: 2px 4px 12px 0 rgba(0, 0, 0, 0.04);
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  box-sizing: border-box;
-}
-
-@media (min-width: 431px) and (max-width: 768px) {
-  .qr-code-wrapper {
-    border-radius: 24px;
-    padding: 24px;
-  }
-}
-
-@media (min-width: 769px) {
-  .qr-code-wrapper {
-    border-radius: 28px;
-    padding: 32px;
-  }
 }
 
 .qr-code-image {
@@ -857,24 +657,9 @@ const hideSuccessNotification = () => {
   height: 140px;
   aspect-ratio: 1/1;
   object-fit: contain;
-  flex-shrink: 0;
-  margin-bottom: 16px;
-}
-
-@media (min-width: 431px) and (max-width: 768px) {
-  .qr-code-image {
-    width: 180px;
-    height: 180px;
-    margin-bottom: 20px;
-  }
-}
-
-@media (min-width: 769px) {
-  .qr-code-image {
-    width: 220px;
-    height: 220px;
-    margin-bottom: 24px;
-  }
+  position: absolute;
+  left: 41px;
+  top: 20px;
 }
 
 .qr-code-link {
@@ -883,63 +668,27 @@ const hideSuccessNotification = () => {
   font-size: 17px;
   font-weight: 600;
   line-height: 24px;
-  text-align: center;
-  flex-shrink: 0;
-}
-
-@media (min-width: 431px) and (max-width: 768px) {
-  .qr-code-link {
-    font-size: 20px;
-    line-height: 28px;
-  }
-}
-
-@media (min-width: 769px) {
-  .qr-code-link {
-    font-size: 24px;
-    line-height: 32px;
-  }
+  position: absolute;
+  left: 20px;
+  top: 176px;
+  width: 182px;
+  height: 24px;
 }
 
 /* Terms Section */
 .terms-checkbox-wrapper {
-  align-self: flex-start;
-  margin-left: 6px;
+  position: absolute;
+  left: 20px;
+  top: 256px;
   z-index: 20;
-}
-
-@media (min-width: 431px) and (max-width: 768px) {
-  .terms-checkbox-wrapper {
-    transform: scale(1.15);
-    transform-origin: left center;
-    margin: 16px 0 16px 20px;
-  }
-}
-
-@media (min-width: 769px) {
-  .terms-checkbox-wrapper {
-    transform: scale(1.3);
-    transform-origin: left center;
-    margin: 24px 0 24px 36px;
-  }
 }
 
 /* Share Button */
 .share-button-container {
-  align-self: center;
+  position: absolute;
+  left: 23px;
+  top: 322px;
   z-index: 20;
-}
-
-@media (min-width: 431px) and (max-width: 768px) {
-  .share-button-container {
-    margin: 20px 0;
-  }
-}
-
-@media (min-width: 769px) {
-  .share-button-container {
-    margin: 32px 0;
-  }
 }
 
 .share-button {
@@ -961,28 +710,6 @@ const hideSuccessNotification = () => {
   font-weight: 600;
   line-height: 26px;
   transition: all 0.2s ease;
-}
-
-@media (min-width: 431px) and (max-width: 768px) {
-  .share-button {
-    width: 450px;
-    padding: 16px 64px;
-    height: 60px;
-    font-size: 20px;
-    line-height: 30px;
-    gap: 16px;
-  }
-}
-
-@media (min-width: 769px) {
-  .share-button {
-    width: 600px;
-    padding: 20px 80px;
-    height: 72px;
-    font-size: 24px;
-    line-height: 36px;
-    gap: 20px;
-  }
 }
 
 .share-button:hover:not(:disabled) {
@@ -1047,30 +774,9 @@ const hideSuccessNotification = () => {
 .how-to-section {
   position: relative;
   left: 14px;
-  top: 0;
+  top: -60px;
   width: 347px;
   height: 410px;
-  margin-top: 40px;
-}
-
-@media (min-width: 431px) and (max-width: 768px) {
-  .how-to-section {
-    left: 32px;
-    top: 0;
-    width: 520px;
-    height: 520px;
-    margin-top: 60px;
-  }
-}
-
-@media (min-width: 769px) {
-  .how-to-section {
-    left: 48px;
-    top: 0;
-    width: 700px;
-    height: 650px;
-    margin-top: 80px;
-  }
 }
 
 .steps-container {
@@ -1101,20 +807,6 @@ const hideSuccessNotification = () => {
   margin: 0;
 }
 
-@media (min-width: 431px) and (max-width: 768px) {
-  .how-to-title {
-    font-size: 28px;
-    line-height: 34px;
-  }
-}
-
-@media (min-width: 769px) {
-  .how-to-title {
-    font-size: 36px;
-    line-height: 44px;
-  }
-}
-
 .how-to-subtitle {
   color: #4B4D50;
   font-family: Montserrat;
@@ -1123,20 +815,6 @@ const hideSuccessNotification = () => {
   line-height: 24px;
   margin: 0;
   align-self: stretch;
-}
-
-@media (min-width: 431px) and (max-width: 768px) {
-  .how-to-subtitle {
-    font-size: 20px;
-    line-height: 28px;
-  }
-}
-
-@media (min-width: 769px) {
-  .how-to-subtitle {
-    font-size: 24px;
-    line-height: 32px;
-  }
 }
 
 /* Step Indicators */
@@ -1484,6 +1162,7 @@ const hideSuccessNotification = () => {
 @media (max-width: 375px) {
   .holders-view {
     width: 100vw;
+    max-width: 375px;
   }
 
   .content-container {
@@ -1493,97 +1172,24 @@ const hideSuccessNotification = () => {
 }
 
 /* Tablet styles - remove white stripes */
-@media (min-width: 376px) and (max-width: 768px) {
+@media (min-width: 376px) and (max-width: 1024px) {
   .holders-view {
     width: 100vw;
+    max-width: 100vw;
     box-shadow: none;
   }
 
   .content-container {
     width: 100vw;
-  }
-
-  /* Adjust web link section for tablets */
-  .web-link-section {
-    width: 520px;
-    height: 260px;
-  }
-
-  .web-link-background {
-    width: 520px;
-    height: 258px;
-  }
-
-  .web-link-title {
-    font-size: 32px;
-    line-height: 38px;
-  }
-
-  .web-link-description {
-    font-size: 20px;
-    line-height: 28px;
-  }
-
-  .copy-link-container {
-    width: 460px;
-    height: 60px;
-  }
-
-  .copy-link-text {
-    font-size: 20px;
-    line-height: 28px;
+    max-width: 100vw;
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .holders-view {
-    width: 100vw;
-    box-shadow: none;
-  }
-
-  .content-container {
-    width: 100vw;
-  }
-
-  /* Adjust web link section for desktop */
-  .web-link-section {
-    width: 700px;
-    height: 320px;
-  }
-
-  .web-link-background {
-    width: 700px;
-    height: 318px;
-  }
-
-  .web-link-title {
-    font-size: 40px;
-    line-height: 48px;
-  }
-
-  .web-link-description {
-    font-size: 24px;
-    line-height: 32px;
-  }
-
-  .copy-link-container {
-    width: 620px;
-    height: 72px;
-  }
-
-  .copy-link-text {
-    font-size: 24px;
-    line-height: 32px;
-  }
-
-  .copy-button {
-    width: 72px;
-    height: 72px;
-  }
-
-  .copy-icon {
-    width: 32px;
-    height: 32px;
+    width: 375px;
+    max-width: 375px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   }
 }
 
