@@ -712,7 +712,8 @@ const copyUserID = async () => {
   display: flex;
   align-items: center;
   gap: 2px;
-  padding-left: 8px;
+  padding-left: 12px;
+  padding-right: 40px;
   flex: 1;
 }
 
