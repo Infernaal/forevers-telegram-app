@@ -636,8 +636,8 @@ const copyUserID = async () => {
 
 /* ID Section */
 .id-section {
-  width: 123px;
-  height: 38px;
+  width: 131px;
+  height: 44px;
   background: rgba(255, 255, 255, 0.30);
   border: 1px solid rgba(255, 255, 255, 0.40);
   border-radius: 100px;
@@ -646,7 +646,7 @@ const copyUserID = async () => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 13px;
+  padding: 6px;
   position: relative;
 }
 
