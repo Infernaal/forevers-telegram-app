@@ -5,8 +5,8 @@
     size === 'small' ? 'w-6 h-6' : size === 'large' ? 'w-10 h-10' : 'w-8 h-8'
   ]">
     <!-- France Flag -->
-    <svg v-if="country.toLowerCase() === 'france' || country.toLowerCase() === 'fr'" 
-         width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg v-if="country.toLowerCase() === 'france' || country.toLowerCase() === 'fr'"
+         width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="12" fill="#D4D4D4"/>
       <path d="M12.0002 23.2943C18.2377 23.2943 23.2943 18.2377 23.2943 12.0002C23.2943 5.7626 18.2377 0.706055 12.0002 0.706055C5.7626 0.706055 0.706055 5.7626 0.706055 12.0002C0.706055 18.2377 5.7626 23.2943 12.0002 23.2943Z" fill="#F0F0F0"/>
       <path d="M23.2915 11.9979C23.2915 7.14181 20.2266 3.00203 15.9258 1.40625V22.5896C20.2266 20.9937 23.2915 16.854 23.2915 11.9979Z" fill="#D80027"/>
