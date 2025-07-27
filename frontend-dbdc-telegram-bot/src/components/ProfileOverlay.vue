@@ -925,10 +925,11 @@ const selectLanguage = (language) => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 6px;
+  padding: 6px 12px 6px 6px;
   cursor: pointer;
   transition: all 0.2s ease;
   position: relative;
+  overflow: hidden;
 }
 
 .language-section:hover {
