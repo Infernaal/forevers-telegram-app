@@ -1138,4 +1138,47 @@ const selectLanguage = (language) => {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
+
+/* Telegram WebApp profile overlay adaptations */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .profile-overlay {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Ensure triangle doesn't overlap with Telegram's bottom UI on shorter screens */
+@media (max-height: 667px) {
+  .triangle-pointer {
+    bottom: calc(85px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .profile-dropdown {
+    bottom: calc(95px + env(safe-area-inset-bottom, 0px));
+    height: calc(500px - env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* iPhone SE and very small screens */
+@media (max-height: 568px) {
+  .triangle-pointer {
+    bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .profile-dropdown {
+    bottom: calc(90px + env(safe-area-inset-bottom, 0px));
+    height: calc(450px - env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* Landscape mode adaptations for mobile */
+@media (orientation: landscape) and (max-height: 500px) {
+  .triangle-pointer {
+    bottom: calc(70px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .profile-dropdown {
+    bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+    height: calc(350px - env(safe-area-inset-bottom, 0px));
+  }
+}
 </style>
