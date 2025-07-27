@@ -182,7 +182,8 @@ const agreeToTerms = () => {
 .terms-modal-container {
   width: 100%;
   max-width: 375px;
-  max-height: 80vh;
+  max-height: 88vh;
+  min-height: 75vh;
   background: #fff;
   border-radius: 20px;
   border: 1px solid #E8E8E8;
@@ -207,7 +208,7 @@ const agreeToTerms = () => {
   display: flex;
   flex-direction: column;
   height: 100%;
-  max-height: 80vh;
+  max-height: 88vh;
 }
 
 .terms-header {
@@ -389,21 +390,22 @@ const agreeToTerms = () => {
 /* Mobile responsiveness */
 @media (max-width: 480px) {
   .terms-modal-overlay {
-    padding: 10px;
+    padding: 8px;
   }
-  
+
   .terms-modal-container {
-    max-height: 85vh;
+    max-height: 92vh;
+    min-height: 80vh;
   }
-  
+
   .terms-header {
     padding: 8px 8px 0 8px;
   }
-  
+
   .terms-scroll-container {
     padding: 0 8px;
   }
-  
+
   .terms-actions {
     padding: 8px;
   }

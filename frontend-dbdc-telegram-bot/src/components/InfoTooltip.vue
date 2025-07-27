@@ -1,25 +1,24 @@
 <template>
   <Transition
-    name="tooltip"
-    enter-active-class="tooltip-enter-active"
-    leave-active-class="tooltip-leave-active"
-    enter-from-class="tooltip-enter-from"
-    enter-to-class="tooltip-enter-to"
-    leave-from-class="tooltip-leave-from"
-    leave-to-class="tooltip-leave-to"
+    name="modal"
+    enter-active-class="transition-all duration-300 ease-out"
+    leave-active-class="transition-all duration-200 ease-in"
+    enter-from-class="opacity-0 backdrop-blur-0 scale-95"
+    enter-to-class="opacity-100 backdrop-blur-md scale-100"
+    leave-from-class="opacity-100 backdrop-blur-md scale-100"
+    leave-to-class="opacity-0 backdrop-blur-0 scale-95"
   >
     <div
       v-if="isVisible"
       class="fixed inset-0 z-50 flex items-center justify-center px-4"
+      style="background: rgba(2, 7, 14, 0.20); backdrop-filter: blur(9px);"
       @click="closeTooltip"
     >
-      <!-- Blur backdrop -->
-      <div class="absolute inset-0 bg-black bg-opacity-20 backdrop-blur-sm tooltip-backdrop"></div>
 
       <!-- Tooltip content -->
       <div
         @click.stop
-        class="relative bg-white rounded-3xl p-4 shadow-xl border border-gray-100 w-full max-w-[300px] mx-auto tooltip-content"
+        class="relative bg-white rounded-3xl p-4 shadow-xl border border-gray-100 w-full max-w-[300px] mx-auto transition-all duration-300"
         style="min-height: 154px;"
       >
         <!-- Close button -->
@@ -115,78 +114,21 @@ onBeforeUnmount(() => {
   backdrop-filter: blur(9px);
 }
 
-/* Tooltip animations - Synchronized smooth effects */
-.tooltip-enter-active,
-.tooltip-enter-active .tooltip-backdrop,
-.tooltip-enter-active .tooltip-content {
-  transition: all 0.3s ease-out;
+/* Enhanced modal styling */
+.shadow-xl {
+  box-shadow: 0 10px 25px -3px rgba(2, 7, 14, 0.12), 0 4px 6px -2px rgba(2, 7, 14, 0.05);
 }
 
-.tooltip-leave-active,
-.tooltip-leave-active .tooltip-backdrop,
-.tooltip-leave-active .tooltip-content {
-  transition: all 0.2s ease-in;
+/* Modal animations */
+.modal-enter-active,
+.modal-leave-active {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.tooltip-enter-from {
+.modal-enter-from,
+.modal-leave-to {
   opacity: 0;
-}
-
-.tooltip-enter-from .tooltip-backdrop {
-  opacity: 0;
-  backdrop-filter: blur(0px);
-}
-
-.tooltip-enter-from .tooltip-content {
-  transform: scale(0.8) translateY(20px);
-  opacity: 0;
-}
-
-.tooltip-enter-to {
-  opacity: 1;
-}
-
-.tooltip-enter-to .tooltip-backdrop {
-  opacity: 1;
-  backdrop-filter: blur(9px);
-}
-
-.tooltip-enter-to .tooltip-content {
-  transform: scale(1) translateY(0px);
-  opacity: 1;
-}
-
-.tooltip-leave-from {
-  opacity: 1;
-}
-
-.tooltip-leave-from .tooltip-backdrop {
-  opacity: 1;
-  backdrop-filter: blur(9px);
-}
-
-.tooltip-leave-from .tooltip-content {
-  transform: scale(1) translateY(0px);
-  opacity: 1;
-}
-
-.tooltip-leave-to {
-  opacity: 0;
-}
-
-.tooltip-leave-to .tooltip-backdrop {
-  opacity: 0;
-  backdrop-filter: blur(0px);
-}
-
-.tooltip-leave-to .tooltip-content {
-  transform: scale(0.9) translateY(-10px);
-  opacity: 0;
-}
-
-/* Close button - static, no animations */
-.tooltip-close-btn {
-  /* No transitions or animations */
+  transform: scale(0.95) translateY(10px);
 }
 
 /* Text elements with proper z-index */
