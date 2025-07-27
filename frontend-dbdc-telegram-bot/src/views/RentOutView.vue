@@ -83,11 +83,11 @@
 
           <!-- Available Section -->
           <div class="bg-green-100 rounded-xl p-3 flex items-center justify-between">
-            <div class="flex items-center gap-0 space-x-1">
+            <div class="flex items-center available-tight">
               <span class="text-sm text-gray-600">{{ item.availableText }}</span>
-              <span v-if="item.availableAmount" class="w-1.5 h-1.5 bg-gray-400 rounded-full"></span>
-              <div v-if="item.availableAmount" class="flex items-center">
-                <svg width="14" height="14" viewBox="0 0 14 14" class="text-dbd-dark mr-0.5">
+              <span v-if="item.availableAmount" class="w-1.5 h-1.5 bg-gray-400 rounded-full available-dot"></span>
+              <div v-if="item.availableAmount" class="flex items-center available-f-section">
+                <svg width="14" height="14" viewBox="0 0 14 14" class="text-dbd-dark">
                   <path d="M12.8602 1.40015H4.3802C4.00686 1.40015 3.7402 1.66681 3.7402 2.04015V4.65348H1.3402C0.966862 4.70681 0.700195 4.97348 0.700195 5.34681C0.700195 5.72015 0.966862 5.98681 1.3402 5.98681H3.7402V11.9601C3.7402 12.3335 4.00686 12.6001 4.3802 12.6001C4.75353 12.6001 5.0202 12.3335 5.0202 11.9601V9.18681H7.7402C8.11353 9.18681 8.3802 8.92015 8.3802 8.54681C8.3802 8.17348 8.11353 7.90681 7.7402 7.90681H5.0202V5.93348H10.1935C10.5669 5.93348 10.8335 5.66681 10.8335 5.29348C10.8335 4.92015 10.5669 4.65348 10.1935 4.65348H5.0202V2.68015H12.8069C13.1802 2.68015 13.4469 2.41348 13.4469 2.04015C13.4469 1.66681 13.2335 1.40015 12.8602 1.40015Z" fill="currentColor"/>
                 </svg>
                 <span class="text-sm font-medium text-dbd-dark">{{ item.availableAmount }}</span>
