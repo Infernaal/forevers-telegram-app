@@ -166,8 +166,9 @@ const inputValue = ref(props.inputAmount || '250')
 const isInputFocused = ref(false)
 
 const handleInput = () => {
-  // Remove non-numeric characters
-  inputValue.value = inputValue.value.replace(/[^0-9]/g, '')
+  // Convert to string first, then remove non-numeric characters
+  const stringValue = String(inputValue.value || '')
+  inputValue.value = stringValue.replace(/[^0-9]/g, '')
 }
 
 const handleRentOut = () => {
