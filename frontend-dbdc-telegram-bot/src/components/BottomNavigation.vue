@@ -17,27 +17,27 @@
           <button
             @click="toggleProfile"
             :class="[
-              'nav-item-button',
+              'flex flex-col items-center justify-center flex-1 gap-1 xs:gap-1 sm:gap-1.5 ml:gap-2 md:gap-2.5 lg:gap-2.5 px-1 xs:px-1 sm:px-1.5 ml:px-2 md:px-2.5 lg:px-2.5 py-1.5 xs:py-1.5 sm:py-2 ml:py-2.5 md:py-3 lg:py-3 min-w-11 xs:min-w-11 sm:min-w-[50px] ml:min-w-[60px] md:min-w-[65px] lg:min-w-[65px] max-w-14 xs:max-w-14 sm:max-w-[70px] ml:max-w-[90px] md:max-w-[100px] lg:max-w-[100px] text-center whitespace-nowrap overflow-hidden relative transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] transform translate-z-0 active:scale-95 active:bg-black active:bg-opacity-[0.02] active:rounded-3',
               isProfileMenuOpen ? 'text-blue-700' : 'text-gray-600'
             ]"
           >
             <div class="relative">
               <div
                 :class="[
+                  'flex items-center justify-center transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] rounded-3',
                   isProfileMenuOpen
-                    ? 'nav-icon-active'
-                    : 'nav-icon-inactive',
-                  'nav-icon-container'
+                    ? 'w-7 h-7 xs:w-7 xs:h-7 sm:w-8 sm:h-8 ml:w-10 ml:h-10 md:w-[42px] md:h-[42px] lg:w-[42px] lg:h-[42px] bg-blue-600'
+                    : 'w-6 h-6 xs:w-6 xs:h-6 sm:w-7 sm:h-7 ml:w-8 ml:h-8 md:w-[34px] md:h-[34px] lg:w-[34px] lg:h-[34px]'
                 ]"
               >
                 <!-- Show close icon when profile menu is open, otherwise show profile -->
                 <div v-if="isProfileMenuOpen" class="text-white">
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <svg class="w-4 h-4 xs:w-4 xs:h-4 sm:w-[18px] sm:h-[18px] ml:w-6 ml:h-6 md:w-[26px] md:h-[26px] lg:w-[26px] lg:h-[26px]" viewBox="0 0 20 20" fill="none">
                     <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </div>
-                <div v-else class="relative profile-avatar">
-                  <div class="rounded-full border-2 border-purple-400 overflow-hidden profile-image">
+                <div v-else class="relative w-6 h-6 xs:w-6 xs:h-6 sm:w-7 sm:h-7 ml:w-8 ml:h-8 md:w-[34px] md:h-[34px] lg:w-[34px] lg:h-[34px]">
+                  <div class="w-6 h-6 xs:w-6 xs:h-6 sm:w-7 sm:h-7 ml:w-8 ml:h-8 md:w-[34px] md:h-[34px] lg:w-[34px] lg:h-[34px] rounded-full border-2 border-purple-400 overflow-hidden">
                     <img
                       src="https://images.pexels.com/photos/15023413/pexels-photo-15023413.jpeg?auto=compress&cs=tinysrgb&w=400"
                       alt="Profile"
@@ -45,21 +45,21 @@
                     />
                   </div>
                   <!-- Silver Badge -->
-                  <div class="profile-badge">
-                    <svg class="profile-star" viewBox="0 0 8 8">
+                  <div class="absolute -bottom-0.5 -right-0.5 bg-gray-300 rounded-full border-2 border-white flex items-center justify-center w-2.5 h-2.5 xs:w-2.5 xs:h-2.5 sm:w-3 sm:h-3 ml:w-3 ml:h-3 md:w-3 md:h-3 lg:w-3 lg:h-3">
+                    <svg class="w-1.5 h-1.5 xs:w-1.5 xs:h-1.5 sm:w-1.5 sm:h-1.5 ml:w-1.5 ml:h-1.5 md:w-1.5 md:h-1.5 lg:w-1.5 lg:h-1.5 text-white" viewBox="0 0 8 8">
                       <path d="M4 0L5 3H8L5.5 5L6.5 8L4 6L1.5 8L2.5 5L0 3H3L4 0Z" fill="currentColor"/>
                     </svg>
                   </div>
                   <!-- Dropdown Arrow -->
-                  <div class="profile-arrow">
-                    <svg :class="isProfileMenuOpen ? 'rotate-180 profile-arrow-icon transition-transform duration-200 text-gray-600' : 'profile-arrow-icon transition-transform duration-200 text-gray-600'" viewBox="0 0 8 6">
+                  <div class="absolute -bottom-0.5 -right-0.5 bg-gray-100 border border-gray-300 rounded-full flex items-center justify-center w-2.5 h-2.5 xs:w-2 xs:h-2 sm:w-2.5 sm:h-2.5 ml:w-2.5 ml:h-2.5 md:w-2.5 md:h-2.5 lg:w-2.5 lg:h-2.5">
+                    <svg :class="isProfileMenuOpen ? 'rotate-180 transition-transform duration-200 text-gray-600' : 'transition-transform duration-200 text-gray-600'" class="w-1.5 h-1 xs:w-1 xs:h-1 sm:w-1.5 sm:h-1 ml:w-1.5 ml:h-1 md:w-1.5 md:h-1 lg:w-1.5 lg:h-1" viewBox="0 0 8 6">
                       <path d="M1 1L4 4L7 1" stroke="currentColor" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </div>
                 </div>
               </div>
             </div>
-            <span class="nav-item-label">Profile</span>
+            <span class="text-[10px] xs:text-[10px] sm:text-[11px] ml:text-xs md:text-[13px] lg:text-[13px] leading-tight font-medium block w-full text-ellipsis overflow-hidden whitespace-nowrap text-center">Profile</span>
           </button>
 
           <!-- Wallet -->
