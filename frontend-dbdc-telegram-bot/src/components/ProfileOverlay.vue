@@ -905,6 +905,7 @@ const selectLanguage = (language) => {
   padding: 6px;
   cursor: pointer;
   transition: all 0.2s ease;
+  position: relative;
 }
 
 .language-section:hover {
