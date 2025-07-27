@@ -635,6 +635,26 @@ const hideSuccessNotification = () => {
   margin-top: 60px;
 }
 
+@media (min-width: 431px) and (max-width: 768px) {
+  .scroll-content {
+    width: 520px;
+    left: 32px;
+    gap: 32px;
+    height: 650px;
+    margin-top: 80px;
+  }
+}
+
+@media (min-width: 769px) {
+  .scroll-content {
+    width: 700px;
+    left: 48px;
+    gap: 48px;
+    height: 800px;
+    margin-top: 100px;
+  }
+}
+
 /* QR Section */
 .qr-section {
   width: 347px;
@@ -642,6 +662,20 @@ const hideSuccessNotification = () => {
   position: absolute;
   left: 0;
   top: 0;
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+  .qr-section {
+    width: 520px;
+    height: 500px;
+  }
+}
+
+@media (min-width: 769px) {
+  .qr-section {
+    width: 700px;
+    height: 600px;
+  }
 }
 
 .qr-background {
@@ -754,6 +788,20 @@ const hideSuccessNotification = () => {
   z-index: 20;
 }
 
+@media (min-width: 431px) and (max-width: 768px) {
+  .share-button-container {
+    left: 35px;
+    top: 410px;
+  }
+}
+
+@media (min-width: 769px) {
+  .share-button-container {
+    left: 50px;
+    top: 480px;
+  }
+}
+
 .share-button {
   display: flex;
   width: 300px;
@@ -773,6 +821,28 @@ const hideSuccessNotification = () => {
   font-weight: 600;
   line-height: 26px;
   transition: all 0.2s ease;
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+  .share-button {
+    width: 450px;
+    padding: 16px 64px;
+    height: 60px;
+    font-size: 20px;
+    line-height: 30px;
+    gap: 16px;
+  }
+}
+
+@media (min-width: 769px) {
+  .share-button {
+    width: 600px;
+    padding: 20px 80px;
+    height: 72px;
+    font-size: 24px;
+    line-height: 36px;
+    gap: 20px;
+  }
 }
 
 .share-button:hover:not(:disabled) {
