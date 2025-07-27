@@ -433,6 +433,27 @@ const goBack = () => {
   }
 }
 
+/* Loyality button enhancements */
+.bg-dbd-orange {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bg-dbd-orange:active {
+  transform: scale(0.95);
+}
+
+/* Telegram specific button improvements */
+@media (hover: none) {
+  .bg-dbd-orange:hover {
+    background-color: #FF6800 !important;
+  }
+
+  .bg-dbd-orange:active {
+    background-color: #e55a00;
+    transform: scale(0.95);
+  }
+}
+
 /* Telegram mini app specific styles */
 .font-montserrat {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
