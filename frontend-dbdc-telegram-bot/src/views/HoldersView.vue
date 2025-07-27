@@ -499,12 +499,11 @@ const hideSuccessNotification = () => {
 <style scoped>
 .holders-view {
   font-family: 'Montserrat', sans-serif;
-  width: 375px;
+  width: 100%;
   min-height: 100vh;
   background: #F0F0F0;
   position: relative;
   margin: 0 auto;
-  max-width: 375px;
   overflow-y: auto;
   overflow-x: hidden;
   /* Hide scrollbar for webkit browsers */
@@ -518,11 +517,29 @@ const hideSuccessNotification = () => {
 
 /* Content Container - now starts from top */
 .content-container {
-  width: 375px;
+  width: 100%;
+  max-width: 375px;
   min-height: calc(100vh + 200px); /* Allow content to extend beyond viewport */
   background: #F0F0F0;
   position: relative;
   padding: 20px 0 80px 0; /* Further reduced bottom padding */
+  margin: 0 auto;
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+  .content-container {
+    max-width: 100%;
+    padding: 32px 0 120px 0;
+    min-height: auto;
+  }
+}
+
+@media (min-width: 769px) {
+  .content-container {
+    max-width: 100%;
+    padding: 48px 0 160px 0;
+    min-height: auto;
+  }
 }
 
 /* Referral Program Header */
@@ -538,6 +555,26 @@ const hideSuccessNotification = () => {
   height: 52px;
 }
 
+@media (min-width: 431px) and (max-width: 768px) {
+  .referral-header {
+    width: 450px;
+    left: 32px;
+    gap: 8px;
+    height: 70px;
+    margin-bottom: 32px;
+  }
+}
+
+@media (min-width: 769px) {
+  .referral-header {
+    width: 600px;
+    left: 48px;
+    gap: 12px;
+    height: 90px;
+    margin-bottom: 48px;
+  }
+}
+
 .referral-title {
   color: #02070E;
   font-family: Montserrat;
@@ -548,6 +585,20 @@ const hideSuccessNotification = () => {
   align-self: stretch;
 }
 
+@media (min-width: 431px) and (max-width: 768px) {
+  .referral-title {
+    font-size: 28px;
+    line-height: 34px;
+  }
+}
+
+@media (min-width: 769px) {
+  .referral-title {
+    font-size: 36px;
+    line-height: 44px;
+  }
+}
+
 .referral-subtitle {
   color: #4B4D50;
   font-family: Montserrat;
@@ -556,6 +607,20 @@ const hideSuccessNotification = () => {
   line-height: 24px;
   margin: 0;
   align-self: stretch;
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+  .referral-subtitle {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
+
+@media (min-width: 769px) {
+  .referral-subtitle {
+    font-size: 24px;
+    line-height: 32px;
+  }
 }
 
 /* Scroll Content */
@@ -572,13 +637,50 @@ const hideSuccessNotification = () => {
   margin-top: 60px;
 }
 
+@media (min-width: 431px) and (max-width: 768px) {
+  .scroll-content {
+    width: 520px;
+    left: 32px;
+    gap: 32px;
+    height: auto;
+    min-height: 650px;
+    margin-top: 80px;
+  }
+}
+
+@media (min-width: 769px) {
+  .scroll-content {
+    width: 700px;
+    left: 48px;
+    gap: 48px;
+    height: auto;
+    min-height: 800px;
+    margin-top: 100px;
+  }
+}
+
 /* QR Section */
 .qr-section {
   width: 347px;
   height: 396px;
-  position: absolute;
-  left: 0;
-  top: 0;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+  .qr-section {
+    width: 520px;
+    height: 500px;
+    margin-bottom: 32px;
+  }
+}
+
+@media (min-width: 769px) {
+  .qr-section {
+    width: 700px;
+    height: 600px;
+    margin-bottom: 48px;
+  }
 }
 
 .qr-background {
@@ -642,6 +744,24 @@ const hideSuccessNotification = () => {
   z-index: 10;
 }
 
+@media (min-width: 431px) and (max-width: 768px) {
+  .qr-code-container {
+    width: 320px;
+    height: 300px;
+    left: 100px;
+    top: 32px;
+  }
+}
+
+@media (min-width: 769px) {
+  .qr-code-container {
+    width: 400px;
+    height: 380px;
+    left: 150px;
+    top: 40px;
+  }
+}
+
 .qr-code-wrapper {
   width: 222px;
   height: 220px;
@@ -652,6 +772,22 @@ const hideSuccessNotification = () => {
   position: relative;
 }
 
+@media (min-width: 431px) and (max-width: 768px) {
+  .qr-code-wrapper {
+    width: 320px;
+    height: 300px;
+    border-radius: 28px;
+  }
+}
+
+@media (min-width: 769px) {
+  .qr-code-wrapper {
+    width: 400px;
+    height: 380px;
+    border-radius: 36px;
+  }
+}
+
 .qr-code-image {
   width: 140px;
   height: 140px;
@@ -660,6 +796,24 @@ const hideSuccessNotification = () => {
   position: absolute;
   left: 41px;
   top: 20px;
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+  .qr-code-image {
+    width: 200px;
+    height: 200px;
+    left: 60px;
+    top: 30px;
+  }
+}
+
+@media (min-width: 769px) {
+  .qr-code-image {
+    width: 250px;
+    height: 250px;
+    left: 75px;
+    top: 40px;
+  }
 }
 
 .qr-code-link {
@@ -673,6 +827,29 @@ const hideSuccessNotification = () => {
   top: 176px;
   width: 182px;
   height: 24px;
+  text-align: center;
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+  .qr-code-link {
+    font-size: 22px;
+    line-height: 30px;
+    left: 30px;
+    top: 250px;
+    width: 260px;
+    height: 30px;
+  }
+}
+
+@media (min-width: 769px) {
+  .qr-code-link {
+    font-size: 28px;
+    line-height: 36px;
+    left: 40px;
+    top: 320px;
+    width: 320px;
+    height: 36px;
+  }
 }
 
 /* Terms Section */
@@ -683,12 +860,50 @@ const hideSuccessNotification = () => {
   z-index: 20;
 }
 
+@media (min-width: 431px) and (max-width: 768px) {
+  .terms-checkbox-wrapper {
+    position: relative;
+    left: 35px;
+    top: auto;
+    transform: scale(1.2);
+    margin: 20px 0;
+  }
+}
+
+@media (min-width: 769px) {
+  .terms-checkbox-wrapper {
+    position: relative;
+    left: 50px;
+    top: auto;
+    transform: scale(1.5);
+    margin: 30px 0;
+  }
+}
+
 /* Share Button */
 .share-button-container {
   position: absolute;
   left: 23px;
   top: 322px;
   z-index: 20;
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+  .share-button-container {
+    position: relative;
+    left: 35px;
+    top: auto;
+    margin: 20px 0;
+  }
+}
+
+@media (min-width: 769px) {
+  .share-button-container {
+    position: relative;
+    left: 50px;
+    top: auto;
+    margin: 30px 0;
+  }
 }
 
 .share-button {
@@ -710,6 +925,28 @@ const hideSuccessNotification = () => {
   font-weight: 600;
   line-height: 26px;
   transition: all 0.2s ease;
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+  .share-button {
+    width: 450px;
+    padding: 16px 64px;
+    height: 60px;
+    font-size: 20px;
+    line-height: 30px;
+    gap: 16px;
+  }
+}
+
+@media (min-width: 769px) {
+  .share-button {
+    width: 600px;
+    padding: 20px 80px;
+    height: 72px;
+    font-size: 24px;
+    line-height: 36px;
+    gap: 20px;
+  }
 }
 
 .share-button:hover:not(:disabled) {
@@ -774,9 +1011,30 @@ const hideSuccessNotification = () => {
 .how-to-section {
   position: relative;
   left: 14px;
-  top: -60px;
+  top: 0;
   width: 347px;
   height: 410px;
+  margin-top: 40px;
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+  .how-to-section {
+    left: 32px;
+    top: 0;
+    width: 520px;
+    height: 520px;
+    margin-top: 60px;
+  }
+}
+
+@media (min-width: 769px) {
+  .how-to-section {
+    left: 48px;
+    top: 0;
+    width: 700px;
+    height: 650px;
+    margin-top: 80px;
+  }
 }
 
 .steps-container {
@@ -807,6 +1065,20 @@ const hideSuccessNotification = () => {
   margin: 0;
 }
 
+@media (min-width: 431px) and (max-width: 768px) {
+  .how-to-title {
+    font-size: 28px;
+    line-height: 34px;
+  }
+}
+
+@media (min-width: 769px) {
+  .how-to-title {
+    font-size: 36px;
+    line-height: 44px;
+  }
+}
+
 .how-to-subtitle {
   color: #4B4D50;
   font-family: Montserrat;
@@ -815,6 +1087,20 @@ const hideSuccessNotification = () => {
   line-height: 24px;
   margin: 0;
   align-self: stretch;
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+  .how-to-subtitle {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
+
+@media (min-width: 769px) {
+  .how-to-subtitle {
+    font-size: 24px;
+    line-height: 32px;
+  }
 }
 
 /* Step Indicators */
@@ -1162,7 +1448,6 @@ const hideSuccessNotification = () => {
 @media (max-width: 375px) {
   .holders-view {
     width: 100vw;
-    max-width: 375px;
   }
 
   .content-container {
@@ -1172,24 +1457,97 @@ const hideSuccessNotification = () => {
 }
 
 /* Tablet styles - remove white stripes */
-@media (min-width: 376px) and (max-width: 1024px) {
+@media (min-width: 376px) and (max-width: 768px) {
   .holders-view {
     width: 100vw;
-    max-width: 100vw;
     box-shadow: none;
   }
 
   .content-container {
     width: 100vw;
-    max-width: 100vw;
+  }
+
+  /* Adjust web link section for tablets */
+  .web-link-section {
+    width: 520px;
+    height: 260px;
+  }
+
+  .web-link-background {
+    width: 520px;
+    height: 258px;
+  }
+
+  .web-link-title {
+    font-size: 32px;
+    line-height: 38px;
+  }
+
+  .web-link-description {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .copy-link-container {
+    width: 460px;
+    height: 60px;
+  }
+
+  .copy-link-text {
+    font-size: 20px;
+    line-height: 28px;
   }
 }
 
-@media (min-width: 1025px) {
+@media (min-width: 769px) {
   .holders-view {
-    width: 375px;
-    max-width: 375px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 100vw;
+    box-shadow: none;
+  }
+
+  .content-container {
+    width: 100vw;
+  }
+
+  /* Adjust web link section for desktop */
+  .web-link-section {
+    width: 700px;
+    height: 320px;
+  }
+
+  .web-link-background {
+    width: 700px;
+    height: 318px;
+  }
+
+  .web-link-title {
+    font-size: 40px;
+    line-height: 48px;
+  }
+
+  .web-link-description {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .copy-link-container {
+    width: 620px;
+    height: 72px;
+  }
+
+  .copy-link-text {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .copy-button {
+    width: 72px;
+    height: 72px;
+  }
+
+  .copy-icon {
+    width: 32px;
+    height: 32px;
   }
 }
 

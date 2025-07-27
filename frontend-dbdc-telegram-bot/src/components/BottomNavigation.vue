@@ -561,103 +561,169 @@ const closeProfileMenu = () => {
 /* Large mobile and small tablets 431px - 768px */
 @media (min-width: 431px) and (max-width: 768px) {
   .nav-content {
-    padding: 16px 16px;
-    padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
-    min-height: 76px;
+    padding: 20px 24px;
+    padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    min-height: 88px;
   }
-  
+
   .nav-items-container {
-    max-width: 480px;
-    gap: 12px;
-    padding: 0 12px;
+    max-width: 100%;
+    gap: 16px;
+    padding: 0 20px;
   }
   
   .nav-item-button {
-    min-width: 60px;
-    max-width: 90px;
-    padding: 10px 8px;
-    gap: 8px;
+    min-width: 70px;
+    max-width: 120px;
+    padding: 12px 10px;
+    gap: 10px;
   }
   
   .nav-item-label {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
   }
   
   .nav-icon-inactive {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
   }
-  
+
   .nav-icon-active {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
   }
-  
+
   .nav-icon-svg-inactive {
-    width: 22px;
-    height: 22px;
-  }
-  
-  .nav-icon-svg-active {
     width: 24px;
     height: 24px;
+  }
+
+  .nav-icon-svg-active {
+    width: 28px;
+    height: 28px;
+  }
+
+  .profile-avatar,
+  .profile-image {
+    width: 36px;
+    height: 36px;
+  }
+
+  .profile-badge {
+    width: 14px;
+    height: 14px;
+  }
+
+  .profile-star {
+    width: 7px;
+    height: 7px;
+  }
+
+  .profile-arrow {
+    width: 12px;
+    height: 12px;
+  }
+
+  .profile-arrow-icon {
+    width: 7px;
+    height: 5px;
+  }
+
+  .cart-counter-badge {
+    width: 22px;
+    height: 22px;
+    font-size: 11px;
+    top: -5px;
+    right: -5px;
   }
 }
 
 /* Tablets and desktop 769px+ */
 @media (min-width: 769px) {
   .bottom-nav-container {
-    max-width: 480px;
-    left: 50%;
-    transform: translateX(-50%);
+    width: 100%;
     border-radius: 20px 20px 0 0;
-    border-left: 1px solid rgba(0, 0, 0, 0.1);
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    border-left: none;
+    border-right: none;
   }
   
   .nav-content {
-    padding: 18px 20px;
-    padding-bottom: calc(18px + env(safe-area-inset-bottom, 0px));
-    min-height: 82px;
+    padding: 24px 48px;
+    padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    min-height: 100px;
   }
   
   .nav-items-container {
-    max-width: 400px;
-    gap: 16px;
-    padding: 0 16px;
+    max-width: 1200px;
+    gap: 24px;
+    padding: 0 32px;
   }
   
   .nav-item-button {
-    min-width: 65px;
-    max-width: 100px;
-    padding: 12px 10px;
-    gap: 10px;
+    min-width: 80px;
+    max-width: 140px;
+    padding: 16px 12px;
+    gap: 12px;
   }
   
   .nav-item-label {
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 600;
   }
   
   .nav-icon-inactive {
-    width: 34px;
-    height: 34px;
+    width: 40px;
+    height: 40px;
   }
-  
+
   .nav-icon-active {
-    width: 42px;
-    height: 42px;
+    width: 50px;
+    height: 50px;
   }
-  
+
   .nav-icon-svg-inactive {
+    width: 28px;
+    height: 28px;
+  }
+
+  .nav-icon-svg-active {
+    width: 32px;
+    height: 32px;
+  }
+
+  .profile-avatar,
+  .profile-image {
+    width: 40px;
+    height: 40px;
+  }
+
+  .profile-badge {
+    width: 16px;
+    height: 16px;
+  }
+
+  .profile-star {
+    width: 8px;
+    height: 8px;
+  }
+
+  .profile-arrow {
+    width: 14px;
+    height: 14px;
+  }
+
+  .profile-arrow-icon {
+    width: 8px;
+    height: 6px;
+  }
+
+  .cart-counter-badge {
     width: 24px;
     height: 24px;
-  }
-  
-  .nav-icon-svg-active {
-    width: 26px;
-    height: 26px;
+    font-size: 12px;
+    top: -6px;
+    right: -6px;
   }
 }
 
