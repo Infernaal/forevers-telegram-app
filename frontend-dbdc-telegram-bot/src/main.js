@@ -32,11 +32,37 @@ if (window.Telegram && window.Telegram.WebApp) {
   document.documentElement.style.setProperty('--tg-viewport-height', tg.viewportHeight + 'px')
   document.documentElement.style.setProperty('--tg-viewport-stable-height', tg.viewportStableHeight + 'px')
 
+  // Set responsive breakpoint variables
+  const updateBreakpoints = () => {
+    const width = window.innerWidth
+    document.documentElement.style.setProperty('--screen-width', width + 'px')
+
+    // Set current breakpoint
+    if (width < 375) {
+      document.documentElement.setAttribute('data-breakpoint', 'xs')
+    } else if (width < 430) {
+      document.documentElement.setAttribute('data-breakpoint', 'sm')
+    } else if (width < 640) {
+      document.documentElement.setAttribute('data-breakpoint', 'ml')
+    } else if (width < 768) {
+      document.documentElement.setAttribute('data-breakpoint', 'md')
+    } else if (width < 1024) {
+      document.documentElement.setAttribute('data-breakpoint', 'lg')
+    } else {
+      document.documentElement.setAttribute('data-breakpoint', 'xl')
+    }
+  }
+  updateBreakpoints()
+
   // Handle viewport changes
   tg.onEvent('viewportChanged', () => {
     document.documentElement.style.setProperty('--tg-viewport-height', tg.viewportHeight + 'px')
     document.documentElement.style.setProperty('--tg-viewport-stable-height', tg.viewportStableHeight + 'px')
+    updateBreakpoints()
   })
+
+  // Handle window resize for breakpoint updates
+  window.addEventListener('resize', updateBreakpoints)
 
   // Handle theme changes
   tg.onEvent('themeChanged', () => {
@@ -92,4 +118,3 @@ if (window.Telegram && window.Telegram.WebApp) {
 app.use(router)
 
 app.mount('#app')
-
