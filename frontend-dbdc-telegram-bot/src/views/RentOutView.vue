@@ -1,21 +1,21 @@
 <template>
   <div class="min-h-screen bg-gray-100 flex flex-col font-sans telegram-webapp">
     <!-- Fixed Header Section -->
-    <div class="w-full max-w-md mx-auto px-4 pt-6 pb-3 bg-gray-100 z-30">
+    <div class="w-full max-w-md lg:max-w-6xl xl:max-w-7xl mx-auto px-4 lg:px-12 xl:px-16 pt-6 lg:pt-12 xl:pt-16 pb-3 lg:pb-6 xl:pb-8 bg-gray-100 z-30">
       <!-- Forevers Available Section - Fixed -->
       <div class="mb-2">
-        <div class="bg-dbd-light-blue border border-purple-200 rounded-2xl p-4">
+        <div class="bg-dbd-light-blue border border-purple-200 rounded-2xl lg:rounded-3xl xl:rounded-4xl p-4 lg:p-8 xl:p-12">
           <div class="flex items-center justify-between">
             <div>
-              <h2 class="text-2xl font-semibold text-dbd-dark leading-tight mb-1">
+              <h2 class="text-2xl lg:text-5xl xl:text-6xl font-semibold text-dbd-dark leading-tight mb-1 lg:mb-3 xl:mb-4">
                 Forevers<br>Available
               </h2>
             </div>
-            <div class="flex items-center gap-3">
-              <svg width="36" height="36" viewBox="0 0 32 32" class="text-dbd-primary">
+            <div class="flex items-center gap-3 lg:gap-6 xl:gap-8">
+              <svg width="36" height="36" viewBox="0 0 32 32" class="text-dbd-primary lg:w-16 lg:h-16 xl:w-20 xl:h-20">
                 <path d="M30.6666 7.38069V1.33325H7.1291V9.01136H1.33325V15.0588H7.1291V30.1075H13.894V22.7276H19.6153V16.6801H13.894V15.0588H25.1316V9.01136H13.894V7.38069H30.6666Z" fill="currentColor"/>
               </svg>
-              <span class="text-4xl font-bold text-dbd-primary">2,225</span>
+              <span class="text-4xl lg:text-7xl xl:text-8xl font-bold text-dbd-primary">2,225</span>
             </div>
           </div>
         </div>
@@ -23,19 +23,19 @@
     </div>
 
     <!-- Scrollable Content Area -->
-    <div class="flex-1 w-full max-w-md mx-auto overflow-y-auto px-4 pb-24">
+    <div class="flex-1 w-full max-w-md lg:max-w-6xl xl:max-w-7xl mx-auto overflow-y-auto px-4 lg:px-12 xl:px-16 pb-24 lg:pb-40 xl:pb-48">
       <!-- Rent Out Cards List -->
-      <div class="space-y-4">
+      <div class="space-y-4 lg:space-y-6 xl:space-y-8">
         <div 
           v-for="item in foreversList" 
           :key="item.id"
-          class="bg-dbd-off-white border border-purple-200 rounded-2xl p-3"
+          class="bg-dbd-off-white border border-purple-200 rounded-2xl lg:rounded-3xl xl:rounded-4xl p-3 lg:p-6 xl:p-8"
         >
           <!-- Header -->
-          <div class="flex items-center justify-between mb-3">
-            <div class="flex items-center gap-3">
-              <CountryFlag :country="item.code" />
-              <span class="text-dbd-gray font-medium">{{ item.title }}</span>
+          <div class="flex items-center justify-between mb-3 lg:mb-6 xl:mb-8">
+            <div class="flex items-center gap-3 lg:gap-6 xl:gap-8">
+              <CountryFlag :country="item.code" class="lg:w-12 lg:h-12 xl:w-16 xl:h-16" />
+              <span class="text-dbd-gray font-medium text-base lg:text-2xl xl:text-3xl">{{ item.title }}</span>
             </div>
             <button
               @click="openRentModal(item)"
@@ -43,28 +43,28 @@
               :class="item.availableAmount === 0
                 ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
                 : 'bg-dbd-orange text-white hover:bg-orange-600'"
-              class="px-3 py-2 rounded-full text-sm font-bold transition-colors"
+              class="px-3 lg:px-6 xl:px-8 py-2 lg:py-3 xl:py-4 rounded-full text-sm lg:text-lg xl:text-xl font-bold transition-colors"
             >
               Loyality
             </button>
           </div>
 
           <!-- Exchange Rate -->
-          <div class="flex items-center gap-0.5 mb-3">
-            <div class="flex items-center gap-1">
-              <span class="text-sm text-dbd-gray">1</span>
-              <svg width="16" height="16" viewBox="0 0 16 16" class="text-dbd-gray">
+          <div class="flex items-center gap-0.5 lg:gap-2 xl:gap-3 mb-3 lg:mb-6 xl:mb-8">
+            <div class="flex items-center gap-1 lg:gap-2 xl:gap-3">
+              <span class="text-sm lg:text-lg xl:text-xl text-dbd-gray">1</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" class="text-dbd-gray lg:w-6 lg:h-6 xl:w-8 xl:h-8">
                 <path d="M15.2636 2H4.61925C4.15063 2 3.8159 2.28571 3.8159 2.68571V5.48571H0.803347C0.334728 5.54286 0 5.82857 0 6.22857C0 6.62857 0.334728 6.91429 0.803347 6.91429H3.8159V13.3143C3.8159 13.7143 4.15063 14 4.61925 14C5.08787 14 5.42259 13.7143 5.42259 13.3143V10.3429H8.83682C9.30544 10.3429 9.64017 10.0571 9.64017 9.65714C9.64017 9.25714 9.30544 8.97143 8.83682 8.97143H5.42259V6.85714H11.9163C12.3849 6.85714 12.7197 6.57143 12.7197 6.17143C12.7197 5.77143 12.3849 5.48571 11.9163 5.48571H5.42259V3.37143H15.1967C15.6653 3.37143 16 3.08571 16 2.68571C16 2.28571 15.7322 2 15.2636 2Z" fill="currentColor"/>
               </svg>
             </div>
-            <span class="text-sm text-dbd-gray">{{ item.code }}</span>
-            <span class="text-sm text-dbd-gray">/</span>
-            <span class="text-sm text-dbd-primary font-medium">{{ item.usdRate }} USD</span>
+            <span class="text-sm lg:text-lg xl:text-xl text-dbd-gray">{{ item.code }}</span>
+            <span class="text-sm lg:text-lg xl:text-xl text-dbd-gray">/</span>
+            <span class="text-sm lg:text-lg xl:text-xl text-dbd-primary font-medium">{{ item.usdRate }} USD</span>
 
             <!-- Price change indicator -->
-            <div class="flex items-center gap-1 px-2 py-0.5 rounded text-xs font-semibold"
+            <div class="flex items-center gap-1 lg:gap-2 xl:gap-3 px-2 lg:px-4 xl:px-6 py-0.5 lg:py-2 xl:py-3 rounded lg:rounded-lg xl:rounded-xl text-xs lg:text-lg xl:text-xl font-semibold"
                  :class="item.priceChange >= 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'">
-              <svg class="w-2 h-2" :class="item.priceChange >= 0 ? '-rotate-45' : 'rotate-45'" viewBox="0 0 10 13">
+              <svg class="w-2 h-2 lg:w-4 lg:h-4 xl:w-6 xl:h-6" :class="item.priceChange >= 0 ? '-rotate-45' : 'rotate-45'" viewBox="0 0 10 13">
                 <path d="M0.720539 4.9362L4.6673 1.01033M4.6673 1.01033L8.58641 4.92944M4.6673 1.01033L4.65686 12.3136" 
                       :stroke="item.priceChange >= 0 ? '#07B80E' : '#FF1919'" 
                       stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
