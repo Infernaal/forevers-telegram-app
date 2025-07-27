@@ -499,12 +499,11 @@ const hideSuccessNotification = () => {
 <style scoped>
 .holders-view {
   font-family: 'Montserrat', sans-serif;
-  width: 375px;
+  width: 100%;
   min-height: 100vh;
   background: #F0F0F0;
   position: relative;
   margin: 0 auto;
-  max-width: 375px;
   overflow-y: auto;
   overflow-x: hidden;
   /* Hide scrollbar for webkit browsers */
@@ -518,11 +517,27 @@ const hideSuccessNotification = () => {
 
 /* Content Container - now starts from top */
 .content-container {
-  width: 375px;
+  width: 100%;
+  max-width: 375px;
   min-height: calc(100vh + 200px); /* Allow content to extend beyond viewport */
   background: #F0F0F0;
   position: relative;
   padding: 20px 0 80px 0; /* Further reduced bottom padding */
+  margin: 0 auto;
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+  .content-container {
+    max-width: 600px;
+    padding: 32px 0 120px 0;
+  }
+}
+
+@media (min-width: 769px) {
+  .content-container {
+    max-width: 800px;
+    padding: 48px 0 160px 0;
+  }
 }
 
 /* Referral Program Header */
@@ -538,6 +553,26 @@ const hideSuccessNotification = () => {
   height: 52px;
 }
 
+@media (min-width: 431px) and (max-width: 768px) {
+  .referral-header {
+    width: 450px;
+    left: 32px;
+    gap: 8px;
+    height: 70px;
+    margin-bottom: 32px;
+  }
+}
+
+@media (min-width: 769px) {
+  .referral-header {
+    width: 600px;
+    left: 48px;
+    gap: 12px;
+    height: 90px;
+    margin-bottom: 48px;
+  }
+}
+
 .referral-title {
   color: #02070E;
   font-family: Montserrat;
@@ -548,6 +583,20 @@ const hideSuccessNotification = () => {
   align-self: stretch;
 }
 
+@media (min-width: 431px) and (max-width: 768px) {
+  .referral-title {
+    font-size: 28px;
+    line-height: 34px;
+  }
+}
+
+@media (min-width: 769px) {
+  .referral-title {
+    font-size: 36px;
+    line-height: 44px;
+  }
+}
+
 .referral-subtitle {
   color: #4B4D50;
   font-family: Montserrat;
@@ -556,6 +605,20 @@ const hideSuccessNotification = () => {
   line-height: 24px;
   margin: 0;
   align-self: stretch;
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+  .referral-subtitle {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
+
+@media (min-width: 769px) {
+  .referral-subtitle {
+    font-size: 24px;
+    line-height: 32px;
+  }
 }
 
 /* Scroll Content */
