@@ -391,7 +391,7 @@ const selectLanguage = (language) => {
 .triangle-pointer {
   position: absolute;
   left: 34px;
-  bottom: calc(110px + env(safe-area-inset-bottom, 0px));
+  bottom: calc(125px + env(safe-area-inset-bottom, 0px));
   z-index: 65;
 }
 
@@ -409,7 +409,7 @@ const selectLanguage = (language) => {
   position: absolute;
   left: 8px;
   right: 8px;
-  bottom: calc(110px + env(safe-area-inset-bottom, 0px));
+  bottom: calc(125px + env(safe-area-inset-bottom, 0px));
   height: calc(580px - env(safe-area-inset-bottom, 0px));
   max-height: calc(100vh - 130px - env(safe-area-inset-bottom, 0px));
   border-radius: 20px;
