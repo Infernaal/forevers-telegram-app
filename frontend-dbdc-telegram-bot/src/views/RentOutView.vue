@@ -119,6 +119,7 @@
       :selected-balance="selectedBalance"
       :rent-amount="calculatedRentAmount"
       :input-amount="inputAmount"
+      :terms-agreed="termsAgreed"
       @close="closeRentModal"
       @rent-out="handleRentOut"
       @open-terms="openTermsModal"
