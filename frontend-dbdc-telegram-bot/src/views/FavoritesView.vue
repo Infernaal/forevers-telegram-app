@@ -36,17 +36,17 @@
           class="bg-white border border-purple-200 rounded-xl xs:rounded-2xl sm:rounded-2xl ml:rounded-2xl md:rounded-2xl lg:rounded-2xl xl:rounded-2xl p-2.5 xs:p-3 sm:p-3 ml:p-3.5 md:p-4 lg:p-4 xl:p-4 relative flex flex-col justify-between min-h-[160px] xs:min-h-[180px] sm:min-h-[180px] ml:min-h-[190px] md:min-h-[210px] lg:min-h-[210px] xl:min-h-[210px]"
         >
           <!-- Country Header -->
-          <div class="flex items-center justify-between mb-3">
-            <div class="flex items-center gap-2">
-              <CountryFlag :country="balance.code" class="w-6 h-6" />
-              <span class="text-gray-700 font-medium text-base">{{ balance.country }} Balance</span>
+          <div class="flex items-center justify-between mb-2.5 xs:mb-3 sm:mb-3 ml:mb-3 md:mb-3.5 lg:mb-3.5 xl:mb-3.5">
+            <div class="flex items-center gap-1.5 xs:gap-2 sm:gap-2 ml:gap-2 md:gap-2.5 lg:gap-2.5 xl:gap-2.5">
+              <CountryFlag :country="balance.code" class="w-5 h-5 xs:w-6 xs:h-6 sm:w-6 sm:h-6 ml:w-6 ml:h-6 md:w-7 md:h-7 lg:w-7 lg:h-7 xl:w-7 xl:h-7" />
+              <span class="text-gray-700 font-medium text-sm xs:text-base sm:text-base ml:text-base md:text-lg lg:text-lg xl:text-lg">{{ balance.country }} Balance</span>
             </div>
 
             <button
               @click="openEnterAmountModal(balance)"
-              class="w-16 h-11 border border-blue-700 bg-purple-50 rounded-full flex items-center justify-center hover:bg-purple-100 transition-colors"
+              class="w-12 h-9 xs:w-16 xs:h-11 sm:w-16 sm:h-11 ml:w-16 ml:h-11 md:w-18 md:h-12 lg:w-18 lg:h-12 xl:w-18 xl:h-12 border border-blue-700 bg-purple-50 rounded-full flex items-center justify-center hover:bg-purple-100 transition-colors"
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" class="text-blue-700">
+              <svg class="w-5 h-5 xs:w-6 xs:h-6 sm:w-6 sm:h-6 ml:w-6 ml:h-6 md:w-7 md:h-7 lg:w-7 lg:h-7 xl:w-7 xl:h-7 text-blue-700" viewBox="0 0 24 24">
                 <path d="M18 13H6C5.4 13 5 12.6 5 12C5 11.4 5.4 11 6 11H18C18.6 11 19 11.4 19 12C19 12.6 18.6 13 18 13Z" fill="currentColor"/>
                 <path d="M12 19C11.4 19 11 18.6 11 18V6C11 5.4 11.4 5 12 5C12.6 5 13 5.4 13 6V18C13 18.6 12.6 19 12 19Z" fill="currentColor"/>
               </svg>
