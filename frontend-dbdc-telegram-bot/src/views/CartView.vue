@@ -1,5 +1,5 @@
 <template>
-  <div class="cart-view w-full xs:max-w-full sm:max-w-full ml:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto bg-gray-100 min-h-screen flex flex-col font-montserrat" style="background: #f3f4f6 !important;">
+  <div class="cart-view w-full h-full bg-gray-100 min-h-screen flex flex-col font-montserrat" style="background: #f3f4f6 !important;">
     <!-- Content Container -->
     <div class="content-container bg-gray-100 flex-1 flex flex-col relative">
       <!-- Scrollable Cart Items Area -->
