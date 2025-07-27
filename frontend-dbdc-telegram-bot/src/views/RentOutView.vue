@@ -148,6 +148,7 @@ import CountryFlag from '../components/CountryFlag.vue'
 import InfoTooltip from '../components/InfoTooltip.vue'
 import RentOutModal from '../components/RentOutModal.vue'
 import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
+import SuccessNotification from '../components/SuccessNotification.vue'
 
 const router = useRouter()
 
