@@ -538,6 +538,26 @@ const hideSuccessNotification = () => {
   height: 52px;
 }
 
+@media (min-width: 376px) and (max-width: 1024px) {
+  .referral-header {
+    width: calc(100vw - 64px);
+    left: 32px;
+    gap: 8px;
+    height: 70px;
+    margin-bottom: 32px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .referral-header {
+    width: 299px;
+    left: 38px;
+    gap: 6px;
+    height: 60px;
+    margin-bottom: 24px;
+  }
+}
+
 .referral-title {
   color: #02070E;
   font-family: Montserrat;
@@ -548,6 +568,20 @@ const hideSuccessNotification = () => {
   align-self: stretch;
 }
 
+@media (min-width: 376px) and (max-width: 1024px) {
+  .referral-title {
+    font-size: 28px;
+    line-height: 34px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .referral-title {
+    font-size: 24px;
+    line-height: 28px;
+  }
+}
+
 .referral-subtitle {
   color: #4B4D50;
   font-family: Montserrat;
@@ -556,6 +590,20 @@ const hideSuccessNotification = () => {
   line-height: 24px;
   margin: 0;
   align-self: stretch;
+}
+
+@media (min-width: 376px) and (max-width: 1024px) {
+  .referral-subtitle {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .referral-subtitle {
+    font-size: 18px;
+    line-height: 26px;
+  }
 }
 
 /* Scroll Content */
@@ -572,6 +620,27 @@ const hideSuccessNotification = () => {
   margin-top: 60px;
 }
 
+@media (min-width: 376px) and (max-width: 1024px) {
+  .scroll-content {
+    width: calc(100vw - 64px);
+    left: 32px;
+    gap: 24px;
+    height: auto;
+    min-height: 650px;
+    margin-top: 80px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .scroll-content {
+    width: 347px;
+    left: 14px;
+    gap: 20px;
+    height: 507px;
+    margin-top: 60px;
+  }
+}
+
 /* QR Section */
 .qr-section {
   width: 347px;
@@ -579,6 +648,25 @@ const hideSuccessNotification = () => {
   position: absolute;
   left: 0;
   top: 0;
+}
+
+@media (min-width: 376px) and (max-width: 1024px) {
+  .qr-section {
+    width: 100%;
+    height: 500px;
+    position: relative;
+    margin-bottom: 32px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .qr-section {
+    width: 347px;
+    height: 396px;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
 }
 
 .qr-background {
@@ -642,6 +730,26 @@ const hideSuccessNotification = () => {
   z-index: 10;
 }
 
+@media (min-width: 376px) and (max-width: 1024px) {
+  .qr-code-container {
+    width: 300px;
+    height: 280px;
+    left: 50%;
+    top: 40px;
+    transform: translateX(-50%);
+  }
+}
+
+@media (min-width: 1025px) {
+  .qr-code-container {
+    width: 222px;
+    height: 220px;
+    left: 63px;
+    top: 24px;
+    transform: none;
+  }
+}
+
 .qr-code-wrapper {
   width: 222px;
   height: 220px;
@@ -652,6 +760,28 @@ const hideSuccessNotification = () => {
   position: relative;
 }
 
+@media (min-width: 376px) and (max-width: 1024px) {
+  .qr-code-wrapper {
+    width: 100%;
+    height: 100%;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    box-sizing: border-box;
+  }
+}
+
+@media (min-width: 1025px) {
+  .qr-code-wrapper {
+    width: 222px;
+    height: 220px;
+    border-radius: 20px;
+  }
+}
+
 .qr-code-image {
   width: 140px;
   height: 140px;
@@ -660,6 +790,25 @@ const hideSuccessNotification = () => {
   position: absolute;
   left: 41px;
   top: 20px;
+}
+
+@media (min-width: 376px) and (max-width: 1024px) {
+  .qr-code-image {
+    width: 180px;
+    height: 180px;
+    position: static;
+    margin-bottom: 20px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .qr-code-image {
+    width: 140px;
+    height: 140px;
+    position: absolute;
+    left: 41px;
+    top: 20px;
+  }
 }
 
 .qr-code-link {
@@ -673,6 +822,30 @@ const hideSuccessNotification = () => {
   top: 176px;
   width: 182px;
   height: 24px;
+  text-align: center;
+}
+
+@media (min-width: 376px) and (max-width: 1024px) {
+  .qr-code-link {
+    font-size: 20px;
+    line-height: 28px;
+    position: static;
+    width: auto;
+    height: auto;
+    text-align: center;
+  }
+}
+
+@media (min-width: 1025px) {
+  .qr-code-link {
+    font-size: 17px;
+    line-height: 24px;
+    position: absolute;
+    left: 20px;
+    top: 176px;
+    width: 182px;
+    height: 24px;
+  }
 }
 
 /* Terms Section */
@@ -683,12 +856,51 @@ const hideSuccessNotification = () => {
   z-index: 20;
 }
 
+@media (min-width: 376px) and (max-width: 1024px) {
+  .terms-checkbox-wrapper {
+    position: relative;
+    left: 0;
+    top: 0;
+    transform: scale(1.15);
+    transform-origin: left center;
+    margin: 20px 0;
+  }
+}
+
+@media (min-width: 1025px) {
+  .terms-checkbox-wrapper {
+    position: absolute;
+    left: 20px;
+    top: 256px;
+    transform: none;
+  }
+}
+
 /* Share Button */
 .share-button-container {
   position: absolute;
   left: 23px;
   top: 322px;
   z-index: 20;
+}
+
+@media (min-width: 376px) and (max-width: 1024px) {
+  .share-button-container {
+    position: relative;
+    left: 0;
+    top: 0;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 1025px) {
+  .share-button-container {
+    position: absolute;
+    left: 23px;
+    top: 322px;
+  }
 }
 
 .share-button {
@@ -710,6 +922,26 @@ const hideSuccessNotification = () => {
   font-weight: 600;
   line-height: 26px;
   transition: all 0.2s ease;
+}
+
+@media (min-width: 376px) and (max-width: 1024px) {
+  .share-button {
+    width: 400px;
+    padding: 16px 64px;
+    height: 60px;
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .share-button {
+    width: 300px;
+    padding: 12px 48px;
+    height: 50px;
+    font-size: 16px;
+    line-height: 26px;
+  }
 }
 
 .share-button:hover:not(:disabled) {
@@ -779,6 +1011,26 @@ const hideSuccessNotification = () => {
   height: 410px;
 }
 
+@media (min-width: 376px) and (max-width: 1024px) {
+  .how-to-section {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    min-height: 480px;
+    margin-top: 40px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .how-to-section {
+    left: 14px;
+    top: -60px;
+    width: 347px;
+    height: 410px;
+  }
+}
+
 .steps-container {
   position: relative;
   width: 100%;
@@ -807,6 +1059,20 @@ const hideSuccessNotification = () => {
   margin: 0;
 }
 
+@media (min-width: 376px) and (max-width: 1024px) {
+  .how-to-title {
+    font-size: 28px;
+    line-height: 34px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .how-to-title {
+    font-size: 20px;
+    line-height: 24px;
+  }
+}
+
 .how-to-subtitle {
   color: #4B4D50;
   font-family: Montserrat;
@@ -817,6 +1083,20 @@ const hideSuccessNotification = () => {
   align-self: stretch;
 }
 
+@media (min-width: 376px) and (max-width: 1024px) {
+  .how-to-subtitle {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .how-to-subtitle {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
 /* Step Indicators */
 .step-indicators {
   position: absolute;
@@ -824,6 +1104,26 @@ const hideSuccessNotification = () => {
   top: 88px;
   width: 298px;
   height: 40px;
+}
+
+@media (min-width: 376px) and (max-width: 1024px) {
+  .step-indicators {
+    left: 50%;
+    top: 120px;
+    width: 400px;
+    height: 48px;
+    transform: translateX(-50%);
+  }
+}
+
+@media (min-width: 1025px) {
+  .step-indicators {
+    left: 27px;
+    top: 88px;
+    width: 298px;
+    height: 40px;
+    transform: none;
+  }
 }
 
 .step-indicator-row {
@@ -888,6 +1188,24 @@ const hideSuccessNotification = () => {
   height: 44px;
   display: flex;
   justify-content: space-between;
+}
+
+@media (min-width: 376px) and (max-width: 1024px) {
+  .step-descriptions {
+    top: 190px;
+    height: 56px;
+    justify-content: center;
+    gap: 80px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .step-descriptions {
+    top: 144px;
+    height: 44px;
+    justify-content: space-between;
+    gap: 0;
+  }
 }
 
 .step-description {
@@ -955,6 +1273,27 @@ const hideSuccessNotification = () => {
   height: 208px;
 }
 
+@media (min-width: 376px) and (max-width: 1024px) {
+  .web-link-section {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 260px;
+    margin-top: 80px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .web-link-section {
+    position: absolute;
+    left: 0;
+    top: 202px;
+    width: 347px;
+    height: 208px;
+  }
+}
+
 .web-link-background {
   width: 347px;
   height: 206px;
@@ -964,6 +1303,22 @@ const hideSuccessNotification = () => {
   position: absolute;
   left: 0;
   top: 2px;
+}
+
+@media (min-width: 376px) and (max-width: 1024px) {
+  .web-link-background {
+    width: 100%;
+    height: 258px;
+    top: 0;
+  }
+}
+
+@media (min-width: 1025px) {
+  .web-link-background {
+    width: 347px;
+    height: 206px;
+    top: 2px;
+  }
 }
 
 .web-link-content {
@@ -989,6 +1344,24 @@ const hideSuccessNotification = () => {
   height: 30px;
 }
 
+@media (min-width: 376px) and (max-width: 1024px) {
+  .web-link-title {
+    font-size: 32px;
+    line-height: 38px;
+    width: auto;
+    height: auto;
+  }
+}
+
+@media (min-width: 1025px) {
+  .web-link-title {
+    font-size: 26px;
+    line-height: 30px;
+    width: 244px;
+    height: 30px;
+  }
+}
+
 .web-link-description {
   color: #FFF;
   font-family: Montserrat;
@@ -998,6 +1371,24 @@ const hideSuccessNotification = () => {
   margin: 0;
   width: 204px;
   height: 48px;
+}
+
+@media (min-width: 376px) and (max-width: 1024px) {
+  .web-link-description {
+    font-size: 20px;
+    line-height: 28px;
+    width: auto;
+    height: auto;
+  }
+}
+
+@media (min-width: 1025px) {
+  .web-link-description {
+    font-size: 16px;
+    line-height: 24px;
+    width: 204px;
+    height: 48px;
+  }
 }
 
 /* Copy Link Container */
@@ -1011,6 +1402,21 @@ const hideSuccessNotification = () => {
   display: flex;
   align-items: center;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 376px) and (max-width: 1024px) {
+  .copy-link-container {
+    width: calc(100% - 40px);
+    height: 60px;
+    max-width: 500px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .copy-link-container {
+    width: 307px;
+    height: 52px;
+  }
 }
 
 .copy-link-copied-state {
@@ -1033,6 +1439,24 @@ const hideSuccessNotification = () => {
   text-decoration: underline;
   width: 182px;
   height: 24px;
+}
+
+@media (min-width: 376px) and (max-width: 1024px) {
+  .copy-link-text {
+    font-size: 20px;
+    line-height: 28px;
+    width: auto;
+    height: auto;
+  }
+}
+
+@media (min-width: 1025px) {
+  .copy-link-text {
+    font-size: 17px;
+    line-height: 24px;
+    width: 182px;
+    height: 24px;
+  }
 }
 
 .copy-link-copied-full {
@@ -1124,6 +1548,20 @@ const hideSuccessNotification = () => {
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
+}
+
+@media (min-width: 376px) and (max-width: 1024px) {
+  .copy-button {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .copy-button {
+    width: 50px;
+    height: 52px;
+  }
 }
 
 .copy-button:hover {
