@@ -134,44 +134,44 @@
                 </svg>
               </div>
               
-              <span class="text-sm font-medium text-dbd-gray">Date & Time</span>
+              <span class="text-sm lg:text-xl xl:text-2xl font-medium text-dbd-gray">Date & Time</span>
             </div>
-            
-            <div class="flex items-center gap-2">
-              <span class="text-sm font-medium text-dbd-dark">{{ transaction.date }}</span>
-              <span class="text-sm font-medium text-dbd-gray">{{ transaction.time }}</span>
+
+            <div class="flex items-center gap-2 lg:gap-4 xl:gap-6">
+              <span class="text-sm lg:text-xl xl:text-2xl font-medium text-dbd-dark">{{ transaction.date }}</span>
+              <span class="text-sm lg:text-xl xl:text-2xl font-medium text-dbd-gray">{{ transaction.time }}</span>
             </div>
           </div>
 
           <!-- Type & Amount Row -->
-          <div class="flex justify-between items-center mb-4">
-            <div class="flex items-center gap-2">
-              <span class="text-base font-semibold text-dbd-gray">Type & Amount</span>
+          <div class="flex justify-between items-center mb-4 lg:mb-6 xl:mb-8">
+            <div class="flex items-center gap-2 lg:gap-4 xl:gap-6">
+              <span class="text-base lg:text-2xl xl:text-3xl font-semibold text-dbd-gray">Type & Amount</span>
             </div>
-            
-            <div class="flex items-center gap-2">
-              <div class="flex items-center gap-1">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+            <div class="flex items-center gap-2 lg:gap-4 xl:gap-6">
+              <div class="flex items-center gap-1 lg:gap-2 xl:gap-3">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="lg:w-6 lg:h-6 xl:w-8 xl:h-8">
                   <path d="M13.7564 1.77783H4.78285C4.38779 1.77783 4.1056 2.06002 4.1056 2.45508V5.22051H1.56592C1.17086 5.27695 0.888672 5.55914 0.888672 5.9542C0.888672 6.34926 1.17086 6.63145 1.56592 6.63145H4.1056V12.9524C4.1056 13.3475 4.38779 13.6297 4.78285 13.6297C5.17791 13.6297 5.4601 13.3475 5.4601 12.9524V10.0177H8.33841C8.73347 10.0177 9.01566 9.7355 9.01566 9.34044C9.01566 8.94538 8.73347 8.66319 8.33841 8.66319H5.4601V6.57501H10.9345C11.3296 6.57501 11.6118 6.29282 11.6118 5.89776C11.6118 5.5027 11.3296 5.22051 10.9345 5.22051H5.4601V3.13233H13.7C14.095 3.13233 14.3772 2.85014 14.3772 2.45508C14.3772 2.06002 14.1515 1.77783 13.7564 1.77783Z" fill="#4B4D50"/>
                 </svg>
-                <span class="text-base font-medium text-dbd-gray">UAE</span>
+                <span class="text-base lg:text-2xl xl:text-3xl font-medium text-dbd-gray">UAE</span>
               </div>
-              <div class="w-px h-4 bg-gray-600"></div>
-              <span class="text-base font-medium text-dbd-gray">{{ transaction.amount.toLocaleString() }}</span>
+              <div class="w-px h-4 lg:h-6 xl:h-8 bg-gray-600"></div>
+              <span class="text-base lg:text-2xl xl:text-3xl font-medium text-dbd-gray">{{ transaction.amount.toLocaleString() }}</span>
             </div>
           </div>
 
           <!-- Purchased Row -->
           <div class="flex justify-between items-center">
-            <div class="flex items-center gap-2">
-              <span class="text-base font-semibold text-dbd-gray">Purchased</span>
+            <div class="flex items-center gap-2 lg:gap-4 xl:gap-6">
+              <span class="text-base lg:text-2xl xl:text-3xl font-semibold text-dbd-gray">Purchased</span>
             </div>
-            
-            <div class="flex items-center gap-1">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+            <div class="flex items-center gap-1 lg:gap-2 xl:gap-3">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="lg:w-8 lg:h-8 xl:w-12 xl:h-12">
                 <path d="M11.8525 24C11.5497 24 11.2994 23.9056 11.1014 23.7167C10.9035 23.5278 10.8045 23.2889 10.8045 23V21.2C9.68657 21.0222 8.73169 20.6444 7.93984 20.0667C7.14799 19.4889 6.53082 18.7556 6.08831 17.8667C5.97186 17.6222 5.97186 17.3667 6.08831 17.1C6.20476 16.8333 6.40272 16.6444 6.6822 16.5333C6.93839 16.4222 7.20039 16.4222 7.46823 16.5333C7.73606 16.6444 7.93984 16.8222 8.07958 17.0667C8.49879 17.8222 9.0461 18.3889 9.7215 18.7667C10.3969 19.1444 11.1771 19.3333 12.0621 19.3333C13.18 19.3333 14.1 19.0667 14.8219 18.5333C15.5439 18 15.9049 17.2667 15.9049 16.3333C15.9049 15.3556 15.5847 14.6 14.9442 14.0667C14.3037 13.5333 13.0985 12.9889 11.3285 12.4333C9.65163 11.9222 8.39981 11.2444 7.57303 10.4C6.74625 9.55556 6.33285 8.5 6.33285 7.23333C6.33285 6.01111 6.74625 4.98889 7.57303 4.16667C8.39981 3.34444 9.47696 2.87778 10.8045 2.76667V1C10.8045 0.711111 10.9035 0.472222 11.1014 0.283333C11.2994 0.0944446 11.5497 0 11.8525 0C12.1553 0 12.4056 0.0944446 12.6036 0.283333C12.8016 0.472222 12.9005 0.711111 12.9005 1V2.76667C13.739 2.87778 14.4901 3.12222 15.1538 3.5C15.8176 3.87778 16.3707 4.36667 16.8132 4.96667C16.9762 5.18889 17.0112 5.42778 16.918 5.68333C16.8248 5.93889 16.6385 6.12222 16.3591 6.23333C16.1029 6.34444 15.835 6.35556 15.5556 6.26667C15.2761 6.17778 15.0432 6.01111 14.8569 5.76667C14.5308 5.36667 14.1291 5.07222 13.6516 4.88333C13.1742 4.69444 12.5978 4.6 11.9224 4.6C10.851 4.6 10.001 4.83333 9.37216 5.3C8.74333 5.76667 8.42892 6.4 8.42892 7.2C8.42892 8.04444 8.77827 8.72778 9.47696 9.25C10.1756 9.77222 11.4682 10.3111 13.3547 10.8667C14.9384 11.3333 16.1087 12.0056 16.8656 12.8833C17.6225 13.7611 18.001 14.8667 18.001 16.2C18.001 17.6 17.5701 18.7278 16.7084 19.5833C15.8467 20.4389 14.5774 20.9889 12.9005 21.2333V23C12.9005 23.2889 12.8016 23.5278 12.6036 23.7167C12.4056 23.9056 12.1553 24 11.8525 24Z" fill="#2019CE"/>
               </svg>
-              <span class="text-base font-medium text-dbd-gray">{{ formatCurrency(transaction.purchased) }}</span>
+              <span class="text-base lg:text-2xl xl:text-3xl font-medium text-dbd-gray">{{ formatCurrency(transaction.purchased) }}</span>
             </div>
           </div>
         </div>
