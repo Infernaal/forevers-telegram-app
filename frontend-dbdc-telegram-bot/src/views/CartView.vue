@@ -1,21 +1,21 @@
 <template>
-  <div class="cart-view w-full h-full bg-gray-100 min-h-screen flex flex-col font-montserrat" style="background: #f3f4f6 !important;">
+  <div class="cart-view w-full max-w-md mx-auto bg-gray-100 min-h-screen flex flex-col font-montserrat" style="background: #f3f4f6 !important;">
     <!-- Content Container -->
     <div class="content-container bg-gray-100 flex-1 flex flex-col relative">
       <!-- Scrollable Cart Items Area -->
-      <div class="flex-1 overflow-y-auto px-4 pt-4 pb-56" v-if="cartItemsCount > 0">
-        <div class="space-y-3">
+      <div class="flex-1 overflow-y-auto px-3.5 pt-4 pb-56" v-if="cartItemsCount > 0">
+        <div class="space-y-2">
           <div
             v-for="item in cartItems"
             :key="item.id"
-            class="bg-white rounded-2xl p-4 border border-dbd-primary/20 relative cart-item"
+            class="bg-white rounded-2xl p-3 border border-dbd-primary/20 relative cart-item"
           >
             <!-- Country Flag and Code Header -->
-            <div class="flex items-center gap-2 mb-3 h-6">
+            <div class="flex items-center gap-1 mb-3 h-6">
               <CountryFlag :country="item.code" class="w-6 h-6" />
-              <div class="flex items-center gap-2">
+              <div class="flex items-center gap-1">
                 <!-- F Icon -->
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-dbd-dark w-5 h-5">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-dbd-dark">
                   <path d="M17.2636 4H6.61925C6.15063 4 5.8159 4.28571 5.8159 4.68571V7.48571H2.80335C2.33473 7.54286 2 7.82857 2 8.22857C2 8.62857 2.33473 8.91429 2.80335 8.91429H5.8159V15.3143C5.8159 15.7143 6.15063 16 6.61925 16C7.08787 16 7.42259 15.7143 7.42259 15.3143V12.3429H10.8368C11.3054 12.3429 11.6402 12.0571 11.6402 11.6571C11.6402 11.2571 11.3054 10.9714 10.8368 10.9714H7.42259V8.85714H13.9163C14.3849 8.85714 14.7197 8.57143 14.7197 8.17143C14.7197 7.77143 14.3849 7.48571 13.9163 7.48571H7.42259V5.37143H17.1967C17.6653 5.37143 18 5.08571 18 4.68571C18 4.28571 17.7322 4 17.2636 4Z" fill="currentColor"/>
                 </svg>
                 <span class="text-dbd-dark font-semibold text-lg leading-6">{{ item.code }}</span>
@@ -28,10 +28,10 @@
                 <div class="text-dbd-gray text-base font-medium leading-6 mb-1">Amount</div>
                 <div class="text-dbd-dark font-semibold text-lg leading-6">{{ item.foreversAmount.toLocaleString() }}</div>
               </div>
-
+              
               <!-- Vertical Divider -->
               <div class="w-px h-14 bg-gray-300"></div>
-
+              
               <div class="flex-1">
                 <div class="text-dbd-gray text-base font-medium leading-6 mb-0.5">Price</div>
                 <div class="text-dbd-gray text-base font-medium leading-6">
@@ -42,7 +42,7 @@
             </div>
 
             <!-- Purchase Amount -->
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-1">
               <span class="text-dbd-gray text-base font-medium leading-6">Purchase to pay:</span>
               <span class="text-dbd-primary font-semibold text-lg leading-6">${{ (item.foreversAmount * item.usdRate).toLocaleString() }}</span>
             </div>
@@ -62,7 +62,7 @@
       </div>
 
       <!-- Empty Cart (takes full space when empty) -->
-      <div v-else class="flex-1 flex items-center justify-center px-4 pt-4">
+      <div v-else class="flex-1 flex items-center justify-center px-3.5 pt-4">
         <div class="text-center">
           <div class="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center mb-4 mx-auto">
             <svg width="20" height="22" viewBox="0 0 18 20" class="text-gray-400">
@@ -249,25 +249,11 @@ const confirmDelete = () => {
 .fixed-bottom-section {
   position: fixed;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
   z-index: 10;
-  width: 100%;
-}
-
-/* Match parent container max-width to prevent white bars */
-@media (max-width: 639px) {
-  .fixed-bottom-section {
-    max-width: 100vw;
-    left: 0;
-    transform: none;
-  }
-}
-
-@media (min-width: 640px) {
-  .fixed-bottom-section {
-    max-width: 480px;
-  }
+  max-width: 375px;
+  margin: 0 auto;
 }
 
 .fixed-bottom-section::before {
@@ -303,7 +289,15 @@ const confirmDelete = () => {
   box-shadow: 0 4px 12px rgba(32, 25, 206, 0.3);
 }
 
-/* Modal styling */
+/* Transaction Details Modal Styles (if used in cart context) */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
 .modal-title {
   font-size: 1rem;
   font-weight: 500;
@@ -328,12 +322,172 @@ const confirmDelete = () => {
   background-color: #f3f4f6;
 }
 
-.modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem;
-  border-bottom: 1px solid #e5e7eb;
+/* Mobile optimizations for Telegram mini app */
+@media (max-width: 375px) {
+  .cart-view {
+    max-width: 100%;
+  }
+
+  .overflow-y-auto {
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-bottom: 220px; /* Space for fixed bottom */
+  }
+
+  .fixed-bottom-section {
+    max-width: 100%;
+  }
+
+  /* Bottom section for mobile */
+  .px-3-5 {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .cart-item {
+    padding: 12px;
+  }
+
+  /* Mobile button optimizations */
+  .h-12 {
+    height: 44px !important;
+  }
+
+  .min-w-24 {
+    min-width: 90px !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .flex-1 {
+    font-size: 16px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  /* Smaller text for mobile */
+  .text-xl {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .text-lg {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  /* Modal responsive styles for mobile */
+  .modal-title {
+    font-size: 0.875rem;
+  }
+
+  .modal-close-btn {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+}
+
+@media (min-width: 376px) and (max-width: 430px) {
+  .cart-view {
+    max-width: 100%;
+  }
+
+  .overflow-y-auto {
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-bottom: 220px; /* Space for fixed bottom */
+  }
+
+  .fixed-bottom-section {
+    max-width: 430px;
+  }
+
+  /* Bottom section padding */
+  .px-3-5 {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  .cart-item {
+    padding: 12px;
+  }
+}
+
+/* Tablets and larger phones */
+@media (min-width: 431px) and (max-width: 768px) {
+  .cart-view {
+    max-width: 420px;
+    background: #f3f4f6 !important;
+  }
+
+  body {
+    background: #f3f4f6 !important;
+  }
+
+  .overflow-y-auto {
+    padding-bottom: 220px; /* Space for fixed bottom */
+  }
+
+  .fixed-bottom-section {
+    max-width: 420px;
+  }
+
+  .h-12 {
+    height: 52px !important;
+  }
+
+  .min-w-24 {
+    min-width: 120px !important;
+  }
+
+  .text-lg {
+    font-size: 18px !important;
+  }
+
+  /* Modal styles for tablets */
+  .modal-title {
+    font-size: 1.125rem;
+  }
+
+  .modal-close-btn {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+/* Desktop and large tablets */
+@media (min-width: 769px) {
+  .cart-view {
+    max-width: 480px;
+    background: #f3f4f6 !important;
+  }
+
+  body {
+    background: #f3f4f6 !important;
+  }
+
+  .overflow-y-auto {
+    padding-bottom: 220px; /* Space for fixed bottom */
+  }
+
+  .fixed-bottom-section {
+    max-width: 480px;
+  }
+
+  /* Modal styles for desktop */
+  .modal-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .modal-close-btn {
+    width: 3.25rem;
+    height: 3.25rem;
+  }
+
+  .modal-header {
+    padding: 1.5rem;
+  }
 }
 
 /* Support for safe areas on iOS - handled by BottomNavigation */

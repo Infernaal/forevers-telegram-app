@@ -5,15 +5,6 @@ export default {
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   theme: {
-    screens: {
-      'xs': '320px',   // small mobile
-      'sm': '375px',   // regular mobile
-      'ml': '430px',   // large mobile / small tablet
-      'md': '640px',   // tablet
-      'lg': '768px',   // large tablet / laptop
-      'xl': '1024px',  // desktop
-      '2xl': '1280px', // large desktop
-    },
     extend: {
       colors: {
         'dbd-primary': '#2019CE',
