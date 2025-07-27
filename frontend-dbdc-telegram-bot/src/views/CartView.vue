@@ -252,8 +252,27 @@ const confirmDelete = () => {
   left: 0;
   right: 0;
   z-index: 10;
-  max-width: 375px;
   margin: 0 auto;
+}
+
+/* Responsive max-widths handled by Tailwind classes in template */
+@media (max-width: 320px) {
+  .fixed-bottom-section { max-width: 100%; }
+}
+@media (min-width: 321px) and (max-width: 375px) {
+  .fixed-bottom-section { max-width: 100%; }
+}
+@media (min-width: 376px) and (max-width: 430px) {
+  .fixed-bottom-section { max-width: 430px; }
+}
+@media (min-width: 431px) and (max-width: 640px) {
+  .fixed-bottom-section { max-width: 500px; }
+}
+@media (min-width: 641px) and (max-width: 768px) {
+  .fixed-bottom-section { max-width: 600px; }
+}
+@media (min-width: 769px) {
+  .fixed-bottom-section { max-width: 700px; }
 }
 
 .fixed-bottom-section::before {
