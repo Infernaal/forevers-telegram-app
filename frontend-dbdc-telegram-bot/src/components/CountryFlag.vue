@@ -15,7 +15,7 @@
 
     <!-- Spain Flag -->
     <svg v-else-if="country.toLowerCase() === 'spain' || country.toLowerCase() === 'es'" 
-         width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+         width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="12" fill="#D4D4D4"/>
       <path d="M0.75 12.0026C0.75 13.3787 0.997544 14.6969 1.44974 15.9156L12 16.8939L22.5503 15.9156C23.0025 14.6969 23.25 13.3787 23.25 12.0026C23.25 10.6265 23.0025 9.30833 22.5503 8.08959L12 7.11133L1.44974 8.08959C0.997544 9.30833 0.75 10.6265 0.75 12.0026Z" fill="#FFDA44"/>
       <path d="M22.5488 8.08698C20.9592 3.80301 16.8356 0.75 11.9985 0.75C7.1614 0.75 3.03779 3.80301 1.44824 8.08698H22.5488Z" fill="#D80027"/>
@@ -24,7 +24,7 @@
 
     <!-- India Flag -->
     <svg v-else-if="country.toLowerCase() === 'india' || country.toLowerCase() === 'in'" 
-         width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+         width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="12" fill="#D4D4D4"/>
       <path d="M12 23.25C18.2132 23.25 23.25 18.2132 23.25 12C23.25 5.7868 18.2132 0.75 12 0.75C5.7868 0.75 0.75 5.7868 0.75 12C0.75 18.2132 5.7868 23.25 12 23.25Z" fill="#F0F0F0"/>
       <path d="M11.999 0.75C7.53857 0.75 3.68457 3.34717 1.86523 7.10889H22.1328C20.3135 3.34717 16.4595 0.75 11.999 0.75Z" fill="#FF9811"/>
@@ -33,7 +33,7 @@
 
     <!-- Japan Flag -->
     <svg v-else-if="country.toLowerCase() === 'japan' || country.toLowerCase() === 'jp'" 
-         width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+         width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="12" fill="#D4D4D4"/>
       <path d="M12 23.25C18.2132 23.25 23.25 18.2132 23.25 12C23.25 5.7868 18.2132 0.75 12 0.75C5.7868 0.75 0.75 5.7868 0.75 12C0.75 18.2132 5.7868 23.25 12 23.25Z" fill="#F0F0F0"/>
       <path d="M12.0026 16.8939C14.704 16.8939 16.8939 14.704 16.8939 12.0026C16.8939 9.30123 14.704 7.11133 12.0026 7.11133C9.30123 7.11133 7.11133 9.30123 7.11133 12.0026C7.11133 14.704 9.30123 16.8939 12.0026 16.8939Z" fill="#D80027"/>
@@ -41,7 +41,7 @@
 
     <!-- Ireland Flag -->
     <svg v-else-if="country.toLowerCase() === 'ireland' || country.toLowerCase() === 'ie'" 
-         width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+         width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="12" fill="#D4D4D4"/>
       <path d="M12 23.25C18.2132 23.25 23.25 18.2132 23.25 12C23.25 5.7868 18.2132 0.75 12 0.75C5.7868 0.75 0.75 5.7868 0.75 12C0.75 18.2132 5.7868 23.25 12 23.25Z" fill="#F0F0F0"/>
       <path d="M23.2481 11.9975C23.2481 7.16042 20.1951 3.03677 15.9111 1.44727V22.5478C20.1951 20.9582 23.2481 16.8346 23.2481 11.9975Z" fill="#FF9811"/>
@@ -50,7 +50,7 @@
 
     <!-- New Zealand Flag -->
     <svg v-else-if="country.toLowerCase() === 'new zealand' || country.toLowerCase() === 'nz'" 
-         width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+         width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="12" fill="#D4D4D4"/>
       <path d="M23.25 12C23.25 18.2132 18.2132 23.25 12 23.25C5.78684 23.25 0.75 18.2132 0.75 12C0.75 12.0027 12 0.75123 12 0.75C18.2132 0.75 23.25 5.78684 23.25 12Z" fill="#0052B4"/>
       <path d="M12 6.61956C12 4.64004 12 3.34299 12 0.75H11.9981C5.78578 0.751055 0.75 5.78741 0.75 12H6.61956V8.69483L9.92477 12H11.9699C11.98 11.99 11.99 11.98 12 11.9699C12 11.212 12 10.5357 12 9.92481L8.69479 6.61956H12Z" fill="#F0F0F0"/>
@@ -64,7 +64,7 @@
 
     <!-- Australia Flag -->
     <svg v-else-if="country.toLowerCase() === 'australia' || country.toLowerCase() === 'au'" 
-         width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+         width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="12" fill="#D4D4D4"/>
       <path d="M23.25 12C23.25 18.2132 18.2132 23.25 12 23.25C5.78684 23.25 0.75 18.2132 0.75 12C0.75 12.0026 12 0.751274 12 0.75C18.2132 0.75 23.25 5.78684 23.25 12Z" fill="#0052B4"/>
       <path d="M12 6.61955C12 4.64004 12 3.34291 12 0.75H11.9981C5.78578 0.751011 0.75 5.78736 0.75 12H6.61956V8.69474L9.92477 12H11.9699C11.98 11.9899 11.99 11.9799 12 11.9699C12 11.2119 12 10.5357 12 9.92481L8.69479 6.61955H12Z" fill="#F0F0F0"/>
@@ -80,7 +80,7 @@
 
     <!-- Germany Flag -->
     <svg v-else-if="country.toLowerCase() === 'germany' || country.toLowerCase() === 'de'" 
-         width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+         width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="12" fill="#D4D4D4"/>
       <path d="M1.44727 15.9118C3.03681 20.1958 7.16042 23.2488 11.9975 23.2488C16.8346 23.2488 20.9582 20.1958 22.5478 15.9118L11.9975 14.9336L1.44727 15.9118Z" fill="#FFDA44"/>
       <path d="M11.9975 0.75C7.16042 0.75 3.03681 3.80297 1.44727 8.08698L11.9975 9.0652L22.5478 8.08693C20.9582 3.80297 16.8346 0.75 11.9975 0.75Z" fill="black"/>
@@ -89,7 +89,7 @@
 
     <!-- UAE Flag -->
     <svg v-else-if="country.toLowerCase() === 'uae' || country.toLowerCase() === 'ae'" 
-         width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+         width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="12" fill="#D4D4D4"/>
       <path d="M12 23.25C18.2132 23.25 23.25 18.2132 23.25 12C23.25 5.7868 18.2132 0.75 12 0.75C5.7868 0.75 0.75 5.7868 0.75 12C0.75 18.2132 5.7868 23.25 12 23.25Z" fill="#F0F0F0"/>
       <path d="M7.11133 15.9111L8.08959 22.5485C9.30829 23.0007 10.6265 23.2481 12.0026 23.2481C16.8397 23.2481 20.9633 20.1951 22.5528 15.9111H7.11133Z" fill="black"/>
@@ -99,7 +99,7 @@
 
     <!-- Italy Flag -->
     <svg v-else-if="country.toLowerCase() === 'italy' || country.toLowerCase() === 'it'" 
-         width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+         width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="12" fill="#D4D4D4"/>
       <path d="M12 23.25C18.2132 23.25 23.25 18.2132 23.25 12C23.25 5.7868 18.2132 0.75 12 0.75C5.7868 0.75 0.75 5.7868 0.75 12C0.75 18.2132 5.7868 23.25 12 23.25Z" fill="#F0F0F0"/>
       <path d="M23.2481 11.9975C23.2481 7.16042 20.1951 3.03681 15.9111 1.44727V22.5478C20.1951 20.9582 23.2481 16.8346 23.2481 11.9975Z" fill="#D80027"/>
@@ -108,7 +108,7 @@
 
     <!-- Norway Flag -->
     <svg v-else-if="country.toLowerCase() === 'norway' || country.toLowerCase() === 'no'" 
-         width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+         width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="12" fill="#D4D4D4"/>
       <path d="M12 23.25C18.2132 23.25 23.25 18.2132 23.25 12C23.25 5.7868 18.2132 0.75 12 0.75C5.7868 0.75 0.75 5.7868 0.75 12C0.75 18.2132 5.7868 23.25 12 23.25Z" fill="#F0F0F0"/>
       <path d="M1.13965 14.9336C1.79057 17.3488 3.22516 19.4421 5.15427 20.9243V14.9336H1.13965Z" fill="#D80027"/>
@@ -120,7 +120,7 @@
 
     <!-- Malta Flag -->
     <svg v-else-if="country.toLowerCase() === 'malta' || country.toLowerCase() === 'mt'" 
-         width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+         width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="12" fill="#D4D4D4"/>
       <path d="M12 23.25C18.2132 23.25 23.25 18.2132 23.25 12C23.25 5.7868 18.2132 0.75 12 0.75C5.7868 0.75 0.75 5.7868 0.75 12C0.75 18.2132 5.7868 23.25 12 23.25Z" fill="#F0F0F0"/>
       <path d="M12 0.75C18.2132 0.75 23.25 5.78684 23.25 12C23.25 18.2132 18.2132 23.25 12 23.25" fill="#D80027"/>
@@ -129,7 +129,7 @@
 
     <!-- Singapore Flag -->
     <svg v-else-if="country.toLowerCase() === 'singapore' || country.toLowerCase() === 'sg'" 
-         width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+         width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="12" fill="#D4D4D4"/>
       <path d="M12 23.25C18.2132 23.25 23.25 18.2132 23.25 12C23.25 5.7868 18.2132 0.75 12 0.75C5.7868 0.75 0.75 5.7868 0.75 12C0.75 18.2132 5.7868 23.25 12 23.25Z" fill="#F0F0F0"/>
       <path d="M0.75 12C0.75 5.78684 5.78684 0.75 12 0.75C18.2132 0.75 23.25 5.78684 23.25 12" fill="#D80027"/>
@@ -143,7 +143,7 @@
 
     <!-- China Flag -->
     <svg v-else-if="country.toLowerCase() === 'china' || country.toLowerCase() === 'cn'" 
-         width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+         width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="12" fill="#D4D4D4"/>
       <path d="M12 23.25C18.2132 23.25 23.25 18.2132 23.25 12C23.25 5.7868 18.2132 0.75 12 0.75C5.7868 0.75 0.75 5.7868 0.75 12C0.75 18.2132 5.7868 23.25 12 23.25Z" fill="#D80027"/>
       <path d="M6.90625 7.59473L7.87744 10.583H11.0195L8.47949 12.4331L9.45068 15.4214L6.90625 13.5757L4.36182 15.4214L5.3374 12.4331L2.79297 10.583H5.93506L6.90625 7.59473Z" fill="#FFDA44"/>
@@ -155,7 +155,7 @@
 
     <!-- Kazakhstan Flag -->
     <svg v-else-if="country.toLowerCase() === 'kz' || country.toLowerCase() === 'kazakhstan'" 
-         width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+         width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="12" fill="#00AFCA"/>
       <circle cx="12" cy="12" r="6" fill="#FFD700"/>
       <path d="M12 8L13 11H16L13.5 13L14.5 16L12 14L9.5 16L10.5 13L8 11H11L12 8Z" fill="#00AFCA"/>
@@ -163,7 +163,7 @@
 
     <!-- Poland Flag -->
     <svg v-else-if="country.toLowerCase() === 'poland' || country.toLowerCase() === 'pl'" 
-         width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+         width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="12" fill="#D4D4D4"/>
       <path d="M12.0001 23.294C18.2376 23.294 23.2942 18.2375 23.2942 11.9999C23.2942 5.76236 18.2376 0.705811 12.0001 0.705811C5.76248 0.705811 0.705933 5.76236 0.705933 11.9999C0.705933 18.2375 5.76248 23.294 12.0001 23.294Z" fill="#DA1E34"/>
       <path d="M0.705933 11.9999C0.705933 5.7624 5.76252 0.705811 12.0001 0.705811C18.2376 0.705811 23.2942 5.7624 23.2942 11.9999" fill="white"/>
@@ -171,7 +171,7 @@
 
     <!-- Ukraine Flag -->
     <svg v-else-if="country.toLowerCase() === 'ua' || country.toLowerCase() === 'ukraine'" 
-         width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+         width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="12" fill="#D4D4D4"/>
       <path d="M12.0002 23.2943C18.2377 23.2943 23.2943 18.2377 23.2943 12.0002C23.2943 5.7626 18.2377 0.706055 12.0002 0.706055C5.7626 0.706055 0.706055 5.7626 0.706055 12.0002C0.706055 18.2377 5.7626 23.2943 12.0002 23.2943Z" fill="#FFDA44"/>
       <path d="M0.706055 12.0002C0.706055 5.76264 5.76264 0.706055 12.0002 0.706055C18.2377 0.706055 23.2943 5.76264 23.2943 12.0002" fill="#338AF3"/>
@@ -179,7 +179,7 @@
 
     <!-- Canada Flag -->
     <svg v-else-if="country.toLowerCase() === 'canada' || country.toLowerCase() === 'ca'" 
-         width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+         width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="12" fill="#D4D4D4"/>
       <path d="M12 23.25C18.2132 23.25 23.25 18.2132 23.25 12C23.25 5.7868 18.2132 0.75 12 0.75C5.7868 0.75 0.75 5.7868 0.75 12C0.75 18.2132 5.7868 23.25 12 23.25Z" fill="#F0F0F0"/>
       <path d="M23.2474 11.9989C23.2474 7.53875 20.6518 3.68492 16.8887 1.86523V22.1326C20.6518 20.3129 23.2474 16.4591 23.2474 11.9989Z" fill="#D80027"/>
@@ -189,7 +189,7 @@
 
     <!-- United Kingdom Flag -->
     <svg v-else-if="country.toLowerCase() === 'united kingdom' || country.toLowerCase() === 'uk' || country.toLowerCase() === 'gb'" 
-         width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+         width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="12" fill="#D4D4D4"/>
       <path d="M12.0002 23.2943C18.2377 23.2943 23.2943 18.2377 23.2943 12.0002C23.2943 5.7626 18.2377 0.706055 12.0002 0.706055C5.7626 0.706055 0.706055 5.7626 0.706055 12.0002C0.706055 18.2377 5.7626 23.2943 12.0002 23.2943Z" fill="#F0F0F0"/>
       <path d="M3.04036 5.12402C2.1532 6.27827 1.48424 7.60864 1.09473 9.05389H6.97023L3.04036 5.12402Z" fill="#0052B4"/>
@@ -209,7 +209,7 @@
 
     <!-- USA Flag -->
     <svg v-else-if="country.toLowerCase() === 'usa' || country.toLowerCase() === 'us' || country.toLowerCase() === 'united states'" 
-         width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+         width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="12" fill="#D4D4D4"/>
       <path d="M12.0002 23.2943C18.2377 23.2943 23.2943 18.2377 23.2943 12.0002C23.2943 5.7626 18.2377 0.706055 12.0002 0.706055C5.7626 0.706055 0.706055 5.7626 0.706055 12.0002C0.706055 18.2377 5.7626 23.2943 12.0002 23.2943Z" fill="#F0F0F0"/>
       <path d="M11.5098 12.001H23.2949C23.2949 10.9816 23.159 9.99408 22.9058 9.05469H11.5098V12.001Z" fill="#D80027"/>
@@ -221,7 +221,7 @@
 
     <!-- Default flag if country not recognized -->
     <svg v-else 
-         width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+         width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="12" fill="#E5E7EB"/>
       <path d="M8 7H16V9H8V7ZM6 11H18V13H6V11ZM8 15H16V17H8V15Z" fill="#9CA3AF"/>
     </svg>
