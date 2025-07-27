@@ -640,7 +640,8 @@ const hideSuccessNotification = () => {
     width: 520px;
     left: 32px;
     gap: 32px;
-    height: 650px;
+    height: auto;
+    min-height: 650px;
     margin-top: 80px;
   }
 }
@@ -650,7 +651,8 @@ const hideSuccessNotification = () => {
     width: 700px;
     left: 48px;
     gap: 48px;
-    height: 800px;
+    height: auto;
+    min-height: 800px;
     margin-top: 100px;
   }
 }
@@ -659,15 +661,15 @@ const hideSuccessNotification = () => {
 .qr-section {
   width: 347px;
   height: 396px;
-  position: absolute;
-  left: 0;
-  top: 0;
+  position: relative;
+  margin-bottom: 20px;
 }
 
 @media (min-width: 431px) and (max-width: 768px) {
   .qr-section {
     width: 520px;
     height: 500px;
+    margin-bottom: 32px;
   }
 }
 
@@ -675,6 +677,7 @@ const hideSuccessNotification = () => {
   .qr-section {
     width: 700px;
     height: 600px;
+    margin-bottom: 48px;
   }
 }
 
@@ -857,17 +860,21 @@ const hideSuccessNotification = () => {
 
 @media (min-width: 431px) and (max-width: 768px) {
   .terms-checkbox-wrapper {
+    position: relative;
     left: 35px;
-    top: 340px;
+    top: auto;
     transform: scale(1.2);
+    margin: 20px 0;
   }
 }
 
 @media (min-width: 769px) {
   .terms-checkbox-wrapper {
+    position: relative;
     left: 50px;
-    top: 400px;
+    top: auto;
     transform: scale(1.5);
+    margin: 30px 0;
   }
 }
 
@@ -881,15 +888,19 @@ const hideSuccessNotification = () => {
 
 @media (min-width: 431px) and (max-width: 768px) {
   .share-button-container {
+    position: relative;
     left: 35px;
-    top: 410px;
+    top: auto;
+    margin: 20px 0;
   }
 }
 
 @media (min-width: 769px) {
   .share-button-container {
+    position: relative;
     left: 50px;
-    top: 480px;
+    top: auto;
+    margin: 30px 0;
   }
 }
 
@@ -998,26 +1009,29 @@ const hideSuccessNotification = () => {
 .how-to-section {
   position: relative;
   left: 14px;
-  top: -60px;
+  top: 0;
   width: 347px;
   height: 410px;
+  margin-top: 40px;
 }
 
 @media (min-width: 431px) and (max-width: 768px) {
   .how-to-section {
     left: 32px;
-    top: -80px;
+    top: 0;
     width: 520px;
     height: 520px;
+    margin-top: 60px;
   }
 }
 
 @media (min-width: 769px) {
   .how-to-section {
     left: 48px;
-    top: -100px;
+    top: 0;
     width: 700px;
     height: 650px;
+    margin-top: 80px;
   }
 }
 
