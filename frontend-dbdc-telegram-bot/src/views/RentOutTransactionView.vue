@@ -628,9 +628,84 @@ onUnmounted(() => {
   }
 }
 
+/* Desktop styles */
+@media (min-width: 769px) {
+  .rent-out-transaction-view {
+    max-width: 100%;
+  }
+
+  .transaction-card {
+    padding: 32px;
+  }
+
+  .empty-state h2 {
+    font-size: 3rem;
+    line-height: 3.5rem;
+  }
+
+  .empty-state p {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+
+  /* Larger modal for desktop */
+  .transaction-modal {
+    max-width: 600px;
+  }
+
+  .transaction-modal .max-h-96 {
+    max-height: 500px;
+  }
+
+  .transaction-modal .p-4 {
+    padding: 2rem;
+  }
+
+  /* Larger export dropdown */
+  .export-dropdown-container {
+    width: 200px;
+    padding: 16px;
+  }
+
+  .export-option {
+    width: 168px;
+    height: 60px;
+    gap: 16px;
+    padding: 8px;
+  }
+
+  .export-option-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .export-option-text {
+    font-size: 18px;
+  }
+}
+
 @media (min-width: 431px) and (max-width: 768px) {
   .rent-out-transaction-view {
-    max-width: 400px;
+    max-width: 100%;
+  }
+
+  .transaction-card {
+    padding: 20px;
+  }
+
+  .empty-state h2 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+
+  .empty-state p {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  /* Larger modal for tablets */
+  .transaction-modal .max-h-96 {
+    max-height: 400px;
   }
 }
 
