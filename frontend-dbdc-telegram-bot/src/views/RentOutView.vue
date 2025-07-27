@@ -135,6 +135,13 @@
       @close="showInfoTooltip = false"
     />
 
+    <!-- Success Notification -->
+    <SuccessNotification
+      :is-visible="showSuccessNotification"
+      message="Rent Out Forevers Successfully"
+      @close="showSuccessNotification = false"
+    />
+
     <!-- Bottom Navigation -->
     <BottomNavigation />
   </div>
