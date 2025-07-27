@@ -372,6 +372,32 @@ const goBack = () => {
   }
 }
 
+/* Ultra-tight Available section spacing */
+.available-tight {
+  gap: 0 !important;
+}
+
+.available-dot {
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+.available-f-section {
+  gap: 2px;
+}
+
+/* Mobile ultra-tight spacing */
+@media (max-width: 375px) {
+  .available-dot {
+    margin-left: 4px !important;
+    margin-right: 4px !important;
+  }
+
+  .available-f-section {
+    gap: 1px !important;
+  }
+}
+
 /* Small mobile devices */
 @media (min-width: 376px) and (max-width: 480px) {
   .w-full.max-w-md {
