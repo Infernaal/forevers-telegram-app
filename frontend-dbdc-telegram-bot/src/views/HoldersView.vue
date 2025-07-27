@@ -250,6 +250,7 @@ import { ref } from 'vue'
 import BottomNavigation from '../components/BottomNavigation.vue'
 import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
 import SuccessNotification from '../components/SuccessNotification.vue'
+import TermsCheckbox from '../components/TermsCheckbox.vue'
 
 // Reactive data
 const termsAccepted = ref(false)
