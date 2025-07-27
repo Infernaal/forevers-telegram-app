@@ -190,61 +190,85 @@
       <!-- Bottom Controls -->
       <div class="bottom-controls">
         <!-- ID Section -->
-        <div class="id-section">
-          <div class="id-content">
+        <div class="id-section" :class="{ 'id-section-copied': showCopySuccess }">
+          <div v-if="!showCopySuccess" class="id-content">
             <span class="id-label">ID: </span>
             <span class="id-value">515745</span>
           </div>
-          <button class="copy-button" @click="copyUserID">
-            <svg v-if="!showCopySuccess" width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M18.2806 1.19995H8.98336C8.42322 1.19995 7.88603 1.43348 7.48995 1.84917C7.09387 2.26486 6.87136 2.82866 6.87136 3.41653V4.26906H5.81536C5.2278 4.26906 4.66431 4.51402 4.24885 4.95006C3.83338 5.3861 3.59998 5.97749 3.59998 6.59414V20.4749C3.59998 21.0915 3.83338 21.6829 4.24885 22.119C4.66431 22.555 5.2278 22.8 5.81536 22.8H14.9132C15.5008 22.8 16.0643 22.555 16.4797 22.119C16.8952 21.6829 17.1286 21.0915 17.1286 20.4749V19.6998H18.2806C18.8363 19.6999 19.3699 19.4709 19.7663 19.0621C20.1627 18.6533 20.3903 18.0975 20.4 17.5143V3.41653C20.398 2.82794 20.1739 2.26417 19.7766 1.8487C19.3794 1.43323 18.8414 1.19995 18.2806 1.19995ZM15.6517 20.4749C15.6517 20.6804 15.5739 20.8776 15.4354 21.0229C15.2969 21.1682 15.1091 21.2499 14.9132 21.2499H5.81536C5.61951 21.2499 5.43168 21.1682 5.29319 21.0229C5.1547 20.8776 5.0769 20.6804 5.0769 20.4749V6.59414C5.0769 6.38859 5.1547 6.19146 5.29319 6.04611C5.43168 5.90077 5.61951 5.81911 5.81536 5.81911H14.9132C15.1091 5.81911 15.2969 5.90077 15.4354 6.04611C15.5739 6.19146 15.6517 6.38859 15.6517 6.59414V20.4749ZM18.9231 17.5143C18.9211 17.6918 18.8526 17.8613 18.7323 17.9861C18.612 18.1108 18.4497 18.1808 18.2806 18.1808H17.1286V6.59414C17.1286 5.97749 16.8952 5.3861 16.4797 4.95006C16.0643 4.51402 15.5008 4.26906 14.9132 4.26906H8.34828V3.41653C8.34828 3.23976 8.41519 3.07022 8.53429 2.94523C8.65339 2.82023 8.81493 2.75001 8.98336 2.75001H18.2806C18.3646 2.74898 18.448 2.76546 18.5259 2.7985C18.6038 2.83154 18.6747 2.88047 18.7344 2.94246C18.7942 3.00446 18.8416 3.07828 18.874 3.15966C18.9064 3.24103 18.9231 3.32834 18.9231 3.41653V17.5143Z" fill="white"/>
-            </svg>
-            <svg v-else width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M13.5 4.5L6 12L2.5 8.5" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-        </div>
-
-        <!-- Language Section -->
-        <div class="language-section">
-          <div class="language-content">
-            <div class="flag-wrapper">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                <circle cx="16" cy="16" r="16" fill="#D4D4D4"/>
-                <g clip-path="url(#clip0_flag)">
-                  <path d="M15.9993 31.0591C24.316 31.0591 31.0581 24.317 31.0581 16.0002C31.0581 7.68347 24.316 0.941406 15.9993 0.941406C7.68249 0.941406 0.94043 7.68347 0.94043 16.0002C0.94043 24.317 7.68249 31.0591 15.9993 31.0591Z" fill="#F0F0F0"/>
-                  <path d="M15.3438 16.0025H31.0573C31.0573 14.6433 30.8761 13.3266 30.5385 12.0741H15.3438V16.0025Z" fill="#D80027"/>
-                  <path d="M15.3438 8.14179H28.847C27.9252 6.63756 26.7466 5.30797 25.3723 4.21338H15.3438V8.14179Z" fill="#D80027"/>
-                  <path d="M16.0038 31.06C19.5478 31.06 22.8053 29.8351 25.3776 27.7864H6.62988C9.20224 29.8351 12.4597 31.06 16.0038 31.06Z" fill="#D80027"/>
-                  <path d="M3.15241 23.855H28.8496C29.5896 22.6475 30.1636 21.3275 30.5411 19.9266H1.46094C1.83841 21.3275 2.41235 22.6475 3.15241 23.855Z" fill="#D80027"/>
-                  <path d="M7.91596 3.29305H9.28825L8.01178 4.22041L8.49937 5.72094L7.22296 4.79358L5.94655 5.72094L6.36772 4.42464C5.24384 5.36082 4.25878 6.45764 3.44702 7.67976H3.88672L3.07419 8.27005C2.94761 8.48123 2.82619 8.69576 2.70984 8.91346L3.09784 10.1076L2.37396 9.5817C2.19402 9.96294 2.02943 10.3528 1.88149 10.7507L2.30896 12.0665H3.88672L2.61025 12.9938L3.09784 14.4943L1.82143 13.567L1.05684 14.1225C0.980312 14.7377 0.94043 15.3643 0.94043 16.0002H15.9993C15.9993 7.68352 15.9993 6.70305 15.9993 0.941406C13.0244 0.941406 10.2513 1.80435 7.91596 3.29305ZM8.49937 14.4943L7.22296 13.567L5.94655 14.4943L6.43414 12.9938L5.15767 12.0665H6.73543L7.22296 10.5659L7.71049 12.0665H9.28825L8.01178 12.9938L8.49937 14.4943ZM8.01178 8.60711L8.49937 10.1076L7.22296 9.18029L5.94655 10.1076L6.43414 8.60711L5.15767 7.67976H6.73543L7.22296 6.17923L7.71049 7.67976H9.28825L8.01178 8.60711ZM13.9009 14.4943L12.6245 13.567L11.3481 14.4943L11.8357 12.9938L10.5592 12.0665H12.137L12.6245 10.5659L13.112 12.0665H14.6898L13.4133 12.9938L13.9009 14.4943ZM13.4133 8.60711L13.9009 10.1076L12.6245 9.18029L11.3481 10.1076L11.8357 8.60711L10.5592 7.67976H12.137L12.6245 6.17923L13.112 7.67976H14.6898L13.4133 8.60711ZM13.4133 4.22041L13.9009 5.72094L12.6245 4.79358L11.3481 5.72094L11.8357 4.22041L10.5592 3.29305H12.137L12.6245 1.79252L13.112 3.29305H14.6898L13.4133 4.22041Z" fill="#0052B4"/>
+          <div v-if="showCopySuccess" class="id-copied-content">
+            <span class="id-copied-text">Copied</span>
+            <div class="id-copied-icon">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="14" cy="14" r="14" fill="white"/>
+              </svg>
+              <svg class="id-tick-svg" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_2_22327)">
+                  <path d="M11.3242 0.926106C10.7978 0.642629 10.2106 1.18934 9.86633 1.51331C9.07667 2.28275 8.40848 3.17368 7.65925 3.98362C6.82907 4.87455 6.05963 5.76548 5.20919 6.6362C4.72323 7.12216 4.19677 7.64862 3.8728 8.25607C3.14385 7.54734 2.51615 6.7779 1.70621 6.15023C1.11901 5.70477 0.147086 5.38079 0.167334 6.45396C0.207831 7.85113 1.44299 9.34952 2.35416 10.3012C2.73888 10.7061 3.24509 11.1313 3.8323 11.1516C4.54099 11.1921 5.26994 10.3417 5.69515 9.87594C6.44438 9.06601 7.05183 8.15479 7.74024 7.32464C8.63118 6.23123 9.54236 5.15803 10.413 4.04436C10.9597 3.35592 12.6809 1.65502 11.3242 0.926106ZM1.05823 6.37297C1.03798 6.37297 1.01773 6.37297 0.977238 6.39318C0.896244 6.37297 0.835499 6.35268 0.754505 6.31219C0.815251 6.27169 0.916493 6.29194 1.05823 6.37297Z" fill="#07B80E"/>
                 </g>
                 <defs>
-                  <clipPath id="clip0_flag">
-                    <rect width="30.1176" height="30.1176" fill="white" transform="translate(0.94043 0.941406)"/>
+                  <clipPath id="clip0_2_22327">
+                    <rect width="11.6667" height="11.6667" fill="white" transform="translate(0.166992 0.166504)"/>
                   </clipPath>
                 </defs>
               </svg>
             </div>
-            <span class="language-text">ENG</span>
           </div>
-          <div class="dropdown-arrow">
+          <button
+            v-if="!showCopySuccess"
+            class="copy-button"
+            @click="copyUserID"
+          >
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18.0655 0.5H7.60611C6.97596 0.5 6.37161 0.727045 5.92603 1.13119C5.48044 1.53533 5.23011 2.08346 5.23011 2.65501V3.48385H4.04211C3.38111 3.48385 2.74718 3.72201 2.27978 4.14594C1.81239 4.56986 1.5498 5.14483 1.5498 5.74435V19.2395C1.5498 19.839 1.81239 20.414 2.27978 20.8379C2.74718 21.2618 3.38111 21.5 4.04211 21.5H14.2772C14.9382 21.5 15.5721 21.2618 16.0395 20.8379C16.5069 20.414 16.7695 19.839 16.7695 19.2395V18.486H18.0655C18.6907 18.4861 19.291 18.2634 19.7369 17.866C20.1829 17.4685 20.4389 16.9281 20.4498 16.3611V2.65501C20.4476 2.08277 20.1954 1.53465 19.7485 1.13073C19.3016 0.7268 18.6964 0.499997 18.0655 0.5ZM15.108 19.2395C15.108 19.4393 15.0204 19.631 14.8646 19.7723C14.7088 19.9136 14.4975 19.993 14.2772 19.993H4.04211C3.82178 19.993 3.61047 19.9136 3.45467 19.7723C3.29887 19.631 3.21134 19.4393 3.21134 19.2395V5.74435C3.21134 5.54451 3.29887 5.35285 3.45467 5.21154C3.61047 5.07024 3.82178 4.99085 4.04211 4.99085H14.2772C14.4975 4.99085 14.7088 5.07024 14.8646 5.21154C15.0204 5.35285 15.108 5.54451 15.108 5.74435V19.2395ZM18.7883 16.3611C18.7861 16.5337 18.709 16.6985 18.5737 16.8198C18.4383 16.9411 18.2558 17.0092 18.0655 17.0092H16.7695V5.74435C16.7695 5.14483 16.5069 4.56986 16.0395 4.14594C15.5721 3.72201 14.9382 3.48385 14.2772 3.48385H6.89165V2.65501C6.89165 2.48314 6.96693 2.31832 7.10091 2.19679C7.2349 2.07527 7.41663 2.007 7.60611 2.007H18.0655C18.16 2.006 18.2538 2.02203 18.3415 2.05414C18.4291 2.08626 18.5089 2.13384 18.5761 2.19411C18.6433 2.25438 18.6967 2.32616 18.7331 2.40527C18.7695 2.48439 18.7883 2.56927 18.7883 2.65501V16.3611Z" fill="#2019CE"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Vertical Divider -->
+        <div class="vertical-divider"></div>
+
+        <!-- Language Section -->
+        <div class="language-section" @click="toggleLanguageDropdown">
+          <div class="language-content">
+            <CountryFlag :country="selectedLanguage.country" size="medium" />
+            <span class="language-text">{{ selectedLanguage.code }}</span>
+          </div>
+          <div class="dropdown-arrow" :class="{ 'dropdown-arrow-open': showLanguageDropdown }">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <circle opacity="0.2" cx="10" cy="10" r="10" fill="white"/>
               <path d="M5.71387 8.57146L9.99958 12.8572L14.2853 8.57146" stroke="white" stroke-linecap="round"/>
             </svg>
           </div>
+
+          <!-- Language Dropdown -->
+          <div v-if="showLanguageDropdown" class="language-dropdown">
+            <div class="language-dropdown-content">
+              <div
+                v-for="(language, index) in languages"
+                :key="language.code"
+                class="language-dropdown-item"
+                :class="{ 'language-item-selected': language.code === selectedLanguage.code }"
+                @click.stop="selectLanguage(language)"
+              >
+                <CountryFlag :country="language.country" size="small" />
+                <span class="language-item-code">{{ language.code }}</span>
+                <svg v-if="language.code === selectedLanguage.code" class="language-item-check" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M13.5 4.5L6 12L2.5 8.5" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Scroll indicator -->
-      <div class="scroll-indicator"></div>
+
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import CountryFlag from './CountryFlag.vue'
 
 // Props
 defineProps({
@@ -259,6 +283,25 @@ const emit = defineEmits(['close'])
 
 // State
 const showCopySuccess = ref(false)
+const showLanguageDropdown = ref(false)
+
+// Language state
+const languages = ref([
+  { code: 'ENG', name: 'English', country: 'uk' },
+  { code: 'ESP', name: 'Español', country: 'spain' },
+  { code: 'FRA', name: 'Français', country: 'france' },
+  { code: 'DEU', name: 'Deutsch', country: 'germany' },
+  { code: 'ITA', name: 'Italiano', country: 'italy' },
+  { code: 'RUS', name: 'Русский', country: 'ukraine' },
+  { code: 'CHN', name: '中文', country: 'china' },
+  { code: 'JPN', name: '日本語', country: 'japan' },
+  { code: 'KOR', name: '한국어', country: 'new zealand' },
+  { code: 'ARA', name: 'العربية', country: 'uae' },
+  { code: 'POR', name: 'Português', country: 'spain' },
+  { code: 'NLD', name: 'Nederlands', country: 'norway' }
+])
+
+const selectedLanguage = ref(languages.value[0])
 
 // Methods
 const handleMenuClick = (menuItem) => {
@@ -272,15 +315,57 @@ const handleUpgrade = () => {
 }
 
 const copyUserID = async () => {
-  try {
-    await navigator.clipboard.writeText('515745')
-    showCopySuccess.value = true
-    setTimeout(() => {
-      showCopySuccess.value = false
-    }, 2000)
-  } catch (err) {
-    console.error('Failed to copy:', err)
+  let copySuccess = false
+
+  // Try modern clipboard API first
+  if (navigator.clipboard) {
+    try {
+      await navigator.clipboard.writeText('515745')
+      copySuccess = true
+    } catch (clipboardErr) {
+      console.log('Clipboard API failed, trying fallback method')
+    }
   }
+
+  // If clipboard API failed or is not available, use fallback
+  if (!copySuccess) {
+    try {
+      const textArea = document.createElement('textarea')
+      textArea.value = '515745'
+      textArea.style.position = 'fixed'
+      textArea.style.left = '-999999px'
+      textArea.style.top = '-999999px'
+      textArea.style.opacity = '0'
+      document.body.appendChild(textArea)
+      textArea.focus()
+      textArea.select()
+
+      const successful = document.execCommand('copy')
+      document.body.removeChild(textArea)
+
+      if (!successful) {
+        console.log('Fallback copy method also failed')
+      }
+    } catch (fallbackErr) {
+      console.error('Fallback copy failed:', fallbackErr)
+    }
+  }
+
+  // Show copied state for user feedback
+  showCopySuccess.value = true
+  setTimeout(() => {
+    showCopySuccess.value = false
+  }, 2500)
+}
+
+const toggleLanguageDropdown = () => {
+  showLanguageDropdown.value = !showLanguageDropdown.value
+}
+
+const selectLanguage = (language) => {
+  selectedLanguage.value = language
+  showLanguageDropdown.value = false
+  console.log('Language selected:', language)
 }
 </script>
 
@@ -321,7 +406,7 @@ const copyUserID = async () => {
   left: 8px;
   right: 8px;
   bottom: 110px;
-  height: 722px;
+  height: 580px;
   border-radius: 20px;
   overflow: hidden;
   z-index: 55;
@@ -355,6 +440,7 @@ const copyUserID = async () => {
   align-items: center;
   padding: 8px;
   gap: 12px;
+  overflow: hidden;
 }
 
 .profile-avatar {
@@ -373,8 +459,10 @@ const copyUserID = async () => {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 0 8px;
+  gap: 6px;
+  padding: 0 4px;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .silver-badge-container {
@@ -405,10 +493,13 @@ const copyUserID = async () => {
 .profile-user-name {
   color: white;
   font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 21px;
+  font-size: 18px;
   font-weight: 700;
-  line-height: 26px;
+  line-height: 22px;
   margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .profile-arrow-btn {
@@ -432,18 +523,21 @@ const copyUserID = async () => {
 
 /* Menu Container */
 .menu-container {
-  position: relative;
+  position: absolute;
+  top: 130px;
+  bottom: 190px;
+  left: 12px;
+  right: 12px;
   z-index: 1;
-  padding: 12px;
-  padding-top: 120px;
-  padding-bottom: 180px;
-  height: 100%;
+  padding: 0;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: none;
   -ms-overflow-style: none;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
+  overscroll-behavior: contain;
+  overscroll-behavior-y: contain;
 }
 
 .menu-container::-webkit-scrollbar {
@@ -456,13 +550,21 @@ const copyUserID = async () => {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 6px;
+  padding: 6px 12px;
   height: 52px;
   cursor: pointer;
   transition: all 0.2s ease;
   border-radius: 8px;
   margin-bottom: 8px;
   position: relative;
+}
+
+.menu-item:first-child {
+  margin-top: 12px;
+}
+
+.menu-item:last-child {
+  margin-bottom: 12px;
 }
 
 .menu-item:hover {
@@ -517,7 +619,7 @@ const copyUserID = async () => {
 /* Start Section */
 .start-section {
   position: absolute;
-  bottom: 112px;
+  bottom: 96px;
   left: 12px;
   right: 12px;
   z-index: 1;
@@ -614,14 +716,14 @@ const copyUserID = async () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 33px;
+  gap: 20px;
   height: 44px;
 }
 
 /* ID Section */
 .id-section {
-  width: 123px;
-  height: 38px;
+  width: 145px;
+  height: 44px;
   background: rgba(255, 255, 255, 0.30);
   border: 1px solid rgba(255, 255, 255, 0.40);
   border-radius: 100px;
@@ -630,14 +732,35 @@ const copyUserID = async () => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 13px;
+  padding: 6px;
   position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Vertical Divider */
+.vertical-divider {
+  width: 2px;
+  height: 24px;
+  background: #E2E2E2;
+  border: 1px solid #B7B7B7;
+  border-radius: 30px;
+  opacity: 0.4;
+  flex-shrink: 0;
+}
+
+.id-section-copied {
+  border: 1px solid #07B80E;
+  background: #129E0F;
+  transform: scale(1.02);
 }
 
 .id-content {
   display: flex;
   align-items: center;
   gap: 2px;
+  padding-left: 12px;
+  padding-right: 40px;
+  flex: 1;
 }
 
 .id-label {
@@ -655,16 +778,18 @@ const copyUserID = async () => {
 }
 
 .copy-button {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   background: white;
   border: 1.2px solid #D8D8D8;
-  border-radius: 0 1200px 1200px 0;
+  border-radius: 0 100px 100px 0;
+  border-left: none;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s ease;
+  flex-shrink: 0;
   position: absolute;
   right: 0;
   top: 50%;
@@ -673,6 +798,97 @@ const copyUserID = async () => {
 
 .copy-button:hover {
   background: #f3f4f6;
+  transform: translateY(-50%) scale(1.05);
+  box-shadow: 0 4px 12px rgba(32, 25, 206, 0.3);
+}
+
+.copy-button:active {
+  transform: translateY(-50%) scale(0.98);
+}
+
+/* ID Copied Content */
+.id-copied-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 6px;
+  box-sizing: border-box;
+  animation: fadeInScale 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.id-copied-text {
+  color: #FFF;
+  font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 22px;
+  text-align: center;
+  animation: slideInLeft 0.3s ease-out 0.1s both;
+}
+
+.id-copied-icon {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: bounceIn 0.5s ease-out 0.2s both;
+}
+
+.id-tick-svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Animations */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(-10deg);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.1) rotate(5deg);
+  }
+  80% {
+    transform: scale(0.95) rotate(-2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
 }
 
 /* Language Section */
@@ -688,6 +904,7 @@ const copyUserID = async () => {
   padding: 6px;
   cursor: pointer;
   transition: all 0.2s ease;
+  position: relative;
 }
 
 .language-section:hover {
@@ -723,21 +940,84 @@ const copyUserID = async () => {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  transition: transform 0.2s ease;
 }
 
-/* Scroll indicator */
-.scroll-indicator {
-  position: absolute;
-  right: 12px;
-  top: 200px;
-  width: 2px;
-  height: 24px;
-  background: #E2E2E2;
-  border: 1px solid #B7B7B7;
-  border-radius: 30px;
-  opacity: 0.4;
-  z-index: 1;
+.dropdown-arrow-open {
+  transform: rotate(180deg);
 }
+
+/* Language Dropdown */
+.language-dropdown {
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  animation: dropdownSlideUp 0.2s ease-out;
+}
+
+.language-dropdown-content {
+  background: linear-gradient(94deg, #120B81 33.64%, #09074E 76.52%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  padding: 8px;
+  max-height: 140px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.language-dropdown-content::-webkit-scrollbar {
+  display: none;
+}
+
+.language-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 36px;
+  justify-content: space-between;
+}
+
+.language-dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.language-item-selected {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.language-item-code {
+  color: #FAFAFA;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  flex: 1;
+}
+
+.language-item-check {
+  flex-shrink: 0;
+}
+
+@keyframes dropdownSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
 
 /* Responsive */
 @media (max-width: 375px) {
