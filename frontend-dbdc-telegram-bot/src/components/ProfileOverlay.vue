@@ -751,12 +751,12 @@ const copyUserID = async () => {
 
 .copy-button:hover {
   background: #f3f4f6;
-  transform: translateY(-1px) scale(1.02);
+  transform: translateY(-50%) scale(1.05);
   box-shadow: 0 4px 12px rgba(32, 25, 206, 0.3);
 }
 
 .copy-button:active {
-  transform: translateY(0) scale(0.98);
+  transform: translateY(-50%) scale(0.98);
 }
 
 /* ID Copied Content */
