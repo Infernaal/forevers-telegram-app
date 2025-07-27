@@ -331,15 +331,17 @@ const agreeToTerms = () => {
   justify-content: center;
   align-items: center;
   border-radius: 1000px;
-  background: #FF6800;
+  background: linear-gradient(90deg, #2019CE 0%, #473FFF 100%);
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(32, 25, 206, 0.25);
 }
 
 .terms-agree-btn:hover {
-  background: #e55a00;
+  opacity: 0.9;
   transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(32, 25, 206, 0.35);
 }
 
 .terms-agree-btn:active {
