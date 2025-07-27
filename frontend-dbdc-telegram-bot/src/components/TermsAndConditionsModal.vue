@@ -182,7 +182,8 @@ const agreeToTerms = () => {
 .terms-modal-container {
   width: 100%;
   max-width: 375px;
-  max-height: 80vh;
+  max-height: 88vh;
+  min-height: 75vh;
   background: #fff;
   border-radius: 20px;
   border: 1px solid #E8E8E8;
