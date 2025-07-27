@@ -964,7 +964,7 @@ const selectLanguage = (language) => {
   backdrop-filter: blur(32px);
   -webkit-backdrop-filter: blur(32px);
   padding: 8px;
-  max-height: 180px;
+  max-height: 140px;
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
