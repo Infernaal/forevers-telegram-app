@@ -3,23 +3,22 @@
     name="modal"
     enter-active-class="transition-all duration-300 ease-out"
     leave-active-class="transition-all duration-200 ease-in"
-    enter-from-class="opacity-0 scale-95"
-    enter-to-class="opacity-100 scale-100"
-    leave-from-class="opacity-100 scale-100"
-    leave-to-class="opacity-0 scale-95"
+    enter-from-class="opacity-0 backdrop-blur-0 scale-95"
+    enter-to-class="opacity-100 backdrop-blur-md scale-100"
+    leave-from-class="opacity-100 backdrop-blur-md scale-100"
+    leave-to-class="opacity-0 backdrop-blur-0 scale-95"
   >
     <div
       v-if="isVisible"
-      class="modal-overlay"
+      class="fixed inset-0 flex items-center justify-center z-50 px-4"
+      style="background: rgba(2, 7, 14, 0.20); backdrop-filter: blur(9px);"
       @click="onCancel"
     >
-      <!-- Background Blur -->
-      <div class="modal-backdrop"></div>
       
       <!-- Modal Content -->
       <div
         @click.stop
-        class="modal-content"
+        class="relative bg-dbd-off-white rounded-[20px] shadow-xl font-montserrat w-full max-w-[320px] mx-auto transition-all duration-300 p-6 flex flex-col items-center gap-6"
       >
         <!-- Icon Container -->
         <div class="modal-icon">
