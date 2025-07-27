@@ -256,6 +256,12 @@ const confirmDelete = () => {
   margin: 0 auto;
 }
 
+@media (min-width: 431px) {
+  .fixed-bottom-section {
+    max-width: 100%;
+  }
+}
+
 .fixed-bottom-section::before {
   content: '';
   position: absolute;
@@ -416,7 +422,7 @@ const confirmDelete = () => {
 /* Tablets and larger phones */
 @media (min-width: 431px) and (max-width: 768px) {
   .cart-view {
-    max-width: 420px;
+    max-width: 100%;
     background: #f3f4f6 !important;
   }
 
@@ -425,40 +431,44 @@ const confirmDelete = () => {
   }
 
   .overflow-y-auto {
-    padding-bottom: 220px; /* Space for fixed bottom */
+    padding-bottom: 280px; /* Space for fixed bottom */
   }
 
   .fixed-bottom-section {
-    max-width: 420px;
+    max-width: 100%;
   }
 
   .h-12 {
-    height: 52px !important;
+    height: 60px !important;
   }
 
   .min-w-24 {
-    min-width: 120px !important;
+    min-width: 140px !important;
   }
 
   .text-lg {
-    font-size: 18px !important;
+    font-size: 20px !important;
+  }
+
+  .cart-item {
+    padding: 20px;
   }
 
   /* Modal styles for tablets */
   .modal-title {
-    font-size: 1.125rem;
+    font-size: 1.25rem;
   }
 
   .modal-close-btn {
-    width: 3rem;
-    height: 3rem;
+    width: 3.5rem;
+    height: 3.5rem;
   }
 }
 
 /* Desktop and large tablets */
 @media (min-width: 769px) {
   .cart-view {
-    max-width: 480px;
+    max-width: 100%;
     background: #f3f4f6 !important;
   }
 
@@ -467,26 +477,42 @@ const confirmDelete = () => {
   }
 
   .overflow-y-auto {
-    padding-bottom: 220px; /* Space for fixed bottom */
+    padding-bottom: 320px; /* Space for fixed bottom */
   }
 
   .fixed-bottom-section {
-    max-width: 480px;
+    max-width: 100%;
+  }
+
+  .h-12 {
+    height: 72px !important;
+  }
+
+  .min-w-24 {
+    min-width: 180px !important;
+  }
+
+  .text-lg {
+    font-size: 24px !important;
+  }
+
+  .cart-item {
+    padding: 32px;
   }
 
   /* Modal styles for desktop */
   .modal-title {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: 600;
   }
 
   .modal-close-btn {
-    width: 3.25rem;
-    height: 3.25rem;
+    width: 4rem;
+    height: 4rem;
   }
 
   .modal-header {
-    padding: 1.5rem;
+    padding: 2rem;
   }
 }
 
