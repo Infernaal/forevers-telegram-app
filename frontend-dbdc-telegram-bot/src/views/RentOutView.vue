@@ -37,7 +37,10 @@
               <CountryFlag :country="item.code" />
               <span class="text-dbd-gray font-medium">{{ item.title }}</span>
             </div>
-            <button class="bg-dbd-orange text-white px-3 py-2 rounded-full text-sm font-bold">
+            <button
+              @click="openRentModal(item)"
+              class="bg-dbd-orange text-white px-3 py-2 rounded-full text-sm font-bold hover:bg-orange-600 transition-colors"
+            >
               Loyality
             </button>
           </div>
@@ -104,6 +107,24 @@
       </div>
     </div>
 
+    <!-- Rent Out Modal -->
+    <RentOutModal
+      :is-visible="showRentModal"
+      :selected-balance="selectedBalance"
+      :rent-amount="calculatedRentAmount"
+      :input-amount="inputAmount"
+      @close="closeRentModal"
+      @rent-out="handleRentOut"
+      @open-terms="openTermsModal"
+    />
+
+    <!-- Terms Modal -->
+    <TermsAndConditionsModal
+      :isVisible="showTermsModal"
+      @close="closeTermsModal"
+      @agree="agreeToTerms"
+    />
+
     <!-- Info Tooltip -->
     <InfoTooltip
       :is-visible="showInfoTooltip"
@@ -118,16 +139,31 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import BottomNavigation from '../components/BottomNavigation.vue'
 import CountryFlag from '../components/CountryFlag.vue'
 import InfoTooltip from '../components/InfoTooltip.vue'
+import RentOutModal from '../components/RentOutModal.vue'
+import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
 
 const router = useRouter()
 
-// Info tooltip state
+// Modal states
 const showInfoTooltip = ref(false)
+const showRentModal = ref(false)
+const showTermsModal = ref(false)
+const selectedBalance = ref(null)
+const inputAmount = ref('250')
+
+// Computed property for rent amount calculation
+const calculatedRentAmount = computed(() => {
+  if (!selectedBalance.value) return '1,225'
+  // Calculate based on selected balance and input amount
+  const amount = parseInt(inputAmount.value) || 250
+  const rate = parseInt(selectedBalance.value.usdRate) || 4
+  return (amount * rate).toLocaleString()
+})
 
 // Telegram WebApp optimizations
 onMounted(() => {
@@ -219,6 +255,45 @@ const foreversList = ref([
     availableAmount: 250
   }
 ])
+
+// Modal handlers
+const openRentModal = (item) => {
+  selectedBalance.value = item
+  showRentModal.value = true
+
+  // Haptic feedback
+  if (window.triggerHaptic) {
+    window.triggerHaptic('impact', 'light')
+  }
+}
+
+const closeRentModal = () => {
+  showRentModal.value = false
+  selectedBalance.value = null
+}
+
+const handleRentOut = (data) => {
+  console.log('Rent out data:', data)
+
+  // Show success message or navigate
+  // TODO: Implement actual rent out logic
+
+  // For now, just close the modal
+  closeRentModal()
+}
+
+const openTermsModal = () => {
+  showTermsModal.value = true
+}
+
+const closeTermsModal = () => {
+  showTermsModal.value = false
+}
+
+const agreeToTerms = () => {
+  showTermsModal.value = false
+  // Terms accepted, return to rent modal
+}
 
 const goBack = () => {
   router.push('/favorites')
