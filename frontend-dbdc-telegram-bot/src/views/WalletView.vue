@@ -457,7 +457,7 @@ const navigateToTransactions = () => {
   }
 
   .content-container {
-    padding: 24px 24px 110px 24px;
+    padding: 24px 24px 140px 24px;
     max-width: 800px;
     margin: 0 auto;
   }
@@ -545,7 +545,7 @@ const navigateToTransactions = () => {
   }
 
   .content-container {
-    padding: 40px 40px 120px 40px;
+    padding: 40px 40px 160px 40px;
     max-width: 1200px;
     margin: 0 auto;
   }
