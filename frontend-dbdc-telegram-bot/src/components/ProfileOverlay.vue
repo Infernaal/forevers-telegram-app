@@ -306,12 +306,17 @@ const copyUserID = async () => {
   padding-bottom: 180px;
   height: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 
 .menu-container::-webkit-scrollbar {
   display: none;
+  width: 0;
+  height: 0;
 }
 
 .menu-item {
