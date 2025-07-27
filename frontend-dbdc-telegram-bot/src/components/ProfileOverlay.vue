@@ -1001,6 +1001,7 @@ const selectLanguage = (language) => {
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .language-dropdown-content::-webkit-scrollbar {
