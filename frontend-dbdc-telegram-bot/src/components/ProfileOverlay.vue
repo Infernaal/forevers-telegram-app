@@ -1029,7 +1029,7 @@ const selectLanguage = (language) => {
   cursor: pointer;
   transition: all 0.2s ease;
   min-height: 36px;
-  justify-content: space-between;
+  position: relative;
 }
 
 .language-dropdown-item:hover {
