@@ -431,18 +431,21 @@ const copyUserID = async () => {
 
 /* Menu Container */
 .menu-container {
-  position: relative;
+  position: absolute;
+  top: 120px;
+  bottom: 180px;
+  left: 12px;
+  right: 12px;
   z-index: 1;
-  padding: 12px;
-  padding-top: 120px;
-  padding-bottom: 160px;
-  height: 100%;
+  padding: 0;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: none;
   -ms-overflow-style: none;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
+  overscroll-behavior: contain;
+  overscroll-behavior-y: contain;
 }
 
 .menu-container::-webkit-scrollbar {
