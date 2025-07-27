@@ -15,7 +15,8 @@
       :class="containerPosition"
     >
       <!-- Triangular pointer pointing UP -->
-      <div class="w-0 h-0 border-l-[6px] border-r-[6px] border-b-[6px] border-transparent border-b-red-500 absolute top-0 left-8 transform -translate-y-full z-10"></div>
+      <div class="w-0 h-0 border-l-[6px] border-r-[6px] border-b-[6px] border-transparent absolute top-0 left-8 transform -translate-y-full z-10"
+           style="border-bottom-color: rgb(255, 25, 25);"></div>
       
       <!-- Error notification body -->
       <div class="text-white rounded-full flex items-center px-3 py-2 border"
