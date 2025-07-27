@@ -303,16 +303,17 @@ const confirmDelete = () => {
   box-shadow: 0 4px 12px rgba(32, 25, 206, 0.3);
 }
 
-/* Responsive modal styling - using Tailwind's responsive approach where possible */
+/* Modal styling */
 .modal-title {
-  @apply xs:text-sm sm:text-base md:text-lg lg:text-xl;
+  font-size: 1rem;
+  font-weight: 500;
   color: #02070E;
   margin: 0;
-  font-weight: 500;
 }
 
 .modal-close-btn {
-  @apply xs:w-9 xs:h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14;
+  width: 2.75rem;
+  height: 2.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -328,10 +329,10 @@ const confirmDelete = () => {
 }
 
 .modal-header {
-  @apply xs:p-4 sm:p-5 md:p-6 lg:p-7;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 1rem;
   border-bottom: 1px solid #e5e7eb;
 }
 
