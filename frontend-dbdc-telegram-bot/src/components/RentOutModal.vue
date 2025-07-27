@@ -372,6 +372,29 @@ button:active {
   background-color: #F4F3FF;
 }
 
+/* Input field styling */
+input[type="number"] {
+  -moz-appearance: textfield;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input:focus {
+  outline: none;
+}
+
+/* Terms and Conditions text wrapping */
+.leading-relaxed {
+  line-height: 1.375;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
 /* Responsive input adjustments */
 @media (max-width: 375px) {
   .w-\[236px\] {
@@ -386,6 +409,10 @@ button:active {
   .w-9.h-9 {
     width: 32px;
     height: 32px;
+  }
+
+  .text-base {
+    font-size: 14px;
   }
 }
 </style>
