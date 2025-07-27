@@ -939,7 +939,7 @@ const selectLanguage = (language) => {
 .language-content {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   flex: 1;
   min-width: 0;
   overflow: hidden;
