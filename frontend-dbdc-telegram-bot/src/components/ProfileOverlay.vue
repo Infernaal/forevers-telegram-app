@@ -1062,7 +1062,7 @@ const selectLanguage = (language) => {
   }
   
   .start-section {
-    bottom: 115px;
+    bottom: 96px;
   }
   
   .bottom-controls {
