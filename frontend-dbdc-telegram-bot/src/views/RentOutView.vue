@@ -39,7 +39,11 @@
             </div>
             <button
               @click="openRentModal(item)"
-              class="bg-dbd-orange text-white px-3 py-2 rounded-full text-sm font-bold hover:bg-orange-600 transition-colors"
+              :disabled="item.availableAmount === 0"
+              :class="item.availableAmount === 0
+                ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
+                : 'bg-dbd-orange text-white hover:bg-orange-600'"
+              class="px-3 py-2 rounded-full text-sm font-bold transition-colors"
             >
               Loyality
             </button>
