@@ -139,15 +139,15 @@
       </div>
 
       <!-- Empty State (when no balances from backend) -->
-      <div v-else class="flex-1 flex items-center justify-center">
+      <div v-else class="flex-1 flex items-center justify-center px-4">
         <div class="text-center">
-          <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg width="32" height="32" viewBox="0 0 32 32" class="text-gray-400">
+          <div class="w-12 h-12 xs:w-16 xs:h-16 sm:w-16 sm:h-16 ml:w-18 ml:h-18 md:w-20 md:h-20 lg:w-20 lg:h-20 xl:w-20 xl:h-20 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-3 xs:mb-4 sm:mb-4 ml:mb-4 md:mb-5 lg:mb-5 xl:mb-5">
+            <svg class="w-6 h-6 xs:w-8 xs:h-8 sm:w-8 sm:h-8 ml:w-9 ml:h-9 md:w-10 md:h-10 lg:w-10 lg:h-10 xl:w-10 xl:h-10 text-gray-400" viewBox="0 0 32 32">
               <path d="M30.667 7.381V1.333H7.129V9.011H1.333V15.059H7.129V30.108H13.894V22.728H19.615V16.680H13.894V15.059H25.132V9.011H13.894V7.381H30.667Z" fill="currentColor"/>
             </svg>
           </div>
-          <h3 class="text-lg font-medium text-gray-900 mb-2">No Balances Found</h3>
-          <p class="text-gray-600 mb-4">Your balance data will appear here when available.</p>
+          <h3 class="text-base xs:text-lg sm:text-lg ml:text-lg md:text-xl lg:text-xl xl:text-xl font-medium text-gray-900 mb-1.5 xs:mb-2 sm:mb-2 ml:mb-2 md:mb-2.5 lg:mb-2.5 xl:mb-2.5">No Balances Found</h3>
+          <p class="text-sm xs:text-base sm:text-base ml:text-base md:text-lg lg:text-lg xl:text-lg text-gray-600 mb-3 xs:mb-4 sm:mb-4 ml:mb-4 md:mb-5 lg:mb-5 xl:mb-5">Your balance data will appear here when available.</p>
         </div>
       </div>
     </main>
