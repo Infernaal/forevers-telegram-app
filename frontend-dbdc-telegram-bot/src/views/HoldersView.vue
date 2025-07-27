@@ -86,20 +86,11 @@
         </div>
 
         <!-- Terms and Conditions -->
-        <div class="terms-container">
-          <div class="terms-wrapper">
-            <label class="terms-label">
-              <input
-                type="checkbox"
-                v-model="termsAccepted"
-                class="terms-checkbox"
-              />
-              <span class="terms-text">
-                I agree that I have read the 
-                <a href="#" @click.prevent="openTerms" class="terms-link">Terms and Conditions</a>
-              </span>
-            </label>
-          </div>
+        <div class="terms-checkbox-wrapper">
+          <TermsCheckbox
+            v-model="termsAccepted"
+            @open-terms="openTerms"
+          />
         </div>
 
         <!-- Share Button -->
