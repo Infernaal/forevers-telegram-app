@@ -128,7 +128,6 @@
 <script setup>
 import { ref, watch, nextTick } from 'vue'
 import CountryFlag from './CountryFlag.vue'
-import TermsCheckbox from './TermsCheckbox.vue'
 
 const props = defineProps({
   isVisible: {
