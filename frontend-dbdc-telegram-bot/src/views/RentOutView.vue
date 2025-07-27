@@ -39,7 +39,11 @@
             </div>
             <button
               @click="openRentModal(item)"
-              class="bg-dbd-orange text-white px-3 py-2 rounded-full text-sm font-bold hover:bg-orange-600 transition-colors"
+              :disabled="item.availableAmount === 0"
+              :class="item.availableAmount === 0
+                ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
+                : 'bg-dbd-orange text-white hover:bg-orange-600'"
+              class="px-3 py-2 rounded-full text-sm font-bold transition-colors"
             >
               Loyality
             </button>
@@ -135,6 +139,13 @@
       @close="showInfoTooltip = false"
     />
 
+    <!-- Success Notification -->
+    <SuccessNotification
+      :is-visible="showSuccessNotification"
+      message="Rent Out Forevers Successfully"
+      @close="showSuccessNotification = false"
+    />
+
     <!-- Bottom Navigation -->
     <BottomNavigation />
   </div>
@@ -148,6 +159,7 @@ import CountryFlag from '../components/CountryFlag.vue'
 import InfoTooltip from '../components/InfoTooltip.vue'
 import RentOutModal from '../components/RentOutModal.vue'
 import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
+import SuccessNotification from '../components/SuccessNotification.vue'
 
 const router = useRouter()
 
@@ -155,6 +167,7 @@ const router = useRouter()
 const showInfoTooltip = ref(false)
 const showRentModal = ref(false)
 const showTermsModal = ref(false)
+const showSuccessNotification = ref(false)
 const selectedBalance = ref(null)
 const inputAmount = ref('250')
 
@@ -199,7 +212,7 @@ const foreversList = ref([
     rentalCost: 4,
     potentialIncome: 120,
     availableText: 'Available',
-    availableAmount: 250
+    availableAmount: 0
   },
   {
     id: 'uae',
@@ -260,6 +273,11 @@ const foreversList = ref([
 
 // Modal handlers
 const openRentModal = (item) => {
+  // Don't open modal if no forevers available
+  if (item.availableAmount === 0) {
+    return
+  }
+
   selectedBalance.value = item
   showRentModal.value = true
 
@@ -277,11 +295,28 @@ const closeRentModal = () => {
 const handleRentOut = (data) => {
   console.log('Rent out data:', data)
 
-  // Show success message or navigate
-  // TODO: Implement actual rent out logic
+  // Update the available amount for the selected balance
+  const rentedAmount = parseInt(data.amount) || 0
+  const balanceItem = foreversList.value.find(item => item.id === data.balance.id)
+  if (balanceItem) {
+    balanceItem.availableAmount = Math.max(0, balanceItem.availableAmount - rentedAmount)
+  }
 
-  // For now, just close the modal
+  // Close the modal first
   closeRentModal()
+
+  // Show success notification
+  showSuccessNotification.value = true
+
+  // Auto-hide notification after 3 seconds
+  setTimeout(() => {
+    showSuccessNotification.value = false
+  }, 3000)
+
+  // Haptic feedback for success
+  if (window.triggerHaptic) {
+    window.triggerHaptic('notification', 'success')
+  }
 }
 
 const openTermsModal = () => {
