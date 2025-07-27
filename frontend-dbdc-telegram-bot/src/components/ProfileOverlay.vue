@@ -373,8 +373,10 @@ const copyUserID = async () => {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 0 8px;
+  gap: 6px;
+  padding: 0 4px;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .silver-badge-container {
