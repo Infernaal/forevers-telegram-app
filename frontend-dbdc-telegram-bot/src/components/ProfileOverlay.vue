@@ -438,8 +438,8 @@ const copyUserID = async () => {
 /* Menu Container */
 .menu-container {
   position: absolute;
-  top: 120px;
-  bottom: 180px;
+  top: 130px;
+  bottom: 190px;
   left: 12px;
   right: 12px;
   z-index: 1;
