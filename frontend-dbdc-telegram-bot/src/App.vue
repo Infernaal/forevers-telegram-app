@@ -1,6 +1,9 @@
 <template>
   <div class="telegram-webapp-container">
-    <RouterView />
+    <!-- Mobile-first responsive wrapper -->
+    <div class="w-full h-full md:max-w-[480px] md:mx-auto md:shadow-lg md:border-x md:border-gray-200">
+      <RouterView />
+    </div>
   </div>
 </template>
 
