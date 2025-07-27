@@ -282,7 +282,7 @@ const copyUserID = async () => {
   position: absolute;
   left: 8px;
   right: 8px;
-  bottom: 90px;
+  bottom: 110px;
   height: 722px;
   border-radius: 20px;
   overflow: hidden;
