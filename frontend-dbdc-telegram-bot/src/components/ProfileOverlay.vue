@@ -529,7 +529,7 @@ const selectLanguage = (language) => {
 .menu-container {
   position: absolute;
   top: 130px;
-  bottom: 190px;
+  bottom: 178px;
   left: 12px;
   right: 12px;
   z-index: 1;
@@ -925,11 +925,11 @@ const selectLanguage = (language) => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 6px 12px 6px 6px;
+  padding: 6px 8px 6px 6px;
   cursor: pointer;
   transition: all 0.2s ease;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .language-section:hover {
@@ -939,10 +939,10 @@ const selectLanguage = (language) => {
 .language-content {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex: 1;
   min-width: 0;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .flag-wrapper {
@@ -960,7 +960,8 @@ const selectLanguage = (language) => {
   line-height: 26px;
   flex-shrink: 0;
   white-space: nowrap;
-  min-width: 0;
+  min-width: 40px;
+  text-align: left;
 }
 
 .dropdown-arrow {
@@ -971,7 +972,8 @@ const selectLanguage = (language) => {
   justify-content: center;
   flex-shrink: 0;
   transition: transform 0.2s ease;
-  margin-left: auto;
+  position: absolute;
+  right: 8px;
 }
 
 .dropdown-arrow-open {
@@ -984,7 +986,7 @@ const selectLanguage = (language) => {
   bottom: 50px;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: 1000;
   animation: dropdownSlideUp 0.2s ease-out;
 }
 
