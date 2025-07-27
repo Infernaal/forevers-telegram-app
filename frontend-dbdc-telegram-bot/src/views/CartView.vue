@@ -293,12 +293,12 @@ const confirmDelete = () => {
 }
 
 .back-button {
-  height: 52px;
-  min-width: 119px;
+  @apply xs:h-10 sm:h-12 md:h-14 lg:h-16;
+  @apply xs:min-w-20 sm:min-w-24 md:min-w-28 lg:min-w-32;
 }
 
 .buy-button {
-  height: 52px;
+  @apply xs:h-10 sm:h-12 md:h-14 lg:h-16;
   background: linear-gradient(90deg, #2019CE 0%, #473FFF 100%);
   transition: all 0.2s ease;
 }
@@ -306,39 +306,6 @@ const confirmDelete = () => {
 .buy-button:hover {
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(32, 25, 206, 0.3);
-}
-
-/* Transaction Details Modal Styles (if used in cart context) */
-.modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.modal-title {
-  font-size: 1rem;
-  font-weight: 500;
-  color: #02070E;
-  margin: 0;
-}
-
-.modal-close-btn {
-  width: 2.75rem;
-  height: 2.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background-color: #FAFAFA;
-  border: 1px solid #e5e7eb;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.modal-close-btn:hover {
-  background-color: #f3f4f6;
 }
 
 /* Responsive modal styling - using Tailwind's responsive approach where possible */
