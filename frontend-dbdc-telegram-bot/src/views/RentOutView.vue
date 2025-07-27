@@ -212,7 +212,7 @@ const foreversList = ref([
     rentalCost: 4,
     potentialIncome: 120,
     availableText: 'Available',
-    availableAmount: 250
+    availableAmount: 0
   },
   {
     id: 'uae',
