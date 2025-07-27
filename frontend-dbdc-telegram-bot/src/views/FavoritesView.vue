@@ -3,26 +3,26 @@
     <!-- Main Content -->
     <main class="flex-1 w-full max-w-full xs:max-w-full sm:max-w-md ml:max-w-lg md:max-w-lg lg:max-w-[480px] xl:max-w-[480px] mx-auto px-3 xs:px-3.5 sm:px-3.5 ml:px-4 md:px-5 lg:px-5 xl:px-5 pt-3 xs:pt-4 sm:pt-4 ml:pt-5 md:pt-6 lg:pt-6 xl:pt-6 pb-2 flex flex-col">
       <!-- Total Balance Card -->
-      <div class="bg-purple-50 border border-purple-200 rounded-2xl p-3 mb-2 flex-shrink-0">
-        <div class="flex items-start justify-between mb-4">
-          <h2 class="text-2xl font-semibold text-black leading-7">
+      <div class="bg-purple-50 border border-purple-200 rounded-xl xs:rounded-2xl sm:rounded-2xl ml:rounded-2xl md:rounded-2xl lg:rounded-2xl xl:rounded-2xl p-2.5 xs:p-3 sm:p-3 ml:p-3.5 md:p-4 lg:p-4 xl:p-4 mb-1.5 xs:mb-2 sm:mb-2 ml:mb-2.5 md:mb-3 lg:mb-3 xl:mb-3 flex-shrink-0">
+        <div class="flex items-start justify-between mb-3 xs:mb-4 sm:mb-4 ml:mb-4 md:mb-5 lg:mb-5 xl:mb-5">
+          <h2 class="text-xl xs:text-2xl sm:text-2xl ml:text-2xl md:text-3xl lg:text-3xl xl:text-3xl font-semibold text-black leading-tight xs:leading-7 sm:leading-7 ml:leading-7 md:leading-8 lg:leading-8 xl:leading-8">
             Forevers<br>Balance
           </h2>
 
-          <div class="flex flex-col items-end gap-2">
-            <div class="flex items-center gap-2">
-              <svg width="32" height="32" viewBox="0 0 32 32" class="text-blue-700">
+          <div class="flex flex-col items-end gap-1.5 xs:gap-2 sm:gap-2 ml:gap-2 md:gap-2.5 lg:gap-2.5 xl:gap-2.5">
+            <div class="flex items-center gap-1.5 xs:gap-2 sm:gap-2 ml:gap-2 md:gap-2.5 lg:gap-2.5 xl:gap-2.5">
+              <svg class="w-6 h-6 xs:w-8 xs:h-8 sm:w-8 sm:h-8 ml:w-8 ml:h-8 md:w-9 md:h-9 lg:w-9 lg:h-9 xl:w-9 xl:h-9 text-blue-700" viewBox="0 0 32 32">
                 <path d="M30.667 7.381V1.333H7.129V9.011H1.333V15.059H7.129V30.108H13.894V22.728H19.615V16.680H13.894V15.059H25.132V9.011H13.894V7.381H30.667Z" fill="currentColor"/>
               </svg>
-              <span class="text-3xl font-bold text-blue-700">{{ totalBalance.toLocaleString() }}</span>
+              <span class="text-2xl xs:text-3xl sm:text-3xl ml:text-3xl md:text-4xl lg:text-4xl xl:text-4xl font-bold text-blue-700">{{ totalBalance.toLocaleString() }}</span>
             </div>
-            <p class="text-lg text-gray-600 font-medium">Worth ${{ totalWorth.toLocaleString() }}</p>
+            <p class="text-base xs:text-lg sm:text-lg ml:text-lg md:text-xl lg:text-xl xl:text-xl text-gray-600 font-medium">Worth ${{ totalWorth.toLocaleString() }}</p>
           </div>
         </div>
 
         <button
           @click="handleRentOut"
-          class="w-full bg-gradient-to-r from-blue-700 to-purple-600 text-white font-bold py-3 px-12 rounded-full hover:from-blue-800 hover:to-purple-700 transition-all duration-200 text-sm"
+          class="w-full bg-gradient-to-r from-blue-700 to-purple-600 text-white font-bold py-2.5 xs:py-3 sm:py-3 ml:py-3.5 md:py-4 lg:py-4 xl:py-4 px-8 xs:px-12 sm:px-12 ml:px-12 md:px-14 lg:px-14 xl:px-14 rounded-full hover:from-blue-800 hover:to-purple-700 transition-all duration-200 text-xs xs:text-sm sm:text-sm ml:text-sm md:text-base lg:text-base xl:text-base"
         >
           Rent Out Forevers
         </button>
