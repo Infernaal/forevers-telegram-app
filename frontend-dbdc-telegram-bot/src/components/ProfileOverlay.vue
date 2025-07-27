@@ -654,6 +654,8 @@ const copyUserID = async () => {
   display: flex;
   align-items: center;
   gap: 2px;
+  padding-left: 8px;
+  flex: 1;
 }
 
 .id-label {
