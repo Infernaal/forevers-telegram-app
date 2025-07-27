@@ -156,6 +156,10 @@ const props = defineProps({
   inputAmount: {
     type: [String, Number],
     default: '250'
+  },
+  termsAgreed: {
+    type: Boolean,
+    default: false
   }
 })
 
