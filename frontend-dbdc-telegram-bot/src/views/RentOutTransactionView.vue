@@ -182,8 +182,8 @@
     <BottomNavigation />
 
     <!-- Transaction Details Modal -->
-    <div v-if="showTransactionModal" class="fixed inset-0 z-50 flex items-end justify-center bg-black bg-opacity-20 backdrop-blur-sm">
-      <div class="w-full max-w-md bg-white rounded-t-3xl shadow-xl animate-slide-up">
+    <div v-if="showTransactionModal" class="fixed inset-0 z-50 flex items-end lg:items-center justify-center bg-black bg-opacity-20 backdrop-blur-sm">
+      <div class="w-full max-w-md lg:max-w-lg xl:max-w-xl bg-white rounded-t-3xl lg:rounded-3xl xl:rounded-4xl shadow-xl animate-slide-up lg:animate-none">
         <!-- Modal Header -->
         <div class="flex items-center justify-between p-4 border-b">
           <h2 class="text-base font-medium text-dbd-dark">Transaction Details</h2>
