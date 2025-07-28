@@ -133,15 +133,15 @@
 
           <!-- Step 2 -->
           <div class="flex justify-center items-center relative">
-            <!-- Line left -->
-            <div class="absolute left-[-50%] top-1/2 transform -translate-y-1/2 w-[40%] h-px bg-dbd-light-gray z-0"></div>
+            <!-- Connecting Line -->
+            <div class="absolute left-0 right-0 top-1/2 transform -translate-y-1/2 mx-auto w-[40%] h-px bg-dbd-light-gray z-0"></div>
             <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-r-full bg-dbd-primary z-10"></div>
           </div>
 
           <!-- Step 3 -->
           <div class="flex justify-center items-center relative">
-            <!-- Line left -->
-            <div class="absolute left-[-50%] top-1/2 transform -translate-y-1/2 w-[40%] h-px bg-dbd-light-gray z-0"></div>
+            <!-- Connecting Line -->
+            <div class="absolute left-0 right-0 top-1/2 transform -translate-y-1/2 mx-auto w-[40%] h-px bg-dbd-light-gray z-0"></div>
             <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-r-full bg-dbd-primary z-10"></div>
           </div>
         </div>
