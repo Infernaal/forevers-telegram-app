@@ -587,6 +587,14 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
+/* Blur effect for SuccessNotification when modal is open */
+.blur-notification {
+  filter: blur(4px);
+  opacity: 0.6;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
 /* Mobile first approach for Telegram mini app */
 
 /* Very small mobile devices (≤374px) */
