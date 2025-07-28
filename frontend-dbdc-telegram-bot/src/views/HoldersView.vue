@@ -125,30 +125,36 @@
       <!-- Unified Step Section -->
       <div class="w-full max-w-2xl mx-auto px-4 mb-12">
         <!-- Step Indicators -->
-        <div class="grid grid-cols-3 gap-4 text-center mb-4 relative">
-          <!-- Step 1 -->
-          <div class="flex justify-center items-center relative">
-            <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-dbd-primary rounded-r-full z-10"></div>
-            <!-- Line to Step 2 -->
-            <div class="absolute right-0 top-1/2 transform -translate-y-1/2 w-[40%] h-px bg-dbd-light-gray z-0"></div>
+        <div class="grid grid-cols-5 gap-0 items-center text-center mb-4">
+          <!-- D1 -->
+          <div class="flex justify-center">
+            <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-dbd-primary rounded-r-full"></div>
           </div>
 
-          <!-- Step 2 -->
-          <div class="flex justify-center items-center relative">
-            <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-dbd-primary rounded-r-full z-10"></div>
-            <!-- Line to Step 3 -->
-            <div class="absolute right-0 top-1/2 transform -translate-y-1/2 w-[40%] h-px bg-dbd-light-gray z-0"></div>
+          <!-- Line between D1 and D2 -->
+          <div class="flex justify-center">
+            <div class="w-full max-w-[60px] h-px bg-dbd-light-gray"></div>
           </div>
 
-          <!-- Step 3 -->
-          <div class="flex justify-center items-center">
-            <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-dbd-primary rounded-r-full z-10"></div>
+          <!-- D2 -->
+          <div class="flex justify-center">
+            <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-dbd-primary rounded-r-full"></div>
+          </div>
+
+          <!-- Line between D2 and D3 -->
+          <div class="flex justify-center">
+            <div class="w-full max-w-[60px] h-px bg-dbd-light-gray"></div>
+          </div>
+
+          <!-- D3 -->
+          <div class="flex justify-center">
+            <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-dbd-primary rounded-r-full"></div>
           </div>
         </div>
 
         <!-- Step Descriptions -->
-        <div class="grid grid-cols-3 gap-4 text-center">
-          <!-- Step 1 -->
+        <div class="grid grid-cols-5 gap-0 text-center">
+          <!-- Description under D1 -->
           <div class="flex flex-col items-center gap-1">
             <div class="flex items-center gap-1.5 justify-center">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
@@ -159,7 +165,10 @@
             <span class="text-dbd-gray text-xs font-medium leading-4">Share your link</span>
           </div>
 
-          <!-- Step 2 -->
+          <!-- Empty under Line 1 -->
+          <div></div>
+
+          <!-- Description under D2 -->
           <div class="flex flex-col items-center gap-1">
             <div class="flex items-center gap-1.5 justify-center">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
@@ -170,7 +179,10 @@
             <span class="text-dbd-gray text-xs font-medium leading-4">Wait for joining</span>
           </div>
 
-          <!-- Step 3 -->
+          <!-- Empty under Line 2 -->
+          <div></div>
+
+          <!-- Description under D3 -->
           <div class="flex flex-col items-center gap-1">
             <div class="flex items-center gap-1.5 justify-center">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
@@ -182,8 +194,6 @@
           </div>
         </div>
       </div>
-
-
 
         <!-- Web Referral Link Section -->
         <div class="relative w-full h-52">
