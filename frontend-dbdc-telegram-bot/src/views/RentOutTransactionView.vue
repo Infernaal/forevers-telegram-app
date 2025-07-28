@@ -958,7 +958,8 @@ onUnmounted(() => {
 }
 
 .export-option:hover {
-  background: linear-gradient(102deg, rgba(111, 106, 224, 0.5) 9.35%, rgba(85, 81, 179, 0.5) 95.29%);
+  background: #2A1FB5 !important;
+  background-image: none !important;
 }
 
 .export-option-icon {
