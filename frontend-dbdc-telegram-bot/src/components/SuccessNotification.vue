@@ -253,4 +253,20 @@ defineEmits(['close'])
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
+
+/* Blur effect when modal is open */
+.blur-notification .success-notification-container {
+  filter: blur(4px);
+  opacity: 0.6;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+  pointer-events: none;
+}
+
+/* Global blur classes that can be applied from parent components */
+:global(.blur-notification) {
+  filter: blur(4px) !important;
+  opacity: 0.6 !important;
+  transition: filter 0.3s ease, opacity 0.3s ease !important;
+  pointer-events: none !important;
+}
 </style>
