@@ -1647,8 +1647,19 @@ const hideSuccessNotification = () => {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
+  .copy-link-text {
+    color: #FAFAFA;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    text-decoration: underline;
+    width: auto;
+    height: auto;
+  }
+
   .copy-button {
-    width: 50px;
+    width: 45px;
     height: 52px;
     border-radius: 0 100px 100px 0;
     border: 1px solid #443FCC;
@@ -1660,6 +1671,11 @@ const hideSuccessNotification = () => {
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
+  }
+
+  .copy-icon {
+    width: 18px;
+    height: 18px;
   }
 }
 
