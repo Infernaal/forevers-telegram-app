@@ -1626,12 +1626,28 @@ const hideSuccessNotification = () => {
 
   .step-descriptions {
     position: absolute;
-    left: 0;
+    left: 50%;
     top: 144px;
-    width: 100%;
+    width: 280px;
     height: 44px;
+    transform: translateX(-50%);
     display: flex;
     justify-content: space-between;
+  }
+
+  .step-description-1 {
+    width: 70px;
+    text-align: center;
+  }
+
+  .step-description-2 {
+    width: 80px;
+    text-align: center;
+  }
+
+  .step-description-3 {
+    width: 70px;
+    text-align: center;
   }
 
   .web-link-section {
