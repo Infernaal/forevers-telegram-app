@@ -123,28 +123,22 @@
         </div>
 
         <!-- Step Indicators -->
-        <div class="relative w-full mb-12 px-4">
-          <div class="grid grid-cols-3 items-center justify-between w-full max-w-2xl mx-auto relative">
-
+        <div class="w-full mb-12 px-4">
+          <div class="flex justify-center items-center w-full max-w-2xl mx-auto gap-4 sm:gap-6 md:gap-10 lg:gap-12">
             <!-- Step 1 -->
-            <div class="flex justify-center relative">
-              <div class="w-10 h-10 rounded-r-full bg-dbd-primary"></div>
-            </div>
+            <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-r-full bg-dbd-primary"></div>
+
+            <!-- Line -->
+            <div class="w-4 sm:w-6 md:w-8 lg:w-10 h-px bg-dbd-light-gray"></div>
 
             <!-- Step 2 -->
-            <div class="flex justify-center relative">
-              <!-- Connecting line from Step 1 -->
-              <div class="absolute left-[-50%] top-1/2 w-full h-px bg-dbd-light-gray z-0"></div>
-              <div class="w-10 h-10 rounded-r-full bg-dbd-primary z-10"></div>
-            </div>
+            <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-r-full bg-dbd-primary"></div>
+
+            <!-- Line -->
+            <div class="w-4 sm:w-6 md:w-8 lg:w-10 h-px bg-dbd-light-gray"></div>
 
             <!-- Step 3 -->
-            <div class="flex justify-center relative">
-              <!-- Connecting line from Step 2 -->
-              <div class="absolute left-[-50%] top-1/2 w-full h-px bg-dbd-light-gray z-0"></div>
-              <div class="w-10 h-10 rounded-r-full bg-dbd-primary z-10"></div>
-            </div>
-
+            <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-r-full bg-dbd-primary"></div>
           </div>
         </div>
 
