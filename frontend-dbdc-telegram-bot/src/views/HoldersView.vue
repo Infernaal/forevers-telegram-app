@@ -94,10 +94,13 @@
         <!-- Share Button -->
         <div class="absolute left-1/2 bottom-2 transform -translate-x-1/2 z-20">
           <button
-            class="flex w-72 px-12 py-3 justify-center items-center gap-2 rounded-full bg-gradient-to-r from-dbd-primary to-blue-500 border-0 cursor-pointer h-12 text-white text-center font-semibold text-base leading-6 transition-all duration-200 ease-in-out hover:transform hover:-translate-y-0.5 hover:shadow-lg disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
-            :class="{ 
-              '!bg-gray-300 !text-white-500 !cursor-not-allowed': !termsAccepted, 
-              '!bg-gradient-to-r !from-blue-700 !to-indigo-700 !cursor-wait': isSharing 
+            class="flex w-60 xs:w-72 px-6 xs:px-12 py-2.5 xs:py-3 justify-center items-center gap-1.5 xs:gap-2 rounded-full
+                  bg-gradient-to-r from-dbd-primary to-blue-500 text-white text-center font-semibold text-sm xs:text-base
+                  leading-6 transition-all duration-200 ease-in-out hover:transform hover:-translate-y-0.5 hover:shadow-lg
+                  disabled:bg-gray-300 disabled:text-white disabled:cursor-not-allowed h-11 xs:h-12"
+            :class="{
+              '!bg-gray-300 !text-white !cursor-not-allowed': !termsAccepted,
+              '!bg-gradient-to-r !from-blue-700 !to-indigo-700 !cursor-wait': isSharing
             }"
             :disabled="!termsAccepted || isSharing"
             @click="shareQRCode"
