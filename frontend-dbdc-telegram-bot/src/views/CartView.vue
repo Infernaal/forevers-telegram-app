@@ -213,11 +213,44 @@ const confirmDelete = () => {
 </script>
 
 <style scoped>
+/* Hide scrollbar for WebKit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+* {
+  scrollbar-width: none;
+}
+
+/* Hide scrollbar for Internet Explorer and Edge Legacy */
+* {
+  -ms-overflow-style: none;
+}
+
+/* Ensure smooth scrolling on touch devices */
+.overflow-y-auto {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.overflow-y-auto::-webkit-scrollbar {
+  display: none;
+}
+
 .cart-view {
   font-family: 'Montserrat', sans-serif;
   height: 100vh;
   height: 100dvh; /* Dynamic viewport height for mobile */
   background: #f3f4f6 !important;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.cart-view::-webkit-scrollbar {
+  display: none;
 }
 
 .content-container {
@@ -333,7 +366,8 @@ const confirmDelete = () => {
   .overflow-y-auto {
     padding-left: 12px;
     padding-right: 12px;
-    padding-bottom: 100px !important; /* Enhanced space for BottomNavigation */
+    /* CartBottom ~70px + BottomNav ~74px + safe area + spacing */
+    padding-bottom: 160px !important;
   }
 }
 
@@ -346,7 +380,8 @@ const confirmDelete = () => {
   .overflow-y-auto {
     padding-left: 14px;
     padding-right: 14px;
-    padding-bottom: 110px !important; /* Enhanced space for BottomNavigation */
+    /* CartBottom ~75px + BottomNav ~78px + safe area + spacing */
+    padding-bottom: 170px !important;
   }
 
   .fixed-bottom-section {
@@ -414,7 +449,8 @@ const confirmDelete = () => {
   }
 
   .overflow-y-auto {
-    padding-bottom: 140px !important; /* Enhanced space for BottomNavigation */
+    /* CartBottom ~85px + BottomNav ~108px + safe area + spacing */
+    padding-bottom: 210px !important;
   }
 
   .fixed-bottom-section {
@@ -461,7 +497,8 @@ const confirmDelete = () => {
   }
 
   .overflow-y-auto {
-    padding-bottom: 150px !important; /* Enhanced space for BottomNavigation */
+    /* CartBottom ~105px + BottomNav ~130px + safe area + spacing */
+    padding-bottom: 250px !important;
   }
 
   .fixed-bottom-section {
