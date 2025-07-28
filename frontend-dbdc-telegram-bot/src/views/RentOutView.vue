@@ -23,7 +23,7 @@
     </div>
 
     <!-- Scrollable Content Area -->
-    <div class="flex-1 w-full max-w-md lg:max-w-6xl xl:max-w-7xl mx-auto overflow-y-auto px-4 lg:px-12 xl:px-16 pb-24 lg:pb-40 xl:pb-48">
+    <div class="flex-1 w-full max-w-md lg:max-w-6xl xl:max-w-7xl mx-auto overflow-y-auto px-4 lg:px-12 xl:px-16 pb-24 sm:pb-28 md:pb-36 lg:pb-40 xl:pb-44">
       <!-- Rent Out Cards List -->
       <div class="space-y-4 lg:space-y-6 xl:space-y-8">
         <div 

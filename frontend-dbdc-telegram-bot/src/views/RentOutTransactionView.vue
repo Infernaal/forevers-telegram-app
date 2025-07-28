@@ -86,7 +86,7 @@
     </div>
 
     <!-- Content Container -->
-    <div class="content-container bg-gray-100 pb-24 lg:pb-40 xl:pb-48 px-4 lg:px-12 xl:px-16">
+    <div class="content-container bg-gray-100 pb-32 sm:pb-36 md:pb-40 lg:pb-44 xl:pb-52 px-4 lg:px-12 xl:px-16">
       <!-- Empty State -->
       <div v-if="transactions.length === 0" class="empty-state flex flex-col items-center justify-center text-center" style="min-height: calc(100vh - 200px);">
         <h2 class="text-xl lg:text-4xl xl:text-5xl font-bold text-dbd-dark mb-4 lg:mb-8 xl:mb-12 leading-tight max-w-60 lg:max-w-none">
@@ -441,6 +441,10 @@ const toggleTransactionSelection = (index) => {
   const selectedIndex = selectedTransactions.value.indexOf(index)
   if (selectedIndex > -1) {
     selectedTransactions.value.splice(selectedIndex, 1)
+    // Закрыть dropdown menu если больше нет выбранных транзакций
+    if (selectedTransactions.value.length === 0) {
+      showExportMenu.value = false
+    }
   } else {
     selectedTransactions.value.push(index)
   }
@@ -928,12 +932,11 @@ onUnmounted(() => {
   gap: 8px;
 }
 
-@media (max-width: 640px) {
-  .export-dropdown-container {
-    border-color: #3A33D3;
-    background-color: #3A33D3;
-    box-shadow: 2px 3px 6px 0 #3A33D3;
-  }
+/* Apply mobile design to all screen sizes */
+.export-dropdown-container {
+  border-color: #3A33D3 !important;
+  background-color: #3A33D3 !important;
+  box-shadow: 2px 3px 6px 0 #3A33D3 !important;
 }
 
 .export-option {
@@ -951,16 +954,16 @@ onUnmounted(() => {
   transition: all 0.2s ease;
 }
 
-@media (max-width: 640px) {
-  .export-option {
-    border-color: #3A33D3;
-    background: #3A33D3;
-    background-image: none;
-  }
+/* Apply mobile design to all screen sizes */
+.export-option {
+  border-color: #3A33D3 !important;
+  background: #3A33D3 !important;
+  background-image: none !important;
 }
 
 .export-option:hover {
-  background: linear-gradient(102deg, rgba(111, 106, 224, 0.5) 9.35%, rgba(85, 81, 179, 0.5) 95.29%);
+  background: #2A1FB5 !important;
+  background-image: none !important;
 }
 
 .export-option-icon {
