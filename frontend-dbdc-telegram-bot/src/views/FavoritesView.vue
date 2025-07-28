@@ -593,7 +593,7 @@ onBeforeUnmount(() => {
 
   /* Bottom padding: BottomNav ~74px + safe area + extra spacing */
   .overflow-y-auto {
-    padding-bottom: 84px !important;
+    padding-bottom: 100px !important;
   }
 }
 
@@ -607,7 +607,7 @@ onBeforeUnmount(() => {
 
   /* Bottom padding: BottomNav ~78px + safe area + extra spacing */
   .overflow-y-auto {
-    padding-bottom: 88px !important;
+    padding-bottom: 110px !important;
   }
 }
 
@@ -621,7 +621,7 @@ onBeforeUnmount(() => {
 
   /* Bottom padding: BottomNav ~108px + safe area + extra spacing */
   .overflow-y-auto {
-    padding-bottom: 118px !important;
+    padding-bottom: 140px !important;
   }
 }
 
