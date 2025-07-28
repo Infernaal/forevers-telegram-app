@@ -588,6 +588,11 @@ onBeforeUnmount(() => {
     padding-left: 14px;
     padding-right: 14px;
   }
+
+  /* Enhanced bottom padding for small screens */
+  .overflow-y-auto {
+    padding-bottom: 80px !important;
+  }
 }
 
 @media (min-width: 376px) and (max-width: 768px) {
