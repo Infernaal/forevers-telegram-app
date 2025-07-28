@@ -541,11 +541,11 @@ const confirmDelete = () => {
 /* Landscape orientation adjustments for mobile devices */
 @media (max-height: 500px) and (orientation: landscape) {
   .overflow-y-auto {
-    padding-bottom: 120px !important;
+    padding-bottom: 140px !important;
   }
 
   .flex-1.flex.items-center.justify-center {
-    padding-bottom: 120px !important;
+    padding-bottom: 140px !important;
   }
 }
 
@@ -554,55 +554,55 @@ const confirmDelete = () => {
 /* iPhone SE and similar small phones */
 @media (min-width: 320px) and (max-width: 374px) and (min-height: 568px) {
   .overflow-y-auto {
-    padding-bottom: 165px !important;
+    padding-bottom: 185px !important;
   }
 
   .flex-1.flex.items-center.justify-center {
-    padding-bottom: 165px !important;
+    padding-bottom: 185px !important;
   }
 }
 
 /* Standard iPhone sizes (iPhone 12 mini, iPhone 13 mini) */
 @media (min-width: 375px) and (max-width: 390px) and (min-height: 812px) {
   .overflow-y-auto {
-    padding-bottom: 175px !important;
+    padding-bottom: 195px !important;
   }
 
   .flex-1.flex.items-center.justify-center {
-    padding-bottom: 175px !important;
+    padding-bottom: 195px !important;
   }
 }
 
 /* iPhone 12/13/14 Pro Max and similar large phones */
 @media (min-width: 414px) and (max-width: 430px) and (min-height: 896px) {
   .overflow-y-auto {
-    padding-bottom: 180px !important;
+    padding-bottom: 200px !important;
   }
 
   .flex-1.flex.items-center.justify-center {
-    padding-bottom: 180px !important;
+    padding-bottom: 200px !important;
   }
 }
 
 /* iPad mini and similar tablets in portrait */
 @media (min-width: 744px) and (max-width: 768px) and (orientation: portrait) {
   .overflow-y-auto {
-    padding-bottom: 215px !important;
+    padding-bottom: 235px !important;
   }
 
   .flex-1.flex.items-center.justify-center {
-    padding-bottom: 215px !important;
+    padding-bottom: 235px !important;
   }
 }
 
 /* iPad and similar tablets in portrait */
 @media (min-width: 768px) and (max-width: 834px) and (orientation: portrait) {
   .overflow-y-auto {
-    padding-bottom: 255px !important;
+    padding-bottom: 275px !important;
   }
 
   .flex-1.flex.items-center.justify-center {
-    padding-bottom: 255px !important;
+    padding-bottom: 275px !important;
   }
 }
 
