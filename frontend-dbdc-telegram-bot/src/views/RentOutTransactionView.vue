@@ -441,6 +441,10 @@ const toggleTransactionSelection = (index) => {
   const selectedIndex = selectedTransactions.value.indexOf(index)
   if (selectedIndex > -1) {
     selectedTransactions.value.splice(selectedIndex, 1)
+    // Закрыть dropdown menu если больше нет выбранных транзакций
+    if (selectedTransactions.value.length === 0) {
+      showExportMenu.value = false
+    }
   } else {
     selectedTransactions.value.push(index)
   }
