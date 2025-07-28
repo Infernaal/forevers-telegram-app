@@ -225,6 +225,11 @@ let errorTimeout = null
 
 // Info tooltip state
 const showInfoTooltip = ref(false)
+
+// Check if any modal is open for blur effect
+const isAnyModalOpen = computed(() => {
+  return showEnterAmountModal.value || showInfoTooltip.value
+})
 const dollarsAmount = computed(() => {
   if (!selectedBalance.value) return 1000
   return foreversAmount.value * selectedBalance.value.usdRate
