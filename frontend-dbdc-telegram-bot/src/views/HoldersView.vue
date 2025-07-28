@@ -84,12 +84,13 @@
         </div>
 
         <!-- Terms and Conditions -->
-        <div class="absolute left-1/2 -translate-x-1/2 bottom-16 z-20 sm:left-6 sm:translate-x-0">
-          <TermsCheckbox
-            v-model="termsAccepted"
-            @open-terms="openTerms"
-          />
-        </div>
+      <div class="absolute left-1/2 -translate-x-1/2 bottom-16 z-20 sm:left-6 sm:translate-x-0">
+        <TermsCheckbox
+          v-model="termsAccepted"
+          @open-terms="openTerms"
+        />
+      </div>
+
 
         <!-- Share Button -->
         <div class="absolute left-0 right-0 bottom-2 px-4 z-20">
