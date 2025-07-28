@@ -846,8 +846,16 @@ onUnmounted(() => {
 
 /* Desktop Large Screens */
 @media (min-width: 1024px) {
+  /* Transaction Details Modal - Centered on desktop */
+  .transaction-details-modal {
+    align-items: center;
+  }
+
   .transaction-details-modal > div {
+    border-radius: 24px;
+    animation: none;
     max-width: 600px;
+    margin: 20px;
   }
 
   .transaction-details-scroll .flex.justify-between {
