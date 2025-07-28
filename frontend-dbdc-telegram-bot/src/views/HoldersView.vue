@@ -131,18 +131,20 @@
             <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-dbd-primary rounded-r-full z-10"></div>
           </div>
 
+          <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-dbd-primary rounded-r-full z-10"></div>
+
           <!-- Step 2 -->
           <div class="flex justify-center relative">
             <!-- Connecting line from Step 1 to Step 2 -->
             <div class="absolute left-0 right-0 top-1/2 transform -translate-y-1/2 mx-auto w-full max-w-[80px] h-px bg-dbd-light-gray z-0"></div>
-            <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-dbd-primary rounded-r-full z-10"></div>
           </div>
+
+          <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-dbd-primary rounded-r-full z-10"></div>
 
           <!-- Step 3 -->
           <div class="flex justify-center relative">
             <!-- Connecting line from Step 2 to Step 3 -->
             <div class="absolute left-0 right-0 top-1/2 transform -translate-y-1/2 mx-auto w-full max-w-[80px] h-px bg-dbd-light-gray z-0"></div>
-            <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-dbd-primary rounded-r-full z-10"></div>
           </div>
         </div>
 
