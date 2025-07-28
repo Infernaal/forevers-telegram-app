@@ -601,6 +601,11 @@ onBeforeUnmount(() => {
     padding-left: 24px;
     padding-right: 24px;
   }
+
+  /* Bottom padding for tablets */
+  .overflow-y-auto {
+    padding-bottom: 100px !important;
+  }
 }
 
 @media (min-width: 769px) {
@@ -608,6 +613,11 @@ onBeforeUnmount(() => {
     max-width: 100%;
     padding-left: 48px;
     padding-right: 48px;
+  }
+
+  /* Bottom padding for desktop */
+  .overflow-y-auto {
+    padding-bottom: 120px !important;
   }
 }
 
