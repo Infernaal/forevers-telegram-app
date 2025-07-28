@@ -562,6 +562,11 @@ const goBack = () => {
   .available-f-section {
     gap: 8px !important;
   }
+
+  /* Bottom padding for desktop */
+  .overflow-y-auto {
+    padding-bottom: 120px !important;
+  }
 }
 
 /* Telegram WebApp optimizations */
