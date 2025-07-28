@@ -659,16 +659,6 @@ const hideSuccessNotification = () => {
   }
 }
 
-@media (min-width: 1025px) {
-  .qr-section {
-    width: 347px;
-    height: 396px;
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
-}
-
 .qr-background {
   width: 100%;
   height: 100%;
