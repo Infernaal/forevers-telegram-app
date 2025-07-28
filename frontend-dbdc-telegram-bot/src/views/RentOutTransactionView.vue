@@ -808,7 +808,8 @@ onUnmounted(() => {
 @media (min-width: 768px) and (max-width: 1023px) {
   /* Transaction Details Modal - Full width on tablet */
   .transaction-details-modal {
-    align-items: end;
+    align-items: end !important;
+    justify-content: stretch !important;
   }
 
   .transaction-modal-container {
