@@ -323,7 +323,9 @@ const confirmDelete = () => {
 }
 
 /* Mobile optimizations for Telegram mini app */
-@media (max-width: 375px) {
+
+/* Very small mobile devices (≤374px) */
+@media (max-width: 374px) {
   .cart-view {
     max-width: 100%;
   }
@@ -331,7 +333,20 @@ const confirmDelete = () => {
   .overflow-y-auto {
     padding-left: 12px;
     padding-right: 12px;
-    padding-bottom: 80px !important; /* Enhanced space for BottomNavigation */
+    padding-bottom: 100px !important; /* Enhanced space for BottomNavigation */
+  }
+}
+
+/* Regular mobile devices (375px-430px) */
+@media (min-width: 375px) and (max-width: 430px) {
+  .cart-view {
+    max-width: 100%;
+  }
+
+  .overflow-y-auto {
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-bottom: 110px !important; /* Enhanced space for BottomNavigation */
   }
 
   .fixed-bottom-section {
@@ -387,16 +402,7 @@ const confirmDelete = () => {
   }
 }
 
-@media (min-width: 376px) and (max-width: 430px) {
-  .cart-view {
-    max-width: 100%;
-  }
 
-  .overflow-y-auto {
-    padding-left: 14px;
-    padding-right: 14px;
-    padding-bottom: 85px !important; /* Enhanced space for BottomNavigation */
-  }
 
   .fixed-bottom-section {
     max-width: 100%;
@@ -413,7 +419,7 @@ const confirmDelete = () => {
   }
 }
 
-/* Tablets and larger phones */
+/* Large mobile and small tablets (431px-768px) */
 @media (min-width: 431px) and (max-width: 768px) {
   .cart-view {
     max-width: 100%;
@@ -425,7 +431,7 @@ const confirmDelete = () => {
   }
 
   .overflow-y-auto {
-    padding-bottom: 100px !important; /* Enhanced space for BottomNavigation */
+    padding-bottom: 140px !important; /* Enhanced space for BottomNavigation */
   }
 
   .fixed-bottom-section {
@@ -460,7 +466,7 @@ const confirmDelete = () => {
   }
 }
 
-/* Desktop and large tablets */
+/* Desktop and large tablets (≥769px) */
 @media (min-width: 769px) {
   .cart-view {
     max-width: 100%;
@@ -472,7 +478,7 @@ const confirmDelete = () => {
   }
 
   .overflow-y-auto {
-    padding-bottom: 120px !important; /* Enhanced space for BottomNavigation */
+    padding-bottom: 150px !important; /* Enhanced space for BottomNavigation */
   }
 
   .fixed-bottom-section {
