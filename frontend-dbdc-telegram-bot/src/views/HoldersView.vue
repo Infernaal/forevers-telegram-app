@@ -567,12 +567,7 @@ const hideSuccessNotification = () => {
   }
 }
 
-@media (min-width: 1025px) {
-  .referral-title {
-    font-size: 24px;
-    line-height: 28px;
-  }
-}
+
 
 .referral-subtitle {
   color: #4B4D50;
