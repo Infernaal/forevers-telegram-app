@@ -1448,27 +1448,258 @@ const hideSuccessNotification = () => {
   .referral-header {
     width: calc(100vw - 28px);
     left: 14px;
+    margin-bottom: 16px;
+    height: 44px;
+  }
+
+  .referral-title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .referral-subtitle {
+    font-size: 14px;
+    line-height: 20px;
   }
 
   .scroll-content {
     width: calc(100vw - 28px);
     left: 14px;
+    gap: 16px;
+    height: auto;
+    min-height: 420px;
+    margin-top: 40px;
   }
 
   .qr-section {
     width: calc(100vw - 28px);
+    height: 320px;
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .qr-background {
+    border-radius: 20px;
+  }
+
+  .qr-code-container {
+    width: 180px;
+    height: 180px;
+    left: 50%;
+    top: 30px;
+    transform: translateX(-50%);
+  }
+
+  .qr-code-wrapper {
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    box-sizing: border-box;
+  }
+
+  .qr-code-image {
+    width: 110px;
+    height: 110px;
+    position: static;
+    margin-bottom: 12px;
+  }
+
+  .qr-code-link {
+    font-size: 14px;
+    line-height: 20px;
+    position: static;
+    width: auto;
+    height: auto;
+    text-align: center;
+  }
+
+  .terms-checkbox-wrapper {
+    position: relative;
+    left: 0;
+    top: 0;
+    transform: scale(0.9);
+    transform-origin: left center;
+    margin: 12px 0;
+  }
+
+  .share-button-container {
+    position: relative;
+    left: 0;
+    top: 0;
+    margin: 16px 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .share-button {
+    width: 280px;
+    padding: 10px 32px;
+    height: 44px;
+    font-size: 14px;
+    line-height: 20px;
   }
 
   .how-to-section {
     width: calc(100vw - 28px);
+    height: auto;
+    min-height: 300px;
+    margin-top: 20px;
+    left: 0;
+    top: 0;
+  }
+
+  .how-to-title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .how-to-subtitle {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .step-indicators {
+    left: 50%;
+    top: 100px;
+    width: 240px;
+    height: 32px;
+    transform: translateX(-50%);
+  }
+
+  .step-line {
+    width: 32px;
+  }
+
+  .step-line-1 {
+    left: 46px;
+    top: 16px;
+  }
+
+  .step-line-2 {
+    left: 148px;
+    top: 16px;
+  }
+
+  .step-indicator {
+    width: 30px;
+    height: 32px;
+  }
+
+  .step-indicator-2 {
+    left: 105px;
+  }
+
+  .step-indicator-3 {
+    left: 210px;
+  }
+
+  .step-descriptions {
+    top: 150px;
+    height: 40px;
+    justify-content: center;
+    gap: 50px;
+  }
+
+  .step-number {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .step-text {
+    font-size: 10px;
+    line-height: 14px;
   }
 
   .web-link-section {
     width: calc(100vw - 28px);
+    height: 180px;
+    margin-top: 40px;
+    position: relative;
+    left: 0;
+    top: 0;
   }
 
   .web-link-background {
     width: 100%;
+    height: 178px;
+    border-radius: 20px;
+  }
+
+  .web-link-content {
+    padding: 16px;
+  }
+
+  .web-link-title {
+    font-size: 20px;
+    line-height: 24px;
+    width: auto;
+    height: auto;
+    margin-bottom: 8px;
+  }
+
+  .web-link-description {
+    font-size: 13px;
+    line-height: 18px;
+    width: auto;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  .copy-link-container {
+    width: calc(100% - 32px);
+    height: 44px;
+    max-width: none;
+  }
+
+  .copy-link-text {
+    font-size: 14px;
+    line-height: 20px;
+    width: auto;
+    height: auto;
+  }
+
+  .copy-button {
+    width: 44px;
+    height: 44px;
+  }
+
+  .copy-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Scale F-icons for small mobile */
+  .f-icon-1 {
+    width: 80px;
+    height: 80px;
+    left: -20px;
+    top: -10px;
+  }
+
+  .f-icon-2 {
+    width: 40px;
+    height: 40px;
+    left: 85%;
+    top: 70%;
+  }
+
+  .f-icon-3 {
+    width: 100px;
+    height: 100px;
+    left: -30px;
+    top: 70%;
+  }
+
+  .f-icon-4 {
+    width: 80px;
+    height: 80px;
+    left: 80%;
+    top: 10px;
   }
 }
 
