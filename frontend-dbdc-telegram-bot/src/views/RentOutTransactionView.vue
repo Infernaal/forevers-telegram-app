@@ -814,9 +814,8 @@ onUnmounted(() => {
     width: 100%;
     margin: 0;
   }
-}
 
-  /* Larger text and spacing for tablet/desktop */
+  /* Larger text and spacing for tablet */
   .transaction-details-scroll .flex.justify-between {
     padding: 16px 0;
   }
