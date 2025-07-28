@@ -430,6 +430,7 @@ const confirmDelete = () => {
 
   .fixed-bottom-section {
     max-width: 100%;
+    bottom: 20px; /* Поднять выше на tablet */
   }
 
   .h-12 {
