@@ -185,9 +185,9 @@
     <div v-if="showTransactionModal" class="fixed inset-0 z-50 flex items-end lg:items-center justify-center bg-black bg-opacity-20 backdrop-blur-sm">
       <div class="w-full max-w-md lg:max-w-lg xl:max-w-xl bg-white rounded-t-3xl lg:rounded-3xl xl:rounded-4xl shadow-xl animate-slide-up lg:animate-none">
         <!-- Modal Header -->
-        <div class="flex items-center justify-between p-4 border-b">
-          <h2 class="text-base font-medium text-dbd-dark">Transaction Details</h2>
-          <button @click="closeTransactionModal" class="w-11 h-11 flex items-center justify-center rounded-full bg-dbd-off-white border border-gray-200">
+        <div class="flex items-center justify-between p-4 lg:p-6 xl:p-8 border-b">
+          <h2 class="text-base lg:text-lg xl:text-xl font-medium text-dbd-dark">Transaction Details</h2>
+          <button @click="closeTransactionModal" class="w-11 h-11 lg:w-12 lg:h-12 xl:w-14 xl:h-14 flex items-center justify-center rounded-full bg-dbd-off-white border border-gray-200">
             <div class="w-5 h-5 relative">
               <div class="absolute w-4 h-0.5 bg-dbd-dark rounded-full rotate-45 top-2.5 left-0.5"></div>
               <div class="absolute w-4 h-0.5 bg-dbd-dark rounded-full -rotate-45 top-2.5 left-0.5"></div>
