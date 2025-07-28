@@ -821,13 +821,14 @@ onUnmounted(() => {
     border-radius: 24px 24px 0 0 !important;
   }
 
-  /* Force override Tailwind classes */
-  .transaction-details-modal .transaction-modal-container.max-w-md {
+  /* Force override all Tailwind max-width classes */
+  .transaction-details-modal .transaction-modal-container,
+  .transaction-details-modal .transaction-modal-container.max-w-md,
+  .transaction-details-modal .transaction-modal-container.md\\:max-w-full,
+  .transaction-details-modal .transaction-modal-container.lg\\:max-w-lg,
+  .transaction-details-modal .transaction-modal-container.xl\\:max-w-xl {
     max-width: none !important;
-  }
-
-  .transaction-details-modal .transaction-modal-container.md\\:max-w-full {
-    max-width: none !important;
+    width: 100% !important;
   }
 
   .transaction-details-modal > div {
