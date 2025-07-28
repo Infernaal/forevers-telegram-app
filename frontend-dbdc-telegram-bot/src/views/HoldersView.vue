@@ -299,7 +299,7 @@
               </div>
               <button
                 v-if="!linkCopied"
-                class="w-13 h-13 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-r-full border border-indigo-700 bg-dbd-off-white flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ease-out hover:bg-blue-50 hover:transform hover:-translate-y-0.5 hover:scale-105 hover:shadow-lg active:transform active:translate-y-0 active:scale-95"
+                class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-r-full border border-indigo-700 bg-dbd-off-white flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ease-out hover:bg-blue-50 hover:transform hover:-translate-y-0.5 hover:scale-105 hover:shadow-lg active:transform active:translate-y-0 active:scale-95"
                 @click="copyWebLink"
               >
                 <div class="flex w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 p-0.5 justify-center items-center text-indigo-700 transition-transform duration-200">
