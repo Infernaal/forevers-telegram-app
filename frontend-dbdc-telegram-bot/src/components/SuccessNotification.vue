@@ -130,7 +130,7 @@ defineEmits(['close'])
 
 @media (min-width: 431px) and (max-width: 768px) {
   .success-notification-container {
-    bottom: calc(130px + env(safe-area-inset-bottom, 0px)); /* 88px nav + 42px spacing */
+    bottom: calc(150px + env(safe-area-inset-bottom, 0px)); /* 88px nav + 62px spacing */
   }
 
   .success-notification-content {
@@ -152,7 +152,7 @@ defineEmits(['close'])
 
 @media (min-width: 769px) {
   .success-notification-container {
-    bottom: calc(150px + env(safe-area-inset-bottom, 0px)); /* 100px nav + 50px spacing */
+    bottom: calc(180px + env(safe-area-inset-bottom, 0px)); /* 100px nav + 80px spacing */
   }
 
   .success-notification-content {
@@ -195,13 +195,13 @@ defineEmits(['close'])
 
   @media (min-width: 431px) and (max-width: 768px) {
     .success-notification-container {
-      bottom: max(130px, calc(130px + env(safe-area-inset-bottom)));
+      bottom: max(150px, calc(150px + env(safe-area-inset-bottom)));
     }
   }
 
   @media (min-width: 769px) {
     .success-notification-container {
-      bottom: max(150px, calc(150px + env(safe-area-inset-bottom)));
+      bottom: max(180px, calc(180px + env(safe-area-inset-bottom)));
     }
   }
 }
