@@ -277,9 +277,11 @@
             <div class="relative w-full max-w-sm h-13 sm:h-14 md:h-16 rounded-full border border-blue-600 border-opacity-60 bg-white bg-opacity-10 flex items-center transition-all duration-400 ease-out overflow-hidden"
                 :class="{ 'border-green-500 bg-green-700 transform scale-105': linkCopied }">
 
-              <!-- Text -->
-              <div v-if="!linkCopied" class="flex-1 px-6 py-3.5">
-                <span class="text-dbd-off-white text-sm font-semibold leading-5 underline truncate">vm.dubadu/jjhI1uT4S</span>
+              <!-- URL text -->
+              <div v-if="!linkCopied" class="flex-1 px-4 sm:px-6 py-3.5 overflow-hidden">
+                <span class="text-dbd-off-white text-xs sm:text-sm font-semibold leading-5 underline truncate block max-w-full">
+                  vm.dubadu/jjhI1uT4S
+                </span>
               </div>
 
               <!-- Copied State -->
