@@ -125,25 +125,21 @@
       <!-- Unified Step Section -->
       <div class="w-full max-w-2xl mx-auto px-4 mb-12">
         <!-- Step Indicators + Lines -->
-        <div class="grid grid-cols-3 gap-4 sm:gap-6 md:gap-10 lg:gap-12 items-center justify-center mb-4">
+        <div class="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 lg:gap-8 mb-4">
           <!-- Step 1 -->
-          <div class="flex justify-center relative">
-            <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-r-full bg-dbd-primary z-10"></div>
-          </div>
+          <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-r-full bg-dbd-primary"></div>
+
+          <!-- Line -->
+          <div class="w-6 sm:w-8 md:w-10 lg:w-12 h-px bg-dbd-light-gray"></div>
 
           <!-- Step 2 -->
-          <div class="flex justify-center items-center relative">
-            <!-- Connecting Line -->
-            <div class="absolute left-0 right-0 top-1/2 transform -translate-y-1/2 mx-auto w-[40%] h-px bg-dbd-light-gray z-0"></div>
-            <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-r-full bg-dbd-primary z-10"></div>
-          </div>
+          <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-r-full bg-dbd-primary"></div>
+
+          <!-- Line -->
+          <div class="w-6 sm:w-8 md:w-10 lg:w-12 h-px bg-dbd-light-gray"></div>
 
           <!-- Step 3 -->
-          <div class="flex justify-center items-center relative">
-            <!-- Connecting Line -->
-            <div class="absolute left-0 right-0 top-1/2 transform -translate-y-1/2 mx-auto w-[40%] h-px bg-dbd-light-gray z-0"></div>
-            <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-r-full bg-dbd-primary z-10"></div>
-          </div>
+          <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-r-full bg-dbd-primary"></div>
         </div>
 
         <!-- Step Descriptions -->
@@ -182,7 +178,6 @@
           </div>
         </div>
       </div>
-
 
         <!-- Web Referral Link Section -->
         <div class="relative w-full h-52">
