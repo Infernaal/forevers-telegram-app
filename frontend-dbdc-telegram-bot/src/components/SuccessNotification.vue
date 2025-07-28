@@ -107,12 +107,12 @@ defineEmits(['close'])
 }
 
 /* Responsive adjustments */
-@media (max-width: 375px) {
+@media (max-width: 374px) {
   .success-notification-container {
     left: 16px;
     right: 16px;
     transform: none;
-    bottom: calc(100px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(84px + env(safe-area-inset-bottom, 0px)); /* 64px nav + 20px spacing */
   }
 
   .success-notification-content {
@@ -122,9 +122,54 @@ defineEmits(['close'])
   }
 }
 
-@media (min-width: 376px) and (max-width: 768px) {
+@media (min-width: 375px) and (max-width: 430px) {
   .success-notification-container {
-    bottom: calc(120px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(88px + env(safe-area-inset-bottom, 0px)); /* 68px nav + 20px spacing */
+  }
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+  .success-notification-container {
+    bottom: calc(108px + env(safe-area-inset-bottom, 0px)); /* 88px nav + 20px spacing */
+  }
+
+  .success-notification-content {
+    width: 400px;
+    height: 52px;
+    padding: 14px 20px;
+  }
+
+  .success-message {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .check-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (min-width: 769px) {
+  .success-notification-container {
+    bottom: calc(120px + env(safe-area-inset-bottom, 0px)); /* 100px nav + 20px spacing */
+  }
+
+  .success-notification-content {
+    width: 480px;
+    height: 60px;
+    padding: 18px 24px;
+  }
+
+  .success-message {
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 600;
+  }
+
+  .check-icon {
+    width: 28px;
+    height: 28px;
   }
 }
 
@@ -133,14 +178,31 @@ defineEmits(['close'])
   .success-notification-container {
     position: fixed;
     z-index: 1000;
-    bottom: calc(100px + env(safe-area-inset-bottom, 8px));
   }
 }
 
 /* Safe area support for notifications */
 @supports (padding: max(0px)) {
   .success-notification-container {
-    bottom: max(100px, calc(100px + env(safe-area-inset-bottom)));
+    bottom: max(84px, calc(84px + env(safe-area-inset-bottom)));
+  }
+
+  @media (min-width: 375px) and (max-width: 430px) {
+    .success-notification-container {
+      bottom: max(88px, calc(88px + env(safe-area-inset-bottom)));
+    }
+  }
+
+  @media (min-width: 431px) and (max-width: 768px) {
+    .success-notification-container {
+      bottom: max(108px, calc(108px + env(safe-area-inset-bottom)));
+    }
+  }
+
+  @media (min-width: 769px) {
+    .success-notification-container {
+      bottom: max(120px, calc(120px + env(safe-area-inset-bottom)));
+    }
   }
 }
 
