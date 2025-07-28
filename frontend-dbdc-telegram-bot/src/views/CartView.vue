@@ -399,7 +399,7 @@ const confirmDelete = () => {
   }
 
   .fixed-bottom-section {
-    max-width: 430px;
+    max-width: 100%;
   }
 
   /* Bottom section padding */
