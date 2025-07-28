@@ -143,6 +143,7 @@
     <!-- Success Notification -->
     <SuccessNotification
       :is-visible="showSuccessNotification"
+      :class="{ 'blur-notification': isAnyModalOpen }"
       message="Rent Out Forevers Successfully"
       @close="showSuccessNotification = false"
     />
