@@ -169,6 +169,11 @@ const showInfoTooltip = ref(false)
 const showRentModal = ref(false)
 const showTermsModal = ref(false)
 const showSuccessNotification = ref(false)
+
+// Check if any modal is open for blur effect
+const isAnyModalOpen = computed(() => {
+  return showRentModal.value || showTermsModal.value || showInfoTooltip.value
+})
 const selectedBalance = ref(null)
 const inputAmount = ref('250')
 const termsAgreed = ref(false)
