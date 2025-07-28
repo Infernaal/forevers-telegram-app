@@ -123,33 +123,31 @@
         </div>
 
       <!-- Unified Step Section -->
-      <div class="w-full max-w-2xl mx-auto px-4 mb-12 relative">
-        <!-- Step Indicators (in grid) -->
-        <div class="grid grid-cols-3 items-center text-center mb-4 relative">
+      <div class="w-full max-w-2xl mx-auto px-4 mb-12">
+        <!-- Step Indicators -->
+        <div class="grid grid-cols-3 gap-4 text-center mb-4 relative">
           <!-- Step 1 -->
-          <div class="flex justify-center relative">
+          <div class="flex justify-center items-center relative">
             <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-dbd-primary rounded-r-full z-10"></div>
+            <!-- Line to Step 2 -->
+            <div class="absolute right-0 top-1/2 transform -translate-y-1/2 w-[40%] h-px bg-dbd-light-gray z-0"></div>
           </div>
-
-          <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-dbd-primary rounded-r-full z-10"></div>
 
           <!-- Step 2 -->
-          <div class="flex justify-center relative">
-            <!-- Connecting line from Step 1 to Step 2 -->
-            <div class="absolute left-0 right-0 top-1/2 transform -translate-y-1/2 mx-auto w-full max-w-[80px] h-px bg-dbd-light-gray z-0"></div>
+          <div class="flex justify-center items-center relative">
+            <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-dbd-primary rounded-r-full z-10"></div>
+            <!-- Line to Step 3 -->
+            <div class="absolute right-0 top-1/2 transform -translate-y-1/2 w-[40%] h-px bg-dbd-light-gray z-0"></div>
           </div>
 
-          <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-dbd-primary rounded-r-full z-10"></div>
-
           <!-- Step 3 -->
-          <div class="flex justify-center relative">
-            <!-- Connecting line from Step 2 to Step 3 -->
-            <div class="absolute left-0 right-0 top-1/2 transform -translate-y-1/2 mx-auto w-full max-w-[80px] h-px bg-dbd-light-gray z-0"></div>
+          <div class="flex justify-center items-center">
+            <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-dbd-primary rounded-r-full z-10"></div>
           </div>
         </div>
 
-        <!-- Step Descriptions (same grid) -->
-        <div class="grid grid-cols-3 text-center gap-4 sm:gap-6 md:gap-10 lg:gap-12">
+        <!-- Step Descriptions -->
+        <div class="grid grid-cols-3 gap-4 text-center">
           <!-- Step 1 -->
           <div class="flex flex-col items-center gap-1">
             <div class="flex items-center gap-1.5 justify-center">
@@ -184,6 +182,7 @@
           </div>
         </div>
       </div>
+
 
 
         <!-- Web Referral Link Section -->
