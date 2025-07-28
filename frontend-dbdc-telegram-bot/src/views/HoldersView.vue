@@ -84,7 +84,7 @@
         </div>
 
         <!-- Terms and Conditions -->
-        <div class="absolute left-6 bottom-16 z-20">
+        <div class="absolute left-6 bottom-16 z-20 md:left-1/2 md:transform md:-translate-x-1/2">
           <TermsCheckbox
             v-model="termsAccepted"
             @open-terms="openTerms"
