@@ -131,8 +131,30 @@ const emit = defineEmits(['back', 'purchase'])
 /* Desktop and large screens */
 @media (min-width: 769px) {
   .cart-bottom-component {
-    padding-bottom: 28px; /* поднято выше */
+    padding: 20px 40px 32px 40px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .action-buttons .back-button {
+    height: 52px;
+    min-width: 140px;
+    font-size: 16px;
+  }
+
+  .action-buttons .buy-button {
+    height: 52px;
+    font-size: 18px;
+    min-width: 200px;
+  }
+
+  .total-section span {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .total-section {
+    margin-bottom: 16px;
   }
 }
 </style>
-
