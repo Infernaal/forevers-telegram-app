@@ -118,7 +118,26 @@ defineEmits(['close'])
   .success-notification-content {
     width: calc(100vw - 32px);
     max-width: 343px;
-    white-space: nowrap;
+    white-space: normal;
+    min-height: 44px;
+    height: auto;
+    align-items: flex-start;
+    padding: 8px 16px;
+  }
+
+  .success-notification-container .success-message {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    margin-left: 8px;
+    line-height: 18px;
+    font-size: 14px;
+    text-align: left;
+  }
+
+  .success-notification-container .check-icon-container {
+    margin-top: 2px;
+    flex-shrink: 0;
   }
 }
 
