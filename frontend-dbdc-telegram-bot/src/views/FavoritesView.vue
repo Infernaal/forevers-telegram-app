@@ -739,19 +739,19 @@ main {
 /* Empty State responsive bottom padding */
 @media (max-width: 374px) {
   .flex-1.flex.items-center.justify-center {
-    padding-bottom: 84px !important;
+    padding-bottom: 100px !important;
   }
 }
 
 @media (min-width: 375px) and (max-width: 430px) {
   .flex-1.flex.items-center.justify-center {
-    padding-bottom: 88px !important;
+    padding-bottom: 110px !important;
   }
 }
 
 @media (min-width: 431px) and (max-width: 768px) {
   .flex-1.flex.items-center.justify-center {
-    padding-bottom: 118px !important;
+    padding-bottom: 140px !important;
   }
 }
 
