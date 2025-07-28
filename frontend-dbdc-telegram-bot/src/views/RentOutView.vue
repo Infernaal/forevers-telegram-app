@@ -510,6 +510,11 @@ const goBack = () => {
     min-height: 52px;
     min-width: 52px;
   }
+
+  /* Bottom padding for tablets */
+  .overflow-y-auto {
+    padding-bottom: 100px !important;
+  }
 }
 
 @media (min-width: 769px) {
