@@ -111,6 +111,7 @@
     <!-- Delete Success Notification -->
     <SuccessNotification
       :is-visible="showDeleteSuccess"
+      :class="{ 'blur-notification': isAnyModalOpen }"
       message="Position delete successfully"
       @close="showDeleteSuccess = false"
     />
