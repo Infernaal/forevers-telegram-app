@@ -3,7 +3,7 @@
     <!-- Content Container -->
     <div class="content-container bg-gray-100 flex-1 flex flex-col relative">
       <!-- Scrollable Cart Items Area -->
-      <div class="flex-1 overflow-y-auto px-3.5 lg:px-12 xl:px-16 pt-4 lg:pt-8 xl:pt-12 pb-24 sm:pb-28 md:pb-36 lg:pb-40 xl:pb-44" v-if="cartItemsCount > 0">
+      <div class="flex-1 overflow-y-auto px-3.5 lg:px-12 xl:px-16 pt-4 lg:pt-8 xl:pt-12 pb-20 sm:pb-24 md:pb-28 lg:pb-32 xl:pb-40" v-if="cartItemsCount > 0">
         <div class="space-y-2 lg:space-y-4 xl:space-y-6">
           <div
             v-for="item in cartItems"
@@ -62,7 +62,7 @@
       </div>
 
       <!-- Empty Cart (takes full space when empty) -->
-      <div v-else class="flex-1 flex items-center justify-center px-3.5 lg:px-12 xl:px-16 pt-4 lg:pt-8 xl:pt-12">
+      <div v-else class="flex-1 flex items-center justify-center px-3.5 lg:px-12 xl:px-16 pt-4 lg:pt-8 xl:pt-12 pb-20 sm:pb-24 md:pb-28 lg:pb-32 xl:pb-40">
         <div class="text-center">
           <div class="w-16 h-16 lg:w-32 lg:h-32 xl:w-40 xl:h-40 bg-gray-200 rounded-lg lg:rounded-2xl xl:rounded-3xl flex items-center justify-center mb-4 lg:mb-8 xl:mb-12 mx-auto">
             <svg width="20" height="22" viewBox="0 0 18 20" class="text-gray-400 lg:w-12 lg:h-12 xl:w-16 xl:h-16">
@@ -111,6 +111,7 @@
     <!-- Delete Success Notification -->
     <SuccessNotification
       :is-visible="showDeleteSuccess"
+      :class="{ 'blur-notification': isAnyModalOpen }"
       message="Position delete successfully"
       @close="showDeleteSuccess = false"
     />
@@ -139,6 +140,11 @@ const { cartItems, cartItemsCount, cartTotal, removeFromCart, clearCart } = useC
 // Computed properties
 const totalForeversAmount = computed(() => {
   return cartItems.value.reduce((total, item) => total + item.foreversAmount, 0)
+})
+
+// Check if any modal is open for blur effect
+const isAnyModalOpen = computed(() => {
+  return showDeleteModal.value || showSuccessModal.value
 })
 
 // Modal state
@@ -213,11 +219,44 @@ const confirmDelete = () => {
 </script>
 
 <style scoped>
+/* Hide scrollbar for WebKit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+* {
+  scrollbar-width: none;
+}
+
+/* Hide scrollbar for Internet Explorer and Edge Legacy */
+* {
+  -ms-overflow-style: none;
+}
+
+/* Ensure smooth scrolling on touch devices */
+.overflow-y-auto {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.overflow-y-auto::-webkit-scrollbar {
+  display: none;
+}
+
 .cart-view {
   font-family: 'Montserrat', sans-serif;
   height: 100vh;
   height: 100dvh; /* Dynamic viewport height for mobile */
   background: #f3f4f6 !important;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.cart-view::-webkit-scrollbar {
+  display: none;
 }
 
 .content-container {
@@ -323,7 +362,9 @@ const confirmDelete = () => {
 }
 
 /* Mobile optimizations for Telegram mini app */
-@media (max-width: 375px) {
+
+/* Very small mobile devices (≤374px) */
+@media (max-width: 374px) {
   .cart-view {
     max-width: 100%;
   }
@@ -331,7 +372,22 @@ const confirmDelete = () => {
   .overflow-y-auto {
     padding-left: 12px;
     padding-right: 12px;
-    padding-bottom: 220px; /* Space for fixed bottom */
+    /* CartBottom ~70px + BottomNav ~74px + safe area + extra spacing */
+    padding-bottom: 180px !important;
+  }
+}
+
+/* Regular mobile devices (375px-430px) */
+@media (min-width: 375px) and (max-width: 430px) {
+  .cart-view {
+    max-width: 100%;
+  }
+
+  .overflow-y-auto {
+    padding-left: 14px;
+    padding-right: 14px;
+    /* CartBottom ~75px + BottomNav ~78px + safe area + extra spacing */
+    padding-bottom: 190px !important;
   }
 
   .fixed-bottom-section {
@@ -387,33 +443,7 @@ const confirmDelete = () => {
   }
 }
 
-@media (min-width: 376px) and (max-width: 430px) {
-  .cart-view {
-    max-width: 100%;
-  }
-
-  .overflow-y-auto {
-    padding-left: 14px;
-    padding-right: 14px;
-    padding-bottom: 220px; /* Space for fixed bottom */
-  }
-
-  .fixed-bottom-section {
-    max-width: 100%;
-  }
-
-  /* Bottom section padding */
-  .px-3-5 {
-    padding-left: 14px !important;
-    padding-right: 14px !important;
-  }
-
-  .cart-item {
-    padding: 12px;
-  }
-}
-
-/* Tablets and larger phones */
+/* Large mobile and small tablets (431px-768px) */
 @media (min-width: 431px) and (max-width: 768px) {
   .cart-view {
     max-width: 100%;
@@ -425,7 +455,8 @@ const confirmDelete = () => {
   }
 
   .overflow-y-auto {
-    padding-bottom: 280px; /* Space for fixed bottom */
+    /* CartBottom ~85px + BottomNav ~108px + safe area + extra spacing */
+    padding-bottom: 230px !important;
   }
 
   .fixed-bottom-section {
@@ -460,7 +491,7 @@ const confirmDelete = () => {
   }
 }
 
-/* Desktop and large tablets */
+/* Desktop and large tablets (≥769px) */
 @media (min-width: 769px) {
   .cart-view {
     max-width: 100%;
@@ -472,7 +503,8 @@ const confirmDelete = () => {
   }
 
   .overflow-y-auto {
-    padding-bottom: 320px; /* Space for fixed bottom */
+    /* CartBottom ~105px + BottomNav ~130px + safe area + extra spacing */
+    padding-bottom: 270px !important;
   }
 
   .fixed-bottom-section {
@@ -510,6 +542,82 @@ const confirmDelete = () => {
   .modal-header {
     padding: 2rem;
   }
+}
+
+/* Landscape orientation adjustments for mobile devices */
+@media (max-height: 500px) and (orientation: landscape) {
+  .overflow-y-auto {
+    padding-bottom: 140px !important;
+  }
+
+  .flex-1.flex.items-center.justify-center {
+    padding-bottom: 140px !important;
+  }
+}
+
+/* Fine-tuning for specific popular device sizes */
+
+/* iPhone SE and similar small phones */
+@media (min-width: 320px) and (max-width: 374px) and (min-height: 568px) {
+  .overflow-y-auto {
+    padding-bottom: 185px !important;
+  }
+
+  .flex-1.flex.items-center.justify-center {
+    padding-bottom: 185px !important;
+  }
+}
+
+/* Standard iPhone sizes (iPhone 12 mini, iPhone 13 mini) */
+@media (min-width: 375px) and (max-width: 390px) and (min-height: 812px) {
+  .overflow-y-auto {
+    padding-bottom: 195px !important;
+  }
+
+  .flex-1.flex.items-center.justify-center {
+    padding-bottom: 195px !important;
+  }
+}
+
+/* iPhone 12/13/14 Pro Max and similar large phones */
+@media (min-width: 414px) and (max-width: 430px) and (min-height: 896px) {
+  .overflow-y-auto {
+    padding-bottom: 200px !important;
+  }
+
+  .flex-1.flex.items-center.justify-center {
+    padding-bottom: 200px !important;
+  }
+}
+
+/* iPad mini and similar tablets in portrait */
+@media (min-width: 744px) and (max-width: 768px) and (orientation: portrait) {
+  .overflow-y-auto {
+    padding-bottom: 235px !important;
+  }
+
+  .flex-1.flex.items-center.justify-center {
+    padding-bottom: 235px !important;
+  }
+}
+
+/* iPad and similar tablets in portrait */
+@media (min-width: 768px) and (max-width: 834px) and (orientation: portrait) {
+  .overflow-y-auto {
+    padding-bottom: 275px !important;
+  }
+
+  .flex-1.flex.items-center.justify-center {
+    padding-bottom: 275px !important;
+  }
+}
+
+/* Blur effect for SuccessNotification when modal is open */
+.blur-notification {
+  filter: blur(4px);
+  opacity: 0.6;
+  transition: all 0.3s ease;
+  pointer-events: none;
 }
 
 /* Support for safe areas on iOS - handled by BottomNavigation */

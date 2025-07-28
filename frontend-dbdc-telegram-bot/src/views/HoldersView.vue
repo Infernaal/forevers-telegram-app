@@ -326,6 +326,7 @@
     <!-- Success Notification -->
     <SuccessNotification
       :is-visible="showSuccessNotification"
+      :class="{ 'blur-notification': isAnyModalOpen }"
       :message="successMessage"
       @close="hideSuccessNotification"
     />
@@ -333,7 +334,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import BottomNavigation from '../components/BottomNavigation.vue'
 import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
 import SuccessNotification from '../components/SuccessNotification.vue'
@@ -344,6 +345,11 @@ const termsAccepted = ref(false)
 const linkCopied = ref(false)
 const referralLink = ref('vm.dubadu/jjhI1uT4S')
 const showTermsModal = ref(false)
+
+// Check if any modal is open for blur effect
+const isAnyModalOpen = computed(() => {
+  return showTermsModal.value
+})
 
 // Success notification
 const showSuccessNotification = ref(false)
@@ -582,3 +588,44 @@ const hideSuccessNotification = () => {
   }
 }
 </script>
+
+<style scoped>
+/* Blur effect for SuccessNotification when modal is open */
+.blur-notification {
+  filter: blur(4px);
+  opacity: 0.6;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+/* Hide scrollbar for WebKit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+* {
+  scrollbar-width: none;
+}
+
+/* Hide scrollbar for Internet Explorer and Edge Legacy */
+* {
+  -ms-overflow-style: none;
+}
+
+/* Ensure smooth scrolling on touch devices */
+.overflow-y-auto {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Apply hidden scrollbar to main container */
+.w-full.min-h-screen.bg-gray-100.font-montserrat.overflow-y-auto.overflow-x-hidden {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.w-full.min-h-screen.bg-gray-100.font-montserrat.overflow-y-auto.overflow-x-hidden::-webkit-scrollbar {
+  display: none;
+}
+</style>

@@ -29,7 +29,7 @@
       </div>
 
       <!-- Scroll Content -->
-      <div class="flex-1 overflow-y-auto pt-2 lg:pt-6 xl:pt-8 pb-24 sm:pb-28 md:pb-36 lg:pb-40 xl:pb-44 space-y-2 lg:space-y-4 xl:space-y-6" v-if="balances.length > 0">
+      <div class="flex-1 overflow-y-auto pt-2 lg:pt-6 xl:pt-8 pb-20 sm:pb-24 md:pb-28 lg:pb-32 xl:pb-40 space-y-2 lg:space-y-4 xl:space-y-6" v-if="balances.length > 0">
         <div
           v-for="balance in balances"
           :key="balance.id"
@@ -139,7 +139,7 @@
       </div>
 
       <!-- Empty State (when no balances from backend) -->
-      <div v-else class="flex-1 flex items-center justify-center">
+      <div v-else class="flex-1 flex items-center justify-center pb-20 sm:pb-24 md:pb-28 lg:pb-32 xl:pb-40">
         <div class="text-center">
           <div class="w-16 h-16 lg:w-32 lg:h-32 xl:w-40 xl:h-40 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4 lg:mb-8 xl:mb-12">
             <svg width="32" height="32" viewBox="0 0 32 32" class="text-gray-400 lg:w-16 lg:h-16 xl:w-20 xl:h-20">
@@ -155,6 +155,7 @@
     <!-- Success Notification -->
     <SuccessNotification
       :is-visible="showSuccessNotification"
+      :class="{ 'blur-notification': isAnyModalOpen }"
       :message="successMessage"
       @close="hideSuccessNotification"
     />
@@ -225,6 +226,11 @@ let errorTimeout = null
 
 // Info tooltip state
 const showInfoTooltip = ref(false)
+
+// Check if any modal is open for blur effect
+const isAnyModalOpen = computed(() => {
+  return showEnterAmountModal.value || showInfoTooltip.value
+})
 const dollarsAmount = computed(() => {
   if (!selectedBalance.value) return 1000
   return foreversAmount.value * selectedBalance.value.usdRate
@@ -581,28 +587,118 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
+/* Blur effect for SuccessNotification when modal is open */
+.blur-notification {
+  filter: blur(4px);
+  opacity: 0.6;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
 /* Mobile first approach for Telegram mini app */
-@media (max-width: 375px) {
+
+/* Very small mobile devices (≤374px) */
+@media (max-width: 374px) {
+  main {
+    max-width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  /* Bottom padding: BottomNav ~74px + safe area + extra spacing */
+  .overflow-y-auto {
+    padding-bottom: 100px !important;
+  }
+}
+
+/* Regular mobile devices (375px-430px) */
+@media (min-width: 375px) and (max-width: 430px) {
   main {
     max-width: 100%;
     padding-left: 14px;
     padding-right: 14px;
   }
+
+  /* Bottom padding: BottomNav ~78px + safe area + extra spacing */
+  .overflow-y-auto {
+    padding-bottom: 110px !important;
+  }
 }
 
-@media (min-width: 376px) and (max-width: 768px) {
+/* Large mobile and small tablets (431px-768px) */
+@media (min-width: 431px) and (max-width: 768px) {
   main {
     max-width: 100%;
     padding-left: 24px;
     padding-right: 24px;
   }
+
+  /* Bottom padding: BottomNav ~108px + safe area + extra spacing */
+  .overflow-y-auto {
+    padding-bottom: 140px !important;
+  }
 }
 
+/* Desktop and large tablets (≥769px) */
 @media (min-width: 769px) {
   main {
     max-width: 100%;
     padding-left: 48px;
     padding-right: 48px;
+  }
+
+  /* Bottom padding: BottomNav ~130px + safe area + extra spacing */
+  .overflow-y-auto {
+    padding-bottom: 140px !important;
+  }
+}
+
+/* Landscape orientation adjustments for mobile devices */
+@media (max-height: 500px) and (orientation: landscape) {
+  main {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .overflow-y-auto {
+    padding-bottom: 74px !important;
+  }
+}
+
+/* Fine-tuning for specific popular device sizes */
+
+/* iPhone SE and similar small phones */
+@media (min-width: 320px) and (max-width: 374px) and (min-height: 568px) {
+  .overflow-y-auto {
+    padding-bottom: 105px !important;
+  }
+}
+
+/* Standard iPhone sizes (iPhone 12 mini, iPhone 13 mini) */
+@media (min-width: 375px) and (max-width: 390px) and (min-height: 812px) {
+  .overflow-y-auto {
+    padding-bottom: 115px !important;
+  }
+}
+
+/* iPhone 12/13/14 Pro Max and similar large phones */
+@media (min-width: 414px) and (max-width: 430px) and (min-height: 896px) {
+  .overflow-y-auto {
+    padding-bottom: 120px !important;
+  }
+}
+
+/* iPad mini and similar tablets in portrait */
+@media (min-width: 744px) and (max-width: 768px) and (orientation: portrait) {
+  .overflow-y-auto {
+    padding-bottom: 145px !important;
+  }
+}
+
+/* iPad and similar tablets in portrait */
+@media (min-width: 768px) and (max-width: 834px) and (orientation: portrait) {
+  .overflow-y-auto {
+    padding-bottom: 150px !important;
   }
 }
 
@@ -627,10 +723,71 @@ onBeforeUnmount(() => {
   -ms-overflow-style: none;
 }
 
-/* Smooth scroll behavior */
+/* Smooth scroll behavior and enhanced performance */
 .overflow-y-auto {
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
+  /* Prevent content shift during scrolling */
+  overscroll-behavior: contain;
+  /* Better performance for smooth scrolling */
+  will-change: scroll-position;
+  /* Prevent horizontal bounce on iOS */
+  overscroll-behavior-x: none;
+}
+
+/* Ensure main container takes full height properly */
+main {
+  min-height: calc(100vh - env(safe-area-inset-top, 0px));
+  box-sizing: border-box;
+}
+
+/* Better touch targets and interaction */
+.balance-card {
+  /* Ensure cards are touch-friendly */
+  touch-action: manipulation;
+  /* Prevent text selection during touch */
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Empty State responsive bottom padding */
+@media (max-width: 374px) {
+  .flex-1.flex.items-center.justify-center {
+    padding-bottom: 100px !important;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 430px) {
+  .flex-1.flex.items-center.justify-center {
+    padding-bottom: 110px !important;
+  }
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+  .flex-1.flex.items-center.justify-center {
+    padding-bottom: 140px !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .flex-1.flex.items-center.justify-center {
+    padding-bottom: 140px !important;
+  }
+}
+
+/* Optimize for mobile WebKit rendering */
+@supports (-webkit-touch-callout: none) {
+  .overflow-y-auto {
+    /* Better iOS scroll performance */
+    -webkit-overflow-scrolling: touch;
+    /* Prevent scroll chaining */
+    overscroll-behavior: contain;
+  }
+
+  main {
+    /* Prevent iOS zoom on input focus */
+    -webkit-text-size-adjust: 100%;
+  }
 }
 
 

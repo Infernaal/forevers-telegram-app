@@ -23,7 +23,7 @@
     </div>
 
     <!-- Scrollable Content Area -->
-    <div class="flex-1 w-full max-w-md lg:max-w-6xl xl:max-w-7xl mx-auto overflow-y-auto px-4 lg:px-12 xl:px-16 pb-24 sm:pb-28 md:pb-36 lg:pb-40 xl:pb-44">
+    <div class="flex-1 w-full max-w-md lg:max-w-6xl xl:max-w-7xl mx-auto overflow-y-auto px-4 lg:px-12 xl:px-16 pb-20 sm:pb-24 md:pb-28 lg:pb-32 xl:pb-40">
       <!-- Rent Out Cards List -->
       <div class="space-y-4 lg:space-y-6 xl:space-y-8">
         <div 
@@ -143,6 +143,7 @@
     <!-- Success Notification -->
     <SuccessNotification
       :is-visible="showSuccessNotification"
+      :class="{ 'blur-notification': isAnyModalOpen }"
       message="Rent Out Forevers Successfully"
       @close="showSuccessNotification = false"
     />
@@ -169,6 +170,11 @@ const showInfoTooltip = ref(false)
 const showRentModal = ref(false)
 const showTermsModal = ref(false)
 const showSuccessNotification = ref(false)
+
+// Check if any modal is open for blur effect
+const isAnyModalOpen = computed(() => {
+  return showRentModal.value || showTermsModal.value || showInfoTooltip.value
+})
 const selectedBalance = ref(null)
 const inputAmount = ref('250')
 const termsAgreed = ref(false)
@@ -342,6 +348,14 @@ const goBack = () => {
 </script>
 
 <style scoped>
+/* Blur effect for SuccessNotification when modal is open */
+.blur-notification {
+  filter: blur(4px);
+  opacity: 0.6;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
 /* Custom scrollbar for webkit browsers */
 ::-webkit-scrollbar {
   width: 0;
@@ -353,11 +367,32 @@ const goBack = () => {
 }
 
 /* Mobile first approach for Telegram mini app */
-@media (max-width: 375px) {
+
+/* Very small mobile devices (≤374px) */
+@media (max-width: 374px) {
   .w-full.max-w-md {
     max-width: 100%;
     padding-left: 12px;
     padding-right: 12px;
+  }
+
+  /* Bottom padding: BottomNav ~74px + safe area + extra spacing */
+  .overflow-y-auto {
+    padding-bottom: 100px !important;
+  }
+}
+
+/* Regular mobile devices (375px-430px) */
+@media (min-width: 375px) and (max-width: 430px) {
+  .w-full.max-w-md {
+    max-width: 100%;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  /* Bottom padding: BottomNav ~78px + safe area + extra spacing */
+  .overflow-y-auto {
+    padding-bottom: 110px !important;
   }
 
   .text-4xl {
@@ -411,6 +446,55 @@ const goBack = () => {
   }
 }
 
+/* Landscape orientation adjustments for mobile devices */
+@media (max-height: 500px) and (orientation: landscape) {
+  .w-full.max-w-md {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .overflow-y-auto {
+    padding-bottom: 74px !important;
+  }
+}
+
+/* Fine-tuning for specific popular device sizes */
+
+/* iPhone SE and similar small phones */
+@media (min-width: 320px) and (max-width: 374px) and (min-height: 568px) {
+  .overflow-y-auto {
+    padding-bottom: 105px !important;
+  }
+}
+
+/* Standard iPhone sizes (iPhone 12 mini, iPhone 13 mini) */
+@media (min-width: 375px) and (max-width: 390px) and (min-height: 812px) {
+  .overflow-y-auto {
+    padding-bottom: 115px !important;
+  }
+}
+
+/* iPhone 12/13/14 Pro Max and similar large phones */
+@media (min-width: 414px) and (max-width: 430px) and (min-height: 896px) {
+  .overflow-y-auto {
+    padding-bottom: 120px !important;
+  }
+}
+
+/* iPad mini and similar tablets in portrait */
+@media (min-width: 744px) and (max-width: 768px) and (orientation: portrait) {
+  .overflow-y-auto {
+    padding-bottom: 145px !important;
+  }
+}
+
+/* iPad and similar tablets in portrait */
+@media (min-width: 768px) and (max-width: 834px) and (orientation: portrait) {
+  .overflow-y-auto {
+    padding-bottom: 155px !important;
+  }
+}
+
 /* Ultra-tight Available section spacing */
 .available-tight {
   gap: 0 !important;
@@ -453,23 +537,14 @@ const goBack = () => {
   }
 }
 
-/* Small mobile devices */
-@media (min-width: 376px) and (max-width: 480px) {
+
+
+/* Large mobile and small tablets (431px-768px) */
+@media (min-width: 431px) and (max-width: 768px) {
   .w-full.max-w-md {
     max-width: 100%;
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
-  .bg-dbd-light-blue {
-    padding: 16px;
-  }
-}
-
-/* Tablets and larger phones */
-@media (min-width: 481px) and (max-width: 768px) {
-  .w-full.max-w-md {
-    max-width: 100%;
+    padding-left: 24px;
+    padding-right: 24px;
   }
 
   .bg-dbd-light-blue {
@@ -499,11 +574,19 @@ const goBack = () => {
     min-height: 52px;
     min-width: 52px;
   }
+
+  /* Bottom padding: BottomNav ~108px + safe area + extra spacing */
+  .overflow-y-auto {
+    padding-bottom: 140px !important;
+  }
 }
 
+/* Desktop and large tablets (≥769px) */
 @media (min-width: 769px) {
   .w-full.max-w-md {
     max-width: 100%;
+    padding-left: 48px;
+    padding-right: 48px;
   }
 
   .bg-dbd-light-blue {
@@ -545,6 +628,11 @@ const goBack = () => {
 
   .available-f-section {
     gap: 8px !important;
+  }
+
+  /* Bottom padding: BottomNav ~130px + safe area + extra spacing */
+  .overflow-y-auto {
+    padding-bottom: 150px !important;
   }
 }
 
