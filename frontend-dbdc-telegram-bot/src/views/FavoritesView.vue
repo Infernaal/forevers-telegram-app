@@ -709,10 +709,46 @@ onBeforeUnmount(() => {
   -ms-overflow-style: none;
 }
 
-/* Smooth scroll behavior */
+/* Smooth scroll behavior and enhanced performance */
 .overflow-y-auto {
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
+  /* Prevent content shift during scrolling */
+  overscroll-behavior: contain;
+  /* Better performance for smooth scrolling */
+  will-change: scroll-position;
+  /* Prevent horizontal bounce on iOS */
+  overscroll-behavior-x: none;
+}
+
+/* Ensure main container takes full height properly */
+main {
+  min-height: calc(100vh - env(safe-area-inset-top, 0px));
+  box-sizing: border-box;
+}
+
+/* Better touch targets and interaction */
+.balance-card {
+  /* Ensure cards are touch-friendly */
+  touch-action: manipulation;
+  /* Prevent text selection during touch */
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Optimize for mobile WebKit rendering */
+@supports (-webkit-touch-callout: none) {
+  .overflow-y-auto {
+    /* Better iOS scroll performance */
+    -webkit-overflow-scrolling: touch;
+    /* Prevent scroll chaining */
+    overscroll-behavior: contain;
+  }
+
+  main {
+    /* Prevent iOS zoom on input focus */
+    -webkit-text-size-adjust: 100%;
+  }
 }
 
 
