@@ -1,7 +1,7 @@
 <template>
   <div class="w-full min-h-screen bg-gray-100 font-montserrat overflow-y-auto overflow-x-hidden">
     <!-- Content Container -->
-    <div class="w-full min-h-screen bg-gray-100 relative px-4 pt-5 pb-32 md:pb-40">
+    <div class="w-full min-h-screen bg-gray-100 relative px-4 pt-5 pb-20">
       
       <!-- Referral Program Header -->
       <div class="flex flex-col items-start gap-1 mb-5">
@@ -13,19 +13,31 @@
       <div class="relative w-full h-96 mb-5">
         <!-- Background with gradient -->
         <div class="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-900 via-indigo-900 to-blue-800 backdrop-blur-lg overflow-hidden">
-          <!-- Decorative F Icons -->
-          <svg class="absolute -left-5 -top-3 w-32 h-32 opacity-10 transform rotate-45" viewBox="0 0 120 131" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g opacity="0.4">
-              <g clip-path="url(#clip0_2_20036)">
-                <path d="M107.496 65.3312L67.7265 22.9094C65.9756 21.0418 63.3909 20.9584 61.5233 22.7093L51.9517 31.6826C50.0177 33.4957 46.9801 33.3977 45.167 31.4637L37.4276 23.2082C37.2722 23.0425 37.1069 22.8853 36.9223 22.7529C34.9485 21.338 32.509 21.3362 30.7243 23.0093C28.8567 24.7602 28.7733 27.3448 30.5242 29.2125L38.497 37.7168C40.3101 39.6508 40.2121 42.6884 38.2781 44.5015L11.8979 69.2327C10.0303 70.9836 9.94687 73.5682 11.6978 75.4359C13.4486 77.3035 16.0333 77.3869 17.9009 75.636L28.2729 65.9123C30.2069 64.0992 33.2445 64.1973 35.0576 66.1312L44.5311 76.2364C46.282 78.104 48.8666 78.1874 50.7342 76.4365C52.6019 74.6857 52.6853 72.101 50.9344 70.2334L41.4609 60.1282C39.6478 58.1942 39.7458 55.1566 41.6797 53.3435L44.5479 50.6547C46.4819 48.8416 49.5195 48.9396 51.3326 50.8736L72.3119 73.2517C74.0628 75.1193 76.6474 75.2027 78.515 73.4518C80.3827 71.7009 80.466 69.1163 78.7152 67.2487L57.7359 44.8705C55.9228 42.9366 56.0208 39.8989 57.9548 38.0858L60.8229 35.397C62.7569 33.5839 65.7945 33.6819 67.6076 35.6159L100.843 71.0674C102.594 72.935 105.179 73.0184 107.046 71.2675C108.914 69.5166 109.247 67.1988 107.496 65.3312Z" fill="#FAFAFA"/>
-              </g>
-            </g>
-            <defs>
-              <clipPath id="clip0_2_20036">
-                <rect x="54.1885" y="-5.56738" width="96" height="96" rx="4.8" transform="rotate(46.8479 54.1885 -5.56738)" fill="white"/>
-              </clipPath>
-            </defs>
-          </svg>
+      <!-- Decorative F Icons -->
+      <svg class="absolute left-2 top-2 w-24 h-24 opacity-20 rotate-12" viewBox="0 0 120 131" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g opacity="0.4">
+          <g clip-path="url(#clip0)">
+            <path d="M107.496 65.3312L67.7265 22.9094C65.9756 21.0418 63.3909 20.9584 61.5233 22.7093L51.9517 31.6826C50.0177 33.4957 46.9801 33.3977 45.167 31.4637L37.4276 23.2082C37.2722 23.0425 37.1069 22.8853 36.9223 22.7529C34.9485 21.338 32.509 21.3362 30.7243 23.0093C28.8567 24.7602 28.7733 27.3448 30.5242 29.2125L38.497 37.7168C40.3101 39.6508 40.2121 42.6884 38.2781 44.5015L11.8979 69.2327C10.0303 70.9836 9.94687 73.5682 11.6978 75.4359C13.4486 77.3035 16.0333 77.3869 17.9009 75.636L28.2729 65.9123C30.2069 64.0992 33.2445 64.1973 35.0576 66.1312L44.5311 76.2364C46.282 78.104 48.8666 78.1874 50.7342 76.4365C52.6019 74.6857 52.6853 72.101 50.9344 70.2334L41.4609 60.1282C39.6478 58.1942 39.7458 55.1566 41.6797 53.3435L44.5479 50.6547C46.4819 48.8416 49.5195 48.9396 51.3326 50.8736L72.3119 73.2517C74.0628 75.1193 76.6474 75.2027 78.515 73.4518C80.3827 71.7009 80.466 69.1163 78.7152 67.2487L57.7359 44.8705C55.9228 42.9366 56.0208 39.8989 57.9548 38.0858L60.8229 35.397C62.7569 33.5839 65.7945 33.6819 67.6076 35.6159L100.843 71.0674C102.594 72.935 105.179 73.0184 107.046 71.2675C108.914 69.5166 109.247 67.1988 107.496 65.3312Z" fill="#FAFAFA"/>
+          </g>
+        </g>
+        <defs>
+          <clipPath id="clip0">
+            <rect x="54.1885" y="-5.56738" width="96" height="96" rx="4.8" transform="rotate(46.8479 54.1885 -5.56738)" fill="white"/>
+          </clipPath>
+        </defs>
+      </svg>
+
+      <svg class="absolute right-4 top-20 w-20 h-20 opacity-25 -rotate-12" viewBox="0 0 120 131" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <use href="#clip0" />
+      </svg>
+
+      <svg class="absolute left-10 bottom-10 w-28 h-28 opacity-15 rotate-45" viewBox="0 0 120 131" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <use href="#clip0" />
+      </svg>
+
+      <svg class="absolute right-2 bottom-4 w-24 h-24 opacity-15 rotate-[-30deg]" viewBox="0 0 120 131" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <use href="#clip0" />
+      </svg>
 
           <svg class="absolute right-20 top-44 w-16 h-16 opacity-10 transform rotate-150" viewBox="0 0 66 66" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g opacity="0.1">
@@ -77,35 +89,8 @@
               class="absolute left-1/2 top-5 transform -translate-x-1/2 w-36 h-36 aspect-square object-contain"
             />
             <!-- QR Code Link -->
-            <div class="absolute left-1/2 bottom-5 transform -translate-x-1/2 w-full px-4">
-              <div class="relative w-full max-w-[200px] mx-auto">
-                <input
-                  type="text"
-                  :value="referralLink"
-                  readonly
-                  class="w-full px-3 py-2 pr-12 text-center text-dbd-primary text-lg font-semibold bg-transparent border border-dbd-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-dbd-primary focus:border-transparent"
-                />
-                <button
-                  @click="copyQRLink"
-                  class="absolute right-2 top-1/2 transform -translate-y-1/2 p-1.5 rounded-md hover:bg-dbd-primary hover:bg-opacity-10 transition-colors duration-200"
-                >
-                  <svg v-if="!qrLinkCopied" width="20" height="20" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M18.0655 0.5H7.60611C6.97596 0.5 6.37161 0.727045 5.92603 1.13119C5.48044 1.53533 5.23011 2.08346 5.23011 2.65501V3.48385H4.04211C3.38111 3.48385 2.74718 3.72201 2.27978 4.14594C1.81239 4.56986 1.5498 5.14483 1.5498 5.74435V19.2395C1.5498 19.839 1.81239 20.414 2.27978 20.8379C2.74718 21.2618 3.38111 21.5 4.04211 21.5H14.2772C14.9382 21.5 15.5721 21.2618 16.0395 20.8379C16.5069 20.414 16.7695 19.839 16.7695 19.2395V18.486H18.0655C18.6907 18.4861 19.291 18.2634 19.7369 17.866C20.1829 17.4685 20.4389 16.9281 20.4498 16.3611V2.65501C20.4476 2.08277 20.1954 1.53465 19.7485 1.13073C19.3016 0.7268 18.6964 0.499997 18.0655 0.5ZM15.108 19.2395C15.108 19.4393 15.0204 19.631 14.8646 19.7723C14.7088 19.9136 14.4975 19.993 14.2772 19.993H4.04211C3.82178 19.993 3.61047 19.9136 3.45467 19.7723C3.29887 19.631 3.21134 19.4393 3.21134 19.2395V5.74435C3.21134 5.54451 3.29887 5.35285 3.45467 5.21154C3.61047 5.07024 3.82178 4.99085 4.04211 4.99085H14.2772C14.4975 4.99085 14.7088 5.07024 14.8646 5.21154C15.0204 5.35285 15.108 5.54451 15.108 5.74435V19.2395ZM18.7883 16.3611C18.7861 16.5337 18.709 16.6985 18.5737 16.8198C18.4383 16.9411 18.2558 17.0092 18.0655 17.0092H16.7695V5.74435C16.7695 5.14483 16.5069 4.56986 16.0395 4.14594C15.5721 3.72201 14.9382 3.48385 14.2772 3.48385H6.89165V2.65501C6.89165 2.48314 6.96693 2.31832 7.10091 2.19679C7.2349 2.07527 7.41663 2.007 7.60611 2.007H18.0655C18.16 2.006 18.2538 2.02203 18.3415 2.05414C18.4291 2.08626 18.5089 2.13384 18.5761 2.19411C18.6433 2.25438 18.6967 2.32616 18.7331 2.40527C18.7695 2.48439 18.7883 2.56927 18.7883 2.65501V16.3611Z" fill="#2019CE"/>
-                  </svg>
-                  <div v-if="qrLinkCopied" class="flex items-center justify-center">
-                    <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <g clip-path="url(#clip0_2_22327)">
-                        <path d="M11.3242 0.926106C10.7978 0.642629 10.2106 1.18934 9.86633 1.51331C9.07667 2.28275 8.40848 3.17368 7.65925 3.98362C6.82907 4.87455 6.05963 5.76548 5.20919 6.6362C4.72323 7.12216 4.19677 7.64862 3.8728 8.25607C3.14385 7.54734 2.51615 6.7779 1.70621 6.15023C1.11901 5.70477 0.147086 5.38079 0.167334 6.45396C0.207831 7.85113 1.44299 9.34952 2.35416 10.3012C2.73888 10.7061 3.24509 11.1313 3.8323 11.1516C4.54099 11.1921 5.26994 10.3417 5.69515 9.87594C6.44438 9.06601 7.05183 8.15479 7.74024 7.32464C8.63118 6.23123 9.54236 5.15803 10.413 4.04436C10.9597 3.35592 12.6809 1.65502 11.3242 0.926106ZM1.05823 6.37297C1.03798 6.37297 1.01773 6.37297 0.977238 6.39318C0.896244 6.37297 0.835499 6.35268 0.754505 6.31219C0.815251 6.27169 0.916493 6.29194 1.05823 6.37297Z" fill="#07B80E"/>
-                      </g>
-                      <defs>
-                        <clipPath id="clip0_2_22327">
-                          <rect width="11.6667" height="11.6667" fill="white" transform="translate(0.166992 0.166504)"/>
-                        </clipPath>
-                      </defs>
-                    </svg>
-                  </div>
-                </button>
-              </div>
+            <div class="absolute left-1/2 bottom-5 transform -translate-x-1/2 text-dbd-primary text-lg font-semibold leading-6 text-center">
+              vm.dubadu/jjhI1uT4S
             </div>
           </div>
         </div>
@@ -160,7 +145,7 @@
         </div>
 
       <!-- Unified Step Section -->
-      <div class="w-full max-w-2xl mx-auto px-4 mb-12 md:flex md:flex-col md:items-center">
+      <div class="w-full max-w-2xl mx-auto px-4 mb-12">
         <!-- Step Indicators -->
         <div class="grid grid-cols-5 gap-0 items-center text-center mb-4">
           <!-- D1 -->
@@ -233,19 +218,19 @@
       </div>
 
         <!-- Web Referral Link Section -->
-        <div class="relative w-full h-52 md:max-w-2xl md:mx-auto">
+        <div class="relative w-full h-52">
           <!-- Background -->
           <div class="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-900 via-indigo-900 to-blue-800 backdrop-blur-lg"></div>
-
+          
           <!-- Content -->
-          <div class="relative z-10 p-5 md:flex md:flex-col md:items-center md:text-center">
+          <div class="relative z-10 p-5">
             <div class="mb-7">
               <h3 class="text-white text-2xl font-bold leading-7 m-0 mb-3">Web Referral Link</h3>
               <p class="text-white text-base font-medium leading-6 m-0">Copy the link bellow and share with your friends.</p>
             </div>
             
             <!-- Copy Link Container -->
-            <div class="relative w-full max-w-sm h-13 rounded-full border border-blue-600 border-opacity-60 bg-white bg-opacity-10 flex items-center transition-all duration-400 ease-out md:mx-auto"
+            <div class="relative w-full max-w-sm h-13 rounded-full border border-blue-600 border-opacity-60 bg-white bg-opacity-10 flex items-center transition-all duration-400 ease-out"
                  :class="{ 'border-green-500 bg-green-700 transform scale-105': linkCopied }">
               <div v-if="!linkCopied" class="flex-1 px-6 py-3.5">
                 <span class="text-dbd-off-white text-sm font-semibold leading-5 underline">vm.dubadu/jjhI1uT4S</span>
@@ -273,8 +258,8 @@
                 class="w-12 h-13 rounded-r-full border border-indigo-700 bg-dbd-off-white flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ease-out hover:bg-blue-50 hover:transform hover:-translate-y-0.5 hover:scale-105 hover:shadow-lg active:transform active:translate-y-0 active:scale-95"
                 @click="copyWebLink"
               >
-                <div class="flex w-6 h-6 p-0.5 justify-center items-center text-indigo-700 transition-transform duration-200">
-                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <div class="flex w-5 h-5 p-0.5 justify-center items-center text-indigo-700 transition-transform duration-200">
+                  <svg width="18" height="18" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M18.0655 0.5H7.60611C6.97596 0.5 6.37161 0.727045 5.92603 1.13119C5.48044 1.53533 5.23011 2.08346 5.23011 2.65501V3.48385H4.04211C3.38111 3.48385 2.74718 3.72201 2.27978 4.14594C1.81239 4.56986 1.5498 5.14483 1.5498 5.74435V19.2395C1.5498 19.839 1.81239 20.414 2.27978 20.8379C2.74718 21.2618 3.38111 21.5 4.04211 21.5H14.2772C14.9382 21.5 15.5721 21.2618 16.0395 20.8379C16.5069 20.414 16.7695 19.839 16.7695 19.2395V18.486H18.0655C18.6907 18.4861 19.291 18.2634 19.7369 17.866C20.1829 17.4685 20.4389 16.9281 20.4498 16.3611V2.65501C20.4476 2.08277 20.1954 1.53465 19.7485 1.13073C19.3016 0.7268 18.6964 0.499997 18.0655 0.5ZM15.108 19.2395C15.108 19.4393 15.0204 19.631 14.8646 19.7723C14.7088 19.9136 14.4975 19.993 14.2772 19.993H4.04211C3.82178 19.993 3.61047 19.9136 3.45467 19.7723C3.29887 19.631 3.21134 19.4393 3.21134 19.2395V5.74435C3.21134 5.54451 3.29887 5.35285 3.45467 5.21154C3.61047 5.07024 3.82178 4.99085 4.04211 4.99085H14.2772C14.4975 4.99085 14.7088 5.07024 14.8646 5.21154C15.0204 5.35285 15.108 5.54451 15.108 5.74435V19.2395ZM18.7883 16.3611C18.7861 16.5337 18.709 16.6985 18.5737 16.8198C18.4383 16.9411 18.2558 17.0092 18.0655 17.0092H16.7695V5.74435C16.7695 5.14483 16.5069 4.56986 16.0395 4.14594C15.5721 3.72201 14.9382 3.48385 14.2772 3.48385H6.89165V2.65501C6.89165 2.48314 6.96693 2.31832 7.10091 2.19679C7.2349 2.07527 7.41663 2.007 7.60611 2.007H18.0655C18.16 2.006 18.2538 2.02203 18.3415 2.05414C18.4291 2.08626 18.5089 2.13384 18.5761 2.19411C18.6433 2.25438 18.6967 2.32616 18.7331 2.40527C18.7695 2.48439 18.7883 2.56927 18.7883 2.65501V16.3611Z" fill="#2019CE"/>
                   </svg>
                 </div>
@@ -314,7 +299,6 @@ import TermsCheckbox from '../components/TermsCheckbox.vue'
 // Reactive data
 const termsAccepted = ref(false)
 const linkCopied = ref(false)
-const qrLinkCopied = ref(false)
 const referralLink = ref('vm.dubadu/jjhI1uT4S')
 const showTermsModal = ref(false)
 
@@ -468,55 +452,6 @@ const copyLink = async () => {
   setTimeout(() => {
     linkCopied.value = false
   }, 2000)
-}
-
-const copyQRLink = async () => {
-  let copySuccess = false
-
-  // Try modern clipboard API first
-  if (navigator.clipboard) {
-    try {
-      await navigator.clipboard.writeText(referralLink.value)
-      copySuccess = true
-    } catch (clipboardErr) {
-      console.log('Clipboard API failed, trying fallback method')
-    }
-  }
-
-  // If clipboard API failed or is not available, use fallback
-  if (!copySuccess) {
-    try {
-      const textArea = document.createElement('textarea')
-      textArea.value = referralLink.value
-      textArea.style.position = 'fixed'
-      textArea.style.left = '-999999px'
-      textArea.style.top = '-999999px'
-      textArea.style.opacity = '0'
-      document.body.appendChild(textArea)
-      textArea.focus()
-      textArea.select()
-
-      const successful = document.execCommand('copy')
-      document.body.removeChild(textArea)
-
-      if (!successful) {
-        console.log('Fallback copy method also failed')
-      }
-    } catch (fallbackErr) {
-      console.error('Fallback copy failed:', fallbackErr)
-    }
-  }
-
-  // Show copied state for QR link
-  qrLinkCopied.value = true
-  setTimeout(() => {
-    qrLinkCopied.value = false
-  }, 2000)
-
-  // Add haptic feedback
-  if (window.triggerHaptic) {
-    window.triggerHaptic('impact', 'light')
-  }
 }
 
 const copyWebLink = async () => {
