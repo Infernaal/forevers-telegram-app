@@ -38,6 +38,10 @@ defineProps({
   message: {
     type: String,
     default: 'Success!'
+  },
+  blurWhenModalOpen: {
+    type: Boolean,
+    default: false
   }
 })
 
