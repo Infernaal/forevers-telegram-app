@@ -1634,6 +1634,7 @@ const hideSuccessNotification = () => {
 
   .copy-link-container {
     width: calc(100vw - 68px);
+    max-width: 307px;
     height: 52px;
     position: relative;
     border-radius: 100px;
