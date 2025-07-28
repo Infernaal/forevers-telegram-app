@@ -582,32 +582,50 @@ onBeforeUnmount(() => {
 
 <style scoped>
 /* Mobile first approach for Telegram mini app */
-@media (max-width: 375px) {
+
+/* Very small mobile devices (≤374px) */
+@media (max-width: 374px) {
+  main {
+    max-width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  /* Bottom padding: BottomNav ~74px + safe area + extra spacing */
+  .overflow-y-auto {
+    padding-bottom: 84px !important;
+  }
+}
+
+/* Regular mobile devices (375px-430px) */
+@media (min-width: 375px) and (max-width: 430px) {
   main {
     max-width: 100%;
     padding-left: 14px;
     padding-right: 14px;
   }
 
-  /* Enhanced bottom padding for small screens */
+  /* Bottom padding: BottomNav ~78px + safe area + extra spacing */
   .overflow-y-auto {
-    padding-bottom: 80px !important;
+    padding-bottom: 88px !important;
   }
 }
 
-@media (min-width: 376px) and (max-width: 768px) {
+/* Large mobile and small tablets (431px-768px) */
+@media (min-width: 431px) and (max-width: 768px) {
   main {
     max-width: 100%;
     padding-left: 24px;
     padding-right: 24px;
   }
 
-  /* Bottom padding for tablets */
+  /* Bottom padding: BottomNav ~108px + safe area + extra spacing */
   .overflow-y-auto {
-    padding-bottom: 100px !important;
+    padding-bottom: 118px !important;
   }
 }
 
+/* Desktop and large tablets (≥769px) */
 @media (min-width: 769px) {
   main {
     max-width: 100%;
@@ -615,9 +633,9 @@ onBeforeUnmount(() => {
     padding-right: 48px;
   }
 
-  /* Bottom padding for desktop */
+  /* Bottom padding: BottomNav ~130px + safe area + extra spacing */
   .overflow-y-auto {
-    padding-bottom: 120px !important;
+    padding-bottom: 140px !important;
   }
 }
 
