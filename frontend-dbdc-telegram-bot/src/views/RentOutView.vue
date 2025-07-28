@@ -353,16 +353,32 @@ const goBack = () => {
 }
 
 /* Mobile first approach for Telegram mini app */
-@media (max-width: 375px) {
+
+/* Very small mobile devices (≤374px) */
+@media (max-width: 374px) {
   .w-full.max-w-md {
     max-width: 100%;
     padding-left: 12px;
     padding-right: 12px;
   }
 
-  /* Enhanced bottom padding for small screens */
+  /* Bottom padding: BottomNav ~74px + safe area + extra spacing */
   .overflow-y-auto {
-    padding-bottom: 80px !important;
+    padding-bottom: 100px !important;
+  }
+}
+
+/* Regular mobile devices (375px-430px) */
+@media (min-width: 375px) and (max-width: 430px) {
+  .w-full.max-w-md {
+    max-width: 100%;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  /* Bottom padding: BottomNav ~78px + safe area + extra spacing */
+  .overflow-y-auto {
+    padding-bottom: 110px !important;
   }
 
   .text-4xl {
@@ -458,28 +474,14 @@ const goBack = () => {
   }
 }
 
-/* Small mobile devices */
-@media (min-width: 376px) and (max-width: 480px) {
+
+
+/* Large mobile and small tablets (431px-768px) */
+@media (min-width: 431px) and (max-width: 768px) {
   .w-full.max-w-md {
     max-width: 100%;
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
-  .bg-dbd-light-blue {
-    padding: 16px;
-  }
-
-  /* Bottom padding for small mobile */
-  .overflow-y-auto {
-    padding-bottom: 85px !important;
-  }
-}
-
-/* Tablets and larger phones */
-@media (min-width: 481px) and (max-width: 768px) {
-  .w-full.max-w-md {
-    max-width: 100%;
+    padding-left: 24px;
+    padding-right: 24px;
   }
 
   .bg-dbd-light-blue {
@@ -510,15 +512,18 @@ const goBack = () => {
     min-width: 52px;
   }
 
-  /* Bottom padding for tablets */
+  /* Bottom padding: BottomNav ~108px + safe area + extra spacing */
   .overflow-y-auto {
-    padding-bottom: 100px !important;
+    padding-bottom: 140px !important;
   }
 }
 
+/* Desktop and large tablets (≥769px) */
 @media (min-width: 769px) {
   .w-full.max-w-md {
     max-width: 100%;
+    padding-left: 48px;
+    padding-right: 48px;
   }
 
   .bg-dbd-light-blue {
@@ -562,9 +567,9 @@ const goBack = () => {
     gap: 8px !important;
   }
 
-  /* Bottom padding for desktop */
+  /* Bottom padding: BottomNav ~130px + safe area + extra spacing */
   .overflow-y-auto {
-    padding-bottom: 120px !important;
+    padding-bottom: 150px !important;
   }
 }
 
