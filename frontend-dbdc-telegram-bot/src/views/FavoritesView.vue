@@ -736,6 +736,31 @@ main {
   -webkit-user-select: none;
 }
 
+/* Empty State responsive bottom padding */
+@media (max-width: 374px) {
+  .flex-1.flex.items-center.justify-center {
+    padding-bottom: 84px !important;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 430px) {
+  .flex-1.flex.items-center.justify-center {
+    padding-bottom: 88px !important;
+  }
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+  .flex-1.flex.items-center.justify-center {
+    padding-bottom: 118px !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .flex-1.flex.items-center.justify-center {
+    padding-bottom: 140px !important;
+  }
+}
+
 /* Optimize for mobile WebKit rendering */
 @supports (-webkit-touch-callout: none) {
   .overflow-y-auto {
