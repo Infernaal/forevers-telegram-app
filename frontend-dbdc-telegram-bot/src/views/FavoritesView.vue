@@ -139,7 +139,7 @@
       </div>
 
       <!-- Empty State (when no balances from backend) -->
-      <div v-else class="flex-1 flex items-center justify-center">
+      <div v-else class="flex-1 flex items-center justify-center pb-20 sm:pb-24 md:pb-28 lg:pb-32 xl:pb-40">
         <div class="text-center">
           <div class="w-16 h-16 lg:w-32 lg:h-32 xl:w-40 xl:h-40 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4 lg:mb-8 xl:mb-12">
             <svg width="32" height="32" viewBox="0 0 32 32" class="text-gray-400 lg:w-16 lg:h-16 xl:w-20 xl:h-20">
