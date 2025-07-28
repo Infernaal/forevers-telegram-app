@@ -87,13 +87,13 @@ defineEmits(['close'])
 
 /* Fixed positioning bottom spacing based on BottomNavigation height */
 .error-notification-fixed {
-  bottom: calc(84px + env(safe-area-inset-bottom, 0px)); /* 64px nav + 20px spacing for small screens */
+  bottom: calc(94px + env(safe-area-inset-bottom, 0px)); /* 64px nav + 30px spacing for small screens */
 }
 
 /* Responsive positioning for fixed bottom notifications */
 @media (max-width: 374px) {
   .error-notification-fixed {
-    bottom: calc(84px + env(safe-area-inset-bottom, 0px)) !important; /* 64px nav + 20px spacing */
+    bottom: calc(94px + env(safe-area-inset-bottom, 0px)) !important; /* 64px nav + 30px spacing */
     left: 16px !important;
     right: 16px !important;
     transform: none !important;
@@ -108,7 +108,7 @@ defineEmits(['close'])
 
 @media (min-width: 375px) and (max-width: 430px) {
   .error-notification-fixed {
-    bottom: calc(88px + env(safe-area-inset-bottom, 0px)) !important; /* 68px nav + 20px spacing */
+    bottom: calc(98px + env(safe-area-inset-bottom, 0px)) !important; /* 68px nav + 30px spacing */
   }
 }
 
@@ -196,12 +196,12 @@ defineEmits(['close'])
 /* Safe area support for notifications */
 @supports (padding: max(0px)) {
   .error-notification-fixed {
-    bottom: max(84px, calc(84px + env(safe-area-inset-bottom))) !important;
+    bottom: max(94px, calc(94px + env(safe-area-inset-bottom))) !important;
   }
 
   @media (min-width: 375px) and (max-width: 430px) {
     .error-notification-fixed {
-      bottom: max(88px, calc(88px + env(safe-area-inset-bottom))) !important;
+      bottom: max(98px, calc(98px + env(safe-area-inset-bottom))) !important;
     }
   }
 
