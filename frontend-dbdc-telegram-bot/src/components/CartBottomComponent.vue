@@ -1,7 +1,9 @@
 <template>
-  <div class="cart-bottom-component bg-gray-100 px-4 pt-4 pb-6 sm:pb-6 md:pb-7 lg:pb-8">
+  <div
+    class="cart-bottom-component bg-gray-100 px-4 pt-4 pb-[env(safe-area-inset-bottom,0)] sm:pb-4 md:pb-3 lg:pb-2"
+  >
     <!-- Total Section -->
-    <div class="total-section flex items-center justify-center gap-1 mb-3 text-base sm:text-[17px] md:text-[18px] lg:text-[19px] leading-6">
+    <div class="total-section flex items-center justify-center gap-1 mb-2 sm:mb-2 md:mb-1 text-base sm:text-[17px] md:text-[18px] lg:text-[19px] leading-6">
       <span class="text-dbd-dark font-semibold">Total to pay:</span>
       <span class="text-dbd-primary font-semibold">${{ totalAmount.toLocaleString() }}</span>
     </div>
@@ -11,8 +13,10 @@
       <!-- Back Button -->
       <button
         @click="$emit('back')"
-        class="back-button flex items-center justify-center gap-2 h-10 sm:h-[40px] md:h-[42px] lg:h-[44px]
-               px-6 sm:px-5 md:px-5 lg:px-6 min-w-[120px] sm:min-w-[110px] md:min-w-[115px] lg:min-w-[120px]
+        class="back-button flex items-center justify-center gap-2
+               h-10 sm:h-[40px] md:h-[42px] lg:h-[44px]
+               px-6 sm:px-5 md:px-5 lg:px-6
+               min-w-[120px] sm:min-w-[110px] md:min-w-[115px] lg:min-w-[120px]
                bg-dbd-off-white border border-dbd-gray rounded-full flex-shrink-0
                transition-all duration-200 hover:bg-gray-100"
       >
@@ -46,7 +50,6 @@ const props = defineProps({
     required: true
   }
 })
-
 const emit = defineEmits(['back', 'purchase'])
 </script>
 
@@ -54,11 +57,11 @@ const emit = defineEmits(['back', 'purchase'])
 .cart-bottom-component {
   font-family: 'Montserrat', sans-serif;
 }
-
 .back-button:hover,
 .buy-button:hover {
   transform: translateY(-1px);
 }
 </style>
+
 
 
