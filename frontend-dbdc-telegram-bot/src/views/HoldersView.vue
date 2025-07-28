@@ -704,15 +704,7 @@ const hideSuccessNotification = () => {
   }
 }
 
-@media (min-width: 1025px) {
-  .qr-code-container {
-    width: 222px;
-    height: 220px;
-    left: 63px;
-    top: 24px;
-    transform: none;
-  }
-}
+
 
 .qr-code-wrapper {
   width: 222px;
@@ -738,13 +730,7 @@ const hideSuccessNotification = () => {
   }
 }
 
-@media (min-width: 1025px) {
-  .qr-code-wrapper {
-    width: 222px;
-    height: 220px;
-    border-radius: 20px;
-  }
-}
+
 
 .qr-code-image {
   width: 140px;
@@ -765,15 +751,7 @@ const hideSuccessNotification = () => {
   }
 }
 
-@media (min-width: 1025px) {
-  .qr-code-image {
-    width: 140px;
-    height: 140px;
-    position: absolute;
-    left: 41px;
-    top: 20px;
-  }
-}
+
 
 .qr-code-link {
   color: #2019CE;
@@ -800,17 +778,7 @@ const hideSuccessNotification = () => {
   }
 }
 
-@media (min-width: 1025px) {
-  .qr-code-link {
-    font-size: 17px;
-    line-height: 24px;
-    position: absolute;
-    left: 20px;
-    top: 176px;
-    width: 182px;
-    height: 24px;
-  }
-}
+
 
 /* Terms Section */
 .terms-checkbox-wrapper {
@@ -831,14 +799,7 @@ const hideSuccessNotification = () => {
   }
 }
 
-@media (min-width: 1025px) {
-  .terms-checkbox-wrapper {
-    position: absolute;
-    left: 20px;
-    top: 256px;
-    transform: none;
-  }
-}
+
 
 /* Share Button */
 .share-button-container {
@@ -859,13 +820,7 @@ const hideSuccessNotification = () => {
   }
 }
 
-@media (min-width: 1025px) {
-  .share-button-container {
-    position: absolute;
-    left: 23px;
-    top: 322px;
-  }
-}
+
 
 .share-button {
   display: flex;
@@ -898,15 +853,7 @@ const hideSuccessNotification = () => {
   }
 }
 
-@media (min-width: 1025px) {
-  .share-button {
-    width: 300px;
-    padding: 12px 48px;
-    height: 50px;
-    font-size: 16px;
-    line-height: 26px;
-  }
-}
+
 
 .share-button:hover:not(:disabled) {
   transform: translateY(-1px);
@@ -986,14 +933,7 @@ const hideSuccessNotification = () => {
   }
 }
 
-@media (min-width: 1025px) {
-  .how-to-section {
-    left: 14px;
-    top: -60px;
-    width: 347px;
-    height: 410px;
-  }
-}
+
 
 .steps-container {
   position: relative;
@@ -1030,12 +970,7 @@ const hideSuccessNotification = () => {
   }
 }
 
-@media (min-width: 1025px) {
-  .how-to-title {
-    font-size: 20px;
-    line-height: 24px;
-  }
-}
+
 
 .how-to-subtitle {
   color: #4B4D50;
@@ -1054,12 +989,7 @@ const hideSuccessNotification = () => {
   }
 }
 
-@media (min-width: 1025px) {
-  .how-to-subtitle {
-    font-size: 16px;
-    line-height: 24px;
-  }
-}
+
 
 /* Step Indicators */
 .step-indicators {
@@ -1080,15 +1010,7 @@ const hideSuccessNotification = () => {
   }
 }
 
-@media (min-width: 1025px) {
-  .step-indicators {
-    left: 27px;
-    top: 88px;
-    width: 298px;
-    height: 40px;
-    transform: none;
-  }
-}
+
 
 .step-indicator-row {
   display: flex;
@@ -1163,14 +1085,7 @@ const hideSuccessNotification = () => {
   }
 }
 
-@media (min-width: 1025px) {
-  .step-descriptions {
-    top: 144px;
-    height: 44px;
-    justify-content: space-between;
-    gap: 0;
-  }
-}
+
 
 .step-description {
   display: inline-flex;
@@ -1248,15 +1163,7 @@ const hideSuccessNotification = () => {
   }
 }
 
-@media (min-width: 1025px) {
-  .web-link-section {
-    position: absolute;
-    left: 0;
-    top: 202px;
-    width: 347px;
-    height: 208px;
-  }
-}
+
 
 .web-link-background {
   width: 347px;
@@ -1277,13 +1184,7 @@ const hideSuccessNotification = () => {
   }
 }
 
-@media (min-width: 1025px) {
-  .web-link-background {
-    width: 347px;
-    height: 206px;
-    top: 2px;
-  }
-}
+
 
 .web-link-content {
   position: relative;
@@ -1317,14 +1218,7 @@ const hideSuccessNotification = () => {
   }
 }
 
-@media (min-width: 1025px) {
-  .web-link-title {
-    font-size: 26px;
-    line-height: 30px;
-    width: 244px;
-    height: 30px;
-  }
-}
+
 
 .web-link-description {
   color: #FFF;
@@ -1346,14 +1240,7 @@ const hideSuccessNotification = () => {
   }
 }
 
-@media (min-width: 1025px) {
-  .web-link-description {
-    font-size: 16px;
-    line-height: 24px;
-    width: 204px;
-    height: 48px;
-  }
-}
+
 
 /* Copy Link Container */
 .copy-link-container {
@@ -1376,12 +1263,7 @@ const hideSuccessNotification = () => {
   }
 }
 
-@media (min-width: 1025px) {
-  .copy-link-container {
-    width: 307px;
-    height: 52px;
-  }
-}
+
 
 .copy-link-copied-state {
   border: 1px solid #07B80E;
@@ -1414,14 +1296,7 @@ const hideSuccessNotification = () => {
   }
 }
 
-@media (min-width: 1025px) {
-  .copy-link-text {
-    font-size: 17px;
-    line-height: 24px;
-    width: 182px;
-    height: 24px;
-  }
-}
+
 
 .copy-link-copied-full {
   width: 100%;
@@ -1521,12 +1396,7 @@ const hideSuccessNotification = () => {
   }
 }
 
-@media (min-width: 1025px) {
-  .copy-button {
-    width: 50px;
-    height: 52px;
-  }
-}
+
 
 .copy-button:hover {
   background: #e8e8ff;
