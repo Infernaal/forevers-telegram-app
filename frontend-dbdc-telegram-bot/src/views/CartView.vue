@@ -141,6 +141,11 @@ const totalForeversAmount = computed(() => {
   return cartItems.value.reduce((total, item) => total + item.foreversAmount, 0)
 })
 
+// Check if any modal is open for blur effect
+const isAnyModalOpen = computed(() => {
+  return showDeleteModal.value || showSuccessModal.value
+})
+
 // Modal state
 const showSuccessModal = ref(false)
 const lastPurchaseDetails = ref(null)
