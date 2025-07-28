@@ -590,6 +590,14 @@ const hideSuccessNotification = () => {
 </script>
 
 <style scoped>
+/* Blur effect for SuccessNotification when modal is open */
+.blur-notification {
+  filter: blur(4px);
+  opacity: 0.6;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
 /* Hide scrollbar for WebKit browsers (Chrome, Safari, Edge) */
 ::-webkit-scrollbar {
   display: none;
