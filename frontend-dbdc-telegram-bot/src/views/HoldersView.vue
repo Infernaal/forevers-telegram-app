@@ -1462,7 +1462,7 @@ const hideSuccessNotification = () => {
 
   .qr-section {
     width: calc(100vw - 28px);
-    height: 414px;
+    height: 434px;
     position: absolute;
     left: 0;
     top: 0;
