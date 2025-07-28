@@ -160,7 +160,7 @@
                   hover:-translate-y-0.5 hover:shadow-lg
                   disabled:bg-gray-300 disabled:text-white disabled:cursor-not-allowed h-11 sm:h-12"
             :class="{
-              '!bg-gray-400 !text-gray-600 !cursor-not-allowed': !termsAccepted,
+              '!bg-gray-400 !bg-none !text-white !cursor-not-allowed': !termsAccepted,
               '!bg-gradient-to-r !from-blue-700 !to-indigo-700 !cursor-wait': isSharing
             }"
             :disabled="!termsAccepted || isSharing"
