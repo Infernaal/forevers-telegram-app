@@ -121,8 +121,9 @@ defineEmits(['close'])
     white-space: normal;
     min-height: 44px;
     height: auto;
-    align-items: flex-start;
-    padding: 8px 16px;
+    align-items: center;
+    padding: 10px 16px;
+    flex-direction: row;
   }
 
   .success-notification-container .success-message {
@@ -130,14 +131,16 @@ defineEmits(['close'])
     overflow: visible;
     text-overflow: unset;
     margin-left: 8px;
-    line-height: 18px;
-    font-size: 14px;
-    text-align: left;
+    line-height: 16px;
+    font-size: 13px;
+    text-align: center;
+    flex: 1;
   }
 
   .success-notification-container .check-icon-container {
-    margin-top: 2px;
     flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: 1px;
   }
 }
 
