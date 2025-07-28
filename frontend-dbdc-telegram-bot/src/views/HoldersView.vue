@@ -1555,52 +1555,73 @@ const hideSuccessNotification = () => {
 
   .step-indicators {
     position: absolute;
-    left: 27px;
+    left: 50%;
     top: 88px;
-    width: calc(100vw - 82px);
+    width: 280px;
     height: 40px;
+    transform: translateX(-50%);
   }
 
   .step-line {
-    width: calc((100vw - 200px) / 2);
+    width: 50px;
+    height: 2px;
+    background: #D0D0D0;
   }
 
   .step-line-1 {
     position: absolute;
-    left: 62px;
-    top: 20px;
+    left: 56px;
+    top: 19px;
   }
 
   .step-line-2 {
     position: absolute;
-    left: calc(100vw - 168px);
+    left: 174px;
     top: 19px;
   }
 
   .step-indicator {
-    width: 38px;
-    height: 40px;
-    border-radius: 0 100px 100px 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
     background: #2019CE;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 600;
   }
 
   .step-indicator-1 {
     position: absolute;
     left: 0;
-    top: 0;
+    top: 4px;
+  }
+
+  .step-indicator-1::after {
+    content: "1";
   }
 
   .step-indicator-2 {
     position: absolute;
-    left: 50%;
-    top: 0;
-    transform: translateX(-50%);
+    left: 124px;
+    top: 4px;
+  }
+
+  .step-indicator-2::after {
+    content: "2";
   }
 
   .step-indicator-3 {
     position: absolute;
-    right: 0;
-    top: 0;
+    left: 248px;
+    top: 4px;
+  }
+
+  .step-indicator-3::after {
+    content: "3";
   }
 
   .step-descriptions {
