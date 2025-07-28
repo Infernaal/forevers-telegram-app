@@ -92,12 +92,17 @@
         </div>
 
         <!-- Share Button -->
-        <div class="absolute left-1/2 bottom-2 transform -translate-x-1/2 z-20">
+        <div class="absolute left-0 right-0 bottom-2 px-4 z-20">
           <button
-            class="flex w-60 xs:w-72 px-6 xs:px-12 py-2.5 xs:py-3 justify-center items-center gap-1.5 xs:gap-2 rounded-full
-                  bg-gradient-to-r from-dbd-primary to-blue-500 text-white text-center font-semibold text-sm xs:text-base
-                  leading-6 transition-all duration-200 ease-in-out hover:transform hover:-translate-y-0.5 hover:shadow-lg
-                  disabled:bg-gray-300 disabled:text-white disabled:cursor-not-allowed h-11 xs:h-12"
+            class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto
+                  flex justify-center items-center
+                  px-5 sm:px-6 py-2.5 sm:py-3
+                  rounded-full
+                  bg-gradient-to-r from-dbd-primary to-blue-500
+                  text-white font-semibold text-sm sm:text-base leading-6
+                  transition-all duration-200 ease-in-out
+                  hover:-translate-y-0.5 hover:shadow-lg
+                  disabled:bg-gray-300 disabled:text-white disabled:cursor-not-allowed h-11 sm:h-12"
             :class="{
               '!bg-gray-300 !text-white !cursor-not-allowed': !termsAccepted,
               '!bg-gradient-to-r !from-blue-700 !to-indigo-700 !cursor-wait': isSharing
@@ -108,8 +113,10 @@
             <span v-if="!isSharing">Share QR code</span>
             <span v-else class="flex items-center gap-2">
               <svg class="animate-spin h-4 w-4" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                <circle class="opacity-25" cx="12" cy="12" r="10"
+                        stroke="currentColor" stroke-width="4" fill="none" />
+                <path class="opacity-75" fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
               </svg>
               Sharing...
             </span>
