@@ -360,6 +360,12 @@ const goBack = () => {
     padding-right: 12px;
   }
 
+  /* Enhanced bottom padding for small screens */
+  .overflow-y-auto {
+    padding-bottom: 80px !important;
+  }
+}
+
   .text-4xl {
     font-size: 28px;
     line-height: 32px;
