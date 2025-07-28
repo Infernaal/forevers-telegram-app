@@ -470,6 +470,11 @@ const goBack = () => {
   .bg-dbd-light-blue {
     padding: 16px;
   }
+
+  /* Bottom padding for small mobile */
+  .overflow-y-auto {
+    padding-bottom: 85px !important;
+  }
 }
 
 /* Tablets and larger phones */
