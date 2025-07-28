@@ -518,7 +518,7 @@ const hideSuccessNotification = () => {
 
 /* Content Container - now starts from top */
 .content-container {
-  width: 375px;
+  width: 100%;
   min-height: calc(100vh + 200px); /* Allow content to extend beyond viewport */
   background: #F0F0F0;
   position: relative;
