@@ -950,12 +950,11 @@ onUnmounted(() => {
   transition: all 0.2s ease;
 }
 
-@media (max-width: 640px) {
-  .export-option {
-    border-color: #3A33D3;
-    background: #3A33D3;
-    background-image: none;
-  }
+/* Apply mobile design to all screen sizes */
+.export-option {
+  border-color: #3A33D3 !important;
+  background: #3A33D3 !important;
+  background-image: none !important;
 }
 
 .export-option:hover {
