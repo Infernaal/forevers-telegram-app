@@ -402,23 +402,6 @@ const confirmDelete = () => {
   }
 }
 
-
-
-  .fixed-bottom-section {
-    max-width: 100%;
-  }
-
-  /* Bottom section padding */
-  .px-3-5 {
-    padding-left: 14px !important;
-    padding-right: 14px !important;
-  }
-
-  .cart-item {
-    padding: 12px;
-  }
-}
-
 /* Large mobile and small tablets (431px-768px) */
 @media (min-width: 431px) and (max-width: 768px) {
   .cart-view {
