@@ -1,5 +1,5 @@
 <template>
-  <div class="cart-bottom-component bg-gray-100 px-3.5 pt-4 pb-4">
+  <div class="cart-bottom-component bg-gray-100 px-3.5 pt-4 pb-6 md:pb-7">
     <!-- Total Section -->
     <div class="total-section flex items-center justify-center gap-1 mb-3">
       <span class="text-dbd-dark font-semibold text-lg leading-6">Total to pay:</span>
@@ -23,7 +23,7 @@
       <button
         @click="$emit('purchase')"
         class="buy-button flex items-center justify-center h-10 px-8 rounded-full text-white font-semibold text-base leading-5 transition-all duration-200 min-w-[180px]"
-        style="background: linear-gradient(90deg, #2019CE 0%, #473FFF 100%);"
+        style="background: linear-gradient(90deg, #2019CE 0%, #473FFF 100%)"
       >
         Buy Forevers
       </button>
@@ -32,7 +32,6 @@
 </template>
 
 <script setup>
-// Props
 const props = defineProps({
   totalAmount: {
     type: Number,
@@ -40,7 +39,6 @@ const props = defineProps({
   }
 })
 
-// Emits
 const emit = defineEmits(['back', 'purchase'])
 </script>
 
@@ -49,17 +47,12 @@ const emit = defineEmits(['back', 'purchase'])
   font-family: 'Montserrat', sans-serif;
 }
 
-.back-button:hover {
-  transform: translateY(-1px);
-}
-
+.back-button:hover,
 .buy-button:hover {
   transform: translateY(-1px);
 }
 
-
-
-/* Mobile optimizations for Telegram WebApp */
+/* Mobile optimization */
 @media (max-width: 375px) {
   .cart-bottom-component {
     padding: 14px 14px 16px 14px;
@@ -89,6 +82,7 @@ const emit = defineEmits(['back', 'purchase'])
   }
 }
 
+/* Small tablets */
 @media (min-width: 376px) and (max-width: 430px) {
   .cart-bottom-component {
     padding: 14px 16px 16px 16px;
@@ -115,6 +109,7 @@ const emit = defineEmits(['back', 'purchase'])
   .cart-bottom-component {
     max-width: 420px;
     margin: 0 auto;
+    padding-bottom: 28px; /* поднято выше */
   }
 
   .action-buttons .back-button {
@@ -130,6 +125,36 @@ const emit = defineEmits(['back', 'purchase'])
 
   .total-section span {
     font-size: 19px;
+  }
+}
+
+/* Desktop and large screens */
+@media (min-width: 769px) {
+  .cart-bottom-component {
+    padding: 20px 40px 32px 40px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .action-buttons .back-button {
+    height: 52px;
+    min-width: 140px;
+    font-size: 16px;
+  }
+
+  .action-buttons .buy-button {
+    height: 52px;
+    font-size: 18px;
+    min-width: 200px;
+  }
+
+  .total-section span {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .total-section {
+    margin-bottom: 16px;
   }
 }
 </style>
