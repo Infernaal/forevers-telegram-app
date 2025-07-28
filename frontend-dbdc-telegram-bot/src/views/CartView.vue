@@ -252,14 +252,8 @@ const confirmDelete = () => {
   left: 0;
   right: 0;
   z-index: 10;
-  max-width: 375px;
+  max-width: 100%;
   margin: 0 auto;
-}
-
-@media (min-width: 431px) {
-  .fixed-bottom-section {
-    max-width: 100%;
-  }
 }
 
 .fixed-bottom-section::before {
