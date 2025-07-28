@@ -808,8 +808,7 @@ onUnmounted(() => {
 @media (min-width: 768px) and (max-width: 1023px) {
   /* Transaction Details Modal - Full width on tablet */
   .transaction-details-modal {
-    align-items: end !important;
-    justify-content: stretch !important;
+    align-items: end;
   }
 
   .transaction-modal-container {
@@ -821,14 +820,13 @@ onUnmounted(() => {
     border-radius: 24px 24px 0 0 !important;
   }
 
-  /* Force override all Tailwind max-width classes */
-  .transaction-details-modal .transaction-modal-container,
-  .transaction-details-modal .transaction-modal-container.max-w-md,
-  .transaction-details-modal .transaction-modal-container.md\\:max-w-full,
-  .transaction-details-modal .transaction-modal-container.lg\\:max-w-lg,
-  .transaction-details-modal .transaction-modal-container.xl\\:max-w-xl {
+  /* Force override Tailwind classes */
+  .transaction-details-modal .transaction-modal-container.max-w-md {
     max-width: none !important;
-    width: 100% !important;
+  }
+
+  .transaction-details-modal .transaction-modal-container.md\\:max-w-full {
+    max-width: none !important;
   }
 
   .transaction-details-modal > div {

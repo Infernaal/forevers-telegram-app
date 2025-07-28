@@ -30,10 +30,8 @@ defineEmits(['update:modelValue', 'open-terms'])
 
 <style scoped>
 .terms-container {
-  width: 100%;
-  max-width: 319px;
-  min-height: 44px;
-  height: auto;
+  width: 319px;
+  height: 44px;
   z-index: 20;
 }
 
@@ -111,45 +109,19 @@ defineEmits(['update:modelValue', 'open-terms'])
 /* Responsive adjustments */
 @media (max-width: 375px) {
   .terms-container {
-    width: 100%;
-    max-width: calc(100% - 16px);
+    max-width: calc(100vw - 56px);
   }
-
+  
   .terms-text {
     font-size: 14px;
     line-height: 20px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
   }
 }
 
 @media (max-width: 320px) {
-  .terms-container {
-    width: 100%;
-    max-width: calc(100% - 8px);
-  }
-
   .terms-text {
     font-size: 13px;
     line-height: 18px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-  }
-}
-
-/* Modal specific responsive adjustments */
-@media (max-width: 375px) {
-  /* When inside modal, ensure proper spacing */
-  .max-w-\[311px\] .terms-container {
-    width: 100%;
-    max-width: calc(100% - 8px);
-  }
-}
-
-@media (max-width: 320px) {
-  .max-w-\[311px\] .terms-container {
-    width: 100%;
-    max-width: calc(100% - 4px);
   }
 }
 </style>
