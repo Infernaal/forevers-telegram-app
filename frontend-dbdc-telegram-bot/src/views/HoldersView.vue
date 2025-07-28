@@ -499,7 +499,7 @@ const hideSuccessNotification = () => {
 <style scoped>
 .holders-view {
   font-family: 'Montserrat', sans-serif;
-  width: 375px;
+  width: 100%;
   min-height: 100vh;
   background: #F0F0F0;
   position: relative;
