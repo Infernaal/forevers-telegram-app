@@ -331,7 +331,7 @@ const confirmDelete = () => {
   .overflow-y-auto {
     padding-left: 12px;
     padding-right: 12px;
-    padding-bottom: 220px; /* Space for fixed bottom */
+    padding-bottom: 80px !important; /* Enhanced space for BottomNavigation */
   }
 
   .fixed-bottom-section {
