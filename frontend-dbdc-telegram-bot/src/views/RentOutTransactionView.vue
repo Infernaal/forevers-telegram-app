@@ -928,12 +928,11 @@ onUnmounted(() => {
   gap: 8px;
 }
 
-@media (max-width: 640px) {
-  .export-dropdown-container {
-    border-color: #3A33D3;
-    background-color: #3A33D3;
-    box-shadow: 2px 3px 6px 0 #3A33D3;
-  }
+/* Apply mobile design to all screen sizes */
+.export-dropdown-container {
+  border-color: #3A33D3 !important;
+  background-color: #3A33D3 !important;
+  box-shadow: 2px 3px 6px 0 #3A33D3 !important;
 }
 
 .export-option {
