@@ -125,13 +125,12 @@
         <!-- Step Indicators -->
         <div class="relative w-full h-10 mb-12">
           <div class="flex justify-center items-center gap-6 w-full h-full relative">
-            <!-- Connecting Lines -->
-            <div class="absolute left-16 top-5 w-11 h-px bg-dbd-light-gray"></div>
-            <div class="absolute right-16 top-5 w-11 h-px bg-dbd-light-gray"></div>
-            
+            <!-- Connecting Lines -->    
             <!-- Step Indicators -->
             <div class="w-10 h-10 rounded-r-full bg-dbd-primary"></div>
+            <div class="absolute left-16 top-5 w-11 h-px bg-dbd-light-gray"></div>
             <div class="w-10 h-10 rounded-r-full bg-dbd-primary"></div>
+            <div class="absolute right-16 top-5 w-11 h-px bg-dbd-light-gray"></div>
             <div class="w-10 h-10 rounded-r-full bg-dbd-primary"></div>
           </div>
         </div>
