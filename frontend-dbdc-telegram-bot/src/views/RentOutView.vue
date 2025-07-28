@@ -432,6 +432,55 @@ const goBack = () => {
   }
 }
 
+/* Landscape orientation adjustments for mobile devices */
+@media (max-height: 500px) and (orientation: landscape) {
+  .w-full.max-w-md {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .overflow-y-auto {
+    padding-bottom: 74px !important;
+  }
+}
+
+/* Fine-tuning for specific popular device sizes */
+
+/* iPhone SE and similar small phones */
+@media (min-width: 320px) and (max-width: 374px) and (min-height: 568px) {
+  .overflow-y-auto {
+    padding-bottom: 105px !important;
+  }
+}
+
+/* Standard iPhone sizes (iPhone 12 mini, iPhone 13 mini) */
+@media (min-width: 375px) and (max-width: 390px) and (min-height: 812px) {
+  .overflow-y-auto {
+    padding-bottom: 115px !important;
+  }
+}
+
+/* iPhone 12/13/14 Pro Max and similar large phones */
+@media (min-width: 414px) and (max-width: 430px) and (min-height: 896px) {
+  .overflow-y-auto {
+    padding-bottom: 120px !important;
+  }
+}
+
+/* iPad mini and similar tablets in portrait */
+@media (min-width: 744px) and (max-width: 768px) and (orientation: portrait) {
+  .overflow-y-auto {
+    padding-bottom: 145px !important;
+  }
+}
+
+/* iPad and similar tablets in portrait */
+@media (min-width: 768px) and (max-width: 834px) and (orientation: portrait) {
+  .overflow-y-auto {
+    padding-bottom: 155px !important;
+  }
+}
+
 /* Ultra-tight Available section spacing */
 .available-tight {
   gap: 0 !important;
