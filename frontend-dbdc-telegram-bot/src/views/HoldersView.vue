@@ -123,29 +123,21 @@
         </div>
 
         <!-- Step Indicators -->
-        <div class="relative w-full h-10 mb-12">
-          <div class="flex justify-center items-center w-full h-full relative space-x-4">
-            
-            <!-- Step 1 -->
-            <div class="flex items-center space-x-2">
-              <div class="w-10 h-10 rounded-l-full bg-dbd-primary"></div>
-              <div class="w-6 h-px bg-dbd-light-gray"></div>
-            </div>
+        <div class="w-full h-10 mb-12 flex justify-center items-center gap-0">
+          <!-- Step 1 -->
+          <div class="w-10 h-10 rounded-r-full bg-dbd-primary"></div>
 
-            <!-- Step 2 -->
-            <div class="flex items-center space-x-2">
-              <div class="w-6 h-px bg-dbd-light-gray"></div>
-              <div class="w-10 h-10 rounded-full bg-dbd-primary"></div>
-              <div class="w-6 h-px bg-dbd-light-gray"></div>
-            </div>
+          <!-- Line -->
+          <div class="w-6 h-px bg-dbd-light-gray mx-2"></div>
 
-            <!-- Step 3 -->
-            <div class="flex items-center space-x-2">
-              <div class="w-6 h-px bg-dbd-light-gray"></div>
-              <div class="w-10 h-10 rounded-r-full bg-dbd-primary"></div>
-            </div>
+          <!-- Step 2 -->
+          <div class="w-10 h-10 rounded-r-full bg-dbd-primary"></div>
 
-          </div>
+          <!-- Line -->
+          <div class="w-6 h-px bg-dbd-light-gray mx-2"></div>
+
+          <!-- Step 3 -->
+          <div class="w-10 h-10 rounded-r-full bg-dbd-primary"></div>
         </div>
 
         <!-- Step Descriptions -->
