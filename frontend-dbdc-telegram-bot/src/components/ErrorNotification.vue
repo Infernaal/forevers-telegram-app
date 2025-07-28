@@ -114,7 +114,7 @@ defineEmits(['close'])
 
 @media (min-width: 431px) and (max-width: 768px) {
   .error-notification-fixed {
-    bottom: calc(130px + env(safe-area-inset-bottom, 0px)) !important; /* 88px nav + 42px spacing */
+    bottom: calc(150px + env(safe-area-inset-bottom, 0px)) !important; /* 88px nav + 62px spacing */
   }
 
   /* Larger notification for tablets */
@@ -134,7 +134,7 @@ defineEmits(['close'])
 
 @media (min-width: 769px) {
   .error-notification-fixed {
-    bottom: calc(150px + env(safe-area-inset-bottom, 0px)) !important; /* 100px nav + 50px spacing */
+    bottom: calc(180px + env(safe-area-inset-bottom, 0px)) !important; /* 100px nav + 80px spacing */
   }
 
   /* Even larger notification for desktop */
@@ -207,13 +207,13 @@ defineEmits(['close'])
 
   @media (min-width: 431px) and (max-width: 768px) {
     .error-notification-fixed {
-      bottom: max(130px, calc(130px + env(safe-area-inset-bottom))) !important;
+      bottom: max(150px, calc(150px + env(safe-area-inset-bottom))) !important;
     }
   }
 
   @media (min-width: 769px) {
     .error-notification-fixed {
-      bottom: max(150px, calc(150px + env(safe-area-inset-bottom))) !important;
+      bottom: max(180px, calc(180px + env(safe-area-inset-bottom))) !important;
     }
   }
 }
