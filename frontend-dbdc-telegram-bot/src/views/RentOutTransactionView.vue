@@ -807,6 +807,13 @@ onUnmounted(() => {
     align-items: end;
   }
 
+  .transaction-modal-container {
+    max-width: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    border-radius: 24px 24px 0 0 !important;
+  }
+
   .transaction-details-modal > div {
     border-radius: 24px 24px 0 0 !important;
     animation: none;
