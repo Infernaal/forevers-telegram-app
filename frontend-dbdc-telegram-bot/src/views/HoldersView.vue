@@ -274,7 +274,7 @@
             </div>
             
             <!-- Copy Link Container -->
-            <div class="relative w-full max-w-sm h-13 rounded-full border border-blue-600 border-opacity-60 bg-white bg-opacity-10 flex items-center transition-all duration-400 ease-out"
+            <div class="relative w-full max-w-sm h-13 sm:h-14 md:h-16 rounded-full border border-blue-600 border-opacity-60 bg-white bg-opacity-10 flex items-center transition-all duration-400 ease-out"
                  :class="{ 'border-green-500 bg-green-700 transform scale-105': linkCopied }">
               <div v-if="!linkCopied" class="flex-1 px-6 py-3.5">
                 <span class="text-dbd-off-white text-sm font-semibold leading-5 underline">vm.dubadu/jjhI1uT4S</span>
