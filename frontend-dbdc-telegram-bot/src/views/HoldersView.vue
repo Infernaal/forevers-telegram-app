@@ -345,6 +345,11 @@ const linkCopied = ref(false)
 const referralLink = ref('vm.dubadu/jjhI1uT4S')
 const showTermsModal = ref(false)
 
+// Check if any modal is open for blur effect
+const isAnyModalOpen = computed(() => {
+  return showTermsModal.value
+})
+
 // Success notification
 const showSuccessNotification = ref(false)
 const successMessage = ref('')
