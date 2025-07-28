@@ -1,7 +1,7 @@
 <template>
   <div class="w-full min-h-screen bg-gray-100 font-montserrat overflow-y-auto overflow-x-hidden">
     <!-- Content Container -->
-    <div class="w-full min-h-screen bg-gray-100 relative px-4 pt-5 pb-20">
+    <div class="w-full min-h-screen bg-gray-100 relative px-4 pt-5 pb-32 sm:pb-36 md:pb-40 lg:pb-44">
       
       <!-- Referral Program Header -->
       <div class="flex flex-col items-start gap-1 mb-5">
