@@ -613,15 +613,7 @@ const hideSuccessNotification = () => {
   }
 }
 
-@media (min-width: 1025px) {
-  .scroll-content {
-    width: 347px;
-    left: 14px;
-    gap: 20px;
-    height: 507px;
-    margin-top: 60px;
-  }
-}
+
 
 /* QR Section */
 .qr-section {
