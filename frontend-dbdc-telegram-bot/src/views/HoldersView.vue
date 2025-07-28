@@ -2021,275 +2021,342 @@ const hideSuccessNotification = () => {
 /* Desktop (769px and above) */
 @media (min-width: 769px) {
   .holders-view {
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
+    width: 100vw;
+    max-width: 100vw;
+    margin: 0;
     padding-left: 48px;
     padding-right: 48px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    border-radius: 16px;
-    overflow: hidden;
+    box-shadow: none;
+    background: #F0F0F0;
   }
 
   .content-container {
     width: 100%;
-    padding: 40px 0 100px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 0 120px 0;
   }
 
   .referral-header {
     width: 100%;
     left: 0;
-    gap: 8px;
-    height: 70px;
-    margin-bottom: 32px;
+    gap: 12px;
+    height: 88px;
+    margin-bottom: 48px;
   }
 
   .referral-title {
-    font-size: 32px;
-    line-height: 38px;
+    font-size: 40px;
+    line-height: 48px;
   }
 
   .referral-subtitle {
-    font-size: 20px;
-    line-height: 28px;
+    font-size: 24px;
+    line-height: 32px;
   }
 
   .scroll-content {
     width: 100%;
     left: 0;
-    gap: 32px;
-    height: auto;
-    min-height: 600px;
+    gap: 48px;
+    height: 700px;
     margin-top: 80px;
   }
 
   .qr-section {
     width: 100%;
-    height: 450px;
-    position: relative;
-    margin-bottom: 40px;
+    height: 550px;
+    position: absolute;
+    left: 0;
+    top: 0;
   }
 
   .qr-background {
-    border-radius: 32px;
+    border-radius: 40px;
   }
 
   .qr-code-container {
-    width: 350px;
-    height: 320px;
+    width: 400px;
+    height: 380px;
     left: 50%;
-    top: 60px;
+    top: 48px;
     transform: translateX(-50%);
   }
 
   .qr-code-wrapper {
-    width: 100%;
-    height: 100%;
+    width: 400px;
+    height: 380px;
     border-radius: 32px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 32px;
-    box-sizing: border-box;
+    border: 1px solid #F2F2F2;
+    background: #FAFAFA;
+    box-shadow: 2px 4px 12px 0 rgba(0, 0, 0, 0.04);
+    position: relative;
   }
 
   .qr-code-image {
-    width: 220px;
-    height: 220px;
-    position: static;
-    margin-bottom: 24px;
+    width: 260px;
+    height: 260px;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    position: absolute;
+    left: 70px;
+    top: 40px;
   }
 
   .qr-code-link {
-    font-size: 22px;
-    line-height: 30px;
-    position: static;
-    width: auto;
-    height: auto;
+    color: #2019CE;
+    font-family: Montserrat;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 34px;
+    position: absolute;
+    left: 40px;
+    top: 330px;
+    width: 320px;
+    height: 34px;
     text-align: center;
   }
 
   .terms-checkbox-wrapper {
-    position: relative;
-    left: 0;
-    top: 0;
-    transform: scale(1.2);
+    position: absolute;
+    left: 48px;
+    top: 448px;
+    z-index: 20;
+    transform: scale(1.3);
     transform-origin: left center;
-    margin: 24px 0;
   }
 
   .share-button-container {
-    position: relative;
-    left: 0;
-    top: 0;
-    margin: 24px 0;
-    display: flex;
-    justify-content: center;
+    position: absolute;
+    left: 50%;
+    top: 508px;
+    z-index: 20;
+    transform: translateX(-50%);
   }
 
   .share-button {
-    width: 500px;
-    padding: 18px 80px;
-    height: 66px;
-    font-size: 20px;
-    line-height: 30px;
+    display: flex;
+    width: 600px;
+    padding: 20px 80px;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    border-radius: 1000px;
+    background: linear-gradient(90deg, #2019CE 0%, #473FFF 100%);
+    border: none;
+    cursor: pointer;
+    height: 72px;
+    color: #FFF;
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 32px;
+    transition: all 0.2s ease;
   }
 
   .how-to-section {
-    width: 100%;
-    height: auto;
-    min-height: 500px;
-    margin-top: 60px;
+    position: relative;
     left: 0;
-    top: 0;
+    top: -60px;
+    width: 100%;
+    height: 600px;
   }
 
   .how-to-title {
-    font-size: 32px;
-    line-height: 38px;
+    font-size: 40px;
+    line-height: 48px;
   }
 
   .how-to-subtitle {
-    font-size: 22px;
-    line-height: 30px;
+    font-size: 24px;
+    line-height: 32px;
   }
 
   .step-indicators {
+    position: absolute;
     left: 50%;
     top: 140px;
-    width: 500px;
-    height: 60px;
+    width: 700px;
+    height: 80px;
     transform: translateX(-50%);
   }
 
   .step-line {
-    width: 80px;
+    width: 120px;
+    height: 2px;
+    background: #7E7E7E;
   }
 
   .step-line-1 {
-    left: 110px;
+    position: absolute;
+    left: 140px;
+    top: 39px;
   }
 
   .step-line-2 {
-    left: 310px;
+    position: absolute;
+    left: 440px;
+    top: 39px;
   }
 
   .step-indicator {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
+    border-radius: 0 100px 100px 0;
+    background: #2019CE;
   }
 
-  .step-indicator-2 {
-    left: 220px;
-  }
-
-  .step-indicator-3 {
-    left: 440px;
-  }
-
-  .step-descriptions {
-    top: 220px;
-    height: 70px;
-    justify-content: center;
-    gap: 120px;
-  }
-
-  .step-number {
-    font-size: 20px;
-    line-height: 28px;
-  }
-
-  .step-text {
-    font-size: 16px;
-    line-height: 22px;
-  }
-
-  .web-link-section {
-    width: 100%;
-    height: 300px;
-    margin-top: 100px;
-    position: relative;
+  .step-indicator-1 {
+    position: absolute;
     left: 0;
     top: 0;
   }
 
+  .step-indicator-2 {
+    position: absolute;
+    left: 310px;
+    top: 0;
+  }
+
+  .step-indicator-3 {
+    position: absolute;
+    left: 620px;
+    top: 0;
+  }
+
+  .step-descriptions {
+    position: absolute;
+    left: 0;
+    top: 250px;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 100px;
+    box-sizing: border-box;
+  }
+
+  .step-number {
+    font-size: 22px;
+    line-height: 30px;
+  }
+
+  .step-text {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .web-link-section {
+    position: absolute;
+    left: 0;
+    top: 350px;
+    width: 100%;
+    height: 380px;
+  }
+
   .web-link-background {
     width: 100%;
-    height: 298px;
-    border-radius: 32px;
+    height: 378px;
+    border-radius: 40px;
+    background: linear-gradient(93deg, #000482 33.15%, rgba(3, 0, 155, 0.84) 76.97%);
+    backdrop-filter: blur(32px);
+    position: absolute;
+    left: 0;
+    top: 2px;
   }
 
   .web-link-content {
-    padding: 40px;
+    padding: 48px;
   }
 
   .web-link-title {
-    font-size: 36px;
-    line-height: 42px;
+    font-size: 48px;
+    line-height: 56px;
     width: auto;
     height: auto;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
 
   .web-link-description {
-    font-size: 22px;
-    line-height: 30px;
+    font-size: 26px;
+    line-height: 36px;
     width: auto;
     height: auto;
-    margin-bottom: 40px;
+    margin-bottom: 48px;
   }
 
   .copy-link-container {
-    width: calc(100% - 80px);
-    height: 70px;
-    max-width: none;
+    width: calc(100% - 96px);
+    max-width: 800px;
+    height: 88px;
+    position: relative;
+    border-radius: 100px;
+    border: 1px solid rgba(32, 25, 206, 0.60);
+    background: rgba(255, 255, 255, 0.10);
+    display: flex;
+    align-items: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .copy-link-text {
-    font-size: 22px;
-    line-height: 30px;
+    color: #FAFAFA;
+    font-family: Montserrat;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 32px;
+    text-decoration: underline;
     width: auto;
     height: auto;
   }
 
   .copy-button {
-    width: 70px;
-    height: 70px;
+    width: 88px;
+    height: 88px;
+    border-radius: 0 100px 100px 0;
+    border: 1px solid #443FCC;
+    background: #FAFAFA;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
   }
 
   .copy-icon {
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
   }
 
   /* Scale F-icons for desktop */
   .f-icon-1 {
-    width: 200px;
-    height: 200px;
-    left: -40px;
-    top: -30px;
+    width: 300px;
+    height: 300px;
+    left: -80px;
+    top: -60px;
   }
 
   .f-icon-2 {
-    width: 100px;
-    height: 100px;
-    left: 85%;
-    top: 60%;
+    width: 150px;
+    height: 150px;
+    left: 82%;
+    top: 55%;
   }
 
   .f-icon-3 {
-    width: 250px;
-    height: 250px;
-    left: -70px;
-    top: 65%;
+    width: 380px;
+    height: 380px;
+    left: -120px;
+    top: 58%;
   }
 
   .f-icon-4 {
-    width: 200px;
-    height: 200px;
-    left: 75%;
-    top: 30px;
+    width: 300px;
+    height: 300px;
+    left: 72%;
+    top: 25px;
   }
 }
 
