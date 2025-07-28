@@ -364,7 +364,6 @@ const goBack = () => {
   .overflow-y-auto {
     padding-bottom: 80px !important;
   }
-}
 
   .text-4xl {
     font-size: 28px;
