@@ -582,3 +582,36 @@ const hideSuccessNotification = () => {
   }
 }
 </script>
+
+<style scoped>
+/* Hide scrollbar for WebKit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+* {
+  scrollbar-width: none;
+}
+
+/* Hide scrollbar for Internet Explorer and Edge Legacy */
+* {
+  -ms-overflow-style: none;
+}
+
+/* Ensure smooth scrolling on touch devices */
+.overflow-y-auto {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Apply hidden scrollbar to main container */
+.w-full.min-h-screen.bg-gray-100.font-montserrat.overflow-y-auto.overflow-x-hidden {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.w-full.min-h-screen.bg-gray-100.font-montserrat.overflow-y-auto.overflow-x-hidden::-webkit-scrollbar {
+  display: none;
+}
+</style>
