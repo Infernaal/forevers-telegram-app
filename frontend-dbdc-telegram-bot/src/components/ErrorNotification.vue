@@ -73,7 +73,7 @@ const containerPosition = computed(() => {
   if (props.position === 'modal') {
     return 'relative z-20'
   }
-  return 'fixed bottom-24 left-1/2 transform -translate-x-1/2 z-50 px-4'
+  return 'fixed left-1/2 transform -translate-x-1/2 z-50 px-4 error-notification-fixed'
 })
 
 defineEmits(['close'])
@@ -85,10 +85,15 @@ defineEmits(['close'])
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
+/* Fixed positioning bottom spacing based on BottomNavigation height */
+.error-notification-fixed {
+  bottom: calc(84px + env(safe-area-inset-bottom, 0px)); /* 64px nav + 20px spacing for small screens */
+}
+
 /* Responsive positioning for fixed bottom notifications */
-@media (max-width: 375px) {
-  .error-notification-container.fixed {
-    bottom: 100px !important;
+@media (max-width: 374px) {
+  .error-notification-fixed {
+    bottom: calc(84px + env(safe-area-inset-bottom, 0px)) !important; /* 64px nav + 20px spacing */
     left: 16px !important;
     right: 16px !important;
     transform: none !important;
@@ -96,23 +101,68 @@ defineEmits(['close'])
   }
 
   /* Hide pointer on very small screens for fixed positioning */
-  .error-notification-container.fixed .w-0 {
+  .error-notification-fixed .w-0 {
     display: none;
   }
 }
 
-@media (min-width: 376px) and (max-width: 768px) {
-  .error-notification-container.fixed {
-    bottom: 110px !important;
+@media (min-width: 375px) and (max-width: 430px) {
+  .error-notification-fixed {
+    bottom: calc(88px + env(safe-area-inset-bottom, 0px)) !important; /* 68px nav + 20px spacing */
+  }
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+  .error-notification-fixed {
+    bottom: calc(108px + env(safe-area-inset-bottom, 0px)) !important; /* 88px nav + 20px spacing */
+  }
+
+  /* Larger notification for tablets */
+  .error-notification-fixed .text-white.rounded-full {
+    min-height: 52px;
+    padding: 14px 20px;
+  }
+
+  .error-notification-fixed .text-sm {
+    font-size: 14px;
+  }
+
+  .error-notification-fixed .text-xs {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 769px) {
+  .error-notification-fixed {
+    bottom: calc(120px + env(safe-area-inset-bottom, 0px)) !important; /* 100px nav + 20px spacing */
+  }
+
+  /* Even larger notification for desktop */
+  .error-notification-fixed .text-white.rounded-full {
+    min-height: 60px;
+    padding: 18px 24px;
+  }
+
+  .error-notification-fixed .w-8.h-8 {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  .error-notification-fixed .text-sm {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .error-notification-fixed .text-xs {
+    font-size: 14px;
+    line-height: 18px;
   }
 }
 
 /* Telegram mini app optimizations */
 @media (max-width: 480px) {
-  .error-notification-container.fixed {
-    bottom: calc(100px + env(safe-area-inset-bottom, 8px)) !important;
-  }
-
   /* Adjust pointer for mobile */
   .error-notification-container .w-0 {
     border-l-width: 8px;
@@ -124,7 +174,7 @@ defineEmits(['close'])
   .error-notification-container .text-base {
     font-size: 14px;
   }
-  
+
   .error-notification-container .text-sm {
     font-size: 12px;
   }
@@ -132,8 +182,8 @@ defineEmits(['close'])
 
 /* Telegram WebApp specific styles */
 @media (max-height: 600px) {
-  .error-notification-container.fixed {
-    bottom: 80px !important;
+  .error-notification-fixed {
+    bottom: calc(64px + env(safe-area-inset-bottom, 0px)) !important; /* Reduced spacing for small height screens */
   }
 }
 
@@ -145,8 +195,26 @@ defineEmits(['close'])
 
 /* Safe area support for notifications */
 @supports (padding: max(0px)) {
-  .error-notification-container.fixed {
-    bottom: max(96px, calc(96px + env(safe-area-inset-bottom))) !important;
+  .error-notification-fixed {
+    bottom: max(84px, calc(84px + env(safe-area-inset-bottom))) !important;
+  }
+
+  @media (min-width: 375px) and (max-width: 430px) {
+    .error-notification-fixed {
+      bottom: max(88px, calc(88px + env(safe-area-inset-bottom))) !important;
+    }
+  }
+
+  @media (min-width: 431px) and (max-width: 768px) {
+    .error-notification-fixed {
+      bottom: max(108px, calc(108px + env(safe-area-inset-bottom))) !important;
+    }
+  }
+
+  @media (min-width: 769px) {
+    .error-notification-fixed {
+      bottom: max(120px, calc(120px + env(safe-area-inset-bottom))) !important;
+    }
   }
 }
 
