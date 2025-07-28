@@ -586,12 +586,7 @@ const hideSuccessNotification = () => {
   }
 }
 
-@media (min-width: 1025px) {
-  .referral-subtitle {
-    font-size: 18px;
-    line-height: 26px;
-  }
-}
+
 
 /* Scroll Content */
 .scroll-content {
