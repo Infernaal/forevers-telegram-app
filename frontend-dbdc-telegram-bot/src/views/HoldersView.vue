@@ -122,36 +122,38 @@
           <p class="text-dbd-gray text-base font-medium leading-6 m-0">Follow these 3 simple steps</p>
         </div>
 
-        <!-- Step Indicators -->
-        <div class="w-full mb-12 px-4">
-          <div class="flex justify-center items-center w-full max-w-2xl mx-auto gap-4 sm:gap-6 md:gap-10 lg:gap-12">
-            <!-- Step 1 -->
-            <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-r-full bg-dbd-primary"></div>
+      <!-- Unified Step Section -->
+      <div class="w-full max-w-2xl mx-auto px-4 mb-12">
+        <!-- Step Indicators + Lines -->
+        <div class="grid grid-cols-3 gap-4 sm:gap-6 md:gap-10 lg:gap-12 items-center justify-center mb-4">
+          <!-- Step 1 -->
+          <div class="flex justify-center relative">
+            <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-r-full bg-dbd-primary z-10"></div>
+          </div>
 
-            <!-- Line -->
-            <div class="w-4 sm:w-6 md:w-8 lg:w-10 h-px bg-dbd-light-gray"></div>
+          <!-- Step 2 -->
+          <div class="flex justify-center items-center relative">
+            <!-- Line left -->
+            <div class="absolute left-[-50%] top-1/2 transform -translate-y-1/2 w-[40%] h-px bg-dbd-light-gray z-0"></div>
+            <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-r-full bg-dbd-primary z-10"></div>
+          </div>
 
-            <!-- Step 2 -->
-            <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-r-full bg-dbd-primary"></div>
-
-            <!-- Line -->
-            <div class="w-4 sm:w-6 md:w-8 lg:w-10 h-px bg-dbd-light-gray"></div>
-
-            <!-- Step 3 -->
-            <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-r-full bg-dbd-primary"></div>
+          <!-- Step 3 -->
+          <div class="flex justify-center items-center relative">
+            <!-- Line left -->
+            <div class="absolute left-[-50%] top-1/2 transform -translate-y-1/2 w-[40%] h-px bg-dbd-light-gray z-0"></div>
+            <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-r-full bg-dbd-primary z-10"></div>
           </div>
         </div>
 
         <!-- Step Descriptions -->
-        <div class="grid grid-cols-3 justify-between items-start mb-12 max-w-2xl mx-auto px-4 text-center">
+        <div class="grid grid-cols-3 gap-4 sm:gap-6 md:gap-10 lg:gap-12 text-center">
           <!-- Step 1 -->
           <div class="flex flex-col items-center gap-1">
             <div class="flex items-center gap-1.5 justify-center">
-              <div class="flex justify-center items-center">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                  <path d="M18 16.08C17.24 16.08 16.56 16.38 16.04 16.85L8.91 12.7C8.96 12.47 9 12.24 9 12C9 11.76 8.96 11.53 8.91 11.3L15.96 7.19C16.5 7.69 17.21 8 18 8C19.66 8 21 6.66 21 5C21 3.34 19.66 2 18 2C16.34 2 15 3.34 15 5C15 5.24 15.04 5.47 15.09 5.7L8.04 9.81C7.5 9.31 6.79 9 6 9C4.34 9 3 10.34 3 12C3 13.66 4.34 15 6 15C6.79 15 7.5 14.69 8.04 14.19L15.16 18.34C15.11 18.55 15.08 18.77 15.08 19C15.08 20.61 16.39 21.92 18 21.92C19.61 21.92 20.92 20.61 20.92 19C20.92 17.39 19.61 16.08 18 16.08Z" fill="#7E7E7E" />
-                </svg>
-              </div>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path d="M18 16.08C17.24 16.08 16.56 16.38 16.04 16.85L8.91 12.7C8.96 12.47 9 12.24 9 12C9 11.76 8.96 11.53 8.91 11.3L15.96 7.19C16.5 7.69 17.21 8 18 8C19.66 8 21 6.66 21 5C21 3.34 19.66 2 18 2C16.34 2 15 3.34 15 5C15 5.24 15.04 5.47 15.09 5.7L8.04 9.81C7.5 9.31 6.79 9 6 9C4.34 9 3 10.34 3 12C3 13.66 4.34 15 6 15C6.79 15 7.5 14.69 8.04 14.19L15.16 18.34C15.11 18.55 15.08 18.77 15.08 19C15.08 20.61 16.39 21.92 18 21.92C19.61 21.92 20.92 20.61 20.92 19C20.92 17.39 19.61 16.08 18 16.08Z" fill="#7E7E7E" />
+              </svg>
               <span class="text-dbd-gray text-base font-medium leading-6">1</span>
             </div>
             <span class="text-dbd-gray text-xs font-medium leading-4">Share your link</span>
@@ -160,11 +162,9 @@
           <!-- Step 2 -->
           <div class="flex flex-col items-center gap-1">
             <div class="flex items-center gap-1.5 justify-center">
-              <div class="flex justify-center items-center">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                  <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM17 13H11V7H13V11H17V13Z" fill="#7E7E7E" />
-                </svg>
-              </div>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM17 13H11V7H13V11H17V13Z" fill="#7E7E7E" />
+              </svg>
               <span class="text-dbd-gray text-sm font-medium leading-6">2</span>
             </div>
             <span class="text-dbd-gray text-xs font-medium leading-4">Wait for joining</span>
@@ -173,16 +173,16 @@
           <!-- Step 3 -->
           <div class="flex flex-col items-center gap-1">
             <div class="flex items-center gap-1.5 justify-center">
-              <div class="flex justify-center items-center">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                  <path d="M12 2L15.09 8.26L22 9L17 13.74L18.18 20.74L12 17.77L5.82 20.74L7 13.74L2 9L8.91 8.26L12 2Z" fill="#7E7E7E" />
-                </svg>
-              </div>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L15.09 8.26L22 9L17 13.74L18.18 20.74L12 17.77L5.82 20.74L7 13.74L2 9L8.91 8.26L12 2Z" fill="#7E7E7E" />
+              </svg>
               <span class="text-dbd-gray text-sm font-medium leading-6">3</span>
             </div>
             <span class="text-dbd-gray text-xs font-medium leading-4">Get rewards</span>
           </div>
         </div>
+      </div>
+
 
         <!-- Web Referral Link Section -->
         <div class="relative w-full h-52">
