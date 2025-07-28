@@ -114,7 +114,7 @@ defineEmits(['close'])
 
 @media (min-width: 431px) and (max-width: 768px) {
   .error-notification-fixed {
-    bottom: calc(150px + env(safe-area-inset-bottom, 0px)) !important; /* 88px nav + 62px spacing */
+    bottom: calc(140px + env(safe-area-inset-bottom, 0px)) !important; /* tablet spacing */
   }
 
   /* Larger notification for tablets */
@@ -134,7 +134,7 @@ defineEmits(['close'])
 
 @media (min-width: 769px) {
   .error-notification-fixed {
-    bottom: calc(180px + env(safe-area-inset-bottom, 0px)) !important; /* 100px nav + 80px spacing */
+    bottom: calc(160px + env(safe-area-inset-bottom, 0px)) !important; /* desktop spacing */
   }
 
   /* Even larger notification for desktop */
@@ -207,13 +207,13 @@ defineEmits(['close'])
 
   @media (min-width: 431px) and (max-width: 768px) {
     .error-notification-fixed {
-      bottom: max(150px, calc(150px + env(safe-area-inset-bottom))) !important;
+      bottom: max(140px, calc(140px + env(safe-area-inset-bottom))) !important;
     }
   }
 
   @media (min-width: 769px) {
     .error-notification-fixed {
-      bottom: max(180px, calc(180px + env(safe-area-inset-bottom))) !important;
+      bottom: max(160px, calc(160px + env(safe-area-inset-bottom))) !important;
     }
   }
 }
