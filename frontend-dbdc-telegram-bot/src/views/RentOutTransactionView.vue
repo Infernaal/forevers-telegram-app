@@ -808,11 +808,11 @@ onUnmounted(() => {
   }
 
   .transaction-details-modal > div {
-    border-radius: 24px 24px 0 0;
+    border-radius: 24px 24px 0 0 !important;
     animation: none;
-    max-width: 100%;
-    width: 100%;
-    margin: 0;
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
   }
 
   /* Larger text and spacing for tablet */
