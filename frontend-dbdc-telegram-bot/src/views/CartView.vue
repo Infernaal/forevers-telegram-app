@@ -477,7 +477,7 @@ const confirmDelete = () => {
 
   .fixed-bottom-section {
     max-width: 100%;
-    bottom: 30px; /* Поднять выше на desktop */
+    bottom: 60px; /* Поднять выше на desktop */
   }
 
   .h-12 {
