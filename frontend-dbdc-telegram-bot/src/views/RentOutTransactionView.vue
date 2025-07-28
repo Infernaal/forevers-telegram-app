@@ -800,19 +800,21 @@ onUnmounted(() => {
   }
 }
 
-/* Tablet and Desktop Transaction Details Modal */
-@media (min-width: 768px) {
-  /* Transaction Details Modal - Center on larger screens */
+/* Tablet Transaction Details Modal */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Transaction Details Modal - Full width on tablet */
   .transaction-details-modal {
-    align-items: center;
+    align-items: end;
   }
 
   .transaction-details-modal > div {
-    border-radius: 24px;
+    border-radius: 24px 24px 0 0;
     animation: none;
-    max-width: 500px;
-    margin: 20px;
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
   }
+}
 
   /* Larger text and spacing for tablet/desktop */
   .transaction-details-scroll .flex.justify-between {
