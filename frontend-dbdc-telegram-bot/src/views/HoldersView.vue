@@ -123,21 +123,21 @@
         </div>
 
         <!-- Step Indicators -->
-        <div class="w-full h-10 mb-12 flex justify-center items-center gap-0">
+        <div class="w-full mb-8 flex justify-center items-center gap-1 sm:gap-2 md:gap-4 lg:gap-6">
           <!-- Step 1 -->
-          <div class="w-10 h-10 rounded-r-full bg-dbd-primary"></div>
+          <div class="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 rounded-r-full bg-dbd-primary"></div>
 
           <!-- Line -->
-          <div class="w-6 h-px bg-dbd-light-gray mx-2"></div>
+          <div class="w-4 h-px sm:w-6 md:w-8 lg:w-10 bg-dbd-light-gray"></div>
 
           <!-- Step 2 -->
-          <div class="w-10 h-10 rounded-r-full bg-dbd-primary"></div>
+          <div class="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 rounded-r-full bg-dbd-primary"></div>
 
           <!-- Line -->
-          <div class="w-6 h-px bg-dbd-light-gray mx-2"></div>
+          <div class="w-4 h-px sm:w-6 md:w-8 lg:w-10 bg-dbd-light-gray"></div>
 
           <!-- Step 3 -->
-          <div class="w-10 h-10 rounded-r-full bg-dbd-primary"></div>
+          <div class="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 rounded-r-full bg-dbd-primary"></div>
         </div>
 
         <!-- Step Descriptions -->
