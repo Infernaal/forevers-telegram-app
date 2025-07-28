@@ -1430,38 +1430,39 @@ const hideSuccessNotification = () => {
   transform: translate(-50%, -50%);
 }
 
-/* Responsive Design */
+/* Mobile first approach for Telegram mini app */
 
 /* Small Mobile (up to 375px) */
 @media (max-width: 375px) {
   .holders-view {
     width: 100vw;
     max-width: 100vw;
+    padding-left: 14px;
+    padding-right: 14px;
   }
 
   .content-container {
-    width: 100vw;
-    max-width: 100vw;
+    width: 100%;
     padding: 20px 0 80px 0;
   }
 
   .referral-header {
-    width: calc(100vw - 28px);
-    left: 14px;
+    width: calc(100% - 0px);
+    left: 0;
     margin-bottom: 20px;
     height: 52px;
   }
 
   .scroll-content {
-    width: calc(100vw - 28px);
-    left: 14px;
+    width: calc(100% - 0px);
+    left: 0;
     gap: 20px;
     height: 507px;
     margin-top: 60px;
   }
 
   .qr-section {
-    width: calc(100vw - 28px);
+    width: calc(100% - 0px);
     height: 396px;
     position: absolute;
     left: 0;
@@ -1512,21 +1513,21 @@ const hideSuccessNotification = () => {
 
   .terms-checkbox-wrapper {
     position: absolute;
-    left: 20px;
+    left: 6px;
     top: 290px;
     z-index: 20;
   }
 
   .share-button-container {
     position: absolute;
-    left: 23px;
+    left: 9px;
     top: 322px;
     z-index: 20;
   }
 
   .share-button {
     display: flex;
-    width: calc(100vw - 74px);
+    width: calc(100vw - 46px);
     padding: 12px 48px;
     justify-content: center;
     align-items: center;
@@ -1549,20 +1550,20 @@ const hideSuccessNotification = () => {
     position: relative;
     left: 0;
     top: -60px;
-    width: calc(100vw - 28px);
+    width: calc(100% - 0px);
     height: 410px;
   }
 
   .step-indicators {
     position: absolute;
-    left: 27px;
+    left: 13px;
     top: 88px;
-    width: calc(100vw - 82px);
+    width: calc(100vw - 54px);
     height: 40px;
   }
 
   .step-line {
-    width: calc((100vw - 200px) / 2);
+    width: calc((100vw - 172px) / 2);
     height: 1px;
     background: #7E7E7E;
   }
@@ -1575,7 +1576,7 @@ const hideSuccessNotification = () => {
 
   .step-line-2 {
     position: absolute;
-    left: calc(100vw - 168px);
+    left: calc(100vw - 140px);
     top: 19px;
   }
 
@@ -1619,7 +1620,7 @@ const hideSuccessNotification = () => {
     position: absolute;
     left: 0;
     top: 202px;
-    width: calc(100vw - 28px);
+    width: calc(100% - 0px);
     height: 208px;
   }
 
@@ -1636,7 +1637,7 @@ const hideSuccessNotification = () => {
 
   .copy-link-container {
     width: calc(100vw - 68px);
-    max-width: 307px;
+    max-width: 279px;
     height: 52px;
     position: relative;
     border-radius: 100px;
@@ -1679,19 +1680,232 @@ const hideSuccessNotification = () => {
   }
 }
 
-/* Tablet (376px to 1024px) */
-@media (min-width: 376px) and (max-width: 1024px) {
+/* Tablet (376px to 768px) */
+@media (min-width: 376px) and (max-width: 768px) {
   .holders-view {
     width: 100vw;
     max-width: 100vw;
+    padding-left: 24px;
+    padding-right: 24px;
     box-shadow: none;
     background: #F0F0F0;
   }
 
   .content-container {
-    width: 100vw;
-    max-width: 100vw;
+    width: 100%;
     padding: 32px 0 120px 0;
+  }
+
+  .referral-header {
+    width: 100%;
+    left: 0;
+    gap: 8px;
+    height: 70px;
+    margin-bottom: 32px;
+  }
+
+  .referral-title {
+    font-size: 28px;
+    line-height: 34px;
+  }
+
+  .referral-subtitle {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .scroll-content {
+    width: 100%;
+    left: 0;
+    gap: 24px;
+    height: auto;
+    min-height: 650px;
+    margin-top: 80px;
+  }
+
+  .qr-section {
+    width: 100%;
+    height: 500px;
+    position: relative;
+    margin-bottom: 32px;
+  }
+
+  .qr-code-container {
+    width: 300px;
+    height: 280px;
+    left: 50%;
+    top: 40px;
+    transform: translateX(-50%);
+  }
+
+  .qr-code-wrapper {
+    width: 100%;
+    height: 100%;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    box-sizing: border-box;
+  }
+
+  .qr-code-image {
+    width: 180px;
+    height: 180px;
+    position: static;
+    margin-bottom: 20px;
+  }
+
+  .qr-code-link {
+    font-size: 20px;
+    line-height: 28px;
+    position: static;
+    width: auto;
+    height: auto;
+    text-align: center;
+  }
+
+  .terms-checkbox-wrapper {
+    position: relative;
+    left: 0;
+    top: 0;
+    transform: scale(1.15);
+    transform-origin: left center;
+    margin: 20px 0;
+  }
+
+  .share-button-container {
+    position: relative;
+    left: 0;
+    top: 0;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .share-button {
+    width: 400px;
+    padding: 16px 64px;
+    height: 60px;
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .how-to-section {
+    width: 100%;
+    height: auto;
+    min-height: 480px;
+    margin-top: 40px;
+    left: 0;
+    top: 0;
+  }
+
+  .how-to-title {
+    font-size: 28px;
+    line-height: 34px;
+  }
+
+  .how-to-subtitle {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .step-indicators {
+    left: 50%;
+    top: 120px;
+    width: 400px;
+    height: 48px;
+    transform: translateX(-50%);
+  }
+
+  .step-line {
+    width: 60px;
+  }
+
+  .step-line-1 {
+    left: 88px;
+  }
+
+  .step-line-2 {
+    left: 252px;
+  }
+
+  .step-indicator {
+    width: 48px;
+    height: 50px;
+  }
+
+  .step-indicator-2 {
+    left: 176px;
+  }
+
+  .step-indicator-3 {
+    left: 352px;
+  }
+
+  .step-descriptions {
+    top: 190px;
+    height: 56px;
+    justify-content: center;
+    gap: 80px;
+  }
+
+  .step-number {
+    font-size: 18px;
+    line-height: 26px;
+  }
+
+  .step-text {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .web-link-section {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 260px;
+    margin-top: 80px;
+  }
+
+  .web-link-background {
+    width: 100%;
+    height: 258px;
+    top: 0;
+  }
+
+  .web-link-title {
+    font-size: 32px;
+    line-height: 38px;
+    width: auto;
+    height: auto;
+  }
+
+  .web-link-description {
+    font-size: 20px;
+    line-height: 28px;
+    width: auto;
+    height: auto;
+  }
+
+  .copy-link-container {
+    width: calc(100% - 40px);
+    height: 60px;
+    max-width: 500px;
+  }
+
+  .copy-link-text {
+    font-size: 20px;
+    line-height: 28px;
+    width: auto;
+    height: auto;
+  }
+
+  .copy-button {
+    width: 60px;
+    height: 60px;
   }
 
   /* Scale F-icons for tablet */
@@ -1722,50 +1936,16 @@ const hideSuccessNotification = () => {
     left: 70%;
     top: 20px;
   }
-
-  /* Adjust step indicators for tablet */
-  .step-line {
-    width: 60px;
-  }
-
-  .step-line-1 {
-    left: 88px;
-  }
-
-  .step-line-2 {
-    left: 252px;
-  }
-
-  .step-indicator {
-    width: 48px;
-    height: 50px;
-  }
-
-  .step-indicator-2 {
-    left: 176px;
-  }
-
-  .step-indicator-3 {
-    left: 352px;
-  }
-
-  .step-number {
-    font-size: 18px;
-    line-height: 26px;
-  }
-
-  .step-text {
-    font-size: 14px;
-    line-height: 18px;
-  }
 }
 
-/* Desktop (1025px and above) */
-@media (min-width: 1025px) {
+/* Desktop (769px and above) */
+@media (min-width: 769px) {
   .holders-view {
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
+    padding-left: 48px;
+    padding-right: 48px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     border-radius: 16px;
     overflow: hidden;
@@ -1777,8 +1957,8 @@ const hideSuccessNotification = () => {
   }
 
   .referral-header {
-    width: calc(100% - 76px);
-    left: 38px;
+    width: 100%;
+    left: 0;
     gap: 8px;
     height: 70px;
     margin-bottom: 32px;
@@ -1795,8 +1975,8 @@ const hideSuccessNotification = () => {
   }
 
   .scroll-content {
-    width: calc(100% - 76px);
-    left: 38px;
+    width: 100%;
+    left: 0;
     gap: 32px;
     height: auto;
     min-height: 600px;
@@ -1848,6 +2028,24 @@ const hideSuccessNotification = () => {
     width: auto;
     height: auto;
     text-align: center;
+  }
+
+  .terms-checkbox-wrapper {
+    position: relative;
+    left: 0;
+    top: 0;
+    transform: scale(1.2);
+    transform-origin: left center;
+    margin: 24px 0;
+  }
+
+  .share-button-container {
+    position: relative;
+    left: 0;
+    top: 0;
+    margin: 24px 0;
+    display: flex;
+    justify-content: center;
   }
 
   .share-button {
