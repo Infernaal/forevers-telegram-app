@@ -112,7 +112,7 @@ defineEmits(['close'])
     left: 16px;
     right: 16px;
     transform: none;
-    bottom: calc(97px + env(safe-area-inset-bottom, 0px)); /* 64px nav + 33px spacing */
+    bottom: calc(94px + env(safe-area-inset-bottom, 0px)); /* 64px nav + 30px spacing */
   }
 
   .success-notification-content {
@@ -206,7 +206,7 @@ defineEmits(['close'])
 /* Safe area support for notifications */
 @supports (padding: max(0px)) {
   .success-notification-container {
-    bottom: max(97px, calc(97px + env(safe-area-inset-bottom)));
+    bottom: max(94px, calc(94px + env(safe-area-inset-bottom)));
   }
 
   @media (min-width: 375px) and (max-width: 430px) {
