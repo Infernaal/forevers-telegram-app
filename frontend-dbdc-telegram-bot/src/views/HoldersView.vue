@@ -1514,7 +1514,7 @@ const hideSuccessNotification = () => {
   .terms-checkbox-wrapper {
     position: absolute;
     left: 6px;
-    top: 290px;
+    top: 270px;
     z-index: 20;
   }
 
