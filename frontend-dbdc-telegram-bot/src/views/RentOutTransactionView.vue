@@ -86,7 +86,7 @@
     </div>
 
     <!-- Content Container -->
-    <div class="content-container bg-gray-100 pb-24 lg:pb-40 xl:pb-48 px-4 lg:px-12 xl:px-16">
+    <div class="content-container bg-gray-100 pb-32 sm:pb-36 md:pb-40 lg:pb-44 xl:pb-52 px-4 lg:px-12 xl:px-16">
       <!-- Empty State -->
       <div v-if="transactions.length === 0" class="empty-state flex flex-col items-center justify-center text-center" style="min-height: calc(100vh - 200px);">
         <h2 class="text-xl lg:text-4xl xl:text-5xl font-bold text-dbd-dark mb-4 lg:mb-8 xl:mb-12 leading-tight max-w-60 lg:max-w-none">
