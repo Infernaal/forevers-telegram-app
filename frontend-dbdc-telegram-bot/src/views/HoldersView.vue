@@ -184,7 +184,6 @@
           </div>
         </div>
 
-
         <!-- Web Referral Link Section -->
         <div class="relative w-full h-52">
           <!-- Background -->
