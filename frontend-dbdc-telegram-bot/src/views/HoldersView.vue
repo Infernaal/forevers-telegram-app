@@ -1597,37 +1597,380 @@ const hideSuccessNotification = () => {
 }
 
 /* Responsive Design */
+
+/* Small Mobile (up to 375px) */
 @media (max-width: 375px) {
   .holders-view {
     width: 100vw;
-    max-width: 375px;
+    max-width: 100vw;
   }
 
   .content-container {
     width: 100vw;
-    max-width: 375px;
+    max-width: 100vw;
+    padding: 16px 0 80px 0;
+  }
+
+  .referral-header {
+    width: calc(100vw - 28px);
+    left: 14px;
+  }
+
+  .scroll-content {
+    width: calc(100vw - 28px);
+    left: 14px;
+  }
+
+  .qr-section {
+    width: calc(100vw - 28px);
+  }
+
+  .how-to-section {
+    width: calc(100vw - 28px);
+  }
+
+  .web-link-section {
+    width: calc(100vw - 28px);
+  }
+
+  .web-link-background {
+    width: 100%;
   }
 }
 
-/* Tablet styles - remove white stripes */
+/* Tablet (376px to 1024px) */
 @media (min-width: 376px) and (max-width: 1024px) {
   .holders-view {
     width: 100vw;
     max-width: 100vw;
     box-shadow: none;
+    background: #F0F0F0;
   }
 
   .content-container {
     width: 100vw;
     max-width: 100vw;
+    padding: 32px 0 120px 0;
+  }
+
+  /* Scale F-icons for tablet */
+  .f-icon-1 {
+    width: 160px;
+    height: 160px;
+    left: -30px;
+    top: -20px;
+  }
+
+  .f-icon-2 {
+    width: 80px;
+    height: 80px;
+    left: 80%;
+    top: 60%;
+  }
+
+  .f-icon-3 {
+    width: 200px;
+    height: 200px;
+    left: -50px;
+    top: 65%;
+  }
+
+  .f-icon-4 {
+    width: 160px;
+    height: 160px;
+    left: 70%;
+    top: 20px;
+  }
+
+  /* Adjust step indicators for tablet */
+  .step-line {
+    width: 60px;
+  }
+
+  .step-line-1 {
+    left: 88px;
+  }
+
+  .step-line-2 {
+    left: 252px;
+  }
+
+  .step-indicator {
+    width: 48px;
+    height: 50px;
+  }
+
+  .step-indicator-2 {
+    left: 176px;
+  }
+
+  .step-indicator-3 {
+    left: 352px;
+  }
+
+  .step-number {
+    font-size: 18px;
+    line-height: 26px;
+  }
+
+  .step-text {
+    font-size: 14px;
+    line-height: 18px;
   }
 }
 
+/* Desktop (1025px and above) */
 @media (min-width: 1025px) {
   .holders-view {
-    width: 375px;
-    max-width: 375px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .content-container {
+    width: 100%;
+    padding: 40px 0 100px 0;
+  }
+
+  .referral-header {
+    width: calc(100% - 76px);
+    left: 38px;
+    gap: 8px;
+    height: 70px;
+    margin-bottom: 32px;
+  }
+
+  .referral-title {
+    font-size: 32px;
+    line-height: 38px;
+  }
+
+  .referral-subtitle {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .scroll-content {
+    width: calc(100% - 76px);
+    left: 38px;
+    gap: 32px;
+    height: auto;
+    min-height: 600px;
+    margin-top: 80px;
+  }
+
+  .qr-section {
+    width: 100%;
+    height: 450px;
+    position: relative;
+    margin-bottom: 40px;
+  }
+
+  .qr-background {
+    border-radius: 32px;
+  }
+
+  .qr-code-container {
+    width: 350px;
+    height: 320px;
+    left: 50%;
+    top: 60px;
+    transform: translateX(-50%);
+  }
+
+  .qr-code-wrapper {
+    width: 100%;
+    height: 100%;
+    border-radius: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    box-sizing: border-box;
+  }
+
+  .qr-code-image {
+    width: 220px;
+    height: 220px;
+    position: static;
+    margin-bottom: 24px;
+  }
+
+  .qr-code-link {
+    font-size: 22px;
+    line-height: 30px;
+    position: static;
+    width: auto;
+    height: auto;
+    text-align: center;
+  }
+
+  .share-button {
+    width: 500px;
+    padding: 18px 80px;
+    height: 66px;
+    font-size: 20px;
+    line-height: 30px;
+  }
+
+  .how-to-section {
+    width: 100%;
+    height: auto;
+    min-height: 500px;
+    margin-top: 60px;
+    left: 0;
+    top: 0;
+  }
+
+  .how-to-title {
+    font-size: 32px;
+    line-height: 38px;
+  }
+
+  .how-to-subtitle {
+    font-size: 22px;
+    line-height: 30px;
+  }
+
+  .step-indicators {
+    left: 50%;
+    top: 140px;
+    width: 500px;
+    height: 60px;
+    transform: translateX(-50%);
+  }
+
+  .step-line {
+    width: 80px;
+  }
+
+  .step-line-1 {
+    left: 110px;
+  }
+
+  .step-line-2 {
+    left: 310px;
+  }
+
+  .step-indicator {
+    width: 60px;
+    height: 60px;
+  }
+
+  .step-indicator-2 {
+    left: 220px;
+  }
+
+  .step-indicator-3 {
+    left: 440px;
+  }
+
+  .step-descriptions {
+    top: 220px;
+    height: 70px;
+    justify-content: center;
+    gap: 120px;
+  }
+
+  .step-number {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .step-text {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .web-link-section {
+    width: 100%;
+    height: 300px;
+    margin-top: 100px;
+    position: relative;
+    left: 0;
+    top: 0;
+  }
+
+  .web-link-background {
+    width: 100%;
+    height: 298px;
+    border-radius: 32px;
+  }
+
+  .web-link-content {
+    padding: 40px;
+  }
+
+  .web-link-title {
+    font-size: 36px;
+    line-height: 42px;
+    width: auto;
+    height: auto;
+    margin-bottom: 16px;
+  }
+
+  .web-link-description {
+    font-size: 22px;
+    line-height: 30px;
+    width: auto;
+    height: auto;
+    margin-bottom: 40px;
+  }
+
+  .copy-link-container {
+    width: calc(100% - 80px);
+    height: 70px;
+    max-width: none;
+  }
+
+  .copy-link-text {
+    font-size: 22px;
+    line-height: 30px;
+    width: auto;
+    height: auto;
+  }
+
+  .copy-button {
+    width: 70px;
+    height: 70px;
+  }
+
+  .copy-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  /* Scale F-icons for desktop */
+  .f-icon-1 {
+    width: 200px;
+    height: 200px;
+    left: -40px;
+    top: -30px;
+  }
+
+  .f-icon-2 {
+    width: 100px;
+    height: 100px;
+    left: 85%;
+    top: 60%;
+  }
+
+  .f-icon-3 {
+    width: 250px;
+    height: 250px;
+    left: -70px;
+    top: 65%;
+  }
+
+  .f-icon-4 {
+    width: 200px;
+    height: 200px;
+    left: 75%;
+    top: 30px;
   }
 }
 
