@@ -366,8 +366,8 @@ const confirmDelete = () => {
   .overflow-y-auto {
     padding-left: 12px;
     padding-right: 12px;
-    /* CartBottom ~70px + BottomNav ~74px + safe area + spacing */
-    padding-bottom: 160px !important;
+    /* CartBottom ~70px + BottomNav ~74px + safe area + extra spacing */
+    padding-bottom: 180px !important;
   }
 }
 
@@ -380,8 +380,8 @@ const confirmDelete = () => {
   .overflow-y-auto {
     padding-left: 14px;
     padding-right: 14px;
-    /* CartBottom ~75px + BottomNav ~78px + safe area + spacing */
-    padding-bottom: 170px !important;
+    /* CartBottom ~75px + BottomNav ~78px + safe area + extra spacing */
+    padding-bottom: 190px !important;
   }
 
   .fixed-bottom-section {
@@ -449,8 +449,8 @@ const confirmDelete = () => {
   }
 
   .overflow-y-auto {
-    /* CartBottom ~85px + BottomNav ~108px + safe area + spacing */
-    padding-bottom: 210px !important;
+    /* CartBottom ~85px + BottomNav ~108px + safe area + extra spacing */
+    padding-bottom: 230px !important;
   }
 
   .fixed-bottom-section {
@@ -497,8 +497,8 @@ const confirmDelete = () => {
   }
 
   .overflow-y-auto {
-    /* CartBottom ~105px + BottomNav ~130px + safe area + spacing */
-    padding-bottom: 250px !important;
+    /* CartBottom ~105px + BottomNav ~130px + safe area + extra spacing */
+    padding-bottom: 270px !important;
   }
 
   .fixed-bottom-section {
