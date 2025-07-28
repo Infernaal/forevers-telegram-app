@@ -548,15 +548,7 @@ const hideSuccessNotification = () => {
   }
 }
 
-@media (min-width: 1025px) {
-  .referral-header {
-    width: 299px;
-    left: 38px;
-    gap: 6px;
-    height: 60px;
-    margin-bottom: 24px;
-  }
-}
+
 
 .referral-title {
   color: #02070E;
