@@ -612,6 +612,14 @@ const confirmDelete = () => {
   }
 }
 
+/* Blur effect for SuccessNotification when modal is open */
+.blur-notification {
+  filter: blur(4px);
+  opacity: 0.6;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
 /* Support for safe areas on iOS - handled by BottomNavigation */
 
 /* Ensure smooth scrolling on mobile */
