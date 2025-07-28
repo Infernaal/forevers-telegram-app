@@ -307,7 +307,7 @@ button:active {
   }
 }
 
-/* Tablet optimizations */
+/* Mobile non-small screens (376px - 768px) */
 @media (min-width: 376px) and (max-width: 768px) {
   .max-w-\[311px\] {
     max-width: 340px;
@@ -316,6 +316,22 @@ button:active {
   .text-lg { font-size: 18px; }
   .text-base { font-size: 16px; }
   .h-11 { height: 48px; }
+
+  /* Make TermsCheckbox smaller for mobile (not small mobile) to fit better */
+  ::deep(.terms-checkbox-dark .terms-container) {
+    width: 100% !important;
+    max-width: calc(100% - 4px) !important;
+  }
+
+  ::deep(.terms-checkbox-dark .terms-text) {
+    font-size: 14px !important;
+    line-height: 20px !important;
+  }
+
+  ::deep(.terms-checkbox-dark .terms-checkbox) {
+    width: 22px !important;
+    height: 22px !important;
+  }
 }
 
 /* Large screens */
@@ -420,6 +436,22 @@ input:focus {
 
   .text-base {
     font-size: 14px;
+  }
+
+  /* Make TermsCheckbox smaller for mobile to fit better */
+  ::deep(.terms-checkbox-dark .terms-container) {
+    width: 100% !important;
+    max-width: calc(100% - 8px) !important;
+  }
+
+  ::deep(.terms-checkbox-dark .terms-text) {
+    font-size: 13px !important;
+    line-height: 18px !important;
+  }
+
+  ::deep(.terms-checkbox-dark .terms-checkbox) {
+    width: 20px !important;
+    height: 20px !important;
   }
 }
 </style>
