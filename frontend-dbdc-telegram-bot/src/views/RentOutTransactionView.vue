@@ -196,7 +196,7 @@
         </div>
 
         <!-- Modal Content -->
-        <div v-if="selectedTransaction" class="p-4 space-y-4 max-h-96 transaction-details-scroll">
+        <div v-if="selectedTransaction" class="p-4 lg:p-6 xl:p-8 space-y-4 lg:space-y-6 xl:space-y-8 max-h-96 lg:max-h-[500px] xl:max-h-[600px] transaction-details-scroll">
           <!-- ID Contract -->
           <div class="flex justify-between items-center">
             <div class="flex items-center gap-2">
