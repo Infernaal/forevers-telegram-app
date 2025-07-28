@@ -1576,7 +1576,7 @@ const hideSuccessNotification = () => {
 
   .step-line-2 {
     position: absolute;
-    left: calc(100vw - 140px);
+    left: calc(100vw - 154px);
     top: 19px;
   }
 
