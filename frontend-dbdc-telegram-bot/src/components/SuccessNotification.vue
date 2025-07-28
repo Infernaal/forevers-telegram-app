@@ -107,24 +107,91 @@ defineEmits(['close'])
 }
 
 /* Responsive adjustments */
-@media (max-width: 375px) {
+@media (max-width: 374px) {
   .success-notification-container {
     left: 16px;
     right: 16px;
     transform: none;
-    bottom: calc(100px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(94px + env(safe-area-inset-bottom, 0px)); /* 64px nav + 30px spacing */
   }
 
   .success-notification-content {
     width: calc(100vw - 32px);
     max-width: 343px;
-    white-space: nowrap;
+    white-space: normal;
+    min-height: 44px;
+    height: auto;
+    align-items: center;
+    padding: 10px 16px;
+    flex-direction: row;
+  }
+
+  .success-notification-container .success-message {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    margin-left: 8px;
+    line-height: 16px;
+    font-size: 13px;
+    text-align: center;
+    flex: 1;
+  }
+
+  .success-notification-container .check-icon-container {
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: 1px;
   }
 }
 
-@media (min-width: 376px) and (max-width: 768px) {
+@media (min-width: 375px) and (max-width: 430px) {
   .success-notification-container {
-    bottom: calc(120px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(101px + env(safe-area-inset-bottom, 0px)); /* 68px nav + 33px spacing */
+  }
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+  .success-notification-container {
+    bottom: calc(140px + env(safe-area-inset-bottom, 0px)); /* tablet spacing */
+  }
+
+  .success-notification-content {
+    width: 400px;
+    height: 52px;
+    padding: 14px 20px;
+  }
+
+  .success-message {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .check-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (min-width: 769px) {
+  .success-notification-container {
+    bottom: calc(160px + env(safe-area-inset-bottom, 0px)); /* desktop spacing */
+  }
+
+  .success-notification-content {
+    width: 480px;
+    height: 60px;
+    padding: 18px 24px;
+  }
+
+  .success-message {
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 600;
+  }
+
+  .check-icon {
+    width: 28px;
+    height: 28px;
   }
 }
 
@@ -133,14 +200,31 @@ defineEmits(['close'])
   .success-notification-container {
     position: fixed;
     z-index: 1000;
-    bottom: calc(100px + env(safe-area-inset-bottom, 8px));
   }
 }
 
 /* Safe area support for notifications */
 @supports (padding: max(0px)) {
   .success-notification-container {
-    bottom: max(100px, calc(100px + env(safe-area-inset-bottom)));
+    bottom: max(94px, calc(94px + env(safe-area-inset-bottom)));
+  }
+
+  @media (min-width: 375px) and (max-width: 430px) {
+    .success-notification-container {
+      bottom: max(101px, calc(101px + env(safe-area-inset-bottom)));
+    }
+  }
+
+  @media (min-width: 431px) and (max-width: 768px) {
+    .success-notification-container {
+      bottom: max(140px, calc(140px + env(safe-area-inset-bottom)));
+    }
+  }
+
+  @media (min-width: 769px) {
+    .success-notification-container {
+      bottom: max(160px, calc(160px + env(safe-area-inset-bottom)));
+    }
   }
 }
 
