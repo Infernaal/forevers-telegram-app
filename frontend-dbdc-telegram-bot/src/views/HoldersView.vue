@@ -326,6 +326,7 @@
     <!-- Success Notification -->
     <SuccessNotification
       :is-visible="showSuccessNotification"
+      :class="{ 'blur-notification': isAnyModalOpen }"
       :message="successMessage"
       @close="hideSuccessNotification"
     />
