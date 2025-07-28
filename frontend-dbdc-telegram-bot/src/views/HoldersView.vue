@@ -333,7 +333,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import BottomNavigation from '../components/BottomNavigation.vue'
 import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
 import SuccessNotification from '../components/SuccessNotification.vue'
