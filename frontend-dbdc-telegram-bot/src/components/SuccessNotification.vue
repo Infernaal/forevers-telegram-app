@@ -112,7 +112,7 @@ defineEmits(['close'])
     left: 16px;
     right: 16px;
     transform: none;
-    bottom: calc(84px + env(safe-area-inset-bottom, 0px)); /* 64px nav + 20px spacing */
+    bottom: calc(94px + env(safe-area-inset-bottom, 0px)); /* 64px nav + 30px spacing */
   }
 
   .success-notification-content {
@@ -124,7 +124,7 @@ defineEmits(['close'])
 
 @media (min-width: 375px) and (max-width: 430px) {
   .success-notification-container {
-    bottom: calc(88px + env(safe-area-inset-bottom, 0px)); /* 68px nav + 20px spacing */
+    bottom: calc(98px + env(safe-area-inset-bottom, 0px)); /* 68px nav + 30px spacing */
   }
 }
 
@@ -184,12 +184,12 @@ defineEmits(['close'])
 /* Safe area support for notifications */
 @supports (padding: max(0px)) {
   .success-notification-container {
-    bottom: max(84px, calc(84px + env(safe-area-inset-bottom)));
+    bottom: max(94px, calc(94px + env(safe-area-inset-bottom)));
   }
 
   @media (min-width: 375px) and (max-width: 430px) {
     .success-notification-container {
-      bottom: max(88px, calc(88px + env(safe-area-inset-bottom)));
+      bottom: max(98px, calc(98px + env(safe-area-inset-bottom)));
     }
   }
 
