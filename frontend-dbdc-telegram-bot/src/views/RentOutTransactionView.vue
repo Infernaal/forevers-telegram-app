@@ -811,7 +811,18 @@ onUnmounted(() => {
     max-width: none !important;
     width: 100% !important;
     margin: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
     border-radius: 24px 24px 0 0 !important;
+  }
+
+  /* Force override Tailwind classes */
+  .transaction-details-modal .transaction-modal-container.max-w-md {
+    max-width: none !important;
+  }
+
+  .transaction-details-modal .transaction-modal-container.md\\:max-w-full {
+    max-width: none !important;
   }
 
   .transaction-details-modal > div {
