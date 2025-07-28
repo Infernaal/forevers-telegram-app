@@ -133,7 +133,7 @@
               class="absolute left-1/2 top-5 transform -translate-x-1/2 w-36 h-36 aspect-square object-contain"
             />
             <!-- QR Code Link -->
-            <div class="absolute left-1/2 bottom-5 transform -translate-x-1/2 text-dbd-primary text-lg font-semibold leading-6 text-center">
+            <div class="absolute left-1/2 bottom-5 transform -translate-x-1/2 text-dbd-primary text-lg sm:text-xl font-semibold leading-6 text-center">
               vm.dubadu/jjhI1uT4S
             </div>
           </div>
@@ -160,7 +160,7 @@
                   hover:-translate-y-0.5 hover:shadow-lg
                   disabled:bg-gray-300 disabled:text-white disabled:cursor-not-allowed h-11 sm:h-12"
             :class="{
-              '!bg-gray-300 !cursor-not-allowed': !termsAccepted,
+              '!bg-gray-400 !text-gray-600 !cursor-not-allowed': !termsAccepted,
               '!bg-gradient-to-r !from-blue-700 !to-indigo-700 !cursor-wait': isSharing
             }"
             :disabled="!termsAccepted || isSharing"
@@ -279,7 +279,7 @@
 
               <!-- URL text -->
               <div v-if="!linkCopied" class="flex-1 px-4 sm:px-6 py-3.5 overflow-hidden">
-                <span class="text-dbd-off-white text-xs sm:text-sm font-semibold leading-5 underline truncate block max-w-full">
+                <span class="text-dbd-off-white text-xs sm:text-base font-semibold leading-5 underline truncate block max-w-full">
                   vm.dubadu/jjhI1uT4S
                 </span>
               </div>
