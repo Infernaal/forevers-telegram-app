@@ -800,6 +800,74 @@ onUnmounted(() => {
   }
 }
 
+/* Tablet and Desktop Transaction Details Modal */
+@media (min-width: 768px) {
+  /* Transaction Details Modal - Center on larger screens */
+  .transaction-details-modal {
+    align-items: center;
+  }
+
+  .transaction-details-modal > div {
+    border-radius: 24px;
+    animation: none;
+    max-width: 500px;
+    margin: 20px;
+  }
+
+  /* Larger text and spacing for tablet/desktop */
+  .transaction-details-scroll .flex.justify-between {
+    padding: 16px 0;
+  }
+
+  .transaction-details-scroll .w-10.h-10 {
+    width: 48px;
+    height: 48px;
+  }
+
+  .transaction-details-scroll .text-sm {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .transaction-details-scroll .copy-btn-default,
+  .transaction-details-scroll .copy-btn-copied {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+  .transaction-details-scroll .copy-btn-default svg,
+  .transaction-details-scroll .copy-btn-copied svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Desktop Large Screens */
+@media (min-width: 1024px) {
+  .transaction-details-modal > div {
+    max-width: 600px;
+  }
+
+  .transaction-details-scroll .flex.justify-between {
+    padding: 20px 0;
+  }
+
+  .transaction-details-scroll .w-10.h-10 {
+    width: 56px;
+    height: 56px;
+  }
+
+  .transaction-details-scroll .text-sm {
+    font-size: 18px;
+  }
+
+  .transaction-details-scroll .copy-btn-default,
+  .transaction-details-scroll .copy-btn-copied {
+    padding: 14px 20px;
+    font-size: 16px;
+  }
+}
+
 /* Export Dropdown - Match Figma Design Exactly */
 .export-dropdown {
   position: absolute;
