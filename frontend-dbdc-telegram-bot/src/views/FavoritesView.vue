@@ -95,14 +95,14 @@
           </div>
 
           <!-- Values Section -->
-          <div class="bg-purple-50 rounded-xl lg:rounded-2xl xl:rounded-3xl p-3 lg:p-6 xl:p-8 mb-3 lg:mb-6 xl:mb-8">
-            <div class="flex justify-between items-center mb-2 lg:mb-4 xl:mb-6">
-              <span class="text-sm lg:text-xl xl:text-2xl text-gray-600 font-medium">Current value</span>
-              <span class="text-base lg:text-2xl xl:text-3xl font-semibold text-gray-700">${{ balance.currentValue.toLocaleString() }}</span>
+          <div class="bg-purple-50 rounded-xl lg:rounded-2xl p-3 lg:p-4 mb-3 lg:mb-4">
+            <div class="flex justify-between items-center mb-2 lg:mb-3">
+              <span class="text-sm lg:text-base text-gray-600 font-medium">Current value</span>
+              <span class="text-base lg:text-lg font-semibold text-gray-700">${{ balance.currentValue.toLocaleString() }}</span>
             </div>
             <div class="flex justify-between items-center">
-              <span class="text-sm lg:text-xl xl:text-2xl text-gray-600 font-medium">Potential worth</span>
-              <span class="text-base lg:text-2xl xl:text-3xl font-semibold text-gray-700">${{ balance.potentialWorth.toLocaleString() }}</span>
+              <span class="text-sm lg:text-base text-gray-600 font-medium">Potential worth</span>
+              <span class="text-base lg:text-lg font-semibold text-gray-700">${{ balance.potentialWorth.toLocaleString() }}</span>
             </div>
           </div>
 
