@@ -529,13 +529,7 @@ const selectLanguage = (language) => {
   height: 5.25rem;
 }
 
-/* Touch optimizations */
-@media (pointer: coarse) {
-  button {
-    min-height: 44px;
-    min-width: 44px;
-  }
-}
+
 
 /* Responsive adaptations for different screen heights */
 @media (max-height: 667px) {
