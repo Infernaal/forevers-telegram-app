@@ -13,7 +13,7 @@
     <div class="absolute left-2 right-2 bottom-[120px] sm:bottom-[115px] md:bottom-[250px] lg:bottom-[190px] xl:bottom-[180px]
                 h-[580px] sm:h-[560px] md:h-[580px] lg:h-[500px] xl:h-[450px]
                 max-h-[calc(100vh-130px)] sm:max-h-[calc(100vh-120px)] md:max-h-[calc(100vh-255px)] lg:max-h-[calc(100vh-210px)] xl:max-h-[calc(100vh-200px)]
-                rounded-[20px] overflow-hidden z-[55] transition-all duration-300 safe-area-inset-calc" 
+                rounded-[20px] overflow-hidden z-[55] transition-all duration-300" 
          @click.stop>
       
       <!-- Background -->
