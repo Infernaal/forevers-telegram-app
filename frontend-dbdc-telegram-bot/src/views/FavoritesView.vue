@@ -1,7 +1,7 @@
 <template>
   <div class="w-full min-h-screen bg-gray-100 font-montserrat overflow-x-hidden flex flex-col">
     <!-- Main Content -->
-    <main class="flex-1 w-full px-4 pt-4 pb-4 flex flex-col">
+    <main class="flex-1 w-full px-4 pt-4 pb-8 flex flex-col">
       <!-- Total Balance Card -->
       <div class="bg-purple-50 border border-purple-200 rounded-2xl p-4 mb-4 flex-shrink-0">
         <div class="flex items-start justify-between mb-4">
