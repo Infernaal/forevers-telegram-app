@@ -624,9 +624,8 @@ onBeforeUnmount(() => {
 
 /* Ensure main container takes full height properly */
 main {
-  min-height: calc(100vh - env(safe-area-inset-top, 0px));
+  min-height: calc(100vh - 100px);
   box-sizing: border-box;
-  height: calc(100vh - 89px);
 }
 
 /* Better touch targets and interaction */
