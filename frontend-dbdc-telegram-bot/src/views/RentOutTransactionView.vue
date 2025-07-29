@@ -441,7 +441,7 @@ const toggleTransactionSelection = (index) => {
   const selectedIndex = selectedTransactions.value.indexOf(index)
   if (selectedIndex > -1) {
     selectedTransactions.value.splice(selectedIndex, 1)
-    // Закрыть dropdown menu если больше нет выбранных т��анзакций
+    // Закрыть dropdown menu если больше нет выбранных транзакций
     if (selectedTransactions.value.length === 0) {
       showExportMenu.value = false
     }
@@ -835,6 +835,16 @@ onUnmounted(() => {
     max-width: 100% !important;
     width: 100% !important;
     margin: 0 !important;
+  }
+
+  /* Force full width - highest specificity */
+  .transaction-details-modal .transaction-modal-container {
+    max-width: 100vw !important;
+    width: 100vw !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
 
   /* Larger text and spacing for tablet */
