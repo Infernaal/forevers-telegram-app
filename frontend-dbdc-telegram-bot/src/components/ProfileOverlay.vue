@@ -12,7 +12,7 @@
     </div>
 
     <!-- Profile Dropdown Menu -->
-    <div class="absolute 
+    <div class="absolute tablet-dropdown-position
                 left-2 right-2 sm:left-3 sm:right-3 md:left-4 md:right-4 lg:left-8 lg:right-8 xl:left-10 xl:right-10
                 bottom-24 sm:bottom-36 md:bottom-28 lg:bottom-44 xl:bottom-48
                 h-[500px] sm:h-[520px] md:h-[580px] lg:h-[500px] xl:h-[450px]
