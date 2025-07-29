@@ -386,6 +386,19 @@ const languages = ref([
 
 const selectedLanguage = ref(languages.value[0])
 
+// Debug and Telegram WebApp detection
+onMounted(() => {
+  console.log('ProfileOverlay mounted')
+  console.log('Telegram WebApp available:', !!(window.Telegram && window.Telegram.WebApp))
+  console.log('Window Telegram object:', window.Telegram)
+})
+
+// Watch isVisible prop for debugging
+watch(() => props.isVisible, (newValue, oldValue) => {
+  console.log('ProfileOverlay visibility changed:', { from: oldValue, to: newValue })
+  console.log('ProfileOverlay element should be:', newValue ? 'visible' : 'hidden')
+}, { immediate: true })
+
 // Methods
 const handleMenuClick = (menuItem) => {
   console.log(`Menu clicked: ${menuItem}`)
