@@ -108,8 +108,8 @@
 
           <!-- Available Section -->
           <div class="bg-green-100 rounded-xl lg:rounded-2xl p-3 lg:p-4 flex items-center justify-between">
-            <div class="flex items-center gap-2 lg:gap-4 xl:gap-6">
-              <span class="text-sm lg:text-xl xl:text-2xl text-gray-600 font-medium">Available</span>
+            <div class="flex items-center gap-2 lg:gap-3">
+              <span class="text-sm lg:text-base text-gray-600 font-medium">Available</span>
               <template v-if="balance.availableAmount">
                 <span class="w-1.5 h-1.5 lg:w-3 lg:h-3 xl:w-4 xl:h-4 bg-gray-400 rounded-full"></span>
                 <div class="flex items-center gap-1 lg:gap-2 xl:gap-3">
