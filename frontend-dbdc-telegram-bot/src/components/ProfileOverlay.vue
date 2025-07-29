@@ -14,7 +14,7 @@
     <!-- Profile Dropdown Menu -->
     <div class="absolute 
                 left-2 right-2 sm:left-3 sm:right-3 md:left-4 md:right-4 lg:left-8 lg:right-8 xl:left-10 xl:right-10
-                bottom-[120px] sm:bottom-[140px] md:bottom-[360px] lg:bottom-[190px] xl:bottom-[180px]
+                bottom-[120px] sm:bottom-[140px] md:bottom-[360px] lg:bottom-[170px] xl:bottom-[180px]
                 h-[500px] sm:h-[520px] md:h-[580px] lg:h-[500px] xl:h-[450px]
                 max-h-[calc(100vh-130px)] sm:max-h-[calc(100vh-150px)] md:max-h-[calc(100vh-315px)] lg:max-h-[calc(100vh-210px)] xl:max-h-[calc(100vh-200px)]
                 rounded-[20px] overflow-hidden z-[55] transition-all duration-300"
