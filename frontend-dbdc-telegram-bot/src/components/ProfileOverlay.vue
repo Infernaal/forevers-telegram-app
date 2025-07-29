@@ -617,7 +617,7 @@ const selectLanguage = (language) => {
 }
 
 /* Fade in animation for overlay */
-.fixed.inset-0.z-50 {
+.fixed.inset-0 {
   animation: fadeIn 0.3s ease-out;
 }
 
@@ -628,5 +628,28 @@ const selectLanguage = (language) => {
   to {
     opacity: 1;
   }
+}
+
+/* Telegram WebApp specific fixes */
+.telegram-webapp-container .fixed {
+  position: fixed !important;
+  z-index: 9999 !important;
+}
+
+/* Ensure ProfileOverlay is above Telegram's native elements */
+@supports (-webkit-touch-callout: none) {
+  .fixed.inset-0 {
+    position: fixed !important;
+    z-index: 99999 !important;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+}
+
+/* Prevent scroll interference in Telegram WebApp */
+.fixed.inset-0 {
+  touch-action: none;
+  -webkit-overflow-scrolling: auto;
+  overscroll-behavior: none;
 }
 </style>
