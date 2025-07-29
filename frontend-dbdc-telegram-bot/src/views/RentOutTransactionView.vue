@@ -134,30 +134,30 @@
                 </svg>
               </div>
               
-              <span class="text-sm lg:text-xl xl:text-2xl font-medium text-dbd-gray">Date & Time</span>
+              <span class="text-sm font-medium text-dbd-gray">Date & Time</span>
             </div>
 
-            <div class="flex items-center gap-2 lg:gap-4 xl:gap-6">
-              <span class="text-sm lg:text-xl xl:text-2xl font-medium text-dbd-dark">{{ transaction.date }}</span>
-              <span class="text-sm lg:text-xl xl:text-2xl font-medium text-dbd-gray">{{ transaction.time }}</span>
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-medium text-dbd-dark">{{ transaction.date }}</span>
+              <span class="text-sm font-medium text-dbd-gray">{{ transaction.time }}</span>
             </div>
           </div>
 
           <!-- Type & Amount Row -->
-          <div class="flex justify-between items-center mb-4 lg:mb-6 xl:mb-8">
-            <div class="flex items-center gap-2 lg:gap-4 xl:gap-6">
-              <span class="text-base lg:text-2xl xl:text-3xl font-semibold text-dbd-gray">Type & Amount</span>
+          <div class="flex justify-between items-center mb-4">
+            <div class="flex items-center gap-2">
+              <span class="text-base font-semibold text-dbd-gray">Type & Amount</span>
             </div>
 
-            <div class="flex items-center gap-2 lg:gap-4 xl:gap-6">
-              <div class="flex items-center gap-1 lg:gap-2 xl:gap-3">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="lg:w-6 lg:h-6 xl:w-8 xl:h-8">
+            <div class="flex items-center gap-2">
+              <div class="flex items-center gap-1">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M13.7564 1.77783H4.78285C4.38779 1.77783 4.1056 2.06002 4.1056 2.45508V5.22051H1.56592C1.17086 5.27695 0.888672 5.55914 0.888672 5.9542C0.888672 6.34926 1.17086 6.63145 1.56592 6.63145H4.1056V12.9524C4.1056 13.3475 4.38779 13.6297 4.78285 13.6297C5.17791 13.6297 5.4601 13.3475 5.4601 12.9524V10.0177H8.33841C8.73347 10.0177 9.01566 9.7355 9.01566 9.34044C9.01566 8.94538 8.73347 8.66319 8.33841 8.66319H5.4601V6.57501H10.9345C11.3296 6.57501 11.6118 6.29282 11.6118 5.89776C11.6118 5.5027 11.3296 5.22051 10.9345 5.22051H5.4601V3.13233H13.7C14.095 3.13233 14.3772 2.85014 14.3772 2.45508C14.3772 2.06002 14.1515 1.77783 13.7564 1.77783Z" fill="#4B4D50"/>
                 </svg>
-                <span class="text-base lg:text-2xl xl:text-3xl font-medium text-dbd-gray">UAE</span>
+                <span class="text-base font-medium text-dbd-gray">UAE</span>
               </div>
-              <div class="w-px h-4 lg:h-6 xl:h-8 bg-gray-600"></div>
-              <span class="text-base lg:text-2xl xl:text-3xl font-medium text-dbd-gray">{{ transaction.amount.toLocaleString() }}</span>
+              <div class="w-px h-4 bg-gray-600"></div>
+              <span class="text-base font-medium text-dbd-gray">{{ transaction.amount.toLocaleString() }}</span>
             </div>
           </div>
 
