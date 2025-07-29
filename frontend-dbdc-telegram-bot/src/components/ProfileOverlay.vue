@@ -15,8 +15,6 @@
                       border-l-transparent border-r-transparent 
                       border-b-[rgba(18,11,129,0.95)] drop-shadow-md"></div>
         </div>
-        <!-- Контент меню -->
-        <div class="p-4 text-white text-center">
         <!-- Background -->
         <div class="absolute inset-0 bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
                     border border-[#09074E] backdrop-blur-[32px]"></div>
