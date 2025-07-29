@@ -3,7 +3,7 @@
     <!-- Dropdown Wrapper -->
     <div class="relative w-full flex justify-center items-end pb-4 sm:pb-6 md:pb-8 lg:pb-10 xl:pb-12">
       <!-- Dropdown Menu -->
-      <div class="relative w-screen px-4 sm:px-8 md:px-8 max-h-[calc(100vh-140px)]
+      <div class="relative w-[92%] max-w-[460px] sm:max-w-[500px] md:max-w-[560px] lg:max-w-[620px] xl:max-w-[680px] max-h-[calc(100vh-140px)]
               h-[500px] sm:h-[580px] md:h-[600px]
               bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
               border border-[#09074E] backdrop-blur-[32px] 
