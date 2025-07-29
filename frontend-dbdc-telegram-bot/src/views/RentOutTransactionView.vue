@@ -182,7 +182,7 @@
     <BottomNavigation />
 
     <!-- Transaction Details Modal -->
-    <div v-if="showTransactionModal" class="transaction-details-modal fixed inset-0 z-50 flex items-end md:items-end lg:items-center justify-center bg-black bg-opacity-20 backdrop-blur-sm">
+    <div v-if="showTransactionModal" class="transaction-details-modal fixed inset-0 z-50 flex items-end md:items-end lg:items-center justify-center md:justify-stretch lg:justify-center bg-black bg-opacity-20 backdrop-blur-sm">
       <div class="transaction-modal-container w-full max-w-md md:max-w-none lg:max-w-lg xl:max-w-xl bg-white rounded-t-3xl md:rounded-t-3xl lg:rounded-3xl xl:rounded-4xl shadow-xl animate-slide-up md:animate-slide-up lg:animate-none">
         <!-- Modal Header -->
         <div class="flex items-center justify-between p-4 lg:p-6 xl:p-8 border-b">
@@ -441,7 +441,7 @@ const toggleTransactionSelection = (index) => {
   const selectedIndex = selectedTransactions.value.indexOf(index)
   if (selectedIndex > -1) {
     selectedTransactions.value.splice(selectedIndex, 1)
-    // Закрыть dropdown menu если больше нет выбранных транзакций
+    // Закрыть dropdown menu если больше нет выбранных транз��кций
     if (selectedTransactions.value.length === 0) {
       showExportMenu.value = false
     }
