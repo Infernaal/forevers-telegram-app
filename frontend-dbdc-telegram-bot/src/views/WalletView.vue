@@ -86,6 +86,77 @@
   </div>
 </template>
 
+<template>
+  <div class="wallet-view min-h-screen bg-gray-100 flex flex-col font-sans">
+    <!-- Content Container -->
+    <div class="flex-1 w-full max-w-md lg:max-w-6xl xl:max-w-7xl mx-auto px-4 lg:px-12 xl:px-16 py-6 lg:py-12 xl:py-16 space-y-6">
+
+      <!-- Forevers Balance Section -->
+      <div class="bg-dbd-light-blue border border-purple-200 rounded-2xl lg:rounded-3xl xl:rounded-4xl p-4 lg:p-8 xl:p-12">
+        <div class="flex items-center justify-between">
+          <h2 class="text-2xl lg:text-5xl xl:text-6xl font-semibold text-dbd-dark leading-tight">
+            Forevers<br>Balance
+          </h2>
+          <div class="flex items-center gap-3 lg:gap-6 xl:gap-8">
+            <svg viewBox="0 0 32 32" class="w-9 h-9 lg:w-16 lg:h-16 xl:w-20 xl:h-20 text-dbd-primary">
+              <path d="M30.6666 7.38081V1.33337H7.1291V9.01148H1.33325V15.0589H7.1291V30.1076H13.894V22.7277H19.6153V16.6803H13.894V15.0589H25.1316V9.01148H13.894V7.38081H30.6666Z" fill="currentColor"/>
+            </svg>
+            <span class="text-4xl lg:text-7xl xl:text-8xl font-bold text-dbd-primary">10,196</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loyalty Program Section -->
+      <div class="bg-white border border-purple-200 rounded-2xl lg:rounded-3xl xl:rounded-4xl p-4 lg:p-8 xl:p-12 shadow-md">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 flex items-center justify-center bg-dbd-light-blue rounded-full">
+            <!-- Loyalty Icon -->
+            <svg width="21" height="21" viewBox="0 0 22 22" fill="none">
+              <!-- truncated for brevity -->
+              <path d="..." fill="#2019CE"/>
+            </svg>
+          </div>
+          <span class="text-xl lg:text-2xl font-semibold text-dbd-dark">Loyalty program</span>
+        </div>
+
+        <div class="mb-6">
+          <span class="block text-3xl font-bold text-dbd-primary">$8,900</span>
+          <span class="block text-sm text-dbd-gray">Forevers Rent %</span>
+        </div>
+
+        <button
+          @click="navigateToTransactions"
+          class="w-full bg-dbd-orange hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-xl transition-colors text-center"
+        >
+          Rent Out History
+        </button>
+      </div>
+
+      <!-- Bonus Section -->
+      <div class="bg-white border border-purple-200 rounded-2xl lg:rounded-3xl xl:rounded-4xl p-4 lg:p-8 xl:p-12 shadow-md">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 flex items-center justify-center bg-dbd-light-blue rounded-full">
+            <!-- Bonus Icon -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M19.8567 6.28571H17.4567C17.751 6.05915 17.9909 5.76969 18.159 5.43849C18.327 5.10729 18.419 4.74272 18.4281 4.37143C18.4151 3.74162 18.1572 3.14167 17.7091 2.69891C17.261 2.25615 16.658 2.00544 16.0281 2C14.3709 2 12.9138 3.04286 11.8709 4.92143C10.8281 3.04286 9.37094 2 7.7138 2C7.08388 2.00544 6.48088 2.25615 6.03279 2.69891C5.58469 3.14167 5.32678 3.74162 5.3138 4.37143C5.32289 4.74272 5.41483 5.10729 5.5829 5.43849C5.75098 5.76969 5.99093 6.05915 6.28523 6.28571H4.14237C3.57405 6.28571 3.029 6.51148 2.62714 6.91334C2.22528 7.31521 1.99951 7.86025 1.99951 8.42857V9.85714C2.00075 10.2992 2.13871 10.7301 2.39447 11.0908C2.65022 11.4514 3.01126 11.7241 3.42808 11.8714V19.8571C3.42808 20.4255 3.65385 20.9705 4.05571 21.3724C4.45758 21.7742 5.00262 22 5.57094 22H18.4281C18.9964 22 19.5414 21.7742 19.9433 21.3724C20.3452 20.9705 20.5709 20.4255 20.5709 19.8571V11.8714C20.9878 11.7241 21.3488 11.4514 21.6046 11.0908C21.8603 10.7301 21.9983 10.2992 21.9995 9.85714V8.42857C21.9995 7.86025 21.7737 7.31521 21.3719 6.91334C20.97 6.51148 20.425 6.28571 19.8567 6.28571ZM13.4281 10.5714H10.5709V7.71429H13.4281V10.5714ZM16.0281 3.42857C16.2787 3.43533 16.5177 3.536 16.6976 3.71063C16.8775 3.88526 16.9853 4.1211 16.9995 4.37143C16.9995 4.78571 16.6709 5.18571 16.0852 5.50714C15.0548 5.98085 13.9336 6.22458 12.7995 6.22143C13.3495 5.06429 14.3995 3.42857 16.0281 3.42857ZM7.7138 3.42857C9.34237 3.42857 10.3924 5.06429 10.9352 6.28571C9.80327 6.29036 8.68409 6.04653 7.65665 5.57143C7.0638 5.25 6.74237 4.85714 6.74237 4.43571C6.74039 4.17414 6.84099 3.92221 7.02259 3.73393C7.20418 3.54566 7.45232 3.43604 7.7138 3.42857ZM3.42808 8.42857C3.42808 8.23913 3.50334 8.05745 3.63729 7.9235C3.77125 7.78954 3.95293 7.71429 4.14237 7.71429H9.14237V10.5714H4.14237C3.95293 10.5714 3.77125 10.4962 3.63729 10.3622C3.50334 10.2283 3.42808 10.0466 3.42808 9.85714V8.42857ZM4.85665 19.8571V12H9.85665V20.5714H5.57094C5.3815 20.5714 5.19982 20.4962 5.06586 20.3622C4.93191 20.2283 4.85665 20.0466 4.85665 19.8571ZM11.2852 20.5714V12H12.7138V20.5714H11.2852ZM19.1424 19.8571C19.1424 20.0466 19.0671 20.2283 18.9332 20.3622C18.7992 20.4962 18.6175 20.5714 18.4281 20.5714H14.1424V12H19.1424V19.8571ZM20.5709 9.85714C20.5709 10.0466 20.4957 10.2283 20.3617 10.3622C20.2278 10.4962 20.0461 10.5714 19.8567 10.5714H14.8567V7.71429H19.8567C20.0461 7.71429 20.2278 7.78954 20.3617 7.9235C20.4957 8.05745 20.5709 8.23913 20.5709 8.42857V9.85714Z" fill="#2019CE"/>
+            </svg>
+          </div>
+          <span class="text-xl lg:text-2xl font-semibold text-dbd-dark">Bonus</span>
+        </div>
+
+        <div>
+          <span class="block text-3xl font-bold text-dbd-primary">$56,200</span>
+          <span class="block text-sm text-dbd-gray">Reward</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Navigation Component -->
+    <BottomNavigation />
+  </div>
+</template>
+
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
