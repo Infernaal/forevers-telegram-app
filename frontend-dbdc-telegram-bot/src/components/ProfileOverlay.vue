@@ -225,10 +225,10 @@
               </div>
               <div class="text-dbd-dark text-lg font-bold leading-6 mb-1">Start</div>
             </div>
-            <button class="relative z-[1] w-[120px] h-11 
-                           bg-gradient-to-r from-dbd-primary to-[#473FFF] 
-                           border-none rounded-full text-white text-base font-bold leading-5 
-                           capitalize cursor-pointer transition-all duration-200 
+            <button class="relative z-[1] w-[120px] h-11 min-h-[44px]
+                           bg-gradient-to-r from-dbd-primary to-[#473FFF]
+                           border-none rounded-full text-white text-base font-bold leading-5
+                           capitalize cursor-pointer transition-all duration-200
                            hover:-translate-y-0.5 hover:shadow-lg flex-shrink-0" 
                     @click="handleUpgrade">
               Upgrade
