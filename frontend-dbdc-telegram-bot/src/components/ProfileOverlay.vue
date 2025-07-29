@@ -18,7 +18,7 @@
                 bottom-[140px] sm:bottom-[165px] md:bottom-[310px] lg:bottom-[190px] xl:bottom-[180px]
                 h-[600px] sm:h-[580px] md:h-[580px] lg:h-[500px] xl:h-[450px]
                 max-h-[calc(100vh-150px)] sm:max-h-[calc(100vh-170px)] md:max-h-[calc(100vh-315px)] lg:max-h-[calc(100vh-210px)] xl:max-h-[calc(100vh-200px)]
-                max-[375px]:left-4 max-[375px]:right-4 max-[375px]:bottom-[135px] max-[375px]:h-[580px] max-[375px]:max-h-[calc(100vh-140px)]
+                max-[375px]:left-4 max-[375px]:right-4 max-[375px]:bottom-[105px] max-[375px]:h-[580px] max-[375px]:max-h-[calc(100vh-140px)]
                 max-[667px]:bottom-[130px] max-[667px]:h-[520px]
                 max-[568px]:bottom-[110px] max-[568px]:h-[470px]
                 landscape:max-[500px]:bottom-[115px] landscape:max-[500px]:h-[370px]
