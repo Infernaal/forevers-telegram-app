@@ -182,7 +182,7 @@
     <BottomNavigation />
 
     <!-- Transaction Details Modal -->
-    <div v-if="showTransactionModal" class="transaction-details-modal fixed inset-0 z-50 flex items-end justify-center bg-black bg-opacity-20 backdrop-blur-sm">
+    <div v-if="showTransactionModal" class="transaction-details-modal fixed inset-0 z-[10001] flex items-end justify-center bg-black bg-opacity-20 backdrop-blur-sm">
       <div class="transaction-modal-container w-full bg-white rounded-t-3xl shadow-xl animate-slide-up">
         <!-- Modal Header -->
         <div class="flex items-center justify-between p-4 border-b">
