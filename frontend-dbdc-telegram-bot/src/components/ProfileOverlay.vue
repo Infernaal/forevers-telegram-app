@@ -354,7 +354,7 @@ import { ref, watch, onMounted } from 'vue'
 import CountryFlag from './CountryFlag.vue'
 
 // Props
-defineProps({
+const props = defineProps({
   isVisible: {
     type: Boolean,
     default: false
