@@ -182,8 +182,8 @@
     <BottomNavigation />
 
     <!-- Transaction Details Modal -->
-    <div v-if="showTransactionModal" class="transaction-details-modal fixed inset-0 z-50 flex items-end md:items-end lg:items-center justify-center bg-black bg-opacity-20 backdrop-blur-sm">
-      <div class="transaction-modal-container w-full max-w-md md:max-w-full lg:max-w-lg xl:max-w-xl bg-white rounded-t-3xl md:rounded-t-3xl lg:rounded-3xl xl:rounded-4xl shadow-xl animate-slide-up md:animate-slide-up lg:animate-none">
+    <div v-if="showTransactionModal" class="transaction-details-modal fixed inset-0 z-50 flex items-end md:items-end lg:items-center justify-center md:justify-stretch lg:justify-center bg-black bg-opacity-20 backdrop-blur-sm">
+      <div class="transaction-modal-container w-full md:max-w-none lg:max-w-lg xl:max-w-xl bg-white rounded-t-3xl md:rounded-t-3xl lg:rounded-3xl xl:rounded-4xl shadow-xl animate-slide-up md:animate-slide-up lg:animate-none">
         <!-- Modal Header -->
         <div class="flex items-center justify-between p-4 lg:p-6 xl:p-8 border-b">
           <h2 class="text-base lg:text-lg xl:text-xl font-medium text-dbd-dark">Transaction Details</h2>
@@ -441,7 +441,7 @@ const toggleTransactionSelection = (index) => {
   const selectedIndex = selectedTransactions.value.indexOf(index)
   if (selectedIndex > -1) {
     selectedTransactions.value.splice(selectedIndex, 1)
-    // Закрыть dropdown menu если больше нет выбранных транзакций
+    // Закрыть dropdown menu если больше нет выбранных транз��кций
     if (selectedTransactions.value.length === 0) {
       showExportMenu.value = false
     }
@@ -808,33 +808,51 @@ onUnmounted(() => {
 @media (min-width: 768px) and (max-width: 1023px) {
   /* Transaction Details Modal - Full width on tablet */
   .transaction-details-modal {
-    align-items: end;
+    align-items: end !important;
+    padding: 0 !important;
   }
 
-  .transaction-modal-container {
-    max-width: none !important;
-    width: 100% !important;
+  /* Ultra-specific selectors to override Tailwind */
+  div.transaction-details-modal div.transaction-modal-container.w-full.max-w-md {
+    max-width: 100vw !important;
+    width: 100vw !important;
     margin: 0 !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
     border-radius: 24px 24px 0 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    position: relative !important;
   }
 
-  /* Force override Tailwind classes */
-  .transaction-details-modal .transaction-modal-container.max-w-md {
-    max-width: none !important;
+  /* Additional override with higher specificity */
+  .fixed.inset-0.z-50.flex .transaction-modal-container {
+    max-width: 100vw !important;
+    width: 100vw !important;
+    margin: 0 !important;
+    border-radius: 24px 24px 0 0 !important;
   }
 
-  .transaction-details-modal .transaction-modal-container.md\\:max-w-full {
-    max-width: none !important;
+  /* Force override all possible Tailwind responsive classes */
+  .transaction-details-modal .transaction-modal-container.max-w-md,
+  .transaction-details-modal .transaction-modal-container.md\\:max-w-none,
+  .transaction-details-modal .transaction-modal-container[class*="max-w"] {
+    max-width: 100vw !important;
+    width: 100vw !important;
+  }
+
+  /* Container positioning */
+  .transaction-details-modal {
+    justify-content: stretch !important;
   }
 
   .transaction-details-modal > div {
     border-radius: 24px 24px 0 0 !important;
-    animation: none;
-    max-width: 100% !important;
-    width: 100% !important;
+    animation: none !important;
+    max-width: 100vw !important;
+    width: 100vw !important;
     margin: 0 !important;
+    flex: none !important;
   }
 
   /* Larger text and spacing for tablet */
