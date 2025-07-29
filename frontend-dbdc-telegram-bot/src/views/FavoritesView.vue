@@ -3,7 +3,7 @@
     <!-- Main Content -->
     <main class="flex-1 w-full max-w-md lg:max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-4 sm:pt-6 md:pt-8 lg:pt-10 xl:pt-12 pb-4 sm:pb-6 md:pb-8 lg:pb-10 xl:pb-12 flex flex-col">
       <!-- Total Balance Card -->
-      <div class="bg-purple-50 border border-purple-200 rounded-2xl p-4 mb-4 flex-shrink-0">
+      <div class="bg-purple-50 border border-purple-200 rounded-2xl lg:rounded-3xl xl:rounded-4xl p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 mb-4 sm:mb-6 md:mb-8 lg:mb-10 xl:mb-12 flex-shrink-0">
         <div class="flex items-start justify-between mb-4">
           <h2 class="text-2xl font-semibold text-black leading-7">
             Forevers<br>Balance
