@@ -10,8 +10,8 @@
           </h2>
 
           <div class="flex flex-col items-end gap-2 lg:gap-3">
-            <div class="flex items-center gap-2 lg:gap-4 xl:gap-6">
-              <svg width="32" height="32" viewBox="0 0 32 32" class="text-blue-700 lg:w-16 lg:h-16 xl:w-20 xl:h-20">
+            <div class="flex items-center gap-2 lg:gap-3">
+              <svg width="32" height="32" viewBox="0 0 32 32" class="text-blue-700 lg:w-12 lg:h-12">
                 <path d="M30.667 7.381V1.333H7.129V9.011H1.333V15.059H7.129V30.108H13.894V22.728H19.615V16.680H13.894V15.059H25.132V9.011H13.894V7.381H30.667Z" fill="currentColor"/>
               </svg>
               <span class="text-3xl lg:text-6xl xl:text-7xl font-bold text-blue-700">{{ totalBalance.toLocaleString() }}</span>
