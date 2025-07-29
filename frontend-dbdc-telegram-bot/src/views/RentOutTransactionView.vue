@@ -182,12 +182,12 @@
     <BottomNavigation />
 
     <!-- Transaction Details Modal -->
-    <div v-if="showTransactionModal" class="transaction-details-modal fixed inset-0 z-50 flex items-end md:items-end lg:items-center justify-center md:justify-stretch lg:justify-center bg-black bg-opacity-20 backdrop-blur-sm">
-      <div class="transaction-modal-container w-full md:max-w-none lg:max-w-lg xl:max-w-xl bg-white rounded-t-3xl md:rounded-t-3xl lg:rounded-3xl xl:rounded-4xl shadow-xl animate-slide-up md:animate-slide-up lg:animate-none">
+    <div v-if="showTransactionModal" class="transaction-details-modal fixed inset-0 z-50 flex items-end justify-center bg-black bg-opacity-20 backdrop-blur-sm">
+      <div class="transaction-modal-container w-full bg-white rounded-t-3xl shadow-xl animate-slide-up">
         <!-- Modal Header -->
-        <div class="flex items-center justify-between p-4 lg:p-6 xl:p-8 border-b">
-          <h2 class="text-base lg:text-lg xl:text-xl font-medium text-dbd-dark">Transaction Details</h2>
-          <button @click="closeTransactionModal" class="w-11 h-11 lg:w-12 lg:h-12 xl:w-14 xl:h-14 flex items-center justify-center rounded-full bg-dbd-off-white border border-gray-200">
+        <div class="flex items-center justify-between p-4 border-b">
+          <h2 class="text-base font-medium text-dbd-dark">Transaction Details</h2>
+          <button @click="closeTransactionModal" class="w-11 h-11 flex items-center justify-center rounded-full bg-dbd-off-white border border-gray-200">
             <div class="w-5 h-5 relative">
               <div class="absolute w-4 h-0.5 bg-dbd-dark rounded-full rotate-45 top-2.5 left-0.5"></div>
               <div class="absolute w-4 h-0.5 bg-dbd-dark rounded-full -rotate-45 top-2.5 left-0.5"></div>
@@ -196,7 +196,7 @@
         </div>
 
         <!-- Modal Content -->
-        <div v-if="selectedTransaction" class="p-4 lg:p-6 xl:p-8 space-y-4 lg:space-y-6 xl:space-y-8 max-h-96 lg:max-h-[500px] xl:max-h-[600px] transaction-details-scroll">
+        <div v-if="selectedTransaction" class="p-4 space-y-4 max-h-96 transaction-details-scroll">
           <!-- ID Contract -->
           <div class="flex justify-between items-center">
             <div class="flex items-center gap-2">
