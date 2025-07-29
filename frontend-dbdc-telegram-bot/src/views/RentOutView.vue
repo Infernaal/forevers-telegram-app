@@ -1,20 +1,20 @@
 <template>
   <div class="w-full min-h-screen bg-gray-100 font-montserrat overflow-x-hidden flex flex-col">
     <!-- Header Section -->
-    <div class="w-full px-4 sm:px-6 md:px-8 lg:px-12 pt-6 sm:pt-8 md:pt-10 lg:pt-12 pb-3 sm:pb-4 md:pb-5 lg:pb-6 bg-gray-100 z-30">
+    <div class="w-full px-4 pt-6 pb-3 bg-gray-100 z-30">
       <div class="mb-2">
-        <div class="bg-dbd-light-blue border border-purple-200 rounded-2xl lg:rounded-3xl p-4 lg:p-6">
+        <div class="bg-dbd-light-blue border border-purple-200 rounded-2xl p-4">
           <div class="flex items-center justify-between">
             <div>
-              <h2 class="text-2xl lg:text-4xl font-semibold text-dbd-dark leading-tight mb-1 lg:mb-2">
+              <h2 class="text-2xl font-semibold text-dbd-dark leading-tight mb-1">
                 Forevers<br />Available
               </h2>
             </div>
-            <div class="flex items-center gap-3 lg:gap-4">
-              <svg class="text-dbd-primary w-9 h-9 lg:w-12 lg:h-12" viewBox="0 0 32 32">
+            <div class="flex items-center gap-3">
+              <svg class="text-dbd-primary w-9 h-9" viewBox="0 0 32 32">
                 <path d="M30.6666 7.38069V1.33325H7.1291V9.01136H1.33325V15.0588H7.1291V30.1075H13.894V22.7276H19.6153V16.6801H13.894V15.0588H25.1316V9.01136H13.894V7.38069H30.6666Z" fill="currentColor"/>
               </svg>
-              <span class="text-4xl lg:text-5xl font-bold text-dbd-primary">2,225</span>
+              <span class="text-4xl font-bold text-dbd-primary">2,225</span>
             </div>
           </div>
         </div>
@@ -22,18 +22,18 @@
     </div>
 
     <!-- Scrollable Cards -->
-    <div class="flex-1 w-full overflow-y-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-24 sm:pb-28 md:pb-32 lg:pb-40">
-      <div class="space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-8 xl:space-y-10">
-        <div 
-          v-for="item in foreversList" 
+    <div class="flex-1 w-full overflow-y-auto px-4 pb-32">
+      <div class="space-y-4">
+        <div
+          v-for="item in foreversList"
           :key="item.id"
-          class="bg-dbd-off-white border border-purple-200 rounded-2xl sm:rounded-3xl md:rounded-3xl lg:rounded-4xl xl:rounded-4xl p-3 sm:p-4 md:p-6 lg:p-8 xl:p-10"
+          class="bg-dbd-off-white border border-purple-200 rounded-2xl p-3"
         >
           <!-- Header -->
-          <div class="flex items-center justify-between mb-3 sm:mb-4 md:mb-6 lg:mb-8 xl:mb-10">
-            <div class="flex items-center gap-3 sm:gap-4 md:gap-6 lg:gap-8 xl:gap-10">
-              <CountryFlag :country="item.code" class="w-6 h-6 sm:w-8 sm:h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 xl:w-20 xl:h-20" />
-              <span class="text-dbd-gray text-base sm:text-lg md:text-xl lg:text-3xl xl:text-4xl font-medium">{{ item.title }}</span>
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-3">
+              <CountryFlag :country="item.code" class="w-6 h-6" />
+              <span class="text-dbd-gray text-base font-medium">{{ item.title }}</span>
             </div>
             <button
               @click="openRentModal(item)"
@@ -41,24 +41,24 @@
               :class="item.availableAmount === 0
                 ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
                 : 'bg-dbd-orange text-white hover:bg-orange-600'"
-              class="px-3 sm:px-4 md:px-6 lg:px-8 xl:px-10 py-2 sm:py-2.5 md:py-3 lg:py-4 xl:py-5 rounded-full text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-bold transition-colors"
+              class="px-3 py-2 rounded-full text-sm font-bold transition-colors"
             >
               Loyality
             </button>
           </div>
 
           <!-- Exchange Rate -->
-          <div class="flex items-center gap-1 sm:gap-1.5 md:gap-2 lg:gap-3 xl:gap-4 mb-3 sm:mb-4 md:mb-6 lg:mb-8 xl:mb-10">
-            <span class="text-dbd-gray text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl">1</span>
-            <svg class="text-dbd-gray w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-8 lg:h-8 xl:w-10 xl:h-10" viewBox="0 0 16 16">
+          <div class="flex items-center gap-1 mb-3">
+            <span class="text-dbd-gray text-sm">1</span>
+            <svg class="text-dbd-gray w-4 h-4" viewBox="0 0 16 16">
               <path d="M15.2636 2H4.61925C4.15063 2 3.8159 2.28571 3.8159 2.68571V5.48571H0.803347C0.334728 5.54286 0 5.82857 0 6.22857C0 6.62857 0.334728 6.91429 0.803347 6.91429H3.8159V13.3143C3.8159 13.7143 4.15063 14 4.61925 14C5.08787 14 5.42259 13.7143 5.42259 13.3143V10.3429H8.83682C9.30544 10.3429 9.64017 10.0571 9.64017 9.65714C9.64017 9.25714 9.30544 8.97143 8.83682 8.97143H5.42259V6.85714H11.9163C12.3849 6.85714 12.7197 6.57143 12.7197 6.17143C12.7197 5.77143 12.3849 5.48571 11.9163 5.48571H5.42259V3.37143H15.1967C15.6653 3.37143 16 3.08571 16 2.68571C16 2.28571 15.7322 2 15.2636 2Z" fill="currentColor"/>
             </svg>
-            <span class="text-dbd-gray text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl">{{ item.code }} / {{ item.usdRate }} USD</span>
+            <span class="text-dbd-gray text-sm">{{ item.code }} / {{ item.usdRate }} USD</span>
             <div
-              class="flex items-center gap-1 sm:gap-1.5 md:gap-2 lg:gap-3 xl:gap-4 px-2 sm:px-3 md:px-4 lg:px-6 xl:px-8 py-0.5 sm:py-1 md:py-2 lg:py-3 xl:py-4 rounded sm:rounded-md md:rounded-lg lg:rounded-xl font-semibold text-xs sm:text-sm md:text-base lg:text-xl xl:text-2xl"
+              class="flex items-center gap-1 px-2 py-0.5 rounded font-semibold text-xs"
               :class="item.priceChange >= 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'"
             >
-              <svg class="w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 lg:w-6 lg:h-6 xl:w-8 xl:h-8" :class="item.priceChange >= 0 ? '-rotate-45' : 'rotate-45'" viewBox="0 0 10 13">
+              <svg class="w-2 h-2" :class="item.priceChange >= 0 ? '-rotate-45' : 'rotate-45'" viewBox="0 0 10 13">
                 <path d="M0.720539 4.9362L4.6673 1.01033M4.6673 1.01033L8.58641 4.92944M4.6673 1.01033L4.65686 12.3136"
                       :stroke="item.priceChange >= 0 ? '#07B80E' : '#FF1919'"
                       stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
@@ -68,35 +68,35 @@
           </div>
 
           <!-- Values Section -->
-          <div class="bg-dbd-light-blue rounded-xl sm:rounded-2xl md:rounded-2xl lg:rounded-3xl xl:rounded-3xl p-3 sm:p-4 md:p-6 lg:p-8 xl:p-10 mb-3 sm:mb-4 md:mb-6 lg:mb-8 xl:mb-10">
-            <div class="flex justify-between mb-2 sm:mb-3 md:mb-4 lg:mb-6 xl:mb-8">
-              <span class="text-sm sm:text-base md:text-lg lg:text-2xl xl:text-3xl text-dbd-gray">Rental cost per 1 Forevers</span>
-              <span class="text-base sm:text-lg md:text-xl lg:text-3xl xl:text-4xl font-semibold text-dbd-gray">${{ item.rentalCost }}</span>
+          <div class="bg-dbd-light-blue rounded-xl p-3 mb-3">
+            <div class="flex justify-between mb-2">
+              <span class="text-sm text-dbd-gray">Rental cost per 1 Forevers</span>
+              <span class="text-base font-semibold text-dbd-gray">${{ item.rentalCost }}</span>
             </div>
             <div class="flex justify-between">
-              <span class="text-sm sm:text-base md:text-lg lg:text-2xl xl:text-3xl text-dbd-gray">Potential income per month</span>
-              <span class="text-base sm:text-lg md:text-xl lg:text-3xl xl:text-4xl font-semibold text-dbd-gray">${{ item.potentialIncome }}</span>
+              <span class="text-sm text-dbd-gray">Potential income per month</span>
+              <span class="text-base font-semibold text-dbd-gray">${{ item.potentialIncome }}</span>
             </div>
           </div>
 
           <!-- Available Section -->
-          <div class="bg-green-100 rounded-xl sm:rounded-2xl md:rounded-2xl lg:rounded-3xl xl:rounded-3xl p-3 sm:p-4 md:p-6 lg:p-8 xl:p-10 flex items-center justify-between">
-            <div class="flex items-center gap-1 sm:gap-1.5 md:gap-2 lg:gap-3 xl:gap-4">
-              <span class="text-sm sm:text-base md:text-lg lg:text-2xl xl:text-3xl text-gray-600">{{ item.availableText }}</span>
-              <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-3 md:h-3 lg:w-4 lg:h-4 xl:w-5 xl:h-5 bg-gray-400 rounded-full"></span>
-              <div class="flex items-center gap-1 sm:gap-1.5 md:gap-2 lg:gap-3 xl:gap-4">
-                <svg class="text-dbd-dark w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-8 lg:h-8 xl:w-10 xl:h-10" viewBox="0 0 14 14">
+          <div class="bg-green-100 rounded-xl p-3 flex items-center justify-between">
+            <div class="flex items-center gap-1">
+              <span class="text-sm text-gray-600">{{ item.availableText }}</span>
+              <span class="w-1.5 h-1.5 bg-gray-400 rounded-full"></span>
+              <div class="flex items-center gap-1">
+                <svg class="text-dbd-dark w-4 h-4" viewBox="0 0 14 14">
                   <path d="M12.8602 1.40015H4.3802C4.00686 1.40015 3.7402 1.66681 3.7402 2.04015V4.65348H1.3402C0.966862 4.70681 0.700195 4.97348 0.700195 5.34681C0.700195 5.72015 0.966862 5.98681 1.3402 5.98681H3.7402V11.9601C3.7402 12.3335 4.00686 12.6001 4.3802 12.6001C4.75353 12.6001 5.0202 12.3335 5.0202 11.9601V9.18681H7.7402C8.11353 9.18681 8.3802 8.92015 8.3802 8.54681C8.3802 8.17348 8.11353 7.90681 7.7402 7.90681H5.0202V5.93348H10.1935C10.5669 5.93348 10.8335 5.66681 10.8335 5.29348C10.8335 4.92015 10.5669 4.65348 10.1935 4.65348H5.0202V2.68015H12.8069C13.1802 2.68015 13.4469 2.41348 13.4469 2.04015C13.4469 1.66681 13.2335 1.40015 12.8602 1.40015Z" fill="currentColor"/>
                 </svg>
-                <span class="text-sm sm:text-base md:text-lg lg:text-2xl xl:text-3xl font-medium text-dbd-dark">{{ item.availableAmount }}</span>
+                <span class="text-sm font-medium text-dbd-dark">{{ item.availableAmount }}</span>
               </div>
             </div>
 
             <button
               @click="showInfoTooltip = true"
-              class="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-16 lg:h-16 xl:w-20 xl:h-20 border border-gray-300 bg-white rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors"
+              class="w-6 h-6 border border-gray-300 bg-white rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors"
             >
-              <svg class="text-dbd-gray w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 lg:w-12 lg:h-12 xl:w-16 xl:h-16" viewBox="0 0 20 20">
+              <svg class="text-dbd-gray w-5 h-5" viewBox="0 0 20 20">
                 <path d="M10 2C5.5888 2 2 5.58885 2 10C2 14.4112 5.5888 18 10 18C14.4112 18 18 14.4112 18 10C18 5.58885 14.4112 2 10 2ZM10 16.5455C6.39079 16.5455 3.45455 13.6092 3.45455 10C3.45455 6.39088 6.39079 3.45455 10 3.45455C13.6092 3.45455 16.5455 6.39088 16.5455 10C16.5455 13.6092 13.6092 16.5455 10 16.5455Z" fill="currentColor"/>
                 <path d="M10 5.39453C9.46543 5.39453 9.03052 5.82973 9.03052 6.36466C9.03052 6.89911 9.46543 7.33393 10 7.33393C10.5346 7.33393 10.9695 6.89911 10.9695 6.36466C10.9695 5.82973 10.5346 5.39453 10 5.39453Z" fill="currentColor"/>
                 <path d="M9.99998 8.78711C9.59833 8.78711 9.27271 9.11273 9.27271 9.51438V13.878C9.27271 14.2797 9.59833 14.6053 9.99998 14.6053C10.4016 14.6053 10.7273 14.2797 10.7273 13.878V9.51438C10.7273 9.11273 10.4016 8.78711 9.99998 8.78711Z" fill="currentColor"/>

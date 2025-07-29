@@ -1,16 +1,16 @@
 <template>
-  <div class="rent-out-transaction-view w-full max-w-md lg:max-w-6xl xl:max-w-7xl mx-auto bg-gray-100 min-h-screen relative">
+  <div class="rent-out-transaction-view w-full mx-auto bg-gray-100 min-h-screen relative">
     <!-- Header Section -->
     <div class="header-section sticky top-0 bg-gray-100 z-40 pb-2">
       <!-- Status Bar Spacing -->
       <div class="h-12"></div>
       
       <!-- Header Content -->
-      <div class="flex justify-between items-center px-4 lg:px-12 xl:px-16 py-3 lg:py-6 xl:py-8">
+      <div class="flex justify-between items-center px-4 py-3">
         <!-- Close Button -->
         <button
           @click="goBack"
-          class="w-11 h-11 lg:w-16 lg:h-16 xl:w-20 xl:h-20 flex items-center justify-center rounded-full bg-dbd-off-white border border-gray-200 hover:bg-gray-100 transition-colors"
+          class="w-11 h-11 flex items-center justify-center rounded-full bg-dbd-off-white border border-gray-200 hover:bg-gray-100 transition-colors"
         >
           <div class="w-5 h-5 relative">
             <div class="absolute w-4 h-0.5 bg-dbd-dark rounded-full rotate-45 top-2.5 left-0.5"></div>
@@ -20,7 +20,7 @@
 
         <!-- Title -->
         <div class="flex-1 text-center">
-          <h1 class="text-2xl lg:text-5xl xl:text-6xl font-semibold text-dbd-dark leading-tight">
+          <h1 class="text-2xl font-semibold text-dbd-dark leading-tight">
             Rented Out<br>History
           </h1>
         </div>
@@ -31,14 +31,14 @@
             @click="toggleExportMenu"
             :disabled="selectedTransactions.length === 0"
             :class="[
-              'export-btn w-32 lg:w-48 xl:w-56 h-13 lg:h-20 xl:h-24 flex items-center justify-center gap-3 lg:gap-4 xl:gap-5 rounded-full px-4 lg:px-6 xl:px-8 py-2.5 lg:py-4 xl:py-5 transition-colors',
+              'export-btn w-32 h-13 flex items-center justify-center gap-3 rounded-full px-4 py-2.5 transition-colors',
               selectedTransactions.length === 0
                 ? 'bg-gray-300 border border-gray-300 cursor-not-allowed'
                 : 'bg-white border border-gray-200 hover:bg-gray-50'
             ]"
           >
-            <span :class="selectedTransactions.length === 0 ? 'text-gray-500' : 'text-dbd-gray'" class="font-medium text-sm lg:text-lg xl:text-xl">Export</span>
-            <svg width="32" height="32" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg" class="lg:w-10 lg:h-10 xl:w-12 xl:h-12">
+            <span :class="selectedTransactions.length === 0 ? 'text-gray-500' : 'text-dbd-gray'" class="font-medium text-sm">Export</span>
+            <svg width="32" height="32" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M24.4294 12.4709H20.4441V14.7762H24.4294C25.6145 14.7762 26.5339 15.3663 26.5339 15.8742V26.0964C26.5339 26.6043 25.6145 27.1945 24.4294 27.1945H9.3657C8.18061 27.1945 7.26115 26.6043 7.26115 26.0964V15.8746C7.26115 15.3667 8.18061 14.7766 9.3657 14.7766H13.3502V12.4713H9.3657C6.85955 12.4713 4.89648 13.9663 4.89648 15.8746V26.0968C4.89648 28.0055 6.85955 29.5001 9.3657 29.5001H24.4298C26.9355 29.5001 28.899 28.0051 28.899 26.0968V15.8746C28.8986 13.9659 26.9355 12.4709 24.4294 12.4709Z" fill="#FF6800"/>
               <path d="M13.3976 9.24579C13.7002 9.24579 14.0025 9.13322 14.2335 8.90807L15.7138 7.465V12.4704V14.7757V19.1917C15.7138 19.8283 16.243 20.3443 16.8961 20.3443C17.5491 20.3443 18.0784 19.8283 18.0784 19.1917V14.7757V12.4704V7.387L19.6387 8.90807C19.8696 9.13322 20.1723 9.24579 20.4746 9.24579C20.7769 9.24579 21.0796 9.13322 21.3105 8.90807C21.7724 8.45817 21.7724 7.72818 21.3105 7.27827L17.7805 3.83695C17.5495 3.6118 17.2472 3.5 16.945 3.5C16.9418 3.5 16.939 3.5 16.9359 3.5C16.9327 3.5 16.93 3.5 16.9268 3.5C16.6245 3.5 16.3223 3.6118 16.0913 3.83695L12.5613 7.27827C12.0994 7.72818 12.0994 8.45817 12.5613 8.90807C12.7926 9.13322 13.0949 9.24579 13.3976 9.24579Z" fill="#FF6800"/>
             </svg>
@@ -86,47 +86,47 @@
     </div>
 
     <!-- Content Container -->
-    <div class="content-container bg-gray-100 pb-32 sm:pb-36 md:pb-40 lg:pb-44 xl:pb-52 px-4 lg:px-12 xl:px-16">
+    <div class="content-container bg-gray-100 pb-32 px-4">
       <!-- Empty State -->
       <div v-if="transactions.length === 0" class="empty-state flex flex-col items-center justify-center text-center" style="min-height: calc(100vh - 200px);">
-        <h2 class="text-xl lg:text-4xl xl:text-5xl font-bold text-dbd-dark mb-4 lg:mb-8 xl:mb-12 leading-tight max-w-60 lg:max-w-none">
+        <h2 class="text-xl font-bold text-dbd-dark mb-4 leading-tight max-w-60">
           No deals<br>have been opened yet.
         </h2>
-        <p class="text-base lg:text-2xl xl:text-3xl font-medium text-dbd-gray leading-relaxed max-w-72 lg:max-w-none">
+        <p class="text-base font-medium text-dbd-gray leading-relaxed max-w-72">
           All the transaction will be displayed inside this table after you make one.
         </p>
       </div>
 
       <!-- Scrollable Transaction List -->
-      <div v-else class="transaction-list space-y-2 lg:space-y-4 xl:space-y-6 pt-4 lg:pt-8 xl:pt-12">
+      <div v-else class="transaction-list space-y-2 pt-4">
         <!-- Transaction Cards -->
         <div
           v-for="(transaction, index) in transactions"
           :key="index"
-          class="transaction-card bg-dbd-off-white rounded-3xl lg:rounded-4xl xl:rounded-5xl border border-gray-200 p-3 lg:p-6 xl:p-8 cursor-pointer hover:bg-gray-50 transition-colors"
+          class="transaction-card bg-dbd-off-white rounded-3xl border border-gray-200 p-3 cursor-pointer hover:bg-gray-50 transition-colors"
           @click="openTransactionDetails(transaction, index)"
         >
           <!-- Date and Time Row -->
-          <div class="flex justify-between items-center mb-4 lg:mb-6 xl:mb-8">
-            <div class="flex items-center gap-2 lg:gap-4 xl:gap-6">
+          <div class="flex justify-between items-center mb-4">
+            <div class="flex items-center gap-2">
               <!-- Checkbox -->
               <div
                 @click.stop="toggleTransactionSelection(index)"
                 :class="[
-                  'w-6 h-6 lg:w-10 lg:h-10 xl:w-12 xl:h-12 border-2 lg:border-4 xl:border-4 rounded flex items-center justify-center cursor-pointer transition-colors',
+                  'w-6 h-6 border-2 rounded flex items-center justify-center cursor-pointer transition-colors',
                   selectedTransactions.includes(index)
                     ? 'bg-green-500 border-green-500'
                     : 'border-gray-400 bg-dbd-off-white hover:border-gray-500'
                 ]"
               >
-                <svg v-if="selectedTransactions.includes(index)" width="14" height="10" viewBox="0 0 14 10" fill="none" class="lg:w-6 lg:h-5 xl:w-8 xl:h-6">
+                <svg v-if="selectedTransactions.includes(index)" width="14" height="10" viewBox="0 0 14 10" fill="none">
                   <path d="M1 5L5 9L13 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
-              
+
               <!-- Calendar Icon -->
-              <div class="w-10 h-10 lg:w-16 lg:h-16 xl:w-20 xl:h-20 bg-dbd-light-orange rounded-full flex items-center justify-center">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="lg:w-8 lg:h-8 xl:w-10 xl:h-10">
+              <div class="w-10 h-10 bg-dbd-light-orange rounded-full flex items-center justify-center">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M14.0615 9.1875C14.4067 9.1875 14.6865 8.90768 14.6865 8.5625C14.6865 8.21732 14.4067 7.9375 14.0615 7.9375C13.7163 7.9375 13.4365 8.21732 13.4365 8.5625C13.4365 8.90768 13.7163 9.1875 14.0615 9.1875Z" fill="#4B4D50"/>
                   <path d="M15.499 3.25H14.6865V2.625C14.6865 2.27981 14.4067 2 14.0615 2C13.7163 2 13.4365 2.27981 13.4365 2.625V3.25H10.5928V2.625C10.5928 2.27981 10.313 2 9.96777 2C9.62259 2 9.34277 2.27981 9.34277 2.625V3.25H6.53027V2.625C6.53027 2.27981 6.25046 2 5.90527 2C5.56009 2 5.28027 2.27981 5.28027 2.625V3.25H4.49902C3.12052 3.25 1.99902 4.3715 1.99902 5.75V15.5C1.99902 16.8785 3.12052 18 4.49902 18H9.28027C9.62546 18 9.90527 17.7202 9.90527 17.375C9.90527 17.0298 9.62546 16.75 9.28027 16.75H4.49902C3.80977 16.75 3.24902 16.1892 3.24902 15.5V5.75C3.24902 5.06075 3.80977 4.5 4.49902 4.5H5.28027V5.125C5.28027 5.47019 5.56009 5.75 5.90527 5.75C6.25046 5.75 6.53027 5.47019 6.53027 5.125V4.5H9.34277V5.125C9.34277 5.47019 9.62259 5.75 9.96777 5.75C10.313 5.75 10.5928 5.47019 10.5928 5.125V4.5H13.4365V5.125C13.4365 5.47019 13.7163 5.75 14.0615 5.75C14.4067 5.75 14.6865 5.47019 14.6865 5.125V4.5H15.499C16.1883 4.5 16.749 5.06075 16.749 5.75V9.3125C16.749 9.65769 17.0288 9.9375 17.374 9.9375C17.7192 9.9375 17.999 9.65769 17.999 9.3125V5.75C17.999 4.3715 16.8775 3.25 15.499 3.25Z" fill="#4B4D50"/>
                   <path d="M14.2178 10.4375C12.1328 10.4375 10.4365 12.1337 10.4365 14.2188C10.4365 16.3038 12.1328 18 14.2178 18C16.3028 18 17.999 16.3038 17.999 14.2188C17.999 12.1337 16.3028 10.4375 14.2178 10.4375ZM14.2178 16.75C12.8221 16.75 11.6865 15.6145 11.6865 14.2188C11.6865 12.823 12.8221 11.6875 14.2178 11.6875C15.6135 11.6875 16.749 12.823 16.749 14.2188C16.749 15.6145 15.6135 16.75 14.2178 16.75Z" fill="#4B4D50"/>
@@ -134,44 +134,44 @@
                 </svg>
               </div>
               
-              <span class="text-sm lg:text-xl xl:text-2xl font-medium text-dbd-gray">Date & Time</span>
+              <span class="text-sm font-medium text-dbd-gray">Date & Time</span>
             </div>
 
-            <div class="flex items-center gap-2 lg:gap-4 xl:gap-6">
-              <span class="text-sm lg:text-xl xl:text-2xl font-medium text-dbd-dark">{{ transaction.date }}</span>
-              <span class="text-sm lg:text-xl xl:text-2xl font-medium text-dbd-gray">{{ transaction.time }}</span>
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-medium text-dbd-dark">{{ transaction.date }}</span>
+              <span class="text-sm font-medium text-dbd-gray">{{ transaction.time }}</span>
             </div>
           </div>
 
           <!-- Type & Amount Row -->
-          <div class="flex justify-between items-center mb-4 lg:mb-6 xl:mb-8">
-            <div class="flex items-center gap-2 lg:gap-4 xl:gap-6">
-              <span class="text-base lg:text-2xl xl:text-3xl font-semibold text-dbd-gray">Type & Amount</span>
+          <div class="flex justify-between items-center mb-4">
+            <div class="flex items-center gap-2">
+              <span class="text-base font-semibold text-dbd-gray">Type & Amount</span>
             </div>
 
-            <div class="flex items-center gap-2 lg:gap-4 xl:gap-6">
-              <div class="flex items-center gap-1 lg:gap-2 xl:gap-3">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="lg:w-6 lg:h-6 xl:w-8 xl:h-8">
+            <div class="flex items-center gap-2">
+              <div class="flex items-center gap-1">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M13.7564 1.77783H4.78285C4.38779 1.77783 4.1056 2.06002 4.1056 2.45508V5.22051H1.56592C1.17086 5.27695 0.888672 5.55914 0.888672 5.9542C0.888672 6.34926 1.17086 6.63145 1.56592 6.63145H4.1056V12.9524C4.1056 13.3475 4.38779 13.6297 4.78285 13.6297C5.17791 13.6297 5.4601 13.3475 5.4601 12.9524V10.0177H8.33841C8.73347 10.0177 9.01566 9.7355 9.01566 9.34044C9.01566 8.94538 8.73347 8.66319 8.33841 8.66319H5.4601V6.57501H10.9345C11.3296 6.57501 11.6118 6.29282 11.6118 5.89776C11.6118 5.5027 11.3296 5.22051 10.9345 5.22051H5.4601V3.13233H13.7C14.095 3.13233 14.3772 2.85014 14.3772 2.45508C14.3772 2.06002 14.1515 1.77783 13.7564 1.77783Z" fill="#4B4D50"/>
                 </svg>
-                <span class="text-base lg:text-2xl xl:text-3xl font-medium text-dbd-gray">UAE</span>
+                <span class="text-base font-medium text-dbd-gray">UAE</span>
               </div>
-              <div class="w-px h-4 lg:h-6 xl:h-8 bg-gray-600"></div>
-              <span class="text-base lg:text-2xl xl:text-3xl font-medium text-dbd-gray">{{ transaction.amount.toLocaleString() }}</span>
+              <div class="w-px h-4 bg-gray-600"></div>
+              <span class="text-base font-medium text-dbd-gray">{{ transaction.amount.toLocaleString() }}</span>
             </div>
           </div>
 
           <!-- Purchased Row -->
           <div class="flex justify-between items-center">
-            <div class="flex items-center gap-2 lg:gap-4 xl:gap-6">
-              <span class="text-base lg:text-2xl xl:text-3xl font-semibold text-dbd-gray">Purchased</span>
+            <div class="flex items-center gap-2">
+              <span class="text-base font-semibold text-dbd-gray">Purchased</span>
             </div>
 
-            <div class="flex items-center gap-1 lg:gap-2 xl:gap-3">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="lg:w-8 lg:h-8 xl:w-12 xl:h-12">
+            <div class="flex items-center gap-1">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M11.8525 24C11.5497 24 11.2994 23.9056 11.1014 23.7167C10.9035 23.5278 10.8045 23.2889 10.8045 23V21.2C9.68657 21.0222 8.73169 20.6444 7.93984 20.0667C7.14799 19.4889 6.53082 18.7556 6.08831 17.8667C5.97186 17.6222 5.97186 17.3667 6.08831 17.1C6.20476 16.8333 6.40272 16.6444 6.6822 16.5333C6.93839 16.4222 7.20039 16.4222 7.46823 16.5333C7.73606 16.6444 7.93984 16.8222 8.07958 17.0667C8.49879 17.8222 9.0461 18.3889 9.7215 18.7667C10.3969 19.1444 11.1771 19.3333 12.0621 19.3333C13.18 19.3333 14.1 19.0667 14.8219 18.5333C15.5439 18 15.9049 17.2667 15.9049 16.3333C15.9049 15.3556 15.5847 14.6 14.9442 14.0667C14.3037 13.5333 13.0985 12.9889 11.3285 12.4333C9.65163 11.9222 8.39981 11.2444 7.57303 10.4C6.74625 9.55556 6.33285 8.5 6.33285 7.23333C6.33285 6.01111 6.74625 4.98889 7.57303 4.16667C8.39981 3.34444 9.47696 2.87778 10.8045 2.76667V1C10.8045 0.711111 10.9035 0.472222 11.1014 0.283333C11.2994 0.0944446 11.5497 0 11.8525 0C12.1553 0 12.4056 0.0944446 12.6036 0.283333C12.8016 0.472222 12.9005 0.711111 12.9005 1V2.76667C13.739 2.87778 14.4901 3.12222 15.1538 3.5C15.8176 3.87778 16.3707 4.36667 16.8132 4.96667C16.9762 5.18889 17.0112 5.42778 16.918 5.68333C16.8248 5.93889 16.6385 6.12222 16.3591 6.23333C16.1029 6.34444 15.835 6.35556 15.5556 6.26667C15.2761 6.17778 15.0432 6.01111 14.8569 5.76667C14.5308 5.36667 14.1291 5.07222 13.6516 4.88333C13.1742 4.69444 12.5978 4.6 11.9224 4.6C10.851 4.6 10.001 4.83333 9.37216 5.3C8.74333 5.76667 8.42892 6.4 8.42892 7.2C8.42892 8.04444 8.77827 8.72778 9.47696 9.25C10.1756 9.77222 11.4682 10.3111 13.3547 10.8667C14.9384 11.3333 16.1087 12.0056 16.8656 12.8833C17.6225 13.7611 18.001 14.8667 18.001 16.2C18.001 17.6 17.5701 18.7278 16.7084 19.5833C15.8467 20.4389 14.5774 20.9889 12.9005 21.2333V23C12.9005 23.2889 12.8016 23.5278 12.6036 23.7167C12.4056 23.9056 12.1553 24 11.8525 24Z" fill="#2019CE"/>
               </svg>
-              <span class="text-base lg:text-2xl xl:text-3xl font-medium text-dbd-gray">{{ formatCurrency(transaction.purchased) }}</span>
+              <span class="text-base font-medium text-dbd-gray">{{ formatCurrency(transaction.purchased) }}</span>
             </div>
           </div>
         </div>
@@ -182,12 +182,12 @@
     <BottomNavigation />
 
     <!-- Transaction Details Modal -->
-    <div v-if="showTransactionModal" class="transaction-details-modal fixed inset-0 z-50 flex items-end md:items-end lg:items-center justify-center md:justify-stretch lg:justify-center bg-black bg-opacity-20 backdrop-blur-sm">
-      <div class="transaction-modal-container w-full md:max-w-none lg:max-w-lg xl:max-w-xl bg-white rounded-t-3xl md:rounded-t-3xl lg:rounded-3xl xl:rounded-4xl shadow-xl animate-slide-up md:animate-slide-up lg:animate-none">
+    <div v-if="showTransactionModal" class="transaction-details-modal fixed inset-0 z-[10001] flex items-end justify-center bg-black bg-opacity-20 backdrop-blur-sm">
+      <div class="transaction-modal-container w-full bg-white rounded-t-3xl shadow-xl animate-slide-up">
         <!-- Modal Header -->
-        <div class="flex items-center justify-between p-4 lg:p-6 xl:p-8 border-b">
-          <h2 class="text-base lg:text-lg xl:text-xl font-medium text-dbd-dark">Transaction Details</h2>
-          <button @click="closeTransactionModal" class="w-11 h-11 lg:w-12 lg:h-12 xl:w-14 xl:h-14 flex items-center justify-center rounded-full bg-dbd-off-white border border-gray-200">
+        <div class="flex items-center justify-between p-4 border-b">
+          <h2 class="text-base font-medium text-dbd-dark">Transaction Details</h2>
+          <button @click="closeTransactionModal" class="w-11 h-11 flex items-center justify-center rounded-full bg-dbd-off-white border border-gray-200">
             <div class="w-5 h-5 relative">
               <div class="absolute w-4 h-0.5 bg-dbd-dark rounded-full rotate-45 top-2.5 left-0.5"></div>
               <div class="absolute w-4 h-0.5 bg-dbd-dark rounded-full -rotate-45 top-2.5 left-0.5"></div>
@@ -196,7 +196,7 @@
         </div>
 
         <!-- Modal Content -->
-        <div v-if="selectedTransaction" class="p-4 lg:p-6 xl:p-8 space-y-4 lg:space-y-6 xl:space-y-8 max-h-96 lg:max-h-[500px] xl:max-h-[600px] transaction-details-scroll">
+        <div v-if="selectedTransaction" class="p-4 space-y-4 max-h-96 transaction-details-scroll">
           <!-- ID Contract -->
           <div class="flex justify-between items-center">
             <div class="flex items-center gap-2">
@@ -428,7 +428,7 @@ const transactions = ref([
 ])
 
 const goBack = () => {
-  router.back()
+  router.push('/wallet')
 }
 
 const toggleExportMenu = () => {
@@ -614,10 +614,18 @@ onUnmounted(() => {
 <style scoped>
 .rent-out-transaction-view {
   font-family: 'Montserrat', sans-serif;
+  -webkit-overflow-scrolling: touch;
+  touch-action: manipulation;
 }
 
 .transaction-card {
   box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease-in-out;
+}
+
+.transaction-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 }
 
 .export-btn:hover {
@@ -625,159 +633,27 @@ onUnmounted(() => {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Mobile first approach for Telegram mini app */
-@media (max-width: 430px) {
-  .rent-out-transaction-view {
-    max-width: 100%;
-  }
-}
-
-/* Desktop styles */
-@media (min-width: 769px) {
-  .rent-out-transaction-view {
-    max-width: 100%;
-  }
-
-  .transaction-card {
-    padding: 32px;
-  }
-
-  .empty-state h2 {
-    font-size: 3rem;
-    line-height: 3.5rem;
-  }
-
-  .empty-state p {
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-  }
-
-  /* Larger modal for desktop */
-  .transaction-modal {
-    max-width: 600px;
-  }
-
-  .transaction-modal .max-h-96 {
-    max-height: 500px;
-  }
-
-  .transaction-modal .p-4 {
-    padding: 2rem;
-  }
-
-  /* Larger export dropdown */
-  .export-dropdown-container {
-    width: 200px;
-    padding: 16px;
-  }
-
-  .export-option {
-    width: 168px;
-    height: 60px;
-    gap: 16px;
-    padding: 8px;
-  }
-
-  .export-option-icon {
-    width: 44px;
-    height: 44px;
-  }
-
-  .export-option-text {
-    font-size: 18px;
-  }
-}
-
-@media (min-width: 431px) and (max-width: 768px) {
-  .rent-out-transaction-view {
-    max-width: 100%;
-  }
-
-  .transaction-card {
-    padding: 20px;
-  }
-
-  .empty-state h2 {
-    font-size: 2rem;
-    line-height: 2.5rem;
-  }
-
-  .empty-state p {
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-  }
-
-  /* Larger modal for tablets */
-  .transaction-modal .max-h-96 {
-    max-height: 400px;
-  }
-}
-
 /* Scrollable content */
 .content-container {
   max-height: calc(100vh - 140px);
   overflow-y: auto;
-}
-
-/* Custom scrollbar */
-.content-container::-webkit-scrollbar {
-  display: none;
-}
-
-.content-container {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.content-container::-webkit-scrollbar {
+  display: none;
 }
 
 /* Transaction Details Modal Invisible Scroll */
 .transaction-details-scroll {
   overflow-y: auto;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .transaction-details-scroll::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
-}
-
-/* Telegram WebApp optimizations */
-@media (max-height: 600px) {
-  .content-container {
-    max-height: calc(100vh - 120px);
-  }
-
-  .empty-state {
-    min-height: calc(100vh - 180px) !important;
-  }
-
-  .transaction-card {
-    padding: 12px;
-  }
-}
-
-/* Mobile touch optimizations for Telegram */
-.rent-out-transaction-view {
-  -webkit-overflow-scrolling: touch;
-  touch-action: manipulation;
-}
-
-/* Export dropdown responsive adjustments */
-@media (max-width: 380px) {
-  .export-btn {
-    width: 120px;
-    height: 48px;
-  }
-
-  .export-btn span {
-    font-size: 0.875rem;
-  }
-}
-
-/* Transaction modal optimizations for Telegram */
-@media (max-height: 700px) {
-  .transaction-modal .max-h-96 {
-    max-height: 280px;
-  }
+  display: none;
 }
 
 /* Copy button fixed width to prevent layout shifts */
@@ -787,137 +663,7 @@ onUnmounted(() => {
   justify-content: center;
 }
 
-/* Touch-friendly targets for Telegram WebApp */
-@media (pointer: coarse) {
-  button {
-    min-height: 44px;
-    min-width: 44px;
-  }
-
-  .transaction-card {
-    padding: 16px;
-  }
-
-  .modal-header-handle {
-    padding: 8px;
-    margin: -8px;
-  }
-}
-
-/* Tablet Transaction Details Modal */
-@media (min-width: 768px) and (max-width: 1023px) {
-  /* Transaction Details Modal - Full width on tablet */
-  .transaction-details-modal {
-    align-items: end !important;
-    padding: 0 !important;
-  }
-
-  /* Ultra-specific selectors to override Tailwind */
-  div.transaction-details-modal div.transaction-modal-container.w-full.max-w-md {
-    max-width: 100vw !important;
-    width: 100vw !important;
-    margin: 0 !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    border-radius: 24px 24px 0 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    position: relative !important;
-  }
-
-  /* Additional override with higher specificity */
-  .fixed.inset-0.z-50.flex .transaction-modal-container {
-    max-width: 100vw !important;
-    width: 100vw !important;
-    margin: 0 !important;
-    border-radius: 24px 24px 0 0 !important;
-  }
-
-  /* Force override all possible Tailwind responsive classes */
-  .transaction-details-modal .transaction-modal-container.max-w-md,
-  .transaction-details-modal .transaction-modal-container.md\\:max-w-none,
-  .transaction-details-modal .transaction-modal-container[class*="max-w"] {
-    max-width: 100vw !important;
-    width: 100vw !important;
-  }
-
-  /* Container positioning */
-  .transaction-details-modal {
-    justify-content: stretch !important;
-  }
-
-  .transaction-details-modal > div {
-    border-radius: 24px 24px 0 0 !important;
-    animation: none !important;
-    max-width: 100vw !important;
-    width: 100vw !important;
-    margin: 0 !important;
-    flex: none !important;
-  }
-
-  /* Larger text and spacing for tablet */
-  .transaction-details-scroll .flex.justify-between {
-    padding: 16px 0;
-  }
-
-  .transaction-details-scroll .w-10.h-10 {
-    width: 48px;
-    height: 48px;
-  }
-
-  .transaction-details-scroll .text-sm {
-    font-size: 16px;
-    line-height: 1.5;
-  }
-
-  .transaction-details-scroll .copy-btn-default,
-  .transaction-details-scroll .copy-btn-copied {
-    padding: 12px 16px;
-    font-size: 14px;
-  }
-
-  .transaction-details-scroll .copy-btn-default svg,
-  .transaction-details-scroll .copy-btn-copied svg {
-    width: 18px;
-    height: 18px;
-  }
-}
-
-/* Desktop Large Screens */
-@media (min-width: 1024px) {
-  /* Transaction Details Modal - Centered on desktop */
-  .transaction-details-modal {
-    align-items: center;
-  }
-
-  .transaction-details-modal > div {
-    border-radius: 24px;
-    animation: none;
-    max-width: 600px;
-    margin: 20px;
-  }
-
-  .transaction-details-scroll .flex.justify-between {
-    padding: 20px 0;
-  }
-
-  .transaction-details-scroll .w-10.h-10 {
-    width: 56px;
-    height: 56px;
-  }
-
-  .transaction-details-scroll .text-sm {
-    font-size: 18px;
-  }
-
-  .transaction-details-scroll .copy-btn-default,
-  .transaction-details-scroll .copy-btn-copied {
-    padding: 14px 20px;
-    font-size: 16px;
-  }
-}
-
-/* Export Dropdown - Match Figma Design Exactly */
+/* Export Dropdown */
 .export-dropdown {
   position: absolute;
   right: 0;
@@ -941,29 +687,21 @@ onUnmounted(() => {
 .export-dropdown-container {
   width: 164px;
   padding: 12px;
-  background: white;
+  background-color: #3A33D3;
   border-radius: 10px;
-  border: 1px solid #F4F4F4;
-  box-shadow: 2px 3px 6px 0 rgba(2, 7, 14, 0.12);
+  border: 1px solid #3A33D3;
+  box-shadow: 2px 3px 6px 0 #3A33D3;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-/* Apply mobile design to all screen sizes */
-.export-dropdown-container {
-  border-color: #3A33D3 !important;
-  background-color: #3A33D3 !important;
-  box-shadow: 2px 3px 6px 0 #3A33D3 !important;
-}
-
 .export-option {
   width: 140px;
   height: 52px;
-  background: linear-gradient(102deg, rgba(111, 106, 224, 0.40) 9.35%, rgba(85, 81, 179, 0.40) 95.29%);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: #3A33D3;
+  border: 1px solid #3A33D3;
   border-radius: 100px;
-  backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -972,16 +710,8 @@ onUnmounted(() => {
   transition: all 0.2s ease;
 }
 
-/* Apply mobile design to all screen sizes */
-.export-option {
-  border-color: #3A33D3 !important;
-  background: #3A33D3 !important;
-  background-image: none !important;
-}
-
 .export-option:hover {
-  background: #2A1FB5 !important;
-  background-image: none !important;
+  background: #2A1FB5;
 }
 
 .export-option-icon {
@@ -1004,16 +734,6 @@ onUnmounted(() => {
   line-height: 26px;
 }
 
-/* Smooth animations */
-.transaction-card {
-  transition: all 0.2s ease-in-out;
-}
-
-.transaction-card:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-}
-
 /* Modal animations */
 @keyframes slide-up {
   from {
@@ -1030,8 +750,19 @@ onUnmounted(() => {
   animation: slide-up 0.3s ease-out;
 }
 
-/* Checkbox animations */
+/* Checkbox and button animations */
 .transition-colors {
   transition: all 0.2s ease-in-out;
+}
+
+/* Global overrides */
+* {
+  -webkit-tap-highlight-color: transparent;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
 }
 </style>
