@@ -34,8 +34,8 @@
 
       
       <!-- Background -->
-      <div class="absolute inset-0 bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E] 
-                  border border-white border-opacity-8 backdrop-blur-[32px]"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
+                  border border-[#09074E] backdrop-blur-[32px]"></div>
 
       <!-- Profile Header Section -->
       <div class="absolute top-3 left-3 right-3 z-[2]">
