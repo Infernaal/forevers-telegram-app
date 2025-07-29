@@ -27,13 +27,13 @@
         <div 
           v-for="item in foreversList" 
           :key="item.id"
-          class="bg-dbd-off-white border border-purple-200 rounded-2xl lg:rounded-4xl p-3 lg:p-8"
+          class="bg-dbd-off-white border border-purple-200 rounded-2xl sm:rounded-3xl md:rounded-3xl lg:rounded-4xl xl:rounded-4xl p-3 sm:p-4 md:p-6 lg:p-8 xl:p-10"
         >
           <!-- Header -->
-          <div class="flex items-center justify-between mb-3 lg:mb-8">
-            <div class="flex items-center gap-3 lg:gap-8">
-              <CountryFlag :country="item.code" class="w-6 h-6 lg:w-16 lg:h-16" />
-              <span class="text-dbd-gray text-base lg:text-3xl font-medium">{{ item.title }}</span>
+          <div class="flex items-center justify-between mb-3 sm:mb-4 md:mb-6 lg:mb-8 xl:mb-10">
+            <div class="flex items-center gap-3 sm:gap-4 md:gap-6 lg:gap-8 xl:gap-10">
+              <CountryFlag :country="item.code" class="w-6 h-6 sm:w-8 sm:h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 xl:w-20 xl:h-20" />
+              <span class="text-dbd-gray text-base sm:text-lg md:text-xl lg:text-3xl xl:text-4xl font-medium">{{ item.title }}</span>
             </div>
             <button
               @click="openRentModal(item)"
@@ -41,7 +41,7 @@
               :class="item.availableAmount === 0
                 ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
                 : 'bg-dbd-orange text-white hover:bg-orange-600'"
-              class="px-3 lg:px-8 py-2 lg:py-4 rounded-full text-sm lg:text-xl font-bold transition-colors"
+              class="px-3 sm:px-4 md:px-6 lg:px-8 xl:px-10 py-2 sm:py-2.5 md:py-3 lg:py-4 xl:py-5 rounded-full text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-bold transition-colors"
             >
               Loyality
             </button>
