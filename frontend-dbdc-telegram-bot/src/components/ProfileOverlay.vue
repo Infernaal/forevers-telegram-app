@@ -253,31 +253,24 @@
                   flex justify-center items-center gap-5 h-11">
         
         <!-- ID Section -->
-        <div class="w-[145px] h-11 bg-white bg-opacity-30 border border-white border-opacity-40 
-                    rounded-full backdrop-blur-[32px] flex items-center justify-between p-1.5 
-                    relative transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
-             :class="{ 'border-[#07B80E] bg-[#129E0F] scale-[1.02]': showCopySuccess }">
-          
+        <div class="w-[145px] h-11 bg-white bg-opacity-30 border border-white border-opacity-40
+                    rounded-full backdrop-blur-[32px] flex items-center justify-between p-1.5
+                    relative transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden"
+             :class="{ 'id-copied-state': showCopySuccess }">
+
           <div v-if="!showCopySuccess" class="flex items-center gap-0.5 pl-3 pr-10 flex-1">
             <span class="text-[#B7B7B7] text-sm font-normal leading-6">ID: </span>
             <span class="text-white text-sm font-normal leading-6">515745</span>
           </div>
-          
-          <div v-if="showCopySuccess" class="w-full h-full flex items-center justify-center gap-2 p-1.5 box-border animate-[fadeInScale_0.4s_cubic-bezier(0.4,0,0.2,1)]">
-            <span class="text-white text-sm font-semibold leading-6 text-center animate-[slideInLeft_0.3s_ease-out_0.1s_both]">Copied</span>
-            <div class="relative w-7 h-7 flex items-center justify-center animate-[bounceIn_0.5s_ease-out_0.2s_both]">
+
+          <div v-if="showCopySuccess" class="id-copied-content">
+            <span class="id-copied-text">Copied</span>
+            <div class="id-copied-icon">
               <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="14" cy="14" r="14" fill="white"/>
               </svg>
-              <svg class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g clip-path="url(#clip0_2_22327)">
-                  <path d="M11.3242 0.926106C10.7978 0.642629 10.2106 1.18934 9.86633 1.51331C9.07667 2.28275 8.40848 3.17368 7.65925 3.98362C6.82907 4.87455 6.05963 5.76548 5.20919 6.6362C4.72323 7.12216 4.19677 7.64862 3.8728 8.25607C3.14385 7.54734 2.51615 6.7779 1.70621 6.15023C1.11901 5.70477 0.147086 5.38079 0.167334 6.45396C0.207831 7.85113 1.44299 9.34952 2.35416 10.3012C2.73888 10.7061 3.24509 11.1313 3.8323 11.1516C4.54099 11.1921 5.26994 10.3417 5.69515 9.87594C6.44438 9.06601 7.05183 8.15479 7.74024 7.32464C8.63118 6.23123 9.54236 5.15803 10.413 4.04436C10.9597 3.35592 12.6809 1.65502 11.3242 0.926106ZM1.05823 6.37297C1.03798 6.37297 1.01773 6.37297 0.977238 6.39318C0.896244 6.37297 0.835499 6.35268 0.754505 6.31219C0.815251 6.27169 0.916493 6.29194 1.05823 6.37297Z" fill="#07B80E"/>
-                </g>
-                <defs>
-                  <clipPath id="clip0_2_22327">
-                    <rect width="11.6667" height="11.6667" fill="white" transform="translate(0.166992 0.166504)"/>
-                  </clipPath>
-                </defs>
+              <svg class="id-tick-svg" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.3242 0.926106C10.7978 0.642629 10.2106 1.18934 9.86633 1.51331C9.07667 2.28275 8.40848 3.17368 7.65925 3.98362C6.82907 4.87455 6.05963 5.76548 5.20919 6.6362C4.72323 7.12216 4.19677 7.64862 3.8728 8.25607C3.14385 7.54734 2.51615 6.7779 1.70621 6.15023C1.11901 5.70477 0.147086 5.38079 0.167334 6.45396C0.207831 7.85113 1.44299 9.34952 2.35416 10.3012C2.73888 10.7061 3.24509 11.1313 3.8323 11.1516C4.54099 11.1921 5.26994 10.3417 5.69515 9.87594C6.44438 9.06601 7.05183 8.15479 7.74024 7.32464C8.63118 6.23123 9.54236 5.15803 10.413 4.04436C10.9597 3.35592 12.6809 1.65502 11.3242 0.926106ZM1.05823 6.37297C1.03798 6.37297 1.01773 6.37297 0.977238 6.39318C0.896244 6.37297 0.835499 6.35268 0.754505 6.31219C0.815251 6.27169 0.916493 6.29194 1.05823 6.37297Z" fill="#07B80E"/>
               </svg>
             </div>
           </div>
@@ -533,6 +526,52 @@ const selectLanguage = (language) => {
   .tablet-dropdown-position {
     bottom: 7rem !important;
   }
+}
+
+/* Copied State Styling - matching HoldersView */
+.id-copied-state {
+  border: 1px solid #07B80E !important;
+  background: #129E0F !important;
+  transform: scale(1.02) !important;
+}
+
+.id-copied-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 6px;
+  box-sizing: border-box;
+  animation: fadeInScale 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.id-copied-text {
+  color: #FFF;
+  font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 22px;
+  text-align: center;
+  animation: slideInLeft 0.3s ease-out 0.1s both;
+}
+
+.id-copied-icon {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: bounceIn 0.5s ease-out 0.2s both;
+}
+
+.id-tick-svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* Height utilities */
