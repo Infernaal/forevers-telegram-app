@@ -1,7 +1,7 @@
 <template>
   <div v-if="isVisible" class="fixed inset-0 z-50 font-montserrat bg-black bg-opacity-10 backdrop-blur-xl">
     <!-- Triangle Pointer -->
-    <div class="absolute left-8 lg:left-9 bottom-[110px] sm:bottom-[105px] md:bottom-[200px] lg:bottom-[180px] xl:bottom-[170px] z-[65]
+    <div class="absolute left-8 lg:left-9 bottom-[120px] sm:bottom-[105px] md:bottom-[240px] lg:bottom-[180px] xl:bottom-[170px] z-[65]
                 transition-all duration-300 safe-area-inset-bottom-calc">
       <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px] 
                   border-l-transparent border-r-transparent 
@@ -10,9 +10,9 @@
     </div>
 
     <!-- Profile Dropdown Menu -->
-    <div class="absolute left-2 right-2 bottom-[110px] sm:bottom-[115px] md:bottom-[210px] lg:bottom-[190px] xl:bottom-[180px]
+    <div class="absolute left-2 right-2 bottom-[120px] sm:bottom-[115px] md:bottom-[250px] lg:bottom-[190px] xl:bottom-[180px]
                 h-[580px] sm:h-[560px] md:h-[580px] lg:h-[500px] xl:h-[450px]
-                max-h-[calc(100vh-130px)] sm:max-h-[calc(100vh-120px)] md:max-h-[calc(100vh-215px)] lg:max-h-[calc(100vh-210px)] xl:max-h-[calc(100vh-200px)]
+                max-h-[calc(100vh-130px)] sm:max-h-[calc(100vh-120px)] md:max-h-[calc(100vh-255px)] lg:max-h-[calc(100vh-210px)] xl:max-h-[calc(100vh-200px)]
                 rounded-[20px] overflow-hidden z-[55] transition-all duration-300 safe-area-inset-calc" 
          @click.stop>
       
@@ -536,12 +536,12 @@ const selectLanguage = (language) => {
 
 /* Safe area utilities */
 .safe-area-inset-bottom-calc {
-  bottom: calc(110px + env(safe-area-inset-bottom, 0px));
+  bottom: calc(120px + env(safe-area-inset-bottom, 0px));
 }
 
 @media (min-width: 768px) {
   .safe-area-inset-bottom-calc {
-    bottom: calc(200px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(240px + env(safe-area-inset-bottom, 0px));
   }
 }
 
@@ -558,16 +558,16 @@ const selectLanguage = (language) => {
 }
 
 .safe-area-inset-calc {
-  bottom: calc(110px + env(safe-area-inset-bottom, 0px));
+  bottom: calc(120px + env(safe-area-inset-bottom, 0px));
   height: calc(580px - env(safe-area-inset-bottom, 0px));
   max-height: calc(100vh - 130px - env(safe-area-inset-bottom, 0px));
 }
 
 @media (min-width: 768px) {
   .safe-area-inset-calc {
-    bottom: calc(210px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(250px + env(safe-area-inset-bottom, 0px));
     height: calc(580px - env(safe-area-inset-bottom, 0px));
-    max-height: calc(100vh - 215px - env(safe-area-inset-bottom, 0px));
+    max-height: calc(100vh - 255px - env(safe-area-inset-bottom, 0px));
   }
 }
 
