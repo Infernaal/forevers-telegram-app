@@ -4,7 +4,7 @@
     <div class="absolute 
                 left-8 md:left-[5.25rem] lg:left-[8.5rem] xl:left-[10.5rem]
                 bottom-[140px] sm:bottom-[155px] md:bottom-[300px] lg:bottom-[180px] xl:bottom-[170px]
-                max-[375px]:left-[7.5rem] max-[667px]:bottom-[120px] max-[568px]:bottom-[100px]
+                max-[375px]:left-[3.5rem] max-[667px]:bottom-[120px] max-[568px]:bottom-[100px]
                 landscape:max-[500px]:bottom-[105px]
                 z-[65] transition-all duration-300">
       <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px] 
