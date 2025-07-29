@@ -33,7 +33,7 @@
         <div
           v-for="balance in balances"
           :key="balance.id"
-          class="bg-white border border-purple-200 rounded-2xl lg:rounded-3xl xl:rounded-4xl balance-card relative flex flex-col justify-between"
+          class="bg-white border border-purple-200 rounded-2xl lg:rounded-3xl balance-card relative flex flex-col justify-between"
         >
           <!-- Country Header -->
           <div class="flex items-center justify-between mb-3 lg:mb-6 xl:mb-8">
