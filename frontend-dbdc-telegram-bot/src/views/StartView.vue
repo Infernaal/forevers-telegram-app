@@ -28,7 +28,7 @@
         </div>
 
         <!-- Features Section -->
-        <div class="mt-4">
+        <div class="mt-8 sm:mt-10 md:mt-12">
           <h3 class="text-base sm:text-lg md:text-xl lg:text-2xl font-medium mb-3 sm:mb-4 md:mb-5 lg:mb-6 text-center text-white">
             What can this bot do?
           </h3>
