@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full min-h-screen bg-gray-100 font-montserrat overflow-x-hidden">
+  <div class="w-full min-h-screen bg-gray-100 font-montserrat overflow-x-hidden wallet-view">
     <!-- Content Container -->
     <div class="px-4 pt-4 pb-24 min-h-[calc(100vh-100px)]">
 
@@ -109,7 +109,14 @@ const navigateToTransactions = () => {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  overflow-y: auto;
   overscroll-behavior: none;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.wallet-view::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
 }
 
 .content-container {
@@ -525,14 +532,6 @@ const navigateToTransactions = () => {
   .wallet-view {
     width: 100%;
     margin: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
-  }
-
-  .wallet-view::-webkit-scrollbar {
-    display: none; /* Chrome, Safari and Opera */
   }
 
   .content-container {
