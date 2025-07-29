@@ -1,8 +1,8 @@
 <template>
   <div class="w-full min-h-screen bg-white font-montserrat overflow-x-hidden flex flex-col">
     <!-- Main Content -->
-    <div class="flex-1 flex items-center justify-center p-4 sm:p-5 md:p-6 lg:p-8">
-      <div class="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-2xl relative rounded-3xl sm:rounded-[2.5rem] md:rounded-[3rem] p-5 sm:p-6 md:p-7 lg:p-8 text-white flex flex-col min-h-[360px] sm:min-h-[380px] md:min-h-[420px] lg:min-h-[460px] shadow-2xl" :style="cardStyle">
+    <div class="flex-1 p-4 sm:p-5 md:p-6 lg:p-8">
+      <div class="w-full relative rounded-3xl sm:rounded-[2.5rem] md:rounded-[3rem] p-5 sm:p-6 md:p-7 lg:p-8 text-white flex flex-col min-h-[360px] sm:min-h-[380px] md:min-h-[420px] lg:min-h-[460px] shadow-2xl" :style="cardStyle">
         <!-- Brand Section -->
         <div class="flex items-start gap-3 sm:gap-4 md:gap-5 lg:gap-6 mb-6 sm:mb-7 md:mb-9 lg:mb-10">
           <div class="flex-shrink-0">
