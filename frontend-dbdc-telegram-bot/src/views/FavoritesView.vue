@@ -46,7 +46,7 @@
               @click="openEnterAmountModal(balance)"
               class="w-16 h-11 lg:w-20 lg:h-12 border border-blue-700 bg-purple-50 rounded-full flex items-center justify-center hover:bg-purple-100 transition-colors"
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" class="text-blue-700 lg:w-8 lg:h-8 xl:w-12 xl:h-12">
+              <svg width="24" height="24" viewBox="0 0 24 24" class="text-blue-700 lg:w-8 lg:h-8">
                 <path d="M18 13H6C5.4 13 5 12.6 5 12C5 11.4 5.4 11 6 11H18C18.6 11 19 11.4 19 12C19 12.6 18.6 13 18 13Z" fill="currentColor"/>
                 <path d="M12 19C11.4 19 11 18.6 11 18V6C11 5.4 11.4 5 12 5C12.6 5 13 5.4 13 6V18C13 18.6 12.6 19 12 19Z" fill="currentColor"/>
               </svg>
@@ -54,12 +54,12 @@
           </div>
 
           <!-- Token Info -->
-          <div class="flex items-center gap-1 lg:gap-3 xl:gap-4 mb-3 lg:mb-6 xl:mb-8 flex-wrap">
-            <svg width="24" height="24" viewBox="0 0 24 24" class="text-blue-700 lg:w-8 lg:h-8 xl:w-12 xl:h-12">
+          <div class="flex items-center gap-1 lg:gap-3 mb-3 lg:mb-6 flex-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" class="text-blue-700 lg:w-8 lg:h-8">
               <path d="M23 5.536V1H5.347V6.759H1V11.294H5.347V22.581H10.421V17.046H14.712V12.510H10.421V11.294H18.849V6.759H10.421V5.536H23Z" fill="currentColor"/>
             </svg>
-            <span class="text-lg lg:text-2xl xl:text-3xl font-semibold text-blue-700">{{ balance.amount.toLocaleString() }}</span>
-            <span class="w-1 h-1 lg:w-2 lg:h-2 xl:w-3 xl:h-3 bg-gray-400 rounded-full"></span>
+            <span class="text-lg lg:text-xl font-semibold text-blue-700">{{ balance.amount.toLocaleString() }}</span>
+            <span class="w-1 h-1 lg:w-2 lg:h-2 bg-gray-400 rounded-full"></span>
             <div class="flex items-center gap-0.5 lg:gap-2 xl:gap-3 text-sm lg:text-lg xl:text-xl text-gray-600 font-medium">
               <span>1</span>
               <svg width="16" height="16" viewBox="0 0 16 16" class="text-gray-600 lg:w-6 lg:h-6 xl:w-8 xl:h-8">
