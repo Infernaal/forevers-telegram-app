@@ -614,10 +614,18 @@ onUnmounted(() => {
 <style scoped>
 .rent-out-transaction-view {
   font-family: 'Montserrat', sans-serif;
+  -webkit-overflow-scrolling: touch;
+  touch-action: manipulation;
 }
 
 .transaction-card {
   box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease-in-out;
+}
+
+.transaction-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 }
 
 .export-btn:hover {
@@ -625,159 +633,27 @@ onUnmounted(() => {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Mobile first approach for Telegram mini app */
-@media (max-width: 430px) {
-  .rent-out-transaction-view {
-    max-width: 100%;
-  }
-}
-
-/* Desktop styles */
-@media (min-width: 769px) {
-  .rent-out-transaction-view {
-    max-width: 100%;
-  }
-
-  .transaction-card {
-    padding: 32px;
-  }
-
-  .empty-state h2 {
-    font-size: 3rem;
-    line-height: 3.5rem;
-  }
-
-  .empty-state p {
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-  }
-
-  /* Larger modal for desktop */
-  .transaction-modal {
-    max-width: 600px;
-  }
-
-  .transaction-modal .max-h-96 {
-    max-height: 500px;
-  }
-
-  .transaction-modal .p-4 {
-    padding: 2rem;
-  }
-
-  /* Larger export dropdown */
-  .export-dropdown-container {
-    width: 200px;
-    padding: 16px;
-  }
-
-  .export-option {
-    width: 168px;
-    height: 60px;
-    gap: 16px;
-    padding: 8px;
-  }
-
-  .export-option-icon {
-    width: 44px;
-    height: 44px;
-  }
-
-  .export-option-text {
-    font-size: 18px;
-  }
-}
-
-@media (min-width: 431px) and (max-width: 768px) {
-  .rent-out-transaction-view {
-    max-width: 100%;
-  }
-
-  .transaction-card {
-    padding: 20px;
-  }
-
-  .empty-state h2 {
-    font-size: 2rem;
-    line-height: 2.5rem;
-  }
-
-  .empty-state p {
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-  }
-
-  /* Larger modal for tablets */
-  .transaction-modal .max-h-96 {
-    max-height: 400px;
-  }
-}
-
 /* Scrollable content */
 .content-container {
   max-height: calc(100vh - 140px);
   overflow-y: auto;
-}
-
-/* Custom scrollbar */
-.content-container::-webkit-scrollbar {
-  display: none;
-}
-
-.content-container {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.content-container::-webkit-scrollbar {
+  display: none;
 }
 
 /* Transaction Details Modal Invisible Scroll */
 .transaction-details-scroll {
   overflow-y: auto;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .transaction-details-scroll::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
-}
-
-/* Telegram WebApp optimizations */
-@media (max-height: 600px) {
-  .content-container {
-    max-height: calc(100vh - 120px);
-  }
-
-  .empty-state {
-    min-height: calc(100vh - 180px) !important;
-  }
-
-  .transaction-card {
-    padding: 12px;
-  }
-}
-
-/* Mobile touch optimizations for Telegram */
-.rent-out-transaction-view {
-  -webkit-overflow-scrolling: touch;
-  touch-action: manipulation;
-}
-
-/* Export dropdown responsive adjustments */
-@media (max-width: 380px) {
-  .export-btn {
-    width: 120px;
-    height: 48px;
-  }
-
-  .export-btn span {
-    font-size: 0.875rem;
-  }
-}
-
-/* Transaction modal optimizations for Telegram */
-@media (max-height: 700px) {
-  .transaction-modal .max-h-96 {
-    max-height: 280px;
-  }
+  display: none;
 }
 
 /* Copy button fixed width to prevent layout shifts */
@@ -787,137 +663,7 @@ onUnmounted(() => {
   justify-content: center;
 }
 
-/* Touch-friendly targets for Telegram WebApp */
-@media (pointer: coarse) {
-  button {
-    min-height: 44px;
-    min-width: 44px;
-  }
-
-  .transaction-card {
-    padding: 16px;
-  }
-
-  .modal-header-handle {
-    padding: 8px;
-    margin: -8px;
-  }
-}
-
-/* Tablet Transaction Details Modal */
-@media (min-width: 768px) and (max-width: 1023px) {
-  /* Transaction Details Modal - Full width on tablet */
-  .transaction-details-modal {
-    align-items: end !important;
-    padding: 0 !important;
-  }
-
-  /* Ultra-specific selectors to override Tailwind */
-  div.transaction-details-modal div.transaction-modal-container.w-full.max-w-md {
-    max-width: 100vw !important;
-    width: 100vw !important;
-    margin: 0 !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    border-radius: 24px 24px 0 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    position: relative !important;
-  }
-
-  /* Additional override with higher specificity */
-  .fixed.inset-0.z-50.flex .transaction-modal-container {
-    max-width: 100vw !important;
-    width: 100vw !important;
-    margin: 0 !important;
-    border-radius: 24px 24px 0 0 !important;
-  }
-
-  /* Force override all possible Tailwind responsive classes */
-  .transaction-details-modal .transaction-modal-container.max-w-md,
-  .transaction-details-modal .transaction-modal-container.md\\:max-w-none,
-  .transaction-details-modal .transaction-modal-container[class*="max-w"] {
-    max-width: 100vw !important;
-    width: 100vw !important;
-  }
-
-  /* Container positioning */
-  .transaction-details-modal {
-    justify-content: stretch !important;
-  }
-
-  .transaction-details-modal > div {
-    border-radius: 24px 24px 0 0 !important;
-    animation: none !important;
-    max-width: 100vw !important;
-    width: 100vw !important;
-    margin: 0 !important;
-    flex: none !important;
-  }
-
-  /* Larger text and spacing for tablet */
-  .transaction-details-scroll .flex.justify-between {
-    padding: 16px 0;
-  }
-
-  .transaction-details-scroll .w-10.h-10 {
-    width: 48px;
-    height: 48px;
-  }
-
-  .transaction-details-scroll .text-sm {
-    font-size: 16px;
-    line-height: 1.5;
-  }
-
-  .transaction-details-scroll .copy-btn-default,
-  .transaction-details-scroll .copy-btn-copied {
-    padding: 12px 16px;
-    font-size: 14px;
-  }
-
-  .transaction-details-scroll .copy-btn-default svg,
-  .transaction-details-scroll .copy-btn-copied svg {
-    width: 18px;
-    height: 18px;
-  }
-}
-
-/* Desktop Large Screens */
-@media (min-width: 1024px) {
-  /* Transaction Details Modal - Centered on desktop */
-  .transaction-details-modal {
-    align-items: center;
-  }
-
-  .transaction-details-modal > div {
-    border-radius: 24px;
-    animation: none;
-    max-width: 600px;
-    margin: 20px;
-  }
-
-  .transaction-details-scroll .flex.justify-between {
-    padding: 20px 0;
-  }
-
-  .transaction-details-scroll .w-10.h-10 {
-    width: 56px;
-    height: 56px;
-  }
-
-  .transaction-details-scroll .text-sm {
-    font-size: 18px;
-  }
-
-  .transaction-details-scroll .copy-btn-default,
-  .transaction-details-scroll .copy-btn-copied {
-    padding: 14px 20px;
-    font-size: 16px;
-  }
-}
-
-/* Export Dropdown - Match Figma Design Exactly */
+/* Export Dropdown */
 .export-dropdown {
   position: absolute;
   right: 0;
@@ -941,29 +687,21 @@ onUnmounted(() => {
 .export-dropdown-container {
   width: 164px;
   padding: 12px;
-  background: white;
+  background-color: #3A33D3;
   border-radius: 10px;
-  border: 1px solid #F4F4F4;
-  box-shadow: 2px 3px 6px 0 rgba(2, 7, 14, 0.12);
+  border: 1px solid #3A33D3;
+  box-shadow: 2px 3px 6px 0 #3A33D3;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-/* Apply mobile design to all screen sizes */
-.export-dropdown-container {
-  border-color: #3A33D3 !important;
-  background-color: #3A33D3 !important;
-  box-shadow: 2px 3px 6px 0 #3A33D3 !important;
-}
-
 .export-option {
   width: 140px;
   height: 52px;
-  background: linear-gradient(102deg, rgba(111, 106, 224, 0.40) 9.35%, rgba(85, 81, 179, 0.40) 95.29%);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: #3A33D3;
+  border: 1px solid #3A33D3;
   border-radius: 100px;
-  backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -972,16 +710,8 @@ onUnmounted(() => {
   transition: all 0.2s ease;
 }
 
-/* Apply mobile design to all screen sizes */
-.export-option {
-  border-color: #3A33D3 !important;
-  background: #3A33D3 !important;
-  background-image: none !important;
-}
-
 .export-option:hover {
-  background: #2A1FB5 !important;
-  background-image: none !important;
+  background: #2A1FB5;
 }
 
 .export-option-icon {
@@ -1004,16 +734,6 @@ onUnmounted(() => {
   line-height: 26px;
 }
 
-/* Smooth animations */
-.transaction-card {
-  transition: all 0.2s ease-in-out;
-}
-
-.transaction-card:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-}
-
 /* Modal animations */
 @keyframes slide-up {
   from {
@@ -1030,8 +750,19 @@ onUnmounted(() => {
   animation: slide-up 0.3s ease-out;
 }
 
-/* Checkbox animations */
+/* Checkbox and button animations */
 .transition-colors {
   transition: all 0.2s ease-in-out;
+}
+
+/* Global overrides */
+* {
+  -webkit-tap-highlight-color: transparent;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
 }
 </style>
