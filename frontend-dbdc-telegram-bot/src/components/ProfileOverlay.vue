@@ -5,7 +5,7 @@
                 left-[1.5rem] max-[360px]:left-[1.25rem] max-[375px]:left-[1.75rem] max-[414px]:left-[2rem]
                 sm:left-[5rem] md:left-[5.25rem] lg:left-[8.5rem] xl:left-[10.5rem]
 
-                bottom-[88px] max-[360px]:bottom-[78px] max-[375px]:bottom-[92px] max-[414px]:bottom-[95px]
+                bottom-[88px] max-[360px]:bottom-[78px] max-[375px]:bottom-[90px] max-[414px]:bottom-[95px]
                 sm:bottom-[130px] md:bottom-[140px] lg:bottom-[153px] xl:bottom-[175px]
 
                 z-[65] transition-all duration-300">
