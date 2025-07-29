@@ -1,7 +1,7 @@
 <template>
-  <div class="min-h-screen flex flex-col font-sans bg-gray-100">
+  <div class="w-full min-h-screen bg-gray-100 font-montserrat overflow-x-hidden flex flex-col">
     <!-- Header Section -->
-    <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-6 sm:pt-8 md:pt-10 lg:pt-12 xl:pt-16 pb-3 sm:pb-4 md:pb-5 lg:pb-6 xl:pb-8 bg-gray-100 z-30">
+    <div class="w-full px-4 sm:px-6 md:px-8 lg:px-12 pt-6 sm:pt-8 md:pt-10 lg:pt-12 pb-3 sm:pb-4 md:pb-5 lg:pb-6 bg-gray-100 z-30">
       <div class="mb-2">
         <div class="bg-dbd-light-blue border border-purple-200 rounded-2xl lg:rounded-3xl p-4 lg:p-6">
           <div class="flex items-center justify-between">
@@ -22,7 +22,7 @@
     </div>
 
     <!-- Scrollable Cards -->
-    <div class="flex-1 w-full max-w-7xl mx-auto overflow-y-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pb-24 sm:pb-28 md:pb-32 lg:pb-40 xl:pb-48">
+    <div class="flex-1 w-full overflow-y-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-24 sm:pb-28 md:pb-32 lg:pb-40">
       <div class="space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-8 xl:space-y-10">
         <div 
           v-for="item in foreversList" 
@@ -349,40 +349,33 @@ const goBack = () => {
   pointer-events: none;
 }
 
-/* Custom scrollbar for webkit browsers */
+/* Global scrollbar hiding and Telegram optimizations */
 ::-webkit-scrollbar {
   width: 0;
 }
 
-/* Ensure proper touch scrolling on iOS */
 * {
   -webkit-tap-highlight-color: transparent;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-/* Basic styling without media queries */
-
-/* Telegram WebApp optimizations */
-.telegram-webapp {
-  height: 100vh;
-  height: calc(var(--vh, 1vh) * 100);
-  overscroll-behavior: none;
-  -webkit-overflow-scrolling: touch;
+/* Performance optimizations */
+* {
+  will-change: auto;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* Hide scrollbar in scrollable area */
 .overflow-y-auto {
   scrollbar-width: none;
   -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 .overflow-y-auto::-webkit-scrollbar {
   display: none;
-}
-
-/* Ensure fixed header doesn't interfere with scrolling */
-.z-30 {
-  position: relative;
-  z-index: 30;
 }
 
 /* Better touch targets */
@@ -392,24 +385,14 @@ button {
   touch-action: manipulation;
 }
 
-/* Loyality button enhancements */
+/* Button enhancements */
 .bg-dbd-orange {
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .bg-dbd-orange:active {
-  transform: scale(0.95);
-}
-
-/* Telegram specific button improvements */
-.bg-dbd-orange:active {
   background-color: #e55a00;
   transform: scale(0.95);
-}
-
-/* Telegram mini app specific styles */
-.font-montserrat {
-  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 
