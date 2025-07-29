@@ -79,54 +79,48 @@
                   [overscroll-behavior:contain] [overscroll-behavior-y:contain]">
         
         <!-- Calculator -->
-        <div class="flex items-center gap-2 px-3 py-1.5 h-13 cursor-pointer 
+        <div class="flex items-center gap-2 px-3 py-1.5 h-13 cursor-pointer
                     transition-all duration-200 rounded-lg mb-2 mt-3
-                    hover:bg-white hover:bg-opacity-10 hover:translate-x-1 relative" 
+                    hover:bg-white hover:bg-opacity-10 hover:translate-x-1 relative"
              @click="handleMenuClick('calculator')">
-          <div class="w-10 h-10 bg-gray-600 bg-opacity-24 border border-white border-opacity-24 
-                      rounded-full flex items-center justify-center flex-shrink-0 opacity-24">
-            <div class="flex items-center justify-center">
-              <svg width="20" height="20" viewBox="0 0 16 20" fill="none">
-                <path d="M14.1377 0C15.1645 0 16 0.788555 16 1.75781V18.2422C16 19.2114 15.1645 20 14.1377 20H1.8623C0.835502 20 0 19.2114 0 18.2422V1.75781C0 0.788555 0.835502 0 1.8623 0H14.1377ZM1.8623 1.17188C1.52004 1.17188 1.24121 1.43473 1.24121 1.75781V18.2422C1.24121 18.5653 1.52004 18.8281 1.8623 18.8281H14.1377C14.48 18.8281 14.7587 18.5653 14.7588 18.2422V1.75781C14.7588 1.43473 14.48 1.17188 14.1377 1.17188H1.8623Z..." fill="white"/>
-              </svg>
-            </div>
+          <div class="w-10 h-10 bg-[#3A33D3] border border-white border-opacity-20
+                      rounded-full flex items-center justify-center flex-shrink-0">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M16 2C17.1 2 18 2.9 18 4V18C18 19.1 17.1 20 16 20H4C2.9 20 2 19.1 2 18V4C2 2.9 2.9 2 4 2H16ZM16 4H4V18H16V4ZM8 6H10V8H8V6ZM12 6H14V8H12V6ZM6 6H8V8H6V6ZM8 10H10V12H8V10ZM12 10H14V12H12V10ZM6 10H8V12H6V10ZM8 14H10V16H8V14ZM12 14H14V16H12V14ZM6 14H8V16H6V14Z" fill="white"/>
+            </svg>
           </div>
           <span class="text-white text-base font-bold leading-7 flex-1">Calculator</span>
         </div>
 
         <!-- Ambassador -->
-        <div class="flex items-center gap-2 px-3 py-1.5 h-13 cursor-pointer 
+        <div class="flex items-center gap-2 px-3 py-1.5 h-13 cursor-pointer
                     transition-all duration-200 rounded-lg mb-2
-                    hover:bg-white hover:bg-opacity-10 hover:translate-x-1 relative" 
+                    hover:bg-white hover:bg-opacity-10 hover:translate-x-1 relative"
              @click="handleMenuClick('ambassador')">
-          <div class="w-10 h-10 bg-gray-600 bg-opacity-24 border border-white border-opacity-24 
-                      rounded-full flex items-center justify-center flex-shrink-0 opacity-24">
-            <div class="flex items-center justify-center">
-              <svg width="14" height="20" viewBox="0 0 14 20" fill="none">
-                <path d="M7 9.64844C9.76508 9.64858 12.0066 11.9652 12.0068 14.8242C12.0068 17.6826 9.76511 19.9999 7 20C4.23394 20 1.99219 17.6827 1.99219 14.8242C1.99243 11.9651 4.23409 9.64844 7 9.64844ZM6.09668 13.8418L4.07715 14.1465L5.53906 15.6182L5.19434 17.6992L7 16.7168L8.80566 17.6992L8.46191 15.6182L9.92383 14.1465L7.90332 13.8418L7 11.9512L6.09668 13.8418ZM4.60547 0L7 3.30078L9.39453 0H14L7 9.64844L0 0H4.60547Z" fill="white"/>
-              </svg>
-            </div>
+          <div class="w-10 h-10 bg-[#3A33D3] border border-white border-opacity-20
+                      rounded-full flex items-center justify-center flex-shrink-0">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M10 1L12.5 7.5H19L14 12L16 19L10 15L4 19L6 12L1 7.5H7.5L10 1Z" fill="white"/>
+            </svg>
           </div>
           <span class="text-white text-base font-bold leading-7 flex-1">Ambassador</span>
         </div>
 
         <!-- Verification -->
-        <div class="flex items-center gap-2 px-3 py-1.5 h-13 cursor-pointer 
+        <div class="flex items-center gap-2 px-3 py-1.5 h-13 cursor-pointer
                     transition-all duration-200 rounded-lg mb-2
-                    hover:bg-white hover:bg-opacity-10 hover:translate-x-1 relative" 
+                    hover:bg-white hover:bg-opacity-10 hover:translate-x-1 relative"
              @click="handleMenuClick('verification')">
-          <div class="w-10 h-10 bg-gray-600 bg-opacity-24 border border-white border-opacity-24 
-                      rounded-full flex items-center justify-center flex-shrink-0 opacity-24">
-            <div class="flex items-center justify-center">
-              <svg width="18" height="22" viewBox="0 0 18 22" fill="none">
-                <path d="M14.2511 12.4974C15.4932 12.4974 16.5 13.5045 16.5 14.7467V15.3222C16.5 16.2166 16.1805 17.0816 15.5989 17.7611C14.0295 19.5949 11.6422 20.5 8.49673 20.5C5.35076 20.5 2.96466 19.5946 1.39831 17.7601C0.818531 17.081 0.5 16.2174 0.5 15.3245V14.7467C0.5 13.5045 1.50689 12.4974 2.74896 12.4974H14.2511Z..." fill="white"/>
-              </svg>
-            </div>
+          <div class="w-10 h-10 bg-[#3A33D3] border border-white border-opacity-20
+                      rounded-full flex items-center justify-center flex-shrink-0">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M10 2C11.1 2 12 2.9 12 4C12 5.1 11.1 6 10 6C8.9 6 8 5.1 8 4C8 2.9 8.9 2 10 2ZM14 8H6C4.9 8 4 8.9 4 10V16C4 17.1 4.9 18 6 18H14C15.1 18 16 17.1 16 16V10C16 8.9 15.1 8 14 8ZM14 16H6V10H14V16Z" fill="white"/>
+            </svg>
           </div>
           <span class="text-white text-base font-bold leading-7 flex-1">Verification</span>
           <!-- Error Badge -->
-          <div class="absolute right-4 top-1/2 transform -translate-y-1/2 w-6 h-6 
-                      rounded-full bg-[#FFF0F3] border-[0.667px] border-[#FF1919] 
+          <div class="absolute right-4 top-1/2 transform -translate-y-1/2 w-6 h-6
+                      rounded-full bg-[#FFF0F3] border-[0.667px] border-[#FF1919]
                       flex items-center justify-center flex-shrink-0">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M7 0C10.866 0 14 3.134 14 7C14 10.866 10.866 14 7 14C3.134 14 0 10.866 0 7C0 3.134 3.134 0 7 0Z" fill="#FF1919"/>
@@ -136,67 +130,57 @@
         </div>
 
         <!-- Security -->
-        <div class="flex items-center gap-2 px-3 py-1.5 h-13 cursor-pointer 
+        <div class="flex items-center gap-2 px-3 py-1.5 h-13 cursor-pointer
                     transition-all duration-200 rounded-lg mb-2
-                    hover:bg-white hover:bg-opacity-10 hover:translate-x-1 relative" 
+                    hover:bg-white hover:bg-opacity-10 hover:translate-x-1 relative"
              @click="handleMenuClick('security')">
-          <div class="w-10 h-10 bg-gray-600 bg-opacity-24 border border-white border-opacity-24 
-                      rounded-full flex items-center justify-center flex-shrink-0 opacity-24">
-            <div class="flex items-center justify-center">
-              <svg width="18" height="20" viewBox="0 0 18 20" fill="none">
-                <path d="M8.78516 0.0354746C8.92389 -0.0121504 9.07611 -0.0121504 9.21484 0.0354746C10.6561 0.531013 12.1438 0.945188 13.6377 1.26497C14.8838 1.5317 16.1601 1.73823 17.4297 1.87922C17.7546 1.91522 18 2.18263 18 2.50032V8.7386C17.9998 13.165 15.3282 17.2234 11.1943 19.0784L9.26953 19.9427C9.18416 19.9808 9.09193 20.0003 9 20.0003C8.90802 20.0003 8.81583 19.9808 8.73047 19.9427L6.80566 19.0784C2.67178 17.2233 0.000192532 13.165 0 8.7386V2.50032C0 2.18263 0.245411 1.91529 0.570312 1.87922C1.83994 1.73823 3.11627 1.53164 4.3623 1.26497C5.85626 0.945192 7.34396 0.531005 8.78516 0.0354746Z..." fill="white"/>
-              </svg>
-            </div>
+          <div class="w-10 h-10 bg-[#3A33D3] border border-white border-opacity-20
+                      rounded-full flex items-center justify-center flex-shrink-0">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M10 1L11.5 2.5V5H18V7.5L17 9L16 10.5V13L14.5 15.5L12 16H10L8 15.5L5.5 13V10.5L4 9L3 7.5V5H8.5V2.5L10 1ZM10 3.5V5H15.5V6.5L15 7.5L14.5 8.5V12L13.5 13.5L12 14H10L8 13.5L6.5 12V8.5L6 7.5L5.5 6.5V5H10V3.5Z" fill="white"/>
+            </svg>
           </div>
           <span class="text-white text-base font-bold leading-7 flex-1">Security</span>
         </div>
 
         <!-- Settings -->
-        <div class="flex items-center gap-2 px-3 py-1.5 h-13 cursor-pointer 
+        <div class="flex items-center gap-2 px-3 py-1.5 h-13 cursor-pointer
                     transition-all duration-200 rounded-lg mb-2
-                    hover:bg-white hover:bg-opacity-10 hover:translate-x-1 relative" 
+                    hover:bg-white hover:bg-opacity-10 hover:translate-x-1 relative"
              @click="handleMenuClick('settings')">
-          <div class="w-10 h-10 bg-gray-600 bg-opacity-24 border border-white border-opacity-24 
-                      rounded-full flex items-center justify-center flex-shrink-0 opacity-24">
-            <div class="flex items-center justify-center">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M12.2222 20L12.3457 19.375L12.8148 17.0913C13.5679 16.8029 14.2469 16.3972 14.8642 15.9135L17.1605 16.6827L17.7778 16.875L18.0988 16.3221L19.679 13.6778L20 13.125L19.5309 12.7163L17.7531 11.2019C17.8179 10.8083 17.9012 10.4147 17.9012 10C17.9012 9.58531 17.8179 9.19169 17.7531 8.79808L19.5309 7.28369L20 6.875L19.679 6.32215L18.0988 3.67785L17.7778 3.125L17.1605 3.31731L14.8642 4.08654C14.2469 3.60277 13.5679 3.19708 12.8148 2.90862L12.3457 0.625L12.2222 0H7.77775L7.65426 0.625L7.18516 2.90862C6.43209 3.19708 5.75306 3.60277 5.13581 4.08654L2.83947 3.31731L2.22215 3.125L1.9012 3.67785L0.32095 6.32215L0 6.875L0.469097 7.28369L2.24688 8.79808C2.18209 9.19169 2.09873 9.58531 2.09873 10C2.09873 10.4147 2.18209 10.8083 2.24688 11.2019L0.469097 12.7163L0 13.125L0.32095 13.6778L1.9012 16.3221L2.22215 16.875L2.83947 16.6827L5.13581 15.9135C5.75306 16.3972 6.43209 16.8029 7.18516 17.0913L7.65426 19.375L7.77775 20H12.2222Z..." fill="white"/>
-              </svg>
-            </div>
+          <div class="w-10 h-10 bg-[#3A33D3] border border-white border-opacity-20
+                      rounded-full flex items-center justify-center flex-shrink-0">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M10 1L13 4L19 3L18 6L20 10L18 14L19 17L13 16L10 19L7 16L1 17L2 14L0 10L2 6L1 3L7 4L10 1ZM10 6C7.8 6 6 7.8 6 10C6 12.2 7.8 14 10 14C12.2 14 14 12.2 14 10C14 7.8 12.2 6 10 6Z" fill="white"/>
+            </svg>
           </div>
           <span class="text-white text-base font-bold leading-7 flex-1">Settings</span>
         </div>
 
         <!-- Support -->
-        <div class="flex items-center gap-2 px-3 py-1.5 h-13 cursor-pointer 
+        <div class="flex items-center gap-2 px-3 py-1.5 h-13 cursor-pointer
                     transition-all duration-200 rounded-lg mb-2
-                    hover:bg-white hover:bg-opacity-10 hover:translate-x-1 relative" 
+                    hover:bg-white hover:bg-opacity-10 hover:translate-x-1 relative"
              @click="handleMenuClick('support')">
-          <div class="w-10 h-10 bg-gray-600 bg-opacity-24 border border-white border-opacity-24 
-                      rounded-full flex items-center justify-center flex-shrink-0 opacity-24">
-            <div class="flex items-center justify-center">
-              <svg width="18" height="20" viewBox="0 0 18 20" fill="none">
-                <path d="M8.99902 0C13.9325 0 17.998 3.80872 17.998 8.58691V10.1348C17.9981 10.1411 17.999 10.1479 17.999 10.1543V12.9561C17.9992 12.9624 18 12.9692 18 12.9756V14.543C17.9997 16.724 16.1499 18.4277 13.9502 18.4277H11.2695C10.9422 19.3551 10.0281 19.9951 8.99902 19.9951C7.71066 19.9949 6.59988 18.993 6.59961 17.6777C6.59962 16.3623 7.71051 15.3606 8.99902 15.3604C10.0286 15.3604 10.9435 15.9998 11.2705 16.9277H13.9502C15.1589 16.9277 16.1261 16.1539 16.4111 15.1514C16.155 15.2407 15.8817 15.293 15.5986 15.293C14.3103 15.2927 13.1995 14.2908 13.1992 12.9756V10.1543C13.1992 8.83884 14.3101 7.83714 15.5986 7.83691C15.9032 7.83691 16.1972 7.89422 16.4697 7.99707C16.1535 4.38853 12.9637 1.5 8.99902 1.5C5.03445 1.50011 1.84359 4.38856 1.52734 7.99707C1.80001 7.89396 2.09449 7.83697 2.39941 7.83691C3.6881 7.83691 4.7998 8.83869 4.7998 10.1543V12.9756C4.79953 14.291 3.68794 15.293 2.39941 15.293C1.11107 15.2927 0.000274862 14.2908 0 12.9756V8.58691C4.31105e-05 3.80879 4.0657 0.000121624 8.99902 0Z..." fill="white"/>
-              </svg>
-            </div>
+          <div class="w-10 h-10 bg-[#3A33D3] border border-white border-opacity-20
+                      rounded-full flex items-center justify-center flex-shrink-0">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M10 2C13.9 2 17 5.1 17 9C17 10.5 16.5 11.9 15.6 13L19 16.4L16.4 19L13 15.6C11.9 16.5 10.5 17 9 17C5.1 17 2 13.9 2 9C2 5.1 5.1 2 9 2H10ZM9 4C6.2 4 4 6.2 4 9C4 11.8 6.2 14 9 14C11.8 14 14 11.8 14 9C14 6.2 11.8 4 9 4Z" fill="white"/>
+            </svg>
           </div>
           <span class="text-white text-base font-bold leading-7 flex-1">Support</span>
         </div>
 
         <!-- Help -->
-        <div class="flex items-center gap-2 px-3 py-1.5 h-13 cursor-pointer 
+        <div class="flex items-center gap-2 px-3 py-1.5 h-13 cursor-pointer
                     transition-all duration-200 rounded-lg mb-3
-                    hover:bg-white hover:bg-opacity-10 hover:translate-x-1 relative" 
+                    hover:bg-white hover:bg-opacity-10 hover:translate-x-1 relative"
              @click="handleMenuClick('help')">
-          <div class="w-10 h-10 bg-gray-600 bg-opacity-24 border border-white border-opacity-24 
-                      rounded-full flex items-center justify-center flex-shrink-0 opacity-24">
-            <div class="flex items-center justify-center">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M9.69301 13.4082C9.12117 13.4082 8.6582 13.8848 8.6582 14.4566C8.6582 15.0149 9.10754 15.5051 9.69301 15.5051C10.2785 15.5051 10.7414 15.0149 10.7414 14.4566C10.7414 13.8848 10.2649 13.4082 9.69301 13.4082Z" fill="white"/>
-                <path d="M9.86984 5.46875C8.03168 5.46875 7.1875 6.55801 7.1875 7.29328C7.1875 7.82434 7.6368 8.06941 8.00445 8.06941C8.73969 8.06941 8.44016 7.02098 9.82898 7.02098C10.5098 7.02098 11.0545 7.32055 11.0545 7.94687C11.0545 8.68219 10.292 9.10426 9.84262 9.48551C9.44777 9.8259 8.93035 10.3842 8.93035 11.5552C8.93035 12.2632 9.12094 12.4674 9.67922 12.4674C10.3464 12.4674 10.4825 12.1679 10.4825 11.9092C10.4825 11.2011 10.4962 10.7927 11.2451 10.2072C11.6127 9.92125 12.7701 8.99535 12.7701 7.71543C12.7701 6.43551 11.6127 5.46875 9.86984 5.46875Z" fill="white"/>
-                <path d="M10 0C4.47328 0 0 4.47254 0 10V19.2188C0 19.6502 0.349766 20 0.78125 20H10C15.5267 20 20 15.5275 20 10C20 4.47328 15.5275 0 10 0ZM10 18.4375H1.5625V10C1.5625 5.33684 5.33621 1.5625 10 1.5625C14.6632 1.5625 18.4375 5.33621 18.4375 10C18.4375 14.6632 14.6638 18.4375 10 18.4375Z" fill="white"/>
-              </svg>
-            </div>
+          <div class="w-10 h-10 bg-[#3A33D3] border border-white border-opacity-20
+                      rounded-full flex items-center justify-center flex-shrink-0">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M10 2C14.4 2 18 5.6 18 10C18 14.4 14.4 18 10 18C5.6 18 2 14.4 2 10C2 5.6 5.6 2 10 2ZM10 4C6.7 4 4 6.7 4 10C4 13.3 6.7 16 10 16C13.3 16 16 13.3 16 10C16 6.7 13.3 4 10 4ZM10 6C10.8 6 11.5 6.7 11.5 7.5C11.5 8.3 10.8 9 10 9C9.2 9 8.5 8.3 8.5 7.5C8.5 6.7 9.2 6 10 6ZM8.5 11H11.5V14H8.5V11Z" fill="white"/>
+            </svg>
           </div>
           <span class="text-white text-base font-bold leading-7 flex-1">Help</span>
         </div>
