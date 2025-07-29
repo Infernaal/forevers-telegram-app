@@ -595,9 +595,11 @@ onBeforeUnmount(() => {
   pointer-events: none;
 }
 
-/* Basic styling for Telegram mini app */
+/* Performance optimizations */
 * {
-  -webkit-tap-highlight-color: transparent;
+  will-change: auto;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* Global scrollbar hiding and Telegram optimizations */
