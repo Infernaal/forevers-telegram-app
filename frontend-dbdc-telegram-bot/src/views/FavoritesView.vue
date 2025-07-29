@@ -29,7 +29,7 @@
       </div>
 
       <!-- Scroll Content -->
-      <div class="flex-1 overflow-y-auto pt-2 lg:pt-6 xl:pt-8 pb-20 sm:pb-24 md:pb-28 lg:pb-32 xl:pb-40 space-y-2 lg:space-y-4 xl:space-y-6" v-if="balances.length > 0">
+      <div class="flex-1 overflow-y-auto pt-4 sm:pt-6 md:pt-8 lg:pt-10 xl:pt-12 pb-24 sm:pb-28 md:pb-32 lg:pb-36 xl:pb-40 space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10 xl:space-y-12" v-if="balances.length > 0">
         <div
           v-for="balance in balances"
           :key="balance.id"
