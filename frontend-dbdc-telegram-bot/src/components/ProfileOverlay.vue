@@ -13,9 +13,14 @@
     </div>
 
     <!-- Profile Dropdown Menu -->
-    <div class="absolute left-2 right-2 bottom-[120px] sm:bottom-[115px] md:bottom-[250px] lg:bottom-[190px] xl:bottom-[180px]
+    <div class="absolute left-2 right-2
+                bottom-[120px] sm:bottom-[115px] md:bottom-[250px] lg:bottom-[190px] xl:bottom-[180px]
                 h-[580px] sm:h-[560px] md:h-[580px] lg:h-[500px] xl:h-[450px]
                 max-h-[calc(100vh-130px)] sm:max-h-[calc(100vh-120px)] md:max-h-[calc(100vh-255px)] lg:max-h-[calc(100vh-210px)] xl:max-h-[calc(100vh-200px)]
+                max-[375px]:left-4 max-[375px]:right-4 max-[375px]:bottom-[115px] max-[375px]:h-[560px] max-[375px]:max-h-[calc(100vh-120px)]
+                max-[667px]:bottom-[110px] max-[667px]:h-[500px]
+                max-[568px]:bottom-[105px] max-[568px]:h-[450px]
+                landscape:max-[500px]:bottom-[95px] landscape:max-[500px]:h-[350px]
                 rounded-[20px] overflow-hidden z-[55] transition-all duration-300" 
          @click.stop>
       
