@@ -243,7 +243,14 @@ const navigateTo = (tab) => {
 }
 
 const toggleProfile = () => {
+  console.log('Profile toggle clicked, current state:', isProfileMenuOpen.value)
   isProfileMenuOpen.value = !isProfileMenuOpen.value
+  console.log('Profile toggle new state:', isProfileMenuOpen.value)
+
+  // Telegram WebApp haptic feedback
+  if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.HapticFeedback) {
+    window.Telegram.WebApp.HapticFeedback.impactOccurred('medium')
+  }
 }
 
 const closeProfileMenu = () => {
