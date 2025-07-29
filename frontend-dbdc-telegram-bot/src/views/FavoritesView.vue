@@ -1,52 +1,52 @@
 <template>
   <div class="w-full min-h-screen bg-gray-100 font-montserrat overflow-x-hidden flex flex-col">
     <!-- Main Content -->
-    <main class="flex-1 w-full px-4 sm:px-6 md:px-8 lg:px-12 pt-4 sm:pt-6 md:pt-8 lg:pt-10 pb-4 sm:pb-6 md:pb-8 lg:pb-10 flex flex-col">
+    <main class="flex-1 w-full px-4 pt-4 pb-32 flex flex-col">
       <!-- Total Balance Card -->
-      <div class="bg-purple-50 border border-purple-200 rounded-2xl lg:rounded-3xl p-4 sm:p-6 md:p-8 lg:p-6 mb-4 sm:mb-6 md:mb-8 lg:mb-6 flex-shrink-0">
-        <div class="flex items-start justify-between mb-4 lg:mb-6">
-          <h2 class="text-2xl lg:text-4xl font-semibold text-black leading-7 lg:leading-tight">
+      <div class="bg-purple-50 border border-purple-200 rounded-2xl p-4 mb-4 flex-shrink-0">
+        <div class="flex items-start justify-between mb-4">
+          <h2 class="text-2xl font-semibold text-black leading-7">
             Forevers<br>Balance
           </h2>
 
-          <div class="flex flex-col items-end gap-2 lg:gap-3">
-            <div class="flex items-center gap-2 lg:gap-3">
-              <svg width="32" height="32" viewBox="0 0 32 32" class="text-blue-700 lg:w-12 lg:h-12">
+          <div class="flex flex-col items-end gap-2">
+            <div class="flex items-center gap-2">
+              <svg width="32" height="32" viewBox="0 0 32 32" class="text-blue-700">
                 <path d="M30.667 7.381V1.333H7.129V9.011H1.333V15.059H7.129V30.108H13.894V22.728H19.615V16.680H13.894V15.059H25.132V9.011H13.894V7.381H30.667Z" fill="currentColor"/>
               </svg>
-              <span class="text-3xl lg:text-5xl font-bold text-blue-700">{{ totalBalance.toLocaleString() }}</span>
+              <span class="text-3xl font-bold text-blue-700">{{ totalBalance.toLocaleString() }}</span>
             </div>
-            <p class="text-lg lg:text-xl text-gray-600 font-medium">Worth ${{ totalWorth.toLocaleString() }}</p>
+            <p class="text-lg text-gray-600 font-medium">Worth ${{ totalWorth.toLocaleString() }}</p>
           </div>
         </div>
 
         <button
           @click="handleRentOut"
-          class="w-full bg-gradient-to-r from-blue-700 to-purple-600 text-white font-bold py-3 lg:py-4 px-12 lg:px-16 rounded-full lg:rounded-2xl hover:from-blue-800 hover:to-purple-700 transition-all duration-200 text-sm lg:text-lg"
+          class="w-full bg-gradient-to-r from-blue-700 to-purple-600 text-white font-bold py-3 px-12 rounded-full hover:from-blue-800 hover:to-purple-700 transition-all duration-200 text-sm"
         >
           Rent Out Forevers
         </button>
       </div>
 
       <!-- Scroll Content -->
-      <div class="flex-1 overflow-y-auto pt-4 sm:pt-6 md:pt-8 lg:pt-8 pb-24 sm:pb-28 md:pb-32 lg:pb-36 space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-8" v-if="balances.length > 0">
+      <div class="flex-1 overflow-y-auto pt-4 pb-8 space-y-4" v-if="balances.length > 0">
         <div
           v-for="balance in balances"
           :key="balance.id"
-          class="bg-white border border-purple-200 rounded-2xl lg:rounded-3xl balance-card relative flex flex-col justify-between"
+          class="bg-white border border-purple-200 rounded-2xl balance-card relative flex flex-col justify-between"
         >
           <!-- Country Header -->
-          <div class="flex items-center justify-between mb-3 lg:mb-6">
-            <div class="flex items-center gap-2 lg:gap-4 xl:gap-6">
-              <CountryFlag :country="balance.code" class="w-6 h-6 lg:w-12 lg:h-12" />
-              <span class="text-gray-700 font-medium text-base lg:text-xl">{{ balance.country }} Balance</span>
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <CountryFlag :country="balance.code" class="w-6 h-6" />
+              <span class="text-gray-700 font-medium text-base">{{ balance.country }} Balance</span>
             </div>
 
             <button
               @click="openEnterAmountModal(balance)"
-              class="w-16 h-11 lg:w-20 lg:h-12 border border-blue-700 bg-purple-50 rounded-full flex items-center justify-center hover:bg-purple-100 transition-colors"
+              class="w-16 h-11 border border-blue-700 bg-purple-50 rounded-full flex items-center justify-center hover:bg-purple-100 transition-colors"
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" class="text-blue-700 lg:w-8 lg:h-8">
+              <svg width="24" height="24" viewBox="0 0 24 24" class="text-blue-700">
                 <path d="M18 13H6C5.4 13 5 12.6 5 12C5 11.4 5.4 11 6 11H18C18.6 11 19 11.4 19 12C19 12.6 18.6 13 18 13Z" fill="currentColor"/>
                 <path d="M12 19C11.4 19 11 18.6 11 18V6C11 5.4 11.4 5 12 5C12.6 5 13 5.4 13 6V18C13 18.6 12.6 19 12 19Z" fill="currentColor"/>
               </svg>
@@ -54,15 +54,15 @@
           </div>
 
           <!-- Token Info -->
-          <div class="flex items-center gap-1 lg:gap-3 mb-3 lg:mb-6 flex-wrap">
-            <svg width="24" height="24" viewBox="0 0 24 24" class="text-blue-700 lg:w-8 lg:h-8">
+          <div class="flex items-center gap-1 mb-3 flex-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" class="text-blue-700">
               <path d="M23 5.536V1H5.347V6.759H1V11.294H5.347V22.581H10.421V17.046H14.712V12.510H10.421V11.294H18.849V6.759H10.421V5.536H23Z" fill="currentColor"/>
             </svg>
-            <span class="text-lg lg:text-xl font-semibold text-blue-700">{{ balance.amount.toLocaleString() }}</span>
-            <span class="w-1 h-1 lg:w-2 lg:h-2 bg-gray-400 rounded-full"></span>
-            <div class="flex items-center gap-0.5 lg:gap-2 text-sm lg:text-base text-gray-600 font-medium">
+            <span class="text-lg font-semibold text-blue-700">{{ balance.amount.toLocaleString() }}</span>
+            <span class="w-1 h-1 bg-gray-400 rounded-full"></span>
+            <div class="flex items-center gap-0.5 text-sm text-gray-600 font-medium">
               <span>1</span>
-              <svg width="16" height="16" viewBox="0 0 16 16" class="text-gray-600 lg:w-6 lg:h-6">
+              <svg width="16" height="16" viewBox="0 0 16 16" class="text-gray-600">
                 <path d="M15.2636 2H4.61925C4.15063 2 3.8159 2.28571 3.8159 2.68571V5.48571H0.803347C0.334728 5.54286 0 5.82857 0 6.22857C0 6.62857 0.334728 6.91429 0.803347 6.91429H3.8159V13.3143C3.8159 13.7143 4.15063 14 4.61925 14C5.08787 14 5.42259 13.7143 5.42259 13.3143V10.3429H8.83682C9.30544 10.3429 9.64017 10.0571 9.64017 9.65714C9.64017 9.25714 9.30544 8.97143 8.83682 8.97143H5.42259V6.85714H11.9163C12.3849 6.85714 12.7197 6.57143 12.7197 6.17143C12.7197 5.77143 12.3849 5.48571 11.9163 5.48571H5.42259V3.37143H15.1967C15.6653 3.37143 16 3.08571 16 2.68571C16 2.28571 15.7322 2 15.2636 2Z" fill="currentColor"/>
               </svg>
               <span>{{ balance.code }}/{{ balance.usdRate }} USD</span>
@@ -70,13 +70,13 @@
 
             <div
               :class="[
-                'px-2 lg:px-4 py-0.5 lg:py-2 rounded lg:rounded-lg text-xs lg:text-base font-semibold flex items-center gap-1 lg:gap-2 ml-1 lg:ml-2',
+                'px-2 py-0.5 rounded text-xs font-semibold flex items-center gap-1 ml-1',
                 balance.priceChange > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
               ]"
             >
               <svg
                 :class="[
-                  'w-2 h-2 lg:w-4 lg:h-4 transform',
+                  'w-2 h-2 transform',
                   balance.priceChange > 0 ? '-rotate-45' : 'rotate-45'
                 ]"
                 viewBox="0 0 10 13"
@@ -95,40 +95,40 @@
           </div>
 
           <!-- Values Section -->
-          <div class="bg-purple-50 rounded-xl lg:rounded-2xl p-3 lg:p-4 mb-3 lg:mb-4">
-            <div class="flex justify-between items-center mb-2 lg:mb-3">
-              <span class="text-sm lg:text-base text-gray-600 font-medium">Current value</span>
-              <span class="text-base lg:text-lg font-semibold text-gray-700">${{ balance.currentValue.toLocaleString() }}</span>
+          <div class="bg-purple-50 rounded-xl p-3 mb-3">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-sm text-gray-600 font-medium">Current value</span>
+              <span class="text-base font-semibold text-gray-700">${{ balance.currentValue.toLocaleString() }}</span>
             </div>
             <div class="flex justify-between items-center">
-              <span class="text-sm lg:text-base text-gray-600 font-medium">Potential worth</span>
-              <span class="text-base lg:text-lg font-semibold text-gray-700">${{ balance.potentialWorth.toLocaleString() }}</span>
+              <span class="text-sm text-gray-600 font-medium">Potential worth</span>
+              <span class="text-base font-semibold text-gray-700">${{ balance.potentialWorth.toLocaleString() }}</span>
             </div>
           </div>
 
           <!-- Available Section -->
-          <div class="bg-green-100 rounded-xl lg:rounded-2xl p-3 lg:p-4 flex items-center justify-between">
-            <div class="flex items-center gap-2 lg:gap-3">
-              <span class="text-sm lg:text-base text-gray-600 font-medium">Available</span>
+          <div class="bg-green-100 rounded-xl p-3 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="text-sm text-gray-600 font-medium">Available</span>
               <template v-if="balance.availableAmount">
-                <span class="w-1.5 h-1.5 lg:w-3 lg:h-3 bg-gray-400 rounded-full"></span>
-                <div class="flex items-center gap-1 lg:gap-2">
-                  <svg width="14" height="14" viewBox="0 0 14 14" class="text-black lg:w-6 lg:h-6">
+                <span class="w-1.5 h-1.5 bg-gray-400 rounded-full"></span>
+                <div class="flex items-center gap-1">
+                  <svg width="14" height="14" viewBox="0 0 14 14" class="text-black">
                     <path d="M12.86 1.4H4.38C4.007 1.4 3.74 1.667 3.74 2.04V4.654H1.34C0.967 4.707 0.7 4.974 0.7 5.347C0.7 5.72 0.967 5.987 1.34 5.987H3.74V11.96C3.74 12.334 4.007 12.6 4.38 12.6C4.754 12.6 5.02 12.334 5.02 11.96V9.187H7.74C8.114 9.187 8.38 8.92 8.38 8.547C8.38 8.174 8.114 7.907 7.74 7.907H5.02V5.934H10.194C10.567 5.934 10.834 5.667 10.834 5.294C10.834 4.92 10.567 4.654 10.194 4.654H5.02V2.68H12.807C13.18 2.68 13.447 2.414 13.447 2.04C13.447 1.667 13.234 1.4 12.86 1.4Z" fill="currentColor"/>
                   </svg>
-                  <span class="text-sm lg:text-base font-medium text-black">{{ balance.availableAmount }}</span>
+                  <span class="text-sm font-medium text-black">{{ balance.availableAmount }}</span>
                 </div>
               </template>
               <template v-else>
-                <span class="text-sm lg:text-base text-gray-600 font-medium">without restrictions</span>
+                <span class="text-sm text-gray-600 font-medium">without restrictions</span>
               </template>
             </div>
 
             <button
               @click="showInfoTooltip = true"
-              class="w-6 h-6 lg:w-10 lg:h-10 border border-gray-300 bg-white rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors"
+              class="w-6 h-6 border border-gray-300 bg-white rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors"
             >
-              <svg width="20" height="20" viewBox="0 0 20 20" class="text-gray-600 lg:w-8 lg:h-8">
+              <svg width="20" height="20" viewBox="0 0 20 20" class="text-gray-600">
                 <path d="M10 2C5.5888 2 2 5.58885 2 10C2 14.4112 5.5888 18 10 18C14.4112 18 18 14.4112 18 10C18 5.58885 14.4112 2 10 2ZM10 16.5455C6.39079 16.5455 3.45455 13.6092 3.45455 10C3.45455 6.39088 6.39079 3.45455 10 3.45455C13.6092 3.45455 16.5455 6.39088 16.5455 10C16.5455 13.6092 13.6092 16.5455 10 16.5455Z" fill="currentColor"/>
                 <path d="M10 5.39453C9.46543 5.39453 9.03052 5.82973 9.03052 6.36466C9.03052 6.89911 9.46543 7.33393 10 7.33393C10.5346 7.33393 10.9695 6.89911 10.9695 6.36466C10.9695 5.82973 10.5346 5.39453 10 5.39453Z" fill="currentColor"/>
                 <path d="M9.99998 8.78711C9.59833 8.78711 9.27271 9.11273 9.27271 9.51438V13.878C9.27271 14.2797 9.59833 14.6053 9.99998 14.6053C10.4016 14.6053 10.7273 14.2797 10.7273 13.878V9.51438C10.7273 9.11273 10.4016 8.78711 9.99998 8.78711Z" fill="currentColor"/>
@@ -139,15 +139,15 @@
       </div>
 
       <!-- Empty State (when no balances from backend) -->
-      <div v-else class="flex-1 flex items-center justify-center pb-24 sm:pb-28 md:pb-32 lg:pb-36">
+      <div v-else class="flex-1 flex items-center justify-center pb-8">
         <div class="text-center">
-          <div class="w-16 h-16 lg:w-24 lg:h-24 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4 lg:mb-6">
-            <svg width="32" height="32" viewBox="0 0 32 32" class="text-gray-400 lg:w-12 lg:h-12">
+          <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg width="32" height="32" viewBox="0 0 32 32" class="text-gray-400">
               <path d="M30.667 7.381V1.333H7.129V9.011H1.333V15.059H7.129V30.108H13.894V22.728H19.615V16.680H13.894V15.059H25.132V9.011H13.894V7.381H30.667Z" fill="currentColor"/>
             </svg>
           </div>
-          <h3 class="text-lg lg:text-2xl font-medium text-gray-900 mb-2 lg:mb-3">No Balances Found</h3>
-          <p class="text-gray-600 lg:text-lg mb-4 lg:mb-6">Your balance data will appear here when available.</p>
+          <h3 class="text-lg font-medium text-gray-900 mb-2">No Balances Found</h3>
+          <p class="text-gray-600 mb-4">Your balance data will appear here when available.</p>
         </div>
       </div>
     </main>
