@@ -359,275 +359,7 @@ const goBack = () => {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Mobile first approach for Telegram mini app */
-
-/* Very small mobile devices (≤374px) */
-@media (max-width: 374px) {
-  .w-full.max-w-md {
-    max-width: 100%;
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-
-  /* Bottom padding: BottomNav ~74px + safe area + extra spacing */
-  .overflow-y-auto {
-    padding-bottom: 100px !important;
-  }
-}
-
-/* Regular mobile devices (375px-430px) */
-@media (min-width: 375px) and (max-width: 430px) {
-  .w-full.max-w-md {
-    max-width: 100%;
-    padding-left: 14px;
-    padding-right: 14px;
-  }
-
-  /* Bottom padding: BottomNav ~78px + safe area + extra spacing */
-  .overflow-y-auto {
-    padding-bottom: 110px !important;
-  }
-
-  .text-4xl {
-    font-size: 28px;
-    line-height: 32px;
-  }
-
-  .text-3xl {
-    font-size: 24px;
-    line-height: 28px;
-  }
-
-  .text-2xl {
-    font-size: 18px;
-    line-height: 22px;
-  }
-
-  .text-xl {
-    font-size: 16px;
-    line-height: 20px;
-  }
-
-  .text-lg {
-    font-size: 14px;
-    line-height: 18px;
-  }
-
-  .text-sm {
-    font-size: 12px;
-    line-height: 16px;
-  }
-
-  /* Smaller padding for mobile */
-  .bg-dbd-light-blue {
-    padding: 12px !important;
-  }
-
-  /* Adjust card spacing */
-  .space-y-4 > * + * {
-    margin-top: 12px;
-  }
-
-  /* Tighter spacing for Available section on mobile */
-  .space-x-1 > * + * {
-    margin-left: 2px !important;
-  }
-
-  /* Even tighter for very small screens */
-  .bg-green-100 .flex.items-center {
-    gap: 2px;
-  }
-}
-
-/* Landscape orientation adjustments for mobile devices */
-@media (max-height: 500px) and (orientation: landscape) {
-  .w-full.max-w-md {
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-
-  .overflow-y-auto {
-    padding-bottom: 74px !important;
-  }
-}
-
-/* Fine-tuning for specific popular device sizes */
-
-/* iPhone SE and similar small phones */
-@media (min-width: 320px) and (max-width: 374px) and (min-height: 568px) {
-  .overflow-y-auto {
-    padding-bottom: 105px !important;
-  }
-}
-
-/* Standard iPhone sizes (iPhone 12 mini, iPhone 13 mini) */
-@media (min-width: 375px) and (max-width: 390px) and (min-height: 812px) {
-  .overflow-y-auto {
-    padding-bottom: 115px !important;
-  }
-}
-
-/* iPhone 12/13/14 Pro Max and similar large phones */
-@media (min-width: 414px) and (max-width: 430px) and (min-height: 896px) {
-  .overflow-y-auto {
-    padding-bottom: 120px !important;
-  }
-}
-
-/* iPad mini and similar tablets in portrait */
-@media (min-width: 744px) and (max-width: 768px) and (orientation: portrait) {
-  .overflow-y-auto {
-    padding-bottom: 145px !important;
-  }
-}
-
-/* iPad and similar tablets in portrait */
-@media (min-width: 768px) and (max-width: 834px) and (orientation: portrait) {
-  .overflow-y-auto {
-    padding-bottom: 155px !important;
-  }
-}
-
-/* Ultra-tight Available section spacing */
-.available-tight {
-  gap: 0 !important;
-}
-
-.available-dot {
-  margin-left: 6px;
-  margin-right: 6px;
-}
-
-.available-f-section {
-  gap: 2px;
-}
-
-/* Adjust spacing for larger screens */
-@media (min-width: 431px) and (max-width: 768px) {
-  .available-tight {
-    gap: 8px !important;
-  }
-
-  .available-dot {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
-
-  .available-f-section {
-    gap: 6px !important;
-  }
-}
-
-/* Mobile ultra-tight spacing */
-@media (max-width: 375px) {
-  .available-dot {
-    margin-left: 4px !important;
-    margin-right: 4px !important;
-  }
-
-  .available-f-section {
-    gap: 1px !important;
-  }
-}
-
-
-
-/* Large mobile and small tablets (431px-768px) */
-@media (min-width: 431px) and (max-width: 768px) {
-  .w-full.max-w-md {
-    max-width: 100%;
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-
-  .bg-dbd-light-blue {
-    padding: 24px;
-  }
-
-  .text-4xl {
-    font-size: 48px;
-    line-height: 52px;
-  }
-
-  .text-2xl {
-    font-size: 32px;
-    line-height: 38px;
-  }
-
-  .space-y-4 > * + * {
-    margin-top: 24px;
-  }
-
-  .bg-dbd-off-white {
-    padding: 20px;
-  }
-
-  /* Larger buttons for tablets */
-  button {
-    min-height: 52px;
-    min-width: 52px;
-  }
-
-  /* Bottom padding: BottomNav ~108px + safe area + extra spacing */
-  .overflow-y-auto {
-    padding-bottom: 140px !important;
-  }
-}
-
-/* Desktop and large tablets (≥769px) */
-@media (min-width: 769px) {
-  .w-full.max-w-md {
-    max-width: 100%;
-    padding-left: 48px;
-    padding-right: 48px;
-  }
-
-  .bg-dbd-light-blue {
-    padding: 32px;
-  }
-
-  .text-4xl {
-    font-size: 64px;
-    line-height: 72px;
-  }
-
-  .text-2xl {
-    font-size: 40px;
-    line-height: 48px;
-  }
-
-  .space-y-4 > * + * {
-    margin-top: 32px;
-  }
-
-  .bg-dbd-off-white {
-    padding: 32px;
-  }
-
-  /* Larger buttons for desktop */
-  button {
-    min-height: 64px;
-    min-width: 64px;
-  }
-
-  .available-tight {
-    gap: 12px !important;
-  }
-
-  .available-dot {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
-
-  .available-f-section {
-    gap: 8px !important;
-  }
-
-  /* Bottom padding: BottomNav ~130px + safe area + extra spacing */
-  .overflow-y-auto {
-    padding-bottom: 150px !important;
-  }
-}
+/* Basic styling without media queries */
 
 /* Telegram WebApp optimizations */
 .telegram-webapp {
@@ -653,13 +385,11 @@ const goBack = () => {
   z-index: 30;
 }
 
-/* Better touch targets for mobile */
-@media (max-width: 768px) {
-  button {
-    min-height: 44px;
-    min-width: 44px;
-    touch-action: manipulation;
-  }
+/* Better touch targets */
+button {
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation;
 }
 
 /* Loyality button enhancements */
@@ -672,15 +402,9 @@ const goBack = () => {
 }
 
 /* Telegram specific button improvements */
-@media (hover: none) {
-  .bg-dbd-orange:hover {
-    background-color: #FF6800 !important;
-  }
-
-  .bg-dbd-orange:active {
-    background-color: #e55a00;
-    transform: scale(0.95);
-  }
+.bg-dbd-orange:active {
+  background-color: #e55a00;
+  transform: scale(0.95);
 }
 
 /* Telegram mini app specific styles */
@@ -688,19 +412,5 @@ const goBack = () => {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* Optimize font sizes for mobile */
-@media (max-width: 375px) {
-  .text-2xl {
-    font-size: 20px;
-    line-height: 24px;
-  }
 
-  .text-lg {
-    font-size: 16px;
-  }
-
-  .text-sm {
-    font-size: 12px;
-  }
-}
 </style>
