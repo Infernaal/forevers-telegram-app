@@ -13,13 +13,12 @@
       <div class="w-[92%] max-w-[460px] sm:max-w-[500px] md:max-w-[560px] lg:max-w-[620px] xl:max-w-[680px]
                   h-[500px] sm:h-[600px] lg:h-[650px] max-h-[calc(100vh-120px)]
                   bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
-                  border border-[#09074E] backdrop-blur-[32px] 
-                  rounded-[20px] z-[55] overflow-hidden shadow-lg">
-        <!-- Тут твій контент -->
-      
-      <!-- Background -->
-      <div class="absolute inset-0 bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
-                  border border-[#09074E] backdrop-blur-[32px]"></div>
+                  border border-[#09074E] backdrop-blur-[32px]
+                  rounded-[20px] z-[55] overflow-hidden shadow-lg relative">
+
+        <!-- Background -->
+        <div class="absolute inset-0 bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
+                    border border-[#09074E] backdrop-blur-[32px]"></div>
 
       <!-- Profile Header Section -->
       <div class="absolute top-3 left-3 right-3 z-[2]">
@@ -338,6 +337,7 @@
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   </div>
