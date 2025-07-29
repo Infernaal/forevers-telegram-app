@@ -59,7 +59,9 @@
               :class="item.priceChange >= 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'"
             >
               <svg class="w-2 h-2 lg:w-6 lg:h-6" :class="item.priceChange >= 0 ? '-rotate-45' : 'rotate-45'" viewBox="0 0 10 13">
-                <path d="M0.720539 4.9362L4.6673 1.01033M4.6673 1.01033L8.58641 4.92944M4.6673 1.01033L4.65686 12.3136" :stroke="item.priceChange >= 0 ? '#07B80E' : '#FF1919'" />
+                <path d="M0.720539 4.9362L4.6673 1.01033M4.6673 1.01033L8.58641 4.92944M4.6673 1.01033L4.65686 12.3136"
+                      :stroke="item.priceChange >= 0 ? '#07B80E' : '#FF1919'"
+                      stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               {{ item.priceChange >= 0 ? '+' : '' }}{{ item.priceChange }}%
             </div>
