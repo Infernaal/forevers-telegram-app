@@ -22,14 +22,14 @@
 
         <button
           @click="handleRentOut"
-          class="w-full bg-gradient-to-r from-blue-700 to-purple-600 text-white font-bold py-3 px-12 rounded-full hover:from-blue-800 hover:to-purple-700 transition-all duration-200 text-sm"
+          class="w-full bg-gradient-to-r from-blue-700 to-purple-600 text-white font-bold py-3 lg:py-6 xl:py-8 px-12 lg:px-24 xl:px-32 rounded-full lg:rounded-2xl xl:rounded-3xl hover:from-blue-800 hover:to-purple-700 transition-all duration-200 text-sm lg:text-xl xl:text-2xl"
         >
           Rent Out Forevers
         </button>
       </div>
 
       <!-- Scroll Content -->
-      <div class="flex-1 overflow-y-auto pt-4 pb-24 space-y-4" v-if="balances.length > 0">
+      <div class="flex-1 overflow-y-auto pt-4 sm:pt-6 md:pt-8 lg:pt-10 xl:pt-12 pb-24 sm:pb-28 md:pb-32 lg:pb-36 xl:pb-40 space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10 xl:space-y-12" v-if="balances.length > 0">
         <div
           v-for="balance in balances"
           :key="balance.id"
