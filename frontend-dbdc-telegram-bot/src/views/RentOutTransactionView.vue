@@ -183,7 +183,7 @@
 
     <!-- Transaction Details Modal -->
     <div v-if="showTransactionModal" class="transaction-details-modal fixed inset-0 z-50 flex items-end md:items-end lg:items-center justify-center md:justify-stretch lg:justify-center bg-black bg-opacity-20 backdrop-blur-sm">
-      <div class="transaction-modal-container w-full max-w-md md:max-w-none lg:max-w-lg xl:max-w-xl bg-white rounded-t-3xl md:rounded-t-3xl lg:rounded-3xl xl:rounded-4xl shadow-xl animate-slide-up md:animate-slide-up lg:animate-none">
+    <div class="transaction-modal-container w-full max-w-none bg-red-100">
         <!-- Modal Header -->
         <div class="flex items-center justify-between p-4 lg:p-6 xl:p-8 border-b">
           <h2 class="text-base lg:text-lg xl:text-xl font-medium text-dbd-dark">Transaction Details</h2>
