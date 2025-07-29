@@ -243,11 +243,20 @@ const navigateTo = (tab) => {
 }
 
 const toggleProfile = () => {
+  console.log('Profile toggle clicked, current state:', isProfileMenuOpen.value)
   isProfileMenuOpen.value = !isProfileMenuOpen.value
+  console.log('Profile toggle new state:', isProfileMenuOpen.value)
+
+  // Telegram WebApp haptic feedback
+  if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.HapticFeedback) {
+    window.Telegram.WebApp.HapticFeedback.impactOccurred('medium')
+  }
 }
 
 const closeProfileMenu = () => {
+  console.log('Profile menu close requested')
   isProfileMenuOpen.value = false
+  console.log('Profile menu closed, state:', isProfileMenuOpen.value)
 }
 
 
@@ -264,7 +273,7 @@ const closeProfileMenu = () => {
   border-radius: 16px 16px 0 0;
   box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08), 0 -2px 6px rgba(0, 0, 0, 0.04);
   border-top: 1px solid rgba(0, 0, 0, 0.06);
-  z-index: 50;
+  z-index: 10000;
   
   /* Prevent scroll interference and rubber band effect */
   touch-action: none;

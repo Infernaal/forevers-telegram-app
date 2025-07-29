@@ -1,20 +1,22 @@
 <template>
-  <div v-if="isVisible" class="fixed inset-0 z-50 font-montserrat bg-black bg-opacity-10 backdrop-blur-xl">
+  <div v-if="isVisible" class="fixed font-montserrat bg-black bg-opacity-10 backdrop-blur-xl"
+       style="z-index: 9999; position: fixed; top: 0; left: 0; right: 0; bottom: 88px;">
     <!-- Dropdown Wrapper -->
     <div class="relative w-full flex justify-center items-start mt-56 sm:mt-64 md:mt-14 lg:mt-12 xl:mt-48">
       <!-- Dropdown Menu -->
       <div class="relative w-[92%] max-w-[460px] sm:max-w-[500px] md:max-w-[560px] lg:max-w-[620px] xl:max-w-[680px] max-h-[calc(100vh-140px)]
               h-[500px] sm:h-[580px] md:h-[600px]
               bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
-              border border-[#09074E] backdrop-blur-[32px] 
-              rounded-[20px] z-[50] overflow-hidden shadow-xl">
+              border border-[#09074E] backdrop-blur-[32px]
+              rounded-[20px] overflow-hidden shadow-xl"
+           style="z-index: 10000; position: relative;">
         <div class="p-4 text-white text-center">
             <!-- Background -->
             <div class="absolute inset-0 bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
                         border border-[#09074E] backdrop-blur-[32px]"></div>
 
           <!-- Profile Header Section -->
-          <div class="absolute top-3 left-3 right-3 z-[2]">
+          <div class="absolute top-3 left-3 right-3" style="z-index: 10001;">
             <div class="w-full h-24 bg-[rgba(96,95,135,0.24)] border border-[#D8D8D8] 
                         rounded-[1000px_20px_20px_1000px] 
                         flex items-center p-2 gap-3 overflow-hidden">
@@ -66,10 +68,11 @@
           </div>
 
           <!-- Menu Items -->
-          <div class="absolute top-[130px] bottom-[178px] left-3 right-3 z-[1] 
+          <div class="absolute top-[130px] bottom-[178px] left-3 right-3
                       overflow-y-auto overflow-x-hidden scrollbar-none
-                      [-webkit-overflow-scrolling:touch] [scroll-behavior:smooth] 
-                      [overscroll-behavior:contain] [overscroll-behavior-y:contain]">
+                      [-webkit-overflow-scrolling:touch] [scroll-behavior:smooth]
+                      [overscroll-behavior:contain] [overscroll-behavior-y:contain]"
+               style="z-index: 10001;">
             
             <!-- Calculator -->
             <div class="flex items-center gap-2 px-3 py-1.5 h-13 cursor-pointer
@@ -181,7 +184,7 @@
           </div>
 
           <!-- Start Section -->
-          <div class="absolute bottom-[86px] sm:bottom-[84px] left-3 right-3 z-[1]">
+          <div class="absolute bottom-[86px] sm:bottom-[84px] left-3 right-3" style="z-index: 10001;">
             <div class="w-full h-21 bg-[#F1E7FF] border border-[#DCCCF1] rounded-2xl 
                         flex flex-col justify-center p-2 relative overflow-hidden">
               <!-- Background gradient -->
@@ -237,8 +240,9 @@
           </div>
 
           <!-- Bottom Controls -->
-          <div class="absolute bottom-3 sm:bottom-2 left-3 right-3 z-[1] 
-                      flex justify-center items-center gap-5 h-11">
+          <div class="absolute bottom-3 sm:bottom-2 left-3 right-3
+                      flex justify-center items-center gap-5 h-11"
+               style="z-index: 10001;">
             
             <!-- ID Section -->
             <div class="w-[145px] h-11 bg-white bg-opacity-30 border border-white border-opacity-40
@@ -304,8 +308,9 @@
               </div>
 
               <!-- Language Dropdown -->
-              <div v-if="showLanguageDropdown" 
-                  class="absolute bottom-[50px] left-0 right-0 z-[1000] animate-[dropdownSlideUp_0.2s_ease-out]">
+              <div v-if="showLanguageDropdown"
+                  class="absolute bottom-[50px] left-0 right-0 animate-[dropdownSlideUp_0.2s_ease-out]"
+                  style="z-index: 10002;">
                 <div class="bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E] 
                             border border-white border-opacity-8 rounded-2xl 
                             backdrop-blur-[32px] p-2 max-h-[140px] overflow-y-auto 
@@ -334,7 +339,8 @@
         </div>
       </div>
       <!-- Triangle (ниже dropdown'а) -->
-      <div class="absolute top-full -mt-1 left-[8%] sm:left-[13%] md:left-[15%] lg:left-[17%] z-[60]">
+      <div class="absolute top-full -mt-1 left-[8%] sm:left-[13%] md:left-[15%] lg:left-[17%]"
+           style="z-index: 9998;">
         <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px]
                 border-l-transparent border-r-transparent 
                 border-t-[rgba(18,11,129,0.95)] drop-shadow-md"></div>
@@ -344,11 +350,11 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import CountryFlag from './CountryFlag.vue'
 
 // Props
-defineProps({
+const props = defineProps({
   isVisible: {
     type: Boolean,
     default: false
@@ -380,14 +386,39 @@ const languages = ref([
 
 const selectedLanguage = ref(languages.value[0])
 
+// Debug and Telegram WebApp detection
+onMounted(() => {
+  console.log('ProfileOverlay mounted')
+  console.log('Telegram WebApp available:', !!(window.Telegram && window.Telegram.WebApp))
+  console.log('Window Telegram object:', window.Telegram)
+})
+
+// Watch isVisible prop for debugging
+watch(() => props.isVisible, (newValue, oldValue) => {
+  console.log('ProfileOverlay visibility changed:', { from: oldValue, to: newValue })
+  console.log('ProfileOverlay element should be:', newValue ? 'visible' : 'hidden')
+}, { immediate: true })
+
 // Methods
 const handleMenuClick = (menuItem) => {
   console.log(`Menu clicked: ${menuItem}`)
+
+  // Telegram WebApp haptic feedback
+  if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.HapticFeedback) {
+    window.Telegram.WebApp.HapticFeedback.impactOccurred('light')
+  }
+
   // Handle menu navigation
 }
 
 const handleUpgrade = () => {
   console.log('Upgrade clicked')
+
+  // Telegram WebApp haptic feedback
+  if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.HapticFeedback) {
+    window.Telegram.WebApp.HapticFeedback.impactOccurred('medium')
+  }
+
   // Handle upgrade
 }
 
@@ -442,6 +473,12 @@ const toggleLanguageDropdown = () => {
 const selectLanguage = (language) => {
   selectedLanguage.value = language
   showLanguageDropdown.value = false
+
+  // Telegram WebApp haptic feedback
+  if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.HapticFeedback) {
+    window.Telegram.WebApp.HapticFeedback.selectionChanged()
+  }
+
   console.log('Language selected:', language)
 }
 </script>
@@ -580,7 +617,7 @@ const selectLanguage = (language) => {
 }
 
 /* Fade in animation for overlay */
-.fixed.inset-0.z-50 {
+.fixed.inset-0 {
   animation: fadeIn 0.3s ease-out;
 }
 
@@ -591,5 +628,28 @@ const selectLanguage = (language) => {
   to {
     opacity: 1;
   }
+}
+
+/* Telegram WebApp specific fixes */
+.telegram-webapp-container .fixed {
+  position: fixed !important;
+  z-index: 9999 !important;
+}
+
+/* Ensure ProfileOverlay is above Telegram's native elements */
+@supports (-webkit-touch-callout: none) {
+  .fixed.inset-0 {
+    position: fixed !important;
+    z-index: 99999 !important;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+}
+
+/* Prevent scroll interference in Telegram WebApp */
+.fixed.inset-0 {
+  touch-action: none;
+  -webkit-overflow-scrolling: auto;
+  overscroll-behavior: none;
 }
 </style>
