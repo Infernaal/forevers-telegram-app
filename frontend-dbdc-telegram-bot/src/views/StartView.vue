@@ -104,6 +104,8 @@ onMounted(() => {
 
 /* Container and layout */
 .start-view-container {
+  width: 100%;
+  margin: 0 auto;
   min-height: 100vh;
   min-height: 100dvh; /* Dynamic viewport height */
   background: white;
@@ -113,7 +115,14 @@ onMounted(() => {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  overflow-y: auto;
   overscroll-behavior: none;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.start-view-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
 }
 
 .main-content {
@@ -279,6 +288,9 @@ onMounted(() => {
 
 /* Small mobile devices (iPhone SE, small Android) - ≤374px */
 @media (max-width: 374px) {
+  .start-view-container {
+    max-width: 100%;
+  }
   .main-content {
     padding: 16px 12px;
   }
@@ -347,6 +359,9 @@ onMounted(() => {
 
 /* Regular mobile devices (iPhone 12, 13, 14) - 375px to 430px */
 @media (min-width: 375px) and (max-width: 430px) {
+  .start-view-container {
+    max-width: 100%;
+  }
   .main-content {
     padding: 18px 16px;
   }
@@ -415,6 +430,9 @@ onMounted(() => {
 
 /* Large mobile and small tablets - 431px to 768px */
 @media (min-width: 431px) and (max-width: 768px) {
+  .start-view-container {
+    width: 100%;
+  }
   .main-content {
     padding: 24px 20px;
   }
@@ -487,7 +505,6 @@ onMounted(() => {
   .start-view-container {
     width: 100%;
     margin: 0;
-    overflow: hidden;
   }
   
   .main-content {
