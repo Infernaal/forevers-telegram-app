@@ -531,55 +531,7 @@ const selectLanguage = (language) => {
 
 
 
-/* Responsive adaptations for different screen heights */
-@media (max-height: 667px) {
-  .safe-area-inset-bottom-calc {
-    bottom: calc(100px + env(safe-area-inset-bottom, 0px));
-  }
-  
-  .safe-area-inset-calc {
-    bottom: calc(110px + env(safe-area-inset-bottom, 0px));
-    height: calc(500px - env(safe-area-inset-bottom, 0px));
-  }
-}
 
-@media (max-height: 568px) {
-  .safe-area-inset-bottom-calc {
-    bottom: calc(95px + env(safe-area-inset-bottom, 0px));
-  }
-  
-  .safe-area-inset-calc {
-    bottom: calc(105px + env(safe-area-inset-bottom, 0px));
-    height: calc(450px - env(safe-area-inset-bottom, 0px));
-  }
-}
-
-@media (orientation: landscape) and (max-height: 500px) {
-  .safe-area-inset-bottom-calc {
-    bottom: calc(85px + env(safe-area-inset-bottom, 0px));
-  }
-  
-  .safe-area-inset-calc {
-    bottom: calc(95px + env(safe-area-inset-bottom, 0px));
-    height: calc(350px - env(safe-area-inset-bottom, 0px));
-  }
-}
-
-/* Fine-tune small screens */
-@media (max-width: 375px) {
-  .safe-area-inset-bottom-calc {
-    bottom: calc(105px + env(safe-area-inset-bottom, 0px));
-    left: 7.5rem;
-  }
-  
-  .safe-area-inset-calc {
-    left: 1rem;
-    right: 1rem;
-    bottom: calc(115px + env(safe-area-inset-bottom, 0px));
-    height: calc(560px - env(safe-area-inset-bottom, 0px));
-    max-height: calc(100vh - 120px - env(safe-area-inset-bottom, 0px));
-  }
-}
 
 /* Fade in animation for overlay */
 .fixed.inset-0.z-50 {
