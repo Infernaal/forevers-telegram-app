@@ -524,6 +524,17 @@ const selectLanguage = (language) => {
   display: none;
 }
 
+/* Tablet specific positioning */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .tablet-triangle-position {
+    bottom: 20rem !important;
+  }
+
+  .tablet-dropdown-position {
+    bottom: 7rem !important;
+  }
+}
+
 /* Height utilities */
 .h-13 {
   height: 3.25rem;
