@@ -254,7 +254,9 @@ const toggleProfile = () => {
 }
 
 const closeProfileMenu = () => {
+  console.log('Profile menu close requested')
   isProfileMenuOpen.value = false
+  console.log('Profile menu closed, state:', isProfileMenuOpen.value)
 }
 
 
