@@ -600,14 +600,15 @@ onBeforeUnmount(() => {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Hide scrollbar completely */
+/* Global scrollbar hiding and Telegram optimizations */
 ::-webkit-scrollbar {
-  width: 0px;
-  background: transparent;
+  width: 0;
 }
 
-::-webkit-scrollbar-thumb {
-  background: transparent;
+* {
+  -webkit-tap-highlight-color: transparent;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 /* Hide scrollbar in Firefox */
