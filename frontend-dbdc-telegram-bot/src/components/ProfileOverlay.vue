@@ -3,11 +3,11 @@
     <!-- Dropdown Wrapper -->
     <div class="relative w-full flex justify-center items-start pt-20 sm:pt-24 md:pt-28 lg:pt-32 xl:pt-36">
       <!-- Dropdown Menu -->
-      <div class="relative w-screen w-[92%] max-w-[460px] sm:max-w-[500px] md:max-w-[560px] lg:max-w-[620px] xl:max-w-[680px]
-                  h-[500px] sm:h-[600px] lg:h-[650px] max-h-[calc(100vh-140px)]
-                  bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
-                  border border-[#09074E] backdrop-blur-[32px] 
-                  rounded-[20px] z-[50] overflow-hidden shadow-lg">
+      <div class="relative w-screen px-4 sm:px-6 md:px-8 max-h-[calc(100vh-140px)]
+              h-[500px] sm:h-[580px] md:h-[600px]
+              bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
+              border border-[#09074E] backdrop-blur-[32px] 
+              rounded-[20px] z-[50] overflow-hidden shadow-xl">
         <div class="p-4 text-white text-center">
             <!-- Background -->
             <div class="absolute inset-0 bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
