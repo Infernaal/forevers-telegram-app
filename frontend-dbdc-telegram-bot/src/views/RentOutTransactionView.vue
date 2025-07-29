@@ -1,16 +1,16 @@
 <template>
-  <div class="rent-out-transaction-view w-full max-w-md lg:max-w-6xl xl:max-w-7xl mx-auto bg-gray-100 min-h-screen relative">
+  <div class="rent-out-transaction-view w-full mx-auto bg-gray-100 min-h-screen relative">
     <!-- Header Section -->
     <div class="header-section sticky top-0 bg-gray-100 z-40 pb-2">
       <!-- Status Bar Spacing -->
       <div class="h-12"></div>
       
       <!-- Header Content -->
-      <div class="flex justify-between items-center px-4 lg:px-12 xl:px-16 py-3 lg:py-6 xl:py-8">
+      <div class="flex justify-between items-center px-4 py-3">
         <!-- Close Button -->
         <button
           @click="goBack"
-          class="w-11 h-11 lg:w-16 lg:h-16 xl:w-20 xl:h-20 flex items-center justify-center rounded-full bg-dbd-off-white border border-gray-200 hover:bg-gray-100 transition-colors"
+          class="w-11 h-11 flex items-center justify-center rounded-full bg-dbd-off-white border border-gray-200 hover:bg-gray-100 transition-colors"
         >
           <div class="w-5 h-5 relative">
             <div class="absolute w-4 h-0.5 bg-dbd-dark rounded-full rotate-45 top-2.5 left-0.5"></div>
@@ -20,7 +20,7 @@
 
         <!-- Title -->
         <div class="flex-1 text-center">
-          <h1 class="text-2xl lg:text-5xl xl:text-6xl font-semibold text-dbd-dark leading-tight">
+          <h1 class="text-2xl font-semibold text-dbd-dark leading-tight">
             Rented Out<br>History
           </h1>
         </div>
@@ -31,14 +31,14 @@
             @click="toggleExportMenu"
             :disabled="selectedTransactions.length === 0"
             :class="[
-              'export-btn w-32 lg:w-48 xl:w-56 h-13 lg:h-20 xl:h-24 flex items-center justify-center gap-3 lg:gap-4 xl:gap-5 rounded-full px-4 lg:px-6 xl:px-8 py-2.5 lg:py-4 xl:py-5 transition-colors',
+              'export-btn w-32 h-13 flex items-center justify-center gap-3 rounded-full px-4 py-2.5 transition-colors',
               selectedTransactions.length === 0
                 ? 'bg-gray-300 border border-gray-300 cursor-not-allowed'
                 : 'bg-white border border-gray-200 hover:bg-gray-50'
             ]"
           >
-            <span :class="selectedTransactions.length === 0 ? 'text-gray-500' : 'text-dbd-gray'" class="font-medium text-sm lg:text-lg xl:text-xl">Export</span>
-            <svg width="32" height="32" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg" class="lg:w-10 lg:h-10 xl:w-12 xl:h-12">
+            <span :class="selectedTransactions.length === 0 ? 'text-gray-500' : 'text-dbd-gray'" class="font-medium text-sm">Export</span>
+            <svg width="32" height="32" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M24.4294 12.4709H20.4441V14.7762H24.4294C25.6145 14.7762 26.5339 15.3663 26.5339 15.8742V26.0964C26.5339 26.6043 25.6145 27.1945 24.4294 27.1945H9.3657C8.18061 27.1945 7.26115 26.6043 7.26115 26.0964V15.8746C7.26115 15.3667 8.18061 14.7766 9.3657 14.7766H13.3502V12.4713H9.3657C6.85955 12.4713 4.89648 13.9663 4.89648 15.8746V26.0968C4.89648 28.0055 6.85955 29.5001 9.3657 29.5001H24.4298C26.9355 29.5001 28.899 28.0051 28.899 26.0968V15.8746C28.8986 13.9659 26.9355 12.4709 24.4294 12.4709Z" fill="#FF6800"/>
               <path d="M13.3976 9.24579C13.7002 9.24579 14.0025 9.13322 14.2335 8.90807L15.7138 7.465V12.4704V14.7757V19.1917C15.7138 19.8283 16.243 20.3443 16.8961 20.3443C17.5491 20.3443 18.0784 19.8283 18.0784 19.1917V14.7757V12.4704V7.387L19.6387 8.90807C19.8696 9.13322 20.1723 9.24579 20.4746 9.24579C20.7769 9.24579 21.0796 9.13322 21.3105 8.90807C21.7724 8.45817 21.7724 7.72818 21.3105 7.27827L17.7805 3.83695C17.5495 3.6118 17.2472 3.5 16.945 3.5C16.9418 3.5 16.939 3.5 16.9359 3.5C16.9327 3.5 16.93 3.5 16.9268 3.5C16.6245 3.5 16.3223 3.6118 16.0913 3.83695L12.5613 7.27827C12.0994 7.72818 12.0994 8.45817 12.5613 8.90807C12.7926 9.13322 13.0949 9.24579 13.3976 9.24579Z" fill="#FF6800"/>
             </svg>
@@ -86,13 +86,13 @@
     </div>
 
     <!-- Content Container -->
-    <div class="content-container bg-gray-100 pb-32 sm:pb-36 md:pb-40 lg:pb-44 xl:pb-52 px-4 lg:px-12 xl:px-16">
+    <div class="content-container bg-gray-100 pb-32 px-4">
       <!-- Empty State -->
       <div v-if="transactions.length === 0" class="empty-state flex flex-col items-center justify-center text-center" style="min-height: calc(100vh - 200px);">
-        <h2 class="text-xl lg:text-4xl xl:text-5xl font-bold text-dbd-dark mb-4 lg:mb-8 xl:mb-12 leading-tight max-w-60 lg:max-w-none">
+        <h2 class="text-xl font-bold text-dbd-dark mb-4 leading-tight max-w-60">
           No deals<br>have been opened yet.
         </h2>
-        <p class="text-base lg:text-2xl xl:text-3xl font-medium text-dbd-gray leading-relaxed max-w-72 lg:max-w-none">
+        <p class="text-base font-medium text-dbd-gray leading-relaxed max-w-72">
           All the transaction will be displayed inside this table after you make one.
         </p>
       </div>
