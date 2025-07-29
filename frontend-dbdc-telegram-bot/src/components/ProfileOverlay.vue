@@ -1,21 +1,22 @@
 <template>
   <div v-if="isVisible" class="fixed inset-0 z-50 font-montserrat bg-black bg-opacity-10 backdrop-blur-xl">
-    <!-- Triangle Pointer + Dropdown Wrapper -->
+    <!-- Dropdown Wrapper -->
     <div class="relative w-full flex justify-center items-end pb-28 sm:pb-36 md:pb-40 lg:pb-44 xl:pb-48">
-      <!-- Triangle -->
-      <div class="absolute bottom-full mb-[-12px] left-1/2 transform -translate-x-1/2 z-[65]">
-        <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px]
-                    border-l-transparent border-r-transparent 
-                    border-t-[rgba(18,11,129,0.95)] drop-shadow-md"></div>
-      </div>
-
-      <!-- Profile Dropdown Menu -->
-      <div class="w-[92%] max-w-[460px] sm:max-w-[500px] md:max-w-[560px] lg:max-w-[620px] xl:max-w-[680px]
+      <!-- Dropdown -->
+      <div class="relative w-[92%] max-w-[460px] sm:max-w-[500px] md:max-w-[560px] lg:max-w-[620px] xl:max-w-[680px]
                   h-[500px] sm:h-[600px] lg:h-[650px] max-h-[calc(100vh-120px)]
                   bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
-                  border border-[#09074E] backdrop-blur-[32px]
-                  rounded-[20px] z-[55] overflow-hidden shadow-lg relative">
+                  border border-[#09074E] backdrop-blur-[32px] 
+                  rounded-[20px] z-[55] overflow-hidden shadow-lg">
 
+        <!-- Triangle (нижний "хвостик", указывающий на профиль) -->
+        <div class="absolute top-full mt-[-7px] left-[2.25rem] sm:left-[3.75rem] md:left-[4.5rem] lg:left-[6rem] z-[65]">
+          <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-b-[15px]
+                      border-l-transparent border-r-transparent 
+                      border-b-[rgba(18,11,129,0.95)] drop-shadow-md"></div>
+        </div>
+        <!-- Контент меню -->
+        <div class="p-4 text-white text-center">
         <!-- Background -->
         <div class="absolute inset-0 bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
                     border border-[#09074E] backdrop-blur-[32px]"></div>
