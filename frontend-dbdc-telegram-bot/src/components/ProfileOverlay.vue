@@ -2,13 +2,13 @@
   <div v-if="isVisible" class="fixed inset-0 z-50 font-montserrat bg-black bg-opacity-10 backdrop-blur-xl">
     <!-- Triangle Pointer -->
     <div class="absolute
-                left-[1.5rem] max-[360px]:left-[1.25rem] max-[375px]:left-[1.75rem] max-[414px]:left-[2rem]
-                sm:left-[5rem] md:left-[5.25rem] lg:left-[8.5rem] xl:left-[10.5rem]
+      left-[1.5rem] max-[360px]:left-[1.25rem] max-[375px]:left-[1.75rem] max-[414px]:left-[2rem]
+      sm:left-[5rem] md:left-[5.25rem] max-[1023px]:left-[6.25rem] lg:left-[8.5rem] max-[1279px]:left-[9.5rem] xl:left-[10.5rem]
 
-                bottom-[88px] max-[360px]:bottom-[78px] max-[375px]:bottom-[90px] max-[414px]:bottom-[95px]
-                sm:bottom-[130px] md:bottom-[140px] lg:bottom-[153px] xl:bottom-[175px]
+      bottom-[88px] max-[360px]:bottom-[78px] max-[375px]:bottom-[90px] max-[414px]:bottom-[95px]
+      sm:bottom-[130px] md:bottom-[140px] max-[1023px]:bottom-[148px] lg:bottom-[153px] max-[1279px]:bottom-[165px] xl:bottom-[175px]
 
-                z-[65] transition-all duration-300">
+      z-[65] transition-all duration-300">
       <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px] 
                   border-l-transparent border-r-transparent 
                   border-t-[rgba(18,11,129,0.95)] 
@@ -17,20 +17,21 @@
 
     <!-- Profile Dropdown Menu -->
     <div class="absolute
-                left-2 right-2 max-[375px]:left-[0.75rem] max-[375px]:right-[0.75rem]
-                sm:left-3 sm:right-3 md:left-4 md:right-4 lg:left-8 lg:right-8 xl:left-10 xl:right-10
+      left-2 right-2 max-[375px]:left-[0.75rem] max-[375px]:right-[0.75rem]
+      sm:left-3 sm:right-3 md:left-4 md:right-4 max-[1023px]:left-6 max-[1023px]:right-6 lg:left-8 lg:right-8 max-[1279px]:left-9 max-[1279px]:right-9 xl:left-10 xl:right-10
 
-                bottom-[98px] max-[360px]:bottom-[88px] max-[375px]:bottom-[100px] max-[414px]:bottom-[105px]
-                sm:bottom-[140px] md:bottom-[150px] lg:bottom-[163px] xl:bottom-[160px]
+      bottom-[98px] max-[360px]:bottom-[88px] max-[375px]:bottom-[100px] max-[414px]:bottom-[105px]
+      sm:bottom-[140px] md:bottom-[150px] max-[1023px]:bottom-[158px] lg:bottom-[163px] max-[1279px]:bottom-[170px] xl:bottom-[160px]
 
-                h-[500px] max-[360px]:h-[470px] max-[375px]:h-[490px] max-[414px]:h-[500px]
-                sm:h-[570px] md:h-[600px] lg:h-[700px] xl:h-[450px]
+      h-[500px] max-[360px]:h-[470px] max-[375px]:h-[490px] max-[414px]:h-[500px]
+      sm:h-[570px] md:h-[600px] max-[1023px]:h-[630px] lg:h-[700px] max-[1279px]:h-[600px] xl:h-[450px]
 
-                max-h-[calc(100vh-100px)] max-[360px]:max-h-[calc(100vh-90px)] max-[375px]:max-h-[calc(100vh-100px)] max-[414px]:max-h-[calc(100vh-110px)]
-                sm:max-h-[calc(100vh-150px)] md:max-h-[calc(100vh-315px)] lg:max-h-[calc(100vh-210px)] xl:max-h-[calc(100vh-200px)]
+      max-h-[calc(100vh-100px)] max-[360px]:max-h-[calc(100vh-90px)] max-[375px]:max-h-[calc(100vh-100px)] max-[414px]:max-h-[calc(100vh-110px)]
+      sm:max-h-[calc(100vh-150px)] md:max-h-[calc(100vh-315px)] max-[1023px]:max-h-[calc(100vh-280px)] lg:max-h-[calc(100vh-210px)] max-[1279px]:max-h-[calc(100vh-220px)] xl:max-h-[calc(100vh-200px)]
 
-                rounded-[20px] overflow-hidden z-[55] transition-all duration-300"
-        @click.stop>
+      rounded-[20px] overflow-hidden z-[55] transition-all duration-300"
+      @click.stop>
+
 
       
       <!-- Background -->
