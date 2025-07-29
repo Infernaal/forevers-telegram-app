@@ -98,35 +98,35 @@
       </div>
 
       <!-- Scrollable Transaction List -->
-      <div v-else class="transaction-list space-y-2 lg:space-y-4 xl:space-y-6 pt-4 lg:pt-8 xl:pt-12">
+      <div v-else class="transaction-list space-y-2 pt-4">
         <!-- Transaction Cards -->
         <div
           v-for="(transaction, index) in transactions"
           :key="index"
-          class="transaction-card bg-dbd-off-white rounded-3xl lg:rounded-4xl xl:rounded-5xl border border-gray-200 p-3 lg:p-6 xl:p-8 cursor-pointer hover:bg-gray-50 transition-colors"
+          class="transaction-card bg-dbd-off-white rounded-3xl border border-gray-200 p-3 cursor-pointer hover:bg-gray-50 transition-colors">
           @click="openTransactionDetails(transaction, index)"
         >
           <!-- Date and Time Row -->
-          <div class="flex justify-between items-center mb-4 lg:mb-6 xl:mb-8">
-            <div class="flex items-center gap-2 lg:gap-4 xl:gap-6">
+          <div class="flex justify-between items-center mb-4">
+            <div class="flex items-center gap-2">
               <!-- Checkbox -->
               <div
                 @click.stop="toggleTransactionSelection(index)"
                 :class="[
-                  'w-6 h-6 lg:w-10 lg:h-10 xl:w-12 xl:h-12 border-2 lg:border-4 xl:border-4 rounded flex items-center justify-center cursor-pointer transition-colors',
+                  'w-6 h-6 border-2 rounded flex items-center justify-center cursor-pointer transition-colors',
                   selectedTransactions.includes(index)
                     ? 'bg-green-500 border-green-500'
                     : 'border-gray-400 bg-dbd-off-white hover:border-gray-500'
                 ]"
               >
-                <svg v-if="selectedTransactions.includes(index)" width="14" height="10" viewBox="0 0 14 10" fill="none" class="lg:w-6 lg:h-5 xl:w-8 xl:h-6">
+                <svg v-if="selectedTransactions.includes(index)" width="14" height="10" viewBox="0 0 14 10" fill="none">
                   <path d="M1 5L5 9L13 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
-              
+
               <!-- Calendar Icon -->
-              <div class="w-10 h-10 lg:w-16 lg:h-16 xl:w-20 xl:h-20 bg-dbd-light-orange rounded-full flex items-center justify-center">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="lg:w-8 lg:h-8 xl:w-10 xl:h-10">
+              <div class="w-10 h-10 bg-dbd-light-orange rounded-full flex items-center justify-center">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M14.0615 9.1875C14.4067 9.1875 14.6865 8.90768 14.6865 8.5625C14.6865 8.21732 14.4067 7.9375 14.0615 7.9375C13.7163 7.9375 13.4365 8.21732 13.4365 8.5625C13.4365 8.90768 13.7163 9.1875 14.0615 9.1875Z" fill="#4B4D50"/>
                   <path d="M15.499 3.25H14.6865V2.625C14.6865 2.27981 14.4067 2 14.0615 2C13.7163 2 13.4365 2.27981 13.4365 2.625V3.25H10.5928V2.625C10.5928 2.27981 10.313 2 9.96777 2C9.62259 2 9.34277 2.27981 9.34277 2.625V3.25H6.53027V2.625C6.53027 2.27981 6.25046 2 5.90527 2C5.56009 2 5.28027 2.27981 5.28027 2.625V3.25H4.49902C3.12052 3.25 1.99902 4.3715 1.99902 5.75V15.5C1.99902 16.8785 3.12052 18 4.49902 18H9.28027C9.62546 18 9.90527 17.7202 9.90527 17.375C9.90527 17.0298 9.62546 16.75 9.28027 16.75H4.49902C3.80977 16.75 3.24902 16.1892 3.24902 15.5V5.75C3.24902 5.06075 3.80977 4.5 4.49902 4.5H5.28027V5.125C5.28027 5.47019 5.56009 5.75 5.90527 5.75C6.25046 5.75 6.53027 5.47019 6.53027 5.125V4.5H9.34277V5.125C9.34277 5.47019 9.62259 5.75 9.96777 5.75C10.313 5.75 10.5928 5.47019 10.5928 5.125V4.5H13.4365V5.125C13.4365 5.47019 13.7163 5.75 14.0615 5.75C14.4067 5.75 14.6865 5.47019 14.6865 5.125V4.5H15.499C16.1883 4.5 16.749 5.06075 16.749 5.75V9.3125C16.749 9.65769 17.0288 9.9375 17.374 9.9375C17.7192 9.9375 17.999 9.65769 17.999 9.3125V5.75C17.999 4.3715 16.8775 3.25 15.499 3.25Z" fill="#4B4D50"/>
                   <path d="M14.2178 10.4375C12.1328 10.4375 10.4365 12.1337 10.4365 14.2188C10.4365 16.3038 12.1328 18 14.2178 18C16.3028 18 17.999 16.3038 17.999 14.2188C17.999 12.1337 16.3028 10.4375 14.2178 10.4375ZM14.2178 16.75C12.8221 16.75 11.6865 15.6145 11.6865 14.2188C11.6865 12.823 12.8221 11.6875 14.2178 11.6875C15.6135 11.6875 16.749 12.823 16.749 14.2188C16.749 15.6145 15.6135 16.75 14.2178 16.75Z" fill="#4B4D50"/>
