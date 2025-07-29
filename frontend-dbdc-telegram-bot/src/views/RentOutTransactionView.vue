@@ -103,7 +103,7 @@
         <div
           v-for="(transaction, index) in transactions"
           :key="index"
-          class="transaction-card bg-dbd-off-white rounded-3xl border border-gray-200 p-3 cursor-pointer hover:bg-gray-50 transition-colors">
+          class="transaction-card bg-dbd-off-white rounded-3xl border border-gray-200 p-3 cursor-pointer hover:bg-gray-50 transition-colors"
           @click="openTransactionDetails(transaction, index)"
         >
           <!-- Date and Time Row -->
