@@ -14,7 +14,7 @@
               <svg width="32" height="32" viewBox="0 0 32 32" class="text-blue-700 lg:w-12 lg:h-12">
                 <path d="M30.667 7.381V1.333H7.129V9.011H1.333V15.059H7.129V30.108H13.894V22.728H19.615V16.680H13.894V15.059H25.132V9.011H13.894V7.381H30.667Z" fill="currentColor"/>
               </svg>
-              <span class="text-3xl lg:text-6xl xl:text-7xl font-bold text-blue-700">{{ totalBalance.toLocaleString() }}</span>
+              <span class="text-3xl lg:text-5xl font-bold text-blue-700">{{ totalBalance.toLocaleString() }}</span>
             </div>
             <p class="text-lg lg:text-2xl xl:text-3xl text-gray-600 font-medium">Worth ${{ totalWorth.toLocaleString() }}</p>
           </div>
