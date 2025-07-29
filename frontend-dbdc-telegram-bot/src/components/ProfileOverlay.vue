@@ -334,7 +334,7 @@
         </div>
       </div>
       <!-- Triangle (ниже dropdown'а) -->
-      <div class="absolute top-full mt-4 left-[11%] sm:left-[13%] md:left-[15%] lg:left-[17%] z-[60]">
+      <div class="absolute top-full mt-6 left-[11%] sm:left-[13%] md:left-[15%] lg:left-[17%] z-[60]">
         <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px]
                 border-l-transparent border-r-transparent 
                 border-t-[rgba(18,11,129,0.95)] drop-shadow-md"></div>
