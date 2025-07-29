@@ -20,7 +20,7 @@
                 max-h-[calc(100vh-150px)] sm:max-h-[calc(100vh-170px)] md:max-h-[calc(100vh-315px)] lg:max-h-[calc(100vh-210px)] xl:max-h-[calc(100vh-200px)]
                 max-[375px]:left-4 max-[375px]:right-4 max-[375px]:bottom-[135px] max-[375px]:h-[580px] max-[375px]:max-h-[calc(100vh-140px)]
                 max-[667px]:bottom-[130px] max-[667px]:h-[520px]
-                max-[568px]:bottom-[115px] max-[568px]:h-[470px]
+                max-[568px]:bottom-[120px] max-[568px]:h-[470px]
                 landscape:max-[500px]:bottom-[115px] landscape:max-[500px]:h-[370px]
                 rounded-[20px] overflow-hidden z-[55] transition-all duration-300" 
          @click.stop>
