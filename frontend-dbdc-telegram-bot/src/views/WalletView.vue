@@ -38,7 +38,7 @@
 
         <button
           @click="navigateToTransactions"
-          class="w-full bg-dbd-orange hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-xl transition-colors text-center"
+          class="w-full bg-dbd-primary hover:bg-primary-600 text-white font-bold py-2 px-4 rounded-xl transition-colors text-center"
         >
           Rent Out History
         </button>
