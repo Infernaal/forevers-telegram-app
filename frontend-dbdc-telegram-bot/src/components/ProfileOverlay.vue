@@ -3,7 +3,7 @@
     <!-- Triangle Pointer -->
     <div class="absolute 
                 left-6 sm:left-[3.25rem] md:left-[5.25rem] lg:left-[8.5rem] xl:left-[10.5rem]
-                bottom-[83px] sm:bottom-[110px] md:bottom-[260px] lg:bottom-[180px] xl:bottom-[170px]
+                bottom-[82px] sm:bottom-[110px] md:bottom-[260px] lg:bottom-[180px] xl:bottom-[170px]
                 z-[65] transition-all duration-300">
       <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px] 
                   border-l-transparent border-r-transparent 
