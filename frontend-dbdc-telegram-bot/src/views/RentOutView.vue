@@ -3,18 +3,18 @@
     <!-- Header Section -->
     <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-6 sm:pt-8 md:pt-10 lg:pt-12 xl:pt-16 pb-3 sm:pb-4 md:pb-5 lg:pb-6 xl:pb-8 bg-gray-100 z-30">
       <div class="mb-2">
-        <div class="bg-dbd-light-blue border border-purple-200 rounded-2xl lg:rounded-4xl p-4 lg:p-12">
+        <div class="bg-dbd-light-blue border border-purple-200 rounded-2xl sm:rounded-3xl md:rounded-3xl lg:rounded-4xl xl:rounded-4xl p-4 sm:p-6 md:p-8 lg:p-12 xl:p-16">
           <div class="flex items-center justify-between">
             <div>
-              <h2 class="text-2xl lg:text-6xl font-semibold text-dbd-dark leading-tight mb-1 lg:mb-4">
+              <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl font-semibold text-dbd-dark leading-tight mb-1 sm:mb-2 md:mb-3 lg:mb-4 xl:mb-6">
                 Forevers<br />Available
               </h2>
             </div>
-            <div class="flex items-center gap-3 lg:gap-8">
-              <svg class="text-dbd-primary w-9 h-9 lg:w-20 lg:h-20" viewBox="0 0 32 32">
+            <div class="flex items-center gap-3 sm:gap-4 md:gap-6 lg:gap-8 xl:gap-10">
+              <svg class="text-dbd-primary w-9 h-9 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24" viewBox="0 0 32 32">
                 <path d="M30.6666 7.38069V1.33325H7.1291V9.01136H1.33325V15.0588H7.1291V30.1075H13.894V22.7276H19.6153V16.6801H13.894V15.0588H25.1316V9.01136H13.894V7.38069H30.6666Z" fill="currentColor"/>
               </svg>
-              <span class="text-4xl lg:text-8xl font-bold text-dbd-primary">2,225</span>
+              <span class="text-4xl sm:text-5xl md:text-6xl lg:text-8xl xl:text-9xl font-bold text-dbd-primary">2,225</span>
             </div>
           </div>
         </div>
@@ -22,8 +22,8 @@
     </div>
 
     <!-- Scrollable Cards -->
-    <div class="flex-1 w-full max-w-7xl mx-auto overflow-y-auto px-4 lg:px-12 pb-24 lg:pb-40">
-      <div class="space-y-4 lg:space-y-8">
+    <div class="flex-1 w-full max-w-7xl mx-auto overflow-y-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pb-24 sm:pb-28 md:pb-32 lg:pb-40 xl:pb-48">
+      <div class="space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-8 xl:space-y-10">
         <div 
           v-for="item in foreversList" 
           :key="item.id"
