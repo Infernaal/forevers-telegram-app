@@ -111,16 +111,16 @@
             <div class="flex items-center gap-2 lg:gap-3">
               <span class="text-sm lg:text-base text-gray-600 font-medium">Available</span>
               <template v-if="balance.availableAmount">
-                <span class="w-1.5 h-1.5 lg:w-3 lg:h-3 xl:w-4 xl:h-4 bg-gray-400 rounded-full"></span>
-                <div class="flex items-center gap-1 lg:gap-2 xl:gap-3">
-                  <svg width="14" height="14" viewBox="0 0 14 14" class="text-black lg:w-6 lg:h-6 xl:w-8 xl:h-8">
+                <span class="w-1.5 h-1.5 lg:w-3 lg:h-3 bg-gray-400 rounded-full"></span>
+                <div class="flex items-center gap-1 lg:gap-2">
+                  <svg width="14" height="14" viewBox="0 0 14 14" class="text-black lg:w-6 lg:h-6">
                     <path d="M12.86 1.4H4.38C4.007 1.4 3.74 1.667 3.74 2.04V4.654H1.34C0.967 4.707 0.7 4.974 0.7 5.347C0.7 5.72 0.967 5.987 1.34 5.987H3.74V11.96C3.74 12.334 4.007 12.6 4.38 12.6C4.754 12.6 5.02 12.334 5.02 11.96V9.187H7.74C8.114 9.187 8.38 8.92 8.38 8.547C8.38 8.174 8.114 7.907 7.74 7.907H5.02V5.934H10.194C10.567 5.934 10.834 5.667 10.834 5.294C10.834 4.92 10.567 4.654 10.194 4.654H5.02V2.68H12.807C13.18 2.68 13.447 2.414 13.447 2.04C13.447 1.667 13.234 1.4 12.86 1.4Z" fill="currentColor"/>
                   </svg>
-                  <span class="text-sm lg:text-xl xl:text-2xl font-medium text-black">{{ balance.availableAmount }}</span>
+                  <span class="text-sm lg:text-base font-medium text-black">{{ balance.availableAmount }}</span>
                 </div>
               </template>
               <template v-else>
-                <span class="text-sm lg:text-xl xl:text-2xl text-gray-600 font-medium">without restrictions</span>
+                <span class="text-sm lg:text-base text-gray-600 font-medium">without restrictions</span>
               </template>
             </div>
 
