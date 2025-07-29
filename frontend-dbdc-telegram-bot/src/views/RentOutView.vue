@@ -3,7 +3,7 @@
     <!-- Header Section -->
     <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-6 sm:pt-8 md:pt-10 lg:pt-12 xl:pt-16 pb-3 sm:pb-4 md:pb-5 lg:pb-6 xl:pb-8 bg-gray-100 z-30">
       <div class="mb-2">
-        <div class="bg-dbd-light-blue border border-purple-200 rounded-2xl sm:rounded-3xl md:rounded-3xl lg:rounded-4xl xl:rounded-4xl p-4 sm:p-6 md:p-8 lg:p-12 xl:p-16">
+        <div class="bg-dbd-light-blue border border-purple-200 rounded-2xl lg:rounded-3xl p-4 lg:p-6">
           <div class="flex items-center justify-between">
             <div>
               <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl font-semibold text-dbd-dark leading-tight mb-1 sm:mb-2 md:mb-3 lg:mb-4 xl:mb-6">
