@@ -367,30 +367,15 @@ const goBack = () => {
   -webkit-backface-visibility: hidden;
 }
 
-/* Basic styling without media queries */
-
-/* Telegram WebApp optimizations */
-.telegram-webapp {
-  height: 100vh;
-  height: calc(var(--vh, 1vh) * 100);
-  overscroll-behavior: none;
-  -webkit-overflow-scrolling: touch;
-}
-
 /* Hide scrollbar in scrollable area */
 .overflow-y-auto {
   scrollbar-width: none;
   -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 .overflow-y-auto::-webkit-scrollbar {
   display: none;
-}
-
-/* Ensure fixed header doesn't interfere with scrolling */
-.z-30 {
-  position: relative;
-  z-index: 30;
 }
 
 /* Better touch targets */
@@ -400,24 +385,14 @@ button {
   touch-action: manipulation;
 }
 
-/* Loyality button enhancements */
+/* Button enhancements */
 .bg-dbd-orange {
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .bg-dbd-orange:active {
-  transform: scale(0.95);
-}
-
-/* Telegram specific button improvements */
-.bg-dbd-orange:active {
   background-color: #e55a00;
   transform: scale(0.95);
-}
-
-/* Telegram mini app specific styles */
-.font-montserrat {
-  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 
