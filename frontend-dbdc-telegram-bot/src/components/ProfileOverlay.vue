@@ -4,7 +4,7 @@
     <div class="absolute 
                 left-8 md:left-[5.25rem] lg:left-[8.5rem] xl:left-[10.5rem]
                 bottom-[140px] sm:bottom-[155px] md:bottom-[300px] lg:bottom-[180px] xl:bottom-[170px]
-                max-[375px]:left-[7.5rem] max-[667px]:bottom-[120px] max-[568px]:bottom-[105px]
+                max-[375px]:left-[7.5rem] max-[667px]:bottom-[120px] max-[568px]:bottom-[100px]
                 landscape:max-[500px]:bottom-[105px]
                 z-[65] transition-all duration-300">
       <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px] 
@@ -20,7 +20,7 @@
                 max-h-[calc(100vh-150px)] sm:max-h-[calc(100vh-170px)] md:max-h-[calc(100vh-315px)] lg:max-h-[calc(100vh-210px)] xl:max-h-[calc(100vh-200px)]
                 max-[375px]:left-4 max-[375px]:right-4 max-[375px]:bottom-[135px] max-[375px]:h-[580px] max-[375px]:max-h-[calc(100vh-140px)]
                 max-[667px]:bottom-[130px] max-[667px]:h-[520px]
-                max-[568px]:bottom-[120px] max-[568px]:h-[470px]
+                max-[568px]:bottom-[110px] max-[568px]:h-[470px]
                 landscape:max-[500px]:bottom-[115px] landscape:max-[500px]:h-[370px]
                 rounded-[20px] overflow-hidden z-[55] transition-all duration-300" 
          @click.stop>
