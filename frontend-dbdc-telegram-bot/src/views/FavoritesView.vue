@@ -60,9 +60,9 @@
             </svg>
             <span class="text-lg lg:text-xl font-semibold text-blue-700">{{ balance.amount.toLocaleString() }}</span>
             <span class="w-1 h-1 lg:w-2 lg:h-2 bg-gray-400 rounded-full"></span>
-            <div class="flex items-center gap-0.5 lg:gap-2 xl:gap-3 text-sm lg:text-lg xl:text-xl text-gray-600 font-medium">
+            <div class="flex items-center gap-0.5 lg:gap-2 text-sm lg:text-base text-gray-600 font-medium">
               <span>1</span>
-              <svg width="16" height="16" viewBox="0 0 16 16" class="text-gray-600 lg:w-6 lg:h-6 xl:w-8 xl:h-8">
+              <svg width="16" height="16" viewBox="0 0 16 16" class="text-gray-600 lg:w-6 lg:h-6">
                 <path d="M15.2636 2H4.61925C4.15063 2 3.8159 2.28571 3.8159 2.68571V5.48571H0.803347C0.334728 5.54286 0 5.82857 0 6.22857C0 6.62857 0.334728 6.91429 0.803347 6.91429H3.8159V13.3143C3.8159 13.7143 4.15063 14 4.61925 14C5.08787 14 5.42259 13.7143 5.42259 13.3143V10.3429H8.83682C9.30544 10.3429 9.64017 10.0571 9.64017 9.65714C9.64017 9.25714 9.30544 8.97143 8.83682 8.97143H5.42259V6.85714H11.9163C12.3849 6.85714 12.7197 6.57143 12.7197 6.17143C12.7197 5.77143 12.3849 5.48571 11.9163 5.48571H5.42259V3.37143H15.1967C15.6653 3.37143 16 3.08571 16 2.68571C16 2.28571 15.7322 2 15.2636 2Z" fill="currentColor"/>
               </svg>
               <span>{{ balance.code }}/{{ balance.usdRate }} USD</span>
@@ -70,13 +70,13 @@
 
             <div
               :class="[
-                'px-2 lg:px-4 xl:px-6 py-0.5 lg:py-2 xl:py-3 rounded lg:rounded-lg xl:rounded-xl text-xs lg:text-lg xl:text-xl font-semibold flex items-center gap-1 lg:gap-2 xl:gap-3 ml-1 lg:ml-3 xl:ml-4',
+                'px-2 lg:px-4 py-0.5 lg:py-2 rounded lg:rounded-lg text-xs lg:text-base font-semibold flex items-center gap-1 lg:gap-2 ml-1 lg:ml-2',
                 balance.priceChange > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
               ]"
             >
               <svg
                 :class="[
-                  'w-2 h-2 lg:w-4 lg:h-4 xl:w-6 xl:h-6 transform',
+                  'w-2 h-2 lg:w-4 lg:h-4 transform',
                   balance.priceChange > 0 ? '-rotate-45' : 'rotate-45'
                 ]"
                 viewBox="0 0 10 13"
