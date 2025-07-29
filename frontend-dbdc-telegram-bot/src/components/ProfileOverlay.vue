@@ -3,7 +3,7 @@
     <!-- Triangle Pointer -->
     <div class="absolute
                 left-[2.1rem] sm:left-[5rem] md:left-[5.25rem] lg:left-[8.5rem] xl:left-[10.5rem]
-                bottom-[98px] sm:bottom-[130px] md:bottom-[150px] lg:bottom-[153px] xl:bottom-[175px]
+                bottom-[98px] sm:bottom-[130px] md:bottom-[140px] lg:bottom-[153px] xl:bottom-[175px]
                 z-[65] transition-all duration-300">
       <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px] 
                   border-l-transparent border-r-transparent 
@@ -14,8 +14,8 @@
     <!-- Profile Dropdown Menu -->
     <div class="absolute
                 left-2 right-2 sm:left-3 sm:right-3 md:left-4 md:right-4 lg:left-8 lg:right-8 xl:left-10 xl:right-10
-                bottom-[108px] sm:bottom-[140px] md:bottom-[290px] lg:bottom-[163px] xl:bottom-[160px]
-                h-[550px] sm:h-[570px] md:h-[580px] lg:h-[500px] xl:h-[450px]
+                bottom-[108px] sm:bottom-[140px] md:bottom-[150px] lg:bottom-[163px] xl:bottom-[160px]
+                h-[550px] sm:h-[570px] md:h-[600px] lg:h-[500px] xl:h-[450px]
                 max-h-[calc(100vh-120px)] sm:max-h-[calc(100vh-150px)] md:max-h-[calc(100vh-315px)] lg:max-h-[calc(100vh-210px)] xl:max-h-[calc(100vh-200px)]
                 rounded-[20px] overflow-hidden z-[55] transition-all duration-300"
         @click.stop>
