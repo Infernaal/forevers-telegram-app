@@ -350,7 +350,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import CountryFlag from './CountryFlag.vue'
 
 // Props
