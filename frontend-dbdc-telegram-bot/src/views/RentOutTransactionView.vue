@@ -441,7 +441,7 @@ const toggleTransactionSelection = (index) => {
   const selectedIndex = selectedTransactions.value.indexOf(index)
   if (selectedIndex > -1) {
     selectedTransactions.value.splice(selectedIndex, 1)
-    // Закрыть dropdown menu если больше нет выбранных транзакций
+    // Закрыть dropdown menu если больше нет выбранных т��анзакций
     if (selectedTransactions.value.length === 0) {
       showExportMenu.value = false
     }
@@ -825,7 +825,7 @@ onUnmounted(() => {
     max-width: none !important;
   }
 
-  .transaction-details-modal .transaction-modal-container.md\\:max-w-full {
+  .transaction-details-modal .transaction-modal-container.md\\:max-w-none {
     max-width: none !important;
   }
 
