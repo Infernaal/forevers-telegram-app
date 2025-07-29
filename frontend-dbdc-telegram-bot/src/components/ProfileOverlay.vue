@@ -2,7 +2,7 @@
   <div v-if="isVisible" class="fixed inset-0 z-50 font-montserrat bg-black bg-opacity-10 backdrop-blur-xl">
     <!-- Triangle Pointer -->
     <div class="absolute 
-                left-8 md:left-[3.25rem] lg:left-[8.5rem] xl:left-[10.5rem]
+                left-8 md:left-[5.25rem] lg:left-[8.5rem] xl:left-[10.5rem]
                 bottom-[120px] sm:bottom-[135px] md:bottom-[300px] lg:bottom-[180px] xl:bottom-[170px]
                 max-[375px]:left-[7.5rem] max-[667px]:bottom-[100px] max-[568px]:bottom-[95px]
                 landscape:max-[500px]:bottom-[85px]
