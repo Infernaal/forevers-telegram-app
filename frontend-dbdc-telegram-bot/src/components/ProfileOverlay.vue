@@ -528,8 +528,6 @@ const selectLanguage = (language) => {
   display: none;
 }
 
-
-
 /* Height utilities */
 .h-13 {
   height: 3.25rem;
@@ -538,10 +536,6 @@ const selectLanguage = (language) => {
 .h-21 {
   height: 5.25rem;
 }
-
-
-
-
 
 /* Fade in animation for overlay */
 .fixed.inset-0.z-50 {
