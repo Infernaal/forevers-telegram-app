@@ -518,58 +518,7 @@ const selectLanguage = (language) => {
   display: none;
 }
 
-/* Safe area utilities */
-.safe-area-inset-bottom-calc {
-  bottom: calc(120px + env(safe-area-inset-bottom, 0px));
-}
 
-@media (min-width: 768px) {
-  .safe-area-inset-bottom-calc {
-    bottom: calc(240px + env(safe-area-inset-bottom, 0px));
-  }
-}
-
-@media (min-width: 1024px) {
-  .safe-area-inset-bottom-calc {
-    bottom: calc(180px + env(safe-area-inset-bottom, 0px));
-  }
-}
-
-@media (min-width: 1280px) {
-  .safe-area-inset-bottom-calc {
-    bottom: calc(170px + env(safe-area-inset-bottom, 0px));
-  }
-}
-
-.safe-area-inset-calc {
-  bottom: calc(120px + env(safe-area-inset-bottom, 0px));
-  height: calc(580px - env(safe-area-inset-bottom, 0px));
-  max-height: calc(100vh - 130px - env(safe-area-inset-bottom, 0px));
-}
-
-@media (min-width: 768px) {
-  .safe-area-inset-calc {
-    bottom: calc(250px + env(safe-area-inset-bottom, 0px));
-    height: calc(580px - env(safe-area-inset-bottom, 0px));
-    max-height: calc(100vh - 255px - env(safe-area-inset-bottom, 0px));
-  }
-}
-
-@media (min-width: 1024px) {
-  .safe-area-inset-calc {
-    bottom: calc(190px + env(safe-area-inset-bottom, 0px));
-    height: calc(500px - env(safe-area-inset-bottom, 0px));
-    max-height: calc(100vh - 210px - env(safe-area-inset-bottom, 0px));
-  }
-}
-
-@media (min-width: 1280px) {
-  .safe-area-inset-calc {
-    bottom: calc(180px + env(safe-area-inset-bottom, 0px));
-    height: calc(450px - env(safe-area-inset-bottom, 0px));
-    max-height: calc(100vh - 200px - env(safe-area-inset-bottom, 0px));
-  }
-}
 
 /* Height utilities */
 .h-13 {
