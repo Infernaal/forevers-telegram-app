@@ -389,11 +389,23 @@ const selectedLanguage = ref(languages.value[0])
 // Methods
 const handleMenuClick = (menuItem) => {
   console.log(`Menu clicked: ${menuItem}`)
+
+  // Telegram WebApp haptic feedback
+  if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.HapticFeedback) {
+    window.Telegram.WebApp.HapticFeedback.impactOccurred('light')
+  }
+
   // Handle menu navigation
 }
 
 const handleUpgrade = () => {
   console.log('Upgrade clicked')
+
+  // Telegram WebApp haptic feedback
+  if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.HapticFeedback) {
+    window.Telegram.WebApp.HapticFeedback.impactOccurred('medium')
+  }
+
   // Handle upgrade
 }
 
@@ -448,6 +460,12 @@ const toggleLanguageDropdown = () => {
 const selectLanguage = (language) => {
   selectedLanguage.value = language
   showLanguageDropdown.value = false
+
+  // Telegram WebApp haptic feedback
+  if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.HapticFeedback) {
+    window.Telegram.WebApp.HapticFeedback.selectionChanged()
+  }
+
   console.log('Language selected:', language)
 }
 </script>
