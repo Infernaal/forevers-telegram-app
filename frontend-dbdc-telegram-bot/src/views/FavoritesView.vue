@@ -16,7 +16,7 @@
               </svg>
               <span class="text-3xl lg:text-5xl font-bold text-blue-700">{{ totalBalance.toLocaleString() }}</span>
             </div>
-            <p class="text-lg lg:text-2xl xl:text-3xl text-gray-600 font-medium">Worth ${{ totalWorth.toLocaleString() }}</p>
+            <p class="text-lg lg:text-xl text-gray-600 font-medium">Worth ${{ totalWorth.toLocaleString() }}</p>
           </div>
         </div>
 
