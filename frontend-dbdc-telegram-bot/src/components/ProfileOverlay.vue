@@ -12,16 +12,13 @@
     </div>
 
     <!-- Profile Dropdown Menu -->
-    <div class="absolute left-2 right-2
-                bottom-[140px] sm:bottom-[165px] md:bottom-[310px] lg:bottom-[190px] xl:bottom-[180px]
-                h-[600px] sm:h-[580px] md:h-[580px] lg:h-[500px] xl:h-[450px]
-                max-h-[calc(100vh-150px)] sm:max-h-[calc(100vh-170px)] md:max-h-[calc(100vh-315px)] lg:max-h-[calc(100vh-210px)] xl:max-h-[calc(100vh-200px)]
-                max-[375px]:left-4 max-[375px]:right-4 max-[375px]:bottom-[105px] max-[375px]:h-[580px] max-[375px]:max-h-[calc(100vh-140px)]
-                max-[667px]:bottom-[130px] max-[667px]:h-[520px]
-                max-[568px]:bottom-[110px] max-[568px]:h-[470px]
-                landscape:max-[500px]:bottom-[115px] landscape:max-[500px]:h-[370px]
-                rounded-[20px] overflow-hidden z-[55] transition-all duration-300" 
-         @click.stop>
+    <div class="absolute 
+                left-2 right-2 sm:left-3 sm:right-3 md:left-4 md:right-4 lg:left-8 lg:right-8 xl:left-10 xl:right-10
+                bottom-[120px] sm:bottom-[140px] md:bottom-[310px] lg:bottom-[190px] xl:bottom-[180px]
+                h-[500px] sm:h-[520px] md:h-[580px] lg:h-[500px] xl:h-[450px]
+                max-h-[calc(100vh-130px)] sm:max-h-[calc(100vh-150px)] md:max-h-[calc(100vh-315px)] lg:max-h-[calc(100vh-210px)] xl:max-h-[calc(100vh-200px)]
+                rounded-[20px] overflow-hidden z-[55] transition-all duration-300"
+        @click.stop>
       
       <!-- Background -->
       <div class="absolute inset-0 bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E] 
