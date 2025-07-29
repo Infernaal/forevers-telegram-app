@@ -22,7 +22,7 @@
     </div>
 
     <!-- Scrollable Cards -->
-    <div class="flex-1 w-full max-w-7xl mx-auto overflow-y-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pb-24 sm:pb-28 md:pb-32 lg:pb-40 xl:pb-48">
+    <div class="flex-1 w-full overflow-y-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-24 sm:pb-28 md:pb-32 lg:pb-40">
       <div class="space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-8 xl:space-y-10">
         <div 
           v-for="item in foreversList" 
