@@ -12,11 +12,11 @@
     </div>
 
     <!-- Profile Dropdown Menu -->
-    <div class="absolute tablet-dropdown-position
+    <div class="absolute
                 left-2 right-2 sm:left-3 sm:right-3 md:left-4 md:right-4 lg:left-8 lg:right-8 xl:left-10 xl:right-10
-                bottom-24 sm:bottom-36 md:bottom-28 lg:bottom-44 xl:bottom-48
-                h-[500px] sm:h-[520px] md:h-[580px] lg:h-[500px] xl:h-[450px]
-                max-h-[calc(100vh-130px)] sm:max-h-[calc(100vh-150px)] md:max-h-[calc(100vh-315px)] lg:max-h-[calc(100vh-210px)] xl:max-h-[calc(100vh-200px)]
+                bottom-[92px] sm:bottom-[140px] md:bottom-[290px] lg:bottom-[163px] xl:bottom-[160px]
+                h-[480px] sm:h-[520px] md:h-[580px] lg:h-[500px] xl:h-[450px]
+                max-h-[calc(100vh-120px)] sm:max-h-[calc(100vh-150px)] md:max-h-[calc(100vh-315px)] lg:max-h-[calc(100vh-210px)] xl:max-h-[calc(100vh-200px)]
                 rounded-[20px] overflow-hidden z-[55] transition-all duration-300"
         @click.stop>
       
