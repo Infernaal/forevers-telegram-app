@@ -808,43 +808,51 @@ onUnmounted(() => {
 @media (min-width: 768px) and (max-width: 1023px) {
   /* Transaction Details Modal - Full width on tablet */
   .transaction-details-modal {
-    align-items: end;
+    align-items: end !important;
+    padding: 0 !important;
   }
 
-  .transaction-modal-container {
-    max-width: none !important;
-    width: 100% !important;
+  /* Ultra-specific selectors to override Tailwind */
+  div.transaction-details-modal div.transaction-modal-container.w-full.max-w-md {
+    max-width: 100vw !important;
+    width: 100vw !important;
     margin: 0 !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
     border-radius: 24px 24px 0 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    position: relative !important;
   }
 
-  /* Force override Tailwind classes */
-  .transaction-details-modal .transaction-modal-container.max-w-md {
-    max-width: none !important;
+  /* Additional override with higher specificity */
+  .fixed.inset-0.z-50.flex .transaction-modal-container {
+    max-width: 100vw !important;
+    width: 100vw !important;
+    margin: 0 !important;
+    border-radius: 24px 24px 0 0 !important;
   }
 
-  .transaction-details-modal .transaction-modal-container.md\\:max-w-none {
-    max-width: none !important;
+  /* Force override all possible Tailwind responsive classes */
+  .transaction-details-modal .transaction-modal-container.max-w-md,
+  .transaction-details-modal .transaction-modal-container.md\\:max-w-none,
+  .transaction-details-modal .transaction-modal-container[class*="max-w"] {
+    max-width: 100vw !important;
+    width: 100vw !important;
+  }
+
+  /* Container positioning */
+  .transaction-details-modal {
+    justify-content: stretch !important;
   }
 
   .transaction-details-modal > div {
     border-radius: 24px 24px 0 0 !important;
-    animation: none;
-    max-width: 100% !important;
-    width: 100% !important;
-    margin: 0 !important;
-  }
-
-  /* Force full width - highest specificity */
-  .transaction-details-modal .transaction-modal-container {
+    animation: none !important;
     max-width: 100vw !important;
     width: 100vw !important;
-    left: 0 !important;
-    right: 0 !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+    margin: 0 !important;
+    flex: none !important;
   }
 
   /* Larger text and spacing for tablet */
