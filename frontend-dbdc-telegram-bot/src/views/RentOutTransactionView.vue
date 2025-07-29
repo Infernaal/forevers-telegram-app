@@ -428,7 +428,7 @@ const transactions = ref([
 ])
 
 const goBack = () => {
-  router.back()
+  router.push('/wallet')
 }
 
 const toggleExportMenu = () => {
