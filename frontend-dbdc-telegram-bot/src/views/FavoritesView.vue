@@ -46,7 +46,7 @@
               @click="openEnterAmountModal(balance)"
               class="w-16 h-11 lg:w-24 lg:h-16 xl:w-32 xl:h-20 border border-blue-700 bg-purple-50 rounded-full flex items-center justify-center hover:bg-purple-100 transition-colors"
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" class="text-blue-700">
+              <svg width="24" height="24" viewBox="0 0 24 24" class="text-blue-700 lg:w-8 lg:h-8 xl:w-12 xl:h-12">
                 <path d="M18 13H6C5.4 13 5 12.6 5 12C5 11.4 5.4 11 6 11H18C18.6 11 19 11.4 19 12C19 12.6 18.6 13 18 13Z" fill="currentColor"/>
                 <path d="M12 19C11.4 19 11 18.6 11 18V6C11 5.4 11.4 5 12 5C12.6 5 13 5.4 13 6V18C13 18.6 12.6 19 12 19Z" fill="currentColor"/>
               </svg>
@@ -54,15 +54,15 @@
           </div>
 
           <!-- Token Info -->
-          <div class="flex items-center gap-1 mb-3 flex-wrap">
-            <svg width="24" height="24" viewBox="0 0 24 24" class="text-blue-700">
+          <div class="flex items-center gap-1 lg:gap-3 xl:gap-4 mb-3 lg:mb-6 xl:mb-8 flex-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" class="text-blue-700 lg:w-8 lg:h-8 xl:w-12 xl:h-12">
               <path d="M23 5.536V1H5.347V6.759H1V11.294H5.347V22.581H10.421V17.046H14.712V12.510H10.421V11.294H18.849V6.759H10.421V5.536H23Z" fill="currentColor"/>
             </svg>
-            <span class="text-lg font-semibold text-blue-700">{{ balance.amount.toLocaleString() }}</span>
-            <span class="w-1 h-1 bg-gray-400 rounded-full"></span>
-            <div class="flex items-center gap-0.5 text-sm text-gray-600 font-medium">
+            <span class="text-lg lg:text-2xl xl:text-3xl font-semibold text-blue-700">{{ balance.amount.toLocaleString() }}</span>
+            <span class="w-1 h-1 lg:w-2 lg:h-2 xl:w-3 xl:h-3 bg-gray-400 rounded-full"></span>
+            <div class="flex items-center gap-0.5 lg:gap-2 xl:gap-3 text-sm lg:text-lg xl:text-xl text-gray-600 font-medium">
               <span>1</span>
-              <svg width="16" height="16" viewBox="0 0 16 16" class="text-gray-600">
+              <svg width="16" height="16" viewBox="0 0 16 16" class="text-gray-600 lg:w-6 lg:h-6 xl:w-8 xl:h-8">
                 <path d="M15.2636 2H4.61925C4.15063 2 3.8159 2.28571 3.8159 2.68571V5.48571H0.803347C0.334728 5.54286 0 5.82857 0 6.22857C0 6.62857 0.334728 6.91429 0.803347 6.91429H3.8159V13.3143C3.8159 13.7143 4.15063 14 4.61925 14C5.08787 14 5.42259 13.7143 5.42259 13.3143V10.3429H8.83682C9.30544 10.3429 9.64017 10.0571 9.64017 9.65714C9.64017 9.25714 9.30544 8.97143 8.83682 8.97143H5.42259V6.85714H11.9163C12.3849 6.85714 12.7197 6.57143 12.7197 6.17143C12.7197 5.77143 12.3849 5.48571 11.9163 5.48571H5.42259V3.37143H15.1967C15.6653 3.37143 16 3.08571 16 2.68571C16 2.28571 15.7322 2 15.2636 2Z" fill="currentColor"/>
               </svg>
               <span>{{ balance.code }}/{{ balance.usdRate }} USD</span>
@@ -70,13 +70,13 @@
 
             <div
               :class="[
-                'px-2 py-0.5 rounded text-xs font-semibold flex items-center gap-1 ml-1',
+                'px-2 lg:px-4 xl:px-6 py-0.5 lg:py-2 xl:py-3 rounded lg:rounded-lg xl:rounded-xl text-xs lg:text-lg xl:text-xl font-semibold flex items-center gap-1 lg:gap-2 xl:gap-3 ml-1 lg:ml-3 xl:ml-4',
                 balance.priceChange > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
               ]"
             >
               <svg
                 :class="[
-                  'w-2 h-2 transform',
+                  'w-2 h-2 lg:w-4 lg:h-4 xl:w-6 xl:h-6 transform',
                   balance.priceChange > 0 ? '-rotate-45' : 'rotate-45'
                 ]"
                 viewBox="0 0 10 13"
