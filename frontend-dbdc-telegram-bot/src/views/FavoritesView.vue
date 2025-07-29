@@ -36,15 +36,15 @@
           class="bg-white border border-purple-200 rounded-2xl lg:rounded-3xl balance-card relative flex flex-col justify-between"
         >
           <!-- Country Header -->
-          <div class="flex items-center justify-between mb-3 lg:mb-6 xl:mb-8">
+          <div class="flex items-center justify-between mb-3 lg:mb-6">
             <div class="flex items-center gap-2 lg:gap-4 xl:gap-6">
-              <CountryFlag :country="balance.code" class="w-6 h-6 lg:w-12 lg:h-12 xl:w-16 xl:h-16" />
-              <span class="text-gray-700 font-medium text-base lg:text-2xl xl:text-3xl">{{ balance.country }} Balance</span>
+              <CountryFlag :country="balance.code" class="w-6 h-6 lg:w-12 lg:h-12" />
+              <span class="text-gray-700 font-medium text-base lg:text-xl">{{ balance.country }} Balance</span>
             </div>
 
             <button
               @click="openEnterAmountModal(balance)"
-              class="w-16 h-11 lg:w-24 lg:h-16 xl:w-32 xl:h-20 border border-blue-700 bg-purple-50 rounded-full flex items-center justify-center hover:bg-purple-100 transition-colors"
+              class="w-16 h-11 lg:w-20 lg:h-12 border border-blue-700 bg-purple-50 rounded-full flex items-center justify-center hover:bg-purple-100 transition-colors"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" class="text-blue-700 lg:w-8 lg:h-8 xl:w-12 xl:h-12">
                 <path d="M18 13H6C5.4 13 5 12.6 5 12C5 11.4 5.4 11 6 11H18C18.6 11 19 11.4 19 12C19 12.6 18.6 13 18 13Z" fill="currentColor"/>
