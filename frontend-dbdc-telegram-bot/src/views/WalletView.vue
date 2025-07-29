@@ -1,7 +1,7 @@
 <template>
   <div class="w-full min-h-screen bg-gray-100 font-montserrat overflow-x-hidden wallet-view">
     <!-- Content Container -->
-    <div class="px-4 pt-4 pb-24 min-h-[calc(100vh-100px)]">
+    <div class="px-4 pt-4 pb-32 min-h-[calc(100vh-100px)]">
 
       <!-- Forevers Balance Section -->
       <div class="mb-4">
