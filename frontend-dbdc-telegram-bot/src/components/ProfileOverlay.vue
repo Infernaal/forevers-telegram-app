@@ -1,6 +1,6 @@
 <template>
-  <div v-if="isVisible" class="fixed inset-0 font-montserrat bg-black bg-opacity-10"
-       style="z-index: 9999; position: fixed; top: 0; left: 0; right: 0; bottom: 0;">
+  <div v-if="isVisible" class="fixed font-montserrat bg-black bg-opacity-10 backdrop-blur-xl"
+       style="z-index: 9999; position: fixed; top: 0; left: 0; right: 0; bottom: 88px;">
     <!-- Dropdown Wrapper -->
     <div class="relative w-full flex justify-center items-start mt-56 sm:mt-64 md:mt-14 lg:mt-12 xl:mt-48">
       <!-- Dropdown Menu -->
