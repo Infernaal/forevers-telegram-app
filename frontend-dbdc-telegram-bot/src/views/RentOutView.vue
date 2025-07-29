@@ -6,7 +6,7 @@
         <div class="bg-dbd-light-blue border border-purple-200 rounded-2xl lg:rounded-3xl p-4 lg:p-6">
           <div class="flex items-center justify-between">
             <div>
-              <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl font-semibold text-dbd-dark leading-tight mb-1 sm:mb-2 md:mb-3 lg:mb-4 xl:mb-6">
+              <h2 class="text-2xl lg:text-4xl font-semibold text-dbd-dark leading-tight mb-1 lg:mb-2">
                 Forevers<br />Available
               </h2>
             </div>
