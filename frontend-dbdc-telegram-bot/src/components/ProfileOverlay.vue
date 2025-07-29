@@ -1,7 +1,7 @@
 <template>
   <div v-if="isVisible" class="fixed inset-0 z-50 font-montserrat bg-black bg-opacity-10 backdrop-blur-xl">
     <!-- Dropdown Wrapper -->
-    <div class="relative w-full flex justify-center items-end pb-16 sm:pb-20 md:pb-24 lg:pb-28 xl:pb-32">
+    <div class="relative w-full flex justify-center items-end pb-4 sm:pb-6 md:pb-8 lg:pb-10 xl:pb-12">
       <!-- Dropdown Menu -->
       <div class="relative w-screen px-4 sm:px-8 md:px-8 max-h-[calc(100vh-140px)]
               h-[500px] sm:h-[580px] md:h-[600px]
