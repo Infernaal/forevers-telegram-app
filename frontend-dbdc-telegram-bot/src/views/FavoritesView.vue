@@ -142,12 +142,12 @@
       <div v-else class="flex-1 flex items-center justify-center pb-24 sm:pb-28 md:pb-32 lg:pb-36">
         <div class="text-center">
           <div class="w-16 h-16 lg:w-24 lg:h-24 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4 lg:mb-6">
-            <svg width="32" height="32" viewBox="0 0 32 32" class="text-gray-400 lg:w-16 lg:h-16 xl:w-20 xl:h-20">
+            <svg width="32" height="32" viewBox="0 0 32 32" class="text-gray-400 lg:w-12 lg:h-12">
               <path d="M30.667 7.381V1.333H7.129V9.011H1.333V15.059H7.129V30.108H13.894V22.728H19.615V16.680H13.894V15.059H25.132V9.011H13.894V7.381H30.667Z" fill="currentColor"/>
             </svg>
           </div>
-          <h3 class="text-lg lg:text-3xl xl:text-4xl font-medium text-gray-900 mb-2 lg:mb-4 xl:mb-6">No Balances Found</h3>
-          <p class="text-gray-600 lg:text-xl xl:text-2xl mb-4 lg:mb-8 xl:mb-12">Your balance data will appear here when available.</p>
+          <h3 class="text-lg lg:text-2xl font-medium text-gray-900 mb-2 lg:mb-3">No Balances Found</h3>
+          <p class="text-gray-600 lg:text-lg mb-4 lg:mb-6">Your balance data will appear here when available.</p>
         </div>
       </div>
     </main>
