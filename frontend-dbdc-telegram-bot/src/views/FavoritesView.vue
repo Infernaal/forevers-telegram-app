@@ -22,7 +22,7 @@
 
         <button
           @click="handleRentOut"
-          class="w-full bg-gradient-to-r from-blue-700 to-purple-600 text-white font-bold py-3 lg:py-6 xl:py-8 px-12 lg:px-24 xl:px-32 rounded-full lg:rounded-2xl xl:rounded-3xl hover:from-blue-800 hover:to-purple-700 transition-all duration-200 text-sm lg:text-xl xl:text-2xl"
+          class="w-full bg-gradient-to-r from-blue-700 to-purple-600 text-white font-bold py-3 lg:py-4 px-12 lg:px-16 rounded-full lg:rounded-2xl hover:from-blue-800 hover:to-purple-700 transition-all duration-200 text-sm lg:text-lg"
         >
           Rent Out Forevers
         </button>
