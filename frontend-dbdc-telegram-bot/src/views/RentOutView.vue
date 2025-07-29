@@ -48,17 +48,17 @@
           </div>
 
           <!-- Exchange Rate -->
-          <div class="flex items-center gap-1 lg:gap-3 mb-3 lg:mb-8">
-            <span class="text-dbd-gray text-sm lg:text-xl">1</span>
-            <svg class="text-dbd-gray w-4 h-4 lg:w-8 lg:h-8" viewBox="0 0 16 16">
+          <div class="flex items-center gap-1 sm:gap-1.5 md:gap-2 lg:gap-3 xl:gap-4 mb-3 sm:mb-4 md:mb-6 lg:mb-8 xl:mb-10">
+            <span class="text-dbd-gray text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl">1</span>
+            <svg class="text-dbd-gray w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-8 lg:h-8 xl:w-10 xl:h-10" viewBox="0 0 16 16">
               <path d="M15.2636 2H4.61925C4.15063 2 3.8159 2.28571 3.8159 2.68571V5.48571H0.803347C0.334728 5.54286 0 5.82857 0 6.22857C0 6.62857 0.334728 6.91429 0.803347 6.91429H3.8159V13.3143C3.8159 13.7143 4.15063 14 4.61925 14C5.08787 14 5.42259 13.7143 5.42259 13.3143V10.3429H8.83682C9.30544 10.3429 9.64017 10.0571 9.64017 9.65714C9.64017 9.25714 9.30544 8.97143 8.83682 8.97143H5.42259V6.85714H11.9163C12.3849 6.85714 12.7197 6.57143 12.7197 6.17143C12.7197 5.77143 12.3849 5.48571 11.9163 5.48571H5.42259V3.37143H15.1967C15.6653 3.37143 16 3.08571 16 2.68571C16 2.28571 15.7322 2 15.2636 2Z" fill="currentColor"/>
             </svg>
-            <span class="text-dbd-gray text-sm lg:text-xl">{{ item.code }} / {{ item.usdRate }} USD</span>
+            <span class="text-dbd-gray text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl">{{ item.code }} / {{ item.usdRate }} USD</span>
             <div
-              class="flex items-center gap-1 lg:gap-3 px-2 lg:px-6 py-0.5 lg:py-3 rounded font-semibold text-xs lg:text-xl"
+              class="flex items-center gap-1 sm:gap-1.5 md:gap-2 lg:gap-3 xl:gap-4 px-2 sm:px-3 md:px-4 lg:px-6 xl:px-8 py-0.5 sm:py-1 md:py-2 lg:py-3 xl:py-4 rounded sm:rounded-md md:rounded-lg lg:rounded-xl font-semibold text-xs sm:text-sm md:text-base lg:text-xl xl:text-2xl"
               :class="item.priceChange >= 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'"
             >
-              <svg class="w-2 h-2 lg:w-6 lg:h-6" :class="item.priceChange >= 0 ? '-rotate-45' : 'rotate-45'" viewBox="0 0 10 13">
+              <svg class="w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 lg:w-6 lg:h-6 xl:w-8 xl:h-8" :class="item.priceChange >= 0 ? '-rotate-45' : 'rotate-45'" viewBox="0 0 10 13">
                 <path d="M0.720539 4.9362L4.6673 1.01033M4.6673 1.01033L8.58641 4.92944M4.6673 1.01033L4.65686 12.3136"
                       :stroke="item.priceChange >= 0 ? '#07B80E' : '#FF1919'"
                       stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
