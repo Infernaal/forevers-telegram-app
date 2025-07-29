@@ -349,14 +349,22 @@ const goBack = () => {
   pointer-events: none;
 }
 
-/* Custom scrollbar for webkit browsers */
+/* Global scrollbar hiding and Telegram optimizations */
 ::-webkit-scrollbar {
   width: 0;
 }
 
-/* Ensure proper touch scrolling on iOS */
 * {
   -webkit-tap-highlight-color: transparent;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Performance optimizations */
+* {
+  will-change: auto;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* Basic styling without media queries */
