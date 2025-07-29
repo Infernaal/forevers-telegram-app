@@ -8,6 +8,8 @@
                   bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
                   border border-[#09074E] backdrop-blur-[32px] 
                   rounded-[20px] z-[50] overflow-hidden shadow-lg">
+           <!-- Контент меню -->
+    <div class="p-4 text-white text-center">
         <!-- Background -->
         <div class="absolute inset-0 bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
                     border border-[#09074E] backdrop-blur-[32px]"></div>
