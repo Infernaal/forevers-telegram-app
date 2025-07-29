@@ -126,9 +126,8 @@
           <div class="absolute right-4 top-1/2 transform -translate-y-1/2 w-6 h-6
                       rounded-full bg-[#FFF0F3] border-[0.667px] border-[#FF1919]
                       flex items-center justify-center flex-shrink-0">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M7 0C10.866 0 14 3.134 14 7C14 10.866 10.866 14 7 14C3.134 14 0 10.866 0 7C0 3.134 3.134 0 7 0Z" fill="#FF1919"/>
-              <path d="M10.5 4.5L4.5 10.5M4.5 4.5L10.5 10.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M9 3L3 9M3 3L9 9" stroke="#FF1919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
         </div>
