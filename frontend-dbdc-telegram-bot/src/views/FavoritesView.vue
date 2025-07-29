@@ -1,7 +1,7 @@
 <template>
-  <div class="h-screen bg-gray-100 flex flex-col font-sans overflow-hidden">
+  <div class="w-full min-h-screen bg-gray-100 font-montserrat overflow-x-hidden flex flex-col">
     <!-- Main Content -->
-    <main class="flex-1 w-full max-w-md lg:max-w-6xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-4 sm:pt-6 md:pt-8 lg:pt-10 pb-4 sm:pb-6 md:pb-8 lg:pb-10 flex flex-col">
+    <main class="flex-1 w-full px-4 sm:px-6 md:px-8 lg:px-12 pt-4 sm:pt-6 md:pt-8 lg:pt-10 pb-4 sm:pb-6 md:pb-8 lg:pb-10 flex flex-col">
       <!-- Total Balance Card -->
       <div class="bg-purple-50 border border-purple-200 rounded-2xl lg:rounded-3xl p-4 sm:p-6 md:p-8 lg:p-6 mb-4 sm:mb-6 md:mb-8 lg:mb-6 flex-shrink-0">
         <div class="flex items-start justify-between mb-4 lg:mb-6">
