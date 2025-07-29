@@ -4,19 +4,19 @@
     <main class="flex-1 w-full max-w-md lg:max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-4 sm:pt-6 md:pt-8 lg:pt-10 xl:pt-12 pb-4 sm:pb-6 md:pb-8 lg:pb-10 xl:pb-12 flex flex-col">
       <!-- Total Balance Card -->
       <div class="bg-purple-50 border border-purple-200 rounded-2xl lg:rounded-3xl xl:rounded-4xl p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 mb-4 sm:mb-6 md:mb-8 lg:mb-10 xl:mb-12 flex-shrink-0">
-        <div class="flex items-start justify-between mb-4">
-          <h2 class="text-2xl font-semibold text-black leading-7">
+        <div class="flex items-start justify-between mb-4 lg:mb-8 xl:mb-12">
+          <h2 class="text-2xl lg:text-5xl xl:text-6xl font-semibold text-black leading-7 lg:leading-tight xl:leading-tight">
             Forevers<br>Balance
           </h2>
 
-          <div class="flex flex-col items-end gap-2">
-            <div class="flex items-center gap-2">
-              <svg width="32" height="32" viewBox="0 0 32 32" class="text-blue-700">
+          <div class="flex flex-col items-end gap-2 lg:gap-4 xl:gap-6">
+            <div class="flex items-center gap-2 lg:gap-4 xl:gap-6">
+              <svg width="32" height="32" viewBox="0 0 32 32" class="text-blue-700 lg:w-16 lg:h-16 xl:w-20 xl:h-20">
                 <path d="M30.667 7.381V1.333H7.129V9.011H1.333V15.059H7.129V30.108H13.894V22.728H19.615V16.680H13.894V15.059H25.132V9.011H13.894V7.381H30.667Z" fill="currentColor"/>
               </svg>
-              <span class="text-3xl font-bold text-blue-700">{{ totalBalance.toLocaleString() }}</span>
+              <span class="text-3xl lg:text-6xl xl:text-7xl font-bold text-blue-700">{{ totalBalance.toLocaleString() }}</span>
             </div>
-            <p class="text-lg text-gray-600 font-medium">Worth ${{ totalWorth.toLocaleString() }}</p>
+            <p class="text-lg lg:text-2xl xl:text-3xl text-gray-600 font-medium">Worth ${{ totalWorth.toLocaleString() }}</p>
           </div>
         </div>
 
