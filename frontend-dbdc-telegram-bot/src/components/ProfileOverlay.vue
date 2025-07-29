@@ -277,9 +277,9 @@
           </div>
           
           <button v-if="!showCopySuccess"
-                  class="w-8 h-8 bg-white border-[1.2px] border-[#D8D8D8] 
-                         rounded-r-full border-l-0 flex items-center justify-center 
-                         cursor-pointer transition-all duration-200 flex-shrink-0 
+                  class="w-8 h-8 min-w-[44px] min-h-[44px] bg-white border-[1.2px] border-[#D8D8D8]
+                         rounded-r-full border-l-0 flex items-center justify-center
+                         cursor-pointer transition-all duration-200 flex-shrink-0
                          absolute right-0 top-1/2 transform -translate-y-1/2
                          hover:bg-gray-100 hover:scale-105 hover:shadow-lg
                          active:scale-98" 
