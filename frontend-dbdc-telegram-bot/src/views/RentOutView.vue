@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen flex flex-col font-sans bg-gray-100">
     <!-- Header Section -->
-    <div class="w-full max-w-7xl mx-auto px-4 lg:px-12 pt-6 lg:pt-12 pb-3 lg:pb-6 bg-gray-100 z-30">
+    <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-6 sm:pt-8 md:pt-10 lg:pt-12 xl:pt-16 pb-3 sm:pb-4 md:pb-5 lg:pb-6 xl:pb-8 bg-gray-100 z-30">
       <div class="mb-2">
         <div class="bg-dbd-light-blue border border-purple-200 rounded-2xl lg:rounded-4xl p-4 lg:p-12">
           <div class="flex items-center justify-between">
