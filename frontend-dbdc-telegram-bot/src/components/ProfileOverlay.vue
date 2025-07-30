@@ -44,7 +44,8 @@
                     alt="Jason Williams"
                     class="w-16 xs:w-18 sm:w-20 md:w-24 lg:w-28 xl:w-32
                             h-16 xs:h-18 sm:h-20 md:h-24 lg:h-28 xl:h-32
-                            rounded-full object-cover border border-[#7E73D6]" />
+                            rounded-full object-cover border-2 border-[#7E73D6]
+                            transition-all duration-300 hover:border-[#9A8BE8]" />
               </div>
 
               <!-- User Info -->
