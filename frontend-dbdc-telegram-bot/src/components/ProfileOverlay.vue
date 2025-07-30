@@ -248,7 +248,7 @@
 
             <!-- Language Section with Dropdown -->
             <div class="relative flex items-center">
-              <div class="bg-white/[0.20] border border-white/24 rounded-full h-11 w-32 sm:w-36 md:w-36 flex items-center px-1.5 cursor-pointer hover:bg-white/25 transition-colors"
+              <div class="bg-white/[0.20] border border-white/24 rounded-full h-11 w-36 sm:w-38 md:w-40 flex items-center px-1.5 cursor-pointer hover:bg-white/25 transition-colors"
                    @click="toggleLanguageDropdown">
                 <!-- Selected Country Flag -->
                 <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 ml-1 flex items-center justify-center">
@@ -668,7 +668,7 @@ console.log('ProfileOverlay loaded with corrected design')
 
 @media (max-width: 480px) {
   .w-36 {
-    width: 9rem; /* 144px - увеличиваем на мобиле для ��учшей видимости цифр */
+    width: 9rem; /* 144px - увеличиваем на мобиле для лучшей видимости цифр */
   }
 }
 
