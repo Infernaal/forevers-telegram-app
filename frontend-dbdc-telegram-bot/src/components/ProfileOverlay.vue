@@ -7,7 +7,7 @@
                 bg-gradient-to-r from-indigo-800 via-purple-900 to-indigo-800
                 border border-indigo-700 backdrop-blur-lg rounded-2xl sm:rounded-3xl
                 overflow-hidden shadow-2xl transform transition-all duration-300 ease-out">
-      <div class="relative p-3 text-white h-full flex flex-col">
+      <div class="relative p-3 sm:p-4 md:p-5 lg:p-6 text-white h-full flex flex-col">
 
           <!-- Profile Header Section -->
           <div class="absolute top-2 left-2 right-2 z-[10001]">
