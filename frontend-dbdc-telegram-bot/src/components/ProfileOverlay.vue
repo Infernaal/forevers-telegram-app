@@ -4,19 +4,26 @@
                       animate-[fadeIn_0.3s_ease-out]">
     <!-- Dropdown Wrapper -->
     <div class="relative w-full h-full flex justify-center items-end
-        px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16
-        py-4 sm:py-6 md:py-8 lg:py-10
-        pb-[88px] sm:pb-[96px] md:pb-[104px] lg:pb-[112px]
-        overflow-y-auto">
+                px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16
+                py-4 xs:py-6 sm:py-8 md:py-10 lg:py-12
+                pb-24 xs:pb-28 sm:pb-32 md:pb-36 lg:pb-40 xl:pb-44
+                safe-area-bottom">
       <!-- Dropdown Menu -->
-      <div class="w-full
-        max-w-[95vw] sm:max-w-[460px] md:max-w-[540px] lg:max-w-[640px] xl:max-w-[720px]
-        min-h-[65vh] sm:min-h-[70vh] md:min-h-[75vh] lg:min-h-[80vh] xl:min-h-[85vh]
-        max-h-[90vh] sm:max-h-[92vh] md:max-h-[94vh] lg:max-h-[96vh] xl:max-h-[97vh]
-        bg-gradient-to-br from-[#120B81] via-[#09074E] to-[#09074E]
-        rounded-[20px] sm:rounded-[22px] md:rounded-[24px] lg:rounded-[28px]
-        border border-[#09074E] shadow-2xl overflow-hidden">
-        <div class="p-4 sm:p-5 md:p-6 lg:p-8 xl:p-10 flex flex-col gap-3 sm:gap-4 md:gap-5">
+      <div class="relative w-full
+              max-w-[95vw] xs:max-w-[400px] sm:max-w-[460px] md:max-w-[520px] lg:max-w-[580px] xl:max-w-[640px] 2xl:max-w-[720px]
+              h-auto min-h-[65vh] max-h-[85vh]
+              xs:min-h-[70vh] xs:max-h-[88vh]
+              sm:min-h-[72vh] sm:max-h-[90vh]
+              md:min-h-[75vh] md:max-h-[92vh]
+              lg:min-h-[78vh] lg:max-h-[94vh]
+              xl:min-h-[80vh] xl:max-h-[95vh]
+              bg-gradient-to-br from-[#120B81] via-[#09074E] to-[#09074E]
+              border border-[#09074E] backdrop-blur-[40px]
+              rounded-[18px] xs:rounded-[20px] sm:rounded-[22px] md:rounded-[24px] lg:rounded-[26px] xl:rounded-[28px]
+              z-[50] overflow-hidden shadow-2xl
+              animate-[fadeInScale_0.4s_ease-out]
+              touch-manipulation overscroll-contain">
+        <div class="p-3 xs:p-4 sm:p-5 md:p-6 lg:p-8 xl:p-10 text-white text-center h-full flex flex-col">
             <!-- Background -->
             <div class="absolute inset-0 bg-gradient-to-br from-[#120B81] via-[#09074E] to-[#09074E]
                         border border-[#09074E] backdrop-blur-[40px]"></div>
