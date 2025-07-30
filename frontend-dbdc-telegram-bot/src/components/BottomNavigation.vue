@@ -115,8 +115,8 @@
               :class="[
                 'flex items-center justify-center transition-all duration-200 ease-out rounded-xl',
                 activeTab === 'favorites'
-                  ? 'w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 bg-blue-600'
-                  : 'w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12'
+                  ? 'w-8 h-8 sm:w-10 sm:h-10 bg-blue-600'
+                  : 'w-7 h-7 sm:w-8 sm:h-8'
               ]"
             >
               <svg
@@ -124,8 +124,8 @@
                 :class="[
                   'fill-current transition-all duration-200',
                   activeTab === 'favorites'
-                    ? 'text-white w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8'
-                    : 'text-gray-600 w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7'
+                    ? 'text-white w-5 h-5 sm:w-6 sm:h-6'
+                    : 'text-gray-600 w-4 h-4 sm:w-5 sm:h-5'
                 ]"
               >
                 <path d="M19.0791 0C19.6648 0 19.9999 0.476058 20 1.14258C20 1.80914 19.5817 2.28598 18.9961 2.28613H6.77832V5.80957H14.8955C15.4812 5.80963 15.8993 6.28565 15.8994 6.95215C15.8994 7.61877 15.4812 8.09564 14.8955 8.0957H6.77832V11.6191H11.0459C11.6316 11.6191 12.0497 12.0951 12.0498 12.7617C12.0498 13.4284 11.6317 13.9043 11.0459 13.9043H6.77832V18.8574C6.7782 19.5238 6.35992 19.9998 5.77441 20C5.18872 20 4.76965 19.5239 4.76953 18.8574V8.19043H1.00391C0.418346 8.19028 9.72129e-05 7.71429 0 7.04785C0 6.38129 0.418278 5.90491 1.00391 5.80957H4.76953V1.14258C4.76965 0.476058 5.18872 0 5.77441 0H19.0791Z" fill="currentColor"/>
