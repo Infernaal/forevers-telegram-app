@@ -193,9 +193,10 @@ const agreeToTerms = () => {
 
 /* Modal Container - Responsive Widths */
 .modal-container {
-  max-width: 340px;
-  max-height: 85vh;
-  min-height: 70vh;
+  max-width: min(340px, calc(100vw - 16px));
+  max-height: min(85vh, calc(100vh - 32px));
+  min-height: min(70vh, 500px);
+  width: 100%;
 }
 
 .modal-content {
