@@ -285,7 +285,7 @@
               <div class="flex items-center justify-between relative z-[1] w-full gap-3 sm:gap-4">
                 <div class="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
                   <div class="flex-shrink-0 w-6 sm:w-7 md:w-8 h-6 sm:h-7 md:h-8">
-                    <svg class="w-5 xs:w-6 sm:w-7 md:w-8 lg:w-9 xl:w-10 h-5 xs:h-6 sm:h-7 md:h-8 lg:h-9 xl:h-10" viewBox="0 0 32 32" fill="none">
+                    <svg class="w-full h-full" viewBox="0 0 32 32" fill="none">
                       <g clip-path="url(#clip0_2_21309)">
                         <path d="M16 31.0588C24.3167 31.0588 31.0588 24.3167 31.0588 16C31.0588 7.68323 24.3167 0.941162 16 0.941162C7.68323 0.941162 0.941162 7.68323 0.941162 16C0.941162 24.3167 7.68323 31.0588 16 31.0588Z" fill="#8C4CD1"/>
                         <path d="M28.998 8.39055C26.1133 12.4471 21.365 15.0918 16.0003 15.0918C10.6356 15.0918 5.88739 12.4471 3.00269 8.39055C5.61916 3.9341 10.4615 0.941162 16.0003 0.941162C21.5392 0.941162 26.3815 3.9341 28.998 8.39055Z" fill="#9C68E1"/>
