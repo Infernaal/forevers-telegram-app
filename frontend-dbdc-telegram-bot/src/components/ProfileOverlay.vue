@@ -51,14 +51,17 @@
               <!-- User Info -->
               <div class="flex-1 flex flex-col gap-1.5 xs:gap-2 sm:gap-2.5 px-1 xs:px-1.5 sm:px-2 min-w-0 overflow-hidden">
                 <!-- Silver Badge -->
-                <div class="flex items-center gap-1.5 xs:gap-2 sm:gap-2.5
-                            px-3 xs:px-4 sm:px-5 md:px-6
-                            py-1 xs:py-1.5 sm:py-2
+                <div class="flex items-center justify-start gap-1.5 xs:gap-2 sm:gap-2.5
+                            px-2.5 xs:px-3 sm:px-3.5 md:px-4 lg:px-4.5 xl:px-5
+                            py-1 xs:py-1.5 sm:py-1.5 md:py-2 lg:py-2.5
                             bg-[rgba(110,107,169,0.90)] border border-[#D8D8D8]
-                            rounded-2xl xs:rounded-3xl w-fit
+                            rounded-xl xs:rounded-2xl sm:rounded-2xl md:rounded-3xl w-fit max-w-fit
                             transition-all duration-300 hover:bg-[rgba(110,107,169,1)]">
-                  <div class="w-5 xs:w-6 sm:w-7 md:w-8 h-5 xs:h-6 sm:h-7 md:h-8 flex-shrink-0 transition-transform duration-300 hover:scale-110">
-                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                  <div class="w-4 xs:w-5 sm:w-6 md:w-7 lg:w-8 xl:w-9
+                             h-4 xs:h-5 sm:h-6 md:h-7 lg:h-8 xl:h-9
+                             flex-shrink-0 flex items-center justify-center
+                             transition-transform duration-300 hover:scale-110">
+                    <svg class="w-full h-full" viewBox="0 0 28 28" fill="none">
                       <path d="M14.0004 26.2497C7.24592 26.2497 1.75073 20.7545 1.75073 14.0001C1.75073 7.24564 7.24592 1.75085 14.0004 1.75085C20.7548 1.75085 26.25 7.24564 26.25 14.0001C26.25 20.7545 20.7544 26.2497 14.0004 26.2497Z" fill="white"/>
                       <path d="M20.2071 5.37145C20.73 5.37145 21.2468 5.39833 21.7567 5.4472C19.7049 3.58479 16.9828 2.44812 14 2.44812C7.63041 2.44812 2.448 7.63013 2.448 14.0001C2.448 16.2735 3.11102 18.3941 4.24973 20.1832C4.86143 11.9015 11.769 5.37145 20.2071 5.37145Z" fill="#E0E0E0"/>
                       <path d="M14.0006 25.5519C20.3702 25.5519 25.5526 20.3699 25.5526 13.9999C25.5526 10.6131 24.0873 7.56229 21.7577 5.44697C21.2478 5.39809 20.731 5.37122 20.2081 5.37122C11.7704 5.37122 4.86244 11.9017 4.25073 20.1829C6.30211 23.4072 9.90475 25.5519 14.0006 25.5519Z" fill="#B5B5B5"/>
