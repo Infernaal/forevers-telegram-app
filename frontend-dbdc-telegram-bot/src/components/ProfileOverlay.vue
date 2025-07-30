@@ -314,16 +314,16 @@
                   <div class="text-dbd-dark text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl font-bold truncate leading-tight">Start</div>
                 </div>
                 <button class="relative z-[1]
-                              w-[70px] xs:w-[80px] sm:w-[90px] md:w-[100px] lg:w-[110px] xl:w-[120px]
-                              h-7 xs:h-8 sm:h-9 md:h-10 lg:h-11 xl:h-12
-                              min-h-[28px] xs:min-h-[32px] sm:min-h-[36px] md:min-h-[40px] lg:min-h-[44px] xl:min-h-[48px]
-                              bg-gradient-to-r from-dbd-primary to-[#473FFF]
-                              border-none rounded-full text-white
-                              text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl
-                              font-bold leading-3 xs:leading-4 sm:leading-5 md:leading-6 lg:leading-7
-                              capitalize cursor-pointer transition-all duration-200
-                              hover:-translate-y-0.5 hover:shadow-lg flex-shrink-0
-                              px-2 xs:px-3 sm:px-4 md:px-5 lg:px-6"
+                     h-7 xs:h-8 sm:h-9 md:h-10 lg:h-11 xl:h-12
+                     min-w-[72px] xs:min-w-[80px] sm:min-w-[90px] md:min-w-[100px] lg:min-w-[110px] xl:min-w-[120px]
+                     px-2 xs:px-3 sm:px-4 md:px-5 lg:px-6
+                     bg-gradient-to-r from-dbd-primary to-[#473FFF]
+                     rounded-full text-white
+                     text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl
+                     font-bold capitalize
+                     flex items-center justify-center flex-shrink-0
+                     transition-all duration-200
+                     hover:-translate-y-0.5 hover:shadow-lg"
                         @click="handleUpgrade">
                   Upgrade
                 </button>
