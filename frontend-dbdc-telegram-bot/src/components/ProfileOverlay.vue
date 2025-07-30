@@ -1109,7 +1109,7 @@ const selectLanguage = (language) => {
   }
 }
 
-/* Small mobile devices (iPhone SE, small Android) - ���374px */
+/* Small mobile devices (iPhone SE, small Android) - ≤374px */
 @media (max-width: 374px) {
   .overlay-wrapper {
     padding: 8px;
@@ -1477,10 +1477,8 @@ const selectLanguage = (language) => {
   }
   
   .copy-button {
-    width: 26px;
-    height: 26px;
-    min-width: 26px;
-    min-height: 26px;
+    width: 36px;
+    height: 100%;
     border-radius: 0 19px 19px 0;
   }
   
