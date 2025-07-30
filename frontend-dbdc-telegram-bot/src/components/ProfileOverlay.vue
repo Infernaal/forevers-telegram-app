@@ -54,15 +54,15 @@
               </div>
 
               <!-- Close Button -->
-              <button class="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10
+              <button class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10
                              bg-gray-100 border border-dbd-primary
-                             rounded-r-full sm:rounded-r-2xl border-l-0
+                             rounded-r-full sm:rounded-r-2xl md:rounded-r-3xl border-l-0
                              flex items-center justify-center flex-shrink-0
                              transition-all duration-200 ease-in-out
                              hover:bg-gray-200 hover:scale-105
                              active:scale-95"
                       @click="$emit('close')">
-                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" viewBox="0 0 16 16" fill="none">
+                <svg class="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-gray-600" viewBox="0 0 16 16" fill="none">
                   <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
@@ -467,7 +467,7 @@ const selectLanguage = (language) => {
 </script>
 
 <style scoped>
-/* Минимальные стили для анимаций */
+/* Минимальные сти��и для анимаций */
 .profile-overlay {
   animation: fadeIn 0.3s ease-out;
 }
@@ -697,7 +697,7 @@ const selectLanguage = (language) => {
   align-items: center;
   gap: 2px;
   padding-left: 12px;
-  padding-right: 4px; /* уме��ьшено для Copy border to border */
+  padding-right: 4px; /* уменьшено для Copy border to border */
   flex: 1;
 }
 
