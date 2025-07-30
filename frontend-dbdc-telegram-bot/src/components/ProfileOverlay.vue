@@ -10,13 +10,13 @@
                 border border-[#09074E] rounded-[20px] shadow-2xl
                 backdrop-blur-[32px] flex flex-col overflow-hidden transform transition-all duration-300 ease-out"
       >
-        <div class="p-2 xs:p-3 sm:p-4 md:p-5 lg:p-6 xl:p-8 text-white text-center h-full flex flex-col">
+        <div class="p-3 sm:p-4 md:p-5 lg:p-6 text-white h-full flex flex-col">
             <!-- Background -->
             <div class="absolute inset-0 bg-gradient-to-br from-[#120B81] via-[#09074E] to-[#09074E]
                         border border-[#09074E] backdrop-blur-[40px]"></div>
 
           <!-- Profile Header Section -->
-          <div class="p-4 sm:p-5 md:p-6 flex flex-col gap-4 overflow-auto scrollbar-none">
+          <div class="relative flex-shrink-0 z-[2] mb-3 sm:mb-4 md:mb-5 lg:mb-6">
             <div class="w-full
                         h-16 xs:h-18 sm:h-20 md:h-24 lg:h-28 xl:h-32
                         bg-[rgba(96,95,135,0.28)] border border-[#D8D8D8]
