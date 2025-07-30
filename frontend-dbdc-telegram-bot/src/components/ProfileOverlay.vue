@@ -87,7 +87,7 @@
             <div class="menu-item"
                 @click="handleMenuClick('ambassador')">
               <div class="menu-icon">
-                <svg width="20" height="20" viewBox="0 0 14 20" fill="none">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 14 20" fill="currentColor">
                   <path d="M7 9.64844C9.76508 9.64858 12.0066 11.9652 12.0068 14.8242C12.0068 17.6826 9.76511 19.9999 7 20C4.23394 20 1.99219 17.6827 1.99219 14.8242C1.99243 11.9651 4.23409 9.64844 7 9.64844ZM6.09668 13.8418L4.07715 14.1465L5.53906 15.6182L5.19434 17.6992L7 16.7168L8.80566 17.6992L8.46191 15.6182L9.92383 14.1465L7.90332 13.8418L7 11.9512L6.09668 13.8418ZM4.60547 0L7 3.30078L9.39453 0H14L7 9.64844L0 0H4.60547Z" fill="white"/>
                 </svg>
               </div>
@@ -467,7 +467,7 @@ const selectLanguage = (language) => {
 </script>
 
 <style scoped>
-/* Минимальные сти����и для анимаций */
+/* Минимальные сти��и для анимаций */
 .profile-overlay {
   animation: fadeIn 0.3s ease-out;
 }
