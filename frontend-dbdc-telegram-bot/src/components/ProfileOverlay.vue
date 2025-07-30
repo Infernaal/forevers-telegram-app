@@ -827,12 +827,12 @@ const selectLanguage = (language) => {
 
 .copy-button:hover {
   background: #f3f4f6;
-  transform: translateY(-50%) scale(1.05);
+  transform: scale(1.02);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .copy-button:active {
-  transform: translateY(-50%) scale(0.98);
+  transform: scale(0.98);
 }
 
 /* Vertical Divider */
