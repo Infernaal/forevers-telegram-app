@@ -9,6 +9,9 @@
       <div class="relative w-full
               max-w-[480px] xs:max-w-[500px] sm:max-w-[520px] md:max-w-[540px] lg:max-w-[560px] xl:max-w-[580px] 2xl:max-w-[600px]
               h-auto min-h-[60vh] max-h-[75vh]
+              md:min-h-[65vh] md:max-h-[80vh]
+              lg:min-h-[70vh] lg:max-h-[85vh]
+              xl:min-h-[75vh] xl:max-h-[90vh]
               bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
               border border-[#09074E] backdrop-blur-[32px]
               rounded-[16px] xs:rounded-[18px] sm:rounded-[20px] md:rounded-[22px] lg:rounded-[24px]
