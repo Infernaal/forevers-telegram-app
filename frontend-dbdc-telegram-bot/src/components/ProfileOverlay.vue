@@ -638,8 +638,8 @@ const selectLanguage = (language) => {
 
   .profile-dropdown {
     max-width: 280px;
-    min-height: 380px;
-    max-height: calc(100vh - 60px);
+    min-h-[380px];
+    max-h-[calc(100vh-60px)];
     height: 400px;
     border-radius: 12px;
   }
@@ -859,8 +859,8 @@ const selectLanguage = (language) => {
 
   .profile-dropdown {
     max-width: 320px;
-    min-height: 420px;
-    max-height: calc(100vh - 80px);
+    min-h-[420px];
+    max-h-[calc(100vh-80px)];
     height: 440px;
     border-radius: 14px;
   }
@@ -1080,8 +1080,8 @@ const selectLanguage = (language) => {
 
   .profile-dropdown {
     max-width: 500px;
-    min-height: 520px;
-    max-height: calc(100vh - 100px);
+    min-h-[520px];
+    max-h-[calc(100vh-100px)];
     height: 550px;
     border-radius: 20px;
   }
@@ -1301,8 +1301,8 @@ const selectLanguage = (language) => {
 
   .profile-dropdown {
     max-width: 600px;
-    min-height: 600px;
-    max-height: calc(100vh - 120px);
+    min-h-[600px];
+    max-h-[calc(100vh-120px)];
     height: 640px;
     border-radius: 24px;
   }
@@ -1522,8 +1522,8 @@ const selectLanguage = (language) => {
 
   .profile-dropdown {
     max-width: 240px;
-    min-height: 300px;
-    max-height: calc(100vh - 40px);
+    min-h-[300px];
+    max-h-[calc(100vh-40px)];
     height: 320px;
     border-radius: 10px;
   }
