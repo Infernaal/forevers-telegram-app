@@ -410,15 +410,16 @@
                         touch-manipulation"
                 @click="toggleLanguageDropdown">
               
-              <div class="flex items-center gap-1 xs:gap-1.5 sm:gap-2 flex-1 min-w-0 pr-4 xs:pr-5 sm:pr-6">
+              <div class="flex items-center gap-1 xs:gap-1.5 sm:gap-2 md:gap-2.5 flex-1 min-w-0
+                           pr-4 xs:pr-5 sm:pr-6 md:pr-7 lg:pr-8 xl:pr-9">
                 <CountryFlag :country="selectedLanguage.country" size="medium"
-                             class="flex-shrink-0 !w-5 xs:!w-6 sm:!w-7 md:!w-8
-                                    !h-5 xs:!h-6 sm:!h-7 md:!h-8
-                                    !min-w-5 xs:!min-w-6 sm:!min-w-7 md:!min-w-8
-                                    !min-h-5 xs:!min-h-6 sm:!min-h-7 md:!min-h-8" />
-                <span class="text-dbd-off-white text-xs xs:text-sm sm:text-base md:text-lg font-normal
-                            leading-4 xs:leading-5 sm:leading-6 md:leading-7
-                            flex-shrink-0 whitespace-nowrap w-6 xs:w-8 sm:w-10 text-left">
+                             class="flex-shrink-0 !w-4 xs:!w-5 sm:!w-6 md:!w-7 lg:!w-8 xl:!w-9
+                                    !h-4 xs:!h-5 sm:!h-6 md:!h-7 lg:!h-8 xl:!h-9
+                                    !min-w-4 xs:!min-w-5 sm:!min-w-6 md:!min-w-7 lg:!min-w-8 xl:!min-w-9
+                                    !min-h-4 xs:!min-h-5 sm:!min-h-6 md:!min-h-7 lg:!min-h-8 xl:!min-h-9" />
+                <span class="text-dbd-off-white text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl
+                           font-semibold leading-tight
+                           flex-shrink-0 whitespace-nowrap text-left">
                   {{ selectedLanguage.code }}
                 </span>
               </div>
