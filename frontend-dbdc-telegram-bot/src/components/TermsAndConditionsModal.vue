@@ -1,36 +1,37 @@
 <template>
   <div v-if="isVisible" 
        class="fixed inset-0 bg-black/20 backdrop-blur-[9px] z-[10001] 
+              flex items-start justify-center 
+              p-3 sm:p-4 md:p-6 lg:p-8 pt-6 sm:pt-8 md:pt-12 lg:pt-16
               animate-[fadeIn_0.3s_ease-out] terms-modal-overlay" 
        @click="closeModal">
-    <div class="w-full h-full min-h-screen bg-gray-100 font-montserrat overflow-x-hidden terms-modal-view
+    <div class="w-full modal-container
                 animate-[slideUp_0.3s_ease-out]" 
          @click.stop>
-      <!-- Content Container with full screen responsive design -->
-      <div class="content-container">
-
+      <!-- Modal Content -->
+      <div class="modal-content">
         <!-- Header -->
-        <div class="terms-header-section">
-          <h1 class="terms-title">
+        <div class="modal-header">
+          <h1 class="modal-title">
             Forevers Leasing Terms & Conditions
           </h1>
-          <p class="terms-last-updated">
+          <p class="modal-subtitle">
             Last Updated: July 16, 2025
           </p>
         </div>
 
         <!-- Scrollable Content -->
-        <div class="terms-scroll-section">
-          <div class="terms-scroll-content">
+        <div class="modal-scroll-section">
+          <div class="modal-scroll-content">
             <!-- Introduction -->
-            <p class="terms-intro">
+            <p class="modal-intro">
               These Terms and Conditions govern your use of DBDC (the "Service"). By accessing or using the Service, you agree to be bound by these Terms. If you do not agree with these Terms, do not use the Service.
             </p>
 
             <!-- Sections -->
-            <div class="terms-sections">
+            <div class="modal-sections">
               <!-- Definitions -->
-              <section class="terms-section">
+              <section class="modal-section">
                 <h2 class="section-title">Definitions</h2>
                 <div class="section-content">
                   <div class="bullet-item">
@@ -49,7 +50,7 @@
               </section>
 
               <!-- Eligibility -->
-              <section class="terms-section">
+              <section class="modal-section">
                 <h2 class="section-title">Eligibility</h2>
                 <div class="section-content">
                   <div class="bullet-item">
@@ -62,7 +63,7 @@
               </section>
 
               <!-- User Accounts -->
-              <section class="terms-section">
+              <section class="modal-section">
                 <h2 class="section-title">User Accounts</h2>
                 <div class="section-content">
                   <div class="bullet-item">
@@ -75,7 +76,7 @@
               </section>
 
               <!-- Digital Currency Risks -->
-              <section class="terms-section">
+              <section class="modal-section">
                 <h2 class="section-title">Digital Currency Risks</h2>
                 <div class="section-content">
                   <div class="bullet-item">
@@ -88,7 +89,7 @@
               </section>
 
               <!-- User Obligations -->
-              <section class="terms-section">
+              <section class="modal-section">
                 <h2 class="section-title">User Obligations</h2>
                 <div class="section-content">
                   <div class="bullet-item">
@@ -101,7 +102,7 @@
               </section>
 
               <!-- Intellectual Property -->
-              <section class="terms-section">
+              <section class="modal-section">
                 <h2 class="section-title">Intellectual Property</h2>
                 <div class="section-content">
                   <div class="bullet-item">
@@ -114,7 +115,7 @@
               </section>
 
               <!-- Limitation of Liability -->
-              <section class="terms-section">
+              <section class="modal-section">
                 <h2 class="section-title">Limitation of Liability</h2>
                 <div class="section-content">
                   <div class="bullet-item">
@@ -127,7 +128,7 @@
               </section>
 
               <!-- Amendments -->
-              <section class="terms-section">
+              <section class="modal-section">
                 <h2 class="section-title">Amendments</h2>
                 <div class="section-content">
                   <div class="bullet-item">
@@ -143,11 +144,11 @@
         </div>
 
         <!-- Action Buttons -->
-        <div class="terms-actions-section">
-          <button class="terms-agree-btn" @click="agreeToTerms">
+        <div class="modal-actions">
+          <button class="agree-btn" @click="agreeToTerms">
             I agree with Terms & Conditions
           </button>
-          <button class="terms-back-btn" @click="closeModal">
+          <button class="back-btn" @click="closeModal">
             Back
           </button>
         </div>
@@ -182,7 +183,7 @@ const agreeToTerms = () => {
 </script>
 
 <style scoped>
-/* Modal Overlay Base Styles */
+/* Modal Overlay */
 .terms-modal-overlay {
   animation: fadeIn 0.3s ease-out;
   touch-action: none;
@@ -190,99 +191,94 @@ const agreeToTerms = () => {
   overscroll-behavior: none;
 }
 
-.terms-modal-view {
-  width: 100%;
-  margin: 0 auto;
-  background: #f3f4f6;
-  min-height: 100vh;
-  min-height: 100dvh; /* Dynamic viewport height */
-  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-  overflow-y: auto;
-  overscroll-behavior: none;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+/* Modal Container - Responsive Widths */
+.modal-container {
+  max-width: 340px;
+  max-height: 85vh;
+  min-height: 70vh;
 }
 
-.terms-modal-view::-webkit-scrollbar {
-  display: none; /* Chrome, Safari and Opera */
-}
-
-.content-container {
-  background: #f3f4f6;
-  padding: 16px 16px 100px 16px; /* Bottom padding for buttons */
-  box-sizing: border-box;
-  min-height: calc(100vh - 0px);
+.modal-content {
+  background: #fff;
+  border-radius: 20px;
+  border: 1px solid #E8E8E8;
+  box-shadow: 1.744px 2.616px 20.93px 0 rgba(2, 7, 14, 0.04);
   display: flex;
   flex-direction: column;
+  height: 100%;
+  max-height: 85vh;
+  overflow: hidden;
 }
 
-/* Header Section */
-.terms-header-section {
-  margin-bottom: 16px;
+/* Header */
+.modal-header {
+  padding: 12px;
   flex-shrink: 0;
+  border-bottom: 1px solid #f0f0f0;
 }
 
-.terms-title {
-  font-size: 18px;
-  font-weight: 600;
+.modal-title {
   color: #02070E;
-  margin: 0 0 12px 0;
-  line-height: 1.3;
+  font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
   text-transform: capitalize;
+  margin: 0 0 8px 0;
 }
 
-.terms-last-updated {
+.modal-subtitle {
+  color: #4B4D50;
+  font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 14px;
   font-weight: 500;
-  color: #4B4D50;
-  margin: 0 0 20px 0;
   line-height: 1.5;
   text-transform: capitalize;
+  margin: 0;
 }
 
-/* Scrollable Section */
-.terms-scroll-section {
+/* Scrollable Content */
+.modal-scroll-section {
   flex: 1;
   overflow-y: auto;
+  padding: 12px;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  overscroll-behavior: contain;
 }
 
-.terms-scroll-section::-webkit-scrollbar {
+.modal-scroll-section::-webkit-scrollbar {
   display: none;
 }
 
-.terms-scroll-content {
-  padding-bottom: 20px;
+.modal-scroll-content {
+  padding-bottom: 12px;
 }
 
-.terms-intro {
+.modal-intro {
   color: #4B4D50;
+  font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 1.4;
-  margin: 0 0 32px 0;
+  margin: 0 0 24px 0;
 }
 
-.terms-sections {
+.modal-sections {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 24px;
 }
 
-.terms-section {
+.modal-section {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 
 .section-title {
   color: #02070E;
-  font-size: 20px;
+  font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
   font-weight: 700;
   line-height: 1.3;
   text-transform: capitalize;
@@ -298,47 +294,43 @@ const agreeToTerms = () => {
 .bullet-item {
   display: flex;
   align-items: flex-start;
-  gap: 14px;
+  gap: 12px;
 }
 
 .bullet-point {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: #4B4D50;
   flex-shrink: 0;
-  margin-top: 8px;
+  margin-top: 6px;
 }
 
 .bullet-text {
   color: #4B4D50;
-  font-size: 14px;
+  font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
   font-weight: 500;
   line-height: 1.4;
   margin: 0;
   flex: 1;
 }
 
-/* Actions Section */
-.terms-actions-section {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 16px;
+/* Actions */
+.modal-actions {
+  padding: 12px;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  background: #f3f4f6;
+  flex-shrink: 0;
   border-top: 1px solid #F0F0F0;
-  z-index: 10002;
 }
 
-.terms-agree-btn {
+.agree-btn {
   display: flex;
   width: 100%;
-  height: 52px;
-  padding: 12px 48px;
+  height: 48px;
+  padding: 12px 36px;
   justify-content: center;
   align-items: center;
   border-radius: 1000px;
@@ -349,30 +341,30 @@ const agreeToTerms = () => {
   box-shadow: 0 4px 12px rgba(32, 25, 206, 0.25);
   color: #FFF;
   text-align: center;
-  font-size: 14px;
+  font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
   font-weight: 700;
   line-height: 1.4;
-  font-family: inherit;
   outline: none;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 }
 
-.terms-agree-btn:hover {
+.agree-btn:hover {
   opacity: 0.9;
   transform: translateY(-1px);
   box-shadow: 0 6px 16px rgba(32, 25, 206, 0.35);
 }
 
-.terms-agree-btn:active {
+.agree-btn:active {
   transform: translateY(0);
 }
 
-.terms-back-btn {
+.back-btn {
   display: flex;
   width: 100%;
-  height: 44px;
-  padding: 12px 24px;
+  height: 40px;
+  padding: 8px 24px;
   justify-content: center;
   align-items: center;
   border-radius: 1000px;
@@ -382,61 +374,71 @@ const agreeToTerms = () => {
   transition: all 0.2s ease;
   color: #4B4D50;
   text-align: center;
-  font-size: 16px;
+  font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
   font-weight: 500;
   line-height: 1.4;
-  font-family: inherit;
   outline: none;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 }
 
-.terms-back-btn:hover {
+.back-btn:hover {
   background: #f0f0f0;
   transform: translateY(-1px);
 }
 
-.terms-back-btn:active {
+.back-btn:active {
   transform: translateY(0);
 }
 
 /* Small mobile devices (iPhone SE, small Android) - ≤374px */
 @media (max-width: 374px) {
-  .terms-modal-view {
-    max-width: 100%;
+  .modal-container {
+    max-width: 300px;
+    max-height: 88vh;
+    min-height: 75vh;
   }
   
-  .content-container {
-    padding: 12px 12px 90px 12px;
+  .modal-content {
+    border-radius: 16px;
   }
   
-  .terms-header-section {
-    margin-bottom: 12px;
+  .modal-header {
+    padding: 10px;
   }
   
-  .terms-title {
+  .modal-title {
     font-size: 16px;
   }
   
-  .terms-last-updated {
+  .modal-subtitle {
     font-size: 12px;
+  }
+  
+  .modal-scroll-section {
+    padding: 10px;
+  }
+  
+  .modal-intro {
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+  
+  .modal-sections {
+    gap: 20px;
+  }
+  
+  .modal-section {
+    gap: 10px;
   }
   
   .section-title {
-    font-size: 18px;
+    font-size: 14px;
   }
   
-  .terms-intro,
   .bullet-text {
-    font-size: 12px;
-  }
-  
-  .terms-sections {
-    gap: 24px;
-  }
-  
-  .terms-section {
-    gap: 12px;
+    font-size: 11px;
   }
   
   .bullet-item {
@@ -444,133 +446,227 @@ const agreeToTerms = () => {
   }
   
   .bullet-point {
-    width: 5px;
-    height: 5px;
-    margin-top: 6px;
+    width: 4px;
+    height: 4px;
+    margin-top: 5px;
   }
   
-  .terms-actions-section {
-    padding: 12px;
+  .modal-actions {
+    padding: 10px;
   }
   
-  .terms-agree-btn {
-    height: 48px;
+  .agree-btn {
+    height: 44px;
+    font-size: 11px;
+    padding: 10px 32px;
+  }
+  
+  .back-btn {
+    height: 36px;
     font-size: 12px;
-    padding: 10px 40px;
-  }
-  
-  .terms-back-btn {
-    height: 40px;
-    font-size: 14px;
-    padding: 10px 20px;
+    padding: 8px 20px;
   }
 }
 
 /* Regular mobile devices (iPhone 12, 13, 14) - 375px to 430px */
 @media (min-width: 375px) and (max-width: 430px) {
-  .terms-modal-view {
-    max-width: 100%;
+  .modal-container {
+    max-width: 360px;
+    max-height: 86vh;
+    min-height: 72vh;
   }
   
-  .content-container {
-    padding: 14px 14px 95px 14px;
+  .modal-content {
+    border-radius: 18px;
   }
   
-  .terms-header-section {
-    margin-bottom: 14px;
-  }
-  
-  .terms-title {
-    font-size: 17px;
-  }
-  
-  .terms-last-updated {
-    font-size: 13px;
-  }
-  
-  .section-title {
-    font-size: 19px;
-  }
-  
-  .terms-intro,
-  .bullet-text {
-    font-size: 13px;
-  }
-  
-  .terms-sections {
-    gap: 28px;
-  }
-  
-  .terms-section {
-    gap: 14px;
-  }
-  
-  .bullet-item {
-    gap: 12px;
-  }
-  
-  .bullet-point {
-    width: 5.5px;
-    height: 5.5px;
-    margin-top: 7px;
-  }
-  
-  .terms-actions-section {
+  .modal-header {
     padding: 14px;
   }
   
-  .terms-agree-btn {
-    height: 50px;
-    font-size: 13px;
-    padding: 11px 44px;
+  .modal-title {
+    font-size: 20px;
   }
   
-  .terms-back-btn {
-    height: 42px;
+  .modal-subtitle {
     font-size: 15px;
-    padding: 11px 22px;
+  }
+  
+  .modal-scroll-section {
+    padding: 14px;
+  }
+  
+  .modal-intro {
+    font-size: 15px;
+    margin-bottom: 28px;
+  }
+  
+  .modal-sections {
+    gap: 28px;
+  }
+  
+  .modal-section {
+    gap: 14px;
+  }
+  
+  .section-title {
+    font-size: 18px;
+  }
+  
+  .bullet-text {
+    font-size: 14px;
+  }
+  
+  .bullet-item {
+    gap: 14px;
+  }
+  
+  .bullet-point {
+    width: 6px;
+    height: 6px;
+    margin-top: 7px;
+  }
+  
+  .modal-actions {
+    padding: 14px;
+  }
+  
+  .agree-btn {
+    height: 52px;
+    font-size: 14px;
+    padding: 12px 40px;
+  }
+  
+  .back-btn {
+    height: 44px;
+    font-size: 16px;
+    padding: 10px 24px;
   }
 }
 
 /* Large mobile and small tablets - 431px to 768px */
 @media (min-width: 431px) and (max-width: 768px) {
-  .terms-modal-view {
-    width: 100%;
+  .modal-container {
+    max-width: 500px;
+    max-height: 82vh;
+    min-height: 65vh;
   }
 
-  .content-container {
-    padding: 24px 24px 140px 24px;
-    max-width: 800px;
-    margin: 0 auto;
+  .modal-content {
+    border-radius: 24px;
   }
 
-  .terms-header-section {
-    margin-bottom: 24px;
+  .modal-header {
+    padding: 20px;
   }
 
-  .terms-title {
-    font-size: 28px;
+  .modal-title {
+    font-size: 26px;
   }
 
-  .terms-last-updated {
+  .modal-subtitle {
     font-size: 18px;
+  }
+
+  .modal-scroll-section {
+    padding: 20px;
+  }
+
+  .modal-intro {
+    font-size: 18px;
+    margin-bottom: 32px;
+  }
+
+  .modal-sections {
+    gap: 32px;
+  }
+
+  .modal-section {
+    gap: 16px;
   }
 
   .section-title {
-    font-size: 24px;
+    font-size: 22px;
   }
 
-  .terms-intro,
+  .bullet-text {
+    font-size: 16px;
+  }
+
+  .bullet-item {
+    gap: 16px;
+  }
+
+  .bullet-point {
+    width: 7px;
+    height: 7px;
+    margin-top: 8px;
+  }
+
+  .modal-actions {
+    padding: 20px;
+  }
+
+  .agree-btn {
+    height: 56px;
+    font-size: 16px;
+    padding: 16px 48px;
+  }
+
+  .back-btn {
+    height: 48px;
+    font-size: 18px;
+    padding: 12px 32px;
+  }
+}
+
+/* Tablets and desktop - ≥769px */
+@media (min-width: 769px) {
+  .modal-container {
+    max-width: 600px;
+    max-height: 80vh;
+    min-height: 60vh;
+  }
+
+  .modal-content {
+    border-radius: 28px;
+  }
+
+  .modal-header {
+    padding: 24px;
+  }
+
+  .modal-title {
+    font-size: 32px;
+  }
+
+  .modal-subtitle {
+    font-size: 20px;
+  }
+
+  .modal-scroll-section {
+    padding: 24px;
+  }
+
+  .modal-intro {
+    font-size: 20px;
+    margin-bottom: 36px;
+  }
+
+  .modal-sections {
+    gap: 36px;
+  }
+
+  .modal-section {
+    gap: 20px;
+  }
+
+  .section-title {
+    font-size: 26px;
+  }
+
   .bullet-text {
     font-size: 18px;
-  }
-
-  .terms-sections {
-    gap: 40px;
-  }
-
-  .terms-section {
-    gap: 20px;
   }
 
   .bullet-item {
@@ -580,154 +676,94 @@ const agreeToTerms = () => {
   .bullet-point {
     width: 8px;
     height: 8px;
-    margin-top: 10px;
+    margin-top: 9px;
   }
 
-  .terms-actions-section {
+  .modal-actions {
     padding: 24px;
   }
 
-  .terms-agree-btn {
+  .agree-btn {
     height: 64px;
     font-size: 18px;
-    padding: 18px 60px;
+    padding: 18px 56px;
   }
 
-  .terms-back-btn {
-    height: 56px;
-    font-size: 18px;
-    padding: 16px 32px;
-  }
-}
-
-/* Tablets and desktop - ≥769px */
-@media (min-width: 769px) {
-  .terms-modal-view {
-    width: 100%;
-    margin: 0;
-  }
-
-  .content-container {
-    padding: 40px 40px 160px 40px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .terms-header-section {
-    margin-bottom: 32px;
-  }
-
-  .terms-title {
-    font-size: 36px;
-  }
-
-  .terms-last-updated {
-    font-size: 22px;
-  }
-
-  .section-title {
-    font-size: 28px;
-  }
-
-  .terms-intro,
-  .bullet-text {
-    font-size: 22px;
-  }
-
-  .terms-sections {
-    gap: 48px;
-  }
-
-  .terms-section {
-    gap: 24px;
-  }
-
-  .bullet-item {
-    gap: 20px;
-  }
-
-  .bullet-point {
-    width: 10px;
-    height: 10px;
-    margin-top: 12px;
-  }
-
-  .terms-actions-section {
-    padding: 40px;
-  }
-
-  .terms-agree-btn {
-    height: 72px;
-    font-size: 22px;
-    padding: 24px 72px;
-  }
-
-  .terms-back-btn {
-    height: 64px;
-    font-size: 22px;
-    padding: 20px 40px;
+  .back-btn {
+    height: 52px;
+    font-size: 20px;
+    padding: 14px 36px;
   }
 }
 
 /* Landscape orientation adjustments for phones */
 @media (max-height: 500px) and (orientation: landscape) {
-  .content-container {
-    padding: 8px 16px 80px 16px;
+  .modal-container {
+    max-height: 90vh;
+    min-height: 80vh;
   }
   
-  .terms-header-section {
-    margin-bottom: 8px;
-  }
-  
-  .terms-title {
-    font-size: 14px;
-  }
-  
-  .terms-last-updated {
-    font-size: 11px;
-  }
-  
-  .section-title {
-    font-size: 16px;
-  }
-  
-  .terms-intro,
-  .bullet-text {
-    font-size: 11px;
-  }
-  
-  .terms-sections {
-    gap: 16px;
-  }
-  
-  .terms-section {
-    gap: 8px;
-  }
-  
-  .bullet-item {
-    gap: 8px;
-  }
-  
-  .bullet-point {
-    width: 4px;
-    height: 4px;
-    margin-top: 5px;
-  }
-  
-  .terms-actions-section {
+  .modal-header {
     padding: 8px;
   }
   
-  .terms-agree-btn {
-    height: 40px;
-    font-size: 11px;
-    padding: 8px 32px;
+  .modal-title {
+    font-size: 14px;
   }
   
-  .terms-back-btn {
-    height: 36px;
+  .modal-subtitle {
     font-size: 11px;
-    padding: 8px 16px;
+  }
+  
+  .modal-scroll-section {
+    padding: 8px;
+  }
+  
+  .modal-intro {
+    font-size: 11px;
+    margin-bottom: 12px;
+  }
+  
+  .modal-sections {
+    gap: 12px;
+  }
+  
+  .modal-section {
+    gap: 6px;
+  }
+  
+  .section-title {
+    font-size: 12px;
+  }
+  
+  .bullet-text {
+    font-size: 10px;
+  }
+  
+  .bullet-item {
+    gap: 6px;
+  }
+  
+  .bullet-point {
+    width: 3px;
+    height: 3px;
+    margin-top: 4px;
+  }
+  
+  .modal-actions {
+    padding: 8px;
+  }
+  
+  .agree-btn {
+    height: 36px;
+    font-size: 10px;
+    padding: 8px 24px;
+  }
+  
+  .back-btn {
+    height: 32px;
+    font-size: 10px;
+    padding: 6px 16px;
   }
 }
 
@@ -748,35 +784,27 @@ const agreeToTerms = () => {
   }
 }
 
-/* High DPI displays */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .bullet-point {
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-  }
-}
-
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
-  .terms-modal-view {
-    background: #1a1a1a;
+  .modal-content {
+    background: #2a2a2a;
+    border-color: rgba(255, 255, 255, 0.1);
   }
   
-  .content-container {
-    background: #1a1a1a;
+  .modal-header {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
   }
   
-  .terms-actions-section {
-    background: #1a1a1a;
+  .modal-actions {
     border-top-color: rgba(255, 255, 255, 0.1);
   }
   
-  .terms-title {
+  .modal-title {
     color: #ffffff;
   }
   
-  .terms-last-updated,
-  .terms-intro,
+  .modal-subtitle,
+  .modal-intro,
   .bullet-text {
     color: #a0a0a0;
   }
@@ -789,8 +817,8 @@ const agreeToTerms = () => {
     background: #a0a0a0;
   }
   
-  .terms-back-btn {
-    background: #2a2a2a;
+  .back-btn {
+    background: #3a3a3a;
     border-color: rgba(255, 255, 255, 0.2);
     color: #ffffff;
   }
@@ -798,69 +826,43 @@ const agreeToTerms = () => {
 
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-  .terms-agree-btn,
-  .terms-back-btn {
+  .agree-btn,
+  .back-btn {
     transition: none;
   }
   
-  .terms-agree-btn:hover,
-  .terms-back-btn:hover {
+  .agree-btn:hover,
+  .back-btn:hover {
     transform: none;
   }
   
-  .terms-agree-btn:active,
-  .terms-back-btn:active {
+  .agree-btn:active,
+  .back-btn:active {
     transform: none;
   }
 }
 
 /* Touch optimizations */
 @media (hover: none) and (pointer: coarse) {
-  .terms-agree-btn:hover,
-  .terms-back-btn:hover {
+  .agree-btn:hover,
+  .back-btn:hover {
     transform: none;
   }
   
-  .terms-agree-btn:active {
+  .agree-btn:active {
     opacity: 0.8;
   }
   
-  .terms-back-btn:active {
+  .back-btn:active {
     background: #e0e0e0;
   }
 }
 
-/* Safe area support for different iOS versions */
-@supports (padding-bottom: env(safe-area-inset-bottom)) {
-  .content-container {
-    padding-bottom: calc(100px + env(safe-area-inset-bottom));
-  }
-  
-  .terms-actions-section {
-    padding-bottom: calc(16px + env(safe-area-inset-bottom));
-  }
-}
-
-@supports (padding-bottom: constant(safe-area-inset-bottom)) {
-  .content-container {
-    padding-bottom: calc(100px + constant(safe-area-inset-bottom));
-  }
-  
-  .terms-actions-section {
-    padding-bottom: calc(16px + constant(safe-area-inset-bottom));
-  }
-}
-
 /* Performance optimizations */
-.terms-agree-btn,
-.terms-back-btn {
+.agree-btn,
+.back-btn {
   will-change: transform;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-}
-
-/* Telegram WebApp specific optimizations */
-* {
-  -webkit-tap-highlight-color: transparent;
 }
 </style>
