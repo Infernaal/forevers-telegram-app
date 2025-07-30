@@ -166,7 +166,7 @@
         </div>
 
         <!-- Bottom Section with Start Card and ID/Language -->
-        <div class="flex-shrink-0 px-3 pb-3 space-y-3">
+        <div class="flex-shrink-0 px-3 pb-3 space-y-4 sm:space-y-5 md:space-y-6">
           
           <!-- Start Upgrade Card - Figma Design -->
           <div class="relative bg-[#F1E7FF] border border-[#DCCCF1] rounded-2xl overflow-hidden h-[84px] w-full max-w-[323px] mx-auto">
@@ -229,7 +229,7 @@
 
             <!-- ID Section -->
             <div class="relative flex items-center">
-              <div class="bg-white/[0.30] backdrop-blur-[32px] border border-white/40 rounded-full h-11 w-36 sm:w-40 md:w-44 flex items-center justify-between pl-3 pr-0">
+              <div class="bg-white/[0.30] backdrop-blur-[32px] border border-white/40 rounded-full h-11 w-32 sm:w-36 md:w-36 flex items-center justify-between pl-3 pr-0">
                 <div class="flex items-center min-w-0 overflow-hidden">
                   <span class="text-dbd-light-gray text-sm">ID:</span>
                   <span class="text-white text-sm font-medium ml-1 truncate">515745</span>
@@ -248,7 +248,7 @@
 
             <!-- Language Section with Dropdown -->
             <div class="relative flex items-center">
-              <div class="bg-white/[0.20] border border-white/24 rounded-full h-11 w-36 sm:w-40 md:w-44 flex items-center px-1.5 cursor-pointer hover:bg-white/25 transition-colors"
+              <div class="bg-white/[0.20] border border-white/24 rounded-full h-11 w-32 sm:w-36 md:w-36 flex items-center px-1.5 cursor-pointer hover:bg-white/25 transition-colors"
                    @click="toggleLanguageDropdown">
                 <!-- Selected Country Flag -->
                 <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 ml-1 flex items-center justify-center">
@@ -279,7 +279,7 @@
                 leave-from-class="opacity-100 scale-100 translate-y-0"
                 leave-to-class="opacity-0 scale-95 translate-y-2">
                 <div v-if="isLanguageDropdownOpen"
-                     class="absolute bottom-full right-0 mb-2 w-36 sm:w-40 md:w-44 bg-gradient-to-br from-[#120B81] via-[#120B81] to-[#09074E] rounded-xl shadow-xl border border-white/20 py-2 z-50 max-h-32 overflow-y-auto backdrop-blur-[32px]"
+                     class="absolute bottom-full right-0 mb-2 w-32 sm:w-36 md:w-36 bg-gradient-to-br from-[#120B81] via-[#120B81] to-[#09074E] rounded-xl shadow-xl border border-white/20 py-2 z-50 max-h-32 overflow-y-auto backdrop-blur-[32px]"
                      @click.stop>
                   <div v-for="language in languages"
                        :key="language.code"
