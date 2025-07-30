@@ -257,10 +257,7 @@
           </div>
 
           <!-- Start Section -->
-          <div class="absolute
-                      bottom-[55px] xs:bottom-[60px] sm:bottom-[65px] md:bottom-[75px] lg:bottom-[85px] xl:bottom-[95px]
-                      left-2 xs:left-2.5 sm:left-3 md:left-3.5 lg:left-4 xl:left-5
-                      right-2 xs:right-2.5 sm:right-3 md:right-3.5 lg:right-4 xl:right-5 z-[1]">
+          <div class="relative flex-shrink-0 z-[1] mb-4 xs:mb-5 sm:mb-6">
             <div class="w-full
                         h-20 xs:h-22 sm:h-24 md:h-26 lg:h-28
                         bg-[#F1E7FF] border border-[#DCCCF1]
