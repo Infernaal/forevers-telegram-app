@@ -322,7 +322,7 @@ const languages = ref([
   { code: 'DEU', name: 'Deutsch', country: 'germany' },
   { code: 'ITA', name: 'Italiano', country: 'italy' },
   { code: 'RUS', name: 'Русский', country: 'ukraine' },
-  { code: 'CHN', name: '���文', country: 'china' },
+  { code: 'CHN', name: '中���', country: 'china' },
   { code: 'JPN', name: '日本語', country: 'japan' },
   { code: 'KOR', name: '한국어', country: 'new zealand' },
   { code: 'ARA', name: 'العربية', country: 'uae' },
@@ -768,9 +768,9 @@ const selectLanguage = (language) => {
   z-index: 10001;
 }
 
-/* ID Section - Full Border to Border */
+/* ID Section - уменьшенная для Copy border to border */
 .id-section-container {
-  flex: 1;
+  flex: 0 0 140px; /* фиксированная ширина */
   height: 40px;
   background: rgba(255, 255, 255, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.4);
