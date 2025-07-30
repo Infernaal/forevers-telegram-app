@@ -1,12 +1,12 @@
 <template>
   <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl profile-overlay">
-    <!-- Dropdown Wrapper -->
-    <div class="relative w-full h-full flex flex-col justify-center items-center overlay-wrapper">
-      <!-- Dropdown Menu -->
-      <div class="relative w-full overlay-menu">
-        <div class="overlay-content">
-            <!-- Background -->
-            <div class="overlay-background"></div>
+    <!-- Dropdown Menu с Tailwind CSS -->
+    <div class="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg
+                h-[480px] sm:h-[520px] md:h-[580px] lg:h-[640px] mx-auto my-auto
+                bg-gradient-to-r from-indigo-800 via-purple-900 to-indigo-800
+                border border-indigo-700 backdrop-blur-lg rounded-2xl
+                overflow-hidden shadow-2xl">
+      <div class="relative p-3 text-white h-full flex flex-col">
 
           <!-- Profile Header Section -->
           <div class="absolute top-2 left-2 right-2 z-[10001]">
@@ -303,7 +303,6 @@
               </div>
             </div>
           </div>
-        </div>
       </div>
       <!-- Triangle убран по требованию -->
     </div>
