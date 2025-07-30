@@ -250,23 +250,23 @@
             </div>
 
             <!-- Separator Bar -->
-            <div class="w-0.5 bg-white opacity-40 rounded-full flex-shrink-0 separator-bar"></div>
+            <div class="w-0.5 bg-white opacity-40 rounded-full flex-shrink-0 h-5 xs:h-6 sm:h-7 md:h-8 lg:h-9"></div>
 
             <!-- Language Section with Dropdown -->
-            <div class="relative flex items-center lang-section">
-              <div class="bg-white/[0.20] border border-white/24 rounded-full flex items-center px-1.5 cursor-pointer hover:bg-white/25 transition-colors lang-container"
+            <div class="relative flex items-center">
+              <div class="bg-white/[0.20] border border-white/24 rounded-full flex items-center px-1 xs:px-1.5 cursor-pointer hover:bg-white/25 transition-colors h-7 xs:h-8 sm:h-9 md:h-10 lg:h-11 w-32 xs:w-36 sm:w-38 md:w-40 lg:w-44"
                    @click="toggleLanguageDropdown">
                 <!-- Selected Country Flag -->
-                <div class="rounded-full overflow-hidden flex-shrink-0 ml-1 flex items-center justify-center lang-flag">
+                <div class="rounded-full overflow-hidden flex-shrink-0 ml-1 flex items-center justify-center w-5 xs:w-6 sm:w-7 md:w-8 lg:w-9 h-5 xs:h-6 sm:h-7 md:h-8 lg:h-9">
                   <CountryFlag :country="selectedLanguage.country" size="small" class="w-full h-full" />
                 </div>
 
                 <!-- Language Text -->
-                <span class="text-dbd-off-white font-medium flex-1 text-center lang-text">{{ selectedLanguage.code }}</span>
+                <span class="text-dbd-off-white font-medium flex-1 text-center text-xs xs:text-sm sm:text-base md:text-lg">{{ selectedLanguage.code }}</span>
 
                 <!-- Dropdown Arrow -->
-                <div class="rounded-full bg-white/20 flex items-center justify-center mr-1 lang-arrow">
-                  <svg class="text-white transform transition-transform duration-200 lang-arrow-icon"
+                <div class="rounded-full bg-white/20 flex items-center justify-center mr-1 w-4 xs:w-5 sm:w-6 md:w-7 lg:w-8 h-4 xs:h-5 sm:h-6 md:h-7 lg:h-8">
+                  <svg class="text-white transform transition-transform duration-200 w-3 xs:w-3 sm:w-4 md:w-4 lg:w-5 h-3 xs:h-3 sm:h-4 md:h-4 lg:h-5"
                        :class="{ 'rotate-180': isLanguageDropdownOpen }"
                        viewBox="0 0 20 20" fill="none">
                     <circle opacity="0.2" cx="10" cy="10" r="10" fill="white"/>
