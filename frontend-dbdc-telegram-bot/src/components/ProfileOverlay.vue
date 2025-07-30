@@ -339,6 +339,11 @@ const languages = [
 
 // Methods
 const handleBackdropClick = (event) => {
+  // Close language dropdown if open
+  if (isLanguageDropdownOpen.value) {
+    isLanguageDropdownOpen.value = false
+  }
+
   // Only close if clicking the backdrop itself, not the modal content
   if (event.target === event.currentTarget) {
     emit('close')
