@@ -185,7 +185,7 @@
                 </div>
               </Transition>
             </div>
-            <span class="text-[10px] sm:text-xs md:text-sm lg:text-base font-medium leading-tight">Cart</span>
+            <span class="text-[10px] sm:text-xs font-medium leading-tight">Cart</span>
           </button>
 
           <!-- Holders -->
