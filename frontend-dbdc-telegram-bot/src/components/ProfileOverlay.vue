@@ -156,19 +156,21 @@
 
             <!-- Verification -->
             <div class="flex items-center
-                        gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3
-                        px-2 xs:px-2.5 sm:px-3 md:px-3.5
-                        py-1 xs:py-1.5 sm:py-2
-                        h-10 xs:h-11 sm:h-12 md:h-13
-                        cursor-pointer transition-all duration-200
-                        rounded-md xs:rounded-lg sm:rounded-xl
-                        mb-1.5 xs:mb-2 sm:mb-2.5
-                        hover:bg-white hover:bg-opacity-10 hover:translate-x-1 relative"
+                        gap-2 xs:gap-2.5 sm:gap-3 md:gap-4
+                        px-3 xs:px-4 sm:px-5 md:px-6
+                        py-2 xs:py-2.5 sm:py-3
+                        h-12 xs:h-13 sm:h-14 md:h-15
+                        cursor-pointer transition-all duration-300
+                        rounded-lg xs:rounded-xl sm:rounded-2xl
+                        mb-2 xs:mb-2.5 sm:mb-3
+                        hover:bg-white hover:bg-opacity-15 hover:translate-x-2 hover:scale-[1.02] relative
+                        touch-manipulation active:scale-95"
                 @click="handleMenuClick('verification')">
-              <div class="w-8 xs:w-9 sm:w-10 md:w-11 h-8 xs:h-9 sm:h-10 md:h-11
-                          bg-[#3A33D3] border border-white border-opacity-20
-                          rounded-full flex items-center justify-center flex-shrink-0">
-                <svg class="w-4 xs:w-5 sm:w-5 md:w-6 h-4 xs:h-5 sm:h-5 md:h-6" viewBox="0 0 18 22" fill="none">
+              <div class="w-10 xs:w-11 sm:w-12 md:w-13 h-10 xs:h-11 sm:h-12 md:h-13
+                          bg-[#3A33D3] border border-white border-opacity-30
+                          rounded-full flex items-center justify-center flex-shrink-0
+                          transition-all duration-300 hover:bg-[#4A43E3] hover:scale-110">
+                <svg class="w-5 xs:w-6 sm:w-6 md:w-7 h-5 xs:h-6 sm:h-6 md:h-7" viewBox="0 0 18 22" fill="none">
                   <path d="M14.2511 12.4974C15.4932 12.4974 16.5 13.5045 16.5 14.7467V15.3222C16.5 16.2166 16.1805 17.0816 15.5989 17.7611C14.0295 19.5949 11.6422 20.5 8.49673 20.5C5.35076 20.5 2.96466 19.5946 1.39831 17.7601C0.818531 17.081 0.5 16.2174 0.5 15.3245V14.7467C0.5 13.5045 1.50689 12.4974 2.74896 12.4974H14.2511ZM14.2511 13.9977H2.74896C2.33534 13.9977 2.00005 14.333 2.00005 14.7467V15.3245C2.00005 15.8602 2.19117 16.3784 2.53904 16.7858C3.79239 18.2538 5.75834 18.9997 8.49673 18.9997C11.2351 18.9997 13.2028 18.2537 14.4593 16.7855C14.8082 16.3779 14.9999 15.8589 14.9999 15.3222V14.7467C14.9999 14.333 14.6647 13.9977 14.2511 13.9977ZM8.49673 0.5C11.2582 0.5 13.4969 2.73897 13.4969 5.50088C13.4969 8.2628 11.2582 10.5017 8.49673 10.5017C5.73521 10.5017 3.49656 8.2628 3.49656 5.50088C3.49656 2.73897 5.73521 0.5 8.49673 0.5ZM8.49673 2.00026C6.56366 2.00026 4.99661 3.56755 4.99661 5.50088C4.99661 7.43422 6.56366 9.00148 8.49673 9.00148C10.4298 9.00148 11.9968 7.43422 11.9968 5.50088C11.9968 3.56755 10.4298 2.00026 8.49673 2.00026Z" fill="white"/>
                 </svg>
               </div>
