@@ -617,10 +617,9 @@ console.log('ProfileOverlay loaded with corrected design')
 
 /* Mobile width adjustments */
 @media (max-width: 320px) {
-  .ml-4 {
+  .profile-overlay-content {
+    width: calc(100% - 1.375rem); /* 8px left + 14px right = 22px = 1.375rem */
     margin-left: 0.5rem; /* 8px */
-  }
-  .mr-6 {
     margin-right: 0.875rem; /* 14px */
   }
 }
