@@ -704,6 +704,14 @@ const selectLanguage = (language) => {
   height: 3.25rem;
 }
 
+.h-14 {
+  height: 3.5rem;
+}
+
+.h-15 {
+  height: 3.75rem;
+}
+
 .h-21 {
   height: 5.25rem;
 }
