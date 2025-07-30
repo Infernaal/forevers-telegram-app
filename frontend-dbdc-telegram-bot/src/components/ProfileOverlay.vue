@@ -254,7 +254,7 @@
             <div class="w-0.5 h-6 bg-gray-400/40 rounded-full flex-shrink-0"></div>
 
             <!-- Language Section -->
-            <div class="flex-1 max-w-[140px] h-12
+            <div class="flex-1 max-w-[120px] xs:max-w-[130px] sm:max-w-[140px] h-full
                         bg-white/20 border border-white/30 rounded-full
                         flex items-center px-1 cursor-pointer
                         transition-all duration-200 ease-in-out
