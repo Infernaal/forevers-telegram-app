@@ -538,9 +538,11 @@ console.log('ProfileOverlay loaded with corrected design')
 
 /* Responsive adjustments - Full width on all screens */
 @media (max-width: 375px) {
-  .mx-4 {
+  .ml-4 {
     margin-left: 0.75rem;
-    margin-right: 0.75rem;
+  }
+  .mr-6 {
+    margin-right: 1rem;
   }
 }
 
