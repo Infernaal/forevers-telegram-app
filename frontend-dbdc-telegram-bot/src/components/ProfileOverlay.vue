@@ -254,9 +254,9 @@
             <div class="w-0.5 h-6 bg-gray-400/40 rounded-full flex-shrink-0"></div>
 
             <!-- Language Section -->
-            <div class="flex-1 max-w-[120px] xs:max-w-[130px] sm:max-w-[140px] h-full
+            <div class="flex-1 max-w-[140px] xs:max-w-[150px] sm:max-w-[160px] h-full
                         bg-white/20 border border-white/30 rounded-full
-                        flex items-center px-1 cursor-pointer
+                        flex items-center px-2 cursor-pointer
                         transition-all duration-200 ease-in-out
                         hover:bg-white/30 relative overflow-visible"
                  @click="toggleLanguageDropdown">
@@ -707,7 +707,7 @@ const selectLanguage = (language) => {
   flex-shrink: 0;
 }
 
-/* Language Section - расширенная дл�� ENG */
+/* Language Section - расширенная дл���� ENG */
 .language-section-container {
   flex: 1; /* занимает оставшееся место */
   min-width: 120px;
