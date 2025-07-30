@@ -265,7 +265,7 @@
                         relative overflow-hidden">
               <!-- Background gradient -->
               <div class="absolute left-0 top-0
-                          w-[100px] xs:w-[120px] sm:w-[140px] md:w-[160px] lg:w-[180px]
+                          w-[120px] xs:w-[140px] sm:w-[160px] md:w-[180px] lg:w-[200px]
                           h-full bg-gradient-to-r from-[#8C4CD1] to-[#C497FF]
                           opacity-40 rounded-l-xl xs:rounded-l-2xl"></div>
               
