@@ -404,10 +404,8 @@
               
               <div class="flex items-center gap-1 flex-1 overflow-hidden">
                 <CountryFlag :country="selectedLanguage.country" size="medium"
-                             class="flex-shrink-0 !w-3 xs:!w-4 sm:!w-5 md:!w-6 lg:!w-7 xl:!w-8
-                                    !h-3 xs:!h-4 sm:!h-5 md:!h-6 lg:!h-7 xl:!h-8
-                                    !min-w-3 xs:!min-w-4 sm:!min-w-5 md:!min-w-6 lg:!min-w-7 xl:!min-w-8
-                                    !min-h-3 xs:!min-h-4 sm:!min-h-5 md:!min-h-6 lg:!min-h-7 xl:!min-h-8" />
+                             class="w-4 sm:w-5 md:w-6 lg:w-7 xl:w-8
+                          h-4 sm:h-5 md:h-6 lg:h-7 xl:h-8 flex-shrink-0" />
                 <span class="text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-white truncate max-w-[80px]">
                   {{ selectedLanguage.code }}
                 </span>
