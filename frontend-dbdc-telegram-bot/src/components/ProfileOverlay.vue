@@ -270,7 +270,10 @@
           </div>
         </div>
       </div>
-      <!-- Triangle убран по требованию -->
+      <!-- Triangle (пришит к dropdown снизу слева) -->
+      <div class="triangle-decoration" :style="trianglePositionStyle">
+        <div class="triangle-shape"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -440,7 +443,7 @@ const selectLanguage = (language) => {
 
 .overlay-wrapper {
   padding: 12px;
-  padding-bottom: 120px; /* Space for BottomNavigation - увеличено */
+  padding-bottom: 100px; /* Space for BottomNavigation */
 }
 
 .overlay-menu {
@@ -768,9 +771,9 @@ const selectLanguage = (language) => {
   z-index: 10001;
 }
 
-/* ID Section - более узкий для Copy border to border */
+/* ID Section - Full Border to Border */
 .id-section-container {
-  flex: 0 0 140px; /* фиксированная ширина вместо flex: 1 */
+  flex: 1;
   height: 40px;
   background: rgba(255, 255, 255, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.4);
@@ -788,7 +791,7 @@ const selectLanguage = (language) => {
   align-items: center;
   gap: 2px;
   padding-left: 12px;
-  padding-right: 4px; /* уменьшаем для Copy border to border */
+  padding-right: 36px;
   flex: 1;
 }
 
@@ -809,14 +812,16 @@ const selectLanguage = (language) => {
 .copy-button {
   position: absolute;
   right: 0;
-  top: 0;
-  bottom: 0;
-  width: 40px; /* ��величиваем ширину */
-  height: 100%; /* полная высота контейнера */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
   background: white;
   border: 1.2px solid #D8D8D8;
   border-radius: 0 20px 20px 0;
-  border-left: 1px solid rgba(255, 255, 255, 0.4); /* граница слева */
+  border-left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -827,12 +832,12 @@ const selectLanguage = (language) => {
 
 .copy-button:hover {
   background: #f3f4f6;
-  transform: scale(1.02);
+  transform: translateY(-50%) scale(1.05);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .copy-button:active {
-  transform: scale(0.98);
+  transform: translateY(-50%) scale(0.98);
 }
 
 /* Vertical Divider */
@@ -846,10 +851,9 @@ const selectLanguage = (language) => {
   flex-shrink: 0;
 }
 
-/* Language Section - расширенная для ENG */
+/* Language Section */
 .language-section-container {
-  flex: 1; /* занимает оставшееся место */
-  min-width: 120px; /* минимальная ширина */
+  width: 112px;
   height: 40px;
   background: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.24);

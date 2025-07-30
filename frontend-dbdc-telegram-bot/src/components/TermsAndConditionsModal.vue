@@ -7,13 +7,14 @@
               touch-manipulation overscroll-contain"
        @click="closeModal">
     <div class="w-full max-w-[calc(100vw-16px)] sm:max-w-[calc(100vw-24px)] md:max-w-md lg:max-w-lg
-                h-[85vh] max-h-[85vh] sm:h-[80vh] sm:max-h-[80vh]
+                max-h-[calc(100vh-32px)] sm:max-h-[calc(100vh-48px)]
+                min-h-[70vh] sm:min-h-[65vh] md:min-h-[60vh]
                 modal-container animate-[slideUp_0.3s_ease-out]"
          @click.stop>
       <!-- Modal Content -->
       <div class="bg-white rounded-2xl sm:rounded-3xl border border-gray-200
                   shadow-lg flex flex-col h-full max-h-full overflow-hidden
-                  modal-content" style="height: 100%">
+                  modal-content">
         <!-- Header -->
         <div class="p-3 sm:p-4 md:p-5 flex-shrink-0 border-b border-gray-100
                     modal-header">
@@ -29,8 +30,7 @@
 
         <!-- Scrollable Content -->
         <div class="flex-1 overflow-y-auto p-3 sm:p-4 md:p-5
-                    scrollbar-none overscroll-contain modal-scroll-section
-                    min-h-0">
+                    scrollbar-none overscroll-contain modal-scroll-section">
           <div class="pb-3">
             <!-- Introduction -->
             <p class="text-dbd-gray font-medium text-xs sm:text-sm md:text-base
@@ -181,8 +181,7 @@
 
         <!-- Action Buttons -->
         <div class="p-3 sm:p-4 md:p-5 flex flex-col gap-2 sm:gap-3
-                    flex-shrink-0 border-t border-gray-100 bg-white
-                    sticky bottom-0 z-10">
+                    flex-shrink-0 border-t border-gray-100">
           <button
             class="w-full h-11 sm:h-12 md:h-14 px-4 sm:px-6 md:px-8
                    flex items-center justify-center rounded-full
@@ -270,25 +269,7 @@ const agreeToTerms = () => {
 
 /* Базовые стили модального окна - работают с Tailwind */
 .modal-container {
-  /* Дополнитель��ые стили при н��обходимости */
-}
-
-/* Обеспечиваем правильную работу скролла */
-.modal-scroll-section {
-  overflow-y: auto !important;
-  -webkit-overflow-scrolling: touch;
-  max-height: 100%;
-}
-
-/* Скрываем скроллбар но оставляем функциональность */
-.scrollbar-none::-webkit-scrollbar {
-  width: 0px;
-  background: transparent;
-}
-
-.scrollbar-none {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  /* Дополнительные стили при н��обходимости */
 }
 
 /* Только необходимые переопределения для очень маленьких экранов */
