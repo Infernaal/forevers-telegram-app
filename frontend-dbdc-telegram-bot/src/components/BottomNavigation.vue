@@ -133,7 +133,7 @@
             </div>
             <span :class="[
               activeTab === 'favorites' ? 'font-semibold text-blue-700' : 'font-medium',
-              'text-[10px] sm:text-xs md:text-sm lg:text-base leading-tight'
+              'text-[10px] sm:text-xs leading-tight'
             ]">Favorites</span>
           </button>
 
