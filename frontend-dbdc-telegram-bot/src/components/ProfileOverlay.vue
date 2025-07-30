@@ -38,7 +38,7 @@
                 <!-- Dynamic Rank Badge -->
                 <div class="flex items-center gap-1.5 bg-white/20 border border-white/20 rounded-full px-2 py-1 mb-2 w-fit">
                   <div class="w-7 h-7 flex items-center justify-center flex-shrink-0">
-                    <component :is="currentRank.iconComponent" class="w-full h-full" />
+                    <div v-html="currentRank.iconSvg" class="w-full h-full"></div>
                   </div>
                   <span class="text-sm font-medium" :style="{ color: currentRank.color }">{{ currentRank.name }}</span>
                 </div>
