@@ -809,16 +809,14 @@ const selectLanguage = (language) => {
 .copy-button {
   position: absolute;
   right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 28px;
-  height: 28px;
-  min-width: 28px;
-  min-height: 28px;
+  top: 0;
+  bottom: 0;
+  width: 40px; /* увеличиваем ширину */
+  height: 100%; /* полная высота контейнера */
   background: white;
   border: 1.2px solid #D8D8D8;
   border-radius: 0 20px 20px 0;
-  border-left: 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.4); /* граница слева */
   display: flex;
   align-items: center;
   justify-content: center;
