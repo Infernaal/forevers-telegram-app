@@ -278,9 +278,9 @@
               relative overflow-hidden">
               <!-- Background gradient -->
               <div class="absolute left-0 top-0
-                w-[100px] xs:w-[120px] sm:w-[140px] md:w-[160px] lg:w-[180px] xl:w-[200px]
+                w-[100px] sm:w-[140px] md:w-[160px] lg:w-[180px]
                 h-full bg-gradient-to-r from-[#8C4CD1] to-[#C497FF]
-                opacity-40 rounded-l-lg xs:rounded-l-xl sm:rounded-l-2xl md:rounded-l-3xl"></div>
+                opacity-40 rounded-l-2xl"></div>
               
               <div class="flex flex-wrap items-center justify-between gap-2 mb-1 relative z-[1]">
                 <div class="flex items-center gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-4 xl:gap-5 flex-1 min-w-0">
