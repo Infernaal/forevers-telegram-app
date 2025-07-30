@@ -270,10 +270,7 @@
           </div>
         </div>
       </div>
-      <!-- Triangle (пришит к dropdown снизу слева) -->
-      <div class="triangle-decoration" :style="trianglePositionStyle">
-        <div class="triangle-shape"></div>
-      </div>
+      <!-- Triangle убран по требованию -->
     </div>
   </div>
 </template>
