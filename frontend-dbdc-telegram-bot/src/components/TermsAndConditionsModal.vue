@@ -272,84 +272,10 @@ const agreeToTerms = () => {
   /* Дополнительные стили при необходимости */
 }
 
-/* Extra small mobile devices - ≤320px */
+/* Только необходимые переопределения для очень маленьких экранов */
 @media (max-width: 320px) {
   .modal-container {
-    max-width: calc(100vw - 8px);
-    max-height: min(95vh, calc(100vh - 16px));
-    min-height: min(85vh, 400px);
-  }
-
-  .modal-content {
-    border-radius: 12px;
-  }
-
-  .modal-header {
-    padding: 8px;
-  }
-
-  .modal-title {
-    font-size: 14px;
-    line-height: 1.3;
-  }
-
-  .modal-subtitle {
-    font-size: 11px;
-  }
-
-  .modal-scroll-section {
-    padding: 8px;
-  }
-
-  .modal-intro {
-    font-size: 11px;
-    margin-bottom: 16px;
-    line-height: 1.3;
-  }
-
-  .modal-sections {
-    gap: 16px;
-  }
-
-  .modal-section {
-    gap: 8px;
-  }
-
-  .section-title {
-    font-size: 12px;
-    line-height: 1.2;
-  }
-
-  .bullet-text {
-    font-size: 10px;
-    line-height: 1.3;
-  }
-
-  .bullet-item {
-    gap: 8px;
-  }
-
-  .bullet-point {
-    width: 3px;
-    height: 3px;
-    margin-top: 4px;
-  }
-
-  .modal-actions {
-    padding: 8px;
-    gap: 6px;
-  }
-
-  .agree-btn {
-    height: 40px;
-    font-size: 10px;
-    padding: 8px 28px;
-  }
-
-  .back-btn {
-    height: 32px;
-    font-size: 11px;
-    padding: 6px 16px;
+    max-width: calc(100vw - 8px) !important;
   }
 }
 
