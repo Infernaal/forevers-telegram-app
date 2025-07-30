@@ -23,10 +23,10 @@
               z-[50] overflow-hidden shadow-2xl
               animate-[fadeInScale_0.4s_ease-out]
               touch-manipulation overscroll-contain">
-        <div class="p-2 xs:p-3 sm:p-4 md:p-6 lg:p-8 xl:p-10 text-white text-center">
+        <div class="p-3 xs:p-4 sm:p-5 md:p-6 lg:p-8 xl:p-10 text-white text-center h-full flex flex-col">
             <!-- Background -->
-            <div class="absolute inset-0 bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
-                        border border-[#09074E] backdrop-blur-[32px]"></div>
+            <div class="absolute inset-0 bg-gradient-to-br from-[#120B81] via-[#09074E] to-[#09074E]
+                        border border-[#09074E] backdrop-blur-[40px]"></div>
 
           <!-- Profile Header Section -->
           <div class="absolute top-2 xs:top-2.5 sm:top-3 md:top-4 lg:top-5 xl:top-6
