@@ -231,18 +231,18 @@
           </div>
 
           <!-- Bottom ID and Language Section with Separator -->
-          <div class="flex items-center justify-between bottom-section">
+          <div class="flex items-center justify-between h-7 xs:h-8 sm:h-9 md:h-10 lg:h-11 gap-2 xs:gap-3 sm:gap-4">
 
             <!-- ID Section -->
-            <div class="relative flex items-center id-section">
-              <div class="bg-white/[0.30] backdrop-blur-[32px] border border-white/40 rounded-full flex items-center justify-between pl-3 pr-0 id-container">
+            <div class="relative flex items-center">
+              <div class="bg-white/[0.30] backdrop-blur-[32px] border border-white/40 rounded-full flex items-center justify-between pl-2 xs:pl-3 pr-0 h-7 xs:h-8 sm:h-9 md:h-10 lg:h-11 w-32 xs:w-36 sm:w-38 md:w-40 lg:w-44">
                 <div class="flex items-center min-w-0 overflow-hidden">
-                  <span class="text-dbd-light-gray id-label">ID:</span>
-                  <span class="text-white font-medium ml-1 truncate id-value">515745</span>
+                  <span class="text-dbd-light-gray text-xs xs:text-sm">ID:</span>
+                  <span class="text-white font-medium ml-1 truncate text-xs xs:text-sm">515745</span>
                 </div>
-                <button class="flex-shrink-0 bg-white border border-[#D8D8D8] rounded-r-full flex items-center justify-center hover:bg-gray-50 transition-colors id-copy-btn"
+                <button class="flex-shrink-0 bg-white border border-[#D8D8D8] rounded-r-full flex items-center justify-center hover:bg-gray-50 transition-colors w-5 xs:w-6 sm:w-7 md:w-8 lg:w-10 h-7 xs:h-8 sm:h-9 md:h-10 lg:h-11"
                         @click="copyUserID">
-                  <svg class="text-gray-600 id-copy-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <svg class="text-gray-600 w-3 xs:w-3 sm:w-4 md:w-5 lg:w-6 h-3 xs:h-3 sm:h-4 md:h-5 lg:h-6" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M18.2806 1.19995H8.98336C8.42322 1.19995 7.88603 1.43348 7.48995 1.84917C7.09387 2.26486 6.87136 2.82866 6.87136 3.41653V4.26906H5.81536C5.2278 4.26906 4.66431 4.51402 4.24885 4.95006C3.83338 5.3861 3.59998 5.97749 3.59998 6.59414V20.4749C3.59998 21.0915 3.83338 21.6829 4.24885 22.119C4.66431 22.555 5.2278 22.8 5.81536 22.8H14.9132C15.5008 22.8 16.0643 22.555 16.4797 22.119C16.8952 21.6829 17.1286 21.0915 17.1286 20.4749V19.6998H18.2806C18.8363 19.6999 19.3699 19.4709 19.7663 19.0621C20.1627 18.6533 20.3903 18.0975 20.4 17.5143V3.41653C20.398 2.82794 20.1739 2.26417 19.7766 1.8487C19.3794 1.43323 18.8414 1.19995 18.2806 1.19995ZM15.6517 20.4749C15.6517 20.6804 15.5739 20.8776 15.4354 21.0229C15.2969 21.1682 15.1091 21.2499 14.9132 21.2499H5.81536C5.61951 21.2499 5.43168 21.1682 5.29319 21.0229C5.1547 20.8776 5.0769 20.6804 5.0769 20.4749V6.59414C5.0769 6.38859 5.1547 6.19146 5.29319 6.04611C5.43168 5.90077 5.61951 5.81911 5.81536 5.81911H14.9132C15.1091 5.81911 15.2969 5.90077 15.4354 6.04611C15.5739 6.19146 15.6517 6.38859 15.6517 6.59414V20.4749ZM18.9231 17.5143C18.9211 17.6918 18.8526 17.8613 18.7323 17.9861C18.612 18.1108 18.4497 18.1808 18.2806 18.1808H17.1286V6.59414C17.1286 5.97749 16.8952 5.3861 16.4797 4.95006C16.0643 4.51402 15.5008 4.26906 14.9132 4.26906H8.34828V3.41653C8.34828 3.23976 8.41519 3.07022 8.53429 2.94523C8.65339 2.82023 8.81493 2.75001 8.98336 2.75001H18.2806C18.3646 2.74898 18.448 2.76546 18.5259 2.7985C18.6038 2.83154 18.6747 2.88047 18.7344 2.94246C18.7942 3.00446 18.8416 3.07828 18.874 3.15966C18.9064 3.24103 18.9231 3.32834 18.9231 3.41653V17.5143Z"/>
                   </svg>
                 </button>
