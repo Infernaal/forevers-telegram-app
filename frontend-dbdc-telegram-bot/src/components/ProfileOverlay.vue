@@ -732,4 +732,601 @@ console.log('ProfileOverlay loaded with corrected design')
   min-height: 100%;
   object-fit: cover;
 }
+
+/* Start upgrade card responsive styles */
+.start-upgrade-card {
+  height: 84px;
+  width: 100%;
+}
+
+.start-gradient {
+  width: 140px;
+}
+
+.start-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.start-icon-svg {
+  width: 32px;
+  height: 32px;
+}
+
+.start-title {
+  font-size: 19px;
+  line-height: 1.5;
+}
+
+.start-description {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.start-button {
+  padding: 12px 24px;
+  font-size: 16px;
+  height: 44px;
+  min-width: 120px;
+}
+
+/* Bottom section responsive styles */
+.bottom-section {
+  height: 44px;
+  gap: 16px;
+}
+
+.separator-bar {
+  height: 24px;
+}
+
+/* ID section styles */
+.id-container {
+  height: 44px;
+  width: 144px;
+}
+
+.id-label {
+  font-size: 14px;
+}
+
+.id-value {
+  font-size: 14px;
+}
+
+.id-copy-btn {
+  width: 24px;
+  height: 44px;
+}
+
+.id-copy-icon {
+  width: 12px;
+  height: 12px;
+}
+
+/* Language section styles */
+.lang-container {
+  height: 44px;
+  width: 144px;
+}
+
+.lang-flag {
+  width: 32px;
+  height: 32px;
+}
+
+.lang-text {
+  font-size: 16px;
+}
+
+.lang-arrow {
+  width: 20px;
+  height: 20px;
+}
+
+.lang-arrow-icon {
+  width: 12px;
+  height: 12px;
+}
+
+.lang-dropdown {
+  width: 144px;
+}
+
+/* Responsive adjustments for Start block and bottom sections */
+@media (min-width: 769px) {
+  .start-upgrade-card {
+    height: 96px;
+  }
+
+  .start-gradient {
+    width: 160px;
+  }
+
+  .start-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .start-icon-svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .start-title {
+    font-size: 22px;
+  }
+
+  .start-description {
+    font-size: 16px;
+  }
+
+  .start-button {
+    padding: 14px 28px;
+    font-size: 18px;
+    height: 48px;
+    min-width: 140px;
+  }
+
+  .id-container,
+  .lang-container {
+    width: 160px;
+    height: 48px;
+  }
+
+  .lang-dropdown {
+    width: 160px;
+  }
+
+  .id-copy-btn {
+    width: 28px;
+    height: 48px;
+  }
+
+  .id-copy-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .lang-flag {
+    width: 36px;
+    height: 36px;
+  }
+
+  .lang-arrow {
+    width: 24px;
+    height: 24px;
+  }
+
+  .lang-arrow-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .separator-bar {
+    height: 28px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  .start-upgrade-card {
+    height: 88px;
+  }
+
+  .start-gradient {
+    width: 150px;
+  }
+
+  .start-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .start-icon-svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .start-title {
+    font-size: 20px;
+  }
+
+  .start-description {
+    font-size: 15px;
+  }
+
+  .start-button {
+    padding: 13px 26px;
+    font-size: 17px;
+    height: 46px;
+    min-width: 130px;
+  }
+
+  .id-container,
+  .lang-container {
+    width: 152px;
+    height: 46px;
+  }
+
+  .lang-dropdown {
+    width: 152px;
+  }
+
+  .id-copy-btn {
+    width: 26px;
+    height: 46px;
+  }
+
+  .id-copy-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .lang-flag {
+    width: 34px;
+    height: 34px;
+  }
+
+  .lang-arrow {
+    width: 22px;
+    height: 22px;
+  }
+
+  .lang-arrow-icon {
+    width: 13px;
+    height: 13px;
+  }
+
+  .separator-bar {
+    height: 26px;
+  }
+}
+
+@media (max-width: 640px) {
+  .start-upgrade-card {
+    height: 76px;
+  }
+
+  .start-gradient {
+    width: 120px;
+  }
+
+  .start-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .start-icon-svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .start-title {
+    font-size: 17px;
+  }
+
+  .start-description {
+    font-size: 13px;
+  }
+
+  .start-button {
+    padding: 10px 20px;
+    font-size: 15px;
+    height: 40px;
+    min-width: 100px;
+  }
+
+  .bottom-section {
+    gap: 12px;
+  }
+
+  .id-container,
+  .lang-container {
+    width: 152px;
+    height: 40px;
+  }
+
+  .lang-dropdown {
+    width: 152px;
+  }
+
+  .id-copy-btn {
+    width: 22px;
+    height: 40px;
+  }
+
+  .id-copy-icon {
+    width: 12px;
+    height: 12px;
+  }
+
+  .id-label,
+  .id-value {
+    font-size: 13px;
+  }
+
+  .lang-text {
+    font-size: 15px;
+  }
+
+  .lang-flag {
+    width: 28px;
+    height: 28px;
+  }
+
+  .lang-arrow {
+    width: 18px;
+    height: 18px;
+  }
+
+  .lang-arrow-icon {
+    width: 11px;
+    height: 11px;
+  }
+
+  .separator-bar {
+    height: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .start-upgrade-card {
+    height: 72px;
+  }
+
+  .start-gradient {
+    width: 100px;
+  }
+
+  .start-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .start-icon-svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .start-title {
+    font-size: 16px;
+  }
+
+  .start-description {
+    font-size: 12px;
+  }
+
+  .start-button {
+    padding: 8px 16px;
+    font-size: 14px;
+    height: 36px;
+    min-width: 90px;
+  }
+
+  .bottom-section {
+    gap: 10px;
+  }
+
+  .id-container,
+  .lang-container {
+    width: 160px;
+    height: 36px;
+  }
+
+  .lang-dropdown {
+    width: 160px;
+  }
+
+  .id-copy-btn {
+    width: 20px;
+    height: 36px;
+  }
+
+  .id-copy-icon {
+    width: 10px;
+    height: 10px;
+  }
+
+  .id-label,
+  .id-value {
+    font-size: 12px;
+  }
+
+  .lang-text {
+    font-size: 14px;
+  }
+
+  .lang-flag {
+    width: 24px;
+    height: 24px;
+  }
+
+  .lang-arrow {
+    width: 16px;
+    height: 16px;
+  }
+
+  .lang-arrow-icon {
+    width: 10px;
+    height: 10px;
+  }
+
+  .separator-bar {
+    height: 20px;
+  }
+}
+
+@media (max-width: 375px) {
+  .start-upgrade-card {
+    height: 68px;
+  }
+
+  .start-gradient {
+    width: 90px;
+  }
+
+  .start-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .start-icon-svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .start-title {
+    font-size: 15px;
+  }
+
+  .start-description {
+    font-size: 11px;
+  }
+
+  .start-button {
+    padding: 7px 14px;
+    font-size: 13px;
+    height: 32px;
+    min-width: 80px;
+  }
+
+  .bottom-section {
+    gap: 8px;
+  }
+
+  .id-container,
+  .lang-container {
+    width: 156px;
+    height: 32px;
+  }
+
+  .lang-dropdown {
+    width: 156px;
+  }
+
+  .id-copy-btn {
+    width: 18px;
+    height: 32px;
+  }
+
+  .id-copy-icon {
+    width: 9px;
+    height: 9px;
+  }
+
+  .id-label,
+  .id-value {
+    font-size: 11px;
+  }
+
+  .lang-text {
+    font-size: 13px;
+  }
+
+  .lang-flag {
+    width: 20px;
+    height: 20px;
+  }
+
+  .lang-arrow {
+    width: 14px;
+    height: 14px;
+  }
+
+  .lang-arrow-icon {
+    width: 9px;
+    height: 9px;
+  }
+
+  .separator-bar {
+    height: 18px;
+  }
+}
+
+@media (max-width: 320px) {
+  .start-upgrade-card {
+    height: 64px;
+  }
+
+  .start-gradient {
+    width: 80px;
+  }
+
+  .start-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .start-icon-svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .start-title {
+    font-size: 14px;
+  }
+
+  .start-description {
+    font-size: 10px;
+  }
+
+  .start-button {
+    padding: 6px 12px;
+    font-size: 12px;
+    height: 28px;
+    min-width: 70px;
+  }
+
+  .bottom-section {
+    gap: 6px;
+  }
+
+  .id-container,
+  .lang-container {
+    width: 140px;
+    height: 28px;
+  }
+
+  .lang-dropdown {
+    width: 140px;
+  }
+
+  .id-copy-btn {
+    width: 16px;
+    height: 28px;
+  }
+
+  .id-copy-icon {
+    width: 8px;
+    height: 8px;
+  }
+
+  .id-label,
+  .id-value {
+    font-size: 10px;
+  }
+
+  .lang-text {
+    font-size: 12px;
+  }
+
+  .lang-flag {
+    width: 18px;
+    height: 18px;
+  }
+
+  .lang-arrow {
+    width: 12px;
+    height: 12px;
+  }
+
+  .lang-arrow-icon {
+    width: 8px;
+    height: 8px;
+  }
+
+  .separator-bar {
+    height: 16px;
+  }
+}
 </style>
