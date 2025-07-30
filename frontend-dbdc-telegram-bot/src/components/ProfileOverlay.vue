@@ -528,9 +528,63 @@ console.log('ProfileOverlay loaded with corrected design')
 
 /* Ensure proper gap spacing on smaller screens */
 @media (max-width: 375px) {
-  .mx-8 {
-    margin-left: 1rem;
-    margin-right: 1rem;
+  .mx-4 {
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+  }
+}
+
+/* Dropdown animation styles */
+.dropdown-enter-active,
+.dropdown-leave-active {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: bottom center;
+}
+
+.dropdown-enter-from,
+.dropdown-leave-to {
+  opacity: 0;
+  transform: scale(0.95) translateY(8px);
+}
+
+.dropdown-enter-to,
+.dropdown-leave-from {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* Custom scrollbar for language dropdown */
+.max-h-40::-webkit-scrollbar {
+  width: 4px;
+}
+
+.max-h-40::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.max-h-40::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 2px;
+}
+
+.max-h-40::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Responsive ID/ENG block adjustments */
+@media (max-width: 640px) {
+  .w-32 {
+    width: 7rem; /* 112px */
+  }
+}
+
+@media (max-width: 375px) {
+  .w-32 {
+    width: 6.5rem; /* 104px */
+  }
+
+  .text-sm {
+    font-size: 0.8rem;
   }
 }
 </style>
