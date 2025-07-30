@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isVisible" class="fixed inset-0 bottom-[88px] z-[9999] font-montserrat bg-black/10 backdrop-blur-xl profile-overlay">
+  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl profile-overlay">
     <!-- Dropdown Wrapper -->
     <div class="relative w-full h-full flex flex-col justify-center items-center overlay-wrapper">
       <!-- Dropdown Menu -->
