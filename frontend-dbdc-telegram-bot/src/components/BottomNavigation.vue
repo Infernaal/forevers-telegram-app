@@ -11,13 +11,13 @@
       <!-- Navigation Content -->
       <div class="flex items-center justify-center p-3 sm:p-4 md:p-5 lg:p-6 xl:p-8 pb-[calc(12px+env(safe-area-inset-bottom,0px))] sm:pb-[calc(16px+env(safe-area-inset-bottom,0px))] md:pb-[calc(20px+env(safe-area-inset-bottom,0px))] lg:pb-[calc(24px+env(safe-area-inset-bottom,0px))] xl:pb-[calc(32px+env(safe-area-inset-bottom,0px))] min-h-[64px] sm:min-h-[72px] md:min-h-[88px] lg:min-h-[100px] xl:min-h-[120px]">
         <!-- Navigation Items Container -->
-        <div class="flex items-center justify-between w-full max-w-full mx-auto gap-2 sm:gap-4 md:gap-6 lg:gap-8 xl:gap-12 px-2 sm:px-4 md:px-6 lg:px-8 xl:px-16 max-w-[100%] sm:max-w-[100%] md:max-w-[800px] lg:max-w-[1000px] xl:max-w-[1200px]">
+        <div class="flex items-center justify-between w-full mx-auto gap-2 sm:gap-4 md:gap-6 lg:gap-8 xl:gap-12 px-2 sm:px-4 md:px-6 lg:px-8 xl:px-16">
 
           <!-- Profile -->
           <button
             @click="toggleProfile"
             :class="[
-              'flex flex-col items-center justify-center flex-1 gap-1 sm:gap-2 p-2 sm:p-3 md:p-4 min-w-[44px] sm:min-w-[52px] md:min-w-[70px] lg:min-w-[80px] xl:min-w-[100px] max-w-[58px] sm:max-w-[80px] md:max-w-[120px] lg:max-w-[140px] xl:max-w-[180px] text-center transition-all duration-200 ease-out transform-gpu active:scale-95 active:bg-black/[0.02] active:rounded-xl',
+              'flex flex-col items-center justify-center flex-1 gap-1 sm:gap-2 p-2 sm:p-3 md:p-4 text-center transition-all duration-200 ease-out transform-gpu active:scale-95 active:bg-black/[0.02] active:rounded-xl',
               isProfileMenuOpen ? 'text-blue-700' : 'text-gray-600'
             ]"
           >
