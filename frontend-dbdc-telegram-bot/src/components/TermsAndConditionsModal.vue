@@ -113,12 +113,15 @@
               </section>
 
               <!-- User Obligations -->
-              <section class="modal-section">
-                <h2 class="section-title">User Obligations</h2>
-                <div class="section-content">
-                  <div class="bullet-item">
-                    <div class="bullet-point"></div>
-                    <p class="bullet-text">
+              <section class="flex flex-col gap-2 sm:gap-3">
+                <h2 class="text-dbd-dark font-bold text-sm sm:text-base md:text-lg
+                           leading-tight capitalize">User Obligations</h2>
+                <div class="flex flex-col gap-2">
+                  <div class="flex items-start gap-2 sm:gap-3">
+                    <div class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-dbd-gray
+                               flex-shrink-0 mt-1.5 sm:mt-2"></div>
+                    <p class="text-dbd-gray font-medium text-xs sm:text-sm
+                             leading-relaxed flex-1">
                       Users agree to use the Service in compliance with applicable laws and regulations. You will not engage in any fraudulent or illegal activities.
                     </p>
                   </div>
@@ -126,43 +129,24 @@
               </section>
 
               <!-- Intellectual Property -->
-              <section class="modal-section">
-                <h2 class="section-title">Intellectual Property</h2>
-                <div class="section-content">
-                  <div class="bullet-item">
-                    <div class="bullet-point"></div>
-                    <p class="bullet-text">
+              <section class="flex flex-col gap-2 sm:gap-3">
+                <h2 class="text-dbd-dark font-bold text-sm sm:text-base md:text-lg
+                           leading-tight capitalize">Intellectual Property</h2>
+                <div class="flex flex-col gap-2">
+                  <div class="flex items-start gap-2 sm:gap-3">
+                    <div class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-dbd-gray
+                               flex-shrink-0 mt-1.5 sm:mt-2"></div>
+                    <p class="text-dbd-gray font-medium text-xs sm:text-sm
+                             leading-relaxed flex-1">
                       All content and materials available on the Service are the property of DBDC and protected by intellectual property laws.
                     </p>
                   </div>
                 </div>
               </section>
 
-              <!-- Limitation of Liability -->
-              <section class="modal-section">
-                <h2 class="section-title">Limitation of Liability</h2>
-                <div class="section-content">
-                  <div class="bullet-item">
-                    <div class="bullet-point"></div>
-                    <p class="bullet-text">
-                      DBDC shall not be liable for any indirect, incidental, or consequential damages arising from your use of the Service.
-                    </p>
-                  </div>
-                </div>
-              </section>
+undefined
 
-              <!-- Amendments -->
-              <section class="modal-section">
-                <h2 class="section-title">Amendments</h2>
-                <div class="section-content">
-                  <div class="bullet-item">
-                    <div class="bullet-point"></div>
-                    <p class="bullet-text">
-                      DBDC reserves the right to modify these Terms at any time. Changes will be effective immediately upon posting.
-                    </p>
-                  </div>
-                </div>
-              </section>
+undefined
             </div>
           </div>
         </div>
