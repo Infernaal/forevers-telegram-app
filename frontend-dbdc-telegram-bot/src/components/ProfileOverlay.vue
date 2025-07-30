@@ -350,9 +350,9 @@
                         touch-manipulation"
                 :class="{ 'id-copied-state': showCopySuccess }">
 
-              <div v-if="!showCopySuccess" class="flex items-center gap-0.5 pl-2 xs:pl-2.5 sm:pl-3 pr-8 xs:pr-9 sm:pr-10 flex-1">
-                <span class="text-[#B7B7B7] text-xs xs:text-sm sm:text-base font-normal leading-4 xs:leading-5 sm:leading-6">ID: </span>
-                <span class="text-white text-xs xs:text-sm sm:text-base font-normal leading-4 xs:leading-5 sm:leading-6">515745</span>
+              <div v-if="!showCopySuccess" class="flex items-center gap-1 pl-3 xs:pl-3.5 sm:pl-4 pr-9 xs:pr-10 sm:pr-11 flex-1">
+                <span class="text-[#B7B7B7] text-sm xs:text-base sm:text-lg font-normal leading-5 xs:leading-6 sm:leading-7">ID: </span>
+                <span class="text-white text-sm xs:text-base sm:text-lg font-semibold leading-5 xs:leading-6 sm:leading-7">515745</span>
               </div>
 
               <div v-if="showCopySuccess" class="id-copied-content">
