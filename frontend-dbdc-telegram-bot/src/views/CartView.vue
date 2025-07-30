@@ -283,7 +283,7 @@ const confirmDelete = () => {
 
 /* CartBottomComponent responsive positioning */
 .cart-bottom-container {
-  bottom: 75px; /* mobile - уменьшили с 90px */
+  bottom: 85px; /* mobile - уменьшили с 90px */
 }
 
 @media (min-width: 640px) {
@@ -294,13 +294,13 @@ const confirmDelete = () => {
 
 @media (min-width: 768px) {
   .cart-bottom-container {
-    bottom: 95px; /* tablet large - уменьшили с 110px */
+    bottom: 100px; /* tablet large - уменьшили с 110px */
   }
 }
 
 @media (min-width: 1024px) {
   .cart-bottom-container {
-    bottom: 100px; /* desktop - уменьшили с 120px */
+    bottom: 110px; /* desktop - уменьшили с 120px */
   }
 }
 
