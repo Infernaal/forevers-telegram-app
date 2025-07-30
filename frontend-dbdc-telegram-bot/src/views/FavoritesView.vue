@@ -724,7 +724,8 @@ onBeforeUnmount(() => {
 }
 
 /* Hide scrollbar in Firefox */
-.overflow-y-auto {
+.overflow-y-auto,
+.scroll-container {
   scrollbar-width: none;
   -ms-overflow-style: none;
   scroll-behavior: smooth;
@@ -732,6 +733,14 @@ onBeforeUnmount(() => {
   overscroll-behavior: contain;
   will-change: scroll-position;
   overscroll-behavior-x: none;
+}
+
+/* Scroll container optimizations */
+.scroll-container {
+  position: relative;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* Ensure main container takes full height properly */
