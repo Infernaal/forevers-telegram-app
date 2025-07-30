@@ -402,8 +402,7 @@
               cursor-pointer transition-all duration-300 overflow-hidden"
                 @click="toggleLanguageDropdown">
               
-              <div class="flex items-center gap-0.5 xs:gap-1 sm:gap-1.5 md:gap-2 flex-1 min-w-0
-                           pr-3 xs:pr-4 sm:pr-5 md:pr-6 lg:pr-7 xl:pr-8">
+              <div class="flex items-center gap-1 flex-1 overflow-hidden">
                 <CountryFlag :country="selectedLanguage.country" size="medium"
                              class="flex-shrink-0 !w-3 xs:!w-4 sm:!w-5 md:!w-6 lg:!w-7 xl:!w-8
                                     !h-3 xs:!h-4 sm:!h-5 md:!h-6 lg:!h-7 xl:!h-8
