@@ -16,7 +16,7 @@
                         border border-[#09074E] backdrop-blur-[40px]"></div>
 
           <!-- Profile Header Section -->
-          <div class="relative flex-shrink-0 z-[2] mb-2 xs:mb-3 sm:mb-4 md:mb-5 lg:mb-6">
+          <div class="p-4 sm:p-5 md:p-6 flex flex-col gap-4 overflow-auto scrollbar-none">
             <div class="w-full
                         h-16 xs:h-18 sm:h-20 md:h-24 lg:h-28 xl:h-32
                         bg-[rgba(96,95,135,0.28)] border border-[#D8D8D8]
