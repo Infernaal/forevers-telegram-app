@@ -26,10 +26,10 @@
                       left-2 xs:left-2.5 sm:left-3 md:left-3.5 lg:left-4
                       right-2 xs:right-2.5 sm:right-3 md:right-3.5 lg:right-4 z-[2]">
             <div class="w-full
-                        h-20 xs:h-22 sm:h-24 md:h-26 lg:h-28
+                        h-20 xs:h-22 sm:h-24 md:h-28 lg:h-32 xl:h-36
                         bg-[rgba(96,95,135,0.24)] border border-[#D8D8D8]
                         rounded-[1000px_16px_16px_1000px] xs:rounded-[1000px_18px_18px_1000px] sm:rounded-[1000px_20px_20px_1000px] md:rounded-[1000px_22px_22px_1000px]
-                        flex items-center p-1.5 xs:p-2 sm:p-2.5 md:p-3 gap-2 xs:gap-2.5 sm:gap-3 md:gap-3.5 overflow-hidden">
+                        flex items-center p-1.5 xs:p-2 sm:p-2.5 md:p-4 lg:p-5 xl:p-6 gap-2 xs:gap-2.5 sm:gap-3 md:gap-4 lg:gap-5 xl:gap-6 overflow-hidden">
               
               <!-- Avatar -->
               <div class="flex-shrink-0">
