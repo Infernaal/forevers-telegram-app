@@ -215,9 +215,9 @@
                  :class="{ 'border-green-500 bg-green-600 scale-105': showCopySuccess }">
 
               <div v-if="!showCopySuccess"
-                   class="flex items-center gap-1 pl-4 pr-12 flex-1">
-                <span class="text-gray-300 text-sm font-normal">ID:</span>
-                <span class="text-white text-sm font-normal">515745</span>
+                   class="flex items-center gap-1 px-3 pr-10 flex-1">
+                <span class="text-gray-300 text-xs sm:text-sm font-normal">ID:</span>
+                <span class="text-white text-xs sm:text-sm font-normal">515745</span>
               </div>
 
               <div v-if="showCopySuccess"
