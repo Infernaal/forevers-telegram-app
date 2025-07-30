@@ -246,11 +246,11 @@
 
             <!-- Language Section with Dropdown -->
             <div class="relative flex items-center">
-              <div class="bg-white/[0.20] border border-white/24 rounded-full h-11 w-32 sm:w-36 flex items-center px-1.5 cursor-pointer hover:bg-white/25 transition-colors"
+              <div class="bg-white/[0.20] border border-white/24 rounded-full h-11 w-36 sm:w-40 md:w-44 flex items-center px-1.5 cursor-pointer hover:bg-white/25 transition-colors"
                    @click="toggleLanguageDropdown">
                 <!-- Selected Country Flag -->
-                <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 ml-1">
-                  <CountryFlag :country="selectedLanguage.country" size="small" />
+                <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 ml-1 flex items-center justify-center">
+                  <CountryFlag :country="selectedLanguage.country" size="small" class="w-full h-full" />
                 </div>
 
                 <!-- Language Text -->
@@ -277,17 +277,16 @@
                 leave-from-class="opacity-100 scale-100 translate-y-0"
                 leave-to-class="opacity-0 scale-95 translate-y-2">
                 <div v-if="isLanguageDropdownOpen"
-                     class="absolute bottom-full right-0 mb-2 w-48 bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-50 max-h-40 overflow-y-auto"
+                     class="absolute bottom-full right-0 mb-2 w-36 sm:w-40 md:w-44 bg-gradient-to-br from-[#120B81] via-[#120B81] to-[#09074E] rounded-xl shadow-xl border border-white/20 py-2 z-50 max-h-32 overflow-y-auto backdrop-blur-[32px]"
                      @click.stop>
                   <div v-for="language in languages"
                        :key="language.code"
-                       class="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 cursor-pointer transition-colors"
+                       class="flex items-center gap-2 px-3 py-1.5 hover:bg-white/10 cursor-pointer transition-colors"
                        @click="selectLanguage(language)">
-                    <div class="w-6 h-6 rounded-full overflow-hidden flex-shrink-0">
-                      <CountryFlag :country="language.country" size="small" />
+                    <div class="w-5 h-5 rounded-full overflow-hidden flex-shrink-0 flex items-center justify-center">
+                      <CountryFlag :country="language.country" size="small" class="w-full h-full" />
                     </div>
-                    <span class="text-gray-800 text-sm font-medium">{{ language.name }}</span>
-                    <span class="text-gray-500 text-xs ml-auto">{{ language.code }}</span>
+                    <span class="text-white text-sm font-medium flex-1 truncate">{{ language.name }}</span>
                   </div>
                 </div>
               </Transition>
