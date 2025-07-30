@@ -10,7 +10,7 @@
   >
     <div
       v-if="isVisible"
-      class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-20 backdrop-blur-md px-4"
+      class="fixed inset-0 flex items-center justify-center z-[99999] bg-black bg-opacity-20 backdrop-blur-md px-4"
       @click.self="handleBackdropClick"
     >
       <!-- Modal Content -->
