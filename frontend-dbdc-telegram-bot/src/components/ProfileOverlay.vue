@@ -5,7 +5,7 @@
       <!-- Dropdown Menu -->
             <div
         class="relative w-full max-w-full sm:max-w-[400px] md:max-w-[500px] lg:max-w-[580px] xl:max-w-[640px]
-                h-auto max-h-[calc(100vh-176px)]
+                min-h-[400px] max-h-[calc(100vh-176px)]
                 bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
                 border border-[#09074E] rounded-[20px] shadow-2xl
                 backdrop-blur-[32px] flex flex-col overflow-hidden transform transition-all duration-300 ease-out"
