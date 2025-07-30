@@ -574,14 +574,6 @@ console.log('ProfileOverlay loaded with corrected design')
   border-radius: 30px;
 }
 
-/* Ensure proper gap spacing on smaller screens */
-@media (max-width: 375px) {
-  .mx-4 {
-    margin-left: 0.75rem;
-    margin-right: 0.75rem;
-  }
-}
-
 /* Dropdown animation styles */
 .dropdown-enter-active,
 .dropdown-leave-active {
@@ -619,162 +611,11 @@ console.log('ProfileOverlay loaded with corrected design')
   background: rgba(255, 255, 255, 0.5);
 }
 
-/* Responsive margin adjustments for all screens */
-@media (min-width: 769px) {
-  .profile-overlay-content {
-    width: calc(100% - 3.5rem); /* 24px left + 32px right = 56px = 3.5rem */
-    margin-left: 1.5rem; /* 24px */
-    margin-right: 2rem; /* 32px */
-  }
-}
-
-@media (min-width: 641px) and (max-width: 768px) {
-  .profile-overlay-content {
-    width: calc(100% - 3rem); /* 20px left + 28px right = 48px = 3rem */
-    margin-left: 1.25rem; /* 20px */
-    margin-right: 1.75rem; /* 28px */
-  }
-}
-
-/* Responsive ID/ENG block adjustments */
-@media (max-width: 640px) {
-  .w-36 {
-    width: 9.5rem; /* 152px - увеличиваем на мобиле */
-  }
-  .profile-overlay-content {
-    width: calc(100% - 2.5rem); /* 16px left + 24px right = 40px = 2.5rem */
-    margin-left: 1rem; /* 16px */
-    margin-right: 1.5rem; /* 24px */
-  }
-}
-
-@media (max-width: 480px) {
-  .w-36 {
-    width: 10rem; /* 160px - еще больше для лучшей видимости */
-  }
-  .profile-overlay-content {
-    width: calc(100% - 2.125rem); /* 14px left + 20px right = 34px = 2.125rem */
-    margin-left: 0.875rem; /* 14px */
-    margin-right: 1.25rem; /* 20px */
-  }
-}
-
-@media (max-width: 375px) {
-  .w-36 {
-    width: 9.75rem; /* 156px */
-  }
-  .profile-overlay-content {
-    width: calc(100% - 1.75rem); /* 12px left + 16px right = 28px = 1.75rem */
-    margin-left: 0.75rem; /* 12px */
-    margin-right: 1rem; /* 16px */
-  }
-}
-
 /* Fix flag container to prevent distortion */
 .country-flag {
   min-width: 100%;
   min-height: 100%;
   object-fit: cover;
-}
-
-/* Start upgrade card responsive styles */
-.start-upgrade-card {
-  height: 84px;
-  width: 100%;
-}
-
-.start-gradient {
-  width: 140px;
-}
-
-.start-icon {
-  width: 32px;
-  height: 32px;
-}
-
-.start-icon-svg {
-  width: 32px;
-  height: 32px;
-}
-
-.start-title {
-  font-size: 19px;
-  line-height: 1.5;
-}
-
-.start-description {
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.start-button {
-  padding: 12px 24px;
-  font-size: 16px;
-  height: 44px;
-  min-width: 120px;
-}
-
-/* Bottom section responsive styles */
-.bottom-section {
-  height: 44px;
-  gap: 16px;
-}
-
-.separator-bar {
-  height: 24px;
-}
-
-/* ID section styles */
-.id-container {
-  height: 44px;
-  width: 144px;
-}
-
-.id-label {
-  font-size: 14px;
-}
-
-.id-value {
-  font-size: 14px;
-}
-
-.id-copy-btn {
-  width: 24px;
-  height: 44px;
-}
-
-.id-copy-icon {
-  width: 12px;
-  height: 12px;
-}
-
-/* Language section styles */
-.lang-container {
-  height: 44px;
-  width: 144px;
-}
-
-.lang-flag {
-  width: 32px;
-  height: 32px;
-}
-
-.lang-text {
-  font-size: 16px;
-}
-
-.lang-arrow {
-  width: 20px;
-  height: 20px;
-}
-
-.lang-arrow-icon {
-  width: 12px;
-  height: 12px;
-}
-
-.lang-dropdown {
-  width: 144px;
 }
 
 /* Responsive adjustments for Start block and bottom sections */
