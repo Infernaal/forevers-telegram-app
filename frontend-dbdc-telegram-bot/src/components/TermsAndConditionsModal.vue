@@ -269,7 +269,7 @@ const agreeToTerms = () => {
 
 /* Базовые стили модального окна - работают с Tailwind */
 .modal-container {
-  /* Дополнительные стили при необходимости */
+  /* Дополнительные стили при н��обходимости */
 }
 
 /* Только необходимые переопределения для очень маленьких экранов */
@@ -316,8 +316,6 @@ const agreeToTerms = () => {
   }
 }
 
-/* Large tablets and desktop cleanup - убрано больше не нужно */
-@media (min-width: 431px) and (max-width: 768px) {
 /* Анимации */
 @keyframes fadeIn {
   from { opacity: 0; }
