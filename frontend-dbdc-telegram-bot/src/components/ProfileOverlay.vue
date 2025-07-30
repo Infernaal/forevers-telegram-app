@@ -352,7 +352,7 @@
                 :class="{ 'id-copied-state': showCopySuccess }">
 
               <div v-if="!showCopySuccess" class="flex items-center gap-1 flex-1 overflow-hidden">
-                <span class="text-xs sm:text-sm md:text-base lg:text-lg font-normal text-[#B7B7B7] whitespace-nowrap">ID:</span>
+                <span class="text-[#B7B7B7] text-xs sm:text-sm md:text-base font-normal whitespace-nowrap">ID:</span>
                 <span class="text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-white truncate max-w-[90px]">515745</span>
               </div>
 
