@@ -478,105 +478,7 @@ const selectLanguage = (language) => {
   display: none;
 }
 
-/* Profile Header Section */
-.profile-header-section {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  right: 8px;
-  z-index: 10001;
-}
-
-.profile-header-container {
-  width: 100%;
-  height: 72px;
-  background: rgba(96, 95, 135, 0.24);
-  border: 1px solid #D8D8D8;
-  border-radius: 36px 16px 16px 36px;
-  display: flex;
-  align-items: center;
-  padding: 6px;
-  gap: 8px;
-  overflow: hidden;
-}
-
-.avatar-container {
-  flex-shrink: 0;
-}
-
-.avatar-image {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 1px solid #7E73D6;
-}
-
-.user-info-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 0 4px;
-  min-width: 0;
-  overflow: hidden;
-}
-
-.silver-badge {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 2px 12px 2px 2px;
-  background: rgba(110, 107, 169, 0.90);
-  border: 1px solid #D8D8D8;
-  border-radius: 24px;
-  width: fit-content;
-}
-
-.badge-icon {
-  width: 24px;
-  height: 24px;
-  flex-shrink: 0;
-}
-
-.badge-text {
-  color: #FAFAFA;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 20px;
-}
-
-.user-name {
-  color: white;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 20px;
-  margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.close-button {
-  width: 36px;
-  height: 36px;
-  min-width: 36px;
-  min-height: 36px;
-  background: #EFEEFF;
-  border: 1px solid #2019CE;
-  border-radius: 0 36px 36px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  flex-shrink: 0;
-}
-
-.close-button:hover {
-  background: #E0D9FF;
-  transform: scale(1.05);
-}
+/* Старые стили удалены - теперь используем Tailwind CSS */
 
 /* Menu Items Section */
 .menu-items-section {
@@ -850,7 +752,7 @@ const selectLanguage = (language) => {
   flex-shrink: 0;
 }
 
-/* Language Section - расширенная для ENG */
+/* Language Section - расширенная дл�� ENG */
 .language-section-container {
   flex: 1; /* занимает оставшееся место */
   min-width: 120px;
