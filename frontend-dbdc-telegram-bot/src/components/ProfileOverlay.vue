@@ -1301,8 +1301,8 @@ const selectLanguage = (language) => {
 
   .profile-dropdown {
     max-width: 600px;
-    min-h-[600px];
-    max-h-[calc(100vh-120px)];
+    min-height: 600px;
+    max-height: calc(100vh - 120px);
     height: 640px;
     border-radius: 24px;
   }
