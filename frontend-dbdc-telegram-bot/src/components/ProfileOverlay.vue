@@ -7,7 +7,7 @@
                 border border-indigo-700 backdrop-blur-lg rounded-xl sm:rounded-2xl md:rounded-3xl
                 overflow-hidden shadow-2xl transform transition-all duration-300 ease-out
                 mx-auto">
-      <div class="relative px-4 pt-4 pb-32 text-white min-h-screen flex flex-col">
+      <div class="relative p-3 sm:p-4 md:p-5 lg:p-6 text-white flex flex-col">
 
           <!-- Profile Header Section -->
         <div class="mb-4">
@@ -467,7 +467,7 @@ const selectLanguage = (language) => {
 </script>
 
 <style scoped>
-/* Минимальные сти��и для анимаций */
+/* Минимальные сти����и для анимаций */
 .profile-overlay {
   animation: fadeIn 0.3s ease-out;
 }
