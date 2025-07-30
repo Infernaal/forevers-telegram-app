@@ -31,14 +31,15 @@
         <!-- Scrollable Content -->
         <div class="flex-1 overflow-y-auto p-3 sm:p-4 md:p-5
                     scrollbar-none overscroll-contain modal-scroll-section">
-          <div class="modal-scroll-content">
+          <div class="pb-3">
             <!-- Introduction -->
-            <p class="modal-intro">
+            <p class="text-dbd-gray font-medium text-xs sm:text-sm md:text-base
+                      leading-relaxed mb-4 sm:mb-6 modal-intro">
               These Terms and Conditions govern your use of DBDC (the "Service"). By accessing or using the Service, you agree to be bound by these Terms. If you do not agree with these Terms, do not use the Service.
             </p>
 
             <!-- Sections -->
-            <div class="modal-sections">
+            <div class="flex flex-col gap-4 sm:gap-6 modal-sections">
               <!-- Definitions -->
               <section class="modal-section">
                 <h2 class="section-title">Definitions</h2>
