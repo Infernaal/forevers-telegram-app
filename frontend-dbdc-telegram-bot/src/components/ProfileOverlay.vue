@@ -261,18 +261,18 @@
                         hover:bg-white/30 relative overflow-visible"
                  @click="toggleLanguageDropdown">
 
-              <div class="flex items-center gap-2 flex-1 min-w-0 px-2">
+              <div class="flex items-center gap-1.5 sm:gap-2 flex-1 min-w-0 px-2">
                 <CountryFlag :country="selectedLanguage.country"
-                           class="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0" />
-                <span class="text-white text-sm font-normal flex-shrink-0">
+                           class="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6 flex-shrink-0" />
+                <span class="text-white text-xs sm:text-sm font-normal flex-shrink-0">
                   {{ selectedLanguage.code }}
                 </span>
               </div>
 
-              <div class="flex-shrink-0 w-4 h-4 flex items-center justify-center mr-1
+              <div class="flex-shrink-0 w-3 h-3 xs:w-4 xs:h-4 flex items-center justify-center mr-1
                           transition-transform duration-200 ease-in-out"
                    :class="{ 'rotate-180': showLanguageDropdown }">
-                <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none">
+                <svg class="w-full h-full" viewBox="0 0 16 16" fill="none">
                   <path d="M4 6l4 4 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
