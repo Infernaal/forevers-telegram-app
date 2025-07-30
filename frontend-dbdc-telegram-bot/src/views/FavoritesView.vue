@@ -1,35 +1,39 @@
 <template>
   <div class="w-full min-h-screen bg-gray-100 font-montserrat overflow-x-hidden flex flex-col">
-    <!-- Main Content -->
-    <main class="flex-1 w-full px-4 pt-4 pb-28 sm:pb-32 md:pb-36 flex flex-col">
-      <!-- Total Balance Card -->
-      <div class="bg-purple-50 border border-purple-200 rounded-2xl p-4 mb-4 flex-shrink-0">
-        <div class="flex items-start justify-between mb-4">
-          <h2 class="text-2xl font-semibold text-black leading-7">
-            Forevers<br>Balance
-          </h2>
+    <!-- Header Section -->
+    <div class="w-full px-4 pt-6 pb-3 bg-gray-100 z-30">
+      <div class="mb-2">
+        <!-- Total Balance Card -->
+        <div class="bg-purple-50 border border-purple-200 rounded-2xl p-4">
+          <div class="flex items-start justify-between mb-4">
+            <h2 class="text-2xl font-semibold text-black leading-7">
+              Forevers<br>Balance
+            </h2>
 
-          <div class="flex flex-col items-end gap-2">
-            <div class="flex items-center gap-2">
-              <svg width="32" height="32" viewBox="0 0 32 32" class="text-blue-700">
-                <path d="M30.667 7.381V1.333H7.129V9.011H1.333V15.059H7.129V30.108H13.894V22.728H19.615V16.680H13.894V15.059H25.132V9.011H13.894V7.381H30.667Z" fill="currentColor"/>
-              </svg>
-              <span class="text-3xl font-bold text-blue-700">{{ totalBalance.toLocaleString() }}</span>
+            <div class="flex flex-col items-end gap-2">
+              <div class="flex items-center gap-2">
+                <svg width="32" height="32" viewBox="0 0 32 32" class="text-blue-700">
+                  <path d="M30.667 7.381V1.333H7.129V9.011H1.333V15.059H7.129V30.108H13.894V22.728H19.615V16.680H13.894V15.059H25.132V9.011H13.894V7.381H30.667Z" fill="currentColor"/>
+                </svg>
+                <span class="text-3xl font-bold text-blue-700">{{ totalBalance.toLocaleString() }}</span>
+              </div>
+              <p class="text-lg text-gray-600 font-medium">Worth ${{ totalWorth.toLocaleString() }}</p>
             </div>
-            <p class="text-lg text-gray-600 font-medium">Worth ${{ totalWorth.toLocaleString() }}</p>
           </div>
+
+          <button
+            @click="handleRentOut"
+            class="w-full bg-gradient-to-r from-blue-700 to-purple-600 text-white font-bold py-3 px-12 rounded-full hover:from-blue-800 hover:to-purple-700 transition-all duration-200 text-sm"
+          >
+            Rent Out Forevers
+          </button>
         </div>
-
-        <button
-          @click="handleRentOut"
-          class="w-full bg-gradient-to-r from-blue-700 to-purple-600 text-white font-bold py-3 px-12 rounded-full hover:from-blue-800 hover:to-purple-700 transition-all duration-200 text-sm"
-        >
-          Rent Out Forevers
-        </button>
       </div>
+    </div>
 
-      <!-- Scroll Content -->
-      <div class="flex-1 overflow-y-auto pt-4 space-y-4" v-if="balances.length > 0">
+    <!-- Scrollable Cards -->
+    <div class="flex-1 w-full overflow-y-auto px-4 pb-32" v-if="balances.length > 0">
+      <div class="space-y-4">
         <div
           v-for="balance in balances"
           :key="balance.id"
@@ -137,20 +141,20 @@
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Empty State (when no balances from backend) -->
-      <div v-else class="flex-1 flex items-center justify-center">
-        <div class="text-center">
-          <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg width="32" height="32" viewBox="0 0 32 32" class="text-gray-400">
-              <path d="M30.667 7.381V1.333H7.129V9.011H1.333V15.059H7.129V30.108H13.894V22.728H19.615V16.680H13.894V15.059H25.132V9.011H13.894V7.381H30.667Z" fill="currentColor"/>
-            </svg>
-          </div>
-          <h3 class="text-lg font-medium text-gray-900 mb-2">No Balances Found</h3>
-          <p class="text-gray-600 mb-4">Your balance data will appear here when available.</p>
+    <!-- Empty State (when no balances from backend) -->
+    <div v-else class="flex-1 flex items-center justify-center">
+      <div class="text-center">
+        <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg width="32" height="32" viewBox="0 0 32 32" class="text-gray-400">
+            <path d="M30.667 7.381V1.333H7.129V9.011H1.333V15.059H7.129V30.108H13.894V22.728H19.615V16.680H13.894V15.059H25.132V9.011H13.894V7.381H30.667Z" fill="currentColor"/>
+          </svg>
         </div>
+        <h3 class="text-lg font-medium text-gray-900 mb-2">No Balances Found</h3>
+        <p class="text-gray-600 mb-4">Your balance data will appear here when available.</p>
       </div>
-    </main>
+    </div>
 
     <!-- Success Notification -->
     <SuccessNotification
@@ -613,22 +617,22 @@ onBeforeUnmount(() => {
   -ms-overflow-style: none;
 }
 
-/* Hide scrollbar in Firefox */
+/* Hide scrollbar in scrollable area */
 .overflow-y-auto {
   scrollbar-width: none;
   -ms-overflow-style: none;
-  scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
   overscroll-behavior: contain;
   will-change: scroll-position;
   overscroll-behavior-x: none;
 }
 
-/* Ensure main container takes full height properly */
-main {
-  min-height: calc(100vh - 100px);
-  box-sizing: border-box;
+.overflow-y-auto::-webkit-scrollbar {
+  display: none;
 }
+
+
 
 /* Better touch targets and interaction */
 .balance-card {
