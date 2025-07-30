@@ -206,9 +206,11 @@
           </div>
 
           <!-- Bottom Controls - Tailwind CSS -->
-          <div class="absolute bottom-2 left-2 right-2
-                      flex items-center justify-center gap-3
-                      h-10 sm:h-11 md:h-12 z-[10001]">
+          <div class="absolute bottom-3 sm:bottom-4 md:bottom-5 lg:bottom-6
+                      left-3 sm:left-4 md:left-5 lg:left-6
+                      right-3 sm:right-4 md:right-5 lg:right-6
+                      flex items-center justify-center gap-2 sm:gap-3
+                      h-10 sm:h-11 md:h-12 lg:h-14 z-[10001]">
 
             <!-- ID Section - Equal width -->
             <div class="flex-1 max-w-[140px] h-full
@@ -679,7 +681,7 @@ const selectLanguage = (language) => {
 
 /* ID Section - уменьшенная для Copy border to border */
 .id-section-container {
-  flex: 0 0 140px; /* фиксир��ванная ширина */
+  flex: 0 0 140px; /* фиксированная ширина */
   height: 40px;
   background: rgba(255, 255, 255, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.4);
