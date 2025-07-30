@@ -768,9 +768,9 @@ const selectLanguage = (language) => {
   z-index: 10001;
 }
 
-/* ID Section - Full Border to Border */
+/* ID Section - более узкий для Copy border to border */
 .id-section-container {
-  flex: 1;
+  flex: 0 0 140px; /* фиксированная ширина вместо flex: 1 */
   height: 40px;
   background: rgba(255, 255, 255, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.4);
