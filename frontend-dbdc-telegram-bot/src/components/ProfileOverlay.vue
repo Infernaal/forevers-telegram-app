@@ -1270,10 +1270,8 @@ const selectLanguage = (language) => {
   }
   
   .copy-button {
-    width: 24px;
-    height: 24px;
-    min-width: 24px;
-    min-height: 24px;
+    width: 32px; /* увеличено для border to border */
+    height: 100%;
     border-radius: 0 18px 18px 0;
   }
   
