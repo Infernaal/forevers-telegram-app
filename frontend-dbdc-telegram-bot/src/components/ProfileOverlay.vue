@@ -208,7 +208,7 @@
                       h-12 sm:h-14 md:h-16">
 
             <!-- ID Section - Copy button border to border -->
-            <div class="flex-1 max-w-[120px] xs:max-w-[130px] sm:max-w-[140px] h-full
+            <div class="flex-1 max-w-[140px] xs:max-w-[150px] sm:max-w-[160px] h-full
                         bg-white/30 border border-white/40 rounded-full
                         backdrop-blur-sm flex items-center relative
                         transition-all duration-300 ease-in-out overflow-hidden"
@@ -358,7 +358,7 @@ const languages = ref([
   { code: 'ITA', name: 'Italiano', country: 'italy' },
   { code: 'RUS', name: 'Ру��ский', country: 'ukraine' },
   { code: 'CHN', name: '中文', country: 'china' },
-  { code: 'JPN', name: '日本��', country: 'japan' },
+  { code: 'JPN', name: '日本語', country: 'japan' },
   { code: 'KOR', name: '한국어', country: 'new zealand' },
   { code: 'ARA', name: 'العربية', country: 'uae' },
   { code: 'POR', name: 'Português', country: 'spain' },
