@@ -27,13 +27,13 @@
             </div>
 
               <!-- User Info -->
-              <div class="flex flex-col gap-1 sm:gap-2 flex-1 min-w-0 px-1">
+              <div class="flex flex-col gap-1 sm:gap-1.5 md:gap-2 flex-1 min-w-0 px-1">
                 <!-- Silver Badge - исправленный -->
                 <div class="flex items-center gap-1.5 sm:gap-2
-                            px-1.5 py-1 sm:px-2 sm:py-1.5
+                            px-2 py-1 sm:px-2.5 sm:py-1.5 md:px-3 md:py-2
                             bg-purple-600/90 border border-gray-200
                             rounded-full w-fit">
-                  <div class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 flex-shrink-0">
+                  <div class="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 flex-shrink-0">
                     <svg class="w-full h-full" viewBox="0 0 24 24" fill="none">
                       <circle cx="12" cy="12" r="10" fill="#E5E7EB"/>
                       <circle cx="12" cy="12" r="8" fill="#9CA3AF"/>
@@ -41,13 +41,13 @@
                             fill="#F3F4F6"/>
                     </svg>
                   </div>
-                  <span class="text-white text-xs sm:text-sm font-medium whitespace-nowrap">
+                  <span class="text-white text-xs sm:text-sm md:text-base font-medium whitespace-nowrap">
                     Silver
                   </span>
                 </div>
 
                 <!-- User Name -->
-                <h2 class="text-white text-sm sm:text-base md:text-lg
+                <h2 class="text-white text-xs sm:text-sm md:text-base lg:text-lg
                            font-bold leading-tight truncate">
                   Jason Williams
                 </h2>
@@ -697,7 +697,7 @@ const selectLanguage = (language) => {
   align-items: center;
   gap: 2px;
   padding-left: 12px;
-  padding-right: 4px; /* уменьшено для Copy border to border */
+  padding-right: 4px; /* уме��ьшено для Copy border to border */
   flex: 1;
 }
 
