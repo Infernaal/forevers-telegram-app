@@ -8,7 +8,9 @@
       <!-- Dropdown Menu -->
       <div class="relative w-full
               max-w-[480px] xs:max-w-[500px] sm:max-w-[520px] md:max-w-[580px] lg:max-w-[640px] xl:max-w-[720px] 2xl:max-w-[800px]
-              h-auto min-h-[60vh] max-h-[75vh]
+              h-auto min-h-[55vh] max-h-[70vh]
+              xs:min-h-[58vh] xs:max-h-[72vh]
+              sm:min-h-[62vh] sm:max-h-[75vh]
               md:min-h-[65vh] md:max-h-[80vh]
               lg:min-h-[70vh] lg:max-h-[85vh]
               xl:min-h-[75vh] xl:max-h-[90vh]
