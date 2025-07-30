@@ -4,13 +4,18 @@
               flex items-center justify-center
               p-2 sm:p-3 md:p-4 lg:p-6
               animate-[fadeIn_0.3s_ease-out] terms-modal-overlay
-              touch-manipulation overscroll-contain"
-       @click="closeModal">
+              touch-manipulation overscroll-contain
+              supports-[height:100dvh]:min-h-[100dvh]"
+       @click="closeModal"
+       style="height: 100vh; height: 100dvh;">
     <div class="w-full max-w-[calc(100vw-16px)] sm:max-w-[calc(100vw-24px)] md:max-w-md lg:max-w-lg
-                max-h-[calc(100vh-32px)] sm:max-h-[calc(100vh-48px)]
-                min-h-[70vh] sm:min-h-[65vh] md:min-h-[60vh]
+                h-[calc(100vh-32px)] sm:h-[calc(100vh-48px)] md:h-[calc(100vh-64px)]
+                max-h-[calc(100vh-32px)] sm:max-h-[calc(100vh-48px)] md:max-h-[calc(100vh-64px)]
+                supports-[height:100dvh]:h-[calc(100dvh-32px)]
+                supports-[height:100dvh]:max-h-[calc(100dvh-32px)]
                 modal-container animate-[slideUp_0.3s_ease-out]"
-         @click.stop>
+         @click.stop
+         style="height: calc(100vh - 32px); height: calc(100dvh - 32px);">
       <!-- Modal Content -->
       <div class="bg-white rounded-2xl sm:rounded-3xl border border-gray-200
                   shadow-lg flex flex-col h-full max-h-full overflow-hidden
@@ -29,8 +34,11 @@
         </div>
 
         <!-- Scrollable Content -->
-        <div class="flex-1 overflow-y-auto p-3 sm:p-4 md:p-5
-                    scrollbar-none overscroll-contain modal-scroll-section">
+        <div class="flex-1 overflow-y-auto overflow-x-hidden p-3 sm:p-4 md:p-5
+                    scrollbar-none overscroll-contain modal-scroll-section
+                    min-h-0 supports-[height:100dvh]:max-h-[calc(100dvh-200px)]"
+             style="max-height: calc(100vh - 200px); max-height: calc(100dvh - 200px);
+                    -webkit-overflow-scrolling: touch;">
           <div class="pb-3">
             <!-- Introduction -->
             <p class="text-dbd-gray font-medium text-xs sm:text-sm md:text-base
@@ -239,7 +247,7 @@ const agreeToTerms = () => {
 </script>
 
 <style scoped>
-/* Дополнительные Tailwind утилиты для мобильной адаптивности */
+/* Дополнител��ные Tailwind утилиты для мобильной адаптивности */
 .scrollbar-none {
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -276,6 +284,79 @@ const agreeToTerms = () => {
 @media (max-width: 320px) {
   .modal-container {
     max-width: calc(100vw - 8px) !important;
+    height: calc(100vh - 16px) !important;
+  }
+}
+
+/* Small height screens (shorter mobile devices) */
+@media (max-height: 600px) {
+  .modal-container {
+    height: calc(100vh - 16px) !important;
+  }
+  .modal-scroll-section {
+    max-height: calc(100vh - 180px) !important;
+  }
+}
+
+/* Very small height screens */
+@media (max-height: 480px) {
+  .modal-scroll-section {
+    max-height: calc(100vh - 160px) !important;
+    max-height: calc(100dvh - 160px) !important;
+  }
+}
+
+/* iOS Safari specific optimizations */
+@supports (-webkit-touch-callout: none) {
+  .terms-modal-overlay {
+    height: 100vh;
+    height: -webkit-fill-available;
+  }
+  .modal-container {
+    height: calc(100vh - 32px);
+    height: calc(-webkit-fill-available - 32px);
+  }
+  .modal-scroll-section {
+    max-height: calc(100vh - 200px);
+    max-height: calc(-webkit-fill-available - 200px);
+  }
+}
+
+/* Android Chrome specific optimizations */
+@media screen and (max-width: 768px) {
+  .modal-container {
+    height: calc(100vh - 32px);
+    height: calc(100dvh - 32px);
+  }
+  .modal-scroll-section {
+    max-height: calc(100vh - 200px);
+    max-height: calc(100dvh - 200px);
+  }
+}
+
+/* iPhone X and newer (with notch) */
+@supports (padding: max(0px)) {
+  .terms-modal-overlay {
+    padding: max(8px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left));
+  }
+}
+
+/* Tablets (iPad, Android tablets) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .modal-container {
+    max-width: 480px;
+    height: calc(100vh - 64px);
+    height: calc(100dvh - 64px);
+  }
+}
+
+/* Large tablets and small desktops */
+@media (min-width: 1024px) {
+  .modal-container {
+    max-width: 520px;
+    height: auto;
+    max-height: calc(100vh - 80px);
+    max-height: calc(100dvh - 80px);
   }
 }
 
@@ -284,7 +365,26 @@ const agreeToTerms = () => {
 /* Landscape orientation - важно для мобильных */
 @media (max-height: 500px) and (orientation: landscape) {
   .modal-container {
-    max-height: min(95vh, calc(100vh - 16px)) !important;
+    height: calc(100vh - 16px) !important;
+    height: calc(100dvh - 16px) !important;
+    max-height: calc(100vh - 16px) !important;
+    max-height: calc(100dvh - 16px) !important;
+  }
+  .modal-scroll-section {
+    max-height: calc(100vh - 140px) !important;
+    max-height: calc(100dvh - 140px) !important;
+  }
+}
+
+/* iPhone landscape (all models) */
+@media (max-height: 440px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
+  .modal-container {
+    height: calc(100vh - 8px) !important;
+    height: calc(100dvh - 8px) !important;
+  }
+  .modal-scroll-section {
+    max-height: calc(100vh - 120px) !important;
+    max-height: calc(100dvh - 120px) !important;
   }
 }
 
