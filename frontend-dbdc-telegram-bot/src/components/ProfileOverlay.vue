@@ -257,11 +257,11 @@
                       left-2 xs:left-2.5 sm:left-3 md:left-3.5 lg:left-4
                       right-2 xs:right-2.5 sm:right-3 md:right-3.5 lg:right-4 z-[1]">
             <div class="w-full
-                        h-16 xs:h-18 sm:h-20 md:h-21 lg:h-22
+                        h-20 xs:h-22 sm:h-24 md:h-26 lg:h-28
                         bg-[#F1E7FF] border border-[#DCCCF1]
                         rounded-xl xs:rounded-2xl sm:rounded-2xl
                         flex flex-col justify-center
-                        p-1.5 xs:p-2 sm:p-2.5 md:p-3
+                        p-3 xs:p-4 sm:p-5 md:p-6 lg:p-7
                         relative overflow-hidden">
               <!-- Background gradient -->
               <div class="absolute left-0 top-0
@@ -269,8 +269,8 @@
                           h-full bg-gradient-to-r from-[#8C4CD1] to-[#C497FF]
                           opacity-40 rounded-l-xl xs:rounded-l-2xl"></div>
               
-              <div class="flex items-center mb-0.5 xs:mb-1 sm:mb-1.5 relative z-[1]">
-                <div class="flex items-center gap-2 xs:gap-2.5 sm:gap-3 md:gap-3.5 flex-1">
+              <div class="flex items-center mb-1 xs:mb-1.5 sm:mb-2 md:mb-2.5 lg:mb-3 relative z-[1]">
+                <div class="flex items-center gap-2 xs:gap-2.5 sm:gap-3 md:gap-4 lg:gap-5 flex-1">
                   <div class="flex-shrink-0">
                     <svg class="w-6 xs:w-7 sm:w-8 md:w-9 lg:w-10 h-6 xs:h-7 sm:h-8 md:h-9 lg:h-10" viewBox="0 0 32 32" fill="none">
                       <g clip-path="url(#clip0_2_21309)">
@@ -300,15 +300,16 @@
                   <div class="text-dbd-dark text-sm xs:text-base sm:text-lg md:text-xl font-bold leading-4 xs:leading-5 sm:leading-6 mb-0.5 xs:mb-1">Start</div>
                 </div>
                 <button class="relative z-[1]
-                              w-[80px] xs:w-[90px] sm:w-[100px] md:w-[110px] lg:w-[120px]
-                              h-8 xs:h-9 sm:h-10 md:h-11 lg:h-12
-                              min-h-[32px] xs:min-h-[36px] sm:min-h-[40px] md:min-h-[44px] lg:min-h-[48px]
+                              w-[90px] xs:w-[100px] sm:w-[110px] md:w-[120px] lg:w-[130px]
+                              h-9 xs:h-10 sm:h-11 md:h-12 lg:h-13
+                              min-h-[36px] xs:min-h-[40px] sm:min-h-[44px] md:min-h-[48px] lg:min-h-[52px]
                               bg-gradient-to-r from-dbd-primary to-[#473FFF]
                               border-none rounded-full text-white
-                              text-xs xs:text-sm sm:text-base md:text-lg
-                              font-bold leading-4 xs:leading-5 sm:leading-6
+                              text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl
+                              font-bold leading-4 xs:leading-5 sm:leading-6 md:leading-7
                               capitalize cursor-pointer transition-all duration-200
-                              hover:-translate-y-0.5 hover:shadow-lg flex-shrink-0"
+                              hover:-translate-y-0.5 hover:shadow-lg flex-shrink-0
+                              px-3 xs:px-4 sm:px-5 md:px-6"
                         @click="handleUpgrade">
                   Upgrade
                 </button>
