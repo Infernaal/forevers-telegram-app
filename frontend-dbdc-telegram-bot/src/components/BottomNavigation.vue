@@ -9,9 +9,9 @@
     <!-- Bottom Navigation -->
     <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl sm:rounded-t-3xl lg:rounded-t-none shadow-[0_-4px_16px_rgba(0,0,0,0.08),0_-2px_6px_rgba(0,0,0,0.04)] border-t border-black/[0.06] z-[10000] pb-[env(safe-area-inset-bottom,0px)]">
       <!-- Navigation Content -->
-      <div class="flex items-center justify-center p-3 sm:p-4 md:p-5 lg:p-6 xl:p-8 pb-[calc(12px+env(safe-area-inset-bottom,0px))] sm:pb-[calc(16px+env(safe-area-inset-bottom,0px))] md:pb-[calc(20px+env(safe-area-inset-bottom,0px))] lg:pb-[calc(24px+env(safe-area-inset-bottom,0px))] xl:pb-[calc(32px+env(safe-area-inset-bottom,0px))] min-h-[64px] sm:min-h-[72px] md:min-h-[88px] lg:min-h-[100px] xl:min-h-[120px]">
+      <div class="flex items-center justify-center p-3 sm:p-4 md:p-5 lg:p-6 pb-[calc(12px+env(safe-area-inset-bottom,0px))] sm:pb-[calc(16px+env(safe-area-inset-bottom,0px))] md:pb-[calc(20px+env(safe-area-inset-bottom,0px))] lg:pb-[calc(24px+env(safe-area-inset-bottom,0px))] min-h-[64px] sm:min-h-[72px] md:min-h-[88px] lg:min-h-[100px]">
         <!-- Navigation Items Container -->
-        <div class="flex items-center justify-between w-full mx-auto gap-2 sm:gap-4 md:gap-6 lg:gap-8 xl:gap-12 px-2 sm:px-4 md:px-6 lg:px-8 xl:px-16">
+        <div class="flex items-center justify-between w-full gap-2 sm:gap-4 md:gap-6 lg:gap-8 px-2 sm:px-4 md:px-6 lg:px-8">
 
           <!-- Profile -->
           <button
