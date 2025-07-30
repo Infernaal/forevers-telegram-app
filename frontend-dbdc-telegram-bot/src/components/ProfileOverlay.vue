@@ -358,8 +358,7 @@
                                                    pl-2 xs:pl-2.5 sm:pl-3 md:pl-3.5 lg:pl-4 xl:pl-4.5
                                                    pr-5 xs:pr-6 sm:pr-7 md:pr-8 lg:pr-9 xl:pr-10 flex-1">
                 <span class="text-xs sm:text-sm md:text-base lg:text-lg font-normal text-[#B7B7B7] whitespace-nowrap">ID:</span>
-                <span class="text-white text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl
-                           font-semibold leading-tight whitespace-nowrap">515745</span>
+                <span class="text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-white truncate max-w-[90px]">515745</span>
               </div>
 
               <div v-if="showCopySuccess" class="id-copied-content">
