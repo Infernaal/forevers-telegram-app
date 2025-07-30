@@ -692,10 +692,9 @@ console.log('ProfileOverlay loaded with corrected design')
   .w-36 {
     width: 9.5rem; /* 152px - увеличиваем на мобиле */
   }
-  .ml-4 {
+  .profile-overlay-content {
+    width: calc(100% - 2.5rem); /* 16px left + 24px right = 40px = 2.5rem */
     margin-left: 1rem; /* 16px */
-  }
-  .mr-6 {
     margin-right: 1.5rem; /* 24px */
   }
 }
@@ -704,10 +703,9 @@ console.log('ProfileOverlay loaded with corrected design')
   .w-36 {
     width: 10rem; /* 160px - еще больше для лучшей видимости */
   }
-  .ml-4 {
+  .profile-overlay-content {
+    width: calc(100% - 2.125rem); /* 14px left + 20px right = 34px = 2.125rem */
     margin-left: 0.875rem; /* 14px */
-  }
-  .mr-6 {
     margin-right: 1.25rem; /* 20px */
   }
 }
@@ -716,12 +714,10 @@ console.log('ProfileOverlay loaded with corrected design')
   .w-36 {
     width: 9.75rem; /* 156px */
   }
-
-  .ml-4 {
-    margin-left: 0.75rem;
-  }
-  .mr-6 {
-    margin-right: 1rem;
+  .profile-overlay-content {
+    width: calc(100% - 1.75rem); /* 12px left + 16px right = 28px = 1.75rem */
+    margin-left: 0.75rem; /* 12px */
+    margin-right: 1rem; /* 16px */
   }
 }
 
