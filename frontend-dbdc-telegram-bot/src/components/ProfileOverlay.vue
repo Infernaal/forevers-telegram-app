@@ -1313,10 +1313,6 @@ const selectLanguage = (language) => {
     height: 14px;
   }
   
-  .triangle-decoration {
-    left: 18px;
-  }
-
   .triangle-shape {
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
@@ -1524,10 +1520,6 @@ const selectLanguage = (language) => {
     height: 15px;
   }
   
-  .triangle-decoration {
-    left: 22px;
-  }
-
   .triangle-shape {
     border-left: 9px solid transparent;
     border-right: 9px solid transparent;
@@ -1736,10 +1728,6 @@ const selectLanguage = (language) => {
     height: 20px;
   }
   
-  .triangle-decoration {
-    left: 32px;
-  }
-
   .triangle-shape {
     border-left: 14px solid transparent;
     border-right: 14px solid transparent;
@@ -1948,10 +1936,6 @@ const selectLanguage = (language) => {
     height: 24px;
   }
   
-  .triangle-decoration {
-    left: 40px;
-  }
-
   .triangle-shape {
     border-left: 18px solid transparent;
     border-right: 18px solid transparent;
