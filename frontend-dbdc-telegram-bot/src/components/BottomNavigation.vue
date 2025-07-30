@@ -7,7 +7,7 @@
     />
 
     <!-- Bottom Navigation -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl sm:rounded-t-3xl lg:rounded-t-none shadow-[0_-4px_16px_rgba(0,0,0,0.08),0_-2px_6px_rgba(0,0,0,0.04)] border-t border-black/[0.06] z-[10000] pb-[env(safe-area-inset-bottom,0px)]">
+    <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl sm:rounded-t-3xl shadow-[0_-4px_16px_rgba(0,0,0,0.08),0_-2px_6px_rgba(0,0,0,0.04)] border-t border-black/[0.06] z-[10000] pb-[env(safe-area-inset-bottom,0px)]">
       <!-- Navigation Content -->
       <div class="flex items-center justify-center p-3 sm:p-4 pb-[calc(12px+env(safe-area-inset-bottom,0px))] sm:pb-[calc(16px+env(safe-area-inset-bottom,0px))] min-h-[64px] sm:min-h-[72px]">
         <!-- Navigation Items Container -->
