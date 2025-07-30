@@ -2,13 +2,13 @@
   <div v-if="isVisible" class="fixed font-montserrat bg-black bg-opacity-10 backdrop-blur-xl"
        style="z-index: 9999; position: fixed; top: 0; left: 0; right: 0; bottom: 88px;">
     <!-- Dropdown Wrapper -->
-    <div class="relative w-full flex justify-center items-start mt-56 sm:mt-64 md:mt-14 lg:mt-12 xl:mt-48">
+    <div class="relative w-full flex justify-center items-start mt-[180px] xs:mt-[200px] sm:mt-[220px] md:mt-[240px] lg:mt-[260px] xl:mt-[280px]">
       <!-- Dropdown Menu -->
-      <div class="relative w-[92%] max-w-[460px] sm:max-w-[500px] md:max-w-[560px] lg:max-w-[620px] xl:max-w-[680px] max-h-[calc(100vh-140px)]
-              h-[500px] sm:h-[580px] md:h-[600px]
+      <div class="relative w-[92%] max-w-[320px] xs:max-w-[360px] sm:max-w-[400px] md:max-w-[460px] lg:max-w-[520px] xl:max-w-[580px] max-h-[calc(100vh-220px)]
+              h-[420px] xs:h-[460px] sm:h-[500px] md:h-[540px] lg:h-[580px] xl:h-[600px]
               bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
               border border-[#09074E] backdrop-blur-[32px]
-              rounded-[20px] overflow-hidden shadow-xl"
+              rounded-[16px] xs:rounded-[18px] sm:rounded-[20px] md:rounded-[22px] lg:rounded-[24px] overflow-hidden shadow-xl"
            style="z-index: 10000; position: relative;">
         <div class="p-4 text-white text-center">
             <!-- Background -->
@@ -339,11 +339,9 @@
         </div>
       </div>
       <!-- Triangle (ниже dropdown'а) -->
-      <div class="absolute top-full -mt-1 left-[8%] sm:left-[13%] md:left-[15%] lg:left-[17%]"
+      <div class="absolute top-full triangle-positioning"
            style="z-index: 9998;">
-        <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px]
-                border-l-transparent border-r-transparent 
-                border-t-[rgba(18,11,129,0.95)] drop-shadow-md"></div>
+        <div class="triangle-shape"></div>
       </div>
     </div>
   </div>
