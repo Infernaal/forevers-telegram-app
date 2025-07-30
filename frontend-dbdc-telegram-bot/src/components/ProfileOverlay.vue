@@ -84,7 +84,7 @@
           <!-- Menu Items -->
           <div class="absolute
                       top-[110px] xs:top-[120px] sm:top-[130px] md:top-[140px] lg:top-[150px]
-                      bottom-[160px] xs:bottom-[165px] sm:bottom-[170px] md:bottom-[175px] lg:bottom-[180px]
+                      bottom-[140px] xs:bottom-[145px] sm:bottom-[150px] md:bottom-[155px] lg:bottom-[160px]
                       left-2 xs:left-2.5 sm:left-3 md:left-3.5 lg:left-4
                       right-2 xs:right-2.5 sm:right-3 md:right-3.5 lg:right-4 z-[1]
                       overflow-y-auto overflow-x-hidden scrollbar-none
