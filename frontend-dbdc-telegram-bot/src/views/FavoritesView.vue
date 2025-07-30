@@ -650,6 +650,26 @@ onMounted(async () => {
     fetchBalancesFromBackend(),
     fetchTotalBalance()
   ])
+
+  // Set up scroll effect after initial render
+  nextTick(() => {
+    if (scrollContainer.value) {
+      // Add scroll listener with throttling for performance
+      let scrollTimeout
+      const throttledHandleScroll = () => {
+        if (scrollTimeout) return
+        scrollTimeout = setTimeout(() => {
+          handleScroll()
+          scrollTimeout = null
+        }, 16) // ~60fps
+      }
+
+      scrollContainer.value.addEventListener('scroll', throttledHandleScroll, { passive: true })
+
+      // Initial calculation
+      handleScroll()
+    }
+  })
 })
 
 // Cleanup
