@@ -24,9 +24,9 @@
                         border border-[#09074E] backdrop-blur-[32px]"></div>
 
           <!-- Profile Header Section -->
-          <div class="absolute top-2 xs:top-2.5 sm:top-3 md:top-3.5 lg:top-4
-                      left-2 xs:left-2.5 sm:left-3 md:left-3.5 lg:left-4
-                      right-2 xs:right-2.5 sm:right-3 md:right-3.5 lg:right-4 z-[2]">
+          <div class="absolute top-2 xs:top-2.5 sm:top-3 md:top-4 lg:top-5 xl:top-6
+                      left-2 xs:left-2.5 sm:left-3 md:left-3.5 lg:left-4 xl:left-5
+                      right-2 xs:right-2.5 sm:right-3 md:right-3.5 lg:right-4 xl:right-5 z-[2]">
             <div class="w-full
                         h-20 xs:h-22 sm:h-24 md:h-28 lg:h-32 xl:h-36
                         bg-[rgba(96,95,135,0.24)] border border-[#D8D8D8]
