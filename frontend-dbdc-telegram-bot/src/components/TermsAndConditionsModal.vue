@@ -286,7 +286,11 @@ const agreeToTerms = () => {
 /* Landscape orientation - важно для мобильных */
 @media (max-height: 500px) and (orientation: landscape) {
   .modal-container {
-    max-height: min(95vh, calc(100vh - 16px)) !important;
+    height: calc(100vh - 16px) !important;
+    max-height: calc(100vh - 16px) !important;
+  }
+  .modal-scroll-section {
+    max-height: calc(100vh - 160px) !important;
   }
 }
 
