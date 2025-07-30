@@ -11,8 +11,11 @@
     <div class="w-full max-w-[calc(100vw-16px)] sm:max-w-[calc(100vw-24px)] md:max-w-md lg:max-w-lg
                 h-[calc(100vh-32px)] sm:h-[calc(100vh-48px)] md:h-[calc(100vh-64px)]
                 max-h-[calc(100vh-32px)] sm:max-h-[calc(100vh-48px)] md:max-h-[calc(100vh-64px)]
+                supports-[height:100dvh]:h-[calc(100dvh-32px)]
+                supports-[height:100dvh]:max-h-[calc(100dvh-32px)]
                 modal-container animate-[slideUp_0.3s_ease-out]"
-         @click.stop>
+         @click.stop
+         style="height: calc(100vh - 32px); height: calc(100dvh - 32px);">
       <!-- Modal Content -->
       <div class="bg-white rounded-2xl sm:rounded-3xl border border-gray-200
                   shadow-lg flex flex-col h-full max-h-full overflow-hidden
