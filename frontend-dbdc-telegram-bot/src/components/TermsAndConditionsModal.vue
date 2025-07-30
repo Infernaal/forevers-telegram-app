@@ -239,6 +239,26 @@ const agreeToTerms = () => {
 </script>
 
 <style scoped>
+/* Дополнительные Tailwind утилиты для мобильной адаптивности */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+.touch-manipulation {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.overscroll-contain {
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
 /* Modal Overlay */
 .terms-modal-overlay {
   animation: fadeIn 0.3s ease-out;
