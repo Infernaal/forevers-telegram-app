@@ -6,7 +6,7 @@
                 max-h-[calc(100vh-160px)] bg-gradient-to-r from-indigo-800 via-purple-900 to-indigo-800
                 border border-indigo-700 backdrop-blur-lg rounded-xl sm:rounded-2xl md:rounded-3xl
                 overflow-hidden shadow-2xl transform transition-all duration-300 ease-out
-                mx-auto">
+                mx-auto z-[10001]">
       <div class="relative p-3 sm:p-4 md:p-5 lg:p-6 text-white flex flex-col">
 
           <!-- Profile Header Section -->
@@ -305,7 +305,7 @@
             </div>
           </div>
       </div>
-      <!-- Triangle убр��н по требов��нию -->
+      <!-- Triangle убран по требов��нию -->
     </div>
   </div>
 </template>
@@ -649,7 +649,7 @@ const selectLanguage = (language) => {
   align-items: center;
   gap: 2px;
   padding-left: 12px;
-  padding-right: 4px; /* ��меньшено для Copy border to border */
+  padding-right: 4px; /* уменьшено для Copy border to border */
   flex: 1;
 }
 
