@@ -271,7 +271,7 @@
         </div>
       </div>
       <!-- Triangle (пришит к dropdown снизу слева) -->
-      <div class="triangle-decoration">
+      <div class="triangle-decoration" :style="trianglePositionStyle">
         <div class="triangle-shape"></div>
       </div>
     </div>
@@ -279,7 +279,7 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch, onMounted, computed } from 'vue'
 import CountryFlag from './CountryFlag.vue'
 
 // Props
@@ -287,6 +287,10 @@ const props = defineProps({
   isVisible: {
     type: Boolean,
     default: false
+  },
+  triggerPosition: {
+    type: Object,
+    default: () => ({ left: 0, width: 0 })
   }
 })
 
@@ -296,6 +300,22 @@ const emit = defineEmits(['close'])
 // State
 const showCopySuccess = ref(false)
 const showLanguageDropdown = ref(false)
+
+// Computed triangle position
+const trianglePositionStyle = computed(() => {
+  if (!props.triggerPosition || props.triggerPosition.left === 0) {
+    return {}
+  }
+
+  // Calculate center of trigger element minus triangle width
+  const triggerCenter = props.triggerPosition.left + (props.triggerPosition.width / 2)
+  const triangleWidth = 20 // approximate triangle width
+  const left = triggerCenter - triangleWidth / 2
+
+  return {
+    left: `${Math.max(12, left)}px`
+  }
+})
 
 // Language state
 const languages = ref([
@@ -972,9 +992,9 @@ const selectLanguage = (language) => {
 .triangle-decoration {
   position: absolute;
   top: 100%;
-  left: 24px;
   margin-top: -1px;
   z-index: 9998;
+  transition: left 0.2s ease;
 }
 
 .triangle-shape {
