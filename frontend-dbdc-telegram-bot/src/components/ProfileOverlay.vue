@@ -35,14 +35,12 @@
               
               <!-- User Info -->
               <div class="flex flex-col min-w-0">
-                <!-- Silver Badge -->
-                <div class="flex items-center gap-2 bg-white/20 border border-white/20 rounded-full px-2 py-1 mb-2 w-fit">
-                  <div class="w-7 h-7 rounded-full bg-[#9E9E9E] flex items-center justify-center flex-shrink-0">
-                    <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z"/>
-                    </svg>
+                <!-- Dynamic Rank Badge -->
+                <div class="flex items-center gap-1.5 bg-white/20 border border-white/20 rounded-full px-2 py-1 mb-2 w-fit">
+                  <div class="w-7 h-7 flex items-center justify-center flex-shrink-0">
+                    <component :is="currentRank.iconComponent" class="w-full h-full" />
                   </div>
-                  <span class="text-dbd-off-white text-sm font-medium">Silver</span>
+                  <span class="text-sm font-medium" :style="{ color: currentRank.color }">{{ currentRank.name }}</span>
                 </div>
                 
                 <!-- User Name -->
@@ -171,12 +169,12 @@
         <div class="flex-shrink-0 px-3 pb-3 space-y-3">
           
           <!-- Start Upgrade Card - Enhanced Design -->
-          <div class="relative bg-[#F1E7FF] border border-[#DCCCF1] rounded-2xl overflow-hidden h-[96px]">
+          <div class="relative bg-[#F1E7FF] border border-[#DCCCF1] rounded-2xl overflow-hidden h-[84px]">
             <!-- Purple gradient overlay on left -->
             <div class="absolute left-0 top-0 w-[140px] h-full bg-gradient-to-r from-[#8C4CD1] to-[#C497FF] opacity-40 rounded-l-2xl"></div>
 
             <!-- Star icon -->
-            <div class="absolute left-2 top-3">
+            <div class="absolute left-2 top-3.5">
               <svg class="w-8 h-8" viewBox="0 0 32 32" fill="none">
                 <g clipPath="url(#clip0_star)">
                   <path d="M16 31.0588C24.3167 31.0588 31.0588 24.3167 31.0588 16C31.0588 7.68323 24.3167 0.941162 16 0.941162C7.68323 0.941162 0.941162 7.68323 0.941162 16C0.941162 24.3167 7.68323 31.0588 16 31.0588Z" fill="#8C4CD1"/>
@@ -204,24 +202,26 @@
             </div>
 
             <!-- Content -->
-            <div class="relative flex flex-col h-full pl-12 pr-3 py-2">
-              <!-- Top row: Start title and Upgrade button aligned with icon -->
-              <div class="flex items-center justify-between">
-                <h3 class="text-dbd-dark text-lg font-bold leading-6">Start</h3>
-                <button class="bg-gradient-to-r from-dbd-primary to-[#473FFF] text-white text-base font-bold px-6 py-3 rounded-full hover:shadow-lg transition-all duration-200 flex-shrink-0"
-                        @click="onMenuClick('upgrade')">
-                  Upgrade
-                </button>
+            <div class="relative flex items-center justify-between h-full pl-12 pr-3 py-2">
+              <!-- Left section: Start title -->
+              <div class="flex flex-col justify-center">
+                <h3 class="text-dbd-dark text-[19px] font-bold leading-6 mb-1">Start</h3>
               </div>
 
-              <!-- Bottom row: Description text -->
-              <div class="flex-1 flex items-end pb-1">
-                <p class="text-sm leading-[22px]">
-                  <span class="text-dbd-gray">buy </span>
-                  <span class="text-[#8C4CD1] font-bold">123</span>
-                  <span class="text-dbd-gray"> more Forevers to upgrade</span>
-                </p>
-              </div>
+              <!-- Right section: Upgrade button -->
+              <button class="bg-gradient-to-r from-dbd-primary to-[#473FFF] text-white text-base font-bold px-6 py-3 rounded-full hover:shadow-lg transition-all duration-200 flex-shrink-0 h-11"
+                      @click="onMenuClick('upgrade')">
+                Upgrade
+              </button>
+            </div>
+
+            <!-- Bottom description text positioned at left -->
+            <div class="absolute left-2 bottom-3.5 right-3">
+              <p class="text-sm leading-[22px] text-left max-w-[299px]">
+                <span class="text-[#4B4D50]">buy </span>
+                <span class="text-[#8C4CD1] font-bold">123</span>
+                <span class="text-[#4B4D50]"> more Forevers to upgrade</span>
+              </p>
             </div>
           </div>
 
@@ -303,7 +303,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import CountryFlag from './CountryFlag.vue'
 
 // Props
@@ -316,6 +316,58 @@ const props = defineProps({
 
 // Emits
 const emit = defineEmits(['close'])
+
+// Current user rank (this would come from user data in real app)
+const userRank = ref('silver') // Can be: norank, bronze, silver, gold, diamond, doublediam ond, ambassador, royalambassador
+
+// Rank definitions with components and colors
+const rankDefinitions = {
+  norank: {
+    name: 'No Rank',
+    color: '#FAFAFA',
+    iconComponent: 'NoRankIcon'
+  },
+  bronze: {
+    name: 'Bronze',
+    color: '#FAB44D',
+    iconComponent: 'BronzeIcon'
+  },
+  silver: {
+    name: 'Silver',
+    color: '#FAFAFA',
+    iconComponent: 'SilverIcon'
+  },
+  gold: {
+    name: 'Gold',
+    color: '#FFD475',
+    iconComponent: 'GoldIcon'
+  },
+  diamond: {
+    name: 'Diamond',
+    color: '#FF8187',
+    iconComponent: 'DiamondIcon'
+  },
+  doublediamond: {
+    name: 'Double Diamond',
+    color: '#DABEFF',
+    iconComponent: 'DoubleDiamondIcon'
+  },
+  ambassador: {
+    name: 'Ambassador',
+    color: '#FFD064',
+    iconComponent: 'AmbassadorIcon'
+  },
+  royalambassador: {
+    name: 'Royal Ambassador',
+    color: '#ECA72C',
+    iconComponent: 'RoyalAmbassadorIcon'
+  }
+}
+
+// Current rank computed property
+const currentRank = computed(() => {
+  return rankDefinitions[userRank.value] || rankDefinitions.norank
+})
 
 // Language dropdown state
 const isLanguageDropdownOpen = ref(false)
