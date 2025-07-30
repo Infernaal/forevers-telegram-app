@@ -4,10 +4,10 @@
                       animate-[fadeIn_0.3s_ease-out]">
     <!-- Dropdown Wrapper -->
     <div class="relative w-full h-full flex justify-center items-end
-                px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16
-                py-4 xs:py-6 sm:py-8 md:py-10 lg:py-12
-                pb-24 xs:pb-28 sm:pb-32 md:pb-36 lg:pb-40 xl:pb-44
-                safe-area-bottom">
+        px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16
+        py-4 sm:py-6 md:py-8 lg:py-10
+        pb-[88px] sm:pb-[96px] md:pb-[104px] lg:pb-[112px]
+        overflow-y-auto">
       <!-- Dropdown Menu -->
       <div class="relative w-full
               max-w-[95vw] xs:max-w-[400px] sm:max-w-[460px] md:max-w-[520px] lg:max-w-[580px] xl:max-w-[640px] 2xl:max-w-[720px]
