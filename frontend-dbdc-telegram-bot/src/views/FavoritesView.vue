@@ -565,37 +565,12 @@ onMounted(async () => {
     fetchBalancesFromBackend(),
     fetchTotalBalance()
   ])
-
-  // Set up scroll effect after initial render
-  nextTick(() => {
-    if (scrollContainer.value) {
-      // Add scroll listener with throttling for performance
-      let scrollTimeout
-      const throttledHandleScroll = () => {
-        if (scrollTimeout) return
-        scrollTimeout = setTimeout(() => {
-          handleScroll()
-          scrollTimeout = null
-        }, 16) // ~60fps
-      }
-
-      scrollContainer.value.addEventListener('scroll', throttledHandleScroll, { passive: true })
-
-      // Initial calculation
-      handleScroll()
-    }
-  })
 })
 
 // Cleanup
 onBeforeUnmount(() => {
   // Remove any remaining keyboard listeners
   document.removeEventListener('keydown', handleKeydown)
-
-  // Remove scroll listeners
-  if (scrollContainer.value) {
-    scrollContainer.value.removeEventListener('scroll', handleScroll)
-  }
 
   // Clear success notification timeout
   if (successTimeout) {
