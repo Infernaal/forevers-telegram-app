@@ -273,9 +273,8 @@
           <div class="relative flex-shrink-0 z-[1] mb-3 sm:mb-4 md:mb-5">
             <div class="w-full
               bg-[#F1E7FF] border border-[#DCCCF1]
-              rounded-lg xs:rounded-xl sm:rounded-2xl md:rounded-3xl
-              flex flex-col justify-center
-              p-2 xs:p-3 sm:p-4 md:p-5 lg:p-6 xl:p-7
+              rounded-2xl
+              px-4 py-3 sm:px-5 sm:py-4 md:px-6 md:py-5
               relative overflow-hidden">
               <!-- Background gradient -->
               <div class="absolute left-0 top-0
