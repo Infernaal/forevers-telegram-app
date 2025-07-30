@@ -16,7 +16,7 @@
       <div class="relative w-full bg-gradient-to-br from-[#120B81] via-[#120B81] to-[#09074E]
                   rounded-[20px] shadow-2xl border border-white/[0.08] backdrop-blur-[32px]
                   transform transition-all duration-300 ease-out
-                  max-h-[calc(100vh-200px)] overflow-hidden flex flex-col mx-4"
+                  max-h-[calc(100vh-200px)] overflow-hidden flex flex-col ml-4 mr-6"
            @click.stop>
 
         <!-- Profile Header Section -->
