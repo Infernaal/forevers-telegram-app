@@ -222,7 +222,7 @@
 
               <!-- Upgrade button -->
               <div class="flex-shrink-0">
-                <button class="flex items-center justify-center bg-gradient-to-r from-[#2019CE] to-[#473FFF] text-white font-montserrat font-bold rounded-full hover:shadow-lg transition-all duration-200 capitalize start-button"
+                <button class="flex items-center justify-center bg-gradient-to-r from-[#2019CE] to-[#473FFF] text-white font-montserrat font-bold rounded-full hover:shadow-lg transition-all duration-200 capitalize px-2 py-1 xs:px-3 xs:py-2 sm:px-4 sm:py-2 md:px-5 md:py-3 lg:px-6 lg:py-3 text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl h-7 xs:h-8 sm:h-9 md:h-10 lg:h-12 min-w-16 xs:min-w-20 sm:min-w-24 md:min-w-28 lg:min-w-32"
                         @click="onMenuClick('upgrade')">
                   Upgrade
                 </button>
