@@ -632,11 +632,7 @@ onBeforeUnmount(() => {
   display: none;
 }
 
-/* Ensure main container takes full height properly */
-main {
-  min-height: calc(100vh - 100px);
-  box-sizing: border-box;
-}
+
 
 /* Better touch targets and interaction */
 .balance-card {
