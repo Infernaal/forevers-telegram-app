@@ -258,19 +258,21 @@
 
             <!-- Help -->
             <div class="flex items-center
-                        gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3
-                        px-2 xs:px-2.5 sm:px-3 md:px-3.5
-                        py-1 xs:py-1.5 sm:py-2
-                        h-10 xs:h-11 sm:h-12 md:h-13
-                        cursor-pointer transition-all duration-200
-                        rounded-md xs:rounded-lg sm:rounded-xl
-                        mb-2 xs:mb-2.5 sm:mb-3 md:mb-3.5
-                        hover:bg-white hover:bg-opacity-10 hover:translate-x-1 relative"
+                        gap-2 xs:gap-2.5 sm:gap-3 md:gap-4
+                        px-3 xs:px-4 sm:px-5 md:px-6
+                        py-2 xs:py-2.5 sm:py-3
+                        h-12 xs:h-13 sm:h-14 md:h-15
+                        cursor-pointer transition-all duration-300
+                        rounded-lg xs:rounded-xl sm:rounded-2xl
+                        mb-3 xs:mb-4 sm:mb-5 md:mb-6
+                        hover:bg-white hover:bg-opacity-15 hover:translate-x-2 hover:scale-[1.02] relative
+                        touch-manipulation active:scale-95"
                 @click="handleMenuClick('help')">
-              <div class="w-8 xs:w-9 sm:w-10 md:w-11 h-8 xs:h-9 sm:h-10 md:h-11
-                          bg-[#3A33D3] border border-white border-opacity-20
-                          rounded-full flex items-center justify-center flex-shrink-0">
-                <svg class="w-4 xs:w-5 sm:w-5 md:w-6 h-4 xs:h-5 sm:h-5 md:h-6" viewBox="0 0 20 20" fill="none">
+              <div class="w-10 xs:w-11 sm:w-12 md:w-13 h-10 xs:h-11 sm:h-12 md:h-13
+                          bg-[#3A33D3] border border-white border-opacity-30
+                          rounded-full flex items-center justify-center flex-shrink-0
+                          transition-all duration-300 hover:bg-[#4A43E3] hover:scale-110">
+                <svg class="w-5 xs:w-6 sm:w-6 md:w-7 h-5 xs:h-6 sm:h-6 md:h-7" viewBox="0 0 20 20" fill="none">
                   <path d="M9.69301 13.4082C9.12117 13.4082 8.6582 13.8848 8.6582 14.4566C8.6582 15.0149 9.10754 15.5051 9.69301 15.5051C10.2785 15.5051 10.7414 15.0149 10.7414 14.4566C10.7414 13.8848 10.2649 13.4082 9.69301 13.4082Z" fill="white"/>
                   <path d="M9.86984 5.46875C8.03168 5.46875 7.1875 6.55801 7.1875 7.29328C7.1875 7.82434 7.6368 8.06941 8.00445 8.06941C8.73969 8.06941 8.44016 7.02098 9.82898 7.02098C10.5098 7.02098 11.0545 7.32055 11.0545 7.94687C11.0545 8.68219 10.292 9.10426 9.84262 9.48551C9.44777 9.8259 8.93035 10.3842 8.93035 11.5552C8.93035 12.2632 9.12094 12.4674 9.67922 12.4674C10.3464 12.4674 10.4825 12.1679 10.4825 11.9092C10.4825 11.2011 10.4962 10.7927 11.2451 10.2072C11.6127 9.92125 12.7701 8.99535 12.7701 7.71543C12.7701 6.43551 11.6127 5.46875 9.86984 5.46875Z" fill="white"/>
                   <path d="M10 0C4.47328 0 0 4.47254 0 10V19.2188C0 19.6502 0.349766 20 0.78125 20H10C15.5267 20 20 15.5275 20 10C20 4.47328 15.5275 0 10 0ZM10 18.4375H1.5625V10C1.5625 5.33684 5.33621 1.5625 10 1.5625C14.6632 1.5625 18.4375 5.33621 18.4375 10C18.4375 14.6632 14.6638 18.4375 10 18.4375Z" fill="white"/>
