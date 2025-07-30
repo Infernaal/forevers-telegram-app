@@ -60,7 +60,7 @@
       </div>
 
       <!-- Empty Cart (takes full space when empty) -->
-      <div v-else class="flex-1 flex items-center justify-center">
+      <div v-else class="flex-1 flex items-center justify-center min-h-[60vh]">
         <div class="text-center">
           <div class="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center mb-4 mx-auto">
             <svg width="20" height="22" viewBox="0 0 18 20" class="text-gray-400">
