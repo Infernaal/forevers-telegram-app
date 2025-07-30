@@ -90,15 +90,12 @@
           </div>
 
           <!-- Menu Items -->
-          <div class="absolute
-                      top-[100px] xs:top-[110px] sm:top-[120px] md:top-[140px] lg:top-[160px] xl:top-[180px]
-                      bottom-[130px] xs:bottom-[135px] sm:bottom-[140px] md:bottom-[150px] lg:bottom-[160px] xl:bottom-[170px]
-                      left-2 xs:left-2.5 sm:left-3 md:left-3.5 lg:left-4 xl:left-5
-                      right-2 xs:right-2.5 sm:right-3 md:right-3.5 lg:right-4 xl:right-5 z-[1]
+          <div class="flex-1 flex flex-col z-[1]
                       overflow-y-auto overflow-x-hidden scrollbar-none
                       [-webkit-overflow-scrolling:touch] [scroll-behavior:smooth]
                       [overscroll-behavior:contain] [overscroll-behavior-y:contain]
-                      px-1 xs:px-2 sm:px-0">
+                      px-1 xs:px-2 sm:px-0 py-2 xs:py-3 sm:py-4
+                      touch-manipulation">
             
             <!-- Calculator -->
             <div class="flex items-center
