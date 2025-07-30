@@ -65,12 +65,15 @@
               </section>
 
               <!-- Eligibility -->
-              <section class="modal-section">
-                <h2 class="section-title">Eligibility</h2>
-                <div class="section-content">
-                  <div class="bullet-item">
-                    <div class="bullet-point"></div>
-                    <p class="bullet-text">
+              <section class="flex flex-col gap-2 sm:gap-3">
+                <h2 class="text-dbd-dark font-bold text-sm sm:text-base md:text-lg
+                           leading-tight capitalize">Eligibility</h2>
+                <div class="flex flex-col gap-2">
+                  <div class="flex items-start gap-2 sm:gap-3">
+                    <div class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-dbd-gray
+                               flex-shrink-0 mt-1.5 sm:mt-2"></div>
+                    <p class="text-dbd-gray font-medium text-xs sm:text-sm
+                             leading-relaxed flex-1">
                       You must be at least 18 years old and capable of entering into legally binding agreements to use the Service.
                     </p>
                   </div>
@@ -78,12 +81,15 @@
               </section>
 
               <!-- User Accounts -->
-              <section class="modal-section">
-                <h2 class="section-title">User Accounts</h2>
-                <div class="section-content">
-                  <div class="bullet-item">
-                    <div class="bullet-point"></div>
-                    <p class="bullet-text">
+              <section class="flex flex-col gap-2 sm:gap-3">
+                <h2 class="text-dbd-dark font-bold text-sm sm:text-base md:text-lg
+                           leading-tight capitalize">User Accounts</h2>
+                <div class="flex flex-col gap-2">
+                  <div class="flex items-start gap-2 sm:gap-3">
+                    <div class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-dbd-gray
+                               flex-shrink-0 mt-1.5 sm:mt-2"></div>
+                    <p class="text-dbd-gray font-medium text-xs sm:text-sm
+                             leading-relaxed flex-1">
                       Users may be required to create an account to access certain features of the Service. You agree to provide accurate, current, and complete information during the registration process.
                     </p>
                   </div>
@@ -91,12 +97,15 @@
               </section>
 
               <!-- Digital Currency Risks -->
-              <section class="modal-section">
-                <h2 class="section-title">Digital Currency Risks</h2>
-                <div class="section-content">
-                  <div class="bullet-item">
-                    <div class="bullet-point"></div>
-                    <p class="bullet-text">
+              <section class="flex flex-col gap-2 sm:gap-3">
+                <h2 class="text-dbd-dark font-bold text-sm sm:text-base md:text-lg
+                           leading-tight capitalize">Digital Currency Risks</h2>
+                <div class="flex flex-col gap-2">
+                  <div class="flex items-start gap-2 sm:gap-3">
+                    <div class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-dbd-gray
+                               flex-shrink-0 mt-1.5 sm:mt-2"></div>
+                    <p class="text-dbd-gray font-medium text-xs sm:text-sm
+                             leading-relaxed flex-1">
                       You acknowledge that there are risks associated with the use of digital currencies, including market volatility and regulatory changes. DBDC is not responsible for any losses incurred.
                     </p>
                   </div>
