@@ -846,9 +846,10 @@ const selectLanguage = (language) => {
   flex-shrink: 0;
 }
 
-/* Language Section */
+/* Language Section - расширенная для ENG */
 .language-section-container {
-  width: 112px;
+  flex: 1; /* занимает оставшееся место */
+  min-width: 120px;
   height: 40px;
   background: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.24);
