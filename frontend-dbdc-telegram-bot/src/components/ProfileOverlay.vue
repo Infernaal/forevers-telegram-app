@@ -4,7 +4,7 @@
     <div class="relative w-full h-full flex justify-center items-end
                 px-2 xs:px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-16
                 py-4 xs:py-6 sm:py-8 md:py-10 lg:py-12
-                pb-24 xs:pb-26 sm:pb-28 md:pb-30 lg:pb-32 xl:pb-34">
+                pb-32 xs:pb-36 sm:pb-40 md:pb-44 lg:pb-48 xl:pb-52">
       <!-- Dropdown Menu -->
       <div class="relative w-full
               max-w-[480px] xs:max-w-[500px] sm:max-w-[520px] md:max-w-[540px] lg:max-w-[560px] xl:max-w-[580px] 2xl:max-w-[600px]
