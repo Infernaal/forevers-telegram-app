@@ -16,7 +16,7 @@
               border border-[#09074E] backdrop-blur-[32px]
               rounded-[16px] xs:rounded-[18px] sm:rounded-[20px] md:rounded-[22px] lg:rounded-[24px]
               z-[50] overflow-hidden shadow-xl">
-        <div class="p-2 xs:p-3 sm:p-4 md:p-5 lg:p-6 text-white text-center">
+        <div class="p-2 xs:p-3 sm:p-4 md:p-6 lg:p-8 xl:p-10 text-white text-center">
             <!-- Background -->
             <div class="absolute inset-0 bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
                         border border-[#09074E] backdrop-blur-[32px]"></div>
