@@ -251,7 +251,7 @@
             </div>
 
             <!-- Vertical Divider -->
-            <div class="w-0.5 h-6 bg-gray-400/40 rounded-full flex-shrink-0"></div>
+            <div class="w-0.5 h-6 sm:h-8 md:h-10 bg-gray-400/40 rounded-full flex-shrink-0"></div>
 
             <!-- Language Section -->
             <div class="flex-1 max-w-[140px] xs:max-w-[150px] sm:max-w-[160px] h-full
