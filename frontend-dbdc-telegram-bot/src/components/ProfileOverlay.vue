@@ -1,11 +1,12 @@
 <template>
-  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl profile-overlay">
-    <!-- Dropdown Menu с Tailwind CSS -->
-    <div class="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg
-                h-[480px] sm:h-[520px] md:h-[580px] lg:h-[640px] mx-auto my-auto
+  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl
+                                        flex items-center justify-center px-4 py-8 pb-24 profile-overlay">
+    <!-- Dropdown Menu с Tailwind CSS - адаптивный как в WalletView -->
+    <div class="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl
+                h-[480px] sm:h-[520px] md:h-[560px] lg:h-[600px] xl:h-[640px]
                 bg-gradient-to-r from-indigo-800 via-purple-900 to-indigo-800
-                border border-indigo-700 backdrop-blur-lg rounded-2xl
-                overflow-hidden shadow-2xl">
+                border border-indigo-700 backdrop-blur-lg rounded-2xl sm:rounded-3xl
+                overflow-hidden shadow-2xl transform transition-all duration-300 ease-out">
       <div class="relative p-3 text-white h-full flex flex-col">
 
           <!-- Profile Header Section -->
