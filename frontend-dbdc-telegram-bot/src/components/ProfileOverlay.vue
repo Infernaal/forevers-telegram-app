@@ -697,6 +697,12 @@ console.log('ProfileOverlay loaded with corrected design')
   .w-36 {
     width: 10rem; /* 160px - еще больше для лучшей видимости */
   }
+  .ml-4 {
+    margin-left: 0.875rem; /* 14px */
+  }
+  .mr-6 {
+    margin-right: 1.25rem; /* 20px */
+  }
 }
 
 @media (max-width: 375px) {
