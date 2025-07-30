@@ -1,22 +1,26 @@
 <template>
-  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl">
+  <div v-if="isVisible" class="fixed inset-0 bottom-[88px] z-[9999] font-montserrat bg-black/10 backdrop-blur-xl min-h-screen">
     <!-- Dropdown Wrapper -->
-    <div class="relative w-full h-full px-4 sm:px-6 md:px-8 lg:px-12">
+    <div class="relative w-full h-full flex flex-col items-center px-4 sm:px-6 md:px-8 lg:px-12 overflow-y-auto sm:overflow-y-scroll
+         scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
       <!-- Dropdown Menu -->
             <div
-        class="absolute bottom-[88px] left-1/2 -translate-x-1/2
-               w-full max-w-full sm:max-w-[400px] md:max-w-[500px] lg:max-w-[580px] xl:max-w-[640px]
-               max-h-[calc(100vh-160px)]
-               bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
-               border border-[#09074E] rounded-[20px] shadow-2xl
-               backdrop-blur-[32px] flex flex-col overflow-y-auto
-               scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent
-               transform transition-all duration-300 ease-out"
+        class="relative
+         w-full
+         max-w-full sm:max-w-[400px] md:max-w-[500px] lg:max-w-[580px] xl:max-w-[640px]
+         h-[calc(100vh-168px)]
+         sm:h-[calc(100vh-172px)]
+         md:h-[calc(100vh-172px)]
+         lg:h-[calc(100vh-172px)]
+         xl:h-[calc(100vh-172px)]
+         bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
+         border border-[#09074E] rounded-[20px] shadow-2xl
+         backdrop-blur-[32px] flex flex-col overflow-hidden transition-all duration-300 ease-out"
       >
-        <div class="relative z-10 py-4 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 text-white">
+        <div class="py-4 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 text-white h-full flex flex-col relative z-10">
             <!-- Background -->
             <div class="absolute inset-0 bg-gradient-to-br from-[#120B81] via-[#09074E] to-[#09074E]
-                      border border-[#09074E] backdrop-blur-[40px] z-0 rounded-[20px]"></div>
+                      border border-[#09074E] backdrop-blur-[40px] z-0"></div>
 
           <!-- Profile Header Section -->
           <div class="relative flex-shrink-0 z-[2] mb-3 sm:mb-4 md:mb-5 lg:mb-6">
