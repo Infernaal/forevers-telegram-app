@@ -19,12 +19,12 @@
                       flex items-center p-1.5 sm:p-2 md:p-2.5 lg:p-3 gap-2 sm:gap-3">
 
               <!-- Avatar -->
-              <div class="flex-shrink-0">
-                <img src="https://images.pexels.com/photos/15023413/pexels-photo-15023413.jpeg?auto=compress&cs=tinysrgb&w=400"
-                     alt="Jason Williams"
-                     class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16
-                            rounded-full object-cover border border-purple-400" />
-              </div>
+            <div class="flex-shrink-0">
+              <img src="https://images.pexels.com/photos/15023413/pexels-photo-15023413.jpeg?auto=compress&cs=tinysrgb&w=400"
+                   alt="Jason Williams"
+                   class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16
+                          rounded-full object-cover border border-purple-400" />
+            </div>
 
               <!-- User Info -->
               <div class="flex flex-col gap-1 sm:gap-2 flex-1 min-w-0 px-1">
@@ -307,7 +307,7 @@
             </div>
           </div>
       </div>
-      <!-- Triangle ��бран по требованию -->
+      <!-- Triangle убран по требованию -->
     </div>
   </div>
 </template>
