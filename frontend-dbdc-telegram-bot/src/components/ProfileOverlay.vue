@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl
+  <div v-if="isVisible" class="fixed inset-0 z-[9998] font-montserrat bg-black/10 backdrop-blur-xl
                                         flex items-center justify-center px-2 sm:px-4 py-4 sm:py-6 md:py-8 pb-20 sm:pb-24 md:pb-28 profile-overlay">
     <!-- Dropdown Menu с Tailwind CSS - адаптивный под контент -->
     <div class="relative w-full max-w-[280px] xs:max-w-[320px] sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl
@@ -305,7 +305,7 @@
             </div>
           </div>
       </div>
-      <!-- Triangle убран по требов��нию -->
+      <!-- Triangle убр��н по требов��нию -->
     </div>
   </div>
 </template>
@@ -649,7 +649,7 @@ const selectLanguage = (language) => {
   align-items: center;
   gap: 2px;
   padding-left: 12px;
-  padding-right: 4px; /* уменьшено для Copy border to border */
+  padding-right: 4px; /* ��меньшено для Copy border to border */
   flex: 1;
 }
 
