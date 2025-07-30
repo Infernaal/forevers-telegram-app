@@ -1,40 +1,39 @@
 <template>
-  <div v-if="isVisible" class="fixed font-montserrat bg-black bg-opacity-10 backdrop-blur-xl"
-       style="z-index: 9999; position: fixed; top: 0; left: 0; right: 0; bottom: 88px;">
+  <div v-if="isVisible" class="fixed inset-0 bottom-[88px] z-[9999] font-montserrat bg-black/10 backdrop-blur-xl">
     <!-- Dropdown Wrapper -->
-    <div class="relative w-full flex justify-center items-start mt-[180px] xs:mt-[200px] sm:mt-[220px] md:mt-[240px] lg:mt-[260px] xl:mt-[280px]">
+    <div class="relative w-full h-full flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 lg:px-12">
       <!-- Dropdown Menu -->
-      <div class="relative w-[92%] max-w-[320px] xs:max-w-[360px] sm:max-w-[400px] md:max-w-[460px] lg:max-w-[520px] xl:max-w-[580px] max-h-[calc(100vh-220px)]
-              h-[420px] xs:h-[460px] sm:h-[500px] md:h-[540px] lg:h-[580px] xl:h-[600px]
+      <div class="relative w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl
+              h-[500px] sm:h-[550px] md:h-[600px] lg:h-[650px]
               bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
               border border-[#09074E] backdrop-blur-[32px]
-              rounded-[16px] xs:rounded-[18px] sm:rounded-[20px] md:rounded-[22px] lg:rounded-[24px] overflow-hidden shadow-xl"
-           style="z-index: 10000; position: relative;">
-        <div class="p-4 text-white text-center">
+              rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl
+              z-[10000]">
+        <div class="p-4 sm:p-6 text-white text-center relative h-full flex flex-col">
             <!-- Background -->
             <div class="absolute inset-0 bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
                         border border-[#09074E] backdrop-blur-[32px]"></div>
 
           <!-- Profile Header Section -->
-          <div class="absolute top-3 left-3 right-3" style="z-index: 10001;">
-            <div class="w-full h-24 bg-[rgba(96,95,135,0.24)] border border-[#D8D8D8] 
-                        rounded-[1000px_20px_20px_1000px] 
-                        flex items-center p-2 gap-3 overflow-hidden">
+          <div class="absolute top-3 sm:top-4 left-3 sm:left-4 right-3 sm:right-4 z-[10001]">
+            <div class="w-full h-20 sm:h-24 md:h-28 bg-[rgba(96,95,135,0.24)] border border-[#D8D8D8]
+                        rounded-[1000px_20px_20px_1000px]
+                        flex items-center p-2 sm:p-3 gap-2 sm:gap-3 overflow-hidden">
               
               <!-- Avatar -->
               <div class="flex-shrink-0">
-                <img src="https://images.pexels.com/photos/15023413/pexels-photo-15023413.jpeg?auto=compress&cs=tinysrgb&w=400" 
-                    alt="Jason Williams" 
-                    class="w-20 h-20 rounded-full object-cover border border-[#7E73D6]" />
+                <img src="https://images.pexels.com/photos/15023413/pexels-photo-15023413.jpeg?auto=compress&cs=tinysrgb&w=400"
+                    alt="Jason Williams"
+                    class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full object-cover border border-[#7E73D6]" />
               </div>
 
               <!-- User Info -->
-              <div class="flex-1 flex flex-col gap-1.5 px-1 min-w-0 overflow-hidden">
+              <div class="flex-1 flex flex-col gap-1 sm:gap-1.5 px-1 min-w-0 overflow-hidden">
                 <!-- Silver Badge -->
-                <div class="flex items-center gap-1.5 px-4 py-0.5 pr-4 pl-0.5 
-                            bg-[rgba(110,107,169,0.90)] border border-[#D8D8D8] 
+                <div class="flex items-center gap-1 sm:gap-1.5 px-3 sm:px-4 py-0.5 pr-3 sm:pr-4 pl-0.5
+                            bg-[rgba(110,107,169,0.90)] border border-[#D8D8D8]
                             rounded-3xl w-fit">
-                  <div class="w-7 h-7 flex-shrink-0">
+                  <div class="w-6 h-6 sm:w-7 sm:h-7 flex-shrink-0">
                     <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
                       <path d="M14.0004 26.2497C7.24592 26.2497 1.75073 20.7545 1.75073 14.0001C1.75073 7.24564 7.24592 1.75085 14.0004 1.75085C20.7548 1.75085 26.25 7.24564 26.25 14.0001C26.25 20.7545 20.7544 26.2497 14.0004 26.2497Z" fill="white"/>
                       <path d="M20.2071 5.37145C20.73 5.37145 21.2468 5.39833 21.7567 5.4472C19.7049 3.58479 16.9828 2.44812 14 2.44812C7.63041 2.44812 2.448 7.63013 2.448 14.0001C2.448 16.2735 3.11102 18.3941 4.24973 20.1832C4.86143 11.9015 11.769 5.37145 20.2071 5.37145Z" fill="#E0E0E0"/>
@@ -45,20 +44,20 @@
                       <path d="M19.4971 12.7667L15.699 12.2144L14.0007 8.77307V17.4421L17.3977 19.2279L16.7489 15.4452L19.4971 12.7667Z" fill="#E0E0E0"/>
                     </svg>
                   </div>
-                  <span class="text-dbd-off-white text-sm font-medium leading-5">Silver</span>
+                  <span class="text-dbd-off-white text-xs sm:text-sm font-medium leading-5">Silver</span>
                 </div>
 
                 <!-- User Name -->
-                <h2 class="text-white text-lg font-bold leading-5 m-0 whitespace-nowrap overflow-hidden text-ellipsis">
+                <h2 class="text-white text-base sm:text-lg md:text-xl font-bold leading-5 m-0 whitespace-nowrap overflow-hidden text-ellipsis">
                   Jason Williams
                 </h2>
               </div>
 
               <!-- Arrow Button -->
-              <button class="w-11 h-11 min-w-[44px] min-h-[44px] bg-dbd-light-blue border border-dbd-primary
+              <button class="w-9 h-9 sm:w-11 sm:h-11 min-w-[36px] sm:min-w-[44px] min-h-[36px] sm:min-h-[44px] bg-dbd-light-blue border border-dbd-primary
                             rounded-r-[1000px] flex items-center justify-center
                             cursor-pointer transition-all duration-200 hover:bg-[#E0D9FF] hover:scale-105
-                            flex-shrink-0" 
+                            flex-shrink-0"
                       @click="$emit('close')">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <path d="M17.2155 11.2862L8.2216 2.29534C7.82696 1.90169 7.18757 1.90169 6.79192 2.29534C6.39728 2.68898 6.39728 3.32838 6.79192 3.72203L15.0724 11.9996L6.79292 20.2771C6.39827 20.6707 6.39827 21.3101 6.79292 21.7048C7.18756 22.0984 7.82795 22.0984 8.2226 21.7048L17.2165 12.7139C17.6051 12.3244 17.6051 11.6749 17.2155 11.2862Z" fill="#B7B7B7"/>
