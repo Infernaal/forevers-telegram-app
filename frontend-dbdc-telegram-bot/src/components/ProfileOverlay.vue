@@ -338,11 +338,7 @@
           </div>
 
           <!-- Bottom Controls -->
-          <div class="relative flex-shrink-0 z-[1]
-                      flex justify-center items-center
-                      gap-2 xs:gap-3 sm:gap-4 md:gap-5 lg:gap-6
-                      h-8 xs:h-9 sm:h-10 md:h-11 lg:h-12
-                      mb-1 xs:mb-2 sm:mb-3 md:mb-4">
+          <div class="relative flex-shrink-0 z-[1] flex justify-center items-center gap-3 sm:gap-4 md:gap-5 lg:gap-6 h-10 sm:h-11 md:h-12 mb-2">
             
             <!-- ID Section -->
             <div class="min-w-[100px] sm:min-w-[120px] md:min-w-[140px] lg:min-w-[160px] xl:min-w-[180px]
