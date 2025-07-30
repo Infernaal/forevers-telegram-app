@@ -323,7 +323,7 @@
 
           <!-- Bottom Controls -->
           <div class="absolute
-                      bottom-2 xs:bottom-2.5 sm:bottom-3 md:bottom-3.5 lg:bottom-4
+                      bottom-3 xs:bottom-4 sm:bottom-5 md:bottom-6 lg:bottom-7
                       left-2 xs:left-2.5 sm:left-3 md:left-3.5 lg:left-4
                       right-2 xs:right-2.5 sm:right-3 md:right-3.5 lg:right-4 z-[1]
                       flex justify-center items-center
