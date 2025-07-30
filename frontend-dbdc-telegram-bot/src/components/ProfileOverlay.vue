@@ -553,37 +553,51 @@ console.log('ProfileOverlay loaded with corrected design')
 }
 
 /* Custom scrollbar for language dropdown */
-.max-h-40::-webkit-scrollbar {
-  width: 4px;
+.max-h-32::-webkit-scrollbar {
+  width: 3px;
 }
 
-.max-h-40::-webkit-scrollbar-track {
-  background: #f1f5f9;
+.max-h-32::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-.max-h-40::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+.max-h-32::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
   border-radius: 2px;
 }
 
-.max-h-40::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+.max-h-32::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
 }
 
 /* Responsive ID/ENG block adjustments */
 @media (max-width: 640px) {
-  .w-32 {
-    width: 7rem; /* 112px */
+  .w-36 {
+    width: 8.5rem; /* 136px */
+  }
+}
+
+@media (max-width: 480px) {
+  .w-36 {
+    width: 9rem; /* 144px - увеличиваем на мобиле для лучшей видимости цифр */
   }
 }
 
 @media (max-width: 375px) {
-  .w-32 {
-    width: 6.5rem; /* 104px */
+  .w-36 {
+    width: 8.75rem; /* 140px */
   }
 
-  .text-sm {
-    font-size: 0.8rem;
+  .mx-4 {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
   }
+}
+
+/* Fix flag container to prevent distortion */
+.country-flag {
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
 }
 </style>
