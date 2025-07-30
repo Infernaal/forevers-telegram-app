@@ -1,7 +1,7 @@
 <template>
   <div class="w-full min-h-screen bg-gray-100 font-montserrat overflow-x-hidden flex flex-col cart-view">
     <!-- Content Container -->
-    <div class="px-4 pt-4 pb-48 min-h-[calc(100vh-100px)] flex-1 flex flex-col">
+    <div class="px-4 pt-4 pb-56 sm:pb-60 md:pb-64 lg:pb-72 xl:pb-80 min-h-[calc(100vh-100px)] flex-1 flex flex-col">
       <!-- Scrollable Cart Items Area -->
       <div class="flex-1 overflow-y-auto space-y-4" v-if="cartItemsCount > 0">
         <div
@@ -82,7 +82,7 @@
     </div>
 
     <!-- Fixed Cart Bottom Component (only when cart has items) -->
-    <div v-if="cartItemsCount > 0" class="fixed left-0 right-0 z-[9999]" style="bottom: 80px;">
+    <div v-if="cartItemsCount > 0" class="fixed left-0 right-0 z-[9999]" style="bottom: 90px;">
       <CartBottomComponent
         :total-amount="cartTotal"
         @back="handleBack"
