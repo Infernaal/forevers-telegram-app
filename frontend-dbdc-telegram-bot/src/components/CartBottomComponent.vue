@@ -68,6 +68,11 @@ button {
   -webkit-backface-visibility: hidden;
 }
 
+/* Custom height class */
+.h-13 {
+  height: 3.25rem; /* 52px */
+}
+
 /* Telegram WebApp specific optimizations */
 * {
   -webkit-tap-highlight-color: transparent;
