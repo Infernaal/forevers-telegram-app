@@ -1,22 +1,23 @@
 <template>
   <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl
-                                        flex items-center justify-center px-4 py-8 pb-24 profile-overlay">
+                                        flex items-center justify-center px-2 sm:px-4 py-4 sm:py-6 md:py-8 pb-20 sm:pb-24 md:pb-28 profile-overlay">
     <!-- Dropdown Menu с Tailwind CSS - адаптивный как в WalletView -->
-    <div class="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl
-                h-[480px] sm:h-[520px] md:h-[560px] lg:h-[600px] xl:h-[640px]
+    <div class="relative w-full max-w-[280px] xs:max-w-[320px] sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl
+                h-[420px] xs:h-[460px] sm:h-[520px] md:h-[560px] lg:h-[600px] xl:h-[640px]
                 bg-gradient-to-r from-indigo-800 via-purple-900 to-indigo-800
-                border border-indigo-700 backdrop-blur-lg rounded-2xl sm:rounded-3xl
-                overflow-hidden shadow-2xl transform transition-all duration-300 ease-out">
-      <div class="relative p-3 sm:p-4 md:p-5 lg:p-6 text-white h-full flex flex-col">
+                border border-indigo-700 backdrop-blur-lg rounded-xl sm:rounded-2xl md:rounded-3xl
+                overflow-hidden shadow-2xl transform transition-all duration-300 ease-out
+                mx-auto">
+      <div class="relative p-2 xs:p-3 sm:p-4 md:p-5 lg:p-6 text-white h-full flex flex-col">
 
           <!-- Profile Header Section -->
-        <div class="absolute top-3 sm:top-4 md:top-5 lg:top-6
-                    left-3 sm:left-4 md:left-5 lg:left-6
-                    right-3 sm:right-4 md:right-5 lg:right-6 z-[10001]">
-          <div class="w-full h-14 sm:h-16 md:h-18 lg:h-20
+        <div class="absolute top-2 xs:top-3 sm:top-4 md:top-5 lg:top-6
+                    left-2 xs:left-3 sm:left-4 md:left-5 lg:left-6
+                    right-2 xs:right-3 sm:right-4 md:right-5 lg:right-6 z-[10001]">
+          <div class="w-full h-12 xs:h-14 sm:h-16 md:h-18 lg:h-20
                       bg-gray-400/25 border border-gray-200
                       rounded-full sm:rounded-2xl md:rounded-3xl
-                      flex items-center p-1.5 sm:p-2 md:p-2.5 lg:p-3 gap-2 sm:gap-3">
+                      flex items-center p-1 xs:p-1.5 sm:p-2 md:p-2.5 lg:p-3 gap-1.5 xs:gap-2 sm:gap-3">
 
               <!-- Avatar -->
             <div class="flex-shrink-0">
@@ -27,13 +28,13 @@
             </div>
 
               <!-- User Info -->
-              <div class="flex flex-col gap-1 sm:gap-1.5 md:gap-2 flex-1 min-w-0 px-1">
-                <!-- Silver Badge - исправленный -->
-                <div class="flex items-center gap-1.5 sm:gap-2
-                            px-2 py-1 sm:px-2.5 sm:py-1.5 md:px-3 md:py-2
-                            bg-purple-600/90 border border-gray-200
-                            rounded-full w-fit">
-                  <div class="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 flex-shrink-0">
+              <div class="flex flex-col gap-0.5 xs:gap-1 sm:gap-1.5 md:gap-2 flex-1 min-w-0 px-0.5 xs:px-1">
+                <!-- Silver Badge - исправленный с лучшим spacing -->
+                <div class="flex items-center gap-1 xs:gap-1.5 sm:gap-2
+                            px-1.5 xs:px-2 py-0.5 xs:py-1 sm:px-2.5 sm:py-1.5 md:px-3 md:py-2
+                            bg-purple-600/90 border border-gray-300/60
+                            rounded-full w-fit mb-0.5 xs:mb-1 sm:mb-1.5">
+                  <div class="w-2.5 h-2.5 xs:w-3 xs:h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 flex-shrink-0">
                     <svg class="w-full h-full" viewBox="0 0 24 24" fill="none">
                       <circle cx="12" cy="12" r="10" fill="#E5E7EB"/>
                       <circle cx="12" cy="12" r="8" fill="#9CA3AF"/>
@@ -41,14 +42,14 @@
                             fill="#F3F4F6"/>
                     </svg>
                   </div>
-                  <span class="text-white text-xs sm:text-sm md:text-base font-medium whitespace-nowrap">
+                  <span class="text-white text-[10px] xs:text-xs sm:text-sm md:text-base font-medium whitespace-nowrap">
                     Silver
                   </span>
                 </div>
 
-                <!-- User Name -->
-                <h2 class="text-white text-xs sm:text-sm md:text-base lg:text-lg
-                           font-bold leading-tight truncate">
+                <!-- User Name - центрированное между badge и border -->
+                <h2 class="text-white text-[11px] xs:text-xs sm:text-sm md:text-base lg:text-lg
+                           font-bold leading-tight truncate mt-auto mb-auto">
                   Jason Williams
                 </h2>
               </div>
@@ -485,19 +486,46 @@ const selectLanguage = (language) => {
 
 /* Старые стили удалены - теперь используем Tailwind CSS */
 
-/* Menu Items Section */
+/* Menu Items Section - адаптивное позиционирование */
 .menu-items-section {
   position: absolute;
-  top: 88px;
-  bottom: 144px;
-  left: 8px;
-  right: 8px;
+  top: 68px;
+  bottom: 130px;
+  left: 6px;
+  right: 6px;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: none;
   -ms-overflow-style: none;
   overscroll-behavior: contain;
   z-index: 10001;
+}
+
+@media (min-width: 375px) {
+  .menu-items-section {
+    top: 78px;
+    bottom: 140px;
+    left: 8px;
+    right: 8px;
+  }
+}
+
+@media (min-width: 640px) {
+  .menu-items-section {
+    top: 88px;
+    bottom: 150px;
+    left: 10px;
+    right: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .menu-items-section {
+    top: 98px;
+    bottom: 160px;
+    left: 12px;
+    right: 12px;
+  }
 }
 
 .menu-items-section::-webkit-scrollbar {
@@ -559,27 +587,75 @@ const selectLanguage = (language) => {
   flex-shrink: 0;
 }
 
-/* Start Section */
+/* Start Section - адаптивное позиционирование для избежания налегания на кнопки */
 .start-section {
   position: absolute;
-  bottom: 56px;
-  left: 8px;
-  right: 8px;
+  bottom: 64px;
+  left: 6px;
+  right: 6px;
   z-index: 10001;
+}
+
+@media (min-width: 375px) {
+  .start-section {
+    bottom: 70px;
+    left: 8px;
+    right: 8px;
+  }
+}
+
+@media (min-width: 640px) {
+  .start-section {
+    bottom: 80px;
+    left: 10px;
+    right: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .start-section {
+    bottom: 90px;
+    left: 12px;
+    right: 12px;
+  }
 }
 
 .start-container {
   width: 100%;
-  height: 64px;
+  height: 56px;
   background: #F1E7FF;
   border: 1px solid #DCCCF1;
-  border-radius: 12px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 8px;
+  padding: 6px;
   position: relative;
   overflow: hidden;
+}
+
+@media (min-width: 375px) {
+  .start-container {
+    height: 60px;
+    border-radius: 11px;
+    padding: 7px;
+  }
+}
+
+@media (min-width: 640px) {
+  .start-container {
+    height: 64px;
+    border-radius: 12px;
+    padding: 8px;
+  }
+}
+
+@media (min-width: 768px) {
+  .start-container {
+    height: 68px;
+    border-radius: 14px;
+    padding: 10px;
+  }
 }
 
 .start-background {
@@ -1196,7 +1272,7 @@ const selectLanguage = (language) => {
   }
   
   .language-section-container {
-    flex: 1; /* расширенная ENG секция */
+    flex: 1; /* расши��енная ENG секция */
     min-width: 100px;
     height: 36px;
     border-radius: 18px;
