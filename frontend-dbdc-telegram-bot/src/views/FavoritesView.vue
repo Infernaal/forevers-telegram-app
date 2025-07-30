@@ -677,6 +677,11 @@ onBeforeUnmount(() => {
   // Remove any remaining keyboard listeners
   document.removeEventListener('keydown', handleKeydown)
 
+  // Remove scroll listeners
+  if (scrollContainer.value) {
+    scrollContainer.value.removeEventListener('scroll', handleScroll)
+  }
+
   // Clear success notification timeout
   if (successTimeout) {
     clearTimeout(successTimeout)
