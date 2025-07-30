@@ -672,19 +672,17 @@ console.log('ProfileOverlay loaded with corrected design')
 
 /* Responsive margin adjustments for all screens */
 @media (min-width: 769px) {
-  .ml-4 {
+  .profile-overlay-content {
+    width: calc(100% - 3.5rem); /* 24px left + 32px right = 56px = 3.5rem */
     margin-left: 1.5rem; /* 24px */
-  }
-  .mr-6 {
     margin-right: 2rem; /* 32px */
   }
 }
 
 @media (min-width: 641px) and (max-width: 768px) {
-  .ml-4 {
+  .profile-overlay-content {
+    width: calc(100% - 3rem); /* 20px left + 28px right = 48px = 3rem */
     margin-left: 1.25rem; /* 20px */
-  }
-  .mr-6 {
     margin-right: 1.75rem; /* 28px */
   }
 }
