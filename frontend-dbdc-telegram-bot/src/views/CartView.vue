@@ -217,397 +217,48 @@ const confirmDelete = () => {
 </script>
 
 <style scoped>
-/* Hide scrollbar for WebKit browsers (Chrome, Safari, Edge) */
-::-webkit-scrollbar {
-  display: none;
+.cart-view {
+  width: 100%;
+  margin: 0 auto;
+  background: #f3f4f6;
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height */
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: none;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
 }
 
-/* Hide scrollbar for Firefox */
-* {
-  scrollbar-width: none;
+.cart-view::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
 }
 
-/* Hide scrollbar for Internet Explorer and Edge Legacy */
-* {
-  -ms-overflow-style: none;
-}
-
-/* Ensure smooth scrolling on touch devices */
+/* Hide scrollbar for all browsers */
 .overflow-y-auto {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
 }
 
 .overflow-y-auto::-webkit-scrollbar {
   display: none;
 }
 
-.cart-view {
-  font-family: 'Montserrat', sans-serif;
-  height: 100vh;
-  height: 100dvh; /* Dynamic viewport height for mobile */
-  background: #f3f4f6 !important;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.cart-view::-webkit-scrollbar {
-  display: none;
-}
-
-.content-container {
-  min-height: 0; /* Allow flex child to shrink */
-  background: #f3f4f6 !important;
-}
-
-.scrollable-content {
-  /* Hide scrollbar for all browsers */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-}
-
-.scrollable-content::-webkit-scrollbar {
-  display: none; /* WebKit browsers */
-}
-
 .cart-item {
-  position: relative;
   transition: all 0.2s ease;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .cart-item:hover {
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-/* Fixed bottom section styling */
-.fixed-bottom-section {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-  max-width: 100%;
-  margin: 0 auto;
-}
-
-.fixed-bottom-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #F0F0F0;
-  z-index: -1;
-}
-
-.fixed-bottom-section > div {
-  background: #F0F0F0;
-  border-top: 1px solid rgba(32, 25, 206, 0.1);
-  padding-bottom: 105px; /* Increased space for BottomNavigation */
-}
-
-.back-button {
-  height: 52px;
-  min-width: 119px;
-}
-
-.buy-button {
-  height: 52px;
-  background: linear-gradient(90deg, #2019CE 0%, #473FFF 100%);
-  transition: all 0.2s ease;
-}
-
-.buy-button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(32, 25, 206, 0.3);
-}
-
-/* Transaction Details Modal Styles (if used in cart context) */
-.modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.modal-title {
-  font-size: 1rem;
-  font-weight: 500;
-  color: #02070E;
-  margin: 0;
-}
-
-.modal-close-btn {
-  width: 2.75rem;
-  height: 2.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background-color: #FAFAFA;
-  border: 1px solid #e5e7eb;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.modal-close-btn:hover {
-  background-color: #f3f4f6;
-}
-
-/* Mobile optimizations for Telegram mini app */
-
-/* Very small mobile devices (≤374px) */
-@media (max-width: 374px) {
-  .cart-view {
-    max-width: 100%;
-  }
-
-  .overflow-y-auto {
-    padding-left: 12px;
-    padding-right: 12px;
-    /* CartBottom ~70px + BottomNav ~74px + safe area + extra spacing */
-    padding-bottom: 180px !important;
-  }
-}
-
-/* Regular mobile devices (375px-430px) */
-@media (min-width: 375px) and (max-width: 430px) {
-  .cart-view {
-    max-width: 100%;
-  }
-
-  .overflow-y-auto {
-    padding-left: 14px;
-    padding-right: 14px;
-    /* CartBottom ~75px + BottomNav ~78px + safe area + extra spacing */
-    padding-bottom: 190px !important;
-  }
-
-  .fixed-bottom-section {
-    max-width: 100%;
-  }
-
-  /* Bottom section for mobile */
-  .px-3-5 {
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-  }
-
-  .cart-item {
-    padding: 12px;
-  }
-
-  /* Mobile button optimizations */
-  .h-12 {
-    height: 44px !important;
-  }
-
-  .min-w-24 {
-    min-width: 90px !important;
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-  }
-
-  .flex-1 {
-    font-size: 16px !important;
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-  }
-
-  /* Smaller text for mobile */
-  .text-xl {
-    font-size: 18px;
-    line-height: 22px;
-  }
-
-  .text-lg {
-    font-size: 16px;
-    line-height: 20px;
-  }
-
-  /* Modal responsive styles for mobile */
-  .modal-title {
-    font-size: 0.875rem;
-  }
-
-  .modal-close-btn {
-    width: 2.25rem;
-    height: 2.25rem;
-  }
-}
-
-/* Large mobile and small tablets (431px-768px) */
-@media (min-width: 431px) and (max-width: 768px) {
-  .cart-view {
-    max-width: 100%;
-    background: #f3f4f6 !important;
-  }
-
-  body {
-    background: #f3f4f6 !important;
-  }
-
-  .overflow-y-auto {
-    /* CartBottom ~85px + BottomNav ~108px + safe area + extra spacing */
-    padding-bottom: 230px !important;
-  }
-
-  .fixed-bottom-section {
-    max-width: 100%;
-    bottom: 50px; /* Поднять выше на tablet */
-  }
-
-  .h-12 {
-    height: 60px !important;
-  }
-
-  .min-w-24 {
-    min-width: 140px !important;
-  }
-
-  .text-lg {
-    font-size: 20px !important;
-  }
-
-  .cart-item {
-    padding: 20px;
-  }
-
-  /* Modal styles for tablets */
-  .modal-title {
-    font-size: 1.25rem;
-  }
-
-  .modal-close-btn {
-    width: 3.5rem;
-    height: 3.5rem;
-  }
-}
-
-/* Desktop and large tablets (≥769px) */
-@media (min-width: 769px) {
-  .cart-view {
-    max-width: 100%;
-    background: #f3f4f6 !important;
-  }
-
-  body {
-    background: #f3f4f6 !important;
-  }
-
-  .overflow-y-auto {
-    /* CartBottom ~105px + BottomNav ~130px + safe area + extra spacing */
-    padding-bottom: 270px !important;
-  }
-
-  .fixed-bottom-section {
-    max-width: 100%;
-    bottom: 60px; /* Поднять выше на desktop */
-  }
-
-  .h-12 {
-    height: 72px !important;
-  }
-
-  .min-w-24 {
-    min-width: 180px !important;
-  }
-
-  .text-lg {
-    font-size: 24px !important;
-  }
-
-  .cart-item {
-    padding: 32px;
-  }
-
-  /* Modal styles for desktop */
-  .modal-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-  }
-
-  .modal-close-btn {
-    width: 4rem;
-    height: 4rem;
-  }
-
-  .modal-header {
-    padding: 2rem;
-  }
-}
-
-/* Landscape orientation adjustments for mobile devices */
-@media (max-height: 500px) and (orientation: landscape) {
-  .overflow-y-auto {
-    padding-bottom: 140px !important;
-  }
-
-  .flex-1.flex.items-center.justify-center {
-    padding-bottom: 140px !important;
-  }
-}
-
-/* Fine-tuning for specific popular device sizes */
-
-/* iPhone SE and similar small phones */
-@media (min-width: 320px) and (max-width: 374px) and (min-height: 568px) {
-  .overflow-y-auto {
-    padding-bottom: 185px !important;
-  }
-
-  .flex-1.flex.items-center.justify-center {
-    padding-bottom: 185px !important;
-  }
-}
-
-/* Standard iPhone sizes (iPhone 12 mini, iPhone 13 mini) */
-@media (min-width: 375px) and (max-width: 390px) and (min-height: 812px) {
-  .overflow-y-auto {
-    padding-bottom: 195px !important;
-  }
-
-  .flex-1.flex.items-center.justify-center {
-    padding-bottom: 195px !important;
-  }
-}
-
-/* iPhone 12/13/14 Pro Max and similar large phones */
-@media (min-width: 414px) and (max-width: 430px) and (min-height: 896px) {
-  .overflow-y-auto {
-    padding-bottom: 200px !important;
-  }
-
-  .flex-1.flex.items-center.justify-center {
-    padding-bottom: 200px !important;
-  }
-}
-
-/* iPad mini and similar tablets in portrait */
-@media (min-width: 744px) and (max-width: 768px) and (orientation: portrait) {
-  .overflow-y-auto {
-    padding-bottom: 235px !important;
-  }
-
-  .flex-1.flex.items-center.justify-center {
-    padding-bottom: 235px !important;
-  }
-}
-
-/* iPad and similar tablets in portrait */
-@media (min-width: 768px) and (max-width: 834px) and (orientation: portrait) {
-  .overflow-y-auto {
-    padding-bottom: 275px !important;
-  }
-
-  .flex-1.flex.items-center.justify-center {
-    padding-bottom: 275px !important;
-  }
 }
 
 /* Blur effect for SuccessNotification when modal is open */
@@ -618,11 +269,20 @@ const confirmDelete = () => {
   pointer-events: none;
 }
 
-/* Support for safe areas on iOS - handled by BottomNavigation */
+/* Performance optimizations */
+.cart-item {
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
 
-/* Ensure smooth scrolling on mobile */
-.scrollable-content {
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain;
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 0;
+}
+
+/* Telegram WebApp specific optimizations */
+* {
+  -webkit-tap-highlight-color: transparent;
 }
 </style>
