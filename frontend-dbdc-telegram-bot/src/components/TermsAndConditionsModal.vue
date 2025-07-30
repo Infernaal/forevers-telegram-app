@@ -4,8 +4,10 @@
               flex items-center justify-center
               p-2 sm:p-3 md:p-4 lg:p-6
               animate-[fadeIn_0.3s_ease-out] terms-modal-overlay
-              touch-manipulation overscroll-contain"
-       @click="closeModal">
+              touch-manipulation overscroll-contain
+              supports-[height:100dvh]:min-h-[100dvh]"
+       @click="closeModal"
+       style="height: 100vh; height: 100dvh;">
     <div class="w-full max-w-[calc(100vw-16px)] sm:max-w-[calc(100vw-24px)] md:max-w-md lg:max-w-lg
                 h-[calc(100vh-32px)] sm:h-[calc(100vh-48px)] md:h-[calc(100vh-64px)]
                 max-h-[calc(100vh-32px)] sm:max-h-[calc(100vh-48px)] md:max-h-[calc(100vh-64px)]
@@ -241,7 +243,7 @@ const agreeToTerms = () => {
 </script>
 
 <style scoped>
-/* Дополнительные Tailwind утилиты для мобильной адаптивности */
+/* Дополнител��ные Tailwind утилиты для мобильной адаптивности */
 .scrollbar-none {
   scrollbar-width: none;
   -ms-overflow-style: none;
