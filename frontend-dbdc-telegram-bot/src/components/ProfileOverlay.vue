@@ -325,14 +325,11 @@
           </div>
 
           <!-- Bottom Controls -->
-          <div class="absolute
-                      bottom-1 xs:bottom-2 sm:bottom-2 md:bottom-2 lg:bottom-4
-                      left-2 xs:left-2.5 sm:left-3 md:left-3.5 lg:left-4
-                      right-2 xs:right-2.5 sm:right-3 md:right-3.5 lg:right-4 z-[1]
+          <div class="relative flex-shrink-0 z-[1]
                       flex justify-center items-center
-                      gap-2 xs:gap-3 sm:gap-4 md:gap-5
-                      h-9 xs:h-10 sm:h-11 md:h-12
-                      mb-1 xs:mb-1.5 sm:mb-2 md:mb-2.5 lg:mb-3">
+                      gap-3 xs:gap-4 sm:gap-5 md:gap-6
+                      h-10 xs:h-11 sm:h-12 md:h-13
+                      mb-2 xs:mb-3 sm:mb-4">
             
             <!-- ID Section -->
             <div class="w-[110px] xs:w-[120px] sm:w-[130px] md:w-[140px] lg:w-[145px]
