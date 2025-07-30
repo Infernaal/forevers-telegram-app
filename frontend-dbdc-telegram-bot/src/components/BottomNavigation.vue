@@ -3,6 +3,7 @@
     <!-- Profile Overlay Component -->
     <ProfileOverlay
       :is-visible="isProfileMenuOpen"
+      :trigger-position="profileButtonPosition"
       @close="closeProfileMenu"
     />
 
@@ -15,6 +16,7 @@
 
           <!-- Profile -->
           <button
+            ref="profileButton"
             @click="toggleProfile"
             :class="[
               'flex flex-col items-center justify-center flex-1 gap-1 sm:gap-2 p-2 sm:p-3 md:p-4 text-center transition-all duration-200 ease-out transform-gpu active:scale-95 active:bg-black/[0.02] active:rounded-xl',
@@ -225,7 +227,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watch, nextTick, onMounted, onUnmounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useCart } from '../composables/useCart.js'
 import ProfileOverlay from './ProfileOverlay.vue'
@@ -239,6 +241,8 @@ const { cartItemsCount } = useCart()
 
 // Profile menu state
 const isProfileMenuOpen = ref(false)
+const profileButton = ref(null)
+const profileButtonPosition = ref({ left: 0, width: 0 })
 
 // Computed active tab based on current route
 const activeTab = ref('wallet')
@@ -273,8 +277,25 @@ const navigateTo = (tab) => {
   router.push(routeMap[tab])
 }
 
-const toggleProfile = () => {
+const updateProfileButtonPosition = () => {
+  if (profileButton.value) {
+    const rect = profileButton.value.getBoundingClientRect()
+    profileButtonPosition.value = {
+      left: rect.left,
+      width: rect.width
+    }
+  }
+}
+
+const toggleProfile = async () => {
   console.log('Profile toggle clicked, current state:', isProfileMenuOpen.value)
+
+  if (!isProfileMenuOpen.value) {
+    // Calculate position before opening
+    await nextTick()
+    updateProfileButtonPosition()
+  }
+
   isProfileMenuOpen.value = !isProfileMenuOpen.value
   console.log('Profile toggle new state:', isProfileMenuOpen.value)
 
@@ -289,6 +310,23 @@ const closeProfileMenu = () => {
   isProfileMenuOpen.value = false
   console.log('Profile menu closed, state:', isProfileMenuOpen.value)
 }
+
+// Window resize handler
+const handleResize = () => {
+  if (isProfileMenuOpen.value) {
+    updateProfileButtonPosition()
+  }
+}
+
+// Lifecycle hooks
+onMounted(() => {
+  window.addEventListener('resize', handleResize)
+  updateProfileButtonPosition()
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+})
 
 
 </script>

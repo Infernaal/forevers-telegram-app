@@ -1,112 +1,141 @@
 <template>
-  <div v-if="isVisible" class="terms-modal-overlay" @click="closeModal">
-    <div class="terms-modal-container" @click.stop>
+  <div v-if="isVisible" 
+       class="fixed inset-0 bg-black/20 backdrop-blur-[9px] z-[10001] 
+              flex items-start justify-center 
+              p-3 sm:p-4 md:p-6 lg:p-8 pt-6 sm:pt-8 md:pt-12 lg:pt-16
+              animate-[fadeIn_0.3s_ease-out] terms-modal-overlay" 
+       @click="closeModal">
+    <div class="w-full modal-container
+                animate-[slideUp_0.3s_ease-out]" 
+         @click.stop>
       <!-- Modal Content -->
-      <div class="terms-content">
+      <div class="modal-content">
         <!-- Header -->
-        <div class="terms-header">
-          <h1 class="terms-title">Forevers Leasing Terms & Conditions</h1>
-          <p class="terms-last-updated">Last Updated: July 16, 2025</p>
+        <div class="modal-header">
+          <h1 class="modal-title">
+            Forevers Leasing Terms & Conditions
+          </h1>
+          <p class="modal-subtitle">
+            Last Updated: July 16, 2025
+          </p>
         </div>
 
         <!-- Scrollable Content -->
-        <div class="terms-scroll-container">
-          <div class="terms-scroll-content">
+        <div class="modal-scroll-section">
+          <div class="modal-scroll-content">
             <!-- Introduction -->
-            <p class="terms-intro">
+            <p class="modal-intro">
               These Terms and Conditions govern your use of DBDC (the "Service"). By accessing or using the Service, you agree to be bound by these Terms. If you do not agree with these Terms, do not use the Service.
             </p>
 
             <!-- Sections -->
-            <div class="terms-sections">
+            <div class="modal-sections">
               <!-- Definitions -->
-              <section class="terms-section">
+              <section class="modal-section">
                 <h2 class="section-title">Definitions</h2>
                 <div class="section-content">
                   <div class="bullet-item">
                     <div class="bullet-point"></div>
-                    <p class="bullet-text">"User" refers to any individual or entity that accesses or uses the Service.</p>
+                    <p class="bullet-text">
+                      "User" refers to any individual or entity that accesses or uses the Service.
+                    </p>
                   </div>
                   <div class="bullet-item">
                     <div class="bullet-point"></div>
-                    <p class="bullet-text">"Service" refers to the cryptocurrency platform and any related services offered by DBDC.</p>
+                    <p class="bullet-text">
+                      "Service" refers to the cryptocurrency platform and any related services offered by DBDC.
+                    </p>
                   </div>
                 </div>
               </section>
 
               <!-- Eligibility -->
-              <section class="terms-section">
+              <section class="modal-section">
                 <h2 class="section-title">Eligibility</h2>
                 <div class="section-content">
                   <div class="bullet-item">
                     <div class="bullet-point"></div>
-                    <p class="bullet-text">You must be at least 18 years old and capable of entering into legally binding agreements to use the Service.</p>
+                    <p class="bullet-text">
+                      You must be at least 18 years old and capable of entering into legally binding agreements to use the Service.
+                    </p>
                   </div>
                 </div>
               </section>
 
               <!-- User Accounts -->
-              <section class="terms-section">
+              <section class="modal-section">
                 <h2 class="section-title">User Accounts</h2>
                 <div class="section-content">
                   <div class="bullet-item">
                     <div class="bullet-point"></div>
-                    <p class="bullet-text">Users may be required to create an account to access certain features of the Service. You agree to provide accurate, current, and complete information during the registration process.</p>
+                    <p class="bullet-text">
+                      Users may be required to create an account to access certain features of the Service. You agree to provide accurate, current, and complete information during the registration process.
+                    </p>
                   </div>
                 </div>
               </section>
 
               <!-- Digital Currency Risks -->
-              <section class="terms-section">
+              <section class="modal-section">
                 <h2 class="section-title">Digital Currency Risks</h2>
                 <div class="section-content">
                   <div class="bullet-item">
                     <div class="bullet-point"></div>
-                    <p class="bullet-text">You acknowledge that there are risks associated with the use of digital currencies, including market volatility and regulatory changes. DBDC is not responsible for any losses incurred.</p>
+                    <p class="bullet-text">
+                      You acknowledge that there are risks associated with the use of digital currencies, including market volatility and regulatory changes. DBDC is not responsible for any losses incurred.
+                    </p>
                   </div>
                 </div>
               </section>
 
               <!-- User Obligations -->
-              <section class="terms-section">
+              <section class="modal-section">
                 <h2 class="section-title">User Obligations</h2>
                 <div class="section-content">
                   <div class="bullet-item">
                     <div class="bullet-point"></div>
-                    <p class="bullet-text">Users agree to use the Service in compliance with applicable laws and regulations. You will not engage in any fraudulent or illegal activities.</p>
+                    <p class="bullet-text">
+                      Users agree to use the Service in compliance with applicable laws and regulations. You will not engage in any fraudulent or illegal activities.
+                    </p>
                   </div>
                 </div>
               </section>
 
               <!-- Intellectual Property -->
-              <section class="terms-section">
+              <section class="modal-section">
                 <h2 class="section-title">Intellectual Property</h2>
                 <div class="section-content">
                   <div class="bullet-item">
                     <div class="bullet-point"></div>
-                    <p class="bullet-text">All content and materials available on the Service are the property of DBDC and protected by intellectual property laws.</p>
+                    <p class="bullet-text">
+                      All content and materials available on the Service are the property of DBDC and protected by intellectual property laws.
+                    </p>
                   </div>
                 </div>
               </section>
 
               <!-- Limitation of Liability -->
-              <section class="terms-section">
+              <section class="modal-section">
                 <h2 class="section-title">Limitation of Liability</h2>
                 <div class="section-content">
                   <div class="bullet-item">
                     <div class="bullet-point"></div>
-                    <p class="bullet-text">DBDC shall not be liable for any indirect, incidental, or consequential damages arising from your use of the Service.</p>
+                    <p class="bullet-text">
+                      DBDC shall not be liable for any indirect, incidental, or consequential damages arising from your use of the Service.
+                    </p>
                   </div>
                 </div>
               </section>
 
               <!-- Amendments -->
-              <section class="terms-section">
+              <section class="modal-section">
                 <h2 class="section-title">Amendments</h2>
                 <div class="section-content">
                   <div class="bullet-item">
                     <div class="bullet-point"></div>
-                    <p class="bullet-text">DBDC reserves the right to modify these Terms at any time. Changes will be effective immediately upon posting.</p>
+                    <p class="bullet-text">
+                      DBDC reserves the right to modify these Terms at any time. Changes will be effective immediately upon posting.
+                    </p>
                   </div>
                 </div>
               </section>
@@ -115,11 +144,11 @@
         </div>
 
         <!-- Action Buttons -->
-        <div class="terms-actions">
-          <button class="terms-agree-btn" @click="agreeToTerms">
+        <div class="modal-actions">
+          <button class="agree-btn" @click="agreeToTerms">
             I agree with Terms & Conditions
           </button>
-          <button class="terms-back-btn" @click="closeModal">
+          <button class="back-btn" @click="closeModal">
             Back
           </button>
         </div>
@@ -154,129 +183,102 @@ const agreeToTerms = () => {
 </script>
 
 <style scoped>
+/* Modal Overlay */
 .terms-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(2, 7, 14, 0.20);
-  backdrop-filter: blur(9px);
-  z-index: 1000;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 60px 20px 20px 20px;
   animation: fadeIn 0.3s ease-out;
+  touch-action: none;
+  -webkit-overflow-scrolling: auto;
+  overscroll-behavior: none;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+/* Modal Container - Responsive Widths */
+.modal-container {
+  max-width: 340px;
+  max-height: 85vh;
+  min-height: 70vh;
 }
 
-.terms-modal-container {
-  width: 100%;
-  max-width: 375px;
-  max-height: 88vh;
-  min-height: 75vh;
+.modal-content {
   background: #fff;
   border-radius: 20px;
   border: 1px solid #E8E8E8;
   box-shadow: 1.744px 2.616px 20.93px 0 rgba(2, 7, 14, 0.04);
   display: flex;
   flex-direction: column;
-  animation: slideUp 0.3s ease-out;
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.terms-content {
-  display: flex;
-  flex-direction: column;
   height: 100%;
-  max-height: 88vh;
+  max-height: 85vh;
+  overflow: hidden;
 }
 
-.terms-header {
-  padding: 12px 12px 0 12px;
+/* Header */
+.modal-header {
+  padding: 12px;
   flex-shrink: 0;
+  border-bottom: 1px solid #f0f0f0;
 }
 
-.terms-title {
+.modal-title {
   color: #02070E;
   font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: clamp(22px, 6vw, 26px);
+  font-size: 18px;
   font-weight: 700;
   line-height: 1.4;
   text-transform: capitalize;
-  margin: 0 0 12px 0;
+  margin: 0 0 8px 0;
 }
 
-.terms-last-updated {
+.modal-subtitle {
   color: #4B4D50;
   font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: clamp(14px, 4vw, 16px);
+  font-size: 14px;
   font-weight: 500;
   line-height: 1.5;
   text-transform: capitalize;
-  margin: 0 0 20px 0;
+  margin: 0;
 }
 
-.terms-scroll-container {
+/* Scrollable Content */
+.modal-scroll-section {
   flex: 1;
   overflow-y: auto;
-  padding: 0 12px;
+  padding: 12px;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
 
-.terms-scroll-container::-webkit-scrollbar {
+.modal-scroll-section::-webkit-scrollbar {
   display: none;
 }
 
-.terms-scroll-content {
-  padding-bottom: 20px;
+.modal-scroll-content {
+  padding-bottom: 12px;
 }
 
-.terms-intro {
+.modal-intro {
   color: #4B4D50;
   font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: clamp(14px, 4vw, 16px);
+  font-size: 14px;
   font-weight: 500;
   line-height: 1.4;
-  margin: 0 0 32px 0;
+  margin: 0 0 24px 0;
 }
 
-.terms-sections {
+.modal-sections {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 24px;
 }
 
-.terms-section {
+.modal-section {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 
 .section-title {
   color: #02070E;
   font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: clamp(20px, 5vw, 24px);
+  font-size: 16px;
   font-weight: 700;
   line-height: 1.3;
   text-transform: capitalize;
@@ -292,29 +294,30 @@ const agreeToTerms = () => {
 .bullet-item {
   display: flex;
   align-items: flex-start;
-  gap: 14px;
+  gap: 12px;
 }
 
 .bullet-point {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: #4B4D50;
   flex-shrink: 0;
-  margin-top: 8px;
+  margin-top: 6px;
 }
 
 .bullet-text {
   color: #4B4D50;
   font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: clamp(14px, 4vw, 16px);
+  font-size: 13px;
   font-weight: 500;
   line-height: 1.4;
   margin: 0;
   flex: 1;
 }
 
-.terms-actions {
+/* Actions */
+.modal-actions {
   padding: 12px;
   display: flex;
   flex-direction: column;
@@ -323,11 +326,11 @@ const agreeToTerms = () => {
   border-top: 1px solid #F0F0F0;
 }
 
-.terms-agree-btn {
+.agree-btn {
   display: flex;
   width: 100%;
-  height: 52px;
-  padding: 12px 48px;
+  height: 48px;
+  padding: 12px 36px;
   justify-content: center;
   align-items: center;
   border-radius: 1000px;
@@ -336,32 +339,32 @@ const agreeToTerms = () => {
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 4px 12px rgba(32, 25, 206, 0.25);
+  color: #FFF;
+  text-align: center;
+  font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
-.terms-agree-btn:hover {
+.agree-btn:hover {
   opacity: 0.9;
   transform: translateY(-1px);
   box-shadow: 0 6px 16px rgba(32, 25, 206, 0.35);
 }
 
-.terms-agree-btn:active {
+.agree-btn:active {
   transform: translateY(0);
 }
 
-.terms-agree-btn {
-  color: #FFF;
-  text-align: center;
-  font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: clamp(12px, 3.5vw, 14px);
-  font-weight: 700;
-  line-height: 1.4;
-}
-
-.terms-back-btn {
+.back-btn {
   display: flex;
   width: 100%;
-  height: 44px;
-  padding: 12px 24px;
+  height: 40px;
+  padding: 8px 24px;
   justify-content: center;
   align-items: center;
   border-radius: 1000px;
@@ -369,68 +372,497 @@ const agreeToTerms = () => {
   background: #FAFAFA;
   cursor: pointer;
   transition: all 0.2s ease;
+  color: #4B4D50;
+  text-align: center;
+  font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
-.terms-back-btn:hover {
+.back-btn:hover {
   background: #f0f0f0;
   transform: translateY(-1px);
 }
 
-.terms-back-btn:active {
+.back-btn:active {
   transform: translateY(0);
 }
 
-.terms-back-btn {
-  color: #4B4D50;
-  text-align: center;
-  font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: clamp(14px, 4vw, 16px);
-  font-weight: 500;
-  line-height: 1.4;
+/* Small mobile devices (iPhone SE, small Android) - ≤374px */
+@media (max-width: 374px) {
+  .modal-container {
+    max-width: 300px;
+    max-height: 88vh;
+    min-height: 75vh;
+  }
+  
+  .modal-content {
+    border-radius: 16px;
+  }
+  
+  .modal-header {
+    padding: 10px;
+  }
+  
+  .modal-title {
+    font-size: 16px;
+  }
+  
+  .modal-subtitle {
+    font-size: 12px;
+  }
+  
+  .modal-scroll-section {
+    padding: 10px;
+  }
+  
+  .modal-intro {
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+  
+  .modal-sections {
+    gap: 20px;
+  }
+  
+  .modal-section {
+    gap: 10px;
+  }
+  
+  .section-title {
+    font-size: 14px;
+  }
+  
+  .bullet-text {
+    font-size: 11px;
+  }
+  
+  .bullet-item {
+    gap: 10px;
+  }
+  
+  .bullet-point {
+    width: 4px;
+    height: 4px;
+    margin-top: 5px;
+  }
+  
+  .modal-actions {
+    padding: 10px;
+  }
+  
+  .agree-btn {
+    height: 44px;
+    font-size: 11px;
+    padding: 10px 32px;
+  }
+  
+  .back-btn {
+    height: 36px;
+    font-size: 12px;
+    padding: 8px 20px;
+  }
 }
 
-/* Mobile responsiveness */
-@media (max-width: 480px) {
-  .terms-modal-overlay {
-    padding: 8px;
+/* Regular mobile devices (iPhone 12, 13, 14) - 375px to 430px */
+@media (min-width: 375px) and (max-width: 430px) {
+  .modal-container {
+    max-width: 360px;
+    max-height: 86vh;
+    min-height: 72vh;
+  }
+  
+  .modal-content {
+    border-radius: 18px;
+  }
+  
+  .modal-header {
+    padding: 14px;
+  }
+  
+  .modal-title {
+    font-size: 20px;
+  }
+  
+  .modal-subtitle {
+    font-size: 15px;
+  }
+  
+  .modal-scroll-section {
+    padding: 14px;
+  }
+  
+  .modal-intro {
+    font-size: 15px;
+    margin-bottom: 28px;
+  }
+  
+  .modal-sections {
+    gap: 28px;
+  }
+  
+  .modal-section {
+    gap: 14px;
+  }
+  
+  .section-title {
+    font-size: 18px;
+  }
+  
+  .bullet-text {
+    font-size: 14px;
+  }
+  
+  .bullet-item {
+    gap: 14px;
+  }
+  
+  .bullet-point {
+    width: 6px;
+    height: 6px;
+    margin-top: 7px;
+  }
+  
+  .modal-actions {
+    padding: 14px;
+  }
+  
+  .agree-btn {
+    height: 52px;
+    font-size: 14px;
+    padding: 12px 40px;
+  }
+  
+  .back-btn {
+    height: 44px;
+    font-size: 16px;
+    padding: 10px 24px;
+  }
+}
+
+/* Large mobile and small tablets - 431px to 768px */
+@media (min-width: 431px) and (max-width: 768px) {
+  .modal-container {
+    max-width: 500px;
+    max-height: 82vh;
+    min-height: 65vh;
   }
 
-  .terms-modal-container {
-    max-height: 92vh;
+  .modal-content {
+    border-radius: 24px;
+  }
+
+  .modal-header {
+    padding: 20px;
+  }
+
+  .modal-title {
+    font-size: 26px;
+  }
+
+  .modal-subtitle {
+    font-size: 18px;
+  }
+
+  .modal-scroll-section {
+    padding: 20px;
+  }
+
+  .modal-intro {
+    font-size: 18px;
+    margin-bottom: 32px;
+  }
+
+  .modal-sections {
+    gap: 32px;
+  }
+
+  .modal-section {
+    gap: 16px;
+  }
+
+  .section-title {
+    font-size: 22px;
+  }
+
+  .bullet-text {
+    font-size: 16px;
+  }
+
+  .bullet-item {
+    gap: 16px;
+  }
+
+  .bullet-point {
+    width: 7px;
+    height: 7px;
+    margin-top: 8px;
+  }
+
+  .modal-actions {
+    padding: 20px;
+  }
+
+  .agree-btn {
+    height: 56px;
+    font-size: 16px;
+    padding: 16px 48px;
+  }
+
+  .back-btn {
+    height: 48px;
+    font-size: 18px;
+    padding: 12px 32px;
+  }
+}
+
+/* Tablets and desktop - ≥769px */
+@media (min-width: 769px) {
+  .modal-container {
+    max-width: 600px;
+    max-height: 80vh;
+    min-height: 60vh;
+  }
+
+  .modal-content {
+    border-radius: 28px;
+  }
+
+  .modal-header {
+    padding: 24px;
+  }
+
+  .modal-title {
+    font-size: 32px;
+  }
+
+  .modal-subtitle {
+    font-size: 20px;
+  }
+
+  .modal-scroll-section {
+    padding: 24px;
+  }
+
+  .modal-intro {
+    font-size: 20px;
+    margin-bottom: 36px;
+  }
+
+  .modal-sections {
+    gap: 36px;
+  }
+
+  .modal-section {
+    gap: 20px;
+  }
+
+  .section-title {
+    font-size: 26px;
+  }
+
+  .bullet-text {
+    font-size: 18px;
+  }
+
+  .bullet-item {
+    gap: 18px;
+  }
+
+  .bullet-point {
+    width: 8px;
+    height: 8px;
+    margin-top: 9px;
+  }
+
+  .modal-actions {
+    padding: 24px;
+  }
+
+  .agree-btn {
+    height: 64px;
+    font-size: 18px;
+    padding: 18px 56px;
+  }
+
+  .back-btn {
+    height: 52px;
+    font-size: 20px;
+    padding: 14px 36px;
+  }
+}
+
+/* Landscape orientation adjustments for phones */
+@media (max-height: 500px) and (orientation: landscape) {
+  .modal-container {
+    max-height: 90vh;
     min-height: 80vh;
   }
-
-  .terms-header {
-    padding: 8px 8px 0 8px;
-  }
-
-  .terms-scroll-container {
-    padding: 0 8px;
-  }
-
-  .terms-actions {
+  
+  .modal-header {
     padding: 8px;
   }
-}
-
-/* Tablet styles */
-@media (min-width: 481px) and (max-width: 768px) {
-  .terms-modal-container {
-    max-width: 500px;
+  
+  .modal-title {
+    font-size: 14px;
+  }
+  
+  .modal-subtitle {
+    font-size: 11px;
+  }
+  
+  .modal-scroll-section {
+    padding: 8px;
+  }
+  
+  .modal-intro {
+    font-size: 11px;
+    margin-bottom: 12px;
+  }
+  
+  .modal-sections {
+    gap: 12px;
+  }
+  
+  .modal-section {
+    gap: 6px;
+  }
+  
+  .section-title {
+    font-size: 12px;
+  }
+  
+  .bullet-text {
+    font-size: 10px;
+  }
+  
+  .bullet-item {
+    gap: 6px;
+  }
+  
+  .bullet-point {
+    width: 3px;
+    height: 3px;
+    margin-top: 4px;
+  }
+  
+  .modal-actions {
+    padding: 8px;
+  }
+  
+  .agree-btn {
+    height: 36px;
+    font-size: 10px;
+    padding: 8px 24px;
+  }
+  
+  .back-btn {
+    height: 32px;
+    font-size: 10px;
+    padding: 6px 16px;
   }
 }
 
-/* Desktop styles */
-@media (min-width: 769px) {
-  .terms-modal-container {
-    max-width: 600px;
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .modal-content {
+    background: #2a2a2a;
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .modal-header {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .modal-actions {
+    border-top-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .modal-title {
+    color: #ffffff;
+  }
+  
+  .modal-subtitle,
+  .modal-intro,
+  .bullet-text {
+    color: #a0a0a0;
+  }
+  
+  .section-title {
+    color: #ffffff;
+  }
+  
+  .bullet-point {
+    background: #a0a0a0;
+  }
+  
+  .back-btn {
+    background: #3a3a3a;
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .agree-btn,
+  .back-btn {
+    transition: none;
+  }
+  
+  .agree-btn:hover,
+  .back-btn:hover {
+    transform: none;
+  }
+  
+  .agree-btn:active,
+  .back-btn:active {
+    transform: none;
   }
 }
 
 /* Touch optimizations */
-.terms-agree-btn,
-.terms-back-btn {
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
+@media (hover: none) and (pointer: coarse) {
+  .agree-btn:hover,
+  .back-btn:hover {
+    transform: none;
+  }
+  
+  .agree-btn:active {
+    opacity: 0.8;
+  }
+  
+  .back-btn:active {
+    background: #e0e0e0;
+  }
+}
+
+/* Performance optimizations */
+.agree-btn,
+.back-btn {
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 </style>
