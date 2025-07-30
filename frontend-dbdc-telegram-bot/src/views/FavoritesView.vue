@@ -29,11 +29,18 @@
       </div>
 
       <!-- Scroll Content -->
-      <div class="flex-1 overflow-y-auto pt-4 space-y-4" v-if="balances.length > 0">
+      <div
+        ref="scrollContainer"
+        @scroll="handleScroll"
+        class="flex-1 overflow-y-auto pt-4 space-y-4 scroll-container"
+        v-if="balances.length > 0"
+      >
         <div
-          v-for="balance in balances"
+          v-for="(balance, index) in balances"
           :key="balance.id"
+          :ref="el => cardRefs[index] = el"
           class="bg-white border border-purple-200 rounded-2xl balance-card relative flex flex-col justify-between"
+          :style="getCardStyle(index)"
         >
           <!-- Country Header -->
           <div class="flex items-center justify-between mb-3">
