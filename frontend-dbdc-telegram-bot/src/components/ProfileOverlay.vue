@@ -440,7 +440,7 @@ const selectLanguage = (language) => {
 
 .overlay-wrapper {
   padding: 12px;
-  padding-bottom: 100px; /* Space for BottomNavigation */
+  padding-bottom: 120px; /* Space for BottomNavigation - увеличено */
 }
 
 .overlay-menu {
