@@ -176,7 +176,7 @@
             <div class="absolute left-0 top-0 w-[140px] h-full bg-gradient-to-r from-[#8C4CD1] to-[#C497FF] opacity-40 rounded-l-2xl"></div>
 
             <!-- Star icon -->
-            <div class="absolute left-2 top-4">
+            <div class="absolute left-2 top-3">
               <svg class="w-8 h-8" viewBox="0 0 32 32" fill="none">
                 <g clipPath="url(#clip0_star)">
                   <path d="M16 31.0588C24.3167 31.0588 31.0588 24.3167 31.0588 16C31.0588 7.68323 24.3167 0.941162 16 0.941162C7.68323 0.941162 0.941162 7.68323 0.941162 16C0.941162 24.3167 7.68323 31.0588 16 31.0588Z" fill="#8C4CD1"/>
@@ -204,21 +204,24 @@
             </div>
 
             <!-- Content -->
-            <div class="relative flex items-center justify-between h-full pl-12 pr-3">
-              <div class="flex flex-col justify-center">
-                <h3 class="text-dbd-dark text-lg font-bold leading-6 mb-2">Start</h3>
+            <div class="relative flex flex-col h-full pl-12 pr-3 py-2">
+              <!-- Top row: Start title and Upgrade button aligned with icon -->
+              <div class="flex items-center justify-between">
+                <h3 class="text-dbd-dark text-lg font-bold leading-6">Start</h3>
+                <button class="bg-gradient-to-r from-dbd-primary to-[#473FFF] text-white text-base font-bold px-6 py-3 rounded-full hover:shadow-lg transition-all duration-200 flex-shrink-0"
+                        @click="onMenuClick('upgrade')">
+                  Upgrade
+                </button>
+              </div>
+
+              <!-- Bottom row: Description text -->
+              <div class="flex-1 flex items-end pb-1">
                 <p class="text-sm leading-[22px]">
                   <span class="text-dbd-gray">buy </span>
                   <span class="text-[#8C4CD1] font-bold">123</span>
                   <span class="text-dbd-gray"> more Forevers to upgrade</span>
                 </p>
               </div>
-
-              <!-- Upgrade Button -->
-              <button class="bg-gradient-to-r from-dbd-primary to-[#473FFF] text-white text-base font-bold px-6 py-3 rounded-full hover:shadow-lg transition-all duration-200 flex-shrink-0"
-                      @click="onMenuClick('upgrade')">
-                Upgrade
-              </button>
             </div>
           </div>
 
