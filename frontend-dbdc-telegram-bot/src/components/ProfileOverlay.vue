@@ -279,9 +279,9 @@
               relative overflow-hidden">
               <!-- Background gradient -->
               <div class="absolute left-0 top-0
-                          w-[100px] xs:w-[120px] sm:w-[140px] md:w-[160px] lg:w-[180px] xl:w-[200px]
-                          h-full bg-gradient-to-r from-[#8C4CD1] to-[#C497FF]
-                          opacity-40 rounded-l-lg xs:rounded-l-xl sm:rounded-l-2xl md:rounded-l-3xl"></div>
+                w-[100px] xs:w-[120px] sm:w-[140px] md:w-[160px] lg:w-[180px] xl:w-[200px]
+                h-full bg-gradient-to-r from-[#8C4CD1] to-[#C497FF]
+                opacity-40 rounded-l-lg xs:rounded-l-xl sm:rounded-l-2xl md:rounded-l-3xl"></div>
               
               <div class="flex items-center mb-0.5 xs:mb-1 sm:mb-1.5 md:mb-2 lg:mb-2.5 relative z-[1]">
                 <div class="flex items-center gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-4 xl:gap-5 flex-1">
