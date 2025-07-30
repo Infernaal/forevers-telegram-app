@@ -189,81 +189,103 @@
             </div>
           </div>
 
-          <!-- Bottom Controls -->
-          <div class="bottom-controls-section">
-            
-            <!-- ID Section -->
-            <div class="id-section-container"
-                :class="{ 'id-copied-state': showCopySuccess }">
+          <!-- Bottom Controls - Tailwind CSS -->
+          <div class="absolute bottom-2 left-2 right-2
+                      flex items-center justify-center gap-3
+                      h-10 sm:h-11 md:h-12 z-[10001]">
 
-              <div v-if="!showCopySuccess" class="id-content">
-                <span class="id-label">ID: </span>
-                <span class="id-value">515745</span>
+            <!-- ID Section - Equal width -->
+            <div class="flex-1 max-w-[140px] h-full
+                        bg-white/30 border border-white/40 rounded-full
+                        backdrop-blur-sm flex items-center relative
+                        transition-all duration-300 ease-in-out overflow-hidden"
+                 :class="{ 'border-green-500 bg-green-600 scale-105': showCopySuccess }">
+
+              <div v-if="!showCopySuccess"
+                   class="flex items-center gap-1 px-3 flex-1">
+                <span class="text-gray-300 text-xs sm:text-sm font-normal">ID:</span>
+                <span class="text-white text-xs sm:text-sm font-normal">515745</span>
               </div>
 
-              <div v-if="showCopySuccess" class="id-copied-content">
-                <span class="id-copied-text">Copied</span>
-                <div class="id-copied-icon">
-                  <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="14" cy="14" r="14" fill="white"/>
+              <div v-if="showCopySuccess"
+                   class="w-full h-full flex items-center justify-center gap-2">
+                <span class="text-white text-sm font-semibold">Copied</span>
+                <div class="relative w-6 h-6">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="absolute">
+                    <circle cx="12" cy="12" r="12" fill="white"/>
                   </svg>
-                  <svg class="id-tick-svg" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11.3242 0.926106C10.7978 0.642629 10.2106 1.18934 9.86633 1.51331C9.07667 2.28275 8.40848 3.17368 7.65925 3.98362C6.82907 4.87455 6.05963 5.76548 5.20919 6.6362C4.72323 7.12216 4.19677 7.64862 3.8728 8.25607C3.14385 7.54734 2.51615 6.7779 1.70621 6.15023C1.11901 5.70477 0.147086 5.38079 0.167334 6.45396C0.207831 7.85113 1.44299 9.34952 2.35416 10.3012C2.73888 10.7061 3.24509 11.1313 3.8323 11.1516C4.54099 11.1921 5.26994 10.3417 5.69515 9.87594C6.44438 9.06601 7.05183 8.15479 7.74024 7.32464C8.63118 6.23123 9.54236 5.15803 10.413 4.04436C10.9597 3.35592 12.6809 1.65502 11.3242 0.926106ZM1.05823 6.37297C1.03798 6.37297 1.01773 6.37297 0.977238 6.39318C0.896244 6.37297 0.835499 6.35268 0.754505 6.31219C0.815251 6.27169 0.916493 6.29194 1.05823 6.37297Z" fill="#07B80E"/>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" class="absolute top-1.5 left-1.5">
+                    <path d="M10 3L4.5 8.5L2 6" stroke="#07B80E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </div>
               </div>
-              
+
               <button v-if="!showCopySuccess"
-                      class="copy-button"
+                      class="absolute right-0 top-0 bottom-0
+                             w-8 sm:w-9 md:w-10
+                             bg-white border border-gray-300
+                             rounded-r-full border-l-0
+                             flex items-center justify-center
+                             transition-all duration-200 ease-in-out
+                             hover:bg-gray-50 hover:scale-105
+                             active:scale-95"
                       @click="copyUserID">
-                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M18.0655 0.5H7.60611C6.97596 0.5 6.37161 0.727045 5.92603 1.13119C5.48044 1.53533 5.23011 2.08346 5.23011 2.65501V3.48385H4.04211C3.38111 3.48385 2.74718 3.72201 2.27978 4.14594C1.81239 4.56986 1.5498 5.14483 1.5498 5.74435V19.2395C1.5498 19.839 1.81239 20.414 2.27978 20.8379C2.74718 21.2618 3.38111 21.5 4.04211 21.5H14.2772C14.9382 21.5 15.5721 21.2618 16.0395 20.8379C16.5069 20.414 16.7695 19.839 16.7695 19.2395V18.486H18.0655C18.6907 18.4861 19.291 18.2634 19.7369 17.866C20.1829 17.4685 20.4389 16.9281 20.4498 16.3611V2.65501C20.4476 2.08277 20.1954 1.53465 19.7485 1.13073C19.3016 0.7268 18.6964 0.499997 18.0655 0.5ZM15.108 19.2395C15.108 19.4393 15.0204 19.631 14.8646 19.7723C14.7088 19.9136 14.4975 19.993 14.2772 19.993H4.04211C3.82178 19.993 3.61047 19.9136 3.45467 19.7723C3.29887 19.631 3.21134 19.4393 3.21134 19.2395V5.74435C3.21134 5.54451 3.29887 5.35285 3.45467 5.21154C3.61047 5.07024 3.82178 4.99085 4.04211 4.99085H14.2772C14.4975 4.99085 14.7088 5.07024 14.8646 5.21154C15.0204 5.35285 15.108 5.54451 15.108 5.74435V19.2395ZM18.7883 16.3611C18.7861 16.5337 18.709 16.6985 18.5737 16.8198C18.4383 16.9411 18.2558 17.0092 18.0655 17.0092H16.7695V5.74435C16.7695 5.14483 16.5069 4.56986 16.0395 4.14594C15.5721 3.72201 14.9382 3.48385 14.2772 3.48385H6.89165V2.65501C6.89165 2.48314 6.96693 2.31832 7.10091 2.19679C7.2349 2.07527 7.41663 2.007 7.60611 2.007H18.0655C18.16 2.006 18.2538 2.02203 18.3415 2.05414C18.4291 2.08626 18.5089 2.13384 18.5761 2.19411C18.6433 2.25438 18.6967 2.32616 18.7331 2.40527C18.7695 2.48439 18.7883 2.56927 18.7883 2.65501V16.3611Z" fill="#2019CE"/>
+                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-dbd-primary" viewBox="0 0 20 20" fill="none">
+                  <path d="M8 3a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 11-2 0V4h-4a1 1 0 01-1-1zM6 5a1 1 0 00-1 1v8a1 1 0 001 1h8a1 1 0 001-1v-3a1 1 0 10-2 0v2H7V7h2a1 1 0 100-2H6z" fill="currentColor"/>
                 </svg>
               </button>
             </div>
 
             <!-- Vertical Divider -->
-            <div class="vertical-divider"></div>
+            <div class="w-0.5 h-6 bg-gray-400/40 rounded-full flex-shrink-0"></div>
 
-            <!-- Language Section -->
-            <div class="language-section-container"
-                @click="toggleLanguageDropdown">
-              
-              <div class="language-content">
-                <CountryFlag :country="selectedLanguage.country" size="medium" class="flag-icon" />
-                <span class="language-code">
+            <!-- Language Section - Equal width -->
+            <div class="flex-1 max-w-[140px] h-full
+                        bg-white/20 border border-white/30 rounded-full
+                        flex items-center px-1 cursor-pointer
+                        transition-all duration-200 ease-in-out
+                        hover:bg-white/30 relative overflow-visible"
+                 @click="toggleLanguageDropdown">
+
+              <div class="flex items-center gap-2 flex-1 min-w-0 px-2">
+                <CountryFlag :country="selectedLanguage.country"
+                           class="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0" />
+                <span class="text-white text-xs sm:text-sm font-normal flex-shrink-0">
                   {{ selectedLanguage.code }}
                 </span>
               </div>
-              
-              <div class="dropdown-arrow"
-                  :class="{ 'rotate-180': showLanguageDropdown }">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <circle opacity="0.2" cx="10" cy="10" r="10" fill="white"/>
-                  <path d="M5.71387 8.57146L9.99958 12.8572L14.2853 8.57146" stroke="white" stroke-linecap="round"/>
+
+              <div class="flex-shrink-0 w-4 h-4 flex items-center justify-center mr-1
+                          transition-transform duration-200 ease-in-out"
+                   :class="{ 'rotate-180': showLanguageDropdown }">
+                <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none">
+                  <path d="M4 6l4 4 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
 
               <!-- Language Dropdown -->
               <div v-if="showLanguageDropdown"
-                  class="language-dropdown"
-                  style="z-index: 10002;">
-                <div class="dropdown-content">
-                  <div v-for="(language, index) in languages"
-                      :key="language.code"
-                      class="dropdown-item"
-                      :class="{ 'active-item': language.code === selectedLanguage.code }"
-                      @click.stop="selectLanguage(language)">
-                    <CountryFlag :country="language.country" size="small" class="dropdown-flag" />
-                    <span class="dropdown-language-name">
-                      {{ language.code }}
-                    </span>
-                    <svg v-if="language.code === selectedLanguage.code" 
-                        class="check-icon" 
-                        width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M13.5 4.5L6 12L2.5 8.5" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </div>
+                   class="absolute bottom-full left-0 right-0 mb-2 z-[10002]
+                          bg-gradient-to-r from-indigo-900 via-purple-900 to-indigo-800
+                          border border-white/10 rounded-2xl backdrop-blur-lg
+                          p-2 max-h-32 overflow-y-auto scrollbar-none
+                          shadow-xl animate-[slideUp_0.2s_ease-out]">
+                <div v-for="language in languages"
+                     :key="language.code"
+                     class="flex items-center gap-2 p-2 rounded-lg cursor-pointer
+                            transition-all duration-200 ease-in-out
+                            hover:bg-white/10 min-h-[32px] relative"
+                     :class="{ 'bg-white/15': language.code === selectedLanguage.code }"
+                     @click.stop="selectLanguage(language)">
+                  <CountryFlag :country="language.country" class="w-5 h-5 flex-shrink-0" />
+                  <span class="text-white text-sm font-medium flex-1">
+                    {{ language.code }}
+                  </span>
+                  <svg v-if="language.code === selectedLanguage.code"
+                       class="w-4 h-4 text-green-400 flex-shrink-0"
+                       viewBox="0 0 16 16" fill="none">
+                    <path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
                 </div>
               </div>
             </div>
