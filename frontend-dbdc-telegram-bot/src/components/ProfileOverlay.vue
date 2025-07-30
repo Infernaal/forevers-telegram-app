@@ -236,7 +236,7 @@
               <!-- Copy button - строго border to border -->
               <button v-if="!showCopySuccess"
                       class="absolute right-0 top-0 bottom-0
-                             w-12 h-full
+                             w-8 sm:w-9 md:w-10 h-full
                              bg-white border-r border-t border-b border-gray-300
                              rounded-r-full border-l-0
                              flex items-center justify-center
@@ -244,7 +244,7 @@
                              hover:bg-gray-50 hover:scale-105
                              active:scale-95"
                       @click="copyUserID">
-                <svg class="w-5 h-5 text-dbd-primary" viewBox="0 0 20 20" fill="none">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-dbd-primary" viewBox="0 0 20 20" fill="none">
                   <path d="M8 3a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 11-2 0V4h-4a1 1 0 01-1-1zM6 5a1 1 0 00-1 1v8a1 1 0 001 1h8a1 1 0 001-1v-3a1 1 0 10-2 0v2H7V7h2a1 1 0 100-2H6z" fill="currentColor"/>
                 </svg>
               </button>
