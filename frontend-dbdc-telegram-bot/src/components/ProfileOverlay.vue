@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-transparent
+  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl
                                         flex items-center justify-center px-2 sm:px-4 py-4 sm:py-6 md:py-8 pb-20 sm:pb-24 md:pb-28 profile-overlay">
     <!-- Dropdown Menu с Tailwind CSS - растянутый как в WalletView -->
     <div class="relative w-full max-w-none
