@@ -196,7 +196,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import BottomNavigation from '../components/BottomNavigation.vue'
 import CountryFlag from '../components/CountryFlag.vue'
@@ -207,6 +207,12 @@ import EnterAmountModal from '../components/EnterAmountModal.vue'
 import { useCart } from '../composables/useCart.js'
 
 const router = useRouter()
+
+// Scroll and fade effect refs
+const scrollContainer = ref(null)
+const cardRefs = ref([])
+const cardOpacities = ref([])
+const scrollTop = ref(0)
 
 // App state
 const isLoading = ref(false)
