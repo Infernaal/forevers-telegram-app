@@ -610,9 +610,11 @@ console.log('ProfileOverlay loaded with corrected design')
 
 /* Mobile width adjustments */
 @media (max-width: 320px) {
-  .mx-4 {
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
+  .ml-4 {
+    margin-left: 0.5rem; /* 8px */
+  }
+  .mr-6 {
+    margin-right: 0.875rem; /* 14px */
   }
 }
 
