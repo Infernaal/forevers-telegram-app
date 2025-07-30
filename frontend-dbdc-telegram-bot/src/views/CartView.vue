@@ -82,7 +82,7 @@
     </div>
 
     <!-- Fixed Cart Bottom Component (only when cart has items) -->
-    <div v-if="cartItemsCount > 0" class="fixed left-0 right-0 z-[9999]" style="bottom: 90px;">
+    <div v-if="cartItemsCount > 0" class="fixed left-0 right-0 z-[9999] cart-bottom-container">
       <CartBottomComponent
         :total-amount="cartTotal"
         @back="handleBack"
