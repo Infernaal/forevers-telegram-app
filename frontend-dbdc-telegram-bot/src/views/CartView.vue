@@ -33,7 +33,7 @@
 
             <div class="flex-1">
               <div class="text-dbd-gray text-base font-medium mb-1">Price</div>
-              <div class="text-dbd-gray text-base font-medium">
+              <div class="text-dbd-gray text-base font-medium whitespace-nowrap">
                 <span>1Forevers {{ item.code }}</span>
                 <span class="text-dbd-dark font-semibold"> = ${{ item.usdRate.toFixed(2) }}</span>
               </div>
