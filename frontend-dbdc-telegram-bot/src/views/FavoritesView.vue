@@ -617,15 +617,19 @@ onBeforeUnmount(() => {
   -ms-overflow-style: none;
 }
 
-/* Hide scrollbar in Firefox */
+/* Hide scrollbar in scrollable area */
 .overflow-y-auto {
   scrollbar-width: none;
   -ms-overflow-style: none;
-  scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
   overscroll-behavior: contain;
   will-change: scroll-position;
   overscroll-behavior-x: none;
+}
+
+.overflow-y-auto::-webkit-scrollbar {
+  display: none;
 }
 
 /* Ensure main container takes full height properly */
