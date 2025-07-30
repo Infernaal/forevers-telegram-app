@@ -272,12 +272,11 @@
           <!-- Start Section -->
           <div class="relative flex-shrink-0 z-[1] mb-2 xs:mb-3 sm:mb-4 md:mb-5">
             <div class="w-full
-                        h-16 xs:h-18 sm:h-20 md:h-22 lg:h-24 xl:h-26
-                        bg-[#F1E7FF] border border-[#DCCCF1]
-                        rounded-lg xs:rounded-xl sm:rounded-2xl md:rounded-3xl
-                        flex flex-col justify-center
-                        p-2 xs:p-3 sm:p-4 md:p-5 lg:p-6 xl:p-7
-                        relative overflow-hidden">
+              bg-[#F1E7FF] border border-[#DCCCF1]
+              rounded-lg xs:rounded-xl sm:rounded-2xl md:rounded-3xl
+              flex flex-col justify-center
+              p-2 xs:p-3 sm:p-4 md:p-5 lg:p-6 xl:p-7
+              relative overflow-hidden">
               <!-- Background gradient -->
               <div class="absolute left-0 top-0
                           w-[100px] xs:w-[120px] sm:w-[140px] md:w-[160px] lg:w-[180px] xl:w-[200px]
