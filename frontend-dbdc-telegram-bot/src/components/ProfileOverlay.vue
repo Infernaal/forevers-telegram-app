@@ -235,19 +235,21 @@
 
             <!-- Support -->
             <div class="flex items-center
-                        gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3
-                        px-2 xs:px-2.5 sm:px-3 md:px-3.5
-                        py-1 xs:py-1.5 sm:py-2
-                        h-10 xs:h-11 sm:h-12 md:h-13
-                        cursor-pointer transition-all duration-200
-                        rounded-md xs:rounded-lg sm:rounded-xl
-                        mb-1.5 xs:mb-2 sm:mb-2.5
-                        hover:bg-white hover:bg-opacity-10 hover:translate-x-1 relative"
+                        gap-2 xs:gap-2.5 sm:gap-3 md:gap-4
+                        px-3 xs:px-4 sm:px-5 md:px-6
+                        py-2 xs:py-2.5 sm:py-3
+                        h-12 xs:h-13 sm:h-14 md:h-15
+                        cursor-pointer transition-all duration-300
+                        rounded-lg xs:rounded-xl sm:rounded-2xl
+                        mb-2 xs:mb-2.5 sm:mb-3
+                        hover:bg-white hover:bg-opacity-15 hover:translate-x-2 hover:scale-[1.02] relative
+                        touch-manipulation active:scale-95"
                 @click="handleMenuClick('support')">
-              <div class="w-8 xs:w-9 sm:w-10 md:w-11 h-8 xs:h-9 sm:h-10 md:h-11
-                          bg-[#3A33D3] border border-white border-opacity-20
-                          rounded-full flex items-center justify-center flex-shrink-0">
-                <svg class="w-4 xs:w-5 sm:w-5 md:w-6 h-4 xs:h-5 sm:h-5 md:h-6" viewBox="0 0 18 20" fill="none">
+              <div class="w-10 xs:w-11 sm:w-12 md:w-13 h-10 xs:h-11 sm:h-12 md:h-13
+                          bg-[#3A33D3] border border-white border-opacity-30
+                          rounded-full flex items-center justify-center flex-shrink-0
+                          transition-all duration-300 hover:bg-[#4A43E3] hover:scale-110">
+                <svg class="w-5 xs:w-6 sm:w-6 md:w-7 h-5 xs:h-6 sm:h-6 md:h-7" viewBox="0 0 18 20" fill="none">
                   <path d="M8.99902 0C13.9325 0 17.998 3.80872 17.998 8.58691V10.1348C17.9981 10.1411 17.999 10.1479 17.999 10.1543V12.9561C17.9992 12.9624 18 12.9692 18 12.9756V14.543C17.9997 16.724 16.1499 18.4277 13.9502 18.4277H11.2695C10.9422 19.3551 10.0281 19.9951 8.99902 19.9951C7.71066 19.9949 6.59988 18.993 6.59961 17.6777C6.59962 16.3623 7.71051 15.3606 8.99902 15.3604C10.0286 15.3604 10.9435 15.9998 11.2705 16.9277H13.9502C15.1589 16.9277 16.1261 16.1539 16.4111 15.1514C16.155 15.2407 15.8817 15.293 15.5986 15.293C14.3103 15.2927 13.1995 14.2908 13.1992 12.9756V10.1543C13.1992 8.83884 14.3101 7.83714 15.5986 7.83691C15.9032 7.83691 16.1972 7.89422 16.4697 7.99707C16.1535 4.38853 12.9637 1.5 8.99902 1.5C5.03445 1.50011 1.84359 4.38856 1.52734 7.99707C1.80001 7.89396 2.09449 7.83697 2.39941 7.83691C3.6881 7.83691 4.7998 8.83869 4.7998 10.1543V12.9756C4.79953 14.291 3.68794 15.293 2.39941 15.293C1.11107 15.2927 0.000274862 14.2908 0 12.9756V8.58691C4.31105e-05 3.80879 4.0657 0.000121624 8.99902 0ZM8.99902 16.8604C8.4656 16.8606 8.09962 17.2622 8.09961 17.6777C8.0999 18.0931 8.4658 18.4949 8.99902 18.4951C9.53249 18.4951 9.89913 18.0932 9.89941 17.6777C9.89941 17.2621 9.53269 16.8604 8.99902 16.8604ZM2.39941 9.33691C1.866 9.33713 1.50001 9.73876 1.5 10.1543V12.9756C1.50029 13.391 1.86621 13.7927 2.39941 13.793C2.93286 13.793 3.29952 13.3911 3.2998 12.9756V10.1543C3.2998 9.73865 2.93306 9.33691 2.39941 9.33691ZM15.5986 9.33691C15.0652 9.33713 14.6992 9.73876 14.6992 10.1543V12.9756C14.6995 13.391 15.0654 13.7927 15.5986 13.793C16.1321 13.793 16.4987 13.3911 16.499 12.9756V10.1729C16.4989 10.1667 16.4981 10.1605 16.498 10.1543V10.1348C16.487 9.72598 16.1241 9.33691 15.5986 9.33691Z" fill="white"/>
                 </svg>
               </div>
