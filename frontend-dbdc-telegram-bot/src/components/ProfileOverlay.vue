@@ -77,15 +77,17 @@
               </div>
 
               <!-- Arrow Button -->
-              <button class="w-9 xs:w-10 sm:w-11 md:w-12 h-9 xs:h-10 sm:h-11 md:h-12
-                            min-w-[36px] xs:min-w-[40px] sm:min-w-[44px] md:min-w-[48px]
-                            min-h-[36px] xs:min-h-[40px] sm:min-h-[44px] md:min-h-[48px]
+              <button class="w-10 xs:w-11 sm:w-12 md:w-13 h-10 xs:h-11 sm:h-12 md:h-13
+                            min-w-[40px] xs:min-w-[44px] sm:min-w-[48px] md:min-w-[52px]
+                            min-h-[40px] xs:min-h-[44px] sm:min-h-[48px] md:min-h-[52px]
                             bg-dbd-light-blue border border-dbd-primary
-                            rounded-r-[1000px] flex items-center justify-center
-                            cursor-pointer transition-all duration-200 hover:bg-[#E0D9FF] hover:scale-105
-                            flex-shrink-0"
-                      @click="$emit('close')">
-                <svg class="w-5 xs:w-6 sm:w-6 md:w-7 h-5 xs:h-6 sm:h-6 md:h-7" viewBox="0 0 24 24" fill="none">
+                            rounded-r-[60px] flex items-center justify-center
+                            cursor-pointer transition-all duration-300 hover:bg-[#E0D9FF] hover:scale-105
+                            flex-shrink-0 touch-manipulation
+                            active:scale-95 focus:outline-none focus:ring-2 focus:ring-dbd-primary focus:ring-opacity-50"
+                      @click="$emit('close')"
+                      aria-label="Закрыть профиль">
+                <svg class="w-6 xs:w-7 sm:w-7 md:w-8 h-6 xs:h-7 sm:h-7 md:h-8" viewBox="0 0 24 24" fill="none">
                   <path d="M17.2155 11.2862L8.2216 2.29534C7.82696 1.90169 7.18757 1.90169 6.79192 2.29534C6.39728 2.68898 6.39728 3.32838 6.79192 3.72203L15.0724 11.9996L6.79292 20.2771C6.39827 20.6707 6.39827 21.3101 6.79292 21.7048C7.18756 22.0984 7.82795 22.0984 8.2226 21.7048L17.2165 12.7139C17.6051 12.3244 17.6051 11.6749 17.2155 11.2862Z" fill="#B7B7B7"/>
                 </svg>
               </button>
