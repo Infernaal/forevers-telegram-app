@@ -3,10 +3,13 @@
        class="fixed inset-0 bg-black/20 backdrop-blur-[9px] z-[10001]
               flex items-center justify-center
               p-2 sm:p-3 md:p-4 lg:p-6
-              animate-[fadeIn_0.3s_ease-out] terms-modal-overlay"
+              animate-[fadeIn_0.3s_ease-out] terms-modal-overlay
+              touch-manipulation overscroll-contain"
        @click="closeModal">
-    <div class="w-full modal-container
-                animate-[slideUp_0.3s_ease-out]" 
+    <div class="w-full max-w-[calc(100vw-16px)] sm:max-w-[calc(100vw-24px)] md:max-w-md lg:max-w-lg
+                max-h-[calc(100vh-32px)] sm:max-h-[calc(100vh-48px)]
+                min-h-[70vh] sm:min-h-[65vh] md:min-h-[60vh]
+                modal-container animate-[slideUp_0.3s_ease-out]"
          @click.stop>
       <!-- Modal Content -->
       <div class="modal-content">
