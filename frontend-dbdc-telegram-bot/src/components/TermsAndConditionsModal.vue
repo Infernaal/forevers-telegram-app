@@ -366,10 +366,25 @@ const agreeToTerms = () => {
 @media (max-height: 500px) and (orientation: landscape) {
   .modal-container {
     height: calc(100vh - 16px) !important;
+    height: calc(100dvh - 16px) !important;
     max-height: calc(100vh - 16px) !important;
+    max-height: calc(100dvh - 16px) !important;
   }
   .modal-scroll-section {
-    max-height: calc(100vh - 160px) !important;
+    max-height: calc(100vh - 140px) !important;
+    max-height: calc(100dvh - 140px) !important;
+  }
+}
+
+/* iPhone landscape (all models) */
+@media (max-height: 440px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
+  .modal-container {
+    height: calc(100vh - 8px) !important;
+    height: calc(100dvh - 8px) !important;
+  }
+  .modal-scroll-section {
+    max-height: calc(100vh - 120px) !important;
+    max-height: calc(100dvh - 120px) !important;
   }
 }
 
