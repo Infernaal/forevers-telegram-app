@@ -204,8 +204,8 @@
           </div>
 
           <!-- Bottom Controls - в пределах контейнера -->
-          <div class="mt-4 flex items-center justify-center gap-2 sm:gap-3
-                      h-10 sm:h-11 md:h-12 lg:h-14">
+          <div class="mt-4 flex items-center justify-center gap-3 sm:gap-4
+                      h-12 sm:h-14 md:h-16">
 
             <!-- ID Section - Copy button border to border -->
             <div class="flex-1 max-w-[120px] xs:max-w-[130px] sm:max-w-[140px] h-full
@@ -358,7 +358,7 @@ const languages = ref([
   { code: 'ITA', name: 'Italiano', country: 'italy' },
   { code: 'RUS', name: 'Ру��ский', country: 'ukraine' },
   { code: 'CHN', name: '中文', country: 'china' },
-  { code: 'JPN', name: '日本語', country: 'japan' },
+  { code: 'JPN', name: '日本��', country: 'japan' },
   { code: 'KOR', name: '한국어', country: 'new zealand' },
   { code: 'ARA', name: 'العربية', country: 'uae' },
   { code: 'POR', name: 'Português', country: 'spain' },
