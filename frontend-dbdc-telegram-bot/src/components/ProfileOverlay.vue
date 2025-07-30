@@ -351,9 +351,7 @@
               relative overflow-hidden touch-manipulation"
                 :class="{ 'id-copied-state': showCopySuccess }">
 
-              <div v-if="!showCopySuccess" class="flex items-center gap-0.5 xs:gap-1
-                                                   pl-2 xs:pl-2.5 sm:pl-3 md:pl-3.5 lg:pl-4 xl:pl-4.5
-                                                   pr-5 xs:pr-6 sm:pr-7 md:pr-8 lg:pr-9 xl:pr-10 flex-1">
+              <div v-if="!showCopySuccess" class="flex items-center gap-1 flex-1 overflow-hidden">
                 <span class="text-xs sm:text-sm md:text-base lg:text-lg font-normal text-[#B7B7B7] whitespace-nowrap">ID:</span>
                 <span class="text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-white truncate max-w-[90px]">515745</span>
               </div>
