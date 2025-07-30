@@ -141,7 +141,7 @@
           <button
             @click="navigateTo('cart')"
             :class="[
-              'flex flex-col items-center justify-center flex-1 gap-1 sm:gap-2 p-2 sm:p-3 md:p-4 min-w-[44px] sm:min-w-[52px] md:min-w-[70px] lg:min-w-[80px] xl:min-w-[100px] max-w-[58px] sm:max-w-[80px] md:max-w-[120px] lg:max-w-[140px] xl:max-w-[180px] text-center transition-all duration-200 ease-out transform-gpu active:scale-95 active:bg-black/[0.02] active:rounded-xl',
+              'flex flex-col items-center justify-center flex-1 gap-1 sm:gap-2 p-2 sm:p-3 md:p-4 text-center transition-all duration-200 ease-out transform-gpu active:scale-95 active:bg-black/[0.02] active:rounded-xl',
               activeTab === 'cart' ? 'text-blue-700' : 'text-gray-600'
             ]"
           >
