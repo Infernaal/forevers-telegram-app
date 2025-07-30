@@ -329,12 +329,13 @@
 
           <!-- Bottom Controls -->
           <div class="absolute
-                      bottom-3 xs:bottom-4 sm:bottom-5 md:bottom-6 lg:bottom-7
+                      bottom-2 xs:bottom-3 sm:bottom-4 md:bottom-5 lg:bottom-6
                       left-2 xs:left-2.5 sm:left-3 md:left-3.5 lg:left-4
                       right-2 xs:right-2.5 sm:right-3 md:right-3.5 lg:right-4 z-[1]
                       flex justify-center items-center
                       gap-2 xs:gap-3 sm:gap-4 md:gap-5
-                      h-9 xs:h-10 sm:h-11 md:h-12">
+                      h-9 xs:h-10 sm:h-11 md:h-12
+                      mb-1 xs:mb-1.5 sm:mb-2 md:mb-2.5 lg:mb-3">
             
             <!-- ID Section -->
             <div class="w-[110px] xs:w-[120px] sm:w-[130px] md:w-[140px] lg:w-[145px]
