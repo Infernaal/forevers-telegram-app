@@ -391,7 +391,7 @@ const copyUserID = () => {
   const userID = '515745'
   navigator.clipboard.writeText(userID).then(() => {
     console.log('User ID copied to clipboard')
-    
+
     // Telegram WebApp haptic feedback
     if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.HapticFeedback) {
       window.Telegram.WebApp.HapticFeedback.notificationOccurred('success')
@@ -399,6 +399,26 @@ const copyUserID = () => {
   }).catch(err => {
     console.error('Failed to copy user ID: ', err)
   })
+}
+
+const toggleLanguageDropdown = () => {
+  isLanguageDropdownOpen.value = !isLanguageDropdownOpen.value
+
+  // Telegram WebApp haptic feedback
+  if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.HapticFeedback) {
+    window.Telegram.WebApp.HapticFeedback.impactOccurred('light')
+  }
+}
+
+const selectLanguage = (language) => {
+  selectedLanguage.value = language
+  isLanguageDropdownOpen.value = false
+  console.log('Language selected:', language)
+
+  // Telegram WebApp haptic feedback
+  if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.HapticFeedback) {
+    window.Telegram.WebApp.HapticFeedback.selectionChanged()
+  }
 }
 
 console.log('ProfileOverlay loaded with corrected design')
