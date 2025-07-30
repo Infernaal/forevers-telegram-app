@@ -1,10 +1,10 @@
 <template>
   <div v-if="isVisible" class="fixed inset-0 z-50 font-montserrat bg-black bg-opacity-10 backdrop-blur-xl">
     <!-- Dropdown Wrapper -->
-    <div class="relative w-full h-full flex justify-center items-start
+    <div class="relative w-full h-full flex justify-center items-end
                 px-2 xs:px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-16
                 py-4 xs:py-6 sm:py-8 md:py-10 lg:py-12
-                pb-12 xs:pb-14 sm:pb-16 md:pb-18 lg:pb-20 xl:pb-22">
+                pb-20 xs:pb-22 sm:pb-24 md:pb-26 lg:pb-28 xl:pb-30">
       <!-- Dropdown Menu -->
       <div class="relative w-full
               max-w-[480px] xs:max-w-[500px] sm:max-w-[520px] md:max-w-[540px] lg:max-w-[560px] xl:max-w-[580px] 2xl:max-w-[600px]
@@ -357,12 +357,12 @@
               </div>
               
               <button v-if="!showCopySuccess"
-                      class="w-6 xs:w-7 sm:w-8 md:w-9
+                      class="absolute right-0 top-0 bottom-0 m-0
+                            w-6 xs:w-7 sm:w-8 md:w-9
                             min-w-[24px] xs:min-w-[28px] sm:min-w-[32px] md:min-w-[36px] lg:min-w-[44px]
                             bg-white border-[1.2px] border-[#D8D8D8]
                             rounded-r-full border-l-0 flex items-center justify-center
                             cursor-pointer transition-all duration-200 flex-shrink-0
-                            absolute right-0 inset-y-0 m-0
                             hover:bg-gray-100 hover:scale-105 hover:shadow-lg
                             active:scale-98"
                       @click="copyUserID">
