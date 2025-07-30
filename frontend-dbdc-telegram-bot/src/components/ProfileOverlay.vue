@@ -168,60 +168,66 @@
         <!-- Bottom Section with Start Card and ID/Language -->
         <div class="flex-shrink-0 px-3 pb-3 space-y-4 sm:space-y-5 md:space-y-6">
           
-          <!-- Start Upgrade Card - Figma Design -->
-          <div class="relative bg-[#F1E7FF] border border-[#DCCCF1] rounded-2xl overflow-hidden h-[84px] w-full">
-            <!-- Purple gradient overlay on left (140px width, opacity 0.4) -->
-            <div class="absolute left-0 top-0 h-full bg-gradient-to-r from-[#8C4CD1] to-[#C497FF] opacity-40 rounded-l-2xl"
-                 style="width: 140px;"></div>
+          <!-- Start Upgrade Card - Responsive Design -->
+          <div class="relative bg-[#F1E7FF] border border-[#DCCCF1] rounded-2xl overflow-hidden start-upgrade-card">
+            <!-- Purple gradient overlay on left -->
+            <div class="absolute left-0 top-0 h-full bg-gradient-to-r from-[#8C4CD1] to-[#C497FF] opacity-40 rounded-l-2xl start-gradient"></div>
 
-            <!-- Star icon positioned at left:8px, top:14px equivalent -->
-            <div class="absolute" style="left: 8px; top: 14px;">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g clipPath="url(#clip0_2_21309)">
-                  <path d="M16 31.0588C24.3167 31.0588 31.0588 24.3167 31.0588 16C31.0588 7.68323 24.3167 0.941162 16 0.941162C7.68323 0.941162 0.941162 7.68323 0.941162 16C0.941162 24.3167 7.68323 31.0588 16 31.0588Z" fill="#8C4CD1"/>
-                  <path d="M28.998 8.39055C26.1133 12.4471 21.365 15.0918 16.0003 15.0918C10.6356 15.0918 5.88739 12.4471 3.00269 8.39055C5.61916 3.9341 10.4615 0.941162 16.0003 0.941162C21.5392 0.941162 26.3815 3.9341 28.998 8.39055Z" fill="#9C68E1"/>
-                  <path d="M15.9997 5.11792V15.4117L19.3443 11.8949L15.9997 5.11792Z" fill="#FF9F00"/>
-                  <path d="M15.9996 5.11792V15.4117L12.655 11.8949L15.9996 5.11792Z" fill="#FED110"/>
-                  <path d="M26.8232 12.982L19.3443 11.8953L15.9997 15.412L26.8232 12.982Z" fill="#FED110"/>
-                  <path d="M26.8232 12.9825L21.4115 18.2577L15.9997 15.4126L26.8232 12.9825Z" fill="#FF9F00"/>
-                  <path d="M5.17645 12.982L12.6553 11.8953L16 15.412L5.17645 12.982Z" fill="#FF9F00"/>
-                  <path d="M5.17645 12.9825L10.5882 18.2577L16 15.4126L5.17645 12.9825Z" fill="#FED110"/>
-                  <path d="M15.9997 15.4124L21.4115 18.2575L22.689 25.7061L15.9997 15.4124Z" fill="#FED110"/>
-                  <path d="M22.689 25.7061L15.9997 22.1894V15.4124L22.689 25.7061Z" fill="#FF9F00"/>
-                  <path d="M15.9996 15.4124L10.5878 18.2575L9.31024 25.7061L15.9996 15.4124Z" fill="#FF9F00"/>
-                  <path d="M9.31024 25.7061L15.9996 22.1894V15.4124L9.31024 25.7061Z" fill="#FED110"/>
-                  <g opacity="0.3">
-                    <path d="M16.0003 27.5882C20.9059 27.5882 24.8826 27.3442 24.8826 27.0432C24.8826 26.7423 20.9059 26.4983 16.0003 26.4983C11.0947 26.4983 7.11792 26.7423 7.11792 27.0432C7.11792 27.3442 11.0947 27.5882 16.0003 27.5882Z" fill="#20273A"/>
-                  </g>
-                </g>
-                <defs>
-                  <clipPath id="clip0_2_21309">
-                    <rect width="32" height="32" fill="white"/>
-                  </clipPath>
-                </defs>
-              </svg>
+            <!-- Content container -->
+            <div class="flex items-center justify-between p-2 h-full">
+              <!-- Left section with star and content -->
+              <div class="flex items-center gap-2 flex-1">
+                <!-- Star icon -->
+                <div class="flex-shrink-0 start-icon">
+                  <svg class="start-icon-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clipPath="url(#clip0_2_21309)">
+                      <path d="M16 31.0588C24.3167 31.0588 31.0588 24.3167 31.0588 16C31.0588 7.68323 24.3167 0.941162 16 0.941162C7.68323 0.941162 0.941162 7.68323 0.941162 16C0.941162 24.3167 7.68323 31.0588 16 31.0588Z" fill="#8C4CD1"/>
+                      <path d="M28.998 8.39055C26.1133 12.4471 21.365 15.0918 16.0003 15.0918C10.6356 15.0918 5.88739 12.4471 3.00269 8.39055C5.61916 3.9341 10.4615 0.941162 16.0003 0.941162C21.5392 0.941162 26.3815 3.9341 28.998 8.39055Z" fill="#9C68E1"/>
+                      <path d="M15.9997 5.11792V15.4117L19.3443 11.8949L15.9997 5.11792Z" fill="#FF9F00"/>
+                      <path d="M15.9996 5.11792V15.4117L12.655 11.8949L15.9996 5.11792Z" fill="#FED110"/>
+                      <path d="M26.8232 12.982L19.3443 11.8953L15.9997 15.412L26.8232 12.982Z" fill="#FED110"/>
+                      <path d="M26.8232 12.9825L21.4115 18.2577L15.9997 15.4126L26.8232 12.9825Z" fill="#FF9F00"/>
+                      <path d="M5.17645 12.982L12.6553 11.8953L16 15.412L5.17645 12.982Z" fill="#FF9F00"/>
+                      <path d="M5.17645 12.9825L10.5882 18.2577L16 15.4126L5.17645 12.9825Z" fill="#FED110"/>
+                      <path d="M15.9997 15.4124L21.4115 18.2575L22.689 25.7061L15.9997 15.4124Z" fill="#FED110"/>
+                      <path d="M22.689 25.7061L15.9997 22.1894V15.4124L22.689 25.7061Z" fill="#FF9F00"/>
+                      <path d="M15.9996 15.4124L10.5878 18.2575L9.31024 25.7061L15.9996 15.4124Z" fill="#FF9F00"/>
+                      <path d="M9.31024 25.7061L15.9996 22.1894V15.4124L9.31024 25.7061Z" fill="#FED110"/>
+                      <g opacity="0.3">
+                        <path d="M16.0003 27.5882C20.9059 27.5882 24.8826 27.3442 24.8826 27.0432C24.8826 26.7423 20.9059 26.4983 16.0003 26.4983C11.0947 26.4983 7.11792 26.7423 7.11792 27.0432C7.11792 27.3442 11.0947 27.5882 16.0003 27.5882Z" fill="#20273A"/>
+                      </g>
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_2_21309">
+                        <rect width="32" height="32" fill="white"/>
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </div>
+
+                <!-- Text content -->
+                <div class="flex flex-col justify-center min-w-0 flex-1">
+                  <!-- Start title -->
+                  <div class="font-montserrat font-bold text-[#02070E] start-title">
+                    Start
+                  </div>
+                  <!-- Description text -->
+                  <div class="font-montserrat start-description">
+                    <span class="text-[#4B4D50] font-normal">buy </span>
+                    <span class="text-[#8C4CD1] font-bold">123</span>
+                    <span class="text-[#4B4D50] font-normal"> more Forevers to upgrade</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Upgrade button -->
+              <div class="flex-shrink-0">
+                <button class="flex items-center justify-center bg-gradient-to-r from-[#2019CE] to-[#473FFF] text-white font-montserrat font-bold rounded-full hover:shadow-lg transition-all duration-200 capitalize start-button"
+                        @click="onMenuClick('upgrade')">
+                  Upgrade
+                </button>
+              </div>
             </div>
-
-            <!-- Start title positioned at left:48px, top:17px equivalent -->
-            <div class="absolute font-montserrat font-bold text-[19px] leading-6 text-[#02070E]"
-                 style="left: 48px; top: 17px; width: 48px; height: 24px;">
-              Start
-            </div>
-
-            <!-- Description text positioned at left:8px, top:54px equivalent -->
-            <div class="absolute font-montserrat text-sm leading-[22px]"
-                 style="left: 8px; top: 54px; width: 299px; height: 22px;">
-              <span class="text-[#4B4D50] font-normal">buy </span>
-              <span class="text-[#8C4CD1] font-bold">123</span>
-              <span class="text-[#4B4D50] font-normal"> more Forevers to upgrade</span>
-            </div>
-
-            <!-- Upgrade button positioned at left:195px, top:8px equivalent -->
-            <button class="absolute flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#2019CE] to-[#473FFF] text-white font-montserrat font-bold text-base leading-5 rounded-full px-6 py-3 hover:shadow-lg transition-all duration-200 capitalize"
-                    style="left: 195px; top: 8px; width: 120px; height: 44px;"
-                    @click="onMenuClick('upgrade')">
-              Upgrade
-            </button>
           </div>
 
           <!-- Bottom ID and Language Section with Separator -->
