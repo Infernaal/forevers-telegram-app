@@ -536,6 +536,13 @@ console.log('ProfileOverlay loaded with corrected design')
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Profile overlay content width with proper margins */
+.profile-overlay-content {
+  width: calc(100% - 2.5rem); /* Default: 16px left + 24px right = 40px = 2.5rem */
+  margin-left: 1rem; /* 16px */
+  margin-right: 1.5rem; /* 24px */
+}
+
 /* Responsive adjustments - Full width on all screens */
 @media (max-width: 375px) {
   .ml-4 {
