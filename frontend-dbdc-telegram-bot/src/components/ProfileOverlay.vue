@@ -358,9 +358,8 @@
               </div>
               
               <button v-if="!showCopySuccess"
-                      class="w-6 xs:w-7 sm:w-8 md:w-9 h-6 xs:h-7 sm:h-8 md:h-9
+                      class="w-6 xs:w-7 sm:w-8 md:w-9
                             min-w-[24px] xs:min-w-[28px] sm:min-w-[32px] md:min-w-[36px] lg:min-w-[44px]
-                            min-h-[24px] xs:min-h-[28px] sm:min-h-[32px] md:min-h-[36px] lg:min-h-[44px]
                             bg-white border-[1.2px] border-[#D8D8D8]
                             rounded-r-full border-l-0 flex items-center justify-center
                             cursor-pointer transition-all duration-200 flex-shrink-0
