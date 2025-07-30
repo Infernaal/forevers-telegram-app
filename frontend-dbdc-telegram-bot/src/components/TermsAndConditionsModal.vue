@@ -29,8 +29,10 @@
         </div>
 
         <!-- Scrollable Content -->
-        <div class="flex-1 overflow-y-auto p-3 sm:p-4 md:p-5
-                    scrollbar-none overscroll-contain modal-scroll-section">
+        <div class="flex-1 overflow-y-auto overflow-x-hidden p-3 sm:p-4 md:p-5
+                    scrollbar-none overscroll-contain modal-scroll-section
+                    min-h-0"
+             style="max-height: calc(100vh - 200px)">
           <div class="pb-3">
             <!-- Introduction -->
             <p class="text-dbd-gray font-medium text-xs sm:text-sm md:text-base
