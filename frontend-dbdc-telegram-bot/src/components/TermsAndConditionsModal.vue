@@ -279,9 +279,44 @@ const agreeToTerms = () => {
   }
 }
 
-/* Убрано - адаптивность теперь через Tailwind CSS к��ассы */
+/* Убрано - адаптивность теперь через Tailwind CSS классы */
 
-/* Large mobile and small tablets - 431px to 768px */
+/* Landscape orientation - важно для мобильных */
+@media (max-height: 500px) and (orientation: landscape) {
+  .modal-container {
+    max-height: min(95vh, calc(100vh - 16px)) !important;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .modal-content {
+    background: #2a2a2a !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .modal-title {
+    color: #ffffff !important;
+  }
+
+  .modal-subtitle,
+  .modal-intro {
+    color: #a0a0a0 !important;
+  }
+}
+
+/* Touch optimizations */
+@media (hover: none) and (pointer: coarse) {
+  button:hover {
+    transform: none !important;
+  }
+
+  button:active {
+    opacity: 0.8 !important;
+  }
+}
+
+/* Large tablets and desktop cleanup - убрано больше не нужно */
 @media (min-width: 431px) and (max-width: 768px) {
   .modal-container {
     max-width: 500px;
