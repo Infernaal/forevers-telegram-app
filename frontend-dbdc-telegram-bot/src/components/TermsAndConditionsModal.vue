@@ -41,18 +41,23 @@
             <!-- Sections -->
             <div class="flex flex-col gap-4 sm:gap-6 modal-sections">
               <!-- Definitions -->
-              <section class="modal-section">
-                <h2 class="section-title">Definitions</h2>
-                <div class="section-content">
-                  <div class="bullet-item">
-                    <div class="bullet-point"></div>
-                    <p class="bullet-text">
+              <section class="flex flex-col gap-2 sm:gap-3">
+                <h2 class="text-dbd-dark font-bold text-sm sm:text-base md:text-lg
+                           leading-tight capitalize">Definitions</h2>
+                <div class="flex flex-col gap-2">
+                  <div class="flex items-start gap-2 sm:gap-3">
+                    <div class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-dbd-gray
+                               flex-shrink-0 mt-1.5 sm:mt-2"></div>
+                    <p class="text-dbd-gray font-medium text-xs sm:text-sm
+                             leading-relaxed flex-1">
                       "User" refers to any individual or entity that accesses or uses the Service.
                     </p>
                   </div>
-                  <div class="bullet-item">
-                    <div class="bullet-point"></div>
-                    <p class="bullet-text">
+                  <div class="flex items-start gap-2 sm:gap-3">
+                    <div class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-dbd-gray
+                               flex-shrink-0 mt-1.5 sm:mt-2"></div>
+                    <p class="text-dbd-gray font-medium text-xs sm:text-sm
+                             leading-relaxed flex-1">
                       "Service" refers to the cryptocurrency platform and any related services offered by DBDC.
                     </p>
                   </div>
