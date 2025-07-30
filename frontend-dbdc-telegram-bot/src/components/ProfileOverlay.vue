@@ -397,7 +397,9 @@
             </div>
 
             <!-- Vertical Divider -->
-            <div class="w-0.5 h-6 bg-[#E2E2E2] border border-[#B7B7B7] rounded-[30px] opacity-40 flex-shrink-0"></div>
+            <div class="w-0.5 h-5 xs:h-6 sm:h-7 md:h-8 lg:h-9 xl:h-10
+                        bg-[#E2E2E2] border border-[#B7B7B7] rounded-[30px]
+                        opacity-50 flex-shrink-0"></div>
 
             <!-- Language Section -->
             <div class="w-[100px] xs:w-[110px] sm:w-[120px] md:w-[130px] lg:w-[140px] xl:w-[150px]
