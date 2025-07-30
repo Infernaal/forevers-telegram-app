@@ -311,7 +311,7 @@
                       </defs>
                     </svg>
                   </div>
-                  <div class="text-dbd-dark text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl font-bold leading-3 xs:leading-4 sm:leading-5 md:leading-6 mb-0 xs:mb-0.5 sm:mb-1">Start</div>
+                  <div class="text-dbd-dark text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl font-bold truncate leading-tight">Start</div>
                 </div>
                 <button class="relative z-[1]
                               w-[70px] xs:w-[80px] sm:w-[90px] md:w-[100px] lg:w-[110px] xl:w-[120px]
