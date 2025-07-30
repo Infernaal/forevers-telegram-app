@@ -10,7 +10,7 @@
                 border border-[#09074E] rounded-[20px] shadow-2xl
                 backdrop-blur-[32px] flex flex-col overflow-hidden transform transition-all duration-300 ease-out"
       >
-        <div class="p-3 sm:p-4 md:p-5 lg:p-6 text-white h-full flex flex-col">
+        <div class="py-4 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 text-white h-full flex flex-col">
             <!-- Background -->
             <div class="absolute inset-0 bg-gradient-to-br from-[#120B81] via-[#09074E] to-[#09074E]
                         border border-[#09074E] backdrop-blur-[40px]"></div>
