@@ -10,11 +10,13 @@
       <div class="relative p-3 sm:p-4 md:p-5 lg:p-6 text-white h-full flex flex-col">
 
           <!-- Profile Header Section -->
-          <div class="absolute top-2 left-2 right-2 z-[10001]">
-            <div class="w-full h-16 sm:h-18 md:h-20
-                        bg-gray-400/25 border border-gray-200
-                        rounded-full sm:rounded-2xl
-                        flex items-center p-1.5 sm:p-2 gap-2">
+        <div class="absolute top-3 sm:top-4 md:top-5 lg:top-6
+                    left-3 sm:left-4 md:left-5 lg:left-6
+                    right-3 sm:right-4 md:right-5 lg:right-6 z-[10001]">
+          <div class="w-full h-14 sm:h-16 md:h-18 lg:h-20
+                      bg-gray-400/25 border border-gray-200
+                      rounded-full sm:rounded-2xl md:rounded-3xl
+                      flex items-center p-1.5 sm:p-2 md:p-2.5 lg:p-3 gap-2 sm:gap-3">
 
               <!-- Avatar -->
               <div class="flex-shrink-0">
@@ -305,7 +307,7 @@
             </div>
           </div>
       </div>
-      <!-- Triangle убран по требованию -->
+      <!-- Triangle ��бран по требованию -->
     </div>
   </div>
 </template>
