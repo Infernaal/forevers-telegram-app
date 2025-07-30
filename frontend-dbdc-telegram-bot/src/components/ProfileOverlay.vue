@@ -788,7 +788,7 @@ const selectLanguage = (language) => {
   align-items: center;
   gap: 2px;
   padding-left: 12px;
-  padding-right: 36px;
+  padding-right: 4px; /* уменьшаем для Copy border to border */
   flex: 1;
 }
 
