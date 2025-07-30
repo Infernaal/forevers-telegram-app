@@ -253,7 +253,7 @@
 
           <!-- Start Section -->
           <div class="absolute
-                      bottom-[70px] xs:bottom-[75px] sm:bottom-[80px] md:bottom-[85px] lg:bottom-[90px]
+                      bottom-[60px] xs:bottom-[65px] sm:bottom-[70px] md:bottom-[75px] lg:bottom-[80px]
                       left-2 xs:left-2.5 sm:left-3 md:left-3.5 lg:left-4
                       right-2 xs:right-2.5 sm:right-3 md:right-3.5 lg:right-4 z-[1]">
             <div class="w-full
