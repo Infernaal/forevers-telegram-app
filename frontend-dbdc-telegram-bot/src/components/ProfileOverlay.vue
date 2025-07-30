@@ -1,15 +1,14 @@
 <template>
   <div v-if="isVisible" class="fixed inset-0 z-50 font-montserrat bg-black bg-opacity-10 backdrop-blur-xl">
     <!-- Dropdown Wrapper -->
-    <div class="relative w-full h-full flex justify-center items-center
+    <div class="relative w-full h-full flex justify-center items-start
                 px-2 xs:px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-16
-                py-2 xs:py-3 sm:py-4 md:py-6 lg:py-8
+                py-4 xs:py-6 sm:py-8 md:py-10 lg:py-12
                 pb-12 xs:pb-14 sm:pb-16 md:pb-18 lg:pb-20 xl:pb-22">
       <!-- Dropdown Menu -->
       <div class="relative w-full
-              max-w-full xs:max-w-full sm:max-w-full md:max-w-full lg:max-w-full xl:max-w-full 2xl:max-w-full
-              min-h-[450px] max-h-[calc(100vh-100px)]
-              h-[480px] xs:h-[500px] sm:h-[520px] md:h-[540px] lg:h-[560px] xl:h-[580px] 2xl:h-[600px]
+              max-w-[480px] xs:max-w-[500px] sm:max-w-[520px] md:max-w-[540px] lg:max-w-[560px] xl:max-w-[580px] 2xl:max-w-[600px]
+              h-auto min-h-[70vh] max-h-[85vh]
               bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
               border border-[#09074E] backdrop-blur-[32px]
               rounded-[16px] xs:rounded-[18px] sm:rounded-[20px] md:rounded-[22px] lg:rounded-[24px]
@@ -363,7 +362,7 @@
                             bg-white border-[1.2px] border-[#D8D8D8]
                             rounded-r-full border-l-0 flex items-center justify-center
                             cursor-pointer transition-all duration-200 flex-shrink-0
-                            absolute right-0 top-0 bottom-0
+                            absolute right-0 inset-y-0 m-0
                             hover:bg-gray-100 hover:scale-105 hover:shadow-lg
                             active:scale-98"
                       @click="copyUserID">
