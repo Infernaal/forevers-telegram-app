@@ -284,7 +284,7 @@
                 opacity-40 rounded-l-lg xs:rounded-l-xl sm:rounded-l-2xl md:rounded-l-3xl"></div>
               
               <div class="flex flex-wrap items-center justify-between gap-2 mb-1 relative z-[1]">
-                <div class="flex items-center gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-4 xl:gap-5 flex-1">
+                <div class="flex items-center gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-4 xl:gap-5 flex-1 min-w-0">
                   <div class="flex-shrink-0">
                     <svg class="w-5 xs:w-6 sm:w-7 md:w-8 lg:w-9 xl:w-10 h-5 xs:h-6 sm:h-7 md:h-8 lg:h-9 xl:h-10" viewBox="0 0 32 32" fill="none">
                       <g clip-path="url(#clip0_2_21309)">
