@@ -300,7 +300,7 @@ const confirmDelete = () => {
 
 @media (min-width: 1024px) {
   .cart-bottom-container {
-    bottom: 110px; /* desktop - уменьшили с 120px */
+    bottom: 120px; /* desktop - уменьшили с 120px */
   }
 }
 
