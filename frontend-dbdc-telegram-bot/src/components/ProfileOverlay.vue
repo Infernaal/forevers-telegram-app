@@ -285,7 +285,7 @@
                 leave-from-class="opacity-100 scale-100 translate-y-0"
                 leave-to-class="opacity-0 scale-95 translate-y-2">
                 <div v-if="isLanguageDropdownOpen"
-                     class="absolute bottom-full right-0 mb-2 bg-gradient-to-br from-[#120B81] via-[#120B81] to-[#09074E] rounded-xl shadow-xl border border-white/20 py-2 z-50 max-h-32 overflow-y-auto backdrop-blur-[32px] lang-dropdown"
+                     class="absolute bottom-full right-0 mb-2 bg-gradient-to-br from-[#120B81] via-[#120B81] to-[#09074E] rounded-xl shadow-xl border border-white/20 py-2 z-50 max-h-32 overflow-y-auto backdrop-blur-[32px] w-32 xs:w-36 sm:w-38 md:w-40 lg:w-44"
                      @click.stop>
                   <div v-for="language in languages"
                        :key="language.code"
