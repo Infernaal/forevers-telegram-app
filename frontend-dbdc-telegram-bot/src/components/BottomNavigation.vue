@@ -84,8 +84,8 @@
               :class="[
                 'flex items-center justify-center transition-all duration-200 ease-out rounded-xl',
                 activeTab === 'wallet'
-                  ? 'w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 bg-blue-600'
-                  : 'w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12'
+                  ? 'w-8 h-8 sm:w-10 sm:h-10 bg-blue-600'
+                  : 'w-7 h-7 sm:w-8 sm:h-8'
               ]"
             >
               <svg
