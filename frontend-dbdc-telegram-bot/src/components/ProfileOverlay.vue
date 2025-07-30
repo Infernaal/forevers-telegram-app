@@ -1492,7 +1492,8 @@ const selectLanguage = (language) => {
   }
   
   .language-section-container {
-    width: 104px;
+    flex: 1;
+    min-width: 110px;
     height: 38px;
     border-radius: 19px;
   }
