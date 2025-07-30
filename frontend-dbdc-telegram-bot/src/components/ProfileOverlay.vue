@@ -310,7 +310,7 @@
                       </defs>
                     </svg>
                   </div>
-                  <div class="text-dbd-dark text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl font-bold truncate leading-tight">Start</div>
+                  <div class="text-dbd-dark text-sm sm:text-base md:text-lg font-bold truncate">Start</div>
                 </div>
                 <button class="relative z-[1]
                      h-7 xs:h-8 sm:h-9 md:h-10 lg:h-11 xl:h-12
