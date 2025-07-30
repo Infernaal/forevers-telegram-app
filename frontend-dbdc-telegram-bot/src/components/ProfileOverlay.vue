@@ -270,7 +270,7 @@
           </div>
         </div>
       </div>
-      <!-- Triangle убран по требова��ию -->
+      <!-- Triangle убран по требованию -->
     </div>
   </div>
 </template>
@@ -321,7 +321,7 @@ const languages = ref([
   { code: 'FRA', name: 'Français', country: 'france' },
   { code: 'DEU', name: 'Deutsch', country: 'germany' },
   { code: 'ITA', name: 'Italiano', country: 'italy' },
-  { code: 'RUS', name: 'Рус��кий', country: 'ukraine' },
+  { code: 'RUS', name: 'Русский', country: 'ukraine' },
   { code: 'CHN', name: '中文', country: 'china' },
   { code: 'JPN', name: '日本語', country: 'japan' },
   { code: 'KOR', name: '한국어', country: 'new zealand' },
@@ -1109,7 +1109,7 @@ const selectLanguage = (language) => {
   }
 }
 
-/* Small mobile devices (iPhone SE, small Android) - ≤374px */
+/* Small mobile devices (iPhone SE, small Android) - ���374px */
 @media (max-width: 374px) {
   .overlay-wrapper {
     padding: 8px;
@@ -1460,6 +1460,7 @@ const selectLanguage = (language) => {
   }
   
   .id-section-container {
+    flex: 0 0 130px;
     height: 38px;
     border-radius: 19px;
   }
