@@ -679,9 +679,11 @@ console.log('ProfileOverlay loaded with corrected design')
     width: 9.75rem; /* 156px */
   }
 
-  .mx-4 {
+  .ml-4 {
     margin-left: 0.75rem;
-    margin-right: 0.75rem;
+  }
+  .mr-6 {
+    margin-right: 1rem;
   }
 }
 
