@@ -40,7 +40,7 @@
                   </svg>
                 </div>
                 <div v-else class="relative">
-                  <div class="rounded-full border-2 border-purple-400 overflow-hidden w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 xl:w-12 xl:h-12">
+                  <div class="rounded-full border-2 border-purple-400 overflow-hidden w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12">
                     <img
                       src="https://images.pexels.com/photos/15023413/pexels-photo-15023413.jpeg?auto=compress&cs=tinysrgb&w=400"
                       alt="Profile"
