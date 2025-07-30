@@ -12,19 +12,25 @@
                 modal-container animate-[slideUp_0.3s_ease-out]"
          @click.stop>
       <!-- Modal Content -->
-      <div class="modal-content">
+      <div class="bg-white rounded-2xl sm:rounded-3xl border border-gray-200
+                  shadow-lg flex flex-col h-full max-h-full overflow-hidden
+                  modal-content">
         <!-- Header -->
-        <div class="modal-header">
-          <h1 class="modal-title">
+        <div class="p-3 sm:p-4 md:p-5 flex-shrink-0 border-b border-gray-100
+                    modal-header">
+          <h1 class="text-dbd-dark font-bold text-base sm:text-lg md:text-xl lg:text-2xl
+                     leading-tight mb-1 sm:mb-2 modal-title">
             Forevers Leasing Terms & Conditions
           </h1>
-          <p class="modal-subtitle">
+          <p class="text-dbd-gray font-medium text-xs sm:text-sm md:text-base
+                    leading-relaxed modal-subtitle">
             Last Updated: July 16, 2025
           </p>
         </div>
 
         <!-- Scrollable Content -->
-        <div class="modal-scroll-section">
+        <div class="flex-1 overflow-y-auto p-3 sm:p-4 md:p-5
+                    scrollbar-none overscroll-contain modal-scroll-section">
           <div class="modal-scroll-content">
             <!-- Introduction -->
             <p class="modal-intro">
