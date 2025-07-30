@@ -10,16 +10,16 @@
                 safe-area-bottom">
       <!-- Dropdown Menu -->
       <div class="relative w-full
-              max-w-[96vw] xs:max-w-[420px] sm:max-w-[480px] md:max-w-[580px] lg:max-w-[640px] xl:max-w-[720px] 2xl:max-w-[800px]
-              h-auto min-h-[60vh] max-h-[78vh]
-              xs:min-h-[62vh] xs:max-h-[80vh]
-              sm:min-h-[65vh] sm:max-h-[82vh]
-              md:min-h-[68vh] md:max-h-[85vh]
-              lg:min-h-[70vh] lg:max-h-[87vh]
-              xl:min-h-[72vh] xl:max-h-[90vh]
+              max-w-[95vw] xs:max-w-[400px] sm:max-w-[460px] md:max-w-[520px] lg:max-w-[580px] xl:max-w-[640px] 2xl:max-w-[720px]
+              h-auto min-h-[65vh] max-h-[85vh]
+              xs:min-h-[70vh] xs:max-h-[88vh]
+              sm:min-h-[72vh] sm:max-h-[90vh]
+              md:min-h-[75vh] md:max-h-[92vh]
+              lg:min-h-[78vh] lg:max-h-[94vh]
+              xl:min-h-[80vh] xl:max-h-[95vh]
               bg-gradient-to-br from-[#120B81] via-[#09074E] to-[#09074E]
               border border-[#09074E] backdrop-blur-[40px]
-              rounded-[20px] xs:rounded-[22px] sm:rounded-[24px] md:rounded-[26px] lg:rounded-[28px]
+              rounded-[18px] xs:rounded-[20px] sm:rounded-[22px] md:rounded-[24px] lg:rounded-[26px] xl:rounded-[28px]
               z-[50] overflow-hidden shadow-2xl
               animate-[fadeInScale_0.4s_ease-out]
               touch-manipulation overscroll-contain">
