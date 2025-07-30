@@ -272,6 +272,24 @@ const agreeToTerms = () => {
   /* Дополнительные стили при н��обходимости */
 }
 
+/* Обеспечиваем правильную работу скролла */
+.modal-scroll-section {
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+  max-height: 100%;
+}
+
+/* Скрываем скроллбар но оставляем функциональность */
+.scrollbar-none::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
 /* Только необходимые переопределения для очень маленьких экранов */
 @media (max-width: 320px) {
   .modal-container {
