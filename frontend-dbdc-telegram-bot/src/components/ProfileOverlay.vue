@@ -424,12 +424,14 @@
                 </span>
               </div>
               
-              <div class="w-4 xs:w-5 sm:w-5 h-4 xs:h-5 sm:h-5 flex items-center justify-center flex-shrink-0
-                          transition-transform duration-200 absolute
-                          right-1 xs:right-1.5 sm:right-2 top-1/2
+              <div class="w-3 xs:w-4 sm:w-5 md:w-6 lg:w-7 xl:w-8
+                          h-3 xs:h-4 sm:h-5 md:h-6 lg:h-7 xl:h-8
+                          flex items-center justify-center flex-shrink-0
+                          transition-transform duration-300 absolute
+                          right-1 xs:right-1.5 sm:right-2 md:right-2.5 lg:right-3 xl:right-3.5 top-1/2
                           transform -translate-y-1/2"
                   :class="{ 'rotate-180': showLanguageDropdown }">
-                <svg class="w-4 xs:w-5 sm:w-5 h-4 xs:h-5 sm:h-5" viewBox="0 0 20 20" fill="none">
+                <svg class="w-full h-full" viewBox="0 0 20 20" fill="none">
                   <circle opacity="0.2" cx="10" cy="10" r="10" fill="white"/>
                   <path d="M5.71387 8.57146L9.99958 12.8572L14.2853 8.57146" stroke="white" stroke-linecap="round"/>
                 </svg>
