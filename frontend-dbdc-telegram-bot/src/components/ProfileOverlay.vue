@@ -768,7 +768,7 @@ const selectLanguage = (language) => {
   z-index: 10001;
 }
 
-/* ID Section - бо��ее узкий для Copy border to border */
+/* ID Section - более узкий для Copy border to border */
 .id-section-container {
   flex: 0 0 140px; /* фиксированная ширина вместо flex: 1 */
   height: 40px;
@@ -811,7 +811,7 @@ const selectLanguage = (language) => {
   right: 0;
   top: 0;
   bottom: 0;
-  width: 40px; /* увеличиваем ширину */
+  width: 40px; /* ��величиваем ширину */
   height: 100%; /* полная высота контейнера */
   background: white;
   border: 1.2px solid #D8D8D8;
@@ -846,9 +846,10 @@ const selectLanguage = (language) => {
   flex-shrink: 0;
 }
 
-/* Language Section */
+/* Language Section - расширенная для ENG */
 .language-section-container {
-  width: 112px;
+  flex: 1; /* занимает оставшееся место */
+  min-width: 120px; /* минимальная ширина */
   height: 40px;
   background: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.24);
