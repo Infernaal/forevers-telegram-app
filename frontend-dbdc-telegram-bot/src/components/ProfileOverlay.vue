@@ -1,12 +1,12 @@
 <template>
   <div v-if="isVisible" class="fixed inset-0 z-50 font-montserrat bg-black bg-opacity-10 backdrop-blur-xl">
     <!-- Dropdown Wrapper -->
-    <div class="relative w-full flex justify-center items-start mt-56 sm:mt-64 md:mt-14 lg:mt-12 xl:mt-48">
+    <div class="relative w-full h-full flex justify-center items-center px-2 xs:px-3 sm:px-4 md:px-6 lg:px-8 pb-16 xs:pb-18 sm:pb-20">
       <!-- Dropdown Menu -->
-      <div class="relative w-[92%] max-w-[460px] sm:max-w-[500px] md:max-w-[560px] lg:max-w-[620px] xl:max-w-[680px] max-h-[calc(100vh-140px)]
-              h-[500px] sm:h-[580px] md:h-[600px]
+      <div class="relative w-full max-w-[340px] xs:max-w-[380px] sm:max-w-[420px] md:max-w-[480px] lg:max-w-[540px] xl:max-w-[600px]
+              h-[500px] xs:h-[520px] sm:h-[540px] md:h-[560px] lg:h-[580px]
               bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
-              border border-[#09074E] backdrop-blur-[32px] 
+              border border-[#09074E] backdrop-blur-[32px]
               rounded-[20px] z-[50] overflow-hidden shadow-xl">
         <div class="p-4 text-white text-center">
             <!-- Background -->
@@ -189,7 +189,7 @@
                           bg-gradient-to-r from-[#8C4CD1] to-[#C497FF] 
                           opacity-40 rounded-l-2xl"></div>
               
-              <div class="flex items-center justify-between mb-1 relative z-[1]">
+              <div class="flex items-center mb-1 relative z-[1]">
                 <div class="flex items-center gap-3 flex-1">
                   <div class="flex-shrink-0">
                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -217,19 +217,19 @@
                       </defs>
                     </svg>
                   </div>
-                  <div class="text-dbd-dark text-lg font-bold leading-6 mb-1">Start</div>
+                  <div class="text-dbd-dark text-lg xs:text-xl sm:text-xl font-bold leading-6 mb-1">Start</div>
                 </div>
-                <button class="relative z-[1] w-[120px] h-11 min-h-[44px]
+                <button class="relative z-[1] w-[100px] xs:w-[110px] sm:w-[120px] h-10 xs:h-11 min-h-[40px] xs:min-h-[44px]
                               bg-gradient-to-r from-dbd-primary to-[#473FFF]
-                              border-none rounded-full text-white text-base font-bold leading-5
+                              border-none rounded-full text-white text-sm xs:text-base font-bold leading-5
                               capitalize cursor-pointer transition-all duration-200
-                              hover:-translate-y-0.5 hover:shadow-lg flex-shrink-0" 
+                              hover:-translate-y-0.5 hover:shadow-lg flex-shrink-0"
                         @click="handleUpgrade">
                   Upgrade
                 </button>
               </div>
-              <div class="relative z-[1]">
-                <div class="text-dbd-gray text-sm font-normal leading-6">
+              <div class="relative z-[1] w-full">
+                <div class="text-dbd-gray text-sm xs:text-sm font-normal leading-6 text-left">
                   buy <span class="text-[#8C4CD1] font-bold">123</span> more Forevers to upgrade
                 </div>
               </div>
@@ -237,11 +237,11 @@
           </div>
 
           <!-- Bottom Controls -->
-          <div class="absolute bottom-3 sm:bottom-2 left-3 right-3 z-[1] 
-                      flex justify-center items-center gap-5 h-11">
+          <div class="absolute bottom-3 xs:bottom-3 sm:bottom-2 left-3 right-3 z-[1]
+                      flex justify-center items-center gap-3 xs:gap-4 sm:gap-5 h-11">
             
             <!-- ID Section -->
-            <div class="w-[145px] h-11 bg-white bg-opacity-30 border border-white border-opacity-40
+            <div class="w-[130px] xs:w-[140px] sm:w-[145px] h-10 xs:h-11 bg-white bg-opacity-30 border border-white border-opacity-40
                         rounded-full backdrop-blur-[32px] flex items-center justify-between p-1.5
                         relative transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden"
                 :class="{ 'id-copied-state': showCopySuccess }">
@@ -281,9 +281,9 @@
             <div class="w-0.5 h-6 bg-[#E2E2E2] border border-[#B7B7B7] rounded-[30px] opacity-40 flex-shrink-0"></div>
 
             <!-- Language Section -->
-            <div class="w-[131px] h-11 bg-white bg-opacity-20 border border-white border-opacity-24 
-                        rounded-full flex items-center p-1.5 cursor-pointer transition-all duration-200 
-                        relative overflow-visible hover:bg-white hover:bg-opacity-30" 
+            <div class="w-[120px] xs:w-[125px] sm:w-[131px] h-10 xs:h-11 bg-white bg-opacity-20 border border-white border-opacity-24
+                        rounded-full flex items-center p-1.5 cursor-pointer transition-all duration-200
+                        relative overflow-visible hover:bg-white hover:bg-opacity-30"
                 @click="toggleLanguageDropdown">
               
               <div class="flex items-center gap-1.5 flex-1 min-w-0 pr-6">
@@ -333,12 +333,7 @@
           </div>
         </div>
       </div>
-      <!-- Triangle (ниже dropdown'а) -->
-      <div class="absolute top-full -mt-1 left-[8%] sm:left-[13%] md:left-[15%] lg:left-[17%] z-[60]">
-        <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px]
-                border-l-transparent border-r-transparent 
-                border-t-[rgba(18,11,129,0.95)] drop-shadow-md"></div>
-      </div>
+
     </div>
   </div>
 </template>
@@ -370,7 +365,7 @@ const languages = ref([
   { code: 'DEU', name: 'Deutsch', country: 'germany' },
   { code: 'ITA', name: 'Italiano', country: 'italy' },
   { code: 'RUS', name: 'Русский', country: 'ukraine' },
-  { code: 'CHN', name: '中文', country: 'china' },
+  { code: 'CHN', name: '中��', country: 'china' },
   { code: 'JPN', name: '日本語', country: 'japan' },
   { code: 'KOR', name: '한국어', country: 'new zealand' },
   { code: 'ARA', name: 'العربية', country: 'uae' },
