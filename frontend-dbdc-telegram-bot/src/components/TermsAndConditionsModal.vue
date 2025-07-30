@@ -781,8 +781,9 @@ const agreeToTerms = () => {
 /* Landscape orientation adjustments for phones */
 @media (max-height: 500px) and (orientation: landscape) {
   .modal-container {
-    max-height: 90vh;
-    min-height: 80vh;
+    max-height: min(95vh, calc(100vh - 16px));
+    min-height: min(85vh, 300px);
+    max-width: min(500px, calc(100vw - 16px));
   }
   
   .modal-header {
