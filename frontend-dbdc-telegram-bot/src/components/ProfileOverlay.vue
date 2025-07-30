@@ -9,14 +9,14 @@
          style="bottom: 88px;"></div>
     
     <!-- Full width modal container -->
-    <div class="w-full min-h-full py-4"
+    <div class="w-full min-h-full py-8 pt-16"
          style="padding-bottom: 88px;">
-      
+
       <!-- Main modal content -->
-      <div class="relative w-full bg-gradient-to-br from-[#120B81] via-[#120B81] to-[#09074E] 
+      <div class="relative w-full bg-gradient-to-br from-[#120B81] via-[#120B81] to-[#09074E]
                   rounded-[20px] shadow-2xl border border-white/[0.08] backdrop-blur-[32px]
                   transform transition-all duration-300 ease-out
-                  max-h-[calc(100vh-176px)] overflow-hidden flex flex-col mx-4"
+                  max-h-[calc(100vh-200px)] overflow-hidden flex flex-col mx-4"
            @click.stop>
 
         <!-- Profile Header Section -->
