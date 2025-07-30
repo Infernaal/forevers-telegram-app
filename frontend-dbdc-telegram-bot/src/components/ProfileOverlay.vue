@@ -168,15 +168,16 @@
         <!-- Bottom Section with Start Card and ID/Language -->
         <div class="flex-shrink-0 px-3 pb-3 space-y-3">
           
-          <!-- Start Upgrade Card - Enhanced Design -->
-          <div class="relative bg-[#F1E7FF] border border-[#DCCCF1] rounded-2xl overflow-hidden h-[84px]">
-            <!-- Purple gradient overlay on left -->
-            <div class="absolute left-0 top-0 w-[140px] h-full bg-gradient-to-r from-[#8C4CD1] to-[#C497FF] opacity-40 rounded-l-2xl"></div>
+          <!-- Start Upgrade Card - Figma Design -->
+          <div class="relative bg-[#F1E7FF] border border-[#DCCCF1] rounded-2xl overflow-hidden h-[84px] w-full max-w-[323px] mx-auto">
+            <!-- Purple gradient overlay on left (140px width, opacity 0.4) -->
+            <div class="absolute left-0 top-0 h-full bg-gradient-to-r from-[#8C4CD1] to-[#C497FF] opacity-40 rounded-l-2xl"
+                 style="width: 140px;"></div>
 
-            <!-- Star icon -->
-            <div class="absolute left-2 top-3.5">
-              <svg class="w-8 h-8" viewBox="0 0 32 32" fill="none">
-                <g clipPath="url(#clip0_star)">
+            <!-- Star icon positioned at left:8px, top:14px equivalent -->
+            <div class="absolute" style="left: 8px; top: 14px;">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clipPath="url(#clip0_2_21309)">
                   <path d="M16 31.0588C24.3167 31.0588 31.0588 24.3167 31.0588 16C31.0588 7.68323 24.3167 0.941162 16 0.941162C7.68323 0.941162 0.941162 7.68323 0.941162 16C0.941162 24.3167 7.68323 31.0588 16 31.0588Z" fill="#8C4CD1"/>
                   <path d="M28.998 8.39055C26.1133 12.4471 21.365 15.0918 16.0003 15.0918C10.6356 15.0918 5.88739 12.4471 3.00269 8.39055C5.61916 3.9341 10.4615 0.941162 16.0003 0.941162C21.5392 0.941162 26.3815 3.9341 28.998 8.39055Z" fill="#9C68E1"/>
                   <path d="M15.9997 5.11792V15.4117L19.3443 11.8949L15.9997 5.11792Z" fill="#FF9F00"/>
@@ -194,35 +195,33 @@
                   </g>
                 </g>
                 <defs>
-                  <clipPath id="clip0_star">
+                  <clipPath id="clip0_2_21309">
                     <rect width="32" height="32" fill="white"/>
                   </clipPath>
                 </defs>
               </svg>
             </div>
 
-            <!-- Content -->
-            <div class="relative flex items-center justify-between h-full pl-12 pr-3 py-2">
-              <!-- Left section: Start title -->
-              <div class="flex flex-col justify-center">
-                <h3 class="text-dbd-dark text-[19px] font-bold leading-6 mb-1">Start</h3>
-              </div>
-
-              <!-- Right section: Upgrade button -->
-              <button class="bg-gradient-to-r from-dbd-primary to-[#473FFF] text-white text-base font-bold px-6 py-3 rounded-full hover:shadow-lg transition-all duration-200 flex-shrink-0 h-11"
-                      @click="onMenuClick('upgrade')">
-                Upgrade
-              </button>
+            <!-- Start title positioned at left:48px, top:17px equivalent -->
+            <div class="absolute font-montserrat font-bold text-[19px] leading-6 text-[#02070E]"
+                 style="left: 48px; top: 17px; width: 48px; height: 24px;">
+              Start
             </div>
 
-            <!-- Bottom description text positioned at left -->
-            <div class="absolute left-2 bottom-3.5 right-3">
-              <p class="text-sm leading-[22px] text-left max-w-[299px]">
-                <span class="text-[#4B4D50]">buy </span>
-                <span class="text-[#8C4CD1] font-bold">123</span>
-                <span class="text-[#4B4D50]"> more Forevers to upgrade</span>
-              </p>
+            <!-- Description text positioned at left:8px, top:54px equivalent -->
+            <div class="absolute font-montserrat text-sm leading-[22px]"
+                 style="left: 8px; top: 54px; width: 299px; height: 22px;">
+              <span class="text-[#4B4D50] font-normal">buy </span>
+              <span class="text-[#8C4CD1] font-bold">123</span>
+              <span class="text-[#4B4D50] font-normal"> more Forevers to upgrade</span>
             </div>
+
+            <!-- Upgrade button positioned at left:195px, top:8px equivalent -->
+            <button class="absolute flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#2019CE] to-[#473FFF] text-white font-montserrat font-bold text-base leading-5 rounded-full px-6 py-3 hover:shadow-lg transition-all duration-200 capitalize"
+                    style="left: 195px; top: 8px; width: 120px; height: 44px;"
+                    @click="onMenuClick('upgrade')">
+              Upgrade
+            </button>
           </div>
 
           <!-- Bottom ID and Language Section with Separator -->
