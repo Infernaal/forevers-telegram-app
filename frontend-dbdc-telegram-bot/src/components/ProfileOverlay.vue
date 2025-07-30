@@ -347,18 +347,22 @@
                       mb-2 xs:mb-3 sm:mb-4">
             
             <!-- ID Section -->
-            <div class="w-[115px] xs:w-[125px] sm:w-[135px] md:w-[145px] lg:w-[150px]
-                        h-9 xs:h-10 sm:h-11 md:h-12 lg:h-13
+            <div class="w-[110px] xs:w-[120px] sm:w-[130px] md:w-[140px] lg:w-[150px] xl:w-[160px]
+                        h-8 xs:h-9 sm:h-10 md:h-11 lg:h-12 xl:h-13
                         bg-white bg-opacity-30 border border-white border-opacity-40
                         rounded-full backdrop-blur-[40px] flex items-center justify-between
-                        p-1.5 xs:p-2 sm:p-2.5
+                        p-1 xs:p-1.5 sm:p-2 md:p-2.5 lg:p-3
                         relative transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden
                         touch-manipulation"
                 :class="{ 'id-copied-state': showCopySuccess }">
 
-              <div v-if="!showCopySuccess" class="flex items-center gap-1 pl-3 xs:pl-3.5 sm:pl-4 pr-9 xs:pr-10 sm:pr-11 flex-1">
-                <span class="text-[#B7B7B7] text-sm xs:text-base sm:text-lg font-normal leading-5 xs:leading-6 sm:leading-7">ID: </span>
-                <span class="text-white text-sm xs:text-base sm:text-lg font-semibold leading-5 xs:leading-6 sm:leading-7">515745</span>
+              <div v-if="!showCopySuccess" class="flex items-center gap-0.5 xs:gap-1 sm:gap-1.5
+                                                   pl-2.5 xs:pl-3 sm:pl-3.5 md:pl-4 lg:pl-4.5 xl:pl-5
+                                                   pr-7 xs:pr-8 sm:pr-9 md:pr-10 lg:pr-11 xl:pr-12 flex-1">
+                <span class="text-[#B7B7B7] text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl
+                           font-normal leading-tight whitespace-nowrap">ID:</span>
+                <span class="text-white text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl
+                           font-semibold leading-tight whitespace-nowrap">515745</span>
               </div>
 
               <div v-if="showCopySuccess" class="id-copied-content">
