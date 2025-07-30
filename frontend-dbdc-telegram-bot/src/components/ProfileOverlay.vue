@@ -312,17 +312,15 @@
                   </div>
                   <div class="text-dbd-dark text-sm sm:text-base md:text-lg font-bold truncate">Start</div>
                 </div>
-                <button class="relative z-[1]
-                     h-7 xs:h-8 sm:h-9 md:h-10 lg:h-11 xl:h-12
-                     min-w-[72px] xs:min-w-[80px] sm:min-w-[90px] md:min-w-[100px] lg:min-w-[110px] xl:min-w-[120px]
-                     px-2 xs:px-3 sm:px-4 md:px-5 lg:px-6
-                     bg-gradient-to-r from-dbd-primary to-[#473FFF]
-                     rounded-full text-white
-                     text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl
-                     font-bold capitalize
-                     flex items-center justify-center flex-shrink-0
-                     transition-all duration-200
-                     hover:-translate-y-0.5 hover:shadow-lg"
+                <button class="bg-gradient-to-r from-dbd-primary to-[#473FFF]
+                     text-white text-sm sm:text-base md:text-lg font-bold
+                     px-4 sm:px-5 md:px-6
+                     h-8 sm:h-9 md:h-10
+                     rounded-full
+                     flex items-center justify-center
+                     hover:-translate-y-0.5 hover:shadow-md
+                     transition-all duration-300
+                     flex-shrink-0"
                         @click="handleUpgrade">
                   Upgrade
                 </button>
