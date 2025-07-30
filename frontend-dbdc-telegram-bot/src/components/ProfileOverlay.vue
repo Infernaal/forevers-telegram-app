@@ -661,10 +661,35 @@ console.log('ProfileOverlay loaded with corrected design')
   background: rgba(255, 255, 255, 0.5);
 }
 
+/* Responsive margin adjustments for all screens */
+@media (min-width: 769px) {
+  .ml-4 {
+    margin-left: 1.5rem; /* 24px */
+  }
+  .mr-6 {
+    margin-right: 2rem; /* 32px */
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  .ml-4 {
+    margin-left: 1.25rem; /* 20px */
+  }
+  .mr-6 {
+    margin-right: 1.75rem; /* 28px */
+  }
+}
+
 /* Responsive ID/ENG block adjustments */
 @media (max-width: 640px) {
   .w-36 {
     width: 9.5rem; /* 152px - увеличиваем на мобиле */
+  }
+  .ml-4 {
+    margin-left: 1rem; /* 16px */
+  }
+  .mr-6 {
+    margin-right: 1.5rem; /* 24px */
   }
 }
 
