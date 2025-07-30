@@ -389,13 +389,14 @@
             <div class="w-0.5 h-6 bg-[#E2E2E2] border border-[#B7B7B7] rounded-[30px] opacity-40 flex-shrink-0"></div>
 
             <!-- Language Section -->
-            <div class="w-[100px] xs:w-[110px] sm:w-[120px] md:w-[125px] lg:w-[131px]
-                        h-8 xs:h-9 sm:h-10 md:h-11 lg:h-12
-                        bg-white bg-opacity-20 border border-white border-opacity-24
+            <div class="w-[105px] xs:w-[115px] sm:w-[125px] md:w-[130px] lg:w-[136px]
+                        h-9 xs:h-10 sm:h-11 md:h-12 lg:h-13
+                        bg-white bg-opacity-25 border border-white border-opacity-30
                         rounded-full flex items-center
-                        p-1 xs:p-1.5 sm:p-2
-                        cursor-pointer transition-all duration-200
-                        relative overflow-visible hover:bg-white hover:bg-opacity-30"
+                        p-1.5 xs:p-2 sm:p-2.5
+                        cursor-pointer transition-all duration-300
+                        relative overflow-visible hover:bg-white hover:bg-opacity-35
+                        touch-manipulation"
                 @click="toggleLanguageDropdown">
               
               <div class="flex items-center gap-1 xs:gap-1.5 sm:gap-2 flex-1 min-w-0 pr-4 xs:pr-5 sm:pr-6">
@@ -498,7 +499,7 @@ const languages = ref([
   { code: 'DEU', name: 'Deutsch', country: 'germany' },
   { code: 'ITA', name: 'Italiano', country: 'italy' },
   { code: 'RUS', name: 'Русский', country: 'ukraine' },
-  { code: 'CHN', name: '中���', country: 'china' },
+  { code: 'CHN', name: '中��', country: 'china' },
   { code: 'JPN', name: '日本語', country: 'japan' },
   { code: 'KOR', name: '한국어', country: 'new zealand' },
   { code: 'ARA', name: 'العربية', country: 'uae' },
