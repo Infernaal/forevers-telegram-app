@@ -400,11 +400,11 @@
             <div class="w-0.5 h-6 bg-[#E2E2E2] border border-[#B7B7B7] rounded-[30px] opacity-40 flex-shrink-0"></div>
 
             <!-- Language Section -->
-            <div class="w-[105px] xs:w-[115px] sm:w-[125px] md:w-[130px] lg:w-[136px]
-                        h-9 xs:h-10 sm:h-11 md:h-12 lg:h-13
+            <div class="w-[100px] xs:w-[110px] sm:w-[120px] md:w-[130px] lg:w-[140px] xl:w-[150px]
+                        h-8 xs:h-9 sm:h-10 md:h-11 lg:h-12 xl:h-13
                         bg-white bg-opacity-25 border border-white border-opacity-30
                         rounded-full flex items-center
-                        p-1.5 xs:p-2 sm:p-2.5
+                        p-1 xs:p-1.5 sm:p-2 md:p-2.5 lg:p-3
                         cursor-pointer transition-all duration-300
                         relative overflow-visible hover:bg-white hover:bg-opacity-35
                         touch-manipulation"
