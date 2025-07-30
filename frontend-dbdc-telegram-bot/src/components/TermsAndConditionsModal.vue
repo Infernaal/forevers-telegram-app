@@ -1,9 +1,9 @@
 <template>
-  <div v-if="isVisible" 
-       class="fixed inset-0 bg-black/20 backdrop-blur-[9px] z-[10001] 
-              flex items-start justify-center 
-              p-3 sm:p-4 md:p-6 lg:p-8 pt-6 sm:pt-8 md:pt-12 lg:pt-16
-              animate-[fadeIn_0.3s_ease-out] terms-modal-overlay" 
+  <div v-if="isVisible"
+       class="fixed inset-0 bg-black/20 backdrop-blur-[9px] z-[10001]
+              flex items-center justify-center
+              p-2 sm:p-3 md:p-4 lg:p-6
+              animate-[fadeIn_0.3s_ease-out] terms-modal-overlay"
        @click="closeModal">
     <div class="w-full modal-container
                 animate-[slideUp_0.3s_ease-out]" 
