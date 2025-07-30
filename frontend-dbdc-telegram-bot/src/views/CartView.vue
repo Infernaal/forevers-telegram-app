@@ -1,7 +1,7 @@
 <template>
   <div class="w-full min-h-screen bg-gray-100 font-montserrat overflow-x-hidden flex flex-col cart-view">
     <!-- Content Container -->
-    <div class="px-4 pt-4 pb-56 sm:pb-60 md:pb-64 lg:pb-72 xl:pb-80 min-h-[calc(100vh-100px)] flex-1 flex flex-col">
+    <div class="px-4 pt-4 pb-60 sm:pb-64 md:pb-80 lg:pb-96 xl:pb-[28rem] min-h-[calc(100vh-100px)] flex-1 flex flex-col">
       <!-- Scrollable Cart Items Area -->
       <div class="flex-1 overflow-y-auto space-y-4" v-if="cartItemsCount > 0">
         <div
@@ -283,30 +283,30 @@ const confirmDelete = () => {
 
 /* CartBottomComponent responsive positioning */
 .cart-bottom-container {
-  bottom: 90px; /* mobile */
+  bottom: 75px; /* mobile - уменьшили с 90px */
 }
 
 @media (min-width: 640px) {
   .cart-bottom-container {
-    bottom: 100px; /* tablet */
+    bottom: 85px; /* tablet - уменьшили с 100px */
   }
 }
 
 @media (min-width: 768px) {
   .cart-bottom-container {
-    bottom: 110px; /* tablet large */
+    bottom: 95px; /* tablet large - уменьшили с 110px */
   }
 }
 
 @media (min-width: 1024px) {
   .cart-bottom-container {
-    bottom: 120px; /* desktop */
+    bottom: 100px; /* desktop - уменьшили с 120px */
   }
 }
 
 @media (min-width: 1280px) {
   .cart-bottom-container {
-    bottom: 130px; /* desktop large */
+    bottom: 105px; /* desktop large - уменьшили с 130px */
   }
 }
 
