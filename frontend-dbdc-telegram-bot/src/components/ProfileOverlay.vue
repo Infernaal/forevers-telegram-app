@@ -50,11 +50,17 @@
                 </h2>
               </div>
 
-              <!-- Arrow Button -->
-              <button class="close-button"
+              <!-- Close Button -->
+              <button class="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10
+                             bg-gray-100 border border-dbd-primary
+                             rounded-r-full sm:rounded-r-2xl border-l-0
+                             flex items-center justify-center flex-shrink-0
+                             transition-all duration-200 ease-in-out
+                             hover:bg-gray-200 hover:scale-105
+                             active:scale-95"
                       @click="$emit('close')">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M17.2155 11.2862L8.2216 2.29534C7.82696 1.90169 7.18757 1.90169 6.79192 2.29534C6.39728 2.68898 6.39728 3.32838 6.79192 3.72203L15.0724 11.9996L6.79292 20.2771C6.39827 20.6707 6.39827 21.3101 6.79292 21.7048C7.18756 22.0984 7.82795 22.0984 8.2226 21.7048L17.2165 12.7139C17.6051 12.3244 17.6051 11.6749 17.2155 11.2862Z" fill="#B7B7B7"/>
+                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" viewBox="0 0 16 16" fill="none">
+                  <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
             </div>
