@@ -169,17 +169,17 @@
         <div class="flex-shrink-0 px-3 pb-3 space-y-4 sm:space-y-5 md:space-y-6">
           
           <!-- Start Upgrade Card - Responsive Design -->
-          <div class="relative bg-[#F1E7FF] border border-[#DCCCF1] rounded-2xl overflow-hidden start-upgrade-card">
+          <div class="relative bg-[#F1E7FF] border border-[#DCCCF1] rounded-2xl overflow-hidden h-16 xs:h-17 sm:h-20 md:h-22 lg:h-24">
             <!-- Purple gradient overlay on left -->
-            <div class="absolute left-0 top-0 h-full bg-gradient-to-r from-[#8C4CD1] to-[#C497FF] opacity-40 rounded-l-2xl start-gradient"></div>
+            <div class="absolute left-0 top-0 h-full bg-gradient-to-r from-[#8C4CD1] to-[#C497FF] opacity-40 rounded-l-2xl w-20 xs:w-24 sm:w-28 md:w-32 lg:w-36"></div>
 
             <!-- Content container -->
             <div class="flex items-center justify-between p-2 h-full">
               <!-- Left section with star and content -->
-              <div class="flex items-center gap-2 flex-1">
+              <div class="flex items-center gap-1 xs:gap-2 flex-1">
                 <!-- Star icon -->
-                <div class="flex-shrink-0 start-icon">
-                  <svg class="start-icon-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <div class="flex-shrink-0 w-5 h-5 xs:w-6 xs:h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10">
+                  <svg class="w-full h-full" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clipPath="url(#clip0_2_21309)">
                       <path d="M16 31.0588C24.3167 31.0588 31.0588 24.3167 31.0588 16C31.0588 7.68323 24.3167 0.941162 16 0.941162C7.68323 0.941162 0.941162 7.68323 0.941162 16C0.941162 24.3167 7.68323 31.0588 16 31.0588Z" fill="#8C4CD1"/>
                       <path d="M28.998 8.39055C26.1133 12.4471 21.365 15.0918 16.0003 15.0918C10.6356 15.0918 5.88739 12.4471 3.00269 8.39055C5.61916 3.9341 10.4615 0.941162 16.0003 0.941162C21.5392 0.941162 26.3815 3.9341 28.998 8.39055Z" fill="#9C68E1"/>
