@@ -423,9 +423,11 @@ const selectLanguage = (language) => {
 
 .overlay-wrapper {
   padding: 12px;
+  padding-bottom: 100px; /* Space for BottomNavigation */
 }
 
 .overlay-menu {
+  width: 100%;
   max-width: 320px;
   height: 480px;
   margin: 0 auto;
@@ -970,7 +972,7 @@ const selectLanguage = (language) => {
 .triangle-decoration {
   position: absolute;
   top: 100%;
-  left: 20px;
+  left: 24px;
   margin-top: -1px;
   z-index: 9998;
 }
@@ -978,9 +980,9 @@ const selectLanguage = (language) => {
 .triangle-shape {
   width: 0;
   height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top: 10px solid rgba(18, 11, 129, 0.95);
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 12px solid rgba(18, 11, 129, 0.95);
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
@@ -1095,9 +1097,11 @@ const selectLanguage = (language) => {
 @media (max-width: 374px) {
   .overlay-wrapper {
     padding: 8px;
+    padding-bottom: 80px;
   }
-  
+
   .overlay-menu {
+    width: 100%;
     max-width: 100%;
     height: 420px;
     border-radius: 12px;
@@ -1290,13 +1294,13 @@ const selectLanguage = (language) => {
   }
   
   .triangle-decoration {
-    left: 16px;
+    left: 18px;
   }
-  
+
   .triangle-shape {
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 8px solid rgba(18, 11, 129, 0.95);
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 10px solid rgba(18, 11, 129, 0.95);
   }
 }
 
@@ -1304,9 +1308,11 @@ const selectLanguage = (language) => {
 @media (min-width: 375px) and (max-width: 430px) {
   .overlay-wrapper {
     padding: 10px;
+    padding-bottom: 90px;
   }
-  
+
   .overlay-menu {
+    width: 100%;
     max-width: 100%;
     height: 450px;
     border-radius: 14px;
@@ -1499,13 +1505,13 @@ const selectLanguage = (language) => {
   }
   
   .triangle-decoration {
-    left: 18px;
+    left: 22px;
   }
-  
+
   .triangle-shape {
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
-    border-top: 9px solid rgba(18, 11, 129, 0.95);
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-top: 11px solid rgba(18, 11, 129, 0.95);
   }
 }
 
@@ -1513,9 +1519,11 @@ const selectLanguage = (language) => {
 @media (min-width: 431px) and (max-width: 768px) {
   .overlay-wrapper {
     padding: 16px;
+    padding-bottom: 120px;
   }
-  
+
   .overlay-menu {
+    width: 100%;
     max-width: 520px;
     height: 580px;
     border-radius: 24px;
@@ -1709,13 +1717,13 @@ const selectLanguage = (language) => {
   }
   
   .triangle-decoration {
-    left: 28px;
+    left: 32px;
   }
-  
+
   .triangle-shape {
-    border-left: 12px solid transparent;
-    border-right: 12px solid transparent;
-    border-top: 14px solid rgba(18, 11, 129, 0.95);
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    border-top: 16px solid rgba(18, 11, 129, 0.95);
   }
 }
 
@@ -1723,9 +1731,11 @@ const selectLanguage = (language) => {
 @media (min-width: 769px) {
   .overlay-wrapper {
     padding: 24px;
+    padding-bottom: 140px;
   }
-  
+
   .overlay-menu {
+    width: 100%;
     max-width: 680px;
     height: 720px;
     border-radius: 32px;
@@ -1919,13 +1929,13 @@ const selectLanguage = (language) => {
   }
   
   .triangle-decoration {
-    left: 36px;
+    left: 40px;
   }
-  
+
   .triangle-shape {
-    border-left: 16px solid transparent;
-    border-right: 16px solid transparent;
-    border-top: 18px solid rgba(18, 11, 129, 0.95);
+    border-left: 18px solid transparent;
+    border-right: 18px solid transparent;
+    border-top: 20px solid rgba(18, 11, 129, 0.95);
   }
 }
 
