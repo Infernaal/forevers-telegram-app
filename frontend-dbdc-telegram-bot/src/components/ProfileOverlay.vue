@@ -768,7 +768,7 @@ const selectLanguage = (language) => {
   z-index: 10001;
 }
 
-/* ID Section - более узкий для Copy border to border */
+/* ID Section - бо��ее узкий для Copy border to border */
 .id-section-container {
   flex: 0 0 140px; /* фиксированная ширина вместо flex: 1 */
   height: 40px;
@@ -827,12 +827,12 @@ const selectLanguage = (language) => {
 
 .copy-button:hover {
   background: #f3f4f6;
-  transform: translateY(-50%) scale(1.05);
+  transform: scale(1.02);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .copy-button:active {
-  transform: translateY(-50%) scale(0.98);
+  transform: scale(0.98);
 }
 
 /* Vertical Divider */
