@@ -3,20 +3,13 @@
     <!-- Dropdown Wrapper -->
     <div class="relative w-full h-full flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 lg:px-12">
       <!-- Dropdown Menu -->
-      <div class="relative w-full
-              max-w-[98vw] xs:max-w-[380px] sm:max-w-[440px] md:max-w-[500px] lg:max-w-[560px] xl:max-w-[620px]
-              h-auto min-h-[70vh] max-h-[90vh]
-              xs:min-h-[72vh] xs:max-h-[88vh]
-              sm:min-h-[74vh] sm:max-h-[86vh]
-              md:min-h-[76vh] md:max-h-[84vh]
-              lg:min-h-[78vh] lg:max-h-[82vh]
-              xl:min-h-[80vh] xl:max-h-[80vh]
-              bg-gradient-to-br from-[#120B81] via-[#09074E] to-[#09074E]
-              border border-[#09074E] backdrop-blur-[40px]
-              rounded-xl xs:rounded-2xl sm:rounded-3xl md:rounded-[28px] lg:rounded-[32px] xl:rounded-[36px]
-              z-[50] overflow-hidden shadow-2xl
-              animate-[fadeInScale_0.4s_ease-out]
-              touch-manipulation overscroll-contain">
+            <div
+        class="relative w-full max-w-full sm:max-w-[400px] md:max-w-[500px] lg:max-w-[580px] xl:max-w-[640px]
+                h-auto max-h-[calc(100vh-176px)]
+                bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
+                border border-[#09074E] rounded-[20px] shadow-2xl
+                backdrop-blur-[32px] flex flex-col overflow-hidden transform transition-all duration-300 ease-out"
+      >
         <div class="p-2 xs:p-3 sm:p-4 md:p-5 lg:p-6 xl:p-8 text-white text-center h-full flex flex-col">
             <!-- Background -->
             <div class="absolute inset-0 bg-gradient-to-br from-[#120B81] via-[#09074E] to-[#09074E]
