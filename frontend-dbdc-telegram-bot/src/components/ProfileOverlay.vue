@@ -278,7 +278,7 @@
                   <path d="M10 0C4.47328 0 0 4.47254 0 10V19.2188C0 19.6502 0.349766 20 0.78125 20H10C15.5267 20 20 15.5275 20 10C20 4.47328 15.5275 0 10 0ZM10 18.4375H1.5625V10C1.5625 5.33684 5.33621 1.5625 10 1.5625C14.6632 1.5625 18.4375 5.33621 18.4375 10C18.4375 14.6632 14.6638 18.4375 10 18.4375Z" fill="white"/>
                 </svg>
               </div>
-              <span class="text-white text-sm xs:text-base sm:text-lg font-bold leading-5 xs:leading-6 sm:leading-7 flex-1 text-left">Help</span>
+              <span class="text-white text-sm xs:text-base sm:text-lg md:text-xl font-bold leading-6 xs:leading-7 sm:leading-8 flex-1 text-left">Help</span>
             </div>
           </div>
 
