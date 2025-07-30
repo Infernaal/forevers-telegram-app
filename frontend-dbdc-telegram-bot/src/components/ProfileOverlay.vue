@@ -341,19 +341,18 @@
           <div class="relative flex-shrink-0 z-[1] flex justify-center items-center gap-3 sm:gap-4 md:gap-5 lg:gap-6 h-10 sm:h-11 md:h-12 mb-2">
             
             <!-- ID Section -->
-            <div class="min-w-[110px] sm:min-w-[130px] md:min-w-[150px] lg:min-w-[160px]
-            max-w-[200px] w-full
-            h-10 sm:h-11 md:h-12
-            bg-white/30 border border-white/40
-            rounded-full backdrop-blur-[40px]
-            flex items-center justify-between
-            px-2 sm:px-3 md:px-4 lg:px-5
-            gap-1 sm:gap-2
-            relative touch-manipulation"
+            <div class="min-w-[110px] sm:min-w-[130px] md:min-w-[150px] lg:min-w-[160px] xl:min-w-[180px]
+              max-w-[200px] w-full
+              h-10 sm:h-11 md:h-12
+              bg-white/30 border border-white/40
+              rounded-full backdrop-blur-[40px]
+              flex items-center justify-between
+              px-2 sm:px-3 md:px-4 lg:px-5
+              relative overflow-hidden touch-manipulation"
                 :class="{ 'id-copied-state': showCopySuccess }">
 
               <div v-if="!showCopySuccess" class="flex items-center gap-1 flex-1 overflow-hidden">
-                <span class="text-[#B7B7B7] text-xs sm:text-sm md:text-base whitespace-nowrap">ID:</span>
+                <span class="text-[#B7B7B7] text-xs sm:text-sm md:text-base font-normal whitespace-nowrap">ID:</span>
                 <span class="text-white text-xs sm:text-sm md:text-base font-semibold truncate max-w-[80px]">515745</span>
               </div>
 
@@ -370,16 +369,19 @@
               </div>
               
               <button v-if="!showCopySuccess"
-                      class="flex-shrink-0 w-6 sm:w-7 md:w-8 lg:w-9 xl:w-10
-           h-6 sm:h-7 md:h-8 lg:h-9 xl:h-10
-           bg-white border border-[#D8D8D8]
-           rounded-full flex items-center justify-center
-           hover:bg-gray-100 hover:scale-105 active:scale-95
-           transition-all duration-300
-           focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                      class="flex items-center justify-center
+             absolute right-0 top-0 bottom-0
+             w-6 sm:w-7 md:w-8 lg:w-9 xl:w-10
+             h-full min-w-[24px] sm:min-w-[28px] md:min-w-[32px]
+             bg-white border border-[#D8D8D8]
+             rounded-r-full border-l-0 flex-shrink-0
+             hover:bg-gray-100 hover:scale-105 active:scale-95
+             transition-all duration-300 cursor-pointer
+             focus:outline-none focus:ring-2 focus:ring-blue-500/50"
                       @click="copyUserID"
                       aria-label="Скопировать ID">
-                <svg class="w-3 sm:w-4 md:w-5 h-3 sm:h-4 md:h-5" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-3 sm:w-4 md:w-5 lg:w-6 xl:w-7
+               h-3 sm:h-4 md:h-5 lg:h-6 xl:h-7" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M18.0655 0.5H7.60611C6.97596 0.5 6.37161 0.727045 5.92603 1.13119C5.48044 1.53533 5.23011 2.08346 5.23011 2.65501V3.48385H4.04211C3.38111 3.48385 2.74718 3.72201 2.27978 4.14594C1.81239 4.56986 1.5498 5.14483 1.5498 5.74435V19.2395C1.5498 19.839 1.81239 20.414 2.27978 20.8379C2.74718 21.2618 3.38111 21.5 4.04211 21.5H14.2772C14.9382 21.5 15.5721 21.2618 16.0395 20.8379C16.5069 20.414 16.7695 19.839 16.7695 19.2395V18.486H18.0655C18.6907 18.4861 19.291 18.2634 19.7369 17.866C20.1829 17.4685 20.4389 16.9281 20.4498 16.3611V2.65501C20.4476 2.08277 20.1954 1.53465 19.7485 1.13073C19.3016 0.7268 18.6964 0.499997 18.0655 0.5ZM15.108 19.2395C15.108 19.4393 15.0204 19.631 14.8646 19.7723C14.7088 19.9136 14.4975 19.993 14.2772 19.993H4.04211C3.82178 19.993 3.61047 19.9136 3.45467 19.7723C3.29887 19.631 3.21134 19.4393 3.21134 19.2395V5.74435C3.21134 5.54451 3.29887 5.35285 3.45467 5.21154C3.61047 5.07024 3.82178 4.99085 4.04211 4.99085H14.2772C14.4975 4.99085 14.7088 5.07024 14.8646 5.21154C15.0204 5.35285 15.108 5.54451 15.108 5.74435V19.2395ZM18.7883 16.3611C18.7861 16.5337 18.709 16.6985 18.5737 16.8198C18.4383 16.9411 18.2558 17.0092 18.0655 17.0092H16.7695V5.74435C16.7695 5.14483 16.5069 4.56986 16.0395 4.14594C15.5721 3.72201 14.9382 3.48385 14.2772 3.48385H6.89165V2.65501C6.89165 2.48314 6.96693 2.31832 7.10091 2.19679C7.2349 2.07527 7.41663 2.007 7.60611 2.007H18.0655C18.16 2.006 18.2538 2.02203 18.3415 2.05414C18.4291 2.08626 18.5089 2.13384 18.5761 2.19411C18.6433 2.25438 18.6967 2.32616 18.7331 2.40527C18.7695 2.48439 18.7883 2.56927 18.7883 2.65501V16.3611Z" fill="#2019CE"/>
                 </svg>
               </button>
@@ -409,9 +411,12 @@
                 </span>
               </div>
               
-              <div class="w-3 sm:w-4 md:w-5 lg:w-6 xl:w-7
-                h-3 sm:h-4 md:h-5 lg:h-6 xl:h-7
-                ml-1 sm:ml-1.5 md:ml-2 transform transition-transform"
+              <div class="w-2.5 xs:w-3 sm:w-4 md:w-5 lg:w-6 xl:w-7
+                          h-2.5 xs:h-3 sm:h-4 md:h-5 lg:h-6 xl:h-7
+                          flex items-center justify-center flex-shrink-0
+                          transition-transform duration-300 absolute
+                          right-0.5 xs:right-1 sm:right-1.5 md:right-2 lg:right-2.5 xl:right-3 top-1/2
+                          transform -translate-y-1/2"
                   :class="{ 'rotate-180': showLanguageDropdown }">
                 <svg class="w-full h-full" viewBox="0 0 20 20" fill="none">
                   <circle opacity="0.2" cx="10" cy="10" r="10" fill="white"/>
