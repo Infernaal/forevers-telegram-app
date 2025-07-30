@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full bg-gray-100 px-4 pt-4 pb-6 sm:pb-8 md:pb-10 lg:pb-12 xl:pb-16 max-w-6xl mx-auto">
+  <div class="w-full bg-gray-100 px-4 pt-4 pb-6 sm:pb-8 md:pb-10 lg:pb-12 xl:pb-16">
     <!-- Total Section -->
     <div class="flex items-center justify-center gap-2 mb-4 lg:mb-6 xl:mb-8">
       <span class="text-dbd-dark font-semibold text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">Total to pay:</span>
