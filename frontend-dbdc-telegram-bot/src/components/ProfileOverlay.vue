@@ -322,7 +322,7 @@ const languages = ref([
   { code: 'DEU', name: 'Deutsch', country: 'germany' },
   { code: 'ITA', name: 'Italiano', country: 'italy' },
   { code: 'RUS', name: 'Русский', country: 'ukraine' },
-  { code: 'CHN', name: '中文', country: 'china' },
+  { code: 'CHN', name: '���文', country: 'china' },
   { code: 'JPN', name: '日本語', country: 'japan' },
   { code: 'KOR', name: '한국어', country: 'new zealand' },
   { code: 'ARA', name: 'العربية', country: 'uae' },
@@ -440,7 +440,7 @@ const selectLanguage = (language) => {
 
 .overlay-wrapper {
   padding: 12px;
-  padding-bottom: 100px; /* Space for BottomNavigation */
+  padding-bottom: 120px; /* Space for BottomNavigation - увеличено */
 }
 
 .overlay-menu {
