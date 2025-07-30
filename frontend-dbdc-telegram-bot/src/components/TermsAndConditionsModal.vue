@@ -925,6 +925,39 @@ const agreeToTerms = () => {
   }
 }
 
+/* Very tall and narrow screens (modern phones) */
+@media (min-height: 700px) and (max-width: 414px) {
+  .modal-container {
+    max-height: 80vh;
+    min-height: 60vh;
+  }
+}
+
+/* Very narrow screens regardless of height */
+@media (max-width: 350px) {
+  .modal-container {
+    max-width: calc(100vw - 12px);
+  }
+
+  .modal-title {
+    font-size: 15px !important;
+    line-height: 1.3 !important;
+  }
+
+  .modal-subtitle {
+    font-size: 12px !important;
+  }
+
+  .section-title {
+    font-size: 13px !important;
+  }
+
+  .bullet-text {
+    font-size: 11px !important;
+    line-height: 1.3 !important;
+  }
+}
+
 /* Touch optimizations */
 @media (hover: none) and (pointer: coarse) {
   .agree-btn:hover,
