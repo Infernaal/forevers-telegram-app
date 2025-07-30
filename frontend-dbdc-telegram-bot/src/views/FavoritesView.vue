@@ -756,6 +756,11 @@ main {
   -webkit-user-select: none;
   padding: 12px;
   min-height: 180px;
+  /* GPU acceleration for smooth fade effects */
+  transform: translateZ(0);
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* Modal styles */
