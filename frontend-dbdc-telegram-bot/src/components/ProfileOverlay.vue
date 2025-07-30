@@ -9,14 +9,18 @@
             <div class="overlay-background"></div>
 
           <!-- Profile Header Section -->
-          <div class="profile-header-section">
-            <div class="profile-header-container">
-              
+          <div class="absolute top-2 left-2 right-2 z-[10001]">
+            <div class="w-full h-16 sm:h-18 md:h-20
+                        bg-gray-400/25 border border-gray-200
+                        rounded-full sm:rounded-2xl
+                        flex items-center p-1.5 sm:p-2 gap-2">
+
               <!-- Avatar -->
-              <div class="avatar-container">
+              <div class="flex-shrink-0">
                 <img src="https://images.pexels.com/photos/15023413/pexels-photo-15023413.jpeg?auto=compress&cs=tinysrgb&w=400"
-                    alt="Jason Williams"
-                    class="avatar-image" />
+                     alt="Jason Williams"
+                     class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16
+                            rounded-full object-cover border border-purple-400" />
               </div>
 
               <!-- User Info -->
