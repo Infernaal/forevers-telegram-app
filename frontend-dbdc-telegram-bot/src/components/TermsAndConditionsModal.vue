@@ -7,8 +7,7 @@
               touch-manipulation overscroll-contain"
        @click="closeModal">
     <div class="w-full max-w-[calc(100vw-16px)] sm:max-w-[calc(100vw-24px)] md:max-w-md lg:max-w-lg
-                max-h-[calc(100vh-32px)] sm:max-h-[calc(100vh-48px)]
-                min-h-[70vh] sm:min-h-[65vh] md:min-h-[60vh]
+                h-[85vh] max-h-[85vh] sm:h-[80vh] sm:max-h-[80vh]
                 modal-container animate-[slideUp_0.3s_ease-out]"
          @click.stop>
       <!-- Modal Content -->
