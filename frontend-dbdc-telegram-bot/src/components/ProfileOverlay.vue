@@ -203,11 +203,9 @@
             </div>
           </div>
 
-          <!-- Bottom Controls - фиксированные внизу -->
-          <div class="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-indigo-800 via-purple-900 to-indigo-800
-                      px-4 py-4 border-t border-indigo-700
-                      flex items-center justify-center gap-3
-                      h-20 z-[10001]">
+          <!-- Bottom Controls - в пределах контейнера -->
+          <div class="mt-4 flex items-center justify-center gap-2 sm:gap-3
+                      h-10 sm:h-11 md:h-12 lg:h-14">
 
             <!-- ID Section - Copy button border to border -->
             <div class="flex-1 max-w-[140px] h-12
