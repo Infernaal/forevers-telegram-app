@@ -242,7 +242,7 @@
             </div>
 
             <!-- Separator Bar -->
-            <div class="w-0.5 h-6 bg-dbd-light-gray opacity-40 rounded-full mx-4 sm:mx-6"></div>
+            <div class="w-0.5 h-6 bg-white opacity-40 rounded-full mx-4 sm:mx-6 flex-shrink-0"></div>
 
             <!-- Language Section with Dropdown -->
             <div class="relative flex items-center">
