@@ -16,7 +16,7 @@
         <div class="relative z-10 py-4 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 text-white">
             <!-- Background -->
             <div class="absolute inset-0 bg-gradient-to-br from-[#120B81] via-[#09074E] to-[#09074E]
-                      border border-[#09074E] backdrop-blur-[40px] z-0"></div>
+                      border border-[#09074E] backdrop-blur-[40px] z-0 rounded-[20px]"></div>
 
           <!-- Profile Header Section -->
           <div class="relative flex-shrink-0 z-[2] mb-3 sm:mb-4 md:mb-5 lg:mb-6">
