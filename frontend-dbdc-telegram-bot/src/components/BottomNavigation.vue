@@ -26,8 +26,8 @@
                 :class="[
                   'flex items-center justify-center transition-all duration-200 ease-out rounded-xl',
                   isProfileMenuOpen
-                    ? 'w-8 h-8 sm:w-9 sm:h-9 md:w-11 md:h-11 lg:w-12 lg:h-12 xl:w-14 xl:h-14 bg-blue-600'
-                    : 'w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 xl:w-12 xl:h-12'
+                    ? 'w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 bg-blue-600'
+                    : 'w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12'
                 ]"
               >
                 <!-- Show close icon when profile menu is open, otherwise show profile -->
