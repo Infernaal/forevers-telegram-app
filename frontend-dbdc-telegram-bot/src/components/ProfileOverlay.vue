@@ -170,39 +170,50 @@
         <!-- Bottom Section with Start Card and ID/Language -->
         <div class="flex-shrink-0 px-3 pb-3 space-y-3">
           
-          <!-- Start Upgrade Card - Corrected Design -->
-          <div class="relative bg-[#F1E7FF] border border-[#DCCCF1] rounded-2xl overflow-hidden h-[84px]">
+          <!-- Start Upgrade Card - Enhanced Design -->
+          <div class="relative bg-[#F1E7FF] border border-[#DCCCF1] rounded-2xl overflow-hidden h-[96px]">
             <!-- Purple gradient overlay on left -->
             <div class="absolute left-0 top-0 w-[140px] h-full bg-gradient-to-r from-[#8C4CD1] to-[#C497FF] opacity-40 rounded-l-2xl"></div>
-            
+
             <!-- Star icon -->
-            <div class="absolute left-2 top-[14px]">
+            <div class="absolute left-2 top-4">
               <svg class="w-8 h-8" viewBox="0 0 32 32" fill="none">
-                <circle cx="16" cy="16" r="15.06" fill="#8C4CD1"/>
-                <path d="M15.9997 5.11792V15.4117L19.3443 11.8949L15.9997 5.11792Z" fill="#FF9F00"/>
-                <path d="M15.9996 5.11792V15.4117L12.655 11.8949L15.9996 5.11792Z" fill="#FED110"/>
-                <path d="M26.8232 12.982L19.3443 11.8953L15.9997 15.412L26.8232 12.982Z" fill="#FED110"/>
-                <path d="M26.8232 12.9825L21.4115 18.2577L15.9997 15.4126L26.8232 12.9825Z" fill="#FF9F00"/>
-                <path d="M5.17645 12.982L12.6553 11.8953L16 15.412L5.17645 12.982Z" fill="#FF9F00"/>
-                <path d="M5.17645 12.9825L10.5882 18.2577L16 15.4126L5.17645 12.9825Z" fill="#FED110"/>
-                <path d="M15.9997 15.4124L21.4115 18.2575L22.689 25.7061L15.9997 15.4124Z" fill="#FED110"/>
-                <path d="M22.689 25.7061L15.9997 22.1894V15.4124L22.689 25.7061Z" fill="#FF9F00"/>
-                <path d="M15.9996 15.4124L10.5878 18.2575L9.31024 25.7061L15.9996 15.4124Z" fill="#FF9F00"/>
-                <path d="M9.31024 25.7061L15.9996 22.1894V15.4124L9.31024 25.7061Z" fill="#FED110"/>
+                <g clipPath="url(#clip0_star)">
+                  <path d="M16 31.0588C24.3167 31.0588 31.0588 24.3167 31.0588 16C31.0588 7.68323 24.3167 0.941162 16 0.941162C7.68323 0.941162 0.941162 7.68323 0.941162 16C0.941162 24.3167 7.68323 31.0588 16 31.0588Z" fill="#8C4CD1"/>
+                  <path d="M28.998 8.39055C26.1133 12.4471 21.365 15.0918 16.0003 15.0918C10.6356 15.0918 5.88739 12.4471 3.00269 8.39055C5.61916 3.9341 10.4615 0.941162 16.0003 0.941162C21.5392 0.941162 26.3815 3.9341 28.998 8.39055Z" fill="#9C68E1"/>
+                  <path d="M15.9997 5.11792V15.4117L19.3443 11.8949L15.9997 5.11792Z" fill="#FF9F00"/>
+                  <path d="M15.9996 5.11792V15.4117L12.655 11.8949L15.9996 5.11792Z" fill="#FED110"/>
+                  <path d="M26.8232 12.982L19.3443 11.8953L15.9997 15.412L26.8232 12.982Z" fill="#FED110"/>
+                  <path d="M26.8232 12.9825L21.4115 18.2577L15.9997 15.4126L26.8232 12.9825Z" fill="#FF9F00"/>
+                  <path d="M5.17645 12.982L12.6553 11.8953L16 15.412L5.17645 12.982Z" fill="#FF9F00"/>
+                  <path d="M5.17645 12.9825L10.5882 18.2577L16 15.4126L5.17645 12.9825Z" fill="#FED110"/>
+                  <path d="M15.9997 15.4124L21.4115 18.2575L22.689 25.7061L15.9997 15.4124Z" fill="#FED110"/>
+                  <path d="M22.689 25.7061L15.9997 22.1894V15.4124L22.689 25.7061Z" fill="#FF9F00"/>
+                  <path d="M15.9996 15.4124L10.5878 18.2575L9.31024 25.7061L15.9996 15.4124Z" fill="#FF9F00"/>
+                  <path d="M9.31024 25.7061L15.9996 22.1894V15.4124L9.31024 25.7061Z" fill="#FED110"/>
+                  <g opacity="0.3">
+                    <path d="M16.0003 27.5882C20.9059 27.5882 24.8826 27.3442 24.8826 27.0432C24.8826 26.7423 20.9059 26.4983 16.0003 26.4983C11.0947 26.4983 7.11792 26.7423 7.11792 27.0432C7.11792 27.3442 11.0947 27.5882 16.0003 27.5882Z" fill="#20273A"/>
+                  </g>
+                </g>
+                <defs>
+                  <clipPath id="clip0_star">
+                    <rect width="32" height="32" fill="white"/>
+                  </clipPath>
+                </defs>
               </svg>
             </div>
-            
+
             <!-- Content -->
             <div class="relative flex items-center justify-between h-full pl-12 pr-3">
               <div class="flex flex-col justify-center">
-                <h3 class="text-dbd-dark text-lg font-bold leading-6 mb-1">Start</h3>
+                <h3 class="text-dbd-dark text-lg font-bold leading-6 mb-2">Start</h3>
                 <p class="text-sm leading-[22px]">
                   <span class="text-dbd-gray">buy </span>
                   <span class="text-[#8C4CD1] font-bold">123</span>
                   <span class="text-dbd-gray"> more Forevers to upgrade</span>
                 </p>
               </div>
-              
+
               <!-- Upgrade Button -->
               <button class="bg-gradient-to-r from-dbd-primary to-[#473FFF] text-white text-base font-bold px-6 py-3 rounded-full hover:shadow-lg transition-all duration-200 flex-shrink-0"
                       @click="onMenuClick('upgrade')">
