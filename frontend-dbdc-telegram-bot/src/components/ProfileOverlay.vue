@@ -71,7 +71,9 @@
                       <path d="M19.4971 12.7667L15.699 12.2144L14.0007 8.77307V17.4421L17.3977 19.2279L16.7489 15.4452L19.4971 12.7667Z" fill="#E0E0E0"/>
                     </svg>
                   </div>
-                  <span class="text-dbd-off-white text-xs xs:text-sm sm:text-base font-semibold leading-4 xs:leading-5 sm:leading-6">Silver</span>
+                  <span class="text-dbd-off-white text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl
+                               font-semibold leading-tight xs:leading-snug sm:leading-normal
+                               flex items-center">Silver</span>
                 </div>
 
                 <!-- User Name -->
