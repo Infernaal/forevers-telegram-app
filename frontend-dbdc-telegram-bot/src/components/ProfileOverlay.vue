@@ -229,7 +229,7 @@
 
             <!-- ID Section -->
             <div class="relative flex items-center">
-              <div class="bg-white/[0.30] backdrop-blur-[32px] border border-white/40 rounded-full h-11 w-32 sm:w-36 md:w-36 flex items-center justify-between pl-3 pr-0">
+              <div class="bg-white/[0.30] backdrop-blur-[32px] border border-white/40 rounded-full h-11 w-36 sm:w-38 md:w-40 flex items-center justify-between pl-3 pr-0">
                 <div class="flex items-center min-w-0 overflow-hidden">
                   <span class="text-dbd-light-gray text-sm">ID:</span>
                   <span class="text-white text-sm font-medium ml-1 truncate">515745</span>
@@ -668,7 +668,7 @@ console.log('ProfileOverlay loaded with corrected design')
 
 @media (max-width: 480px) {
   .w-36 {
-    width: 9rem; /* 144px - увеличиваем на мобиле для лучшей видимости цифр */
+    width: 9rem; /* 144px - увеличиваем на мобиле для ��учшей видимости цифр */
   }
 }
 
