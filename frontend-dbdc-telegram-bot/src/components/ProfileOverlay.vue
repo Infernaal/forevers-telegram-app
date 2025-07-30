@@ -7,7 +7,7 @@
                 pb-32 xs:pb-36 sm:pb-40 md:pb-44 lg:pb-48 xl:pb-52">
       <!-- Dropdown Menu -->
       <div class="relative w-full
-              max-w-[480px] xs:max-w-[500px] sm:max-w-[520px] md:max-w-[540px] lg:max-w-[560px] xl:max-w-[580px] 2xl:max-w-[600px]
+              max-w-[480px] xs:max-w-[500px] sm:max-w-[520px] md:max-w-[580px] lg:max-w-[640px] xl:max-w-[720px] 2xl:max-w-[800px]
               h-auto min-h-[60vh] max-h-[75vh]
               md:min-h-[65vh] md:max-h-[80vh]
               lg:min-h-[70vh] lg:max-h-[85vh]
