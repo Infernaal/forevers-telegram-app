@@ -281,6 +281,35 @@ const confirmDelete = () => {
   width: 0;
 }
 
+/* CartBottomComponent responsive positioning */
+.cart-bottom-container {
+  bottom: 90px; /* mobile */
+}
+
+@media (min-width: 640px) {
+  .cart-bottom-container {
+    bottom: 100px; /* tablet */
+  }
+}
+
+@media (min-width: 768px) {
+  .cart-bottom-container {
+    bottom: 110px; /* tablet large */
+  }
+}
+
+@media (min-width: 1024px) {
+  .cart-bottom-container {
+    bottom: 120px; /* desktop */
+  }
+}
+
+@media (min-width: 1280px) {
+  .cart-bottom-container {
+    bottom: 130px; /* desktop large */
+  }
+}
+
 /* Telegram WebApp specific optimizations */
 * {
   -webkit-tap-highlight-color: transparent;
