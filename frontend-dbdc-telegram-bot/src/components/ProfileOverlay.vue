@@ -32,9 +32,11 @@
           <div class="relative flex-shrink-0 z-[2] mb-4 xs:mb-5 sm:mb-6 md:mb-7 lg:mb-8">
             <div class="w-full
                         h-20 xs:h-22 sm:h-24 md:h-28 lg:h-32 xl:h-36
-                        bg-[rgba(96,95,135,0.24)] border border-[#D8D8D8]
-                        rounded-[1000px_16px_16px_1000px] xs:rounded-[1000px_18px_18px_1000px] sm:rounded-[1000px_20px_20px_1000px] md:rounded-[1000px_22px_22px_1000px]
-                        flex items-center p-1.5 xs:p-2 sm:p-2.5 md:p-4 lg:p-5 xl:p-6 gap-2 xs:gap-2.5 sm:gap-3 md:gap-4 lg:gap-5 xl:gap-6 overflow-hidden">
+                        bg-[rgba(96,95,135,0.28)] border border-[#D8D8D8]
+                        rounded-[60px_18px_18px_60px] xs:rounded-[70px_20px_20px_70px] sm:rounded-[80px_22px_22px_80px] md:rounded-[90px_24px_24px_90px]
+                        flex items-center p-2 xs:p-2.5 sm:p-3 md:p-4 lg:p-5 xl:p-6 gap-3 xs:gap-3.5 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-7 overflow-hidden
+                        transition-all duration-300 hover:bg-[rgba(96,95,135,0.35)]
+                        touch-manipulation select-none">
               
               <!-- Avatar -->
               <div class="flex-shrink-0">
