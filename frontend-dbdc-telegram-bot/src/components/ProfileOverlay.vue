@@ -270,7 +270,7 @@
           </div>
 
           <!-- Start Section -->
-          <div class="relative flex-shrink-0 z-[1] mb-2 xs:mb-3 sm:mb-4 md:mb-5">
+          <div class="relative flex-shrink-0 z-[1] mb-3 sm:mb-4 md:mb-5">
             <div class="w-full
               bg-[#F1E7FF] border border-[#DCCCF1]
               rounded-lg xs:rounded-xl sm:rounded-2xl md:rounded-3xl
