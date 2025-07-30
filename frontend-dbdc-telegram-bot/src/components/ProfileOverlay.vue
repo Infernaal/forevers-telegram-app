@@ -465,48 +465,18 @@ const selectLanguage = (language) => {
 </script>
 
 <style scoped>
-/* Profile Overlay Base Styles */
+/* Минимальные стили для анимаций */
 .profile-overlay {
   animation: fadeIn 0.3s ease-out;
-  touch-action: none;
-  -webkit-overflow-scrolling: auto;
-  overscroll-behavior: none;
 }
 
-.overlay-wrapper {
-  padding: 12px;
-  padding-bottom: 120px; /* Space for BottomNavigation - увеличено */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-.overlay-menu {
-  width: 100%;
-  max-width: 320px;
-  height: 480px;
-  margin: 0 auto;
-  background: linear-gradient(to right, #120B81, #09074E, #09074E);
-  border: 1px solid #09074E;
-  backdrop-filter: blur(32px);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  z-index: 10000;
-}
-
-.overlay-content {
-  padding: 12px;
-  color: white;
-  position: relative;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.overlay-background {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to right, #120B81, #09074E, #09074E);
-  border: 1px solid #09074E;
-  backdrop-filter: blur(32px);
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }
 
 /* Profile Header Section */
