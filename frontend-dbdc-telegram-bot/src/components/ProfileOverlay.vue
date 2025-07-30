@@ -341,12 +341,13 @@
                       mb-2 xs:mb-3 sm:mb-4">
             
             <!-- ID Section -->
-            <div class="w-[110px] xs:w-[120px] sm:w-[130px] md:w-[140px] lg:w-[145px]
-                        h-8 xs:h-9 sm:h-10 md:h-11 lg:h-12
+            <div class="w-[115px] xs:w-[125px] sm:w-[135px] md:w-[145px] lg:w-[150px]
+                        h-9 xs:h-10 sm:h-11 md:h-12 lg:h-13
                         bg-white bg-opacity-30 border border-white border-opacity-40
-                        rounded-full backdrop-blur-[32px] flex items-center justify-between
-                        p-1 xs:p-1.5 sm:p-2
-                        relative transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden"
+                        rounded-full backdrop-blur-[40px] flex items-center justify-between
+                        p-1.5 xs:p-2 sm:p-2.5
+                        relative transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden
+                        touch-manipulation"
                 :class="{ 'id-copied-state': showCopySuccess }">
 
               <div v-if="!showCopySuccess" class="flex items-center gap-0.5 pl-2 xs:pl-2.5 sm:pl-3 pr-8 xs:pr-9 sm:pr-10 flex-1">
