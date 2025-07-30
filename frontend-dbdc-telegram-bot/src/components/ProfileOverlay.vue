@@ -406,7 +406,7 @@
                 <CountryFlag :country="selectedLanguage.country" size="medium"
                              class="w-4 sm:w-5 md:w-6 lg:w-7 xl:w-8
                           h-4 sm:h-5 md:h-6 lg:h-7 xl:h-8 flex-shrink-0" />
-                <span class="text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-white truncate max-w-[80px]">
+                <span class="text-white text-xs sm:text-sm md:text-base font-semibold truncate">
                   {{ selectedLanguage.code }}
                 </span>
               </div>
