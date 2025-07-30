@@ -13,7 +13,7 @@
       <!-- Modal Content -->
       <div class="bg-white rounded-2xl sm:rounded-3xl border border-gray-200
                   shadow-lg flex flex-col h-full max-h-full overflow-hidden
-                  modal-content">
+                  modal-content" style="height: 100%">
         <!-- Header -->
         <div class="p-3 sm:p-4 md:p-5 flex-shrink-0 border-b border-gray-100
                     modal-header">
