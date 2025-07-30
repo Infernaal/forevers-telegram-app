@@ -122,19 +122,21 @@
 
             <!-- Ambassador -->
             <div class="flex items-center
-                        gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3
-                        px-2 xs:px-2.5 sm:px-3 md:px-3.5
-                        py-1 xs:py-1.5 sm:py-2
-                        h-10 xs:h-11 sm:h-12 md:h-13
-                        cursor-pointer transition-all duration-200
-                        rounded-md xs:rounded-lg sm:rounded-xl
-                        mb-1.5 xs:mb-2 sm:mb-2.5
-                        hover:bg-white hover:bg-opacity-10 hover:translate-x-1 relative"
+                        gap-2 xs:gap-2.5 sm:gap-3 md:gap-4
+                        px-3 xs:px-4 sm:px-5 md:px-6
+                        py-2 xs:py-2.5 sm:py-3
+                        h-12 xs:h-13 sm:h-14 md:h-15
+                        cursor-pointer transition-all duration-300
+                        rounded-lg xs:rounded-xl sm:rounded-2xl
+                        mb-2 xs:mb-2.5 sm:mb-3
+                        hover:bg-white hover:bg-opacity-15 hover:translate-x-2 hover:scale-[1.02] relative
+                        touch-manipulation active:scale-95"
                 @click="handleMenuClick('ambassador')">
-              <div class="w-8 xs:w-9 sm:w-10 md:w-11 h-8 xs:h-9 sm:h-10 md:h-11
-                          bg-[#3A33D3] border border-white border-opacity-20
-                          rounded-full flex items-center justify-center flex-shrink-0">
-                <svg class="w-4 xs:w-5 sm:w-5 md:w-6 h-4 xs:h-5 sm:h-5 md:h-6" viewBox="0 0 14 20" fill="none">
+              <div class="w-10 xs:w-11 sm:w-12 md:w-13 h-10 xs:h-11 sm:h-12 md:h-13
+                          bg-[#3A33D3] border border-white border-opacity-30
+                          rounded-full flex items-center justify-center flex-shrink-0
+                          transition-all duration-300 hover:bg-[#4A43E3] hover:scale-110">
+                <svg class="w-5 xs:w-6 sm:w-6 md:w-7 h-5 xs:h-6 sm:h-6 md:h-7" viewBox="0 0 14 20" fill="none">
                   <path d="M7 9.64844C9.76508 9.64858 12.0066 11.9652 12.0068 14.8242C12.0068 17.6826 9.76511 19.9999 7 20C4.23394 20 1.99219 17.6827 1.99219 14.8242C1.99243 11.9651 4.23409 9.64844 7 9.64844ZM6.09668 13.8418L4.07715 14.1465L5.53906 15.6182L5.19434 17.6992L7 16.7168L8.80566 17.6992L8.46191 15.6182L9.92383 14.1465L7.90332 13.8418L7 11.9512L6.09668 13.8418ZM4.60547 0L7 3.30078L9.39453 0H14L7 9.64844L0 0H4.60547Z" fill="white"/>
                 </svg>
               </div>
