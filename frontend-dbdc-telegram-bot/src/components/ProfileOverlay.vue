@@ -87,33 +87,33 @@
             </div>
 
             <!-- Ambassador -->
-            <div class="flex items-center gap-2 px-3 py-1.5 h-13 cursor-pointer
+            <div class="flex items-center gap-2 sm:gap-3 px-3 py-2 h-12 sm:h-14 cursor-pointer
                         transition-all duration-200 rounded-lg mb-2
                         hover:bg-white hover:bg-opacity-10 hover:translate-x-1 relative"
                 @click="handleMenuClick('ambassador')">
-              <div class="w-10 h-10 bg-[#3A33D3] border border-white border-opacity-20
+              <div class="w-8 h-8 sm:w-10 sm:h-10 bg-[#3A33D3] border border-white border-opacity-20
                           rounded-full flex items-center justify-center flex-shrink-0">
                 <svg width="20" height="20" viewBox="0 0 14 20" fill="none">
                   <path d="M7 9.64844C9.76508 9.64858 12.0066 11.9652 12.0068 14.8242C12.0068 17.6826 9.76511 19.9999 7 20C4.23394 20 1.99219 17.6827 1.99219 14.8242C1.99243 11.9651 4.23409 9.64844 7 9.64844ZM6.09668 13.8418L4.07715 14.1465L5.53906 15.6182L5.19434 17.6992L7 16.7168L8.80566 17.6992L8.46191 15.6182L9.92383 14.1465L7.90332 13.8418L7 11.9512L6.09668 13.8418ZM4.60547 0L7 3.30078L9.39453 0H14L7 9.64844L0 0H4.60547Z" fill="white"/>
                 </svg>
               </div>
-              <span class="text-white text-base font-bold leading-7 flex-1">Ambassador</span>
+              <span class="text-white text-sm sm:text-base font-bold leading-6 sm:leading-7 flex-1 text-center">Ambassador</span>
             </div>
 
             <!-- Verification -->
-            <div class="flex items-center gap-2 px-3 py-1.5 h-13 cursor-pointer
+            <div class="flex items-center gap-2 sm:gap-3 px-3 py-2 h-12 sm:h-14 cursor-pointer
                         transition-all duration-200 rounded-lg mb-2
                         hover:bg-white hover:bg-opacity-10 hover:translate-x-1 relative"
                 @click="handleMenuClick('verification')">
-              <div class="w-10 h-10 bg-[#3A33D3] border border-white border-opacity-20
+              <div class="w-8 h-8 sm:w-10 sm:h-10 bg-[#3A33D3] border border-white border-opacity-20
                           rounded-full flex items-center justify-center flex-shrink-0">
                 <svg width="20" height="20" viewBox="0 0 18 22" fill="none">
                   <path d="M14.2511 12.4974C15.4932 12.4974 16.5 13.5045 16.5 14.7467V15.3222C16.5 16.2166 16.1805 17.0816 15.5989 17.7611C14.0295 19.5949 11.6422 20.5 8.49673 20.5C5.35076 20.5 2.96466 19.5946 1.39831 17.7601C0.818531 17.081 0.5 16.2174 0.5 15.3245V14.7467C0.5 13.5045 1.50689 12.4974 2.74896 12.4974H14.2511ZM14.2511 13.9977H2.74896C2.33534 13.9977 2.00005 14.333 2.00005 14.7467V15.3245C2.00005 15.8602 2.19117 16.3784 2.53904 16.7858C3.79239 18.2538 5.75834 18.9997 8.49673 18.9997C11.2351 18.9997 13.2028 18.2537 14.4593 16.7855C14.8082 16.3779 14.9999 15.8589 14.9999 15.3222V14.7467C14.9999 14.333 14.6647 13.9977 14.2511 13.9977ZM8.49673 0.5C11.2582 0.5 13.4969 2.73897 13.4969 5.50088C13.4969 8.2628 11.2582 10.5017 8.49673 10.5017C5.73521 10.5017 3.49656 8.2628 3.49656 5.50088C3.49656 2.73897 5.73521 0.5 8.49673 0.5ZM8.49673 2.00026C6.56366 2.00026 4.99661 3.56755 4.99661 5.50088C4.99661 7.43422 6.56366 9.00148 8.49673 9.00148C10.4298 9.00148 11.9968 7.43422 11.9968 5.50088C11.9968 3.56755 10.4298 2.00026 8.49673 2.00026Z" fill="white"/>
                 </svg>
               </div>
-              <span class="text-white text-base font-bold leading-7 flex-1">Verification</span>
+              <span class="text-white text-sm sm:text-base font-bold leading-6 sm:leading-7 flex-1 text-center">Verification</span>
               <!-- Error Badge -->
-              <div class="absolute right-4 top-1/2 transform -translate-y-1/2 w-6 h-6
+              <div class="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 sm:w-6 sm:h-6
                           rounded-full bg-[#FFF0F3] border-[0.667px] border-[#FF1919]
                           flex items-center justify-center flex-shrink-0">
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
@@ -123,17 +123,17 @@
             </div>
 
             <!-- Security -->
-            <div class="flex items-center gap-2 px-3 py-1.5 h-13 cursor-pointer
+            <div class="flex items-center gap-2 sm:gap-3 px-3 py-2 h-12 sm:h-14 cursor-pointer
                         transition-all duration-200 rounded-lg mb-2
                         hover:bg-white hover:bg-opacity-10 hover:translate-x-1 relative"
                 @click="handleMenuClick('security')">
-              <div class="w-10 h-10 bg-[#3A33D3] border border-white border-opacity-20
+              <div class="w-8 h-8 sm:w-10 sm:h-10 bg-[#3A33D3] border border-white border-opacity-20
                           rounded-full flex items-center justify-center flex-shrink-0">
                 <svg width="20" height="20" viewBox="0 0 18 20" fill="none">
                   <path d="M8.78516 0.0354746C8.92389 -0.0121504 9.07611 -0.0121504 9.21484 0.0354746C10.6561 0.531013 12.1438 0.945188 13.6377 1.26497C14.8838 1.5317 16.1601 1.73823 17.4297 1.87922C17.7546 1.91522 18 2.18263 18 2.50032V8.7386C17.9998 13.165 15.3282 17.2234 11.1943 19.0784L9.26953 19.9427C9.18416 19.9808 9.09193 20.0003 9 20.0003C8.90802 20.0003 8.81583 19.9808 8.73047 19.9427L6.80566 19.0784C2.67178 17.2233 0.000192532 13.165 0 8.7386V2.50032C0 2.18263 0.245411 1.91529 0.570312 1.87922C1.83994 1.73823 3.11627 1.53164 4.3623 1.26497C5.85626 0.945192 7.34396 0.531005 8.78516 0.0354746ZM9 1.28743C7.57623 1.76779 6.10923 2.17074 4.6377 2.48567C3.53526 2.72147 2.41054 2.91243 1.28613 3.05403V8.7386C1.28633 12.6791 3.6638 16.2924 7.34375 17.9437L9 18.6868L10.6562 17.9437C14.3362 16.2924 16.7137 12.6792 16.7139 8.7386V3.05403C15.5895 2.91243 14.4647 2.72154 13.3623 2.48567C11.8907 2.17074 10.4239 1.7678 9 1.28743ZM9 4.37532C10.4179 4.37532 11.5713 5.49682 11.5713 6.87532V7.50032L11.7021 7.50618C12.3499 7.57014 12.8564 8.10392 12.8564 8.75032V13.1253C12.8563 13.8145 12.2802 14.3753 11.5713 14.3753H6.42871C5.71976 14.3753 5.14277 13.8145 5.14258 13.1253V8.75032C5.14258 8.10406 5.64931 7.57034 6.29688 7.50618L6.42871 7.50032V6.87532C6.42871 5.49687 7.58218 4.3754 9 4.37532ZM6.42871 13.1253H11.5723L11.5713 8.75032H6.42871V13.1253ZM9 5.62532C8.29099 5.6254 7.71484 6.18599 7.71484 6.87532V7.50032H10.2861V6.87532C10.2861 6.18594 9.70907 5.62532 9 5.62532Z" fill="white"/>
                 </svg>
               </div>
-              <span class="text-white text-base font-bold leading-7 flex-1">Security</span>
+              <span class="text-white text-sm sm:text-base font-bold leading-6 sm:leading-7 flex-1 text-center">Security</span>
             </div>
 
             <!-- Settings -->
