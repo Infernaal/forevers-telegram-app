@@ -7,7 +7,7 @@
                 pb-12 xs:pb-14 sm:pb-16 md:pb-18 lg:pb-20 xl:pb-22">
       <!-- Dropdown Menu -->
       <div class="relative w-full
-              max-w-[320px] xs:max-w-[350px] sm:max-w-[400px] md:max-w-[450px] lg:max-w-[500px] xl:max-w-[550px] 2xl:max-w-[600px]
+              max-w-full xs:max-w-full sm:max-w-full md:max-w-[600px] lg:max-w-[800px] xl:max-w-[1000px] 2xl:max-w-[1200px]
               min-h-[450px] max-h-[calc(100vh-100px)]
               h-[480px] xs:h-[500px] sm:h-[520px] md:h-[540px] lg:h-[560px] xl:h-[580px] 2xl:h-[600px]
               bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
