@@ -227,12 +227,14 @@
 
             <!-- ID Section -->
             <div class="relative flex items-center">
-              <div class="bg-white/[0.30] backdrop-blur-[32px] border border-white/40 rounded-full h-[38px] min-w-[123px] flex items-center pl-3 pr-1">
-                <span class="text-dbd-light-gray text-sm mr-1">ID:</span>
-                <span class="text-white text-sm font-medium">515745</span>
-                <button class="flex-shrink-0 w-6 h-6 bg-white border border-gray-300 rounded-r-full flex items-center justify-center ml-2"
+              <div class="bg-white/[0.30] backdrop-blur-[32px] border border-white/40 rounded-full h-11 w-32 sm:w-36 flex items-center justify-between pl-3 pr-0">
+                <div class="flex items-center min-w-0">
+                  <span class="text-dbd-light-gray text-sm">ID:</span>
+                  <span class="text-white text-sm font-medium ml-1">515745</span>
+                </div>
+                <button class="flex-shrink-0 w-6 h-6 bg-white border border-[#D8D8D8] rounded-r-full flex items-center justify-center"
                         @click="copyUserID">
-                  <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
+                  <svg class="w-4 h-4 text-gray-600" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M18.2806 1.19995H8.98336C8.42322 1.19995 7.88603 1.43348 7.48995 1.84917C7.09387 2.26486 6.87136 2.82866 6.87136 3.41653V4.26906H5.81536C5.2278 4.26906 4.66431 4.51402 4.24885 4.95006C3.83338 5.3861 3.59998 5.97749 3.59998 6.59414V20.4749C3.59998 21.0915 3.83338 21.6829 4.24885 22.119C4.66431 22.555 5.2278 22.8 5.81536 22.8H14.9132C15.5008 22.8 16.0643 22.555 16.4797 22.119C16.8952 21.6829 17.1286 21.0915 17.1286 20.4749V19.6998H18.2806C18.8363 19.6999 19.3699 19.4709 19.7663 19.0621C20.1627 18.6533 20.3903 18.0975 20.4 17.5143V3.41653C20.398 2.82794 20.1739 2.26417 19.7766 1.8487C19.3794 1.43323 18.8414 1.19995 18.2806 1.19995ZM15.6517 20.4749C15.6517 20.6804 15.5739 20.8776 15.4354 21.0229C15.2969 21.1682 15.1091 21.2499 14.9132 21.2499H5.81536C5.61951 21.2499 5.43168 21.1682 5.29319 21.0229C5.1547 20.8776 5.0769 20.6804 5.0769 20.4749V6.59414C5.0769 6.38859 5.1547 6.19146 5.29319 6.04611C5.43168 5.90077 5.61951 5.81911 5.81536 5.81911H14.9132C15.1091 5.81911 15.2969 5.90077 15.4354 6.04611C15.5739 6.19146 15.6517 6.38859 15.6517 6.59414V20.4749ZM18.9231 17.5143C18.9211 17.6918 18.8526 17.8613 18.7323 17.9861C18.612 18.1108 18.4497 18.1808 18.2806 18.1808H17.1286V6.59414C17.1286 5.97749 16.8952 5.3861 16.4797 4.95006C16.0643 4.51402 15.5008 4.26906 14.9132 4.26906H8.34828V3.41653C8.34828 3.23976 8.41519 3.07022 8.53429 2.94523C8.65339 2.82023 8.81493 2.75001 8.98336 2.75001H18.2806C18.3646 2.74898 18.448 2.76546 18.5259 2.7985C18.6038 2.83154 18.6747 2.88047 18.7344 2.94246C18.7942 3.00446 18.8416 3.07828 18.874 3.15966C18.9064 3.24103 18.9231 3.32834 18.9231 3.41653V17.5143Z"/>
                   </svg>
                 </button>
@@ -240,43 +242,55 @@
             </div>
 
             <!-- Separator Bar -->
-            <div class="w-0.5 h-6 bg-dbd-light-gray opacity-40 rounded-full mx-8"></div>
+            <div class="w-0.5 h-6 bg-dbd-light-gray opacity-40 rounded-full mx-4 sm:mx-6"></div>
 
-            <!-- Language Section -->
+            <!-- Language Section with Dropdown -->
             <div class="relative flex items-center">
-              <div class="bg-white/[0.20] border border-white/24 rounded-full h-11 min-w-[131px] flex items-center px-1.5 cursor-pointer hover:bg-white/25 transition-colors"
-                   @click="onMenuClick('language')">
-                <!-- US Flag -->
+              <div class="bg-white/[0.20] border border-white/24 rounded-full h-11 w-32 sm:w-36 flex items-center px-1.5 cursor-pointer hover:bg-white/25 transition-colors"
+                   @click="toggleLanguageDropdown">
+                <!-- Selected Country Flag -->
                 <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 ml-1">
-                  <svg class="w-full h-full" viewBox="0 0 32 32" fill="none">
-                    <circle cx="16" cy="16" r="16" fill="#D4D4D4"/>
-                    <g clipPath="url(#clip0_flag)">
-                      <path d="M15.9993 31.0591C24.316 31.0591 31.0581 24.317 31.0581 16.0002C31.0581 7.68347 24.316 0.941406 15.9993 0.941406C7.68249 0.941406 0.94043 7.68347 0.94043 16.0002C0.94043 24.317 7.68249 31.0591 15.9993 31.0591Z" fill="#F0F0F0"/>
-                      <path d="M15.3438 16.0025H31.0573C31.0573 14.6433 30.8761 13.3266 30.5385 12.0741H15.3438V16.0025Z" fill="#D80027"/>
-                      <path d="M15.3438 8.14179H28.847C27.9252 6.63756 26.7466 5.30797 25.3723 4.21338H15.3438V8.14179Z" fill="#D80027"/>
-                      <path d="M16.0038 31.06C19.5478 31.06 22.8053 29.8351 25.3776 27.7864H6.62988C9.20224 29.8351 12.4597 31.06 16.0038 31.06Z" fill="#D80027"/>
-                      <path d="M3.15241 23.855H28.8496C29.5896 22.6475 30.1636 21.3275 30.5411 19.9266H1.46094C1.83841 21.3275 2.41235 22.6475 3.15241 23.855Z" fill="#D80027"/>
-                      <path d="M7.91596 3.29305H9.28825L8.01178 4.22041L8.49937 5.72094L7.22296 4.79358L5.94655 5.72094L6.36772 4.42464C5.24384 5.36082 4.25878 6.45764 3.44702 7.67976H3.88672L3.07419 8.27005C2.94761 8.48123 2.82619 8.69576 2.70984 8.91346L3.09784 10.1076L2.37396 9.5817C2.19402 9.96294 2.02943 10.3528 1.88149 10.7507L2.30896 12.0665H3.88672L2.61025 12.9938L3.09784 14.4943L1.82143 13.567L1.05684 14.1225C0.980312 14.7377 0.94043 15.3643 0.94043 16.0002H15.9993C15.9993 7.68352 15.9993 6.70305 15.9993 0.941406C13.0244 0.941406 10.2513 1.80435 7.91596 3.29305ZM8.49937 14.4943L7.22296 13.567L5.94655 14.4943L6.43414 12.9938L5.15767 12.0665H6.73543L7.22296 10.5659L7.71049 12.0665H9.28825L8.01178 12.9938L8.49937 14.4943ZM8.01178 8.60711L8.49937 10.1076L7.22296 9.18029L5.94655 10.1076L6.43414 8.60711L5.15767 7.67976H6.73543L7.22296 6.17923L7.71049 7.67976H9.28825L8.01178 8.60711ZM13.9009 14.4943L12.6245 13.567L11.3481 14.4943L11.8357 12.9938L10.5592 12.0665H12.137L12.6245 10.5659L13.112 12.0665H14.6898L13.4133 12.9938L13.9009 14.4943ZM13.4133 8.60711L13.9009 10.1076L12.6245 9.18029L11.3481 10.1076L11.8357 8.60711L10.5592 7.67976H12.137L12.6245 6.17923L13.112 7.67976H14.6898L13.4133 8.60711ZM13.4133 4.22041L13.9009 5.72094L12.6245 4.79358L11.3481 5.72094L11.8357 4.22041L10.5592 3.29305H12.137L12.6245 1.79252L13.112 3.29305H14.6898L13.4133 4.22041Z" fill="#0052B4"/>
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_flag">
-                        <rect width="30.1176" height="30.1176" fill="white" transform="translate(0.94043 0.941406)"/>
-                      </clipPath>
-                    </defs>
-                  </svg>
+                  <CountryFlag :country="selectedLanguage.country" size="small" />
                 </div>
 
-                <!-- ENG Text -->
-                <span class="text-dbd-off-white text-base font-medium flex-1 text-center">ENG</span>
+                <!-- Language Text -->
+                <span class="text-dbd-off-white text-base font-medium flex-1 text-center">{{ selectedLanguage.code }}</span>
 
                 <!-- Dropdown Arrow -->
                 <div class="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center mr-1">
-                  <svg class="w-3 h-3 text-white" viewBox="0 0 20 20" fill="none">
+                  <svg class="w-3 h-3 text-white transform transition-transform duration-200"
+                       :class="{ 'rotate-180': isLanguageDropdownOpen }"
+                       viewBox="0 0 20 20" fill="none">
                     <circle opacity="0.2" cx="10" cy="10" r="10" fill="white"/>
                     <path d="M5.71387 8.57146L9.99958 12.8572L14.2853 8.57146" stroke="white" strokeLinecap="round"/>
                   </svg>
                 </div>
               </div>
+
+              <!-- Language Dropdown Menu -->
+              <Transition
+                name="dropdown"
+                enter-active-class="transition-all duration-200 ease-out"
+                leave-active-class="transition-all duration-150 ease-in"
+                enter-from-class="opacity-0 scale-95 translate-y-2"
+                enter-to-class="opacity-100 scale-100 translate-y-0"
+                leave-from-class="opacity-100 scale-100 translate-y-0"
+                leave-to-class="opacity-0 scale-95 translate-y-2">
+                <div v-if="isLanguageDropdownOpen"
+                     class="absolute bottom-full right-0 mb-2 w-48 bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-50 max-h-40 overflow-y-auto"
+                     @click.stop>
+                  <div v-for="language in languages"
+                       :key="language.code"
+                       class="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 cursor-pointer transition-colors"
+                       @click="selectLanguage(language)">
+                    <div class="w-6 h-6 rounded-full overflow-hidden flex-shrink-0">
+                      <CountryFlag :country="language.country" size="small" />
+                    </div>
+                    <span class="text-gray-800 text-sm font-medium">{{ language.name }}</span>
+                    <span class="text-gray-500 text-xs ml-auto">{{ language.code }}</span>
+                  </div>
+                </div>
+              </Transition>
             </div>
           </div>
         </div>
