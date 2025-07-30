@@ -270,7 +270,7 @@
           </div>
         </div>
       </div>
-      <!-- Triangle убран по требованию -->
+      <!-- Triangle убран по требова��ию -->
     </div>
   </div>
 </template>
@@ -321,7 +321,7 @@ const languages = ref([
   { code: 'FRA', name: 'Français', country: 'france' },
   { code: 'DEU', name: 'Deutsch', country: 'germany' },
   { code: 'ITA', name: 'Italiano', country: 'italy' },
-  { code: 'RUS', name: 'Русский', country: 'ukraine' },
+  { code: 'RUS', name: 'Рус��кий', country: 'ukraine' },
   { code: 'CHN', name: '中文', country: 'china' },
   { code: 'JPN', name: '日本語', country: 'japan' },
   { code: 'KOR', name: '한국어', country: 'new zealand' },
@@ -1285,7 +1285,8 @@ const selectLanguage = (language) => {
   }
   
   .language-section-container {
-    width: 96px;
+    flex: 1; /* расширенная ENG секция */
+    min-width: 100px;
     height: 36px;
     border-radius: 18px;
   }
