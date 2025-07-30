@@ -302,10 +302,65 @@ const agreeToTerms = () => {
 @media (max-height: 480px) {
   .modal-scroll-section {
     max-height: calc(100vh - 160px) !important;
+    max-height: calc(100dvh - 160px) !important;
   }
 }
 
-/* У��рано - адаптивность теперь через Tailwind CSS классы */
+/* iOS Safari specific optimizations */
+@supports (-webkit-touch-callout: none) {
+  .terms-modal-overlay {
+    height: 100vh;
+    height: -webkit-fill-available;
+  }
+  .modal-container {
+    height: calc(100vh - 32px);
+    height: calc(-webkit-fill-available - 32px);
+  }
+  .modal-scroll-section {
+    max-height: calc(100vh - 200px);
+    max-height: calc(-webkit-fill-available - 200px);
+  }
+}
+
+/* Android Chrome specific optimizations */
+@media screen and (max-width: 768px) {
+  .modal-container {
+    height: calc(100vh - 32px);
+    height: calc(100dvh - 32px);
+  }
+  .modal-scroll-section {
+    max-height: calc(100vh - 200px);
+    max-height: calc(100dvh - 200px);
+  }
+}
+
+/* iPhone X and newer (with notch) */
+@supports (padding: max(0px)) {
+  .terms-modal-overlay {
+    padding: max(8px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left));
+  }
+}
+
+/* Tablets (iPad, Android tablets) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .modal-container {
+    max-width: 480px;
+    height: calc(100vh - 64px);
+    height: calc(100dvh - 64px);
+  }
+}
+
+/* Large tablets and small desktops */
+@media (min-width: 1024px) {
+  .modal-container {
+    max-width: 520px;
+    height: auto;
+    max-height: calc(100vh - 80px);
+    max-height: calc(100dvh - 80px);
+  }
+}
+
+/* Убрано - адаптивность теперь через Tailwind CSS классы */
 
 /* Landscape orientation - важно для мобильных */
 @media (max-height: 500px) and (orientation: landscape) {
