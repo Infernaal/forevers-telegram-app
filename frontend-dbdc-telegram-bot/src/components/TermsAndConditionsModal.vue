@@ -413,20 +413,6 @@ const agreeToTerms = () => {
   }
 }
 
-/* Tablet styles */
-@media (min-width: 481px) and (max-width: 768px) {
-  .terms-modal-container {
-    max-width: 500px;
-  }
-}
-
-/* Desktop styles */
-@media (min-width: 769px) {
-  .terms-modal-container {
-    max-width: 600px;
-  }
-}
-
 /* Touch optimizations */
 .terms-agree-btn,
 .terms-back-btn {
