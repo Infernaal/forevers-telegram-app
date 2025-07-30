@@ -1,13 +1,7 @@
 <template>
-  <div v-if="isVisible" class="fixed inset-0 z-50 font-montserrat bg-black bg-opacity-20 backdrop-blur-xl
-                      safe-area-inset-top safe-area-inset-bottom
-                      animate-[fadeIn_0.3s_ease-out]">
+  <div v-if="isVisible" class="fixed inset-0 bottom-[88px] z-[9999] font-montserrat bg-black/10 backdrop-blur-xl">
     <!-- Dropdown Wrapper -->
-    <div class="relative w-full h-full flex justify-center items-end
-                px-2 xs:px-3 sm:px-4 md:px-6 lg:px-8 xl:px-10
-                py-2 xs:py-3 sm:py-4 md:py-6 lg:py-8
-                pb-20 xs:pb-24 sm:pb-28 md:pb-32 lg:pb-36
-                safe-area-bottom">
+    <div class="relative w-full h-full flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 lg:px-12">
       <!-- Dropdown Menu -->
       <div class="relative w-full
               max-w-[98vw] xs:max-w-[380px] sm:max-w-[440px] md:max-w-[500px] lg:max-w-[560px] xl:max-w-[620px]
