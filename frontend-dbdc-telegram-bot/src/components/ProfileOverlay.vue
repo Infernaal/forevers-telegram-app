@@ -189,19 +189,21 @@
 
             <!-- Security -->
             <div class="flex items-center
-                        gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3
-                        px-2 xs:px-2.5 sm:px-3 md:px-3.5
-                        py-1 xs:py-1.5 sm:py-2
-                        h-10 xs:h-11 sm:h-12 md:h-13
-                        cursor-pointer transition-all duration-200
-                        rounded-md xs:rounded-lg sm:rounded-xl
-                        mb-1.5 xs:mb-2 sm:mb-2.5
-                        hover:bg-white hover:bg-opacity-10 hover:translate-x-1 relative"
+                        gap-2 xs:gap-2.5 sm:gap-3 md:gap-4
+                        px-3 xs:px-4 sm:px-5 md:px-6
+                        py-2 xs:py-2.5 sm:py-3
+                        h-12 xs:h-13 sm:h-14 md:h-15
+                        cursor-pointer transition-all duration-300
+                        rounded-lg xs:rounded-xl sm:rounded-2xl
+                        mb-2 xs:mb-2.5 sm:mb-3
+                        hover:bg-white hover:bg-opacity-15 hover:translate-x-2 hover:scale-[1.02] relative
+                        touch-manipulation active:scale-95"
                 @click="handleMenuClick('security')">
-              <div class="w-8 xs:w-9 sm:w-10 md:w-11 h-8 xs:h-9 sm:h-10 md:h-11
-                          bg-[#3A33D3] border border-white border-opacity-20
-                          rounded-full flex items-center justify-center flex-shrink-0">
-                <svg class="w-4 xs:w-5 sm:w-5 md:w-6 h-4 xs:h-5 sm:h-5 md:h-6" viewBox="0 0 18 20" fill="none">
+              <div class="w-10 xs:w-11 sm:w-12 md:w-13 h-10 xs:h-11 sm:h-12 md:h-13
+                          bg-[#3A33D3] border border-white border-opacity-30
+                          rounded-full flex items-center justify-center flex-shrink-0
+                          transition-all duration-300 hover:bg-[#4A43E3] hover:scale-110">
+                <svg class="w-5 xs:w-6 sm:w-6 md:w-7 h-5 xs:h-6 sm:h-6 md:h-7" viewBox="0 0 18 20" fill="none">
                   <path d="M8.78516 0.0354746C8.92389 -0.0121504 9.07611 -0.0121504 9.21484 0.0354746C10.6561 0.531013 12.1438 0.945188 13.6377 1.26497C14.8838 1.5317 16.1601 1.73823 17.4297 1.87922C17.7546 1.91522 18 2.18263 18 2.50032V8.7386C17.9998 13.165 15.3282 17.2234 11.1943 19.0784L9.26953 19.9427C9.18416 19.9808 9.09193 20.0003 9 20.0003C8.90802 20.0003 8.81583 19.9808 8.73047 19.9427L6.80566 19.0784C2.67178 17.2233 0.000192532 13.165 0 8.7386V2.50032C0 2.18263 0.245411 1.91529 0.570312 1.87922C1.83994 1.73823 3.11627 1.53164 4.3623 1.26497C5.85626 0.945192 7.34396 0.531005 8.78516 0.0354746ZM9 1.28743C7.57623 1.76779 6.10923 2.17074 4.6377 2.48567C3.53526 2.72147 2.41054 2.91243 1.28613 3.05403V8.7386C1.28633 12.6791 3.6638 16.2924 7.34375 17.9437L9 18.6868L10.6562 17.9437C14.3362 16.2924 16.7137 12.6792 16.7139 8.7386V3.05403C15.5895 2.91243 14.4647 2.72154 13.3623 2.48567C11.8907 2.17074 10.4239 1.7678 9 1.28743ZM9 4.37532C10.4179 4.37532 11.5713 5.49682 11.5713 6.87532V7.50032L11.7021 7.50618C12.3499 7.57014 12.8564 8.10392 12.8564 8.75032V13.1253C12.8563 13.8145 12.2802 14.3753 11.5713 14.3753H6.42871C5.71976 14.3753 5.14277 13.8145 5.14258 13.1253V8.75032C5.14258 8.10406 5.64931 7.57034 6.29688 7.50618L6.42871 7.50032V6.87532C6.42871 5.49687 7.58218 4.3754 9 4.37532ZM6.42871 13.1253H11.5723L11.5713 8.75032H6.42871V13.1253ZM9 5.62532C8.29099 5.6254 7.71484 6.18599 7.71484 6.87532V7.50032H10.2861V6.87532C10.2861 6.18594 9.70907 5.62532 9 5.62532Z" fill="white"/>
                 </svg>
               </div>
