@@ -662,24 +662,24 @@ console.log('ProfileOverlay loaded with corrected design')
 /* Responsive ID/ENG block adjustments */
 @media (max-width: 640px) {
   .w-36 {
-    width: 8.5rem; /* 136px */
+    width: 9.5rem; /* 152px - увеличиваем на мобиле */
   }
 }
 
 @media (max-width: 480px) {
   .w-36 {
-    width: 9rem; /* 144px - увеличиваем на мобиле для лучшей видимости цифр */
+    width: 10rem; /* 160px - еще больше для лучшей видимости */
   }
 }
 
 @media (max-width: 375px) {
   .w-36 {
-    width: 8.75rem; /* 140px */
+    width: 9.75rem; /* 156px */
   }
 
   .mx-4 {
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
   }
 }
 
