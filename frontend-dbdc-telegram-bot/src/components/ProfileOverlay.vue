@@ -208,7 +208,7 @@
                       h-10 sm:h-11 md:h-12 lg:h-14">
 
             <!-- ID Section - Copy button border to border -->
-            <div class="flex-1 max-w-[140px] h-12
+            <div class="flex-1 max-w-[120px] xs:max-w-[130px] sm:max-w-[140px] h-full
                         bg-white/30 border border-white/40 rounded-full
                         backdrop-blur-sm flex items-center relative
                         transition-all duration-300 ease-in-out overflow-hidden"
