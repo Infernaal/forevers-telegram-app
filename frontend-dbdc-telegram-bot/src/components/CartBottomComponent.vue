@@ -43,118 +43,33 @@ const emit = defineEmits(['back', 'purchase'])
 </script>
 
 <style scoped>
-.cart-bottom-component {
-  font-family: 'Montserrat', sans-serif;
+/* Base styles */
+.w-full {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.back-button:hover,
-.buy-button:hover {
-  transform: translateY(-1px);
+/* Button hover effects */
+button {
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-/* Mobile optimization */
-@media (max-width: 375px) {
-  .cart-bottom-component {
-    padding: 14px 14px 16px 14px;
-  }
-
-  .action-buttons .back-button {
-    height: 40px;
-    min-width: 110px;
-    padding: 8px 20px;
-    gap: 6px;
-  }
-
-  .action-buttons .buy-button {
-    height: 40px;
-    font-size: 14px;
-    padding: 8px 20px;
-    min-width: 160px;
-  }
-
-  .total-section span {
-    font-size: 17px;
-    line-height: 22px;
-  }
-
-  .total-section {
-    margin-bottom: 12px;
-  }
+button:active {
+  transform: scale(0.98) translateY(1px);
 }
 
-/* Small tablets */
-@media (min-width: 376px) and (max-width: 430px) {
-  .cart-bottom-component {
-    padding: 14px 16px 16px 16px;
-  }
-
-  .action-buttons .back-button {
-    height: 42px;
-    min-width: 115px;
-  }
-
-  .action-buttons .buy-button {
-    height: 42px;
-    font-size: 15px;
-    min-width: 170px;
-  }
-
-  .total-section span {
-    font-size: 18px;
-  }
+/* Performance optimizations */
+button {
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
-/* Tablets and larger */
-@media (min-width: 431px) and (max-width: 768px) {
-  .cart-bottom-component {
-    max-width: 420px;
-    margin: 0 auto;
-    padding-bottom: 28px; /* поднято выше */
-  }
-
-  .action-buttons .back-button {
-    height: 44px;
-    min-width: 120px;
-  }
-
-  .action-buttons .buy-button {
-    height: 44px;
-    font-size: 16px;
-    min-width: 180px;
-  }
-
-  .total-section span {
-    font-size: 19px;
-  }
-}
-
-/* Desktop and large screens */
-@media (min-width: 769px) {
-  .cart-bottom-component {
-    padding: 20px 40px 32px 40px;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .action-buttons .back-button {
-    height: 52px;
-    min-width: 140px;
-    font-size: 16px;
-  }
-
-  .action-buttons .buy-button {
-    height: 52px;
-    font-size: 18px;
-    min-width: 200px;
-  }
-
-  .total-section span {
-    font-size: 20px;
-    line-height: 28px;
-  }
-
-  .total-section {
-    margin-bottom: 16px;
-  }
+/* Telegram WebApp specific optimizations */
+* {
+  -webkit-tap-highlight-color: transparent;
 }
 </style>
