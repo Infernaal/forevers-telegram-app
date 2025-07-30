@@ -338,6 +338,10 @@ const fetchBalancesFromBackend = async () => {
     setTimeout(() => {
       balances.value = mockBalances
       isLoading.value = false
+      // Initialize card opacities after balances are loaded
+      nextTick(() => {
+        initializeCardOpacities()
+      })
     }, 1000)
 
   } catch (error) {
