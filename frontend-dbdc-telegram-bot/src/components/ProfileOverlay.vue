@@ -420,16 +420,55 @@ console.log('ProfileOverlay loaded with corrected design')
   border-radius: 30px;
 }
 
-/* Ensure proper height distribution */
+/* Responsive height adjustments */
+@media (max-height: 800px) {
+  .max-h-60 {
+    max-height: 12rem; /* 192px */
+  }
+}
+
 @media (max-height: 700px) {
+  .max-h-60 {
+    max-height: 10rem; /* 160px */
+  }
+
+  .max-h-\[calc\(100vh-176px\)\] {
+    max-height: calc(100vh - 140px);
+  }
+}
+
+@media (max-height: 600px) {
+  .max-h-60 {
+    max-height: 8rem; /* 128px */
+  }
+
   .max-h-\[calc\(100vh-176px\)\] {
     max-height: calc(100vh - 120px);
   }
 }
 
-@media (max-height: 600px) {
+@media (max-height: 500px) {
+  .max-h-60 {
+    max-height: 6rem; /* 96px */
+  }
+
   .max-h-\[calc\(100vh-176px\)\] {
     max-height: calc(100vh - 100px);
+  }
+}
+
+/* Mobile width adjustments */
+@media (max-width: 320px) {
+  .max-w-\[375px\] {
+    max-width: calc(100vw - 16px);
+  }
+}
+
+/* Ensure proper gap spacing on smaller screens */
+@media (max-width: 375px) {
+  .mx-8 {
+    margin-left: 1rem;
+    margin-right: 1rem;
   }
 }
 </style>
