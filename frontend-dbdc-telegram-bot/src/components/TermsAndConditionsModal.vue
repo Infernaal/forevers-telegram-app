@@ -181,7 +181,8 @@
 
         <!-- Action Buttons -->
         <div class="p-3 sm:p-4 md:p-5 flex flex-col gap-2 sm:gap-3
-                    flex-shrink-0 border-t border-gray-100">
+                    flex-shrink-0 border-t border-gray-100 bg-white
+                    sticky bottom-0 z-10">
           <button
             class="w-full h-11 sm:h-12 md:h-14 px-4 sm:px-6 md:px-8
                    flex items-center justify-center rounded-full
@@ -269,7 +270,7 @@ const agreeToTerms = () => {
 
 /* Базовые стили модального окна - работают с Tailwind */
 .modal-container {
-  /* Дополнительные стили при н��обходимости */
+  /* Дополнитель��ые стили при н��обходимости */
 }
 
 /* Обеспечиваем правильную работу скролла */
