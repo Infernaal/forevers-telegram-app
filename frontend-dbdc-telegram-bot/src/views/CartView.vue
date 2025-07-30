@@ -60,7 +60,7 @@
       </div>
 
       <!-- Empty Cart (takes full space when empty) -->
-      <div v-else class="fixed inset-0 top-16 bottom-24 flex items-center justify-center px-4">
+      <div v-else class="fixed inset-0 top-4 bottom-[84px] sm:bottom-[92px] flex items-center justify-center px-4">
         <div class="text-center w-full max-w-sm mx-auto">
           <div class="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center mb-6 mx-auto">
             <svg width="20" height="22" viewBox="0 0 18 20" class="text-gray-400">
