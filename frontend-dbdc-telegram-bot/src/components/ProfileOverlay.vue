@@ -68,11 +68,11 @@
                       <path d="M19.4971 12.7667L15.699 12.2144L14.0007 8.77307V17.4421L17.3977 19.2279L16.7489 15.4452L19.4971 12.7667Z" fill="#E0E0E0"/>
                     </svg>
                   </div>
-                  <span class="text-dbd-off-white text-xs xs:text-sm sm:text-base font-medium leading-4 xs:leading-5 sm:leading-6">Silver</span>
+                  <span class="text-dbd-off-white text-xs xs:text-sm sm:text-base font-semibold leading-4 xs:leading-5 sm:leading-6">Silver</span>
                 </div>
 
                 <!-- User Name -->
-                <h2 class="text-white text-sm xs:text-base sm:text-lg md:text-xl font-bold leading-4 xs:leading-5 sm:leading-6 m-0 whitespace-nowrap overflow-hidden text-ellipsis text-left">
+                <h2 class="text-white text-sm xs:text-base sm:text-lg md:text-xl font-bold leading-5 xs:leading-6 sm:leading-7 m-0 whitespace-nowrap overflow-hidden text-ellipsis text-left">
                   Jason Williams
                 </h2>
               </div>
@@ -503,7 +503,7 @@ const languages = ref([
   { code: 'CHN', name: '中��', country: 'china' },
   { code: 'JPN', name: '日本語', country: 'japan' },
   { code: 'KOR', name: '한국어', country: 'new zealand' },
-  { code: 'ARA', name: 'العر��ية', country: 'uae' },
+  { code: 'ARA', name: 'العربية', country: 'uae' },
   { code: 'POR', name: 'Português', country: 'spain' },
   { code: 'NLD', name: 'Nederlands', country: 'norway' }
 ])
