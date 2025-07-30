@@ -6,7 +6,7 @@
       <!-- Dropdown Menu -->
             <div
         class="relative
-         w-[96%] sm:w-[94%] md:w-[92%] lg:w-[92%] xl:w-[90%]
+         w-[96%] sm:w-[94%] md:w-[92%] lg:w-[94%] xl:w-[90%]
          h-[calc(100vh-168px)]
          sm:h-[calc(100vh-172px)]
          md:h-[calc(100vh-172px)]
