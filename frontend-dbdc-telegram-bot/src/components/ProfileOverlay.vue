@@ -370,15 +370,13 @@
               </div>
               
               <button v-if="!showCopySuccess"
-                      class="flex items-center justify-center
-             absolute right-0 top-0 bottom-0
-             w-6 sm:w-7 md:w-8 lg:w-9 xl:w-10
-             h-full min-w-[24px] sm:min-w-[28px] md:min-w-[32px]
-             bg-white border border-[#D8D8D8]
-             rounded-r-full border-l-0 flex-shrink-0
-             hover:bg-gray-100 hover:scale-105 active:scale-95
-             transition-all duration-300 cursor-pointer
-             focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                      class="flex-shrink-0 w-6 sm:w-7 md:w-8 lg:w-9 xl:w-10
+           h-6 sm:h-7 md:h-8 lg:h-9 xl:h-10
+           bg-white border border-[#D8D8D8]
+           rounded-full flex items-center justify-center
+           hover:bg-gray-100 hover:scale-105 active:scale-95
+           transition-all duration-300
+           focus:outline-none focus:ring-2 focus:ring-blue-500/50"
                       @click="copyUserID"
                       aria-label="Скопировать ID">
                 <svg class="w-3 sm:w-4 md:w-5 lg:w-6 xl:w-7
