@@ -258,9 +258,9 @@
 
           <!-- Start Section -->
           <div class="absolute
-                      bottom-[60px] xs:bottom-[65px] sm:bottom-[70px] md:bottom-[75px] lg:bottom-[80px]
-                      left-2 xs:left-2.5 sm:left-3 md:left-3.5 lg:left-4
-                      right-2 xs:right-2.5 sm:right-3 md:right-3.5 lg:right-4 z-[1]">
+                      bottom-[55px] xs:bottom-[60px] sm:bottom-[65px] md:bottom-[75px] lg:bottom-[85px] xl:bottom-[95px]
+                      left-2 xs:left-2.5 sm:left-3 md:left-3.5 lg:left-4 xl:left-5
+                      right-2 xs:right-2.5 sm:right-3 md:right-3.5 lg:right-4 xl:right-5 z-[1]">
             <div class="w-full
                         h-20 xs:h-22 sm:h-24 md:h-26 lg:h-28
                         bg-[#F1E7FF] border border-[#DCCCF1]
