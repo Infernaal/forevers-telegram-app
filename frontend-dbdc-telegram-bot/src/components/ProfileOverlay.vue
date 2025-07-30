@@ -302,6 +302,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import CountryFlag from './CountryFlag.vue'
 
 // Props
 const props = defineProps({
@@ -313,6 +314,28 @@ const props = defineProps({
 
 // Emits
 const emit = defineEmits(['close'])
+
+// Language dropdown state
+const isLanguageDropdownOpen = ref(false)
+const selectedLanguage = ref({
+  code: 'ENG',
+  name: 'English',
+  country: 'us'
+})
+
+// Available languages
+const languages = [
+  { code: 'ENG', name: 'English', country: 'us' },
+  { code: 'ESP', name: 'Spanish', country: 'spain' },
+  { code: 'FRA', name: 'French', country: 'france' },
+  { code: 'DEU', name: 'German', country: 'germany' },
+  { code: 'ITA', name: 'Italian', country: 'italy' },
+  { code: 'JPN', name: 'Japanese', country: 'japan' },
+  { code: 'KOR', name: 'Korean', country: 'korea' },
+  { code: 'CHN', name: 'Chinese', country: 'china' },
+  { code: 'RUS', name: 'Russian', country: 'russia' },
+  { code: 'ARA', name: 'Arabic', country: 'uae' }
+]
 
 // Methods
 const handleBackdropClick = (event) => {
