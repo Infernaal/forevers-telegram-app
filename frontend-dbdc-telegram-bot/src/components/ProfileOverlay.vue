@@ -182,18 +182,18 @@
           </div>
 
           <!-- Start Section -->
-          <div class="absolute bottom-[86px] sm:bottom-[84px] left-3 right-3" style="z-index: 10001;">
-            <div class="w-full h-21 bg-[#F1E7FF] border border-[#DCCCF1] rounded-2xl 
-                        flex flex-col justify-center p-2 relative overflow-hidden">
+          <div class="absolute bottom-16 sm:bottom-18 md:bottom-20 left-3 sm:left-4 right-3 sm:right-4 z-[10001]">
+            <div class="w-full h-16 sm:h-20 bg-[#F1E7FF] border border-[#DCCCF1] rounded-xl sm:rounded-2xl
+                        flex flex-col justify-center p-2 sm:p-3 relative overflow-hidden">
               <!-- Background gradient -->
               <div class="absolute left-0 top-0 w-[140px] h-full 
                           bg-gradient-to-r from-[#8C4CD1] to-[#C497FF] 
                           opacity-40 rounded-l-2xl"></div>
               
               <div class="flex items-center justify-between mb-1 relative z-[1]">
-                <div class="flex items-center gap-3 flex-1">
+                <div class="flex items-center gap-2 sm:gap-3 flex-1">
                   <div class="flex-shrink-0">
-                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <svg width="24" height="24" sm:width="32" sm:height="32" viewBox="0 0 32 32" fill="none" class="w-6 h-6 sm:w-8 sm:h-8">
                       <g clip-path="url(#clip0_2_21309)">
                         <path d="M16 31.0588C24.3167 31.0588 31.0588 24.3167 31.0588 16C31.0588 7.68323 24.3167 0.941162 16 0.941162C7.68323 0.941162 0.941162 7.68323 0.941162 16C0.941162 24.3167 7.68323 31.0588 16 31.0588Z" fill="#8C4CD1"/>
                         <path d="M28.998 8.39055C26.1133 12.4471 21.365 15.0918 16.0003 15.0918C10.6356 15.0918 5.88739 12.4471 3.00269 8.39055C5.61916 3.9341 10.4615 0.941162 16.0003 0.941162C21.5392 0.941162 26.3815 3.9341 28.998 8.39055Z" fill="#9C68E1"/>
@@ -218,19 +218,19 @@
                       </defs>
                     </svg>
                   </div>
-                  <div class="text-dbd-dark text-lg font-bold leading-6 mb-1">Start</div>
+                  <div class="text-dbd-dark text-base sm:text-lg font-bold leading-5 sm:leading-6 mb-1">Start</div>
                 </div>
-                <button class="relative z-[1] w-[120px] h-11 min-h-[44px]
+                <button class="relative z-[1] w-20 sm:w-28 h-8 sm:h-10 min-h-[32px] sm:min-h-[40px]
                               bg-gradient-to-r from-dbd-primary to-[#473FFF]
-                              border-none rounded-full text-white text-base font-bold leading-5
+                              border-none rounded-full text-white text-xs sm:text-base font-bold leading-4 sm:leading-5
                               capitalize cursor-pointer transition-all duration-200
-                              hover:-translate-y-0.5 hover:shadow-lg flex-shrink-0" 
+                              hover:-translate-y-0.5 hover:shadow-lg flex-shrink-0"
                         @click="handleUpgrade">
                   Upgrade
                 </button>
               </div>
               <div class="relative z-[1]">
-                <div class="text-dbd-gray text-sm font-normal leading-6">
+                <div class="text-dbd-gray text-xs sm:text-sm font-normal leading-4 sm:leading-6 text-center">
                   buy <span class="text-[#8C4CD1] font-bold">123</span> more Forevers to upgrade
                 </div>
               </div>
@@ -238,19 +238,19 @@
           </div>
 
           <!-- Bottom Controls -->
-          <div class="absolute bottom-3 sm:bottom-2 left-3 right-3
-                      flex justify-center items-center gap-5 h-11"
-               style="z-index: 10001;">
+          <div class="absolute bottom-2 sm:bottom-3 left-3 sm:left-4 right-3 sm:right-4
+                      flex justify-center items-center gap-3 sm:gap-5 h-10 sm:h-11
+                      z-[10001]">
             
             <!-- ID Section -->
-            <div class="w-[145px] h-11 bg-white bg-opacity-30 border border-white border-opacity-40
-                        rounded-full backdrop-blur-[32px] flex items-center justify-between p-1.5
+            <div class="w-32 sm:w-36 h-10 sm:h-11 bg-white bg-opacity-30 border border-white border-opacity-40
+                        rounded-full backdrop-blur-[32px] flex items-center justify-between p-1 sm:p-1.5
                         relative transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden"
                 :class="{ 'id-copied-state': showCopySuccess }">
 
-              <div v-if="!showCopySuccess" class="flex items-center gap-0.5 pl-3 pr-10 flex-1">
-                <span class="text-[#B7B7B7] text-sm font-normal leading-6">ID: </span>
-                <span class="text-white text-sm font-normal leading-6">515745</span>
+              <div v-if="!showCopySuccess" class="flex items-center gap-0.5 pl-2 sm:pl-3 pr-8 sm:pr-10 flex-1">
+                <span class="text-[#B7B7B7] text-xs sm:text-sm font-normal leading-5 sm:leading-6">ID: </span>
+                <span class="text-white text-xs sm:text-sm font-normal leading-5 sm:leading-6">515745</span>
               </div>
 
               <div v-if="showCopySuccess" class="id-copied-content">
@@ -266,12 +266,12 @@
               </div>
               
               <button v-if="!showCopySuccess"
-                      class="w-8 h-8 min-w-[44px] min-h-[44px] bg-white border-[1.2px] border-[#D8D8D8]
+                      class="w-7 h-7 sm:w-8 sm:h-8 min-w-[28px] sm:min-w-[32px] min-h-[28px] sm:min-h-[32px] bg-white border-[1.2px] border-[#D8D8D8]
                             rounded-r-full border-l-0 flex items-center justify-center
                             cursor-pointer transition-all duration-200 flex-shrink-0
                             absolute right-0 top-1/2 transform -translate-y-1/2
                             hover:bg-gray-100 hover:scale-105 hover:shadow-lg
-                            active:scale-98" 
+                            active:scale-98"
                       @click="copyUserID">
                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M18.0655 0.5H7.60611C6.97596 0.5 6.37161 0.727045 5.92603 1.13119C5.48044 1.53533 5.23011 2.08346 5.23011 2.65501V3.48385H4.04211C3.38111 3.48385 2.74718 3.72201 2.27978 4.14594C1.81239 4.56986 1.5498 5.14483 1.5498 5.74435V19.2395C1.5498 19.839 1.81239 20.414 2.27978 20.8379C2.74718 21.2618 3.38111 21.5 4.04211 21.5H14.2772C14.9382 21.5 15.5721 21.2618 16.0395 20.8379C16.5069 20.414 16.7695 19.839 16.7695 19.2395V18.486H18.0655C18.6907 18.4861 19.291 18.2634 19.7369 17.866C20.1829 17.4685 20.4389 16.9281 20.4498 16.3611V2.65501C20.4476 2.08277 20.1954 1.53465 19.7485 1.13073C19.3016 0.7268 18.6964 0.499997 18.0655 0.5ZM15.108 19.2395C15.108 19.4393 15.0204 19.631 14.8646 19.7723C14.7088 19.9136 14.4975 19.993 14.2772 19.993H4.04211C3.82178 19.993 3.61047 19.9136 3.45467 19.7723C3.29887 19.631 3.21134 19.4393 3.21134 19.2395V5.74435C3.21134 5.54451 3.29887 5.35285 3.45467 5.21154C3.61047 5.07024 3.82178 4.99085 4.04211 4.99085H14.2772C14.4975 4.99085 14.7088 5.07024 14.8646 5.21154C15.0204 5.35285 15.108 5.54451 15.108 5.74435V19.2395ZM18.7883 16.3611C18.7861 16.5337 18.709 16.6985 18.5737 16.8198C18.4383 16.9411 18.2558 17.0092 18.0655 17.0092H16.7695V5.74435C16.7695 5.14483 16.5069 4.56986 16.0395 4.14594C15.5721 3.72201 14.9382 3.48385 14.2772 3.48385H6.89165V2.65501C6.89165 2.48314 6.96693 2.31832 7.10091 2.19679C7.2349 2.07527 7.41663 2.007 7.60611 2.007H18.0655C18.16 2.006 18.2538 2.02203 18.3415 2.05414C18.4291 2.08626 18.5089 2.13384 18.5761 2.19411C18.6433 2.25438 18.6967 2.32616 18.7331 2.40527C18.7695 2.48439 18.7883 2.56927 18.7883 2.65501V16.3611Z" fill="#2019CE"/>
@@ -283,20 +283,20 @@
             <div class="w-0.5 h-6 bg-[#E2E2E2] border border-[#B7B7B7] rounded-[30px] opacity-40 flex-shrink-0"></div>
 
             <!-- Language Section -->
-            <div class="w-[131px] h-11 bg-white bg-opacity-20 border border-white border-opacity-24 
-                        rounded-full flex items-center p-1.5 cursor-pointer transition-all duration-200 
-                        relative overflow-visible hover:bg-white hover:bg-opacity-30" 
+            <div class="w-28 sm:w-32 h-10 sm:h-11 bg-white bg-opacity-20 border border-white border-opacity-24
+                        rounded-full flex items-center p-1 sm:p-1.5 cursor-pointer transition-all duration-200
+                        relative overflow-visible hover:bg-white hover:bg-opacity-30"
                 @click="toggleLanguageDropdown">
               
-              <div class="flex items-center gap-1.5 flex-1 min-w-0 pr-6">
-                <CountryFlag :country="selectedLanguage.country" size="medium" class="flex-shrink-0 !w-8 !h-8 !min-w-8 !min-h-8" />
-                <span class="text-dbd-off-white text-base font-normal leading-7 flex-shrink-0 whitespace-nowrap w-10 text-left">
+              <div class="flex items-center gap-1 sm:gap-1.5 flex-1 min-w-0 pr-5 sm:pr-6">
+                <CountryFlag :country="selectedLanguage.country" size="medium" class="flex-shrink-0 !w-6 !h-6 sm:!w-8 sm:!h-8 !min-w-6 sm:!min-w-8 !min-h-6 sm:!min-h-8" />
+                <span class="text-dbd-off-white text-xs sm:text-base font-normal leading-5 sm:leading-7 flex-shrink-0 whitespace-nowrap w-8 sm:w-10 text-left">
                   {{ selectedLanguage.code }}
                 </span>
               </div>
               
-              <div class="w-5 h-5 flex items-center justify-center flex-shrink-0 
-                          transition-transform duration-200 absolute right-1.5 top-1/2 
+              <div class="w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center flex-shrink-0
+                          transition-transform duration-200 absolute right-1 sm:right-1.5 top-1/2
                           transform -translate-y-1/2"
                   :class="{ 'rotate-180': showLanguageDropdown }">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
