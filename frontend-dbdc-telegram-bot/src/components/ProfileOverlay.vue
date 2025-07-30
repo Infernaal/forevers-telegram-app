@@ -345,20 +345,22 @@
                       mb-1 xs:mb-2 sm:mb-3 md:mb-4">
             
             <!-- ID Section -->
-            <div class="min-w-[100px] sm:min-w-[120px] md:min-w-[140px] lg:min-w-[160px] xl:min-w-[180px]
-            max-w-[220px] w-full
-            h-9 sm:h-10 md:h-11 lg:h-12
-            flex flex-shrink-0 items-center justify-between
-            px-2 sm:px-3 md:px-4 lg:px-5
-            bg-white bg-opacity-30 border border-white/40 rounded-full
-            backdrop-blur-[40px] transition-all duration-300 overflow-hidden"
+            <div class="w-[90px] xs:w-[100px] sm:w-[110px] md:w-[120px] lg:w-[130px] xl:w-[140px]
+                        h-7 xs:h-8 sm:h-9 md:h-10 lg:h-11 xl:h-12
+                        bg-white bg-opacity-30 border border-white border-opacity-40
+                        rounded-full backdrop-blur-[40px] flex items-center justify-between
+                        p-0.5 xs:p-1 sm:p-1.5 md:p-2 lg:p-2.5 xl:p-3
+                        relative transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden
+                        touch-manipulation"
                 :class="{ 'id-copied-state': showCopySuccess }">
 
               <div v-if="!showCopySuccess" class="flex items-center gap-0.5 xs:gap-1
                                                    pl-2 xs:pl-2.5 sm:pl-3 md:pl-3.5 lg:pl-4 xl:pl-4.5
                                                    pr-5 xs:pr-6 sm:pr-7 md:pr-8 lg:pr-9 xl:pr-10 flex-1">
-                <span class="text-xs sm:text-sm md:text-base lg:text-lg font-normal text-[#B7B7B7] whitespace-nowrap">ID:</span>
-                <span class="text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-white truncate max-w-[90px]">515745</span>
+                <span class="text-[#B7B7B7] text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl
+                           font-normal leading-tight whitespace-nowrap">ID:</span>
+                <span class="text-white text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl
+                           font-semibold leading-tight whitespace-nowrap">515745</span>
               </div>
 
               <div v-if="showCopySuccess" class="id-copied-content">
