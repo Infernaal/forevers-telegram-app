@@ -180,11 +180,31 @@
         </div>
 
         <!-- Action Buttons -->
-        <div class="modal-actions">
-          <button class="agree-btn" @click="agreeToTerms">
+        <div class="p-3 sm:p-4 md:p-5 flex flex-col gap-2 sm:gap-3
+                    flex-shrink-0 border-t border-gray-100">
+          <button
+            class="w-full h-11 sm:h-12 md:h-14 px-4 sm:px-6 md:px-8
+                   flex items-center justify-center rounded-full
+                   bg-gradient-to-r from-dbd-primary to-blue-500
+                   text-white font-bold text-xs sm:text-sm md:text-base
+                   transition-all duration-200 ease-in-out
+                   hover:opacity-90 hover:-translate-y-0.5 hover:shadow-lg
+                   active:translate-y-0 active:scale-95
+                   focus:outline-none focus:ring-2 focus:ring-dbd-primary focus:ring-opacity-50
+                   disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+            @click="agreeToTerms">
             I agree with Terms & Conditions
           </button>
-          <button class="back-btn" @click="closeModal">
+          <button
+            class="w-full h-10 sm:h-11 md:h-12 px-4 sm:px-5 md:px-6
+                   flex items-center justify-center rounded-full
+                   border border-dbd-gray bg-dbd-off-white text-dbd-gray
+                   font-medium text-xs sm:text-sm md:text-base
+                   transition-all duration-200 ease-in-out
+                   hover:bg-gray-100 hover:-translate-y-0.5
+                   active:translate-y-0 active:scale-95
+                   focus:outline-none focus:ring-2 focus:ring-dbd-gray focus:ring-opacity-50"
+            @click="closeModal">
             Back
           </button>
         </div>
