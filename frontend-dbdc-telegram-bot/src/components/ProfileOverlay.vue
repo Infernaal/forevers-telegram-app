@@ -483,48 +483,7 @@ const selectLanguage = (language) => {
 
 /* Старые стили удалены - теперь используем Tailwind CSS */
 
-/* Menu Items Section - адаптивное позиционирование */
-.menu-items-section {
-  position: absolute;
-  top: 68px;
-  bottom: 130px;
-  left: 6px;
-  right: 6px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  overscroll-behavior: contain;
-  z-index: 10001;
-}
-
-@media (min-width: 375px) {
-  .menu-items-section {
-    top: 78px;
-    bottom: 140px;
-    left: 8px;
-    right: 8px;
-  }
-}
-
-@media (min-width: 640px) {
-  .menu-items-section {
-    top: 88px;
-    bottom: 150px;
-    left: 10px;
-    right: 10px;
-  }
-}
-
-@media (min-width: 768px) {
-  .menu-items-section {
-    top: 98px;
-    bottom: 160px;
-    left: 12px;
-    right: 12px;
-  }
-}
-
+/* Scrollbar hiding for menu items */
 .menu-items-section::-webkit-scrollbar {
   display: none;
 }
