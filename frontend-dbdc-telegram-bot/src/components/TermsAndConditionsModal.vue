@@ -472,9 +472,9 @@ const agreeToTerms = () => {
 /* Regular mobile devices (iPhone 12, 13, 14) - 375px to 430px */
 @media (min-width: 375px) and (max-width: 430px) {
   .modal-container {
-    max-width: 360px;
-    max-height: 86vh;
-    min-height: 72vh;
+    max-width: min(360px, calc(100vw - 16px));
+    max-height: min(88vh, calc(100vh - 24px));
+    min-height: min(75vh, 480px);
   }
   
   .modal-content {
