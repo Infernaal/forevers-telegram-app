@@ -69,7 +69,7 @@
                 </div>
               </div>
             </div>
-            <span class="text-[10px] sm:text-xs md:text-sm lg:text-base font-medium leading-tight">Profile</span>
+            <span class="text-[10px] sm:text-xs font-medium leading-tight">Profile</span>
           </button>
 
           <!-- Wallet -->
