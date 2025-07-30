@@ -549,16 +549,6 @@ console.log('ProfileOverlay loaded with corrected design')
   margin-right: 1.5rem; /* 24px */
 }
 
-/* Responsive adjustments - Full width on all screens */
-@media (max-width: 375px) {
-  .ml-4 {
-    margin-left: 0.75rem;
-  }
-  .mr-6 {
-    margin-right: 1rem;
-  }
-}
-
 /* Ensure proper backdrop blur on iOS Safari */
 .backdrop-blur-md {
   -webkit-backdrop-filter: blur(12px);
