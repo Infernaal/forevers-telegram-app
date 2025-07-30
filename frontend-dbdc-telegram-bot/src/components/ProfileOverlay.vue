@@ -414,9 +414,7 @@
                                     !h-3 xs:!h-4 sm:!h-5 md:!h-6 lg:!h-7 xl:!h-8
                                     !min-w-3 xs:!min-w-4 sm:!min-w-5 md:!min-w-6 lg:!min-w-7 xl:!min-w-8
                                     !min-h-3 xs:!min-h-4 sm:!min-h-5 md:!min-h-6 lg:!min-h-7 xl:!min-h-8" />
-                <span class="text-dbd-off-white text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl
-                           font-semibold leading-tight
-                           flex-shrink-0 whitespace-nowrap text-left">
+                <span class="text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-white truncate max-w-[80px]">
                   {{ selectedLanguage.code }}
                 </span>
               </div>
