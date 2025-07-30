@@ -208,11 +208,11 @@
                 <!-- Text content -->
                 <div class="flex flex-col justify-center min-w-0 flex-1">
                   <!-- Start title -->
-                  <div class="font-montserrat font-bold text-[#02070E] start-title">
+                  <div class="font-montserrat font-bold text-[#02070E] text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl">
                     Start
                   </div>
                   <!-- Description text -->
-                  <div class="font-montserrat start-description">
+                  <div class="font-montserrat text-xs xs:text-sm sm:text-sm md:text-base lg:text-lg">
                     <span class="text-[#4B4D50] font-normal">buy </span>
                     <span class="text-[#8C4CD1] font-bold">123</span>
                     <span class="text-[#4B4D50] font-normal"> more Forevers to upgrade</span>
