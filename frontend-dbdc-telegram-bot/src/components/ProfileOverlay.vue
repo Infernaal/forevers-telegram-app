@@ -174,13 +174,14 @@
                   <path d="M14.2511 12.4974C15.4932 12.4974 16.5 13.5045 16.5 14.7467V15.3222C16.5 16.2166 16.1805 17.0816 15.5989 17.7611C14.0295 19.5949 11.6422 20.5 8.49673 20.5C5.35076 20.5 2.96466 19.5946 1.39831 17.7601C0.818531 17.081 0.5 16.2174 0.5 15.3245V14.7467C0.5 13.5045 1.50689 12.4974 2.74896 12.4974H14.2511ZM14.2511 13.9977H2.74896C2.33534 13.9977 2.00005 14.333 2.00005 14.7467V15.3245C2.00005 15.8602 2.19117 16.3784 2.53904 16.7858C3.79239 18.2538 5.75834 18.9997 8.49673 18.9997C11.2351 18.9997 13.2028 18.2537 14.4593 16.7855C14.8082 16.3779 14.9999 15.8589 14.9999 15.3222V14.7467C14.9999 14.333 14.6647 13.9977 14.2511 13.9977ZM8.49673 0.5C11.2582 0.5 13.4969 2.73897 13.4969 5.50088C13.4969 8.2628 11.2582 10.5017 8.49673 10.5017C5.73521 10.5017 3.49656 8.2628 3.49656 5.50088C3.49656 2.73897 5.73521 0.5 8.49673 0.5ZM8.49673 2.00026C6.56366 2.00026 4.99661 3.56755 4.99661 5.50088C4.99661 7.43422 6.56366 9.00148 8.49673 9.00148C10.4298 9.00148 11.9968 7.43422 11.9968 5.50088C11.9968 3.56755 10.4298 2.00026 8.49673 2.00026Z" fill="white"/>
                 </svg>
               </div>
-              <span class="text-white text-sm xs:text-base sm:text-lg font-bold leading-5 xs:leading-6 sm:leading-7 flex-1 text-left">Verification</span>
+              <span class="text-white text-sm xs:text-base sm:text-lg md:text-xl font-bold leading-6 xs:leading-7 sm:leading-8 flex-1 text-left">Verification</span>
               <!-- Error Badge -->
-              <div class="absolute right-2 xs:right-3 sm:right-4 top-1/2 transform -translate-y-1/2
-                          w-5 xs:w-6 sm:w-6 h-5 xs:h-6 sm:h-6
-                          rounded-full bg-[#FFF0F3] border-[0.667px] border-[#FF1919]
-                          flex items-center justify-center flex-shrink-0">
-                <svg class="w-3 xs:w-3.5 sm:w-4 h-3 xs:h-3.5 sm:h-4" viewBox="0 0 12 12" fill="none">
+              <div class="absolute right-3 xs:right-4 sm:right-5 top-1/2 transform -translate-y-1/2
+                          w-6 xs:w-7 sm:w-7 h-6 xs:h-7 sm:h-7
+                          rounded-full bg-[#FFF0F3] border border-[#FF1919]
+                          flex items-center justify-center flex-shrink-0
+                          transition-all duration-300 hover:scale-110">
+                <svg class="w-3.5 xs:w-4 sm:w-4.5 h-3.5 xs:h-4 sm:h-4.5" viewBox="0 0 12 12" fill="none">
                   <path d="M9 3L3 9M3 3L9 9" stroke="#FF1919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
