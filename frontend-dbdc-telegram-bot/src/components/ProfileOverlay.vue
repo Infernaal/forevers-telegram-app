@@ -337,9 +337,12 @@
         </div>
       </div>
       <!-- Triangle (ниже dropdown'а) -->
-      <div class="absolute top-full triangle-positioning"
-           style="z-index: 9998;">
-        <div class="triangle-shape"></div>
+      <div class="absolute top-full left-8 sm:left-12 md:left-16 lg:left-20 -mt-px z-[9998]">
+        <div class="w-0 h-0 border-l-[8px] sm:border-l-[10px] md:border-l-[12px]
+                    border-r-[8px] sm:border-r-[10px] md:border-r-[12px]
+                    border-t-[10px] sm:border-t-[12px] md:border-t-[14px]
+                    border-l-transparent border-r-transparent
+                    border-t-[rgba(18,11,129,0.95)] drop-shadow-md"></div>
       </div>
     </div>
   </div>
