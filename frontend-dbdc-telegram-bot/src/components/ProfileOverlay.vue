@@ -29,7 +29,7 @@
 
               <!-- User Info -->
               <div class="flex flex-col gap-0.5 xs:gap-1 sm:gap-1.5 md:gap-2 flex-1 min-w-0 px-0.5 xs:px-1">
-                <!-- Silver Badge - исправленный с лучшим spacing -->
+                <!-- Silver Badge - исправ��енный с лучшим spacing -->
                 <div class="flex items-center gap-1 xs:gap-1.5 sm:gap-2
                             px-1.5 xs:px-2 py-0.5 xs:py-1 sm:px-2.5 sm:py-1.5 md:px-3 md:py-2
                             bg-purple-600/90 border border-gray-300/60
@@ -206,24 +206,24 @@
             </div>
           </div>
 
-          <!-- Bottom Controls - Tailwind CSS -->
-          <div class="absolute bottom-3 sm:bottom-4 md:bottom-5 lg:bottom-6
-                      left-3 sm:left-4 md:left-5 lg:left-6
-                      right-3 sm:right-4 md:right-5 lg:right-6
-                      flex items-center justify-center gap-2 sm:gap-3
-                      h-10 sm:h-11 md:h-12 lg:h-14 z-[10001]">
+          <!-- Bottom Controls - Tailwind CSS с улучшенным spacing -->
+          <div class="absolute bottom-2 xs:bottom-3 sm:bottom-4 md:bottom-5 lg:bottom-6
+                      left-2 xs:left-3 sm:left-4 md:left-5 lg:left-6
+                      right-2 xs:right-3 sm:right-4 md:right-5 lg:right-6
+                      flex items-center justify-center gap-1.5 xs:gap-2 sm:gap-3
+                      h-8 xs:h-9 sm:h-11 md:h-12 lg:h-14 z-[10001]">
 
-            <!-- ID Section - Equal width -->
-            <div class="flex-1 max-w-[140px] h-full
+            <!-- ID Section - Equal width с адаптивными размерами -->
+            <div class="flex-1 max-w-[110px] xs:max-w-[120px] sm:max-w-[140px] h-full
                         bg-white/30 border border-white/40 rounded-full
                         backdrop-blur-sm flex items-center relative
                         transition-all duration-300 ease-in-out overflow-hidden"
                  :class="{ 'border-green-500 bg-green-600 scale-105': showCopySuccess }">
 
               <div v-if="!showCopySuccess"
-                   class="flex items-center gap-1 px-3 flex-1">
-                <span class="text-gray-300 text-xs sm:text-sm font-normal">ID:</span>
-                <span class="text-white text-xs sm:text-sm font-normal">515745</span>
+                   class="flex items-center gap-0.5 xs:gap-1 px-2 xs:px-2.5 sm:px-3 flex-1">
+                <span class="text-gray-300 text-[10px] xs:text-xs sm:text-sm font-normal">ID:</span>
+                <span class="text-white text-[10px] xs:text-xs sm:text-sm font-normal">515745</span>
               </div>
 
               <div v-if="showCopySuccess"
@@ -241,7 +241,7 @@
 
               <button v-if="!showCopySuccess"
                       class="absolute right-0 top-0 bottom-0
-                             w-8 sm:w-9 md:w-10
+                             w-6 xs:w-7 sm:w-8 md:w-9 lg:w-10
                              bg-white border border-gray-300
                              rounded-r-full border-l-0
                              flex items-center justify-center
@@ -249,7 +249,7 @@
                              hover:bg-gray-50 hover:scale-105
                              active:scale-95"
                       @click="copyUserID">
-                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-dbd-primary" viewBox="0 0 20 20" fill="none">
+                <svg class="w-3 h-3 xs:w-3.5 xs:h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-dbd-primary" viewBox="0 0 20 20" fill="none">
                   <path d="M8 3a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 11-2 0V4h-4a1 1 0 01-1-1zM6 5a1 1 0 00-1 1v8a1 1 0 001 1h8a1 1 0 001-1v-3a1 1 0 10-2 0v2H7V7h2a1 1 0 100-2H6z" fill="currentColor"/>
                 </svg>
               </button>
@@ -258,26 +258,26 @@
             <!-- Vertical Divider -->
             <div class="w-0.5 h-6 bg-gray-400/40 rounded-full flex-shrink-0"></div>
 
-            <!-- Language Section - Equal width -->
-            <div class="flex-1 max-w-[140px] h-full
+            <!-- Language Section - Equal width с адаптивными размерами -->
+            <div class="flex-1 max-w-[110px] xs:max-w-[120px] sm:max-w-[140px] h-full
                         bg-white/20 border border-white/30 rounded-full
-                        flex items-center px-1 cursor-pointer
+                        flex items-center px-0.5 xs:px-1 cursor-pointer
                         transition-all duration-200 ease-in-out
                         hover:bg-white/30 relative overflow-visible"
                  @click="toggleLanguageDropdown">
 
-              <div class="flex items-center gap-2 flex-1 min-w-0 px-2">
+              <div class="flex items-center gap-1 xs:gap-1.5 sm:gap-2 flex-1 min-w-0 px-1 xs:px-1.5 sm:px-2">
                 <CountryFlag :country="selectedLanguage.country"
-                           class="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0" />
-                <span class="text-white text-xs sm:text-sm font-normal flex-shrink-0">
+                           class="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6 flex-shrink-0" />
+                <span class="text-white text-[10px] xs:text-xs sm:text-sm font-normal flex-shrink-0">
                   {{ selectedLanguage.code }}
                 </span>
               </div>
 
-              <div class="flex-shrink-0 w-4 h-4 flex items-center justify-center mr-1
+              <div class="flex-shrink-0 w-3 h-3 xs:w-3.5 xs:h-3.5 sm:w-4 sm:h-4 flex items-center justify-center mr-0.5 xs:mr-1
                           transition-transform duration-200 ease-in-out"
                    :class="{ 'rotate-180': showLanguageDropdown }">
-                <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none">
+                <svg class="w-full h-full" viewBox="0 0 16 16" fill="none">
                   <path d="M4 6l4 4 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
@@ -1097,17 +1097,18 @@ const selectLanguage = (language) => {
 }
 
 /* Small mobile devices (iPhone SE, small Android) - ≤374px */
+/* Добавим xs breakpoint для очень маленьких экранов */
 @media (max-width: 374px) {
   .overlay-wrapper {
-    padding: 8px;
+    padding: 6px;
     padding-bottom: 80px;
   }
 
   .overlay-menu {
     width: 100%;
     max-width: 100%;
-    height: 420px;
-    border-radius: 12px;
+    height: 380px;
+    border-radius: 10px;
   }
   
   .overlay-content {
@@ -1272,7 +1273,7 @@ const selectLanguage = (language) => {
   }
   
   .language-section-container {
-    flex: 1; /* расши��енная ENG секция */
+    flex: 1; /* расширенная ENG секция */
     min-width: 100px;
     height: 36px;
     border-radius: 18px;
