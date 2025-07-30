@@ -1,40 +1,37 @@
 <template>
-  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl
+  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-transparent
                                         flex items-center justify-center px-2 sm:px-4 py-4 sm:py-6 md:py-8 pb-20 sm:pb-24 md:pb-28 profile-overlay">
-    <!-- Dropdown Menu с Tailwind CSS - адаптивный как в WalletView -->
-    <div class="relative w-full max-w-[280px] xs:max-w-[320px] sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl
-                h-[420px] xs:h-[460px] sm:h-[520px] md:h-[560px] lg:h-[600px] xl:h-[640px]
-                bg-gradient-to-r from-indigo-800 via-purple-900 to-indigo-800
-                border border-indigo-700 backdrop-blur-lg rounded-xl sm:rounded-2xl md:rounded-3xl
+    <!-- Dropdown Menu с Tailwind CSS - растянутый как в WalletView -->
+    <div class="relative w-full max-w-none
+                min-h-screen bg-gradient-to-r from-indigo-800 via-purple-900 to-indigo-800
+                border-0 backdrop-blur-lg rounded-none
                 overflow-hidden shadow-2xl transform transition-all duration-300 ease-out
-                mx-auto">
-      <div class="relative p-2 xs:p-3 sm:p-4 md:p-5 lg:p-6 text-white h-full flex flex-col">
+                mx-0">
+      <div class="relative px-4 pt-4 pb-32 text-white min-h-screen flex flex-col">
 
           <!-- Profile Header Section -->
-        <div class="absolute top-2 xs:top-3 sm:top-4 md:top-5 lg:top-6
-                    left-2 xs:left-3 sm:left-4 md:left-5 lg:left-6
-                    right-2 xs:right-3 sm:right-4 md:right-5 lg:right-6 z-[10001]">
-          <div class="w-full h-12 xs:h-14 sm:h-16 md:h-18 lg:h-20
+        <div class="mb-4">
+          <div class="w-full h-16 sm:h-18 md:h-20
                       bg-gray-400/25 border border-gray-200
-                      rounded-full sm:rounded-2xl md:rounded-3xl
-                      flex items-center p-1 xs:p-1.5 sm:p-2 md:p-2.5 lg:p-3 gap-1.5 xs:gap-2 sm:gap-3">
+                      rounded-2xl sm:rounded-3xl
+                      flex items-center p-2 sm:p-3 gap-3">
 
               <!-- Avatar -->
             <div class="flex-shrink-0">
               <img src="https://images.pexels.com/photos/15023413/pexels-photo-15023413.jpeg?auto=compress&cs=tinysrgb&w=400"
                    alt="Jason Williams"
-                   class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16
+                   class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16
                           rounded-full object-cover border border-purple-400" />
             </div>
 
               <!-- User Info -->
-              <div class="flex flex-col gap-0.5 xs:gap-1 sm:gap-1.5 md:gap-2 flex-1 min-w-0 px-0.5 xs:px-1">
-                <!-- Silver Badge - исправ��енный с лучшим spacing -->
-                <div class="flex items-center gap-1 xs:gap-1.5 sm:gap-2
-                            px-1.5 xs:px-2 py-0.5 xs:py-1 sm:px-2.5 sm:py-1.5 md:px-3 md:py-2
+              <div class="flex flex-col gap-1 sm:gap-2 flex-1 min-w-0 px-1">
+                <!-- Silver Badge - исправленный с отступом от border -->
+                <div class="flex items-center gap-2
+                            px-3 py-1.5 sm:px-4 sm:py-2
                             bg-purple-600/90 border border-gray-300/60
-                            rounded-full w-fit mb-0.5 xs:mb-1 sm:mb-1.5">
-                  <div class="w-2.5 h-2.5 xs:w-3 xs:h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 flex-shrink-0">
+                            rounded-full w-fit">
+                  <div class="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0">
                     <svg class="w-full h-full" viewBox="0 0 24 24" fill="none">
                       <circle cx="12" cy="12" r="10" fill="#E5E7EB"/>
                       <circle cx="12" cy="12" r="8" fill="#9CA3AF"/>
@@ -42,28 +39,28 @@
                             fill="#F3F4F6"/>
                     </svg>
                   </div>
-                  <span class="text-white text-[10px] xs:text-xs sm:text-sm md:text-base font-medium whitespace-nowrap">
+                  <span class="text-white text-sm sm:text-base font-medium whitespace-nowrap">
                     Silver
                   </span>
                 </div>
 
-                <!-- User Name - центрированное между badge и border -->
-                <h2 class="text-white text-[11px] xs:text-xs sm:text-sm md:text-base lg:text-lg
-                           font-bold leading-tight truncate mt-auto mb-auto">
+                <!-- User Name - центрированное -->
+                <h2 class="text-white text-sm sm:text-base md:text-lg
+                           font-bold leading-tight truncate">
                   Jason Williams
                 </h2>
               </div>
 
               <!-- Close Button -->
-              <button class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10
+              <button class="w-9 h-9 sm:w-10 sm:h-10
                              bg-gray-100 border border-dbd-primary
-                             rounded-r-full sm:rounded-r-2xl md:rounded-r-3xl border-l-0
+                             rounded-r-2xl sm:rounded-r-3xl border-l-0
                              flex items-center justify-center flex-shrink-0
                              transition-all duration-200 ease-in-out
                              hover:bg-gray-200 hover:scale-105
                              active:scale-95"
                       @click="$emit('close')">
-                <svg class="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-gray-600" viewBox="0 0 16 16" fill="none">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" viewBox="0 0 16 16" fill="none">
                   <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
@@ -71,7 +68,7 @@
           </div>
 
           <!-- Menu Items -->
-          <div class="menu-items-section">
+          <div class="flex-1 overflow-y-auto mb-4">
             
             <!-- Calculator -->
             <div class="menu-item"
@@ -160,10 +157,10 @@
           </div>
 
           <!-- Start Section -->
-          <div class="start-section">
-            <div class="start-container">
+          <div class="mb-4">
+            <div class="bg-[#F1E7FF] border border-[#DCCCF1] rounded-xl p-4 relative overflow-hidden">
               <!-- Background gradient -->
-              <div class="start-background"></div>
+              <div class="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-[#8C4CD1] to-[#C497FF] opacity-40 rounded-l-xl"></div>
               
               <div class="start-content">
                 <div class="start-header">
@@ -206,24 +203,23 @@
             </div>
           </div>
 
-          <!-- Bottom Controls - Tailwind CSS с улучшенным spacing -->
-          <div class="absolute bottom-2 xs:bottom-3 sm:bottom-4 md:bottom-5 lg:bottom-6
-                      left-2 xs:left-3 sm:left-4 md:left-5 lg:left-6
-                      right-2 xs:right-3 sm:right-4 md:right-5 lg:right-6
-                      flex items-center justify-center gap-1.5 xs:gap-2 sm:gap-3
-                      h-8 xs:h-9 sm:h-11 md:h-12 lg:h-14 z-[10001]">
+          <!-- Bottom Controls - фиксированные внизу -->
+          <div class="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-indigo-800 via-purple-900 to-indigo-800
+                      px-4 py-4 border-t border-indigo-700
+                      flex items-center justify-center gap-3
+                      h-20 z-[10001]">
 
-            <!-- ID Section - Equal width с адаптивными размерами -->
-            <div class="flex-1 max-w-[110px] xs:max-w-[120px] sm:max-w-[140px] h-full
+            <!-- ID Section - Copy button border to border -->
+            <div class="flex-1 max-w-[140px] h-12
                         bg-white/30 border border-white/40 rounded-full
                         backdrop-blur-sm flex items-center relative
                         transition-all duration-300 ease-in-out overflow-hidden"
                  :class="{ 'border-green-500 bg-green-600 scale-105': showCopySuccess }">
 
               <div v-if="!showCopySuccess"
-                   class="flex items-center gap-0.5 xs:gap-1 px-2 xs:px-2.5 sm:px-3 flex-1">
-                <span class="text-gray-300 text-[10px] xs:text-xs sm:text-sm font-normal">ID:</span>
-                <span class="text-white text-[10px] xs:text-xs sm:text-sm font-normal">515745</span>
+                   class="flex items-center gap-1 pl-4 pr-12 flex-1">
+                <span class="text-gray-300 text-sm font-normal">ID:</span>
+                <span class="text-white text-sm font-normal">515745</span>
               </div>
 
               <div v-if="showCopySuccess"
@@ -239,17 +235,18 @@
                 </div>
               </div>
 
+              <!-- Copy button - строго border to border -->
               <button v-if="!showCopySuccess"
                       class="absolute right-0 top-0 bottom-0
-                             w-6 xs:w-7 sm:w-8 md:w-9 lg:w-10
-                             bg-white border border-gray-300
+                             w-12 h-full
+                             bg-white border-r border-t border-b border-gray-300
                              rounded-r-full border-l-0
                              flex items-center justify-center
                              transition-all duration-200 ease-in-out
                              hover:bg-gray-50 hover:scale-105
                              active:scale-95"
                       @click="copyUserID">
-                <svg class="w-3 h-3 xs:w-3.5 xs:h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-dbd-primary" viewBox="0 0 20 20" fill="none">
+                <svg class="w-5 h-5 text-dbd-primary" viewBox="0 0 20 20" fill="none">
                   <path d="M8 3a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 11-2 0V4h-4a1 1 0 01-1-1zM6 5a1 1 0 00-1 1v8a1 1 0 001 1h8a1 1 0 001-1v-3a1 1 0 10-2 0v2H7V7h2a1 1 0 100-2H6z" fill="currentColor"/>
                 </svg>
               </button>
@@ -258,26 +255,26 @@
             <!-- Vertical Divider -->
             <div class="w-0.5 h-6 bg-gray-400/40 rounded-full flex-shrink-0"></div>
 
-            <!-- Language Section - Equal width с адаптивными размерами -->
-            <div class="flex-1 max-w-[110px] xs:max-w-[120px] sm:max-w-[140px] h-full
+            <!-- Language Section -->
+            <div class="flex-1 max-w-[140px] h-12
                         bg-white/20 border border-white/30 rounded-full
-                        flex items-center px-0.5 xs:px-1 cursor-pointer
+                        flex items-center px-1 cursor-pointer
                         transition-all duration-200 ease-in-out
                         hover:bg-white/30 relative overflow-visible"
                  @click="toggleLanguageDropdown">
 
-              <div class="flex items-center gap-1 xs:gap-1.5 sm:gap-2 flex-1 min-w-0 px-1 xs:px-1.5 sm:px-2">
+              <div class="flex items-center gap-2 flex-1 min-w-0 px-2">
                 <CountryFlag :country="selectedLanguage.country"
-                           class="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6 flex-shrink-0" />
-                <span class="text-white text-[10px] xs:text-xs sm:text-sm font-normal flex-shrink-0">
+                           class="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0" />
+                <span class="text-white text-sm font-normal flex-shrink-0">
                   {{ selectedLanguage.code }}
                 </span>
               </div>
 
-              <div class="flex-shrink-0 w-3 h-3 xs:w-3.5 xs:h-3.5 sm:w-4 sm:h-4 flex items-center justify-center mr-0.5 xs:mr-1
+              <div class="flex-shrink-0 w-4 h-4 flex items-center justify-center mr-1
                           transition-transform duration-200 ease-in-out"
                    :class="{ 'rotate-180': showLanguageDropdown }">
-                <svg class="w-full h-full" viewBox="0 0 16 16" fill="none">
+                <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none">
                   <path d="M4 6l4 4 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
