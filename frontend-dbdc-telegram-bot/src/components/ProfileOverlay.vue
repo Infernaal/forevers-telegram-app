@@ -1253,6 +1253,7 @@ const selectLanguage = (language) => {
   }
   
   .id-section-container {
+    flex: 0 0 120px; /* меньше на маленьких экранах */
     height: 36px;
     border-radius: 18px;
   }
