@@ -311,6 +311,23 @@ const closeProfileMenu = () => {
   console.log('Profile menu closed, state:', isProfileMenuOpen.value)
 }
 
+// Window resize handler
+const handleResize = () => {
+  if (isProfileMenuOpen.value) {
+    updateProfileButtonPosition()
+  }
+}
+
+// Lifecycle hooks
+onMounted(() => {
+  window.addEventListener('resize', handleResize)
+  updateProfileButtonPosition()
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+})
+
 
 </script>
 
