@@ -63,7 +63,7 @@
         </div>
 
         <!-- Scrollable Menu Items Container -->
-        <div class="flex-1 overflow-y-auto px-3">
+        <div class="flex-1 overflow-y-auto px-3 max-h-60">
           <div class="space-y-1">
             
             <!-- Calculator -->
