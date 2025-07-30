@@ -411,12 +411,9 @@
                 </span>
               </div>
               
-              <div class="w-2.5 xs:w-3 sm:w-4 md:w-5 lg:w-6 xl:w-7
-                          h-2.5 xs:h-3 sm:h-4 md:h-5 lg:h-6 xl:h-7
-                          flex items-center justify-center flex-shrink-0
-                          transition-transform duration-300 absolute
-                          right-0.5 xs:right-1 sm:right-1.5 md:right-2 lg:right-2.5 xl:right-3 top-1/2
-                          transform -translate-y-1/2"
+              <div class="w-3 sm:w-4 md:w-5 lg:w-6 xl:w-7
+                h-3 sm:h-4 md:h-5 lg:h-6 xl:h-7
+                ml-1 sm:ml-1.5 md:ml-2 transform transition-transform"
                   :class="{ 'rotate-180': showLanguageDropdown }">
                 <svg class="w-full h-full" viewBox="0 0 20 20" fill="none">
                   <circle opacity="0.2" cx="10" cy="10" r="10" fill="white"/>
