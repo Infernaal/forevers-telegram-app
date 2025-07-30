@@ -393,13 +393,13 @@
                         opacity-50 flex-shrink-0"></div>
 
             <!-- Language Section -->
-            <div class="min-w-[90px] sm:min-w-[110px] md:min-w-[130px] lg:min-w-[150px] xl:min-w-[170px]
-            max-w-[220px] w-full
-            h-9 sm:h-10 md:h-11 lg:h-12
-            flex items-center justify-between
-            px-2 sm:px-3 md:px-4 lg:px-5
-            bg-white bg-opacity-25 border border-white/30 rounded-full
-            cursor-pointer transition-all duration-300 overflow-hidden"
+            <div class="min-w-[110px] sm:min-w-[130px] md:min-w-[150px] lg:min-w-[160px] xl:min-w-[180px]
+              max-w-[200px] w-full
+              h-10 sm:h-11 md:h-12
+              bg-white/25 border border-white/30
+              rounded-full flex items-center
+              px-2 sm:px-3 md:px-4 lg:px-5
+              cursor-pointer transition-all duration-300 overflow-hidden"
                 @click="toggleLanguageDropdown">
               
               <div class="flex items-center gap-0.5 xs:gap-1 sm:gap-1.5 md:gap-2 flex-1 min-w-0
