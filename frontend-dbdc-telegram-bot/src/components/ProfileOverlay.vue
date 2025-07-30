@@ -231,18 +231,18 @@
           </div>
 
           <!-- Bottom ID and Language Section with Separator -->
-          <div class="flex items-center justify-center h-11 relative">
+          <div class="flex items-center justify-between bottom-section">
 
             <!-- ID Section -->
-            <div class="relative flex items-center">
-              <div class="bg-white/[0.30] backdrop-blur-[32px] border border-white/40 rounded-full h-11 w-36 sm:w-38 md:w-40 flex items-center justify-between pl-3 pr-0">
+            <div class="relative flex items-center id-section">
+              <div class="bg-white/[0.30] backdrop-blur-[32px] border border-white/40 rounded-full flex items-center justify-between pl-3 pr-0 id-container">
                 <div class="flex items-center min-w-0 overflow-hidden">
-                  <span class="text-dbd-light-gray text-sm">ID:</span>
-                  <span class="text-white text-sm font-medium ml-1 truncate">515745</span>
+                  <span class="text-dbd-light-gray id-label">ID:</span>
+                  <span class="text-white font-medium ml-1 truncate id-value">515745</span>
                 </div>
-                <button class="flex-shrink-0 w-6 h-6 sm:w-8 sm:h-10 md:w-10 md:h-10 bg-white border border-[#D8D8D8] rounded-r-full flex items-center justify-center hover:bg-gray-50 transition-colors"
+                <button class="flex-shrink-0 bg-white border border-[#D8D8D8] rounded-r-full flex items-center justify-center hover:bg-gray-50 transition-colors id-copy-btn"
                         @click="copyUserID">
-                  <svg class="w-3 h-3 sm:w-5 sm:h-5 md:w-6 md:h-6 text-gray-600" viewBox="0 0 24 24" fill="currentColor">
+                  <svg class="text-gray-600 id-copy-icon" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M18.2806 1.19995H8.98336C8.42322 1.19995 7.88603 1.43348 7.48995 1.84917C7.09387 2.26486 6.87136 2.82866 6.87136 3.41653V4.26906H5.81536C5.2278 4.26906 4.66431 4.51402 4.24885 4.95006C3.83338 5.3861 3.59998 5.97749 3.59998 6.59414V20.4749C3.59998 21.0915 3.83338 21.6829 4.24885 22.119C4.66431 22.555 5.2278 22.8 5.81536 22.8H14.9132C15.5008 22.8 16.0643 22.555 16.4797 22.119C16.8952 21.6829 17.1286 21.0915 17.1286 20.4749V19.6998H18.2806C18.8363 19.6999 19.3699 19.4709 19.7663 19.0621C20.1627 18.6533 20.3903 18.0975 20.4 17.5143V3.41653C20.398 2.82794 20.1739 2.26417 19.7766 1.8487C19.3794 1.43323 18.8414 1.19995 18.2806 1.19995ZM15.6517 20.4749C15.6517 20.6804 15.5739 20.8776 15.4354 21.0229C15.2969 21.1682 15.1091 21.2499 14.9132 21.2499H5.81536C5.61951 21.2499 5.43168 21.1682 5.29319 21.0229C5.1547 20.8776 5.0769 20.6804 5.0769 20.4749V6.59414C5.0769 6.38859 5.1547 6.19146 5.29319 6.04611C5.43168 5.90077 5.61951 5.81911 5.81536 5.81911H14.9132C15.1091 5.81911 15.2969 5.90077 15.4354 6.04611C15.5739 6.19146 15.6517 6.38859 15.6517 6.59414V20.4749ZM18.9231 17.5143C18.9211 17.6918 18.8526 17.8613 18.7323 17.9861C18.612 18.1108 18.4497 18.1808 18.2806 18.1808H17.1286V6.59414C17.1286 5.97749 16.8952 5.3861 16.4797 4.95006C16.0643 4.51402 15.5008 4.26906 14.9132 4.26906H8.34828V3.41653C8.34828 3.23976 8.41519 3.07022 8.53429 2.94523C8.65339 2.82023 8.81493 2.75001 8.98336 2.75001H18.2806C18.3646 2.74898 18.448 2.76546 18.5259 2.7985C18.6038 2.83154 18.6747 2.88047 18.7344 2.94246C18.7942 3.00446 18.8416 3.07828 18.874 3.15966C18.9064 3.24103 18.9231 3.32834 18.9231 3.41653V17.5143Z"/>
                   </svg>
                 </button>
@@ -250,23 +250,23 @@
             </div>
 
             <!-- Separator Bar -->
-            <div class="w-0.5 h-6 bg-white opacity-40 rounded-full mx-4 sm:mx-6 flex-shrink-0"></div>
+            <div class="w-0.5 bg-white opacity-40 rounded-full flex-shrink-0 separator-bar"></div>
 
             <!-- Language Section with Dropdown -->
-            <div class="relative flex items-center">
-              <div class="bg-white/[0.20] border border-white/24 rounded-full h-11 w-36 sm:w-38 md:w-40 flex items-center px-1.5 cursor-pointer hover:bg-white/25 transition-colors"
+            <div class="relative flex items-center lang-section">
+              <div class="bg-white/[0.20] border border-white/24 rounded-full flex items-center px-1.5 cursor-pointer hover:bg-white/25 transition-colors lang-container"
                    @click="toggleLanguageDropdown">
                 <!-- Selected Country Flag -->
-                <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 ml-1 flex items-center justify-center">
+                <div class="rounded-full overflow-hidden flex-shrink-0 ml-1 flex items-center justify-center lang-flag">
                   <CountryFlag :country="selectedLanguage.country" size="small" class="w-full h-full" />
                 </div>
 
                 <!-- Language Text -->
-                <span class="text-dbd-off-white text-base font-medium flex-1 text-center">{{ selectedLanguage.code }}</span>
+                <span class="text-dbd-off-white font-medium flex-1 text-center lang-text">{{ selectedLanguage.code }}</span>
 
                 <!-- Dropdown Arrow -->
-                <div class="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center mr-1">
-                  <svg class="w-3 h-3 text-white transform transition-transform duration-200"
+                <div class="rounded-full bg-white/20 flex items-center justify-center mr-1 lang-arrow">
+                  <svg class="text-white transform transition-transform duration-200 lang-arrow-icon"
                        :class="{ 'rotate-180': isLanguageDropdownOpen }"
                        viewBox="0 0 20 20" fill="none">
                     <circle opacity="0.2" cx="10" cy="10" r="10" fill="white"/>
@@ -285,7 +285,7 @@
                 leave-from-class="opacity-100 scale-100 translate-y-0"
                 leave-to-class="opacity-0 scale-95 translate-y-2">
                 <div v-if="isLanguageDropdownOpen"
-                     class="absolute bottom-full right-0 mb-2 w-36 sm:w-38 md:w-40 bg-gradient-to-br from-[#120B81] via-[#120B81] to-[#09074E] rounded-xl shadow-xl border border-white/20 py-2 z-50 max-h-32 overflow-y-auto backdrop-blur-[32px]"
+                     class="absolute bottom-full right-0 mb-2 bg-gradient-to-br from-[#120B81] via-[#120B81] to-[#09074E] rounded-xl shadow-xl border border-white/20 py-2 z-50 max-h-32 overflow-y-auto backdrop-blur-[32px] lang-dropdown"
                      @click.stop>
                   <div v-for="language in languages"
                        :key="language.code"
