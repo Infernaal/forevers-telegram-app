@@ -36,8 +36,9 @@
         <!-- Scrollable Content -->
         <div class="flex-1 overflow-y-auto overflow-x-hidden p-3 sm:p-4 md:p-5
                     scrollbar-none overscroll-contain modal-scroll-section
-                    min-h-0"
-             style="max-height: calc(100vh - 200px)">
+                    min-h-0 supports-[height:100dvh]:max-h-[calc(100dvh-200px)]"
+             style="max-height: calc(100vh - 200px); max-height: calc(100dvh - 200px);
+                    -webkit-overflow-scrolling: touch;">
           <div class="pb-3">
             <!-- Introduction -->
             <p class="text-dbd-gray font-medium text-xs sm:text-sm md:text-base
@@ -304,7 +305,7 @@ const agreeToTerms = () => {
   }
 }
 
-/* Убрано - адаптивность теперь через Tailwind CSS классы */
+/* У��рано - адаптивность теперь через Tailwind CSS классы */
 
 /* Landscape orientation - важно для мобильных */
 @media (max-height: 500px) and (orientation: landscape) {
