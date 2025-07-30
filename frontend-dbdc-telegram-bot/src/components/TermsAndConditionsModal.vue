@@ -278,6 +278,24 @@ const agreeToTerms = () => {
 @media (max-width: 320px) {
   .modal-container {
     max-width: calc(100vw - 8px) !important;
+    height: calc(100vh - 16px) !important;
+  }
+}
+
+/* Small height screens (shorter mobile devices) */
+@media (max-height: 600px) {
+  .modal-container {
+    height: calc(100vh - 16px) !important;
+  }
+  .modal-scroll-section {
+    max-height: calc(100vh - 180px) !important;
+  }
+}
+
+/* Very small height screens */
+@media (max-height: 480px) {
+  .modal-scroll-section {
+    max-height: calc(100vh - 160px) !important;
   }
 }
 
