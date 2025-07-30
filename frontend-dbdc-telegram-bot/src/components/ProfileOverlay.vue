@@ -35,8 +35,8 @@
               <div class="flex-shrink-0">
                 <img src="https://images.pexels.com/photos/15023413/pexels-photo-15023413.jpeg?auto=compress&cs=tinysrgb&w=400"
                     alt="Jason Williams"
-                    class="w-16 xs:w-18 sm:w-20 md:w-22 lg:w-24
-                            h-16 xs:h-18 sm:h-20 md:h-22 lg:h-24
+                    class="w-16 xs:w-18 sm:w-20 md:w-24 lg:w-28 xl:w-32
+                            h-16 xs:h-18 sm:h-20 md:h-24 lg:h-28 xl:h-32
                             rounded-full object-cover border border-[#7E73D6]" />
               </div>
 
