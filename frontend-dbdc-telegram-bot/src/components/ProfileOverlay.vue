@@ -5,17 +5,15 @@
          scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
       <!-- Dropdown Menu -->
             <div
-        class="relative
-         w-full
-         max-w-full sm:max-w-[400px] md:max-w-[500px] lg:max-w-[580px] xl:max-w-[640px]
-         h-[calc(100vh-168px)]
-         sm:h-[calc(100vh-172px)]
-         md:h-[calc(100vh-172px)]
-         lg:h-[calc(100vh-172px)]
-         xl:h-[calc(100vh-172px)]
+        class="absolute bottom-[88px] left-1/2 -translate-x-1/2
+         w-[96%] sm:w-[94%] md:w-[90%] lg:w-[85%] xl:w-[80%]
+         max-w-[700px]
+         max-h-[calc(100vh-160px)]
          bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
          border border-[#09074E] rounded-[20px] shadow-2xl
-         backdrop-blur-[32px] flex flex-col overflow-hidden transition-all duration-300 ease-out"
+         backdrop-blur-[32px] flex flex-col overflow-y-auto
+         scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent
+         transition-all duration-300 ease-out"
       >
         <div class="py-4 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 text-white h-full flex flex-col relative z-10">
             <!-- Background -->
