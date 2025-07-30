@@ -2,7 +2,7 @@
   <div v-if="isVisible" class="fixed inset-0 z-50 font-montserrat bg-black bg-opacity-10 backdrop-blur-xl">
     <!-- Dropdown Wrapper -->
     <div class="relative w-full h-full flex justify-center items-center
-                px-1 xs:px-2 sm:px-3 md:px-4 lg:px-6 xl:px-8 2xl:px-10
+                px-2 xs:px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-16
                 py-2 xs:py-3 sm:py-4 md:py-6 lg:py-8
                 pb-12 xs:pb-14 sm:pb-16 md:pb-18 lg:pb-20 xl:pb-22">
       <!-- Dropdown Menu -->
