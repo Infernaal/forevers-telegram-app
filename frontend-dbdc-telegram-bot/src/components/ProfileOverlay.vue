@@ -19,40 +19,48 @@
                   max-h-[calc(100vh-200px)] overflow-hidden flex flex-col profile-overlay-content"
            @click.stop>
 
-        <!-- Profile Header Section -->
-        <div class="flex-shrink-0 px-3 pt-4 pb-2">
-          <div class="flex items-center justify-between bg-white/10 border border-white/24 rounded-full px-2 py-2 mb-4">
-            <!-- Profile Avatar and Info -->
-            <div class="flex items-center gap-3">
-              <!-- Avatar -->
-              <div class="w-20 h-20 rounded-full border-2 border-[#7E73D6] overflow-hidden bg-gray-200 flex-shrink-0">
-                <img 
-                  src="https://images.pexels.com/photos/15023413/pexels-photo-15023413.jpeg?auto=compress&cs=tinysrgb&w=400" 
-                  alt="Profile" 
+        <!-- Profile Header Section - Figma Design -->
+        <div class="flex-shrink-0 p-2 xs:p-3 sm:p-4">
+          <div class="relative bg-[#605F87] bg-opacity-24 border border-[#D8D8D8] border-opacity-24 rounded-full sm:rounded-[20px] h-20 xs:h-22 sm:h-24 w-full flex items-center">
+
+            <!-- Avatar -->
+            <div class="relative ml-2 xs:ml-2 sm:ml-2">
+              <div class="w-16 xs:w-18 sm:w-20 h-16 xs:h-18 sm:h-20 rounded-full border border-[#7E73D6] overflow-hidden bg-gray-200 flex-shrink-0">
+                <img
+                  src="https://images.pexels.com/photos/15023413/pexels-photo-15023413.jpeg?auto=compress&cs=tinysrgb&w=400"
+                  alt="Profile"
                   class="w-full h-full object-cover"
                 />
               </div>
-              
-              <!-- User Info -->
-              <div class="flex flex-col min-w-0">
-                <!-- Dynamic Rank Badge -->
-                <div class="flex items-center gap-1.5 bg-white/20 border border-white/20 rounded-full px-2 py-1 mb-2 w-fit">
-                  <div class="w-7 h-7 flex items-center justify-center flex-shrink-0">
-                    <div v-html="currentRank.iconSvg" class="w-full h-full"></div>
-                  </div>
-                  <span class="text-sm font-medium" :style="{ color: currentRank.color }">{{ currentRank.name }}</span>
-                </div>
-                
-                <!-- User Name -->
-                <h3 class="text-white text-xl font-bold leading-tight">Jason Williams</h3>
-              </div>
             </div>
-            
-            <!-- Arrow Button -->
-            <div class="flex-shrink-0">
-              <button class="w-11 h-11 bg-[#EFEEFF] border border-dbd-primary rounded-r-full flex items-center justify-center hover:bg-white/90 transition-colors"
+
+            <!-- Center Content Area -->
+            <div class="flex-1 flex flex-col justify-center items-center px-2 xs:px-3 sm:px-4">
+              <!-- Rank Badge -->
+              <div class="flex items-center gap-1.5 xs:gap-2 bg-[#6E6BA9] bg-opacity-90 border border-[#D8D8D8] rounded-full px-2 xs:px-3 sm:px-4 py-1 xs:py-1.5 mb-1 xs:mb-2">
+                <div class="w-6 xs:w-7 sm:w-7 h-6 xs:h-7 sm:h-7 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-full h-full" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14.0004 26.2497C7.24592 26.2497 1.75073 20.7545 1.75073 14.0001C1.75073 7.24564 7.24592 1.75085 14.0004 1.75085C20.7548 1.75085 26.25 7.24564 26.25 14.0001C26.25 20.7545 20.7544 26.2497 14.0004 26.2497Z" fill="white"/>
+                    <path d="M20.2071 5.37145C20.73 5.37145 21.2468 5.39833 21.7567 5.4472C19.7049 3.58479 16.9828 2.44812 14 2.44812C7.63041 2.44812 2.448 7.63013 2.448 14.0001C2.448 16.2735 3.11102 18.3941 4.24973 20.1832C4.86143 11.9015 11.769 5.37145 20.2071 5.37145Z" fill="#E0E0E0"/>
+                    <path d="M14.0006 25.5519C20.3702 25.5519 25.5526 20.3699 25.5526 13.9999C25.5526 10.6131 24.0873 7.56229 21.7577 5.44697C21.2478 5.39809 20.731 5.37122 20.2081 5.37122C11.7704 5.37122 4.86244 11.9017 4.25073 20.1829C6.30211 23.4072 9.90475 25.5519 14.0006 25.5519Z" fill="#B5B5B5"/>
+                    <path d="M14.0004 23.1368C19.0464 23.1368 23.1369 19.0463 23.1369 14.0003C23.1369 8.95433 19.0464 4.86377 14.0004 4.86377C8.95445 4.86377 4.86389 8.95433 4.86389 14.0003C4.86389 19.0463 8.95445 23.1368 14.0004 23.1368Z" fill="#9E9E9E"/>
+                    <path d="M19.4965 12.7667L15.6984 12.2148L14.0001 8.77307L12.3014 12.2148L8.50366 12.7667L11.2519 15.4452L10.6031 19.2279L14.0001 17.4421L17.397 19.2279L16.7483 15.4452L19.4965 12.7667Z" fill="#F6F6F6"/>
+                    <path d="M20.5542 6.30372C20.755 6.5045 21.4074 6.81443 21.7117 6.9529C21.7728 6.98059 21.7728 7.06693 21.7117 7.09462C21.4074 7.23309 20.7554 7.54261 20.5542 7.7438C20.3534 7.94458 20.0435 8.59701 19.905 8.90124C19.8774 8.96233 19.791 8.96233 19.7633 8.90124C19.6249 8.59701 19.3153 7.94499 19.1141 7.7438C18.9134 7.54302 18.2609 7.23309 17.9567 7.09462C17.8956 7.06693 17.8956 6.98059 17.9567 6.9529C18.2609 6.81443 18.913 6.50491 19.1141 6.30372C19.3149 6.10294 19.6249 5.45051 19.7633 5.14628C19.791 5.08519 19.8774 5.08519 19.905 5.14628C20.0431 5.45051 20.353 6.10253 20.5542 6.30372Z" fill="white"/>
+                    <path d="M19.4971 12.7667L15.699 12.2144L14.0007 8.77307V17.4421L17.3977 19.2279L16.7489 15.4452L19.4971 12.7667Z" fill="#E0E0E0"/>
+                  </svg>
+                </div>
+                <span class="text-xs xs:text-sm sm:text-sm font-medium text-[#FAFAFA]">Silver</span>
+              </div>
+
+              <!-- User Name -->
+              <h3 class="text-white text-sm xs:text-lg sm:text-xl font-semibold xs:font-bold text-center leading-tight">Jason Williams</h3>
+            </div>
+
+            <!-- Close Button -->
+            <div class="flex-shrink-0 mr-2 xs:mr-2 sm:mr-2">
+              <button class="w-9 xs:w-10 sm:w-11 h-9 xs:h-10 sm:h-11 bg-[#EFEEFF] border border-[#2019CE] rounded-full flex items-center justify-center hover:bg-white/90 transition-colors"
                       @click="emit('close')">
-                <svg class="w-6 h-6 text-dbd-light-gray" viewBox="0 0 24 24" fill="currentColor">
+                <svg class="w-5 xs:w-6 sm:w-6 h-5 xs:h-6 sm:h-6 text-[#B7B7B7]" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M17.2155 11.2862L8.2216 2.29534C7.82696 1.90169 7.18757 1.90169 6.79192 2.29534C6.39728 2.68898 6.39728 3.32838 6.79192 3.72203L15.0724 11.9996L6.79292 20.2771C6.39827 20.6707 6.39827 21.3101 6.79292 21.7048C7.18756 22.0984 7.82795 22.0984 8.2226 21.7048L17.2165 12.7139C17.6051 12.3244 17.6051 11.6749 17.2155 11.2862Z"/>
                 </svg>
               </button>
