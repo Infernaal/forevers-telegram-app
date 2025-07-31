@@ -99,8 +99,9 @@
                       overflow-y-auto overflow-x-hidden scrollbar-none
                       [-webkit-overflow-scrolling:touch] [scroll-behavior:smooth]
                       [overscroll-behavior:contain] [overscroll-behavior-y:contain]
-                      px-0 xs:px-1 sm:px-2 py-1 xs:py-2 sm:py-3
-                      touch-manipulation">
+                      px-0 xs:px-1 sm:px-2 py-1 xs:py-2 sm:py-2 md:py-1 lg:py-1
+                      touch-manipulation
+                      max-h-[300px] sm:max-h-[280px] md:max-h-[240px] lg:max-h-[220px]">
             
             <!-- Calculator -->
             <div class="flex items-center
