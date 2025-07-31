@@ -665,6 +665,9 @@ const selectLanguage = (language) => {
 
 .scrollbar-none::-webkit-scrollbar {
   display: none;
+  width: 0;
+  height: 0;
+  background: transparent;
 }
 
 /* Tablet specific positioning */
