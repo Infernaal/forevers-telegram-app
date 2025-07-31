@@ -1,8 +1,7 @@
 <template>
   <div v-if="isVisible" class="fixed inset-0 bottom-[88px] z-[9999] font-montserrat bg-black/10 backdrop-blur-xl min-h-screen">
     <!-- Dropdown Wrapper -->
-    <div class="relative w-full h-full flex flex-col items-center px-4 sm:px-6 md:px-8 lg:px-12 overflow-y-auto sm:overflow-y-scroll
-         scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
+    <div class="relative w-full h-full flex flex-col items-center px-4 sm:px-6 md:px-8 lg:px-12 overflow-y-auto scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
       <!-- Dropdown Menu -->
             <div
         class="absolute inset-x-4 sm:inset-x-6 md:inset-x-8 lg:inset-x-12
