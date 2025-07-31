@@ -4,7 +4,7 @@
     <div
       class="absolute
             inset-x-4 sm:inset-x-6 md:inset-x-8 lg:inset-x-12 xl:inset-x-20 2xl:inset-x-24
-            bottom-[calc(88px+env(safe-area-inset-bottom,0px))]
+            bottom-[calc(88px+env(safe-area-inset-bottom,0px)+2px)]
             sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+32px)]
             md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+36px)]
             lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+39px)]
