@@ -769,14 +769,34 @@ onMounted(() => {
   }
 }
 
-/* Telegram WebApp specific optimizations - только для очень маленьких экранов */
-@media (max-height: 500px) and (orientation: portrait) {
+/* Telegram WebApp specific optimizations */
+@media (max-height: 700px) and (orientation: portrait) {
+  .absolute.inset-x-4 {
+    bottom: calc(75px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+
+@media (max-height: 600px) and (orientation: portrait) {
+  .absolute.inset-x-4 {
+    bottom: calc(65px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
   .profile-overlay-container {
-    max-height: calc(100vh - 120px);
+    max-height: calc(100vh - 110px);
+  }
+}
+
+@media (max-height: 500px) and (orientation: portrait) {
+  .absolute.inset-x-4 {
+    bottom: calc(55px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  .profile-overlay-container {
+    max-height: calc(100vh - 100px);
   }
 
   .flex.flex-col.z-\[1\].flex-1 {
-    max-height: 180px;
+    max-height: 160px;
   }
 }
 
