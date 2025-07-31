@@ -426,15 +426,16 @@
 
               <!-- Language Dropdown -->
               <div v-if="showLanguageDropdown"
-                  class="absolute bottom-[32px] xs:bottom-[36px] sm:bottom-[40px] md:bottom-[44px] left-0 right-0 z-[1000] animate-[dropdownSlideUp_0.2s_ease-out]
-                         w-full max-w-full">
+                  class="absolute bottom-[44px] xs:bottom-[48px] sm:bottom-[52px] md:bottom-[56px] left-0 right-0 z-[1000]
+                         w-full max-w-full animate-[dropdownSlideUp_0.3s_ease-out]">
                 <div class="bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
-                            border border-white border-opacity-8
+                            border border-white border-opacity-20
                             rounded-lg xs:rounded-xl sm:rounded-2xl
                             backdrop-blur-[32px]
-                            p-1 xs:p-1.5 sm:p-2 md:p-2.5
-                            max-h-[100px] xs:max-h-[110px] sm:max-h-[120px] md:max-h-[130px]
-                            overflow-y-auto scrollbar-none shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+                            p-1.5 xs:p-2 sm:p-2.5 md:p-3
+                            max-h-[120px] xs:max-h-[130px] sm:max-h-[140px] md:max-h-[150px]
+                            overflow-y-auto scrollbar-none shadow-[0_12px_40px_rgba(0,0,0,0.4)]
+                            transform-gpu">
                   <div v-for="(language, index) in languages"
                       :key="language.code"
                       class="flex items-center
