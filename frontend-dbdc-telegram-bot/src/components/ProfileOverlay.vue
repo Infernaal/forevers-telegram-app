@@ -714,8 +714,42 @@ const selectLanguage = (language) => {
   height: 3.75rem;
 }
 
+.h-18 {
+  height: 4.5rem;
+}
+
 .h-21 {
   height: 5.25rem;
+}
+
+.h-22 {
+  height: 5.5rem;
+}
+
+/* Width utilities */
+.w-18 {
+  width: 4.5rem;
+}
+
+/* Custom scrollbar for better UX */
+@media (min-width: 768px) {
+  .scrollbar-none::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .scrollbar-none::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+  }
+
+  .scrollbar-none::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+  }
+
+  .scrollbar-none::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
 }
 
 /* Fade in animation for overlay */
