@@ -3,13 +3,14 @@
     <!-- Dropdown Wrapper -->
     <div class="relative w-full h-full flex flex-col items-center px-4 sm:px-6 md:px-8 lg:px-12 overflow-y-auto scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
       <!-- Triangle Pointer -->
-      <div class="absolute
-                  left-[calc(1.5rem+8px)] sm:left-[calc(1.5rem+12px)] md:left-[calc(2rem+12px)] lg:left-[3rem+12px]
-                  bottom-[calc(88px+env(safe-area-inset-bottom,0px)+8px-15px)]
-                  sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+20px-15px)]
-                  md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+28px-15px)]
-                  lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+36px-15px)]
-                  z-[9998] transition-all duration-300 ease-out">
+      <div
+        class="absolute
+              left-1/2 transform -translate-x-[170px] sm:-translate-x-[180px] md:-translate-x-[190px] lg:-translate-x-[200px]
+              bottom-[calc(88px+env(safe-area-inset-bottom,0px)+15px)]
+              sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+27px)]
+              md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+35px)]
+              lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+43px)]
+              z-[9998] transition-all duration-300 ease-out">
         <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px] 
                     border-l-transparent border-r-transparent 
                     border-t-[#120B81] drop-shadow-md"></div>
