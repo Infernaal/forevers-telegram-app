@@ -394,76 +394,78 @@
             <div class="w-0.5 h-4 xs:h-5 sm:h-6 md:h-7 lg:h-8 xl:h-9
                         bg-[#E2E2E2] border border-[#B7B7B7] rounded-[30px]
                         opacity-50 flex-shrink-0"></div>
+            <!-- Обгортка для позиціонування dropdown відносно Language Section -->
+            <div class="relative w-full max-w-[200px]">
+              <!-- Language Section -->
+              <div class="min-w-[110px] sm:min-w-[130px] md:min-w-[150px] lg:min-w-[160px] xl:min-w-[180px]
+                max-w-[200px] w-full
+                h-10 sm:h-11 md:h-12
+                bg-white/25 border border-white/30
+                rounded-full flex items-center
+                px-2 sm:px-3 md:px-4 lg:px-5
+                cursor-pointer transition-all duration-300 overflow-hidden"
+                  @click="toggleLanguageDropdown">
+                
+                <div class="flex items-center gap-1 flex-1 overflow-hidden">
+                  <CountryFlag :country="selectedLanguage.country" size="medium"
+                              class="w-4 sm:w-5 md:w-6 lg:w-7 xl:w-8
+                            h-4 sm:h-5 md:h-6 lg:h-7 xl:h-8 flex-shrink-0" />
+                  <span class="text-white text-xs sm:text-sm md:text-base font-semibold truncate">
+                    {{ selectedLanguage.code }}
+                  </span>
+                </div>
+                
+                <div class="w-3 sm:w-4 md:w-5 lg:w-6 xl:w-7
+                  h-3 sm:h-4 md:h-5 lg:h-6 xl:h-7
+                  ml-1 sm:ml-1.5 md:ml-2 transform transition-transform"
+                    :class="{ 'rotate-180': showLanguageDropdown }">
+                  <svg class="w-full h-full" viewBox="0 0 20 20" fill="none">
+                    <circle opacity="0.2" cx="10" cy="10" r="10" fill="white"/>
+                    <path d="M5.71387 8.57146L9.99958 12.8572L14.2853 8.57146" stroke="white" stroke-linecap="round"/>
+                  </svg>
+                </div>
 
-            <!-- Language Section -->
-            <div class="min-w-[110px] sm:min-w-[130px] md:min-w-[150px] lg:min-w-[160px] xl:min-w-[180px]
-              max-w-[200px] w-full
-              h-10 sm:h-11 md:h-12
-              bg-white/25 border border-white/30
-              rounded-full flex items-center
-              px-2 sm:px-3 md:px-4 lg:px-5
-              cursor-pointer transition-all duration-300 overflow-hidden"
-                @click="toggleLanguageDropdown">
-              
-              <div class="flex items-center gap-1 flex-1 overflow-hidden">
-                <CountryFlag :country="selectedLanguage.country" size="medium"
-                             class="w-4 sm:w-5 md:w-6 lg:w-7 xl:w-8
-                          h-4 sm:h-5 md:h-6 lg:h-7 xl:h-8 flex-shrink-0" />
-                <span class="text-white text-xs sm:text-sm md:text-base font-semibold truncate">
-                  {{ selectedLanguage.code }}
-                </span>
-              </div>
-              
-              <div class="w-3 sm:w-4 md:w-5 lg:w-6 xl:w-7
-                h-3 sm:h-4 md:h-5 lg:h-6 xl:h-7
-                ml-1 sm:ml-1.5 md:ml-2 transform transition-transform"
-                  :class="{ 'rotate-180': showLanguageDropdown }">
-                <svg class="w-full h-full" viewBox="0 0 20 20" fill="none">
-                  <circle opacity="0.2" cx="10" cy="10" r="10" fill="white"/>
-                  <path d="M5.71387 8.57146L9.99958 12.8572L14.2853 8.57146" stroke="white" stroke-linecap="round"/>
-                </svg>
-              </div>
-
-              <!-- Language Dropdown -->
-              <div v-if="showLanguageDropdown"
-                  class="absolute bottom-[44px] xs:bottom-[48px] sm:bottom-[52px] md:bottom-[56px] right-0 z-[1000]
-                         min-w-[110px] sm:min-w-[130px] md:min-w-[150px] lg:min-w-[160px] xl:min-w-[180px]
-                         max-w-[200px] w-full animate-[dropdownSlideUp_0.3s_ease-out]">
-                <div class="bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
-                            border border-white border-opacity-20
-                            rounded-lg xs:rounded-xl sm:rounded-2xl
-                            backdrop-blur-[32px]
-                            p-1.5 xs:p-2 sm:p-2.5 md:p-3
-                            max-h-[120px] xs:max-h-[130px] sm:max-h-[140px] md:max-h-[150px]
-                            overflow-y-auto scrollbar-none shadow-[0_12px_40px_rgba(0,0,0,0.4)]
-                            transform-gpu">
-                  <div v-for="(language, index) in languages"
-                      :key="language.code"
-                      class="flex items-center
-                              gap-1 xs:gap-1.5 sm:gap-2 md:gap-2.5
-                              px-1.5 xs:px-2 sm:px-2.5 md:px-3
-                              py-0.5 xs:py-1 sm:py-1.5 md:py-2
-                              rounded-md xs:rounded-lg sm:rounded-xl
-                              cursor-pointer transition-all duration-200
-                              min-h-6 xs:min-h-7 sm:min-h-8 md:min-h-9
-                              relative hover:bg-white hover:bg-opacity-10"
-                      :class="{ 'bg-white bg-opacity-15': language.code === selectedLanguage.code }"
-                      @click.stop="selectLanguage(language)">
-                    <CountryFlag :country="language.country" size="small"
-                                 class="flex-shrink-0 !w-3 xs:!w-4 sm:!w-5 md:!w-6
-                                        !h-3 xs:!h-4 sm:!h-5 md:!h-6
-                                        !min-w-3 xs:!min-w-4 sm:!min-w-5 md:!min-w-6
-                                        !min-h-3 xs:!min-h-4 sm:!min-h-5 md:!min-h-6" />
-                    <span class="text-dbd-off-white text-xs xs:text-sm sm:text-base md:text-lg font-medium
-                                leading-3 xs:leading-4 sm:leading-5 md:leading-6
-                                flex-1 mr-3 xs:mr-4 sm:mr-5 md:mr-6">
-                      {{ language.code }}
-                    </span>
-                    <svg v-if="language.code === selectedLanguage.code"
-                        class="absolute right-1.5 xs:right-2 sm:right-2.5 md:right-3 top-1/2 transform -translate-y-1/2 flex-shrink-0"
-                        width="10" height="10" viewBox="0 0 16 16" fill="none">
-                      <path d="M13.5 4.5L6 12L2.5 8.5" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                <!-- Language Dropdown -->
+                <div v-if="showLanguageDropdown"
+                    class="absolute bottom-[44px] xs:bottom-[48px] sm:bottom-[52px] md:bottom-[56px] right-0 z-[1000]
+                          min-w-[110px] sm:min-w-[130px] md:min-w-[150px] lg:min-w-[160px] xl:min-w-[180px]
+                          max-w-[200px] w-full animate-[dropdownSlideUp_0.3s_ease-out]">
+                  <div class="bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
+                              border border-white border-opacity-20
+                              rounded-lg xs:rounded-xl sm:rounded-2xl
+                              backdrop-blur-[32px]
+                              p-1.5 xs:p-2 sm:p-2.5 md:p-3
+                              max-h-[120px] xs:max-h-[130px] sm:max-h-[140px] md:max-h-[150px]
+                              overflow-y-auto scrollbar-none shadow-[0_12px_40px_rgba(0,0,0,0.4)]
+                              transform-gpu">
+                    <div v-for="(language, index) in languages"
+                        :key="language.code"
+                        class="flex items-center
+                                gap-1 xs:gap-1.5 sm:gap-2 md:gap-2.5
+                                px-1.5 xs:px-2 sm:px-2.5 md:px-3
+                                py-0.5 xs:py-1 sm:py-1.5 md:py-2
+                                rounded-md xs:rounded-lg sm:rounded-xl
+                                cursor-pointer transition-all duration-200
+                                min-h-6 xs:min-h-7 sm:min-h-8 md:min-h-9
+                                relative hover:bg-white hover:bg-opacity-10"
+                        :class="{ 'bg-white bg-opacity-15': language.code === selectedLanguage.code }"
+                        @click.stop="selectLanguage(language)">
+                      <CountryFlag :country="language.country" size="small"
+                                  class="flex-shrink-0 !w-3 xs:!w-4 sm:!w-5 md:!w-6
+                                          !h-3 xs:!h-4 sm:!h-5 md:!h-6
+                                          !min-w-3 xs:!min-w-4 sm:!min-w-5 md:!min-w-6
+                                          !min-h-3 xs:!min-h-4 sm:!min-h-5 md:!min-h-6" />
+                      <span class="text-dbd-off-white text-xs xs:text-sm sm:text-base md:text-lg font-medium
+                                  leading-3 xs:leading-4 sm:leading-5 md:leading-6
+                                  flex-1 mr-3 xs:mr-4 sm:mr-5 md:mr-6">
+                        {{ language.code }}
+                      </span>
+                      <svg v-if="language.code === selectedLanguage.code"
+                          class="absolute right-1.5 xs:right-2 sm:right-2.5 md:right-3 top-1/2 transform -translate-y-1/2 flex-shrink-0"
+                          width="10" height="10" viewBox="0 0 16 16" fill="none">
+                        <path d="M13.5 4.5L6 12L2.5 8.5" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </div>
                   </div>
                 </div>
               </div>
