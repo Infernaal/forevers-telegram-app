@@ -7,14 +7,17 @@
             <div
         class="relative
          w-[96%] sm:w-[94%] md:w-[92%] lg:w-[94%] xl:w-[90%]
-         h-[calc(100vh-168px)]
-         sm:h-[calc(100vh-172px)]
-         md:h-[calc(100vh-172px)]
-         lg:h-[calc(100vh-172px)]
-         xl:h-[calc(100vh-172px)]
          bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
          border border-[#09074E] rounded-[20px] shadow-2xl
-         backdrop-blur-[32px] flex flex-col overflow-hidden transition-all duration-300 ease-out"
+         backdrop-blur-[32px] flex flex-col overflow-hidden
+         transition-all duration-300 ease-out
+
+         /* Высота + отступ над BottomNavigation */
+         max-h-[calc(100vh-88px-16px-env(safe-area-inset-bottom))]
+         sm:max-h-[calc(100vh-104px-20px-env(safe-area-inset-bottom))]
+         md:max-h-[calc(100vh-104px-20px-env(safe-area-inset-bottom))]
+         lg:max-h-[calc(100vh-104px-20px-env(safe-area-inset-bottom))]
+         xl:max-h-[calc(100vh-104px-20px-env(safe-area-inset-bottom))]"
       >
         <div class="py-4 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 text-white h-full flex flex-col relative z-10">
             <!-- Background -->
