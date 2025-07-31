@@ -100,7 +100,12 @@
           </div>
 
           <!-- Menu Items -->
-          <div class="flex flex-col flex-1 overflow-y-auto scrollbar-none pb-[120px]">
+          <div class="flex flex-col z-[1] flex-1
+                      overflow-y-auto overflow-x-hidden scrollbar-none
+                      [-webkit-overflow-scrolling:touch] [scroll-behavior:smooth]
+                      [overscroll-behavior:contain] [overscroll-behavior-y:contain]
+                      px-0 xs:px-1 sm:px-2 py-1 xs:py-1 sm:py-1 md:py-1 lg:py-1
+                      touch-manipulation max-h-[200px] xs:max-h-[220px] sm:max-h-[240px]">
             
             <!-- Calculator -->
             <div class="flex items-center
@@ -341,7 +346,7 @@
           </div>
 
           <!-- Bottom Controls -->
-          <div class="relative z-[1] flex justify-center items-center gap-3 px-4 pt-3 pb-5">
+          <div class="relative flex-shrink-0 z-[1] flex justify-center items-center gap-3 sm:gap-4 md:gap-4 lg:gap-4 h-10 sm:h-11 md:h-11 lg:h-12 mb-2">
             
             <!-- ID Section -->
             <div class="min-w-[120px] sm:min-w-[140px] md:min-w-[160px] lg:min-w-[170px] xl:min-w-[190px]
