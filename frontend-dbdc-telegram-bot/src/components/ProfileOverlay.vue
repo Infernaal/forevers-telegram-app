@@ -8,7 +8,7 @@
               left-1/2 transform -translate-x-[150px] sm:-translate-x-[150px] md:-translate-x-[90px] lg:-translate-x-[0px]
               bottom-[calc(88px+env(safe-area-inset-bottom,0px)+2px)]
               sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+2px)]
-              md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+20px)]
+              md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+30px)]
               lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+35px)]
               z-[9998] transition-all duration-300 ease-out ">
         <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px] 
