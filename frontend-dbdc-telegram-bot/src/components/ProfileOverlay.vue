@@ -631,11 +631,13 @@ const selectLanguage = (language) => {
 @keyframes dropdownSlideUp {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(8px) scale(0.95);
+    visibility: hidden;
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+    visibility: visible;
   }
 }
 
