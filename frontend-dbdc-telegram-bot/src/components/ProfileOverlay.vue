@@ -323,7 +323,7 @@
                 <button class="bg-gradient-to-r from-dbd-primary to-[#473FFF]
                      text-white text-sm sm:text-base md:text-base lg:text-lg font-bold
                      px-4 sm:px-5 md:px-5 lg:px-6
-                     h-8 sm:h-9 md:h-9 lg:h-10
+                     h-8 sm:h-9 md:h-10 lg:h-11
                      rounded-full
                      flex items-center justify-center
                      hover:-translate-y-0.5 hover:shadow-md
