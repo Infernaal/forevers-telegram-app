@@ -119,12 +119,12 @@
 
           <!-- Menu Items -->
           <div class="flex-1 flex flex-col z-[1]
-                      overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent
+                      overflow-y-auto overflow-x-hidden scrollbar-none
                       [-webkit-overflow-scrolling:touch] [scroll-behavior:smooth]
                       [overscroll-behavior:contain] [overscroll-behavior-y:contain]
                       px-0 xs:px-1 sm:px-2 py-1 xs:py-2 sm:py-2 md:py-1 lg:py-1
                       touch-manipulation
-                      min-h-0">
+                      max-h-[350px] sm:max-h-[320px] md:max-h-[280px] lg:max-h-[260px] xl:max-h-[240px]">
             
             <!-- Calculator -->
             <div class="flex items-center
