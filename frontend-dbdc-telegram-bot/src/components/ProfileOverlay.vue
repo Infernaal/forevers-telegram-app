@@ -19,7 +19,7 @@
             <div
         class="absolute inset-x-4 sm:inset-x-6 md:inset-x-8 lg:inset-x-12
                bottom-[calc(88px+env(safe-area-inset-bottom,0px)+16px)]
-               sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+28px)]
+               sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+30px)]
                md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+40px)]
                lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+48px)]
                w-auto
