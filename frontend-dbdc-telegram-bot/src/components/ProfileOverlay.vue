@@ -65,7 +65,7 @@
                       <path d="M19.4971 12.7667L15.699 12.2144L14.0007 8.77307V17.4421L17.3977 19.2279L16.7489 15.4452L19.4971 12.7667Z" fill="#E0E0E0"/>
                     </svg>
                   </div>
-                  <span class="text-dbd-off-white text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl
+                  <span class="text-dbd-off-white text-xs xs:text-sm sm:text-base md:text-base lg:text-lg
                                font-semibold leading-tight
                                flex items-center">Silver</span>
                 </div>
@@ -86,7 +86,7 @@
                             flex-shrink-0 touch-manipulation
                             active:scale-95 focus:outline-none focus:ring-2 focus:ring-dbd-primary focus:ring-opacity-50"
                       @click="$emit('close')"
-                      aria-label="Закры��ь профиль">
+                      aria-label="Закрыть профиль">
                 <svg class="w-4 xs:w-5 sm:w-6 md:w-7 lg:w-8 xl:w-9 h-4 xs:h-5 sm:h-6 md:h-7 lg:h-8 xl:h-9" viewBox="0 0 24 24" fill="none">
                   <path d="M17.2155 11.2862L8.2216 2.29534C7.82696 1.90169 7.18757 1.90169 6.79192 2.29534C6.39728 2.68898 6.39728 3.32838 6.79192 3.72203L15.0724 11.9996L6.79292 20.2771C6.39827 20.6707 6.39827 21.3101 6.79292 21.7048C7.18756 22.0984 7.82795 22.0984 8.2226 21.7048L17.2165 12.7139C17.6051 12.3244 17.6051 11.6749 17.2155 11.2862Z" fill="#B7B7B7"/>
                 </svg>
