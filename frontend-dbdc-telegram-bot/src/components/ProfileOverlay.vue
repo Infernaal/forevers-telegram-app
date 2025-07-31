@@ -25,10 +25,10 @@
           <!-- Profile Header Section -->
           <div class="relative flex-shrink-0 z-[2] mb-3 sm:mb-4 md:mb-3 lg:mb-3">
             <div class="w-full
-                        h-16 xs:h-18 sm:h-20 md:h-20 lg:h-22 xl:h-24
+                        h-16 xs:h-18 sm:h-20 md:h-22 lg:h-24 xl:h-28
                         bg-[rgba(96,95,135,0.28)] border border-[#D8D8D8]
-                        rounded-[50px_12px_12px_50px] xs:rounded-[55px_14px_14px_55px] sm:rounded-[60px_16px_16px_60px] md:rounded-[60px_16px_16px_60px] lg:rounded-[70px_18px_18px_70px] xl:rounded-[80px_20px_20px_80px]
-                        flex items-center p-1.5 xs:p-2 sm:p-2.5 md:p-2.5 lg:p-3 xl:p-4 gap-2 xs:gap-2.5 sm:gap-3 md:gap-3 lg:gap-4 xl:gap-5 overflow-hidden
+                        rounded-[50px_12px_12px_50px] xs:rounded-[55px_14px_14px_55px] sm:rounded-[60px_16px_16px_60px] md:rounded-[65px_17px_17px_65px] lg:rounded-[70px_18px_18px_70px] xl:rounded-[80px_20px_20px_80px]
+                        flex items-center p-1.5 xs:p-2 sm:p-2.5 md:p-2.5 lg:p-3.5 xl:p-4 gap-2 xs:gap-2.5 sm:gap-3 md:gap-3.5 lg:gap-4 xl:gap-5 overflow-hidden
                         transition-all duration-300 hover:bg-[rgba(96,95,135,0.35)]
                         touch-manipulation select-none">
               
