@@ -10,7 +10,8 @@
               sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+2px)]
               md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+25px)]
               lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+35px)]
-              z-[9998] transition-all duration-300 ease-out">
+              z-[9998] transition-all duration-300 ease-out bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
+               border border-[#09074E] rounded-[20px] shadow-2xl">
         <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px] 
                     border-l-transparent border-r-transparent 
                     border-t-[#120B81] drop-shadow-md"></div>
