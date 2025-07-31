@@ -110,7 +110,7 @@
                         h-8 xs:h-9 sm:h-10 md:h-9 lg:h-9
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
-                        mb-1 xs:mb-1 sm:mb-1.5 md:mb-2 lg:mb-2.5 xl:mb-3
+                        mb-2 xs:mb-2.5 sm:mb-3 md:mb-4 lg:mb-5 xl:mb-6
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('calculator')">
@@ -133,7 +133,7 @@
                         h-8 xs:h-9 sm:h-10 md:h-9 lg:h-9
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
-                        mb-1 xs:mb-1 sm:mb-1.5 md:mb-2 lg:mb-2.5 xl:mb-3
+                        mb-2 xs:mb-2.5 sm:mb-3 md:mb-4 lg:mb-5 xl:mb-6
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('ambassador')">
@@ -156,7 +156,7 @@
                         h-8 xs:h-9 sm:h-10 md:h-9 lg:h-9
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
-                        mb-1 xs:mb-1 sm:mb-1.5 md:mb-2 lg:mb-2.5 xl:mb-3
+                        mb-2 xs:mb-2.5 sm:mb-3 md:mb-4 lg:mb-5 xl:mb-6
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('verification')">
@@ -189,7 +189,7 @@
                         h-8 xs:h-9 sm:h-10 md:h-9 lg:h-9
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
-                        mb-1 xs:mb-1 sm:mb-1.5 md:mb-2 lg:mb-2.5 xl:mb-3
+                        mb-2 xs:mb-2.5 sm:mb-3 md:mb-4 lg:mb-5 xl:mb-6
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('security')">
@@ -212,7 +212,7 @@
                         h-8 xs:h-9 sm:h-10 md:h-9 lg:h-9
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
-                        mb-1 xs:mb-1 sm:mb-1.5 md:mb-2 lg:mb-2.5 xl:mb-3
+                        mb-2 xs:mb-2.5 sm:mb-3 md:mb-4 lg:mb-5 xl:mb-6
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('settings')">
@@ -235,7 +235,7 @@
                         h-8 xs:h-9 sm:h-10 md:h-9 lg:h-9
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
-                        mb-1 xs:mb-1 sm:mb-1.5 md:mb-2 lg:mb-2.5 xl:mb-3
+                        mb-2 xs:mb-2.5 sm:mb-3 md:mb-4 lg:mb-5 xl:mb-6
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('support')">
@@ -258,7 +258,7 @@
                         h-8 xs:h-9 sm:h-10 md:h-9 lg:h-9
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
-                        mb-1 xs:mb-1 sm:mb-1.5 md:mb-2 lg:mb-2.5 xl:mb-3
+                        mb-2 xs:mb-2.5 sm:mb-3 md:mb-4 lg:mb-5 xl:mb-6
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('help')">
@@ -509,7 +509,7 @@ const languages = ref([
   { code: 'FRA', name: 'Fran��ais', country: 'france' },
   { code: 'DEU', name: 'Deutsch', country: 'germany' },
   { code: 'ITA', name: 'Italiano', country: 'italy' },
-  { code: 'RUS', name: 'Русск��й', country: 'ukraine' },
+  { code: 'RUS', name: 'Русский', country: 'ukraine' },
   { code: 'CHN', name: '中��', country: 'china' },
   { code: 'JPN', name: '日本語', country: 'japan' },
   { code: 'KOR', name: '한국어', country: 'new zealand' },
