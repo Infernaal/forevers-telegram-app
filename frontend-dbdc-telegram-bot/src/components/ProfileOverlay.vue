@@ -9,11 +9,11 @@
               left-1/2 transform
               -translate-x-[150px] sm:-translate-x-[252px] md:-translate-x-[330px] lg:-translate-x-[472px] xl:-translate-x-[550px] 2xl:-translate-x-[620px]
               bottom-[calc(88px+env(safe-area-inset-bottom,0px)+3px)]
-              sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+18px)]
-              md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+22px)]
-              lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+25px)]
-              xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+30px)]
-              2xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+35px)]
+              sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+19px)]
+              md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+23px)]
+              lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+26px)]
+              xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+31px)]
+              2xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+36px)]
               z-[9998] transition-all duration-300 ease-out">
         <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px]
                     border-l-transparent border-r-transparent
