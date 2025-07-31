@@ -397,7 +397,8 @@
             <!-- Обгортка для позиціонування dropdown відносно Language Section -->
             <div class="relative w-full max-w-[200px]">
               <!-- Language Section -->
-              <div class="min-w-[110px] sm:min-w-[130px] md:min-w-[150px] lg:min-w-[160px] xl:min-w-[180px]
+              <div class="language-button
+           min-w-[110px] sm:min-w-[130px] md:min-w-[150px] lg:min-w-[160px] xl:min-w-[180px]
            max-w-[200px] w-full
            h-10 sm:h-11 md:h-12
            bg-white/25 border border-white/30
