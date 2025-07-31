@@ -585,50 +585,12 @@ const selectLanguage = (language) => {
   console.log('Language selected:', language)
 }
 
-// Telegram WebApp viewport adaptation
-const setupTelegramWebAppViewport = () => {
-  if (window.Telegram && window.Telegram.WebApp) {
-    const tgWebApp = window.Telegram.WebApp
-
-    // Expand the WebApp to full height
-    tgWebApp.expand()
-
-    // Set viewport height for CSS
-    const setViewportHeight = () => {
-      const vh = tgWebApp.viewportHeight || window.innerHeight
-      document.documentElement.style.setProperty('--tg-viewport-height', `${vh}px`)
-    }
-
-    setViewportHeight()
-
-    // Listen for viewport changes (e.g., when keyboard appears/disappears)
-    tgWebApp.onEvent('viewportChanged', setViewportHeight)
-
-    return () => {
-      tgWebApp.offEvent('viewportChanged', setViewportHeight)
-    }
-  }
-
-  // Fallback for non-Telegram environments
-  const setFallbackViewportHeight = () => {
-    const vh = window.innerHeight
-    document.documentElement.style.setProperty('--tg-viewport-height', `${vh}px`)
-  }
-
-  setFallbackViewportHeight()
-  window.addEventListener('resize', setFallbackViewportHeight)
-
-  return () => {
-    window.removeEventListener('resize', setFallbackViewportHeight)
-  }
-}
-
+// Telegram WebApp minimal adaptation
 onMounted(() => {
-  const cleanup = setupTelegramWebAppViewport()
-
-  onUnmounted(() => {
-    if (cleanup) cleanup()
-  })
+  if (window.Telegram && window.Telegram.WebApp) {
+    // Just expand the WebApp to full height
+    window.Telegram.WebApp.expand()
+  }
 })
 </script>
 
