@@ -11,7 +11,7 @@
               bottom-[calc(88px+env(safe-area-inset-bottom,0px)+3px)]
               sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+19px)]
               md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+23px)]
-              lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+26px)]
+              lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+27px)]
               xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+31px)]
               2xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+36px)]
               z-[9998] transition-all duration-300 ease-out">
