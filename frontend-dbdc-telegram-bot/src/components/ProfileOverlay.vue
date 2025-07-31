@@ -335,7 +335,7 @@
                 </button>
               </div>
               <div class="mt-2 sm:mt-2.5 md:mt-2.5 lg:mt-3 relative z-[1]">
-                <div class="text-dbd-gray text-xs sm:text-sm md:text-sm lg:text-base font-normal">
+                <div class="text-dbd-gray text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-normal">
                   buy <span class="text-[#8C4CD1] font-bold">123</span> more Forevers to upgrade
                 </div>
               </div>
