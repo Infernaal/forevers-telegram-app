@@ -5,7 +5,7 @@
       <!-- Triangle Pointer -->
       <div
         class="absolute
-            left-1/2 transform -translate-x-[150px] sm:-translate-x-[252px] md:-translate-x-[30px] lg:-translate-x-[472px] xl:-translate-x-[584px] 2xl:-translate-x-[696px]
+            left-1/2 transform -translate-x-[150px] sm:-translate-x-[252px] md:-translate-x-[282px] lg:-translate-x-[472px] xl:-translate-x-[584px] 2xl:-translate-x-[696px]
               bottom-[calc(88px+env(safe-area-inset-bottom,0px)+2px)]
               sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+18px)]
               md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+28px)]
