@@ -5,10 +5,10 @@
       <!-- Dropdown Menu -->
             <div
         class="absolute inset-x-4 sm:inset-x-6 md:inset-x-8 lg:inset-x-12
-               bottom-[calc(88px+env(safe-area-inset-bottom,0px)+12px)]
-               sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+24px)]
-               md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+32px)]
-               lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+40px)]
+               bottom-[calc(88px+env(safe-area-inset-bottom,0px)+16px)]
+               sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+28px)]
+               md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+36px)]
+               lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+44px)]
                w-auto
                max-h-[calc(100vh-140px)]
                sm:max-h-[calc(100vh-160px)]
