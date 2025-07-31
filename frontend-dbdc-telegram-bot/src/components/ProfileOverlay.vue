@@ -86,7 +86,7 @@
                             flex-shrink-0 touch-manipulation
                             active:scale-95 focus:outline-none focus:ring-2 focus:ring-dbd-primary focus:ring-opacity-50"
                       @click="$emit('close')"
-                      aria-label="Закрыть профиль">
+                      aria-label="Закрыт�� профиль">
                 <svg class="w-4 xs:w-5 sm:w-6 md:w-6 lg:w-7 xl:w-8 h-4 xs:h-5 sm:h-6 md:h-6 lg:h-7 xl:h-8" viewBox="0 0 24 24" fill="none">
                   <path d="M17.2155 11.2862L8.2216 2.29534C7.82696 1.90169 7.18757 1.90169 6.79192 2.29534C6.39728 2.68898 6.39728 3.32838 6.79192 3.72203L15.0724 11.9996L6.79292 20.2771C6.39827 20.6707 6.39827 21.3101 6.79292 21.7048C7.18756 22.0984 7.82795 22.0984 8.2226 21.7048L17.2165 12.7139C17.6051 12.3244 17.6051 11.6749 17.2155 11.2862Z" fill="#B7B7B7"/>
                 </svg>
@@ -101,7 +101,7 @@
                       [overscroll-behavior:contain] [overscroll-behavior-y:contain]
                       px-0 xs:px-1 sm:px-2 py-1 xs:py-2 sm:py-2 md:py-1 lg:py-1
                       touch-manipulation
-                      max-h-[350px] sm:max-h-[380px] md:max-h-[400px] lg:max-h-[420px] xl:max-h-[450px]">
+                      max-h-[350px] sm:max-h-[320px] md:max-h-[280px] lg:max-h-[260px] xl:max-h-[240px]">
             
             <!-- Calculator -->
             <div class="flex items-center
