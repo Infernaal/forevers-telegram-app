@@ -19,11 +19,13 @@
       </div>
       <!-- Dropdown Menu -->
             <div
-        class="absolute inset-x-4 sm:inset-x-6 md:inset-x-8 lg:inset-x-12
+        class="absolute inset-x-4 sm:inset-x-6 md:inset-x-8 lg:inset-x-12 xl:inset-x-16 2xl:inset-x-20
                bottom-[calc(88px+env(safe-area-inset-bottom,0px)+16px)]
                sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+32px)]
-               md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+40px)]
+               md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+35px)]
                lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+39px)]
+               xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+45px)]
+               2xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+50px)]
                w-auto
                max-h-[calc(100vh-140px)]
                sm:max-h-[calc(100vh-160px)]
