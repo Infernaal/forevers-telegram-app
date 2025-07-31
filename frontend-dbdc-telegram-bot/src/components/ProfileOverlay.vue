@@ -100,7 +100,7 @@
                       [-webkit-overflow-scrolling:touch] [scroll-behavior:smooth]
                       [overscroll-behavior:contain] [overscroll-behavior-y:contain]
                       px-0 xs:px-1 sm:px-2 py-1 xs:py-1 sm:py-1 md:py-1 lg:py-1
-                      touch-manipulation max-h-[200px] xs:max-h-[220px] sm:max-h-[240px]">
+                      touch-manipulation max-h-[calc(100vh-380px)] min-h-[200px] xs:max-h-[calc(100vh-360px)] sm:max-h-[calc(100vh-340px)]">
             
             <!-- Calculator -->
             <div class="flex items-center
