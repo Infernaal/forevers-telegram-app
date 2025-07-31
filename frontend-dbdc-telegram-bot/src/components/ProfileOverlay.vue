@@ -72,7 +72,7 @@
                 </div>
 
                 <!-- User Name -->
-                <h2 class="text-white text-xs xs:text-sm sm:text-base md:text-base lg:text-lg font-bold leading-4 xs:leading-5 sm:leading-6 m-0 whitespace-nowrap overflow-hidden text-ellipsis text-left">
+                <h2 class="text-white text-xs xs:text-sm sm:text-base md:text-sm lg:text-base xl:text-lg font-bold leading-4 xs:leading-5 sm:leading-6 m-0 whitespace-nowrap overflow-hidden text-ellipsis text-left">
                   Jason Williams
                 </h2>
               </div>
