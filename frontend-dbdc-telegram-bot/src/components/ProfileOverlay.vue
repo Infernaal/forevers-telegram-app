@@ -12,12 +12,6 @@
             2xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+48px)]
             flex flex-col items-start z-[9999]">
 
-      <!-- Triangle Pointer -->
-      <div class="ml-6 sm:ml-10 md:ml-12 lg:ml-20 xl:ml-24 2xl:ml-32 mb-[-1px]">
-        <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px]
-                    border-l-transparent border-r-transparent border-t-[#09074E] drop-shadow-md"></div>
-      </div>
-
       <!-- Dropdown Menu -->
       <div class="w-full
                   bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
@@ -474,8 +468,12 @@
             </div>
           </div>
         </div>
+        <!-- Triangle Pointer -->
+        <div class="ml-6 sm:ml-10 md:ml-12 lg:ml-20 xl:ml-24 2xl:ml-32 mb-[-1px]">
+          <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px]
+                      border-l-transparent border-r-transparent border-t-[#09074E] drop-shadow-md"></div>
+        </div>
       </div>
-
     </div>
   </div>
 </template>
