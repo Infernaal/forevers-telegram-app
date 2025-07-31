@@ -807,53 +807,14 @@ onMounted(() => {
   }
 }
 
-/* Telegram WebApp specific optimizations */
-@media (max-height: 700px) {
+/* Telegram WebApp specific optimizations - только для очень маленьких экранов */
+@media (max-height: 500px) and (orientation: portrait) {
   .profile-overlay-container {
-    max-height: calc(var(--tg-viewport-height, 100vh) - 140px) !important;
+    max-height: calc(100vh - 120px);
   }
 
   .flex.flex-col.z-\[1\].flex-1 {
-    max-height: calc(var(--tg-viewport-height, 100vh) - 320px) !important;
-    min-height: 180px !important;
-  }
-}
-
-@media (max-height: 600px) {
-  .profile-overlay-container {
-    max-height: calc(var(--tg-viewport-height, 100vh) - 120px) !important;
-  }
-
-  .flex.flex-col.z-\[1\].flex-1 {
-    max-height: calc(var(--tg-viewport-height, 100vh) - 300px) !important;
-    min-height: 150px !important;
-  }
-}
-
-@media (max-height: 500px) {
-  .profile-overlay-container {
-    max-height: calc(var(--tg-viewport-height, 100vh) - 100px) !important;
-  }
-
-  .flex.flex-col.z-\[1\].flex-1 {
-    max-height: calc(var(--tg-viewport-height, 100vh) - 280px) !important;
-    min-height: 120px !important;
-  }
-}
-
-@media (max-height: 400px) {
-  .profile-overlay-container {
-    max-height: calc(var(--tg-viewport-height, 100vh) - 80px) !important;
-  }
-
-  .flex.flex-col.z-\[1\].flex-1 {
-    max-height: calc(var(--tg-viewport-height, 100vh) - 250px) !important;
-    min-height: 100px !important;
-  }
-
-  /* Reduce gaps and padding on very small screens */
-  .absolute.inset-x-4 {
-    bottom: calc(70px + env(safe-area-inset-bottom, 0px)) !important;
+    max-height: 180px;
   }
 }
 
