@@ -426,7 +426,8 @@
 
               <!-- Language Dropdown -->
               <div v-if="showLanguageDropdown"
-                  class="absolute bottom-[32px] xs:bottom-[36px] sm:bottom-[40px] md:bottom-[44px] left-0 right-0 z-[1000] animate-[dropdownSlideUp_0.2s_ease-out]">
+                  class="absolute bottom-[32px] xs:bottom-[36px] sm:bottom-[40px] md:bottom-[44px] left-0 right-0 z-[1000] animate-[dropdownSlideUp_0.2s_ease-out]
+                         w-full max-w-full">
                 <div class="bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
                             border border-white border-opacity-8
                             rounded-lg xs:rounded-xl sm:rounded-2xl
