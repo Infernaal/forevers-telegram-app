@@ -4,12 +4,12 @@
     <div
       class="absolute
             inset-x-4 sm:inset-x-6 md:inset-x-8 lg:inset-x-12 xl:inset-x-20 2xl:inset-x-24
-            bottom-[calc(88px+env(safe-area-inset-bottom,0px)+2px)]
-            sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+18px)]
-            md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+27px)]
-            lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+27px)]
-            xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+27px)]
-            2xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+27px)]
+            bottom-[calc(88px+env(safe-area-inset-bottom,0px)+20px)]
+            sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+20px)]
+            md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+20px)]
+            lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+20px)]
+            xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+20px)]
+            2xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+20px)]
             flex flex-col items-start z-[9999]">
 
       <!-- Dropdown Menu -->
@@ -17,7 +17,7 @@
                   bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
                   border border-[#09074E] rounded-[20px] shadow-2xl
                   backdrop-blur-[32px] flex flex-col overflow-hidden transition-all duration-300 ease-out
-                  profile-overlay-container max-h-[calc(100vh-140px)]">
+                  profile-overlay-container max-h-[calc(100vh-160px)]">
         <div class="py-4 px-4 sm:px-6 md:px-6 lg:px-8 xl:px-10 text-white flex flex-col relative z-10 h-full">
           <!-- Background -->
           <div class="absolute inset-0 bg-gradient-to-br from-[#120B81] via-[#09074E] to-[#09074E] border border-[#09074E] backdrop-blur-[40px] z-0 rounded-[20px]"></div>
