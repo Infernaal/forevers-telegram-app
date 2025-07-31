@@ -129,11 +129,11 @@
             <div class="flex items-center
                         gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-3.5
                         px-2 xs:px-3 sm:px-4 md:px-4.5 lg:px-5
-                        py-1.5 xs:py-2 sm:py-2.5 md:py-2 lg:py-2
-                        h-10 xs:h-11 sm:h-12 md:h-11 lg:h-11
+                        py-1 xs:py-1.5 sm:py-1.5 md:py-1.5 lg:py-1.5
+                        h-8 xs:h-9 sm:h-10 md:h-9 lg:h-9
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
-                        mb-1.5 xs:mb-2 sm:mb-2.5 md:mb-2 lg:mb-2
+                        mb-1 xs:mb-1 sm:mb-1.5 md:mb-1 lg:mb-1
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('ambassador')">
