@@ -4,12 +4,15 @@
     <div class="relative w-full h-full flex flex-col items-center px-4 sm:px-6 md:px-8 lg:px-12 overflow-y-auto scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
       <!-- Dropdown Menu -->
             <div
-        class="absolute inset-x-4 sm:inset-x-6 md:inset-x-8 lg:inset-x-12
-               bottom-[calc(88px+env(safe-area-inset-bottom,0px)+12px)]
-               w-auto
-               bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
-               border border-[#09074E] rounded-[20px] shadow-2xl
-               backdrop-blur-[32px] flex flex-col overflow-hidden transition-all duration-300 ease-out"
+        class="absolute 
+    inset-x-4 sm:inset-x-6 md:inset-x-8 lg:inset-x-12
+    bottom-[calc(88px+env(safe-area-inset-bottom,0px)+8px)]
+    sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+8px)]
+    w-auto
+    bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
+    border border-[#09074E] rounded-[20px] shadow-2xl
+    backdrop-blur-[32px] flex flex-col overflow-hidden
+    transition-all duration-300 ease-out"
       >
         <div class="py-4 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 text-white flex flex-col relative z-10">
             <!-- Background -->
