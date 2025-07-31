@@ -223,7 +223,7 @@ const foreversList = ref([
     priceChange: 0.17,
     rentalCost: 4,
     potentialIncome: 120,
-    availableText: 'Available without restrictions',
+    availableText: 'Available',
     availableAmount: 250
   },
   {
