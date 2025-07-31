@@ -259,7 +259,7 @@
                         h-10 xs:h-11 sm:h-12 md:h-11 lg:h-12
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
-                        mb-2 xs:mb-3 sm:mb-4 md:mb-5
+                        mb-2 xs:mb-3 sm:mb-4 md:mb-3 lg:mb-3
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('help')">
@@ -505,7 +505,7 @@ const languages = ref([
   { code: 'JPN', name: '日本語', country: 'japan' },
   { code: 'KOR', name: '한국어', country: 'new zealand' },
   { code: 'ARA', name: 'العربية', country: 'uae' },
-  { code: 'POR', name: 'Portugu��s', country: 'spain' },
+  { code: 'POR', name: 'Português', country: 'spain' },
   { code: 'NLD', name: 'Nederlands', country: 'norway' }
 ])
 
