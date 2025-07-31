@@ -757,40 +757,6 @@ const selectLanguage = (language) => {
   width: 4.5rem;
 }
 
-/* ProfileOverlay triangle pointer */
-.profile-overlay-container::after {
-  content: '';
-  position: absolute;
-  bottom: -8px;
-  left: 32px;
-  width: 0;
-  height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top: 8px solid #09074E;
-  z-index: 10;
-}
-
-@media (min-width: 640px) {
-  .profile-overlay-container::after {
-    left: 40px;
-    bottom: -10px;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 10px solid #09074E;
-  }
-}
-
-@media (min-width: 768px) {
-  .profile-overlay-container::after {
-    left: 48px;
-    bottom: -12px;
-    border-left: 12px solid transparent;
-    border-right: 12px solid transparent;
-    border-top: 12px solid #09074E;
-  }
-}
-
 /* Keep scrollbar invisible on all devices */
 
 /* Fade in animation for overlay */
