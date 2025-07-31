@@ -86,7 +86,7 @@
                             flex-shrink-0 touch-manipulation
                             active:scale-95 focus:outline-none focus:ring-2 focus:ring-dbd-primary focus:ring-opacity-50"
                       @click="$emit('close')"
-                      aria-label="Закрыт�� профиль">
+                      aria-label="Закрыть профиль">
                 <svg class="w-4 xs:w-5 sm:w-6 md:w-6 lg:w-7 xl:w-8 h-4 xs:h-5 sm:h-6 md:h-6 lg:h-7 xl:h-8" viewBox="0 0 24 24" fill="none">
                   <path d="M17.2155 11.2862L8.2216 2.29534C7.82696 1.90169 7.18757 1.90169 6.79192 2.29534C6.39728 2.68898 6.39728 3.32838 6.79192 3.72203L15.0724 11.9996L6.79292 20.2771C6.39827 20.6707 6.39827 21.3101 6.79292 21.7048C7.18756 22.0984 7.82795 22.0984 8.2226 21.7048L17.2165 12.7139C17.6051 12.3244 17.6051 11.6749 17.2155 11.2862Z" fill="#B7B7B7"/>
                 </svg>
@@ -107,11 +107,11 @@
             <div class="flex items-center
                         gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-3.5
                         px-2 xs:px-3 sm:px-4 md:px-4.5 lg:px-5
-                        py-1.5 xs:py-2 sm:py-2.5 md:py-2.5 lg:py-3
-                        h-10 xs:h-11 sm:h-12 md:h-12 lg:h-13
+                        py-1.5 xs:py-2 sm:py-2.5 md:py-2 lg:py-2
+                        h-10 xs:h-11 sm:h-12 md:h-11 lg:h-11
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
-                        mb-1.5 xs:mb-2 sm:mb-2.5 md:mb-2.5 lg:mb-3
+                        mb-1.5 xs:mb-2 sm:mb-2.5 md:mb-2 lg:mb-2
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('calculator')">
@@ -130,11 +130,11 @@
             <div class="flex items-center
                         gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-3.5
                         px-2 xs:px-3 sm:px-4 md:px-4.5 lg:px-5
-                        py-1.5 xs:py-2 sm:py-2.5 md:py-2.5 lg:py-3
-                        h-10 xs:h-11 sm:h-12 md:h-12 lg:h-13
+                        py-1.5 xs:py-2 sm:py-2.5 md:py-2 lg:py-2
+                        h-10 xs:h-11 sm:h-12 md:h-11 lg:h-11
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
-                        mb-1.5 xs:mb-2 sm:mb-2.5 md:mb-2.5 lg:mb-3
+                        mb-1.5 xs:mb-2 sm:mb-2.5 md:mb-2 lg:mb-2
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('ambassador')">
@@ -153,11 +153,11 @@
             <div class="flex items-center
                         gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-3.5
                         px-2 xs:px-3 sm:px-4 md:px-4.5 lg:px-5
-                        py-1.5 xs:py-2 sm:py-2.5 md:py-2.5 lg:py-3
-                        h-10 xs:h-11 sm:h-12 md:h-12 lg:h-13
+                        py-1.5 xs:py-2 sm:py-2.5 md:py-2 lg:py-2
+                        h-10 xs:h-11 sm:h-12 md:h-11 lg:h-11
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
-                        mb-1.5 xs:mb-2 sm:mb-2.5 md:mb-2.5 lg:mb-3
+                        mb-1.5 xs:mb-2 sm:mb-2.5 md:mb-2 lg:mb-2
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('verification')">
@@ -186,11 +186,11 @@
             <div class="flex items-center
                         gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-3.5
                         px-2 xs:px-3 sm:px-4 md:px-4.5 lg:px-5
-                        py-1.5 xs:py-2 sm:py-2.5 md:py-2.5 lg:py-3
-                        h-10 xs:h-11 sm:h-12 md:h-12 lg:h-13
+                        py-1.5 xs:py-2 sm:py-2.5 md:py-2 lg:py-2
+                        h-10 xs:h-11 sm:h-12 md:h-11 lg:h-11
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
-                        mb-1.5 xs:mb-2 sm:mb-2.5 md:mb-2.5 lg:mb-3
+                        mb-1.5 xs:mb-2 sm:mb-2.5 md:mb-2 lg:mb-2
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('security')">
@@ -209,11 +209,11 @@
             <div class="flex items-center
                         gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-3.5
                         px-2 xs:px-3 sm:px-4 md:px-4.5 lg:px-5
-                        py-1.5 xs:py-2 sm:py-2.5 md:py-2.5 lg:py-3
-                        h-10 xs:h-11 sm:h-12 md:h-12 lg:h-13
+                        py-1.5 xs:py-2 sm:py-2.5 md:py-2 lg:py-2
+                        h-10 xs:h-11 sm:h-12 md:h-11 lg:h-11
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
-                        mb-1.5 xs:mb-2 sm:mb-2.5 md:mb-2.5 lg:mb-3
+                        mb-1.5 xs:mb-2 sm:mb-2.5 md:mb-2 lg:mb-2
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('settings')">
@@ -232,11 +232,11 @@
             <div class="flex items-center
                         gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-3.5
                         px-2 xs:px-3 sm:px-4 md:px-4.5 lg:px-5
-                        py-1.5 xs:py-2 sm:py-2.5 md:py-2.5 lg:py-3
-                        h-10 xs:h-11 sm:h-12 md:h-12 lg:h-13
+                        py-1.5 xs:py-2 sm:py-2.5 md:py-2 lg:py-2
+                        h-10 xs:h-11 sm:h-12 md:h-11 lg:h-11
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
-                        mb-1.5 xs:mb-2 sm:mb-2.5 md:mb-2.5 lg:mb-3
+                        mb-1.5 xs:mb-2 sm:mb-2.5 md:mb-2 lg:mb-2
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('support')">
@@ -255,8 +255,8 @@
             <div class="flex items-center
                         gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-3.5
                         px-2 xs:px-3 sm:px-4 md:px-4.5 lg:px-5
-                        py-1.5 xs:py-2 sm:py-2.5 md:py-2.5 lg:py-3
-                        h-10 xs:h-11 sm:h-12 md:h-12 lg:h-13
+                        py-1.5 xs:py-2 sm:py-2.5 md:py-2 lg:py-2
+                        h-10 xs:h-11 sm:h-12 md:h-11 lg:h-11
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
                         mb-2 xs:mb-3 sm:mb-4 md:mb-3.5 lg:mb-4
