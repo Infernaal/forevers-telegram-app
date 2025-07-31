@@ -818,28 +818,14 @@ onMounted(() => {
   }
 }
 
-/* Telegram WebApp overlay optimizations */
+/* Telegram WebApp overlay - минимальная адаптация */
 .telegram-webapp-overlay {
   height: 100vh;
-  height: 100svh; /* Use small viewport height for mobile browsers */
-  height: var(--tg-viewport-height, 100vh); /* Telegram WebApp specific variable */
-  overflow: hidden;
 }
 
-/* Support for Telegram WebApp viewport variables */
-:root {
-  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
-  --tg-viewport-height: 100vh;
-}
-
-/* Ensure the container works with Telegram's dynamic viewport */
 @supports (height: 100svh) {
   .telegram-webapp-overlay {
     height: 100svh;
-  }
-
-  .profile-overlay-container {
-    max-height: calc(100svh - 160px) !important;
   }
 }
 </style>
