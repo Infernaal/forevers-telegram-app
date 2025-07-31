@@ -373,9 +373,9 @@
               
               <button v-if="!showCopySuccess"
                       class="flex items-center justify-center
-             absolute right-0 top-0 bottom-0
+             absolute right-[-1px] top-[-1px] bottom-[-1px]
              w-10 sm:w-11 md:w-10 lg:w-11 xl:w-12
-             h-full min-w-[40px] sm:min-w-[44px] md:min-w-[40px]
+             h-[calc(100%+2px)] min-w-[40px] sm:min-w-[44px] md:min-w-[40px]
              bg-white border border-[#D8D8D8]
              rounded-r-full border-l-0 flex-shrink-0
              hover:bg-gray-100 hover:scale-105 active:scale-95
