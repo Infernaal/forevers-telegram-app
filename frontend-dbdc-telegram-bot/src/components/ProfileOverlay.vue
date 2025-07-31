@@ -21,7 +21,7 @@
                bottom-[calc(88px+env(safe-area-inset-bottom,0px)+16px)]
                sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+32px)]
                md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+40px)]
-               lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+48px)]
+               lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+40px)]
                w-auto
                max-h-[calc(100vh-140px)]
                sm:max-h-[calc(100vh-160px)]
