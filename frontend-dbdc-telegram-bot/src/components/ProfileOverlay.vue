@@ -47,10 +47,10 @@
               <div class="flex-1 flex flex-col gap-1 xs:gap-1.5 sm:gap-2 px-0.5 xs:px-1 sm:px-1.5 min-w-0 overflow-hidden">
                 <!-- Silver Badge -->
                 <div class="flex items-center justify-start gap-1 xs:gap-1.5 sm:gap-2
-                            px-2 xs:px-2.5 sm:px-3 md:px-3 lg:px-3.5 xl:px-4
-                            py-0.5 xs:py-1 sm:py-1.5 md:py-1.5 lg:py-2
+                            px-2 xs:px-2.5 sm:px-3 md:px-2.5 lg:px-3 xl:px-3.5
+                            py-0.5 xs:py-1 sm:py-1.5 md:py-1 lg:py-1.5 xl:py-2
                             bg-[rgba(110,107,169,0.90)] border border-[#D8D8D8]
-                            rounded-lg xs:rounded-xl sm:rounded-2xl md:rounded-2xl w-fit max-w-fit
+                            rounded-lg xs:rounded-xl sm:rounded-2xl md:rounded-lg lg:rounded-xl xl:rounded-2xl w-fit max-w-fit
                             transition-all duration-300 hover:bg-[rgba(110,107,169,1)]">
                   <div class="w-3 xs:w-4 sm:w-5 md:w-5 lg:w-6 xl:w-7
                              h-3 xs:h-4 sm:h-5 md:h-5 lg:h-6 xl:h-7
