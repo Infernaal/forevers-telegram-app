@@ -9,7 +9,7 @@
             md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+20px)]
             lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+27px)]
             xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+44px)]
-            2xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+48px)]
+            2xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+40px)]
             flex flex-col items-start z-[9999]">
 
       <!-- Dropdown Menu -->
