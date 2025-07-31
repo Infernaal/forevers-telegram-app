@@ -772,31 +772,42 @@ onMounted(() => {
 /* Telegram WebApp specific optimizations */
 @media (max-height: 700px) and (orientation: portrait) {
   .absolute.inset-x-4 {
-    bottom: calc(75px + env(safe-area-inset-bottom, 0px)) !important;
+    bottom: calc(88px + env(safe-area-inset-bottom, 0px) + 20px) !important;
   }
 }
 
 @media (max-height: 600px) and (orientation: portrait) {
   .absolute.inset-x-4 {
-    bottom: calc(65px + env(safe-area-inset-bottom, 0px)) !important;
+    bottom: calc(88px + env(safe-area-inset-bottom, 0px) + 20px) !important;
   }
 
   .profile-overlay-container {
-    max-height: calc(100vh - 110px);
+    max-height: calc(100vh - 130px);
   }
 }
 
 @media (max-height: 500px) and (orientation: portrait) {
   .absolute.inset-x-4 {
-    bottom: calc(55px + env(safe-area-inset-bottom, 0px)) !important;
+    bottom: calc(88px + env(safe-area-inset-bottom, 0px) + 20px) !important;
   }
 
   .profile-overlay-container {
-    max-height: calc(100vh - 100px);
+    max-height: calc(100vh - 120px);
   }
 
   .flex.flex-col.z-\[1\].flex-1 {
-    max-height: 160px;
+    max-height: 140px;
+  }
+}
+
+/* Ensure triangle is always visible */
+@media (max-height: 568px) {
+  .absolute.inset-x-4 {
+    bottom: calc(80px + env(safe-area-inset-bottom, 0px) + 15px) !important;
+  }
+
+  .profile-overlay-container {
+    max-height: calc(100vh - 115px);
   }
 }
 
