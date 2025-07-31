@@ -118,13 +118,13 @@
           </div>
 
           <!-- Menu Items -->
-          <div class="flex-1 flex flex-col z-[1]
+          <div class="flex flex-col z-[1]
                       overflow-y-auto overflow-x-hidden scrollbar-none
                       [-webkit-overflow-scrolling:touch] [scroll-behavior:smooth]
                       [overscroll-behavior:contain] [overscroll-behavior-y:contain]
                       px-0 xs:px-1 sm:px-2 py-1 xs:py-2 sm:py-2 md:py-1 lg:py-1
                       touch-manipulation
-                      max-h-[350px] sm:max-h-[320px] md:max-h-[280px] lg:max-h-[260px] xl:max-h-[240px]">
+                      h-[176px] xs:h-[188px] sm:h-[200px] md:h-[188px] lg:h-[188px] xl:h-[200px]">
             
             <!-- Calculator -->
             <div class="flex items-center
@@ -665,6 +665,9 @@ const selectLanguage = (language) => {
 
 .scrollbar-none::-webkit-scrollbar {
   display: none;
+  width: 0;
+  height: 0;
+  background: transparent;
 }
 
 /* Tablet specific positioning */
@@ -788,26 +791,7 @@ const selectLanguage = (language) => {
   }
 }
 
-/* Custom scrollbar for better UX */
-@media (min-width: 768px) {
-  .scrollbar-none::-webkit-scrollbar {
-    width: 4px;
-  }
-
-  .scrollbar-none::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 2px;
-  }
-
-  .scrollbar-none::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 2px;
-  }
-
-  .scrollbar-none::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.5);
-  }
-}
+/* Keep scrollbar invisible on all devices */
 
 /* Fade in animation for overlay */
 .fixed.inset-0.z-50 {
