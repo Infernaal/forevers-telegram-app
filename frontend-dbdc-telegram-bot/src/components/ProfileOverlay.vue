@@ -7,9 +7,9 @@
         class="absolute
               left-1/2 transform -translate-x-[170px] sm:-translate-x-[180px] md:-translate-x-[190px] lg:-translate-x-[200px]
               bottom-[calc(88px+env(safe-area-inset-bottom,0px)+10px)]
-              sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+10px)]
-              md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+20px)]
-              lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+30px)]
+              sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+13px)]
+              md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+23px)]
+              lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+33px)]
               z-[9998] transition-all duration-300 ease-out">
         <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px] 
                     border-l-transparent border-r-transparent 
