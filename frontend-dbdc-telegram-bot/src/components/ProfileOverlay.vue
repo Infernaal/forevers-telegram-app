@@ -282,7 +282,7 @@
             <div class="w-full
               bg-[#F1E7FF] border border-[#DCCCF1]
               rounded-2xl
-              px-4 py-3 sm:px-5 sm:py-4 md:px-5 md:py-4 lg:px-6 lg:py-5
+              px-4 py-3 sm:px-5 sm:py-4 md:px-5 md:py-3 lg:px-5 lg:py-3
               relative overflow-hidden">
               <!-- Background gradient -->
               <div class="absolute left-0 top-0
