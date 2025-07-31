@@ -341,7 +341,7 @@
           </div>
 
           <!-- Bottom Controls -->
-          <div class="relative flex-shrink-0 z-[1] flex justify-center items-center gap-3 sm:gap-4 md:gap-4 lg:gap-4 h-10 sm:h-11 md:h-11 lg:h-12 mb-2">
+          <div class="relative z-[1] flex justify-center items-center gap-3 px-4 pt-3 pb-5">
             
             <!-- ID Section -->
             <div class="min-w-[120px] sm:min-w-[140px] md:min-w-[160px] lg:min-w-[170px] xl:min-w-[190px]
