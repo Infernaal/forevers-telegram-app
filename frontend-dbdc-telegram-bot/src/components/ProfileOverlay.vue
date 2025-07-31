@@ -791,26 +791,7 @@ const selectLanguage = (language) => {
   }
 }
 
-/* Custom scrollbar for better UX */
-@media (min-width: 768px) {
-  .scrollbar-none::-webkit-scrollbar {
-    width: 4px;
-  }
-
-  .scrollbar-none::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 2px;
-  }
-
-  .scrollbar-none::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 2px;
-  }
-
-  .scrollbar-none::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.5);
-  }
-}
+/* Keep scrollbar invisible on all devices */
 
 /* Fade in animation for overlay */
 .fixed.inset-0.z-50 {
