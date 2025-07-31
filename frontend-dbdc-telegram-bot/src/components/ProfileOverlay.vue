@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl min-h-screen">
+  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl min-h-screen telegram-webapp-overlay">
     <!-- Dropdown Wrapper -->
     <div
       class="absolute
@@ -484,7 +484,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import CountryFlag from './CountryFlag.vue'
 
 // Props
@@ -584,6 +584,14 @@ const selectLanguage = (language) => {
   showLanguageDropdown.value = false
   console.log('Language selected:', language)
 }
+
+// Telegram WebApp minimal adaptation
+onMounted(() => {
+  if (window.Telegram && window.Telegram.WebApp) {
+    // Just expand the WebApp to full height
+    window.Telegram.WebApp.expand()
+  }
+})
 </script>
 
 <style scoped>
@@ -758,6 +766,28 @@ const selectLanguage = (language) => {
   }
   to {
     opacity: 1;
+  }
+}
+
+/* Telegram WebApp specific optimizations - только для очень маленьких экранов */
+@media (max-height: 500px) and (orientation: portrait) {
+  .profile-overlay-container {
+    max-height: calc(100vh - 120px);
+  }
+
+  .flex.flex-col.z-\[1\].flex-1 {
+    max-height: 180px;
+  }
+}
+
+/* Telegram WebApp overlay - минимальная адаптация */
+.telegram-webapp-overlay {
+  height: 100vh;
+}
+
+@supports (height: 100svh) {
+  .telegram-webapp-overlay {
+    height: 100svh;
   }
 }
 </style>
