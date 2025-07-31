@@ -432,13 +432,13 @@
               max-w-[200px] w-full
               animate-[dropdownSlideUp_0.3s_ease-out]">
                   <div class="bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
-                              border border-white border-opacity-20
-                              rounded-lg xs:rounded-xl sm:rounded-2xl
-                              backdrop-blur-[32px]
-                              p-1.5 xs:p-2 sm:p-2.5 md:p-3
-                              max-h-[120px] xs:max-h-[130px] sm:max-h-[140px] md:max-h-[150px]
-                              overflow-y-auto scrollbar-none shadow-[0_12px_40px_rgba(0,0,0,0.4)]
-                              transform-gpu">
+                border border-white border-opacity-20
+                rounded-lg xs:rounded-xl sm:rounded-2xl
+                backdrop-blur-[32px]
+                p-1.5 xs:p-2 sm:p-2.5 md:p-3
+                max-h-[150px] overflow-y-auto scrollbar-none
+                shadow-[0_12px_40px_rgba(0,0,0,0.4)]
+                transform-gpu">
                     <div v-for="(language, index) in languages"
                         :key="language.code"
                         class="flex items-center
