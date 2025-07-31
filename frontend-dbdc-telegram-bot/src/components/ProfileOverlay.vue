@@ -760,4 +760,27 @@ const selectLanguage = (language) => {
     opacity: 1;
   }
 }
+
+/* Telegram WebApp specific optimizations */
+@media (max-height: 600px) {
+  .profile-overlay-container {
+    max-height: calc(100vh - 120px) !important;
+  }
+
+  .flex.flex-col.z-\[1\].flex-1 {
+    max-height: calc(100vh - 300px) !important;
+    min-height: 150px !important;
+  }
+}
+
+@media (max-height: 500px) {
+  .profile-overlay-container {
+    max-height: calc(100vh - 100px) !important;
+  }
+
+  .flex.flex-col.z-\[1\].flex-1 {
+    max-height: calc(100vh - 280px) !important;
+    min-height: 120px !important;
+  }
+}
 </style>
