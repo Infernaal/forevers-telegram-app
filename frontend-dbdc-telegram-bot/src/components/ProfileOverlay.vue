@@ -95,13 +95,12 @@
           </div>
 
           <!-- Menu Items -->
-          <div class="flex flex-col z-[1]
+          <div class="flex flex-col z-[1] flex-1
                       overflow-y-auto overflow-x-hidden scrollbar-none
                       [-webkit-overflow-scrolling:touch] [scroll-behavior:smooth]
                       [overscroll-behavior:contain] [overscroll-behavior-y:contain]
                       px-0 xs:px-1 sm:px-2 py-1 xs:py-2 sm:py-2 md:py-1 lg:py-1
-                      touch-manipulation
-                      h-[176px] xs:h-[188px] sm:h-[200px] md:h-[188px] lg:h-[188px] xl:h-[200px]">
+                      touch-manipulation">
             
             <!-- Calculator -->
             <div class="flex items-center
