@@ -259,7 +259,7 @@
                         h-10 xs:h-11 sm:h-12 md:h-11 lg:h-11
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
-                        mb-2 xs:mb-3 sm:mb-4 md:mb-3.5 lg:mb-4
+                        mb-1.5 xs:mb-2 sm:mb-2.5 md:mb-2 lg:mb-2
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('help')">
