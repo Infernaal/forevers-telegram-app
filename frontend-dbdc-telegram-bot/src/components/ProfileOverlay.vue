@@ -17,7 +17,7 @@
                   bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
                   border border-[#09074E] rounded-[20px] shadow-2xl
                   backdrop-blur-[32px] flex flex-col overflow-hidden transition-all duration-300 ease-out
-                  profile-overlay-container max-h-[calc(100vh-140px)]">
+                  profile-overlay-container max-h-[calc(100vh-220px)] xs:max-h-[calc(100vh-200px)] sm:max-h-[calc(100vh-180px)]">
         <div class="py-4 px-4 sm:px-6 md:px-6 lg:px-8 xl:px-10 text-white flex flex-col relative z-10 h-full">
           <!-- Background -->
           <div class="absolute inset-0 bg-gradient-to-br from-[#120B81] via-[#09074E] to-[#09074E] border border-[#09074E] backdrop-blur-[40px] z-0 rounded-[20px]"></div>
@@ -95,13 +95,12 @@
           </div>
 
           <!-- Menu Items -->
-          <div class="flex-1 flex flex-col z-[1]
+          <div class="flex flex-col z-[1] flex-1
                       overflow-y-auto overflow-x-hidden scrollbar-none
                       [-webkit-overflow-scrolling:touch] [scroll-behavior:smooth]
                       [overscroll-behavior:contain] [overscroll-behavior-y:contain]
                       px-0 xs:px-1 sm:px-2 py-1 xs:py-2 sm:py-2 md:py-1 lg:py-1
-                      touch-manipulation
-                      max-h-[350px] sm:max-h-[320px] md:max-h-[280px] lg:max-h-[260px] xl:max-h-[240px]">
+                      touch-manipulation">
             
             <!-- Calculator -->
             <div class="flex items-center
