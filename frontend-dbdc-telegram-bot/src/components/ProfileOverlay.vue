@@ -31,7 +31,7 @@
                xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+44px)]
                2xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+48px)]
                w-auto
-               max-h-[calc(100vh-140px)]
+               max-h-[calc(100vh-180px)]
                sm:max-h-[calc(100vh-160px)]
                md:max-h-[calc(100vh-170px)]
                lg:max-h-[calc(100vh-180px)]
