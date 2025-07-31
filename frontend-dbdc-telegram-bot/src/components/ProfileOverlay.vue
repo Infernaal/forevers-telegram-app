@@ -398,12 +398,12 @@
             <div class="relative w-full max-w-[200px]">
               <!-- Language Section -->
               <div class="min-w-[110px] sm:min-w-[130px] md:min-w-[150px] lg:min-w-[160px] xl:min-w-[180px]
-                max-w-[200px] w-full
-                h-10 sm:h-11 md:h-12
-                bg-white/25 border border-white/30
-                rounded-full flex items-center
-                px-2 sm:px-3 md:px-4 lg:px-5
-                cursor-pointer transition-all duration-300 overflow-hidden"
+           max-w-[200px] w-full
+           h-10 sm:h-11 md:h-12
+           bg-white/25 border border-white/30
+           rounded-full flex items-center
+           px-2 sm:px-3 md:px-4 lg:px-5
+           cursor-pointer transition-all duration-300 overflow-hidden"
                   @click="toggleLanguageDropdown">
                 
                 <div class="flex items-center gap-1 flex-1 overflow-hidden">
