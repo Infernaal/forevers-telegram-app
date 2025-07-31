@@ -77,9 +77,9 @@
               </div>
 
               <!-- Arrow Button -->
-              <button class="w-8 xs:w-9 sm:w-10 md:w-11 lg:w-12 xl:w-13 h-8 xs:h-9 sm:h-10 md:h-11 lg:h-12 xl:h-13
-                            min-w-[32px] xs:min-w-[36px] sm:min-w-[40px] md:min-w-[44px] lg:min-w-[48px] xl:min-w-[52px]
-                            min-h-[32px] xs:min-h-[36px] sm:min-h-[40px] md:min-h-[44px] lg:min-h-[48px] xl:min-h-[52px]
+              <button class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-11 xl:w-12 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-11 xl:h-12
+                            min-w-[32px] xs:min-w-[36px] sm:min-w-[40px] md:min-w-[40px] lg:min-w-[44px] xl:min-w-[48px]
+                            min-h-[32px] xs:min-h-[36px] sm:min-h-[40px] md:min-h-[40px] lg:min-h-[44px] xl:min-h-[48px]
                             bg-dbd-light-blue border border-dbd-primary
                             rounded-r-[50px] flex items-center justify-center
                             cursor-pointer transition-all duration-300 hover:bg-[#E0D9FF] hover:scale-105
