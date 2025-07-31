@@ -4,12 +4,12 @@
     <div
       class="absolute
             inset-x-4 sm:inset-x-6 md:inset-x-8 lg:inset-x-12 xl:inset-x-20 2xl:inset-x-24
-            bottom-[calc(88px+env(safe-area-inset-bottom,0px)+2px)]
-            sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+18px)]
-            md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+27px)]
-            lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+27px)]
-            xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+27px)]
-            2xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+27px)]
+            bottom-[calc(80px+env(safe-area-inset-bottom,0px))]
+            sm:bottom-[calc(90px+env(safe-area-inset-bottom,0px))]
+            md:bottom-[calc(95px+env(safe-area-inset-bottom,0px))]
+            lg:bottom-[calc(95px+env(safe-area-inset-bottom,0px))]
+            xl:bottom-[calc(95px+env(safe-area-inset-bottom,0px))]
+            2xl:bottom-[calc(95px+env(safe-area-inset-bottom,0px))]
             flex flex-col items-start z-[9999]">
 
       <!-- Dropdown Menu -->
