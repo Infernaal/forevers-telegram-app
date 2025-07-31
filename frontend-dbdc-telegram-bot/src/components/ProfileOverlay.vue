@@ -469,10 +469,10 @@
           </div>
         </div>
       </div>
-      <!-- Triangle Pointer -->
-      <div class="ml-5 sm:ml-10 md:ml-20 lg:ml-20 xl:ml-20 2xl:ml-32 mb-[-1px]">
-        <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px]
-                    border-l-transparent border-r-transparent border-t-[#09074E] drop-shadow-md"></div>
+      <!-- Triangle Pointer (attached to bottom of dropdown) -->
+      <div class="absolute left-10 sm:left-16 md:left-24 lg:left-32 xl:left-40 2xl:left-48 top-full mt-[-1px]">
+        <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-b-[15px]
+                    border-l-transparent border-r-transparent border-b-[#09074E] drop-shadow-md"></div>
       </div>
     </div>
   </div>
