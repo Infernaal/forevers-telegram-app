@@ -782,7 +782,7 @@ onMounted(() => {
   }
 
   .profile-overlay-container {
-    max-height: calc(100vh - 110px);
+    max-height: calc(100vh - 120px);
   }
 }
 
@@ -792,7 +792,7 @@ onMounted(() => {
   }
 
   .profile-overlay-container {
-    max-height: calc(100vh - 100px);
+    max-height: calc(100vh - 120px);
   }
 
   .flex.flex-col.z-\[1\].flex-1 {
