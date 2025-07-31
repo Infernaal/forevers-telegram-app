@@ -5,13 +5,11 @@
       <!-- Triangle Pointer -->
       <div
         class="absolute
-            left-1/2 transform -translate-x-[150px] sm:-translate-x-[252px] md:-translate-x-[282px] lg:-translate-x-[472px] xl:-translate-x-[584px] 2xl:-translate-x-[696px]
+              left-1/2 transform -translate-x-[150px] sm:-translate-x-[252px] md:-translate-x-[30px] lg:-translate-x-[472px]
               bottom-[calc(88px+env(safe-area-inset-bottom,0px)+2px)]
               sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+18px)]
-              md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+28px)]
+              md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+40px)]
               lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+25px)]
-              xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+32px)]
-              2xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+38px)]
               z-[9998] transition-all duration-300 ease-out ">
         <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px] 
                     border-l-transparent border-r-transparent 
@@ -19,13 +17,11 @@
       </div>
       <!-- Dropdown Menu -->
             <div
-        class="absolute inset-x-4 sm:inset-x-6 md:inset-x-8 lg:inset-x-12 xl:inset-x-16 2xl:inset-x-20
+        class="absolute inset-x-4 sm:inset-x-6 md:inset-x-8 lg:inset-x-12
                bottom-[calc(88px+env(safe-area-inset-bottom,0px)+16px)]
                sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+32px)]
-               md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+35px)]
+               md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+40px)]
                lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+39px)]
-               xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+45px)]
-               2xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+50px)]
                w-auto
                max-h-[calc(100vh-140px)]
                sm:max-h-[calc(100vh-160px)]
