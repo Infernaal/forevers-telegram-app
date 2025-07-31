@@ -115,7 +115,7 @@
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('calculator')">
-              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-12 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-12
+              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-10 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-10
                           bg-[#3A33D3] border border-white border-opacity-30
                           rounded-full flex items-center justify-center flex-shrink-0
                           transition-all duration-300 hover:bg-[#4A43E3] hover:scale-110">
@@ -138,7 +138,7 @@
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('ambassador')">
-              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-12 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-12
+              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-10 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-10
                           bg-[#3A33D3] border border-white border-opacity-30
                           rounded-full flex items-center justify-center flex-shrink-0
                           transition-all duration-300 hover:bg-[#4A43E3] hover:scale-110">
@@ -161,7 +161,7 @@
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('verification')">
-              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-12 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-12
+              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-10 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-10
                           bg-[#3A33D3] border border-white border-opacity-30
                           rounded-full flex items-center justify-center flex-shrink-0
                           transition-all duration-300 hover:bg-[#4A43E3] hover:scale-110">
@@ -194,7 +194,7 @@
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('security')">
-              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-12 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-12
+              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-10 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-10
                           bg-[#3A33D3] border border-white border-opacity-30
                           rounded-full flex items-center justify-center flex-shrink-0
                           transition-all duration-300 hover:bg-[#4A43E3] hover:scale-110">
@@ -217,7 +217,7 @@
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('settings')">
-              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-12 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-12
+              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-10 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-10
                           bg-[#3A33D3] border border-white border-opacity-30
                           rounded-full flex items-center justify-center flex-shrink-0
                           transition-all duration-300 hover:bg-[#4A43E3] hover:scale-110">
@@ -240,7 +240,7 @@
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('support')">
-              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-12 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-12
+              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-10 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-10
                           bg-[#3A33D3] border border-white border-opacity-30
                           rounded-full flex items-center justify-center flex-shrink-0
                           transition-all duration-300 hover:bg-[#4A43E3] hover:scale-110">
@@ -263,7 +263,7 @@
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('help')">
-              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-12 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-12
+              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-10 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-10
                           bg-[#3A33D3] border border-white border-opacity-30
                           rounded-full flex items-center justify-center flex-shrink-0
                           transition-all duration-300 hover:bg-[#4A43E3] hover:scale-110">
