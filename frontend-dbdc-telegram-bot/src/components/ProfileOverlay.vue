@@ -7,7 +7,7 @@
             bottom-[calc(88px+env(safe-area-inset-bottom,0px)+2px)]
             sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+18px)]
             md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+36px)]
-            lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+29px)]
+            lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+23px)]
             xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+44px)]
             2xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+48px)]
             flex flex-col items-start z-[9999]">
