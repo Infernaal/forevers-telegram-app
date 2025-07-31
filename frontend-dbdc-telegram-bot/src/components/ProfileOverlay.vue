@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl min-h-screen telegram-webapp-overlay">
+  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl min-h-screen">
     <!-- Dropdown Wrapper -->
     <div
       class="absolute
@@ -17,7 +17,7 @@
                   bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
                   border border-[#09074E] rounded-[20px] shadow-2xl
                   backdrop-blur-[32px] flex flex-col overflow-hidden transition-all duration-300 ease-out
-                  profile-overlay-container max-h-[calc(100vh-140px)]">
+                  profile-overlay-container max-h-[calc(100vh-220px)] xs:max-h-[calc(100vh-200px)] sm:max-h-[calc(100vh-180px)]">
         <div class="py-4 px-4 sm:px-6 md:px-6 lg:px-8 xl:px-10 text-white flex flex-col relative z-10 h-full">
           <!-- Background -->
           <div class="absolute inset-0 bg-gradient-to-br from-[#120B81] via-[#09074E] to-[#09074E] border border-[#09074E] backdrop-blur-[40px] z-0 rounded-[20px]"></div>
@@ -484,7 +484,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import CountryFlag from './CountryFlag.vue'
 
 // Props
@@ -584,14 +584,6 @@ const selectLanguage = (language) => {
   showLanguageDropdown.value = false
   console.log('Language selected:', language)
 }
-
-// Telegram WebApp minimal adaptation
-onMounted(() => {
-  if (window.Telegram && window.Telegram.WebApp) {
-    // Just expand the WebApp to full height
-    window.Telegram.WebApp.expand()
-  }
-})
 </script>
 
 <style scoped>
@@ -766,48 +758,6 @@ onMounted(() => {
   }
   to {
     opacity: 1;
-  }
-}
-
-/* Telegram WebApp specific optimizations */
-@media (max-height: 700px) and (orientation: portrait) {
-  .absolute.inset-x-4 {
-    bottom: calc(75px + env(safe-area-inset-bottom, 0px)) !important;
-  }
-}
-
-@media (max-height: 600px) and (orientation: portrait) {
-  .absolute.inset-x-4 {
-    bottom: calc(65px + env(safe-area-inset-bottom, 0px)) !important;
-  }
-
-  .profile-overlay-container {
-    max-height: calc(100vh - 120px);
-  }
-}
-
-@media (max-height: 500px) and (orientation: portrait) {
-  .absolute.inset-x-4 {
-    bottom: calc(55px + env(safe-area-inset-bottom, 0px)) !important;
-  }
-
-  .profile-overlay-container {
-    max-height: calc(100vh - 120px);
-  }
-
-  .flex.flex-col.z-\[1\].flex-1 {
-    max-height: 160px;
-  }
-}
-
-/* Telegram WebApp overlay - минимальная адаптация */
-.telegram-webapp-overlay {
-  height: 100vh;
-}
-
-@supports (height: 100svh) {
-  .telegram-webapp-overlay {
-    height: 100svh;
   }
 }
 </style>
