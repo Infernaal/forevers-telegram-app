@@ -322,7 +322,7 @@
                   <div class="text-dbd-dark text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold truncate">Start</div>
                 </div>
                 <button class="bg-gradient-to-r from-dbd-primary to-[#473FFF]
-                     text-white text-sm sm:text-base md:text-base lg:text-lg font-bold
+                     text-white text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-bold
                      px-4 sm:px-5 md:px-5 lg:px-6
                      h-8 sm:h-9 md:h-9 lg:h-10
                      rounded-full
