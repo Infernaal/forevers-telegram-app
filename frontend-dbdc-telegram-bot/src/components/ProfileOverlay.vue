@@ -16,7 +16,8 @@
                lg:max-h-[calc(100vh-180px)]
                bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
                border border-[#09074E] rounded-[20px] shadow-2xl
-               backdrop-blur-[32px] flex flex-col overflow-hidden transition-all duration-300 ease-out"
+               backdrop-blur-[32px] flex flex-col overflow-hidden transition-all duration-300 ease-out
+               profile-overlay-container"
       >
         <div class="py-4 px-4 sm:px-6 md:px-6 lg:px-8 xl:px-10 text-white flex flex-col relative z-10 h-full">
             <!-- Background -->
