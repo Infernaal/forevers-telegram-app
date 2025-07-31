@@ -484,7 +484,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import CountryFlag from './CountryFlag.vue'
 
 // Props
