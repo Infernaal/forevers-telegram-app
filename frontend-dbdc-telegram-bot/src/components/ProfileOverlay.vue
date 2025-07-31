@@ -6,8 +6,8 @@
       <div
         class="absolute
               left-1/2 transform -translate-x-[170px] sm:-translate-x-[180px] md:-translate-x-[190px] lg:-translate-x-[200px]
-              bottom-[calc(88px+env(safe-area-inset-bottom,0px))]
-              sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px))]
+              bottom-[calc(88px+env(safe-area-inset-bottom,0px)+5px)]
+              sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+5px)]
               md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+25px)]
               lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+35px)]
               z-[9998] transition-all duration-300 ease-out">
