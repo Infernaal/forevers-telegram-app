@@ -1,46 +1,23 @@
 <template>
   <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl min-h-screen">
     <!-- Dropdown Wrapper -->
-    <div class="relative w-full h-full flex flex-col items-center px-4 sm:px-6 md:px-8 lg:px-12 overflow-y-auto scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
-
-      <!-- Triangle Pointer -->
-      <div
-        class="absolute
-              left-1/2 transform
-              -translate-x-[150px] sm:-translate-x-[252px] md:-translate-x-[330px] lg:-translate-x-[472px] xl:-translate-x-[550px] 2xl:-translate-x-[620px]
-              bottom-[calc(88px+env(safe-area-inset-bottom,0px)+3px)]
-              sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+19px)]
-              md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+23px)]
-              lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+27px)]
-              xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+31px)]
-              2xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+36px)]
-              z-[9998] transition-all duration-300 ease-out">
-        <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px]
-                    border-l-transparent border-r-transparent
-                    border-t-[#09074E] drop-shadow-md"></div>
-      </div>
+    <div
+      class="absolute
+            inset-x-4 sm:inset-x-6 md:inset-x-8 lg:inset-x-12 xl:inset-x-20 2xl:inset-x-24
+            bottom-[calc(88px+env(safe-area-inset-bottom,0px)+2px)]
+            sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+18px)]
+            md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+27px)]
+            lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+27px)]
+            xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+27px)]
+            2xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+27px)]
+            flex flex-col items-start z-[9999]">
 
       <!-- Dropdown Menu -->
-      <div
-        class="absolute
-               inset-x-4 sm:inset-x-6 md:inset-x-8 lg:inset-x-12 xl:inset-x-20 2xl:inset-x-24
-               bottom-[calc(88px+env(safe-area-inset-bottom,0px)+16px)]
-               sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+32px)]
-               md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+36px)]
-               lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+39px)]
-               xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+44px)]
-               2xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+48px)]
-               w-auto
-               max-h-[calc(100vh-140px)]
-               sm:max-h-[calc(100vh-160px)]
-               md:max-h-[calc(100vh-170px)]
-               lg:max-h-[calc(100vh-180px)]
-               xl:max-h-[calc(100vh-190px)]
-               2xl:max-h-[calc(100vh-200px)]
-               bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
-               border border-[#09074E] rounded-[20px] shadow-2xl
-               backdrop-blur-[32px] flex flex-col overflow-hidden transition-all duration-300 ease-out
-               profile-overlay-container">
+      <div class="w-full
+                  bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
+                  border border-[#09074E] rounded-[20px] shadow-2xl
+                  backdrop-blur-[32px] flex flex-col overflow-hidden transition-all duration-300 ease-out
+                  profile-overlay-container max-h-[calc(100vh-140px)]">
         <div class="py-4 px-4 sm:px-6 md:px-6 lg:px-8 xl:px-10 text-white flex flex-col relative z-10 h-full">
           <!-- Background -->
           <div class="absolute inset-0 bg-gradient-to-br from-[#120B81] via-[#09074E] to-[#09074E] border border-[#09074E] backdrop-blur-[40px] z-0 rounded-[20px]"></div>
@@ -118,13 +95,12 @@
           </div>
 
           <!-- Menu Items -->
-          <div class="flex flex-col z-[1]
+          <div class="flex flex-col z-[1] flex-1
                       overflow-y-auto overflow-x-hidden scrollbar-none
                       [-webkit-overflow-scrolling:touch] [scroll-behavior:smooth]
                       [overscroll-behavior:contain] [overscroll-behavior-y:contain]
                       px-0 xs:px-1 sm:px-2 py-1 xs:py-2 sm:py-2 md:py-1 lg:py-1
-                      touch-manipulation
-                      h-[176px] xs:h-[188px] sm:h-[200px] md:h-[188px] lg:h-[188px] xl:h-[200px]">
+                      touch-manipulation">
             
             <!-- Calculator -->
             <div class="flex items-center
@@ -492,7 +468,11 @@
           </div>
         </div>
       </div>
-
+      <!-- Triangle Pointer -->
+      <div class="ml-6 sm:ml-10 md:ml-14 lg:ml-20 xl:ml-14 2xl:ml-30 mt-[-1px]">
+        <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px]
+                    border-l-transparent border-r-transparent border-t-[#09074E] drop-shadow-md"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -755,40 +735,6 @@ const selectLanguage = (language) => {
 /* Width utilities */
 .w-18 {
   width: 4.5rem;
-}
-
-/* ProfileOverlay triangle pointer */
-.profile-overlay-container::after {
-  content: '';
-  position: absolute;
-  bottom: -8px;
-  left: 32px;
-  width: 0;
-  height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top: 8px solid #09074E;
-  z-index: 10;
-}
-
-@media (min-width: 640px) {
-  .profile-overlay-container::after {
-    left: 40px;
-    bottom: -10px;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 10px solid #09074E;
-  }
-}
-
-@media (min-width: 768px) {
-  .profile-overlay-container::after {
-    left: 48px;
-    bottom: -12px;
-    border-left: 12px solid transparent;
-    border-right: 12px solid transparent;
-    border-top: 12px solid #09074E;
-  }
 }
 
 /* Keep scrollbar invisible on all devices */
