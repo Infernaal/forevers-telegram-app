@@ -52,8 +52,8 @@
                             bg-[rgba(110,107,169,0.90)] border border-[#D8D8D8]
                             rounded-lg xs:rounded-xl sm:rounded-2xl md:rounded-lg lg:rounded-xl xl:rounded-2xl w-fit max-w-fit
                             transition-all duration-300 hover:bg-[rgba(110,107,169,1)]">
-                  <div class="w-3 xs:w-4 sm:w-5 md:w-5 lg:w-6 xl:w-7
-                             h-3 xs:h-4 sm:h-5 md:h-5 lg:h-6 xl:h-7
+                  <div class="w-3 xs:w-4 sm:w-5 md:w-4 lg:w-5 xl:w-6
+                             h-3 xs:h-4 sm:h-5 md:h-4 lg:h-5 xl:h-6
                              flex-shrink-0 flex items-center justify-center
                              transition-transform duration-300 hover:scale-110">
                     <svg class="w-full h-full" viewBox="0 0 28 28" fill="none">
