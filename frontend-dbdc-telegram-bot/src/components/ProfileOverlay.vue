@@ -17,7 +17,7 @@
               z-[9998] transition-all duration-300 ease-out">
         <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px]
                     border-l-transparent border-r-transparent
-                    border-t-[#120B81] drop-shadow-md"></div>
+                    border-t-[#E9DAFF] drop-shadow-md"></div>
       </div>
 
       <!-- Dropdown Menu -->
