@@ -344,8 +344,8 @@
           <div class="relative flex-shrink-0 z-[1] flex justify-center items-center gap-3 sm:gap-4 md:gap-4 lg:gap-4 h-10 sm:h-11 md:h-11 lg:h-12 mb-2">
             
             <!-- ID Section -->
-            <div class="min-w-[110px] sm:min-w-[130px] md:min-w-[150px] lg:min-w-[160px] xl:min-w-[180px]
-              max-w-[200px] w-full
+            <div class="min-w-[120px] sm:min-w-[140px] md:min-w-[160px] lg:min-w-[170px] xl:min-w-[190px]
+              max-w-[210px] w-full
               h-10 sm:h-11 md:h-12
               bg-white/30 border border-white/40
               rounded-full backdrop-blur-[40px]
@@ -373,9 +373,9 @@
               
               <button v-if="!showCopySuccess"
                       class="flex items-center justify-center
-             absolute right-0 top-0 bottom-0
-             w-8 sm:w-9 md:w-8 lg:w-9 xl:w-10
-             h-full min-w-[32px] sm:min-w-[36px] md:min-w-[32px]
+             absolute right-[-1px] top-[-1px] bottom-[-1px]
+             w-10 sm:w-11 md:w-10 lg:w-11 xl:w-12
+             h-[calc(100%+2px)] min-w-[40px] sm:min-w-[44px] md:min-w-[40px]
              bg-white border border-[#D8D8D8]
              rounded-r-full border-l-0 flex-shrink-0
              hover:bg-gray-100 hover:scale-105 active:scale-95
@@ -383,8 +383,8 @@
              focus:outline-none focus:ring-2 focus:ring-blue-500/50"
                       @click="copyUserID"
                       aria-label="Скопировать ID">
-                <svg class="w-4 sm:w-5 md:w-5 lg:w-6 xl:w-7
-               h-4 sm:h-5 md:h-5 lg:h-6 xl:h-7" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-5 sm:w-6 md:w-6 lg:w-7 xl:w-8
+               h-5 sm:h-6 md:h-6 lg:h-7 xl:h-8" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M18.0655 0.5H7.60611C6.97596 0.5 6.37161 0.727045 5.92603 1.13119C5.48044 1.53533 5.23011 2.08346 5.23011 2.65501V3.48385H4.04211C3.38111 3.48385 2.74718 3.72201 2.27978 4.14594C1.81239 4.56986 1.5498 5.14483 1.5498 5.74435V19.2395C1.5498 19.839 1.81239 20.414 2.27978 20.8379C2.74718 21.2618 3.38111 21.5 4.04211 21.5H14.2772C14.9382 21.5 15.5721 21.2618 16.0395 20.8379C16.5069 20.414 16.7695 19.839 16.7695 19.2395V18.486H18.0655C18.6907 18.4861 19.291 18.2634 19.7369 17.866C20.1829 17.4685 20.4389 16.9281 20.4498 16.3611V2.65501C20.4476 2.08277 20.1954 1.53465 19.7485 1.13073C19.3016 0.7268 18.6964 0.499997 18.0655 0.5ZM15.108 19.2395C15.108 19.4393 15.0204 19.631 14.8646 19.7723C14.7088 19.9136 14.4975 19.993 14.2772 19.993H4.04211C3.82178 19.993 3.61047 19.9136 3.45467 19.7723C3.29887 19.631 3.21134 19.4393 3.21134 19.2395V5.74435C3.21134 5.54451 3.29887 5.35285 3.45467 5.21154C3.61047 5.07024 3.82178 4.99085 4.04211 4.99085H14.2772C14.4975 4.99085 14.7088 5.07024 14.8646 5.21154C15.0204 5.35285 15.108 5.54451 15.108 5.74435V19.2395ZM18.7883 16.3611C18.7861 16.5337 18.709 16.6985 18.5737 16.8198C18.4383 16.9411 18.2558 17.0092 18.0655 17.0092H16.7695V5.74435C16.7695 5.14483 16.5069 4.56986 16.0395 4.14594C15.5721 3.72201 14.9382 3.48385 14.2772 3.48385H6.89165V2.65501C6.89165 2.48314 6.96693 2.31832 7.10091 2.19679C7.2349 2.07527 7.41663 2.007 7.60611 2.007H18.0655C18.16 2.006 18.2538 2.02203 18.3415 2.05414C18.4291 2.08626 18.5089 2.13384 18.5761 2.19411C18.6433 2.25438 18.6967 2.32616 18.7331 2.40527C18.7695 2.48439 18.7883 2.56927 18.7883 2.65501V16.3611Z" fill="#2019CE"/>
                 </svg>
               </button>
@@ -394,73 +394,79 @@
             <div class="w-0.5 h-4 xs:h-5 sm:h-6 md:h-7 lg:h-8 xl:h-9
                         bg-[#E2E2E2] border border-[#B7B7B7] rounded-[30px]
                         opacity-50 flex-shrink-0"></div>
+            <!-- Обгортка для позиціонування dropdown відносно Language Section -->
+            <div class="relative w-full max-w-[200px]">
+              <!-- Language Section -->
+              <div class="language-button
+           min-w-[110px] sm:min-w-[130px] md:min-w-[150px] lg:min-w-[160px] xl:min-w-[180px]
+           max-w-[200px] w-full
+           h-10 sm:h-11 md:h-12
+           bg-white/25 border border-white/30
+           rounded-full flex items-center
+           px-2 sm:px-3 md:px-4 lg:px-5
+           cursor-pointer transition-all duration-300 overflow-hidden"
+                  @click="toggleLanguageDropdown">
+                
+                <div class="flex items-center gap-1 flex-1 overflow-hidden">
+                  <CountryFlag :country="selectedLanguage.country" size="medium"
+                              class="w-4 sm:w-5 md:w-6 lg:w-7 xl:w-8
+                            h-4 sm:h-5 md:h-6 lg:h-7 xl:h-8 flex-shrink-0" />
+                  <span class="text-white text-xs sm:text-sm md:text-base font-semibold truncate">
+                    {{ selectedLanguage.code }}
+                  </span>
+                </div>
+                
+                <div class="w-3 sm:w-4 md:w-5 lg:w-6 xl:w-7
+                  h-3 sm:h-4 md:h-5 lg:h-6 xl:h-7
+                  ml-1 sm:ml-1.5 md:ml-2 transform transition-transform"
+                    :class="{ 'rotate-180': showLanguageDropdown }">
+                  <svg class="w-full h-full" viewBox="0 0 20 20" fill="none">
+                    <circle opacity="0.2" cx="10" cy="10" r="10" fill="white"/>
+                    <path d="M5.71387 8.57146L9.99958 12.8572L14.2853 8.57146" stroke="white" stroke-linecap="round"/>
+                  </svg>
+                </div>
 
-            <!-- Language Section -->
-            <div class="min-w-[110px] sm:min-w-[130px] md:min-w-[150px] lg:min-w-[160px] xl:min-w-[180px]
-              max-w-[200px] w-full
-              h-10 sm:h-11 md:h-12
-              bg-white/25 border border-white/30
-              rounded-full flex items-center
-              px-2 sm:px-3 md:px-4 lg:px-5
-              cursor-pointer transition-all duration-300 overflow-hidden"
-                @click="toggleLanguageDropdown">
-              
-              <div class="flex items-center gap-1 flex-1 overflow-hidden">
-                <CountryFlag :country="selectedLanguage.country" size="medium"
-                             class="w-4 sm:w-5 md:w-6 lg:w-7 xl:w-8
-                          h-4 sm:h-5 md:h-6 lg:h-7 xl:h-8 flex-shrink-0" />
-                <span class="text-white text-xs sm:text-sm md:text-base font-semibold truncate">
-                  {{ selectedLanguage.code }}
-                </span>
-              </div>
-              
-              <div class="w-3 sm:w-4 md:w-5 lg:w-6 xl:w-7
-                h-3 sm:h-4 md:h-5 lg:h-6 xl:h-7
-                ml-1 sm:ml-1.5 md:ml-2 transform transition-transform"
-                  :class="{ 'rotate-180': showLanguageDropdown }">
-                <svg class="w-full h-full" viewBox="0 0 20 20" fill="none">
-                  <circle opacity="0.2" cx="10" cy="10" r="10" fill="white"/>
-                  <path d="M5.71387 8.57146L9.99958 12.8572L14.2853 8.57146" stroke="white" stroke-linecap="round"/>
-                </svg>
-              </div>
-
-              <!-- Language Dropdown -->
-              <div v-if="showLanguageDropdown"
-                  class="absolute bottom-[32px] xs:bottom-[36px] sm:bottom-[40px] md:bottom-[44px] left-0 right-0 z-[1000] animate-[dropdownSlideUp_0.2s_ease-out]">
-                <div class="bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
-                            border border-white border-opacity-8
-                            rounded-lg xs:rounded-xl sm:rounded-2xl
-                            backdrop-blur-[32px]
-                            p-1 xs:p-1.5 sm:p-2 md:p-2.5
-                            max-h-[100px] xs:max-h-[110px] sm:max-h-[120px] md:max-h-[130px]
-                            overflow-y-auto scrollbar-none shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
-                  <div v-for="(language, index) in languages"
-                      :key="language.code"
-                      class="flex items-center
-                              gap-1 xs:gap-1.5 sm:gap-2 md:gap-2.5
-                              px-1.5 xs:px-2 sm:px-2.5 md:px-3
-                              py-0.5 xs:py-1 sm:py-1.5 md:py-2
-                              rounded-md xs:rounded-lg sm:rounded-xl
-                              cursor-pointer transition-all duration-200
-                              min-h-6 xs:min-h-7 sm:min-h-8 md:min-h-9
-                              relative hover:bg-white hover:bg-opacity-10"
-                      :class="{ 'bg-white bg-opacity-15': language.code === selectedLanguage.code }"
-                      @click.stop="selectLanguage(language)">
-                    <CountryFlag :country="language.country" size="small"
-                                 class="flex-shrink-0 !w-3 xs:!w-4 sm:!w-5 md:!w-6
-                                        !h-3 xs:!h-4 sm:!h-5 md:!h-6
-                                        !min-w-3 xs:!min-w-4 sm:!min-w-5 md:!min-w-6
-                                        !min-h-3 xs:!min-h-4 sm:!min-h-5 md:!min-h-6" />
-                    <span class="text-dbd-off-white text-xs xs:text-sm sm:text-base md:text-lg font-medium
-                                leading-3 xs:leading-4 sm:leading-5 md:leading-6
-                                flex-1 mr-3 xs:mr-4 sm:mr-5 md:mr-6">
-                      {{ language.code }}
-                    </span>
-                    <svg v-if="language.code === selectedLanguage.code"
-                        class="absolute right-1.5 xs:right-2 sm:right-2.5 md:right-3 top-1/2 transform -translate-y-1/2 flex-shrink-0"
-                        width="10" height="10" viewBox="0 0 16 16" fill="none">
-                      <path d="M13.5 4.5L6 12L2.5 8.5" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                <!-- Language Dropdown -->
+                <div v-if="showLanguageDropdown"
+                    class="absolute left-0 bottom-full mb-1 z-[1000]
+           w-full
+           animate-[dropdownSlideUp_0.3s_ease-out]">
+                  <div class="bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
+                border border-white border-opacity-20
+                rounded-lg xs:rounded-xl sm:rounded-2xl
+                backdrop-blur-[32px]
+                p-1.5 xs:p-2 sm:p-2.5 md:p-3
+                max-h-[150px] overflow-y-auto scrollbar-none
+                shadow-[0_12px_40px_rgba(0,0,0,0.4)]
+                transform-gpu">
+                    <div v-for="(language, index) in languages"
+                        :key="language.code"
+                        class="flex items-center
+                                gap-1 xs:gap-1.5 sm:gap-2 md:gap-2.5
+                                px-1.5 xs:px-2 sm:px-2.5 md:px-3
+                                py-0.5 xs:py-1 sm:py-1.5 md:py-2
+                                rounded-md xs:rounded-lg sm:rounded-xl
+                                cursor-pointer transition-all duration-200
+                                min-h-6 xs:min-h-7 sm:min-h-8 md:min-h-9
+                                relative hover:bg-white hover:bg-opacity-10"
+                        :class="{ 'bg-white bg-opacity-15': language.code === selectedLanguage.code }"
+                        @click.stop="selectLanguage(language)">
+                      <CountryFlag :country="language.country" size="small"
+                                  class="flex-shrink-0 !w-3 xs:!w-4 sm:!w-5 md:!w-6
+                                          !h-3 xs:!h-4 sm:!h-5 md:!h-6
+                                          !min-w-3 xs:!min-w-4 sm:!min-w-5 md:!min-w-6
+                                          !min-h-3 xs:!min-h-4 sm:!min-h-5 md:!min-h-6" />
+                      <span class="text-dbd-off-white text-xs xs:text-sm sm:text-base md:text-lg font-medium
+                                  leading-3 xs:leading-4 sm:leading-5 md:leading-6
+                                  flex-1 mr-3 xs:mr-4 sm:mr-5 md:mr-6">
+                        {{ language.code }}
+                      </span>
+                      <svg v-if="language.code === selectedLanguage.code"
+                          class="absolute right-1.5 xs:right-2 sm:right-2.5 md:right-3 top-1/2 transform -translate-y-1/2 flex-shrink-0"
+                          width="10" height="10" viewBox="0 0 16 16" fill="none">
+                        <path d="M13.5 4.5L6 12L2.5 8.5" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -629,11 +635,13 @@ const selectLanguage = (language) => {
 @keyframes dropdownSlideUp {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(8px) scale(0.95);
+    visibility: hidden;
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+    visibility: visible;
   }
 }
 
