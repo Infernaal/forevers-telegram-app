@@ -318,7 +318,7 @@
                       </defs>
                     </svg>
                   </div>
-                  <div class="text-dbd-dark text-sm sm:text-base md:text-lg font-bold truncate">Start</div>
+                  <div class="text-dbd-dark text-sm sm:text-base md:text-base lg:text-lg font-bold truncate">Start</div>
                 </div>
                 <button class="bg-gradient-to-r from-dbd-primary to-[#473FFF]
                      text-white text-sm sm:text-base md:text-lg font-bold
