@@ -470,7 +470,7 @@
         </div>
       </div>
       <!-- Triangle Pointer -->
-      <div class="ml-6 sm:ml-10 md:ml-12 lg:ml-20 xl:ml-14 2xl:ml-30 mb-[-1px]">
+      <div class="ml-6 sm:ml-10 md:ml-12 lg:ml-22 xl:ml-14 2xl:ml-30 mb-[-1px]">
         <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px]
                     border-l-transparent border-r-transparent border-t-[#09074E] drop-shadow-md"></div>
       </div>
