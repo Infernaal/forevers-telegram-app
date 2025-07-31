@@ -376,8 +376,8 @@
               <button v-if="!showCopySuccess"
                       class="flex items-center justify-center
              absolute right-0 top-0 bottom-0
-             w-6 sm:w-7 md:w-8 lg:w-9 xl:w-10
-             h-full min-w-[24px] sm:min-w-[28px] md:min-w-[32px]
+             w-8 sm:w-9 md:w-8 lg:w-9 xl:w-10
+             h-full min-w-[32px] sm:min-w-[36px] md:min-w-[32px]
              bg-white border border-[#D8D8D8]
              rounded-r-full border-l-0 flex-shrink-0
              hover:bg-gray-100 hover:scale-105 active:scale-95
@@ -504,7 +504,7 @@ const languages = ref([
   { code: 'RUS', name: 'Русский', country: 'ukraine' },
   { code: 'CHN', name: '中��', country: 'china' },
   { code: 'JPN', name: '日本語', country: 'japan' },
-  { code: 'KOR', name: '한국어', country: 'new zealand' },
+  { code: 'KOR', name: '한��어', country: 'new zealand' },
   { code: 'ARA', name: 'العربية', country: 'uae' },
   { code: 'POR', name: 'Português', country: 'spain' },
   { code: 'NLD', name: 'Nederlands', country: 'norway' }
