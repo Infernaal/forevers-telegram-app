@@ -1,6 +1,6 @@
 <template>
   <div v-if="isVisible"
-       class="fixed inset-0 bg-black/20 backdrop-blur-[9px] z-[10002]
+       class="fixed inset-0 bg-black/20 backdrop-blur-[9px] z-[10001]
               flex items-center justify-center
               p-2 sm:p-3 md:p-4 lg:p-6
               animate-[fadeIn_0.3s_ease-out] terms-modal-overlay
