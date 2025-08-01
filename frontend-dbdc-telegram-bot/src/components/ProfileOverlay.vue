@@ -659,6 +659,25 @@ const selectLanguage = (language) => {
   background: transparent;
 }
 
+/* Enhanced scrolling for menu items */
+.scrollbar-none {
+  /* For better touch scrolling on mobile devices */
+  -webkit-overflow-scrolling: touch;
+  /* Smooth scrolling behavior */
+  scroll-behavior: smooth;
+  /* Prevent overscroll bounce */
+  overscroll-behavior: contain;
+  overscroll-behavior-y: contain;
+}
+
+/* Desktop mouse wheel scrolling optimization */
+@media (hover: hover) and (pointer: fine) {
+  .scrollbar-none {
+    /* Enable smoother scrolling with mouse wheel */
+    scroll-behavior: smooth;
+  }
+}
+
 /* Tablet specific positioning */
 @media (min-width: 768px) and (max-width: 1023px) {
   .tablet-triangle-position {
