@@ -2,16 +2,9 @@
   <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl min-h-screen">
     <!-- Dropdown Wrapper -->
     <div
-      class="absolute
-            inset-x-4 sm:inset-x-6 md:inset-x-8 lg:inset-x-12 xl:inset-x-20 2xl:inset-x-24
-            bottom-[calc(88px+env(safe-area-inset-bottom,0px)+2px)]
-            sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+18px)]
-            md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+27px)]
-            lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+27px)]
-            xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+27px)]
-            2xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+27px)]
-            flex flex-col items-start z-[9999]
-            profile-dropdown-wrapper">
+      class="absolute inset-x-4 sm:inset-x-6 md:inset-x-8 lg:inset-x-12 xl:inset-x-20 2xl:inset-x-24
+            top-4 bottom-[calc(88px+env(safe-area-inset-bottom,0px))]
+            flex flex-col items-start z-[9999] justify-end">
 
       <!-- Dropdown Menu -->
       <div class="w-full
