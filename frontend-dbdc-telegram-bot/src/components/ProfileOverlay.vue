@@ -5,7 +5,7 @@
       class="absolute inset-x-4 sm:inset-x-6 md:inset-x-8 lg:inset-x-12 xl:inset-x-20 2xl:inset-x-24
             bottom-[calc(64px+env(safe-area-inset-bottom,0px)+16px)]
             sm:bottom-[calc(72px+env(safe-area-inset-bottom,0px)+40px)]
-            md:bottom-[calc(88px+env(safe-area-inset-bottom,0px)+20px)]
+            md:bottom-[calc(88px+env(safe-area-inset-bottom,0px)+26px)]
             lg:bottom-[calc(96px+env(safe-area-inset-bottom,0px)+24px)]
             xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+28px)]
             flex flex-col items-start z-[9999]">
