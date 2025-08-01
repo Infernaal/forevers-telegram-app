@@ -30,9 +30,8 @@ defineEmits(['update:modelValue', 'open-terms'])
 
 <style scoped>
 .terms-container {
-  width: 100%;
-  max-width: 375px;
-  min-height: 44px;
+  width: 319px;
+  height: 44px;
   z-index: 20;
 }
 
@@ -110,35 +109,19 @@ defineEmits(['update:modelValue', 'open-terms'])
 /* Responsive adjustments */
 @media (max-width: 375px) {
   .terms-container {
-    max-width: 350px;
+    max-width: calc(100vw - 56px);
   }
-
+  
   .terms-text {
     font-size: 14px;
-    line-height: 18px;
-  }
-
-  /* Keep checkbox size same as tablet/desktop for better usability */
-  .terms-checkbox {
-    width: 24px;
-    height: 24px;
+    line-height: 20px;
   }
 }
 
 @media (max-width: 320px) {
-  .terms-container {
-    max-width: 300px;
-  }
-
   .terms-text {
     font-size: 13px;
-    line-height: 16px;
-  }
-
-  /* Keep checkbox size same as tablet/desktop for better usability */
-  .terms-checkbox {
-    width: 24px;
-    height: 24px;
+    line-height: 18px;
   }
 }
 </style>
