@@ -31,9 +31,9 @@ defineEmits(['update:modelValue', 'open-terms'])
 <style scoped>
 .terms-container {
   width: 100%;
-  max-width: 375px;
   min-height: 44px;
   z-index: 20;
+  padding: 0 16px;
 }
 
 .terms-wrapper {
