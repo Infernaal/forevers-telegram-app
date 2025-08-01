@@ -3,8 +3,11 @@
     <!-- Dropdown Wrapper -->
     <div
       class="absolute inset-x-4 sm:inset-x-6 md:inset-x-8 lg:inset-x-12 xl:inset-x-20 2xl:inset-x-24
-            bottom-[calc(88px+env(safe-area-inset-bottom,0px)+15px)]
-            sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+15px)]
+            bottom-[calc(64px+env(safe-area-inset-bottom,0px)+16px)]
+            sm:bottom-[calc(72px+env(safe-area-inset-bottom,0px)+40px)]
+            md:bottom-[calc(88px+env(safe-area-inset-bottom,0px)+32px)]
+            lg:bottom-[calc(96px+env(safe-area-inset-bottom,0px)+24px)]
+            xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+28px)]
             flex flex-col items-start z-[9999]">
 
       <!-- Dropdown Menu -->
@@ -97,22 +100,22 @@
                       [overscroll-behavior:contain] [overscroll-behavior-y:contain]
                       px-0 xs:px-1 sm:px-2 py-1 xs:py-1 sm:py-1 md:py-1 lg:py-1
                       touch-manipulation
-                      max-h-[calc(50vh)] sm:max-h-[calc(60vh)] md:max-h-[calc(70vh)]
-                      min-h-[200px] sm:min-h-[240px] md:min-h-[280px]">
+                      max-h-[calc(40vh)] sm:max-h-[calc(45vh)] md:max-h-[calc(35vh)] lg:max-h-[calc(30vh)] xl:max-h-[calc(28vh)]
+                      min-h-[180px] sm:min-h-[200px] md:min-h-[220px] lg:min-h-[240px] xl:min-h-[260px]">
             
             <!-- Calculator -->
             <div class="flex items-center
                         gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-3.5
                         px-2 xs:px-3 sm:px-4 md:px-4.5 lg:px-5
-                        py-1 xs:py-1.5 sm:py-1.5 md:py-1.5 lg:py-1.5
-                        h-8 xs:h-9 sm:h-10 md:h-9 lg:h-9
+                        py-2 xs:py-2.5 sm:py-2.5 md:py-2.5 lg:py-2.5
+                        h-10 xs:h-11 sm:h-12 md:h-11 lg:h-11
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
                         mb-2 xs:mb-2.5 sm:mb-3 md:mb-4 lg:mb-5 xl:mb-6
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('calculator')">
-              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-10 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-10
+              <div class="w-9 xs:w-10 sm:w-11 md:w-11 lg:w-11 h-9 xs:h-10 sm:h-11 md:h-11 lg:h-11
                           bg-[#3A33D3] border border-white border-opacity-30
                           rounded-full flex items-center justify-center flex-shrink-0
                           transition-all duration-300 hover:bg-[#4A43E3] hover:scale-110">
@@ -127,15 +130,15 @@
             <div class="flex items-center
                         gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-3.5
                         px-2 xs:px-3 sm:px-4 md:px-4.5 lg:px-5
-                        py-1 xs:py-1.5 sm:py-1.5 md:py-1.5 lg:py-1.5
-                        h-8 xs:h-9 sm:h-10 md:h-9 lg:h-9
+                        py-2 xs:py-2.5 sm:py-2.5 md:py-2.5 lg:py-2.5
+                        h-10 xs:h-11 sm:h-12 md:h-11 lg:h-11
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
                         mb-2 xs:mb-2.5 sm:mb-3 md:mb-4 lg:mb-5 xl:mb-6
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('ambassador')">
-              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-10 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-10
+              <div class="w-9 xs:w-10 sm:w-11 md:w-11 lg:w-11 h-9 xs:h-10 sm:h-11 md:h-11 lg:h-11
                           bg-[#3A33D3] border border-white border-opacity-30
                           rounded-full flex items-center justify-center flex-shrink-0
                           transition-all duration-300 hover:bg-[#4A43E3] hover:scale-110">
@@ -150,15 +153,15 @@
             <div class="flex items-center
                         gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-3.5
                         px-2 xs:px-3 sm:px-4 md:px-4.5 lg:px-5
-                        py-1 xs:py-1.5 sm:py-1.5 md:py-1.5 lg:py-1.5
-                        h-8 xs:h-9 sm:h-10 md:h-9 lg:h-9
+                        py-2 xs:py-2.5 sm:py-2.5 md:py-2.5 lg:py-2.5
+                        h-10 xs:h-11 sm:h-12 md:h-11 lg:h-11
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
                         mb-2 xs:mb-2.5 sm:mb-3 md:mb-4 lg:mb-5 xl:mb-6
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('verification')">
-              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-10 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-10
+              <div class="w-9 xs:w-10 sm:w-11 md:w-11 lg:w-11 h-9 xs:h-10 sm:h-11 md:h-11 lg:h-11
                           bg-[#3A33D3] border border-white border-opacity-30
                           rounded-full flex items-center justify-center flex-shrink-0
                           transition-all duration-300 hover:bg-[#4A43E3] hover:scale-110">
@@ -183,15 +186,15 @@
             <div class="flex items-center
                         gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-3.5
                         px-2 xs:px-3 sm:px-4 md:px-4.5 lg:px-5
-                        py-1 xs:py-1.5 sm:py-1.5 md:py-1.5 lg:py-1.5
-                        h-8 xs:h-9 sm:h-10 md:h-9 lg:h-9
+                        py-2 xs:py-2.5 sm:py-2.5 md:py-2.5 lg:py-2.5
+                        h-10 xs:h-11 sm:h-12 md:h-11 lg:h-11
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
                         mb-2 xs:mb-2.5 sm:mb-3 md:mb-4 lg:mb-5 xl:mb-6
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('security')">
-              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-10 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-10
+              <div class="w-9 xs:w-10 sm:w-11 md:w-11 lg:w-11 h-9 xs:h-10 sm:h-11 md:h-11 lg:h-11
                           bg-[#3A33D3] border border-white border-opacity-30
                           rounded-full flex items-center justify-center flex-shrink-0
                           transition-all duration-300 hover:bg-[#4A43E3] hover:scale-110">
@@ -206,15 +209,15 @@
             <div class="flex items-center
                         gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-3.5
                         px-2 xs:px-3 sm:px-4 md:px-4.5 lg:px-5
-                        py-1 xs:py-1.5 sm:py-1.5 md:py-1.5 lg:py-1.5
-                        h-8 xs:h-9 sm:h-10 md:h-9 lg:h-9
+                        py-2 xs:py-2.5 sm:py-2.5 md:py-2.5 lg:py-2.5
+                        h-10 xs:h-11 sm:h-12 md:h-11 lg:h-11
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
                         mb-2 xs:mb-2.5 sm:mb-3 md:mb-4 lg:mb-5 xl:mb-6
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('settings')">
-              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-10 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-10
+              <div class="w-9 xs:w-10 sm:w-11 md:w-11 lg:w-11 h-9 xs:h-10 sm:h-11 md:h-11 lg:h-11
                           bg-[#3A33D3] border border-white border-opacity-30
                           rounded-full flex items-center justify-center flex-shrink-0
                           transition-all duration-300 hover:bg-[#4A43E3] hover:scale-110">
@@ -229,15 +232,15 @@
             <div class="flex items-center
                         gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-3.5
                         px-2 xs:px-3 sm:px-4 md:px-4.5 lg:px-5
-                        py-1 xs:py-1.5 sm:py-1.5 md:py-1.5 lg:py-1.5
-                        h-8 xs:h-9 sm:h-10 md:h-9 lg:h-9
+                        py-2 xs:py-2.5 sm:py-2.5 md:py-2.5 lg:py-2.5
+                        h-10 xs:h-11 sm:h-12 md:h-11 lg:h-11
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
                         mb-2 xs:mb-2.5 sm:mb-3 md:mb-4 lg:mb-5 xl:mb-6
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('support')">
-              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-10 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-10
+              <div class="w-9 xs:w-10 sm:w-11 md:w-11 lg:w-11 h-9 xs:h-10 sm:h-11 md:h-11 lg:h-11
                           bg-[#3A33D3] border border-white border-opacity-30
                           rounded-full flex items-center justify-center flex-shrink-0
                           transition-all duration-300 hover:bg-[#4A43E3] hover:scale-110">
@@ -252,15 +255,15 @@
             <div class="flex items-center
                         gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-3.5
                         px-2 xs:px-3 sm:px-4 md:px-4.5 lg:px-5
-                        py-1 xs:py-1.5 sm:py-1.5 md:py-1.5 lg:py-1.5
-                        h-8 xs:h-9 sm:h-10 md:h-9 lg:h-9
+                        py-2 xs:py-2.5 sm:py-2.5 md:py-2.5 lg:py-2.5
+                        h-10 xs:h-11 sm:h-12 md:h-11 lg:h-11
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
                         mb-2 xs:mb-2.5 sm:mb-3 md:mb-4 lg:mb-5 xl:mb-6
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('help')">
-              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-10 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-10
+              <div class="w-9 xs:w-10 sm:w-11 md:w-11 lg:w-11 h-9 xs:h-10 sm:h-11 md:h-11 lg:h-11
                           bg-[#3A33D3] border border-white border-opacity-30
                           rounded-full flex items-center justify-center flex-shrink-0
                           transition-all duration-300 hover:bg-[#4A43E3] hover:scale-110">
@@ -656,6 +659,25 @@ const selectLanguage = (language) => {
   background: transparent;
 }
 
+/* Enhanced scrolling for menu items */
+.scrollbar-none {
+  /* For better touch scrolling on mobile devices */
+  -webkit-overflow-scrolling: touch;
+  /* Smooth scrolling behavior */
+  scroll-behavior: smooth;
+  /* Prevent overscroll bounce */
+  overscroll-behavior: contain;
+  overscroll-behavior-y: contain;
+}
+
+/* Desktop mouse wheel scrolling optimization */
+@media (hover: hover) and (pointer: fine) {
+  .scrollbar-none {
+    /* Enable smoother scrolling with mouse wheel */
+    scroll-behavior: smooth;
+  }
+}
+
 /* Tablet specific positioning */
 @media (min-width: 768px) and (max-width: 1023px) {
   .tablet-triangle-position {
@@ -771,7 +793,8 @@ const selectLanguage = (language) => {
   }
 
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(35vh) !important;
+    max-height: calc(25vh) !important;
+    min-height: 150px !important;
   }
 }
 
@@ -782,7 +805,8 @@ const selectLanguage = (language) => {
   }
 
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(30vh) !important;
+    max-height: calc(20vh) !important;
+    min-height: 120px !important;
   }
 }
 
@@ -793,7 +817,27 @@ const selectLanguage = (language) => {
   }
 
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(25vh) !important;
+    max-height: calc(15vh) !important;
+    min-height: 100px !important;
+  }
+}
+
+/* Desktop and tablet specific constraints */
+@media (min-width: 768px) {
+  .overflow-y-auto.overflow-x-hidden {
+    max-height: calc(35vh) !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .overflow-y-auto.overflow-x-hidden {
+    max-height: calc(30vh) !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .overflow-y-auto.overflow-x-hidden {
+    max-height: calc(28vh) !important;
   }
 }
 </style>
