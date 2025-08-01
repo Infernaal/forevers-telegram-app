@@ -110,8 +110,7 @@ defineEmits(['update:modelValue', 'open-terms'])
 /* Responsive adjustments */
 @media (max-width: 375px) {
   .terms-container {
-    width: 100%;
-    max-width: calc(100% - 8px);
+    padding: 0 8px;
   }
 
   .terms-text {
@@ -128,7 +127,7 @@ defineEmits(['update:modelValue', 'open-terms'])
 
 @media (max-width: 320px) {
   .terms-container {
-    max-width: calc(100% - 4px);
+    padding: 0 12px;
   }
 
   .terms-text {
