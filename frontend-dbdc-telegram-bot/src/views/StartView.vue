@@ -49,7 +49,7 @@
     </div>
 
     <!-- Bottom Section -->
-    <div class="bg-white p-3 sm:p-4 md:p-5 lg:p-6 border-t border-black/5 pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))] sm:pb-[calc(1rem+env(safe-area-inset-bottom,0px))] md:pb-[calc(1.25rem+env(safe-area-inset-bottom,0px))] lg:pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))]">
+    <div class="bg-white p-3 sm:p-4 md:p-5 lg:p-6 border-t border-black/5 pb-[max(0.75rem,calc(4px+env(safe-area-inset-bottom)))] sm:pb-[max(1rem,calc(4px+env(safe-area-inset-bottom)))] md:pb-[max(1.25rem,calc(4px+env(safe-area-inset-bottom)))] lg:pb-[max(1.5rem,calc(4px+env(safe-area-inset-bottom)))]">
       <button @click="handleStart" class="w-full h-12 sm:h-13 md:h-14 lg:h-15 bg-gradient-to-r from-dbd-primary to-[#473FFF] border-0 rounded-full text-white font-bold text-sm sm:text-base md:text-lg lg:text-xl font-montserrat cursor-pointer transition-all duration-200 ease-out shadow-lg hover:shadow-xl active:scale-98 outline-none touch-manipulation">
         Start
       </button>
@@ -114,5 +114,26 @@ onMounted(() => {
   will-change: auto;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+}
+
+/* Enhanced safe area handling for iOS and other devices with home indicator */
+.safe-bottom {
+  padding-bottom: max(16px, calc(4px + env(safe-area-inset-bottom)));
+}
+
+/* Additional safe area utility classes */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.safe-area-bottom-enhanced {
+  padding-bottom: max(12px, calc(4px + env(safe-area-inset-bottom)));
+}
+
+/* Specific iPhone safe area optimizations */
+@supports (padding: max(0px)) {
+  .safe-bottom {
+    padding-bottom: max(16px, calc(4px + env(safe-area-inset-bottom)));
+  }
 }
 </style>
