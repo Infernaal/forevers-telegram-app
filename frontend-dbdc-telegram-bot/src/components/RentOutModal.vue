@@ -28,7 +28,7 @@
 
         <!-- Exchange Rate Section -->
         <div class="flex justify-center mb-4">
-          <div class="bg-white rounded-full border border-gray-100 px-3 py-2.5 flex items-center shadow-sm w-[236px] h-11">
+          <div class="bg-white rounded-full border border-gray-100 px-3 py-2.5 flex items-center shadow-sm w-[236px] sm:w-[260px] md:w-[280px] h-11">
             <!-- F Logo and Amount -->
             <div class="flex items-center gap-2">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -37,9 +37,9 @@
               <span class="text-dbd-primary font-bold text-xl">{{ rentAmount || '1,225' }}</span>
             </div>
             <!-- Country Flag and Name -->
-            <div class="ml-auto flex items-center gap-1">
+            <div class="ml-auto flex items-center gap-2">
               <CountryFlag :country="selectedBalance?.code || 'AE'" class="w-6 h-6 flex-shrink-0" />
-              <span class="text-dbd-dark text-sm font-medium">Forevers {{ selectedBalance?.code || 'UAE' }}</span>
+              <span class="text-dbd-dark text-sm font-medium whitespace-nowrap">Forevers {{ selectedBalance?.code || 'UAE' }}</span>
             </div>
           </div>
         </div>
