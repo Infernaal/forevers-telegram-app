@@ -759,67 +759,41 @@ const selectLanguage = (language) => {
   }
 }
 
-/* Adaptive height for all screens and Telegram WebApp */
+/* Adaptive height for ProfileOverlay positioned above BottomNavigation */
 .profile-overlay-container {
-  max-height: calc(100vh - 120px - env(safe-area-inset-bottom));
-  min-height: 400px;
+  max-height: calc(100vh - 150px - env(safe-area-inset-bottom));
 }
 
 /* Small screens optimization */
 @media (max-height: 600px) {
   .profile-overlay-container {
-    max-height: calc(100vh - 100px - env(safe-area-inset-bottom));
-    min-height: 320px;
+    max-height: calc(100vh - 130px - env(safe-area-inset-bottom));
   }
 
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(40vh) !important;
-    min-height: 160px !important;
+    max-height: calc(35vh) !important;
   }
 }
 
 /* Very small screens */
 @media (max-height: 500px) {
   .profile-overlay-container {
-    max-height: calc(100vh - 80px - env(safe-area-inset-bottom));
-    min-height: 280px;
+    max-height: calc(100vh - 110px - env(safe-area-inset-bottom));
   }
 
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(35vh) !important;
-    min-height: 120px !important;
+    max-height: calc(30vh) !important;
   }
 }
 
 /* Landscape orientation */
 @media (max-height: 450px) and (orientation: landscape) {
   .profile-overlay-container {
-    max-height: calc(100vh - 60px - env(safe-area-inset-bottom));
-    min-height: 240px;
+    max-height: calc(100vh - 100px - env(safe-area-inset-bottom));
   }
 
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(30vh) !important;
-    min-height: 100px !important;
-  }
-}
-
-/* Large screens - more space for content */
-@media (min-height: 800px) {
-  .profile-overlay-container {
-    min-height: 500px;
-  }
-
-  .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(75vh) !important;
-    min-height: 320px !important;
-  }
-}
-
-/* Telegram WebApp specific adjustments */
-@supports (-webkit-touch-callout: none) {
-  .profile-overlay-container {
-    max-height: calc(100vh - 120px - env(safe-area-inset-bottom));
+    max-height: calc(25vh) !important;
   }
 }
 </style>
