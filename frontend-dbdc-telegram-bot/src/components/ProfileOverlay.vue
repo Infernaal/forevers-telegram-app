@@ -100,8 +100,8 @@
                       [overscroll-behavior:contain] [overscroll-behavior-y:contain]
                       px-0 xs:px-1 sm:px-2 py-1 xs:py-1 sm:py-1 md:py-1 lg:py-1
                       touch-manipulation
-                      max-h-[calc(50vh)] sm:max-h-[calc(60vh)] md:max-h-[calc(70vh)]
-                      min-h-[200px] sm:min-h-[240px] md:min-h-[280px]">
+                      max-h-[calc(40vh)] sm:max-h-[calc(45vh)] md:max-h-[calc(35vh)] lg:max-h-[calc(30vh)] xl:max-h-[calc(28vh)]
+                      min-h-[180px] sm:min-h-[200px] md:min-h-[220px] lg:min-h-[240px] xl:min-h-[260px]">
             
             <!-- Calculator -->
             <div class="flex items-center
