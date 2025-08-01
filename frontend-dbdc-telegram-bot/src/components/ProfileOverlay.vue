@@ -3,9 +3,9 @@
     <!-- Dropdown Wrapper -->
     <div
       class="absolute inset-x-4 sm:inset-x-6 md:inset-x-8 lg:inset-x-12 xl:inset-x-20 2xl:inset-x-24
-            bottom-[calc(64px+env(safe-area-inset-bottom,0px)+16px)]
-            sm:bottom-[calc(74px+env(safe-area-inset-bottom,0px)+16px)]
-            md:bottom-[calc(90px+env(safe-area-inset-bottom,0px)+20px)]
+            bottom-[calc(68px+env(safe-area-inset-bottom,0px)+16px)]
+            sm:bottom-[calc(72px+env(safe-area-inset-bottom,0px)+16px)]
+            md:bottom-[calc(88px+env(safe-area-inset-bottom,0px)+202px)]
             lg:bottom-[calc(96px+env(safe-area-inset-bottom,0px)+24px)]
             xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+28px)]
             flex flex-col items-start z-[9999]">
