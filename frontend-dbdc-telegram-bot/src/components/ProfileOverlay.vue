@@ -94,9 +94,7 @@
                       [-webkit-overflow-scrolling:touch] [scroll-behavior:smooth]
                       [overscroll-behavior:contain] [overscroll-behavior-y:contain]
                       px-0 xs:px-1 sm:px-2 py-1 xs:py-1 sm:py-1 md:py-1 lg:py-1
-                      touch-manipulation
-                      max-h-[180px] xs:max-h-[200px] sm:max-h-[240px] md:max-h-[280px] lg:max-h-[320px]
-                      min-h-[140px] xs:min-h-[160px] sm:min-h-[180px]">
+                      touch-manipulation">
             
             <!-- Calculator -->
             <div class="flex items-center
