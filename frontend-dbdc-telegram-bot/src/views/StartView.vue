@@ -118,6 +118,6 @@ onMounted(() => {
 
 /* Safe area handling for iOS and other devices with home indicator */
 .safe-bottom {
-  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
 }
 </style>
