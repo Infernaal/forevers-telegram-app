@@ -402,7 +402,7 @@
             <div class="w-0.5 h-4 xs:h-5 sm:h-6 md:h-7 lg:h-8 xl:h-9
                         bg-[#E2E2E2] border border-[#B7B7B7] rounded-[30px]
                         opacity-50 flex-shrink-0"></div>
-            <!-- Обгортка для позиціо��ування dropdown відносно Language Section -->
+            <!-- Обгортка для позиціонування dropdown відносно Language Section -->
             <div class="relative w-full max-w-[200px]">
               <!-- Language Section -->
               <div class="language-button
@@ -766,6 +766,69 @@ const selectLanguage = (language) => {
   }
   to {
     opacity: 1;
+  }
+}
+
+/* Telegram WebApp specific optimizations */
+@media (max-height: 670px) {
+  .profile-overlay-container {
+    min-height: 420px !important;
+    max-height: calc(100dvh - 60px - env(safe-area-inset-bottom)) !important;
+  }
+
+  .overflow-y-auto.overflow-x-hidden {
+    max-height: 160px !important;
+    min-height: 120px !important;
+  }
+}
+
+@media (max-height: 600px) {
+  .profile-overlay-container {
+    min-height: 380px !important;
+    max-height: calc(100dvh - 40px - env(safe-area-inset-bottom)) !important;
+  }
+
+  .overflow-y-auto.overflow-x-hidden {
+    max-height: 140px !important;
+    min-height: 100px !important;
+  }
+}
+
+@media (max-height: 550px) {
+  .profile-overlay-container {
+    min-height: 340px !important;
+    max-height: calc(100dvh - 30px - env(safe-area-inset-bottom)) !important;
+  }
+
+  .overflow-y-auto.overflow-x-hidden {
+    max-height: 120px !important;
+    min-height: 80px !important;
+  }
+}
+
+/* Very small screens (landscape phones) */
+@media (max-height: 480px) {
+  .profile-overlay-container {
+    min-height: 300px !important;
+    max-height: calc(100dvh - 20px - env(safe-area-inset-bottom)) !important;
+  }
+
+  .overflow-y-auto.overflow-x-hidden {
+    max-height: 100px !important;
+    min-height: 60px !important;
+  }
+}
+
+/* iPhone landscape and very compact screens */
+@media (max-height: 430px) {
+  .profile-overlay-container {
+    min-height: 260px !important;
+    max-height: calc(100dvh - 15px - env(safe-area-inset-bottom)) !important;
+  }
+
+  .overflow-y-auto.overflow-x-hidden {
+    max-height: 80px !important;
+    min-height: 40px !important;
   }
 }
 </style>
