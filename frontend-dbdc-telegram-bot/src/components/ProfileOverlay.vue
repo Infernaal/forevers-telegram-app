@@ -755,96 +755,18 @@ const selectLanguage = (language) => {
   }
 }
 
-/* Telegram WebApp specific optimizations */
-@media (max-height: 670px) {
-  .profile-overlay-container {
-    min-height: 420px !important;
-    max-height: calc(100dvh - 60px - env(safe-area-inset-bottom)) !important;
-  }
-
-  .overflow-y-auto.overflow-x-hidden {
-    max-height: 160px !important;
-    min-height: 120px !important;
-  }
+/* Simple adaptive height for all screens and Telegram WebApp */
+.profile-overlay-container {
+  height: 100%;
+  max-height: 100%;
+  min-height: 100%;
 }
 
+/* Ensure proper scrolling on small screens */
 @media (max-height: 600px) {
-  .profile-overlay-container {
-    min-height: 380px !important;
-    max-height: calc(100dvh - 40px - env(safe-area-inset-bottom)) !important;
-  }
-
   .overflow-y-auto.overflow-x-hidden {
-    max-height: 140px !important;
-    min-height: 100px !important;
-  }
-}
-
-@media (max-height: 550px) {
-  .profile-overlay-container {
-    min-height: 340px !important;
-    max-height: calc(100dvh - 30px - env(safe-area-inset-bottom)) !important;
-  }
-
-  .overflow-y-auto.overflow-x-hidden {
-    max-height: 120px !important;
-    min-height: 80px !important;
-  }
-}
-
-/* Very small screens (landscape phones) */
-@media (max-height: 480px) {
-  .profile-overlay-container {
-    min-height: 300px !important;
-    max-height: calc(100dvh - 20px - env(safe-area-inset-bottom)) !important;
-  }
-
-  .overflow-y-auto.overflow-x-hidden {
-    max-height: 100px !important;
-    min-height: 60px !important;
-  }
-}
-
-/* iPhone landscape and very compact screens */
-@media (max-height: 430px) {
-  .profile-overlay-container {
-    min-height: 260px !important;
-    max-height: calc(100dvh - 15px - env(safe-area-inset-bottom)) !important;
-  }
-
-  .overflow-y-auto.overflow-x-hidden {
-    max-height: 80px !important;
-    min-height: 40px !important;
-  }
-
-  .profile-dropdown-wrapper {
-    bottom: calc(78px + env(safe-area-inset-bottom, 0px) + 2px) !important;
-  }
-}
-
-/* Adaptive positioning for different heights */
-@media (max-height: 600px) {
-  .profile-dropdown-wrapper {
-    bottom: calc(82px + env(safe-area-inset-bottom, 0px) + 2px) !important;
-  }
-}
-
-@media (max-height: 550px) {
-  .profile-dropdown-wrapper {
-    bottom: calc(80px + env(safe-area-inset-bottom, 0px) + 2px) !important;
-  }
-}
-
-/* Telegram WebApp viewport fixes */
-@supports (-webkit-touch-callout: none) {
-  .profile-overlay-container {
-    max-height: calc(100vh - 80px - env(safe-area-inset-bottom)) !important;
-  }
-
-  @media (max-height: 670px) {
-    .profile-overlay-container {
-      max-height: calc(100vh - 60px - env(safe-area-inset-bottom)) !important;
-    }
+    flex: 1;
+    min-height: 0;
   }
 }
 </style>
