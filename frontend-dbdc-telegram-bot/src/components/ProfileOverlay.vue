@@ -107,15 +107,15 @@
             <div class="flex items-center
                         gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-3.5
                         px-2 xs:px-3 sm:px-4 md:px-4.5 lg:px-5
-                        py-1 xs:py-1.5 sm:py-1.5 md:py-1.5 lg:py-1.5
-                        h-8 xs:h-9 sm:h-10 md:h-9 lg:h-9
+                        py-2 xs:py-2.5 sm:py-2.5 md:py-2.5 lg:py-2.5
+                        h-10 xs:h-11 sm:h-12 md:h-11 lg:h-11
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
                         mb-2 xs:mb-2.5 sm:mb-3 md:mb-4 lg:mb-5 xl:mb-6
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('calculator')">
-              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-10 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-10
+              <div class="w-9 xs:w-10 sm:w-11 md:w-11 lg:w-11 h-9 xs:h-10 sm:h-11 md:h-11 lg:h-11
                           bg-[#3A33D3] border border-white border-opacity-30
                           rounded-full flex items-center justify-center flex-shrink-0
                           transition-all duration-300 hover:bg-[#4A43E3] hover:scale-110">
