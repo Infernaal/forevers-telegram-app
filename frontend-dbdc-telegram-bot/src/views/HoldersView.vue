@@ -4,9 +4,9 @@
     <div class="w-full min-h-screen bg-gray-100 relative px-4 pt-5 pb-32 sm:pb-36 md:pb-40 lg:pb-44">
       
       <!-- Referral Program Header -->
-      <div class="flex flex-col items-start gap-1 mb-5">
-        <h1 class="text-dbd-dark text-xl font-bold leading-6 m-0">Referral Program</h1>
-        <p class="text-dbd-gray text-base font-medium leading-6 m-0">Share the QR-code with your friends.</p>
+      <div class="flex flex-col items-start md:items-center lg:items-center gap-1 mb-5">
+        <h1 class="text-dbd-dark text-xl md:text-2xl lg:text-3xl font-bold leading-6 m-0">Referral Program</h1>
+        <p class="text-dbd-gray text-base md:text-lg font-medium leading-6 m-0 md:text-center">Share the QR-code with your friends.</p>
       </div>
 
       <!-- QR Code Section -->
