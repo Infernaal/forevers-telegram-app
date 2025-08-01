@@ -317,8 +317,8 @@ button:active {
   .text-base { font-size: 16px; }
   .h-11 { height: 48px; }
 
-  .sm\:w-\[260px\] {
-    width: 260px !important;
+  .sm\:w-\[270px\] {
+    width: 270px !important;
   }
 
   /* Make TermsCheckbox smaller for mobile (not small mobile) to fit better */
