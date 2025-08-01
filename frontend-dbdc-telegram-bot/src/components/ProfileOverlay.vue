@@ -9,11 +9,12 @@
             pb-4">
 
       <!-- Dropdown Menu -->
-      <div class="w-full h-full
+      <div class="w-full
   bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
   border border-[#09074E] rounded-[20px] shadow-2xl
   backdrop-blur-[32px] flex flex-col overflow-hidden transition-all duration-300 ease-out
-  profile-overlay-container">
+  profile-overlay-container
+  max-h-[calc(100%-20px)]">
         <div class="py-4 px-4 sm:px-6 md:px-6 lg:px-8 xl:px-10 text-white flex flex-col relative z-10 h-full">
           <!-- Background -->
           <div class="absolute inset-0 bg-gradient-to-br from-[#120B81] via-[#09074E] to-[#09074E] border border-[#09074E] backdrop-blur-[40px] z-0 rounded-[20px]"></div>
@@ -82,7 +83,7 @@
                             flex-shrink-0 touch-manipulation
                             active:scale-95 focus:outline-none focus:ring-2 focus:ring-dbd-primary focus:ring-opacity-50"
                       @click="$emit('close')"
-                      aria-label="Закрыть проф��ль">
+                      aria-label="Закрыть профиль">
                 <svg class="w-4 xs:w-5 sm:w-6 md:w-6 lg:w-7 xl:w-8 h-4 xs:h-5 sm:h-6 md:h-6 lg:h-7 xl:h-8" viewBox="0 0 24 24" fill="none">
                   <path d="M17.2155 11.2862L8.2216 2.29534C7.82696 1.90169 7.18757 1.90169 6.79192 2.29534C6.39728 2.68898 6.39728 3.32838 6.79192 3.72203L15.0724 11.9996L6.79292 20.2771C6.39827 20.6707 6.39827 21.3101 6.79292 21.7048C7.18756 22.0984 7.82795 22.0984 8.2226 21.7048L17.2165 12.7139C17.6051 12.3244 17.6051 11.6749 17.2155 11.2862Z" fill="#B7B7B7"/>
                 </svg>
