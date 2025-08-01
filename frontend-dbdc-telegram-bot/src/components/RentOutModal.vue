@@ -425,6 +425,11 @@ input:focus {
     max-width: 236px;
   }
 
+  .sm\:w-\[260px\] {
+    width: calc(100% - 32px) !important;
+    max-width: 240px !important;
+  }
+
   .h-\[52px\] {
     height: 48px;
   }
