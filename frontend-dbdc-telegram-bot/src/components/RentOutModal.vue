@@ -424,14 +424,14 @@ input:focus {
 
 /* Responsive input adjustments */
 @media (max-width: 375px) {
-  .w-\[236px\] {
-    width: calc(100% - 32px);
-    max-width: 236px;
+  .w-\[250px\] {
+    width: calc(100% - 24px) !important;
+    max-width: 250px !important;
   }
 
-  .sm\:w-\[260px\] {
-    width: calc(100% - 32px) !important;
-    max-width: 240px !important;
+  .sm\:w-\[270px\] {
+    width: calc(100% - 24px) !important;
+    max-width: 250px !important;
   }
 
   .h-\[52px\] {
