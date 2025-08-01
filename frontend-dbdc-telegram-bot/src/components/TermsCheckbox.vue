@@ -30,8 +30,9 @@ defineEmits(['update:modelValue', 'open-terms'])
 
 <style scoped>
 .terms-container {
-  width: 319px;
-  height: 44px;
+  width: 100%;
+  max-width: 319px;
+  min-height: 44px;
   z-index: 20;
 }
 
@@ -109,19 +110,34 @@ defineEmits(['update:modelValue', 'open-terms'])
 /* Responsive adjustments */
 @media (max-width: 375px) {
   .terms-container {
-    max-width: calc(100vw - 56px);
+    width: 100%;
+    max-width: calc(100% - 8px);
   }
-  
+
   .terms-text {
     font-size: 14px;
     line-height: 20px;
   }
+
+  .terms-checkbox {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 @media (max-width: 320px) {
+  .terms-container {
+    max-width: calc(100% - 4px);
+  }
+
   .terms-text {
     font-size: 13px;
     line-height: 18px;
+  }
+
+  .terms-checkbox {
+    width: 18px;
+    height: 18px;
   }
 }
 </style>

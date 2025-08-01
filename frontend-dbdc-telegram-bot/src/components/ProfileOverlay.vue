@@ -2,14 +2,9 @@
   <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl min-h-screen">
     <!-- Dropdown Wrapper -->
     <div
-      class="absolute
-            inset-x-4 sm:inset-x-6 md:inset-x-8 lg:inset-x-12 xl:inset-x-20 2xl:inset-x-24
-            bottom-[calc(88px+env(safe-area-inset-bottom,0px)+2px)]
-            sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+18px)]
-            md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+27px)]
-            lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+27px)]
-            xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+27px)]
-            2xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+27px)]
+      class="absolute inset-x-4 sm:inset-x-6 md:inset-x-8 lg:inset-x-12 xl:inset-x-20 2xl:inset-x-24
+            bottom-[calc(88px+env(safe-area-inset-bottom,0px)+15px)]
+            sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+15px)]
             flex flex-col items-start z-[9999]">
 
       <!-- Dropdown Menu -->
@@ -18,11 +13,7 @@
   border border-[#09074E] rounded-[20px] shadow-2xl
   backdrop-blur-[32px] flex flex-col overflow-hidden transition-all duration-300 ease-out
   profile-overlay-container
-  max-h-[calc(100dvh-72px-env(safe-area-inset-bottom))]
-  sm:max-h-[calc(100dvh-48px-env(safe-area-inset-bottom))]
-  md:max-h-[calc(100dvh-32px-env(safe-area-inset-bottom))]
-  lg:max-h-[calc(100dvh-16px)]
-  xl:max-h-[calc(100vh-8px)]">
+  max-h-[calc(100vh-120px)]">
         <div class="py-4 px-4 sm:px-6 md:px-6 lg:px-8 xl:px-10 text-white flex flex-col relative z-10 h-full">
           <!-- Background -->
           <div class="absolute inset-0 bg-gradient-to-br from-[#120B81] via-[#09074E] to-[#09074E] border border-[#09074E] backdrop-blur-[40px] z-0 rounded-[20px]"></div>
@@ -105,7 +96,9 @@
                       [-webkit-overflow-scrolling:touch] [scroll-behavior:smooth]
                       [overscroll-behavior:contain] [overscroll-behavior-y:contain]
                       px-0 xs:px-1 sm:px-2 py-1 xs:py-1 sm:py-1 md:py-1 lg:py-1
-                      touch-manipulation max-h-[200px] xs:max-h-[220px] sm:max-h-[240px]">
+                      touch-manipulation
+                      max-h-[calc(50vh)] sm:max-h-[calc(60vh)] md:max-h-[calc(70vh)]
+                      min-h-[200px] sm:min-h-[240px] md:min-h-[280px]">
             
             <!-- Calculator -->
             <div class="flex items-center
@@ -480,7 +473,7 @@
         </div>
       </div>
       <!-- Triangle Pointer -->
-      <div class="ml-6 sm:ml-10 md:ml-14 lg:ml-20 xl:ml-14 2xl:ml-30 mt-[-1px]">
+      <div class="ml-6 sm:ml-10 md:ml-14 lg:ml-20 xl:ml-14 2xl:ml-30 mt-[-1px] mb-2">
         <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px]
                     border-l-transparent border-r-transparent border-t-[#09074E] drop-shadow-md"></div>
       </div>
@@ -763,6 +756,44 @@ const selectLanguage = (language) => {
   }
   to {
     opacity: 1;
+  }
+}
+
+/* Adaptive height for ProfileOverlay positioned above BottomNavigation */
+.profile-overlay-container {
+  max-height: calc(100vh - 150px - env(safe-area-inset-bottom));
+}
+
+/* Small screens optimization */
+@media (max-height: 600px) {
+  .profile-overlay-container {
+    max-height: calc(100vh - 130px - env(safe-area-inset-bottom));
+  }
+
+  .overflow-y-auto.overflow-x-hidden {
+    max-height: calc(35vh) !important;
+  }
+}
+
+/* Very small screens */
+@media (max-height: 500px) {
+  .profile-overlay-container {
+    max-height: calc(100vh - 110px - env(safe-area-inset-bottom));
+  }
+
+  .overflow-y-auto.overflow-x-hidden {
+    max-height: calc(30vh) !important;
+  }
+}
+
+/* Landscape orientation */
+@media (max-height: 450px) and (orientation: landscape) {
+  .profile-overlay-container {
+    max-height: calc(100vh - 100px - env(safe-area-inset-bottom));
+  }
+
+  .overflow-y-auto.overflow-x-hidden {
+    max-height: calc(25vh) !important;
   }
 }
 </style>
