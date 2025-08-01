@@ -10,7 +10,8 @@
             lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+27px)]
             xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+27px)]
             2xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+27px)]
-            flex flex-col items-start z-[9999]">
+            flex flex-col items-start z-[9999]
+            profile-dropdown-wrapper">
 
       <!-- Dropdown Menu -->
       <div class="w-full
