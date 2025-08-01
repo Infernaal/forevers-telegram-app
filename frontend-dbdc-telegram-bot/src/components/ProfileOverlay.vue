@@ -3,10 +3,9 @@
     <!-- Dropdown Wrapper -->
     <div
       class="absolute inset-x-4 sm:inset-x-6 md:inset-x-8 lg:inset-x-12 xl:inset-x-20 2xl:inset-x-24
-            top-4 bottom-[calc(88px+env(safe-area-inset-bottom,0px))]
-            sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px))]
-            flex flex-col items-start z-[9999] justify-end
-            pb-4">
+            bottom-[calc(88px+env(safe-area-inset-bottom,0px)+15px)]
+            sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+15px)]
+            flex flex-col items-start z-[9999]">
 
       <!-- Dropdown Menu -->
       <div class="w-full
