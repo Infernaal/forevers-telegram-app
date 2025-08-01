@@ -18,11 +18,12 @@
   border border-[#09074E] rounded-[20px] shadow-2xl
   backdrop-blur-[32px] flex flex-col overflow-hidden transition-all duration-300 ease-out
   profile-overlay-container
-  max-h-[calc(100dvh-72px-env(safe-area-inset-bottom))]
-  sm:max-h-[calc(100dvh-48px-env(safe-area-inset-bottom))]
-  md:max-h-[calc(100dvh-32px-env(safe-area-inset-bottom))]
-  lg:max-h-[calc(100dvh-16px)]
-  xl:max-h-[calc(100vh-8px)]">
+  max-h-[calc(100dvh-80px-env(safe-area-inset-bottom))]
+  sm:max-h-[calc(100dvh-60px-env(safe-area-inset-bottom))]
+  md:max-h-[calc(100dvh-40px-env(safe-area-inset-bottom))]
+  lg:max-h-[calc(100dvh-20px)]
+  xl:max-h-[calc(100vh-16px)]
+  min-h-[460px] sm:min-h-[520px] md:min-h-[580px]">
         <div class="py-4 px-4 sm:px-6 md:px-6 lg:px-8 xl:px-10 text-white flex flex-col relative z-10 h-full">
           <!-- Background -->
           <div class="absolute inset-0 bg-gradient-to-br from-[#120B81] via-[#09074E] to-[#09074E] border border-[#09074E] backdrop-blur-[40px] z-0 rounded-[20px]"></div>
@@ -105,7 +106,9 @@
                       [-webkit-overflow-scrolling:touch] [scroll-behavior:smooth]
                       [overscroll-behavior:contain] [overscroll-behavior-y:contain]
                       px-0 xs:px-1 sm:px-2 py-1 xs:py-1 sm:py-1 md:py-1 lg:py-1
-                      touch-manipulation max-h-[200px] xs:max-h-[220px] sm:max-h-[240px]">
+                      touch-manipulation
+                      max-h-[180px] xs:max-h-[200px] sm:max-h-[240px] md:max-h-[280px] lg:max-h-[320px]
+                      min-h-[140px] xs:min-h-[160px] sm:min-h-[180px]">
             
             <!-- Calculator -->
             <div class="flex items-center
@@ -399,7 +402,7 @@
             <div class="w-0.5 h-4 xs:h-5 sm:h-6 md:h-7 lg:h-8 xl:h-9
                         bg-[#E2E2E2] border border-[#B7B7B7] rounded-[30px]
                         opacity-50 flex-shrink-0"></div>
-            <!-- Обгортка для позиціонування dropdown відносно Language Section -->
+            <!-- Обгортка для позиціо��ування dropdown відносно Language Section -->
             <div class="relative w-full max-w-[200px]">
               <!-- Language Section -->
               <div class="language-button
