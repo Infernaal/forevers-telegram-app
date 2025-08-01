@@ -119,9 +119,10 @@ defineEmits(['update:modelValue', 'open-terms'])
     line-height: 20px;
   }
 
+  /* Keep checkbox size same as tablet/desktop for better usability */
   .terms-checkbox {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
   }
 }
 
@@ -135,9 +136,10 @@ defineEmits(['update:modelValue', 'open-terms'])
     line-height: 18px;
   }
 
+  /* Keep checkbox size same as tablet/desktop for better usability */
   .terms-checkbox {
-    width: 18px;
-    height: 18px;
+    width: 24px;
+    height: 24px;
   }
 }
 </style>
