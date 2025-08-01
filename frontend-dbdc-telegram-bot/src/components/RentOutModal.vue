@@ -317,6 +317,10 @@ button:active {
   .text-base { font-size: 16px; }
   .h-11 { height: 48px; }
 
+  .sm\:w-\[260px\] {
+    width: 260px !important;
+  }
+
   /* Make TermsCheckbox smaller for mobile (not small mobile) to fit better */
   ::deep(.terms-checkbox-dark .terms-container) {
     width: 100% !important;
