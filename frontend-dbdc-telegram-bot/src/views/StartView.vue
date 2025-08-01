@@ -118,49 +118,6 @@ onMounted(() => {
 
 /* Safe area handling for iOS and other devices with home indicator */
 .safe-bottom {
-  padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
-}
-
-@media (min-width: 640px) {
-  .safe-bottom {
-    padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
-  }
-}
-
-@media (min-width: 768px) {
-  .safe-bottom {
-    padding-bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
-  }
-}
-
-@media (min-width: 1024px) {
-  .safe-bottom {
-    padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
-  }
-}
-
-/* Additional safe area support for devices that need it */
-@supports (padding-bottom: env(safe-area-inset-bottom)) {
-  .safe-bottom {
-    padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));
-  }
-
-  @media (min-width: 640px) {
-    .safe-bottom {
-      padding-bottom: calc(1rem + env(safe-area-inset-bottom));
-    }
-  }
-
-  @media (min-width: 768px) {
-    .safe-bottom {
-      padding-bottom: calc(1.25rem + env(safe-area-inset-bottom));
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .safe-bottom {
-      padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));
-    }
-  }
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 </style>
