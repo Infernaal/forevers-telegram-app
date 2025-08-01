@@ -793,7 +793,8 @@ const selectLanguage = (language) => {
   }
 
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(35vh) !important;
+    max-height: calc(25vh) !important;
+    min-height: 150px !important;
   }
 }
 
@@ -804,7 +805,8 @@ const selectLanguage = (language) => {
   }
 
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(30vh) !important;
+    max-height: calc(20vh) !important;
+    min-height: 120px !important;
   }
 }
 
@@ -815,7 +817,27 @@ const selectLanguage = (language) => {
   }
 
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(25vh) !important;
+    max-height: calc(15vh) !important;
+    min-height: 100px !important;
+  }
+}
+
+/* Desktop and tablet specific constraints */
+@media (min-width: 768px) {
+  .overflow-y-auto.overflow-x-hidden {
+    max-height: calc(35vh) !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .overflow-y-auto.overflow-x-hidden {
+    max-height: calc(30vh) !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .overflow-y-auto.overflow-x-hidden {
+    max-height: calc(28vh) !important;
   }
 }
 </style>
