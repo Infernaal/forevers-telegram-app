@@ -110,12 +110,12 @@ defineEmits(['update:modelValue', 'open-terms'])
 /* Responsive adjustments */
 @media (max-width: 375px) {
   .terms-container {
-    padding: 0 8px;
+    max-width: 350px;
   }
 
   .terms-text {
     font-size: 14px;
-    line-height: 20px;
+    line-height: 18px;
   }
 
   /* Keep checkbox size same as tablet/desktop for better usability */
@@ -127,12 +127,12 @@ defineEmits(['update:modelValue', 'open-terms'])
 
 @media (max-width: 320px) {
   .terms-container {
-    padding: 0 12px;
+    max-width: 300px;
   }
 
   .terms-text {
     font-size: 13px;
-    line-height: 18px;
+    line-height: 16px;
   }
 
   /* Keep checkbox size same as tablet/desktop for better usability */
