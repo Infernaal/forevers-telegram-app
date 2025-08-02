@@ -10,7 +10,7 @@
     <!-- Bottom Navigation -->
     <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl sm:rounded-t-3xl shadow-[0_-4px_16px_rgba(0,0,0,0.08),0_-2px_6px_rgba(0,0,0,0.04)] border-t border-black/[0.06] z-[10001]">
       <!-- Navigation Content -->
-      <div class="flex items-center justify-center px-3 sm:px-4 pt-3 sm:pt-4 pb-[max(var(--tg-content-safe-area-inset-bottom),1rem)]">
+      <div class="flex items-center justify-center px-3 sm:px-4 pt-3 sm:pt-4 pb-[max(env(safe-area-inset-bottom),1rem)]">
         <!-- Navigation Items Container -->
         <div class="flex items-center justify-between w-full gap-2 sm:gap-4 px-2 sm:px-4">
 
@@ -227,7 +227,7 @@
 </template>
 
 <script setup>
-import { ref, watch, nextTick, onMounted, onUnmounted } from 'vue'
+import { ref, watch, nextTick, onMounted, onUnmounted, reactive } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useCart } from '../composables/useCart.js'
 import ProfileOverlay from './ProfileOverlay.vue'
@@ -242,7 +242,10 @@ const { cartItemsCount } = useCart()
 // Profile menu state
 const isProfileMenuOpen = ref(false)
 const profileButton = ref(null)
-const profileButtonPosition = ref({ left: 0, width: 0 })
+const profileButtonPosition = reactive({
+  left: 0,
+  width: 0
+})
 
 // Computed active tab based on current route
 const activeTab = ref('wallet')
@@ -280,49 +283,37 @@ const navigateTo = (tab) => {
 const updateProfileButtonPosition = () => {
   if (profileButton.value) {
     const rect = profileButton.value.getBoundingClientRect()
-    profileButtonPosition.value = {
-      left: rect.left,
-      width: rect.width,
-      bottom: window.innerHeight - rect.bottom
-    }
+    profileButtonPosition.left = rect.left
+    profileButtonPosition.width = rect.width
   }
 }
 
-const toggleProfile = async () => {
-  console.log('Profile toggle clicked, current state:', isProfileMenuOpen.value)
-
-  if (!isProfileMenuOpen.value) {
-    // Calculate position before opening
-    await nextTick()
-    updateProfileButtonPosition()
-  }
-
+const toggleProfile = () => {
   isProfileMenuOpen.value = !isProfileMenuOpen.value
-  console.log('Profile toggle new state:', isProfileMenuOpen.value)
 
-  // Telegram WebApp haptic feedback
   if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.HapticFeedback) {
     window.Telegram.WebApp.HapticFeedback.impactOccurred('medium')
   }
 }
 
 const closeProfileMenu = () => {
-  console.log('Profile menu close requested')
   isProfileMenuOpen.value = false
-  console.log('Profile menu closed, state:', isProfileMenuOpen.value)
 }
 
-// Window resize handler
-const handleResize = () => {
-  if (isProfileMenuOpen.value) {
+watch(isProfileMenuOpen, async (val) => {
+  if (val) {
+    await nextTick()
     updateProfileButtonPosition()
   }
+})
+
+const handleResize = () => {
+  updateProfileButtonPosition()
 }
 
-// Lifecycle hooks
 onMounted(() => {
-  window.addEventListener('resize', handleResize)
   updateProfileButtonPosition()
+  window.addEventListener('resize', handleResize)
 })
 
 onUnmounted(() => {
