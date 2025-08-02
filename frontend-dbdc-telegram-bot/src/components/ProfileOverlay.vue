@@ -496,11 +496,21 @@ const overlayStyle = {
   bottom: 'calc(88px + env(safe-area-inset-bottom, 0px) + 15px)'
 }
 
-const triangleStyle = computed(() => ({
-  left: `${props.triggerPosition.left + props.triggerPosition.width / 2 - 12}px`,
-  bottom: 'calc(88px + env(safe-area-inset-bottom, 0px))',
-  marginBottom: '-1px'
-}))
+defineProps({
+  triggerPosition: {
+    type: Object,
+    required: true
+  }
+})
+
+const triangleStyle = computed(() => {
+  const offsetLeft = triggerPosition.left + triggerPosition.width / 2 - 12
+  const offsetBottom = triggerPosition.bottom ?? 88
+
+  return {
+    left: `${offsetLeft}px`,
+    bottom: `calc(${offsetBottom}px + env(safe-area-inset-bottom, 0px))`
+  }
 
 // Emits
 const emit = defineEmits(['close'])
