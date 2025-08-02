@@ -242,10 +242,6 @@ const { cartItemsCount } = useCart()
 // Profile menu state
 const isProfileMenuOpen = ref(false)
 const profileButton = ref(null)
-const profileButtonPosition = reactive({
-  left: 0,
-  width: 0
-})
 
 // Computed active tab based on current route
 const activeTab = ref('wallet')
