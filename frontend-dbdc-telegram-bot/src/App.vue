@@ -21,47 +21,50 @@ import { ref, onMounted } from 'vue'
 export default {
   name: 'App',
   setup() {
-    // флаг для отображения заглушки на десктопе
+    // флаг для отображения заглушки на десктопе или в обычном браузере
     const showDesktopOnly = ref(false)
 
     onMounted(() => {
-      if (window.Telegram && window.Telegram.WebApp) {
-        const webapp = window.Telegram.WebApp
-
-        // всегда надо вызвать ready()
-        webapp.ready()
-
-        // если десктоп — показываем заглушку и выходим
-        if (webapp.isDesktop) {
-          showDesktopOnly.value = true
-          return
-        }
-
-        // иначе — продолжаем инициализацию для мобильных
-        webapp.expand()
-        webapp.disableVerticalSwipes()
-
-        // Theme support
-        const scheme = webapp.colorScheme
-        document.body.classList.toggle('tg-dark', scheme === 'dark')
-        
-        // Set theme colors
-        webapp.setHeaderColor('#2019CE')
-        webapp.setBackgroundColor('#FAFAFA')
+      // если нет WebApp или это Telegram Desktop — показываем заглушку и выходим
+      if (
+        !window.Telegram ||
+        !window.Telegram.WebApp ||
+        window.Telegram.WebApp.isDesktop
+      ) {
+        showDesktopOnly.value = true
+        return
       }
+
+      // иначе — инициализация WebApp для мобильных
+      const webapp = window.Telegram.WebApp
+      webapp.ready()
+      webapp.expand()
+      webapp.disableVerticalSwipes()
+
+      // Theme support
+      const scheme = webapp.colorScheme
+      document.body.classList.toggle('tg-dark', scheme === 'dark')
+
+      // Set theme colors
+      webapp.setHeaderColor('#2019CE')
+      webapp.setBackgroundColor('#FAFAFA')
 
       // Prevent zoom on mobile
       const viewport = document.querySelector('meta[name="viewport"]')
       if (!viewport) {
         const meta = document.createElement('meta')
         meta.name = 'viewport'
-        meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover'
+        meta.content =
+          'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover'
         document.head.appendChild(meta)
       }
 
       // Set viewport height for mobile
       const setViewportHeight = () => {
-        document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`)
+        document.documentElement.style.setProperty(
+          '--vh',
+          `${window.innerHeight * 0.01}px`
+        )
       }
       setViewportHeight()
       window.addEventListener('resize', setViewportHeight)
