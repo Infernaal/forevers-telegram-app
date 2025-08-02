@@ -29,12 +29,16 @@
 
         <!-- Exchange Rate Section -->
         <div class="flex justify-center mb-4">
-          <div class="bg-white rounded-full border border-gray-100 px-4 py-2 flex items-center shadow-sm">
+          <div
+            class="bg-white dark:bg-[#2a2a2a]
+                   border border-gray-100 dark:border-gray-700
+                   rounded-full px-4 py-2 flex items-center shadow-sm"
+          >
             <CountryFlag :country="selectedBalance?.code" class="w-5 h-5 flex-shrink-0 mr-2" />
             <div class="flex items-center text-sm font-medium">
-              <span class="text-dbd-dark">1 Forevers {{ selectedBalance?.code }}</span>
-              <span class="text-dbd-gray mx-1">/</span>
-              <span class="text-dbd-primary">{{ selectedBalance?.usdRate }} USD</span>
+              <span class="text-dbd-dark dark:text-white">1 Forevers {{ selectedBalance?.code }}</span>
+              <span class="text-dbd-gray mx-1 dark:text-gray-400">/</span>
+              <span class="text-dbd-primary dark:text-blue-400">{{ selectedBalance?.usdRate }} USD</span>
             </div>
           </div>
         </div>
