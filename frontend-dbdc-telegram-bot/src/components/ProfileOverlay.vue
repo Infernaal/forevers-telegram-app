@@ -1,8 +1,14 @@
 <template>
-  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl">
+  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl min-h-screen">
+    <!-- Dropdown Wrapper -->
     <div
-      class="fixed inset-x-4 sm:inset-x-6 md:inset-x-8 lg:inset-x-12 xl:inset-x-20 2xl:inset-x-24 flex flex-col items-start z-[9999]"
-      :style="overlayStyle">
+      class="absolute inset-x-4 sm:inset-x-6 md:inset-x-8 lg:inset-x-12 xl:inset-x-20 2xl:inset-x-24
+            bottom-[calc(64px+env(safe-area-inset-bottom,0px)+16px)]
+            sm:bottom-[calc(72px+env(safe-area-inset-bottom,0px)+40px)]
+            md:bottom-[calc(88px+env(safe-area-inset-bottom,0px)+32px)]
+            lg:bottom-[calc(96px+env(safe-area-inset-bottom,0px)+24px)]
+            xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+28px)]
+            flex flex-col items-start z-[9999]">
 
       <!-- Dropdown Menu -->
       <div class="w-full
@@ -469,38 +475,26 @@
           </div>
         </div>
       </div>
+      <!-- Triangle Pointer -->
+      <div class="ml-6 sm:ml-10 md:ml-14 lg:ml-20 xl:ml-14 2xl:ml-30 mt-[-1px] mb-2">
+        <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px]
+                    border-l-transparent border-r-transparent border-t-[#09074E] drop-shadow-md"></div>
+      </div>
     </div>
-    <div
-      class="fixed w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px] border-l-transparent border-r-transparent border-t-[#09074E] drop-shadow-md"
-      :style="triangleStyle"></div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import CountryFlag from './CountryFlag.vue'
 
 // Props
-const props = defineProps({
+defineProps({
   isVisible: {
     type: Boolean,
     default: false
-  },
-  triggerPosition: {
-    type: Object,
-    default: () => ({ left: 0, width: 0 })
   }
 })
-
-const overlayStyle = {
-  bottom: 'calc(88px + env(safe-area-inset-bottom, 0px) + 15px)'
-}
-
-const triangleStyle = computed(() => ({
-  left: `${props.triggerPosition.left + props.triggerPosition.width / 2 - 12}px`,
-  bottom: 'calc(88px + env(safe-area-inset-bottom, 0px))',
-  marginBottom: '-1px'
-}))
 
 // Emits
 const emit = defineEmits(['close'])
