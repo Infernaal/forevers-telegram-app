@@ -8,14 +8,9 @@
     />
 
     <!-- Bottom Navigation -->
-    <div class="fixed left-0 right-0 bottom-0 z-[10001]
-            bg-white dark:bg-[#1b1b1b]
-            border-t border-black/10 shadow-[0_-4px_16px_rgba(0,0,0,0.08)]
-            rounded-t-2xl">
+    <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl sm:rounded-t-3xl shadow-[0_-4px_16px_rgba(0,0,0,0.08),0_-2px_6px_rgba(0,0,0,0.04)] border-t border-black/[0.06] z-[10001]">
       <!-- Navigation Content -->
-      <div class="flex items-center justify-center px-3
-              pt-[clamp(0.75rem,2vh,1.25rem)]
-              pb-[calc(0.25rem+env(safe-area-inset-bottom,0px))]">
+      <div class="flex items-center justify-center px-3 sm:px-4 pt-3 sm:pt-4 pb-[max(env(safe-area-inset-bottom),1rem)]"
         <!-- Navigation Items Container -->
         <div class="flex items-center justify-between w-full gap-2 sm:gap-4 px-2 sm:px-4">
 
