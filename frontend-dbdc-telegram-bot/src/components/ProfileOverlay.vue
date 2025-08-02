@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl min-h-screen">
+  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl min-h-[100vh]" style="top: 0; height: calc(100vh - var(--tg-viewport-height, 0px))">
     <!-- Dropdown Wrapper -->
     <div
       class="absolute inset-x-4 sm:inset-x-6 md:inset-x-8 lg:inset-x-12 xl:inset-x-20 2xl:inset-x-24
