@@ -23,7 +23,7 @@ export default {
         document.body.classList.toggle('tg-dark', scheme === 'dark')
         
         // Set theme colors
-        webapp.setHeaderColor('#FFFFFF')
+        webapp.setHeaderColor('#2019CE')
         webapp.setBackgroundColor('#FAFAFA')
       }
 
