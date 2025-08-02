@@ -18,6 +18,10 @@ export default {
         webapp.expand()
         webapp.disableVerticalSwipes()
 
+        // Theme support
+        const scheme = webapp.colorScheme
+        document.body.classList.toggle('tg-dark', scheme === 'dark')
+        
         // Set theme colors
         webapp.setHeaderColor('#FFFFFF')
         webapp.setBackgroundColor('#FAFAFA')
