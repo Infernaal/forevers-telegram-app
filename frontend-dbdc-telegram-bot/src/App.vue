@@ -16,9 +16,6 @@
 </template>
 
 <script>
-import { onMounted } from 'vue'
-
-<script>
 import { ref, onMounted } from 'vue'
 
 export default {
