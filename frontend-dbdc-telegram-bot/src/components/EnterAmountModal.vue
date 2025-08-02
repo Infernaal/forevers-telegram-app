@@ -249,8 +249,8 @@ const handleInput = (event) => {
   if (amount > maxAllowed) {
     inputError.value = true
     errorMessage.value = maxAllowed === 50000
-      ? Maximum amount allowed is ${maxAllowed.toLocaleString()}
-      : Amount cannot exceed available balance (${maxAllowed.toLocaleString()})
+      ? `Maximum amount allowed is ${maxAllowed.toLocaleString()}`
+      : `Amount cannot exceed available balance (${maxAllowed.toLocaleString()})`
     return
   } else {
     errorMessage.value = ''
@@ -293,8 +293,8 @@ const handleAddToCart = () => {
   if (amount > maxAllowed) {
     inputError.value = true
     errorMessage.value = maxAllowed === 50000
-      ? Maximum amount allowed is ${maxAllowed.toLocaleString()}
-      : Amount cannot exceed available balance (${maxAllowed.toLocaleString()})
+      ? `Maximum amount allowed is ${maxAllowed.toLocaleString()}`
+      : `Amount cannot exceed available balance (${maxAllowed.toLocaleString()})`
     return
   }
 
