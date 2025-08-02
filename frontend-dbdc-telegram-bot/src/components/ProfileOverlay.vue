@@ -688,14 +688,25 @@ const selectLanguage = (language) => {
   }
 }
 
-/* Tablet specific positioning */
-@media (min-width: 768px) and (max-width: 1023px) {
-  .tablet-triangle-position {
-    bottom: 20rem !important;
+/* Tablet and Desktop specific improvements */
+@media (min-width: 768px) {
+  .profile-overlay-container {
+    max-width: 480px;
+    margin: 0 auto;
   }
+}
 
-  .tablet-dropdown-position {
-    bottom: 7rem !important;
+@media (min-width: 1024px) {
+  .profile-overlay-container {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1280px) {
+  .profile-overlay-container {
+    max-width: 600px;
+    margin: 0 auto;
   }
 }
 
