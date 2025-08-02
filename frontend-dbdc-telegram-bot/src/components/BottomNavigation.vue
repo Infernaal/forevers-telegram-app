@@ -15,7 +15,7 @@
       <!-- Navigation Content -->
       <div class="flex items-center justify-center px-3
               pt-[clamp(0.75rem,2vh,1.25rem)]
-              pb-[calc(clamp(0.75rem,2vh,1.25rem)+env(safe-area-inset-bottom,0px))]">
+              pb-[calc(0.5rem+env(safe-area-inset-bottom,0px))]">
         <!-- Navigation Items Container -->
         <div class="flex items-center justify-between w-full gap-2 sm:gap-4 px-2 sm:px-4">
 
