@@ -5,7 +5,7 @@
       class="absolute inset-x-4 bottom-[calc(100px+env(safe-area-inset-bottom,0px))] md:bottom-[calc(110px+env(safe-area-inset-bottom,0px))] lg:bottom-[calc(120px+env(safe-area-inset-bottom,0px))] flex flex-col items-start z-[9999]">
 
       <!-- Dropdown Menu -->
-      <div class="w-full max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto
+      <div class="w-full
   bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
   border border-[#09074E] rounded-[20px] shadow-2xl
   backdrop-blur-[32px] flex flex-col overflow-hidden transition-all duration-300 ease-out
