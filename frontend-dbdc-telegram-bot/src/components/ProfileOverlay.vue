@@ -479,7 +479,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import CountryFlag from './CountryFlag.vue'
 
 // Props
@@ -508,7 +508,7 @@ const languages = ref([
   { code: 'FRA', name: 'Fran��ais', country: 'france' },
   { code: 'DEU', name: 'Deutsch', country: 'germany' },
   { code: 'ITA', name: 'Italiano', country: 'italy' },
-  { code: 'RUS', name: 'Русск��й', country: 'ukraine' },
+  { code: 'RUS', name: 'Русский', country: 'ukraine' },
   { code: 'CHN', name: '中��', country: 'china' },
   { code: 'JPN', name: '日本語', country: 'japan' },
   { code: 'KOR', name: '한국어', country: 'new zealand' },
