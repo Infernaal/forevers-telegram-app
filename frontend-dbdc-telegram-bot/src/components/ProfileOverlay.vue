@@ -511,6 +511,7 @@ const triangleStyle = computed(() => {
     left: `${offsetLeft}px`,
     bottom: `calc(${offsetBottom}px + env(safe-area-inset-bottom, 0px))`
   }
+}
 
 // Emits
 const emit = defineEmits(['close'])
