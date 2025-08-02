@@ -293,7 +293,7 @@ const updateProfileButtonPosition = () => {
     profileButtonPosition.left = profileRect.left
     profileButtonPosition.width = profileRect.width
     profileButtonPosition.bottom = window.innerHeight - navRect.top
-    profileButtonPosition.bottomOffset = navRect.height
+    profileButtonPosition.bottomOffset = window.innerHeight - navRect.top
   }
 }
   
