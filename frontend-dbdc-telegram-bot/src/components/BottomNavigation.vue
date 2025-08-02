@@ -19,7 +19,7 @@
             ref="profileButton"
             @click="toggleProfile"
             :class="[
-              'flex flex-col items-center justify-center flex-1 gap-1 sm:gap-2 p-2 sm:p-3 md:p-4 text-center transition-all duration-200 ease-out transform-gpu active:scale-95 active:bg-black/[0.02] active:rounded-xl',
+              'flex flex-col items-center justify-center flex-1 gap-1 p-2 text-center transition-all duration-200 ease-out transform-gpu active:scale-95 active:bg-black/[0.02] active:rounded-xl min-h-[60px]',
               isProfileMenuOpen ? 'text-blue-700' : 'text-gray-600'
             ]"
           >
