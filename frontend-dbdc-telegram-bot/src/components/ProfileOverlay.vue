@@ -477,18 +477,19 @@
           </div>
         </div>
       </div>
-   <div
-     class="fixed z-[9999]"  <!-- fixed вместо absolute -->
-     :style="{
-       left: `${triggerPosition.left + triggerPosition.width / 2 - 12}px`,
-       bottom: `calc(${triggerPosition.bottom}px + env(safe-area-inset-bottom,0px))`
-     }"
-   >
-     <div class="w-0 h-0
-                 border-l-[12px] border-r-[12px] border-t-[15px]
-                 border-l-transparent border-r-transparent
-                 border-t-[#09074E] drop-shadow-md"></div>
-   </div>
+     <div
+       class="fixed z-[9999]"  <!-- fixed вместо absolute -->
+       :style="{
+         left: `${triggerPosition.left + triggerPosition.width / 2 - 12}px`,
+         bottom: `calc(${triggerPosition.bottom}px + env(safe-area-inset-bottom,0px))`
+       }"
+     >
+       <div class="w-0 h-0
+                   border-l-[12px] border-r-[12px] border-t-[15px]
+                   border-l-transparent border-r-transparent
+                   border-t-[#09074E] drop-shadow-md"></div>
+     </div>
+    </div>
   </div>
 </template>
 
