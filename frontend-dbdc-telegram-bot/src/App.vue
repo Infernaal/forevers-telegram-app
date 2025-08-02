@@ -54,8 +54,9 @@ export default {
   min-height: 100vh;
   min-height: calc(var(--vh, 1vh) * 100);
 
-  /* Background and appearance */
-  background: white;
+  /* 🟢 Поддержка Telegram темы */
+  background: var(--tg-theme-bg-color, #ffffff);
+  color: var(--tg-theme-text-color, #000000);
 
   /* Enhanced scroll and overscroll prevention */
   overflow: hidden;
@@ -105,5 +106,9 @@ body, html {
   touch-action: pan-y;
   height: 100%;
   width: 100%;
+  
+  /* 🟢 Telegram theme support */
+  background-color: var(--tg-theme-bg-color, #ffffff);
+  color: var(--tg-theme-text-color, #000000);
 }
 </style>
