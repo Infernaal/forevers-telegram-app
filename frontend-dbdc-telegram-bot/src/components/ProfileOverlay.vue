@@ -829,24 +829,24 @@ const selectLanguage = (language) => {
 /* Very small screens */
 @media (max-height: 500px) {
   .profile-overlay-container {
-    max-height: calc(100vh - 110px - env(safe-area-inset-bottom));
+    max-height: calc(var(--tg-viewport-height, 100vh) - 100px - env(safe-area-inset-bottom));
   }
 
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(20vh) !important;
-    min-height: 120px !important;
+    max-height: calc(18vh) !important;
+    min-height: 110px !important;
   }
 }
 
 /* Landscape orientation */
 @media (max-height: 450px) and (orientation: landscape) {
   .profile-overlay-container {
-    max-height: calc(100vh - 100px - env(safe-area-inset-bottom));
+    max-height: calc(var(--tg-viewport-height, 100vh) - 90px - env(safe-area-inset-bottom));
   }
 
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(15vh) !important;
-    min-height: 100px !important;
+    max-height: calc(12vh) !important;
+    min-height: 90px !important;
   }
 }
 
