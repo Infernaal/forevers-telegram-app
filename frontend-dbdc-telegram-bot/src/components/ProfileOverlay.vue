@@ -483,10 +483,14 @@ import { ref } from 'vue'
 import CountryFlag from './CountryFlag.vue'
 
 // Props
-defineProps({
+const props = defineProps({
   isVisible: {
     type: Boolean,
     default: false
+  },
+  triggerPosition: {
+    type: Object,
+    default: () => ({ left: 0, width: 0 })
   }
 })
 
@@ -504,7 +508,7 @@ const languages = ref([
   { code: 'FRA', name: 'Fran��ais', country: 'france' },
   { code: 'DEU', name: 'Deutsch', country: 'germany' },
   { code: 'ITA', name: 'Italiano', country: 'italy' },
-  { code: 'RUS', name: 'Русский', country: 'ukraine' },
+  { code: 'RUS', name: 'Русск��й', country: 'ukraine' },
   { code: 'CHN', name: '中��', country: 'china' },
   { code: 'JPN', name: '日本語', country: 'japan' },
   { code: 'KOR', name: '한국어', country: 'new zealand' },
