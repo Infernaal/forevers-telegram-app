@@ -817,12 +817,12 @@ const selectLanguage = (language) => {
 /* Small screens optimization */
 @media (max-height: 600px) {
   .profile-overlay-container {
-    max-height: calc(100vh - 130px - env(safe-area-inset-bottom));
+    max-height: calc(var(--tg-viewport-height, 100vh) - 120px - env(safe-area-inset-bottom));
   }
 
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(25vh) !important;
-    min-height: 150px !important;
+    max-height: calc(22vh) !important;
+    min-height: 140px !important;
   }
 }
 
