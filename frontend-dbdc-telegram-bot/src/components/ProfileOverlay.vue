@@ -546,6 +546,16 @@ onMounted(() => {
   }
 })
 
+onUnmounted(() => {
+  window.removeEventListener('resize', updateTelegramViewport)
+  window.removeEventListener('orientationchange', updateTelegramViewport)
+
+  // Telegram WebApp cleanup
+  if (window.Telegram && window.Telegram.WebApp) {
+    window.Telegram.WebApp.offEvent('viewportChanged', updateTelegramViewport)
+  }
+})
+
 // Methods
 const handleMenuClick = (menuItem) => {
   console.log(`Menu clicked: ${menuItem}`)
