@@ -8,7 +8,7 @@
     />
 
     <!-- Bottom Navigation -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl sm:rounded-t-3xl shadow-[0_-4px_16px_rgba(0,0,0,0.08),0_-2px_6px_rgba(0,0,0,0.04)] border-t border-black/[0.06] z-[10001]">
+    <div ref="bottomNav" class="bottom-navigation fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl sm:rounded-t-3xl shadow-[0_-4px_16px_rgba(0,0,0,0.08),0_-2px_6px_rgba(0,0,0,0.04)] border-t border-black/[0.06] z-[10001]">
       <!-- Navigation Content -->
       <div class="flex items-center justify-center px-3 sm:px-4 pt-3 sm:pt-4 pb-[max(var(--tg-content-safe-area-inset-bottom),1rem)]">
         <!-- Navigation Items Container -->
@@ -280,14 +280,25 @@ const navigateTo = (tab) => {
   router.push(routeMap[tab])
 }
 
+const bottomNav = ref(null)
+
 const updateProfileButtonPosition = () => {
-  if (profileButton.value) {
-    const rect = profileButton.value.getBoundingClientRect()
-    profileButtonPosition.left = rect.left
-    profileButtonPosition.width = rect.width
+  if (profileButton.value && bottomNav.value) {
+    const profileRect = profileButton.value.getBoundingClientRect()
+    const navRect = bottomNav.value.getBoundingClientRect()
+
+    profileButtonPosition.left = profileRect.left
+    profileButtonPosition.width = profileRect.width
+    profileButtonPosition.bottom = window.innerHeight - navRect.top // или navRect.height
   }
 }
 
+const profileButtonPosition = reactive({
+  left: 0,
+  width: 0,
+  bottom: 0
+})
+  
 const toggleProfile = () => {
   isProfileMenuOpen.value = !isProfileMenuOpen.value
 
