@@ -804,7 +804,14 @@ const selectLanguage = (language) => {
 
 /* Adaptive height for ProfileOverlay positioned above BottomNavigation */
 .profile-overlay-container {
-  max-height: calc(100vh - 150px - env(safe-area-inset-bottom));
+  max-height: calc(100vh - 160px - env(safe-area-inset-bottom));
+}
+
+/* Telegram WebApp specific adjustments */
+@media (max-width: 767px) {
+  .profile-overlay-container {
+    max-height: calc(var(--tg-viewport-height, 100vh) - 150px - env(safe-area-inset-bottom));
+  }
 }
 
 /* Small screens optimization */
