@@ -726,27 +726,7 @@ const selectLanguage = (language) => {
   }
 }
 
-/* Tablet and Desktop specific improvements */
-@media (min-width: 768px) {
-  .profile-overlay-container {
-    max-width: 480px;
-    margin: 0 auto;
-  }
-}
-
-@media (min-width: 1024px) {
-  .profile-overlay-container {
-    max-width: 520px;
-    margin: 0 auto;
-  }
-}
-
-@media (min-width: 1280px) {
-  .profile-overlay-container {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-}
+/* Tablet and Desktop specific improvements - maintain full width */
 
 /* Copied State Styling - matching HoldersView */
 .id-copied-state {
