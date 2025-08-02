@@ -519,20 +519,7 @@ const languages = ref([
 
 const selectedLanguage = ref(languages.value[0])
 
-// Calculate triangle position based on Profile button position
-const trianglePosition = computed(() => {
-  if (!props.triggerPosition.left || !props.triggerPosition.width) {
-    return '24px' // fallback position
-  }
-
-  // Calculate center of Profile button minus container padding and triangle width
-  const profileButtonCenter = props.triggerPosition.left + (props.triggerPosition.width / 2)
-  const containerPadding = 16 // inset-x-4 = 16px
-  const triangleWidth = 12 // half of triangle width
-
-  const position = profileButtonCenter - containerPadding - triangleWidth
-  return `${Math.max(12, position)}px` // minimum 12px from edge
-})
+// Triangle is now positioned with fixed left margin for consistent alignment
 
 // Set Telegram WebApp viewport height
 onMounted(() => {
