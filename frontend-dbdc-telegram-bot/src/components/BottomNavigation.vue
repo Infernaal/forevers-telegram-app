@@ -8,7 +8,7 @@
     />
 
     <!-- Bottom Navigation -->
-    <div class="fixed left-0 right-0 bottom-[env(safe-area-inset-bottom,0px)] z-[10001]
+    <div class="fixed left-0 right-0 bottom-0 z-[10001]
             bg-white dark:bg-[#1b1b1b]
             border-t border-black/10 shadow-[0_-4px_16px_rgba(0,0,0,0.08)]
             rounded-t-2xl">
