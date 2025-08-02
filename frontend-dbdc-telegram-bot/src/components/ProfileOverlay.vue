@@ -470,7 +470,7 @@
         </div>
       </div>
       <!-- Triangle Pointer -->
-      <div :style="{marginLeft: trianglePosition}" class="mt-[-1px] mb-2">
+      <div class="flex justify-start ml-4 md:ml-6 lg:ml-8 mt-[-1px] mb-2">
         <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px]
                     border-l-transparent border-r-transparent border-t-[#09074E] drop-shadow-md"></div>
       </div>
