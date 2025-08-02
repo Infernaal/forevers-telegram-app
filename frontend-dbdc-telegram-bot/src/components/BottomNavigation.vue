@@ -227,7 +227,7 @@
 </template>
 
 <script setup>
-import { ref, watch, nextTick, onMounted, onUnmounted, reactive } from 'vue'
+import { ref, watch, nextTick, onMounted, onUnmounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useCart } from '../composables/useCart.js'
 import ProfileOverlay from './ProfileOverlay.vue'
@@ -242,10 +242,7 @@ const { cartItemsCount } = useCart()
 // Profile menu state
 const isProfileMenuOpen = ref(false)
 const profileButton = ref(null)
-const profileButtonPosition = reactive({
-  left: 0,
-  width: 0
-})
+const profileButtonPosition = ref({ left: 0, width: 0 })
 
 // Computed active tab based on current route
 const activeTab = ref('wallet')
@@ -283,37 +280,48 @@ const navigateTo = (tab) => {
 const updateProfileButtonPosition = () => {
   if (profileButton.value) {
     const rect = profileButton.value.getBoundingClientRect()
-    profileButtonPosition.left = rect.left
-    profileButtonPosition.width = rect.width
+    profileButtonPosition.value = {
+      left: rect.left,
+      width: rect.width
+    }
   }
 }
 
-const toggleProfile = () => {
-  isProfileMenuOpen.value = !isProfileMenuOpen.value
+const toggleProfile = async () => {
+  console.log('Profile toggle clicked, current state:', isProfileMenuOpen.value)
 
+  if (!isProfileMenuOpen.value) {
+    // Calculate position before opening
+    await nextTick()
+    updateProfileButtonPosition()
+  }
+
+  isProfileMenuOpen.value = !isProfileMenuOpen.value
+  console.log('Profile toggle new state:', isProfileMenuOpen.value)
+
+  // Telegram WebApp haptic feedback
   if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.HapticFeedback) {
     window.Telegram.WebApp.HapticFeedback.impactOccurred('medium')
   }
 }
 
 const closeProfileMenu = () => {
+  console.log('Profile menu close requested')
   isProfileMenuOpen.value = false
+  console.log('Profile menu closed, state:', isProfileMenuOpen.value)
 }
 
-watch(isProfileMenuOpen, async (val) => {
-  if (val) {
-    await nextTick()
+// Window resize handler
+const handleResize = () => {
+  if (isProfileMenuOpen.value) {
     updateProfileButtonPosition()
   }
-})
-
-const handleResize = () => {
-  updateProfileButtonPosition()
 }
 
+// Lifecycle hooks
 onMounted(() => {
-  updateProfileButtonPosition()
   window.addEventListener('resize', handleResize)
+  updateProfileButtonPosition()
 })
 
 onUnmounted(() => {
