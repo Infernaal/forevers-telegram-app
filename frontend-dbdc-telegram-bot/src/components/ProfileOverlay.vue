@@ -10,7 +10,10 @@
             lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+20px)]
             xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+20px)]
             2xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+20px)]
-            flex flex-col items-start z-[9999]">
+            flex flex-col items-start z-[9999]"
+      :style="{
+          bottom: `calc(${triggerPosition.bottom}px + env(safe-area-inset-bottom,0px) + 20px)`
+      }">
 
       <!-- Dropdown Menu -->
       <div class="w-full
@@ -475,9 +478,16 @@
         </div>
       </div>
       <!-- Triangle Pointer -->
-      <div class="ml-6 sm:ml-10 md:ml-14 lg:ml-20 xl:ml-14 2xl:ml-30 mt-[-1px] flex-shrink-0">
-        <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px]
-                    border-l-transparent border-r-transparent border-t-[#09074E] drop-shadow-md"></div>
+      <div
+        class="absolute"
+        :style="{
+          left: `${triggerPosition.left + triggerPosition.width / 2 - 12}px`,
+          bottom: `calc(${triggerPosition.bottom}px + env(safe-area-inset-bottom,0px))`
+        }">
+        <div class="w-0 h-0
+                    border-l-[12px] border-r-[12px] border-t-[15px]
+                    border-l-transparent border-r-transparent
+                    border-t-[#09074E] drop-shadow-md"></div>
       </div>
     </div>
   </div>
@@ -492,6 +502,10 @@ defineProps({
   isVisible: {
     type: Boolean,
     default: false
+  },
+  triggerPosition: {
+    type: Object,
+    required: true
   }
 })
 
