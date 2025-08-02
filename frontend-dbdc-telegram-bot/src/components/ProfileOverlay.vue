@@ -1,14 +1,8 @@
 <template>
-  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl min-h-screen">
+  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl min-h-[100vh]" style="top: 0; height: calc(100vh - var(--tg-viewport-height, 0px))">
     <!-- Dropdown Wrapper -->
     <div
-      class="absolute inset-x-4 sm:inset-x-6 md:inset-x-8 lg:inset-x-12 xl:inset-x-20 2xl:inset-x-24
-            bottom-[calc(64px+env(safe-area-inset-bottom,0px)+16px)]
-            sm:bottom-[calc(72px+env(safe-area-inset-bottom,0px)+40px)]
-            md:bottom-[calc(88px+env(safe-area-inset-bottom,0px)+32px)]
-            lg:bottom-[calc(96px+env(safe-area-inset-bottom,0px)+24px)]
-            xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+28px)]
-            flex flex-col items-start z-[9999]">
+      class="absolute inset-x-4 bottom-[calc(90px+env(safe-area-inset-bottom,0px)+1px)] flex flex-col items-start z-[9999]">
 
       <!-- Dropdown Menu -->
       <div class="w-full
@@ -476,7 +470,7 @@
         </div>
       </div>
       <!-- Triangle Pointer -->
-      <div class="ml-6 sm:ml-10 md:ml-14 lg:ml-20 xl:ml-14 2xl:ml-30 mt-[-1px] mb-2">
+      <div :style="{marginLeft: trianglePosition}" class="mt-[-1px] mb-2">
         <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px]
                     border-l-transparent border-r-transparent border-t-[#09074E] drop-shadow-md"></div>
       </div>
@@ -485,14 +479,18 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import CountryFlag from './CountryFlag.vue'
 
 // Props
-defineProps({
+const props = defineProps({
   isVisible: {
     type: Boolean,
     default: false
+  },
+  triggerPosition: {
+    type: Object,
+    default: () => ({ left: 0, width: 0 })
   }
 })
 
@@ -520,6 +518,31 @@ const languages = ref([
 ])
 
 const selectedLanguage = ref(languages.value[0])
+
+// Calculate triangle position based on Profile button position
+const trianglePosition = computed(() => {
+  if (!props.triggerPosition.left || !props.triggerPosition.width) {
+    return '24px' // fallback position
+  }
+
+  // Calculate center of Profile button minus container padding and triangle width
+  const profileButtonCenter = props.triggerPosition.left + (props.triggerPosition.width / 2)
+  const containerPadding = 16 // inset-x-4 = 16px
+  const triangleWidth = 12 // half of triangle width
+
+  const position = profileButtonCenter - containerPadding - triangleWidth
+  return `${Math.max(12, position)}px` // minimum 12px from edge
+})
+
+// Set Telegram WebApp viewport height
+onMounted(() => {
+  if (window.Telegram && window.Telegram.WebApp) {
+    const tgViewportHeight = window.Telegram.WebApp.viewportHeight
+    if (tgViewportHeight) {
+      document.documentElement.style.setProperty('--tg-viewport-height', `${tgViewportHeight}px`)
+    }
+  }
+})
 
 // Methods
 const handleMenuClick = (menuItem) => {

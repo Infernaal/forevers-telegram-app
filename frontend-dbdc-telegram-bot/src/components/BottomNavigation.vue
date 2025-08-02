@@ -8,18 +8,18 @@
     />
 
     <!-- Bottom Navigation -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl sm:rounded-t-3xl shadow-[0_-4px_16px_rgba(0,0,0,0.08),0_-2px_6px_rgba(0,0,0,0.04)] border-t border-black/[0.06] z-[10001]">
+    <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-[0_-4px_16px_rgba(0,0,0,0.08),0_-2px_6px_rgba(0,0,0,0.04)] border-t border-black/[0.06] z-[10001]">
       <!-- Navigation Content -->
-      <div class="flex items-center justify-center px-3 sm:px-4 pt-3 sm:pt-4 pb-[max(env(safe-area-inset-bottom),1rem)]">
+      <div class="flex items-center justify-center px-3 pt-3 pb-[max(env(safe-area-inset-bottom),1rem)]">
         <!-- Navigation Items Container -->
-        <div class="flex items-center justify-between w-full gap-2 sm:gap-4 px-2 sm:px-4">
+        <div class="flex items-center justify-between w-full gap-2 px-2">
 
           <!-- Profile -->
           <button
             ref="profileButton"
             @click="toggleProfile"
             :class="[
-              'flex flex-col items-center justify-center flex-1 gap-1 sm:gap-2 p-2 sm:p-3 md:p-4 text-center transition-all duration-200 ease-out transform-gpu active:scale-95 active:bg-black/[0.02] active:rounded-xl',
+              'flex flex-col items-center justify-center flex-1 gap-1 p-2 text-center transition-all duration-200 ease-out transform-gpu active:scale-95 active:bg-black/[0.02] active:rounded-xl min-h-[60px]',
               isProfileMenuOpen ? 'text-blue-700' : 'text-gray-600'
             ]"
           >
@@ -78,7 +78,7 @@
           <button
             @click="navigateTo('wallet')"
             :class="[
-              'flex flex-col items-center justify-center flex-1 gap-1 sm:gap-2 p-2 sm:p-3 md:p-4 text-center transition-all duration-200 ease-out transform-gpu active:scale-95 active:bg-black/[0.02] active:rounded-xl',
+              'flex flex-col items-center justify-center flex-1 gap-1 p-2 text-center transition-all duration-200 ease-out transform-gpu active:scale-95 active:bg-black/[0.02] active:rounded-xl min-h-[60px]',
               activeTab === 'wallet' ? 'text-blue-700' : 'text-gray-600'
             ]"
           >
@@ -109,7 +109,7 @@
           <button
             @click="navigateTo('favorites')"
             :class="[
-              'flex flex-col items-center justify-center flex-1 gap-1 sm:gap-2 p-2 sm:p-3 md:p-4 text-center transition-all duration-200 ease-out transform-gpu active:scale-95 active:bg-black/[0.02] active:rounded-xl',
+              'flex flex-col items-center justify-center flex-1 gap-1 p-2 text-center transition-all duration-200 ease-out transform-gpu active:scale-95 active:bg-black/[0.02] active:rounded-xl min-h-[60px]',
               activeTab === 'favorites' ? 'text-blue-700' : 'text-gray-600'
             ]"
           >
@@ -143,7 +143,7 @@
           <button
             @click="navigateTo('cart')"
             :class="[
-              'flex flex-col items-center justify-center flex-1 gap-1 sm:gap-2 p-2 sm:p-3 md:p-4 text-center transition-all duration-200 ease-out transform-gpu active:scale-95 active:bg-black/[0.02] active:rounded-xl',
+              'flex flex-col items-center justify-center flex-1 gap-1 p-2 text-center transition-all duration-200 ease-out transform-gpu active:scale-95 active:bg-black/[0.02] active:rounded-xl min-h-[60px]',
               activeTab === 'cart' ? 'text-blue-700' : 'text-gray-600'
             ]"
           >
@@ -194,7 +194,7 @@
           <button
             @click="navigateTo('holders')"
             :class="[
-              'flex flex-col items-center justify-center flex-1 gap-1 sm:gap-2 p-2 sm:p-3 md:p-4 text-center transition-all duration-200 ease-out transform-gpu active:scale-95 active:bg-black/[0.02] active:rounded-xl',
+              'flex flex-col items-center justify-center flex-1 gap-1 p-2 text-center transition-all duration-200 ease-out transform-gpu active:scale-95 active:bg-black/[0.02] active:rounded-xl min-h-[60px]',
               activeTab === 'holders' ? 'text-blue-700' : 'text-gray-600'
             ]"
           >
