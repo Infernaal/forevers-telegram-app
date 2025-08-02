@@ -497,8 +497,8 @@ const overlayStyle = {
 }
 
 const triangleStyle = computed(() => {
-  const offsetLeft = triggerPosition.left + triggerPosition.width / 2 - 12
-  const offsetBottom = triggerPosition.bottom ?? 88
+  const offsetLeft = props.triggerPosition.left + props.triggerPosition.width / 2 - 12
+  const offsetBottom = props.triggerPosition.bottom ?? 88
 
   return {
     left: `${offsetLeft}px`,
