@@ -22,18 +22,18 @@
       >
         <!-- Title -->
         <div class="flex justify-center items-center pt-4 pb-2">
-          <h2 class="text-[18px] font-semibold text-dbd-dark">
+          <h2 class="text-[18px] font-semibold :class="isDarkTheme ? 'text-white' : 'text-dbd-dark'">
             Enter Amount
           </h2>
         </div>
 
         <!-- Exchange Rate Section -->
         <div class="flex justify-center mb-4">
-          <div class="bg-white rounded-full border border-gray-100 px-4 py-2 flex items-center shadow-sm">
+          <div class="bg-white rounded-full border px-4 py-2 flex items-center shadow-sm :class="isDarkTheme ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-100'">
             <CountryFlag :country="selectedBalance?.code" class="w-5 h-5 flex-shrink-0 mr-2" />
             <div class="flex items-center text-sm font-medium">
-              <span class="text-dbd-dark">1 Forevers {{ selectedBalance?.code }}</span>
-              <span class="text-dbd-gray mx-1">/</span>
+              <span :class="isDarkTheme ? 'text-white' : 'text-dbd-dark'">1 Forevers {{ selectedBalance?.code }}</span>
+              <span class="mx-1" :class="isDarkTheme ? 'text-gray-400' : 'text-dbd-gray'">/</span>
               <span class="text-dbd-primary">{{ selectedBalance?.usdRate }} USD</span>
             </div>
           </div>
@@ -103,8 +103,17 @@
                 </svg>
               </div>
               <div class="flex flex-col ml-2 flex-1 min-w-0">
-                <span class="text-dbd-gray text-xs font-medium whitespace-nowrap">Dollars</span>
-                <div class="text-sm font-semibold text-dbd-gray whitespace-nowrap overflow-hidden text-ellipsis" :title="'$' + calculatedDollars">
+                <span
+                  class="text-xs font-medium whitespace-nowrap"
+                  :class="isDarkTheme ? 'text-gray-300' : 'text-dbd-gray'"
+                >
+                  Dollars
+                </span>
+                <div
+                  class="text-sm font-semibold whitespace-nowrap overflow-hidden text-ellipsis"
+                  :class="isDarkTheme ? 'text-white' : 'text-dbd-gray'"
+                  :title="'$' + calculatedDollars"
+                >
                   ${{ calculatedDollars }}
                 </div>
               </div>
@@ -180,6 +189,14 @@ const errorMessage = ref('')
 const isInputFocused = ref(false)
 let errorTimeout = null
 
+const isDarkTheme = ref(false)
+
+onMounted(() => {
+  if (window.Telegram?.WebApp?.colorScheme === 'dark') {
+    isDarkTheme.value = true
+  }
+})
+  
 const calculatedDollars = computed(() => {
   if (!inputValue.value || !props.selectedBalance?.usdRate) {
     return '1,000.00'
@@ -565,27 +582,5 @@ button:active {
 .bg-gradient-to-r:disabled {
   opacity: 0.5;
   box-shadow: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  .text-dbd-dark {
-    color: #ffffff !important;
-  }
-
-  .text-dbd-gray {
-    color: #aaaaaa !important;
-  }
-
-  .bg-white {
-    background-color: #2a2a2a !important;
-  }
-
-  .border-gray-100 {
-    border-color: #444 !important;
-  }
-
-  .bg-gray-100 {
-    background-color: #333 !important;
-  }
 }
 </style>
