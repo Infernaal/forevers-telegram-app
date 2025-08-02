@@ -49,7 +49,7 @@
     </div>
 
     <!-- Bottom Section -->
-    <div class="bg-white px-3 sm:px-4 md:px-5 lg:px-6 pt-3 sm:pt-4 md:pt-5 lg:pt-6 pb-[max(env(safe-area-inset-bottom),1rem)] border-t border-black/5">
+    <div class="bg-white px-3 sm:px-4 md:px-5 lg:px-6 pt-3 sm:pt-4 md:pt-5 lg:pt-6 pb-[max(var(--tg-content-safe-area-inset-bottom),1rem)] border-t border-black/5">
       <button @click="handleStart" class="w-full h-12 sm:h-13 md:h-14 lg:h-15 bg-gradient-to-r from-dbd-primary to-[#473FFF] border-0 rounded-full text-white font-bold text-sm sm:text-base md:text-lg lg:text-xl font-montserrat cursor-pointer transition-all duration-200 ease-out shadow-lg hover:shadow-xl active:scale-98 outline-none touch-manipulation">
         Start
       </button>
