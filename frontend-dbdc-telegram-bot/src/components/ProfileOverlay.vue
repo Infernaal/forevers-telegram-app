@@ -852,20 +852,35 @@ const selectLanguage = (language) => {
 
 /* Desktop and tablet specific constraints */
 @media (min-width: 768px) {
+  .profile-overlay-container {
+    max-height: calc(100vh - 180px - env(safe-area-inset-bottom));
+  }
+
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(35vh) !important;
+    max-height: calc(32vh) !important;
+    min-height: 200px !important;
   }
 }
 
 @media (min-width: 1024px) {
+  .profile-overlay-container {
+    max-height: calc(100vh - 200px - env(safe-area-inset-bottom));
+  }
+
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(30vh) !important;
+    max-height: calc(28vh) !important;
+    min-height: 220px !important;
   }
 }
 
 @media (min-width: 1280px) {
+  .profile-overlay-container {
+    max-height: calc(100vh - 220px - env(safe-area-inset-bottom));
+  }
+
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(28vh) !important;
+    max-height: calc(25vh) !important;
+    min-height: 240px !important;
   }
 }
 </style>
