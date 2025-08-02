@@ -1,23 +1,16 @@
 <template>
-  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl min-h-screen telegram-webapp-overlay">
-    <!-- Dropdown Wrapper -->
+  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl">
     <div
-      class="absolute
-            inset-x-4 sm:inset-x-6 md:inset-x-8 lg:inset-x-12 xl:inset-x-20 2xl:inset-x-24
-            bottom-[calc(88px+env(safe-area-inset-bottom,0px)+20px)]
-            sm:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+20px)]
-            md:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+20px)]
-            lg:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+20px)]
-            xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+20px)]
-            2xl:bottom-[calc(104px+env(safe-area-inset-bottom,0px)+20px)]
-            flex flex-col items-start z-[9999]">
+      class="fixed inset-x-4 sm:inset-x-6 md:inset-x-8 lg:inset-x-12 xl:inset-x-20 2xl:inset-x-24 flex flex-col items-start z-[9999]"
+      :style="overlayStyle">
 
       <!-- Dropdown Menu -->
       <div class="w-full
-                  bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
-                  border border-[#09074E] rounded-[20px] shadow-2xl
-                  backdrop-blur-[32px] flex flex-col overflow-hidden transition-all duration-300 ease-out
-                  profile-overlay-container max-h-[calc(100vh-160px)]">
+  bg-gradient-to-r from-[#120B81] via-[#09074E] to-[#09074E]
+  border border-[#09074E] rounded-[20px] shadow-2xl
+  backdrop-blur-[32px] flex flex-col overflow-hidden transition-all duration-300 ease-out
+  profile-overlay-container
+  max-h-[calc(100vh-120px)]">
         <div class="py-4 px-4 sm:px-6 md:px-6 lg:px-8 xl:px-10 text-white flex flex-col relative z-10 h-full">
           <!-- Background -->
           <div class="absolute inset-0 bg-gradient-to-br from-[#120B81] via-[#09074E] to-[#09074E] border border-[#09074E] backdrop-blur-[40px] z-0 rounded-[20px]"></div>
@@ -100,21 +93,23 @@
                       [-webkit-overflow-scrolling:touch] [scroll-behavior:smooth]
                       [overscroll-behavior:contain] [overscroll-behavior-y:contain]
                       px-0 xs:px-1 sm:px-2 py-1 xs:py-1 sm:py-1 md:py-1 lg:py-1
-                      touch-manipulation max-h-[200px] xs:max-h-[220px] sm:max-h-[240px]">
+                      touch-manipulation
+                      max-h-[calc(40vh)] sm:max-h-[calc(45vh)] md:max-h-[calc(35vh)] lg:max-h-[calc(30vh)] xl:max-h-[calc(28vh)]
+                      min-h-[180px] sm:min-h-[200px] md:min-h-[220px] lg:min-h-[240px] xl:min-h-[260px]">
             
             <!-- Calculator -->
             <div class="flex items-center
                         gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-3.5
                         px-2 xs:px-3 sm:px-4 md:px-4.5 lg:px-5
-                        py-1 xs:py-1.5 sm:py-1.5 md:py-1.5 lg:py-1.5
-                        h-8 xs:h-9 sm:h-10 md:h-9 lg:h-9
+                        py-2 xs:py-2.5 sm:py-2.5 md:py-2.5 lg:py-2.5
+                        h-10 xs:h-11 sm:h-12 md:h-11 lg:h-11
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
                         mb-2 xs:mb-2.5 sm:mb-3 md:mb-4 lg:mb-5 xl:mb-6
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('calculator')">
-              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-10 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-10
+              <div class="w-9 xs:w-10 sm:w-11 md:w-11 lg:w-11 h-9 xs:h-10 sm:h-11 md:h-11 lg:h-11
                           bg-[#3A33D3] border border-white border-opacity-30
                           rounded-full flex items-center justify-center flex-shrink-0
                           transition-all duration-300 hover:bg-[#4A43E3] hover:scale-110">
@@ -129,15 +124,15 @@
             <div class="flex items-center
                         gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-3.5
                         px-2 xs:px-3 sm:px-4 md:px-4.5 lg:px-5
-                        py-1 xs:py-1.5 sm:py-1.5 md:py-1.5 lg:py-1.5
-                        h-8 xs:h-9 sm:h-10 md:h-9 lg:h-9
+                        py-2 xs:py-2.5 sm:py-2.5 md:py-2.5 lg:py-2.5
+                        h-10 xs:h-11 sm:h-12 md:h-11 lg:h-11
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
                         mb-2 xs:mb-2.5 sm:mb-3 md:mb-4 lg:mb-5 xl:mb-6
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('ambassador')">
-              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-10 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-10
+              <div class="w-9 xs:w-10 sm:w-11 md:w-11 lg:w-11 h-9 xs:h-10 sm:h-11 md:h-11 lg:h-11
                           bg-[#3A33D3] border border-white border-opacity-30
                           rounded-full flex items-center justify-center flex-shrink-0
                           transition-all duration-300 hover:bg-[#4A43E3] hover:scale-110">
@@ -152,15 +147,15 @@
             <div class="flex items-center
                         gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-3.5
                         px-2 xs:px-3 sm:px-4 md:px-4.5 lg:px-5
-                        py-1 xs:py-1.5 sm:py-1.5 md:py-1.5 lg:py-1.5
-                        h-8 xs:h-9 sm:h-10 md:h-9 lg:h-9
+                        py-2 xs:py-2.5 sm:py-2.5 md:py-2.5 lg:py-2.5
+                        h-10 xs:h-11 sm:h-12 md:h-11 lg:h-11
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
                         mb-2 xs:mb-2.5 sm:mb-3 md:mb-4 lg:mb-5 xl:mb-6
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('verification')">
-              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-10 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-10
+              <div class="w-9 xs:w-10 sm:w-11 md:w-11 lg:w-11 h-9 xs:h-10 sm:h-11 md:h-11 lg:h-11
                           bg-[#3A33D3] border border-white border-opacity-30
                           rounded-full flex items-center justify-center flex-shrink-0
                           transition-all duration-300 hover:bg-[#4A43E3] hover:scale-110">
@@ -185,15 +180,15 @@
             <div class="flex items-center
                         gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-3.5
                         px-2 xs:px-3 sm:px-4 md:px-4.5 lg:px-5
-                        py-1 xs:py-1.5 sm:py-1.5 md:py-1.5 lg:py-1.5
-                        h-8 xs:h-9 sm:h-10 md:h-9 lg:h-9
+                        py-2 xs:py-2.5 sm:py-2.5 md:py-2.5 lg:py-2.5
+                        h-10 xs:h-11 sm:h-12 md:h-11 lg:h-11
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
                         mb-2 xs:mb-2.5 sm:mb-3 md:mb-4 lg:mb-5 xl:mb-6
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('security')">
-              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-10 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-10
+              <div class="w-9 xs:w-10 sm:w-11 md:w-11 lg:w-11 h-9 xs:h-10 sm:h-11 md:h-11 lg:h-11
                           bg-[#3A33D3] border border-white border-opacity-30
                           rounded-full flex items-center justify-center flex-shrink-0
                           transition-all duration-300 hover:bg-[#4A43E3] hover:scale-110">
@@ -208,15 +203,15 @@
             <div class="flex items-center
                         gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-3.5
                         px-2 xs:px-3 sm:px-4 md:px-4.5 lg:px-5
-                        py-1 xs:py-1.5 sm:py-1.5 md:py-1.5 lg:py-1.5
-                        h-8 xs:h-9 sm:h-10 md:h-9 lg:h-9
+                        py-2 xs:py-2.5 sm:py-2.5 md:py-2.5 lg:py-2.5
+                        h-10 xs:h-11 sm:h-12 md:h-11 lg:h-11
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
                         mb-2 xs:mb-2.5 sm:mb-3 md:mb-4 lg:mb-5 xl:mb-6
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('settings')">
-              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-10 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-10
+              <div class="w-9 xs:w-10 sm:w-11 md:w-11 lg:w-11 h-9 xs:h-10 sm:h-11 md:h-11 lg:h-11
                           bg-[#3A33D3] border border-white border-opacity-30
                           rounded-full flex items-center justify-center flex-shrink-0
                           transition-all duration-300 hover:bg-[#4A43E3] hover:scale-110">
@@ -231,15 +226,15 @@
             <div class="flex items-center
                         gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-3.5
                         px-2 xs:px-3 sm:px-4 md:px-4.5 lg:px-5
-                        py-1 xs:py-1.5 sm:py-1.5 md:py-1.5 lg:py-1.5
-                        h-8 xs:h-9 sm:h-10 md:h-9 lg:h-9
+                        py-2 xs:py-2.5 sm:py-2.5 md:py-2.5 lg:py-2.5
+                        h-10 xs:h-11 sm:h-12 md:h-11 lg:h-11
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
                         mb-2 xs:mb-2.5 sm:mb-3 md:mb-4 lg:mb-5 xl:mb-6
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('support')">
-              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-10 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-10
+              <div class="w-9 xs:w-10 sm:w-11 md:w-11 lg:w-11 h-9 xs:h-10 sm:h-11 md:h-11 lg:h-11
                           bg-[#3A33D3] border border-white border-opacity-30
                           rounded-full flex items-center justify-center flex-shrink-0
                           transition-all duration-300 hover:bg-[#4A43E3] hover:scale-110">
@@ -254,15 +249,15 @@
             <div class="flex items-center
                         gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-3.5
                         px-2 xs:px-3 sm:px-4 md:px-4.5 lg:px-5
-                        py-1 xs:py-1.5 sm:py-1.5 md:py-1.5 lg:py-1.5
-                        h-8 xs:h-9 sm:h-10 md:h-9 lg:h-9
+                        py-2 xs:py-2.5 sm:py-2.5 md:py-2.5 lg:py-2.5
+                        h-10 xs:h-11 sm:h-12 md:h-11 lg:h-11
                         cursor-pointer transition-all duration-300
                         rounded-lg xs:rounded-xl sm:rounded-2xl
                         mb-2 xs:mb-2.5 sm:mb-3 md:mb-4 lg:mb-5 xl:mb-6
                         hover:bg-white hover:bg-opacity-15 hover:translate-x-1 hover:scale-[1.01] relative
                         touch-manipulation active:scale-95"
                 @click="handleMenuClick('help')">
-              <div class="w-8 xs:w-9 sm:w-10 md:w-10 lg:w-10 h-8 xs:h-9 sm:h-10 md:h-10 lg:h-10
+              <div class="w-9 xs:w-10 sm:w-11 md:w-11 lg:w-11 h-9 xs:h-10 sm:h-11 md:h-11 lg:h-11
                           bg-[#3A33D3] border border-white border-opacity-30
                           rounded-full flex items-center justify-center flex-shrink-0
                           transition-all duration-300 hover:bg-[#4A43E3] hover:scale-110">
@@ -474,26 +469,38 @@
           </div>
         </div>
       </div>
-      <!-- Triangle Pointer -->
-      <div class="ml-6 sm:ml-10 md:ml-14 lg:ml-20 xl:ml-14 2xl:ml-30 mt-[-1px] flex-shrink-0">
-        <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px]
-                    border-l-transparent border-r-transparent border-t-[#09074E] drop-shadow-md"></div>
-      </div>
     </div>
+    <div
+      class="fixed w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px] border-l-transparent border-r-transparent border-t-[#09074E] drop-shadow-md"
+      :style="triangleStyle"></div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 import CountryFlag from './CountryFlag.vue'
 
 // Props
-defineProps({
+const props = defineProps({
   isVisible: {
     type: Boolean,
     default: false
+  },
+  triggerPosition: {
+    type: Object,
+    default: () => ({ left: 0, width: 0 })
   }
 })
+
+const overlayStyle = {
+  bottom: 'calc(88px + env(safe-area-inset-bottom, 0px) + 15px)'
+}
+
+const triangleStyle = computed(() => ({
+  left: `${props.triggerPosition.left + props.triggerPosition.width / 2 - 12}px`,
+  bottom: 'calc(88px + env(safe-area-inset-bottom, 0px))',
+  marginBottom: '-1px'
+}))
 
 // Emits
 const emit = defineEmits(['close'])
@@ -584,14 +591,6 @@ const selectLanguage = (language) => {
   showLanguageDropdown.value = false
   console.log('Language selected:', language)
 }
-
-// Telegram WebApp minimal adaptation
-onMounted(() => {
-  if (window.Telegram && window.Telegram.WebApp) {
-    // Just expand the WebApp to full height
-    window.Telegram.WebApp.expand()
-  }
-})
 </script>
 
 <style scoped>
@@ -664,6 +663,25 @@ onMounted(() => {
   width: 0;
   height: 0;
   background: transparent;
+}
+
+/* Enhanced scrolling for menu items */
+.scrollbar-none {
+  /* For better touch scrolling on mobile devices */
+  -webkit-overflow-scrolling: touch;
+  /* Smooth scrolling behavior */
+  scroll-behavior: smooth;
+  /* Prevent overscroll bounce */
+  overscroll-behavior: contain;
+  overscroll-behavior-y: contain;
+}
+
+/* Desktop mouse wheel scrolling optimization */
+@media (hover: hover) and (pointer: fine) {
+  .scrollbar-none {
+    /* Enable smoother scrolling with mouse wheel */
+    scroll-behavior: smooth;
+  }
 }
 
 /* Tablet specific positioning */
@@ -769,56 +787,63 @@ onMounted(() => {
   }
 }
 
-/* Telegram WebApp specific optimizations */
-@media (max-height: 700px) and (orientation: portrait) {
-  .absolute.inset-x-4 {
-    bottom: calc(88px + env(safe-area-inset-bottom, 0px) + 20px) !important;
-  }
+/* Adaptive height for ProfileOverlay positioned above BottomNavigation */
+.profile-overlay-container {
+  max-height: calc(100vh - 150px - env(safe-area-inset-bottom));
 }
 
-@media (max-height: 600px) and (orientation: portrait) {
-  .absolute.inset-x-4 {
-    bottom: calc(88px + env(safe-area-inset-bottom, 0px) + 20px) !important;
-  }
-
+/* Small screens optimization */
+@media (max-height: 600px) {
   .profile-overlay-container {
-    max-height: calc(100vh - 130px);
+    max-height: calc(100vh - 130px - env(safe-area-inset-bottom));
+  }
+
+  .overflow-y-auto.overflow-x-hidden {
+    max-height: calc(25vh) !important;
+    min-height: 150px !important;
   }
 }
 
-@media (max-height: 500px) and (orientation: portrait) {
-  .absolute.inset-x-4 {
-    bottom: calc(88px + env(safe-area-inset-bottom, 0px) + 20px) !important;
-  }
-
+/* Very small screens */
+@media (max-height: 500px) {
   .profile-overlay-container {
-    max-height: calc(100vh - 120px);
+    max-height: calc(100vh - 110px - env(safe-area-inset-bottom));
   }
 
-  .flex.flex-col.z-\[1\].flex-1 {
-    max-height: 140px;
+  .overflow-y-auto.overflow-x-hidden {
+    max-height: calc(20vh) !important;
+    min-height: 120px !important;
   }
 }
 
-/* Ensure triangle is always visible */
-@media (max-height: 568px) {
-  .absolute.inset-x-4 {
-    bottom: calc(80px + env(safe-area-inset-bottom, 0px) + 15px) !important;
-  }
-
+/* Landscape orientation */
+@media (max-height: 450px) and (orientation: landscape) {
   .profile-overlay-container {
-    max-height: calc(100vh - 115px);
+    max-height: calc(100vh - 100px - env(safe-area-inset-bottom));
+  }
+
+  .overflow-y-auto.overflow-x-hidden {
+    max-height: calc(15vh) !important;
+    min-height: 100px !important;
   }
 }
 
-/* Telegram WebApp overlay - минимальная адаптация */
-.telegram-webapp-overlay {
-  height: 100vh;
+/* Desktop and tablet specific constraints */
+@media (min-width: 768px) {
+  .overflow-y-auto.overflow-x-hidden {
+    max-height: calc(35vh) !important;
+  }
 }
 
-@supports (height: 100svh) {
-  .telegram-webapp-overlay {
-    height: 100svh;
+@media (min-width: 1024px) {
+  .overflow-y-auto.overflow-x-hidden {
+    max-height: calc(30vh) !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .overflow-y-auto.overflow-x-hidden {
+    max-height: calc(28vh) !important;
   }
 }
 </style>
