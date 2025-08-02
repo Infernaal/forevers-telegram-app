@@ -521,13 +521,28 @@ const selectedLanguage = ref(languages.value[0])
 
 // Triangle is now positioned with fixed left margin for consistent alignment
 
-// Set Telegram WebApp viewport height
-onMounted(() => {
+// Set Telegram WebApp viewport height and handle changes
+const updateTelegramViewport = () => {
   if (window.Telegram && window.Telegram.WebApp) {
     const tgViewportHeight = window.Telegram.WebApp.viewportHeight
     if (tgViewportHeight) {
       document.documentElement.style.setProperty('--tg-viewport-height', `${tgViewportHeight}px`)
     }
+  }
+}
+
+onMounted(() => {
+  updateTelegramViewport()
+
+  // Handle orientation changes and viewport changes
+  window.addEventListener('resize', updateTelegramViewport)
+  window.addEventListener('orientationchange', () => {
+    setTimeout(updateTelegramViewport, 100) // Delay to ensure viewport is updated
+  })
+
+  // Telegram WebApp specific events
+  if (window.Telegram && window.Telegram.WebApp) {
+    window.Telegram.WebApp.onEvent('viewportChanged', updateTelegramViewport)
   }
 })
 
