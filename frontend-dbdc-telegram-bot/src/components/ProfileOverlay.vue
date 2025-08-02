@@ -2,7 +2,7 @@
   <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl min-h-[100vh]" style="top: 0; height: calc(100vh - var(--tg-viewport-height, 0px))">
     <!-- Dropdown Wrapper -->
     <div
-      class="absolute inset-x-4 bottom-[calc(90px+env(safe-area-inset-bottom,0px)+1px)] flex flex-col items-start z-[9999]">
+      class="absolute inset-x-4 bottom-[calc(80px+env(safe-area-inset-bottom,0px))] md:bottom-[calc(90px+env(safe-area-inset-bottom,0px))] lg:bottom-[calc(95px+env(safe-area-inset-bottom,0px))] flex flex-col items-start z-[9999]">
 
       <!-- Dropdown Menu -->
       <div class="w-full
@@ -10,7 +10,7 @@
   border border-[#09074E] rounded-[20px] shadow-2xl
   backdrop-blur-[32px] flex flex-col overflow-hidden transition-all duration-300 ease-out
   profile-overlay-container
-  max-h-[calc(100vh-120px)]">
+  max-h-[calc(100vh-140px)] md:max-h-[calc(100vh-160px)] lg:max-h-[calc(100vh-180px)]">
         <div class="py-4 px-4 sm:px-6 md:px-6 lg:px-8 xl:px-10 text-white flex flex-col relative z-10 h-full">
           <!-- Background -->
           <div class="absolute inset-0 bg-gradient-to-br from-[#120B81] via-[#09074E] to-[#09074E] border border-[#09074E] backdrop-blur-[40px] z-0 rounded-[20px]"></div>
@@ -94,8 +94,8 @@
                       [overscroll-behavior:contain] [overscroll-behavior-y:contain]
                       px-0 xs:px-1 sm:px-2 py-1 xs:py-1 sm:py-1 md:py-1 lg:py-1
                       touch-manipulation
-                      max-h-[calc(40vh)] sm:max-h-[calc(45vh)] md:max-h-[calc(35vh)] lg:max-h-[calc(30vh)] xl:max-h-[calc(28vh)]
-                      min-h-[180px] sm:min-h-[200px] md:min-h-[220px] lg:min-h-[240px] xl:min-h-[260px]">
+                      max-h-[calc(35vh)] sm:max-h-[calc(40vh)] md:max-h-[calc(32vh)] lg:max-h-[calc(28vh)] xl:max-h-[calc(25vh)]
+                      min-h-[160px] sm:min-h-[180px] md:min-h-[200px] lg:min-h-[220px] xl:min-h-[240px]">
             
             <!-- Calculator -->
             <div class="flex items-center
@@ -479,7 +479,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import CountryFlag from './CountryFlag.vue'
 
 // Props
@@ -534,13 +534,38 @@ const trianglePosition = computed(() => {
   return `${Math.max(12, position)}px` // minimum 12px from edge
 })
 
-// Set Telegram WebApp viewport height
-onMounted(() => {
+// Set Telegram WebApp viewport height and handle changes
+const updateTelegramViewport = () => {
   if (window.Telegram && window.Telegram.WebApp) {
     const tgViewportHeight = window.Telegram.WebApp.viewportHeight
     if (tgViewportHeight) {
       document.documentElement.style.setProperty('--tg-viewport-height', `${tgViewportHeight}px`)
     }
+  }
+}
+
+onMounted(() => {
+  updateTelegramViewport()
+
+  // Handle orientation changes and viewport changes
+  window.addEventListener('resize', updateTelegramViewport)
+  window.addEventListener('orientationchange', () => {
+    setTimeout(updateTelegramViewport, 100) // Delay to ensure viewport is updated
+  })
+
+  // Telegram WebApp specific events
+  if (window.Telegram && window.Telegram.WebApp) {
+    window.Telegram.WebApp.onEvent('viewportChanged', updateTelegramViewport)
+  }
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', updateTelegramViewport)
+  window.removeEventListener('orientationchange', updateTelegramViewport)
+
+  // Telegram WebApp cleanup
+  if (window.Telegram && window.Telegram.WebApp) {
+    window.Telegram.WebApp.offEvent('viewportChanged', updateTelegramViewport)
   }
 })
 
@@ -701,16 +726,7 @@ const selectLanguage = (language) => {
   }
 }
 
-/* Tablet specific positioning */
-@media (min-width: 768px) and (max-width: 1023px) {
-  .tablet-triangle-position {
-    bottom: 20rem !important;
-  }
-
-  .tablet-dropdown-position {
-    bottom: 7rem !important;
-  }
-}
+/* Tablet and Desktop specific improvements - maintain full width */
 
 /* Copied State Styling - matching HoldersView */
 .id-copied-state {
@@ -806,61 +822,83 @@ const selectLanguage = (language) => {
 
 /* Adaptive height for ProfileOverlay positioned above BottomNavigation */
 .profile-overlay-container {
-  max-height: calc(100vh - 150px - env(safe-area-inset-bottom));
+  max-height: calc(100vh - 160px - env(safe-area-inset-bottom));
+}
+
+/* Telegram WebApp specific adjustments */
+@media (max-width: 767px) {
+  .profile-overlay-container {
+    max-height: calc(var(--tg-viewport-height, 100vh) - 150px - env(safe-area-inset-bottom));
+  }
 }
 
 /* Small screens optimization */
 @media (max-height: 600px) {
   .profile-overlay-container {
-    max-height: calc(100vh - 130px - env(safe-area-inset-bottom));
+    max-height: calc(var(--tg-viewport-height, 100vh) - 120px - env(safe-area-inset-bottom));
   }
 
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(25vh) !important;
-    min-height: 150px !important;
+    max-height: calc(22vh) !important;
+    min-height: 140px !important;
   }
 }
 
 /* Very small screens */
 @media (max-height: 500px) {
   .profile-overlay-container {
-    max-height: calc(100vh - 110px - env(safe-area-inset-bottom));
+    max-height: calc(var(--tg-viewport-height, 100vh) - 100px - env(safe-area-inset-bottom));
   }
 
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(20vh) !important;
-    min-height: 120px !important;
+    max-height: calc(18vh) !important;
+    min-height: 110px !important;
   }
 }
 
 /* Landscape orientation */
 @media (max-height: 450px) and (orientation: landscape) {
   .profile-overlay-container {
-    max-height: calc(100vh - 100px - env(safe-area-inset-bottom));
+    max-height: calc(var(--tg-viewport-height, 100vh) - 90px - env(safe-area-inset-bottom));
   }
 
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(15vh) !important;
-    min-height: 100px !important;
+    max-height: calc(12vh) !important;
+    min-height: 90px !important;
   }
 }
 
 /* Desktop and tablet specific constraints */
 @media (min-width: 768px) {
+  .profile-overlay-container {
+    max-height: calc(100vh - 180px - env(safe-area-inset-bottom));
+  }
+
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(35vh) !important;
+    max-height: calc(32vh) !important;
+    min-height: 200px !important;
   }
 }
 
 @media (min-width: 1024px) {
+  .profile-overlay-container {
+    max-height: calc(100vh - 200px - env(safe-area-inset-bottom));
+  }
+
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(30vh) !important;
+    max-height: calc(28vh) !important;
+    min-height: 220px !important;
   }
 }
 
 @media (min-width: 1280px) {
+  .profile-overlay-container {
+    max-height: calc(100vh - 220px - env(safe-area-inset-bottom));
+  }
+
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(28vh) !important;
+    max-height: calc(25vh) !important;
+    min-height: 240px !important;
   }
 }
 </style>
