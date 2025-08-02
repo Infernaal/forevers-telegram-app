@@ -478,7 +478,7 @@
         </div>
       </div>
      <div
-       class="fixed z-[9999]"  <!-- fixed вместо absolute -->
+       class="fixed z-[9999]"
        :style="{
          left: `${triggerPosition.left + triggerPosition.width / 2 - 12}px`,
          bottom: `calc(${triggerPosition.bottom}px + env(safe-area-inset-bottom,0px))`
