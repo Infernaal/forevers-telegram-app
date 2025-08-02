@@ -282,7 +282,8 @@ const updateProfileButtonPosition = () => {
     const rect = profileButton.value.getBoundingClientRect()
     profileButtonPosition.value = {
       left: rect.left,
-      width: rect.width
+      width: rect.width,
+      bottom: window.innerHeight - rect.bottom
     }
   }
 }
