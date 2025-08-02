@@ -32,7 +32,12 @@
 
         <!-- Exchange Rate Section -->
         <div class="flex justify-center mb-4">
-          <div class="bg-white rounded-full border px-4 py-2 flex items-center shadow-sm :class="isDarkTheme ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-100'">
+          <div
+            :class="[
+              'rounded-full px-4 py-2 flex items-center shadow-sm',
+              isDarkTheme ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-100'
+            ]"
+          >
             <CountryFlag :country="selectedBalance?.code" class="w-5 h-5 flex-shrink-0 mr-2" />
             <div class="flex items-center text-sm font-medium">
               <span :class="isDarkTheme ? 'text-white' : 'text-dbd-dark'">1 Forevers {{ selectedBalance?.code }}</span>
