@@ -22,7 +22,10 @@
       >
         <!-- Title -->
         <div class="flex justify-center items-center pt-4 pb-2">
-          <h2 class="text-[18px] font-semibold :class="isDarkTheme ? 'text-white' : 'text-dbd-dark'">
+          <h2
+            class="text-[18px] font-semibold"
+            :class="isDarkTheme ? 'text-white' : 'text-dbd-dark'"
+          >
             Enter Amount
           </h2>
         </div>
