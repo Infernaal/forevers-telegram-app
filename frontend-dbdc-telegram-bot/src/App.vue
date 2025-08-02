@@ -3,7 +3,7 @@
     <!-- Заглушка для Desktop WebApp -->
     <div v-if="showDesktopOnly" class="desktop-only-overlay">
       <div class="desktop-only-card">
-        <img src="/mobile-only.svg" alt="Mobile Only" class="icon" />
+        <img src="https://img.icons8.com/ios-filled/100/2019CE/smartphone-tablet.png" alt="Mobile Only" class="icon" />
         <h2>Available on Mobile &amp; Tablet Only</h2>
         <p>This mini-app works exclusively in the Telegram<br/>Mobile App or on a Tablet.</p>
         <p class="hint">Please open this chat in Telegram on your phone or tablet.</p>
