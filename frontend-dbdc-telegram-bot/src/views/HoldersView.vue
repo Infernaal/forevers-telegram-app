@@ -10,7 +10,7 @@
       </div>
 
       <!-- QR Code Section -->
-      <div class="relative w-full h-96 mb-5">
+      <div class="relative overflow-visible w-full px-6 h-96 mb-5">
         <!-- Background with gradient -->
         <div class="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-900 via-indigo-900 to-blue-800 backdrop-blur-lg overflow-hidden">
           <!-- Decorative F Icons behind QR code -->
