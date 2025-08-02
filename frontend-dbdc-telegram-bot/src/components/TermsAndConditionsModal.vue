@@ -17,17 +17,21 @@
          @click.stop
          style="height: calc(100vh - 32px); height: calc(100dvh - 32px);">
       <!-- Modal Content -->
-      <div class="bg-white rounded-2xl sm:rounded-3xl border border-gray-200
-                  shadow-lg flex flex-col h-full max-h-full overflow-hidden
-                  modal-content">
+      <div
+        class="bg-white dark:bg-[#1e1e1e]
+               border border-gray-200 dark:border-white/10
+               rounded-2xl sm:rounded-3xl shadow-lg
+               flex flex-col h-full max-h-full overflow-hidden
+               modal-content"
+      >
         <!-- Header -->
         <div class="p-3 sm:p-4 md:p-5 flex-shrink-0 border-b border-gray-100
                     modal-header">
-          <h1 class="text-dbd-dark font-bold text-base sm:text-lg md:text-xl lg:text-2xl
+          <h1 class="text-dbd-dark dark:text-white font-bold text-base sm:text-lg md:text-xl lg:text-2xl
                      leading-tight mb-1 sm:mb-2 modal-title">
             Forevers Leasing Terms & Conditions
           </h1>
-          <p class="text-dbd-gray font-medium text-xs sm:text-sm md:text-base
+          <p class="text-dbd-gray dark:text-gray-400 font-medium text-xs sm:text-sm md:text-base
                     leading-relaxed modal-subtitle">
             Last Updated: July 16, 2025
           </p>
@@ -50,13 +54,13 @@
             <div class="flex flex-col gap-4 sm:gap-6 modal-sections">
               <!-- Definitions -->
               <section class="flex flex-col gap-2 sm:gap-3">
-                <h2 class="text-dbd-dark font-bold text-sm sm:text-base md:text-lg
+                <h2 class="text-dbd-dark dark:text-white font-bold text-sm sm:text-base md:text-lg
                            leading-tight capitalize">Definitions</h2>
                 <div class="flex flex-col gap-2">
                   <div class="flex items-start gap-2 sm:gap-3">
                     <div class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-dbd-gray
                                flex-shrink-0 mt-1.5 sm:mt-2"></div>
-                    <p class="text-dbd-gray font-medium text-xs sm:text-sm
+                    <p class="text-dbd-gray dark:text-gray-400 font-medium text-xs sm:text-sm
                              leading-relaxed flex-1">
                       "User" refers to any individual or entity that accesses or uses the Service.
                     </p>
@@ -64,7 +68,7 @@
                   <div class="flex items-start gap-2 sm:gap-3">
                     <div class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-dbd-gray
                                flex-shrink-0 mt-1.5 sm:mt-2"></div>
-                    <p class="text-dbd-gray font-medium text-xs sm:text-sm
+                    <p class="text-dbd-gray dark:text-gray-400 font-medium text-xs sm:text-sm
                              leading-relaxed flex-1">
                       "Service" refers to the cryptocurrency platform and any related services offered by DBDC.
                     </p>
@@ -74,13 +78,13 @@
 
               <!-- Eligibility -->
               <section class="flex flex-col gap-2 sm:gap-3">
-                <h2 class="text-dbd-dark font-bold text-sm sm:text-base md:text-lg
+                <h2 class="text-dbd-dark dark:text-white font-bold text-sm sm:text-base md:text-lg
                            leading-tight capitalize">Eligibility</h2>
                 <div class="flex flex-col gap-2">
                   <div class="flex items-start gap-2 sm:gap-3">
                     <div class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-dbd-gray
                                flex-shrink-0 mt-1.5 sm:mt-2"></div>
-                    <p class="text-dbd-gray font-medium text-xs sm:text-sm
+                    <p class="text-dbd-gray dark:text-gray-400 font-medium text-xs sm:text-sm
                              leading-relaxed flex-1">
                       You must be at least 18 years old and capable of entering into legally binding agreements to use the Service.
                     </p>
@@ -90,13 +94,13 @@
 
               <!-- User Accounts -->
               <section class="flex flex-col gap-2 sm:gap-3">
-                <h2 class="text-dbd-dark font-bold text-sm sm:text-base md:text-lg
+                <h2 class="text-dbd-dark dark:text-white font-bold text-sm sm:text-base md:text-lg
                            leading-tight capitalize">User Accounts</h2>
                 <div class="flex flex-col gap-2">
                   <div class="flex items-start gap-2 sm:gap-3">
                     <div class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-dbd-gray
                                flex-shrink-0 mt-1.5 sm:mt-2"></div>
-                    <p class="text-dbd-gray font-medium text-xs sm:text-sm
+                    <p class="text-dbd-gray dark:text-gray-400 font-medium text-xs sm:text-sm
                              leading-relaxed flex-1">
                       Users may be required to create an account to access certain features of the Service. You agree to provide accurate, current, and complete information during the registration process.
                     </p>
@@ -106,13 +110,13 @@
 
               <!-- Digital Currency Risks -->
               <section class="flex flex-col gap-2 sm:gap-3">
-                <h2 class="text-dbd-dark font-bold text-sm sm:text-base md:text-lg
+                <h2 class="text-dbd-dark dark:text-white font-bold text-sm sm:text-base md:text-lg
                            leading-tight capitalize">Digital Currency Risks</h2>
                 <div class="flex flex-col gap-2">
                   <div class="flex items-start gap-2 sm:gap-3">
                     <div class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-dbd-gray
                                flex-shrink-0 mt-1.5 sm:mt-2"></div>
-                    <p class="text-dbd-gray font-medium text-xs sm:text-sm
+                    <p class="text-dbd-gray dark:text-gray-400 font-medium text-xs sm:text-sm
                              leading-relaxed flex-1">
                       You acknowledge that there are risks associated with the use of digital currencies, including market volatility and regulatory changes. DBDC is not responsible for any losses incurred.
                     </p>
@@ -122,13 +126,13 @@
 
               <!-- User Obligations -->
               <section class="flex flex-col gap-2 sm:gap-3">
-                <h2 class="text-dbd-dark font-bold text-sm sm:text-base md:text-lg
+                <h2 class="text-dbd-dark dark:text-white font-bold text-sm sm:text-base md:text-lg
                            leading-tight capitalize">User Obligations</h2>
                 <div class="flex flex-col gap-2">
                   <div class="flex items-start gap-2 sm:gap-3">
                     <div class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-dbd-gray
                                flex-shrink-0 mt-1.5 sm:mt-2"></div>
-                    <p class="text-dbd-gray font-medium text-xs sm:text-sm
+                    <p class="text-dbd-gray dark:text-gray-400 font-medium text-xs sm:text-sm
                              leading-relaxed flex-1">
                       Users agree to use the Service in compliance with applicable laws and regulations. You will not engage in any fraudulent or illegal activities.
                     </p>
@@ -138,13 +142,13 @@
 
               <!-- Intellectual Property -->
               <section class="flex flex-col gap-2 sm:gap-3">
-                <h2 class="text-dbd-dark font-bold text-sm sm:text-base md:text-lg
+                <h2 class="text-dbd-dark dark:text-white font-bold text-sm sm:text-base md:text-lg
                            leading-tight capitalize">Intellectual Property</h2>
                 <div class="flex flex-col gap-2">
                   <div class="flex items-start gap-2 sm:gap-3">
                     <div class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-dbd-gray
                                flex-shrink-0 mt-1.5 sm:mt-2"></div>
-                    <p class="text-dbd-gray font-medium text-xs sm:text-sm
+                    <p class="text-dbd-gray dark:text-gray-400 font-medium text-xs sm:text-sm
                              leading-relaxed flex-1">
                       All content and materials available on the Service are the property of DBDC and protected by intellectual property laws.
                     </p>
@@ -154,13 +158,13 @@
 
               <!-- Limitation of Liability -->
               <section class="flex flex-col gap-2 sm:gap-3">
-                <h2 class="text-dbd-dark font-bold text-sm sm:text-base md:text-lg
+                <h2 class="text-dbd-dark dark:text-white font-bold text-sm sm:text-base md:text-lg
                            leading-tight capitalize">Limitation of Liability</h2>
                 <div class="flex flex-col gap-2">
                   <div class="flex items-start gap-2 sm:gap-3">
                     <div class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-dbd-gray
                                flex-shrink-0 mt-1.5 sm:mt-2"></div>
-                    <p class="text-dbd-gray font-medium text-xs sm:text-sm
+                    <p class="text-dbd-gray dark:text-gray-400 font-medium text-xs sm:text-sm
                              leading-relaxed flex-1">
                       DBDC shall not be liable for any indirect, incidental, or consequential damages arising from your use of the Service.
                     </p>
@@ -170,13 +174,13 @@
 
               <!-- Amendments -->
               <section class="flex flex-col gap-2 sm:gap-3">
-                <h2 class="text-dbd-dark font-bold text-sm sm:text-base md:text-lg
+                <h2 class="text-dbd-dark dark:text-white font-bold text-sm sm:text-base md:text-lg
                            leading-tight capitalize">Amendments</h2>
                 <div class="flex flex-col gap-2">
                   <div class="flex items-start gap-2 sm:gap-3">
                     <div class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-dbd-gray
                                flex-shrink-0 mt-1.5 sm:mt-2"></div>
-                    <p class="text-dbd-gray font-medium text-xs sm:text-sm
+                    <p class="text-dbd-gray dark:text-gray-400 font-medium text-xs sm:text-sm
                              leading-relaxed flex-1">
                       DBDC reserves the right to modify these Terms at any time. Changes will be effective immediately upon posting.
                     </p>
