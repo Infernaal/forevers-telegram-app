@@ -276,6 +276,13 @@ const navigateTo = (tab) => {
   router.push(routeMap[tab])
 }
 
+const profileButtonPosition = reactive({
+  left: 0,
+  width: 0,
+  bottom: 0,
+  bottomOffset: 0
+})
+
 const bottomNav = ref(null)
 
 const updateProfileButtonPosition = () => {
@@ -285,15 +292,10 @@ const updateProfileButtonPosition = () => {
 
     profileButtonPosition.left = profileRect.left
     profileButtonPosition.width = profileRect.width
-    profileButtonPosition.bottom = window.innerHeight - navRect.top // или navRect.height
+    profileButtonPosition.bottom = window.innerHeight - navRect.top
+    profileButtonPosition.bottomOffset = navRect.height
   }
 }
-
-const profileButtonPosition = reactive({
-  left: 0,
-  width: 0,
-  bottom: 0
-})
   
 const toggleProfile = () => {
   isProfileMenuOpen.value = !isProfileMenuOpen.value
