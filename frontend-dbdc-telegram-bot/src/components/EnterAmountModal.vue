@@ -566,4 +566,26 @@ button:active {
   opacity: 0.5;
   box-shadow: none;
 }
+
+@media (prefers-color-scheme: dark) {
+  .text-dbd-dark {
+    color: #ffffff !important;
+  }
+
+  .text-dbd-gray {
+    color: #aaaaaa !important;
+  }
+
+  .bg-white {
+    background-color: #2a2a2a !important;
+  }
+
+  .border-gray-100 {
+    border-color: #444 !important;
+  }
+
+  .bg-gray-100 {
+    background-color: #333 !important;
+  }
+}
 </style>
