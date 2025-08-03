@@ -3,7 +3,7 @@
     <!-- Dropdown Wrapper -->
     <div
       class="absolute inset-x-4 flex flex-col items-start z-[9999]"
-      :style="{ top: '0px', bottom: bottomOffset + 'px' }"
+      :style="{ top: '10px', height: `calc(100vh - ${props.bottomOffset}px - 10px)` }"
     >
 
       <!-- Dropdown Menu -->
@@ -94,9 +94,7 @@
                       [-webkit-overflow-scrolling:touch] [scroll-behavior:smooth]
                       [overscroll-behavior:contain] [overscroll-behavior-y:contain]
                       px-0 xs:px-1 sm:px-2 py-1 xs:py-1 sm:py-1 md:py-1 lg:py-1
-                      touch-manipulation
-                      max-h-[calc(35vh)] sm:max-h-[calc(40vh)] md:max-h-[calc(32vh)] lg:max-h-[calc(28vh)] xl:max-h-[calc(25vh)]
-                      min-h-[160px] sm:min-h-[180px] md:min-h-[200px] lg:min-h-[220px] xl:min-h-[240px]">
+                      touch-manipulation">
             
             <!-- Calculator -->
             <div class="flex items-center
@@ -492,6 +490,10 @@ const props = defineProps({
   triggerPosition: {
     type: Object,
     default: () => ({ left: 0, width: 0 })
+  },
+  bottomOffset: {
+    type: Number,
+    default: 0
   }
 })
 
@@ -821,24 +823,24 @@ const selectLanguage = (language) => {
 
 /* Adaptive height for ProfileOverlay positioned above BottomNavigation */
 .profile-overlay-container {
-  max-height: calc(100vh - 160px - env(safe-area-inset-bottom));
+  height: 100%;
 }
 
 /* Telegram WebApp specific adjustments */
 @media (max-width: 767px) {
   .profile-overlay-container {
-    max-height: calc(var(--tg-viewport-height, 100vh) - 150px - env(safe-area-inset-bottom));
+    height: 100%;
   }
 }
 
 /* Small screens optimization */
 @media (max-height: 600px) {
   .profile-overlay-container {
-    max-height: calc(var(--tg-viewport-height, 100vh) - 120px - env(safe-area-inset-bottom));
+    height: 100%;
   }
 
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(22vh) !important;
+    flex: 1;
     min-height: 140px !important;
   }
 }
@@ -846,11 +848,11 @@ const selectLanguage = (language) => {
 /* Very small screens */
 @media (max-height: 500px) {
   .profile-overlay-container {
-    max-height: calc(var(--tg-viewport-height, 100vh) - 100px - env(safe-area-inset-bottom));
+    height: 100%;
   }
 
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(18vh) !important;
+    flex: 1;
     min-height: 110px !important;
   }
 }
@@ -858,11 +860,11 @@ const selectLanguage = (language) => {
 /* Landscape orientation */
 @media (max-height: 450px) and (orientation: landscape) {
   .profile-overlay-container {
-    max-height: calc(var(--tg-viewport-height, 100vh) - 90px - env(safe-area-inset-bottom));
+    height: 100%;
   }
 
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(12vh) !important;
+    flex: 1;
     min-height: 90px !important;
   }
 }
@@ -870,33 +872,33 @@ const selectLanguage = (language) => {
 /* Desktop and tablet specific constraints */
 @media (min-width: 768px) {
   .profile-overlay-container {
-    max-height: calc(100vh - 180px - env(safe-area-inset-bottom));
+    height: 100%;
   }
 
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(32vh) !important;
+    flex: 1;
     min-height: 200px !important;
   }
 }
 
 @media (min-width: 1024px) {
   .profile-overlay-container {
-    max-height: calc(100vh - 200px - env(safe-area-inset-bottom));
+    height: 100%;
   }
 
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(28vh) !important;
+    flex: 1;
     min-height: 220px !important;
   }
 }
 
 @media (min-width: 1280px) {
   .profile-overlay-container {
-    max-height: calc(100vh - 220px - env(safe-area-inset-bottom));
+    height: 100%;
   }
 
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(25vh) !important;
+    flex: 1;
     min-height: 240px !important;
   }
 }
