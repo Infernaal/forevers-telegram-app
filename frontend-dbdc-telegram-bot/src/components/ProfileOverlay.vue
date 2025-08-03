@@ -511,7 +511,7 @@ const languages = ref([
   { code: 'RUS', name: 'Русский', country: 'ukraine' },
   { code: 'CHN', name: '中��', country: 'china' },
   { code: 'JPN', name: '日本語', country: 'japan' },
-  { code: 'KOR', name: '한국어', country: 'new zealand' },
+  { code: 'KOR', name: '한국��', country: 'new zealand' },
   { code: 'ARA', name: 'العربية', country: 'uae' },
   { code: 'POR', name: 'Português', country: 'spain' },
   { code: 'NLD', name: 'Nederlands', country: 'norway' }
@@ -921,6 +921,45 @@ const selectLanguage = (language) => {
   .overflow-y-auto.overflow-x-hidden {
     max-height: calc(18vh) !important;
     min-height: 110px !important;
+  }
+}
+
+/* Telegram WebApp specific environment fixes */
+@supports (height: 100dvh) {
+  .tg-overlay-container {
+    height: 100dvh;
+  }
+}
+
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+  .tg-overlay-container {
+    height: -webkit-fill-available;
+  }
+
+  @media (max-width: 767px) {
+    .tg-dropdown-wrapper {
+      bottom: calc(88px + env(safe-area-inset-bottom, 16px));
+    }
+  }
+}
+
+/* Android specific fixes */
+@media (max-width: 767px) and (orientation: portrait) {
+  .tg-triangle-pointer {
+    position: relative;
+    z-index: 1000;
+  }
+
+  .tg-dropdown-wrapper {
+    bottom: calc(90px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* Landscape mode adjustments */
+@media (max-height: 450px) and (orientation: landscape) {
+  .tg-dropdown-wrapper {
+    bottom: calc(78px + env(safe-area-inset-bottom, 0px));
   }
 }
 
