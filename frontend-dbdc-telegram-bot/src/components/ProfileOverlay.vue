@@ -2,7 +2,7 @@
   <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl min-h-[100vh]" style="top: 0; height: calc(100dvh - var(--tg-viewport-height, 0px))">
     <!-- Dropdown Wrapper -->
     <div
-      class="absolute inset-x-4 bottom-[calc(80px+env(safe-area-inset-bottom,0px))] md:bottom-[calc(90px+env(safe-area-inset-bottom,0px))] lg:bottom-[calc(95px+env(safe-area-inset-bottom,0px))] flex flex-col items-start z-[9999]">
+      class="absolute inset-x-4 bottom-[calc(78px+env(safe-area-inset-bottom,0px))] md:bottom-[calc(88px+env(safe-area-inset-bottom,0px))] lg:bottom-[calc(93px+env(safe-area-inset-bottom,0px))] flex flex-col items-start z-[9999]">
 
       <!-- Dropdown Menu -->
       <div class="w-full
