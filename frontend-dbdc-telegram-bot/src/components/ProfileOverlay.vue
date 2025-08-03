@@ -1,5 +1,6 @@
 <template>
-  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl min-h-[100vh]" style="top: 0; height: calc(100vh - var(--tg-viewport-height, 0px))">
+  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl" 
+    :style="overlayStyle">
     <!-- Dropdown Wrapper -->
     <div
       class="absolute inset-x-4 bottom-[calc(80px+env(safe-area-inset-bottom,0px))] md:bottom-[calc(90px+env(safe-area-inset-bottom,0px))] lg:bottom-[calc(95px+env(safe-area-inset-bottom,0px))] flex flex-col items-start z-[9999]">
@@ -470,10 +471,12 @@
         </div>
       </div>
       <!-- Triangle Pointer -->
-      <div :style="{marginLeft: trianglePosition}" class="mt-[-1px] mb-2">
-        <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px]
-                    border-l-transparent border-r-transparent border-t-[#09074E] drop-shadow-md"></div>
-      </div>
+      <div
+        class="fixed w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px]
+               border-l-transparent border-r-transparent border-t-[#09074E]
+               drop-shadow-md z-[9999]"
+        :style="triangleStyle"
+      />
     </div>
   </div>
 </template>
@@ -491,6 +494,10 @@ const props = defineProps({
   triggerPosition: {
     type: Object,
     default: () => ({ left: 0, width: 0 })
+  },
+  bottomNavHeight: {
+    type: Number,
+    required: true
   }
 })
 
@@ -633,6 +640,19 @@ const selectLanguage = (language) => {
   showLanguageDropdown.value = false
   console.log('Language selected:', language)
 }
+
+const triangleStyle = computed(() => {
+  return {
+    left: `${triggerPosition.left + triggerPosition.width / 2 - 12}px`,
+    bottom: `calc(${props.bottomNavHeight}px + env(safe-area-inset-bottom, 0px))`
+  }
+})
+
+const overlayStyle = computed(() => {
+  return {
+    height: `calc(100dvh - ${props.bottomNavHeight}px - env(safe-area-inset-bottom, 0px))`
+  }
+})
 </script>
 
 <style scoped>
