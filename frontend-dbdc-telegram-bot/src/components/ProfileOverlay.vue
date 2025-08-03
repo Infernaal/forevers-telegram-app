@@ -2,7 +2,7 @@
   <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl min-h-[100vh]" style="top: 0; height: calc(100dvh - var(--tg-viewport-height, 0px))">
     <!-- Dropdown Wrapper -->
     <div
-      class="absolute inset-x-4 bottom-[calc(80px+env(safe-area-inset-bottom,0px))] md:bottom-[calc(90px+env(safe-area-inset-bottom,0px))] lg:bottom-[calc(95px+env(safe-area-inset-bottom,0px))] flex flex-col items-start z-[9999]">
+      class="absolute inset-x-4 bottom-[calc(93px+env(safe-area-inset-bottom,0px))] sm:bottom-[calc(103px+env(safe-area-inset-bottom,0px))] md:bottom-[calc(103px+env(safe-area-inset-bottom,0px))] lg:bottom-[calc(103px+env(safe-area-inset-bottom,0px))] flex flex-col items-start z-[9999]">
 
       <!-- Dropdown Menu -->
       <div class="w-full
@@ -10,7 +10,7 @@
   border border-[#09074E] rounded-[20px] shadow-2xl
   backdrop-blur-[32px] flex flex-col overflow-hidden transition-all duration-300 ease-out
   profile-overlay-container
-  max-h-[calc(100dvh-140px)] md:max-h-[calc(100dvh-160px)] lg:max-h-[calc(100dvh-180px)]">
+  max-h-[calc(100dvh-138px)] md:max-h-[calc(100dvh-158px)] lg:max-h-[calc(100dvh-178px)]">
         <div class="py-4 px-4 sm:px-6 md:px-6 lg:px-8 xl:px-10 text-white flex flex-col relative z-10 h-full">
           <!-- Background -->
           <div class="absolute inset-0 bg-gradient-to-br from-[#120B81] via-[#09074E] to-[#09074E] border border-[#09074E] backdrop-blur-[40px] z-0 rounded-[20px]"></div>
@@ -470,7 +470,7 @@
         </div>
       </div>
       <!-- Triangle Pointer -->
-      <div :style="{marginLeft: trianglePosition}" class="mt-[-1px] mb-2">
+      <div :style="{marginLeft: trianglePosition}" class="mt-[-1px]">
         <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px]
                     border-l-transparent border-r-transparent border-t-[#09074E] drop-shadow-md"></div>
       </div>
