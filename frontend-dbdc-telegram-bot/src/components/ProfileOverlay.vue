@@ -821,24 +821,24 @@ const selectLanguage = (language) => {
 
 /* Adaptive height for ProfileOverlay positioned above BottomNavigation */
 .profile-overlay-container {
-  max-height: calc(100vh - 160px - env(safe-area-inset-bottom));
+  height: 100%;
 }
 
 /* Telegram WebApp specific adjustments */
 @media (max-width: 767px) {
   .profile-overlay-container {
-    max-height: calc(var(--tg-viewport-height, 100vh) - 150px - env(safe-area-inset-bottom));
+    height: 100%;
   }
 }
 
 /* Small screens optimization */
 @media (max-height: 600px) {
   .profile-overlay-container {
-    max-height: calc(var(--tg-viewport-height, 100vh) - 120px - env(safe-area-inset-bottom));
+    height: 100%;
   }
 
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(22vh) !important;
+    flex: 1;
     min-height: 140px !important;
   }
 }
@@ -846,11 +846,11 @@ const selectLanguage = (language) => {
 /* Very small screens */
 @media (max-height: 500px) {
   .profile-overlay-container {
-    max-height: calc(var(--tg-viewport-height, 100vh) - 100px - env(safe-area-inset-bottom));
+    height: 100%;
   }
 
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(18vh) !important;
+    flex: 1;
     min-height: 110px !important;
   }
 }
@@ -858,11 +858,11 @@ const selectLanguage = (language) => {
 /* Landscape orientation */
 @media (max-height: 450px) and (orientation: landscape) {
   .profile-overlay-container {
-    max-height: calc(var(--tg-viewport-height, 100vh) - 90px - env(safe-area-inset-bottom));
+    height: 100%;
   }
 
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(12vh) !important;
+    flex: 1;
     min-height: 90px !important;
   }
 }
@@ -870,33 +870,33 @@ const selectLanguage = (language) => {
 /* Desktop and tablet specific constraints */
 @media (min-width: 768px) {
   .profile-overlay-container {
-    max-height: calc(100vh - 180px - env(safe-area-inset-bottom));
+    height: 100%;
   }
 
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(32vh) !important;
+    flex: 1;
     min-height: 200px !important;
   }
 }
 
 @media (min-width: 1024px) {
   .profile-overlay-container {
-    max-height: calc(100vh - 200px - env(safe-area-inset-bottom));
+    height: 100%;
   }
 
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(28vh) !important;
+    flex: 1;
     min-height: 220px !important;
   }
 }
 
 @media (min-width: 1280px) {
   .profile-overlay-container {
-    max-height: calc(100vh - 220px - env(safe-area-inset-bottom));
+    height: 100%;
   }
 
   .overflow-y-auto.overflow-x-hidden {
-    max-height: calc(25vh) !important;
+    flex: 1;
     min-height: 240px !important;
   }
 }
