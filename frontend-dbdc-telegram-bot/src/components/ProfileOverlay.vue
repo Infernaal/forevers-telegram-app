@@ -1,9 +1,8 @@
 <template>
-  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl" style="height: var(--tg-viewport-stable-height, 100vh)">
+  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl min-h-[100vh]" style="top: 0; height: calc(100dvh - var(--tg-viewport-height, 0px))">
     <!-- Dropdown Wrapper -->
     <div
-      class="absolute inset-x-4 flex flex-col items-start z-[9999]"
-      style="top: 0; bottom: calc(93px + env(safe-area-inset-bottom, 0px))">
+      class="absolute inset-x-4 bottom-[calc(93px+env(safe-area-inset-bottom,0px))] sm:bottom-[calc(103px+env(safe-area-inset-bottom,0px))] md:bottom-[calc(103px+env(safe-area-inset-bottom,0px))] lg:bottom-[calc(103px+env(safe-area-inset-bottom,0px))] flex flex-col items-start z-[9999]">
 
       <!-- Dropdown Menu -->
       <div class="w-full
@@ -535,19 +534,38 @@ const trianglePosition = computed(() => {
   return `${Math.max(12, position)}px` // minimum 12px from edge
 })
 
-// Telegram WebApp viewport events (CSS variables are handled automatically)
-onMounted(() => {
-  // Telegram WebApp automatically handles CSS variables
+// Set Telegram WebApp viewport height and handle changes
+const updateTelegramViewport = () => {
   if (window.Telegram && window.Telegram.WebApp) {
-    // Enable closing confirmation if needed
-    window.Telegram.WebApp.enableClosingConfirmation()
+    const tgViewportHeight = window.Telegram.WebApp.viewportHeight
+    if (tgViewportHeight) {
+      document.documentElement.style.setProperty('--tg-viewport-height', `${tgViewportHeight}px`)
+    }
+  }
+}
+
+onMounted(() => {
+  updateTelegramViewport()
+
+  // Handle orientation changes and viewport changes
+  window.addEventListener('resize', updateTelegramViewport)
+  window.addEventListener('orientationchange', () => {
+    setTimeout(updateTelegramViewport, 100) // Delay to ensure viewport is updated
+  })
+
+  // Telegram WebApp specific events
+  if (window.Telegram && window.Telegram.WebApp) {
+    window.Telegram.WebApp.onEvent('viewportChanged', updateTelegramViewport)
   }
 })
 
 onUnmounted(() => {
-  // Cleanup if needed
+  window.removeEventListener('resize', updateTelegramViewport)
+  window.removeEventListener('orientationchange', updateTelegramViewport)
+
+  // Telegram WebApp cleanup
   if (window.Telegram && window.Telegram.WebApp) {
-    window.Telegram.WebApp.disableClosingConfirmation()
+    window.Telegram.WebApp.offEvent('viewportChanged', updateTelegramViewport)
   }
 })
 
@@ -807,16 +825,10 @@ const selectLanguage = (language) => {
   max-height: calc(100vh - 160px - env(safe-area-inset-bottom));
 }
 
-/* Telegram WebApp specific adjustments using official CSS variables */
+/* Telegram WebApp specific adjustments */
 @media (max-width: 767px) {
   .profile-overlay-container {
-    max-height: calc(var(--tg-viewport-stable-height, 100vh) - 150px - env(safe-area-inset-bottom));
-  }
-}
-
-@media (min-width: 768px) {
-  .profile-overlay-container {
-    max-height: calc(var(--tg-viewport-stable-height, 100vh) - 180px - env(safe-area-inset-bottom));
+    max-height: calc(var(--tg-viewport-height, 100vh) - 150px - env(safe-area-inset-bottom));
   }
 }
 
@@ -835,7 +847,7 @@ const selectLanguage = (language) => {
 /* Very small screens */
 @media (max-height: 500px) {
   .profile-overlay-container {
-    max-height: calc(var(--tg-viewport-stable-height, 100vh) - 100px - env(safe-area-inset-bottom));
+    max-height: calc(var(--tg-viewport-height, 100vh) - 100px - env(safe-area-inset-bottom));
   }
 
   .overflow-y-auto.overflow-x-hidden {
