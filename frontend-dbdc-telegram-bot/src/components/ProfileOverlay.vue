@@ -1,5 +1,9 @@
 <template>
-  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl" :style="overlayStyle" />
+  <div
+    v-if="isVisible"
+    class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl"
+    :style="overlayStyle"
+  >
     <!-- Dropdown Wrapper -->
     <div
       class="absolute inset-x-4 bottom-[calc(80px+env(safe-area-inset-bottom,0px))] md:bottom-[calc(90px+env(safe-area-inset-bottom,0px))] lg:bottom-[calc(95px+env(safe-area-inset-bottom,0px))] flex flex-col items-start z-[9999]">
