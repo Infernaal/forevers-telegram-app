@@ -535,49 +535,19 @@ const trianglePosition = computed(() => {
   return `${Math.max(12, position)}px` // minimum 12px from edge
 })
 
-// Set Telegram WebApp viewport height and handle changes
-const updateTelegramViewport = () => {
-  if (window.Telegram && window.Telegram.WebApp) {
-    const tgViewportHeight = window.Telegram.WebApp.viewportHeight
-    const tgViewportStableHeight = window.Telegram.WebApp.viewportStableHeight
-
-    if (tgViewportHeight) {
-      document.documentElement.style.setProperty('--tg-viewport-height', `${tgViewportHeight}px`)
-    }
-
-    if (tgViewportStableHeight) {
-      document.documentElement.style.setProperty('--tg-viewport-stable-height', `${tgViewportStableHeight}px`)
-    }
-
-    // Force full viewport width for desktop Telegram
-    if (window.innerWidth >= 768) {
-      document.documentElement.style.setProperty('--tg-viewport-width', '100vw')
-    }
-  }
-}
-
+// Telegram WebApp viewport events (CSS variables are handled automatically)
 onMounted(() => {
-  updateTelegramViewport()
-
-  // Handle orientation changes and viewport changes
-  window.addEventListener('resize', updateTelegramViewport)
-  window.addEventListener('orientationchange', () => {
-    setTimeout(updateTelegramViewport, 100) // Delay to ensure viewport is updated
-  })
-
-  // Telegram WebApp specific events
+  // Telegram WebApp automatically handles CSS variables
   if (window.Telegram && window.Telegram.WebApp) {
-    window.Telegram.WebApp.onEvent('viewportChanged', updateTelegramViewport)
+    // Enable closing confirmation if needed
+    window.Telegram.WebApp.enableClosingConfirmation()
   }
 })
 
 onUnmounted(() => {
-  window.removeEventListener('resize', updateTelegramViewport)
-  window.removeEventListener('orientationchange', updateTelegramViewport)
-
-  // Telegram WebApp cleanup
+  // Cleanup if needed
   if (window.Telegram && window.Telegram.WebApp) {
-    window.Telegram.WebApp.offEvent('viewportChanged', updateTelegramViewport)
+    window.Telegram.WebApp.disableClosingConfirmation()
   }
 })
 
