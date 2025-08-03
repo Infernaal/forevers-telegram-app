@@ -312,10 +312,10 @@ const closeProfileMenu = () => {
   console.log('Profile menu closed, state:', isProfileMenuOpen.value)
 }
 
-// Window resize handler
 const handleResize = () => {
   if (isProfileMenuOpen.value) {
     updateProfileButtonPosition()
+    updateBottomNavHeight()
   }
 }
 
@@ -323,6 +323,7 @@ const handleResize = () => {
 onMounted(() => {
   window.addEventListener('resize', handleResize)
   updateProfileButtonPosition()
+  updateBottomNavHeight()
 })
 
 onUnmounted(() => {
@@ -336,19 +337,6 @@ const updateBottomNavHeight = () => {
   if (bottomNav.value) {
     const rect = bottomNav.value.getBoundingClientRect()
     bottomNavHeight.value = rect.height
-  }
-}
-
-onMounted(() => {
-  window.addEventListener('resize', handleResize)
-  updateProfileButtonPosition()
-  updateBottomNavHeight()
-})
-
-const handleResize = () => {
-  if (isProfileMenuOpen.value) {
-    updateProfileButtonPosition()
-    updateBottomNavHeight()
   }
 }
 </script>
