@@ -4,11 +4,12 @@
     <ProfileOverlay
       :is-visible="isProfileMenuOpen"
       :trigger-position="profileButtonPosition"
+      :bottom-nav-height="bottomNavHeight"
       @close="closeProfileMenu"
     />
 
     <!-- Bottom Navigation -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-[0_-4px_16px_rgba(0,0,0,0.08),0_-2px_6px_rgba(0,0,0,0.04)] border-t border-black/[0.06] z-[10001]">
+    <div ref="bottomNav" class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-[0_-4px_16px_rgba(0,0,0,0.08),0_-2px_6px_rgba(0,0,0,0.04)] border-t border-black/[0.06] z-[10001]">
       <!-- Navigation Content -->
       <div class="flex items-center justify-center px-3 pt-3 pb-[max(env(safe-area-inset-bottom),1rem)]">
         <!-- Navigation Items Container -->
@@ -328,7 +329,28 @@ onUnmounted(() => {
   window.removeEventListener('resize', handleResize)
 })
 
+const bottomNav = ref(null)
+const bottomNavHeight = ref(88) // дефолт
 
+const updateBottomNavHeight = () => {
+  if (bottomNav.value) {
+    const rect = bottomNav.value.getBoundingClientRect()
+    bottomNavHeight.value = rect.height
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('resize', handleResize)
+  updateProfileButtonPosition()
+  updateBottomNavHeight()
+})
+
+const handleResize = () => {
+  if (isProfileMenuOpen.value) {
+    updateProfileButtonPosition()
+    updateBottomNavHeight()
+  }
+}
 </script>
 
 <style scoped>
