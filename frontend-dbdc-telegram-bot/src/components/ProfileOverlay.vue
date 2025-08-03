@@ -3,7 +3,7 @@
     <!-- Dropdown Wrapper -->
     <div
       class="absolute inset-x-4 flex flex-col items-start z-[9999]"
-      :style="{ top: '10px', height: `calc(100vh - ${bottomOffset}px - 20px)` }"
+      :style="{ top: '10px', height: `calc(100vh - ${props.bottomOffset}px - 20px)` }"
     >
 
       <!-- Dropdown Menu -->
