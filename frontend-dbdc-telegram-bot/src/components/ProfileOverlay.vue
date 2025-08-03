@@ -490,6 +490,10 @@ const props = defineProps({
   triggerPosition: {
     type: Object,
     default: () => ({ left: 0, width: 0 })
+  },
+  bottomOffset: {
+    type: Number,
+    default: 0
   }
 })
 
