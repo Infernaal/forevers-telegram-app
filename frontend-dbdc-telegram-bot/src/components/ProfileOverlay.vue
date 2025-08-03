@@ -635,6 +635,10 @@ const selectLanguage = (language) => {
 </script>
 
 <style scoped>
+.profile-overlay-container {
+  /* 138px здесь — это сумма вашего header (или отступов) + высота треугольника + bottomOffset */
+  max-height: calc(var(--tg-viewport-height) - 138px);
+}
 /* Custom animations */
 @keyframes fadeInScale {
   0% {
