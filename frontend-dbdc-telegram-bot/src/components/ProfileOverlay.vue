@@ -3,7 +3,8 @@
     <!-- Dropdown Wrapper -->
     <div
       class="absolute inset-x-4 flex flex-col items-start z-[9999]"
-      style="bottom: calc(93px + env(safe-area-inset-bottom, 0px))">
+      :style="{ bottom: bottomOffset + 'px' }"
+    >
 
       <!-- Dropdown Menu -->
       <div class="w-full
