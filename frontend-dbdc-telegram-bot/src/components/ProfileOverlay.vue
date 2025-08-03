@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl min-h-[100vh]" style="top: 0; height: calc(100dvh - var(--tg-viewport-height, 0px))">
+  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl min-h-[100vh]" style="top:0; height: var(--tg-viewport-height, 100vh);">
     <!-- Dropdown Wrapper -->
     <div
       class="absolute inset-x-4 bottom-[calc(93px+env(safe-area-inset-bottom,0px))] sm:bottom-[calc(103px+env(safe-area-inset-bottom,0px))] md:bottom-[calc(103px+env(safe-area-inset-bottom,0px))] lg:bottom-[calc(103px+env(safe-area-inset-bottom,0px))] flex flex-col items-start z-[9999]">
@@ -536,13 +536,11 @@ const trianglePosition = computed(() => {
 
 // Set Telegram WebApp viewport height and handle changes
 const updateTelegramViewport = () => {
-  if (window.Telegram && window.Telegram.WebApp) {
-    const tgViewportHeight = window.Telegram.WebApp.viewportHeight
-    if (tgViewportHeight) {
-      document.documentElement.style.setProperty('--tg-viewport-height', `${tgViewportHeight}px`)
-    }
+  if (window.Telegram?.WebApp) {
+    const h = window.Telegram.WebApp.viewportHeight;
+    document.documentElement.style.setProperty('--tg-viewport-height', `${h}px`);
   }
-}
+};
 
 onMounted(() => {
   updateTelegramViewport()
