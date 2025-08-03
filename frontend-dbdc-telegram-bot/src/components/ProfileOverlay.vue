@@ -3,7 +3,7 @@
     <!-- Dropdown Wrapper -->
     <div
       class="absolute inset-x-4 flex flex-col items-start z-[9999]"
-      :style="{ bottom: bottomOffset + 'px' }"
+      :style="{ top: '0px', bottom: bottomOffset + 'px' }"
     >
 
       <!-- Dropdown Menu -->
