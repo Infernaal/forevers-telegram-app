@@ -1,8 +1,8 @@
 <template>
-  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl min-h-[100vh]" style="top: 0; height: calc(100dvh - var(--tg-viewport-height, 0px))">
+  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl tg-overlay-container">
     <!-- Dropdown Wrapper -->
     <div
-      class="absolute inset-x-4 bottom-[calc(93px+env(safe-area-inset-bottom,0px))] sm:bottom-[calc(103px+env(safe-area-inset-bottom,0px))] md:bottom-[calc(103px+env(safe-area-inset-bottom,0px))] lg:bottom-[calc(103px+env(safe-area-inset-bottom,0px))] flex flex-col items-start z-[9999]">
+      class="absolute tg-dropdown-wrapper flex flex-col items-start z-[9999]">
 
       <!-- Dropdown Menu -->
       <div class="w-full
@@ -470,7 +470,7 @@
         </div>
       </div>
       <!-- Triangle Pointer -->
-      <div :style="{marginLeft: trianglePosition}" class="mt-[-1px]">
+      <div :style="{marginLeft: trianglePosition}" class="tg-triangle-pointer">
         <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px]
                     border-l-transparent border-r-transparent border-t-[#09074E] drop-shadow-md"></div>
       </div>
@@ -826,9 +826,66 @@ const selectLanguage = (language) => {
 }
 
 /* Telegram WebApp specific adjustments */
+.tg-overlay-container {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+}
+
+/* Desktop Telegram - full viewport width */
+@media (min-width: 768px) {
+  .tg-overlay-container {
+    width: 100vw;
+    max-width: none;
+    left: 0;
+    right: 0;
+  }
+}
+
+.tg-dropdown-wrapper {
+  left: 16px;
+  right: 16px;
+  bottom: calc(93px + env(safe-area-inset-bottom, 0px));
+}
+
+/* Mobile adjustments */
 @media (max-width: 767px) {
+  .tg-dropdown-wrapper {
+    bottom: calc(93px + env(safe-area-inset-bottom, 0px));
+  }
+
   .profile-overlay-container {
     max-height: calc(var(--tg-viewport-height, 100vh) - 150px - env(safe-area-inset-bottom));
+  }
+}
+
+/* Desktop/Tablet adjustments */
+@media (min-width: 768px) {
+  .tg-dropdown-wrapper {
+    bottom: calc(103px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* Triangle positioning fix */
+.tg-triangle-pointer {
+  margin-top: -1px;
+  /* Ensure triangle connects properly */
+  position: relative;
+  z-index: 10;
+}
+
+/* Mobile iPhone specific fixes */
+@media (max-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+  .tg-triangle-pointer {
+    margin-top: 0px;
+  }
+
+  .tg-dropdown-wrapper {
+    bottom: calc(88px + env(safe-area-inset-bottom, 0px));
   }
 }
 
