@@ -538,8 +538,19 @@ const trianglePosition = computed(() => {
 const updateTelegramViewport = () => {
   if (window.Telegram && window.Telegram.WebApp) {
     const tgViewportHeight = window.Telegram.WebApp.viewportHeight
+    const tgViewportStableHeight = window.Telegram.WebApp.viewportStableHeight
+
     if (tgViewportHeight) {
       document.documentElement.style.setProperty('--tg-viewport-height', `${tgViewportHeight}px`)
+    }
+
+    if (tgViewportStableHeight) {
+      document.documentElement.style.setProperty('--tg-viewport-stable-height', `${tgViewportStableHeight}px`)
+    }
+
+    // Force full viewport width for desktop Telegram
+    if (window.innerWidth >= 768) {
+      document.documentElement.style.setProperty('--tg-viewport-width', '100vw')
     }
   }
 }
