@@ -1,5 +1,6 @@
 <template>
-  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl min-h-[100vh]" style="top:0; height: var(--tg-viewport-height, 100vh);">
+  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl min-h-[100vh]"
+    :style="{ bottom: bottomOffset + 'px' }">
     <!-- Dropdown Wrapper -->
     <div
       class="absolute inset-x-4 bottom-[calc(93px+env(safe-area-inset-bottom,0px))] sm:bottom-[calc(103px+env(safe-area-inset-bottom,0px))] md:bottom-[calc(103px+env(safe-area-inset-bottom,0px))] lg:bottom-[calc(103px+env(safe-area-inset-bottom,0px))] flex flex-col items-start z-[9999]">
@@ -470,7 +471,7 @@
         </div>
       </div>
       <!-- Triangle Pointer -->
-      <div :style="{marginLeft: trianglePosition}" class="mt-[-1px]">
+      <div :style="{ marginLeft: trianglePosition, marginTop: '-' + bottomOffset + 'px' }" class="mt-[-1px]">
         <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px]
                     border-l-transparent border-r-transparent border-t-[#09074E] drop-shadow-md"></div>
       </div>
