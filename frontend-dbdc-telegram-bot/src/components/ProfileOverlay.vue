@@ -1,9 +1,10 @@
 <template>
-  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl min-h-[100vh]"
-    :style="{ bottom: bottomOffset + 'px' }">
+  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl min-h-[100vh]" style="height: var(--tg-viewport-stable-height, 100vh)">
     <!-- Dropdown Wrapper -->
     <div
-      class="absolute inset-x-4 bottom-[calc(93px+env(safe-area-inset-bottom,0px))] sm:bottom-[calc(103px+env(safe-area-inset-bottom,0px))] md:bottom-[calc(103px+env(safe-area-inset-bottom,0px))] lg:bottom-[calc(103px+env(safe-area-inset-bottom,0px))] flex flex-col items-start z-[9999]">
+      class="absolute inset-x-4 flex flex-col items-start z-[9999]"
+      :style="{ bottom: bottomOffset + 'px' }"
+    >
 
       <!-- Dropdown Menu -->
       <div class="w-full
