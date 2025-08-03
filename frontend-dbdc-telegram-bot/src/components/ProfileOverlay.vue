@@ -1,8 +1,9 @@
 <template>
-  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl tg-overlay-container">
+  <div v-if="isVisible" class="fixed inset-0 z-[9999] font-montserrat bg-black/10 backdrop-blur-xl" style="height: var(--tg-viewport-stable-height, 100vh)">
     <!-- Dropdown Wrapper -->
     <div
-      class="absolute tg-dropdown-wrapper flex flex-col items-start z-[9999]">
+      class="absolute inset-x-4 flex flex-col items-start z-[9999]"
+      style="bottom: calc(93px + env(safe-area-inset-bottom, 0px))">
 
       <!-- Dropdown Menu -->
       <div class="w-full
@@ -470,7 +471,7 @@
         </div>
       </div>
       <!-- Triangle Pointer -->
-      <div :style="{marginLeft: trianglePosition}" class="tg-triangle-pointer">
+      <div :style="{marginLeft: trianglePosition}" class="mt-[-1px]">
         <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-t-[15px]
                     border-l-transparent border-r-transparent border-t-[#09074E] drop-shadow-md"></div>
       </div>
@@ -511,7 +512,7 @@ const languages = ref([
   { code: 'RUS', name: 'Русский', country: 'ukraine' },
   { code: 'CHN', name: '中��', country: 'china' },
   { code: 'JPN', name: '日本語', country: 'japan' },
-  { code: 'KOR', name: '한국��', country: 'new zealand' },
+  { code: 'KOR', name: '한국어', country: 'new zealand' },
   { code: 'ARA', name: 'العربية', country: 'uae' },
   { code: 'POR', name: 'Português', country: 'spain' },
   { code: 'NLD', name: 'Nederlands', country: 'norway' }
@@ -836,67 +837,16 @@ const selectLanguage = (language) => {
   max-height: calc(100vh - 160px - env(safe-area-inset-bottom));
 }
 
-/* Telegram WebApp specific adjustments */
-.tg-overlay-container {
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-}
-
-/* Desktop Telegram - full viewport width */
-@media (min-width: 768px) {
-  .tg-overlay-container {
-    width: 100vw;
-    max-width: none;
-    left: 0;
-    right: 0;
-  }
-}
-
-.tg-dropdown-wrapper {
-  left: 16px;
-  right: 16px;
-  bottom: calc(93px + env(safe-area-inset-bottom, 0px));
-}
-
-/* Mobile adjustments */
+/* Telegram WebApp specific adjustments using official CSS variables */
 @media (max-width: 767px) {
-  .tg-dropdown-wrapper {
-    bottom: calc(93px + env(safe-area-inset-bottom, 0px));
-  }
-
   .profile-overlay-container {
-    max-height: calc(var(--tg-viewport-height, 100vh) - 150px - env(safe-area-inset-bottom));
+    max-height: calc(var(--tg-viewport-stable-height, 100vh) - 150px - env(safe-area-inset-bottom));
   }
 }
 
-/* Desktop/Tablet adjustments */
 @media (min-width: 768px) {
-  .tg-dropdown-wrapper {
-    bottom: calc(103px + env(safe-area-inset-bottom, 0px));
-  }
-}
-
-/* Triangle positioning fix */
-.tg-triangle-pointer {
-  margin-top: -1px;
-  /* Ensure triangle connects properly */
-  position: relative;
-  z-index: 10;
-}
-
-/* Mobile iPhone specific fixes */
-@media (max-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
-  .tg-triangle-pointer {
-    margin-top: 0px;
-  }
-
-  .tg-dropdown-wrapper {
-    bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+  .profile-overlay-container {
+    max-height: calc(var(--tg-viewport-stable-height, 100vh) - 180px - env(safe-area-inset-bottom));
   }
 }
 
@@ -915,51 +865,12 @@ const selectLanguage = (language) => {
 /* Very small screens */
 @media (max-height: 500px) {
   .profile-overlay-container {
-    max-height: calc(var(--tg-viewport-height, 100vh) - 100px - env(safe-area-inset-bottom));
+    max-height: calc(var(--tg-viewport-stable-height, 100vh) - 100px - env(safe-area-inset-bottom));
   }
 
   .overflow-y-auto.overflow-x-hidden {
     max-height: calc(18vh) !important;
     min-height: 110px !important;
-  }
-}
-
-/* Telegram WebApp specific environment fixes */
-@supports (height: 100dvh) {
-  .tg-overlay-container {
-    height: 100dvh;
-  }
-}
-
-/* iOS Safari specific fixes */
-@supports (-webkit-touch-callout: none) {
-  .tg-overlay-container {
-    height: -webkit-fill-available;
-  }
-
-  @media (max-width: 767px) {
-    .tg-dropdown-wrapper {
-      bottom: calc(88px + env(safe-area-inset-bottom, 16px));
-    }
-  }
-}
-
-/* Android specific fixes */
-@media (max-width: 767px) and (orientation: portrait) {
-  .tg-triangle-pointer {
-    position: relative;
-    z-index: 1000;
-  }
-
-  .tg-dropdown-wrapper {
-    bottom: calc(90px + env(safe-area-inset-bottom, 0px));
-  }
-}
-
-/* Landscape mode adjustments */
-@media (max-height: 450px) and (orientation: landscape) {
-  .tg-dropdown-wrapper {
-    bottom: calc(78px + env(safe-area-inset-bottom, 0px));
   }
 }
 
