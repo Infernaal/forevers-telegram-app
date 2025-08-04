@@ -38,7 +38,7 @@
 
               <!-- User Info -->
               <div class="flex-1 flex flex-col gap-1 xs:gap-1.5 sm:gap-2 px-0.5 xs:px-1 sm:px-1.5 min-w-0 overflow-hidden">
-                <!-- Silver Badge -->
+                <!-- Rank Badge -->
                 <div class="flex items-center justify-start gap-1 xs:gap-1.5 sm:gap-2
                             px-2 xs:px-2.5 sm:px-3 md:px-2.5 lg:px-3 xl:px-3.5
                             py-0.5 xs:py-1 sm:py-1.5 md:py-1 lg:py-1.5 xl:py-2
@@ -49,24 +49,19 @@
                              h-3 xs:h-4 sm:h-5 md:h-4 lg:h-5 xl:h-6
                              flex-shrink-0 flex items-center justify-center
                              transition-transform duration-300 hover:scale-110">
-                    <svg class="w-full h-full" viewBox="0 0 28 28" fill="none">
-                      <path d="M14.0004 26.2497C7.24592 26.2497 1.75073 20.7545 1.75073 14.0001C1.75073 7.24564 7.24592 1.75085 14.0004 1.75085C20.7548 1.75085 26.25 7.24564 26.25 14.0001C26.25 20.7545 20.7544 26.2497 14.0004 26.2497Z" fill="white"/>
-                      <path d="M20.2071 5.37145C20.73 5.37145 21.2468 5.39833 21.7567 5.4472C19.7049 3.58479 16.9828 2.44812 14 2.44812C7.63041 2.44812 2.448 7.63013 2.448 14.0001C2.448 16.2735 3.11102 18.3941 4.24973 20.1832C4.86143 11.9015 11.769 5.37145 20.2071 5.37145Z" fill="#E0E0E0"/>
-                      <path d="M14.0006 25.5519C20.3702 25.5519 25.5526 20.3699 25.5526 13.9999C25.5526 10.6131 24.0873 7.56229 21.7577 5.44697C21.2478 5.39809 20.731 5.37122 20.2081 5.37122C11.7704 5.37122 4.86244 11.9017 4.25073 20.1829C6.30211 23.4072 9.90475 25.5519 14.0006 25.5519Z" fill="#B5B5B5"/>
-                      <path d="M14.0004 23.1368C19.0464 23.1368 23.1369 19.0463 23.1369 14.0003C23.1369 8.95433 19.0464 4.86377 14.0004 4.86377C8.95445 4.86377 4.86389 8.95433 4.86389 14.0003C4.86389 19.0463 8.95445 23.1368 14.0004 23.1368Z" fill="#9E9E9E"/>
-                      <path d="M19.4965 12.7667L15.6984 12.2148L14.0001 8.77307L12.3014 12.2148L8.50366 12.7667L11.2519 15.4452L10.6031 19.2279L14.0001 17.4421L17.397 19.2279L16.7483 15.4452L19.4965 12.7667Z" fill="#F6F6F6"/>
-                      <path d="M20.5542 6.30372C20.755 6.5045 21.4074 6.81443 21.7117 6.9529C21.7728 6.98059 21.7728 7.06693 21.7117 7.09462C21.4074 7.23309 20.7554 7.54261 20.5542 7.7438C20.3534 7.94458 20.0435 8.59701 19.905 8.90124C19.8774 8.96233 19.791 8.96233 19.7633 8.90124C19.6249 8.59701 19.3153 7.94499 19.1141 7.7438C18.9134 7.54302 18.2609 7.23309 17.9567 7.09462C17.8956 7.06693 17.8956 6.98059 17.9567 6.9529C18.2609 6.81443 18.913 6.50491 19.1141 6.30372C19.3149 6.10294 19.6249 5.45051 19.7633 5.14628C19.791 5.08519 19.8774 5.08519 19.905 5.14628C20.0431 5.45051 20.353 6.10253 20.5542 6.30372Z" fill="white"/>
-                      <path d="M19.4971 12.7667L15.699 12.2144L14.0007 8.77307V17.4421L17.3977 19.2279L16.7489 15.4452L19.4971 12.7667Z" fill="#E0E0E0"/>
-                    </svg>
+                    <img :src="getRankIcon(userInfo.rank)" :alt="userInfo.rank" class="w-full h-full object-contain" />
                   </div>
-                  <span class="text-dbd-off-white text-xs xs:text-sm sm:text-base md:text-sm lg:text-base xl:text-lg
-                               font-semibold leading-tight
-                               flex items-center">Silver</span>
+                  <span :class="[
+                    'text-dbd-off-white font-semibold leading-tight flex items-center capitalize',
+                    userInfo.rank === 'royal ambassador'
+                      ? 'text-[10px] xs:text-xs sm:text-base md:text-sm lg:text-base xl:text-lg'
+                      : 'text-xs xs:text-sm sm:text-base md:text-sm lg:text-base xl:text-lg'
+                  ]">{{ userInfo.rank }}</span>
                 </div>
 
                 <!-- User Name -->
                 <h2 class="text-white text-xs xs:text-sm sm:text-base md:text-sm lg:text-base xl:text-lg font-bold leading-4 xs:leading-5 sm:leading-6 m-0 whitespace-nowrap overflow-hidden text-ellipsis text-left">
-                  Jason Williams
+                  {{ userInfo.fullName }}
                 </h2>
               </div>
 
@@ -286,30 +281,7 @@
               <div class="flex items-center justify-between relative z-[1] w-full gap-3 sm:gap-4">
                 <div class="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
                   <div class="flex-shrink-0 w-7 sm:w-8 md:w-9 lg:w-10 xl:w-11 h-7 sm:h-8 md:h-9 lg:h-10 xl:h-11">
-                    <svg class="w-full h-full" viewBox="0 0 32 32" fill="none">
-                      <g clip-path="url(#clip0_2_21309)">
-                        <path d="M16 31.0588C24.3167 31.0588 31.0588 24.3167 31.0588 16C31.0588 7.68323 24.3167 0.941162 16 0.941162C7.68323 0.941162 0.941162 7.68323 0.941162 16C0.941162 24.3167 7.68323 31.0588 16 31.0588Z" fill="#8C4CD1"/>
-                        <path d="M28.998 8.39055C26.1133 12.4471 21.365 15.0918 16.0003 15.0918C10.6356 15.0918 5.88739 12.4471 3.00269 8.39055C5.61916 3.9341 10.4615 0.941162 16.0003 0.941162C21.5392 0.941162 26.3815 3.9341 28.998 8.39055Z" fill="#9C68E1"/>
-                        <path d="M15.9997 5.11792V15.4117L19.3443 11.8949L15.9997 5.11792Z" fill="#FF9F00"/>
-                        <path d="M15.9996 5.11792V15.4117L12.655 11.8949L15.9996 5.11792Z" fill="#FED110"/>
-                        <path d="M26.8232 12.982L19.3443 11.8953L15.9997 15.412L26.8232 12.982Z" fill="#FED110"/>
-                        <path d="M26.8232 12.9825L21.4115 18.2577L15.9997 15.4126L26.8232 12.9825Z" fill="#FF9F00"/>
-                        <path d="M5.17645 12.982L12.6553 11.8953L16 15.412L5.17645 12.982Z" fill="#FF9F00"/>
-                        <path d="M5.17645 12.9825L10.5882 18.2577L16 15.4126L5.17645 12.9825Z" fill="#FED110"/>
-                        <path d="M15.9997 15.4124L21.4115 18.2575L22.689 25.7061L15.9997 15.4124Z" fill="#FED110"/>
-                        <path d="M22.689 25.7061L15.9997 22.1894V15.4124L22.689 25.7061Z" fill="#FF9F00"/>
-                        <path d="M15.9996 15.4124L10.5878 18.2575L9.31024 25.7061L15.9996 15.4124Z" fill="#FF9F00"/>
-                        <path d="M9.31024 25.7061L15.9996 22.1894V15.4124L9.31024 25.7061Z" fill="#FED110"/>
-                        <g opacity="0.3">
-                          <path d="M16.0003 27.5882C20.9059 27.5882 24.8826 27.3442 24.8826 27.0432C24.8826 26.7423 20.9059 26.4983 16.0003 26.4983C11.0947 26.4983 7.11792 26.7423 7.11792 27.0432C7.11792 27.3442 11.0947 27.5882 16.0003 27.5882Z" fill="#20273A"/>
-                        </g>
-                      </g>
-                      <defs>
-                        <clipPath id="clip0_2_21309">
-                          <rect width="32" height="32" fill="white"/>
-                        </clipPath>
-                      </defs>
-                    </svg>
+                    <img src="/star.svg" alt="Start" class="w-full h-full object-contain" />
                   </div>
                   <div class="text-dbd-dark text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold truncate">Start</div>
                 </div>
@@ -414,10 +386,7 @@
                   h-3 sm:h-4 md:h-5 lg:h-6 xl:h-7
                   ml-1 sm:ml-1.5 md:ml-2 transform transition-transform"
                     :class="{ 'rotate-180': showLanguageDropdown }">
-                  <svg class="w-full h-full" viewBox="0 0 20 20" fill="none">
-                    <circle opacity="0.2" cx="10" cy="10" r="10" fill="white"/>
-                    <path d="M5.71387 8.57146L9.99958 12.8572L14.2853 8.57146" stroke="white" stroke-linecap="round"/>
-                  </svg>
+                  <img src="/arrow.svg" alt="Dropdown arrow" class="w-full h-full object-contain" />
                 </div>
 
                 <!-- Language Dropdown -->
@@ -503,6 +472,12 @@ const emit = defineEmits(['close'])
 // State
 const showCopySuccess = ref(false)
 const showLanguageDropdown = ref(false)
+
+// Mock user data (заглушка)
+const userInfo = ref({
+  fullName: 'Jason Williams', // name surname приходят одной строкой через пробел
+  rank: 'royal ambassador' // можно менять на: none, bronze, silver, gold, diamond, double diamond, ambassador, royal ambassador
+})
 
 // Language state
 const languages = ref([
@@ -633,6 +608,13 @@ const selectLanguage = (language) => {
   selectedLanguage.value = language
   showLanguageDropdown.value = false
   console.log('Language selected:', language)
+}
+
+// Get rank icon from public folder
+const getRankIcon = (rank) => {
+  const availableRanks = ['none', 'bronze', 'silver', 'gold', 'diamond', 'double diamond', 'ambassador', 'royal ambassador']
+  const validRank = availableRanks.includes(rank.toLowerCase()) ? rank.toLowerCase().replace(' ', '-') : 'none'
+  return `/${validRank}.svg`
 }
 </script>
 

@@ -50,24 +50,21 @@
                       class="w-full h-full object-cover"
                     />
                   </div>
-                  <!-- Silver Badge -->
-                  <div class="absolute -top-0.5 -right-0.5 bg-gray-300 border-2 border-white rounded-full w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center">
-                    <svg class="w-1.5 h-1.5 sm:w-2 sm:h-2 text-white" viewBox="0 0 8 8">
-                      <path d="M4 0L5 3H8L5.5 5L6.5 8L4 6L1.5 8L2.5 5L0 3H3L4 0Z" fill="currentColor"/>
-                    </svg>
+                  <!-- Rank Badge -->
+                  <div class="absolute -top-0.5 -right-0.5 border-2 border-white rounded-full w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center overflow-hidden bg-white">
+                    <img :src="getRankIcon(userInfo.rank)" :alt="userInfo.rank" class="w-full h-full object-contain" />
                   </div>
                   <!-- Dropdown Arrow -->
                   <div class="absolute -bottom-0.5 -right-0.5 bg-gray-100 border border-gray-300 rounded-full w-2.5 h-2.5 sm:w-3 sm:h-3 flex items-center justify-center">
-                    <svg
+                    <img
                       :class="[
-                        'text-gray-600 transition-transform duration-200',
+                        'transition-transform duration-200',
                         isProfileMenuOpen ? 'rotate-180' : '',
                         'w-1.5 h-1 sm:w-2 sm:h-1.5'
                       ]"
-                      viewBox="0 0 8 6"
-                    >
-                      <path d="M1 1L4 4L7 1" stroke="currentColor" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                      src="/arrow.svg"
+                      alt="Dropdown arrow"
+                    />
                   </div>
                 </div>
               </div>
@@ -245,6 +242,12 @@ const isProfileMenuOpen = ref(false)
 const profileButton = ref(null)
 const profileButtonPosition = ref({ left: 0, width: 0 })
 
+// Mock user data (заглушка) - синхронизировано с ProfileOverlay
+const userInfo = ref({
+  fullName: 'Jason Williams', // name surname приходят одной строкой через пробел
+  rank: 'royal ambassador' // можно менять на: none, bronze, silver, gold, diamond, double diamond, ambassador, royal ambassador
+})
+
 // Computed active tab based on current route
 const activeTab = ref('wallet')
 
@@ -346,6 +349,13 @@ onUnmounted(() => {
   window.removeEventListener('resize', updateBottomOffset)
   window.Telegram?.WebApp?.offEvent('viewportChanged', updateBottomOffset)
 })
+
+// Get rank icon from public folder
+const getRankIcon = (rank) => {
+  const availableRanks = ['none', 'bronze', 'silver', 'gold', 'diamond', 'double diamond', 'ambassador', 'royal ambassador']
+  const validRank = availableRanks.includes(rank.toLowerCase()) ? rank.toLowerCase().replace(' ', '-') : 'none'
+  return `/${validRank}.svg`
+}
 
 
 </script>
