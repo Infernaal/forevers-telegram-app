@@ -641,6 +641,13 @@ const selectLanguage = (language) => {
   showLanguageDropdown.value = false
   console.log('Language selected:', language)
 }
+
+// Get rank icon from public folder
+const getRankIcon = (rank) => {
+  const availableRanks = ['none', 'bronze', 'silver', 'gold', 'diamond', 'double-diamond', 'ambassador', 'royal-ambassador']
+  const validRank = availableRanks.includes(rank.toLowerCase()) ? rank.toLowerCase() : 'none'
+  return `/${validRank}.svg`
+}
 </script>
 
 <style scoped>
