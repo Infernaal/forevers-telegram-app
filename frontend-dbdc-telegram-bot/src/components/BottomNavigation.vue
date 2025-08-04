@@ -51,13 +51,13 @@
                     />
                   </div>
                   <!-- Silver Badge -->
-                  <div class="absolute -bottom-0.5 -right-0.5 bg-gray-300 border-2 border-white rounded-full flex items-center justify-center w-3 h-3 sm:w-4 sm:h-4">
+                  <div class="absolute -top-0.5 -right-0.5 bg-gray-300 border-2 border-white rounded-full w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center">
                     <svg class="w-1.5 h-1.5 sm:w-2 sm:h-2 text-white" viewBox="0 0 8 8">
                       <path d="M4 0L5 3H8L5.5 5L6.5 8L4 6L1.5 8L2.5 5L0 3H3L4 0Z" fill="currentColor"/>
                     </svg>
                   </div>
                   <!-- Dropdown Arrow -->
-                  <div class="absolute -bottom-0.5 -right-0.5 bg-gray-100 border border-gray-300 rounded-full flex items-center justify-center w-2.5 h-2.5 sm:w-3 sm:h-3">
+                  <div class="absolute -bottom-0.5 -right-0.5 bg-gray-100 border border-gray-300 rounded-full w-2.5 h-2.5 sm:w-3 sm:h-3 flex items-center justify-center">
                     <svg
                       :class="[
                         'text-gray-600 transition-transform duration-200',
@@ -388,6 +388,29 @@ onUnmounted(() => {
     background-color: #1a1a1a !important;
     border-top-color: rgba(255, 255, 255, 0.1) !important;
     box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.3), 0 -2px 6px rgba(0, 0, 0, 0.2) !important;
+  }
+}
+
+/* Profile badge centering fixes */
+.absolute.rounded-full.flex.items-center.justify-center {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.absolute.rounded-full.flex.items-center.justify-center svg {
+  display: block;
+  margin: 0 auto;
+}
+
+/* Mobile specific badge centering */
+@media (max-width: 640px) {
+  .absolute.rounded-full.flex.items-center.justify-center {
+    line-height: 1;
+  }
+
+  .absolute.rounded-full.flex.items-center.justify-center svg {
+    vertical-align: middle;
   }
 }
 
