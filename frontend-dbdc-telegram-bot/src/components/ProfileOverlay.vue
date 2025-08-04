@@ -58,7 +58,7 @@
 
                 <!-- User Name -->
                 <h2 class="text-white text-xs xs:text-sm sm:text-base md:text-sm lg:text-base xl:text-lg font-bold leading-4 xs:leading-5 sm:leading-6 m-0 whitespace-nowrap overflow-hidden text-ellipsis text-left">
-                  {{ userInfo.name }} {{ userInfo.surname }}
+                  {{ userInfo.fullName }}
                 </h2>
               </div>
 
