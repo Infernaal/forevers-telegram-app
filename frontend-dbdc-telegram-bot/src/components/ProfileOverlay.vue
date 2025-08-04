@@ -51,9 +51,12 @@
                              transition-transform duration-300 hover:scale-110">
                     <img :src="getRankIcon(userInfo.rank)" :alt="userInfo.rank" class="w-full h-full object-contain" />
                   </div>
-                  <span class="text-dbd-off-white text-xs xs:text-sm sm:text-base md:text-sm lg:text-base xl:text-lg
-                               font-semibold leading-tight
-                               flex items-center capitalize">{{ userInfo.rank }}</span>
+                  <span :class="[
+                    'text-dbd-off-white font-semibold leading-tight flex items-center capitalize',
+                    userInfo.rank === 'royal ambassador'
+                      ? 'text-[10px] xs:text-xs sm:text-base md:text-sm lg:text-base xl:text-lg'
+                      : 'text-xs xs:text-sm sm:text-base md:text-sm lg:text-base xl:text-lg'
+                  ]">{{ userInfo.rank }}</span>
                 </div>
 
                 <!-- User Name -->
