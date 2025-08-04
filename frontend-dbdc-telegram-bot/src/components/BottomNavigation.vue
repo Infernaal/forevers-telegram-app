@@ -247,7 +247,7 @@ const profileButtonPosition = ref({ left: 0, width: 0 })
 const userInfo = ref({
   name: 'Jason',
   surname: 'Williams',
-  rank: 'silver' // можно менять на: none, bronze, silver, gold, diamond, double-diamond, ambassador, royal-ambassador
+  rank: 'gold' // можно менять на: none, bronze, silver, gold, diamond, double-diamond, ambassador, royal-ambassador
 })
 
 // Computed active tab based on current route
