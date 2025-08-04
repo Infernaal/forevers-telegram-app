@@ -142,7 +142,7 @@
               Offer valid until {{ balance.discountEnd || '...' }}
             </div>
           </div>
-        </div>  
+
           <!-- Values Section -->
           <div class="bg-purple-50 rounded-xl p-3 mb-3">
             <div class="flex justify-between items-center mb-2">
@@ -153,7 +153,6 @@
               <span class="text-sm text-gray-600 font-medium">Potential worth</span>
               <span class="text-base font-semibold text-gray-700">${{ balance.potentialWorth.toLocaleString() }}</span>
             </div>
-          </div>
           </div>
         </div>
       </div>
