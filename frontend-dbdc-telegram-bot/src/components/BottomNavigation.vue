@@ -52,7 +52,7 @@
                   </div>
                   <!-- Silver Badge -->
                   <div class="absolute -top-0.5 -right-0.5 bg-gray-300 border-2 border-white rounded-full flex items-center justify-center w-3 h-3 sm:w-4 sm:h-4">
-                    <svg class="w-1.5 h-1.5 sm:w-2 sm:h-2 text-white" viewBox="0 0 8 8">
+                    <svg class="w-1.5 h-1.5 sm:w-2 sm:h-2 text-white flex-shrink-0" viewBox="0 0 8 8" style="margin: auto;">
                       <path d="M4 0L5 3H8L5.5 5L6.5 8L4 6L1.5 8L2.5 5L0 3H3L4 0Z" fill="currentColor"/>
                     </svg>
                   </div>
@@ -60,11 +60,12 @@
                   <div class="absolute -bottom-0.5 -right-0.5 bg-gray-100 border border-gray-300 rounded-full flex items-center justify-center w-2.5 h-2.5 sm:w-3 sm:h-3">
                     <svg
                       :class="[
-                        'text-gray-600 transition-transform duration-200',
+                        'text-gray-600 transition-transform duration-200 flex-shrink-0',
                         isProfileMenuOpen ? 'rotate-180' : '',
                         'w-1.5 h-1 sm:w-2 sm:h-1.5'
                       ]"
                       viewBox="0 0 8 6"
+                      style="margin: auto;"
                     >
                       <path d="M1 1L4 4L7 1" stroke="currentColor" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
