@@ -101,7 +101,7 @@
           <!-- Available and Discount Section -->
           <div class="flex gap-2 mb-3 sm:gap-3" v-if="balance.discount && balance.discount > 0">
             <!-- Available Section -->
-            <div class="bg-green-100 rounded-xl p-2 sm:p-3 flex-1 min-w-0 sm:flex sm:items-center">
+            <div class="bg-green-100 rounded-xl p-1.5 sm:p-3 flex-1 min-w-0 sm:flex sm:items-center">
               <!-- Mobile: vertical layout, Desktop: horizontal layout matching no-discount version -->
               <div class="flex flex-col gap-0.5 sm:flex-row sm:items-center sm:justify-between sm:gap-0 sm:w-full">
                 <!-- Mobile: separate rows, Desktop: left side content group -->
