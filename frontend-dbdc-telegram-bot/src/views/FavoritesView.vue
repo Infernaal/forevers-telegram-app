@@ -110,9 +110,9 @@
                   <!-- Mobile: info button on right, Desktop: hidden (will show at end) -->
                   <button
                     @click="showInfoTooltip = true"
-                    class="w-4 h-4 border border-gray-300 bg-white rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors flex-shrink-0 sm:hidden"
+                    class="w-3.5 h-3.5 border border-gray-300 bg-white rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors flex-shrink-0 sm:hidden"
                   >
-                    <svg width="16" height="16" viewBox="0 0 20 20" class="text-gray-600">
+                    <svg width="18" height="18" viewBox="0 0 20 20" class="text-gray-600">
                       <path d="M10 2C5.5888 2 2 5.58885 2 10C2 14.4112 5.5888 18 10 18C14.4112 18 18 14.4112 18 10C18 5.58885 14.4112 2 10 2ZM10 16.5455C6.39079 16.5455 3.45455 13.6092 3.45455 10C3.45455 6.39088 6.39079 3.45455 10 3.45455C13.6092 3.45455 16.5455 6.39088 16.5455 10C16.5455 13.6092 13.6092 16.5455 10 16.5455Z" fill="currentColor"/>
                       <path d="M10 5.39453C9.46543 5.39453 9.03052 5.82973 9.03052 6.36466C9.03052 6.89911 9.46543 7.33393 10 7.33393C10.5346 7.33393 10.9695 6.89911 10.9695 6.36466C10.9695 5.82973 10.5346 5.39453 10 5.39453Z" fill="currentColor"/>
                       <path d="M9.99998 8.78711C9.59833 8.78711 9.27271 9.11273 9.27271 9.51438V13.878C9.27271 14.2797 9.59833 14.6053 9.99998 14.6053C10.4016 14.6053 10.7273 14.2797 10.7273 13.878V9.51438C10.7273 9.11273 10.4016 8.78711 9.99998 8.78711Z" fill="currentColor"/>
