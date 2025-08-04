@@ -161,12 +161,9 @@
               <!-- Error Badge -->
               <div class="absolute right-2 xs:right-3 sm:right-4 md:right-5 top-1/2 transform -translate-y-1/2
                           w-5 xs:w-6 sm:w-7 md:w-8 h-5 xs:h-6 sm:h-7 md:h-8
-                          rounded-full bg-[#FFF0F3] border border-[#FF1919]
                           flex items-center justify-center flex-shrink-0
                           transition-all duration-300 hover:scale-110">
-                <svg class="w-3 xs:w-3.5 sm:w-4 md:w-4.5 h-3 xs:h-3.5 sm:h-4 md:h-4.5" viewBox="0 0 12 12" fill="none">
-                  <path d="M9 3L3 9M3 3L9 9" stroke="#FF1919" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+                <img src="/error-badge.svg" alt="Error" class="w-full h-full object-contain" />
               </div>
             </div>
 
@@ -475,7 +472,7 @@ const showLanguageDropdown = ref(false)
 
 // Mock user data (заглушка)
 const userInfo = ref({
-  fullName: 'Jason Williams', // name surname приходят одной строкой через пробел
+  fullName: 'Jason Williams', // name surname приходят одной строкой чере�� пробел
   rank: 'royal ambassador' // можно менять на: none, bronze, silver, gold, diamond, double diamond, ambassador, royal ambassador
 })
 
