@@ -168,7 +168,7 @@
                   {{ balance.discount }}% OFF
                 </div>
               </div>
-              <div class="text-xs text-gray-500">
+              <div class="text-xs text-gray-500 whitespace-nowrap">
                 Offer valid until {{ balance.discountEnd || '...' }}
               </div>
             </div>
