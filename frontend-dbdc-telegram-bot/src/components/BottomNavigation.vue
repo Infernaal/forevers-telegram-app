@@ -51,7 +51,7 @@
                     />
                   </div>
                   <!-- Silver Badge -->
-                  <div class="absolute -bottom-0.5 -right-0.5 bg-gray-300 border-2 border-white rounded-full flex items-center justify-center w-3 h-3 sm:w-4 sm:h-4">
+                  <div class="absolute -top-0.5 -right-0.5 bg-gray-300 border-2 border-white rounded-full flex items-center justify-center w-3 h-3 sm:w-4 sm:h-4">
                     <svg class="w-1.5 h-1.5 sm:w-2 sm:h-2 text-white" viewBox="0 0 8 8">
                       <path d="M4 0L5 3H8L5.5 5L6.5 8L4 6L1.5 8L2.5 5L0 3H3L4 0Z" fill="currentColor"/>
                     </svg>
