@@ -245,9 +245,8 @@ const profileButtonPosition = ref({ left: 0, width: 0 })
 
 // Mock user data (заглушка) - синхронизировано с ProfileOverlay
 const userInfo = ref({
-  name: 'Jason',
-  surname: 'Williams',
-  rank: 'gold' // можно менять на: none, bronze, silver, gold, diamond, double-diamond, ambassador, royal-ambassador
+  fullName: 'Jason Williams', // name surname приходят одной строкой через пробел
+  rank: 'royal ambassador' // можно менять на: none, bronze, silver, gold, diamond, double diamond, ambassador, royal ambassador
 })
 
 // Computed active tab based on current route
