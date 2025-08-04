@@ -498,9 +498,8 @@ const showLanguageDropdown = ref(false)
 
 // Mock user data (заглушка)
 const userInfo = ref({
-  name: 'Jason',
-  surname: 'Williams',
-  rank: 'double diamond' // можно менять на: none, bronze, silver, gold, diamond, double diamond, ambassador, royal ambassador
+  fullName: 'Jason Williams', // name surname приходят одной строкой через пробел
+  rank: 'royal ambassador' // можно менять на: none, bronze, silver, gold, diamond, double diamond, ambassador, royal ambassador
 })
 
 // Language state
