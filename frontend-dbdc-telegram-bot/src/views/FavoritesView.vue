@@ -161,7 +161,7 @@
             <!-- Discount Section -->
             <div class="bg-gray-100 rounded-xl p-1.5 sm:p-3 flex flex-col justify-center items-end text-right min-w-0 flex-1">
               <div class="flex items-center justify-between w-full mb-0.5 sm:mb-1">
-                <div class="bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded sm:px-2">
+                <div class="text-white text-xs font-bold px-1.5 py-0.5 rounded sm:px-2" style="background-color: #FF0000">
                   {{ Math.round(balance.usdRate * (1 - balance.discount / 100), 2) }} USD
                 </div>
                 <div class="text-sm sm:text-base font-semibold text-gray-700">
