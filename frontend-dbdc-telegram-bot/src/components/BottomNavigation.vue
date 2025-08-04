@@ -243,6 +243,13 @@ const isProfileMenuOpen = ref(false)
 const profileButton = ref(null)
 const profileButtonPosition = ref({ left: 0, width: 0 })
 
+// Mock user data (заглушка) - синхронизировано с ProfileOverlay
+const userInfo = ref({
+  name: 'Jason',
+  surname: 'Williams',
+  rank: 'silver' // можно менять на: none, bronze, silver, gold, diamond, double-diamond, ambassador, royal-ambassador
+})
+
 // Computed active tab based on current route
 const activeTab = ref('wallet')
 
