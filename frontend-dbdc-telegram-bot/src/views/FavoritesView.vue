@@ -175,7 +175,7 @@
           </div>
 
           <!-- Available Section (no discount) - Always horizontal layout -->
-          <div v-else class="bg-green-100 rounded-xl p-3 flex items-center justify-between mb-3">
+          <div v-else class="bg-green-100 rounded-xl p-2 sm:p-3 flex items-center justify-between mb-3">
             <div class="flex items-center gap-2">
               <span class="text-sm text-gray-600 font-medium">Available</span>
               <template v-if="balance.availableAmount">
