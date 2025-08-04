@@ -98,18 +98,6 @@
             </div>
           </div>
 
-          <!-- Values Section -->
-          <div class="bg-purple-50 rounded-xl p-3 mb-3">
-            <div class="flex justify-between items-center mb-2">
-              <span class="text-sm text-gray-600 font-medium">Current value</span>
-              <span class="text-base font-semibold text-gray-700">${{ balance.currentValue.toLocaleString() }}</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <span class="text-sm text-gray-600 font-medium">Potential worth</span>
-              <span class="text-base font-semibold text-gray-700">${{ balance.potentialWorth.toLocaleString() }}</span>
-            </div>
-          </div>
-
           <!-- Available Section -->
           <div class="bg-green-100 rounded-xl p-3 flex items-center justify-between">
             <div class="flex items-center gap-2">
@@ -138,6 +126,34 @@
                 <path d="M9.99998 8.78711C9.59833 8.78711 9.27271 9.11273 9.27271 9.51438V13.878C9.27271 14.2797 9.59833 14.6053 9.99998 14.6053C10.4016 14.6053 10.7273 14.2797 10.7273 13.878V9.51438C10.7273 9.11273 10.4016 8.78711 9.99998 8.78711Z" fill="currentColor"/>
               </svg>
             </button>
+          </div>
+          <!-- Discount Section -->
+          <div
+            v-if="balance.discount && balance.discount > 0"
+            class="bg-red-100 rounded-xl p-3 flex flex-col items-center justify-center w-full sm:w-[10rem] text-center"
+          >
+            <div class="bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded mb-1">
+              {{ (balance.usdRate * (1 - balance.discount / 100)).toFixed(0) }} USD
+            </div>
+            <div class="text-sm text-gray-700 font-semibold mb-1">
+              {{ balance.discount }}% OFF
+            </div>
+            <div class="text-xs text-gray-500">
+              Offer valid until {{ balance.discountEnd || '...' }}
+            </div>
+          </div>
+        </div>  
+          <!-- Values Section -->
+          <div class="bg-purple-50 rounded-xl p-3 mb-3">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-sm text-gray-600 font-medium">Current value</span>
+              <span class="text-base font-semibold text-gray-700">${{ balance.currentValue.toLocaleString() }}</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-gray-600 font-medium">Potential worth</span>
+              <span class="text-base font-semibold text-gray-700">${{ balance.potentialWorth.toLocaleString() }}</span>
+            </div>
+          </div>
           </div>
         </div>
       </div>
@@ -258,7 +274,9 @@ const mockBalances = [
     priceChange: 0.17,
     currentValue: 4000,
     potentialWorth: 8000,
-    availableAmount: 250
+    availableAmount: 250,
+    discount: 85,
+    discountEnd: '2025-09-01'
   },
   {
     id: 'uae',
@@ -269,7 +287,9 @@ const mockBalances = [
     priceChange: 0.17,
     currentValue: 4000,
     potentialWorth: 8000,
-    availableAmount: null
+    availableAmount: null,
+    discount: 90,
+    discountEnd: '2025-09-01'
   },
   {
     id: 'kz',
