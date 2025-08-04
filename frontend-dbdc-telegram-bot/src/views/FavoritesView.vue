@@ -311,7 +311,7 @@ const mockBalances = [
     currentValue: 4000,
     potentialWorth: 8000,
     availableAmount: 250,
-    discount: 85,
+    discount: 55,
     discountEnd: '01.09.2025'
   },
   {
