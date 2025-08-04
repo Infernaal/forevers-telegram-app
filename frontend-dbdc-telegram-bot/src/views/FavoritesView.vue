@@ -98,20 +98,84 @@
             </div>
           </div>
 
-          <!-- Values Section -->
-          <div class="bg-purple-50 rounded-xl p-3 mb-3">
-            <div class="flex justify-between items-center mb-2">
-              <span class="text-sm text-gray-600 font-medium">Current value</span>
-              <span class="text-base font-semibold text-gray-700">${{ balance.currentValue.toLocaleString() }}</span>
+          <!-- Available and Discount Section -->
+          <div class="flex gap-2 mb-3 sm:gap-3" v-if="balance.discount && balance.discount > 0">
+            <!-- Available Section -->
+            <div class="bg-green-100 rounded-xl p-2 sm:p-3 flex-1 min-w-0 sm:flex sm:items-center">
+              <!-- Mobile: vertical layout, Desktop: horizontal layout matching no-discount version -->
+              <div class="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between sm:gap-0">
+                <!-- Mobile: separate rows, Desktop: left side content group -->
+                <div class="flex items-center justify-between sm:justify-start sm:gap-2">
+                  <span class="text-sm text-gray-600 font-medium">Available</span>
+                  <!-- Mobile: info button on right, Desktop: hidden (will show at end) -->
+                  <button
+                    @click="showInfoTooltip = true"
+                    class="w-5 h-5 border border-gray-300 bg-white rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors flex-shrink-0 sm:hidden"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 20 20" class="text-gray-600">
+                      <path d="M10 2C5.5888 2 2 5.58885 2 10C2 14.4112 5.5888 18 10 18C14.4112 18 18 14.4112 18 10C18 5.58885 14.4112 2 10 2ZM10 16.5455C6.39079 16.5455 3.45455 13.6092 3.45455 10C3.45455 6.39088 6.39079 3.45455 10 3.45455C13.6092 3.45455 16.5455 6.39088 16.5455 10C16.5455 13.6092 13.6092 16.5455 10 16.5455Z" fill="currentColor"/>
+                      <path d="M10 5.39453C9.46543 5.39453 9.03052 5.82973 9.03052 6.36466C9.03052 6.89911 9.46543 7.33393 10 7.33393C10.5346 7.33393 10.9695 6.89911 10.9695 6.36466C10.9695 5.82973 10.5346 5.39453 10 5.39453Z" fill="currentColor"/>
+                      <path d="M9.99998 8.78711C9.59833 8.78711 9.27271 9.11273 9.27271 9.51438V13.878C9.27271 14.2797 9.59833 14.6053 9.99998 14.6053C10.4016 14.6053 10.7273 14.2797 10.7273 13.878V9.51438C10.7273 9.11273 10.4016 8.78711 9.99998 8.78711Z" fill="currentColor"/>
+                    </svg>
+                  </button>
+                  <!-- Desktop: dot separator and F icon + amount in same left group -->
+                  <template v-if="balance.availableAmount">
+                    <span class="w-1.5 h-1.5 bg-gray-400 rounded-full hidden sm:block"></span>
+                    <div class="hidden sm:flex items-center gap-1">
+                      <svg width="14" height="14" viewBox="0 0 14 14" class="text-black">
+                        <path d="M12.86 1.4H4.38C4.007 1.4 3.74 1.667 3.74 2.04V4.654H1.34C0.967 4.707 0.7 4.974 0.7 5.347C0.7 5.72 0.967 5.987 1.34 5.987H3.74V11.96C3.74 12.334 4.007 12.6 4.38 12.6C4.754 12.6 5.02 12.334 5.02 11.96V9.187H7.74C8.114 9.187 8.38 8.92 8.38 8.547C8.38 8.174 8.114 7.907 7.74 7.907H5.02V5.934H10.194C10.567 5.934 10.834 5.667 10.834 5.294C10.834 4.92 10.567 4.654 10.194 4.654H5.02V2.68H12.807C13.18 2.68 13.447 2.414 13.447 2.04C13.447 1.667 13.234 1.4 12.86 1.4Z" fill="currentColor"/>
+                      </svg>
+                      <span class="text-sm font-medium text-black">{{ balance.availableAmount }}</span>
+                    </div>
+                  </template>
+                  <template v-else>
+                    <span class="text-sm text-gray-600 font-medium hidden sm:inline">without restrictions</span>
+                  </template>
+                </div>
+                <!-- Mobile: F icon + amount row -->
+                <div class="flex items-center gap-1 sm:hidden">
+                  <template v-if="balance.availableAmount">
+                    <svg width="14" height="14" viewBox="0 0 14 14" class="text-black">
+                      <path d="M12.86 1.4H4.38C4.007 1.4 3.74 1.667 3.74 2.04V4.654H1.34C0.967 4.707 0.7 4.974 0.7 5.347C0.7 5.72 0.967 5.987 1.34 5.987H3.74V11.96C3.74 12.334 4.007 12.6 4.38 12.6C4.754 12.6 5.02 12.334 5.02 11.96V9.187H7.74C8.114 9.187 8.38 8.92 8.38 8.547C8.38 8.174 8.114 7.907 7.74 7.907H5.02V5.934H10.194C10.567 5.934 10.834 5.667 10.834 5.294C10.834 4.92 10.567 4.654 10.194 4.654H5.02V2.68H12.807C13.18 2.68 13.447 2.414 13.447 2.04C13.447 1.667 13.234 1.4 12.86 1.4Z" fill="currentColor"/>
+                    </svg>
+                    <span class="text-sm font-medium text-black">{{ balance.availableAmount }}</span>
+                  </template>
+                  <template v-else>
+                    <span class="text-sm text-gray-600 font-medium">without restrictions</span>
+                  </template>
+                </div>
+                <!-- Desktop: info button on right -->
+                <button
+                  @click="showInfoTooltip = true"
+                  class="w-6 h-6 border border-gray-300 bg-white rounded-full items-center justify-center hover:bg-gray-50 transition-colors flex-shrink-0 hidden sm:flex"
+                >
+                  <svg width="20" height="20" viewBox="0 0 20 20" class="text-gray-600">
+                    <path d="M10 2C5.5888 2 2 5.58885 2 10C2 14.4112 5.5888 18 10 18C14.4112 18 18 14.4112 18 10C18 5.58885 14.4112 2 10 2ZM10 16.5455C6.39079 16.5455 3.45455 13.6092 3.45455 10C3.45455 6.39088 6.39079 3.45455 10 3.45455C13.6092 3.45455 16.5455 6.39088 16.5455 10C16.5455 13.6092 13.6092 16.5455 10 16.5455Z" fill="currentColor"/>
+                    <path d="M10 5.39453C9.46543 5.39453 9.03052 5.82973 9.03052 6.36466C9.03052 6.89911 9.46543 7.33393 10 7.33393C10.5346 7.33393 10.9695 6.89911 10.9695 6.36466C10.9695 5.82973 10.5346 5.39453 10 5.39453Z" fill="currentColor"/>
+                    <path d="M9.99998 8.78711C9.59833 8.78711 9.27271 9.11273 9.27271 9.51438V13.878C9.27271 14.2797 9.59833 14.6053 9.99998 14.6053C10.4016 14.6053 10.7273 14.2797 10.7273 13.878V9.51438C10.7273 9.11273 10.4016 8.78711 9.99998 8.78711Z" fill="currentColor"/>
+                  </svg>
+                </button>
+              </div>
             </div>
-            <div class="flex justify-between items-center">
-              <span class="text-sm text-gray-600 font-medium">Potential worth</span>
-              <span class="text-base font-semibold text-gray-700">${{ balance.potentialWorth.toLocaleString() }}</span>
+
+            <!-- Discount Section -->
+            <div class="bg-gray-100 rounded-xl p-2 sm:p-3 flex flex-col justify-center items-end text-right min-w-0 flex-1">
+              <div class="flex items-center justify-between w-full mb-0.5 sm:mb-1">
+                <div class="bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded sm:px-2">
+                  {{ Math.round(balance.usdRate * (1 - balance.discount / 100), 2) }} USD
+                </div>
+                <div class="text-sm sm:text-base font-semibold text-gray-700">
+                  {{ balance.discount }}% OFF
+                </div>
+              </div>
+              <div class="text-[10px] sm:text-xs text-gray-500 leading-tight">
+                Offer valid until {{ balance.discountEnd || '...' }}
+              </div>
             </div>
           </div>
 
-          <!-- Available Section -->
-          <div class="bg-green-100 rounded-xl p-3 flex items-center justify-between">
+          <!-- Available Section (no discount) - Always horizontal layout -->
+          <div v-else class="bg-green-100 rounded-xl p-3 flex items-center justify-between mb-3">
             <div class="flex items-center gap-2">
               <span class="text-sm text-gray-600 font-medium">Available</span>
               <template v-if="balance.availableAmount">
@@ -127,7 +191,6 @@
                 <span class="text-sm text-gray-600 font-medium">without restrictions</span>
               </template>
             </div>
-
             <button
               @click="showInfoTooltip = true"
               class="w-6 h-6 border border-gray-300 bg-white rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors"
@@ -138,6 +201,18 @@
                 <path d="M9.99998 8.78711C9.59833 8.78711 9.27271 9.11273 9.27271 9.51438V13.878C9.27271 14.2797 9.59833 14.6053 9.99998 14.6053C10.4016 14.6053 10.7273 14.2797 10.7273 13.878V9.51438C10.7273 9.11273 10.4016 8.78711 9.99998 8.78711Z" fill="currentColor"/>
               </svg>
             </button>
+          </div>
+
+          <!-- Values Section -->
+          <div class="bg-purple-50 rounded-xl p-3 mb-3">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-sm text-gray-600 font-medium">Current value</span>
+              <span class="text-base font-semibold text-gray-700">${{ balance.currentValue.toLocaleString() }}</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-gray-600 font-medium">Potential worth</span>
+              <span class="text-base font-semibold text-gray-700">${{ balance.potentialWorth.toLocaleString() }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -258,7 +333,9 @@ const mockBalances = [
     priceChange: 0.17,
     currentValue: 4000,
     potentialWorth: 8000,
-    availableAmount: 250
+    availableAmount: 250,
+    discount: 55,
+    discountEnd: '01.09.2025'
   },
   {
     id: 'uae',
@@ -269,7 +346,9 @@ const mockBalances = [
     priceChange: 0.17,
     currentValue: 4000,
     potentialWorth: 8000,
-    availableAmount: null
+    availableAmount: null,
+    discount: 90,
+    discountEnd: '01.09.2025'
   },
   {
     id: 'kz',
@@ -280,7 +359,8 @@ const mockBalances = [
     priceChange: -0.17,
     currentValue: 4000,
     potentialWorth: 8000,
-    availableAmount: 250
+    availableAmount: 250,
+    discount: 0
   },
   {
     id: 'pl',
@@ -291,7 +371,8 @@ const mockBalances = [
     priceChange: -0.17,
     currentValue: 4000,
     potentialWorth: 8000,
-    availableAmount: 250
+    availableAmount: 250,
+    discount: 0
   },
   {
     id: 'ua',
@@ -302,7 +383,8 @@ const mockBalances = [
     priceChange: -0.17,
     currentValue: 4000,
     potentialWorth: 8000,
-    availableAmount: 250
+    availableAmount: 250,
+    discount: 0
   },
   {
     id: 'us',
@@ -313,7 +395,8 @@ const mockBalances = [
     priceChange: -0.17,
     currentValue: 4000,
     potentialWorth: 8000,
-    availableAmount: 250
+    availableAmount: 250,
+    discount: 0
   }
 ]
 
