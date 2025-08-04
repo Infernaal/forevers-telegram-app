@@ -639,7 +639,7 @@ const selectLanguage = (language) => {
 // Get rank icon from public folder
 const getRankIcon = (rank) => {
   const availableRanks = ['none', 'bronze', 'silver', 'gold', 'diamond', 'double diamond', 'ambassador', 'royal ambassador']
-  const validRank = availableRanks.includes(rank.toLowerCase()) ? rank.toLowerCase() : 'none'
+  const validRank = availableRanks.includes(rank.toLowerCase()) ? rank.toLowerCase().replace(' ', '-') : 'none'
   return `/${validRank}.svg`
 }
 </script>
