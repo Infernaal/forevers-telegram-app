@@ -103,9 +103,9 @@
             <!-- Available Section -->
             <div class="bg-green-100 rounded-xl p-1.5 sm:p-3 flex-1 min-w-0 sm:flex sm:items-center">
               <!-- Mobile: vertical layout, Desktop: horizontal layout matching no-discount version -->
-              <div class="flex flex-col gap-0.5 sm:flex-row sm:items-center sm:justify-between sm:gap-0 sm:w-full">
+              <div class="flex flex-col gap-0 sm:flex-row sm:items-center sm:justify-between sm:gap-0 sm:w-full">
                 <!-- Mobile: separate rows, Desktop: left side content group -->
-                <div class="flex items-center justify-between sm:justify-start sm:gap-2 sm:flex-1">
+                <div class="flex items-center justify-between sm:justify-start sm:gap-2 sm:flex-1 pl-1 sm:pl-0">
                   <span class="text-sm text-gray-600 font-medium">Available</span>
                   <!-- Mobile: info button on right, Desktop: hidden (will show at end) -->
                   <button
