@@ -159,16 +159,16 @@
             </div>
 
             <!-- Discount Section -->
-            <div class="bg-gray-100 rounded-xl p-3 flex flex-col justify-center items-end text-right min-w-0 flex-1">
-              <div class="flex items-center justify-between w-full mb-1">
-                <div class="bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded">
+            <div class="bg-gray-100 rounded-xl p-2 sm:p-3 flex flex-col justify-center items-end text-right min-w-0 flex-1">
+              <div class="flex items-center justify-between w-full mb-0.5 sm:mb-1">
+                <div class="bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded sm:px-2">
                   {{ Math.round(balance.usdRate * (1 - balance.discount / 100), 2) }} USD
                 </div>
-                <div class="text-base font-semibold text-gray-700">
+                <div class="text-sm sm:text-base font-semibold text-gray-700">
                   {{ balance.discount }}% OFF
                 </div>
               </div>
-              <div class="text-xs text-gray-500 whitespace-nowrap">
+              <div class="text-[10px] sm:text-xs text-gray-500 leading-tight">
                 Offer valid until {{ balance.discountEnd || '...' }}
               </div>
             </div>
