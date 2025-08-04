@@ -51,7 +51,7 @@
                     />
                   </div>
                   <!-- Rank Badge -->
-                  <div class="absolute -top-0.5 -right-0.5 rounded-full w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center overflow-hidden">
+                  <div class="absolute -top-0.5 -right-0.5 rounded-full w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center overflow-hidden">
                     <img :src="getRankIcon(userInfo.rank)" :alt="userInfo.rank" class="w-full h-full object-cover" />
                   </div>
                   <!-- Dropdown Arrow -->
