@@ -500,7 +500,7 @@ const showLanguageDropdown = ref(false)
 const userInfo = ref({
   name: 'Jason',
   surname: 'Williams',
-  rank: 'royal ambassador' // можно менять на: none, bronze, silver, gold, diamond, double diamond, ambassador, royal ambassador
+  rank: 'double diamond' // можно менять на: none, bronze, silver, gold, diamond, double diamond, ambassador, royal ambassador
 })
 
 // Language state
