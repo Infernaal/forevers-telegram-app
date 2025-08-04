@@ -504,6 +504,13 @@ const emit = defineEmits(['close'])
 const showCopySuccess = ref(false)
 const showLanguageDropdown = ref(false)
 
+// Mock user data (заглушка)
+const userInfo = ref({
+  name: 'Jason',
+  surname: 'Williams',
+  rank: 'silver' // можно менять на: none, bronze, silver, gold, diamond, double-diamond, ambassador, royal-ambassador
+})
+
 // Language state
 const languages = ref([
   { code: 'ENG', name: 'English', country: 'uk' },
