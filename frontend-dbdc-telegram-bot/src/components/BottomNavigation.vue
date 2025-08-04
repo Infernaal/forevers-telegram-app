@@ -56,16 +56,15 @@
                   </div>
                   <!-- Dropdown Arrow -->
                   <div class="absolute -bottom-0.5 -right-0.5 bg-gray-100 border border-gray-300 rounded-full w-2.5 h-2.5 sm:w-3 sm:h-3 flex items-center justify-center">
-                    <svg
+                    <img
                       :class="[
-                        'text-gray-600 transition-transform duration-200',
+                        'transition-transform duration-200',
                         isProfileMenuOpen ? 'rotate-180' : '',
                         'w-1.5 h-1 sm:w-2 sm:h-1.5'
                       ]"
-                      viewBox="0 0 8 6"
-                    >
-                      <path d="M1 1L4 4L7 1" stroke="currentColor" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                      src="/arrow.svg"
+                      alt="Dropdown arrow"
+                    />
                   </div>
                 </div>
               </div>
