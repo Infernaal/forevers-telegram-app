@@ -391,6 +391,29 @@ onUnmounted(() => {
   }
 }
 
+/* Profile badge centering fixes */
+.absolute.rounded-full.flex.items-center.justify-center {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.absolute.rounded-full.flex.items-center.justify-center svg {
+  display: block;
+  margin: 0 auto;
+}
+
+/* Mobile specific badge centering */
+@media (max-width: 640px) {
+  .absolute.rounded-full.flex.items-center.justify-center {
+    line-height: 1;
+  }
+
+  .absolute.rounded-full.flex.items-center.justify-center svg {
+    vertical-align: middle;
+  }
+}
+
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   .transition-all,
