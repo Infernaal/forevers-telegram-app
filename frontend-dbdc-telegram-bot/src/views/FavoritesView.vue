@@ -99,7 +99,7 @@
           </div>
 
           <!-- Available and Discount Section -->
-          <div class="flex gap-3 mb-3" v-if="balance.discount && balance.discount > 0">
+          <div class="flex gap-2 mb-3 sm:gap-3" v-if="balance.discount && balance.discount > 0">
             <!-- Available Section -->
             <div class="bg-green-100 rounded-xl p-3 flex-1 min-w-0 sm:flex sm:items-center">
               <!-- Mobile: vertical layout, Desktop: horizontal layout matching no-discount version -->
