@@ -500,7 +500,7 @@ const showLanguageDropdown = ref(false)
 const userInfo = ref({
   name: 'Jason',
   surname: 'Williams',
-  rank: 'gold' // можно менять на: none, bronze, silver, gold, diamond, double-diamond, ambassador, royal-ambassador
+  rank: 'royal ambassador' // можно менять на: none, bronze, silver, gold, diamond, double diamond, ambassador, royal ambassador
 })
 
 // Language state
@@ -636,7 +636,7 @@ const selectLanguage = (language) => {
 
 // Get rank icon from public folder
 const getRankIcon = (rank) => {
-  const availableRanks = ['none', 'bronze', 'silver', 'gold', 'diamond', 'double-diamond', 'ambassador', 'royal-ambassador']
+  const availableRanks = ['none', 'bronze', 'silver', 'gold', 'diamond', 'double diamond', 'ambassador', 'royal ambassador']
   const validRank = availableRanks.includes(rank.toLowerCase()) ? rank.toLowerCase() : 'none'
   return `/${validRank}.svg`
 }
