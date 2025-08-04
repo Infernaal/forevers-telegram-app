@@ -102,9 +102,9 @@
           <div class="flex gap-3 mb-3" v-if="balance.discount && balance.discount > 0">
             <!-- Available Section -->
             <div class="bg-green-100 rounded-xl p-3 flex-1 min-w-0">
-              <!-- Mobile: vertical layout, Desktop: horizontal layout -->
-              <div class="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between sm:gap-2">
-                <!-- Mobile: separate rows, Desktop: single row -->
+              <!-- Mobile: vertical layout, Desktop: horizontal layout matching no-discount version -->
+              <div class="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between sm:gap-0">
+                <!-- Mobile: separate rows, Desktop: left side content group -->
                 <div class="flex items-center justify-between sm:justify-start sm:gap-2">
                   <span class="text-sm text-gray-600 font-medium">Available</span>
                   <!-- Mobile: info button on right, Desktop: hidden (will show at end) -->
@@ -118,13 +118,22 @@
                       <path d="M9.99998 8.78711C9.59833 8.78711 9.27271 9.11273 9.27271 9.51438V13.878C9.27271 14.2797 9.59833 14.6053 9.99998 14.6053C10.4016 14.6053 10.7273 14.2797 10.7273 13.878V9.51438C10.7273 9.11273 10.4016 8.78711 9.99998 8.78711Z" fill="currentColor"/>
                     </svg>
                   </button>
-                  <!-- Desktop: dot separator -->
+                  <!-- Desktop: dot separator and F icon + amount in same left group -->
                   <template v-if="balance.availableAmount">
                     <span class="w-1.5 h-1.5 bg-gray-400 rounded-full hidden sm:block"></span>
+                    <div class="hidden sm:flex items-center gap-1">
+                      <svg width="14" height="14" viewBox="0 0 14 14" class="text-black">
+                        <path d="M12.86 1.4H4.38C4.007 1.4 3.74 1.667 3.74 2.04V4.654H1.34C0.967 4.707 0.7 4.974 0.7 5.347C0.7 5.72 0.967 5.987 1.34 5.987H3.74V11.96C3.74 12.334 4.007 12.6 4.38 12.6C4.754 12.6 5.02 12.334 5.02 11.96V9.187H7.74C8.114 9.187 8.38 8.92 8.38 8.547C8.38 8.174 8.114 7.907 7.74 7.907H5.02V5.934H10.194C10.567 5.934 10.834 5.667 10.834 5.294C10.834 4.92 10.567 4.654 10.194 4.654H5.02V2.68H12.807C13.18 2.68 13.447 2.414 13.447 2.04C13.447 1.667 13.234 1.4 12.86 1.4Z" fill="currentColor"/>
+                      </svg>
+                      <span class="text-sm font-medium text-black">{{ balance.availableAmount }}</span>
+                    </div>
+                  </template>
+                  <template v-else>
+                    <span class="text-sm text-gray-600 font-medium hidden sm:inline">without restrictions</span>
                   </template>
                 </div>
-                <!-- F icon + amount -->
-                <div class="flex items-center gap-1">
+                <!-- Mobile: F icon + amount row -->
+                <div class="flex items-center gap-1 sm:hidden">
                   <template v-if="balance.availableAmount">
                     <svg width="14" height="14" viewBox="0 0 14 14" class="text-black">
                       <path d="M12.86 1.4H4.38C4.007 1.4 3.74 1.667 3.74 2.04V4.654H1.34C0.967 4.707 0.7 4.974 0.7 5.347C0.7 5.72 0.967 5.987 1.34 5.987H3.74V11.96C3.74 12.334 4.007 12.6 4.38 12.6C4.754 12.6 5.02 12.334 5.02 11.96V9.187H7.74C8.114 9.187 8.38 8.92 8.38 8.547C8.38 8.174 8.114 7.907 7.74 7.907H5.02V5.934H10.194C10.567 5.934 10.834 5.667 10.834 5.294C10.834 4.92 10.567 4.654 10.194 4.654H5.02V2.68H12.807C13.18 2.68 13.447 2.414 13.447 2.04C13.447 1.667 13.234 1.4 12.86 1.4Z" fill="currentColor"/>
