@@ -386,10 +386,7 @@
                   h-3 sm:h-4 md:h-5 lg:h-6 xl:h-7
                   ml-1 sm:ml-1.5 md:ml-2 transform transition-transform"
                     :class="{ 'rotate-180': showLanguageDropdown }">
-                  <svg class="w-full h-full" viewBox="0 0 20 20" fill="none">
-                    <circle opacity="0.2" cx="10" cy="10" r="10" fill="white"/>
-                    <path d="M5.71387 8.57146L9.99958 12.8572L14.2853 8.57146" stroke="white" stroke-linecap="round"/>
-                  </svg>
+                  <img src="/arrow.svg" alt="Dropdown arrow" class="w-full h-full object-contain" />
                 </div>
 
                 <!-- Language Dropdown -->
