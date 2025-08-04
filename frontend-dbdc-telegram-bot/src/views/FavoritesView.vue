@@ -136,7 +136,7 @@
             <div class="bg-gray-100 rounded-xl p-3 flex flex-col justify-center items-end text-right min-w-0 flex-1">
               <div class="flex items-center justify-between w-full mb-1">
                 <div class="bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded">
-                  {{ (balance.usdRate * (1 - balance.discount / 100)) }} USD
+                  {{ Math.round(balance.usdRate * (1 - balance.discount / 100), 2) }} USD
                 </div>
                 <div class="text-base font-semibold text-gray-700">
                   {{ balance.discount }}% OFF
