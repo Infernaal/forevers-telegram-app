@@ -193,7 +193,7 @@
             </div>
             <button
               @click="showInfoTooltip = true"
-              class="w-6 h-6 border border-gray-300 bg-white rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors"
+              class="w-6 h-6 flex items-center justify-center transition-colors"
             >
               <svg width="20" height="20" viewBox="0 0 20 20" class="text-gray-600">
                 <path d="M10 2C5.5888 2 2 5.58885 2 10C2 14.4112 5.5888 18 10 18C14.4112 18 18 14.4112 18 10C18 5.58885 14.4112 2 10 2ZM10 16.5455C6.39079 16.5455 3.45455 13.6092 3.45455 10C3.45455 6.39088 6.39079 3.45455 10 3.45455C13.6092 3.45455 16.5455 6.39088 16.5455 10C16.5455 13.6092 13.6092 16.5455 10 16.5455Z" fill="currentColor"/>
