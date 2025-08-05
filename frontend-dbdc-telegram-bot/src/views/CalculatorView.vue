@@ -426,6 +426,19 @@ html, body {
   .gap-2 {
     gap: 8px;
   }
+
+  /* Mobile dropdown positioning */
+  .relative .absolute.right-0 {
+    right: 0;
+    left: auto;
+    transform: translateX(0);
+  }
+
+  /* Adjust dropdown width for mobile */
+  .relative .absolute.w-64 {
+    width: 280px;
+    min-width: 280px;
+  }
 }
 
 /* Responsive text adjustments */
