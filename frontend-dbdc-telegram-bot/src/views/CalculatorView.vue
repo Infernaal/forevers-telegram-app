@@ -6,7 +6,7 @@
       <!-- Header - Outside the card -->
       <h1 class="text-2xl md:text-3xl font-bold text-black mb-6 w-[95%] mx-auto">Income Calculator</h1>
 
-      <div class="bg-white rounded-3xl border border-gray-200 shadow-sm px-6 py-6 max-w-sm md:max-w-2xl lg:max-w-4xl xl:max-w-6xl mx-auto relative">
+      <div class="bg-white rounded-3xl border border-gray-200 shadow-sm px-4 sm:px-6 py-6 w-[96%] mx-auto relative">
 
         <!-- Basic Monthly Income Section -->
         <div class="mb-6">
