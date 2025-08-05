@@ -31,7 +31,7 @@
             <div class="relative flex-shrink-0 min-w-[140px] sm:min-w-fit">
               <button
                 @click="toggleCurrencyDropdown"
-                class="flex items-center bg-white border border-gray-200 rounded-full px-3 py-2.5 h-11 gap-2 hover:bg-gray-50 transition-colors w-full sm:min-w-fit text-sm justify-between sm:justify-start"
+                class="flex items-center bg-white border border-gray-200 rounded-full px-2 sm:px-3 py-2.5 h-11 gap-1 sm:gap-2 hover:bg-gray-50 transition-colors min-w-fit text-xs sm:text-sm justify-start"
               >
                 <div class="flex items-center gap-1.5">
                   <CountryFlag :country="selectedCurrency.country" size="medium" class="w-6 h-6 flex-shrink-0" />
