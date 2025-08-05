@@ -467,6 +467,9 @@ const props = defineProps({
 // Emits
 const emit = defineEmits(['close'])
 
+// Router
+const router = useRouter()
+
 // State
 const showCopySuccess = ref(false)
 const showLanguageDropdown = ref(false)
