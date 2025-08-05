@@ -66,12 +66,15 @@
               <input
                 ref="inputField"
                 v-model="inputValue"
-                type="number"
-                class="text-dbd-dark text-base font-semibold bg-transparent border-none outline-none w-full p-0 m-0"
+                type="text"
+                inputmode="numeric"
+                class="text-dbd-dark text-base font-semibold bg-transparent border-none outline-none w-full p-0 m-0 telegram-input"
                 placeholder="250"
                 @input="handleInput"
                 @focus="isInputFocused = true"
                 @blur="isInputFocused = false"
+                @keydown.enter="termsAccepted && handleRentOut()"
+                @keydown.escape="closeModal"
               />
             </div>
           </div>
