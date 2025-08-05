@@ -156,6 +156,7 @@ const props = defineProps({
 
 const emit = defineEmits(['close', 'rent-out', 'open-terms'])
 
+const inputField = ref(null)
 const termsAccepted = ref(false)
 const inputValue = ref(props.inputAmount || '250')
 const isInputFocused = ref(false)
@@ -203,10 +204,24 @@ const handleKeyDown = (event) => {
   }
 }
 
-watch(() => props.isVisible, (isVisible) => {
+watch(() => props.isVisible, async (isVisible) => {
   if (isVisible) {
     document.addEventListener('keydown', handleKeyDown)
     document.body.style.overflow = 'hidden'
+
+    // Auto-focus input field for Telegram WebApp
+    await nextTick()
+    setTimeout(() => {
+      if (inputField.value) {
+        inputField.value.focus()
+        inputField.value.select() // Select all text for easy replacement
+
+        // Trigger virtual keyboard on mobile
+        if (window.Telegram?.WebApp?.HapticFeedback) {
+          window.Telegram.WebApp.HapticFeedback.selectionChanged()
+        }
+      }
+    }, 300) // Delay to ensure modal animation is complete
   } else {
     document.removeEventListener('keydown', handleKeyDown)
     document.body.style.overflow = ''
