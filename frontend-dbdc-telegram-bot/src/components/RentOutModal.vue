@@ -151,6 +151,10 @@ const props = defineProps({
   termsAgreed: {
     type: Boolean,
     default: false
+  },
+  bottomOffset: {
+    type: Number,
+    default: 0
   }
 })
 
