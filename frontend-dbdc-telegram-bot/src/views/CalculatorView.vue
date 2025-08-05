@@ -465,8 +465,8 @@ html, body {
     width: 130px !important;
   }
 
-  .w-\[160px\] {
-    width: 150px !important;
+  .w-\[180px\] {
+    width: 170px !important;
   }
 
   /* Smaller dropdown for very small screens */
