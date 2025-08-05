@@ -207,9 +207,8 @@ const handleKeyDown = (event) => {
 watch(() => props.isVisible, async (isVisible) => {
   if (isVisible) {
     document.addEventListener('keydown', handleKeyDown)
-    document.body.style.overflow = 'hidden'
 
-    // Auto-focus input field for Telegram WebApp
+    // Auto-focus input field for Telegram WebApp - immediate focus for keyboard
     await nextTick()
     setTimeout(() => {
       if (inputField.value) {
@@ -221,10 +220,9 @@ watch(() => props.isVisible, async (isVisible) => {
           window.Telegram.WebApp.HapticFeedback.selectionChanged()
         }
       }
-    }, 300) // Delay to ensure modal animation is complete
+    }, 100) // Reduced delay for faster keyboard appearance
   } else {
     document.removeEventListener('keydown', handleKeyDown)
-    document.body.style.overflow = ''
   }
 })
 
