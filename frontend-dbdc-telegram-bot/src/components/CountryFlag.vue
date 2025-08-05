@@ -85,7 +85,9 @@ const countryCodeMap = {
   'portugal': 'PT',
   'pt': 'PT',
   'netherlands': 'NL',
-  'nl': 'NL'
+  'nl': 'NL',
+  'russia': 'RU',
+  'ru': 'RU'
 }
 
 const flagSrc = computed(() => {
