@@ -465,6 +465,10 @@ html, body {
     width: 130px !important;
   }
 
+  .w-\[160px\] {
+    width: 150px !important;
+  }
+
   /* Smaller dropdown for very small screens */
   .relative .absolute.w-64 {
     width: 220px !important;
