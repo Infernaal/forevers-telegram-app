@@ -256,8 +256,7 @@ const currencies = ref([
   { code: 'KZ', name: 'Kazakhstan', country: 'kz', rate: '8' },
   { code: 'DE', name: 'Germany', country: 'germany', rate: '4' },
   { code: 'PL', name: 'Poland', country: 'poland', rate: '4' },
-  { code: 'UA', name: 'Ukraine', country: 'ukraine', rate: '4' },
-  { code: 'PL2', name: 'Poland', country: 'poland', rate: '1' }
+  { code: 'UA', name: 'Ukraine', country: 'ukraine', rate: '4' }
 ])
 
 // Computed values
