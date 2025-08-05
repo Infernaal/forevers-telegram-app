@@ -181,8 +181,35 @@ const closeModal = () => {
     window.triggerHaptic('impact', 'light')
   }
 
+  // Force hide keyboard before closing modal
+  if (inputField.value) {
+    inputField.value.blur()
+  }
+
+  // Additional keyboard hiding for mobile/Telegram WebApp
+  if (document.activeElement && typeof document.activeElement.blur === 'function') {
+    document.activeElement.blur()
+  }
+
+  // Force hide keyboard in iOS Safari/Telegram WebApp
+  setTimeout(() => {
+    window.scrollTo(0, 0)
+    if (window.Telegram?.WebApp) {
+      // Telegram WebApp specific keyboard hiding
+      const hiddenInput = document.createElement('input')
+      hiddenInput.style.position = 'absolute'
+      hiddenInput.style.left = '-9999px'
+      hiddenInput.style.opacity = '0'
+      document.body.appendChild(hiddenInput)
+      hiddenInput.focus()
+      hiddenInput.blur()
+      document.body.removeChild(hiddenInput)
+    }
+  }, 50)
+
   termsAccepted.value = false
   inputValue.value = props.inputAmount || '250'
+  isInputFocused.value = false
   emit('close')
 }
 
