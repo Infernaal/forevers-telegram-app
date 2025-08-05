@@ -417,8 +417,8 @@ html, body {
 
 /* Mobile input field adjustments */
 @media (max-width: 640px) {
-  .w-\[158px\] {
-    width: 158px !important;
+  .w-\[140px\] {
+    width: 140px !important;
     flex-shrink: 0;
   }
 
@@ -436,8 +436,8 @@ html, body {
 
   /* Adjust dropdown width for mobile */
   .relative .absolute.w-64 {
-    width: 280px;
-    min-width: 280px;
+    width: 240px;
+    min-width: 240px;
   }
 }
 
