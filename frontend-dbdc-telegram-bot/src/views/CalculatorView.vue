@@ -202,6 +202,28 @@
     <div class="mt-auto">
       <BottomNavigation />
     </div>
+
+    <!-- InfoTooltips -->
+    <InfoTooltip
+      :isVisible="showBankDepositTooltip"
+      title="Bank Deposit Returns"
+      description="Traditional bank deposits offer stable but modest returns at 3.5% annually. While safe, they often barely keep up with inflation, making them suitable for emergency funds but limited for wealth building."
+      @close="showBankDepositTooltip = false"
+    />
+
+    <InfoTooltip
+      :isVisible="showResidentialTooltip"
+      title="Residential Real Estate Investment"
+      description="Residential properties typically yield 5% annually through rental income and appreciation. Requires significant capital, ongoing maintenance, and market knowledge, but provides tangible asset ownership."
+      @close="showResidentialTooltip = false"
+    />
+
+    <InfoTooltip
+      :isVisible="showCommercialTooltip"
+      title="Commercial Real Estate Investment"
+      description="Commercial properties offer higher returns at 8% annually but demand substantial capital and expertise. Income comes from business leases with longer terms, providing more stable cash flow than residential."
+      @close="showCommercialTooltip = false"
+    />
   </div>
 </template>
 
