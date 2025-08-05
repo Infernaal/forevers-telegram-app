@@ -27,10 +27,10 @@
             </div>
             
             <!-- Currency Selector -->
-            <div class="relative">
+            <div class="relative flex-shrink-0">
               <button
                 @click="toggleCurrencyDropdown"
-                class="flex items-center bg-white border border-gray-200 rounded-full px-3 py-2.5 gap-2 hover:bg-gray-50 transition-colors min-w-fit"
+                class="flex items-center bg-white border border-gray-200 rounded-full px-2 sm:px-3 py-2.5 gap-1 sm:gap-2 hover:bg-gray-50 transition-colors min-w-fit text-xs sm:text-sm"
               >
                 <div class="flex items-center gap-1.5">
                   <CountryFlag :country="selectedCurrency.country" size="medium" class="w-6 h-6 flex-shrink-0" />
