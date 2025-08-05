@@ -281,6 +281,19 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+/* Telegram WebApp fixes */
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+  position: relative !important;
+}
+
+/* Prevent horizontal scroll and movement */
+* {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
 /* Custom width for containers */
 .w-22 {
   width: 5.5rem;
