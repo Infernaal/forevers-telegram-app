@@ -412,8 +412,29 @@ button:active {
   background-color: #F4F3FF;
 }
 
+/* Telegram WebApp optimized input */
+.telegram-input {
+  font-size: 16px !important; /* Prevents zoom on iOS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+.telegram-input::-webkit-outer-spin-button,
+.telegram-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.telegram-input:focus {
+  outline: none;
+  border: none;
+  background: transparent;
+}
+
 /* Input field styling */
-input[type="number"] {
+input[type="number"], input[type="text"] {
   -moz-appearance: textfield;
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
