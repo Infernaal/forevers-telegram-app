@@ -294,6 +294,10 @@ const selectCurrency = (currency) => {
   showCurrencyDropdown.value = false
 }
 
+const navigateToFavorites = () => {
+  router.push('/favorites')
+}
+
 // Close dropdown when clicking outside
 const handleClickOutside = (event) => {
   if (!event.target.closest('.relative')) {
