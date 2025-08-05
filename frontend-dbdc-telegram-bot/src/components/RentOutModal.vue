@@ -10,7 +10,7 @@
   >
     <div
       v-if="isVisible"
-      class="fixed inset-0 flex items-center justify-center z-50 px-4"
+      class="fixed inset-0 flex items-center justify-center z-[10002] px-4"
       style="background: rgba(2, 7, 14, 0.20); backdrop-filter: blur(9px);"
       @click.self="closeModal"
     >
