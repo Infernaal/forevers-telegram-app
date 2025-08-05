@@ -369,15 +369,6 @@ watch(() => props.isVisible, async (isVisible) => {
     
     // Set default value
     inputValue.value = '250'
-    
-    // Focus input field after modal is rendered
-    await nextTick()
-    setTimeout(() => {
-      if (inputField.value) {
-        inputField.value.focus({ preventScroll: true })
-        inputField.value.select()
-      }
-    }, 350)
   } else {
     document.removeEventListener('keydown', handleKeyDown)
     document.body.style.overflow = ''
