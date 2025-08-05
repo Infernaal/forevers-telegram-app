@@ -93,6 +93,7 @@
     <!-- Delete Confirmation Modal -->
     <DeleteConfirmModal
       :is-visible="showDeleteModal"
+      :bottom-offset="bottomNavRef?.bottomOffset || 0"
       @cancel="cancelDelete"
       @confirm="confirmDelete"
     />
