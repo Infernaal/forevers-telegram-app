@@ -66,15 +66,12 @@
               <input
                 ref="inputField"
                 v-model="inputValue"
-                type="text"
-                inputmode="numeric"
-                class="text-dbd-dark text-base font-semibold bg-transparent border-none outline-none w-full p-0 m-0 telegram-input"
+                type="number"
+                class="text-dbd-dark text-base font-semibold bg-transparent border-none outline-none w-full p-0 m-0"
                 placeholder="250"
                 @input="handleInput"
                 @focus="isInputFocused = true"
                 @blur="isInputFocused = false"
-                @keydown.enter="termsAccepted && handleRentOut()"
-                @keydown.escape="closeModal"
               />
             </div>
           </div>
@@ -146,7 +143,6 @@ const props = defineProps({
 
 const emit = defineEmits(['close', 'rent-out', 'open-terms'])
 
-const inputField = ref(null)
 const termsAccepted = ref(false)
 const inputValue = ref(props.inputAmount || '250')
 const isInputFocused = ref(false)
@@ -181,35 +177,8 @@ const closeModal = () => {
     window.triggerHaptic('impact', 'light')
   }
 
-  // Force hide keyboard before closing modal
-  if (inputField.value) {
-    inputField.value.blur()
-  }
-
-  // Additional keyboard hiding for mobile/Telegram WebApp
-  if (document.activeElement && typeof document.activeElement.blur === 'function') {
-    document.activeElement.blur()
-  }
-
-  // Force hide keyboard in iOS Safari/Telegram WebApp
-  setTimeout(() => {
-    window.scrollTo(0, 0)
-    if (window.Telegram?.WebApp) {
-      // Telegram WebApp specific keyboard hiding
-      const hiddenInput = document.createElement('input')
-      hiddenInput.style.position = 'absolute'
-      hiddenInput.style.left = '-9999px'
-      hiddenInput.style.opacity = '0'
-      document.body.appendChild(hiddenInput)
-      hiddenInput.focus()
-      hiddenInput.blur()
-      document.body.removeChild(hiddenInput)
-    }
-  }, 50)
-
   termsAccepted.value = false
   inputValue.value = props.inputAmount || '250'
-  isInputFocused.value = false
   emit('close')
 }
 
@@ -221,53 +190,13 @@ const handleKeyDown = (event) => {
   }
 }
 
-watch(() => props.isVisible, async (isVisible) => {
+watch(() => props.isVisible, (isVisible) => {
   if (isVisible) {
     document.addEventListener('keydown', handleKeyDown)
     document.body.style.overflow = 'hidden'
-
-    // Set default value
-    inputValue.value = props.inputAmount || '250'
-
-    // Setup Telegram WebApp close button handler
-    if (window.Telegram?.WebApp) {
-      window.Telegram.WebApp.onEvent('backButtonClicked', closeModal)
-      window.Telegram.WebApp.onEvent('settingsButtonClicked', closeModal)
-    }
-
-    // Focus input field after modal is rendered with delay for Telegram WebApp
-    await nextTick()
-    setTimeout(() => {
-      if (inputField.value) {
-        inputField.value.focus()
-        inputField.value.select()
-
-        // Force keyboard to appear in Telegram WebApp
-        if (window.Telegram?.WebApp) {
-          inputField.value.setAttribute('readonly', false)
-          inputField.value.setAttribute('disabled', false)
-        }
-      }
-    }, 150)
   } else {
     document.removeEventListener('keydown', handleKeyDown)
     document.body.style.overflow = ''
-
-    // Clean up Telegram WebApp handlers
-    if (window.Telegram?.WebApp) {
-      window.Telegram.WebApp.offEvent('backButtonClicked', closeModal)
-      window.Telegram.WebApp.offEvent('settingsButtonClicked', closeModal)
-    }
-
-    // Force hide keyboard in Telegram WebApp
-    if (inputField.value) {
-      inputField.value.blur()
-    }
-
-    // Additional keyboard hiding for mobile
-    if (document.activeElement && typeof document.activeElement.blur === 'function') {
-      document.activeElement.blur()
-    }
   }
 })
 
@@ -461,29 +390,8 @@ button:active {
   background-color: #F4F3FF;
 }
 
-/* Telegram WebApp optimized input */
-.telegram-input {
-  font-size: 16px !important; /* Prevents zoom on iOS */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-user-select: text;
-  user-select: text;
-}
-
-.telegram-input::-webkit-outer-spin-button,
-.telegram-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.telegram-input:focus {
-  outline: none;
-  border: none;
-  background: transparent;
-}
-
 /* Input field styling */
-input[type="number"], input[type="text"] {
+input[type="number"] {
   -moz-appearance: textfield;
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
