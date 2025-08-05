@@ -191,7 +191,7 @@
             Forevers UAE offers a unique <span class="text-red-500">investment</span> opportunity with higher earning potential and lower entry thresholds compared to traditional options like bank deposits or real estate.
           </p>
           
-          <button class="w-full bg-gradient-to-r from-dbd-primary to-purple-600 text-white font-bold py-3 px-6 rounded-full hover:from-purple-700 hover:to-purple-800 transition-all duration-300">
+          <button @click="navigateToFavorites" class="w-full bg-gradient-to-r from-dbd-primary to-purple-600 text-white font-bold py-3 px-6 rounded-full hover:from-purple-700 hover:to-purple-800 transition-all duration-300">
             <span class="text-red-500">Invested</span> Now
           </button>
         </div>
