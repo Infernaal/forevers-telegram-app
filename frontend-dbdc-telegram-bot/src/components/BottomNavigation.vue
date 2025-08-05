@@ -424,6 +424,29 @@ const getRankIcon = (rank) => {
   }
 }
 
+/* Keyboard-aware positioning for Telegram WebApp */
+.bottom-nav-with-keyboard {
+  bottom: 0;
+  /* When keyboard is open, push navigation down by keyboard height */
+  transform: translateY(var(--keyboard-height, 0px));
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Ensure navigation stays behind keyboard overlay */
+@supports (env(keyboard-inset-height)) {
+  .bottom-nav-with-keyboard {
+    bottom: calc(0px + env(keyboard-inset-height, 0px));
+    transform: none;
+  }
+}
+
+/* Fallback for browsers that don't support keyboard-inset-height */
+@media screen and (max-height: 500px) {
+  .bottom-nav-with-keyboard {
+    transform: translateY(calc(var(--keyboard-height, 0px) + 20px));
+  }
+}
+
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   .transition-all,
@@ -433,6 +456,10 @@ const getRankIcon = (rank) => {
 
   .active\:scale-95:active {
     transform: none !important;
+  }
+
+  .bottom-nav-with-keyboard {
+    transition: none !important;
   }
 }
 </style>
