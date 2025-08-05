@@ -113,6 +113,7 @@
       :rent-amount="calculatedRentAmount"
       :input-amount="inputAmount"
       :terms-agreed="termsAgreed"
+      :bottom-offset="bottomNavRef?.bottomOffset || 0"
       @close="closeRentModal"
       @rent-out="handleRentOut"
       @open-terms="openTermsModal"
