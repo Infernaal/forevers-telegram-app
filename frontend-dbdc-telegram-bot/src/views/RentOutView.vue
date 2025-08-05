@@ -158,6 +158,7 @@ import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
 import SuccessNotification from '../components/SuccessNotification.vue'
 
 const router = useRouter()
+const bottomNavRef = ref(null)
 
 // Modal states
 const showInfoTooltip = ref(false)
