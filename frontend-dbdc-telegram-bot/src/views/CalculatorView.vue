@@ -234,6 +234,9 @@ import BottomNavigation from '../components/BottomNavigation.vue'
 import CountryFlag from '../components/CountryFlag.vue'
 import InfoTooltip from '../components/InfoTooltip.vue'
 
+// Router
+const router = useRouter()
+
 // Reactive data
 const monthlyIncome = ref(50)
 const showCurrencyDropdown = ref(false)
