@@ -76,7 +76,7 @@
               <input
                 ref="inputField"
                 v-model="inputValue"
-                type="text"
+                type="number"
                 inputmode="numeric"
                 class="text-base font-semibold bg-transparent border-none outline-none p-0 m-0 w-full telegram-input text-dbd-dark"
                 placeholder="250"
