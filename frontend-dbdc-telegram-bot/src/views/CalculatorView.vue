@@ -28,14 +28,12 @@
             
             <!-- Currency Selector -->
             <div class="relative">
-              <button 
+              <button
                 @click="toggleCurrencyDropdown"
                 class="flex items-center bg-white border border-gray-200 rounded-full px-3 py-2.5 gap-2 hover:bg-gray-50 transition-colors min-w-fit"
               >
                 <div class="flex items-center gap-1.5">
-                  <div class="w-6 h-6 rounded-full overflow-hidden flex-shrink-0">
-                    <img :src="selectedCurrency.flag" :alt="selectedCurrency.name" class="w-full h-full object-cover" />
-                  </div>
+                  <CountryFlag :country="selectedCurrency.country" size="medium" class="w-6 h-6 flex-shrink-0" />
                   <svg class="w-3.5 h-3.5 text-dbd-dark flex-shrink-0" viewBox="0 0 14 14" fill="currentColor">
                     <path d="M12.8602 1.40015H4.3802C4.00686 1.40015 3.7402 1.66681 3.7402 2.04015V4.65348H1.3402C0.966862 4.70681 0.700195 4.97348 0.700195 5.34681C0.700195 5.72015 0.966862 5.98681 1.3402 5.98681H3.7402V11.9601C3.7402 12.3335 4.00686 12.6001 4.3802 12.6001C4.75353 12.6001 5.0202 12.3335 5.0202 11.9601V9.18681H7.7402C8.11353 9.18681 8.3802 8.92015 8.3802 8.54681C8.3802 8.17348 8.11353 7.90681 7.7402 7.90681H5.0202V5.93348H10.1935C10.5669 5.93348 10.8335 5.66681 10.8335 5.29348C10.8335 4.92015 10.5669 4.65348 10.1935 4.65348H5.0202V2.68015H12.8069C13.1802 2.68015 13.4469 2.41348 13.4469 2.04015C13.4469 1.66681 13.2335 1.40015 12.8602 1.40015Z"/>
                   </svg>
@@ -50,14 +48,12 @@
               </button>
 
               <!-- Currency Dropdown -->
-              <div v-if="showCurrencyDropdown" class="absolute top-full mt-1 left-0 w-64 bg-gradient-to-r from-purple-800 via-purple-900 to-purple-900 rounded-xl shadow-xl border border-purple-600 z-50 p-2 max-h-80 overflow-y-auto">
-                <div v-for="currency in currencies" :key="currency.code" 
+              <div v-if="showCurrencyDropdown" class="absolute top-full mt-1 left-0 w-64 bg-gradient-to-r from-purple-800 via-purple-900 to-purple-900 rounded-xl shadow-xl border border-purple-600 z-50 p-2 max-h-80 overflow-y-auto scrollbar-hide">
+                <div v-for="currency in currencies" :key="currency.code"
                      @click="selectCurrency(currency)"
                      class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 cursor-pointer transition-colors">
                   <div class="flex items-center gap-2">
-                    <div class="w-6 h-6 rounded-full overflow-hidden">
-                      <img :src="currency.flag" :alt="currency.name" class="w-full h-full object-cover" />
-                    </div>
+                    <CountryFlag :country="currency.country" size="medium" class="w-6 h-6 flex-shrink-0" />
                     <span class="text-white text-sm font-medium">{{ currency.code }}</span>
                   </div>
                   <span class="text-yellow-400 text-sm font-medium">{{ currency.rate }} USD</span>
