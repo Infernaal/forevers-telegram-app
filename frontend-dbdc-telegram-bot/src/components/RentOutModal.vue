@@ -264,6 +264,43 @@ button:active {
   }
 }
 
+/* Input container focus state animation */
+.border-dbd-primary {
+  animation: pulseBlue 2s infinite;
+}
+
+@keyframes pulseBlue {
+  0%, 100% {
+    border-color: #2019CE;
+    box-shadow: 0 0 0 0 rgba(32, 25, 206, 0.4);
+  }
+  50% {
+    border-color: #2019CE;
+    box-shadow: 0 0 0 4px rgba(32, 25, 206, 0.1);
+  }
+}
+
+/* Telegram WebApp optimized input */
+.telegram-input {
+  font-size: 16px !important; /* Prevents zoom on iOS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+.telegram-input::-webkit-outer-spin-button,
+.telegram-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.telegram-input:focus {
+  outline: none;
+  border: none;
+  background: transparent;
+}
+
 /* Clean typography */
 * {
   -webkit-tap-highlight-color: transparent;
