@@ -9,8 +9,7 @@
     />
 
     <!-- Bottom Navigation -->
-    <div ref="bottomNav" class="fixed left-0 right-0 bg-white rounded-t-2xl shadow-[0_-4px_16px_rgba(0,0,0,0.08),0_-2px_6px_rgba(0,0,0,0.04)] border-t border-black/[0.06] z-[10001] pb-[max(var(--tg-safe-area-bottom),1rem)]"
-      :style="{ bottom: 'var(--tg-safe-area-bottom, 0px)' }">
+    <div ref="bottomNav" class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-[0_-4px_16px_rgba(0,0,0,0.08),0_-2px_6px_rgba(0,0,0,0.04)] border-t border-black/[0.06] z-[10001] pb-[max(var(--tg-safe-area-inset-bottom),1rem)]">
       <!-- Navigation Content -->
       <div class="flex items-center justify-center px-3 pt-3">
         <!-- Navigation Items Container -->
