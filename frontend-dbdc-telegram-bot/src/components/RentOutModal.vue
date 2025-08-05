@@ -194,10 +194,28 @@ const handleKeyDown = (event) => {
   }
 }
 
-watch(() => props.isVisible, (isVisible) => {
+watch(() => props.isVisible, async (isVisible) => {
   if (isVisible) {
     document.addEventListener('keydown', handleKeyDown)
     document.body.style.overflow = 'hidden'
+
+    // Set default value
+    inputValue.value = props.inputAmount || '250'
+
+    // Focus input field after modal is rendered with delay for Telegram WebApp
+    await nextTick()
+    setTimeout(() => {
+      if (inputField.value) {
+        inputField.value.focus()
+        inputField.value.select()
+
+        // Force keyboard to appear in Telegram WebApp
+        if (window.Telegram?.WebApp) {
+          inputField.value.setAttribute('readonly', false)
+          inputField.value.setAttribute('disabled', false)
+        }
+      }
+    }, 150)
   } else {
     document.removeEventListener('keydown', handleKeyDown)
     document.body.style.overflow = ''
