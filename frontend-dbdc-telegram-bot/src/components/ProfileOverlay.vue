@@ -549,7 +549,12 @@ onUnmounted(() => {
 // Methods
 const handleMenuClick = (menuItem) => {
   console.log(`Menu clicked: ${menuItem}`)
-  // Handle menu navigation
+
+  if (menuItem === 'calculator') {
+    emit('close')
+    router.push('/calculator')
+  }
+  // Handle other menu navigation
 }
 
 const handleUpgrade = () => {
