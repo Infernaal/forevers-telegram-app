@@ -70,6 +70,10 @@ const props = defineProps({
   isVisible: {
     type: Boolean,
     default: false
+  },
+  bottomOffset: {
+    type: Number,
+    default: 0
   }
 })
 
