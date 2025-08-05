@@ -15,7 +15,7 @@
           <!-- Input Section -->
           <div class="flex flex-col sm:flex-row gap-2 mb-6">
             <!-- Amount Input -->
-            <div class="flex items-center bg-dbd-off-white border border-gray-200 rounded-full px-3 py-2.5 h-11 flex-[0.6] sm:flex-1">
+            <div class="flex items-center bg-dbd-off-white border border-gray-200 rounded-full px-3 py-2.5 h-11 flex-1 min-w-0">
               <svg class="w-6 h-6 mr-2 text-blue-700 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M23 5.536V1H5.347V6.759H1V11.294H5.347V22.581H10.421V17.046H14.712V12.510H10.421V11.294H18.849V6.759H10.421V5.536H23Z"/>
               </svg>
