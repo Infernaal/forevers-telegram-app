@@ -370,14 +370,20 @@ watch(() => props.isVisible, async (isVisible) => {
     // Set default value
     inputValue.value = '250'
     
-    // Focus input field after modal is rendered
+    // Focus input field after modal is rendered with delay for Telegram WebApp
     await nextTick()
     setTimeout(() => {
       if (inputField.value) {
         inputField.value.focus()
         inputField.value.select()
+
+        // Force keyboard to appear in Telegram WebApp
+        if (window.Telegram?.WebApp) {
+          inputField.value.setAttribute('readonly', false)
+          inputField.value.setAttribute('disabled', false)
+        }
       }
-    }, 100)
+    }, 150)
   } else {
     document.removeEventListener('keydown', handleKeyDown)
     document.body.style.overflow = ''
