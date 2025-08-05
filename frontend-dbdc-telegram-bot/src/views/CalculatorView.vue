@@ -16,8 +16,8 @@
           <div class="flex gap-2 mb-6">
             <!-- Amount Input -->
             <div class="flex items-center bg-dbd-off-white border border-gray-200 rounded-full px-2 sm:px-3 py-2.5 h-11 flex-1 min-w-0">
-              <svg class="w-6 h-6 mr-2 text-blue-700 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M23 5.536V1H5.347V6.759H1V11.294H5.347V22.581H10.421V17.046H14.712V12.510H10.421V11.294H18.849V6.759H10.421V5.536H23Z"/>
+              <svg class="w-5 h-5 mr-1 sm:mr-2 text-green-600 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M11.8 2C11.2 2 10.7 2.5 10.7 3.1V4.6C9.4 4.8 8.2 5.4 7.3 6.3C6.4 7.2 5.8 8.4 5.8 9.8C5.8 11.2 6.4 12.4 7.3 13.3C8.2 14.2 9.4 14.8 10.7 15V16.9C10.7 17.5 11.2 18 11.8 18C12.4 18 12.9 17.5 12.9 16.9V15C14.2 14.8 15.4 14.2 16.3 13.3C17.2 12.4 17.8 11.2 17.8 9.8C17.8 8.4 17.2 7.2 16.3 6.3C15.4 5.4 14.2 4.8 12.9 4.6V3.1C12.9 2.5 12.4 2 11.8 2ZM11.8 6.5C12.6 6.5 13.3 6.8 13.8 7.3C14.3 7.8 14.6 8.5 14.6 9.3C14.6 10.1 14.3 10.8 13.8 11.3C13.3 11.8 12.6 12.1 11.8 12.1C11 12.1 10.3 11.8 9.8 11.3C9.3 10.8 9 10.1 9 9.3C9 8.5 9.3 7.8 9.8 7.3C10.3 6.8 11 6.5 11.8 6.5Z"/>
               </svg>
               <input
                 v-model="monthlyIncome"
