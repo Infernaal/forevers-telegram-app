@@ -41,7 +41,7 @@
                   <span class="text-gray-400 text-xs sm:text-sm">/</span>
                   <span class="text-xs sm:text-sm font-medium text-dbd-primary">{{ selectedCurrency.rate }} USD</span>
                 </div>
-                <svg class="w-4 h-4 text-gray-400 ml-1 flex-shrink-0" :class="{ 'rotate-180': showCurrencyDropdown }" viewBox="0 0 16 16" fill="none">
+                <svg class="w-3 h-3 sm:w-4 sm:h-4 text-gray-400 ml-0.5 sm:ml-1 flex-shrink-0" :class="{ 'rotate-180': showCurrencyDropdown }" viewBox="0 0 16 16" fill="none">
                   <circle cx="8" cy="8" r="7.6" fill="white" stroke="#CFCFCF" stroke-width="0.8"/>
                   <path d="M4.7998 6.4001L7.9998 9.6001L11.1998 6.4001" stroke="#4D4F53" stroke-width="0.8" stroke-linecap="round"/>
                 </svg>
