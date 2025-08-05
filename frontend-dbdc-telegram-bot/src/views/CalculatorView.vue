@@ -415,6 +415,19 @@ html, body {
   transition: all 0.3s ease;
 }
 
+/* Mobile input field adjustments */
+@media (max-width: 640px) {
+  .w-\[158px\] {
+    width: 158px !important;
+    flex-shrink: 0;
+  }
+
+  /* Ensure proper gap between input and dropdown */
+  .gap-2 {
+    gap: 8px;
+  }
+}
+
 /* Responsive text adjustments */
 @media (max-width: 375px) {
   .text-sm {
@@ -428,6 +441,10 @@ html, body {
 
   .p-4 {
     padding: 0.75rem;
+  }
+
+  .w-\[158px\] {
+    width: 148px !important;
   }
 }
 
