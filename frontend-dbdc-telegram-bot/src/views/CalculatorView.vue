@@ -209,6 +209,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import BottomNavigation from '../components/BottomNavigation.vue'
 import CountryFlag from '../components/CountryFlag.vue'
+import InfoTooltip from '../components/InfoTooltip.vue'
 
 // Reactive data
 const monthlyIncome = ref(50)
