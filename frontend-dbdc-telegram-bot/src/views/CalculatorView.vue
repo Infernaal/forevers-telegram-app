@@ -1,8 +1,8 @@
 <template>
-  <div class="min-h-screen bg-gray-100 flex flex-col">
+  <div class="min-h-screen bg-gray-100 flex flex-col font-montserrat">
     <!-- Content -->
-    <div class="flex-1 px-4 py-6">
-      <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-6 max-w-md mx-auto">
+    <div class="flex-1 px-3.5 py-4 sm:px-4 sm:py-6">
+      <div class="bg-white rounded-3xl border border-gray-200 shadow-sm p-6 max-w-sm sm:max-w-md mx-auto">
         <!-- Header -->
         <h1 class="text-xl md:text-2xl font-bold text-dbd-dark mb-6">Income Calculator</h1>
 
