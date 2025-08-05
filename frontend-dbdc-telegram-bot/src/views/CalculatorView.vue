@@ -1,7 +1,7 @@
 <template>
-  <div class="min-h-screen bg-gray-100 flex flex-col font-montserrat overflow-hidden">
+  <div class="min-h-screen bg-gray-100 flex flex-col font-montserrat">
     <!-- Content -->
-    <div class="flex-1 px-2 py-4 sm:px-3 md:px-4 lg:px-6 xl:px-8 sm:py-6 overflow-y-auto scrollbar-hide pb-24" style="-webkit-overflow-scrolling: touch;">
+    <div class="flex-1 px-2 py-4 sm:px-3 md:px-4 lg:px-6 xl:px-8 sm:py-6 overflow-y-auto scrollbar-hide pb-24 sm:pb-32 md:pb-32 lg:pb-30" style="-webkit-overflow-scrolling: touch;">
 
       <!-- Header - Outside the card -->
       <h1 class="text-2xl md:text-3xl font-bold text-black mb-6 w-[95%] mx-auto">Income Calculator</h1>
@@ -15,32 +15,32 @@
           <!-- Input Section -->
           <div class="flex gap-2 mb-6">
             <!-- Amount Input -->
-            <div class="flex items-center bg-dbd-off-white border border-gray-200 rounded-full px-3 py-2.5 h-11 flex-[0.6] sm:flex-1">
-              <svg class="w-6 h-6 mr-2 text-blue-700 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M23 5.536V1H5.347V6.759H1V11.294H5.347V22.581H10.421V17.046H14.712V12.510H10.421V11.294H18.849V6.759H10.421V5.536H23Z"/>
+            <div class="flex items-center bg-dbd-off-white border border-gray-200 rounded-full px-3 py-2 h-11 w-[140px] sm:flex-1 min-w-0">
+              <svg class="w-6 h-6 mr-2 text-dbd-gray flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.8763 22C11.624 22 11.4153 21.9213 11.2504 21.7639C11.0854 21.6065 11.0029 21.4074 11.0029 21.1667V19.6667C10.0713 19.5185 9.27559 19.2037 8.61572 18.7222C7.95585 18.2407 7.44153 17.6296 7.07278 16.8889C6.97574 16.6852 6.97574 16.4722 7.07278 16.25C7.16982 16.0278 7.33479 15.8704 7.56769 15.7778C7.78117 15.6852 7.99951 15.6852 8.22271 15.7778C8.4459 15.8704 8.61572 16.0185 8.73217 16.2222C9.08151 16.8519 9.5376 17.3241 10.1004 17.6389C10.6633 17.9537 11.3134 18.1111 12.0509 18.1111C12.9825 18.1111 13.7492 17.8889 14.3508 17.4444C14.9525 17 15.2533 16.3889 15.2533 15.6111C15.2533 14.7963 14.9864 14.1667 14.4527 13.7222C13.919 13.2778 12.9146 12.8241 11.4396 12.3611C10.0422 11.9352 8.99903 11.3704 8.31004 10.6667C7.62106 9.96296 7.27656 9.08333 7.27656 8.02778C7.27656 7.00926 7.62106 6.15741 8.31004 5.47222C8.99903 4.78704 9.89665 4.39815 11.0029 4.30556V2.83333C11.0029 2.59259 11.0854 2.39352 11.2504 2.23611C11.4153 2.0787 11.624 2 11.8763 2C12.1286 2 12.3372 2.0787 12.5022 2.23611C12.6672 2.39352 12.7496 2.59259 12.7496 2.83333V4.30556C13.4483 4.39815 14.0742 4.60185 14.6274 4.91667C15.1805 5.23148 15.6414 5.63889 16.0102 6.13889C16.146 6.32407 16.1752 6.52315 16.0975 6.73611C16.0199 6.94907 15.8646 7.10185 15.6317 7.19444C15.4182 7.28704 15.1951 7.2963 14.9622 7.22222C14.7293 7.14815 14.5352 7.00926 14.3799 6.80556C14.1082 6.47222 13.7734 6.22685 13.3755 6.06944C12.9777 5.91204 12.4973 5.83333 11.9345 5.83333C11.0417 5.83333 10.3333 6.02778 9.80932 6.41667C9.2853 6.80556 9.02329 7.33333 9.02329 8C9.02329 8.7037 9.31441 9.27315 9.89665 9.70833C10.4789 10.1435 11.556 10.5926 13.1281 11.0556C14.4478 11.4444 15.4231 12.0046 16.0539 12.7361C16.6846 13.4676 17 14.3889 17 15.5C17 16.6667 16.641 17.6065 15.9229 18.3194C15.2048 19.0324 14.147 19.4907 12.7496 19.6944V21.1667C12.7496 21.4074 12.6672 21.6065 12.5022 21.7639C12.3372 21.9213 12.1286 22 11.8763 22Z" fill="#4B4D50"/>
               </svg>
               <input
                 v-model="monthlyIncome"
                 type="number"
                 placeholder="50"
-                class="bg-transparent outline-none text-dbd-gray font-medium flex-1 min-w-0 text-sm"
+                class="bg-transparent outline-none text-dbd-gray font-medium flex-1 min-w-0 text-base"
               />
             </div>
 
             <!-- Currency Selector -->
-            <div class="relative flex-shrink-0">
+            <div class="relative w-[180px] sm:flex-shrink-0 sm:min-w-[140px] sm:w-auto">
               <button
                 @click="toggleCurrencyDropdown"
-                class="flex items-center bg-white border border-gray-200 rounded-full px-3 py-2.5 h-11 gap-2 hover:bg-gray-50 transition-colors min-w-fit text-sm"
+                class="flex items-center bg-white border border-gray-200 rounded-full px-3 py-2 h-11 gap-2 hover:bg-gray-50 transition-colors w-full text-sm justify-between"
               >
-                <div class="flex items-center gap-1.5">
-                  <CountryFlag :country="selectedCurrency.country" size="medium" class="w-6 h-6 flex-shrink-0" />
-                  <svg class="w-3.5 h-3.5 text-dbd-dark flex-shrink-0" viewBox="0 0 14 14" fill="currentColor">
+                <div class="flex items-center gap-1">
+                  <CountryFlag :country="selectedCurrency.country" size="medium" class="w-5 h-5 flex-shrink-0" />
+                  <svg class="w-3 h-3 text-dbd-dark flex-shrink-0" viewBox="0 0 14 14" fill="currentColor">
                     <path d="M12.8602 1.40015H4.3802C4.00686 1.40015 3.7402 1.66681 3.7402 2.04015V4.65348H1.3402C0.966862 4.70681 0.700195 4.97348 0.700195 5.34681C0.700195 5.72015 0.966862 5.98681 1.3402 5.98681H3.7402V11.9601C3.7402 12.3335 4.00686 12.6001 4.3802 12.6001C4.75353 12.6001 5.0202 12.3335 5.0202 11.9601V9.18681H7.7402C8.11353 9.18681 8.3802 8.92015 8.3802 8.54681C8.3802 8.17348 8.11353 7.90681 7.7402 7.90681H5.0202V5.93348H10.1935C10.5669 5.93348 10.8335 5.66681 10.8335 5.29348C10.8335 4.92015 10.5669 4.65348 10.1935 4.65348H5.0202V2.68015H12.8069C13.1802 2.68015 13.4469 2.41348 13.4469 2.04015C13.4469 1.66681 13.2335 1.40015 12.8602 1.40015Z"/>
                   </svg>
-                  <span class="text-sm font-medium text-dbd-dark">{{ selectedCurrency.code }}</span>
-                  <span class="text-gray-400 text-sm">/</span>
-                  <span class="text-sm font-medium text-dbd-primary">{{ selectedCurrency.rate }} USD</span>
+                  <span class="text-xs font-medium text-dbd-dark">{{ selectedCurrency.code }}</span>
+                  <span class="text-gray-400 text-xs">/</span>
+                  <span class="text-xs font-medium text-dbd-primary">{{ selectedCurrency.rate }} USD</span>
                 </div>
                 <svg class="w-4 h-4 text-gray-400 ml-1 flex-shrink-0" :class="{ 'rotate-180': showCurrencyDropdown }" viewBox="0 0 16 16" fill="none">
                   <circle cx="8" cy="8" r="7.6" fill="white" stroke="#CFCFCF" stroke-width="0.8"/>
@@ -49,7 +49,7 @@
               </button>
 
               <!-- Currency Dropdown -->
-              <div v-if="showCurrencyDropdown" class="absolute top-full mt-1 left-0 w-64 bg-gradient-to-r from-purple-800 via-purple-900 to-purple-900 rounded-xl shadow-xl border border-purple-600 z-50 p-2 max-h-80 overflow-y-auto scrollbar-hide">
+              <div v-if="showCurrencyDropdown" class="absolute top-full mt-1 right-0 w-64 bg-gradient-to-r from-purple-800 via-purple-900 to-purple-900 rounded-xl shadow-xl border border-purple-600 z-50 p-2 max-h-80 overflow-y-auto scrollbar-hide">
                 <div v-for="currency in currencies" :key="currency.code"
                      @click="selectCurrency(currency)"
                      class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 cursor-pointer transition-colors">
@@ -107,7 +107,7 @@
                   <div class="flex-1">
                     <div class="text-sm text-dbd-gray">Deposit at 3.5% annual Interest Rate</div>
                   </div>
-                  <button class="w-6 h-6 bg-transparent rounded-full flex items-center justify-center hover:bg-gray-50 flex-shrink-0">
+                  <button @click="showBankDepositTooltip = true" class="w-6 h-6 bg-transparent rounded-full flex items-center justify-center hover:bg-gray-50 flex-shrink-0">
                     <svg class="w-5 h-5 text-dbd-gray" viewBox="0 0 20 20" fill="currentColor">
                       <path d="M10 2C5.5888 2 2 5.58885 2 10C2 14.4112 5.5888 18 10 18C14.4112 18 18 14.4112 18 10C18 5.58885 14.4112 2 10 2ZM10 16.5455C6.39079 16.5455 3.45455 13.6092 3.45455 10C3.45455 6.39088 6.39079 3.45455 10 3.45455C13.6092 3.45455 16.5455 6.39088 16.5455 10C16.5455 13.6092 13.6092 16.5455 10 16.5455Z"/>
                       <path d="M9.99978 5.39453C9.46518 5.39453 9.03027 5.82973 9.03027 6.36466C9.03027 6.89911 9.46518 7.33393 9.99978 7.33393C10.5344 7.33393 10.9693 6.89911 10.9693 6.36466C10.9693 5.82973 10.5344 5.39453 9.99978 5.39453Z"/>
@@ -131,7 +131,7 @@
                   <div class="flex-1">
                     <div class="text-sm text-dbd-gray">Investments in Residential Real Estate at 5%</div>
                   </div>
-                  <button class="w-6 h-6 bg-transparent rounded-full flex items-center justify-center hover:bg-gray-50 flex-shrink-0">
+                  <button @click="showResidentialTooltip = true" class="w-6 h-6 bg-transparent rounded-full flex items-center justify-center hover:bg-gray-50 flex-shrink-0">
                     <svg class="w-5 h-5 text-dbd-gray" viewBox="0 0 20 20" fill="currentColor">
                       <path d="M10 2C5.5888 2 2 5.58885 2 10C2 14.4112 5.5888 18 10 18C14.4112 18 18 14.4112 18 10C18 5.58885 14.4112 2 10 2ZM10 16.5455C6.39079 16.5455 3.45455 13.6092 3.45455 10C3.45455 6.39088 6.39079 3.45455 10 3.45455C13.6092 3.45455 16.5455 6.39088 16.5455 10C16.5455 13.6092 13.6092 16.5455 10 16.5455Z"/>
                       <path d="M9.99978 5.39453C9.46518 5.39453 9.03027 5.82973 9.03027 6.36466C9.03027 6.89911 9.46518 7.33393 9.99978 7.33393C10.5344 7.33393 10.9693 6.89911 10.9693 6.36466C10.9693 5.82973 10.5344 5.39453 9.99978 5.39453Z"/>
@@ -161,7 +161,7 @@
                   <div class="flex-1">
                     <div class="text-sm text-dbd-gray">Investments in Commercial Real Estate at 8%</div>
                   </div>
-                  <button class="w-6 h-6 bg-transparent rounded-full flex items-center justify-center hover:bg-gray-50 flex-shrink-0">
+                  <button @click="showCommercialTooltip = true" class="w-6 h-6 bg-transparent rounded-full flex items-center justify-center hover:bg-gray-50 flex-shrink-0">
                     <svg class="w-5 h-5 text-dbd-gray" viewBox="0 0 20 20" fill="currentColor">
                       <path d="M10 2C5.5888 2 2 5.58885 2 10C2 14.4112 5.5888 18 10 18C14.4112 18 18 14.4112 18 10C18 5.58885 14.4112 2 10 2ZM10 16.5455C6.39079 16.5455 3.45455 13.6092 3.45455 10C3.45455 6.39088 6.39079 3.45455 10 3.45455C13.6092 3.45455 16.5455 6.39088 16.5455 10C16.5455 13.6092 13.6092 16.5455 10 16.5455Z"/>
                       <path d="M9.99978 5.39453C9.46518 5.39453 9.03027 5.82973 9.03027 6.36466C9.03027 6.89911 9.46518 7.33393 9.99978 7.33393C10.5344 7.33393 10.9693 6.89911 10.9693 6.36466C10.9693 5.82973 10.5344 5.39453 9.99978 5.39453Z"/>
@@ -191,7 +191,7 @@
             Forevers UAE offers a unique <span class="text-red-500">investment</span> opportunity with higher earning potential and lower entry thresholds compared to traditional options like bank deposits or real estate.
           </p>
           
-          <button class="w-full bg-gradient-to-r from-dbd-primary to-purple-600 text-white font-bold py-3 px-6 rounded-full hover:from-purple-700 hover:to-purple-800 transition-all duration-300">
+          <button @click="navigateToFavorites" class="w-full bg-gradient-to-r from-dbd-primary to-purple-600 text-white font-bold py-3 px-6 rounded-full hover:from-purple-700 hover:to-purple-800 transition-all duration-300">
             <span class="text-red-500">Invested</span> Now
           </button>
         </div>
@@ -202,17 +202,47 @@
     <div class="mt-auto">
       <BottomNavigation />
     </div>
+
+    <!-- InfoTooltips -->
+    <InfoTooltip
+      :isVisible="showBankDepositTooltip"
+      title="Bank Deposit Returns"
+      description="Traditional bank deposits offer stable but modest returns at 3.5% annually. While safe, they often barely keep up with inflation, making them suitable for emergency funds but limited for wealth building."
+      @close="showBankDepositTooltip = false"
+    />
+
+    <InfoTooltip
+      :isVisible="showResidentialTooltip"
+      title="Residential Real Estate Investment"
+      description="Residential properties typically yield 5% annually through rental income and appreciation. Requires significant capital, ongoing maintenance, and market knowledge, but provides tangible asset ownership."
+      @close="showResidentialTooltip = false"
+    />
+
+    <InfoTooltip
+      :isVisible="showCommercialTooltip"
+      title="Commercial Real Estate Investment"
+      description="Commercial properties offer higher returns at 8% annually but demand substantial capital and expertise. Income comes from business leases with longer terms, providing more stable cash flow than residential."
+      @close="showCommercialTooltip = false"
+    />
   </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useRouter } from 'vue-router'
 import BottomNavigation from '../components/BottomNavigation.vue'
 import CountryFlag from '../components/CountryFlag.vue'
+import InfoTooltip from '../components/InfoTooltip.vue'
+
+// Router
+const router = useRouter()
 
 // Reactive data
 const monthlyIncome = ref(50)
 const showCurrencyDropdown = ref(false)
+const showBankDepositTooltip = ref(false)
+const showResidentialTooltip = ref(false)
+const showCommercialTooltip = ref(false)
 const selectedCurrency = ref({
   code: 'UAE',
   name: 'United Arab Emirates',
@@ -264,6 +294,10 @@ const selectCurrency = (currency) => {
   showCurrencyDropdown.value = false
 }
 
+const navigateToFavorites = () => {
+  router.push('/favorites')
+}
+
 // Close dropdown when clicking outside
 const handleClickOutside = (event) => {
   if (!event.target.closest('.relative')) {
@@ -281,6 +315,19 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+/* Telegram WebApp fixes */
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+  position: relative !important;
+}
+
+/* Prevent horizontal scroll and movement */
+* {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
 /* Custom width for containers */
 .w-22 {
   width: 5.5rem;
@@ -376,6 +423,37 @@ onUnmounted(() => {
   transition: all 0.3s ease;
 }
 
+/* Mobile input field adjustments */
+@media (max-width: 640px) {
+  .w-\[140px\] {
+    width: 140px !important;
+    flex-shrink: 0;
+  }
+
+  .w-\[180px\] {
+    width: 180px !important;
+    flex-shrink: 0;
+  }
+
+  /* Ensure proper gap between input and dropdown */
+  .gap-2 {
+    gap: 8px;
+  }
+
+  /* Mobile dropdown positioning */
+  .relative .absolute.right-0 {
+    right: 0;
+    left: auto;
+    transform: translateX(0);
+  }
+
+  /* Adjust dropdown width for mobile */
+  .relative .absolute.w-64 {
+    width: 240px;
+    min-width: 240px;
+  }
+}
+
 /* Responsive text adjustments */
 @media (max-width: 375px) {
   .text-sm {
@@ -389,6 +467,21 @@ onUnmounted(() => {
 
   .p-4 {
     padding: 0.75rem;
+  }
+
+  .w-\[140px\] {
+    width: 130px !important;
+  }
+
+  .w-\[180px\] {
+    width: 170px !important;
+  }
+
+  /* Smaller dropdown for very small screens */
+  .relative .absolute.w-64 {
+    width: 220px !important;
+    min-width: 220px !important;
+    right: -5px;
   }
 }
 
