@@ -215,18 +215,18 @@ const showCurrencyDropdown = ref(false)
 const selectedCurrency = ref({
   code: 'UAE',
   name: 'United Arab Emirates',
-  rate: '9',
-  flag: 'https://flagcdn.com/w40/ae.png'
+  country: 'uae',
+  rate: '9'
 })
 
 // Currency options
 const currencies = ref([
-  { code: 'UAE', name: 'United Arab Emirates', rate: '9', flag: 'https://flagcdn.com/w40/ae.png' },
-  { code: 'KZ', name: 'Kazakhstan', rate: '8', flag: 'https://flagcdn.com/w40/kz.png' },
-  { code: 'DE', name: 'Germany', rate: '4', flag: 'https://flagcdn.com/w40/de.png' },
-  { code: 'PL', name: 'Poland', rate: '4', flag: 'https://flagcdn.com/w40/pl.png' },
-  { code: 'UA', name: 'Ukraine', rate: '4', flag: 'https://flagcdn.com/w40/ua.png' },
-  { code: 'PL2', name: 'Poland', rate: '1', flag: 'https://flagcdn.com/w40/pl.png' }
+  { code: 'UAE', name: 'United Arab Emirates', country: 'uae', rate: '9' },
+  { code: 'KZ', name: 'Kazakhstan', country: 'kz', rate: '8' },
+  { code: 'DE', name: 'Germany', country: 'germany', rate: '4' },
+  { code: 'PL', name: 'Poland', country: 'poland', rate: '4' },
+  { code: 'UA', name: 'Ukraine', country: 'ukraine', rate: '4' },
+  { code: 'PL2', name: 'Poland', country: 'poland', rate: '1' }
 ])
 
 // Computed values
