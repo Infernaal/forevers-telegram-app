@@ -28,7 +28,7 @@
             </div>
 
             <!-- Currency Selector -->
-            <div class="relative flex-shrink-0">
+            <div class="relative w-full sm:w-auto sm:flex-shrink-0">
               <button
                 @click="toggleCurrencyDropdown"
                 class="flex items-center bg-white border border-gray-200 rounded-full px-3 py-2.5 h-11 gap-2 hover:bg-gray-50 transition-colors min-w-fit text-sm"
