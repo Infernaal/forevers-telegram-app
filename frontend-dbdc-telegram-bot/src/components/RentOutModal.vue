@@ -208,19 +208,24 @@ watch(() => props.isVisible, async (isVisible) => {
   if (isVisible) {
     document.addEventListener('keydown', handleKeyDown)
 
-    // Auto-focus input field for Telegram WebApp - immediate focus for keyboard
+    // Auto-focus input field for Telegram WebApp - instant focus for immediate keyboard
     await nextTick()
-    setTimeout(() => {
-      if (inputField.value) {
-        inputField.value.focus()
-        inputField.value.select() // Select all text for easy replacement
+    if (inputField.value) {
+      inputField.value.focus()
+      inputField.value.select() // Select all text for easy replacement
 
-        // Trigger virtual keyboard on mobile
-        if (window.Telegram?.WebApp?.HapticFeedback) {
-          window.Telegram.WebApp.HapticFeedback.selectionChanged()
-        }
+      // Force keyboard to appear on mobile devices
+      inputField.value.click()
+
+      // Trigger virtual keyboard on mobile - multiple methods for compatibility
+      if (window.Telegram?.WebApp?.HapticFeedback) {
+        window.Telegram.WebApp.HapticFeedback.selectionChanged()
       }
-    }, 100) // Reduced delay for faster keyboard appearance
+
+      // Additional trigger for mobile keyboards
+      const inputEvent = new Event('touchstart', { bubbles: true })
+      inputField.value.dispatchEvent(inputEvent)
+    }
   } else {
     document.removeEventListener('keydown', handleKeyDown)
   }
