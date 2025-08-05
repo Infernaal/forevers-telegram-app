@@ -289,12 +289,27 @@ onUnmounted(() => {
   height: 5.5rem;
 }
 
+/* Hide scrollbar while maintaining scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}
+
+/* Touch scrolling for mobile */
+.scrollbar-hide {
+  -webkit-overflow-scrolling: touch;
+}
+
 /* Ensure proper responsive design */
 @media (max-width: 640px) {
   .max-w-sm {
     max-width: 24rem;
   }
-  
+
   .px-3\.5 {
     padding-left: 0.875rem;
     padding-right: 0.875rem;
@@ -305,15 +320,34 @@ onUnmounted(() => {
   .max-w-sm {
     max-width: calc(100vw - 1.75rem);
   }
-  
+
   .text-xl {
     font-size: 1.125rem;
     line-height: 1.75rem;
   }
-  
+
   .text-lg {
     font-size: 1rem;
     line-height: 1.5rem;
+  }
+}
+
+/* Tablet and desktop responsive adjustments */
+@media (min-width: 768px) {
+  .max-w-sm {
+    max-width: 42rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .max-w-sm {
+    max-width: 56rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .max-w-sm {
+    max-width: 72rem;
   }
 }
 
@@ -347,11 +381,11 @@ onUnmounted(() => {
     font-size: 0.8rem;
     line-height: 1.25rem;
   }
-  
+
   .gap-3 {
     gap: 0.5rem;
   }
-  
+
   .p-4 {
     padding: 0.75rem;
   }
