@@ -487,13 +487,14 @@ const languages = ref([
   { code: 'FRA', name: 'Fran��ais', country: 'france' },
   { code: 'DEU', name: 'Deutsch', country: 'germany' },
   { code: 'ITA', name: 'Italiano', country: 'italy' },
-  { code: 'RUS', name: 'Русский', country: 'ukraine' },
+  { code: 'RUS', name: 'Русский', country: 'russia' },
+  { code: 'UKR', name: 'Українська', country: 'ukraine' },
   { code: 'CHN', name: '中��', country: 'china' },
   { code: 'JPN', name: '日本語', country: 'japan' },
-  { code: 'KOR', name: '한국어', country: 'new zealand' },
+  { code: 'KOR', name: '한국어', country: 'south korea' },
   { code: 'ARA', name: 'العربية', country: 'uae' },
-  { code: 'POR', name: 'Português', country: 'spain' },
-  { code: 'NLD', name: 'Nederlands', country: 'norway' }
+  { code: 'POR', name: 'Português', country: 'portugal' },
+  { code: 'NLD', name: 'Nederlands', country: 'netherlands' }
 ])
 
 const selectedLanguage = ref(languages.value[0])

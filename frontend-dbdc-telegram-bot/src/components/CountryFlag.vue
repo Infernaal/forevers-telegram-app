@@ -78,7 +78,16 @@ const countryCodeMap = {
   'gb': 'GB',
   'usa': 'USA',
   'us': 'USA',
-  'united states': 'USA'
+  'united states': 'USA',
+  'south korea': 'KR',
+  'korea': 'KR',
+  'kr': 'KR',
+  'portugal': 'PT',
+  'pt': 'PT',
+  'netherlands': 'NL',
+  'nl': 'NL',
+  'russia': 'RU',
+  'ru': 'RU'
 }
 
 const flagSrc = computed(() => {
