@@ -143,7 +143,7 @@
     />
 
     <!-- Bottom Navigation -->
-    <BottomNavigation />
+    <BottomNavigation ref="bottomNavRef" />
   </div>
 </template>
 
