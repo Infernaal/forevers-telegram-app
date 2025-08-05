@@ -116,7 +116,7 @@
     />
 
     <!-- Bottom Navigation Component -->
-    <BottomNavigation />
+    <BottomNavigation ref="bottomNavRef" />
   </div>
 </template>
 
