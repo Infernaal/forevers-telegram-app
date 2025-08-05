@@ -359,6 +359,11 @@ const getRankIcon = (rank) => {
   return `/${validRank}.svg`
 }
 
+// Expose bottomOffset so parent components can access it
+defineExpose({
+  bottomOffset
+})
+
 
 </script>
 
