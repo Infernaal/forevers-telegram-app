@@ -422,6 +422,11 @@ html, body {
     flex-shrink: 0;
   }
 
+  .w-\[160px\] {
+    width: 160px !important;
+    flex-shrink: 0;
+  }
+
   /* Ensure proper gap between input and dropdown */
   .gap-2 {
     gap: 8px;
