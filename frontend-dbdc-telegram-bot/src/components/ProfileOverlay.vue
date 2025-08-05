@@ -445,6 +445,7 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useRouter } from 'vue-router'
 import CountryFlag from './CountryFlag.vue'
 
 // Props
@@ -465,6 +466,9 @@ const props = defineProps({
 
 // Emits
 const emit = defineEmits(['close'])
+
+// Router
+const router = useRouter()
 
 // State
 const showCopySuccess = ref(false)
@@ -545,7 +549,12 @@ onUnmounted(() => {
 // Methods
 const handleMenuClick = (menuItem) => {
   console.log(`Menu clicked: ${menuItem}`)
-  // Handle menu navigation
+
+  if (menuItem === 'calculator') {
+    emit('close')
+    router.push('/calculator')
+  }
+  // Handle other menu navigation
 }
 
 const handleUpgrade = () => {
