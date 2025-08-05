@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-100 flex flex-col font-montserrat overflow-hidden">
+  <div class="min-h-screen bg-gray-100 flex flex-col font-montserrat">
     <!-- Content -->
     <div class="flex-1 px-2 py-4 sm:px-3 md:px-4 lg:px-6 xl:px-8 sm:py-6 overflow-y-auto scrollbar-hide pb-24" style="-webkit-overflow-scrolling: touch;">
 
