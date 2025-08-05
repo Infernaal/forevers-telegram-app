@@ -10,7 +10,7 @@
   >
     <div
       v-if="isVisible"
-      class="fixed inset-0 flex items-center justify-center z-50 px-4"
+      class="fixed inset-0 flex items-center justify-center z-[10002] px-4"
       style="background: rgba(2, 7, 14, 0.20); backdrop-filter: blur(9px);"
       @click.self="closeModal"
     >
@@ -207,24 +207,27 @@ const handleKeyDown = (event) => {
 watch(() => props.isVisible, async (isVisible) => {
   if (isVisible) {
     document.addEventListener('keydown', handleKeyDown)
-    document.body.style.overflow = 'hidden'
 
-    // Auto-focus input field for Telegram WebApp
+    // Auto-focus input field for Telegram WebApp - instant focus for immediate keyboard
     await nextTick()
-    setTimeout(() => {
-      if (inputField.value) {
-        inputField.value.focus()
-        inputField.value.select() // Select all text for easy replacement
+    if (inputField.value) {
+      inputField.value.focus()
+      inputField.value.select() // Select all text for easy replacement
 
-        // Trigger virtual keyboard on mobile
-        if (window.Telegram?.WebApp?.HapticFeedback) {
-          window.Telegram.WebApp.HapticFeedback.selectionChanged()
-        }
+      // Force keyboard to appear on mobile devices
+      inputField.value.click()
+
+      // Trigger virtual keyboard on mobile - multiple methods for compatibility
+      if (window.Telegram?.WebApp?.HapticFeedback) {
+        window.Telegram.WebApp.HapticFeedback.selectionChanged()
       }
-    }, 300) // Delay to ensure modal animation is complete
+
+      // Additional trigger for mobile keyboards
+      const inputEvent = new Event('touchstart', { bubbles: true })
+      inputField.value.dispatchEvent(inputEvent)
+    }
   } else {
     document.removeEventListener('keydown', handleKeyDown)
-    document.body.style.overflow = ''
   }
 })
 
