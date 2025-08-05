@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-gray-100 flex flex-col font-montserrat overflow-hidden">
     <!-- Content -->
-    <div class="flex-1 px-3.5 py-4 sm:px-4 md:px-8 lg:px-16 xl:px-32 sm:py-6 overflow-y-auto scrollbar-hide" style="-webkit-overflow-scrolling: touch;">
+    <div class="flex-1 px-2 py-4 sm:px-3 md:px-4 lg:px-6 xl:px-8 sm:py-6 overflow-y-auto scrollbar-hide pb-24" style="-webkit-overflow-scrolling: touch;">
 
       <!-- Header - Outside the card -->
       <h1 class="text-2xl md:text-3xl font-bold text-black mb-6 max-w-sm md:max-w-2xl lg:max-w-4xl xl:max-w-6xl mx-auto">Income Calculator</h1>
