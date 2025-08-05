@@ -255,12 +255,13 @@
     />
 
     <!-- Bottom Navigation -->
-    <BottomNavigation />
+    <BottomNavigation ref="bottomNavRef" />
 
     <!-- Enter Amount Modal -->
     <EnterAmountModal
       :is-visible="showEnterAmountModal"
       :selected-balance="selectedBalance"
+      :bottom-offset="bottomNavRef?.bottomOffset || 0"
       @close="closeEnterAmountModal"
       @add-to-cart="handleAddToCart"
     />
