@@ -113,6 +113,7 @@
       :rent-amount="calculatedRentAmount"
       :input-amount="inputAmount"
       :terms-agreed="termsAgreed"
+      :bottom-offset="bottomNavRef?.bottomOffset || 0"
       @close="closeRentModal"
       @rent-out="handleRentOut"
       @open-terms="openTermsModal"
@@ -142,7 +143,7 @@
     />
 
     <!-- Bottom Navigation -->
-    <BottomNavigation />
+    <BottomNavigation ref="bottomNavRef" />
   </div>
 </template>
 
@@ -157,6 +158,7 @@ import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
 import SuccessNotification from '../components/SuccessNotification.vue'
 
 const router = useRouter()
+const bottomNavRef = ref(null)
 
 // Modal states
 const showInfoTooltip = ref(false)

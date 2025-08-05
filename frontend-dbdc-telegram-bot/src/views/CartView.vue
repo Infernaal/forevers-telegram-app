@@ -93,6 +93,7 @@
     <!-- Delete Confirmation Modal -->
     <DeleteConfirmModal
       :is-visible="showDeleteModal"
+      :bottom-offset="bottomNavRef?.bottomOffset || 0"
       @cancel="cancelDelete"
       @confirm="confirmDelete"
     />
@@ -115,7 +116,7 @@
     />
 
     <!-- Bottom Navigation Component -->
-    <BottomNavigation />
+    <BottomNavigation ref="bottomNavRef" />
   </div>
 </template>
 
@@ -131,6 +132,7 @@ import SuccessNotification from '../components/SuccessNotification.vue'
 import { useCart } from '../composables/useCart.js'
 
 const router = useRouter()
+const bottomNavRef = ref(null)
 
 // Cart functionality
 const { cartItems, cartItemsCount, cartTotal, removeFromCart, clearCart } = useCart()
