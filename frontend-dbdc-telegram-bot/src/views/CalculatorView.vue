@@ -131,7 +131,7 @@
                   <div class="flex-1">
                     <div class="text-sm text-dbd-gray">Investments in Residential Real Estate at 5%</div>
                   </div>
-                  <button class="w-6 h-6 bg-transparent rounded-full flex items-center justify-center hover:bg-gray-50 flex-shrink-0">
+                  <button @click="showResidentialTooltip = true" class="w-6 h-6 bg-transparent rounded-full flex items-center justify-center hover:bg-gray-50 flex-shrink-0">
                     <svg class="w-5 h-5 text-dbd-gray" viewBox="0 0 20 20" fill="currentColor">
                       <path d="M10 2C5.5888 2 2 5.58885 2 10C2 14.4112 5.5888 18 10 18C14.4112 18 18 14.4112 18 10C18 5.58885 14.4112 2 10 2ZM10 16.5455C6.39079 16.5455 3.45455 13.6092 3.45455 10C3.45455 6.39088 6.39079 3.45455 10 3.45455C13.6092 3.45455 16.5455 6.39088 16.5455 10C16.5455 13.6092 13.6092 16.5455 10 16.5455Z"/>
                       <path d="M9.99978 5.39453C9.46518 5.39453 9.03027 5.82973 9.03027 6.36466C9.03027 6.89911 9.46518 7.33393 9.99978 7.33393C10.5344 7.33393 10.9693 6.89911 10.9693 6.36466C10.9693 5.82973 10.5344 5.39453 9.99978 5.39453Z"/>
