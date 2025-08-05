@@ -498,17 +498,4 @@ button:hover {
 button:active {
   transform: translateY(0);
 }
-
-/* Tablet and Desktop bottom spacing to prevent overlap with BottomNavigation */
-@media (min-width: 768px) {
-  .pb-24.md\:pb-32.lg\:pb-40 {
-    padding-bottom: 10rem !important; /* 160px for larger screens */
-  }
-}
-
-@media (min-width: 1024px) {
-  .pb-24.md\:pb-32.lg\:pb-40 {
-    padding-bottom: 12rem !important; /* 192px for desktop */
-  }
-}
 </style>
