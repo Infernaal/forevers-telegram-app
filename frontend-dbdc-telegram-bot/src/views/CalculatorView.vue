@@ -1,8 +1,8 @@
 <template>
-  <div class="min-h-screen bg-gray-100 flex flex-col font-montserrat">
+  <div class="min-h-screen bg-gray-100 flex flex-col font-montserrat overflow-hidden">
     <!-- Content -->
-    <div class="flex-1 px-3.5 py-11 sm:px-4 sm:py-6">
-      <div class="bg-white rounded-3xl border border-gray-200 shadow-sm px-6 py-3 max-w-sm mx-auto relative">
+    <div class="flex-1 px-3.5 py-4 sm:px-4 md:px-8 lg:px-16 xl:px-32 sm:py-6 overflow-y-auto scrollbar-hide" style="-webkit-overflow-scrolling: touch;">
+      <div class="bg-white rounded-3xl border border-gray-200 shadow-sm px-6 py-3 max-w-sm md:max-w-2xl lg:max-w-4xl xl:max-w-6xl mx-auto relative">
         
         <!-- Header -->
         <h1 class="text-xl font-semibold text-black mb-3">Income Calculator</h1>
