@@ -11,11 +11,7 @@
     <div
       v-if="isVisible"
       class="fixed inset-0 flex items-center justify-center z-[10002] px-4"
-      :style="{
-        background: 'rgba(2, 7, 14, 0.20)',
-        backdropFilter: 'blur(9px)',
-        paddingBottom: bottomOffset ? `${bottomOffset}px` : '0px'
-      }"
+      style="background: rgba(2, 7, 14, 0.20); backdrop-filter: blur(9px);"
       @click.self="closeModal"
     >
       <!-- Modal Content -->
@@ -155,10 +151,6 @@ const props = defineProps({
   termsAgreed: {
     type: Boolean,
     default: false
-  },
-  bottomOffset: {
-    type: Number,
-    default: 0
   }
 })
 

@@ -255,13 +255,12 @@
     />
 
     <!-- Bottom Navigation -->
-    <BottomNavigation ref="bottomNavRef" />
+    <BottomNavigation />
 
     <!-- Enter Amount Modal -->
     <EnterAmountModal
       :is-visible="showEnterAmountModal"
       :selected-balance="selectedBalance"
-      :bottom-offset="bottomNavRef?.bottomOffset || 0"
       @close="closeEnterAmountModal"
       @add-to-cart="handleAddToCart"
     />
@@ -285,7 +284,6 @@ const router = useRouter()
 const isLoading = ref(false)
 const showEnterAmountModal = ref(false)
 const selectedBalance = ref(null)
-const bottomNavRef = ref(null)
 const foreversAmount = ref(250)
 const amountInput = ref(null)
 const inputError = ref('')
