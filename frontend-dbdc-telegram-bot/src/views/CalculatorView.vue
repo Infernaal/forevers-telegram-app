@@ -229,6 +229,7 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useRouter } from 'vue-router'
 import BottomNavigation from '../components/BottomNavigation.vue'
 import CountryFlag from '../components/CountryFlag.vue'
 import InfoTooltip from '../components/InfoTooltip.vue'
