@@ -49,7 +49,7 @@
               </button>
 
               <!-- Currency Dropdown -->
-              <div v-if="showCurrencyDropdown" class="absolute top-full mt-1 left-0 w-full sm:w-64 bg-gradient-to-r from-purple-800 via-purple-900 to-purple-900 rounded-xl shadow-xl border border-purple-600 z-50 p-2 max-h-80 overflow-y-auto scrollbar-hide">
+              <div v-if="showCurrencyDropdown" class="absolute top-full mt-1 right-0 w-64 bg-gradient-to-r from-purple-800 via-purple-900 to-purple-900 rounded-xl shadow-xl border border-purple-600 z-50 p-2 max-h-80 overflow-y-auto scrollbar-hide">
                 <div v-for="currency in currencies" :key="currency.code"
                      @click="selectCurrency(currency)"
                      class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 cursor-pointer transition-colors">
