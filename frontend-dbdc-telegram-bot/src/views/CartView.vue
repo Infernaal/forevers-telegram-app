@@ -132,6 +132,7 @@ import SuccessNotification from '../components/SuccessNotification.vue'
 import { useCart } from '../composables/useCart.js'
 
 const router = useRouter()
+const bottomNavRef = ref(null)
 
 // Cart functionality
 const { cartItems, cartItemsCount, cartTotal, removeFromCart, clearCart } = useCart()
