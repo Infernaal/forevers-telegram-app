@@ -171,6 +171,10 @@ const props = defineProps({
   selectedBalance: {
     type: Object,
     default: null
+  },
+  bottomOffset: {
+    type: Number,
+    default: 0
   }
 })
 
