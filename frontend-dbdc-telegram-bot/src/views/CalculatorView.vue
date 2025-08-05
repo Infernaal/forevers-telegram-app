@@ -422,8 +422,8 @@ html, body {
     flex-shrink: 0;
   }
 
-  .w-\[160px\] {
-    width: 160px !important;
+  .w-\[180px\] {
+    width: 180px !important;
     flex-shrink: 0;
   }
 
