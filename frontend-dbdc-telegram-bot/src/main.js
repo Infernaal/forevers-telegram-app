@@ -72,6 +72,14 @@ if (window.Telegram && window.Telegram.WebApp) {
   }
   updateSafeArea()
 
+  // Better keyboard handling for form inputs
+  tg.onEvent('viewportChanged', () => {
+    updateSafeArea()
+    // Adjust viewport for keyboard
+    const keyboardHeight = Math.max(0, window.innerHeight - tg.viewportHeight)
+    document.documentElement.style.setProperty('--keyboard-height', keyboardHeight + 'px')
+  })
+  
   // Add to global for easy access
   window.Telegram.WebApp.utils = {
     haptic: window.triggerHaptic,
