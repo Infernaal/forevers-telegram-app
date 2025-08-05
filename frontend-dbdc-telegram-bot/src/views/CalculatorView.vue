@@ -214,6 +214,9 @@ import InfoTooltip from '../components/InfoTooltip.vue'
 // Reactive data
 const monthlyIncome = ref(50)
 const showCurrencyDropdown = ref(false)
+const showBankDepositTooltip = ref(false)
+const showResidentialTooltip = ref(false)
+const showCommercialTooltip = ref(false)
 const selectedCurrency = ref({
   code: 'UAE',
   name: 'United Arab Emirates',
