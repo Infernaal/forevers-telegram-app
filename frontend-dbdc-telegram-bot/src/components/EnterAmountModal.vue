@@ -366,10 +366,16 @@ watch(() => props.isVisible, async (isVisible) => {
   if (isVisible) {
     document.addEventListener('keydown', handleKeyDown)
     document.body.style.overflow = 'hidden'
-    
+
     // Set default value
     inputValue.value = '250'
-    
+
+    // Setup Telegram WebApp close button handler
+    if (window.Telegram?.WebApp) {
+      window.Telegram.WebApp.onEvent('backButtonClicked', closeModal)
+      window.Telegram.WebApp.onEvent('settingsButtonClicked', closeModal)
+    }
+
     // Focus input field after modal is rendered with delay for Telegram WebApp
     await nextTick()
     setTimeout(() => {
@@ -387,6 +393,22 @@ watch(() => props.isVisible, async (isVisible) => {
   } else {
     document.removeEventListener('keydown', handleKeyDown)
     document.body.style.overflow = ''
+
+    // Clean up Telegram WebApp handlers
+    if (window.Telegram?.WebApp) {
+      window.Telegram.WebApp.offEvent('backButtonClicked', closeModal)
+      window.Telegram.WebApp.offEvent('settingsButtonClicked', closeModal)
+    }
+
+    // Force hide keyboard in Telegram WebApp
+    if (inputField.value) {
+      inputField.value.blur()
+    }
+
+    // Additional keyboard hiding for mobile
+    if (document.activeElement && typeof document.activeElement.blur === 'function') {
+      document.activeElement.blur()
+    }
   }
 })
 </script>
