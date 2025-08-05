@@ -366,9 +366,23 @@ watch(() => props.isVisible, async (isVisible) => {
   if (isVisible) {
     document.addEventListener('keydown', handleKeyDown)
     document.body.style.overflow = 'hidden'
-    
+
     // Set default value
     inputValue.value = '250'
+
+    // Auto-focus input field for Telegram WebApp
+    await nextTick()
+    setTimeout(() => {
+      if (inputField.value) {
+        inputField.value.focus()
+        inputField.value.select() // Select all text for easy replacement
+
+        // Trigger virtual keyboard on mobile
+        if (window.Telegram?.WebApp?.HapticFeedback) {
+          window.Telegram.WebApp.HapticFeedback.selectionChanged()
+        }
+      }
+    }, 300) // Delay to ensure modal animation is complete
   } else {
     document.removeEventListener('keydown', handleKeyDown)
     document.body.style.overflow = ''
