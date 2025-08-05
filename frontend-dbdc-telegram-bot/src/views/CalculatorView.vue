@@ -13,7 +13,7 @@
           <h2 class="text-lg font-semibold text-dbd-dark mb-4">Basic monthly income in USD</h2>
           
           <!-- Input Section -->
-          <div class="flex gap-2 mb-6">
+          <div class="flex flex-col sm:flex-row gap-2 mb-6">
             <!-- Amount Input -->
             <div class="flex items-center bg-dbd-off-white border border-gray-200 rounded-full px-3 py-2.5 h-11 flex-[0.6] sm:flex-1">
               <svg class="w-6 h-6 mr-2 text-blue-700 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
