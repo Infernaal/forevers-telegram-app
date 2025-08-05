@@ -456,15 +456,15 @@ html, body {
     padding: 0.75rem;
   }
 
-  .w-\[158px\] {
-    width: 148px !important;
+  .w-\[140px\] {
+    width: 130px !important;
   }
 
   /* Smaller dropdown for very small screens */
   .relative .absolute.w-64 {
-    width: 250px !important;
-    min-width: 250px !important;
-    right: -10px;
+    width: 220px !important;
+    min-width: 220px !important;
+    right: -5px;
   }
 }
 
