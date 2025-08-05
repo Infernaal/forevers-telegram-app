@@ -47,31 +47,44 @@
         <!-- Input Field -->
         <div class="px-4 mb-6">
           <div
-            class="w-full rounded-full border bg-dbd-off-white flex items-center px-3.5 py-2 gap-2 h-[52px] transition-all duration-200"
-            :class="isInputFocused ? 'border-dbd-primary' : 'border-dbd-gray'"
+            class="w-full rounded-full border-2 bg-dbd-off-white flex items-center px-4 py-3 transition-all duration-200"
+            :class="[
+              isInputFocused
+                ? 'border-dbd-primary bg-dbd-light-blue'
+                : 'border-dbd-gray'
+            ]"
           >
             <!-- Forevers Icon -->
             <div
-              class="w-9 h-9 rounded-[29px] flex items-center justify-center flex-shrink-0 transition-all duration-200"
-              :class="isInputFocused ? 'bg-dbd-primary' : 'bg-dbd-light-blue'"
+              class="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-200"
+              :class="[
+                isInputFocused
+                  ? 'bg-dbd-primary'
+                  : 'bg-dbd-light-blue'
+              ]"
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M22.0457 2.40039H7.50852C6.86852 2.40039 6.41138 2.85753 6.41138 3.49753V7.97753H2.29709C1.65709 8.06896 1.19995 8.52611 1.19995 9.16611C1.19995 9.80611 1.65709 10.2632 2.29709 10.2632H6.41138V20.5033C6.41138 21.1432 6.86852 21.6004 7.50852 21.6004C8.14852 21.6004 8.60567 21.1432 8.60567 20.5033V15.749H13.2685C13.9085 15.749 14.3657 15.2918 14.3657 14.6518C14.3657 14.0118 13.9085 13.5547 13.2685 13.5547H8.60567V10.1718H17.4742C18.1142 10.1718 18.5714 9.71468 18.5714 9.07468C18.5714 8.43468 18.1142 7.97753 17.4742 7.97753H8.60567V4.59468H21.9542C22.5942 4.59468 23.0514 4.13753 23.0514 3.49753C23.0514 2.85753 22.6857 2.40039 22.0457 2.40039Z" :fill="isInputFocused ? '#FFFFFF' : '#02070E'"/>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22.0457 2.40039H7.50852C6.86852 2.40039 6.41138 2.85753 6.41138 3.49753V7.97753H2.29709C1.65709 8.06896 1.19995 8.52611 1.19995 9.16611C1.19995 9.80611 1.65709 10.2632 2.29709 10.2632H6.41138V20.5033C6.41138 21.1432 6.86852 21.6004 7.50852 21.6004C8.14852 21.6004 8.60567 21.1432 8.60567 20.5033V15.749H13.2685C13.9085 15.749 14.3657 15.2918 14.3657 14.6518C14.3657 14.0118 13.9085 13.5547 13.2685 13.5547H8.60567V10.1718H17.4742C18.1142 10.1718 18.5714 9.71468 18.5714 9.07468C18.5714 8.43468 18.1142 7.97753 17.4742 7.97753H8.60567V4.59468H21.9542C22.5942 4.59468 23.0514 4.13753 23.0514 3.49753C23.0514 2.85753 22.6857 2.40039 22.0457 2.40039Z"
+                  :fill="isInputFocused ? '#FFFFFF' : '#02070E'"
+                />
               </svg>
             </div>
 
             <!-- Input Content -->
-            <div class="flex flex-col flex-1 min-w-0">
-              <span class="text-dbd-gray text-xs font-medium">Forevers {{ selectedBalance?.code || 'UAE' }}</span>
+            <div class="flex flex-col ml-2 flex-1">
+              <span class="text-dbd-gray text-xs font-medium whitespace-nowrap">Forevers {{ selectedBalance?.code || 'UAE' }}</span>
               <input
                 ref="inputField"
                 v-model="inputValue"
-                type="number"
-                class="text-dbd-dark text-base font-semibold bg-transparent border-none outline-none w-full p-0 m-0"
+                type="text"
+                inputmode="numeric"
+                class="text-base font-semibold bg-transparent border-none outline-none p-0 m-0 w-full telegram-input text-dbd-dark"
                 placeholder="250"
                 @input="handleInput"
                 @focus="isInputFocused = true"
                 @blur="isInputFocused = false"
+                @keydown.enter="handleRentOut"
+                @keydown.escape="closeModal"
               />
             </div>
           </div>
@@ -249,6 +262,43 @@ button:active {
     transform: scale(0.95);
     opacity: 0.85;
   }
+}
+
+/* Input container focus state animation */
+.border-dbd-primary {
+  animation: pulseBlue 2s infinite;
+}
+
+@keyframes pulseBlue {
+  0%, 100% {
+    border-color: #2019CE;
+    box-shadow: 0 0 0 0 rgba(32, 25, 206, 0.4);
+  }
+  50% {
+    border-color: #2019CE;
+    box-shadow: 0 0 0 4px rgba(32, 25, 206, 0.1);
+  }
+}
+
+/* Telegram WebApp optimized input */
+.telegram-input {
+  font-size: 16px !important; /* Prevents zoom on iOS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+.telegram-input::-webkit-outer-spin-button,
+.telegram-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.telegram-input:focus {
+  outline: none;
+  border: none;
+  background: transparent;
 }
 
 /* Clean typography */
