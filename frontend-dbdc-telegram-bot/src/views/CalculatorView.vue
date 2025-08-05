@@ -459,6 +459,13 @@ html, body {
   .w-\[158px\] {
     width: 148px !important;
   }
+
+  /* Smaller dropdown for very small screens */
+  .relative .absolute.w-64 {
+    width: 250px !important;
+    min-width: 250px !important;
+    right: -10px;
+  }
 }
 
 /* Input focus styles */
