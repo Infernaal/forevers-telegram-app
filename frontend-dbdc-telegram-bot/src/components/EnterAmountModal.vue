@@ -374,10 +374,10 @@ watch(() => props.isVisible, async (isVisible) => {
     await nextTick()
     setTimeout(() => {
       if (inputField.value) {
-        inputField.value.focus()
+        inputField.value.focus({ preventScroll: true })
         inputField.value.select()
       }
-    }, 100)
+    }, 350)
   } else {
     document.removeEventListener('keydown', handleKeyDown)
     document.body.style.overflow = ''
