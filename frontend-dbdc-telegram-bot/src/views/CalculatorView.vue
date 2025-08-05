@@ -23,7 +23,7 @@
                 v-model="monthlyIncome"
                 type="number"
                 placeholder="50"
-                class="bg-transparent outline-none text-dbd-gray font-medium flex-1 min-w-0 text-sm"
+                class="bg-transparent outline-none text-dbd-gray font-medium flex-1 min-w-0 text-base"
               />
             </div>
 
