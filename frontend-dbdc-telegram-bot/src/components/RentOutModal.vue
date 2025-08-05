@@ -146,6 +146,7 @@ const props = defineProps({
 
 const emit = defineEmits(['close', 'rent-out', 'open-terms'])
 
+const inputField = ref(null)
 const termsAccepted = ref(false)
 const inputValue = ref(props.inputAmount || '250')
 const isInputFocused = ref(false)
