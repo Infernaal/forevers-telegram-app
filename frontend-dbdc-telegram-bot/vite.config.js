@@ -29,6 +29,14 @@ export default defineConfig({
     // Если ты разрабатываешь и хочешь отключить кэш
     headers: {
       'Cache-Control': 'no-store'
+    },
+    proxy: {
+      '/api': {
+        target: 'https://dbdc-mini.dubadu.com',
+        changeOrigin: true,
+        secure: true,
+        rewrite: (path) => path.replace(/^\/api/, '/api')
+      }
     }
   }
 })
