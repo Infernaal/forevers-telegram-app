@@ -521,82 +521,10 @@ const fetchAndCombineData = async () => {
 
   } catch (err) {
     console.error('Failed to fetch data:', err)
-
-    // Fallback to mock data if API fails (for development)
-    console.log('Using fallback mock data...')
-    const mockBalances = [
-      {
-        id: 'de',
-        country: 'Forevers DE',
-        code: 'DE',
-        amount: 2000,
-        usdRate: 20.00,
-        priceChange: 0.17,
-        currentValue: 40000,
-        potentialWorth: 80000,
-        availableAmount: null,
-        discount: 0,
-        discountEnd: null
-      },
-      {
-        id: 'uae',
-        country: 'Forevers UAE',
-        code: 'UAE',
-        amount: 25472,
-        usdRate: 8.65,
-        priceChange: 0.17,
-        currentValue: 220333,
-        potentialWorth: 440666,
-        availableAmount: null,
-        discount: 0,
-        discountEnd: null
-      },
-      {
-        id: 'kz',
-        country: 'Forevers KZ',
-        code: 'KZ',
-        amount: 6543,
-        usdRate: 10.00,
-        priceChange: -0.17,
-        currentValue: 65430,
-        potentialWorth: 130860,
-        availableAmount: null,
-        discount: 0,
-        discountEnd: null
-      },
-      {
-        id: 'pl',
-        country: 'Forevers PL',
-        code: 'PL',
-        amount: 2000,
-        usdRate: 1.25,
-        priceChange: -0.17,
-        currentValue: 2500,
-        potentialWorth: 25000,
-        availableAmount: 19136,
-        discount: 90,
-        discountEnd: '10.08.2025'
-      },
-      {
-        id: 'ua',
-        country: 'Forevers UA',
-        code: 'UA',
-        amount: 4000,
-        usdRate: 0.75,
-        priceChange: -0.17,
-        currentValue: 3000,
-        potentialWorth: 30000,
-        availableAmount: 31560,
-        discount: 90,
-        discountEnd: '10.08.2025'
-      }
-    ]
-
-    balances.value = mockBalances
-    totalBalance.value = 40015
-    totalWorth.value = 331263
-
-    error.value = `API Error: ${err.message}. Using mock data for development.`
+    error.value = err.message
+    balances.value = []
+    totalBalance.value = 0
+    totalWorth.value = 0
   } finally {
     isLoading.value = false
   }
