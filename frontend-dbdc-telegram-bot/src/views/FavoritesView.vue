@@ -162,7 +162,7 @@
             <div class="bg-gray-100 rounded-xl p-1.5 sm:p-3 flex flex-col justify-center items-end text-right min-w-0 flex-1">
               <div class="flex items-center justify-between w-full mb-0.5 sm:mb-1">
                 <div class="text-white text-xs font-bold px-1.5 py-0.5 rounded sm:px-2" style="background-color: #FF0000">
-                  {{ Math.round(balance.usdRate * (1 - balance.discount / 100), 2) }} USD
+                  {{ balance.discountedRate || balance.usdRate }} USD
                 </div>
                 <div class="text-sm sm:text-base font-semibold text-gray-700">
                   {{ balance.discount }}% OFF
@@ -215,6 +215,37 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div v-else-if="isLoading" class="flex-1 flex items-center justify-center">
+      <div class="text-center">
+        <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+          <svg width="32" height="32" viewBox="0 0 32 32" class="text-gray-400">
+            <path d="M30.667 7.381V1.333H7.129V9.011H1.333V15.059H7.129V30.108H13.894V22.728H19.615V16.680H13.894V15.059H25.132V9.011H13.894V7.381H30.667Z" fill="currentColor"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-medium text-gray-900 mb-2">Loading...</h3>
+        <p class="text-gray-600 mb-4">Fetching your balance data...</p>
+      </div>
+    </div>
+
+    <!-- Error State -->
+    <div v-else-if="error" class="flex-1 flex items-center justify-center">
+      <div class="text-center">
+        <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg width="32" height="32" viewBox="0 0 32 32" class="text-red-500">
+            <path d="M16 2C8.269 2 2 8.269 2 16s6.269 14 14 14 14-6.269 14-14S23.731 2 16 2zm0 24c-5.514 0-10-4.486-10-10S10.486 6 16 6s10 4.486 10 10-4.486 10-10 10z" fill="currentColor"/>
+            <path d="M16 10c-0.552 0-1 0.448-1 1v7c0 0.552 0.448 1 1 1s1-0.448 1-1v-7c0-0.552-0.448-1-1-1z" fill="currentColor"/>
+            <path d="M16 21c-0.828 0-1.5 0.672-1.5 1.5S15.172 24 16 24s1.5-0.672 1.5-1.5S16.828 21 16 21z" fill="currentColor"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-medium text-gray-900 mb-2">Failed to load data</h3>
+        <p class="text-gray-600 mb-4">{{ error }}</p>
+        <button @click="fetchAndCombineData" class="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors">
+          Try Again
+        </button>
       </div>
     </div>
 
@@ -315,124 +346,186 @@ const dollarsAmount = computed(() => {
   return foreversAmount.value * selectedBalance.value.usdRate
 })
 
-// Data - Ready for backend integration
-const totalBalance = ref(10196)
-const totalWorth = ref(56000)
-const balances = ref([]) // Will be populated from backend
+// Data
+const totalBalance = ref(0)
+const totalWorth = ref(0)
+const balances = ref([])
+const error = ref(null)
 
-// Flag classes are now handled by CountryFlag component
+// Helper function to check if discount is active
+const isDiscountActive = (startDate, endDate) => {
+  const now = new Date()
+  const start = new Date(startDate)
+  const end = new Date(endDate)
+  return now >= start && now <= end
+}
 
-// Mock data for development (remove when connecting to backend)
-const mockBalances = [
-  {
-    id: 'de',
-    country: 'Forevers DE',
-    code: 'DE',
-    amount: 1000,
-    usdRate: 4,
-    priceChange: 0.17,
-    currentValue: 4000,
-    potentialWorth: 8000,
-    availableAmount: 250,
-    discount: 55,
-    discountEnd: '01.09.2025'
-  },
-  {
-    id: 'uae',
-    country: 'Forevers UAE',
-    code: 'UAE',
-    amount: 1000,
-    usdRate: 9,
-    priceChange: 0.17,
-    currentValue: 4000,
-    potentialWorth: 8000,
-    availableAmount: null,
-    discount: 90,
-    discountEnd: '01.09.2025'
-  },
-  {
-    id: 'kz',
-    country: 'Forevers KZ',
-    code: 'KZ',
-    amount: 1000,
-    usdRate: 8,
-    priceChange: -0.17,
-    currentValue: 4000,
-    potentialWorth: 8000,
-    availableAmount: 250,
-    discount: 0
-  },
-  {
-    id: 'pl',
-    country: 'Forevers PL',
-    code: 'PL',
-    amount: 1000,
-    usdRate: 4,
-    priceChange: -0.17,
-    currentValue: 4000,
-    potentialWorth: 8000,
-    availableAmount: 250,
-    discount: 0
-  },
-  {
-    id: 'ua',
-    country: 'Forevers UA',
-    code: 'UA',
-    amount: 1000,
-    usdRate: 4,
-    priceChange: -0.17,
-    currentValue: 4000,
-    potentialWorth: 8000,
-    availableAmount: 250,
-    discount: 0
-  },
-  {
-    id: 'us',
-    country: 'Forevers US',
-    code: 'US',
-    amount: 1000,
-    usdRate: 4,
-    priceChange: -0.17,
-    currentValue: 4000,
-    potentialWorth: 8000,
-    availableAmount: 250,
-    discount: 0
-  }
-]
+// Helper function to format date
+const formatDate = (dateString) => {
+  const date = new Date(dateString)
+  return date.toLocaleDateString('en-GB')
+}
 
 // Backend integration functions
-const fetchBalancesFromBackend = async () => {
-  isLoading.value = true
+const fetchUserBalance = async () => {
+  console.log('Fetching user balance...')
   try {
-    // TODO: Replace with actual API call to Python backend
-    // const response = await fetch('/api/balances')
-    // const data = await response.json()
+    const response = await fetch('/api/v1/dbdc/api/v1/dbdc/forevers/96', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    })
 
-    // For now, use mock data
-    setTimeout(() => {
-      balances.value = mockBalances
-      isLoading.value = false
-    }, 1000)
+    console.log('User balance response status:', response.status)
 
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
+    const data = await response.json()
+    console.log('User balance data:', data)
+
+    if (data.status !== 'success') {
+      throw new Error(data.message || 'Failed to fetch user balance')
+    }
+
+    return data
   } catch (error) {
-    console.error('Failed to fetch balances:', error)
-    isLoading.value = false
+    console.error('Error fetching user balance:', error)
+    throw error
   }
 }
 
-const fetchTotalBalance = async () => {
+const fetchPricesFromBackend = async () => {
+  console.log('Fetching prices...')
   try {
-    // TODO: Replace with actual API call to Python backend
-    // const response = await fetch('/api/total-balance')
-    // const data = await response.json()
-    // totalBalance.value = data.balance
-    // totalWorth.value = data.worth
+    const response = await fetch('/api/v1/dbdc/api/v1/dbdc/prices/forevers', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    })
 
-    // For now, use mock data
-    totalBalance.value = 10196
-    totalWorth.value = 56000
+    console.log('Prices response status:', response.status)
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
+    const data = await response.json()
+    console.log('Prices data:', data)
+
+    if (data.status !== 'success') {
+      throw new Error(data.message || 'Failed to fetch prices')
+    }
+
+    return data
   } catch (error) {
-    console.error('Failed to fetch total balance:', error)
+    console.error('Error fetching prices:', error)
+    throw error
+  }
+}
+
+const fetchAndCombineData = async () => {
+  isLoading.value = true
+  error.value = null
+
+  try {
+    // Fetch both APIs in parallel
+    const [pricesData, userBalanceData] = await Promise.all([
+      fetchPricesFromBackend(),
+      fetchUserBalance()
+    ])
+
+    // Transform API data into component format
+    const pricesMap = new Map()
+    const discountsMap = new Map()
+    const discountedPricesMap = new Map()
+
+    // Create maps for easy lookup
+    pricesData.data.prices.forEach(price => {
+      pricesMap.set(price.type, parseFloat(price.value))
+    })
+
+    pricesData.data.discounted_prices.forEach(price => {
+      discountedPricesMap.set(price.type, parseFloat(price.value))
+    })
+
+    pricesData.data.discounts.forEach(discount => {
+      discountsMap.set(discount.type, {
+        percentage: parseFloat(discount.discount),
+        startDate: discount.start_date,
+        endDate: discount.end_date
+      })
+    })
+
+    // Get user balance data
+    const userBalance = userBalanceData.forevers_balance
+    const availableForvers = userBalanceData.available_forevers
+
+    // Create balance objects for each country
+    const transformedBalances = []
+    const countryNames = {
+      'DE': 'Forevers DE',
+      'KZ': 'Forevers KZ',
+      'PL': 'Forevers PL',
+      'UA': 'Forevers UA',
+      'UAE': 'Forevers UAE'
+    }
+
+    // Balance mapping
+    const balanceMap = {
+      'DE': parseFloat(userBalance.balance_de),
+      'KZ': parseFloat(userBalance.balance_kz),
+      'PL': parseFloat(userBalance.balance_pl),
+      'UA': parseFloat(userBalance.balance_ua),
+      'UAE': parseFloat(userBalance.balance_uae)
+    }
+
+    pricesMap.forEach((price, type) => {
+      const discount = discountsMap.get(type)
+      const discountedPrice = discountedPricesMap.get(type)
+      const hasActiveDiscount = discount && discount.percentage > 0 &&
+        isDiscountActive(discount.startDate, discount.endDate)
+
+      const userAmount = balanceMap[type] || 0
+      const currentPrice = hasActiveDiscount ? discountedPrice : price
+      const availableAmount = availableForvers[type]
+
+      transformedBalances.push({
+        id: type.toLowerCase(),
+        country: countryNames[type] || `Forevers ${type}`,
+        code: type,
+        amount: userAmount,
+        usdRate: price, // Always show original price in token info
+        discountedRate: hasActiveDiscount ? discountedPrice : null, // Discounted price for discount block
+        priceChange: 0, // Would need historical data for this
+        currentValue: currentPrice * userAmount,
+        potentialWorth: price * userAmount * 2, // Example calculation
+        availableAmount: availableAmount,
+        discount: hasActiveDiscount ? discount.percentage : 0,
+        discountEnd: hasActiveDiscount ? formatDate(discount.endDate) : null
+      })
+    })
+
+    // Filter out balances with 0 amount
+    balances.value = transformedBalances.filter(balance => balance.amount > 0)
+
+    // Calculate totals from user balance API
+    totalBalance.value = parseFloat(userBalance.balance)
+    totalWorth.value = transformedBalances.reduce((sum, balance) => sum + balance.currentValue, 0)
+
+  } catch (err) {
+    console.error('Failed to fetch data:', err)
+    error.value = err.message
+    balances.value = []
+    totalBalance.value = 0
+    totalWorth.value = 0
+  } finally {
+    isLoading.value = false
   }
 }
 
@@ -648,10 +741,7 @@ const handleAddToCart = async (data) => {
 // Initialize
 onMounted(async () => {
   // Fetch data from backend
-  await Promise.all([
-    fetchBalancesFromBackend(),
-    fetchTotalBalance()
-  ])
+  await fetchAndCombineData()
 })
 
 // Cleanup
