@@ -636,10 +636,7 @@ const handleAddToCart = async (data) => {
 // Initialize
 onMounted(async () => {
   // Fetch data from backend
-  await Promise.all([
-    fetchBalancesFromBackend(),
-    fetchTotalBalance()
-  ])
+  await fetchPricesFromBackend()
 })
 
 // Cleanup
