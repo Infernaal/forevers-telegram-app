@@ -708,7 +708,7 @@ const handleAddToCart = async (data) => {
 // Initialize
 onMounted(async () => {
   // Fetch data from backend
-  await fetchPricesFromBackend()
+  await fetchAndCombineData()
 })
 
 // Cleanup
