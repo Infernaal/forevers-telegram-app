@@ -500,7 +500,8 @@ const fetchAndCombineData = async () => {
         country: countryNames[type] || `Forevers ${type}`,
         code: type,
         amount: userAmount,
-        usdRate: currentPrice,
+        usdRate: price, // Always show original price in token info
+        discountedRate: hasActiveDiscount ? discountedPrice : null, // Discounted price for discount block
         priceChange: 0, // Would need historical data for this
         currentValue: currentPrice * userAmount,
         potentialWorth: price * userAmount * 2, // Example calculation
