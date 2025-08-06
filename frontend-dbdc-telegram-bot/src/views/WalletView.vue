@@ -90,7 +90,7 @@ const bonusBalance = ref(0)
 
 const fetchWalletData = async () => {
   try {
-    const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/api/v1/dbdc/forevers/96')
+    const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/forevers/96')
     const result = await response.json()
     // Forevers balance
     foreversBalance.value = parseFloat(result?.forevers_balance?.balance || 0)

@@ -327,7 +327,7 @@ const availableForevers = ref({})
 // Fetch user balances and available forevers
 const fetchUserBalances = async () => {
   try {
-    const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/api/v1/dbdc/forevers/96')
+    const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/forevers/96')
     const result = await response.json()
     userBalances.value = result?.forevers_balance || {}
     availableForevers.value = result?.available_forevers || {}
@@ -343,7 +343,7 @@ const fetchBalancesFromBackend = async () => {
   isLoading.value = true
   try {
     // Fetch prices and discounts
-    const pricesResponse = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/api/v1/dbdc/prices/forevers')
+    const pricesResponse = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/prices/forevers')
     const pricesResult = await pricesResponse.json()
     const prices = pricesResult?.data?.prices || []
     const discounts = pricesResult?.data?.discounts || []

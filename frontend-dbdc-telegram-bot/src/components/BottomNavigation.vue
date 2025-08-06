@@ -254,7 +254,7 @@ const userInfo = ref({
 // Fetch user info from backend
 const fetchUserInfo = async () => {
   try {
-    const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/api/v1/dbdc/user/info/96')
+    const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/user/info/96')
     const result = await response.json()
     const data = result?.data || {}
     userInfo.value.fullName = data?.full_name || ''

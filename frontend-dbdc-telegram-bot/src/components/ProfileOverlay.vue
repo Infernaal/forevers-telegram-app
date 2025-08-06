@@ -511,7 +511,7 @@ const userInfo = ref({
 // Fetch user info from API
 const fetchUserInfo = async () => {
   try {
-    const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/api/v1/dbdc/user/info/96')
+    const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/user/info/96')
     const result = await response.json()
     if (result.status === 'success' && result.data) {
       userInfo.value.fullName = result.data.full_name || ''
