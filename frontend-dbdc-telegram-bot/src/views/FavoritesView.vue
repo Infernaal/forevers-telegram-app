@@ -315,90 +315,11 @@ const dollarsAmount = computed(() => {
   return foreversAmount.value * selectedBalance.value.usdRate
 })
 
-// Data - Ready for backend integration
-const totalBalance = ref(10196)
-const totalWorth = ref(56000)
-const balances = ref([]) // Will be populated from backend
-
-// Flag classes are now handled by CountryFlag component
-
-// Mock data for development (remove when connecting to backend)
-const mockBalances = [
-  {
-    id: 'de',
-    country: 'Forevers DE',
-    code: 'DE',
-    amount: 1000,
-    usdRate: 4,
-    priceChange: 0.17,
-    currentValue: 4000,
-    potentialWorth: 8000,
-    availableAmount: 250,
-    discount: 55,
-    discountEnd: '01.09.2025'
-  },
-  {
-    id: 'uae',
-    country: 'Forevers UAE',
-    code: 'UAE',
-    amount: 1000,
-    usdRate: 9,
-    priceChange: 0.17,
-    currentValue: 4000,
-    potentialWorth: 8000,
-    availableAmount: null,
-    discount: 90,
-    discountEnd: '01.09.2025'
-  },
-  {
-    id: 'kz',
-    country: 'Forevers KZ',
-    code: 'KZ',
-    amount: 1000,
-    usdRate: 8,
-    priceChange: -0.17,
-    currentValue: 4000,
-    potentialWorth: 8000,
-    availableAmount: 250,
-    discount: 0
-  },
-  {
-    id: 'pl',
-    country: 'Forevers PL',
-    code: 'PL',
-    amount: 1000,
-    usdRate: 4,
-    priceChange: -0.17,
-    currentValue: 4000,
-    potentialWorth: 8000,
-    availableAmount: 250,
-    discount: 0
-  },
-  {
-    id: 'ua',
-    country: 'Forevers UA',
-    code: 'UA',
-    amount: 1000,
-    usdRate: 4,
-    priceChange: -0.17,
-    currentValue: 4000,
-    potentialWorth: 8000,
-    availableAmount: 250,
-    discount: 0
-  },
-  {
-    id: 'us',
-    country: 'Forevers US',
-    code: 'US',
-    amount: 1000,
-    usdRate: 4,
-    priceChange: -0.17,
-    currentValue: 4000,
-    potentialWorth: 8000,
-    availableAmount: 250,
-    discount: 0
-  }
-]
+// Data
+const totalBalance = ref(0)
+const totalWorth = ref(0)
+const balances = ref([])
+const error = ref(null)
 
 // Backend integration functions
 const fetchBalancesFromBackend = async () => {
