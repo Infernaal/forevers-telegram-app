@@ -23,7 +23,7 @@ export function useCart() {
         country: item.balance.country,
         code: item.balance.code,
         foreversAmount: item.foreversAmount,
-        usdRate: item.balance.usdRate,
+        usdRate: item.balance.modalPrice,
         totalCost: item.foreversAmount * item.balance.usdRate,
         addedAt: new Date().toISOString()
       }

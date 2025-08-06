@@ -431,7 +431,10 @@ const handleRentOut = () => {
 }
 
 const openEnterAmountModal = (balance) => {
-  selectedBalance.value = balance
+  // Передаем в selectedBalance цену для модального окна: discountPrice если есть скидка, иначе usdRate
+  const modalPrice = balance.discount && balance.discount > 0 ? balance.discountPrice : balance.usdRate
+  selectedBalance.value = { ...balance, modalPrice }
+  console.log('Opening modal for balance:', selectedBalance.value)
   showEnterAmountModal.value = true
 }
 

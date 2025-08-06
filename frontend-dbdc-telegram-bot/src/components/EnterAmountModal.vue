@@ -38,7 +38,7 @@
             <div class="flex items-center text-sm font-medium">
               <span class="text-dbd-dark dark:text-white">1 Forevers {{ selectedBalance?.code }}</span>
               <span class="text-dbd-gray mx-1 dark:text-gray-400">/</span>
-              <span class="text-dbd-primary dark:text-blue-400">{{ selectedBalance?.usdRate }} USD</span>
+              <span class="text-dbd-primary dark:text-blue-400">{{ selectedBalance?.modalPrice }} USD</span>
             </div>
           </div>
         </div>
@@ -185,10 +185,10 @@ const isInputFocused = ref(false)
 let errorTimeout = null
 
 const calculatedDollars = computed(() => {
-  if (!inputValue.value || !props.selectedBalance?.usdRate) {
+  if (!inputValue.value || !props.selectedBalance?.modalPrice) {
     return '1,000.00'
   }
-  const amount = parseFloat(inputValue.value) * props.selectedBalance.usdRate
+  const amount = parseFloat(inputValue.value) * props.selectedBalance.modalPrice
 
   // Format large amounts with K suffix
   if (amount >= 100000) {
