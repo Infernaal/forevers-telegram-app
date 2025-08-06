@@ -370,13 +370,12 @@ const formatDate = (dateString) => {
 const fetchUserBalance = async () => {
   console.log('Fetching user balance...')
   try {
-    const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/api/v1/dbdc/forevers/96', {
+    const response = await fetch('/api/v1/dbdc/api/v1/dbdc/forevers/96', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-      },
-      mode: 'cors'
+      }
     })
 
     console.log('User balance response status:', response.status)
@@ -402,13 +401,12 @@ const fetchUserBalance = async () => {
 const fetchPricesFromBackend = async () => {
   console.log('Fetching prices...')
   try {
-    const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/api/v1/dbdc/prices/forevers', {
+    const response = await fetch('/api/v1/dbdc/api/v1/dbdc/prices/forevers', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-      },
-      mode: 'cors'
+      }
     })
 
     console.log('Prices response status:', response.status)
