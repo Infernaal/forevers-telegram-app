@@ -162,7 +162,7 @@
             <div class="bg-gray-100 rounded-xl p-1.5 sm:p-3 flex flex-col justify-center items-end text-right min-w-0 flex-1">
               <div class="flex items-center justify-between w-full mb-0.5 sm:mb-1">
                 <div class="text-white text-xs font-bold px-1.5 py-0.5 rounded sm:px-2" style="background-color: #FF0000">
-                  {{ Math.round(balance.usdRate * (1 - balance.discount / 100), 2) }} USD
+                  {{ balance.discountPrice.toFixed(2) }} USD
                 </div>
                 <div class="text-sm sm:text-base font-semibold text-gray-700">
                   {{ balance.discount }}% OFF
@@ -316,104 +316,104 @@ const dollarsAmount = computed(() => {
 })
 
 // Data - Ready for backend integration
-const totalBalance = ref(10196)
-const totalWorth = ref(56000)
+const totalBalance = ref(0)
+const totalWorth = ref(0)
 const balances = ref([]) // Will be populated from backend
 
-// Flag classes are now handled by CountryFlag component
+// Store user balances and available amounts
+const userBalances = ref({})
+const availableForevers = ref({})
 
-// Mock data for development (remove when connecting to backend)
-const mockBalances = [
-  {
-    id: 'de',
-    country: 'Forevers DE',
-    code: 'DE',
-    amount: 1000,
-    usdRate: 4,
-    priceChange: 0.17,
-    currentValue: 4000,
-    potentialWorth: 8000,
-    availableAmount: 250,
-    discount: 55,
-    discountEnd: '01.09.2025'
-  },
-  {
-    id: 'uae',
-    country: 'Forevers UAE',
-    code: 'UAE',
-    amount: 1000,
-    usdRate: 9,
-    priceChange: 0.17,
-    currentValue: 4000,
-    potentialWorth: 8000,
-    availableAmount: null,
-    discount: 90,
-    discountEnd: '01.09.2025'
-  },
-  {
-    id: 'kz',
-    country: 'Forevers KZ',
-    code: 'KZ',
-    amount: 1000,
-    usdRate: 8,
-    priceChange: -0.17,
-    currentValue: 4000,
-    potentialWorth: 8000,
-    availableAmount: 250,
-    discount: 0
-  },
-  {
-    id: 'pl',
-    country: 'Forevers PL',
-    code: 'PL',
-    amount: 1000,
-    usdRate: 4,
-    priceChange: -0.17,
-    currentValue: 4000,
-    potentialWorth: 8000,
-    availableAmount: 250,
-    discount: 0
-  },
-  {
-    id: 'ua',
-    country: 'Forevers UA',
-    code: 'UA',
-    amount: 1000,
-    usdRate: 4,
-    priceChange: -0.17,
-    currentValue: 4000,
-    potentialWorth: 8000,
-    availableAmount: 250,
-    discount: 0
-  },
-  {
-    id: 'us',
-    country: 'Forevers US',
-    code: 'US',
-    amount: 1000,
-    usdRate: 4,
-    priceChange: -0.17,
-    currentValue: 4000,
-    potentialWorth: 8000,
-    availableAmount: 250,
-    discount: 0
+// Fetch user balances and available forevers
+const fetchUserBalances = async () => {
+  try {
+    const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/api/v1/dbdc/forevers/96')
+    const result = await response.json()
+    userBalances.value = result?.forevers_balance || {}
+    availableForevers.value = result?.available_forevers || {}
+
+    // Set totalBalance from backend
+    totalBalance.value = parseFloat(userBalances.value.balance || 0)
+  } catch (error) {
+    console.error('Failed to fetch user balances:', error)
   }
-]
+}
 
-// Backend integration functions
 const fetchBalancesFromBackend = async () => {
   isLoading.value = true
   try {
-    // TODO: Replace with actual API call to Python backend
-    // const response = await fetch('/api/balances')
-    // const data = await response.json()
+    // Fetch prices and discounts
+    const pricesResponse = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/api/v1/dbdc/prices/forevers')
+    const pricesResult = await pricesResponse.json()
+    const prices = pricesResult?.data?.prices || []
+    const discounts = pricesResult?.data?.discounts || []
+    const discountedPrices = pricesResult?.data?.discounted_prices || []
 
-    // For now, use mock data
-    setTimeout(() => {
-      balances.value = mockBalances
-      isLoading.value = false
-    }, 1000)
+    // Fetch user balances
+    await fetchUserBalances()
 
+    // Map by type for easier lookup
+    const priceMap = Object.fromEntries(prices.map(p => [p.type, p.value]))
+    const discountMap = Object.fromEntries(discounts.map(d => [d.type, d]))
+    const discountedPriceMap = Object.fromEntries(discountedPrices.map(dp => [dp.type, dp.value]))
+
+    // Compose balances array using user balances and available forevers
+    const rawBalances = prices.map(p => {
+      const type = p.type
+      const discountObj = discountMap[type] || {}
+      const discountedPrice = discountedPriceMap[type] || priceMap[type]
+      const discount = parseFloat(discountObj.discount || '0')
+      const discountEnd = discountObj.end_date || null
+
+      // Use actual user balance and available amount
+      const amount = parseFloat(userBalances.value[`balance_${type.toLowerCase()}`] || 0)
+      const usdRate = parseFloat(priceMap[type])
+      const discountPrice = parseFloat(discountedPrice)
+
+      // UAE potential worth special case
+      let potentialWorth
+      if (type === 'UAE') {
+        potentialWorth = amount * 20
+      } else {
+        potentialWorth = usdRate * amount
+      }
+
+      // priceChange calculation: percent difference between price and discount price
+      let priceChange = 0
+      if (usdRate > discountPrice) {
+        priceChange = ((usdRate - discountPrice) / usdRate) * 100
+      } else {
+        priceChange = 0
+      }
+
+      const availableAmount = availableForevers.value[type] !== undefined ? availableForevers.value[type] : null
+
+      // currentValue = discount price * count forevers
+      const currentValue = discountPrice * amount
+
+      return {
+        id: type.toLowerCase(),
+        country: `Forevers ${type}`,
+        code: type,
+        amount,
+        usdRate,
+        discountPrice,
+        priceChange,
+        currentValue,
+        potentialWorth,
+        availableAmount,
+        discount,
+        discountEnd
+      }
+    })
+
+    balances.value = rawBalances
+
+    // totalWorth сейчас считается так:
+    // Это сумма всех currentValue (discount price * count forevers)
+    totalWorth.value = balances.value.reduce((sum, b) => sum + b.currentValue, 0)
+
+    isLoading.value = false
   } catch (error) {
     console.error('Failed to fetch balances:', error)
     isLoading.value = false
@@ -421,19 +421,8 @@ const fetchBalancesFromBackend = async () => {
 }
 
 const fetchTotalBalance = async () => {
-  try {
-    // TODO: Replace with actual API call to Python backend
-    // const response = await fetch('/api/total-balance')
-    // const data = await response.json()
-    // totalBalance.value = data.balance
-    // totalWorth.value = data.worth
-
-    // For now, use mock data
-    totalBalance.value = 10196
-    totalWorth.value = 56000
-  } catch (error) {
-    console.error('Failed to fetch total balance:', error)
-  }
+  // Now handled in fetchBalancesFromBackend
+  // Remove mock data and API call here
 }
 
 // Methods
@@ -835,3 +824,55 @@ onBeforeUnmount(() => {
   }
 }
 </style>
+.error-message-leave-active {
+  transition: all 0.3s ease-out;
+}
+
+.error-message-enter-from {
+  opacity: 0;
+  transform: translateY(-10px) scale(0.95);
+}
+
+.error-message-leave-to {
+  opacity: 0;
+  transform: translateY(-5px) scale(0.98);
+}
+
+/* Cart badge animations */
+.cart-badge-enter-active,
+.cart-badge-leave-active {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cart-badge-enter-from {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.cart-badge-leave-to {
+  opacity: 0;
+  transform: scale(0);
+}
+
+/* Input field states */
+.input-focused {
+  border-color: #2019CE !important;
+  box-shadow: 0 0 0 2px rgba(32, 25, 206, 0.1);
+}
+
+.input-error {
+  border-color: #FF1919 !important;
+  box-shadow: 0 0 0 2px rgba(255, 25, 25, 0.1);
+}
+
+/* Optimize for mobile WebKit rendering */
+@supports (-webkit-touch-callout: none) {
+  .overflow-y-auto {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  main {
+    -webkit-text-size-adjust: 100%;
+  }
+}

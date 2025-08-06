@@ -28,8 +28,8 @@
               
               <!-- Avatar -->
               <div class="flex-shrink-0">
-                <img src="https://images.pexels.com/photos/15023413/pexels-photo-15023413.jpeg?auto=compress&cs=tinysrgb&w=400"
-                    alt="Jason Williams"
+                <img :src="userInfo.avatar"
+                    alt="User Avatar"
                     class="w-12 xs:w-14 sm:w-16 md:w-16 lg:w-18 xl:w-20
                             h-12 xs:h-14 sm:h-16 md:h-16 lg:h-18 xl:h-20
                             rounded-full object-cover border-2 border-[#7E73D6]
@@ -53,10 +53,10 @@
                   </div>
                   <span :class="[
                     'text-dbd-off-white font-semibold leading-tight flex items-center capitalize',
-                    userInfo.rank === 'royal ambassador'
+                    userInfo.rank && userInfo.rank.toLowerCase() === 'royal ambassador'
                       ? 'text-[10px] xs:text-xs sm:text-base md:text-sm lg:text-base xl:text-lg'
                       : 'text-xs xs:text-sm sm:text-base md:text-sm lg:text-base xl:text-lg'
-                  ]">{{ userInfo.rank }}</span>
+                  ]">{{ toTitleCase(userInfo.rank) }}</span>
                 </div>
 
                 <!-- User Name -->
@@ -467,18 +467,20 @@ const props = defineProps({
 // Emits
 const emit = defineEmits(['close'])
 
+function toTitleCase(str) {
+  if (!str) return ''
+  return str
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ')
+}
+
 // Router
 const router = useRouter()
 
 // State
 const showCopySuccess = ref(false)
 const showLanguageDropdown = ref(false)
-
-// Mock user data (заглушка)
-const userInfo = ref({
-  fullName: 'Jason Williams', // name surname приходят одной строкой чере�� пробел
-  rank: 'royal ambassador' // можно менять на: none, bronze, silver, gold, diamond, double diamond, ambassador, royal ambassador
-})
 
 // Language state
 const languages = ref([
@@ -498,6 +500,34 @@ const languages = ref([
 ])
 
 const selectedLanguage = ref(languages.value[0])
+
+// User info state (from API)
+const userInfo = ref({
+  fullName: '',
+  rank: '',
+  avatar: ''
+})
+
+// Fetch user info from API
+const fetchUserInfo = async () => {
+  try {
+    const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/api/v1/dbdc/user/info/96')
+    const result = await response.json()
+    if (result.status === 'success' && result.data) {
+      userInfo.value.fullName = result.data.full_name || ''
+      userInfo.value.rank = result.data.rank || ''
+      userInfo.value.avatar = result.data.avatar && result.data.avatar.trim() !== '' ? result.data.avatar : '/no-photo.svg'
+    } else {
+      userInfo.value.fullName = ''
+      userInfo.value.rank = ''
+      userInfo.value.avatar = '/no-photo.svg'
+    }
+  } catch (err) {
+    userInfo.value.fullName = ''
+    userInfo.value.rank = ''
+    userInfo.value.avatar = '/no-photo.svg'
+  }
+}
 
 // Calculate triangle position based on Profile button position
 const trianglePosition = computed(() => {
@@ -524,6 +554,7 @@ const updateTelegramViewport = () => {
 
 onMounted(() => {
   updateTelegramViewport()
+  fetchUserInfo()
 
   // Handle orientation changes and viewport changes
   window.addEventListener('resize', updateTelegramViewport)
@@ -619,8 +650,11 @@ const selectLanguage = (language) => {
 
 // Get rank icon from public folder
 const getRankIcon = (rank) => {
-  const availableRanks = ['none', 'bronze', 'silver', 'gold', 'diamond', 'double diamond', 'ambassador', 'royal ambassador']
-  const validRank = availableRanks.includes(rank.toLowerCase()) ? rank.toLowerCase().replace(' ', '-') : 'none'
+  const availableRanks = [
+    'none', 'bronze', 'silver', 'gold', 'diamond', 'double diamond', 'ambassador', 'royal ambassador'
+  ]
+  const normalizedRank = (rank || '').toLowerCase().replace(/_/g, ' ')
+  const validRank = availableRanks.includes(normalizedRank) ? normalizedRank.replace(/ /g, '-') : 'none'
   return `/${validRank}.svg`
 }
 </script>

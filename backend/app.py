@@ -34,7 +34,8 @@ app = FastAPI(
 origins = [
     "https://web.telegram.org",
     "http://localhost:3000",
-    "https://dbdc-mini.dubadu.com"
+    "https://dbdc-mini.dubadu.com",
+    "http://localhost:5173"
 ]
 
 app.add_middleware(

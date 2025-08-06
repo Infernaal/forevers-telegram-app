@@ -47,7 +47,7 @@
                 <div v-else class="relative">
                   <div class="rounded-full border-2 border-purple-400 overflow-hidden w-7 h-7 sm:w-8 sm:h-8">
                     <img
-                      src="https://images.pexels.com/photos/15023413/pexels-photo-15023413.jpeg?auto=compress&cs=tinysrgb&w=400"
+                      :src="userInfo.photo"
                       alt="Profile"
                       class="w-full h-full object-cover"
                     />
@@ -244,10 +244,47 @@ const isProfileMenuOpen = ref(false)
 const profileButton = ref(null)
 const profileButtonPosition = ref({ left: 0, width: 0 })
 
-// Mock user data (заглушка) - синхронизировано с ProfileOverlay
+// User info state
 const userInfo = ref({
-  fullName: 'Jason Williams', // name surname приходят одной строкой через пробел
-  rank: 'royal ambassador' // можно менять на: none, bronze, silver, gold, diamond, double diamond, ambassador, royal ambassador
+  fullName: '',
+  rank: '',
+  photo: ''
+})
+
+// Fetch user info from backend
+const fetchUserInfo = async () => {
+  try {
+    const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/api/v1/dbdc/user/info/96')
+    const result = await response.json()
+    const data = result?.data || {}
+    userInfo.value.fullName = data?.full_name || ''
+    // Normalize rank: lower case, spaces instead of underscores
+    userInfo.value.rank = data?.rank ? data.rank.toLowerCase().replace(/_/g, ' ') : 'none'
+    userInfo.value.photo =
+      data?.avatar && data.avatar.trim() && data.avatar.trim() !== ','
+        ? data.avatar
+        : '/no-photo.svg'
+  } catch (error) {
+    console.error('Failed to fetch user info:', error)
+    userInfo.value.photo = '/no-photo.svg'
+    userInfo.value.rank = 'none'
+    userInfo.value.fullName = ''
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('resize', handleResize)
+  updateProfileButtonPosition()
+  updateBottomOffset()
+  window.addEventListener('resize', updateBottomOffset)
+  window.Telegram?.WebApp?.onEvent('viewportChanged', updateBottomOffset)
+  fetchUserInfo()
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+  window.removeEventListener('resize', updateBottomOffset)
+  window.Telegram?.WebApp?.offEvent('viewportChanged', updateBottomOffset)
 })
 
 // Computed active tab based on current route
@@ -354,8 +391,11 @@ onUnmounted(() => {
 
 // Get rank icon from public folder
 const getRankIcon = (rank) => {
-  const availableRanks = ['none', 'bronze', 'silver', 'gold', 'diamond', 'double diamond', 'ambassador', 'royal ambassador']
-  const validRank = availableRanks.includes(rank.toLowerCase()) ? rank.toLowerCase().replace(' ', '-') : 'none'
+  const availableRanks = [
+    'none', 'bronze', 'silver', 'gold', 'diamond', 'double diamond', 'ambassador', 'royal ambassador'
+  ]
+  const normalizedRank = (rank || '').toLowerCase().replace(/_/g, ' ')
+  const validRank = availableRanks.includes(normalizedRank) ? normalizedRank.replace(/ /g, '-') : 'none'
   return `/${validRank}.svg`
 }
 

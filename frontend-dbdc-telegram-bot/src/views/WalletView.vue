@@ -16,7 +16,7 @@
               <svg class="w-8 h-8" viewBox="0 0 32 32" fill="none">
                 <path d="M30.6666 7.38081V1.33337H7.1291V9.01148H1.33325V15.0589H7.1291V30.1076H13.894V22.7277H19.6153V16.6803H13.894V15.0589H25.1316V9.01148H13.894V7.38081H30.6666Z" fill="#2019CE"/>
               </svg>
-              <span class="text-xl font-bold text-[#2019CE]">10,196</span>
+              <span class="text-xl font-bold text-[#2019CE]">{{ foreversBalance.toLocaleString() }}</span>
             </div>
           </div>
         </div>
@@ -37,7 +37,7 @@
           </div>
           <div class="bg-[#FAFAFA] border border-[#2019CE]/20 rounded-2xl p-4 mb-4">
             <div class="flex flex-col gap-2">
-              <span class="text-xl font-bold text-[#2019CE]">$8,900</span>
+              <span class="text-xl font-bold text-[#2019CE]">${{ loyaltyBalance.toLocaleString() }}</span>
               <span class="text-sm font-medium text-[#4B4D50]">Forevers Rent %</span>
             </div>
           </div>
@@ -63,7 +63,7 @@
           </div>
           <div class="bg-[#FAFAFA] border border-[#2019CE]/20 rounded-2xl p-4">
             <div class="flex flex-col gap-2">
-              <span class="text-xl font-bold text-[#2019CE]">$56,200</span>
+              <span class="text-xl font-bold text-[#2019CE]">${{ bonusBalance.toLocaleString() }}</span>
               <span class="text-sm font-medium text-[#4B4D50]">Reward</span>
             </div>
           </div>
@@ -78,24 +78,40 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import BottomNavigation from '../components/BottomNavigation.vue'
 
 const router = useRouter()
 
-// Wallet balances for display only
-const loyaltyBalance = ref(8900)
-const bonusBalance = ref(56200)
-const userBalance = ref(10196) // Forevers balance converted to USD
+const foreversBalance = ref(0)
+const loyaltyBalance = ref(0)
+const bonusBalance = ref(0)
 
-// Navigation methods
+const fetchWalletData = async () => {
+  try {
+    const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/api/v1/dbdc/forevers/96')
+    const result = await response.json()
+    // Forevers balance
+    foreversBalance.value = parseFloat(result?.forevers_balance?.balance || 0)
+    // Loyalty program
+    const loyalty = result?.wallets?.find(w => w.type === 'loyalty_program')
+    loyaltyBalance.value = loyalty ? parseFloat(loyalty.amount) : 0
+    // Bonus
+    const bonus = result?.wallets?.find(w => w.type === 'bonus')
+    bonusBalance.value = bonus ? parseFloat(bonus.amount) : 0
+  } catch (error) {
+    console.error('Failed to fetch wallet data:', error)
+  }
+}
+
+onMounted(() => {
+  fetchWalletData()
+})
+
 const navigateToTransactions = () => {
   router.push('/rent-out-transactions')
 }
-
-// Methods (wallet doesn't need purchase methods)
-// WalletView only displays balances, purchase logic is in CartView
 </script>
 
 <style scoped>
