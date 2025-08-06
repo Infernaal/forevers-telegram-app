@@ -243,7 +243,7 @@
         </div>
         <h3 class="text-lg font-medium text-gray-900 mb-2">Failed to load data</h3>
         <p class="text-gray-600 mb-4">{{ error }}</p>
-        <button @click="fetchPricesFromBackend" class="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors">
+        <button @click="fetchAndCombineData" class="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors">
           Try Again
         </button>
       </div>
