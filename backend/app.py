@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+﻿from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from db.database import init_db
@@ -34,10 +34,7 @@ app = FastAPI(
 origins = [
     "https://web.telegram.org",
     "http://localhost:3000",
-    "https://dbdc-mini.dubadu.com",
-    "https://f998ff5809bd4e2097bedd54deb65b70-23d9a37179764579af84cb4ea.fly.dev",
-    "http://localhost:5173",  # Для локальной разработки Vite
-    "*"  # Временно разрешить все домены для тестирования
+    "https://dbdc-mini.dubadu.com"
 ]
 
 app.add_middleware(
