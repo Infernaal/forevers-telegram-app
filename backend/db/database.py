@@ -4,8 +4,10 @@ from sqlalchemy.ext.asyncio import (
     AsyncAttrs,
     async_sessionmaker,
     create_async_engine,
+    AsyncSession,
 )
 from sqlalchemy.orm import DeclarativeBase
+from typing import AsyncGenerator
 
 # 🔐 Загрузка переменных окружения
 load_dotenv()
@@ -30,3 +32,8 @@ class Base(AsyncAttrs, DeclarativeBase):
 async def init_db():
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
+
+# 🧪 Асинхронный генератор сессии для Depends
+async def get_db() -> AsyncGenerator[AsyncSession, None]:
+    async with async_session() as session:
+        yield session
