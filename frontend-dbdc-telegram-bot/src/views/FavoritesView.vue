@@ -218,6 +218,37 @@
       </div>
     </div>
 
+    <!-- Loading State -->
+    <div v-else-if="isLoading" class="flex-1 flex items-center justify-center">
+      <div class="text-center">
+        <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+          <svg width="32" height="32" viewBox="0 0 32 32" class="text-gray-400">
+            <path d="M30.667 7.381V1.333H7.129V9.011H1.333V15.059H7.129V30.108H13.894V22.728H19.615V16.680H13.894V15.059H25.132V9.011H13.894V7.381H30.667Z" fill="currentColor"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-medium text-gray-900 mb-2">Loading...</h3>
+        <p class="text-gray-600 mb-4">Fetching your balance data...</p>
+      </div>
+    </div>
+
+    <!-- Error State -->
+    <div v-else-if="error" class="flex-1 flex items-center justify-center">
+      <div class="text-center">
+        <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg width="32" height="32" viewBox="0 0 32 32" class="text-red-500">
+            <path d="M16 2C8.269 2 2 8.269 2 16s6.269 14 14 14 14-6.269 14-14S23.731 2 16 2zm0 24c-5.514 0-10-4.486-10-10S10.486 6 16 6s10 4.486 10 10-4.486 10-10 10z" fill="currentColor"/>
+            <path d="M16 10c-0.552 0-1 0.448-1 1v7c0 0.552 0.448 1 1 1s1-0.448 1-1v-7c0-0.552-0.448-1-1-1z" fill="currentColor"/>
+            <path d="M16 21c-0.828 0-1.5 0.672-1.5 1.5S15.172 24 16 24s1.5-0.672 1.5-1.5S16.828 21 16 21z" fill="currentColor"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-medium text-gray-900 mb-2">Failed to load data</h3>
+        <p class="text-gray-600 mb-4">{{ error }}</p>
+        <button @click="fetchPricesFromBackend" class="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors">
+          Try Again
+        </button>
+      </div>
+    </div>
+
     <!-- Empty State (when no balances from backend) -->
     <div v-else class="flex-1 flex items-center justify-center">
       <div class="text-center">
