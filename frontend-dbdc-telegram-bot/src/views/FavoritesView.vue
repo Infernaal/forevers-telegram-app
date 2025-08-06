@@ -321,39 +321,106 @@ const totalWorth = ref(0)
 const balances = ref([])
 const error = ref(null)
 
-// Backend integration functions
-const fetchBalancesFromBackend = async () => {
-  isLoading.value = true
-  try {
-    // TODO: Replace with actual API call to Python backend
-    // const response = await fetch('/api/balances')
-    // const data = await response.json()
-
-    // For now, use mock data
-    setTimeout(() => {
-      balances.value = mockBalances
-      isLoading.value = false
-    }, 1000)
-
-  } catch (error) {
-    console.error('Failed to fetch balances:', error)
-    isLoading.value = false
-  }
+// Helper function to check if discount is active
+const isDiscountActive = (startDate, endDate) => {
+  const now = new Date()
+  const start = new Date(startDate)
+  const end = new Date(endDate)
+  return now >= start && now <= end
 }
 
-const fetchTotalBalance = async () => {
-  try {
-    // TODO: Replace with actual API call to Python backend
-    // const response = await fetch('/api/total-balance')
-    // const data = await response.json()
-    // totalBalance.value = data.balance
-    // totalWorth.value = data.worth
+// Helper function to format date
+const formatDate = (dateString) => {
+  const date = new Date(dateString)
+  return date.toLocaleDateString('en-GB')
+}
 
-    // For now, use mock data
-    totalBalance.value = 10196
-    totalWorth.value = 56000
-  } catch (error) {
-    console.error('Failed to fetch total balance:', error)
+// Backend integration functions
+const fetchPricesFromBackend = async () => {
+  isLoading.value = true
+  error.value = null
+
+  try {
+    const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/api/v1/dbdc/prices/forevers')
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
+    const data = await response.json()
+
+    if (data.status !== 'success') {
+      throw new Error(data.message || 'Failed to fetch prices')
+    }
+
+    // Transform API data into component format
+    const pricesMap = new Map()
+    const discountsMap = new Map()
+    const discountedPricesMap = new Map()
+
+    // Create maps for easy lookup
+    data.data.prices.forEach(price => {
+      pricesMap.set(price.type, parseFloat(price.value))
+    })
+
+    data.data.discounted_prices.forEach(price => {
+      discountedPricesMap.set(price.type, parseFloat(price.value))
+    })
+
+    data.data.discounts.forEach(discount => {
+      discountsMap.set(discount.type, {
+        percentage: parseFloat(discount.discount),
+        startDate: discount.start_date,
+        endDate: discount.end_date
+      })
+    })
+
+    // Create balance objects for each country
+    const transformedBalances = []
+    const countryNames = {
+      'DE': 'Forevers DE',
+      'KZ': 'Forevers KZ',
+      'PL': 'Forevers PL',
+      'UA': 'Forevers UA',
+      'UAE': 'Forevers UAE'
+    }
+
+    pricesMap.forEach((price, type) => {
+      const discount = discountsMap.get(type)
+      const discountedPrice = discountedPricesMap.get(type)
+      const hasActiveDiscount = discount && discount.percentage > 0 &&
+        isDiscountActive(discount.startDate, discount.endDate)
+
+      transformedBalances.push({
+        id: type.toLowerCase(),
+        country: countryNames[type] || `Forevers ${type}`,
+        code: type,
+        amount: 1000, // Default amount, could be fetched from user balance API
+        usdRate: hasActiveDiscount ? discountedPrice : price,
+        priceChange: 0, // Would need historical data for this
+        currentValue: hasActiveDiscount ? discountedPrice * 1000 : price * 1000,
+        potentialWorth: price * 1000 * 2, // Example calculation
+        availableAmount: 250, // Would need from user balance API
+        discount: hasActiveDiscount ? discount.percentage : 0,
+        discountEnd: hasActiveDiscount ? formatDate(discount.endDate) : null
+      })
+    })
+
+    balances.value = transformedBalances
+
+    // Calculate totals
+    const totalAmount = transformedBalances.reduce((sum, balance) => sum + balance.amount, 0)
+    const totalValue = transformedBalances.reduce((sum, balance) => sum + balance.currentValue, 0)
+
+    totalBalance.value = totalAmount
+    totalWorth.value = totalValue
+
+  } catch (err) {
+    console.error('Failed to fetch prices:', err)
+    error.value = err.message
+    balances.value = []
+  } finally {
+    isLoading.value = false
   }
 }
 
