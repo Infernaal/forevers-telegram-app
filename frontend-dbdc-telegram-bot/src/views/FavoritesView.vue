@@ -367,22 +367,48 @@ const formatDate = (dateString) => {
 }
 
 // Backend integration functions
+const fetchUserBalance = async () => {
+  const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/api/v1/dbdc/forevers/96')
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`)
+  }
+
+  const data = await response.json()
+
+  if (data.status !== 'success') {
+    throw new Error(data.message || 'Failed to fetch user balance')
+  }
+
+  return data
+}
+
 const fetchPricesFromBackend = async () => {
+  const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/api/v1/dbdc/prices/forevers')
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`)
+  }
+
+  const data = await response.json()
+
+  if (data.status !== 'success') {
+    throw new Error(data.message || 'Failed to fetch prices')
+  }
+
+  return data
+}
+
+const fetchAndCombineData = async () => {
   isLoading.value = true
   error.value = null
 
   try {
-    const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/api/v1/dbdc/prices/forevers')
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
-    }
-
-    const data = await response.json()
-
-    if (data.status !== 'success') {
-      throw new Error(data.message || 'Failed to fetch prices')
-    }
+    // Fetch both APIs in parallel
+    const [pricesData, userBalanceData] = await Promise.all([
+      fetchPricesFromBackend(),
+      fetchUserBalance()
+    ])
 
     // Transform API data into component format
     const pricesMap = new Map()
@@ -390,21 +416,25 @@ const fetchPricesFromBackend = async () => {
     const discountedPricesMap = new Map()
 
     // Create maps for easy lookup
-    data.data.prices.forEach(price => {
+    pricesData.data.prices.forEach(price => {
       pricesMap.set(price.type, parseFloat(price.value))
     })
 
-    data.data.discounted_prices.forEach(price => {
+    pricesData.data.discounted_prices.forEach(price => {
       discountedPricesMap.set(price.type, parseFloat(price.value))
     })
 
-    data.data.discounts.forEach(discount => {
+    pricesData.data.discounts.forEach(discount => {
       discountsMap.set(discount.type, {
         percentage: parseFloat(discount.discount),
         startDate: discount.start_date,
         endDate: discount.end_date
       })
     })
+
+    // Get user balance data
+    const userBalance = userBalanceData.forevers_balance
+    const availableForvers = userBalanceData.available_forevers
 
     // Create balance objects for each country
     const transformedBalances = []
@@ -416,38 +446,49 @@ const fetchPricesFromBackend = async () => {
       'UAE': 'Forevers UAE'
     }
 
+    // Balance mapping
+    const balanceMap = {
+      'DE': parseFloat(userBalance.balance_de),
+      'KZ': parseFloat(userBalance.balance_kz),
+      'PL': parseFloat(userBalance.balance_pl),
+      'UA': parseFloat(userBalance.balance_ua),
+      'UAE': parseFloat(userBalance.balance_uae)
+    }
+
     pricesMap.forEach((price, type) => {
       const discount = discountsMap.get(type)
       const discountedPrice = discountedPricesMap.get(type)
       const hasActiveDiscount = discount && discount.percentage > 0 &&
         isDiscountActive(discount.startDate, discount.endDate)
 
+      const userAmount = balanceMap[type] || 0
+      const currentPrice = hasActiveDiscount ? discountedPrice : price
+      const availableAmount = availableForvers[type]
+
       transformedBalances.push({
         id: type.toLowerCase(),
         country: countryNames[type] || `Forevers ${type}`,
         code: type,
-        amount: 1000, // Default amount, could be fetched from user balance API
-        usdRate: hasActiveDiscount ? discountedPrice : price,
+        amount: userAmount,
+        usdRate: currentPrice,
         priceChange: 0, // Would need historical data for this
-        currentValue: hasActiveDiscount ? discountedPrice * 1000 : price * 1000,
-        potentialWorth: price * 1000 * 2, // Example calculation
-        availableAmount: 250, // Would need from user balance API
+        currentValue: currentPrice * userAmount,
+        potentialWorth: price * userAmount * 2, // Example calculation
+        availableAmount: availableAmount,
         discount: hasActiveDiscount ? discount.percentage : 0,
         discountEnd: hasActiveDiscount ? formatDate(discount.endDate) : null
       })
     })
 
-    balances.value = transformedBalances
+    // Filter out balances with 0 amount
+    balances.value = transformedBalances.filter(balance => balance.amount > 0)
 
-    // Calculate totals
-    const totalAmount = transformedBalances.reduce((sum, balance) => sum + balance.amount, 0)
-    const totalValue = transformedBalances.reduce((sum, balance) => sum + balance.currentValue, 0)
-
-    totalBalance.value = totalAmount
-    totalWorth.value = totalValue
+    // Calculate totals from user balance API
+    totalBalance.value = parseFloat(userBalance.balance)
+    totalWorth.value = transformedBalances.reduce((sum, balance) => sum + balance.currentValue, 0)
 
   } catch (err) {
-    console.error('Failed to fetch prices:', err)
+    console.error('Failed to fetch data:', err)
     error.value = err.message
     balances.value = []
   } finally {
