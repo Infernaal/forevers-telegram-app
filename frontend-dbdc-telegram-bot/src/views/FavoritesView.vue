@@ -368,35 +368,67 @@ const formatDate = (dateString) => {
 
 // Backend integration functions
 const fetchUserBalance = async () => {
-  const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/api/v1/dbdc/forevers/96')
+  console.log('Fetching user balance...')
+  try {
+    const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/api/v1/dbdc/forevers/96', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      mode: 'cors'
+    })
 
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`)
+    console.log('User balance response status:', response.status)
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
+    const data = await response.json()
+    console.log('User balance data:', data)
+
+    if (data.status !== 'success') {
+      throw new Error(data.message || 'Failed to fetch user balance')
+    }
+
+    return data
+  } catch (error) {
+    console.error('Error fetching user balance:', error)
+    throw error
   }
-
-  const data = await response.json()
-
-  if (data.status !== 'success') {
-    throw new Error(data.message || 'Failed to fetch user balance')
-  }
-
-  return data
 }
 
 const fetchPricesFromBackend = async () => {
-  const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/api/v1/dbdc/prices/forevers')
+  console.log('Fetching prices...')
+  try {
+    const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/api/v1/dbdc/prices/forevers', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      mode: 'cors'
+    })
 
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`)
+    console.log('Prices response status:', response.status)
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
+    const data = await response.json()
+    console.log('Prices data:', data)
+
+    if (data.status !== 'success') {
+      throw new Error(data.message || 'Failed to fetch prices')
+    }
+
+    return data
+  } catch (error) {
+    console.error('Error fetching prices:', error)
+    throw error
   }
-
-  const data = await response.json()
-
-  if (data.status !== 'success') {
-    throw new Error(data.message || 'Failed to fetch prices')
-  }
-
-  return data
 }
 
 const fetchAndCombineData = async () => {
