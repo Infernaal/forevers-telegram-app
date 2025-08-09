@@ -23,7 +23,7 @@
             </svg>
           </div>
           <div class="text-center">
-            <h3 class="text-lg font-semibold text-dbd-dark">USD 8,9K</h3>
+            <h3 class="text-lg font-semibold text-dbd-dark">USD {{ loyaltyBalance.toLocaleString() }}</h3>
             <p class="text-dbd-light-gray text-base">Loyalty Program</p>
           </div>
         </div>
@@ -47,7 +47,7 @@
             </svg>
           </div>
           <div class="text-center">
-            <h3 class="text-lg font-semibold text-dbd-dark">USD 56,2K</h3>
+            <h3 class="text-lg font-semibold text-dbd-dark">USD {{ bonusBalance.toLocaleString() }}</h3>
             <p class="text-dbd-light-gray text-base">Bonus Reward</p>
           </div>
         </div>
@@ -126,9 +126,13 @@ import CartBottomComponent from '../components/CartBottomComponent.vue'
 import TermsCheckbox from '../components/TermsCheckbox.vue'
 import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
 import SuccessModal from '../components/SuccessModal.vue'
+import { useWallet } from '../composables/useWallet.js'
 
 const router = useRouter()
 const route = useRoute()
+
+// Wallet data
+const { loyaltyBalance, bonusBalance, fetchWalletData } = useWallet()
 
 // Reactive data
 const selectedPayment = ref('bonus') // Default to bonus reward as shown in design
@@ -182,7 +186,10 @@ const closeSuccessModal = () => {
 }
 
 // Get purchase details from query params if available
-onMounted(() => {
+onMounted(async () => {
+  // Fetch wallet data first
+  await fetchWalletData()
+
   if (route.query.totalAmount) {
     totalAmount.value = parseFloat(route.query.totalAmount)
 
