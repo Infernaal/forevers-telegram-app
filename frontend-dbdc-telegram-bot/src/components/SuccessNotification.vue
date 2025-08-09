@@ -120,7 +120,6 @@ defineEmits(['close'])
     left: 16px;
     right: 16px;
     transform: none;
-    bottom: calc(94px + env(safe-area-inset-bottom, 0px)); /* 64px nav + 30px spacing */
   }
 
   .success-notification-content {
@@ -152,17 +151,8 @@ defineEmits(['close'])
   }
 }
 
-@media (min-width: 375px) and (max-width: 430px) {
-  .success-notification-container {
-    bottom: calc(101px + env(safe-area-inset-bottom, 0px)); /* 68px nav + 33px spacing */
-  }
-}
 
 @media (min-width: 431px) and (max-width: 768px) {
-  .success-notification-container {
-    bottom: calc(140px + env(safe-area-inset-bottom, 0px)); /* tablet spacing */
-  }
-
   .success-notification-content {
     width: 400px;
     height: 52px;
@@ -181,10 +171,6 @@ defineEmits(['close'])
 }
 
 @media (min-width: 769px) {
-  .success-notification-container {
-    bottom: calc(160px + env(safe-area-inset-bottom, 0px)); /* desktop spacing */
-  }
-
   .success-notification-content {
     width: 480px;
     height: 60px;
