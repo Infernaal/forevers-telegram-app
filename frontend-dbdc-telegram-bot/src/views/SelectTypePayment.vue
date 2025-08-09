@@ -102,6 +102,7 @@
       <CartBottomComponent
         :total-amount="totalAmount"
         :disabled="!selectedPayment || !termsAccepted"
+        :button-text="selectedPayment === 'usdt' && !isConnected ? 'Connect Wallet' : 'Buy Forevers'"
         @back="handleBack"
         @purchase="handlePurchase"
       />
