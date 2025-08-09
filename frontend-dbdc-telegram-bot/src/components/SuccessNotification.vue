@@ -57,7 +57,6 @@ defineEmits(['close'])
 .success-notification-container {
   position: fixed;
   left: 50%;
-  bottom: 120px;
   transform: translateX(-50%);
   z-index: 50;
   cursor: pointer;
