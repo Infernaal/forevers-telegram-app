@@ -58,7 +58,7 @@ defineEmits(['close'])
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 50;
+  z-index: 10000;
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
 }
