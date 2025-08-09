@@ -76,7 +76,10 @@
             </svg>
           </div>
           <div class="text-center">
-            <h3 class="text-lg font-semibold text-dbd-dark">USDT</h3>
+            <div class="flex items-center justify-center gap-2 mb-1">
+              <h3 class="text-lg font-semibold text-dbd-dark">USDT</h3>
+              <span class="text-xs px-2 py-1 bg-orange-100 text-orange-600 rounded-full font-medium">TESTNET</span>
+            </div>
             <p class="text-dbd-light-gray text-base" v-if="!isConnected">Connect Wallet</p>
             <p class="text-dbd-light-gray text-base" v-else>{{ wallet?.account?.address?.slice(0, 6) }}...{{ wallet?.account?.address?.slice(-4) }}</p>
           </div>
