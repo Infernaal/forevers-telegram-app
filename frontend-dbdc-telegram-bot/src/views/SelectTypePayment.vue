@@ -133,7 +133,7 @@ const route = useRoute()
 // Reactive data
 const selectedPayment = ref('bonus') // Default to bonus reward as shown in design
 const termsAccepted = ref(false) // Default to unchecked - user must agree to terms
-const totalAmount = ref('26,106.00')
+const totalAmount = ref('0')
 const purchaseDetails = ref(null)
 const showTermsModal = ref(false)
 const showSuccessModal = ref(false)
@@ -149,7 +149,7 @@ const selectPayment = (paymentType) => {
 }
 
 const handleBack = () => {
-  router.go(-1)
+  router.push('/cart')
 }
 
 const handlePurchase = () => {
@@ -191,6 +191,9 @@ onMounted(() => {
     } else if (purchaseDetails.value?.amount) {
       totalAmount.value = purchaseDetails.value.amount.toLocaleString()
     }
+  } else {
+    // If no purchase details, redirect back to cart
+    router.push('/cart')
   }
 })
 </script>
