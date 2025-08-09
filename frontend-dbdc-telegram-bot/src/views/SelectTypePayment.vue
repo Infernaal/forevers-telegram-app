@@ -210,28 +210,32 @@ const handleCryptoPayment = async () => {
       return
     }
 
-    // Prepare transaction for USDT payment
+    // Prepare transaction for USDT payment (testnet)
     const transaction = {
       validUntil: Math.floor(Date.now() / 1000) + 600, // 10 minutes
       messages: [
         {
-          address: 'EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs', // Example USDT contract
-          amount: (totalAmount.value * 1000000000).toString(), // Convert to nanotons
-          payload: 'te6cckEBAQEADAAMABQAAAAASGVsbG8hCaTc/g==' // Example payload
+          // Testnet USDT contract address (example)
+          address: 'kQAiboDEv_qRrcEdrYdwbVLNOXBHwShFbtKGbQVJ2OKxY_Di',
+          amount: '100000000', // 0.1 TON for testing
+          payload: '' // Empty payload for simple transfer
         }
       ]
     }
+
+    console.log('Sending testnet transaction:', transaction)
 
     // Send transaction
     const result = await sendTransaction(transaction)
 
     if (result) {
-      console.log('Crypto payment successful:', result)
+      console.log('Testnet crypto payment successful:', result)
       showSuccessModal.value = true
     }
   } catch (error) {
-    console.error('Crypto payment failed:', error)
-    // Handle error - maybe show error modal
+    console.error('Testnet crypto payment failed:', error)
+    // Show error in console for debugging
+    alert(`Payment failed: ${error.message}`)
   }
 }
 
