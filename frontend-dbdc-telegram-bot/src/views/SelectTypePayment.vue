@@ -106,6 +106,7 @@ import { ref, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import BottomNavigation from '../components/BottomNavigation.vue'
 import CartBottomComponent from '../components/CartBottomComponent.vue'
+import TermsCheckbox from '../components/TermsCheckbox.vue'
 
 const router = useRouter()
 const route = useRoute()
