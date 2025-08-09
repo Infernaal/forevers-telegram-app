@@ -76,13 +76,8 @@
             </svg>
           </div>
           <div class="text-center">
-            <div class="flex items-center justify-center gap-2 mb-1">
-              <h3 class="text-lg font-semibold text-dbd-dark">{{ cryptoAmountDisplay || 'TON' }}</h3>
-              <span class="text-xs px-2 py-1 bg-orange-100 text-orange-600 rounded-full font-medium">TESTNET</span>
-            </div>
-            <p class="text-dbd-light-gray text-base" v-if="!isConnected">Connect Wallet</p>
-            <p class="text-dbd-light-gray text-base" v-else>{{ wallet?.account?.address?.slice(0, 6) }}...{{ wallet?.account?.address?.slice(-4) }}</p>
-            <p class="text-xs text-dbd-light-gray mt-1" v-if="tonRate">1 TON = ${{ tonRate.toFixed(2) }}</p>
+            <h3 class="text-lg font-semibold text-dbd-dark">USDT</h3>
+            <p class="text-dbd-light-gray text-base">Crypto Wallet</p>
           </div>
         </div>
       </div>
