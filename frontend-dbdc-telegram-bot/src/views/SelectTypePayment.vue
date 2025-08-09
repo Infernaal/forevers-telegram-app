@@ -83,7 +83,7 @@
     </div>
 
     <!-- Terms and Conditions Checkbox - positioned above CartBottom -->
-    <div class="fixed left-1/2 transform -translate-x-1/2 z-[9999]" style="bottom: 171px;">
+    <div class="fixed left-1/2 transform -translate-x-1/2 z-[9999]" style="bottom: 200px;">
       <TermsCheckbox
         v-model="termsAccepted"
         @open-terms="openTerms"
