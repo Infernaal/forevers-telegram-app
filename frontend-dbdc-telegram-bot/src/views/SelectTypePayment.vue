@@ -55,7 +55,10 @@
         <!-- USDT Crypto Wallet -->
         <div
           class="bg-white border rounded-xl p-4 flex flex-col items-center gap-2 cursor-pointer transition-all col-span-1 relative"
-          :class="selectedPayment === 'usdt' ? 'border-green-500 bg-green-50' : 'border-gray-200'"
+          :class="[
+            selectedPayment === 'usdt' ? 'border-green-500 bg-green-50' : 'border-gray-200',
+            isConnected && selectedPayment !== 'usdt' ? 'border-blue-300' : ''
+          ]"
           @click="selectPayment('usdt')"
         >
           <!-- Selected Checkmark -->
