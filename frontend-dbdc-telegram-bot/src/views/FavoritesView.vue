@@ -235,6 +235,7 @@
     <SuccessNotification
       :is-visible="showSuccessNotification"
       :class="{ 'blur-notification': isAnyModalOpen }"
+      :bottom-offset="bottomNavRef?.bottomOffset || 120"
       :message="successMessage"
       @close="hideSuccessNotification"
     />
@@ -255,7 +256,7 @@
     />
 
     <!-- Bottom Navigation -->
-    <BottomNavigation />
+    <BottomNavigation ref="bottomNavRef" />
 
     <!-- Enter Amount Modal -->
     <EnterAmountModal
@@ -296,6 +297,7 @@ const { addToCart, isAddingToCart } = useCart()
 // Success notification
 const showSuccessNotification = ref(false)
 const successMessage = ref('')
+const bottomNavRef = ref(null)
 let successTimeout = null
 
 // Error notification

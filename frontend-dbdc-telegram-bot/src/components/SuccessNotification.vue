@@ -12,6 +12,7 @@
       v-if="isVisible"
       @click="$emit('close')"
       class="success-notification-container"
+      :style="{ bottom: `max(${props.bottomOffset + 5}px, calc(${props.bottomOffset + 5}px + env(safe-area-inset-bottom)))` }"
     >
       <div class="success-notification-content">
         <!-- Check Icon Circle -->
@@ -30,7 +31,7 @@
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
   isVisible: {
     type: Boolean,
     default: false
@@ -42,6 +43,10 @@ defineProps({
   blurWhenModalOpen: {
     type: Boolean,
     default: false
+  },
+  bottomOffset: {
+    type: Number,
+    default: 120
   }
 })
 
@@ -52,9 +57,8 @@ defineEmits(['close'])
 .success-notification-container {
   position: fixed;
   left: 50%;
-  bottom: 120px;
   transform: translateX(-50%);
-  z-index: 50;
+  z-index: 10000;
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
 }
@@ -116,7 +120,6 @@ defineEmits(['close'])
     left: 16px;
     right: 16px;
     transform: none;
-    bottom: calc(94px + env(safe-area-inset-bottom, 0px)); /* 64px nav + 30px spacing */
   }
 
   .success-notification-content {
@@ -148,17 +151,8 @@ defineEmits(['close'])
   }
 }
 
-@media (min-width: 375px) and (max-width: 430px) {
-  .success-notification-container {
-    bottom: calc(101px + env(safe-area-inset-bottom, 0px)); /* 68px nav + 33px spacing */
-  }
-}
 
 @media (min-width: 431px) and (max-width: 768px) {
-  .success-notification-container {
-    bottom: calc(140px + env(safe-area-inset-bottom, 0px)); /* tablet spacing */
-  }
-
   .success-notification-content {
     width: 400px;
     height: 52px;
@@ -177,10 +171,6 @@ defineEmits(['close'])
 }
 
 @media (min-width: 769px) {
-  .success-notification-container {
-    bottom: calc(160px + env(safe-area-inset-bottom, 0px)); /* desktop spacing */
-  }
-
   .success-notification-content {
     width: 480px;
     height: 60px;
@@ -203,34 +193,10 @@ defineEmits(['close'])
 @media (max-width: 480px) {
   .success-notification-container {
     position: fixed;
-    z-index: 1000;
+    z-index: 10002;
   }
 }
 
-/* Safe area support for notifications */
-@supports (padding: max(0px)) {
-  .success-notification-container {
-    bottom: max(94px, calc(94px + env(safe-area-inset-bottom)));
-  }
-
-  @media (min-width: 375px) and (max-width: 430px) {
-    .success-notification-container {
-      bottom: max(101px, calc(101px + env(safe-area-inset-bottom)));
-    }
-  }
-
-  @media (min-width: 431px) and (max-width: 768px) {
-    .success-notification-container {
-      bottom: max(140px, calc(140px + env(safe-area-inset-bottom)));
-    }
-  }
-
-  @media (min-width: 769px) {
-    .success-notification-container {
-      bottom: max(160px, calc(160px + env(safe-area-inset-bottom)));
-    }
-  }
-}
 
 /* Success notification animations */
 .success-notification-enter-active,

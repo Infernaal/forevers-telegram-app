@@ -137,18 +137,20 @@
     <SuccessNotification
       :is-visible="showSuccessNotification"
       :class="{ 'blur-notification': isAnyModalOpen }"
+      :bottom-offset="bottomOffset"
       message="Rent Out Forevers Successfully"
       @close="showSuccessNotification = false"
     />
 
     <!-- Bottom Navigation -->
-    <BottomNavigation />
+    <BottomNavigation ref="bottomNavRef" />
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useBottomOffset } from '../composables/useBottomOffset.js'
 import BottomNavigation from '../components/BottomNavigation.vue'
 import CountryFlag from '../components/CountryFlag.vue'
 import InfoTooltip from '../components/InfoTooltip.vue'
@@ -157,6 +159,7 @@ import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
 import SuccessNotification from '../components/SuccessNotification.vue'
 
 const router = useRouter()
+const { bottomNavRef, bottomOffset } = useBottomOffset()
 
 // Modal states
 const showInfoTooltip = ref(false)
