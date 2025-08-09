@@ -71,7 +71,8 @@
           </div>
           <div class="text-center">
             <h3 class="text-lg font-semibold text-dbd-dark">USDT</h3>
-            <p class="text-dbd-light-gray text-base">Crypto Wallet</p>
+            <p class="text-dbd-light-gray text-base" v-if="!isConnected">Connect Wallet</p>
+            <p class="text-dbd-light-gray text-base" v-else>{{ wallet?.account?.address?.slice(0, 6) }}...{{ wallet?.account?.address?.slice(-4) }}</p>
           </div>
         </div>
       </div>
@@ -127,12 +128,16 @@ import TermsCheckbox from '../components/TermsCheckbox.vue'
 import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
 import SuccessModal from '../components/SuccessModal.vue'
 import { useWallet } from '../composables/useWallet.js'
+import { useTonConnect } from '../composables/useTonConnect.js'
 
 const router = useRouter()
 const route = useRoute()
 
 // Wallet data
 const { loyaltyBalance, bonusBalance, fetchWalletData } = useWallet()
+
+// TON Connect data
+const { isConnected, wallet, isLoading, connectWallet, sendTransaction } = useTonConnect()
 
 // Reactive data
 const selectedPayment = ref('bonus') // Default to bonus reward as shown in design
@@ -169,10 +174,16 @@ const handleBack = () => {
   router.push('/cart')
 }
 
-const handlePurchase = () => {
+const handlePurchase = async () => {
   if (!selectedPayment.value || !termsAccepted.value) return
 
-  // Here you would implement the actual purchase logic
+  // Handle USDT crypto wallet payment with TON Connect
+  if (selectedPayment.value === 'usdt') {
+    await handleCryptoPayment()
+    return
+  }
+
+  // For loyalty and bonus - show success modal
   console.log('Purchase initiated with:', {
     paymentMethod: selectedPayment.value,
     totalAmount: totalAmount.value,
@@ -180,8 +191,41 @@ const handlePurchase = () => {
     purchaseDetails: purchaseDetails.value
   })
 
-  // Show success modal instead of navigating
+  // Show success modal for loyalty/bonus
   showSuccessModal.value = true
+}
+
+const handleCryptoPayment = async () => {
+  try {
+    // If wallet not connected, open connection modal
+    if (!isConnected.value) {
+      await connectWallet()
+      return
+    }
+
+    // Prepare transaction for USDT payment
+    const transaction = {
+      validUntil: Math.floor(Date.now() / 1000) + 600, // 10 minutes
+      messages: [
+        {
+          address: 'EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs', // Example USDT contract
+          amount: (totalAmount.value * 1000000000).toString(), // Convert to nanotons
+          payload: 'te6cckEBAQEADAAMABQAAAAASGVsbG8hCaTc/g==' // Example payload
+        }
+      ]
+    }
+
+    // Send transaction
+    const result = await sendTransaction(transaction)
+
+    if (result) {
+      console.log('Crypto payment successful:', result)
+      showSuccessModal.value = true
+    }
+  } catch (error) {
+    console.error('Crypto payment failed:', error)
+    // Handle error - maybe show error modal
+  }
 }
 
 const openTerms = () => {
