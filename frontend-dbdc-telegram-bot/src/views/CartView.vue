@@ -110,12 +110,13 @@
     <SuccessNotification
       :is-visible="showDeleteSuccess"
       :class="{ 'blur-notification': isAnyModalOpen }"
+      :bottom-offset="bottomNavRef?.bottomOffset || 120"
       message="Position delete successfully"
       @close="showDeleteSuccess = false"
     />
 
     <!-- Bottom Navigation Component -->
-    <BottomNavigation />
+    <BottomNavigation ref="bottomNavRef" />
   </div>
 </template>
 
@@ -155,6 +156,7 @@ const itemToDelete = ref(null)
 
 // Success notification state
 const showDeleteSuccess = ref(false)
+const bottomNavRef = ref(null)
 
 // Methods
 const handleBack = () => {
