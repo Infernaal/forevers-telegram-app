@@ -117,6 +117,7 @@ const selectedPayment = ref('bonus') // Default to bonus reward as shown in desi
 const termsAccepted = ref(true) // Default to checked as shown in design
 const totalAmount = ref('26,106.00')
 const purchaseDetails = ref(null)
+const showTermsModal = ref(false)
 
 // Methods
 const selectPayment = (paymentType) => {
