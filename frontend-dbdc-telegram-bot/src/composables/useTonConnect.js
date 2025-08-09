@@ -19,10 +19,11 @@ export function useTonConnect() {
     }
 
     const manifestUrl = `${window.location.origin}/tonconnect-manifest.json`
+    // Do NOT force network here; some wallets throw "Network is not supported" if explicitly set.
+    // We keep desired network in TON_NETWORK and enforce / warn after connection.
     tonConnectUI.value = new TonConnectUI({
       manifestUrl,
-      buttonRootId: null,
-      network: TON_NETWORK
+      buttonRootId: null
     })
 
     _singletonInstance = tonConnectUI.value
@@ -37,6 +38,13 @@ export function useTonConnect() {
           chain: walletInfo.account?.chain,
           device: walletInfo.device?.appName
         })
+        // Runtime network guard: desired testnet but wallet on mainnet (chain 0) or vice versa.
+        if (TON_NETWORK === 'testnet' && walletInfo.account?.chain === 0) {
+          // eslint-disable-next-line no-alert
+          alert('Wallet connected on mainnet, but this dApp expects testnet. Switch network in wallet settings.')
+        } else if (TON_NETWORK !== 'testnet' && walletInfo.account?.chain !== 0) {
+          alert('Wallet connected on testnet while dApp expects mainnet.')
+        }
       } else {
         isConnected.value = false
         wallet.value = null
@@ -80,6 +88,15 @@ export function useTonConnect() {
     for (const m of transaction.messages) {
       if (!m.address) throw new Error('Message missing address')
       if (!m.amount) throw new Error('Message missing amount')
+    }
+
+    // Enforce desired network before sending to avoid opaque wallet error
+    const currentChain = wallet.value?.account?.chain
+    if (TON_NETWORK === 'testnet' && currentChain === 0) {
+      throw new Error('Wallet is on mainnet; please switch wallet to testnet before sending.')
+    }
+    if (TON_NETWORK !== 'testnet' && currentChain !== 0) {
+      throw new Error('Wallet is on testnet; please switch wallet to mainnet before sending.')
     }
 
     try {
