@@ -30,7 +30,7 @@
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
   isVisible: {
     type: Boolean,
     default: false
@@ -42,6 +42,10 @@ defineProps({
   blurWhenModalOpen: {
     type: Boolean,
     default: false
+  },
+  bottomOffset: {
+    type: Number,
+    default: 120
   }
 })
 
