@@ -36,6 +36,10 @@ const props = defineProps({
   totalAmount: {
     type: Number,
     required: true
+  },
+  disabled: {
+    type: Boolean,
+    default: false
   }
 })
 
