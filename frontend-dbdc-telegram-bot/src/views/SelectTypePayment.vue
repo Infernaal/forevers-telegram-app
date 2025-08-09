@@ -161,6 +161,12 @@ const closeTermsModal = () => {
   showTermsModal.value = false
 }
 
+const closeSuccessModal = () => {
+  showSuccessModal.value = false
+  // Navigate to wallet after modal closes
+  router.push('/wallet')
+}
+
 // Get purchase details from route params if available
 onMounted(() => {
   if (route.params.purchaseDetails) {
