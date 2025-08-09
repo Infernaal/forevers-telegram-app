@@ -21,3 +21,9 @@ export async function normalizeTonAddress(address) {
     return address // leave as-is; downstream TonConnect may still handle or error gracefully
   }
 }
+
+// Dev-time warning
+if (!TON_RECEIVER) {
+  // eslint-disable-next-line no-console
+  console.warn('[TON CONFIG] VITE_TON_RECEIVER is empty. Create .env with VITE_TON_RECEIVER=... and rebuild (Vite inlines at build time).')
+}
