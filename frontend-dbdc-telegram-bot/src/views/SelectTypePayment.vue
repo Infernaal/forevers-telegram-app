@@ -256,7 +256,7 @@ const handleCryptoPayment = async () => {
     // TODO: replace with the project receiving wallet (testnet) in user-friendly form (e.g. EQ... or kQ...).
     let destinationAddress = await normalizeTonAddress(TON_RECEIVER)
     if (!validateTonAddress(destinationAddress)) {
-      throw new Error('Configured destination address failed validation: check VITE_TON_RECEIVER')
+      console.warn('[TON] Destination address did not pass local heuristic validation; proceeding so wallet can return its own error.', destinationAddress)
     }
 
     const buildTonTransaction = async (to, amountNano /* string */, comment) => {
@@ -325,9 +325,35 @@ const handleCryptoPayment = async () => {
 
     showSuccessModal.value = true
   } catch (error) {
-    console.error('Testnet crypto payment failed:', error)
-    // Show error in console for debugging
-    alert(`Payment failed: ${error.message}`)
+    // Expose the original wallet error verbatim so you can see what TonConnect / wallet returned
+    console.group('[TON] Wallet transaction error (raw)')
+    console.error(error)
+    try {
+      // Attempt to log a JSON serialization including non-enumerable props
+      const plain = typeof error === 'object' && error !== null
+        ? JSON.stringify(error, Object.getOwnPropertyNames(error))
+        : String(error)
+      console.log('Serializable form:', plain)
+    } catch (_) { /* ignore */ }
+    console.groupEnd()
+
+    // Derive the most meaningful message to show the user without hiding wallet content
+    let msg = ''
+    if (error) {
+      if (typeof error === 'string') msg = error
+      else if (error.data?.error) msg = error.data.error
+      else if (error.message) msg = error.message
+      else if (error.description) msg = error.description
+      else if (error.code) msg = `Code: ${error.code}`
+      else msg = Object.prototype.toString.call(error)
+    } else {
+      msg = 'Unknown error'
+    }
+
+    // Show concise alert; full object is in console
+    try {
+      alert(`Wallet error:\n${msg}\n\n(Full details logged to console)`)
+    } catch (_) { /* ignore alert issues */ }
   } finally {
     isSending.value = false
   }
