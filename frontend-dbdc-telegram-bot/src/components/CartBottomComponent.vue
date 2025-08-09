@@ -21,9 +21,14 @@
 
       <!-- Buy Forevers Button -->
       <button
-        @click="$emit('purchase')"
-        class="flex items-center justify-center h-11 sm:h-12 md:h-13 lg:h-14 px-6 sm:px-8 md:px-10 lg:px-12 rounded-full text-white font-semibold text-base sm:text-lg md:text-lg lg:text-xl transition-all duration-200 hover:transform hover:-translate-y-0.5 hover:shadow-lg min-w-[160px] sm:min-w-[180px] md:min-w-[200px] lg:min-w-[220px]"
-        style="background: linear-gradient(90deg, #2019CE 0%, #473FFF 100%)"
+        @click="!disabled ? $emit('purchase') : null"
+        :disabled="disabled"
+        class="flex items-center justify-center h-11 sm:h-12 md:h-13 lg:h-14 px-6 sm:px-8 md:px-10 lg:px-12 rounded-full text-white font-semibold text-base sm:text-lg md:text-lg lg:text-xl transition-all duration-200 min-w-[160px] sm:min-w-[180px] md:min-w-[200px] lg:min-w-[220px]"
+        :class="{
+          'opacity-50 cursor-not-allowed': disabled,
+          'hover:transform hover:-translate-y-0.5 hover:shadow-lg': !disabled
+        }"
+        :style="disabled ? 'background: #9CA3AF' : 'background: linear-gradient(90deg, #2019CE 0%, #473FFF 100%)'"
       >
         Buy Forevers
       </button>
