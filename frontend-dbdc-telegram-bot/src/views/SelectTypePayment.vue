@@ -220,4 +220,21 @@ button {
   background: #129E0F !important; /* Use green color to match design */
   border-color: #129E0F !important;
 }
+
+/* Responsive positioning for Terms checkbox */
+.terms-checkbox-position {
+  bottom: 200px; /* Default for mobile */
+}
+
+@media (min-width: 768px) {
+  .terms-checkbox-position {
+    bottom: 250px; /* Higher for tablet */
+  }
+}
+
+@media (min-width: 1024px) {
+  .terms-checkbox-position {
+    bottom: 280px; /* Even higher for desktop */
+  }
+}
 </style>
