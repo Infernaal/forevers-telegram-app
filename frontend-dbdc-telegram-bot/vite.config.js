@@ -6,12 +6,21 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 export default defineConfig({
   plugins: [
     vue(),
-    vueDevTools(),
+    vueDevTools()
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      buffer: 'buffer',
+      process: 'process/browser'
     },
+  },
+  define: {
+    'process.env': {},
+    global: 'window'
+  },
+  optimizeDeps: {
+    include: ['buffer']
   },
   base: './', // важно, если ты деплоишь как статик сайт в подкаталог
   build: {

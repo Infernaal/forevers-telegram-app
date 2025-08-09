@@ -137,7 +137,6 @@ import { useWallet } from '../composables/useWallet.js'
 import { useTonConnect } from '../composables/useTonConnect.js'
 import { TON_RECEIVER, TON_COMMENT_PREFIX, validateTonAddress } from '../config/ton.js'
 const API_BASE = import.meta.env.VITE_API_BASE || ''
-import { Cell } from 'ton-core'
 import { useCryptoRates } from '../composables/useCryptoRates.js'
 
 const router = useRouter()
@@ -261,11 +260,13 @@ const handleCryptoPayment = async () => {
       throw new Error('Configured destination address is invalid format length')
     }
 
-    const buildTonTransaction = (to, amountNano /* string */, comment) => {
+    const buildTonTransaction = async (to, amountNano /* string */, comment) => {
       const msg = { address: to, amount: amountNano }
       if (comment) {
-        const payload = buildCommentPayload(`${TON_COMMENT_PREFIX}: ${comment}`)
-        if (payload) msg.payload = payload
+        try {
+          const payload = await buildCommentPayload(`${TON_COMMENT_PREFIX}: ${comment}`)
+          if (payload) msg.payload = payload
+        } catch (e) { console.warn('Comment payload build failed', e) }
       }
       return {
         validUntil: Math.floor(Date.now() / 1000) + 600,
@@ -273,7 +274,7 @@ const handleCryptoPayment = async () => {
       }
     }
 
-    const transaction = buildTonTransaction(destinationAddress, nanotonAmount.toString(), `USD ${totalAmount.value}`)
+    const transaction = await buildTonTransaction(destinationAddress, nanotonAmount.toString(), `USD ${totalAmount.value}`)
 
     console.log('Sending testnet transaction:', {
       ...transaction,
@@ -288,9 +289,10 @@ const handleCryptoPayment = async () => {
       txHash.value = result.hash
     } else if (result?.boc) {
       try {
+        const mod = await import('@ton/core')
         const raw = atob(result.boc)
         const bytes = Uint8Array.from(raw, c => c.charCodeAt(0))
-        const cell = Cell.fromBoc(bytes)[0]
+        const cell = mod.Cell.fromBoc(bytes)[0]
         const hBytes = cell.hash()
         txHash.value = Array.from(hBytes).map(b => b.toString(16).padStart(2, '0')).join('')
       } catch (e) {

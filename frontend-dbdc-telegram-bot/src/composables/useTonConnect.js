@@ -1,6 +1,6 @@
 import { ref, onMounted, computed } from 'vue'
 import { TonConnectUI } from '@tonconnect/ui'
-import { beginCell } from 'ton-core'
+let beginCellFn = null
 import { TON_NETWORK } from '../config/ton.js'
 
 // Simple singleton to avoid multiple TonConnectUI instances if composable used in many components
@@ -93,10 +93,14 @@ export function useTonConnect() {
   }
 
   // Placeholder for future comment payload builder (requires ton-core to serialize a cell)
-  const buildCommentPayload = (text) => {
+  const buildCommentPayload = async (text) => {
     if (!text) return undefined
     try {
-      const cell = beginCell().storeUint(0, 32).storeStringTail(text).endCell()
+  if (!beginCellFn) {
+        const mod = await import('@ton/core')
+        beginCellFn = mod.beginCell
+      }
+      const cell = beginCellFn().storeUint(0, 32).storeStringTail(text).endCell()
       return cell.toBoc({ idx: false }).toString('base64')
     } catch (e) {
       console.warn('Failed to build comment payload', e)

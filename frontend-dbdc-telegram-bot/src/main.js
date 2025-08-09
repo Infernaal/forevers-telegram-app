@@ -1,4 +1,9 @@
 import { createApp } from 'vue'
+import { Buffer } from 'buffer'
+import process from 'process'
+
+if (!window.Buffer) window.Buffer = Buffer
+if (!window.process) window.process = process
 import App from './App.vue'
 import router from './router'
 import './assets/tailwind.css'
