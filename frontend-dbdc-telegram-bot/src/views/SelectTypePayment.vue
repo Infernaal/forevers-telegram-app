@@ -181,15 +181,17 @@ const closeSuccessModal = () => {
   router.push('/wallet')
 }
 
-// Get purchase details from route params if available
+// Get purchase details from query params if available
 onMounted(() => {
-  if (route.params.purchaseDetails) {
-    purchaseDetails.value = route.params.purchaseDetails
-    // Format the total amount properly
-    if (route.params.totalAmount) {
-      totalAmount.value = route.params.totalAmount
-    } else if (purchaseDetails.value?.amount) {
-      totalAmount.value = purchaseDetails.value.amount.toLocaleString()
+  if (route.query.totalAmount) {
+    totalAmount.value = parseFloat(route.query.totalAmount).toLocaleString()
+
+    // Store purchase details from query
+    purchaseDetails.value = {
+      paymentMethod: 'cart',
+      amount: parseFloat(route.query.totalAmount),
+      foreversAmount: parseFloat(route.query.foreversAmount || 0),
+      itemsCount: parseInt(route.query.itemsCount || 0)
     }
   } else {
     // If no purchase details, redirect back to cart
