@@ -110,7 +110,7 @@
     <!-- Success Modal -->
     <SuccessModal
       :is-visible="showSuccessModal"
-      :amount="purchaseDetails?.foreversAmount?.toLocaleString() || '0'"
+      :amount="purchaseDetails?.foreversAmount?.toLocaleString() || totalAmount"
       :message="'Payment completed successfully'"
       @close="closeSuccessModal"
       @confirm="closeSuccessModal"
