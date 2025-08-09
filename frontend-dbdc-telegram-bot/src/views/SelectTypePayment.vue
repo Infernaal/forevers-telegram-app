@@ -115,6 +115,10 @@ const selectPayment = (paymentType) => {
   selectedPayment.value = paymentType
 }
 
+const handleBack = () => {
+  router.go(-1)
+}
+
 const handlePurchase = () => {
   if (!selectedPayment.value || !termsAccepted.value) return
 
