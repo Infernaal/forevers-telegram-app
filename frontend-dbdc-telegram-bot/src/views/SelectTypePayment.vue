@@ -82,6 +82,7 @@
             </div>
             <p class="text-dbd-light-gray text-base" v-if="!isConnected">Connect Wallet</p>
             <p class="text-dbd-light-gray text-base" v-else>{{ wallet?.account?.address?.slice(0, 6) }}...{{ wallet?.account?.address?.slice(-4) }}</p>
+            <p class="text-xs text-dbd-light-gray mt-1" v-if="tonRate">1 TON = ${{ tonRate.toFixed(2) }}</p>
           </div>
         </div>
       </div>
