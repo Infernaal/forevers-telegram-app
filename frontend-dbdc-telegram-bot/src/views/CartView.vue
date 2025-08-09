@@ -167,19 +167,22 @@ const handlePurchase = () => {
   // Handle the purchase logic
   console.log('Purchase initiated, total amount:', cartTotal.value)
 
-  // Store purchase details for modal (before clearing cart)
-  lastPurchaseDetails.value = {
+  // Store purchase details for the payment selection page
+  const purchaseDetails = {
     paymentMethod: 'cart',
     amount: cartTotal.value,
     foreversAmount: totalForeversAmount.value,
-    termsAccepted: true
+    cartItems: [...cartItems.value]
   }
 
-  // Show success modal
-  showSuccessModal.value = true
-
-  // Clear cart after successful purchase
-  clearCart()
+  // Navigate to payment selection page with purchase details
+  router.push({
+    name: 'select-payment',
+    params: {
+      purchaseDetails: purchaseDetails,
+      totalAmount: cartTotal.value.toLocaleString()
+    }
+  })
 }
 
 const closeSuccessModal = () => {
