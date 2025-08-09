@@ -260,8 +260,6 @@
       </div>
     </div>
 
-    <!-- Bottom Navigation Component -->
-    <BottomNavigation />
 
     <!-- Terms and Conditions Modal -->
     <TermsAndConditionsModal
@@ -274,9 +272,13 @@
     <SuccessNotification
       :is-visible="showSuccessNotification"
       :class="{ 'blur-notification': isAnyModalOpen }"
+      :bottom-offset="bottomNavRef?.bottomOffset || 120"
       :message="successMessage"
       @close="hideSuccessNotification"
     />
+
+    <!-- Bottom Navigation Component -->
+    <BottomNavigation ref="bottomNavRef" />
   </div>
 </template>
 
@@ -302,6 +304,7 @@ const isAnyModalOpen = computed(() => {
 const showSuccessNotification = ref(false)
 const successMessage = ref('')
 const isSharing = ref(false)
+const bottomNavRef = ref(null)
 let successTimeout = null
 
 // Methods
