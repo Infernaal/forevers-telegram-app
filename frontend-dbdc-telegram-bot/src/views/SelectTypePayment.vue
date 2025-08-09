@@ -239,8 +239,8 @@ const handleCryptoPayment = async () => {
         {
           // Your testnet wallet address
           address: '0QD1TQ6UOU5g3kbFJXPg0vq8jYtA27pJNv_KEMKaabQQo6LR',
-          amount: nanotonAmount, // Converted amount in nanotons
-          payload: '' // Empty payload for simple transfer
+          amount: nanotonAmount.toString() // Converted amount in nanotons as string
+          // No payload field for simple transfer
         }
       ]
     }
