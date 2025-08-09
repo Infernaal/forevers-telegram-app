@@ -138,6 +138,11 @@ const purchaseDetails = ref(null)
 const showTermsModal = ref(false)
 const showSuccessModal = ref(false)
 
+// Computed properties
+const isAnyModalOpen = computed(() => {
+  return showTermsModal.value || showSuccessModal.value
+})
+
 // Methods
 const selectPayment = (paymentType) => {
   selectedPayment.value = paymentType
