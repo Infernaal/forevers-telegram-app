@@ -142,6 +142,12 @@ const handlePurchase = () => {
   router.push('/wallet')
 }
 
+const openTerms = () => {
+  // Handle opening terms and conditions modal
+  console.log('Opening Terms and Conditions modal')
+  // You can implement modal opening logic here
+}
+
 // Get purchase details from route params if available
 onMounted(() => {
   if (route.params.purchaseDetails) {
