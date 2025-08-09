@@ -206,4 +206,18 @@ onMounted(() => {
 button {
   touch-action: manipulation;
 }
+
+/* Custom styles for TermsCheckbox on payment screen */
+:deep(.terms-text) {
+  color: #4B4D50 !important; /* Use dark gray instead of white for this screen */
+}
+
+:deep(.terms-checkbox) {
+  border-color: #7E7E7E;
+}
+
+:deep(.terms-checkbox:checked) {
+  background: #129E0F !important; /* Use green color to match design */
+  border-color: #129E0F !important;
+}
 </style>
