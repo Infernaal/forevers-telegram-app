@@ -259,6 +259,12 @@ const handleCryptoPayment = async () => {
       console.warn('[TON] Destination address did not pass local heuristic validation; proceeding so wallet can return its own error.', destinationAddress)
     }
 
+    // Hard guard: if after normalization we still have no address -> stop here (avoid generic "Message missing address")
+    if (!destinationAddress || !destinationAddress.trim()) {
+      alert('Receiver address not configured. Please set VITE_TON_RECEIVER in your .env and reload.')
+      return
+    }
+
     const buildTonTransaction = async (to, amountNano /* string */, comment) => {
       const msg = { address: to, amount: amountNano }
       if (comment) {
