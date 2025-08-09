@@ -228,11 +228,11 @@ const handleCryptoPayment = async () => {
 
     // Network guard (simple): chain 0 = mainnet, -3 = testnet (common convention)
     if (network === 'testnet' && chain.value === 0) {
-      alert('Wallet is on mainnet, please switch to testnet in wallet settings')
+      alert('Your wallet is currently on Mainnet. This application operates on Testnet. Please switch your wallet network to Testnet and try again.')
       return
     }
     if (network !== 'testnet' && chain.value !== 0) {
-      alert('Wallet network mismatch')
+      alert('Your wallet network does not match the application network. Switch to the correct network and try again.')
       return
     }
 
@@ -261,7 +261,7 @@ const handleCryptoPayment = async () => {
 
     // Hard guard: if after normalization we still have no address -> stop here (avoid generic "Message missing address")
     if (!destinationAddress || !destinationAddress.trim()) {
-      alert('Receiver address not configured. Please set VITE_TON_RECEIVER in your .env and reload.')
+      alert('Payment destination is temporarily unavailable. Please try again later or contact support.')
       return
     }
 
@@ -322,7 +322,7 @@ const handleCryptoPayment = async () => {
         const verifyJson = await verifyResp.json()
         console.log('Verification result:', verifyJson)
         if (!verifyJson.confirmed) {
-          alert('Warning: On-chain verification not confirmed yet.')
+          alert('We are still confirming your transaction on the blockchain. It should appear shortly.')
         }
       } catch (e) {
         console.warn('Verification call failed', e)
@@ -331,44 +331,27 @@ const handleCryptoPayment = async () => {
 
     showSuccessModal.value = true
   } catch (error) {
-    // Build a detailed alert (no console output) with as much wallet error context as possible
-    let lines = []
-    const push = (label, val) => {
-      if (val === undefined || val === null || val === '') return
-      lines.push(`${label}: ${val}`)
-    }
+    // Developer log with full details
+    console.group('[TON] Wallet transaction error')
+    console.error(error)
     try {
-      if (typeof error === 'string') {
-        push('Raw', error)
-      } else if (typeof error === 'object' && error) {
-        push('Message', error.message)
-        push('Description', error.description)
-        push('Code', error.code)
-        if (error.data) {
-          try { push('Data.error', error.data.error) } catch(_){}
-          try { push('Data.message', error.data.message) } catch(_){}
-        }
-        // Include full JSON snapshot
-        try {
-          const snapshot = JSON.stringify(error, Object.getOwnPropertyNames(error), 2)
-          push('JSON', snapshot)
-        } catch(_) {}
-        // Include stack (if any)
-        push('Stack', error.stack)
-      } else {
-        push('Raw', String(error))
-      }
-    } catch (e2) {
-      lines.push('Failed to parse error object')
+      const snapshot = typeof error === 'object' && error !== null
+        ? JSON.stringify(error, Object.getOwnPropertyNames(error), 2)
+        : String(error)
+      console.log('Snapshot:', snapshot)
+    } catch(_) {}
+    console.groupEnd()
+
+    // User-friendly generic message (no sensitive internals)
+  let userMsg = 'We could not submit your transaction. Please try again in a moment.'
+    // Add small hint for common network mismatch
+    const msgStr = (error && (error.message || error.description || '')) + ''
+    if (/network/i.test(msgStr)) {
+  userMsg += '\nEnsure your wallet is set to the correct network (Testnet/Mainnet) and retry.'
+    } else if (/reject|denied|cancel/i.test(msgStr)) {
+  userMsg = 'Transaction was cancelled in your wallet.'
     }
-    if (!lines.length) lines.push('Unknown wallet error')
-    // Trim overly long JSON if huge
-    const maxLen = 4000
-    let text = lines.join('\n')
-    if (text.length > maxLen) {
-      text = text.slice(0, maxLen) + '\n... (truncated)'
-    }
-    alert(text)
+    alert(userMsg)
   } finally {
     isSending.value = false
   }
