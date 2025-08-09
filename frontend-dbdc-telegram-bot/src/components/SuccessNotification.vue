@@ -12,7 +12,7 @@
       v-if="isVisible"
       @click="$emit('close')"
       class="success-notification-container"
-      :style="{ bottom: `${props.bottomOffset + 30}px` }"
+      :style="{ bottom: `max(${props.bottomOffset + 30}px, calc(${props.bottomOffset + 30}px + env(safe-area-inset-bottom)))` }"
     >
       <div class="success-notification-content">
         <!-- Check Icon Circle -->
