@@ -30,7 +30,7 @@
         }"
         :style="disabled ? 'background: #9CA3AF' : 'background: linear-gradient(90deg, #2019CE 0%, #473FFF 100%)'"
       >
-        Buy Forevers
+        {{ buttonText }}
       </button>
     </div>
   </div>
