@@ -242,8 +242,8 @@ const handleCryptoPayment = async () => {
       validUntil: Math.floor(Date.now() / 1000) + 600, // 10 minutes
       messages: [
         {
-          // Testnet recipient address (you can change this to your address)
-          address: 'kQAiboDEv_qRrcEdrYdwbVLNOXBHwShFbtKGbQVJ2OKxY_Di',
+          // Your testnet wallet address
+          address: '0QD1TQ6UOU5g3kbFJXPg0vq8jYtA27pJNv_KEMKaabQQo6LR',
           amount: nanotonAmount, // Converted amount in nanotons
           payload: '' // Empty payload for simple transfer
         }
