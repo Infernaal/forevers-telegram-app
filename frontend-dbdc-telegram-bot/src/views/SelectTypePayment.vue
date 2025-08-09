@@ -75,22 +75,6 @@
           </div>
         </div>
       </div>
-
-      <!-- Terms & Conditions -->
-      <div class="flex items-center gap-2 mb-6 justify-center mt-auto">
-        <div
-          class="w-6 h-6 rounded border-2 flex items-center justify-center cursor-pointer transition-all"
-          :class="termsAccepted ? 'bg-green-500 border-green-500' : 'border-gray-300'"
-          @click="termsAccepted = !termsAccepted"
-        >
-          <svg v-if="termsAccepted" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9.56331 0.651646C9.11206 0.408665 8.60874 0.877271 8.31369 1.15496C7.63684 1.81448 7.0641 2.57814 6.42191 3.27237C5.71032 4.03603 5.0508 4.79968 4.32186 5.54601C3.90532 5.96255 3.45407 6.4138 3.17638 6.93447C2.55157 6.32699 2.01354 5.66747 1.31931 5.12947C0.815989 4.74764 -0.0170889 4.46995 0.000266917 5.38981C0.0349785 6.58738 1.09368 7.87171 1.87469 8.68741C2.20445 9.03452 2.63835 9.39899 3.14167 9.41635C3.74912 9.45106 4.37393 8.72212 4.7384 8.32294C5.38059 7.6287 5.90126 6.84766 6.49133 6.13611C7.25499 5.19889 8.036 4.27901 8.7823 3.32444C9.2509 2.73434 10.7261 1.27643 9.56331 0.651646ZM0.763893 5.32038C0.746538 5.32038 0.729182 5.32038 0.69447 5.33771C0.625047 5.32038 0.57298 5.303 0.503557 5.26829C0.555624 5.23358 0.642403 5.25093 0.763893 5.32038Z" fill="white"/>
-          </svg>
-        </div>
-        <span class="text-sm text-dbd-gray">I agree with
-          <span class="text-dbd-primary underline cursor-pointer">Terms & Conditions</span>
-        </span>
-      </div>
     </div>
 
     <!-- Bottom Navigation -->
