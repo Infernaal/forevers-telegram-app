@@ -10,7 +10,8 @@ export function useTonConnect() {
   const initTonConnect = () => {
     tonConnectUI.value = new TonConnectUI({
       manifestUrl: `${window.location.origin}/tonconnect-manifest.json`,
-      buttonRootId: null
+      buttonRootId: null,
+      network: 'testnet' // Use testnet instead of mainnet
     })
 
     // Subscribe to connection status changes
