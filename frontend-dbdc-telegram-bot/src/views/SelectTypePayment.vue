@@ -135,7 +135,7 @@ import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
 import SuccessModal from '../components/SuccessModal.vue'
 import { useWallet } from '../composables/useWallet.js'
 import { useTonConnect } from '../composables/useTonConnect.js'
-import { TON_RECEIVER, TON_COMMENT_PREFIX, validateTonAddress } from '../config/ton.js'
+import { TON_RECEIVER, TON_COMMENT_PREFIX, validateTonAddress, normalizeTonAddress } from '../config/ton.js'
 const API_BASE = import.meta.env.VITE_API_BASE || ''
 import { useCryptoRates } from '../composables/useCryptoRates.js'
 
@@ -254,10 +254,9 @@ const handleCryptoPayment = async () => {
     // NOTE: address must be a valid user-friendly (bounceable or non-bounceable) or raw format.
     // Provided earlier string looked invalid. Replace with a placeholder testnet address.
     // TODO: replace with the project receiving wallet (testnet) in user-friendly form (e.g. EQ... or kQ...).
-  const destinationAddress = TON_RECEIVER
-
+    let destinationAddress = await normalizeTonAddress(TON_RECEIVER)
     if (!validateTonAddress(destinationAddress)) {
-      throw new Error('Configured destination address is invalid format length')
+      throw new Error('Configured destination address failed validation (provide user-friendly EQ... address in .env)')
     }
 
     const buildTonTransaction = async (to, amountNano /* string */, comment) => {
