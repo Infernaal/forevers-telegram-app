@@ -98,6 +98,13 @@
         @purchase="handlePurchase"
       />
     </div>
+
+    <!-- Terms and Conditions Modal -->
+    <TermsAndConditionsModal
+      :isVisible="showTermsModal"
+      @close="closeTermsModal"
+      @agree="closeTermsModal"
+    />
   </div>
 </template>
 
