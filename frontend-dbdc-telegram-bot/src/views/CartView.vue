@@ -97,14 +97,6 @@
       @confirm="confirmDelete"
     />
 
-    <!-- Success Modal -->
-    <SuccessModal
-      :is-visible="showSuccessModal"
-      :amount="lastPurchaseDetails?.foreversAmount?.toLocaleString() || '0'"
-      :message="'Funds have been successfully'"
-      @close="closeSuccessModal"
-      @confirm="closeSuccessModal"
-    />
 
     <!-- Delete Success Notification -->
     <SuccessNotification
