@@ -3,10 +3,10 @@
     name="modal"
     enter-active-class="transition-all duration-300 ease-out"
     leave-active-class="transition-all duration-200 ease-in"
-    enter-from-class="opacity-0 backdrop-blur-0"
-    enter-to-class="opacity-100 backdrop-blur-md"
-    leave-from-class="opacity-100 backdrop-blur-md"
-    leave-to-class="opacity-0 backdrop-blur-0"
+    enter-from-class="opacity-0"
+    enter-to-class="opacity-100"
+    leave-from-class="opacity-100"
+    leave-to-class="opacity-0"
   >
     <div
       v-if="isVisible"

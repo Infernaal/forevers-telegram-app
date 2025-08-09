@@ -97,14 +97,6 @@
       @confirm="confirmDelete"
     />
 
-    <!-- Success Modal -->
-    <SuccessModal
-      :is-visible="showSuccessModal"
-      :amount="lastPurchaseDetails?.foreversAmount?.toLocaleString() || '0'"
-      :message="'Funds have been successfully'"
-      @close="closeSuccessModal"
-      @confirm="closeSuccessModal"
-    />
 
     <!-- Delete Success Notification -->
     <SuccessNotification
@@ -126,7 +118,6 @@ import { useRouter } from 'vue-router'
 import BottomNavigation from '../components/BottomNavigation.vue'
 import CountryFlag from '../components/CountryFlag.vue'
 import CartBottomComponent from '../components/CartBottomComponent.vue'
-import SuccessModal from '../components/SuccessModal.vue'
 import DeleteConfirmModal from '../components/DeleteConfirmModal.vue'
 import SuccessNotification from '../components/SuccessNotification.vue'
 import { useCart } from '../composables/useCart.js'
@@ -143,12 +134,8 @@ const totalForeversAmount = computed(() => {
 
 // Check if any modal is open for blur effect
 const isAnyModalOpen = computed(() => {
-  return showDeleteModal.value || showSuccessModal.value
+  return showDeleteModal.value
 })
-
-// Modal state
-const showSuccessModal = ref(false)
-const lastPurchaseDetails = ref(null)
 
 // Delete confirmation modal state
 const showDeleteModal = ref(false)
@@ -167,28 +154,24 @@ const handlePurchase = () => {
   // Handle the purchase logic
   console.log('Purchase initiated, total amount:', cartTotal.value)
 
-  // Store purchase details for modal (before clearing cart)
-  lastPurchaseDetails.value = {
+  // Store purchase details for the payment selection page
+  const purchaseDetails = {
     paymentMethod: 'cart',
     amount: cartTotal.value,
     foreversAmount: totalForeversAmount.value,
-    termsAccepted: true
+    cartItems: [...cartItems.value]
   }
 
-  // Show success modal
-  showSuccessModal.value = true
-
-  // Clear cart after successful purchase
-  clearCart()
+  // Navigate to payment selection page with purchase details
+  router.push({
+    name: 'select-payment',
+    params: {
+      purchaseDetails: purchaseDetails,
+      totalAmount: cartTotal.value.toLocaleString()
+    }
+  })
 }
 
-const closeSuccessModal = () => {
-  showSuccessModal.value = false
-  lastPurchaseDetails.value = null
-
-  // Navigate to wallet after modal closes
-  router.push('/wallet')
-}
 
 // Delete confirmation methods
 const showDeleteConfirm = (item) => {
