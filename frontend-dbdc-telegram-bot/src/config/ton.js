@@ -4,18 +4,20 @@ export const TON_RECEIVER = import.meta.env.VITE_TON_RECEIVER || ''
 export const TON_COMMENT_PREFIX = import.meta.env.VITE_TON_COMMENT_PREFIX || 'Order'
 
 export function validateTonAddress(address) {
-  return !!address && /[A-Za-z0-9_-]{48,}/.test(address)
+  // Accept common user-friendly (EQ/UQ/kQ/0Q etc) or base64url raw (>=48 chars)
+  if (!address) return false
+  if (address.length < 36) return false
+  return /^[A-Za-z0-9_-]+=?$/.test(address)
 }
 
 export async function normalizeTonAddress(address) {
+  // Keep original form; only verify parseable, but don't force bounceable transformation.
   if (!address) return ''
   try {
     const mod = await import('@ton/core')
-    // parse either raw or user-friendly
-    const parsed = mod.Address.parse(address)
-    // Return bounceable user-friendly testnet/mainnet depending on workchain (testnet remains same format)
-    return parsed.toString({ bounceable: true, urlSafe: true })
-  } catch (e) {
-    return address // fallback (let TonConnect validate)
+    mod.Address.parse(address) // will throw if invalid
+    return address
+  } catch {
+    return address // leave as-is; downstream TonConnect may still handle or error gracefully
   }
 }

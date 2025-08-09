@@ -256,7 +256,7 @@ const handleCryptoPayment = async () => {
     // TODO: replace with the project receiving wallet (testnet) in user-friendly form (e.g. EQ... or kQ...).
     let destinationAddress = await normalizeTonAddress(TON_RECEIVER)
     if (!validateTonAddress(destinationAddress)) {
-      throw new Error('Configured destination address failed validation (provide user-friendly EQ... address in .env)')
+      throw new Error('Configured destination address failed validation: check VITE_TON_RECEIVER')
     }
 
     const buildTonTransaction = async (to, amountNano /* string */, comment) => {
