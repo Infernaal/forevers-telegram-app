@@ -94,6 +94,7 @@
     <div class="fixed left-0 right-0 z-[9999]" style="bottom: 89px;">
       <CartBottomComponent
         :total-amount="parseFloat(totalAmount.replace(/,/g, ''))"
+        :disabled="!selectedPayment || !termsAccepted"
         @back="handleBack"
         @purchase="handlePurchase"
       />
