@@ -147,6 +147,19 @@ const isAnyModalOpen = computed(() => {
   return showTermsModal.value || showSuccessModal.value
 })
 
+// Format number to short notation (K, M, B)
+const formatNumberShort = (value) => {
+  if (value < 1000) {
+    return value.toString()
+  } else if (value < 1000000) {
+    return (value / 1000).toFixed(1).replace('.0', '') + 'K'
+  } else if (value < 1000000000) {
+    return (value / 1000000).toFixed(1).replace('.0', '') + 'M'
+  } else {
+    return (value / 1000000000).toFixed(1).replace('.0', '') + 'B'
+  }
+}
+
 // Methods
 const selectPayment = (paymentType) => {
   selectedPayment.value = paymentType
