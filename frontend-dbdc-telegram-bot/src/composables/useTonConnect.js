@@ -19,11 +19,13 @@ export function useTonConnect() {
       if (walletInfo) {
         isConnected.value = true
         wallet.value = walletInfo
-        console.log('Wallet connected:', walletInfo)
+        console.log('Testnet wallet connected:', walletInfo)
+        console.log('Wallet network:', walletInfo.account?.chain)
+        console.log('Wallet address:', walletInfo.account?.address)
       } else {
         isConnected.value = false
         wallet.value = null
-        console.log('Wallet disconnected')
+        console.log('Testnet wallet disconnected')
       }
     })
   }
