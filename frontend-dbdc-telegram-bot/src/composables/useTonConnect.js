@@ -9,7 +9,7 @@ export function useTonConnect() {
 
   const initTonConnect = () => {
     tonConnectUI.value = new TonConnectUI({
-      manifestUrl: 'https://raw.githubusercontent.com/ton-community/tutorials/main/03-client/test/public/tonconnect-manifest.json',
+      manifestUrl: `${window.location.origin}/tonconnect-manifest.json`,
       buttonRootId: null
     })
 
