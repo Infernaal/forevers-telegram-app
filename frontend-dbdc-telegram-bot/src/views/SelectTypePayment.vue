@@ -184,7 +184,7 @@ const closeSuccessModal = () => {
 // Get purchase details from query params if available
 onMounted(() => {
   if (route.query.totalAmount) {
-    totalAmount.value = parseFloat(route.query.totalAmount).toLocaleString()
+    totalAmount.value = parseFloat(route.query.totalAmount)
 
     // Store purchase details from query
     purchaseDetails.value = {
