@@ -145,9 +145,11 @@ const handlePurchase = () => {
 }
 
 const openTerms = () => {
-  // Handle opening terms and conditions modal
-  console.log('Opening Terms and Conditions modal')
-  // You can implement modal opening logic here
+  showTermsModal.value = true
+}
+
+const closeTermsModal = () => {
+  showTermsModal.value = false
 }
 
 // Get purchase details from route params if available
