@@ -9,6 +9,7 @@ from routers.forevers_prices import router as forevers_price_router
 from routers.user_info import router as user_info_router
 from routers.ton_payment import router as ton_payment_router
 from fastapi.openapi.utils import get_openapi
+import os
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -16,7 +17,13 @@ async def lifespan(app: FastAPI):
     print("Bot is ready")
     yield
 
-# 👇 FastAPI с lifespan
+API_PREFIX = "/api/v1/dbdc"
+DOCS_UNDER_PREFIX = os.getenv("DOCS_UNDER_PREFIX", "true").lower() == "true"
+
+docs_url = f"{API_PREFIX}/docs" if DOCS_UNDER_PREFIX else "/docs"
+redoc_url = f"{API_PREFIX}/redoc" if DOCS_UNDER_PREFIX else "/redoc"
+openapi_url = f"{API_PREFIX}/openapi.json" if DOCS_UNDER_PREFIX else "/openapi.json"
+
 app = FastAPI(
     title="DBDC Telegram Bot Backend",
     description="Backend для Telegram WebApp, который обрабатывает финансовые данные пользователей, включая баланс forevers.",
@@ -26,9 +33,9 @@ app = FastAPI(
         "url": "https://dubadu.com",
         "email": "support@dubadu.com",
     },
-    docs_url="/docs",
-    redoc_url="/redoc",
-    openapi_url="/openapi.json",
+    docs_url=docs_url,
+    redoc_url=redoc_url,
+    openapi_url=openapi_url,
     lifespan=lifespan
 )
 
@@ -49,10 +56,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(forevers_user_balance_router, prefix="/api/v1/dbdc")
-app.include_router(forevers_price_router, prefix="/api/v1/dbdc")
-app.include_router(user_info_router, prefix="/api/v1/dbdc")
-app.include_router(ton_payment_router, prefix="/api/v1/dbdc")
+app.include_router(forevers_user_balance_router, prefix=API_PREFIX)
+app.include_router(forevers_price_router, prefix=API_PREFIX)
+app.include_router(user_info_router, prefix=API_PREFIX)
+app.include_router(ton_payment_router, prefix=API_PREFIX)
 
 # Normalize duplicate slashes to avoid //api issues
 @app.middleware("http")
