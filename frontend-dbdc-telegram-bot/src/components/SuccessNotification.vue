@@ -197,30 +197,6 @@ defineEmits(['close'])
   }
 }
 
-/* Safe area support for notifications */
-@supports (padding: max(0px)) {
-  .success-notification-container {
-    bottom: max(94px, calc(94px + env(safe-area-inset-bottom)));
-  }
-
-  @media (min-width: 375px) and (max-width: 430px) {
-    .success-notification-container {
-      bottom: max(101px, calc(101px + env(safe-area-inset-bottom)));
-    }
-  }
-
-  @media (min-width: 431px) and (max-width: 768px) {
-    .success-notification-container {
-      bottom: max(140px, calc(140px + env(safe-area-inset-bottom)));
-    }
-  }
-
-  @media (min-width: 769px) {
-    .success-notification-container {
-      bottom: max(160px, calc(160px + env(safe-area-inset-bottom)));
-    }
-  }
-}
 
 /* Success notification animations */
 .success-notification-enter-active,
