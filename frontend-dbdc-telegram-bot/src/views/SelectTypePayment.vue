@@ -179,6 +179,14 @@ const formatNumberShort = (value) => {
   }
 }
 
+// Computed property for crypto amount display
+const cryptoAmountDisplay = computed(() => {
+  if (!totalAmount.value) return ''
+
+  const tonAmount = convertUsdToTon(totalAmount.value)
+  return formatTonAmount(tonAmount)
+})
+
 // Methods
 const selectPayment = (paymentType) => {
   selectedPayment.value = paymentType
