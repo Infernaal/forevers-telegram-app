@@ -81,17 +81,19 @@
       </div>
     </div>
 
+    <!-- Bottom Navigation -->
+    <div class="fixed left-0 right-0 bottom-0 z-[9998]">
+      <BottomNavigation />
+    </div>
+
     <!-- Cart Bottom Component -->
-    <div class="fixed left-0 right-0 bottom-0 z-[9999]">
+    <div class="fixed left-0 right-0 z-[9999]" style="bottom: 89px;">
       <CartBottomComponent
         :total-amount="parseFloat(totalAmount.replace(/,/g, ''))"
         @back="handleBack"
         @purchase="handlePurchase"
       />
     </div>
-
-    <!-- Bottom Navigation -->
-    <BottomNavigation />
   </div>
 </template>
 
