@@ -137,12 +137,13 @@
     <SuccessNotification
       :is-visible="showSuccessNotification"
       :class="{ 'blur-notification': isAnyModalOpen }"
+      :bottom-offset="bottomNavRef?.bottomOffset || 120"
       message="Rent Out Forevers Successfully"
       @close="showSuccessNotification = false"
     />
 
     <!-- Bottom Navigation -->
-    <BottomNavigation />
+    <BottomNavigation ref="bottomNavRef" />
   </div>
 </template>
 
@@ -163,6 +164,7 @@ const showInfoTooltip = ref(false)
 const showRentModal = ref(false)
 const showTermsModal = ref(false)
 const showSuccessNotification = ref(false)
+const bottomNavRef = ref(null)
 
 // Check if any modal is open for blur effect
 const isAnyModalOpen = computed(() => {
