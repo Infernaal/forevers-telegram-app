@@ -127,6 +127,7 @@ const termsAccepted = ref(false) // Default to unchecked - user must agree to te
 const totalAmount = ref('26,106.00')
 const purchaseDetails = ref(null)
 const showTermsModal = ref(false)
+const showSuccessModal = ref(false)
 
 // Methods
 const selectPayment = (paymentType) => {
