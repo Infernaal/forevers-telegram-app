@@ -1,7 +1,7 @@
 <template>
   <div class="w-full min-h-screen bg-white font-montserrat flex flex-col">
     <!-- Content Container -->
-    <div class="flex-1 bg-gray-100 rounded-t-2xl p-4 pt-8">
+    <div class="flex-1 bg-gray-100 rounded-t-2xl p-4 pt-8 pb-40">
 
       <!-- Payment Methods Grid -->
       <div class="grid grid-cols-2 gap-3 mb-8">
