@@ -107,6 +107,7 @@ import { useRouter, useRoute } from 'vue-router'
 import BottomNavigation from '../components/BottomNavigation.vue'
 import CartBottomComponent from '../components/CartBottomComponent.vue'
 import TermsCheckbox from '../components/TermsCheckbox.vue'
+import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
 
 const router = useRouter()
 const route = useRoute()
