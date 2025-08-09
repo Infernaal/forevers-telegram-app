@@ -134,12 +134,8 @@ const totalForeversAmount = computed(() => {
 
 // Check if any modal is open for blur effect
 const isAnyModalOpen = computed(() => {
-  return showDeleteModal.value || showSuccessModal.value
+  return showDeleteModal.value
 })
-
-// Modal state
-const showSuccessModal = ref(false)
-const lastPurchaseDetails = ref(null)
 
 // Delete confirmation modal state
 const showDeleteModal = ref(false)
