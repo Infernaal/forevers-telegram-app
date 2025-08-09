@@ -161,8 +161,11 @@ const handlePurchase = () => {
 onMounted(() => {
   if (route.params.purchaseDetails) {
     purchaseDetails.value = route.params.purchaseDetails
+    // Format the total amount properly
     if (route.params.totalAmount) {
       totalAmount.value = route.params.totalAmount
+    } else if (purchaseDetails.value?.amount) {
+      totalAmount.value = purchaseDetails.value.amount.toLocaleString()
     }
   }
 })
