@@ -23,7 +23,7 @@
             </svg>
           </div>
           <div class="text-center">
-            <h3 class="text-lg font-semibold text-dbd-dark">USD {{ loyaltyBalance.toLocaleString() }}</h3>
+            <h3 class="text-lg font-semibold text-dbd-dark">USD {{ formatNumberShort(loyaltyBalance) }}</h3>
             <p class="text-dbd-light-gray text-base">Loyalty Program</p>
           </div>
         </div>
@@ -47,7 +47,7 @@
             </svg>
           </div>
           <div class="text-center">
-            <h3 class="text-lg font-semibold text-dbd-dark">USD {{ bonusBalance.toLocaleString() }}</h3>
+            <h3 class="text-lg font-semibold text-dbd-dark">USD {{ formatNumberShort(bonusBalance) }}</h3>
             <p class="text-dbd-light-gray text-base">Bonus Reward</p>
           </div>
         </div>
