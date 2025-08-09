@@ -149,9 +149,8 @@ const handlePurchase = () => {
     purchaseDetails: purchaseDetails.value
   })
 
-  // For now, navigate back to cart or wallet
-  // You can replace this with actual payment processing
-  router.push('/wallet')
+  // Show success modal instead of navigating
+  showSuccessModal.value = true
 }
 
 const openTerms = () => {
