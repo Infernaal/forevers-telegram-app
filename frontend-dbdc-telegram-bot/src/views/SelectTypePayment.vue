@@ -325,35 +325,44 @@ const handleCryptoPayment = async () => {
 
     showSuccessModal.value = true
   } catch (error) {
-    // Expose the original wallet error verbatim so you can see what TonConnect / wallet returned
-    console.group('[TON] Wallet transaction error (raw)')
-    console.error(error)
-    try {
-      // Attempt to log a JSON serialization including non-enumerable props
-      const plain = typeof error === 'object' && error !== null
-        ? JSON.stringify(error, Object.getOwnPropertyNames(error))
-        : String(error)
-      console.log('Serializable form:', plain)
-    } catch (_) { /* ignore */ }
-    console.groupEnd()
-
-    // Derive the most meaningful message to show the user without hiding wallet content
-    let msg = ''
-    if (error) {
-      if (typeof error === 'string') msg = error
-      else if (error.data?.error) msg = error.data.error
-      else if (error.message) msg = error.message
-      else if (error.description) msg = error.description
-      else if (error.code) msg = `Code: ${error.code}`
-      else msg = Object.prototype.toString.call(error)
-    } else {
-      msg = 'Unknown error'
+    // Build a detailed alert (no console output) with as much wallet error context as possible
+    let lines = []
+    const push = (label, val) => {
+      if (val === undefined || val === null || val === '') return
+      lines.push(`${label}: ${val}`)
     }
-
-    // Show concise alert; full object is in console
     try {
-      alert(`Wallet error:\n${msg}\n\n(Full details logged to console)`)
-    } catch (_) { /* ignore alert issues */ }
+      if (typeof error === 'string') {
+        push('Raw', error)
+      } else if (typeof error === 'object' && error) {
+        push('Message', error.message)
+        push('Description', error.description)
+        push('Code', error.code)
+        if (error.data) {
+          try { push('Data.error', error.data.error) } catch(_){}
+          try { push('Data.message', error.data.message) } catch(_){}
+        }
+        // Include full JSON snapshot
+        try {
+          const snapshot = JSON.stringify(error, Object.getOwnPropertyNames(error), 2)
+          push('JSON', snapshot)
+        } catch(_) {}
+        // Include stack (if any)
+        push('Stack', error.stack)
+      } else {
+        push('Raw', String(error))
+      }
+    } catch (e2) {
+      lines.push('Failed to parse error object')
+    }
+    if (!lines.length) lines.push('Unknown wallet error')
+    // Trim overly long JSON if huge
+    const maxLen = 4000
+    let text = lines.join('\n')
+    if (text.length > maxLen) {
+      text = text.slice(0, maxLen) + '\n... (truncated)'
+    }
+    alert(text)
   } finally {
     isSending.value = false
   }
