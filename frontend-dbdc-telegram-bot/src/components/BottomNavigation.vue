@@ -399,6 +399,11 @@ const getRankIcon = (rank) => {
   return `/${validRank}.svg`
 }
 
+// Export bottomOffset for use in parent components
+defineExpose({
+  bottomOffset
+})
+
 
 </script>
 
