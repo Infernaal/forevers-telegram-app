@@ -133,7 +133,7 @@ const route = useRoute()
 // Reactive data
 const selectedPayment = ref('bonus') // Default to bonus reward as shown in design
 const termsAccepted = ref(false) // Default to unchecked - user must agree to terms
-const totalAmount = ref('0')
+const totalAmount = ref(0)
 const purchaseDetails = ref(null)
 const showTermsModal = ref(false)
 const showSuccessModal = ref(false)
