@@ -135,6 +135,9 @@ import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
 import SuccessModal from '../components/SuccessModal.vue'
 import { useWallet } from '../composables/useWallet.js'
 import { useTonConnect } from '../composables/useTonConnect.js'
+import { TON_RECEIVER, TON_COMMENT_PREFIX, validateTonAddress } from '../config/ton.js'
+const API_BASE = import.meta.env.VITE_API_BASE || ''
+import { Cell } from 'ton-core'
 import { useCryptoRates } from '../composables/useCryptoRates.js'
 
 const router = useRouter()
@@ -144,7 +147,7 @@ const route = useRoute()
 const { loyaltyBalance, bonusBalance, fetchWalletData } = useWallet()
 
 // TON Connect data
-const { isConnected, wallet, isLoading, connectWallet, sendTransaction } = useTonConnect()
+const { isConnected, wallet, isLoading, connectWallet, sendTransaction, chain, network } = useTonConnect()
 
 // Crypto rates data
 const { tonRate, convertUsdToTon, convertUsdToUsdt, tonToNanotons, formatTonAmount, formatUsdtAmount, fetchRates } = useCryptoRates()
@@ -156,6 +159,8 @@ const totalAmount = ref(0)
 const purchaseDetails = ref(null)
 const showTermsModal = ref(false)
 const showSuccessModal = ref(false)
+const isSending = ref(false)
+const txHash = ref(null)
 
 // Computed properties
 const isAnyModalOpen = computed(() => {
@@ -215,9 +220,20 @@ const handlePurchase = async () => {
 
 const handleCryptoPayment = async () => {
   try {
+    if (isSending.value) return
     // If wallet not connected, open connection modal
     if (!isConnected.value) {
       await connectWallet()
+      return
+    }
+
+    // Network guard (simple): chain 0 = mainnet, -3 = testnet (common convention)
+    if (network === 'testnet' && chain.value === 0) {
+      alert('Wallet is on mainnet, please switch to testnet in wallet settings')
+      return
+    }
+    if (network !== 'testnet' && chain.value !== 0) {
+      alert('Wallet network mismatch')
       return
     }
 
@@ -232,18 +248,32 @@ const handleCryptoPayment = async () => {
       nanotons: nanotonAmount
     })
 
-    // Prepare transaction for TON payment (testnet)
-    const transaction = {
-      validUntil: Math.floor(Date.now() / 1000) + 600, // 10 minutes
-      messages: [
-        {
-          // Your testnet wallet address
-          address: '0QD1TQ6UOU5g3kbFJXPg0vq8jYtA27pJNv_KEMKaabQQo6LR',
-          amount: nanotonAmount, // Converted amount in nanotons
-          payload: '' // Empty payload for simple transfer
-        }
-      ]
+    // Helper: optional simple text comment -> on-chain payload
+    // (TonConnect payload expects base64 BOC). Here we keep no payload for plain transfer.
+    // If you need a comment later, build it using a library like ton-core to serialize a cell.
+
+    // NOTE: address must be a valid user-friendly (bounceable or non-bounceable) or raw format.
+    // Provided earlier string looked invalid. Replace with a placeholder testnet address.
+    // TODO: replace with the project receiving wallet (testnet) in user-friendly form (e.g. EQ... or kQ...).
+  const destinationAddress = TON_RECEIVER
+
+    if (!validateTonAddress(destinationAddress)) {
+      throw new Error('Configured destination address is invalid format length')
     }
+
+    const buildTonTransaction = (to, amountNano /* string */, comment) => {
+      const msg = { address: to, amount: amountNano }
+      if (comment) {
+        const payload = buildCommentPayload(`${TON_COMMENT_PREFIX}: ${comment}`)
+        if (payload) msg.payload = payload
+      }
+      return {
+        validUntil: Math.floor(Date.now() / 1000) + 600,
+        messages: [msg]
+      }
+    }
+
+    const transaction = buildTonTransaction(destinationAddress, nanotonAmount.toString(), `USD ${totalAmount.value}`)
 
     console.log('Sending testnet transaction:', {
       ...transaction,
@@ -252,16 +282,53 @@ const handleCryptoPayment = async () => {
     })
 
     // Send transaction
+    isSending.value = true
     const result = await sendTransaction(transaction)
-
-    if (result) {
-      console.log('Testnet crypto payment successful:', result)
-      showSuccessModal.value = true
+    if (result?.hash) {
+      txHash.value = result.hash
+    } else if (result?.boc) {
+      try {
+        const raw = atob(result.boc)
+        const bytes = Uint8Array.from(raw, c => c.charCodeAt(0))
+        const cell = Cell.fromBoc(bytes)[0]
+        const hBytes = cell.hash()
+        txHash.value = Array.from(hBytes).map(b => b.toString(16).padStart(2, '0')).join('')
+      } catch (e) {
+        console.warn('Failed to derive tx hash from BOC', e)
+      }
     }
+    console.log('Testnet crypto payment successful:', result)
+
+    // Server-side verification (best effort, hash may be missing depending on wallet)
+  if (txHash.value) {
+      try {
+  const verifyResp = await fetch(`${API_BASE}/api/v1/dbdc/ton/verify`.replace(/\/\/+/g,'/'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            tx_hash: txHash.value,
+            destination: TON_RECEIVER,
+            amount: parseInt(nanotonAmount, 10),
+            comment_prefix: TON_COMMENT_PREFIX
+          })
+        })
+        const verifyJson = await verifyResp.json()
+        console.log('Verification result:', verifyJson)
+        if (!verifyJson.confirmed) {
+          alert('Warning: On-chain verification not confirmed yet.')
+        }
+      } catch (e) {
+        console.warn('Verification call failed', e)
+      }
+    }
+
+    showSuccessModal.value = true
   } catch (error) {
     console.error('Testnet crypto payment failed:', error)
     // Show error in console for debugging
     alert(`Payment failed: ${error.message}`)
+  } finally {
+    isSending.value = false
   }
 }
 

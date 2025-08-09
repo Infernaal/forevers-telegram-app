@@ -1,5 +1,10 @@
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { TonConnectUI } from '@tonconnect/ui'
+import { beginCell } from 'ton-core'
+import { TON_NETWORK } from '../config/ton.js'
+
+// Simple singleton to avoid multiple TonConnectUI instances if composable used in many components
+let _singletonInstance = null
 
 export function useTonConnect() {
   const tonConnectUI = ref(null)
@@ -8,24 +13,34 @@ export function useTonConnect() {
   const isLoading = ref(false)
 
   const initTonConnect = () => {
+    if (_singletonInstance) {
+      tonConnectUI.value = _singletonInstance
+      return
+    }
+
+    const manifestUrl = `${window.location.origin}/tonconnect-manifest.json`
     tonConnectUI.value = new TonConnectUI({
-      manifestUrl: `${window.location.origin}/tonconnect-manifest.json`,
+      manifestUrl,
       buttonRootId: null,
-      network: 'testnet' // Use testnet instead of mainnet
+      network: TON_NETWORK
     })
+
+    _singletonInstance = tonConnectUI.value
 
     // Subscribe to connection status changes
     tonConnectUI.value.onStatusChange((walletInfo) => {
       if (walletInfo) {
         isConnected.value = true
         wallet.value = walletInfo
-        console.log('Testnet wallet connected:', walletInfo)
-        console.log('Wallet network:', walletInfo.account?.chain)
-        console.log('Wallet address:', walletInfo.account?.address)
+        console.log('[TonConnect] Connected:', {
+          address: walletInfo.account?.address,
+          chain: walletInfo.account?.chain,
+          device: walletInfo.device?.appName
+        })
       } else {
         isConnected.value = false
         wallet.value = null
-        console.log('Testnet wallet disconnected')
+        console.log('[TonConnect] Disconnected')
       }
     })
   }
@@ -58,18 +73,47 @@ export function useTonConnect() {
       throw new Error('Wallet not connected')
     }
 
+    // Basic validation
+    if (!transaction?.messages?.length) {
+      throw new Error('Transaction must contain at least one message')
+    }
+    for (const m of transaction.messages) {
+      if (!m.address) throw new Error('Message missing address')
+      if (!m.amount) throw new Error('Message missing amount')
+    }
+
     try {
       const result = await tonConnectUI.value.sendTransaction(transaction)
-      console.log('Transaction sent:', result)
+      console.log('[TonConnect] Transaction sent:', result)
       return result
     } catch (error) {
-      console.error('Failed to send transaction:', error)
+      console.error('[TonConnect] Failed to send transaction:', error)
       throw error
+    }
+  }
+
+  // Placeholder for future comment payload builder (requires ton-core to serialize a cell)
+  const buildCommentPayload = (text) => {
+    if (!text) return undefined
+    try {
+      const cell = beginCell().storeUint(0, 32).storeStringTail(text).endCell()
+      return cell.toBoc({ idx: false }).toString('base64')
+    } catch (e) {
+      console.warn('Failed to build comment payload', e)
+      return undefined
     }
   }
 
   onMounted(() => {
     initTonConnect()
+    // Attempt immediate restoration: TonConnectUI internally restores if existing session; we just reflect state
+    setTimeout(() => {
+      const restored = _singletonInstance?.wallet
+      if (restored) {
+        isConnected.value = true
+        wallet.value = restored
+      }
+    }, 0)
   })
 
   return {
@@ -79,6 +123,9 @@ export function useTonConnect() {
     isLoading,
     connectWallet,
     disconnectWallet,
-    sendTransaction
+  sendTransaction,
+  buildCommentPayload,
+  chain: computed(() => wallet.value?.account?.chain || null),
+  network: TON_NETWORK
   }
 }

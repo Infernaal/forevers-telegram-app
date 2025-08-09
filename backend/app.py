@@ -3,9 +3,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from db.database import init_db
 import uvicorn
+import re
 from routers.forevers_user_balance import router as forevers_user_balance_router
 from routers.forevers_prices import router as forevers_price_router
 from routers.user_info import router as user_info_router
+from routers.ton_payment import router as ton_payment_router
 from fastapi.openapi.utils import get_openapi
 
 @asynccontextmanager
@@ -50,3 +52,14 @@ app.add_middleware(
 app.include_router(forevers_user_balance_router, prefix="/api/v1/dbdc")
 app.include_router(forevers_price_router, prefix="/api/v1/dbdc")
 app.include_router(user_info_router, prefix="/api/v1/dbdc")
+app.include_router(ton_payment_router, prefix="/api/v1/dbdc")
+
+# Normalize duplicate slashes to avoid //api issues
+@app.middleware("http")
+async def normalize_slashes(request, call_next):
+    original_path = request.scope.get('path', '')
+    normalized = re.sub(r'//+', '/', original_path)
+    if normalized != original_path:
+        request.scope['path'] = normalized
+    response = await call_next(request)
+    return response
