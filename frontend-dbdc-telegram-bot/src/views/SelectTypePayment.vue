@@ -1,5 +1,17 @@
 <template>
   <div class="w-full min-h-screen bg-white font-montserrat flex flex-col">
+    <!-- Back Button -->
+    <div class="fixed top-4 left-4 z-50">
+      <button
+        @click="router.go(-1)"
+        class="w-11 h-11 bg-white rounded-lg shadow-md flex items-center justify-center hover:bg-gray-50 transition-colors"
+      >
+        <svg width="24" height="24" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 30L14 22L22 14" stroke="#02070E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
     <!-- Content Container -->
     <div class="flex-1 bg-gray-100 rounded-t-2xl p-4 mt-20">
       <!-- Header -->
