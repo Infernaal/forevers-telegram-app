@@ -172,13 +172,6 @@ const handlePurchase = () => {
   })
 }
 
-const closeSuccessModal = () => {
-  showSuccessModal.value = false
-  lastPurchaseDetails.value = null
-
-  // Navigate to wallet after modal closes
-  router.push('/wallet')
-}
 
 // Delete confirmation methods
 const showDeleteConfirm = (item) => {
