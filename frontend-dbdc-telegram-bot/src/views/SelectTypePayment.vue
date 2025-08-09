@@ -139,6 +139,7 @@ import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
 import SuccessModal from '../components/SuccessModal.vue'
 import { useWallet } from '../composables/useWallet.js'
 import { useTonConnect } from '../composables/useTonConnect.js'
+import { useCryptoRates } from '../composables/useCryptoRates.js'
 
 const router = useRouter()
 const route = useRoute()
@@ -148,6 +149,9 @@ const { loyaltyBalance, bonusBalance, fetchWalletData } = useWallet()
 
 // TON Connect data
 const { isConnected, wallet, isLoading, connectWallet, sendTransaction } = useTonConnect()
+
+// Crypto rates data
+const { tonRate, convertUsdToTon, convertUsdToUsdt, tonToNanotons, formatTonAmount, formatUsdtAmount, fetchRates } = useCryptoRates()
 
 // Reactive data
 const selectedPayment = ref('bonus') // Default to bonus reward as shown in design
@@ -213,20 +217,35 @@ const handleCryptoPayment = async () => {
       return
     }
 
-    // Prepare transaction for USDT payment (testnet)
+    // Convert USD amount to TON
+    const tonAmount = convertUsdToTon(totalAmount.value)
+    const nanotonAmount = tonToNanotons(tonAmount)
+
+    console.log('Payment conversion:', {
+      usdAmount: totalAmount.value,
+      tonRate: tonRate.value,
+      tonAmount: tonAmount,
+      nanotons: nanotonAmount
+    })
+
+    // Prepare transaction for TON payment (testnet)
     const transaction = {
       validUntil: Math.floor(Date.now() / 1000) + 600, // 10 minutes
       messages: [
         {
-          // Testnet USDT contract address (example)
+          // Testnet recipient address (you can change this to your address)
           address: 'kQAiboDEv_qRrcEdrYdwbVLNOXBHwShFbtKGbQVJ2OKxY_Di',
-          amount: '100000000', // 0.1 TON for testing
+          amount: nanotonAmount, // Converted amount in nanotons
           payload: '' // Empty payload for simple transfer
         }
       ]
     }
 
-    console.log('Sending testnet transaction:', transaction)
+    console.log('Sending testnet transaction:', {
+      ...transaction,
+      usdAmount: totalAmount.value,
+      tonAmount: formatTonAmount(tonAmount)
+    })
 
     // Send transaction
     const result = await sendTransaction(transaction)
@@ -258,8 +277,11 @@ const closeSuccessModal = () => {
 
 // Get purchase details from query params if available
 onMounted(async () => {
-  // Fetch wallet data first
-  await fetchWalletData()
+  // Fetch wallet data and crypto rates
+  await Promise.all([
+    fetchWalletData(),
+    fetchRates()
+  ])
 
   if (route.query.totalAmount) {
     totalAmount.value = parseFloat(route.query.totalAmount)
