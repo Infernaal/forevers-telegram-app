@@ -37,7 +37,7 @@
           </div>
           <div class="bg-[#FAFAFA] border border-[#2019CE]/20 rounded-2xl p-4 mb-4">
             <div class="flex flex-col gap-2">
-              <span class="text-xl font-bold text-[#2019CE]">${{ loyaltyDisplay }}</span>
+              <span class="text-xl font-bold text-[#2019CE]">${{ loyaltyFullDisplay }}</span>
               <span class="text-sm font-medium text-[#4B4D50]">Forevers Rent %</span>
             </div>
           </div>
@@ -63,7 +63,7 @@
           </div>
           <div class="bg-[#FAFAFA] border border-[#2019CE]/20 rounded-2xl p-4">
             <div class="flex flex-col gap-2">
-              <span class="text-xl font-bold text-[#2019CE]">${{ bonusDisplay }}</span>
+              <span class="text-xl font-bold text-[#2019CE]">${{ bonusFullDisplay }}</span>
               <span class="text-sm font-medium text-[#4B4D50]">Reward</span>
             </div>
           </div>
@@ -80,7 +80,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { formatCompactNumber } from '../utils/formatNumber.js'
+// import { formatCompactNumber } from '../utils/formatNumber.js' // no longer needed for full display
 import BottomNavigation from '../components/BottomNavigation.vue'
 
 const router = useRouter()
@@ -107,9 +107,13 @@ const fetchWalletData = async () => {
   }
 }
 
-// Use query override if provided (after purchase)
-const loyaltyDisplay = computed(() => formatCompactNumber(loyaltyBalance.value))
-const bonusDisplay = computed(() => formatCompactNumber(bonusBalance.value))
+// Full (non-compact) displays with locale separators
+const loyaltyFullDisplay = computed(() => {
+  return Number(loyaltyBalance.value || 0).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 8 })
+})
+const bonusFullDisplay = computed(() => {
+  return Number(bonusBalance.value || 0).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 8 })
+})
 
 onMounted(() => {
   if (route.query.loyalty) {
