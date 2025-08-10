@@ -12,7 +12,7 @@
       v-if="isVisible"
       @click="$emit('close')"
       class="success-notification-container"
-      :style="{ bottom: `max(${props.bottomOffset + 5}px, calc(${props.bottomOffset + 5}px + env(safe-area-inset-bottom)))` }"
+      :style="{ bottom: `max(${props.bottomOffset + 5}px, calc(${props.bottomOffset + 5}px + var(--tg-content-safe-area-inset-bottom)))` }"
     >
       <div class="success-notification-content">
         <!-- Check Icon Circle -->
