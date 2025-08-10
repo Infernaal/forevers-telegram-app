@@ -110,7 +110,7 @@
     <!-- Success Modal -->
     <SuccessModal
       :is-visible="showSuccessModal"
-      :amount="purchaseDetails?.foreversAmount?.toLocaleString() || totalAmount"
+      :amount="foreversAmountDisplay"
       :message="'Payment completed successfully'"
       @close="closeSuccessModal"
       @confirm="closeSuccessModal"
@@ -135,7 +135,8 @@ const route = useRoute()
 // Reactive data
 const selectedPayment = ref('bonus') // default
 const termsAccepted = ref(false)
-const totalAmount = ref('0') // string version (locale)
+const totalAmount = ref('0') // USD total (locale string)
+const foreversAmount = ref(0) // numeric forevers amount
 
 // Robust locale-aware parser: handles forms like "26,106.00", "187,5", "1 234,56"
 function parseLocaleAmount(val) {
@@ -184,6 +185,10 @@ const handleBack = () => {
 
 const handlePurchase = () => {
   if (!selectedPayment.value || !termsAccepted.value) return
+  // Ensure forevers amount is available before showing success
+  if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
+    foreversAmount.value = purchaseDetails.value.foreversAmount
+  }
   showSuccessModal.value = true
 }
 
@@ -217,16 +222,30 @@ async function fetchWalletData() {
   } catch (e) { console.error('wallet fetch failed', e) }
 }
 
+// Computed for SuccessModal display
+const foreversAmountDisplay = computed(() => {
+  return foreversAmount.value ? foreversAmount.value.toLocaleString() : '0'
+})
+
 onMounted(() => {
-  // Accept total via params or query
+  // Attempt to retrieve purchase details (note: params may not persist without dynamic segments)
   if (route.params.purchaseDetails) {
     purchaseDetails.value = route.params.purchaseDetails
   }
+
+  // Parse USD total (for potential future logic)
   const incomingTotal = route.params.totalAmount || route.query.totalRaw || route.query.total || purchaseDetails.value?.amount
   if (incomingTotal !== undefined) {
     const num = parseLocaleAmount(incomingTotal)
     totalAmount.value = num.toLocaleString(undefined, { maximumFractionDigits: 6 })
   }
+
+  // Prefer explicit forevers amount from query, then purchaseDetails
+  const incomingForevers = route.query.foreversAmount || purchaseDetails.value?.foreversAmount
+  if (incomingForevers !== undefined) {
+    foreversAmount.value = parseLocaleAmount(incomingForevers)
+  }
+
   fetchWalletData()
 })
 </script>

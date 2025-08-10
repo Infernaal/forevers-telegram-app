@@ -170,7 +170,8 @@ const handlePurchase = () => {
       purchaseDetails: purchaseDetails,
       totalAmount: localeString
     },
-    query: { total: cartTotal.value, totalRaw: localeString }
+  // Provide both USD total (for payment) and raw forevers amount explicitly via query
+  query: { total: cartTotal.value, totalRaw: localeString, foreversAmount: totalForeversAmount.value }
   })
 }
 
