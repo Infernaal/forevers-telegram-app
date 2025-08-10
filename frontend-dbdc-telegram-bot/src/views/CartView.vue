@@ -163,12 +163,14 @@ const handlePurchase = () => {
   }
 
   // Navigate to payment selection page with purchase details
+  const localeString = cartTotal.value.toLocaleString()
   router.push({
     name: 'select-payment',
     params: {
       purchaseDetails: purchaseDetails,
-      totalAmount: cartTotal.value.toLocaleString()
-    }
+      totalAmount: localeString
+    },
+    query: { total: cartTotal.value, totalRaw: localeString }
   })
 }
 

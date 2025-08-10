@@ -37,7 +37,7 @@
           </div>
           <div class="bg-[#FAFAFA] border border-[#2019CE]/20 rounded-2xl p-4 mb-4">
             <div class="flex flex-col gap-2">
-              <span class="text-xl font-bold text-[#2019CE]">${{ loyaltyBalance.toLocaleString() }}</span>
+              <span class="text-xl font-bold text-[#2019CE]">${{ loyaltyDisplay }}</span>
               <span class="text-sm font-medium text-[#4B4D50]">Forevers Rent %</span>
             </div>
           </div>
@@ -63,7 +63,7 @@
           </div>
           <div class="bg-[#FAFAFA] border border-[#2019CE]/20 rounded-2xl p-4">
             <div class="flex flex-col gap-2">
-              <span class="text-xl font-bold text-[#2019CE]">${{ bonusBalance.toLocaleString() }}</span>
+              <span class="text-xl font-bold text-[#2019CE]">${{ bonusDisplay }}</span>
               <span class="text-sm font-medium text-[#4B4D50]">Reward</span>
             </div>
           </div>
@@ -78,11 +78,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, onMounted, computed } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { formatCompactNumber } from '../utils/formatNumber.js'
 import BottomNavigation from '../components/BottomNavigation.vue'
 
 const router = useRouter()
+const route = useRoute()
 
 const foreversBalance = ref(0)
 const loyaltyBalance = ref(0)
@@ -105,7 +107,19 @@ const fetchWalletData = async () => {
   }
 }
 
+// Use query override if provided (after purchase)
+const loyaltyDisplay = computed(() => formatCompactNumber(loyaltyBalance.value))
+const bonusDisplay = computed(() => formatCompactNumber(bonusBalance.value))
+
 onMounted(() => {
+  if (route.query.loyalty) {
+    const l = parseFloat(route.query.loyalty)
+    if (!isNaN(l)) loyaltyBalance.value = l
+  }
+  if (route.query.bonus) {
+    const b = parseFloat(route.query.bonus)
+    if (!isNaN(b)) bonusBalance.value = b
+  }
   fetchWalletData()
 })
 

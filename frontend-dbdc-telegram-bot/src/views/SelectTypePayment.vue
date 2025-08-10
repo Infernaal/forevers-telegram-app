@@ -23,7 +23,7 @@
             </svg>
           </div>
           <div class="text-center">
-            <h3 class="text-lg font-semibold text-dbd-dark">USD 8,9K</h3>
+            <h3 class="text-lg font-semibold text-dbd-dark">{{ loyaltyFormatted }}</h3>
             <p class="text-dbd-light-gray text-base">Loyalty Program</p>
           </div>
         </div>
@@ -47,7 +47,7 @@
             </svg>
           </div>
           <div class="text-center">
-            <h3 class="text-lg font-semibold text-dbd-dark">USD 56,2K</h3>
+            <h3 class="text-lg font-semibold text-dbd-dark">{{ bonusFormatted }}</h3>
             <p class="text-dbd-light-gray text-base">Bonus Reward</p>
           </div>
         </div>
@@ -93,7 +93,7 @@
     <!-- Cart Bottom Component -->
     <div class="fixed left-0 right-0 z-[9999]" style="bottom: 89px;">
       <CartBottomComponent
-        :total-amount="parseFloat(totalAmount.replace(/,/g, ''))"
+        :total-amount="numericTotal"
         :disabled="!selectedPayment || !termsAccepted"
         @back="handleBack"
         @purchase="handlePurchase"
@@ -126,17 +126,49 @@ import CartBottomComponent from '../components/CartBottomComponent.vue'
 import TermsCheckbox from '../components/TermsCheckbox.vue'
 import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
 import SuccessModal from '../components/SuccessModal.vue'
+import { useCart } from '../composables/useCart.js'
+import { formatUSDPrefix } from '../utils/formatNumber.js'
 
 const router = useRouter()
 const route = useRoute()
 
 // Reactive data
-const selectedPayment = ref('bonus') // Default to bonus reward as shown in design
-const termsAccepted = ref(false) // Default to unchecked - user must agree to terms
-const totalAmount = ref('26,106.00')
+const selectedPayment = ref('bonus') // default
+const termsAccepted = ref(false)
+const totalAmount = ref('0') // string version (locale)
+
+// Robust locale-aware parser: handles forms like "26,106.00", "187,5", "1 234,56"
+function parseLocaleAmount(val) {
+  if (typeof val === 'number') return val
+  if (val == null) return 0
+  let s = String(val).trim()
+  if (!s) return 0
+  // Remove NBSP or spaces used as thousand separators
+  s = s.replace(/\u00A0|\s/g, '')
+  // If string has comma but no dot => treat comma as decimal separator
+  if (s.includes(',') && !s.includes('.')) {
+    // Remove any dots that might be thousands separators (rare in this case)
+    s = s.replace(/\./g, '')
+    // Replace the last comma with a dot (decimal)
+    const lastComma = s.lastIndexOf(',')
+    s = s.substring(0, lastComma).replace(/,/g, '') + '.' + s.substring(lastComma + 1)
+  } else {
+    // Remove commas that act as thousand separators (those followed by exactly 3 digits before decimal or end)
+    s = s.replace(/,(?=\d{3}(?:\D|$))/g, '')
+  }
+  const num = parseFloat(s)
+  return isNaN(num) ? 0 : num
+}
+
+const numericTotal = computed(() => parseLocaleAmount(totalAmount.value))
 const purchaseDetails = ref(null)
 const showTermsModal = ref(false)
 const showSuccessModal = ref(false)
+const loyaltyBalance = ref(0)
+const bonusBalance = ref(0)
+
+// cart composable (for clearing cart after success)
+const { clearCart } = useCart()
 
 // Computed properties
 const isAnyModalOpen = computed(() => {
@@ -144,9 +176,7 @@ const isAnyModalOpen = computed(() => {
 })
 
 // Methods
-const selectPayment = (paymentType) => {
-  selectedPayment.value = paymentType
-}
+const selectPayment = (paymentType) => { selectedPayment.value = paymentType }
 
 const handleBack = () => {
   router.go(-1)
@@ -154,16 +184,6 @@ const handleBack = () => {
 
 const handlePurchase = () => {
   if (!selectedPayment.value || !termsAccepted.value) return
-
-  // Here you would implement the actual purchase logic
-  console.log('Purchase initiated with:', {
-    paymentMethod: selectedPayment.value,
-    totalAmount: totalAmount.value,
-    termsAccepted: termsAccepted.value,
-    purchaseDetails: purchaseDetails.value
-  })
-
-  // Show success modal instead of navigating
   showSuccessModal.value = true
 }
 
@@ -177,21 +197,37 @@ const closeTermsModal = () => {
 
 const closeSuccessModal = () => {
   showSuccessModal.value = false
-  // Navigate to wallet after modal closes
-  router.push('/wallet')
+  clearCart() // empty cart after success
+  router.push({ name: 'wallet', query: { loyalty: loyaltyBalance.value, bonus: bonusBalance.value } })
 }
 
 // Get purchase details from route params if available
+// Formatters for loyalty & bonus
+const loyaltyFormatted = computed(() => formatUSDPrefix(loyaltyBalance.value))
+const bonusFormatted = computed(() => formatUSDPrefix(bonusBalance.value))
+
+async function fetchWalletData() {
+  try {
+    const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/forevers/96')
+    const result = await response.json()
+    const loyalty = result?.wallets?.find(w => w.type === 'loyalty_program')
+    loyaltyBalance.value = loyalty ? parseFloat(loyalty.amount) : 0
+    const bonus = result?.wallets?.find(w => w.type === 'bonus')
+    bonusBalance.value = bonus ? parseFloat(bonus.amount) : 0
+  } catch (e) { console.error('wallet fetch failed', e) }
+}
+
 onMounted(() => {
+  // Accept total via params or query
   if (route.params.purchaseDetails) {
     purchaseDetails.value = route.params.purchaseDetails
-    // Format the total amount properly
-    if (route.params.totalAmount) {
-      totalAmount.value = route.params.totalAmount
-    } else if (purchaseDetails.value?.amount) {
-      totalAmount.value = purchaseDetails.value.amount.toLocaleString()
-    }
   }
+  const incomingTotal = route.params.totalAmount || route.query.totalRaw || route.query.total || purchaseDetails.value?.amount
+  if (incomingTotal !== undefined) {
+    const num = parseLocaleAmount(incomingTotal)
+    totalAmount.value = num.toLocaleString(undefined, { maximumFractionDigits: 6 })
+  }
+  fetchWalletData()
 })
 </script>
 
