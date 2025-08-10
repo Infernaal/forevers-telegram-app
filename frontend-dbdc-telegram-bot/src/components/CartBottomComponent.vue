@@ -30,7 +30,7 @@
         }"
         :style="disabled ? 'background: #9CA3AF' : 'background: linear-gradient(90deg, #2019CE 0%, #473FFF 100%)'"
       >
-        {{ buttonText }}
+        Buy Forevers
       </button>
     </div>
   </div>
@@ -45,10 +45,6 @@ const props = defineProps({
   disabled: {
     type: Boolean,
     default: false
-  },
-  buttonText: {
-    type: String,
-    default: 'Buy Forevers'
   }
 })
 

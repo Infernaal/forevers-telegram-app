@@ -78,15 +78,32 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import BottomNavigation from '../components/BottomNavigation.vue'
-import { useWallet } from '../composables/useWallet.js'
 
 const router = useRouter()
 
-// Use wallet composable
-const { foreversBalance, loyaltyBalance, bonusBalance, fetchWalletData } = useWallet()
+const foreversBalance = ref(0)
+const loyaltyBalance = ref(0)
+const bonusBalance = ref(0)
+
+const fetchWalletData = async () => {
+  try {
+    const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/forevers/96')
+    const result = await response.json()
+    // Forevers balance
+    foreversBalance.value = parseFloat(result?.forevers_balance?.balance || 0)
+    // Loyalty program
+    const loyalty = result?.wallets?.find(w => w.type === 'loyalty_program')
+    loyaltyBalance.value = loyalty ? parseFloat(loyalty.amount) : 0
+    // Bonus
+    const bonus = result?.wallets?.find(w => w.type === 'bonus')
+    bonusBalance.value = bonus ? parseFloat(bonus.amount) : 0
+  } catch (error) {
+    console.error('Failed to fetch wallet data:', error)
+  }
+}
 
 onMounted(() => {
   fetchWalletData()

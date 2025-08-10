@@ -23,7 +23,7 @@
             </svg>
           </div>
           <div class="text-center">
-            <h3 class="text-lg font-semibold text-dbd-dark">USD {{ formatNumberShort(loyaltyBalance) }}</h3>
+            <h3 class="text-lg font-semibold text-dbd-dark">USD 8,9K</h3>
             <p class="text-dbd-light-gray text-base">Loyalty Program</p>
           </div>
         </div>
@@ -47,7 +47,7 @@
             </svg>
           </div>
           <div class="text-center">
-            <h3 class="text-lg font-semibold text-dbd-dark">USD {{ formatNumberShort(bonusBalance) }}</h3>
+            <h3 class="text-lg font-semibold text-dbd-dark">USD 56,2K</h3>
             <p class="text-dbd-light-gray text-base">Bonus Reward</p>
           </div>
         </div>
@@ -55,10 +55,7 @@
         <!-- USDT Crypto Wallet -->
         <div
           class="bg-white border rounded-xl p-4 flex flex-col items-center gap-2 cursor-pointer transition-all col-span-1 relative"
-          :class="[
-            selectedPayment === 'usdt' ? 'border-green-500 bg-green-50' : 'border-gray-200',
-            isConnected && selectedPayment !== 'usdt' ? 'border-blue-300' : ''
-          ]"
+          :class="selectedPayment === 'usdt' ? 'border-green-500 bg-green-50' : 'border-gray-200'"
           @click="selectPayment('usdt')"
         >
           <!-- Selected Checkmark -->
@@ -67,9 +64,6 @@
               <path d="M8.80292 1.37621C8.42688 1.17372 8.00745 1.56423 7.76157 1.79564C7.19753 2.34524 6.72025 2.98162 6.18509 3.56015C5.5921 4.19653 5.0425 4.8329 4.43505 5.45484C4.08793 5.80196 3.71189 6.178 3.48048 6.6119C2.9598 6.10566 2.51145 5.55606 1.93292 5.10773C1.51349 4.78954 0.819255 4.55813 0.833719 5.32468C0.862645 6.32266 1.7449 7.39293 2.39574 8.07268C2.67054 8.36194 3.03212 8.66567 3.45155 8.68013C3.95776 8.70906 4.47843 8.1016 4.78216 7.76895C5.31732 7.19042 5.75122 6.53956 6.24294 5.94659C6.87932 5.16558 7.53016 4.39901 8.15208 3.60354C8.54258 3.11179 9.77195 1.89686 8.80292 1.37621ZM1.47007 5.26682C1.45561 5.26682 1.44115 5.26682 1.41222 5.28126C1.35437 5.26682 1.31098 5.25234 1.25313 5.22341C1.29652 5.19448 1.36883 5.20895 1.47007 5.26682Z" fill="white"/>
             </svg>
           </div>
-
-          <!-- Connected Indicator -->
-          <div v-if="isConnected && selectedPayment !== 'usdt'" class="absolute top-3 left-3 w-3 h-3 bg-blue-500 rounded-full"></div>
           <div class="w-10 h-10 bg-gray-100 border border-gray-200 rounded-full flex items-center justify-center">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M14.7002 0.0917358C15.144 -0.0204478 15.6077 -0.0301851 16.0557 0.0643921C16.5037 0.15902 16.9246 0.355507 17.2852 0.637634C17.6662 0.961021 17.9702 1.36586 18.1738 1.8222C18.3521 2.22166 18.4496 2.65182 18.4619 3.08783V5.38959L18.4609 5.39056C18.6059 5.49919 18.7444 5.61844 18.874 5.74799C19.5951 6.46895 20 7.44724 20 8.46674V16.1552C19.9998 16.7817 18.7879 18 17.2988 18H2.70117C1.21206 18 0.0002339 16.7817 0 15.2842V2.71582C0.000233829 1.21827 1.21206 0 2.70117 0H15.3369ZM2.70117 3.67188C1.90768 3.67188 1.2618 4.32114 1.26172 5.11914V15.2842C1.26195 16.082 1.90778 16.7314 2.70117 16.7314H17.2988C18.0922 16.7314 18.738 16.082 18.7383 15.2842V13.1484H14.7158C13.1219 13.1484 11.8244 11.8443 11.8242 10.2412C11.8242 8.63803 13.1217 7.33301 14.7158 7.33301H18.7383V5.11914C18.7382 4.32114 18.0923 3.67188 17.2988 3.67188H2.70117ZM14.7158 8.60254C13.8174 8.60254 13.0859 9.33767 13.0859 10.2412C13.0861 11.1446 13.8175 11.8799 14.7158 11.8799H18.7383V8.60254H14.7158ZM15.9404 9.6748C16.3756 9.6748 16.7283 9.99219 16.7285 10.3838C16.7285 10.7755 16.3757 11.0938 15.9404 11.0938C15.5052 11.0937 15.1523 10.7755 15.1523 10.3838C15.1526 9.99222 15.5053 9.67484 15.9404 9.6748ZM2.70117 1.26855C1.90778 1.26855 1.26195 1.91796 1.26172 2.71582V2.82227C1.67869 2.5571 2.17244 2.40332 2.70117 2.40332H16.7422C16.5994 1.75535 16.0235 1.26855 15.3369 1.26855H2.70117Z" fill="#2019CE"/>
@@ -99,9 +93,8 @@
     <!-- Cart Bottom Component -->
     <div class="fixed left-0 right-0 z-[9999]" style="bottom: 89px;">
       <CartBottomComponent
-        :total-amount="totalAmount"
+        :total-amount="parseFloat(totalAmount.replace(/,/g, ''))"
         :disabled="!selectedPayment || !termsAccepted"
-        :button-text="selectedPayment === 'usdt' && !isConnected ? 'Connect Wallet' : 'Buy Forevers'"
         @back="handleBack"
         @purchase="handlePurchase"
       />
@@ -133,61 +126,21 @@ import CartBottomComponent from '../components/CartBottomComponent.vue'
 import TermsCheckbox from '../components/TermsCheckbox.vue'
 import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
 import SuccessModal from '../components/SuccessModal.vue'
-import { useWallet } from '../composables/useWallet.js'
-import { useTonConnect } from '../composables/useTonConnect.js'
-import { TON_RECEIVER, TON_COMMENT_PREFIX, validateTonAddress, normalizeTonAddress } from '../config/ton.js'
-const API_BASE = import.meta.env.VITE_API_BASE || ''
-import { useCryptoRates } from '../composables/useCryptoRates.js'
-import { useCart } from '../composables/useCart.js'
 
 const router = useRouter()
 const route = useRoute()
 
-// Wallet data
-const { loyaltyBalance, bonusBalance, fetchWalletData } = useWallet()
-
-// TON Connect data
-const { isConnected, wallet, isLoading, connectWallet, sendTransaction, chain, network } = useTonConnect()
-
-// Crypto rates data
-const { tonRate, convertUsdToTon, convertUsdToUsdt, tonToNanotons, formatTonAmount, formatUsdtAmount, fetchRates } = useCryptoRates()
-
 // Reactive data
 const selectedPayment = ref('bonus') // Default to bonus reward as shown in design
 const termsAccepted = ref(false) // Default to unchecked - user must agree to terms
-const totalAmount = ref(0)
+const totalAmount = ref('26,106.00')
 const purchaseDetails = ref(null)
 const showTermsModal = ref(false)
 const showSuccessModal = ref(false)
-const isSending = ref(false)
-const txHash = ref(null)
-// Cart (for clearing after successful purchase)
-const { clearCart } = useCart()
 
 // Computed properties
 const isAnyModalOpen = computed(() => {
   return showTermsModal.value || showSuccessModal.value
-})
-
-// Format number to short notation (K, M, B)
-const formatNumberShort = (value) => {
-  if (value < 1000) {
-    return value.toString()
-  } else if (value < 1000000) {
-    return (value / 1000).toFixed(1).replace('.0', '') + 'K'
-  } else if (value < 1000000000) {
-    return (value / 1000000).toFixed(1).replace('.0', '') + 'M'
-  } else {
-    return (value / 1000000000).toFixed(1).replace('.0', '') + 'B'
-  }
-}
-
-// Computed property for crypto amount display
-const cryptoAmountDisplay = computed(() => {
-  if (!totalAmount.value) return ''
-
-  const tonAmount = convertUsdToTon(totalAmount.value)
-  return formatTonAmount(tonAmount)
 })
 
 // Methods
@@ -196,19 +149,13 @@ const selectPayment = (paymentType) => {
 }
 
 const handleBack = () => {
-  router.push('/cart')
+  router.go(-1)
 }
 
-const handlePurchase = async () => {
+const handlePurchase = () => {
   if (!selectedPayment.value || !termsAccepted.value) return
 
-  // Handle USDT crypto wallet payment with TON Connect
-  if (selectedPayment.value === 'usdt') {
-    await handleCryptoPayment()
-    return
-  }
-
-  // For loyalty and bonus - show success modal
+  // Here you would implement the actual purchase logic
   console.log('Purchase initiated with:', {
     paymentMethod: selectedPayment.value,
     totalAmount: totalAmount.value,
@@ -216,148 +163,8 @@ const handlePurchase = async () => {
     purchaseDetails: purchaseDetails.value
   })
 
-  // Show success modal for loyalty/bonus
+  // Show success modal instead of navigating
   showSuccessModal.value = true
-}
-
-const handleCryptoPayment = async () => {
-  try {
-    if (isSending.value) return
-    // If wallet not connected, open connection modal
-    if (!isConnected.value) {
-      await connectWallet()
-      return
-    }
-
-    // Network guard (simple): chain 0 = mainnet, -3 = testnet (common convention)
-    if (network === 'testnet' && chain.value === 0) {
-      alert('Your wallet is currently on Mainnet. This application operates on Testnet. Please switch your wallet network to Testnet and try again.')
-      return
-    }
-    if (network !== 'testnet' && chain.value !== 0) {
-      alert('Your wallet network does not match the application network. Switch to the correct network and try again.')
-      return
-    }
-
-    // Convert USD amount to TON
-    const tonAmount = convertUsdToTon(totalAmount.value)
-    const nanotonAmount = tonToNanotons(tonAmount)
-
-    console.log('Payment conversion:', {
-      usdAmount: totalAmount.value,
-      tonRate: tonRate.value,
-      tonAmount: tonAmount,
-      nanotons: nanotonAmount
-    })
-
-    // Helper: optional simple text comment -> on-chain payload
-    // (TonConnect payload expects base64 BOC). Here we keep no payload for plain transfer.
-    // If you need a comment later, build it using a library like ton-core to serialize a cell.
-
-    // NOTE: address must be a valid user-friendly (bounceable or non-bounceable) or raw format.
-    // Provided earlier string looked invalid. Replace with a placeholder testnet address.
-    // TODO: replace with the project receiving wallet (testnet) in user-friendly form (e.g. EQ... or kQ...).
-    let destinationAddress = await normalizeTonAddress(TON_RECEIVER)
-    if (!validateTonAddress(destinationAddress)) {
-      console.warn('[TON] Destination address did not pass local heuristic validation; proceeding so wallet can return its own error.', destinationAddress)
-    }
-
-    // Hard guard: if after normalization we still have no address -> stop here (avoid generic "Message missing address")
-    if (!destinationAddress || !destinationAddress.trim()) {
-      alert('Payment destination is temporarily unavailable. Please try again later or contact support.')
-      return
-    }
-
-    const buildTonTransaction = async (to, amountNano /* string */, comment) => {
-      const msg = { address: to, amount: amountNano }
-      if (comment) {
-        try {
-          const payload = await buildCommentPayload(`${TON_COMMENT_PREFIX}: ${comment}`)
-          if (payload) msg.payload = payload
-        } catch (e) { console.warn('Comment payload build failed', e) }
-      }
-      return {
-        validUntil: Math.floor(Date.now() / 1000) + 600,
-        messages: [msg]
-      }
-    }
-
-    const transaction = await buildTonTransaction(destinationAddress, nanotonAmount.toString(), `USD ${totalAmount.value}`)
-
-    console.log('Sending testnet transaction:', {
-      ...transaction,
-      usdAmount: totalAmount.value,
-      tonAmount: formatTonAmount(tonAmount)
-    })
-
-    // Send transaction
-    isSending.value = true
-    const result = await sendTransaction(transaction)
-    if (result?.hash) {
-      txHash.value = result.hash
-    } else if (result?.boc) {
-      try {
-        const mod = await import('@ton/core')
-        const raw = atob(result.boc)
-        const bytes = Uint8Array.from(raw, c => c.charCodeAt(0))
-        const cell = mod.Cell.fromBoc(bytes)[0]
-        const hBytes = cell.hash()
-        txHash.value = Array.from(hBytes).map(b => b.toString(16).padStart(2, '0')).join('')
-      } catch (e) {
-        console.warn('Failed to derive tx hash from BOC', e)
-      }
-    }
-    console.log('Testnet crypto payment successful:', result)
-
-    // Server-side verification (best effort, hash may be missing depending on wallet)
-  if (txHash.value) {
-      try {
-  const verifyResp = await fetch(`${API_BASE}/api/v1/dbdc/ton/verify`.replace(/\/\/+/g,'/'), {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            tx_hash: txHash.value,
-            destination: TON_RECEIVER,
-            amount: parseInt(nanotonAmount, 10),
-            comment_prefix: TON_COMMENT_PREFIX
-          })
-        })
-        const verifyJson = await verifyResp.json()
-        console.log('Verification result:', verifyJson)
-        if (!verifyJson.confirmed) {
-          alert('We are still confirming your transaction on the blockchain. It should appear shortly.')
-        }
-      } catch (e) {
-        console.warn('Verification call failed', e)
-      }
-    }
-
-    showSuccessModal.value = true
-  } catch (error) {
-    // Developer log with full details
-    console.group('[TON] Wallet transaction error')
-    console.error(error)
-    try {
-      const snapshot = typeof error === 'object' && error !== null
-        ? JSON.stringify(error, Object.getOwnPropertyNames(error), 2)
-        : String(error)
-      console.log('Snapshot:', snapshot)
-    } catch(_) {}
-    console.groupEnd()
-
-    // User-friendly generic message (no sensitive internals)
-  let userMsg = 'We could not submit your transaction. Please try again in a moment.'
-    // Add small hint for common network mismatch
-    const msgStr = (error && (error.message || error.description || '')) + ''
-    if (/network/i.test(msgStr)) {
-  userMsg += '\nEnsure your wallet is set to the correct network (Testnet/Mainnet) and retry.'
-    } else if (/reject|denied|cancel/i.test(msgStr)) {
-  userMsg = 'Transaction was cancelled in your wallet.'
-    }
-    alert(userMsg)
-  } finally {
-    isSending.value = false
-  }
 }
 
 const openTerms = () => {
@@ -370,33 +177,20 @@ const closeTermsModal = () => {
 
 const closeSuccessModal = () => {
   showSuccessModal.value = false
-  // Clear cart after successful payment (both loyalty/bonus and crypto)
-  try { clearCart() } catch(_) {}
   // Navigate to wallet after modal closes
   router.push('/wallet')
 }
 
-// Get purchase details from query params if available
-onMounted(async () => {
-  // Fetch wallet data and crypto rates
-  await Promise.all([
-    fetchWalletData(),
-    fetchRates()
-  ])
-
-  if (route.query.totalAmount) {
-    totalAmount.value = parseFloat(route.query.totalAmount)
-
-    // Store purchase details from query
-    purchaseDetails.value = {
-      paymentMethod: 'cart',
-      amount: parseFloat(route.query.totalAmount),
-      foreversAmount: parseFloat(route.query.foreversAmount || 0),
-      itemsCount: parseInt(route.query.itemsCount || 0)
+// Get purchase details from route params if available
+onMounted(() => {
+  if (route.params.purchaseDetails) {
+    purchaseDetails.value = route.params.purchaseDetails
+    // Format the total amount properly
+    if (route.params.totalAmount) {
+      totalAmount.value = route.params.totalAmount
+    } else if (purchaseDetails.value?.amount) {
+      totalAmount.value = purchaseDetails.value.amount.toLocaleString()
     }
-  } else {
-    // If no purchase details, redirect back to cart
-    router.push('/cart')
   }
 })
 </script>

@@ -163,13 +163,11 @@ const handlePurchase = () => {
   }
 
   // Navigate to payment selection page with purchase details
-  // Using query params instead of route params for complex objects
   router.push({
-    path: '/select-payment',
-    query: {
-      totalAmount: cartTotal.value.toString(),
-      foreversAmount: totalForeversAmount.value.toString(),
-      itemsCount: cartItems.value.length.toString()
+    name: 'select-payment',
+    params: {
+      purchaseDetails: purchaseDetails,
+      totalAmount: cartTotal.value.toLocaleString()
     }
   })
 }

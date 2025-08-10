@@ -1,11 +1,4 @@
 import { createApp } from 'vue'
-// Install custom console interceptor (on-screen overlay). Remove import to disable.
-import './utils/logger.js'
-import { Buffer } from 'buffer'
-import process from 'process'
-
-if (!window.Buffer) window.Buffer = Buffer
-if (!window.process) window.process = process
 import App from './App.vue'
 import router from './router'
 import './assets/tailwind.css'
