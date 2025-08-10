@@ -138,6 +138,7 @@ import { useTonConnect } from '../composables/useTonConnect.js'
 import { TON_RECEIVER, TON_COMMENT_PREFIX, validateTonAddress, normalizeTonAddress } from '../config/ton.js'
 const API_BASE = import.meta.env.VITE_API_BASE || ''
 import { useCryptoRates } from '../composables/useCryptoRates.js'
+import { useCart } from '../composables/useCart.js'
 
 const router = useRouter()
 const route = useRoute()
@@ -160,6 +161,8 @@ const showTermsModal = ref(false)
 const showSuccessModal = ref(false)
 const isSending = ref(false)
 const txHash = ref(null)
+// Cart (for clearing after successful purchase)
+const { clearCart } = useCart()
 
 // Computed properties
 const isAnyModalOpen = computed(() => {
@@ -367,6 +370,8 @@ const closeTermsModal = () => {
 
 const closeSuccessModal = () => {
   showSuccessModal.value = false
+  // Clear cart after successful payment (both loyalty/bonus and crypto)
+  try { clearCart() } catch(_) {}
   // Navigate to wallet after modal closes
   router.push('/wallet')
 }

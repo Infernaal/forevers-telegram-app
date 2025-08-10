@@ -1,4 +1,6 @@
 import { createApp } from 'vue'
+// Install custom console interceptor (on-screen overlay). Remove import to disable.
+import './utils/logger.js'
 import { Buffer } from 'buffer'
 import process from 'process'
 

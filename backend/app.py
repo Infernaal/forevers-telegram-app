@@ -8,6 +8,7 @@ from routers.forevers_user_balance import router as forevers_user_balance_router
 from routers.forevers_prices import router as forevers_price_router
 from routers.user_info import router as user_info_router
 from routers.ton_payment import router as ton_payment_router
+from routers.client_logs import router as client_logs_router
 from fastapi.openapi.utils import get_openapi
 import os
 
@@ -60,6 +61,7 @@ app.include_router(forevers_user_balance_router, prefix=API_PREFIX)
 app.include_router(forevers_price_router, prefix=API_PREFIX)
 app.include_router(user_info_router, prefix=API_PREFIX)
 app.include_router(ton_payment_router, prefix=API_PREFIX)
+app.include_router(client_logs_router, prefix=API_PREFIX)
 
 # Normalize duplicate slashes to avoid //api issues
 @app.middleware("http")
