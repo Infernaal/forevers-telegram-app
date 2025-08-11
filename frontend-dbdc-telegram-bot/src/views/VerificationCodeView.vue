@@ -1,16 +1,16 @@
 <template>
   <div class="w-full min-h-screen bg-dbd-off-white font-montserrat overflow-hidden flex flex-col">
     <!-- Main Content -->
-    <div class="flex-1 flex items-center justify-center p-3 xs:p-4 sm:p-6 md:p-8">
-      <div class="w-full xs:max-w-[380px] sm:max-w-[420px] md:max-w-[460px] lg:max-w-[500px]">
+    <div class="flex-1 flex items-center justify-center p-4 xs:p-6 sm:p-8">
+      <div class="w-full max-w-sm xs:max-w-md sm:max-w-lg md:max-w-xl">
         <!-- Verification Card -->
         <div
-          class="w-full h-[300px] xs:h-[320px] sm:h-[340px] md:h-[360px] rounded-3xl p-6 xs:p-7 sm:p-8 md:p-9 flex flex-col text-white"
+          class="w-full min-h-[400px] xs:min-h-[420px] sm:min-h-[450px] md:min-h-[480px] rounded-3xl p-6 xs:p-8 sm:p-10 md:p-12 flex flex-col text-white"
           :style="cardStyle"
         >
           <!-- Title -->
-          <div class="text-center mb-6 xs:mb-7 sm:mb-8">
-            <h1 class="text-lg xs:text-xl sm:text-2xl md:text-3xl font-semibold leading-tight max-w-[319px] mx-auto">
+          <div class="text-center mb-8 xs:mb-10 sm:mb-12">
+            <h1 class="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight max-w-[340px] mx-auto">
               Please, enter your verification code in the box below
             </h1>
           </div>
@@ -19,14 +19,14 @@
           <div class="flex flex-col items-center gap-3 xs:gap-4 sm:gap-5">
             <!-- Code Input Boxes -->
             <div class="flex justify-center gap-3 xs:gap-4 sm:gap-5">
-              <div 
-                v-for="(digit, index) in verificationCode" 
+              <div
+                v-for="(digit, index) in verificationCode"
                 :key="index"
-                class="w-12 xs:w-13 sm:w-14 md:w-16 h-12 xs:h-13 sm:h-14 md:h-16 rounded-lg border-2 bg-black/20 flex items-center justify-center cursor-pointer transition-all"
+                class="w-12 xs:w-14 sm:w-16 md:w-18 h-12 xs:h-14 sm:h-16 md:h-18 rounded-lg border-2 bg-black/30 flex items-center justify-center cursor-pointer transition-all"
                 :class="{
                   'border-dbd-orange': digit === '' && focusedIndex === index,
-                  'border-green-500': digit !== '',
-                  'border-white/30': digit === '' && focusedIndex !== index
+                  'border-green-500 bg-green-900/30': digit !== '',
+                  'border-white/40': digit === '' && focusedIndex !== index
                 }"
                 @click="focusInput(index)"
               >
@@ -39,7 +39,7 @@
                   @blur="focusedIndex = -1"
                   type="text"
                   maxlength="1"
-                  class="w-full h-full bg-transparent text-center text-white text-xl xs:text-2xl sm:text-3xl font-bold border-none outline-none"
+                  class="w-full h-full bg-transparent text-center text-white text-2xl xs:text-3xl sm:text-4xl font-bold border-none outline-none"
                   inputmode="numeric"
                   pattern="[0-9]*"
                 />
@@ -47,7 +47,7 @@
             </div>
 
             <!-- Resend Section -->
-            <div class="flex justify-between items-center w-full max-w-[300px] xs:max-w-[320px] sm:max-w-[340px]">
+            <div class="flex justify-between items-center w-full max-w-[320px] xs:max-w-[350px] sm:max-w-[380px]">
               <button 
                 @click="resendCode"
                 :disabled="timeLeft > 0"
@@ -70,14 +70,14 @@
           </div>
 
           <!-- Continue Button -->
-          <div class="mt-auto pt-6 xs:pt-7 sm:pt-8">
+          <div class="mt-auto pt-8 xs:pt-10 sm:pt-12">
             <button
               @click="handleContinue"
               :disabled="!isCodeComplete"
-              class="w-full h-12 xs:h-14 sm:h-16 rounded-full font-bold text-sm xs:text-base sm:text-lg
+              class="w-full h-14 xs:h-16 sm:h-18 rounded-full font-bold text-base xs:text-lg sm:text-xl
                      bg-dbd-orange border border-dbd-orange text-white
                      transition-all duration-300 ease-in-out
-                     flex items-center justify-center gap-2 xs:gap-3
+                     flex items-center justify-center gap-3 xs:gap-4
                      hover:bg-orange-600 hover:border-orange-600 hover:shadow-lg hover:scale-[1.02]
                      active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed
                      disabled:hover:scale-100 disabled:hover:bg-dbd-orange"
