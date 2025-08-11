@@ -186,6 +186,37 @@ const handleTelegramContinue = () => {
   router.push('/favorites')
 }
 
+// Keyboard detection through viewport changes
+const handleResize = () => {
+  const currentHeight = window.innerHeight
+  const heightDifference = initialViewportHeight.value - currentHeight
+
+  // If viewport shrunk by more than 150px, assume keyboard is visible
+  if (heightDifference > 150) {
+    keyboardVisible.value = true
+  } else {
+    keyboardVisible.value = false
+  }
+}
+
+// Lifecycle hooks
+onMounted(() => {
+  initialViewportHeight.value = window.innerHeight
+  window.addEventListener('resize', handleResize)
+
+  // Also listen for visual viewport changes (better for mobile)
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', handleResize)
+  }
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+  if (window.visualViewport) {
+    window.visualViewport.removeEventListener('resize', handleResize)
+  }
+})
+
 // Computed style for the gradient card background
 const cardStyle = {
   background: `
