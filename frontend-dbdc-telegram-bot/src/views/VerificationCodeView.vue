@@ -2,7 +2,7 @@
   <div class="w-full min-h-screen bg-dbd-off-white font-montserrat overflow-hidden flex flex-col">
     <!-- Main Content -->
     <div class="flex-1 flex items-center justify-center p-3 xs:p-4 sm:p-6 md:p-8">
-      <div class="w-full max-w-[347px] xs:max-w-[380px] sm:max-w-[420px] md:max-w-[460px] lg:max-w-[500px]">
+      <div class="w-full xs:max-w-[380px] sm:max-w-[420px] md:max-w-[460px] lg:max-w-[500px]">
         <!-- Verification Card -->
         <div
           class="w-full h-[300px] xs:h-[320px] sm:h-[340px] md:h-[360px] rounded-3xl p-6 xs:p-7 sm:p-8 md:p-9 flex flex-col text-white"
