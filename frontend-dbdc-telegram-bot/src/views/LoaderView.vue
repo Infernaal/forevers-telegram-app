@@ -73,7 +73,7 @@ const router = useRouter()
 onMounted(() => {
   setTimeout(() => {
     router.push('/favorites')
-  }, 2500) // 2.5 seconds
+  }, 5000) // 2.5 seconds
 })
 
 // Computed style for the gradient card background
