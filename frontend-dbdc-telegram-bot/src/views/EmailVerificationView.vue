@@ -13,7 +13,7 @@
               class="w-full h-full"
             >
               <!-- Email envelope -->
-              <rect x="10" y="20" width="44" height="32" rx="4" stroke="#22C55E" stroke-width="3" fill="none"/>
+              <rect x="10" y="20" width="74" height="74" rx="4" stroke="#22C55E" stroke-width="3" fill="none"/>
               <path d="M10 24L32 36L54 24" stroke="#22C55E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
               
               <!-- Checkmark circle -->
