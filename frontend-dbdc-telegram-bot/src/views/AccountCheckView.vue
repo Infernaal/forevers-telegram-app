@@ -201,20 +201,20 @@ input:-webkit-autofill:active {
 
 /* Button States */
 .continue-button {
-  border-color: #FFFFFF;
+  border: 2px solid #FFFFFF !important;
   transform: scale(1);
   will-change: transform, border-color, color, background-color;
 }
 
 .continue-button--active {
   color: #FFFFFF;
-  border-color: #FFFFFF;
+  border: 2px solid #FFFFFF !important;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 .continue-button--active:hover {
   background-color: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.9) !important;
   transform: scale(1.02);
 }
 
@@ -223,15 +223,16 @@ input:-webkit-autofill:active {
 }
 
 .continue-button--disabled {
-  color: rgba(255, 255, 255, 0.5);
-  border-color: #FFFFFF;
-  cursor: not-allowed;
+  color: rgba(255, 255, 255, 0.5) !important;
+  border: 2px solid #FFFFFF !important;
+  cursor: not-allowed !important;
   transform: scale(1);
 }
 
 .continue-button--disabled:hover {
   transform: none;
   background-color: transparent;
+  border: 2px solid #FFFFFF !important;
 }
 
 /* Performance optimizations */
