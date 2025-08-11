@@ -1,11 +1,10 @@
 <template>
   <div class="w-full min-h-screen bg-white font-montserrat overflow-hidden flex items-center justify-center">
     <!-- Main Content Container -->
-    <div class="flex-1 flex items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8">
-      <div class="w-full max-w-[320px] xs:max-w-[347px] sm:max-w-[420px] md:max-w-[500px] lg:max-w-[600px]
-                  h-[320px] xs:h-[372px] sm:h-[420px] md:h-[480px] lg:h-[540px]
+    <div class="w-full flex-1 flex items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8">
+      <div class="w-full h-[400px] xs:h-[450px] sm:h-[500px] md:h-[550px] lg:h-[600px]
                   relative rounded-2xl sm:rounded-3xl md:rounded-[2rem] lg:rounded-[2.5rem]
-                  p-4 xs:p-6 sm:p-7 md:p-8 lg:p-10
+                  p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12
                   text-white flex flex-col items-center justify-center" :style="cardStyle">
         <!-- Welcome Section -->
         <div class="flex flex-col items-center gap-2 xs:gap-3 sm:gap-4 md:gap-5 mb-6 xs:mb-8 sm:mb-10 md:mb-12">
