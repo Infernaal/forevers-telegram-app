@@ -89,9 +89,7 @@
       >
         <span>Continue with Telegram</span>
         <div class="w-7 h-7 xs:w-8 xs:h-8 bg-white/20 rounded-full border border-white/30 flex items-center justify-center">
-          <svg class="w-4 h-4 xs:w-5 xs:h-5 text-white" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8.27839 12.5451L8.01372 17.0123C8.39239 17.0123 8.5564 16.8171 8.75307 16.5827L10.5284 14.5467L14.2072 17.7795C14.8819 18.2307 15.3572 17.9931 15.5392 17.0347L17.954 3.45712L17.9546 3.45632C18.1686 2.25952 17.5939 1.79152 16.9366 2.08512L2.74293 8.60592C1.77424 9.05713 1.7889 9.70512 2.57825 9.99872L6.20701 11.3531L14.6359 5.02432C15.0326 4.70912 15.3932 4.88352 15.0966 5.19872L8.27839 12.5451Z" fill="#039BE5"/>
-          </svg>
+          <img src="/telegram-icon.svg" alt="Telegram" class="w-4 h-4 xs:w-5 xs:h-5" />
         </div>
       </button>
     </div>
