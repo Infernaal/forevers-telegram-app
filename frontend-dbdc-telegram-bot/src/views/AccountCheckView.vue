@@ -39,27 +39,11 @@
           </div>
 
           <!-- Terms Checkbox -->
-          <div class="flex items-start gap-3 xs:gap-4">
-            <div class="flex-shrink-0 mt-1">
-              <div 
-                @click="toggleTermsAgreement"
-                class="w-5 h-5 xs:w-6 xs:h-6 rounded border border-dbd-light-gray bg-dbd-off-white cursor-pointer flex items-center justify-center transition-colors"
-                :class="{ 'bg-dbd-primary border-dbd-primary': termsAgreed }"
-              >
-                <svg v-if="termsAgreed" class="w-3 h-3 xs:w-4 xs:h-4 text-white" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                </svg>
-              </div>
-            </div>
-            <div class="flex-1 text-sm xs:text-base text-white leading-tight">
-              I agree that I have read the 
-              <button 
-                @click="openTerms"
-                class="text-dbd-orange underline hover:no-underline transition-all"
-              >
-                Terms and Conditions
-              </button>
-            </div>
+          <div class="flex justify-center">
+            <TermsCheckbox
+              v-model="termsAgreed"
+              @open-terms="openTerms"
+            />
           </div>
 
           <!-- Continue Button -->
@@ -97,6 +81,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import TermsCheckbox from '../components/TermsCheckbox.vue'
 
 const router = useRouter()
 
@@ -116,9 +101,6 @@ const isValidEmail = (email) => {
   return emailRegex.test(email)
 }
 
-const toggleTermsAgreement = () => {
-  termsAgreed.value = !termsAgreed.value
-}
 
 const openTerms = () => {
   // Open terms and conditions link or modal
