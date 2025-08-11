@@ -1,46 +1,11 @@
 <template>
   <div class="w-full min-h-screen bg-dbd-off-white font-montserrat overflow-hidden flex flex-col">
-    <!-- Top Bar -->
-    <div class="w-full h-11 flex items-center justify-between px-2 pt-2 pb-2">
-      <!-- Close Button -->
-      <button 
-        @click="handleClose"
-        class="w-11 h-11 flex items-center justify-center rounded-full border border-dbd-light-gray bg-dbd-off-white hover:bg-gray-100 transition-colors"
-      >
-        <div class="w-5 h-5 relative">
-          <div class="absolute top-2 left-1 w-4 h-0.5 bg-dbd-dark rounded-full transform rotate-45"></div>
-          <div class="absolute top-2 left-1 w-4 h-0.5 bg-dbd-dark rounded-full transform -rotate-45"></div>
-        </div>
-      </button>
-
-      <!-- Title Section -->
-      <div class="flex flex-col items-center">
-        <div class="text-lg font-medium leading-5">
-          <span class="text-dbd-orange">DBD Capital</span>
-          <span class="text-dbd-primary"> Forevers Bot</span>
-        </div>
-        <div class="text-xs font-medium text-dbd-light-gray leading-4">mini App</div>
-      </div>
-
-      <!-- Menu Button -->
-      <button 
-        @click="handleMenu"
-        class="w-11 h-11 flex items-center justify-center hover:bg-gray-100 rounded-full transition-colors"
-      >
-        <div class="flex flex-col items-center gap-1.5">
-          <div class="w-1 h-1 bg-dbd-dark rounded-full"></div>
-          <div class="w-1 h-1 bg-dbd-dark rounded-full"></div>
-          <div class="w-1 h-1 bg-dbd-dark rounded-full"></div>
-        </div>
-      </button>
-    </div>
-
     <!-- Main Content -->
     <div class="flex-1 flex items-center justify-center p-3 xs:p-4 sm:p-6 md:p-8">
       <div class="w-full max-w-[347px] xs:max-w-[380px] sm:max-w-[420px] md:max-w-[460px] lg:max-w-[500px]">
         <!-- Verification Card -->
-        <div 
-          class="w-full h-[300px] xs:h-[320px] sm:h-[340px] md:h-[360px] rounded-3xl p-6 xs:p-7 sm:p-8 md:p-9 flex flex-col justify-between text-white"
+        <div
+          class="w-full h-[300px] xs:h-[320px] sm:h-[340px] md:h-[360px] rounded-3xl p-6 xs:p-7 sm:p-8 md:p-9 flex flex-col text-white"
           :style="cardStyle"
         >
           <!-- Title -->
@@ -105,7 +70,7 @@
           </div>
 
           <!-- Continue Button -->
-          <div class="mt-6 xs:mt-7 sm:mt-8">
+          <div class="mt-auto pt-6 xs:pt-7 sm:pt-8">
             <button
               @click="handleContinue"
               :disabled="!isCodeComplete"
@@ -148,10 +113,7 @@ const isCodeComplete = computed(() => {
 })
 
 const cardStyle = {
-  background: `
-    linear-gradient(0deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.25) 100%),
-    linear-gradient(90deg, #2019CE 20.91%, #473FFF 68.93%)
-  `
+  background: `linear-gradient(90deg, #2019CE 20.91%, #473FFF 68.93%)`
 }
 
 // Methods
@@ -262,23 +224,7 @@ const handleContinue = () => {
   router.push('/favorites')
 }
 
-const handleClose = () => {
-  // Add haptic feedback
-  if (window.triggerHaptic) {
-    window.triggerHaptic('impact', 'light')
-  }
-  
-  router.back()
-}
-
-const handleMenu = () => {
-  // Add haptic feedback
-  if (window.triggerHaptic) {
-    window.triggerHaptic('selection')
-  }
-  
-  console.log('Menu button clicked')
-}
+// Removed header-related functions
 
 // Lifecycle
 onMounted(() => {
