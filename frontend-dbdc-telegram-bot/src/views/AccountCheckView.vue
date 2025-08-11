@@ -201,8 +201,7 @@ const handleContinue = () => {
 const handleTelegramContinue = () => {
   // Handle Telegram authentication
   console.log('Continue with Telegram')
-  // Skip loader and go directly to favorites
-  router.replace('/favorites')
+  router.push('/favorites')
 }
 
 // Keyboard detection through viewport changes
