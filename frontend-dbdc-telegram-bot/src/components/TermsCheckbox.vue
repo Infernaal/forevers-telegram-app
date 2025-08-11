@@ -54,7 +54,7 @@ defineEmits(['update:modelValue', 'open-terms'])
   width: 24px;
   height: 24px;
   border-radius: 4px;
-  border: 1px solid #7E7E7E;
+  border: 2px solid #FFFFFF;
   background: #FAFAFA;
   cursor: pointer;
   flex-shrink: 0;
@@ -63,11 +63,13 @@ defineEmits(['update:modelValue', 'open-terms'])
   -webkit-appearance: none;
   position: relative;
   transition: all 0.2s ease;
+  box-shadow: 0 0 0 1px rgba(126, 126, 126, 0.3);
 }
 
 .terms-checkbox:checked {
   background: #2019CE;
-  border-color: #2019CE;
+  border-color: #FFFFFF;
+  box-shadow: 0 0 0 1px #2019CE;
 }
 
 .terms-checkbox:checked::after {
@@ -76,7 +78,7 @@ defineEmits(['update:modelValue', 'open-terms'])
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: #FAFAFA;
+  color: #FFFFFF;
   font-size: 14px;
   font-weight: bold;
 }
