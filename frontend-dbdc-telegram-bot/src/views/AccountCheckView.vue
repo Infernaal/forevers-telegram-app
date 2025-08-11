@@ -108,6 +108,7 @@ const emailError = ref(false)
 const emailErrorMessage = ref('')
 const isFocused = ref(false)
 const hasBlurred = ref(false)
+const keyboardVisible = ref(false)
 
 // Computed
 const canContinue = computed(() => {
