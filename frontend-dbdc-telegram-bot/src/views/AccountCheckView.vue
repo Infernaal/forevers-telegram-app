@@ -115,6 +115,7 @@ const isFocused = ref(false)
 const hasBlurred = ref(false)
 const keyboardVisible = ref(false)
 const initialViewportHeight = ref(0)
+const showTermsModal = ref(false)
 
 // Computed
 const canContinue = computed(() => {
