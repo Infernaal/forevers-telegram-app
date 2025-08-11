@@ -80,7 +80,10 @@
     </div>
 
     <!-- Bottom Telegram Button -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white/75 backdrop-blur-sm p-4">
+    <div
+      class="fixed bottom-0 left-0 right-0 bg-white/75 backdrop-blur-sm p-4 transition-transform duration-300"
+      :class="{ 'translate-y-full': keyboardVisible }"
+    >
       <button
         @click="handleTelegramContinue"
         class="w-full mx-auto h-12 xs:h-14 sm:h-16 bg-gradient-to-r from-dbd-primary to-[#473FFF]
