@@ -195,7 +195,7 @@ const handleContinue = () => {
 
   // Handle email form continuation
   console.log('Continue with email:', email.value.trim())
-  router.push('/favorites')
+  router.push('/email-verification')
 }
 
 const handleTelegramContinue = () => {
