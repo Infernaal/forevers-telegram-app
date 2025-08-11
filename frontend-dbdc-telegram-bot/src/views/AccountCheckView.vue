@@ -6,9 +6,7 @@
     <!-- Main Content Container -->
     <div
       class="w-full flex-1 flex items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8 pb-20 xs:pb-24 main-content-container"
-      :style="Object.assign({}, keyboardVisible ? { overflowY: 'auto', maxHeight: '80vh', touchAction: 'pan-y' } : {}, isTelegramWebApp.value ? { paddingTop: 'calc(var(--tg-header-height, 56px) + 8px)' } : {})"
       @click.stop
-      ref="scrollableContainer"
     >
       <div class="w-full min-h-[348px] xs:min-h-[380px] sm:min-h-[420px] md:min-h-[460px] lg:min-h-[500px]
                   relative rounded-2xl sm:rounded-3xl md:rounded-[2rem] lg:rounded-[2.5rem]
@@ -72,15 +70,16 @@
           <button
             @click="handleContinue"
             :disabled="!canContinue"
-       class="continue-button w-full h-12 xs:h-14 sm:h-16 rounded-full font-bold text-sm xs:text-base sm:text-lg
-         border-2 bg-transparent relative overflow-hidden
-         transition-all duration-300 ease-in-out"
+            class="continue-button w-full h-12 xs:h-14 sm:h-16 rounded-full font-bold text-sm xs:text-base sm:text-lg
+                   border-2 bg-transparent relative overflow-hidden
+                   transition-all duration-300 ease-in-out"
             :class="{
               'continue-button--active': canContinue,
               'continue-button--disabled': !canContinue
             }"
           >
             <span class="relative z-10">Continue</span>
+            <div class="absolute inset-0 bg-white/5 opacity-0 transition-opacity duration-300 ease-in-out continue-button__overlay"></div>
           </button>
         </div>
       </div>
@@ -111,8 +110,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
-const scrollableContainer = ref(null);
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import TermsCheckbox from '../components/TermsCheckbox.vue'
 import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
@@ -185,27 +183,11 @@ const handleFocus = () => {
         keyboardVisible.value = heightDiff > 100
       }
     }, 300)
-    // Прокрутка к input при открытии клавиатуры
-    nextTick(() => {
-      const container = scrollableContainer.value;
-      const input = container?.querySelector('input[type="email"]');
-      if (container && input) {
-        input.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    });
   } else {
     // In browser, detect keyboard appearance with a delay
     setTimeout(() => {
       keyboardVisible.value = true
     }, 300)
-    // Прокрутка к input при открытии клавиатуры
-    nextTick(() => {
-      const container = scrollableContainer.value;
-      const input = container?.querySelector('input[type="email"]');
-      if (container && input) {
-        input.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    });
   }
 }
 
@@ -224,14 +206,6 @@ const handleBlur = () => {
   } else {
     keyboardVisible.value = false
   }
-
-  // Сброс скролла при скрытии клавиатуры
-  nextTick(() => {
-    const container = scrollableContainer.value;
-    if (container) {
-      container.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  });
 
   validateEmail()
 }
@@ -384,6 +358,9 @@ input:focus-visible {
   transform: scale(1.02);
 }
 
+.continue-button--active:hover .continue-button__overlay {
+  opacity: 1;
+}
 
 .continue-button--disabled {
   color: rgba(255, 255, 255, 0.5) !important;
@@ -406,7 +383,7 @@ input:focus-visible {
 }
 
 /* Global scrollbar hiding and Telegram optimizations */
-::-webkit-scrollbar {
+:::-webkit-scrollbar {
   width: 0;
 }
 
