@@ -102,6 +102,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import TermsCheckbox from '../components/TermsCheckbox.vue'
+import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
 
 const router = useRouter()
 
