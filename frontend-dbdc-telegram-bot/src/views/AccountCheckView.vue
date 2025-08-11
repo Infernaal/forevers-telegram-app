@@ -1,7 +1,7 @@
 <template>
   <div class="w-full min-h-screen bg-white font-montserrat overflow-hidden flex items-center justify-center">
     <!-- Main Content Container -->
-    <div class="w-full flex-1 flex items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8">
+    <div class="w-full flex-1 flex items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8 pb-20 xs:pb-24">
       <div class="w-full min-h-[348px] xs:min-h-[380px] sm:min-h-[420px] md:min-h-[460px] lg:min-h-[500px]
                   relative rounded-2xl sm:rounded-3xl md:rounded-[2rem] lg:rounded-[2.5rem]
                   p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 mx-auto
@@ -80,7 +80,11 @@
     </div>
 
     <!-- Bottom Telegram Button -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white/75 backdrop-blur-sm p-4">
+    <div
+      class="fixed bottom-0 left-0 right-0 bg-white/75 backdrop-blur-sm p-4 transition-transform duration-300"
+      :class="{ 'translate-y-full': keyboardVisible }"
+      style="padding-bottom: calc(1rem + var(--tg-safe-area-bottom, 0px))"
+    >
       <button
         @click="handleTelegramContinue"
         class="w-full mx-auto h-12 xs:h-14 sm:h-16 bg-gradient-to-r from-dbd-primary to-[#473FFF]
@@ -91,13 +95,21 @@
         <img src="/telegram-icon.svg" alt="Telegram" class="w-6 h-6" />
       </button>
     </div>
+
+    <!-- Terms and Conditions Modal -->
+    <TermsAndConditionsModal
+      :isVisible="showTermsModal"
+      @close="closeTermsModal"
+      @agree="agreeToTerms"
+    />
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import TermsCheckbox from '../components/TermsCheckbox.vue'
+import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
 
 const router = useRouter()
 
@@ -108,6 +120,9 @@ const emailError = ref(false)
 const emailErrorMessage = ref('')
 const isFocused = ref(false)
 const hasBlurred = ref(false)
+const keyboardVisible = ref(false)
+const initialViewportHeight = ref(0)
+const showTermsModal = ref(false)
 
 // Computed
 const canContinue = computed(() => {
@@ -144,18 +159,31 @@ const validateEmail = () => {
 
 const handleFocus = () => {
   isFocused.value = true
+  // Detect keyboard appearance with a delay for mobile
+  setTimeout(() => {
+    keyboardVisible.value = true
+  }, 300)
 }
 
 const handleBlur = () => {
   isFocused.value = false
   hasBlurred.value = true
+  keyboardVisible.value = false
   validateEmail()
 }
 
 
 const openTerms = () => {
-  // Open terms and conditions link or modal
-  console.log('Opening Terms and Conditions')
+  showTermsModal.value = true
+}
+
+const closeTermsModal = () => {
+  showTermsModal.value = false
+}
+
+const agreeToTerms = () => {
+  termsAgreed.value = true
+  showTermsModal.value = false
 }
 
 const handleContinue = () => {
@@ -167,14 +195,45 @@ const handleContinue = () => {
 
   // Handle email form continuation
   console.log('Continue with email:', email.value.trim())
-  router.push('/favorites')
+  router.push('/email-verification')
 }
 
 const handleTelegramContinue = () => {
   // Handle Telegram authentication
   console.log('Continue with Telegram')
-  router.push('/favorites')
+  router.push('/loader?redirect=/favorites')
 }
+
+// Keyboard detection through viewport changes
+const handleResize = () => {
+  const currentHeight = window.innerHeight
+  const heightDifference = initialViewportHeight.value - currentHeight
+
+  // If viewport shrunk by more than 150px, assume keyboard is visible
+  if (heightDifference > 150) {
+    keyboardVisible.value = true
+  } else {
+    keyboardVisible.value = false
+  }
+}
+
+// Lifecycle hooks
+onMounted(() => {
+  initialViewportHeight.value = window.innerHeight
+  window.addEventListener('resize', handleResize)
+
+  // Also listen for visual viewport changes (better for mobile)
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', handleResize)
+  }
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+  if (window.visualViewport) {
+    window.visualViewport.removeEventListener('resize', handleResize)
+  }
+})
 
 // Computed style for the gradient card background
 const cardStyle = {
@@ -186,13 +245,21 @@ const cardStyle = {
 </script>
 
 <style scoped>
-/* Remove input autofill background */
+/* Remove input autofill background and focus outline */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
   -webkit-text-fill-color: #02070E !important;
+}
+
+/* Remove blue focus outline from input */
+input:focus,
+input:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
 }
 
 /* Button States */

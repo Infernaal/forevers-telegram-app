@@ -64,16 +64,31 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { computed, onMounted, onUnmounted } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 
 const router = useRouter()
+const route = useRoute()
 
-// Auto-redirect to AccountCheckView after 5 seconds
+// Get redirect target from query parameter, default to account-check
+const redirectTo = computed(() => {
+  return route.query.redirect || '/account-check'
+})
+
+
+let timeoutId = null
+
+// Auto-redirect after 5 seconds
 onMounted(() => {
-  setTimeout(() => {
-    router.push('/account-check')
-  }, 5000) // 5 seconds
+  timeoutId = setTimeout(() => {
+    router.push(redirectTo.value)
+  }, 5000)
+})
+
+onUnmounted(() => {
+  if (timeoutId) {
+    clearTimeout(timeoutId)
+  }
 })
 
 // Computed style for the gradient card background
@@ -114,7 +129,7 @@ const cardStyle = {
 }
 
 /* Global scrollbar hiding and Telegram optimizations */
-:::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 0;
 }
 

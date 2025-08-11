@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import StartView from '../views/StartView.vue'
 import LoaderView from '../views/LoaderView.vue'
 import AccountCheckView from '../views/AccountCheckView.vue'
+import EmailVerificationView from '../views/EmailVerificationView.vue'
 import WalletView from '../views/WalletView.vue'
 import FavoritesView from '../views/FavoritesView.vue'
 import CartView from '../views/CartView.vue'
@@ -28,6 +29,11 @@ const router = createRouter({
       path: '/account-check',
       name: 'account-check',
       component: AccountCheckView,
+    },
+    {
+      path: '/email-verification',
+      name: 'email-verification',
+      component: EmailVerificationView,
     },
     {
       path: '/wallet',
