@@ -28,7 +28,7 @@
           <div class="text-white text-center text-xs xs:text-sm sm:text-base md:text-lg font-medium
                       max-w-[280px] xs:max-w-[298px] sm:max-w-[350px] md:max-w-[400px] lg:max-w-[450px]
                       leading-4 xs:leading-5 sm:leading-6 md:leading-7 px-2">
-            {{ loaderDescription }}
+            Please wait a little, while we prepare everything for you
           </div>
 
           <!-- Figma Design Loader -->
