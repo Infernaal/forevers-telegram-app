@@ -87,10 +87,7 @@
 
     <!-- Bottom Telegram Button -->
     <div
-      class="fixed bottom-0 left-0 right-0 bg-white/75 backdrop-blur-sm p-4"
-      :style="{
-        paddingBottom: isTelegramWebApp ? 'calc(1rem + var(--tg-safe-area-bottom, 0px))' : '1rem'
-      }"
+      class="fixed bottom-0 left-0 right-0 bg-white/75 backdrop-blur-sm p-4 pb-[max(var(--tg-content-safe-area-inset-bottom),1rem)]"
     >
       <button
         @click="handleTelegramContinue"
