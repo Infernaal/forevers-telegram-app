@@ -6,7 +6,7 @@
     <!-- Main Content Container -->
     <div
       class="w-full flex-1 flex items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8 pb-20 xs:pb-24 main-content-container"
-      :style="keyboardVisible ? { overflowY: 'auto', maxHeight: '80vh', touchAction: 'pan-y' } : {}"
+      :style="Object.assign({}, keyboardVisible ? { overflowY: 'auto', maxHeight: '80vh', touchAction: 'pan-y' } : {}, isTelegramWebApp.value ? { paddingTop: 'calc(var(--tg-header-height, 56px) + 8px)' } : {})"
       @click.stop
       ref="scrollableContainer"
     >
@@ -81,7 +81,6 @@
             }"
           >
             <span class="relative z-10">Continue</span>
-       <!-- overlay removed -->
           </button>
         </div>
       </div>
@@ -385,9 +384,6 @@ input:focus-visible {
   transform: scale(1.02);
 }
 
-.continue-button--active:hover .continue-button__overlay {
-  opacity: 1;
-}
 
 .continue-button--disabled {
   color: rgba(255, 255, 255, 0.5) !important;
