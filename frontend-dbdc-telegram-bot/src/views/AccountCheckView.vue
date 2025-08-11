@@ -400,4 +400,28 @@ input:focus-visible {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
+
+/* Improved touch handling for Telegram WebApp */
+.main-content-container {
+  touch-action: manipulation;
+}
+
+/* Prevent zoom on input focus in iOS */
+input[type="email"] {
+  font-size: 16px;
+}
+
+@media screen and (max-width: 767px) {
+  input[type="email"] {
+    font-size: 16px !important;
+  }
+}
+
+/* Enhanced keyboard handling for Telegram WebApp */
+@supports (height: 100vh) {
+  .min-h-screen {
+    min-height: 100vh;
+    min-height: var(--tg-viewport-height, 100vh);
+  }
+}
 </style>
