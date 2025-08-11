@@ -31,6 +31,11 @@ const router = createRouter({
       component: AccountCheckView,
     },
     {
+      path: '/email-verification',
+      name: 'email-verification',
+      component: EmailVerificationView,
+    },
+    {
       path: '/wallet',
       name: 'wallet',
       component: WalletView,
