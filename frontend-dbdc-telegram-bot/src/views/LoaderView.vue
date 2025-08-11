@@ -2,7 +2,7 @@
   <div class="w-full min-h-screen bg-white font-montserrat overflow-hidden flex items-center justify-center">
     <!-- Main Content Container -->
     <div class="w-full flex-1 flex items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8">
-      <div class="w-full max-w-[347px] h-[372px] xs:h-[400px] sm:h-[450px] md:h-[500px] lg:h-[550px]
+      <div class="w-full h-[372px] xs:h-[400px] sm:h-[450px] md:h-[500px] lg:h-[550px]
                   relative rounded-2xl sm:rounded-3xl md:rounded-[2rem] lg:rounded-[2.5rem]
                   p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 mx-auto
                   text-white flex flex-col items-center justify-center" :style="cardStyle">
