@@ -88,9 +88,7 @@
                transition-all duration-200 hover:shadow-lg border-2 border-white/20 hover:border-white/40 hover:scale-[1.02]"
       >
         <span>Continue with Telegram</span>
-        <div class="w-7 h-7 xs:w-8 xs:h-8 bg-white/20 rounded-full border border-white/30 flex items-center justify-center">
           <img src="/telegram-icon.svg" alt="Telegram" class="w-4 h-4 xs:w-5 xs:h-5" />
-        </div>
       </button>
     </div>
   </div>
