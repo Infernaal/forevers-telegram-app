@@ -391,6 +391,38 @@ function updateBottomOffset() {
   ) || 0
   bottomOffset.value = navH + safe
 }
+
+// Keyboard detection for Telegram WebApp
+const handleKeyboardDetection = () => {
+  if (isTelegramWebApp()) {
+    // Use Telegram WebApp viewport API
+    if (window.Telegram?.WebApp?.viewportHeight) {
+      const currentHeight = window.Telegram.WebApp.viewportHeight
+      const heightDifference = initialViewportHeight.value - currentHeight
+
+      // Consider keyboard visible if height difference is significant (> 100px)
+      if (heightDifference > 100) {
+        keyboardVisible.value = true
+        keyboardHeight.value = heightDifference
+      } else {
+        keyboardVisible.value = false
+        keyboardHeight.value = 0
+      }
+    }
+  } else {
+    // Fallback for regular browsers
+    const currentHeight = window.innerHeight
+    const heightDifference = initialViewportHeight.value - currentHeight
+
+    if (heightDifference > 150) {
+      keyboardVisible.value = true
+      keyboardHeight.value = heightDifference
+    } else {
+      keyboardVisible.value = false
+      keyboardHeight.value = 0
+    }
+  }
+}
   
 onMounted(() => {
   window.addEventListener('resize', handleResize)
