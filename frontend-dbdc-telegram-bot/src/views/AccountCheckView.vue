@@ -64,16 +64,16 @@
           <button
             @click="handleContinue"
             :disabled="!canContinue"
-            class="w-full h-12 xs:h-14 sm:h-16 rounded-full font-bold text-sm xs:text-base sm:text-lg
-                   transition-all duration-200 relative overflow-hidden"
+            class="continue-button w-full h-12 xs:h-14 sm:h-16 rounded-full font-bold text-sm xs:text-base sm:text-lg
+                   border-2 bg-transparent relative overflow-hidden
+                   transition-all duration-300 ease-in-out"
             :class="{
-              'border-2 border-white bg-transparent text-white hover:bg-white/10 hover:border-white/90 shadow-lg': canContinue,
-              'bg-transparent text-white/50 cursor-not-allowed': !canContinue
+              'continue-button--active': canContinue,
+              'continue-button--disabled': !canContinue
             }"
-            :style="!canContinue ? 'border: 2px solid #FFFFFF !important;' : ''"
           >
             <span class="relative z-10">Continue</span>
-            <div v-if="canContinue" class="absolute inset-0 bg-white/5 opacity-0 hover:opacity-100 transition-opacity duration-200"></div>
+            <div class="absolute inset-0 bg-white/5 opacity-0 transition-opacity duration-300 ease-in-out continue-button__overlay"></div>
           </button>
         </div>
       </div>
