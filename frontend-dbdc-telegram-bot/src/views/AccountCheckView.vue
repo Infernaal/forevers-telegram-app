@@ -199,6 +199,41 @@ input:-webkit-autofill:active {
   -webkit-text-fill-color: #02070E !important;
 }
 
+/* Button States */
+.continue-button {
+  border-color: #FFFFFF;
+  transform: scale(1);
+  will-change: transform, border-color, color, background-color;
+}
+
+.continue-button--active {
+  color: #FFFFFF;
+  border-color: #FFFFFF;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.continue-button--active:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.9);
+  transform: scale(1.02);
+}
+
+.continue-button--active:hover .continue-button__overlay {
+  opacity: 1;
+}
+
+.continue-button--disabled {
+  color: rgba(255, 255, 255, 0.5);
+  border-color: #FFFFFF;
+  cursor: not-allowed;
+  transform: scale(1);
+}
+
+.continue-button--disabled:hover {
+  transform: none;
+  background-color: transparent;
+}
+
 /* Performance optimizations */
 * {
   will-change: auto;
