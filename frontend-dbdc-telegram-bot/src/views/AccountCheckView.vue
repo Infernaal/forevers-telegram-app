@@ -83,6 +83,7 @@
     <div
       class="fixed bottom-0 left-0 right-0 bg-white/75 backdrop-blur-sm p-4 transition-transform duration-300"
       :class="{ 'translate-y-full': keyboardVisible }"
+      style="padding-bottom: calc(1rem + var(--tg-safe-area-bottom, 0px))"
     >
       <button
         @click="handleTelegramContinue"
