@@ -201,7 +201,7 @@ const handleContinue = () => {
 const handleTelegramContinue = () => {
   // Handle Telegram authentication
   console.log('Continue with Telegram')
-  router.push('/favorites')
+  router.push('/loader?redirect=/favorites')
 }
 
 // Keyboard detection through viewport changes
