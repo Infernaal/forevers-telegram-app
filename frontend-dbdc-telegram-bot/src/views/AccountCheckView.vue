@@ -48,7 +48,7 @@
 
             <!-- Error message -->
             <div v-if="emailError" class="mt-2 px-2">
-              <p class="text-red-500 text-xs xs:text-sm">{{ emailErrorMessage }}</p>
+              <p class="text-red-400 font-semibold text-sm xs:text-base bg-red-50 px-3 py-2 rounded-md border border-red-200">{{ emailErrorMessage }}</p>
             </div>
           </div>
 
@@ -64,10 +64,15 @@
           <button
             @click="handleContinue"
             :disabled="!canContinue"
-            class="w-full h-12 xs:h-14 sm:h-16 rounded-full border border-white bg-transparent text-white font-bold text-sm xs:text-base sm:text-lg
-                   transition-all duration-200 hover:bg-white hover:text-dbd-primary disabled:opacity-50 disabled:cursor-not-allowed disabled:border-gray-400"
+            class="w-full h-12 xs:h-14 sm:h-16 rounded-full font-bold text-sm xs:text-base sm:text-lg
+                   transition-all duration-200 relative overflow-hidden"
+            :class="{
+              'border-2 border-white bg-transparent text-white hover:bg-white/10 hover:border-white/90 shadow-lg': canContinue,
+              'border-2 border-white/40 bg-transparent text-white/50 cursor-not-allowed': !canContinue
+            }"
           >
-            Continue
+            <span class="relative z-10">Continue</span>
+            <div v-if="canContinue" class="absolute inset-0 bg-white/5 opacity-0 hover:opacity-100 transition-opacity duration-200"></div>
           </button>
         </div>
       </div>
@@ -75,11 +80,11 @@
 
     <!-- Bottom Telegram Button -->
     <div class="fixed bottom-0 left-0 right-0 bg-white/75 backdrop-blur-sm p-4">
-      <button 
+      <button
         @click="handleTelegramContinue"
-        class="w-full max-w-[347px] mx-auto h-12 xs:h-14 sm:h-16 bg-gradient-to-r from-dbd-primary to-[#473FFF] 
-               text-white font-bold text-sm xs:text-base rounded-full flex items-center justify-center gap-3 
-               transition-all duration-200 hover:shadow-lg"
+        class="w-full max-w-[347px] mx-auto h-12 xs:h-14 sm:h-16 bg-gradient-to-r from-dbd-primary to-[#473FFF]
+               text-white font-bold text-sm xs:text-base rounded-full flex items-center justify-center gap-3
+               transition-all duration-200 hover:shadow-lg border-2 border-white/20 hover:border-white/40 hover:scale-[1.02]"
       >
         <span>Continue with Telegram</span>
         <div class="w-7 h-7 xs:w-8 xs:h-8 bg-white/20 rounded-full border border-white/30 flex items-center justify-center">
