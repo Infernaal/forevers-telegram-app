@@ -87,7 +87,8 @@
 
     <!-- Bottom Telegram Button -->
     <div
-      class="fixed bottom-0 left-0 right-0 bg-white/75 backdrop-blur-sm p-4 pb-[max(var(--tg-content-safe-area-inset-bottom),1rem)] z-10"
+      class="fixed bottom-0 left-0 right-0 bg-white/75 backdrop-blur-sm p-4 pb-[max(var(--tg-content-safe-area-inset-bottom),1rem)] z-10 transition-opacity duration-150"
+      v-show="!keyboardVisible"
     >
       <button
         @click="handleTelegramContinue"
@@ -126,6 +127,7 @@ const isFocused = ref(false)
 const hasBlurred = ref(false)
 const keyboardVisible = ref(false)
 const initialViewportHeight = ref(0)
+const initialViewportStableHeight = ref(0)
 const showTermsModal = ref(false)
 
 // Telegram WebApp detection
@@ -178,9 +180,12 @@ const handleFocus = () => {
   if (isTelegramWebApp.value) {
     // In Telegram WebApp, use viewport changes
     setTimeout(() => {
-      if (window.Telegram?.WebApp?.viewportHeight) {
-        const heightDiff = initialViewportHeight.value - window.Telegram.WebApp.viewportHeight
-        keyboardVisible.value = heightDiff > 100
+      const wa = window.Telegram?.WebApp
+      if (wa?.viewportHeight) {
+        // Prefer stable vs current height if available
+        const stable = wa.viewportStableHeight ?? initialViewportStableHeight.value ?? initialViewportHeight.value
+        const heightDiff = (stable || 0) - wa.viewportHeight
+        keyboardVisible.value = heightDiff > 80
       }
     }, 300)
   } else {
@@ -246,9 +251,11 @@ const handleTelegramContinue = () => {
 const handleResize = () => {
   if (isTelegramWebApp.value) {
     // Use Telegram WebApp's viewport API
-    if (window.Telegram?.WebApp?.viewportHeight) {
-      const heightDifference = initialViewportHeight.value - window.Telegram.WebApp.viewportHeight
-      keyboardVisible.value = heightDifference > 100
+    const wa = window.Telegram?.WebApp
+    if (wa?.viewportHeight) {
+      const stable = wa.viewportStableHeight ?? initialViewportStableHeight.value ?? initialViewportHeight.value
+      const heightDifference = (stable || 0) - wa.viewportHeight
+      keyboardVisible.value = heightDifference > 80
     }
   } else {
     // Fallback to window height for browsers
@@ -282,6 +289,10 @@ onMounted(() => {
   // Set initial viewport height based on environment
   if (isTelegramWebApp.value && window.Telegram?.WebApp?.viewportHeight) {
     initialViewportHeight.value = window.Telegram.WebApp.viewportHeight
+    // Also cache stable height if available (helps detect keyboard reliably)
+    if (window.Telegram.WebApp.viewportStableHeight) {
+      initialViewportStableHeight.value = window.Telegram.WebApp.viewportStableHeight
+    }
   } else {
     initialViewportHeight.value = window.innerHeight
   }
@@ -296,6 +307,8 @@ onMounted(() => {
   // Also listen for visual viewport changes (better for mobile browsers)
   if (window.visualViewport) {
     window.visualViewport.addEventListener('resize', handleResize)
+    // Some Android keyboards only trigger visualViewport scroll when opening
+    window.visualViewport.addEventListener('scroll', handleResize)
   }
 })
 
@@ -304,6 +317,7 @@ onUnmounted(() => {
 
   if (window.visualViewport) {
     window.visualViewport.removeEventListener('resize', handleResize)
+  window.visualViewport.removeEventListener('scroll', handleResize)
   }
 
   // Clean up Telegram WebApp event listeners
@@ -383,7 +397,7 @@ input:focus-visible {
 }
 
 /* Global scrollbar hiding and Telegram optimizations */
-:::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 0;
 }
 
