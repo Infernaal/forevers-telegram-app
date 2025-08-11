@@ -9,24 +9,14 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import Loader from '../components/Loader.vue'
 
 const router = useRouter()
 
-// Auto-redirect to AccountCheckView after 5 seconds
-onMounted(() => {
-  setTimeout(() => {
-    router.push('/account-check')
-  }, 5000) // 5 seconds
-})
-
-// Computed style for the gradient card background
-const cardStyle = {
-  background: `
-    linear-gradient(0deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.25) 100%),
-    linear-gradient(90deg, #2019CE 20.91%, #473FFF 68.93%)
-  `
+// Handle completion from Loader component
+const handleComplete = () => {
+  router.push('/account-check')
 }
 </script>
 
