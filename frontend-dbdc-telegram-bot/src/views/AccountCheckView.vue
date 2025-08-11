@@ -88,13 +88,8 @@
     <!-- Bottom Telegram Button -->
     <div
       class="fixed bottom-0 left-0 right-0 bg-white/75 backdrop-blur-sm p-4 transition-transform duration-300"
-      :class="{
-        'translate-y-full': isInBrowser && keyboardVisible,
-        'transform-none': isTelegramWebApp
-      }"
       :style="{
-        paddingBottom: isTelegramWebApp ? 'calc(1rem + var(--tg-safe-area-inset-bottom, 0px))' : '1rem',
-        transform: isTelegramWebApp && keyboardVisible ? 'translateY(0)' : undefined
+        paddingBottom: isTelegramWebApp ? 'calc(1rem + var(--tg-safe-area-inset-bottom, 0px))' : '1rem'
       }"
     >
       <button
