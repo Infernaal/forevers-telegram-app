@@ -78,9 +78,9 @@ const handleContinue = () => {
     window.triggerHaptic('impact', 'medium')
   }
 
-  // Navigate to next step
-  console.log('Continuing after email verification...')
-  router.push('/favorites')
+  // Navigate to verification code entry
+  console.log('Continuing to verification code entry...')
+  router.push('/verification-code')
 }
 
 // Lifecycle
