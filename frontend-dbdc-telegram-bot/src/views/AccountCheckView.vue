@@ -95,6 +95,13 @@
         <img src="/telegram-icon.svg" alt="Telegram" class="w-6 h-6" />
       </button>
     </div>
+
+    <!-- Terms and Conditions Modal -->
+    <TermsAndConditionsModal
+      :isVisible="showTermsModal"
+      @close="closeTermsModal"
+      @agree="agreeToTerms"
+    />
   </div>
 </template>
 
