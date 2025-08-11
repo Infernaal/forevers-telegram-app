@@ -255,6 +255,19 @@ const userInfo = ref({
   photo: ''
 })
 
+// Keyboard detection state
+const keyboardVisible = ref(false)
+const keyboardHeight = ref(0)
+const initialViewportHeight = ref(0)
+
+// Telegram WebApp detection
+const isTelegramWebApp = () => {
+  return typeof window !== 'undefined' &&
+         window.Telegram &&
+         window.Telegram.WebApp &&
+         window.Telegram.WebApp.initData !== ''
+}
+
 // Fetch user info from backend
 const fetchUserInfo = async () => {
   try {
