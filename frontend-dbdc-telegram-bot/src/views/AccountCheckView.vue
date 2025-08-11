@@ -18,23 +18,37 @@
         <div class="flex flex-col gap-4 xs:gap-6 sm:gap-8">
           <!-- Email Input -->
           <div class="relative w-full">
-            <div class="w-full h-12 xs:h-14 sm:h-16 bg-white rounded-lg border border-dbd-light-gray flex items-center px-4 gap-3">
+            <div
+              class="w-full h-12 xs:h-14 sm:h-16 bg-white rounded-lg border flex items-center px-4 gap-3 transition-colors"
+              :class="{
+                'border-red-500': emailError,
+                'border-dbd-light-gray': !emailError,
+                'border-dbd-primary': isFocused && !emailError
+              }"
+            >
               <!-- Email Icon -->
               <svg class="w-6 h-6 xs:w-7 xs:h-7 text-dbd-gray flex-shrink-0" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M24.9709 15.5249C25.4844 15.5249 25.9006 15.1402 25.9006 14.6656V9.03695C25.9006 7.1416 24.2324 5.59961 22.1818 5.59961H5.81934C3.76882 5.59961 2.10059 7.1416 2.10059 9.03695V18.9623C2.10059 20.8576 3.76882 22.3996 5.81934 22.3996H22.1818C24.2324 22.3996 25.9006 20.8576 25.9006 18.9623C25.9006 18.4877 25.4844 18.1029 24.9709 18.1029C24.4574 18.1029 24.0412 18.4877 24.0412 18.9623C24.0412 19.9099 23.2071 20.6809 22.1818 20.6809H5.81934C4.79408 20.6809 3.95996 19.9099 3.95996 18.9623V9.21904L12.0369 13.8614C12.6425 14.2095 13.3215 14.3835 14.0006 14.3835C14.6796 14.3835 15.3587 14.2095 15.9643 13.8614L24.0412 9.21904V14.6656C24.0412 15.1402 24.4574 15.5249 24.9709 15.5249ZM14.9824 12.4018C14.3768 12.7499 13.6243 12.75 13.0187 12.4018L4.73574 7.64105C5.04105 7.43798 5.41534 7.31828 5.81934 7.31828H22.1818C22.5858 7.31828 22.9601 7.43803 23.2654 7.64109L14.9824 12.4018Z" fill="currentColor"/>
               </svg>
-              
+
               <!-- Input Field -->
-              <input 
+              <input
                 v-model="email"
                 type="email"
                 placeholder="Email"
+                @focus="handleFocus"
+                @blur="handleBlur"
+                @input="validateEmail"
                 class="flex-1 text-sm xs:text-base text-dbd-dark placeholder-dbd-light-gray outline-none bg-transparent"
-                :class="{ 'text-red-500': emailError }"
               />
-              
+
               <!-- Required asterisk -->
               <span class="text-red-500 text-sm xs:text-base font-medium">*</span>
+            </div>
+
+            <!-- Error message -->
+            <div v-if="emailError" class="mt-2 px-2">
+              <p class="text-red-500 text-xs xs:text-sm">{{ emailErrorMessage }}</p>
             </div>
           </div>
 
@@ -47,11 +61,11 @@
           </div>
 
           <!-- Continue Button -->
-          <button 
+          <button
             @click="handleContinue"
             :disabled="!canContinue"
-            class="w-full h-12 xs:h-14 sm:h-16 rounded-full border border-white text-white font-bold text-sm xs:text-base sm:text-lg 
-                   transition-all duration-200 hover:bg-white hover:text-dbd-primary disabled:opacity-50 disabled:cursor-not-allowed"
+            class="w-full h-12 xs:h-14 sm:h-16 rounded-full border border-white bg-transparent text-white font-bold text-sm xs:text-base sm:text-lg
+                   transition-all duration-200 hover:bg-white hover:text-dbd-primary disabled:opacity-50 disabled:cursor-not-allowed disabled:border-gray-400"
           >
             Continue
           </button>
@@ -89,16 +103,51 @@ const router = useRouter()
 const email = ref('')
 const termsAgreed = ref(false)
 const emailError = ref(false)
+const emailErrorMessage = ref('')
+const isFocused = ref(false)
+const hasBlurred = ref(false)
 
 // Computed
 const canContinue = computed(() => {
-  return email.value.trim() && termsAgreed.value && isValidEmail(email.value)
+  return email.value.trim() && termsAgreed.value && isValidEmail(email.value) && !emailError.value
 })
 
 // Methods
-const isValidEmail = (email) => {
+const isValidEmail = (emailString) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  return emailRegex.test(email)
+  return emailRegex.test(emailString.trim())
+}
+
+const validateEmail = () => {
+  const emailValue = email.value.trim()
+
+  // Clear previous errors
+  emailError.value = false
+  emailErrorMessage.value = ''
+
+  // Only validate if user has started typing and field has been blurred at least once
+  if (!emailValue && hasBlurred.value) {
+    emailError.value = true
+    emailErrorMessage.value = 'Email is required'
+    return
+  }
+
+  // Validate email format if there's content
+  if (emailValue && !isValidEmail(emailValue)) {
+    emailError.value = true
+    emailErrorMessage.value = 'Please enter a valid email address'
+    return
+  }
+}
+
+const handleFocus = () => {
+  isFocused.value = true
+}
+
+const handleBlur = () => {
+  isFocused.value = false
+  hasBlurred.value = true
+  validateEmail()
 }
 
 
@@ -108,16 +157,14 @@ const openTerms = () => {
 }
 
 const handleContinue = () => {
+  // Force validation on submit
+  hasBlurred.value = true
+  validateEmail()
+
   if (!canContinue.value) return
-  
-  if (!isValidEmail(email.value)) {
-    emailError.value = true
-    return
-  }
-  
-  emailError.value = false
+
   // Handle email form continuation
-  console.log('Continue with email:', email.value)
+  console.log('Continue with email:', email.value.trim())
   router.push('/favorites')
 }
 
