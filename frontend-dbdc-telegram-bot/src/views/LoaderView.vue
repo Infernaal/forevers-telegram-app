@@ -13,12 +13,12 @@
           </div>
 
           <!-- DBD Capital Text Logo -->
-          <div class="flex flex-col items-center">
-            <div class="text-white font-bold text-center leading-none">
-              <div class="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight">DBD</div>
-              <div class="w-full h-0.5 xs:h-1 sm:h-1.5 md:h-2 bg-white my-1 xs:my-1.5 sm:my-2 md:my-2.5"></div>
-              <div class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-wider">CAPITAL</div>
-            </div>
+          <div class="flex items-center justify-center">
+            <img
+              src="/dbd-logo.svg"
+              alt="DBD Capital Logo"
+              class="w-28 h-20 xs:w-36 xs:h-24 sm:w-40 sm:h-28 md:w-48 md:h-32 lg:w-56 lg:h-36"
+            />
           </div>
         </div>
 
