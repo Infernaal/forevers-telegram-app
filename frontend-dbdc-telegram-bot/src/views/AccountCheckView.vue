@@ -68,8 +68,9 @@
                    transition-all duration-200 relative overflow-hidden"
             :class="{
               'border-2 border-white bg-transparent text-white hover:bg-white/10 hover:border-white/90 shadow-lg': canContinue,
-              'border-2 !border-white bg-transparent text-white/50 cursor-not-allowed': !canContinue
+              'bg-transparent text-white/50 cursor-not-allowed': !canContinue
             }"
+            :style="!canContinue ? 'border: 2px solid #FFFFFF !important;' : ''"
           >
             <span class="relative z-10">Continue</span>
             <div v-if="canContinue" class="absolute inset-0 bg-white/5 opacity-0 hover:opacity-100 transition-opacity duration-200"></div>
