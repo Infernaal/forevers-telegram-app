@@ -69,11 +69,11 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
-// Auto-redirect to FavoritesView after 2-3 seconds
+// Auto-redirect to AccountCheckView after 5 seconds
 onMounted(() => {
   setTimeout(() => {
-    router.push('/favorites')
-  }, 5000) // 2.5 seconds
+    router.push('/account-check')
+  }, 5000) // 5 seconds
 })
 
 // Computed style for the gradient card background
