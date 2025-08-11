@@ -68,7 +68,7 @@
                    transition-all duration-200 relative overflow-hidden"
             :class="{
               'border-2 border-white bg-transparent text-white hover:bg-white/10 hover:border-white/90 shadow-lg': canContinue,
-              'border-2 border-white bg-transparent text-white/50 cursor-not-allowed': !canContinue
+              'border-2 !border-white bg-transparent text-white/50 cursor-not-allowed': !canContinue
             }"
           >
             <span class="relative z-10">Continue</span>
