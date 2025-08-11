@@ -170,6 +170,15 @@ const openTerms = () => {
   showTermsModal.value = true
 }
 
+const closeTermsModal = () => {
+  showTermsModal.value = false
+}
+
+const agreeToTerms = () => {
+  termsAgreed.value = true
+  showTermsModal.value = false
+}
+
 const handleContinue = () => {
   // Force validation on submit
   hasBlurred.value = true
