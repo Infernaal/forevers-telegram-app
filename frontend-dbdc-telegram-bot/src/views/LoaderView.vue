@@ -36,10 +36,10 @@
             <!-- Orange semi-circle background -->
             <div class="w-full h-full absolute inset-0 loader-bg"></div>
 
-            <!-- Spinning white gradient ring -->
-            <div class="w-full h-full absolute inset-0 spinner">
+            <!-- Spinning white gradient ring - smaller size -->
+            <div class="absolute inset-0 flex items-center justify-center spinner">
               <svg
-                class="w-full h-full"
+                class="w-8 h-8 xs:w-10 xs:h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16"
                 viewBox="0 0 35 34"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
