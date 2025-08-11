@@ -145,11 +145,16 @@ const validateEmail = () => {
 
 const handleFocus = () => {
   isFocused.value = true
+  // Detect keyboard appearance with a delay for mobile
+  setTimeout(() => {
+    keyboardVisible.value = true
+  }, 300)
 }
 
 const handleBlur = () => {
   isFocused.value = false
   hasBlurred.value = true
+  keyboardVisible.value = false
   validateEmail()
 }
 
