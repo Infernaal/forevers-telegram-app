@@ -9,7 +9,7 @@
         <!-- Welcome Section -->
         <div class="flex flex-col items-center gap-2 xs:gap-3 sm:gap-4 md:gap-5 mb-6 xs:mb-8 sm:mb-10 md:mb-12">
           <div class="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white text-center leading-tight">
-            {{ loaderTitle }}
+            Welcome to
           </div>
 
           <!-- DBD Capital Text Logo -->
