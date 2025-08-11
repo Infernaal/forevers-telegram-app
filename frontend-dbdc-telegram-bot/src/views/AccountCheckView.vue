@@ -167,8 +167,7 @@ const handleBlur = () => {
 
 
 const openTerms = () => {
-  // Open terms and conditions link or modal
-  console.log('Opening Terms and Conditions')
+  showTermsModal.value = true
 }
 
 const handleContinue = () => {
