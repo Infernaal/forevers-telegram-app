@@ -87,7 +87,7 @@
 
     <!-- Bottom Telegram Button -->
     <div
-      class="fixed bottom-0 left-0 right-0 bg-white/75 backdrop-blur-sm p-4 pb-[max(var(--tg-content-safe-area-inset-bottom),1rem)]"
+      class="fixed bottom-0 left-0 right-0 bg-white/75 backdrop-blur-sm p-4 pb-4 z-10"
     >
       <button
         @click="handleTelegramContinue"
