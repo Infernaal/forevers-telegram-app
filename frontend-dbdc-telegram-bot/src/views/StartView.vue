@@ -81,7 +81,7 @@ const cardStyle = computed(() => ({
 
 // Handle start button click
 const handleStart = () => {
-  router.push('/favorites')
+  router.push('/loader')
 }
 
 // Initialize app

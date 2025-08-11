@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import StartView from '../views/StartView.vue'
+import LoaderView from '../views/LoaderView.vue'
 import WalletView from '../views/WalletView.vue'
 import FavoritesView from '../views/FavoritesView.vue'
 import CartView from '../views/CartView.vue'
@@ -17,7 +18,11 @@ const router = createRouter({
       name: 'start',
       component: StartView,
     },
-
+    {
+      path: '/loader',
+      name: 'loader',
+      component: LoaderView,
+    },
     {
       path: '/wallet',
       name: 'wallet',
