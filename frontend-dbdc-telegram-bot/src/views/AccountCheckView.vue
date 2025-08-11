@@ -1,7 +1,7 @@
 <template>
   <div class="w-full min-h-screen bg-white font-montserrat overflow-hidden flex items-center justify-center">
     <!-- Main Content Container -->
-    <div class="w-full flex-1 flex items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8">
+    <div class="w-full flex-1 flex items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8 pb-20 xs:pb-24">
       <div class="w-full min-h-[348px] xs:min-h-[380px] sm:min-h-[420px] md:min-h-[460px] lg:min-h-[500px]
                   relative rounded-2xl sm:rounded-3xl md:rounded-[2rem] lg:rounded-[2.5rem]
                   p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 mx-auto
