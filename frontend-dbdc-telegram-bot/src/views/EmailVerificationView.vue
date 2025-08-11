@@ -32,10 +32,8 @@
           <button
             @click="handleContinue"
             class="w-full h-12 xs:h-14 sm:h-16 rounded-full font-bold text-sm xs:text-base sm:text-lg
-                   border-2 border-dbd-primary bg-transparent text-dbd-primary
-                   transition-all duration-300 ease-in-out hover:bg-dbd-primary hover:text-white
-                   hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]
-                   focus:outline-none focus:ring-2 focus:ring-dbd-primary focus:ring-opacity-50"
+                   bg-dbd-primary text-white border-2 border-dbd-primary
+                   active:scale-[0.98] focus:outline-none"
           >
             Continue
           </button>
