@@ -5,22 +5,11 @@
       <div class="w-full mx-auto flex flex-col items-center">
         <!-- Email Icon -->
         <div class="mb-6 sm:mb-8 md:mb-10">
-          <div class="w-16 h-16 xs:w-18 xs:h-18 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center">
-            <svg 
-              viewBox="0 0 74 74" 
-              fill="none" 
-              xmlns="http://www.w3.org/2000/svg"
-              class="w-full h-full"
-            >
-              <!-- Email envelope -->
-              <rect x="10" y="20" width="44" height="32" rx="4" stroke="#22C55E" stroke-width="3" fill="none"/>
-              <path d="M10 24L32 36L54 24" stroke="#22C55E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-              
-              <!-- Checkmark circle -->
-              <circle cx="50" cy="50" r="12" fill="#22C55E"/>
-              <path d="M44 50L48 54L56 46" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
+          <img
+            src="/email-icon.svg"
+            alt="Email verification"
+            class="w-16 h-16 xs:w-18 xs:h-18 sm:w-20 sm:h-20 md:w-24 md:h-24"
+          />
         </div>
 
         <!-- Title -->
