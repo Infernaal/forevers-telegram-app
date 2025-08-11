@@ -87,7 +87,7 @@
 
     <!-- Bottom Telegram Button -->
     <div
-      class="fixed bottom-0 left-0 right-0 bg-white/75 backdrop-blur-sm p-4 transition-transform duration-300"
+      class="fixed bottom-0 left-0 right-0 bg-white/75 backdrop-blur-sm p-4"
       :style="{
         paddingBottom: isTelegramWebApp ? 'calc(1rem + var(--tg-safe-area-inset-bottom, 0px))' : '1rem'
       }"
@@ -417,6 +417,20 @@ input[type="email"] {
   .min-h-screen {
     min-height: 100vh;
     min-height: var(--tg-viewport-height, 100vh);
+  }
+}
+
+/* Fix bottom positioning for Telegram WebApp - prevent floating above keyboard */
+.tg-viewport-stable-bottom {
+  bottom: 0px !important;
+  position: fixed !important;
+}
+
+/* Use stable viewport height in Telegram WebApp */
+@media (max-height: 100vh) {
+  .fixed.bottom-0 {
+    bottom: 0px !important;
+    position: fixed !important;
   }
 }
 </style>
