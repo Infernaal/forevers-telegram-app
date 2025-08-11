@@ -2,8 +2,8 @@
   <div class="w-full min-h-screen bg-white font-montserrat overflow-hidden flex items-center justify-center">
     <!-- Main Content Container -->
     <div class="w-full flex-1 flex items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8">
-      <div class="w-full max-w-[347px] h-[348px] xs:h-[380px] sm:h-[420px] md:h-[460px] lg:h-[500px] 
-                  relative rounded-2xl sm:rounded-3xl md:rounded-[2rem] lg:rounded-[2.5rem] 
+      <div class="w-full min-h-[348px] xs:min-h-[380px] sm:min-h-[420px] md:min-h-[460px] lg:min-h-[500px]
+                  relative rounded-2xl sm:rounded-3xl md:rounded-[2rem] lg:rounded-[2.5rem]
                   p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 mx-auto
                   text-white flex flex-col justify-between" :style="cardStyle">
         
@@ -47,8 +47,8 @@
             </div>
 
             <!-- Error message -->
-            <div v-if="emailError" class="mt-2 px-2">
-              <p class="text-red-500 text-xs xs:text-sm">{{ emailErrorMessage }}</p>
+            <div v-if="emailError" class="mt-1 px-2">
+              <p class="text-red-400 font-medium text-xs xs:text-sm px-2 py-1 rounded">{{ emailErrorMessage }}</p>
             </div>
           </div>
 
@@ -64,10 +64,16 @@
           <button
             @click="handleContinue"
             :disabled="!canContinue"
-            class="w-full h-12 xs:h-14 sm:h-16 rounded-full border border-white bg-transparent text-white font-bold text-sm xs:text-base sm:text-lg
-                   transition-all duration-200 hover:bg-white hover:text-dbd-primary disabled:opacity-50 disabled:cursor-not-allowed disabled:border-gray-400"
+            class="continue-button w-full h-12 xs:h-14 sm:h-16 rounded-full font-bold text-sm xs:text-base sm:text-lg
+                   border-2 bg-transparent relative overflow-hidden
+                   transition-all duration-300 ease-in-out"
+            :class="{
+              'continue-button--active': canContinue,
+              'continue-button--disabled': !canContinue
+            }"
           >
-            Continue
+            <span class="relative z-10">Continue</span>
+            <div class="absolute inset-0 bg-white/5 opacity-0 transition-opacity duration-300 ease-in-out continue-button__overlay"></div>
           </button>
         </div>
       </div>
@@ -75,18 +81,14 @@
 
     <!-- Bottom Telegram Button -->
     <div class="fixed bottom-0 left-0 right-0 bg-white/75 backdrop-blur-sm p-4">
-      <button 
+      <button
         @click="handleTelegramContinue"
-        class="w-full max-w-[347px] mx-auto h-12 xs:h-14 sm:h-16 bg-gradient-to-r from-dbd-primary to-[#473FFF] 
-               text-white font-bold text-sm xs:text-base rounded-full flex items-center justify-center gap-3 
-               transition-all duration-200 hover:shadow-lg"
+        class="w-full mx-auto h-12 xs:h-14 sm:h-16 bg-gradient-to-r from-dbd-primary to-[#473FFF]
+               text-white font-bold text-sm xs:text-base rounded-full flex items-center justify-center gap-3
+               transition-all duration-200 hover:shadow-lg border-2 border-white/20 hover:border-white/40 hover:scale-[1.02]"
       >
         <span>Continue with Telegram</span>
-        <div class="w-7 h-7 xs:w-8 xs:h-8 bg-white/20 rounded-full border border-white/30 flex items-center justify-center">
-          <svg class="w-4 h-4 xs:w-5 xs:h-5 text-white" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8.27839 12.5451L8.01372 17.0123C8.39239 17.0123 8.5564 16.8171 8.75307 16.5827L10.5284 14.5467L14.2072 17.7795C14.8819 18.2307 15.3572 17.9931 15.5392 17.0347L17.954 3.45712L17.9546 3.45632C18.1686 2.25952 17.5939 1.79152 16.9366 2.08512L2.74293 8.60592C1.77424 9.05713 1.7889 9.70512 2.57825 9.99872L6.20701 11.3531L14.6359 5.02432C15.0326 4.70912 15.3932 4.88352 15.0966 5.19872L8.27839 12.5451Z" fill="#039BE5"/>
-          </svg>
-        </div>
+        <img src="/telegram-icon.svg" alt="Telegram" class="w-6 h-6" />
       </button>
     </div>
   </div>
@@ -191,6 +193,42 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
   -webkit-text-fill-color: #02070E !important;
+}
+
+/* Button States */
+.continue-button {
+  border: 2px solid #FFFFFF !important;
+  transform: scale(1);
+  will-change: transform, border-color, color, background-color;
+}
+
+.continue-button--active {
+  color: #FFFFFF;
+  border: 2px solid #FFFFFF !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.continue-button--active:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.9) !important;
+  transform: scale(1.02);
+}
+
+.continue-button--active:hover .continue-button__overlay {
+  opacity: 1;
+}
+
+.continue-button--disabled {
+  color: rgba(255, 255, 255, 0.5) !important;
+  border: 2px solid #FFFFFF !important;
+  cursor: not-allowed !important;
+  transform: scale(1);
+}
+
+.continue-button--disabled:hover {
+  transform: none;
+  background-color: transparent;
+  border: 2px solid #FFFFFF !important;
 }
 
 /* Performance optimizations */
