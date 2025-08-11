@@ -47,8 +47,8 @@
             </div>
 
             <!-- Error message -->
-            <div v-if="emailError" class="mt-2 px-2">
-              <p class="text-red-400 font-semibold text-sm xs:text-base bg-red-50 px-3 py-2 rounded-md border border-red-200">{{ emailErrorMessage }}</p>
+            <div v-if="emailError" class="mt-1 px-2">
+              <p class="text-red-400 font-medium text-xs xs:text-sm px-2 py-1 rounded">{{ emailErrorMessage }}</p>
             </div>
           </div>
 
@@ -68,7 +68,7 @@
                    transition-all duration-200 relative overflow-hidden"
             :class="{
               'border-2 border-white bg-transparent text-white hover:bg-white/10 hover:border-white/90 shadow-lg': canContinue,
-              'border-2 border-white/40 bg-transparent text-white/50 cursor-not-allowed': !canContinue
+              'border-2 border-white bg-transparent text-white/50 cursor-not-allowed': !canContinue
             }"
           >
             <span class="relative z-10">Continue</span>
