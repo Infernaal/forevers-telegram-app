@@ -1,18 +1,22 @@
 <template>
   <div class="w-full min-h-screen bg-white font-montserrat overflow-hidden flex items-center justify-center">
     <!-- Main Content Container -->
-    <div class="flex-1 flex items-center justify-center p-4">
-      <div class="w-full max-w-[347px] h-[372px] relative rounded-3xl p-6 text-white flex flex-col items-center justify-center" :style="cardStyle">
+    <div class="flex-1 flex items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8">
+      <div class="w-full max-w-[320px] xs:max-w-[347px] sm:max-w-[420px] md:max-w-[500px] lg:max-w-[600px]
+                  h-[320px] xs:h-[372px] sm:h-[420px] md:h-[480px] lg:h-[540px]
+                  relative rounded-2xl sm:rounded-3xl md:rounded-[2rem] lg:rounded-[2.5rem]
+                  p-4 xs:p-6 sm:p-7 md:p-8 lg:p-10
+                  text-white flex flex-col items-center justify-center" :style="cardStyle">
         <!-- Welcome Section -->
-        <div class="flex flex-col items-center gap-3 mb-8">
-          <div class="text-2xl font-bold text-white text-center">
+        <div class="flex flex-col items-center gap-2 xs:gap-3 sm:gap-4 md:gap-5 mb-6 xs:mb-8 sm:mb-10 md:mb-12">
+          <div class="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white text-center leading-tight">
             Welcome to
           </div>
-          
+
           <!-- DBD Capital Logo -->
           <div class="flex items-center justify-center">
             <svg
-              class="w-36 h-24"
+              class="w-28 h-20 xs:w-36 xs:h-24 sm:w-40 sm:h-28 md:w-48 md:h-32 lg:w-56 lg:h-36"
               viewBox="0 0 142 98"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -31,19 +35,21 @@
         </div>
 
         <!-- Loading Section -->
-        <div class="flex flex-col items-center gap-8">
+        <div class="flex flex-col items-center gap-6 xs:gap-8 sm:gap-10 md:gap-12">
           <!-- Loading Text -->
-          <div class="text-white text-center text-sm font-medium max-w-[298px] leading-5">
+          <div class="text-white text-center text-xs xs:text-sm sm:text-base md:text-lg font-medium
+                      max-w-[280px] xs:max-w-[298px] sm:max-w-[350px] md:max-w-[400px] lg:max-w-[450px]
+                      leading-4 xs:leading-5 sm:leading-6 md:leading-7 px-2">
             Please wait a little, while we prepare everything for you
           </div>
 
           <!-- Spinning Loader -->
-          <div class="w-16 h-16 relative">
+          <div class="w-12 h-12 xs:w-16 xs:h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 relative">
             <!-- Orange background circle -->
-            <div class="w-16 h-16 rounded-full bg-dbd-orange absolute inset-0"></div>
-            
+            <div class="w-full h-full rounded-full bg-dbd-orange absolute inset-0"></div>
+
             <!-- Spinning white gradient circle -->
-            <div class="w-16 h-16 rounded-full absolute inset-0 spinner">
+            <div class="w-full h-full rounded-full absolute inset-0 spinner">
               <svg
                 class="w-full h-full"
                 viewBox="0 0 35 34"
