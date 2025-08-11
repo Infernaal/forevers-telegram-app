@@ -2,7 +2,7 @@
   <div class="w-full min-h-screen bg-white font-montserrat overflow-hidden flex flex-col">
     <!-- Main Content -->
     <div class="flex-1 flex items-center justify-center p-4 sm:p-6 md:p-8">
-      <div class="w-fullmx-auto flex flex-col items-center">
+      <div class="w-full mx-auto flex flex-col items-center">
         <!-- Email Icon -->
         <div class="mb-6 sm:mb-8 md:mb-10">
           <div class="w-16 h-16 xs:w-18 xs:h-18 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center">
