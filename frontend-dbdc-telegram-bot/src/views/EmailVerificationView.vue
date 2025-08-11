@@ -27,32 +27,18 @@
           </p>
         </div>
 
-        <!-- Resend Section -->
-        <div class="w-full max-w-[347px] bg-white border border-dbd-light-gray rounded-xl p-4 sm:p-6 backdrop-blur-md">
-          <p class="text-base sm:text-lg text-dbd-gray font-medium mb-3 sm:mb-4">
-            Haven't received the verification code?
-          </p>
-          
-          <div class="flex items-center justify-between">
-            <button 
-              @click="resendCode"
-              :disabled="timeLeft > 0"
-              class="text-sm sm:text-base font-semibold underline transition-all duration-200"
-              :class="{
-                'text-dbd-orange hover:text-orange-600 cursor-pointer': timeLeft === 0,
-                'text-dbd-light-gray cursor-not-allowed': timeLeft > 0
-              }"
-            >
-              Resend verification code
-            </button>
-            
-            <span 
-              v-if="timeLeft > 0"
-              class="text-sm sm:text-base text-dbd-gray font-medium"
-            >
-              in {{ formatTime(timeLeft) }} secs
-            </span>
-          </div>
+        <!-- Continue Button -->
+        <div class="w-full max-w-[347px]">
+          <button
+            @click="handleContinue"
+            class="w-full h-12 xs:h-14 sm:h-16 rounded-full font-bold text-sm xs:text-base sm:text-lg
+                   border-2 border-dbd-primary bg-transparent text-dbd-primary
+                   transition-all duration-300 ease-in-out hover:bg-dbd-primary hover:text-white
+                   hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]
+                   focus:outline-none focus:ring-2 focus:ring-dbd-primary focus:ring-opacity-50"
+          >
+            Continue
+          </button>
         </div>
       </div>
     </div>
@@ -65,7 +51,7 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
-// Timer state
+// Timer state (keeping for potential future use)
 const timeLeft = ref(59) // 59 seconds countdown
 let intervalId = null
 
@@ -86,20 +72,15 @@ const startTimer = () => {
   }, 1000)
 }
 
-const resendCode = () => {
-  if (timeLeft.value === 0) {
-    // Reset timer
-    timeLeft.value = 59
-    startTimer()
-    
-    // Here you would typically call your resend verification API
-    console.log('Resending verification code...')
-    
-    // Add haptic feedback if available
-    if (window.triggerHaptic) {
-      window.triggerHaptic('impact', 'light')
-    }
+const handleContinue = () => {
+  // Add haptic feedback if available
+  if (window.triggerHaptic) {
+    window.triggerHaptic('impact', 'medium')
   }
+
+  // Navigate to verification code entry
+  console.log('Continuing to verification code entry...')
+  router.push('/verification-code')
 }
 
 // Lifecycle

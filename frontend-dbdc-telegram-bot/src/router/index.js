@@ -3,6 +3,7 @@ import StartView from '../views/StartView.vue'
 import LoaderView from '../views/LoaderView.vue'
 import AccountCheckView from '../views/AccountCheckView.vue'
 import EmailVerificationView from '../views/EmailVerificationView.vue'
+import VerificationCodeView from '../views/VerificationCodeView.vue'
 import WalletView from '../views/WalletView.vue'
 import FavoritesView from '../views/FavoritesView.vue'
 import CartView from '../views/CartView.vue'
@@ -34,6 +35,11 @@ const router = createRouter({
       path: '/email-verification',
       name: 'email-verification',
       component: EmailVerificationView,
+    },
+    {
+      path: '/verification-code',
+      name: 'verification-code',
+      component: VerificationCodeView,
     },
     {
       path: '/wallet',
