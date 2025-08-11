@@ -83,7 +83,7 @@
     <div class="fixed bottom-0 left-0 right-0 bg-white/75 backdrop-blur-sm p-4">
       <button
         @click="handleTelegramContinue"
-        class="w-full max-w-[347px] mx-auto h-12 xs:h-14 sm:h-16 bg-gradient-to-r from-dbd-primary to-[#473FFF]
+        class="w-full mx-auto h-12 xs:h-14 sm:h-16 bg-gradient-to-r from-dbd-primary to-[#473FFF]
                text-white font-bold text-sm xs:text-base rounded-full flex items-center justify-center gap-3
                transition-all duration-200 hover:shadow-lg border-2 border-white/20 hover:border-white/40 hover:scale-[1.02]"
       >
