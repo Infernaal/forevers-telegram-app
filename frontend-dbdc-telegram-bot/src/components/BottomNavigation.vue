@@ -290,11 +290,30 @@ const fetchUserInfo = async () => {
 }
 
 onMounted(() => {
+  // Set initial viewport height
+  if (isTelegramWebApp() && window.Telegram?.WebApp?.viewportHeight) {
+    initialViewportHeight.value = window.Telegram.WebApp.viewportHeight
+  } else {
+    initialViewportHeight.value = window.innerHeight
+  }
+
   window.addEventListener('resize', handleResize)
+  window.addEventListener('resize', handleKeyboardDetection)
   updateProfileButtonPosition()
   updateBottomOffset()
   window.addEventListener('resize', updateBottomOffset)
-  window.Telegram?.WebApp?.onEvent('viewportChanged', updateBottomOffset)
+
+  // Enhanced viewport listening for Telegram WebApp keyboard detection
+  if (isTelegramWebApp() && window.Telegram?.WebApp) {
+    window.Telegram.WebApp.onEvent('viewportChanged', updateBottomOffset)
+    window.Telegram.WebApp.onEvent('viewportChanged', handleKeyboardDetection)
+  }
+
+  // Also listen for visual viewport changes (better for mobile browsers)
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', handleKeyboardDetection)
+  }
+
   fetchUserInfo()
 })
 
