@@ -1,7 +1,7 @@
 <template>
-  <Loader 
-    title="Welcome to"
-    description="Please wait a little, while we prepare everything for you"
+  <Loader
+    :title="loaderTitle"
+    :description="loaderDescription"
     :duration="5000"
     :auto-complete="true"
     @complete="handleComplete"
