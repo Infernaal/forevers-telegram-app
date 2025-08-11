@@ -227,13 +227,21 @@ const cardStyle = {
 </script>
 
 <style scoped>
-/* Remove input autofill background */
+/* Remove input autofill background and focus outline */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
   -webkit-text-fill-color: #02070E !important;
+}
+
+/* Remove blue focus outline from input */
+input:focus,
+input:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
 }
 
 /* Button States */
