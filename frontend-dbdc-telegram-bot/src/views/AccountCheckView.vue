@@ -396,7 +396,7 @@ input:focus-visible {
 }
 
 /* Global scrollbar hiding and Telegram optimizations */
-:::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 0;
 }
 
@@ -427,18 +427,6 @@ input:focus-visible {
 @supports (-webkit-touch-callout: none) {
   .telegram-webapp-container {
     height: -webkit-fill-available;
-  }
-}
-
-/* Keyboard responsive adjustments */
-@media screen and (max-height: 600px) {
-  .main-content-container {
-    padding-top: 1rem !important;
-    padding-bottom: 1rem !important;
-  }
-
-  .telegram-button-container.relative {
-    padding-top: 1rem !important;
   }
 }
 
