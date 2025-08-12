@@ -80,7 +80,7 @@ class EmailService:
         try:
             # Create message
             message = MIMEMultipart("alternative")
-            message["Subject"] = "Your DBDC Verification Code"
+            message["Subject"] = "Verification Code"
             message["From"] = f"{self.from_name} <{self.from_email}>"
             message["To"] = email
 
@@ -97,7 +97,10 @@ class EmailService:
                 <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                     <!-- Header -->
                     <div style="background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%); padding: 40px 20px; text-align: center;">
-                        <img src="https://dbdcusa.com/assets/landing/images/logo-white.svg" alt="DBD Logo" style="max-width: 100px; margin-bottom: 10px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" style="max-width: 100px; margin-bottom: 10px;">
+                            <!-- Example SVG content -->
+                            <circle cx="50" cy="50" r="40" stroke="blue" stroke-width="4" fill="white" />
+                        </svg>
                     </div>
                     <!-- Content -->
                     <div style="padding: 20px;">
