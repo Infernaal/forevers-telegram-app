@@ -337,25 +337,4 @@ input[type="email"] {
   }
 }
 
-/* Enhanced keyboard handling for Telegram WebApp */
-@supports (height: 100vh) {
-  .min-h-screen {
-    min-height: 100vh;
-    min-height: var(--tg-viewport-height, 100vh);
-  }
-}
-
-/* Fix bottom positioning for Telegram WebApp - prevent floating above keyboard */
-.tg-viewport-stable-bottom {
-  bottom: 0px !important;
-  position: fixed !important;
-}
-
-/* Use stable viewport height in Telegram WebApp */
-@media (max-height: 100vh) {
-  .fixed.bottom-0 {
-    bottom: 0px !important;
-    position: fixed !important;
-  }
-}
 </style>
