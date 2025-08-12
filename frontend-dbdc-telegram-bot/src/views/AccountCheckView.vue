@@ -1,11 +1,13 @@
 <template>
   <div
-    class="w-full min-h-screen bg-white font-montserrat overflow-hidden flex items-center justify-center"
+    class="w-full min-h-screen bg-white font-montserrat"
+    :class="{ 'overflow-auto': isTelegramWebApp && isFocused, 'overflow-hidden flex items-center justify-center': !(isTelegramWebApp && isFocused) }"
     @click="handleBackgroundClick"
   >
     <!-- Main Content Container -->
     <div
-      class="w-full flex-1 flex items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8 pb-20 xs:pb-24 main-content-container"
+      class="w-full flex-1 main-content-container"
+      :class="{ 'block': isTelegramWebApp && isFocused, 'flex items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8 pb-20 xs:pb-24': !(isTelegramWebApp && isFocused) }"
       @click.stop
     >
       <div class="w-full min-h-[348px] xs:min-h-[380px] sm:min-h-[420px] md:min-h-[460px] lg:min-h-[500px]
