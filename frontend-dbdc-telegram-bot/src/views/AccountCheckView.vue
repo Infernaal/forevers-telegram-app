@@ -5,7 +5,7 @@
   >
     <!-- Main Content Container -->
     <div
-      class="w-full flex-1 flex items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8 transition-all duration-300 ease-in-out main-content-container"
+      class="w-full flex-1 flex items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8 main-content-container main-content-transition"
       :class="{
         'pb-8 xs:pb-12': keyboardVisible,
         'pb-20 xs:pb-24': !keyboardVisible
@@ -91,7 +91,7 @@
 
     <!-- Bottom Telegram Button -->
     <div
-      class="fixed bottom-0 left-0 right-0 p-4 pb-[max(var(--tg-content-safe-area-inset-bottom),1rem)] z-10 transition-all duration-300 ease-in-out"
+      class="fixed bottom-0 left-0 right-0 p-4 pb-[max(var(--tg-content-safe-area-inset-bottom),1rem)] z-10 bottom-button-transition"
       :class="{
         'opacity-0 pointer-events-none transform translate-y-full': keyboardVisible,
         'opacity-100 pointer-events-auto transform translate-y-0': !keyboardVisible
@@ -135,6 +135,8 @@ const hasBlurred = ref(false)
 const keyboardVisible = ref(false)
 const initialViewportHeight = ref(0)
 const showTermsModal = ref(false)
+const keyboardTimeout = ref(null)
+const isTransitioning = ref(false)
 
 // Telegram WebApp detection
 const isTelegramWebApp = computed(() => {
@@ -155,6 +157,25 @@ const canContinue = computed(() => {
 const isValidEmail = (emailString) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   return emailRegex.test(emailString.trim())
+}
+
+// Debounced function for smooth keyboard state management
+const updateKeyboardState = (visible, delay = 0) => {
+  if (keyboardTimeout.value) {
+    clearTimeout(keyboardTimeout.value)
+  }
+  
+  keyboardTimeout.value = setTimeout(() => {
+    if (keyboardVisible.value !== visible) {
+      isTransitioning.value = true
+      keyboardVisible.value = visible
+      
+      // Reset transition flag after animation completes
+      setTimeout(() => {
+        isTransitioning.value = false
+      }, 400) // Match CSS transition duration
+    }
+  }, delay)
 }
 
 const validateEmail = () => {
@@ -184,21 +205,19 @@ const handleFocus = () => {
 
   // Enhanced keyboard detection for Telegram WebApp vs browser
   if (isTelegramWebApp.value) {
-    // In Telegram WebApp, use viewport changes
+    // In Telegram WebApp, use viewport changes with slight delay for detection
     setTimeout(() => {
       if (window.Telegram?.WebApp?.viewportHeight) {
         const heightDiff = initialViewportHeight.value - window.Telegram.WebApp.viewportHeight
-        keyboardVisible.value = heightDiff > 100
+        updateKeyboardState(heightDiff > 100, 50)
       } else {
         // Fallback for Telegram WebApp without viewport API
-        keyboardVisible.value = true
+        updateKeyboardState(true, 100)
       }
-    }, 300)
+    }, 200)
   } else {
-    // In browser, detect keyboard appearance with a delay
-    setTimeout(() => {
-      keyboardVisible.value = true
-    }, 300)
+    // In browser, detect keyboard appearance with smooth delay
+    updateKeyboardState(true, 150)
   }
 }
 
@@ -206,21 +225,20 @@ const handleBlur = () => {
   isFocused.value = false
   hasBlurred.value = true
 
-  // Handle keyboard hiding
+  // Handle keyboard hiding with smooth transition
   if (isTelegramWebApp.value) {
     setTimeout(() => {
       if (window.Telegram?.WebApp?.viewportHeight) {
         const heightDiff = initialViewportHeight.value - window.Telegram.WebApp.viewportHeight
-        keyboardVisible.value = heightDiff > 100
+        updateKeyboardState(heightDiff > 100, 100)
       } else {
         // Fallback for Telegram WebApp without viewport API
-        keyboardVisible.value = false
+        updateKeyboardState(false, 150)
       }
-    }, 100)
+    }, 50)
   } else {
-    setTimeout(() => {
-      keyboardVisible.value = false
-    }, 100)
+    // In browser, hide keyboard with smooth delay
+    updateKeyboardState(false, 200)
   }
 
   validateEmail()
@@ -260,22 +278,25 @@ const handleTelegramContinue = () => {
 
 // Enhanced keyboard detection for both Telegram WebApp and browser
 const handleResize = () => {
+  // Skip resize handling during transitions to avoid conflicts
+  if (isTransitioning.value) return
+
   if (isTelegramWebApp.value) {
     // Use Telegram WebApp's viewport API
     if (window.Telegram?.WebApp?.viewportHeight) {
       const heightDifference = initialViewportHeight.value - window.Telegram.WebApp.viewportHeight
-      keyboardVisible.value = heightDifference > 100
+      updateKeyboardState(heightDifference > 100, 50)
     } else {
       // Fallback to window height for Telegram WebApp without viewport API
       const currentHeight = window.innerHeight
       const heightDifference = initialViewportHeight.value - currentHeight
-      keyboardVisible.value = heightDifference > 150
+      updateKeyboardState(heightDifference > 150, 50)
     }
   } else {
     // Fallback to window height for browsers
     const currentHeight = window.innerHeight
     const heightDifference = initialViewportHeight.value - currentHeight
-    keyboardVisible.value = heightDifference > 150
+    updateKeyboardState(heightDifference > 150, 50)
   }
 }
 
@@ -321,6 +342,11 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+  // Clear keyboard timeout
+  if (keyboardTimeout.value) {
+    clearTimeout(keyboardTimeout.value)
+  }
+
   window.removeEventListener('resize', handleResize)
 
   if (window.visualViewport) {
@@ -403,6 +429,25 @@ input:focus-visible {
   -webkit-backface-visibility: hidden;
 }
 
+/* Smooth hardware-accelerated animations */
+.bottom-button-transition,
+.main-content-transition {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+}
+
+/* Optimize rendering for mobile devices */
+@media (max-width: 768px) {
+  .bottom-button-transition {
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+  }
+}
+
 /* Global scrollbar hiding and Telegram optimizations */
 ::-webkit-scrollbar {
   width: 0;
@@ -455,7 +500,22 @@ input[type="email"] {
 /* Smooth transitions for keyboard appearance */
 .transition-all {
   transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition-duration: 400ms;
+}
+
+/* Custom smooth transition for bottom button */
+.bottom-button-transition {
+  transition: opacity 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              visibility 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: opacity, transform, visibility;
+}
+
+/* Smooth transition for main content */
+.main-content-transition {
+  transition: padding 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: padding;
 }
 
 /* Ensure content is visible when keyboard is active */
@@ -472,5 +532,7 @@ input[type="email"] {
 /* Improved transform performance for bottom button */
 .transform {
   transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 </style>
