@@ -5,21 +5,17 @@
   >
     <!-- Main Content Container -->
     <div
-      class="w-full flex-1 flex justify-center p-3 sm:p-4 md:p-6 lg:p-8 main-content-container main-content-transition"
+      class="w-full flex-1 flex items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8 main-content-container main-content-transition"
       :class="{
-        'pb-6 xs:pb-8 pt-8 xs:pt-12 sm:pt-16 items-start': keyboardVisible,
-        'pb-20 xs:pb-24 pt-3 sm:pt-4 md:pt-6 lg:pt-8 items-center': !keyboardVisible
+        'pb-12 xs:pb-16 pt-4 xs:pt-6 sm:pt-8': keyboardVisible,
+        'pb-20 xs:pb-24 pt-3 sm:pt-4 md:pt-6 lg:pt-8': !keyboardVisible
       }"
       @click.stop
     >
       <div class="w-full min-h-[348px] xs:min-h-[380px] sm:min-h-[420px] md:min-h-[460px] lg:min-h-[500px]
                   relative rounded-2xl sm:rounded-3xl md:rounded-[2rem] lg:rounded-[2.5rem]
-                  p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 mx-auto main-content-transition
+                  p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 mx-auto
                   text-white flex flex-col justify-between" 
-           :class="{
-             'mt-4 xs:mt-6 sm:mt-8': keyboardVisible,
-             'mt-0': !keyboardVisible
-           }"
            :style="cardStyle">
         
         <!-- Question Section -->
@@ -520,9 +516,8 @@ input[type="email"] {
 /* Smooth transition for main content */
 .main-content-transition {
   transition: padding-bottom 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              padding-top 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              margin-top 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  will-change: padding-bottom, padding-top, margin-top;
+              padding-top 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: padding-bottom, padding-top;
 }
 
 /* Ensure content is visible when keyboard is active */
