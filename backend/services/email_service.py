@@ -7,7 +7,6 @@ from email.mime.multipart import MIMEMultipart
 from typing import Dict, Optional
 import os
 from dotenv import load_dotenv
-import base64
 
 load_dotenv()
 
@@ -76,12 +75,6 @@ class EmailService:
         for email in expired_emails:
             del self.verification_codes[email]
 
-    def get_base64_logo(self) -> str:
-        """Convert dbd-logo.png to base64"""
-        logo_path = os.path.join(os.path.dirname(__file__), '../dbd-logo.png')
-        with open(logo_path, 'rb') as logo_file:
-            return base64.b64encode(logo_file.read()).decode('utf-8')
-
     async def send_verification_email(self, email: str, code: str) -> tuple[bool, str]:
         """Send verification code via email"""
         try:
@@ -90,9 +83,6 @@ class EmailService:
             message["Subject"] = "Your DBDC Verification Code"
             message["From"] = f"{self.from_name} <{self.from_email}>"
             message["To"] = email
-
-            # Get base64 logo
-            base64_logo = self.get_base64_logo()
 
             # Create HTML content
             html_content = f"""
@@ -107,7 +97,7 @@ class EmailService:
                 <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                     <!-- Header -->
                     <div style="background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%); padding: 40px 20px; text-align: center;">
-                        <img src="data:image/png;base64,{base64_logo}" alt="DBD Logo" style="max-width: 100px; margin-bottom: 10px;">
+                        <img src="https://dbdcusa.com/assets/landing/images/logo-white.svg" alt="DBD Logo" style="max-width: 100px; margin-bottom: 10px;">
                     </div>
                     <!-- Content -->
                     <div style="padding: 20px;">
@@ -116,7 +106,7 @@ class EmailService:
                             We received a request to verify your email address. Please use the verification code below to complete your authorization:
                         </p>
                         <div style="background-color: #f8f9fa; border: 2px solid #007BFF; border-radius: 10px; padding: 30px; text-align: center; margin: 30px 0;">
-                            <span style="font-size: 36px; font-weight: bold; color: #007BFF;">{code}</span>
+                            <span style="font-size: 36px; font-weight: bold; color: #007BFF; letter-spacing: 2px;">{code}</span>
                         </div>
                         <p style="color: #666666; font-size: 14px; line-height: 1.6; margin: 30px 0 0 0;">
                             <strong>Important:</strong><br>
