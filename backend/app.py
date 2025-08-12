@@ -8,6 +8,8 @@ from routers.forevers_prices import router as forevers_price_router
 from routers.user_info import router as user_info_router
 from routers.email_verification import router as email_verification_router
 from fastapi.openapi.utils import get_openapi
+import os
+from dotenv import load_dotenv
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -52,3 +54,13 @@ app.include_router(forevers_user_balance_router, prefix="/api/v1/dbdc")
 app.include_router(forevers_price_router, prefix="/api/v1/dbdc")
 app.include_router(user_info_router, prefix="/api/v1/dbdc")
 app.include_router(email_verification_router, prefix="/api/v1/dbdc")
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Email configuration
+app.config["MAIL_SERVER"] = os.getenv("EMAIL_HOST")
+app.config["MAIL_PORT"] = int(os.getenv("EMAIL_PORT"))
+app.config["MAIL_USERNAME"] = os.getenv("EMAIL_HOST_USER")
+app.config["MAIL_PASSWORD"] = os.getenv("EMAIL_HOST_PASSWORD")
+app.config["MAIL_USE_TLS"] = True
