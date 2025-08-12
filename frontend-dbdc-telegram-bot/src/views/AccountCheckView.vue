@@ -5,7 +5,11 @@
   >
     <!-- Main Content Container -->
     <div
-      class="w-full flex-1 flex items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8 pb-20 xs:pb-24 main-content-container"
+      class="w-full flex-1 flex items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8 transition-all duration-300 ease-in-out main-content-container"
+      :class="{
+        'pb-8 xs:pb-12': keyboardVisible,
+        'pb-20 xs:pb-24': !keyboardVisible
+      }"
       @click.stop
     >
       <div class="w-full min-h-[348px] xs:min-h-[380px] sm:min-h-[420px] md:min-h-[460px] lg:min-h-[500px]
@@ -87,11 +91,15 @@
 
     <!-- Bottom Telegram Button -->
     <div
-      class="fixed bottom-0 left-0 right-0 bg-white/75 backdrop-blur-sm p-4 pb-[max(var(--tg-content-safe-area-inset-bottom),1rem)] z-10"
+      class="fixed bottom-0 left-0 right-0 p-4 pb-[max(var(--tg-content-safe-area-inset-bottom),1rem)] z-10 transition-all duration-300 ease-in-out"
+      :class="{
+        'opacity-0 pointer-events-none transform translate-y-full': keyboardVisible,
+        'opacity-100 pointer-events-auto transform translate-y-0': !keyboardVisible
+      }"
     >
       <button
         @click="handleTelegramContinue"
-        class="w-full h-12 xs:h-14 sm:h-16 bg-gradient-to-r from-dbd-primary to-[#473FFF]
+        class="w-full mx-auto h-12 xs:h-14 sm:h-16 bg-gradient-to-r from-dbd-primary to-[#473FFF]
                text-white font-bold text-sm xs:text-base rounded-full flex items-center justify-center gap-3
                transition-all duration-200 hover:shadow-lg border-2 border-white/20 hover:border-white/40 hover:scale-[1.02]"
       >
@@ -181,6 +189,9 @@ const handleFocus = () => {
       if (window.Telegram?.WebApp?.viewportHeight) {
         const heightDiff = initialViewportHeight.value - window.Telegram.WebApp.viewportHeight
         keyboardVisible.value = heightDiff > 100
+      } else {
+        // Fallback for Telegram WebApp without viewport API
+        keyboardVisible.value = true
       }
     }, 300)
   } else {
@@ -201,10 +212,15 @@ const handleBlur = () => {
       if (window.Telegram?.WebApp?.viewportHeight) {
         const heightDiff = initialViewportHeight.value - window.Telegram.WebApp.viewportHeight
         keyboardVisible.value = heightDiff > 100
+      } else {
+        // Fallback for Telegram WebApp without viewport API
+        keyboardVisible.value = false
       }
     }, 100)
   } else {
-    keyboardVisible.value = false
+    setTimeout(() => {
+      keyboardVisible.value = false
+    }, 100)
   }
 
   validateEmail()
@@ -249,6 +265,11 @@ const handleResize = () => {
     if (window.Telegram?.WebApp?.viewportHeight) {
       const heightDifference = initialViewportHeight.value - window.Telegram.WebApp.viewportHeight
       keyboardVisible.value = heightDifference > 100
+    } else {
+      // Fallback to window height for Telegram WebApp without viewport API
+      const currentHeight = window.innerHeight
+      const heightDifference = initialViewportHeight.value - currentHeight
+      keyboardVisible.value = heightDifference > 150
     }
   } else {
     // Fallback to window height for browsers
@@ -429,5 +450,27 @@ input[type="email"] {
     bottom: 0px !important;
     position: fixed !important;
   }
+}
+
+/* Smooth transitions for keyboard appearance */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Ensure content is visible when keyboard is active */
+.main-content-container {
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.main-content-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Improved transform performance for bottom button */
+.transform {
+  transform: translateZ(0);
 }
 </style>
