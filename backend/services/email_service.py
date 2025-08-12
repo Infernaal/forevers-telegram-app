@@ -12,7 +12,7 @@ load_dotenv()
 
 class EmailService:
     def __init__(self):
-        self.smtp_host = os.getenv("SMTP_HOST", "smtp.gmail.com")
+        self.smtp_host = os.getenv("SMTP_HOST", "sandbox.smtp.mailtrap.io")
         self.smtp_port = int(os.getenv("SMTP_PORT", "587"))
         self.smtp_username = os.getenv("SMTP_USERNAME")
         self.smtp_password = os.getenv("SMTP_PASSWORD")
