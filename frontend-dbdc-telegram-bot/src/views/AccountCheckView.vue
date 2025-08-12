@@ -1,16 +1,13 @@
 <template>
   <div
-    class="w-full bg-white font-montserrat overflow-hidden flex flex-col"
-    :style="rootStyle"
+    class="w-full min-h-screen bg-white font-montserrat overflow-hidden flex items-center justify-center"
     @click="handleBackgroundClick"
   >
     <!-- Main Content Container -->
     <div
-      class="w-full flex-1 overflow-y-auto main-scroll"
-      :style="scrollStyle"
+      class="w-full flex-1 flex items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8 pb-20 xs:pb-24 main-content-container"
       @click.stop
     >
-      <div class="w-full h-full flex items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8 main-content-container">
       <div class="w-full min-h-[348px] xs:min-h-[380px] sm:min-h-[420px] md:min-h-[460px] lg:min-h-[500px]
                   relative rounded-2xl sm:rounded-3xl md:rounded-[2rem] lg:rounded-[2.5rem]
                   p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 mx-auto
@@ -86,18 +83,15 @@
           </button>
         </div>
       </div>
-      </div>
     </div>
 
     <!-- Bottom Telegram Button -->
     <div
-      class="fixed bottom-0 left-0 right-0 p-4 z-10 bg-transparent"
-      :style="ctaContainerStyle"
-      ref="ctaRef"
+      class="fixed bottom-0 left-0 right-0 bg-white/75 backdrop-blur-sm p-4 pb-[max(var(--tg-content-safe-area-inset-bottom),1rem)] z-10"
     >
       <button
         @click="handleTelegramContinue"
-        class="w-full mx-auto h-12 xs:h-14 sm:h-16 bg-gradient-to-r from-dbd-primary to-[#473FFF]
+        class="w-full h-12 xs:h-14 sm:h-16 bg-gradient-to-r from-dbd-primary to-[#473FFF]
                text-white font-bold text-sm xs:text-base rounded-full flex items-center justify-center gap-3
                transition-all duration-200 hover:shadow-lg border-2 border-white/20 hover:border-white/40 hover:scale-[1.02]"
       >
@@ -130,14 +124,9 @@ const emailError = ref(false)
 const emailErrorMessage = ref('')
 const isFocused = ref(false)
 const hasBlurred = ref(false)
+const keyboardVisible = ref(false)
+const initialViewportHeight = ref(0)
 const showTermsModal = ref(false)
-// Layout state
-const safeBottom = ref(0)
-const stableH = ref(0)
-const ctaHeight = ref(80) // will be measured on mount
-const ctaRef = ref(null)
-let viewportChangedHandler = null
-let resizeHandler = null
 
 // Telegram WebApp detection
 const isTelegramWebApp = computed(() => {
@@ -184,13 +173,41 @@ const validateEmail = () => {
 
 const handleFocus = () => {
   isFocused.value = true
+
+  // Enhanced keyboard detection for Telegram WebApp vs browser
+  if (isTelegramWebApp.value) {
+    // In Telegram WebApp, use viewport changes
+    setTimeout(() => {
+      if (window.Telegram?.WebApp?.viewportHeight) {
+        const heightDiff = initialViewportHeight.value - window.Telegram.WebApp.viewportHeight
+        keyboardVisible.value = heightDiff > 100
+      }
+    }, 300)
+  } else {
+    // In browser, detect keyboard appearance with a delay
+    setTimeout(() => {
+      keyboardVisible.value = true
+    }, 300)
+  }
 }
 
 const handleBlur = () => {
   isFocused.value = false
   hasBlurred.value = true
-  validateEmail()
 
+  // Handle keyboard hiding
+  if (isTelegramWebApp.value) {
+    setTimeout(() => {
+      if (window.Telegram?.WebApp?.viewportHeight) {
+        const heightDiff = initialViewportHeight.value - window.Telegram.WebApp.viewportHeight
+        keyboardVisible.value = heightDiff > 100
+      }
+    }, 100)
+  } else {
+    keyboardVisible.value = false
+  }
+
+  validateEmail()
 }
 
 
@@ -225,6 +242,21 @@ const handleTelegramContinue = () => {
   router.push('/loader?redirect=/favorites')
 }
 
+// Enhanced keyboard detection for both Telegram WebApp and browser
+const handleResize = () => {
+  if (isTelegramWebApp.value) {
+    // Use Telegram WebApp's viewport API
+    if (window.Telegram?.WebApp?.viewportHeight) {
+      const heightDifference = initialViewportHeight.value - window.Telegram.WebApp.viewportHeight
+      keyboardVisible.value = heightDifference > 100
+    }
+  } else {
+    // Fallback to window height for browsers
+    const currentHeight = window.innerHeight
+    const heightDifference = initialViewportHeight.value - currentHeight
+    keyboardVisible.value = heightDifference > 150
+  }
+}
 
 // Handle background clicks to dismiss keyboard
 const handleBackgroundClick = (event) => {
@@ -247,42 +279,37 @@ const handleBackgroundClick = (event) => {
 
 // Lifecycle hooks
 onMounted(() => {
-  // Read initial CSS variables from Telegram main.js
-  const parsePx = (v) => (typeof v === 'string' && v.endsWith('px') ? parseFloat(v) : Number(v) || 0)
-  const rs = getComputedStyle(document.documentElement)
-  safeBottom.value = parsePx(rs.getPropertyValue('--tg-content-safe-area-inset-bottom') || rs.getPropertyValue('--tg-safe-area-inset-bottom'))
-  stableH.value = parsePx(rs.getPropertyValue('--tg-viewport-stable-height')) || window.innerHeight
-
-  // Measure CTA height once rendered
-  requestAnimationFrame(() => {
-    if (ctaRef.value) {
-      const rect = ctaRef.value.getBoundingClientRect()
-      if (rect && rect.height) ctaHeight.value = Math.ceil(rect.height)
-    }
-  })
-
-  viewportChangedHandler = () => {
-    const r = getComputedStyle(document.documentElement)
-    safeBottom.value = parsePx(r.getPropertyValue('--tg-content-safe-area-inset-bottom') || r.getPropertyValue('--tg-safe-area-inset-bottom'))
-    stableH.value = parsePx(r.getPropertyValue('--tg-viewport-stable-height')) || window.innerHeight
+  // Set initial viewport height based on environment
+  if (isTelegramWebApp.value && window.Telegram?.WebApp?.viewportHeight) {
+    initialViewportHeight.value = window.Telegram.WebApp.viewportHeight
+  } else {
+    initialViewportHeight.value = window.innerHeight
   }
 
-  // Listen tg viewport changes if available
-  if (isTelegramWebApp.value) {
-    window.Telegram.WebApp.onEvent('viewportChanged', viewportChangedHandler)
+  window.addEventListener('resize', handleResize)
+
+  // Enhanced viewport listening for Telegram WebApp
+  if (isTelegramWebApp.value && window.Telegram?.WebApp) {
+    window.Telegram.WebApp.onEvent('viewportChanged', handleResize)
   }
 
-  // Also listen to resize as a fallback
-  resizeHandler = () => viewportChangedHandler && viewportChangedHandler()
-  window.addEventListener('resize', resizeHandler)
+  // Also listen for visual viewport changes (better for mobile browsers)
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', handleResize)
+  }
 })
 
 onUnmounted(() => {
-  if (isTelegramWebApp.value) {
-    // Telegram SDK lacks offEvent in some versions; guard with try
-    try { window.Telegram.WebApp.offEvent && viewportChangedHandler && window.Telegram.WebApp.offEvent('viewportChanged', viewportChangedHandler) } catch {}
+  window.removeEventListener('resize', handleResize)
+
+  if (window.visualViewport) {
+    window.visualViewport.removeEventListener('resize', handleResize)
   }
-  if (resizeHandler) window.removeEventListener('resize', resizeHandler)
+
+  // Clean up Telegram WebApp event listeners
+  if (isTelegramWebApp.value && window.Telegram?.WebApp) {
+    window.Telegram.WebApp.offEvent('viewportChanged', handleResize)
+  }
 })
 
 // Computed style for the gradient card background
@@ -292,19 +319,6 @@ const cardStyle = {
     linear-gradient(90deg, #2019CE 20.91%, #473FFF 68.93%)
   `
 }
-
-// Root and scroll styles to keep CTA fixed and content scrollable under keyboard
-const rootStyle = computed(() => ({
-  minHeight: 'var(--tg-viewport-stable-height, 100vh)'
-}))
-
-const scrollStyle = computed(() => ({
-  paddingBottom: `${Math.max(ctaHeight.value, 64) + safeBottom.value}px`
-}))
-
-const ctaContainerStyle = computed(() => ({
-  paddingBottom: `max(var(--tg-content-safe-area-inset-bottom, 0px), 1rem)`
-}))
 </script>
 
 <style scoped>
@@ -380,14 +394,8 @@ input:focus-visible {
 }
 
 /* Improved touch handling for Telegram WebApp */
-  .main-content-container {
+.main-content-container {
   touch-action: manipulation;
-}
-
-/* Make inner list scrollable while keeping CTA fixed */
-.main-scroll {
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain;
 }
 
 /* Prevent zoom on input focus in iOS */
@@ -401,4 +409,25 @@ input[type="email"] {
   }
 }
 
+/* Enhanced keyboard handling for Telegram WebApp */
+@supports (height: 100vh) {
+  .min-h-screen {
+    min-height: 100vh;
+    min-height: var(--tg-viewport-height, 100vh);
+  }
+}
+
+/* Fix bottom positioning for Telegram WebApp - prevent floating above keyboard */
+.tg-viewport-stable-bottom {
+  bottom: 0px !important;
+  position: fixed !important;
+}
+
+/* Use stable viewport height in Telegram WebApp */
+@media (max-height: 100vh) {
+  .fixed.bottom-0 {
+    bottom: 0px !important;
+    position: fixed !important;
+  }
+}
 </style>
