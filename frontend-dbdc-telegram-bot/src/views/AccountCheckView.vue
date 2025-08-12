@@ -1,6 +1,7 @@
 <template>
   <div
-    class="w-full min-h-screen bg-white font-montserrat overflow-auto flex items-center justify-center telegram-webapp-container"
+    class="w-full min-h-screen bg-white font-montserrat telegram-webapp-container"
+    :class="{ 'overflow-auto': isTelegramWebApp && isKeyboardVisible, 'overflow-hidden': !(isTelegramWebApp && isKeyboardVisible) }"
     @click="handleBackgroundClick"
   >
     <!-- Main Content Container -->
