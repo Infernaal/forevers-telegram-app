@@ -232,7 +232,6 @@ const handleBlur = () => {
   }
 }
 
-
 const openTerms = () => {
   showTermsModal.value = true
 }
