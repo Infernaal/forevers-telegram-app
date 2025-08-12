@@ -17,41 +17,19 @@
 
           <!-- Verification Code Input -->
           <div class="flex flex-col items-center gap-3 flex-1 justify-center">
-            <!-- Code Input Boxes -->
-            <div class="flex justify-center gap-2 xs:gap-3 sm:gap-4">
-              <div
-                v-for="(digit, index) in verificationCode"
-                :key="index"
-                class="w-11 xs:w-12 sm:w-14 h-11 xs:h-12 sm:h-14 rounded-lg border-2 flex items-center justify-center cursor-pointer transition-all flex-shrink-0"
-                :class="{
-                  'border-dbd-orange bg-black': digit === '' && focusedIndex === index && !verificationError,
-                  'border-green-500 bg-green-900': digit !== '' && !verificationError,
-                  'border-white bg-black': digit === '' && focusedIndex !== index && !verificationError,
-                  'border-red-500 bg-red-900': verificationError
-                }"
-                :style="{
-                  backgroundColor: verificationError ? '#1F0F0F' : (digit !== '' ? '#020F03' : '#000000'),
-                  borderColor: verificationError ? '#EF4444' : (digit !== '' ? '#07B80E' : (focusedIndex === index ? '#FF6800' : '#FFFFFF'))
-                }"
-                @click="focusInput(index)"
-              >
-                <input
-                  :ref="el => inputRefs[index] = el"
-                  v-model="verificationCode[index]"
-                  @input="handleInput(index, $event)"
-                  @keydown="handleKeydown(index, $event)"
-                  @focus="focusedIndex = index; clearError()"
-                  @blur="focusedIndex = -1"
-                  type="text"
-                  maxlength="1"
-                  class="w-full h-full bg-transparent text-center text-white font-bold border-none outline-none"
-                  inputmode="numeric"
-                  pattern="[0-9]*"
-                  :style="{
-                    fontSize: digit !== '' ? '22px' : '18px'
-                  }"
-                />
-              </div>
+            <!-- Single Code Input -->
+            <div class="w-full max-w-[280px] xs:max-w-[300px] sm:max-w-[320px]">
+              <input
+                v-model="verificationCode"
+                @input="handleInput"
+                @focus="clearError()"
+                type="text"
+                maxlength="5"
+                class="w-full h-11 xs:h-12 sm:h-14 rounded-lg border-2 text-center text-white font-bold border-dbd-orange bg-black outline-none"
+                inputmode="numeric"
+                pattern="[0-9]*"
+                placeholder="Enter verification code"
+              />
             </div>
 
             <!-- Error Message -->
