@@ -171,6 +171,16 @@ const validateEmail = () => {
 
 const handleFocus = () => {
   isFocused.value = true
+
+  // Smooth scroll up for Telegram WebApp to prevent keyboard from covering the button
+  if (isTelegramWebApp.value) {
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+    }, 100)
+  }
 }
 
 const handleBlur = () => {
