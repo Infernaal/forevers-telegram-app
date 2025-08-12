@@ -78,7 +78,7 @@ class EmailService:
 
     def get_base64_logo(self) -> str:
         """Convert dbd-logo.svg to base64"""
-        logo_path = os.path.join(os.path.dirname(__file__), '../../frontend-dbdc-telegram-bot/public/dbd-logo.svg')
+        logo_path = os.path.join(os.path.dirname(__file__), '../dbd-logo.svg')
         with open(logo_path, 'rb') as logo_file:
             return base64.b64encode(logo_file.read()).decode('utf-8')
 
