@@ -187,6 +187,16 @@ const handleBlur = () => {
   isFocused.value = false
   hasBlurred.value = true
   validateEmail()
+
+  // Scroll back to original position when losing focus in Telegram WebApp
+  if (isTelegramWebApp.value) {
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+    }, 100)
+  }
 }
 
 
