@@ -323,7 +323,7 @@ onUnmounted(() => {
   } else {
     window.removeEventListener('resize', handleResize)
   }
-}
+})
 
 // Computed style for the gradient card background
 const cardStyle = {
