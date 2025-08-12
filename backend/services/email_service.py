@@ -91,31 +91,23 @@ class EmailService:
             <head>
                 <meta charset="utf-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>DBDC Verification Code</title>
+                <title>Verification Code</title>
             </head>
             <body style="margin: 0; padding: 0; background-color: #f5f5f5; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
                 <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                     <!-- Header -->
-                    <div style="background: linear-gradient(135deg, #FF6800 0%, #FF8A3D 100%); padding: 40px 20px; text-align: center;">
-                        <h1 style="color: #ffffff; margin: 0; font-size: 28px; font-weight: bold;">DBDC</h1>
-                        <p style="color: #ffffff; margin: 10px 0 0 0; font-size: 16px; opacity: 0.9;">Email Verification</p>
+                    <div style="background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%); padding: 40px 20px; text-align: center;">
+                        <img src="https://dbdc-mini.dubadu.com/public/dbd-logo.svg" alt="DBD Logo" style="max-width: 100px; margin-bottom: 10px;">
                     </div>
-                    
                     <!-- Content -->
-                    <div style="padding: 40px 30px;">
+                    <div style="padding: 20px;">
                         <h2 style="color: #333333; margin: 0 0 20px 0; font-size: 24px; font-weight: 600;">Your Verification Code</h2>
-                        
                         <p style="color: #666666; font-size: 16px; line-height: 1.6; margin: 0 0 30px 0;">
                             We received a request to verify your email address. Please use the verification code below to complete your authorization:
                         </p>
-                        
-                        <!-- Verification Code -->
-                        <div style="background-color: #f8f9fa; border: 2px solid #FF6800; border-radius: 10px; padding: 30px; text-align: center; margin: 30px 0;">
-                            <div style="font-size: 36px; font-weight: bold; color: #FF6800; letter-spacing: 8px; font-family: 'Courier New', monospace;">
-                                {code}
-                            </div>
+                        <div style="background-color: #f8f9fa; border: 2px solid #007BFF; border-radius: 10px; padding: 30px; text-align: center; margin: 30px 0;">
+                            <span style="font-size: 36px; font-weight: bold; color: #007BFF;">{code}</span>
                         </div>
-                        
                         <p style="color: #666666; font-size: 14px; line-height: 1.6; margin: 30px 0 0 0;">
                             <strong>Important:</strong><br>
                             • This code will expire in {self.code_expiry_minutes} minutes<br>
@@ -123,7 +115,6 @@ class EmailService:
                             • If you didn't request this verification, please ignore this email
                         </p>
                     </div>
-                    
                     <!-- Footer -->
                     <div style="background-color: #f8f9fa; padding: 20px 30px; border-top: 1px solid #e9ecef;">
                         <p style="color: #999999; font-size: 12px; margin: 0; text-align: center;">
