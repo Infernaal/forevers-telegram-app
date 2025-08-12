@@ -155,7 +155,7 @@ class EmailService:
                 port=self.smtp_port,
                 username=self.smtp_username,
                 password=self.smtp_password,
-                use_tls=True,
+                use_tls=False,
             )
             
             return True, "Email sent successfully"
