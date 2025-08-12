@@ -77,8 +77,8 @@ class EmailService:
             del self.verification_codes[email]
 
     def get_base64_logo(self) -> str:
-        """Convert dbd-logo.svg to base64"""
-        logo_path = os.path.join(os.path.dirname(__file__), '../dbd-logo.svg')
+        """Convert dbd-logo.png to base64"""
+        logo_path = os.path.join(os.path.dirname(__file__), '../dbd-logo.png')
         with open(logo_path, 'rb') as logo_file:
             return base64.b64encode(logo_file.read()).decode('utf-8')
 
@@ -107,7 +107,7 @@ class EmailService:
                 <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                     <!-- Header -->
                     <div style="background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%); padding: 40px 20px; text-align: center;">
-                        <img src="data:image/svg+xml;base64,{base64_logo}" alt="DBD Logo" style="max-width: 100px; margin-bottom: 10px;">
+                        <img src="data:image/png;base64,{base64_logo}" alt="DBD Logo" style="max-width: 100px; margin-bottom: 10px;">
                     </div>
                     <!-- Content -->
                     <div style="padding: 20px;">
