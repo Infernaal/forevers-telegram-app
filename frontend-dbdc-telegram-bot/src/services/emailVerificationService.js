@@ -4,7 +4,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dbdc-mini.dub
 class EmailVerificationService {
   async sendVerificationCode(email) {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/v1/dbdc/email/send-verification-code`, {
+      const response = await fetch(`${API_BASE_URL}/email/send-verification-code`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ class EmailVerificationService {
 
   async verifyCode(email, code) {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/v1/dbdc/email/verify-code`, {
+      const response = await fetch(`${API_BASE_URL}/email/verify-code`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ class EmailVerificationService {
 
   async resendVerificationCode(email) {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/v1/dbdc/email/resend-verification-code`, {
+      const response = await fetch(`${API_BASE_URL}/email/resend-verification-code`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
