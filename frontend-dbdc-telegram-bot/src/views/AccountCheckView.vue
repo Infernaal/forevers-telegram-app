@@ -7,7 +7,7 @@
     <div
       class="w-full flex-1 flex items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8 main-content-container main-content-transition"
       :class="{
-        'pb-8 xs:pb-16 pt-8 xs:pt-6 sm:pt-8': keyboardVisible,
+        'pb-10 xs:pb-12 pt-6 xs:pt-8 sm:pt-10': keyboardVisible,
         'pb-20 xs:pb-24 pt-3 sm:pt-4 md:pt-6 lg:pt-8': !keyboardVisible
       }"
       @click.stop
