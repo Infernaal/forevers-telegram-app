@@ -87,13 +87,7 @@
     </div>
 
     <!-- Bottom Telegram Button -->
-    <div
-      class="telegram-button-container"
-      :class="{
-        'fixed bottom-0 left-0 right-0 p-4 pb-[max(var(--tg-content-safe-area-inset-bottom),1rem)] z-10': !isKeyboardVisible,
-        'relative p-4 pt-8': isKeyboardVisible
-      }"
-    >
+    <div class="telegram-button-container fixed bottom-0 left-0 right-0 p-4 pb-[max(var(--tg-content-safe-area-inset-bottom),1rem)] z-10">
       <button
         @click="handleTelegramContinue"
         class="w-full mx-auto h-12 xs:h-14 sm:h-16 bg-gradient-to-r from-dbd-primary to-[#473FFF]
