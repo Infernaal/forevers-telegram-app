@@ -69,6 +69,8 @@ if (window.Telegram && window.Telegram.WebApp) {
     const safeAreaBottom = tg.safeAreaInset?.bottom || 0
     document.documentElement.style.setProperty('--tg-safe-area-inset-top', safeAreaTop + 'px')
     document.documentElement.style.setProperty('--tg-safe-area-inset-bottom', safeAreaBottom + 'px')
+  // Backward/compat var used in components
+  document.documentElement.style.setProperty('--tg-content-safe-area-inset-bottom', safeAreaBottom + 'px')
   }
   updateSafeArea()
 
