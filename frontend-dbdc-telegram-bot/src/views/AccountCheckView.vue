@@ -74,16 +74,22 @@
           <!-- Continue Button -->
           <button
             @click="handleContinue"
-            :disabled="!canContinue"
+            :disabled="!canContinue || isLoading"
             class="continue-button w-full h-12 xs:h-14 sm:h-16 rounded-full font-bold text-sm xs:text-base sm:text-lg
                    border-2 bg-transparent relative overflow-hidden
                    transition-all duration-300 ease-in-out"
             :class="{
-              'continue-button--active': canContinue,
-              'continue-button--disabled': !canContinue
+              'continue-button--active': canContinue && !isLoading,
+              'continue-button--disabled': !canContinue || isLoading
             }"
           >
-            <span class="relative z-10">Continue</span>
+            <span class="relative z-10 flex items-center justify-center gap-2">
+              <svg v-if="isLoading" class="animate-spin h-4 w-4 xs:h-5 xs:w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              {{ isLoading ? 'Sending...' : 'Continue' }}
+            </span>
             <div class="absolute inset-0 bg-white/5 opacity-0 transition-opacity duration-300 ease-in-out continue-button__overlay"></div>
           </button>
         </div>
@@ -123,6 +129,7 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import TermsCheckbox from '../components/TermsCheckbox.vue'
 import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
+import emailVerificationService from '../services/emailVerificationService.js'
 
 const router = useRouter()
 
@@ -138,6 +145,7 @@ const initialViewportHeight = ref(0)
 const showTermsModal = ref(false)
 const keyboardTimeout = ref(null)
 const isTransitioning = ref(false)
+const isLoading = ref(false)
 
 // Telegram WebApp detection
 const isTelegramWebApp = computed(() => {
@@ -259,16 +267,39 @@ const agreeToTerms = () => {
   showTermsModal.value = false
 }
 
-const handleContinue = () => {
+const handleContinue = async () => {
   // Force validation on submit
   hasBlurred.value = true
   validateEmail()
 
-  if (!canContinue.value) return
+  if (!canContinue.value || isLoading.value) return
 
-  // Handle email form continuation
-  console.log('Continue with email:', email.value.trim())
-  router.push('/email-verification')
+  isLoading.value = true
+  emailError.value = false
+  emailErrorMessage.value = ''
+
+  try {
+    // Send verification code to email
+    const result = await emailVerificationService.sendVerificationCode(email.value.trim())
+    
+    if (result.success) {
+      // Store email in sessionStorage for verification page
+      sessionStorage.setItem('verificationEmail', email.value.trim())
+      
+      // Navigate to email verification page
+      router.push('/email-verification')
+    } else {
+      // Show error
+      emailError.value = true
+      emailErrorMessage.value = result.error || 'Failed to send verification code'
+    }
+  } catch (error) {
+    console.error('Error sending verification code:', error)
+    emailError.value = true
+    emailErrorMessage.value = 'Failed to send verification code. Please try again.'
+  } finally {
+    isLoading.value = false
+  }
 }
 
 const handleTelegramContinue = () => {

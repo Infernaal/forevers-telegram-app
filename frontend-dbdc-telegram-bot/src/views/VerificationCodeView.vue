@@ -24,13 +24,14 @@
                 :key="index"
                 class="w-11 xs:w-12 sm:w-14 h-11 xs:h-12 sm:h-14 rounded-lg border-2 flex items-center justify-center cursor-pointer transition-all flex-shrink-0"
                 :class="{
-                  'border-dbd-orange bg-black': digit === '' && focusedIndex === index,
-                  'border-green-500 bg-green-900': digit !== '',
-                  'border-white bg-black': digit === '' && focusedIndex !== index
+                  'border-dbd-orange bg-black': digit === '' && focusedIndex === index && !verificationError,
+                  'border-green-500 bg-green-900': digit !== '' && !verificationError,
+                  'border-white bg-black': digit === '' && focusedIndex !== index && !verificationError,
+                  'border-red-500 bg-red-900': verificationError
                 }"
                 :style="{
-                  backgroundColor: digit !== '' ? '#020F03' : '#000000',
-                  borderColor: digit !== '' ? '#07B80E' : (focusedIndex === index ? '#FF6800' : '#FFFFFF')
+                  backgroundColor: verificationError ? '#1F0F0F' : (digit !== '' ? '#020F03' : '#000000'),
+                  borderColor: verificationError ? '#EF4444' : (digit !== '' ? '#07B80E' : (focusedIndex === index ? '#FF6800' : '#FFFFFF'))
                 }"
                 @click="focusInput(index)"
               >
@@ -39,7 +40,7 @@
                   v-model="verificationCode[index]"
                   @input="handleInput(index, $event)"
                   @keydown="handleKeydown(index, $event)"
-                  @focus="focusedIndex = index"
+                  @focus="focusedIndex = index; clearError()"
                   @blur="focusedIndex = -1"
                   type="text"
                   maxlength="1"
@@ -51,6 +52,11 @@
                   }"
                 />
               </div>
+            </div>
+
+            <!-- Error Message -->
+            <div v-if="verificationError" class="w-full max-w-[280px] xs:max-w-[300px] sm:max-w-[320px] text-center">
+              <p class="text-red-400 font-medium text-xs xs:text-sm">{{ errorMessage }}</p>
             </div>
 
             <!-- Resend Section -->
@@ -80,7 +86,7 @@
           <div class="w-full">
             <button
               @click="handleContinue"
-              :disabled="!isCodeComplete"
+              :disabled="!isCodeComplete || isVerifying"
               class="w-full h-11 xs:h-12 sm:h-14 rounded-full font-bold text-sm xs:text-base
                      bg-dbd-orange border border-dbd-orange text-white
                      transition-all duration-300 ease-in-out
@@ -89,11 +95,15 @@
                      active:scale-[0.98] disabled:cursor-not-allowed
                      disabled:hover:scale-100 disabled:hover:bg-dbd-orange"
               :class="{
-                'opacity-50': !isCodeComplete
+                'opacity-50': !isCodeComplete || isVerifying
               }"
             >
-              <span>Continue</span>
-              <svg class="w-4 h-4 xs:w-5 xs:h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg v-if="isVerifying" class="animate-spin h-4 w-4 xs:h-5 xs:w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              <span>{{ isVerifying ? 'Verifying...' : 'Continue' }}</span>
+              <svg v-if="!isVerifying" class="w-4 h-4 xs:w-5 xs:h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1.03895 13.0391L20.4531 13.0391L15.8206 17.6718C15.4147 18.0774 15.4147 18.7354 15.8206 19.1409C16.2264 19.5468 16.8844 19.5468 17.2896 19.1409L23.6956 12.7348C24.1015 12.3292 24.1015 11.6712 23.6956 11.2657L17.2896 4.85927C17.0867 4.6563 16.8209 4.55496 16.5551 4.55496C16.2893 4.55496 16.0234 4.6563 15.8206 4.85927C15.4147 5.26487 15.4147 5.92282 15.8206 6.3283L20.4531 10.9613L1.03895 10.9613C0.465234 10.9613 -1.20632e-06 11.4265 -1.25648e-06 12.0002C-1.30663e-06 12.5739 0.465174 13.0391 1.03895 13.0391Z" fill="currentColor"/>
               </svg>
             </button>
@@ -107,6 +117,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
+import emailVerificationService from '../services/emailVerificationService.js'
 
 const router = useRouter()
 
@@ -115,6 +126,11 @@ const verificationCode = ref(['', '', '', '', ''])
 const focusedIndex = ref(-1)
 const inputRefs = ref([])
 const timeLeft = ref(59)
+const email = ref('')
+const isLoading = ref(false)
+const isVerifying = ref(false)
+const verificationError = ref(false)
+const errorMessage = ref('')
 let intervalId = null
 
 // Computed
@@ -200,44 +216,102 @@ const handleKeydown = (index, event) => {
   }
 }
 
-const resendCode = () => {
-  if (timeLeft.value === 0) {
-    // Reset timer
-    timeLeft.value = 59
-    startTimer()
-    
-    // Clear existing code
-    verificationCode.value = ['', '', '', '', '']
-    focusInput(0)
-    
-    // Add haptic feedback
-    if (window.triggerHaptic) {
-      window.triggerHaptic('impact', 'light')
+const clearError = () => {
+  verificationError.value = false
+  errorMessage.value = ''
+}
+
+const resendCode = async () => {
+  if (timeLeft.value === 0 && !isLoading.value) {
+    isLoading.value = true
+    clearError()
+
+    try {
+      const result = await emailVerificationService.resendVerificationCode(email.value)
+      
+      if (result.success) {
+        // Reset timer
+        timeLeft.value = 59
+        startTimer()
+        
+        // Clear existing code
+        verificationCode.value = ['', '', '', '', '']
+        focusInput(0)
+        
+        // Add haptic feedback
+        if (window.triggerHaptic) {
+          window.triggerHaptic('impact', 'light')
+        }
+      } else {
+        verificationError.value = true
+        errorMessage.value = result.error || 'Failed to resend verification code'
+      }
+    } catch (error) {
+      console.error('Error resending verification code:', error)
+      verificationError.value = true
+      errorMessage.value = 'Failed to resend verification code'
+    } finally {
+      isLoading.value = false
     }
-    
-    console.log('Resending verification code...')
   }
 }
 
-const handleContinue = () => {
-  if (!isCodeComplete.value) return
+const handleContinue = async () => {
+  if (!isCodeComplete.value || isVerifying.value) return
   
-  // Add haptic feedback
-  if (window.triggerHaptic) {
-    window.triggerHaptic('impact', 'medium')
+  isVerifying.value = true
+  clearError()
+  
+  try {
+    const code = verificationCode.value.join('')
+    const result = await emailVerificationService.verifyCode(email.value, code)
+    
+    if (result.success) {
+      // Add haptic feedback
+      if (window.triggerHaptic) {
+        window.triggerHaptic('impact', 'medium')
+      }
+      
+      // Navigate to next step
+      router.push('/favorites')
+    } else {
+      // Show error
+      verificationError.value = true
+      errorMessage.value = result.message || 'Verification code invalid'
+      
+      // Add error haptic feedback
+      if (window.triggerHaptic) {
+        window.triggerHaptic('impact', 'heavy')
+      }
+    }
+  } catch (error) {
+    console.error('Error verifying code:', error)
+    verificationError.value = true
+    errorMessage.value = 'Failed to verify code. Please try again.'
+    
+    // Add error haptic feedback
+    if (window.triggerHaptic) {
+      window.triggerHaptic('impact', 'heavy')
+    }
+  } finally {
+    isVerifying.value = false
   }
-  
-  const code = verificationCode.value.join('')
-  console.log('Verification code entered:', code)
-  
-  // Navigate to next step
-  router.push('/favorites')
 }
 
 // Removed header-related functions
 
 // Lifecycle
 onMounted(() => {
+  // Get email from sessionStorage
+  const storedEmail = sessionStorage.getItem('verificationEmail')
+  if (storedEmail) {
+    email.value = storedEmail
+  } else {
+    // If no email found, redirect back to account check
+    router.push('/account-check')
+    return
+  }
+  
   startTimer()
   
   // Auto-focus first input
@@ -274,6 +348,7 @@ input::-webkit-inner-spin-button {
 
 input[type=number] {
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 /* Performance optimizations */

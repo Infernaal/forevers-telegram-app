@@ -6,3 +6,5 @@ python-dotenv
 pydantic
 pydantic-core
 starlette
+aiosmtplib
+email-validator
