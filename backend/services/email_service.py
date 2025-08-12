@@ -97,7 +97,7 @@ class EmailService:
                 <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                     <!-- Header -->
                     <div style="background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%); padding: 40px 20px; text-align: center;">
-                        <img src="https://dbdc-mini.dubadu.com/public/dbd-logo.svg" alt="DBD Logo" style="max-width: 100px; margin-bottom: 10px;">
+                        <img src="https://dbdc-mini.dubadu.com/dbd-logo.svg" alt="DBD Logo" style="max-width: 100px; margin-bottom: 10px;">
                     </div>
                     <!-- Content -->
                     <div style="padding: 20px;">
