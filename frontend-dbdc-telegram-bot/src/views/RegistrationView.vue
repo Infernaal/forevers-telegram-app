@@ -480,6 +480,9 @@ watch(() => route.name, (newRouteName) => {
 
 const editField = (fieldName) => {
   if (fieldName === 'country') {
+    // Save current form data before navigation
+    saveFormData()
+
     // Pass current selected country to CountrySelectView for editing
     if (selectedCountry.value && selectedCountry.value.name) {
       sessionStorage.setItem('currentCountry', JSON.stringify(selectedCountry.value))
