@@ -194,10 +194,10 @@
               <!-- Phone Number Field -->
               <div class="relative">
                 <div :class="[
-                  'w-full h-[52px] rounded-lg border bg-white flex items-center px-3 focus-within:border-dbd-primary focus-within:ring-1 focus-within:ring-dbd-primary/20 transition-all duration-200',
-                  showPhoneFilled ? 'border-dbd-dark' : 'border-[#B7B7B7]'
+                  'w-full h-[52px] rounded-lg border bg-white flex items-center px-3 focus-within:ring-1 transition-all duration-200',
+                  phoneOverLength ? 'border-red-500 focus-within:border-red-500 focus-within:ring-red-300' : (showPhoneFilled ? 'border-dbd-dark focus-within:border-dbd-primary focus-within:ring-dbd-primary/20' : 'border-[#B7B7B7] focus-within:border-dbd-primary focus-within:ring-dbd-primary/20')
                 ]">
-                  <div v-if="!showPhoneFilled" class="flex items-center flex-1 pr-8">
+                  <div v-if="!showPhoneFilled" class="flex items-center flex-1">
                     <svg class="w-6 h-6 mr-2 flex-shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                       <path d="M22.4979 18.4211C22.4686 17.6088 22.1303 16.8508 21.5452 16.2866C20.3996 15.1819 19.4397 14.5442 18.5245 14.2797C17.2635 13.9153 16.0954 14.2467 15.0529 15.2648C15.0513 15.2663 15.0498 15.2678 15.0482 15.2694L13.9392 16.3702C13.246 15.9795 11.8983 15.1216 10.4421 13.6654L10.3342 13.5576C8.8778 12.1012 8.01995 10.7532 7.62961 10.0608L8.73047 8.95173C8.73203 8.95018 8.73358 8.94862 8.73514 8.94702C9.75319 7.90464 10.0846 6.73659 9.72017 5.4754C9.45566 4.56021 8.81799 3.60036 7.71328 2.45475C7.14915 1.86974 6.39114 1.53136 5.57883 1.50207C4.76602 1.47274 3.98607 1.75567 3.38117 2.29864L3.35763 2.3198C3.34672 2.32961 3.33605 2.33974 3.32564 2.35011C2.12146 3.5543 1.49023 5.24009 1.50011 7.2253C1.51697 10.5977 3.37043 14.4543 6.45804 17.5419C7.04026 18.1241 7.70196 18.7003 8.42474 19.2545C8.78424 19.5302 9.29915 19.4622 9.57481 19.1027C9.85052 18.7432 9.78252 18.2282 9.42297 17.9526C8.75709 17.442 8.14985 16.9135 7.61812 16.3819C4.82923 13.593 3.15542 10.167 3.1407 7.21713C3.13311 5.68823 3.59302 4.4121 4.47087 3.52509L4.47715 3.51943C5.07339 2.98422 5.97611 3.01679 6.53236 3.59359C8.65611 5.79606 8.50234 6.83585 7.5639 7.79816L6.04329 9.33019C5.80482 9.57046 5.73842 9.93255 5.87611 10.2418C5.91471 10.3285 6.84859 12.3921 9.17438 14.7179L9.28237 14.8258C11.6079 17.1513 13.6715 18.0852 13.7582 18.1238C14.0674 18.2615 14.4296 18.1951 14.6698 17.9566L16.2019 16.436C17.1643 15.4975 18.2041 15.3438 20.4064 17.4676C20.9832 18.0237 21.0158 18.9265 20.4807 19.5227L20.4749 19.5291C19.5951 20.3998 18.3326 20.8594 16.8203 20.8594C16.8079 20.8594 16.7954 20.8594 16.7829 20.8593C15.5741 20.8533 14.1744 20.5219 12.7351 19.9011C12.3192 19.7216 11.8364 19.9134 11.657 20.3294C11.4776 20.7454 11.6693 21.2281 12.0853 21.4075C13.749 22.1252 15.3267 22.4927 16.7747 22.4999C16.7901 22.5 16.8054 22.5 16.8208 22.5C18.786 22.5 20.455 21.8692 21.6499 20.6744C21.6603 20.664 21.6704 20.6533 21.6802 20.6424L21.7014 20.6187C22.2444 20.0139 22.5273 19.2334 22.4979 18.421..." fill="#4B4D50"/>
                     </svg>
@@ -221,39 +221,36 @@
                       </div>
                     </div>
                   </div>
-                  <div v-else class="flex items-center flex-1">
+                  <div v-else class="flex items-center flex-1 pr-6">
                     <svg class="w-6 h-6 mr-2 flex-shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                       <path d="M22.4979 18.4211C22.4686 17.6088 22.1303 16.8508 21.5452 16.2866C20.3996 15.1819 19.4397 14.5442 18.5245 14.2797C17.2635 13.9153 16.0954 14.2467 15.0529 15.2648C15.0513 15.2663 15.0498 15.2678 15.0482 15.2694L13.9392 16.3702C13.246 15.9795 11.8983 15.1216 10.4421 13.6654L10.3342 13.5576C8.8778 12.1012 8.01995 10.7532 7.62961 10.0608L8.73047 8.95173C8.73203 8.95018 8.73358 8.94862 8.73514 8.94702C9.75319 7.90464 10.0846 6.73659 9.72017 5.4754C9.45566 4.56021 8.81799 3.60036 7.71328 2.45475C7.14915 1.86974 6.39114 1.53136 5.57883 1.50207C4.76602 1.47274 3.98607 1.75567 3.38117 2.29864L3.35763 2.3198C3.34672 2.32961 3.33605 2.33974 3.32564 2.35011C2.12146 3.5543 1.49023 5.24009 1.50011 7.2253C1.51697 10.5977 3.37043 14.4543 6.45804 17.5419C7.04026 18.1241 7.70196 18.7003 8.42474 19.2545C8.78424 19.5302 9.29915 19.4622 9.57481 19.1027C9.85052 18.7432 9.78252 18.2282 9.42297 17.9526C8.75709 17.442 8.14985 16.9135 7.61812 16.3819C4.82923 13.593 3.15542 10.167 3.1407 7.21713C3.13311 5.68823 3.59302 4.4121 4.47087 3.52509L4.47715 3.51943C5.07339 2.98422 5.97611 3.01679 6.53236 3.59359C8.65611 5.79606 8.50234 6.83585 7.5639 7.79816L6.04329 9.33019C5.80482 9.57046 5.73842 9.93255 5.87611 10.2418C5.91471 10.3285 6.84859 12.3921 9.17438 14.7179L9.28237 14.8258C11.6079 17.1513 13.6715 18.0852 13.7582 18.1238C14.0674 18.2615 14.4296 18.1951 14.6698 17.9566L16.2019 16.436C17.1643 15.4975 18.2041 15.3438 20.4064 17.4676C20.9832 18.0237 21.0158 18.9265 20.4807 19.5227L20.4749 19.5291C19.5951 20.3998 18.3326 20.8594 16.8203 20.8594C16.8079 20.8594 16.7954 20.8594 16.7829 20.8593C15.5741 20.8533 14.1744 20.5219 12.7351 19.9011C12.3192 19.7216 11.8364 19.9134 11.657 20.3294C11.4776 20.7454 11.6693 21.2281 12.0853 21.4075C13.749 22.1252 15.3267 22.4927 16.7747 22.4999C16.7901 22.5 16.8054 22.5 16.8208 22.5C18.786 22.5 20.455 21.8692 21.6499 20.6744C21.6603 20.664 21.6704 20.6533 21.6802 20.6424L21.7014 20.6187C22.2444 20.0139 22.5273 19.2334 22.4979 18.421..." fill="#4B4D50"/>
                     </svg>
                     <div class="flex flex-col items-start justify-center flex-1 cursor-pointer" @click="editField('phone')">
                       <div class="text-xs text-dbd-gray font-medium leading-none">Your Phone #</div>
-                      <div class="text-base font-medium text-dbd-dark mt-1">{{ formData.phone }}</div>
+                      <div class="text-base font-medium text-dbd-dark mt-1">{{ displayPhoneNumber }}</div>
                     </div>
-                    <!-- Success checkmark -->
-                    <div v-if="showPhoneFilled" class="w-5 h-5 rounded-full border border-[#88EF8C] bg-[#B3FFB6] flex items-center justify-center mr-2">
+                    <!-- Success checkmark (hidden if any hard error like over-length) -->
+                      <div v-if="showPhoneFilled && !phoneOverLength" class="w-5 h-5 rounded-full border border-[#88EF8C] bg-[#B3FFB6] flex items-center justify-center mr-1">
                       <svg class="w-2 h-2" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8">
                         <path d="M7.65064 0.0612768C7.28964 -0.158776 6.88699 0.265611 6.65095 0.5171C6.10947 1.11439 5.65128 1.80598 5.13753 2.4347C4.56826 3.1263 4.04064 3.81789 3.45749 4.49379C3.12425 4.87103 2.76325 5.27969 2.5411 5.75124C2.04125 5.20108 1.61083 4.60379 1.05545 4.11656C0.652791 3.77076 -0.0136711 3.51927 0.000213534 4.35233C0.0279828 5.4369 0.874945 6.60004 1.49975 7.33876C1.76356 7.65312 2.11068 7.9832 2.51333 7.99892C2.99929 8.03035 3.49914 7.37019 3.79072 7.00868C4.30447 6.37996 4.72101 5.67262 5.19306 5.02821C5.80399 4.17943 6.4288 3.34635 7.02584 2.48186C7.40072 1.94744 8.58091 0.627101 7.65064 0.0612768ZM0.611114 4.28946C0.59723 4.28946 0.583345 4.28946 0.555576 4.30515C0.500037 4.28946 0.458384 4.27371 0.402845 4.24228C0.444499 4.21084 0.513922 4.22656 0.611114 4.28946Z" fill="#07B80E"/>
                       </svg>
                     </div>
                     <!-- Error cross -->
-                    <div v-else-if="showPhoneError" class="w-5 h-5 rounded-full border border-[#EF8888] bg-[#FFB3B3] flex items-center justify-center mr-2">
+                      <div v-else-if="showPhoneError || phoneOverLength" class="w-5 h-5 rounded-full border border-[#EF8888] bg-[#FFB3B3] flex items-center justify-center mr-2">
                       <svg class="w-2 h-2" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8">
                         <path d="M6.5 1.5L1.5 6.5M1.5 1.5L6.5 6.5" stroke="#DC2626" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                       </svg>
                     </div>
-                    <div class="w-5 h-5 rounded-full border border-[#CFCFCF] bg-white flex items-center justify-center">
-                      <svg class="w-3 h-3" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path d="M8 14L12 10L8 6" stroke="#4B4D50" stroke-linecap="round"/>
-                      </svg>
-                    </div>
                   </div>
-                  <!-- Fixed right icon position -->
-                  <div class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 rounded-full border border-[#CFCFCF] bg-white flex items-center justify-center">
+                  <!-- Fixed right icon only when collapsed -->
+                  <div v-if="showPhoneFilled" class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 rounded-full border border-[#CFCFCF] bg-white flex items-center justify-center">
                     <svg class="w-3 h-3" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                       <path d="M8 14L12 10L8 6" stroke="#4B4D50" stroke-linecap="round"/>
                     </svg>
                   </div>
                 </div>
+                <!-- Phone specific error message -->
+                <div v-if="phoneErrorMessage" class="mt-1 text-xs font-medium" :class="phoneOverLength ? 'text-red-600' : 'text-red-600'">{{ phoneErrorMessage }}</div>
               </div>
 
               <!-- Register Button -->
@@ -287,6 +284,8 @@
 import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import CountryFlag from '@/components/CountryFlag.vue'
+import { fullCountries } from '@/utils/allCountries.js'
+import { parsePhoneNumberFromString, AsYouType } from 'libphonenumber-js'
 
 const router = useRouter()
 const route = useRoute()
@@ -304,33 +303,8 @@ const formData = ref({
 const showCountryDropdown = ref(false)
 const selectedCountry = ref({ name: '', code: '' })
 
-// Available countries list with phone codes
-const countries = ref([
-  { name: 'United States', code: 'USA', phoneCode: '+1', minDigits: 10, maxDigits: 10, placeholder: '(555) 123-4567' },
-  { name: 'Canada', code: 'CA', phoneCode: '+1', minDigits: 10, maxDigits: 10, placeholder: '(555) 123-4567' },
-  { name: 'United Kingdom', code: 'GB', phoneCode: '+44', minDigits: 10, maxDigits: 11, placeholder: '7911 123456' },
-  { name: 'Australia', code: 'AU', phoneCode: '+61', minDigits: 9, maxDigits: 9, placeholder: '412 345 678' },
-  { name: 'Germany', code: 'DE', phoneCode: '+49', minDigits: 10, maxDigits: 12, placeholder: '1512 3456789' },
-  { name: 'France', code: 'FR', phoneCode: '+33', minDigits: 9, maxDigits: 9, placeholder: '6 12 34 56 78' },
-  { name: 'Spain', code: 'ES', phoneCode: '+34', minDigits: 9, maxDigits: 9, placeholder: '612 34 56 78' },
-  { name: 'Italy', code: 'IT', phoneCode: '+39', minDigits: 9, maxDigits: 11, placeholder: '312 345 6789' },
-  { name: 'Netherlands', code: 'NL', phoneCode: '+31', minDigits: 9, maxDigits: 9, placeholder: '6 12345678' },
-  { name: 'Norway', code: 'NO', phoneCode: '+47', minDigits: 8, maxDigits: 8, placeholder: '12 34 56 78' },
-  { name: 'Ireland', code: 'IE', phoneCode: '+353', minDigits: 9, maxDigits: 9, placeholder: '85 123 4567' },
-  { name: 'New Zealand', code: 'NZ', phoneCode: '+64', minDigits: 8, maxDigits: 10, placeholder: '21 123 4567' },
-  { name: 'Japan', code: 'JP', phoneCode: '+81', minDigits: 10, maxDigits: 11, placeholder: '90 1234 5678' },
-  { name: 'South Korea', code: 'KR', phoneCode: '+82', minDigits: 9, maxDigits: 11, placeholder: '10 1234 5678' },
-  { name: 'Singapore', code: 'SG', phoneCode: '+65', minDigits: 8, maxDigits: 8, placeholder: '9123 4567' },
-  { name: 'China', code: 'CN', phoneCode: '+86', minDigits: 11, maxDigits: 11, placeholder: '138 0013 8000' },
-  { name: 'India', code: 'IN', phoneCode: '+91', minDigits: 10, maxDigits: 10, placeholder: '98765 43210' },
-  { name: 'United Arab Emirates', code: 'UAE', phoneCode: '+971', minDigits: 9, maxDigits: 9, placeholder: '50 123 4567' },
-  { name: 'Kazakhstan', code: 'KZ', phoneCode: '+7', minDigits: 10, maxDigits: 10, placeholder: '701 123 4567' },
-  { name: 'Poland', code: 'PL', phoneCode: '+48', minDigits: 9, maxDigits: 9, placeholder: '512 345 678' },
-  { name: 'Ukraine', code: 'UA', phoneCode: '+380', minDigits: 9, maxDigits: 9, placeholder: '67 123 4567' },
-  { name: 'Russia', code: 'RU', phoneCode: '+7', minDigits: 10, maxDigits: 10, placeholder: '912 345 6789' },
-  { name: 'Portugal', code: 'PT', phoneCode: '+351', minDigits: 9, maxDigits: 9, placeholder: '912 345 678' },
-  { name: 'Malta', code: 'MT', phoneCode: '+356', minDigits: 8, maxDigits: 8, placeholder: '9696 1234' }
-])
+// Available countries list with phone codes (full automatic dataset)
+const countries = ref(fullCountries)
 
 // Track which fields have been touched (user moved away from them)
 const touchedFields = ref({
@@ -361,17 +335,31 @@ const isCountryValid = computed(() => {
 })
 
 const isPhoneValid = computed(() => {
-  if (!selectedCountry.value.name || !formData.value.phone.trim()) {
+  if (!selectedCountry.value.code || !formData.value.phone.trim()) return false
+  const iso2 = selectedCountry.value.code.slice(0,2).toUpperCase()
+  const dial = getSelectedCountryCode().replace('+','')
+  try {
+    // Build full international number for parsing
+    const digitsOnly = formData.value.phone.replace(/\D/g,'')
+    const fullIntl = `+${dial}${digitsOnly}`
+    const parsed = parsePhoneNumberFromString(fullIntl)
+    return !!parsed && parsed.country === iso2 && parsed.isValid()
+  } catch {
     return false
   }
+})
 
-  // Remove spaces and formatting for digit counting
-  const phoneDigits = formData.value.phone.replace(/\D/g, '')
-  const country = countries.value.find(c => c.name === selectedCountry.value.name)
-
-  if (!country) return false
-
-  return phoneDigits.length >= country.minDigits && phoneDigits.length <= country.maxDigits
+// Formatted phone with country code (international format) when valid
+const displayPhoneNumber = computed(() => {
+  if (!selectedCountry.value.code || !formData.value.phone) return formData.value.phone
+  const dial = getSelectedCountryCode().replace('+','')
+  try {
+    const digitsOnly = formData.value.phone.replace(/\D/g,'')
+    const fullIntl = `+${dial}${digitsOnly}`
+    const parsed = parsePhoneNumberFromString(fullIntl)
+    if (parsed && parsed.isValid()) return parsed.formatInternational()
+  } catch {}
+  return `+${dial} ${formData.value.phone}`.trim()
 })
 
 // Show filled state only if field is touched, valid, and has meaningful content
@@ -416,19 +404,36 @@ const showCountryError = computed(() => {
 })
 
 const showPhoneError = computed(() => {
-  if (!touchedFields.value.phone || !formData.value.phone.trim() || !selectedCountry.value.name) {
-    return false
+  if (!touchedFields.value.phone || !formData.value.phone.trim() || !selectedCountry.value.code) return false
+  const hasContent = formData.value.phone.replace(/\D/g,'').length > 0
+  const dial = getSelectedCountryCode().replace('+','')
+  try {
+    const fullIntl = `+${dial}${formData.value.phone.replace(/\D/g,'')}`
+    const parsed = parsePhoneNumberFromString(fullIntl)
+    return hasContent && (!parsed || !parsed.isPossible())
+  } catch {
+    return hasContent
   }
+})
 
-  const phoneDigits = formData.value.phone.replace(/\D/g, '')
-  const country = countries.value.find(c => c.name === selectedCountry.value.name)
+// Country specific approximate max national digit lengths (fallback to 15 if unknown)
+const maxNationalLengths = {
+  UA: 9, RU: 10, KZ: 10, US: 10, CA: 10, GB: 10, AU: 9, NZ: 10, DE: 12, FR: 9, ES: 9, IT: 11, NL: 9, NO: 8, IE: 9, JP: 11, KR: 11, SG: 8, CN: 11, IN: 10, AE: 9, PT: 9, MT: 8, PL: 9
+}
 
-  if (!country) return false
+const phoneOverLength = computed(() => {
+  if (!selectedCountry.value.code) return false
+  const iso2 = selectedCountry.value.code.slice(0,2).toUpperCase()
+  const digits = formData.value.phone.replace(/\D/g,'')
+  const limit = maxNationalLengths[iso2] || 15
+  return digits.length > limit
+})
 
-  const hasContent = phoneDigits.length > 0
-  const isInvalid = phoneDigits.length > 0 && (phoneDigits.length < country.minDigits || phoneDigits.length > country.maxDigits)
-
-  return hasContent && isInvalid
+// Unified phone error message (production-friendly, English)
+const phoneErrorMessage = computed(() => {
+  if (phoneOverLength.value) return 'Phone number exceeds the maximum length for the selected country.'
+  if (showPhoneError.value) return 'Please enter a valid phone number.'
+  return ''
 })
 
 const isFormValid = computed(() => {
@@ -454,16 +459,16 @@ const getSelectedCountryName = () => {
 }
 
 const getPhonePlaceholder = () => {
-  if (!selectedCountry.value.name) return '123 456 789'
-  const country = countries.value.find(c => c.name === selectedCountry.value.name)
-  return country ? country.placeholder : '123 456 789'
+  if (!selectedCountry.value.code) return 'Enter phone number'
+  return 'Enter phone number'
 }
 
 const handlePhoneInput = (event) => {
-  // Format phone number as user types (optional)
-  let value = event.target.value.replace(/\D/g, '')
-  event.target.value = value
-  formData.value.phone = value
+  // Keep UX simple: store only raw national digits (no live pretty formatting) so nothing "прыгает" и не дублируется.
+  // Formatting (international) уже показывается в свернутом состоянии через displayPhoneNumber.
+  let digits = event.target.value.replace(/\D/g,'').slice(0,15)
+  formData.value.phone = digits
+  event.target.value = digits
 }
 
 // Methods
@@ -488,8 +493,14 @@ const toggleCountryDropdown = () => {
 }
 
 const selectCountry = (country) => {
+  const prevCode = selectedCountry.value.code
   selectedCountry.value = country
   formData.value.country = country.name
+  if (prevCode && prevCode !== country.code) {
+    // Country actually changed – clear phone input & its touched state
+    formData.value.phone = ''
+    touchedFields.value.phone = false
+  }
   showCountryDropdown.value = false
   touchedFields.value.country = true
 }
@@ -543,8 +554,13 @@ const handleCountrySelection = () => {
 
       // Add a small delay for smooth transition
       setTimeout(() => {
+        const prevCode = selectedCountry.value.code
         selectedCountry.value = country
         formData.value.country = country.name
+        if (prevCode && prevCode !== country.code) {
+          formData.value.phone = ''
+          touchedFields.value.phone = false
+        }
         touchedFields.value.country = true
 
         // Add haptic feedback when country is updated
@@ -617,8 +633,10 @@ const handleRegister = () => {
     window.triggerHaptic('impact', 'medium')
   }
 
+  // Placeholder: here you'd normally send data to backend
   console.log('Registration submitted:', formData.value)
-  // Handle registration logic here
+  // Redirect flow: loader -> favorites
+  router.push({ path: '/loader', query: { redirect: '/favorites' } })
 }
 </script>
 

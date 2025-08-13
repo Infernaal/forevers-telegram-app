@@ -92,6 +92,7 @@
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import CountryFlag from '@/components/CountryFlag.vue'
+import { fullCountries } from '@/utils/allCountries.js'
 
 const router = useRouter()
 const emit = defineEmits(['select-country'])
@@ -102,33 +103,8 @@ const searchQuery = ref('')
 // Selected country
 const selectedCountry = ref(null)
 
-// Countries list with phone codes (matching the registration view)
-const countries = ref([
-  { name: 'India', code: 'IN', phoneCode: '+91', minDigits: 10, maxDigits: 10, placeholder: '98765 43210' },
-  { name: 'United Arab Emirates', code: 'UAE', phoneCode: '+971', minDigits: 9, maxDigits: 9, placeholder: '50 123 4567' },
-  { name: 'United States', code: 'USA', phoneCode: '+1', minDigits: 10, maxDigits: 10, placeholder: '(555) 123-4567' },
-  { name: 'United Kingdom', code: 'GB', phoneCode: '+44', minDigits: 10, maxDigits: 11, placeholder: '7911 123456' },
-  { name: 'Canada', code: 'CA', phoneCode: '+1', minDigits: 10, maxDigits: 10, placeholder: '(555) 123-4567' },
-  { name: 'New Zealand', code: 'NZ', phoneCode: '+64', minDigits: 8, maxDigits: 10, placeholder: '21 123 4567' },
-  { name: 'Spain', code: 'ES', phoneCode: '+34', minDigits: 9, maxDigits: 9, placeholder: '612 34 56 78' },
-  { name: 'Italy', code: 'IT', phoneCode: '+39', minDigits: 9, maxDigits: 11, placeholder: '312 345 6789' },
-  { name: 'Japan', code: 'JP', phoneCode: '+81', minDigits: 10, maxDigits: 11, placeholder: '90 1234 5678' },
-  { name: 'Australia', code: 'AU', phoneCode: '+61', minDigits: 9, maxDigits: 9, placeholder: '412 345 678' },
-  { name: 'Germany', code: 'DE', phoneCode: '+49', minDigits: 10, maxDigits: 12, placeholder: '1512 3456789' },
-  { name: 'France', code: 'FR', phoneCode: '+33', minDigits: 9, maxDigits: 9, placeholder: '6 12 34 56 78' },
-  { name: 'Netherlands', code: 'NL', phoneCode: '+31', minDigits: 9, maxDigits: 9, placeholder: '6 12345678' },
-  { name: 'Norway', code: 'NO', phoneCode: '+47', minDigits: 8, maxDigits: 8, placeholder: '12 34 56 78' },
-  { name: 'Ireland', code: 'IE', phoneCode: '+353', minDigits: 9, maxDigits: 9, placeholder: '85 123 4567' },
-  { name: 'South Korea', code: 'KR', phoneCode: '+82', minDigits: 9, maxDigits: 11, placeholder: '10 1234 5678' },
-  { name: 'Singapore', code: 'SG', phoneCode: '+65', minDigits: 8, maxDigits: 8, placeholder: '9123 4567' },
-  { name: 'China', code: 'CN', phoneCode: '+86', minDigits: 11, maxDigits: 11, placeholder: '138 0013 8000' },
-  { name: 'Kazakhstan', code: 'KZ', phoneCode: '+7', minDigits: 10, maxDigits: 10, placeholder: '701 123 4567' },
-  { name: 'Poland', code: 'PL', phoneCode: '+48', minDigits: 9, maxDigits: 9, placeholder: '512 345 678' },
-  { name: 'Ukraine', code: 'UA', phoneCode: '+380', minDigits: 9, maxDigits: 9, placeholder: '67 123 4567' },
-  { name: 'Russia', code: 'RU', phoneCode: '+7', minDigits: 10, maxDigits: 10, placeholder: '912 345 6789' },
-  { name: 'Portugal', code: 'PT', phoneCode: '+351', minDigits: 9, maxDigits: 9, placeholder: '912 345 678' },
-  { name: 'Malta', code: 'MT', phoneCode: '+356', minDigits: 8, maxDigits: 8, placeholder: '9696 1234' }
-])
+// Countries list (full automatic dataset)
+const countries = ref(fullCountries)
 
 // Computed filtered countries based on search
 const filteredCountries = computed(() => {

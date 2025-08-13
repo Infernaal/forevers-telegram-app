@@ -92,16 +92,24 @@ const countryCodeMap = {
 
 const flagSrc = computed(() => {
   if (imageError.value) {
-    return '/flags/default.svg' // fallback if needed
+    // Use jsDelivr country flags (svg-country-flags) fallback then default
+    const upper = (props.country || '').toUpperCase()
+    return `https://cdn.jsdelivr.net/npm/svg-country-flags@1.2.10/svg/${upper.toLowerCase()}.svg`
   }
-  
   const countryKey = props.country.toLowerCase()
-  const countryCode = countryCodeMap[countryKey] || props.country.toUpperCase()
-  return `/flags/States=${countryCode}.svg`
+  let countryCode = countryCodeMap[countryKey] || props.country.toUpperCase()
+  // Prefer local asset naming pattern; if not existing (heuristic: USA/UAE special cases else 2 letters)
+  const localPath = `/flags/States=${countryCode}.svg`
+  return localPath
 })
 
-const handleImageError = () => {
-  imageError.value = true
+const handleImageError = (e) => {
+  // First failure switches to CDN; if CDN also fails, show default
+  if (!imageError.value) {
+    imageError.value = true
+  } else {
+    e.target.src = '/flags/default.svg'
+  }
 }
 </script>
 
