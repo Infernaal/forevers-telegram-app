@@ -49,11 +49,18 @@ class EmailVerificationService {
         body: JSON.stringify({ email, code })
       })
 
-      const data = await response.json()
-
       if (!response.ok) {
-        throw new Error(data.detail || 'Failed to verify code')
+        let errorMessage = 'Failed to verify code'
+        try {
+          const errorData = await response.json()
+          errorMessage = errorData.detail || errorMessage
+        } catch (jsonError) {
+          console.warn('Failed to parse error response:', jsonError)
+        }
+        throw new Error(errorMessage)
       }
+
+      const data = await response.json()
 
       return {
         success: data.valid,
@@ -78,11 +85,18 @@ class EmailVerificationService {
         body: JSON.stringify({ email })
       })
 
-      const data = await response.json()
-
       if (!response.ok) {
-        throw new Error(data.detail || 'Failed to resend verification code')
+        let errorMessage = 'Failed to resend verification code'
+        try {
+          const errorData = await response.json()
+          errorMessage = errorData.detail || errorMessage
+        } catch (jsonError) {
+          console.warn('Failed to parse error response:', jsonError)
+        }
+        throw new Error(errorMessage)
       }
+
+      const data = await response.json()
 
       return {
         success: true,
