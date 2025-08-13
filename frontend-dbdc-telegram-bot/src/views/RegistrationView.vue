@@ -34,10 +34,11 @@
                   <input
                     v-model="formData.email"
                     type="email"
-                    placeholder="Email *"
+                    placeholder="Email"
                     required
                     class="flex-1 text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none"
                   />
+                  <span class="text-red-500 text-sm font-medium ml-1"> *</span>
                 </div>
               </div>
 
@@ -47,10 +48,11 @@
                   <input
                     v-model="formData.firstName"
                     type="text"
-                    placeholder="First name *"
+                    placeholder="First name"
                     required
                     class="flex-1 text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none"
                   />
+                  <span class="text-red-500 text-sm font-medium ml-1"> *</span>
                 </div>
               </div>
 
@@ -60,10 +62,11 @@
                   <input
                     v-model="formData.lastName"
                     type="text"
-                    placeholder="Last name *"
+                    placeholder="Last name"
                     required
                     class="flex-1 text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none"
                   />
+                  <span class="text-red-500 text-sm font-medium ml-1"> *</span>
                 </div>
               </div>
 
