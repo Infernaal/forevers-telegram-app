@@ -323,7 +323,7 @@ const countries = ref([
   { name: 'Singapore', code: 'SG', phoneCode: '+65', minDigits: 8, maxDigits: 8, placeholder: '9123 4567' },
   { name: 'China', code: 'CN', phoneCode: '+86', minDigits: 11, maxDigits: 11, placeholder: '138 0013 8000' },
   { name: 'India', code: 'IN', phoneCode: '+91', minDigits: 10, maxDigits: 10, placeholder: '98765 43210' },
-  { name: 'UAE', code: 'UAE', phoneCode: '+971', minDigits: 9, maxDigits: 9, placeholder: '50 123 4567' },
+  { name: 'United Arab Emirates', code: 'UAE', phoneCode: '+971', minDigits: 9, maxDigits: 9, placeholder: '50 123 4567' },
   { name: 'Kazakhstan', code: 'KZ', phoneCode: '+7', minDigits: 10, maxDigits: 10, placeholder: '701 123 4567' },
   { name: 'Poland', code: 'PL', phoneCode: '+48', minDigits: 9, maxDigits: 9, placeholder: '512 345 678' },
   { name: 'Ukraine', code: 'UA', phoneCode: '+380', minDigits: 9, maxDigits: 9, placeholder: '67 123 4567' },
