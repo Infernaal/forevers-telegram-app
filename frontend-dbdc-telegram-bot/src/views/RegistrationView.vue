@@ -441,28 +441,24 @@ const isFormValid = computed(() => {
 })
 
 
-// Phone input handlers
-const onPhoneInput = (phone, phoneObject_) => {
-  formData.value.phone = phone
-  phoneObject.value = phoneObject_
-
-  // Auto-update country selection if phone country differs
-  if (phoneObject_.country && phoneObject_.country.name) {
-    const phoneCountry = countries.value.find(c =>
-      c.code.toLowerCase() === phoneObject_.country.iso2.toLowerCase() ||
-      c.name.toLowerCase().includes(phoneObject_.country.name.toLowerCase())
-    )
-
-    if (phoneCountry && phoneCountry.name !== selectedCountry.value.name) {
-      selectedCountry.value = phoneCountry
-      formData.value.country = phoneCountry.name
-      touchedFields.value.country = true
-    }
-  }
+// Helper functions for phone field
+const getSelectedCountryCode = () => {
+  if (!selectedCountry.value.name) return 'Country code'
+  const country = countries.value.find(c => c.name === selectedCountry.value.name)
+  return country ? country.phoneCode : 'Country code'
 }
 
-const onPhoneBlur = () => {
-  handleFieldBlur('phone')
+const getPhonePlaceholder = () => {
+  if (!selectedCountry.value.name) return 'Enter phone number'
+  const country = countries.value.find(c => c.name === selectedCountry.value.name)
+  return country ? country.placeholder : 'Enter phone number'
+}
+
+const handlePhoneInput = (event) => {
+  // Format phone number as user types (optional)
+  let value = event.target.value.replace(/\D/g, '')
+  event.target.value = value
+  formData.value.phone = value
 }
 
 // Methods
