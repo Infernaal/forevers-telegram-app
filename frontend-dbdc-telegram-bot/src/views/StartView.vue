@@ -85,11 +85,11 @@ const cardStyle = computed(() => ({
 
 const isLoading = ref(false)
 
-// Handle start: delegate user check to loader action for unified UX
+// Handle start: immediately show loader; loader itself выполняет проверку (action=check-telegram)
 const handleStart = () => {
   if (isLoading.value) return
   isLoading.value = true
-  router.push({ path: '/loader', query: { action: 'check-telegram', redirect: '/account-check', minDelay: 400 } })
+  router.push({ path: '/loader', query: { action: 'check-telegram', redirect: '/account-check', minDelay: 300 } })
 }
 
 // Initialize app

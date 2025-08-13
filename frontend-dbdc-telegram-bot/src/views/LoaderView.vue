@@ -78,6 +78,7 @@ const error = ref(null)
 const providedRedirect = route.query.redirect || '/account-check'
 const action = route.query.action || null
 const minDelay = Number(route.query.minDelay || 400) // prevent flash
+const duration = Number(route.query.duration || 0) // explicit duration (ms) for pure time-based loader
 const startedAt = performance.now()
 
 const cardStyle = {
@@ -105,8 +106,12 @@ const getTelegramUserId = () => {
 
 const runAction = async () => {
   if (!action) {
-    // No action, just redirect quickly
-    return finish(providedRedirect)
+    // Time-based loader: wait for duration (or fallback to default 5000) after minDelay
+    const total = duration > 0 ? duration : 5000
+    const elapsed = performance.now() - startedAt
+    const remaining = Math.max(total - elapsed, 0)
+    setTimeout(() => finish(providedRedirect), remaining)
+    return
   }
 
   switch (action) {
