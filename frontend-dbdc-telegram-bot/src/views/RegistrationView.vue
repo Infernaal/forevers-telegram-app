@@ -452,6 +452,7 @@ const handleCountrySelection = () => {
 
       // Clear the stored data after using it
       sessionStorage.removeItem('selectedCountry')
+      sessionStorage.removeItem('registrationFormState')
     } catch (error) {
       console.error('Error parsing stored country:', error)
     }
