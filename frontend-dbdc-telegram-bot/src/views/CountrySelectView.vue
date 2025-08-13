@@ -202,16 +202,23 @@ selectedCountry.value = countries.value.find(country => country.code === 'USA')
   }
 }
 
-/* Responsive adjustments */
+/* Telegram WebApp support */
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Responsive adjustments for larger screens */
 @media (min-width: 768px) {
-  .w-full {
+  .w-full.h-screen {
     max-width: 600px;
     margin: 0 auto;
   }
 }
 
 @media (min-width: 1024px) {
-  .w-full {
+  .w-full.h-screen {
     max-width: 800px;
     margin: 0 auto;
   }
