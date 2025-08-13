@@ -259,6 +259,7 @@ import { useRouter, useRoute } from 'vue-router'
 import CountryFlag from '@/components/CountryFlag.vue'
 
 const router = useRouter()
+const route = useRoute()
 
 // Form data
 const formData = ref({
