@@ -265,6 +265,15 @@ const formData = ref({
   phone: ''
 })
 
+// Track which fields have been touched (user moved away from them)
+const touchedFields = ref({
+  email: false,
+  firstName: false,
+  lastName: false,
+  country: false,
+  phone: false
+})
+
 // Computed properties
 const isFormValid = computed(() => {
   return formData.value.email.trim() &&
