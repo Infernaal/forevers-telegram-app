@@ -12,11 +12,19 @@ class EmailVerificationService {
         body: JSON.stringify({ email })
       })
 
-      const data = await response.json()
-
       if (!response.ok) {
-        throw new Error(data.detail || 'Failed to send verification code')
+        let errorMessage = 'Failed to send verification code'
+        try {
+          const errorData = await response.json()
+          errorMessage = errorData.detail || errorMessage
+        } catch (jsonError) {
+          // If JSON parsing fails, use default error message
+          console.warn('Failed to parse error response:', jsonError)
+        }
+        throw new Error(errorMessage)
       }
+
+      const data = await response.json()
 
       return {
         success: true,
