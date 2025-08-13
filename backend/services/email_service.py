@@ -12,8 +12,8 @@ load_dotenv()
 
 class EmailService:
     def __init__(self):
-        self.smtp_host = os.getenv("SMTP_HOST", "sandbox.smtp.mailtrap.io")
-        self.smtp_port = int(os.getenv("SMTP_PORT", "587"))
+        self.smtp_host = os.getenv("SMTP_HOST", "smtp.mailgun.org")
+        self.smtp_port = int(os.getenv("SMTP_PORT", "465"))
         self.smtp_username = os.getenv("SMTP_USERNAME")
         self.smtp_password = os.getenv("SMTP_PASSWORD")
         self.from_email = os.getenv("FROM_EMAIL")
@@ -155,7 +155,7 @@ class EmailService:
                 port=self.smtp_port,
                 username=self.smtp_username,
                 password=self.smtp_password,
-                use_tls=True,
+                use_tls=True
             )
             
             return True, "Email sent successfully"
