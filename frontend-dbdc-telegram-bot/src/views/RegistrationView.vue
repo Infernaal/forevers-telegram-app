@@ -63,14 +63,15 @@
               <div class="relative">
                 <div :class="[
                   'w-full h-[52px] rounded-lg border bg-white flex items-center px-3',
-                  formData.firstName.trim() ? 'border-dbd-dark' : 'border-[#B7B7B7]'
+                  showFirstNameFilled ? 'border-dbd-dark' : 'border-[#B7B7B7]'
                 ]">
-                  <div v-if="!formData.firstName.trim()" class="flex items-center flex-1">
+                  <div v-if="!showFirstNameFilled" class="flex items-center flex-1">
                     <input
                       v-model="formData.firstName"
                       type="text"
                       placeholder="First name"
                       required
+                      @blur="handleFieldBlur('firstName')"
                       class="flex-1 text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none"
                     />
                     <span class="text-red-500 text-sm font-medium ml-1"> *</span>
@@ -81,7 +82,7 @@
                     </div>
                     <div class="text-base font-medium text-dbd-dark mt-1">{{ formData.firstName }}</div>
                   </div>
-                  <div v-if="formData.firstName.trim()" class="w-5 h-5 rounded-full border border-[#88EF8C] bg-[#B3FFB6] flex items-center justify-center">
+                  <div v-if="showFirstNameFilled" class="w-5 h-5 rounded-full border border-[#88EF8C] bg-[#B3FFB6] flex items-center justify-center">
                     <svg class="w-2 h-2" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8">
                       <path d="M7.65064 0.0612768C7.28964 -0.158776 6.88699 0.265611 6.65095 0.5171C6.10947 1.11439 5.65128 1.80598 5.13753 2.4347C4.56826 3.1263 4.04064 3.81789 3.45749 4.49379C3.12425 4.87103 2.76325 5.27969 2.5411 5.75124C2.04125 5.20108 1.61083 4.60379 1.05545 4.11656C0.652791 3.77076 -0.0136711 3.51927 0.000213534 4.35233C0.0279828 5.4369 0.874945 6.60004 1.49975 7.33876C1.76356 7.65312 2.11068 7.9832 2.51333 7.99892C2.99929 8.03035 3.49914 7.37019 3.79072 7.00868C4.30447 6.37996 4.72101 5.67262 5.19306 5.02821C5.80399 4.17943 6.4288 3.34635 7.02584 2.48186C7.40072 1.94744 8.58091 0.627101 7.65064 0.0612768ZM0.611114 4.28946C0.59723 4.28946 0.583345 4.28946 0.555576 4.30515C0.500037 4.28946 0.458384 4.27371 0.402845 4.24228C0.444499 4.21084 0.513922 4.22656 0.611114 4.28946Z" fill="#07B80E"/>
                     </svg>
@@ -93,14 +94,15 @@
               <div class="relative">
                 <div :class="[
                   'w-full h-[52px] rounded-lg border bg-white flex items-center px-3',
-                  formData.lastName.trim() ? 'border-dbd-dark' : 'border-[#B7B7B7]'
+                  showLastNameFilled ? 'border-dbd-dark' : 'border-[#B7B7B7]'
                 ]">
-                  <div v-if="!formData.lastName.trim()" class="flex items-center flex-1">
+                  <div v-if="!showLastNameFilled" class="flex items-center flex-1">
                     <input
                       v-model="formData.lastName"
                       type="text"
                       placeholder="Last name"
                       required
+                      @blur="handleFieldBlur('lastName')"
                       class="flex-1 text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none"
                     />
                     <span class="text-red-500 text-sm font-medium ml-1"> *</span>
@@ -111,7 +113,7 @@
                     </div>
                     <div class="text-base font-medium text-dbd-dark mt-1">{{ formData.lastName }}</div>
                   </div>
-                  <div v-if="formData.lastName.trim()" class="w-5 h-5 rounded-full border border-[#88EF8C] bg-[#B3FFB6] flex items-center justify-center">
+                  <div v-if="showLastNameFilled" class="w-5 h-5 rounded-full border border-[#88EF8C] bg-[#B3FFB6] flex items-center justify-center">
                     <svg class="w-2 h-2" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8">
                       <path d="M7.65064 0.0612768C7.28964 -0.158776 6.88699 0.265611 6.65095 0.5171C6.10947 1.11439 5.65128 1.80598 5.13753 2.4347C4.56826 3.1263 4.04064 3.81789 3.45749 4.49379C3.12425 4.87103 2.76325 5.27969 2.5411 5.75124C2.04125 5.20108 1.61083 4.60379 1.05545 4.11656C0.652791 3.77076 -0.0136711 3.51927 0.000213534 4.35233C0.0279828 5.4369 0.874945 6.60004 1.49975 7.33876C1.76356 7.65312 2.11068 7.9832 2.51333 7.99892C2.99929 8.03035 3.49914 7.37019 3.79072 7.00868C4.30447 6.37996 4.72101 5.67262 5.19306 5.02821C5.80399 4.17943 6.4288 3.34635 7.02584 2.48186C7.40072 1.94744 8.58091 0.627101 7.65064 0.0612768ZM0.611114 4.28946C0.59723 4.28946 0.583345 4.28946 0.555576 4.30515C0.500037 4.28946 0.458384 4.27371 0.402845 4.24228C0.444499 4.21084 0.513922 4.22656 0.611114 4.28946Z" fill="#07B80E"/>
                     </svg>
