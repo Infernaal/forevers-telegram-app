@@ -8,42 +8,20 @@
       </div>
 
       <!-- Search Section -->
-      <div class="mb-6 flex-shrink-0">
-        <!-- Search Input -->
-        <div class="relative mb-4">
-          <div class="w-full h-[50px] rounded-[29px] border border-[#D8D8D8] bg-[#FAFAFA] flex items-center">
-            <input
-              v-model="searchQuery"
-              type="text"
-              placeholder="Search country"
-              class="flex-1 px-5 py-4 text-[15px] font-medium text-dbd-dark placeholder-dbd-light-gray bg-transparent border-none outline-none rounded-l-[29px]"
-            />
-            <div class="w-12 h-[50px] rounded-r-[25px] border-l border-[#C7C7C7] bg-white flex items-center justify-center">
-              <svg 
-                class="w-6 h-6 text-dbd-light-gray" 
-                fill="none" 
-                xmlns="http://www.w3.org/2000/svg" 
-                viewBox="0 0 24 24"
-              >
-                <path 
-                  d="M10.0494 18.4507C11.837 18.4507 13.5735 17.8486 14.9838 16.7395L20.3045 22.1115C20.7019 22.499 21.3353 22.4879 21.7192 22.0866C22.0936 21.6952 22.0936 21.0746 21.7192 20.6831L16.3985 15.3111C19.1243 11.7685 18.4895 6.66563 14.9807 3.91356C11.472 1.1615 6.41791 1.80236 3.69215 5.34501C0.966393 8.88766 1.60113 13.9905 5.10992 16.7426C6.52252 17.8506 8.26058 18.4516 10.0494 18.4507ZM5.77429 6.01269C8.13538 3.62877 11.9635 3.62872 14.3246 6.0126C16.6857 8.39648 16.6858 12.2615 14.3247 14.6454C11.9636 17.0294 8.13551 17.0294 5.77438 14.6455C5.77434 14.6455 5.77434 14.6455 5.77429 14.6454C3.4132 12.2789 3.39929 8.42798 5.74318 6.04411C5.75354 6.0336 5.76389 6.02315 5.77429 6.01269Z" 
-                  fill="currentColor"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
-
-        <!-- Results Count -->
-        <div class="text-right px-5">
-          <span class="text-[15px] font-bold text-dbd-dark">{{ filteredCountries.length }}</span>
-          <span class="text-[15px] text-[#8F8F8F] ml-1">results</span>
+      <div class="mb-4 flex-shrink-0">
+        <div class="relative">
+          <input
+            v-model="searchQuery"
+            type="text"
+            placeholder="Search country"
+            class="w-full h-[50px] rounded-[29px] border border-[#D8D8D8] bg-[#FAFAFA] px-5 py-4 text-[15px] font-medium text-dbd-dark placeholder-dbd-light-gray outline-none"
+          />
         </div>
       </div>
 
-      <!-- Countries List -->
-      <div class="flex-1 min-h-0">
-        <div class="h-full overflow-y-auto scrollbar-hidden">
+      <!-- Countries List (vertical scroll only) -->
+      <div class="flex-1 min-h-0 overflow-hidden">
+        <div class="h-full overflow-y-auto overflow-x-hidden scrollbar-hidden vertical-only">
           <div class="space-y-2">
             <div
               v-for="country in filteredCountries"
@@ -211,5 +189,12 @@ body {
   will-change: auto;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+}
+</style>
+<style scoped>
+/* Vertical only scrolling (prevent horizontal drag) */
+.vertical-only {
+  touch-action: pan-y;
+  overscroll-behavior: contain;
 }
 </style>

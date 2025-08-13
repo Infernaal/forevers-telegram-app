@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full min-h-screen bg-white font-montserrat overflow-hidden flex flex-col" style="padding-bottom: max(var(--tg-content-safe-area-inset-bottom, 0px), 1rem);">
+  <div class="w-full min-h-screen bg-white font-montserrat flex flex-col scroll-hide" style="padding-bottom: max(var(--tg-content-safe-area-inset-bottom, 0px), 1rem);">
     <!-- Main Content -->
     <div class="flex-1 flex items-center justify-center p-4 sm:p-6 md:p-8">
       <div class="w-full max-w-[375px] mx-auto">
@@ -703,4 +703,15 @@ input::placeholder {
   -webkit-backface-visibility: hidden;
 }
 
+</style>
+<style scoped>
+/* Hidden vertical scrollbar while allowing scroll */
+.scroll-hide {
+  overflow-y: auto;
+  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.scroll-hide::-webkit-scrollbar { /* Chrome/Safari */
+  display: none;
+}
 </style>
