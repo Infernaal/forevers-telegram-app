@@ -64,40 +64,69 @@
 </template>
 
 <script setup>
-import { computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import telegramUserService from '../services/telegramUserService.js'
 
 const router = useRouter()
 const route = useRoute()
 
-// Get redirect target from query parameter, default to account-check
-const redirectTo = computed(() => {
-  return route.query.redirect || '/account-check'
-})
+const isProcessing = ref(true)
+const error = ref(null)
 
+// Provided redirect (may be overridden by action result)
+const providedRedirect = route.query.redirect || '/account-check'
+const action = route.query.action || null
+const minDelay = Number(route.query.minDelay || 400) // prevent flash
+const startedAt = performance.now()
 
-let timeoutId = null
-
-// Auto-redirect after 5 seconds
-onMounted(() => {
-  timeoutId = setTimeout(() => {
-    router.push(redirectTo.value)
-  }, 5000)
-})
-
-onUnmounted(() => {
-  if (timeoutId) {
-    clearTimeout(timeoutId)
-  }
-})
-
-// Computed style for the gradient card background
 const cardStyle = {
   background: `
     linear-gradient(0deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.25) 100%),
     linear-gradient(90deg, #2019CE 20.91%, #473FFF 68.93%)
   `
 }
+
+const finish = async (target) => {
+  const elapsed = performance.now() - startedAt
+  const waitMore = minDelay - elapsed
+  if (waitMore > 0) {
+    await new Promise(r => setTimeout(r, waitMore))
+  }
+  isProcessing.value = false
+  router.replace(target)
+}
+
+const getTelegramUserId = () => {
+  try {
+    return window?.Telegram?.WebApp?.initDataUnsafe?.user?.id || null
+  } catch (e) { return null }
+}
+
+const runAction = async () => {
+  if (!action) {
+    // No action, just redirect quickly
+    return finish(providedRedirect)
+  }
+
+  switch (action) {
+    case 'check-telegram': {
+      const tgId = getTelegramUserId()
+      if (!tgId) {
+        return finish('/account-check')
+      }
+      const res = await telegramUserService.getUserByTelegramId(tgId)
+      const target = res.status === 'success' ? '/favorites' : '/account-check'
+      return finish(target)
+    }
+    default:
+      return finish(providedRedirect)
+  }
+}
+
+onMounted(() => {
+  runAction().catch(() => finish(providedRedirect))
+})
 </script>
 
 <style scoped>

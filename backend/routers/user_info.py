@@ -1,4 +1,5 @@
 ﻿from fastapi import APIRouter, Depends
+from pydantic import BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from db.database import get_db
@@ -39,7 +40,7 @@ async def get_user_info(user_id: int, db: AsyncSession = Depends(get_db)):
         )
 
 
-@router.get("/by-telegram/{telegram_id}", response_model=UserInfoResponseWrapper, summary="Get user by Telegram ID")
+@router.get("/auth/by-telegram/{telegram_id}", response_model=UserInfoResponseWrapper, summary="Auth (existence) by Telegram ID")
 async def get_user_by_telegram(telegram_id: int, db: AsyncSession = Depends(get_db)):
     """Lightweight existence check by Telegram ID.
     Returns only status=success if a user with given telegram id exists, otherwise status=failed.
@@ -54,3 +55,4 @@ async def get_user_by_telegram(telegram_id: int, db: AsyncSession = Depends(get_
         return UserInfoResponseWrapper(status="success")
     except Exception:
         return UserInfoResponseWrapper(status="failed")
+

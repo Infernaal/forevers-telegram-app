@@ -4,7 +4,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dbdc-mini.dub
 class TelegramUserService {
   async getUserByTelegramId(telegramId) {
     try {
-      const response = await fetch(`${API_BASE_URL}/user/by-telegram/${telegramId}`)
+  const response = await fetch(`${API_BASE_URL}/user/auth/by-telegram/${telegramId}`)
       if (!response.ok) {
         throw new Error('Network error')
       }

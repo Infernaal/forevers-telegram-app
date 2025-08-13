@@ -64,7 +64,6 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import telegramUserService from '../services/telegramUserService.js'
 
 // Router instance
 const router = useRouter()
@@ -86,33 +85,11 @@ const cardStyle = computed(() => ({
 
 const isLoading = ref(false)
 
-// Extract Telegram user id from WebApp initData if available
-const getTelegramUserId = () => {
-  try {
-    if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user) {
-      return window.Telegram.WebApp.initDataUnsafe.user.id
-    }
-  } catch (e) {
-    console.warn('Cannot read Telegram user id', e)
-  }
-  return null
-}
-
-// Handle start button click -> verify user then redirect
-const handleStart = async () => {
+// Handle start: delegate user check to loader action for unified UX
+const handleStart = () => {
   if (isLoading.value) return
   isLoading.value = true
-  const tgId = getTelegramUserId()
-  // If no telegram context fallback directly to account-check
-  if (!tgId) {
-    router.push({ path: '/loader', query: { redirect: '/account-check' } })
-    isLoading.value = false
-    return
-  }
-  const result = await telegramUserService.getUserByTelegramId(tgId)
-  const redirectPath = result.status === 'success' ? '/favorites' : '/account-check'
-  router.push({ path: '/loader', query: { redirect: redirectPath } })
-  isLoading.value = false
+  router.push({ path: '/loader', query: { action: 'check-telegram', redirect: '/account-check', minDelay: 400 } })
 }
 
 // Initialize app
