@@ -432,6 +432,22 @@ onBeforeUnmount(() => {
   document.removeEventListener('click', handleClickOutside)
 })
 
+const editField = (fieldName) => {
+  // Reset the touched state for the field to show the input again
+  touchedFields.value[fieldName] = false
+
+  // For country field, also clear the selected country to show the dropdown
+  if (fieldName === 'country') {
+    selectedCountry.value = { name: '', code: '' }
+    formData.value.country = ''
+  }
+
+  // Add haptic feedback if available
+  if (window.triggerHaptic) {
+    window.triggerHaptic('impact', 'light')
+  }
+}
+
 const handleRegister = () => {
   if (!isFormValid.value) return
 
