@@ -28,7 +28,7 @@
               <!-- Email Field -->
               <div class="relative">
                 <div :class="[
-                  'w-full h-[52px] rounded-lg border bg-white flex items-center px-3',
+                  'w-full h-[52px] rounded-lg border bg-white flex items-center px-3 focus-within:border-dbd-primary focus-within:ring-1 focus-within:ring-dbd-primary/20 transition-all duration-200',
                   showEmailFilled ? 'border-dbd-dark' : 'border-[#B7B7B7]'
                 ]">
                   <div v-if="!showEmailFilled" class="flex items-center flex-1">
@@ -41,19 +41,26 @@
                       placeholder="Email"
                       required
                       @blur="handleFieldBlur('email')"
-                      class="flex-1 text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none"
+                      class="flex-1 text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none focus:ring-0"
                     />
-                    <span class="text-red-500 text-sm font-medium ml-1"> *</span>
+                    <span v-if="!showEmailError" class="text-red-500 text-sm font-medium ml-1"> *</span>
                   </div>
-                  <div v-else class="flex flex-col items-start justify-center flex-1">
+                  <div v-else class="flex flex-col items-start justify-center flex-1 cursor-pointer" @click="editField('email')">
                     <div class="text-xs text-dbd-gray font-medium leading-none">
                       <span>Email </span><span class="text-red-500">*</span>
                     </div>
                     <div class="text-base font-medium text-dbd-dark mt-1">{{ formData.email }}</div>
                   </div>
+                  <!-- Success checkmark -->
                   <div v-if="showEmailFilled" class="w-5 h-5 rounded-full border border-[#88EF8C] bg-[#B3FFB6] flex items-center justify-center">
                     <svg class="w-2 h-2" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8">
                       <path d="M7.65064 0.0612768C7.28964 -0.158776 6.88699 0.265611 6.65095 0.5171C6.10947 1.11439 5.65128 1.80598 5.13753 2.4347C4.56826 3.1263 4.04064 3.81789 3.45749 4.49379C3.12425 4.87103 2.76325 5.27969 2.5411 5.75124C2.04125 5.20108 1.61083 4.60379 1.05545 4.11656C0.652791 3.77076 -0.0136711 3.51927 0.000213534 4.35233C0.0279828 5.4369 0.874945 6.60004 1.49975 7.33876C1.76356 7.65312 2.11068 7.9832 2.51333 7.99892C2.99929 8.03035 3.49914 7.37019 3.79072 7.00868C4.30447 6.37996 4.72101 5.67262 5.19306 5.02821C5.80399 4.17943 6.4288 3.34635 7.02584 2.48186C7.40072 1.94744 8.58091 0.627101 7.65064 0.0612768ZM0.611114 4.28946C0.59723 4.28946 0.583345 4.28946 0.555576 4.30515C0.500037 4.28946 0.458384 4.27371 0.402845 4.24228C0.444499 4.21084 0.513922 4.22656 0.611114 4.28946Z" fill="#07B80E"/>
+                    </svg>
+                  </div>
+                  <!-- Error cross -->
+                  <div v-else-if="showEmailError" class="w-5 h-5 rounded-full border border-[#EF8888] bg-[#FFB3B3] flex items-center justify-center">
+                    <svg class="w-2 h-2" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8">
+                      <path d="M6.5 1.5L1.5 6.5M1.5 1.5L6.5 6.5" stroke="#DC2626" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </div>
                 </div>
@@ -62,29 +69,39 @@
               <!-- First Name Field -->
               <div class="relative">
                 <div :class="[
-                  'w-full h-[52px] rounded-lg border bg-white flex items-center px-3',
+                  'w-full h-[52px] rounded-lg border bg-white flex items-center px-3 focus-within:border-dbd-primary focus-within:ring-1 focus-within:ring-dbd-primary/20 transition-all duration-200',
                   showFirstNameFilled ? 'border-dbd-dark' : 'border-[#B7B7B7]'
                 ]">
                   <div v-if="!showFirstNameFilled" class="flex items-center flex-1">
+                    <svg class="w-6 h-6 mr-2 flex-shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                      <path d="M12 12C15.3137 12 18 9.31371 18 6C18 2.68629 15.3137 0 12 0C8.68629 0 6 2.68629 6 6C6 9.31371 8.68629 12 12 12ZM12 15C5.37258 15 0 17.6863 0 21V24H24V21C24 17.6863 18.6274 15 12 15Z" fill="#4B4D50"/>
+                    </svg>
                     <input
                       v-model="formData.firstName"
                       type="text"
                       placeholder="First name"
                       required
                       @blur="handleFieldBlur('firstName')"
-                      class="flex-1 text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none"
+                      class="flex-1 text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none focus:ring-0"
                     />
-                    <span class="text-red-500 text-sm font-medium ml-1"> *</span>
+                    <span v-if="!showFirstNameError" class="text-red-500 text-sm font-medium ml-1"> *</span>
                   </div>
-                  <div v-else class="flex flex-col items-start justify-center flex-1">
+                  <div v-else class="flex flex-col items-start justify-center flex-1 cursor-pointer" @click="editField('firstName')">
                     <div class="text-xs text-dbd-gray font-medium leading-none">
                       <span>First name</span><span class="text-red-500">*</span>
                     </div>
                     <div class="text-base font-medium text-dbd-dark mt-1">{{ formData.firstName }}</div>
                   </div>
+                  <!-- Success checkmark -->
                   <div v-if="showFirstNameFilled" class="w-5 h-5 rounded-full border border-[#88EF8C] bg-[#B3FFB6] flex items-center justify-center">
                     <svg class="w-2 h-2" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8">
                       <path d="M7.65064 0.0612768C7.28964 -0.158776 6.88699 0.265611 6.65095 0.5171C6.10947 1.11439 5.65128 1.80598 5.13753 2.4347C4.56826 3.1263 4.04064 3.81789 3.45749 4.49379C3.12425 4.87103 2.76325 5.27969 2.5411 5.75124C2.04125 5.20108 1.61083 4.60379 1.05545 4.11656C0.652791 3.77076 -0.0136711 3.51927 0.000213534 4.35233C0.0279828 5.4369 0.874945 6.60004 1.49975 7.33876C1.76356 7.65312 2.11068 7.9832 2.51333 7.99892C2.99929 8.03035 3.49914 7.37019 3.79072 7.00868C4.30447 6.37996 4.72101 5.67262 5.19306 5.02821C5.80399 4.17943 6.4288 3.34635 7.02584 2.48186C7.40072 1.94744 8.58091 0.627101 7.65064 0.0612768ZM0.611114 4.28946C0.59723 4.28946 0.583345 4.28946 0.555576 4.30515C0.500037 4.28946 0.458384 4.27371 0.402845 4.24228C0.444499 4.21084 0.513922 4.22656 0.611114 4.28946Z" fill="#07B80E"/>
+                    </svg>
+                  </div>
+                  <!-- Error cross -->
+                  <div v-else-if="showFirstNameError" class="w-5 h-5 rounded-full border border-[#EF8888] bg-[#FFB3B3] flex items-center justify-center">
+                    <svg class="w-2 h-2" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8">
+                      <path d="M6.5 1.5L1.5 6.5M1.5 1.5L6.5 6.5" stroke="#DC2626" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </div>
                 </div>
@@ -93,29 +110,39 @@
               <!-- Last Name Field -->
               <div class="relative">
                 <div :class="[
-                  'w-full h-[52px] rounded-lg border bg-white flex items-center px-3',
+                  'w-full h-[52px] rounded-lg border bg-white flex items-center px-3 focus-within:border-dbd-primary focus-within:ring-1 focus-within:ring-dbd-primary/20 transition-all duration-200',
                   showLastNameFilled ? 'border-dbd-dark' : 'border-[#B7B7B7]'
                 ]">
                   <div v-if="!showLastNameFilled" class="flex items-center flex-1">
+                    <svg class="w-6 h-6 mr-2 flex-shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                      <path d="M12 12C15.3137 12 18 9.31371 18 6C18 2.68629 15.3137 0 12 0C8.68629 0 6 2.68629 6 6C6 9.31371 8.68629 12 12 12ZM12 15C5.37258 15 0 17.6863 0 21V24H24V21C24 17.6863 18.6274 15 12 15Z" fill="#4B4D50"/>
+                    </svg>
                     <input
                       v-model="formData.lastName"
                       type="text"
                       placeholder="Last name"
                       required
                       @blur="handleFieldBlur('lastName')"
-                      class="flex-1 text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none"
+                      class="flex-1 text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none focus:ring-0"
                     />
-                    <span class="text-red-500 text-sm font-medium ml-1"> *</span>
+                    <span v-if="!showLastNameError" class="text-red-500 text-sm font-medium ml-1"> *</span>
                   </div>
-                  <div v-else class="flex flex-col items-start justify-center flex-1">
+                  <div v-else class="flex flex-col items-start justify-center flex-1 cursor-pointer" @click="editField('lastName')">
                     <div class="text-xs text-dbd-gray font-medium leading-none">
                       <span>Last name</span><span class="text-red-500">*</span>
                     </div>
                     <div class="text-base font-medium text-dbd-dark mt-1">{{ formData.lastName }}</div>
                   </div>
+                  <!-- Success checkmark -->
                   <div v-if="showLastNameFilled" class="w-5 h-5 rounded-full border border-[#88EF8C] bg-[#B3FFB6] flex items-center justify-center">
                     <svg class="w-2 h-2" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8">
                       <path d="M7.65064 0.0612768C7.28964 -0.158776 6.88699 0.265611 6.65095 0.5171C6.10947 1.11439 5.65128 1.80598 5.13753 2.4347C4.56826 3.1263 4.04064 3.81789 3.45749 4.49379C3.12425 4.87103 2.76325 5.27969 2.5411 5.75124C2.04125 5.20108 1.61083 4.60379 1.05545 4.11656C0.652791 3.77076 -0.0136711 3.51927 0.000213534 4.35233C0.0279828 5.4369 0.874945 6.60004 1.49975 7.33876C1.76356 7.65312 2.11068 7.9832 2.51333 7.99892C2.99929 8.03035 3.49914 7.37019 3.79072 7.00868C4.30447 6.37996 4.72101 5.67262 5.19306 5.02821C5.80399 4.17943 6.4288 3.34635 7.02584 2.48186C7.40072 1.94744 8.58091 0.627101 7.65064 0.0612768ZM0.611114 4.28946C0.59723 4.28946 0.583345 4.28946 0.555576 4.30515C0.500037 4.28946 0.458384 4.27371 0.402845 4.24228C0.444499 4.21084 0.513922 4.22656 0.611114 4.28946Z" fill="#07B80E"/>
+                    </svg>
+                  </div>
+                  <!-- Error cross -->
+                  <div v-else-if="showLastNameError" class="w-5 h-5 rounded-full border border-[#EF8888] bg-[#FFB3B3] flex items-center justify-center">
+                    <svg class="w-2 h-2" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8">
+                      <path d="M6.5 1.5L1.5 6.5M1.5 1.5L6.5 6.5" stroke="#DC2626" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </div>
                 </div>
@@ -127,7 +154,7 @@
               <!-- Country Selector -->
               <div class="relative">
                 <div :class="[
-                  'w-full h-[52px] rounded-lg border bg-white flex items-center px-3 cursor-pointer',
+                  'w-full h-[52px] rounded-lg border bg-white flex items-center px-3 cursor-pointer focus-within:border-dbd-primary focus-within:ring-1 focus-within:ring-dbd-primary/20 transition-all duration-200',
                   showCountryFilled ? 'border-dbd-dark' : 'border-[#B7B7B7]'
                 ]" @click="toggleCountryDropdown">
                   <div v-if="!showCountryFilled" class="flex items-center flex-1">
@@ -143,19 +170,12 @@
                       </svg>
                     </div>
                   </div>
-                  <div v-else class="flex items-center flex-1">
-                    <!-- US Flag -->
-                    <svg class="w-6 h-6 mr-2 flex-shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <circle cx="12" cy="12" r="12" fill="#F0F0F0"/>
-                      <path d="M11.4785 12.0015H24.0002C24.0002 10.9185 23.8559 9.8692 23.5868 8.87109H11.4785V12.0015Z" fill="#D80027"/>
-                      <path d="M11.4785 5.73787H22.239C21.5044 4.53919 20.5651 3.47967 19.47 2.60742H11.4785V5.73787Z" fill="#D80027"/>
-                      <path d="M12.005 24.0013C14.8291 24.0013 17.4249 23.0251 19.4748 21.3926H4.53516C6.585 23.0251 9.1808 24.0013 12.005 24.0013Z" fill="#D80027"/>
-                      <path d="M1.76391 18.2594H22.2413C22.8311 17.2971 23.2884 16.2452 23.5892 15.1289H0.416016C0.716813 16.2452 1.17417 17.2971 1.76391 18.2594Z" fill="#D80027"/>
-                      <path d="M5.55862 1.87397H6.65217L5.63498 2.61295L6.02353 3.80869L5.00639 3.0697L3.98925 3.80869L4.32487 2.7757C3.42928 3.52172 2.64431 4.39575 1.99744 5.36963H2.34783L1.70034 5.84002C1.59947 6.0083 1.50272 6.17925 1.41 6.35273L1.71919 7.30434L1.14234 6.88523C0.998953 7.18903 0.867797 7.49967 0.749906 7.81678L1.09055 8.86528H2.34783L1.33064 9.60427L1.71919 10.8L0.702047 10.061L0.0927656 10.5037C0.0317812 10.9939 0 11.4932 0 12H12C12 5.37262 12 4.59131 12 0C9.62944 0 7.41961 0.687656 5.55862 1.87397ZM6.02353 10.8L5.00639 10.061L3.98925 10.8L4.3778 9.60427L3.36061 8.86528H4.61789L5.00639 7.66955L5.39489 8.86528H6.65217L5.63498 9.60427L6.02353 10.8ZM5.63498 6.10861L6.02353 7.30434L5.00639 6.56536L3.98925 7.30434L4.3778 6.10861L3.36061 5.36963H4.61789L5.00639 4.17389L5.39489 5.36963H6.65217L5.63498 6.10861ZM10.3279 10.8L9.31073 10.061L8.29359 10.8L8.68214 9.60427L7.66495 8.86528H8.92223L9.31073 7.66955L9.69923 8.86528H10.9565L9.93933 9.60427L10.3279 10.8ZM9.93933 6.10861L10.3279 7.30434L9.31073 6.56536L8.29359 7.30434L8.68214 6.10861L7.66495 5.36963H8.92223L9.31073 4.17389L9.69923 5.36963H10.9565L9.93933 6.10861ZM9.93933 2.61295L10.3279 3.80869L9.31073 3.0697L8.29359 3.80869L8.68214 2.61295L7.66495 1.87397H8.92223L9.31073 0.678234L9.69923 1.87397H10.9565L9.93933 2.61295Z" fill="#0052B4"/>
-                    </svg>
+                  <div v-else class="flex items-center flex-1 cursor-pointer" @click="editField('country')">
+                    <!-- Country Flag -->
+                    <CountryFlag :country="selectedCountry.code" size="small" class="mr-2" />
                     <div class="flex flex-col items-start justify-center flex-1">
                       <div class="text-xs text-dbd-gray font-medium leading-none">Country</div>
-                      <div class="text-base font-medium text-dbd-dark mt-1">{{ formData.country }}</div>
+                      <div class="text-base font-medium text-dbd-dark mt-1">{{ selectedCountry.name }}</div>
                     </div>
                     <div v-if="showCountryFilled" class="w-5 h-5 rounded-full border border-[#88EF8C] bg-[#B3FFB6] flex items-center justify-center mr-2">
                       <svg class="w-2 h-2" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8">
@@ -174,27 +194,29 @@
               <!-- Phone Number Field -->
               <div class="relative">
                 <div :class="[
-                  'w-full h-[52px] rounded-lg border bg-white flex items-center px-3',
+                  'w-full h-[52px] rounded-lg border bg-white flex items-center px-3 focus-within:border-dbd-primary focus-within:ring-1 focus-within:ring-dbd-primary/20 transition-all duration-200',
                   showPhoneFilled ? 'border-dbd-dark' : 'border-[#B7B7B7]'
                 ]">
-                  <div v-if="!formData.phone.trim()" class="flex items-center flex-1">
+                  <div v-if="!showPhoneFilled" class="flex items-center flex-1">
                     <svg class="w-6 h-6 mr-2 flex-shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <path d="M22.4979 18.4211C22.4686 17.6088 22.1303 16.8508 21.5452 16.2866C20.3996 15.1819 19.4397 14.5442 18.5245 14.2797C17.2635 13.9153 16.0954 14.2467 15.0529 15.2648C15.0513 15.2663 15.0498 15.2678 15.0482 15.2694L13.9392 16.3702C13.246 15.9795 11.8983 15.1216 10.4421 13.6654L10.3342 13.5576C8.8778 12.1012 8.01995 10.7532 7.62961 10.0608L8.73047 8.95173C8.73203 8.95018 8.73358 8.94862 8.73514 8.94702C9.75319 7.90464 10.0846 6.73659 9.72017 5.4754C9.45566 4.56021 8.81799 3.60036 7.71328 2.45475C7.14915 1.86974 6.39114 1.53136 5.57883 1.50207C4.76602 1.47274 3.98607 1.75567 3.38117 2.29864L3.35763 2.3198C3.34672 2.32961 3.33605 2.33974 3.32564 2.35011C2.12146 3.5543 1.49023 5.24009 1.50011 7.2253C1.51697 10.5977 3.37043 14.4543 6.45804 17.5419C7.04026 18.1241 7.70196 18.7003 8.42474 19.2545C8.78424 19.5302 9.29915 19.4622 9.57481 19.1027C9.85052 18.7432 9.78252 18.2282 9.42297 17.9526C8.75709 17.442 8.14985 16.9135 7.61812 16.3819C4.82923 13.593 3.15542 10.167 3.1407 7.21713C3.13311 5.68823 3.59302 4.4121 4.47087 3.52509L4.47715 3.51943C5.07339 2.98422 5.97611 3.01679 6.53236 3.59359C8.65611 5.79606 8.50234 6.83585 7.5639 7.79816L6.04329 9.33019C5.80482 9.57046 5.73842 9.93255 5.87611 10.2418C5.91471 10.3285 6.84859 12.3921 9.17438 14.7179L9.28237 14.8258C11.6079 17.1513 13.6715 18.0852 13.7582 18.1238C14.0674 18.2615 14.4296 18.1951 14.6698 17.9566L16.2019 16.436C17.1643 15.4975 18.2041 15.3438 20.4064 17.4676C20.9832 18.0237 21.0158 18.9265 20.4807 19.5227L20.4749 19.5291C19.5951 20.3998 18.3326 20.8594 16.8203 20.8594C16.8079 20.8594 16.7954 20.8594 16.7829 20.8593C15.5741 20.8533 14.1744 20.5219 12.7351 19.9011C12.3192 19.7216 11.8364 19.9134 11.657 20.3294C11.4776 20.7454 11.6693 21.2281 12.0853 21.4075C13.749 22.1252 15.3267 22.4927 16.7747 22.4999C16.7901 22.5 16.8054 22.5 16.8208 22.5C18.786 22.5 20.455 21.8692 21.6499 20.6744C21.6603 20.664 21.6704 20.6533 21.6802 20.6424L21.7014 20.6187C22.2444 20.0139 22.5273 19.2334 22.4979 18.4211Z" fill="#4B4D50"/>
+                      <path d="M22.4979 18.4211C22.4686 17.6088 22.1303 16.8508 21.5452 16.2866C20.3996 15.1819 19.4397 14.5442 18.5245 14.2797C17.2635 13.9153 16.0954 14.2467 15.0529 15.2648C15.0513 15.2663 15.0498 15.2678 15.0482 15.2694L13.9392 16.3702C13.246 15.9795 11.8983 15.1216 10.4421 13.6654L10.3342 13.5576C8.8778 12.1012 8.01995 10.7532 7.62961 10.0608L8.73047 8.95173C8.73203 8.95018 8.73358 8.94862 8.73514 8.94702C9.75319 7.90464 10.0846 6.73659 9.72017 5.4754C9.45566 4.56021 8.81799 3.60036 7.71328 2.45475C7.14915 1.86974 6.39114 1.53136 5.57883 1.50207C4.76602 1.47274 3.98607 1.75567 3.38117 2.29864L3.35763 2.3198C3.34672 2.32961 3.33605 2.33974 3.32564 2.35011C2.12146 3.5543 1.49023 5.24009 1.50011 7.2253C1.51697 10.5977 3.37043 14.4543 6.45804 17.5419C7.04026 18.1241 7.70196 18.7003 8.42474 19.2545C8.78424 19.5302 9.29915 19.4622 9.57481 19.1027C9.85052 18.7432 9.78252 18.2282 9.42297 17.9526C8.75709 17.442 8.14985 16.9135 7.61812 16.3819C4.82923 13.593 3.15542 10.167 3.1407 7.21713C3.13311 5.68823 3.59302 4.4121 4.47087 3.52509L4.47715 3.51943C5.07339 2.98422 5.97611 3.01679 6.53236 3.59359C8.65611 5.79606 8.50234 6.83585 7.5639 7.79816L6.04329 9.33019C5.80482 9.57046 5.73842 9.93255 5.87611 10.2418C5.91471 10.3285 6.84859 12.3921 9.17438 14.7179L9.28237 14.8258C11.6079 17.1513 13.6715 18.0852 13.7582 18.1238C14.0674 18.2615 14.4296 18.1951 14.6698 17.9566L16.2019 16.436C17.1643 15.4975 18.2041 15.3438 20.4064 17.4676C20.9832 18.0237 21.0158 18.9265 20.4807 19.5227L20.4749 19.5291C19.5951 20.3998 18.3326 20.8594 16.8203 20.8594C16.8079 20.8594 16.7954 20.8594 16.7829 20.8593C15.5741 20.8533 14.1744 20.5219 12.7351 19.9011C12.3192 19.7216 11.8364 19.9134 11.657 20.3294C11.4776 20.7454 11.6693 21.2281 12.0853 21.4075C13.749 22.1252 15.3267 22.4927 16.7747 22.4999C16.7901 22.5 16.8054 22.5 16.8208 22.5C18.786 22.5 20.455 21.8692 21.6499 20.6744C21.6603 20.664 21.6704 20.6533 21.6802 20.6424L21.7014 20.6187C22.2444 20.0139 22.5273 19.2334 22.4979 18.421..." fill="#4B4D50"/>
                     </svg>
                     <div class="flex flex-col items-start justify-center flex-1 min-w-0">
                       <div class="flex items-center">
                         <span class="text-xs text-dbd-gray font-medium leading-none whitespace-nowrap">Your Phone #</span>
-                        <span class="text-red-500 text-xs font-medium ml-1">*</span>
+                        <span v-if="!showPhoneError" class="text-red-500 text-xs font-medium ml-1">*</span>
                       </div>
                       <div class="flex items-center w-full mt-1">
-                        <span class="text-sm text-dbd-light-gray font-medium whitespace-nowrap">Country code</span>
+                        <span class="text-xs text-dbd-dark font-medium whitespace-nowrap" style="min-width: fit-content; max-width: 80px;">{{ getSelectedCountryCode() }}</span>
                         <div class="w-px h-7 bg-dbd-light-gray mx-2 flex-shrink-0"></div>
                         <input
                           v-model="formData.phone"
                           type="tel"
-                          placeholder="__ - ___ - ___"
+                          :placeholder="getPhonePlaceholder()"
                           required
-                          class="flex-1 text-base font-medium text-dbd-gray bg-transparent border-none outline-none min-w-0"
+                          @input="handlePhoneInput"
+                          @blur="handleFieldBlur('phone')"
+                          class="flex-1 text-base font-medium text-dbd-gray bg-transparent border-none outline-none min-w-0 focus:ring-0"
                         />
                       </div>
                     </div>
@@ -206,15 +228,22 @@
                   </div>
                   <div v-else class="flex items-center flex-1">
                     <svg class="w-6 h-6 mr-2 flex-shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <path d="M22.4979 18.4211C22.4686 17.6088 22.1303 16.8508 21.5452 16.2866C20.3996 15.1819 19.4397 14.5442 18.5245 14.2797C17.2635 13.9153 16.0954 14.2467 15.0529 15.2648C15.0513 15.2663 15.0498 15.2678 15.0482 15.2694L13.9392 16.3702C13.246 15.9795 11.8983 15.1216 10.4421 13.6654L10.3342 13.5576C8.8778 12.1012 8.01995 10.7532 7.62961 10.0608L8.73047 8.95173C8.73203 8.95018 8.73358 8.94862 8.73514 8.94702C9.75319 7.90464 10.0846 6.73659 9.72017 5.4754C9.45566 4.56021 8.81799 3.60036 7.71328 2.45475C7.14915 1.86974 6.39114 1.53136 5.57883 1.50207C4.76602 1.47274 3.98607 1.75567 3.38117 2.29864L3.35763 2.3198C3.34672 2.32961 3.33605 2.33974 3.32564 2.35011C2.12146 3.5543 1.49023 5.24009 1.50011 7.2253C1.51697 10.5977 3.37043 14.4543 6.45804 17.5419C7.04026 18.1241 7.70196 18.7003 8.42474 19.2545C8.78424 19.5302 9.29915 19.4622 9.57481 19.1027C9.85052 18.7432 9.78252 18.2282 9.42297 17.9526C8.75709 17.442 8.14985 16.9135 7.61812 16.3819C4.82923 13.593 3.15542 10.167 3.1407 7.21713C3.13311 5.68823 3.59302 4.4121 4.47087 3.52509L4.47715 3.51943C5.07339 2.98422 5.97611 3.01679 6.53236 3.59359C8.65611 5.79606 8.50234 6.83585 7.5639 7.79816L6.04329 9.33019C5.80482 9.57046 5.73842 9.93255 5.87611 10.2418C5.91471 10.3285 6.84859 12.3921 9.17438 14.7179L9.28237 14.8258C11.6079 17.1513 13.6715 18.0852 13.7582 18.1238C14.0674 18.2615 14.4296 18.1951 14.6698 17.9566L16.2019 16.436C17.1643 15.4975 18.2041 15.3438 20.4064 17.4676C20.9832 18.0237 21.0158 18.9265 20.4807 19.5227L20.4749 19.5291C19.5951 20.3998 18.3326 20.8594 16.8203 20.8594C16.8079 20.8594 16.7954 20.8594 16.7829 20.8593C15.5741 20.8533 14.1744 20.5219 12.7351 19.9011C12.3192 19.7216 11.8364 19.9134 11.657 20.3294C11.4776 20.7454 11.6693 21.2281 12.0853 21.4075C13.749 22.1252 15.3267 22.4927 16.7747 22.4999C16.7901 22.5 16.8054 22.5 16.8208 22.5C18.786 22.5 20.455 21.8692 21.6499 20.6744C21.6603 20.664 21.6704 20.6533 21.6802 20.6424L21.7014 20.6187C22.2444 20.0139 22.5273 19.2334 22.4979 18.4211Z" fill="#4B4D50"/>
+                      <path d="M22.4979 18.4211C22.4686 17.6088 22.1303 16.8508 21.5452 16.2866C20.3996 15.1819 19.4397 14.5442 18.5245 14.2797C17.2635 13.9153 16.0954 14.2467 15.0529 15.2648C15.0513 15.2663 15.0498 15.2678 15.0482 15.2694L13.9392 16.3702C13.246 15.9795 11.8983 15.1216 10.4421 13.6654L10.3342 13.5576C8.8778 12.1012 8.01995 10.7532 7.62961 10.0608L8.73047 8.95173C8.73203 8.95018 8.73358 8.94862 8.73514 8.94702C9.75319 7.90464 10.0846 6.73659 9.72017 5.4754C9.45566 4.56021 8.81799 3.60036 7.71328 2.45475C7.14915 1.86974 6.39114 1.53136 5.57883 1.50207C4.76602 1.47274 3.98607 1.75567 3.38117 2.29864L3.35763 2.3198C3.34672 2.32961 3.33605 2.33974 3.32564 2.35011C2.12146 3.5543 1.49023 5.24009 1.50011 7.2253C1.51697 10.5977 3.37043 14.4543 6.45804 17.5419C7.04026 18.1241 7.70196 18.7003 8.42474 19.2545C8.78424 19.5302 9.29915 19.4622 9.57481 19.1027C9.85052 18.7432 9.78252 18.2282 9.42297 17.9526C8.75709 17.442 8.14985 16.9135 7.61812 16.3819C4.82923 13.593 3.15542 10.167 3.1407 7.21713C3.13311 5.68823 3.59302 4.4121 4.47087 3.52509L4.47715 3.51943C5.07339 2.98422 5.97611 3.01679 6.53236 3.59359C8.65611 5.79606 8.50234 6.83585 7.5639 7.79816L6.04329 9.33019C5.80482 9.57046 5.73842 9.93255 5.87611 10.2418C5.91471 10.3285 6.84859 12.3921 9.17438 14.7179L9.28237 14.8258C11.6079 17.1513 13.6715 18.0852 13.7582 18.1238C14.0674 18.2615 14.4296 18.1951 14.6698 17.9566L16.2019 16.436C17.1643 15.4975 18.2041 15.3438 20.4064 17.4676C20.9832 18.0237 21.0158 18.9265 20.4807 19.5227L20.4749 19.5291C19.5951 20.3998 18.3326 20.8594 16.8203 20.8594C16.8079 20.8594 16.7954 20.8594 16.7829 20.8593C15.5741 20.8533 14.1744 20.5219 12.7351 19.9011C12.3192 19.7216 11.8364 19.9134 11.657 20.3294C11.4776 20.7454 11.6693 21.2281 12.0853 21.4075C13.749 22.1252 15.3267 22.4927 16.7747 22.4999C16.7901 22.5 16.8054 22.5 16.8208 22.5C18.786 22.5 20.455 21.8692 21.6499 20.6744C21.6603 20.664 21.6704 20.6533 21.6802 20.6424L21.7014 20.6187C22.2444 20.0139 22.5273 19.2334 22.4979 18.421..." fill="#4B4D50"/>
                     </svg>
-                    <div class="flex flex-col items-start justify-center flex-1">
+                    <div class="flex flex-col items-start justify-center flex-1 cursor-pointer" @click="editField('phone')">
                       <div class="text-xs text-dbd-gray font-medium leading-none">Your Phone #</div>
                       <div class="text-base font-medium text-dbd-dark mt-1">{{ formData.phone }}</div>
                     </div>
-                    <div class="w-5 h-5 rounded-full border border-[#88EF8C] bg-[#B3FFB6] flex items-center justify-center mr-2">
+                    <!-- Success checkmark -->
+                    <div v-if="showPhoneFilled" class="w-5 h-5 rounded-full border border-[#88EF8C] bg-[#B3FFB6] flex items-center justify-center mr-2">
                       <svg class="w-2 h-2" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8">
                         <path d="M7.65064 0.0612768C7.28964 -0.158776 6.88699 0.265611 6.65095 0.5171C6.10947 1.11439 5.65128 1.80598 5.13753 2.4347C4.56826 3.1263 4.04064 3.81789 3.45749 4.49379C3.12425 4.87103 2.76325 5.27969 2.5411 5.75124C2.04125 5.20108 1.61083 4.60379 1.05545 4.11656C0.652791 3.77076 -0.0136711 3.51927 0.000213534 4.35233C0.0279828 5.4369 0.874945 6.60004 1.49975 7.33876C1.76356 7.65312 2.11068 7.9832 2.51333 7.99892C2.99929 8.03035 3.49914 7.37019 3.79072 7.00868C4.30447 6.37996 4.72101 5.67262 5.19306 5.02821C5.80399 4.17943 6.4288 3.34635 7.02584 2.48186C7.40072 1.94744 8.58091 0.627101 7.65064 0.0612768ZM0.611114 4.28946C0.59723 4.28946 0.583345 4.28946 0.555576 4.30515C0.500037 4.28946 0.458384 4.27371 0.402845 4.24228C0.444499 4.21084 0.513922 4.22656 0.611114 4.28946Z" fill="#07B80E"/>
+                      </svg>
+                    </div>
+                    <!-- Error cross -->
+                    <div v-else-if="showPhoneError" class="w-5 h-5 rounded-full border border-[#EF8888] bg-[#FFB3B3] flex items-center justify-center mr-2">
+                      <svg class="w-2 h-2" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8">
+                        <path d="M6.5 1.5L1.5 6.5M1.5 1.5L6.5 6.5" stroke="#DC2626" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                       </svg>
                     </div>
                     <div class="w-5 h-5 rounded-full border border-[#CFCFCF] bg-white flex items-center justify-center">
@@ -254,10 +283,12 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import CountryFlag from '@/components/CountryFlag.vue'
 
 const router = useRouter()
+const route = useRoute()
 
 // Form data
 const formData = ref({
@@ -267,6 +298,38 @@ const formData = ref({
   country: '',
   phone: ''
 })
+
+// Country dropdown state
+const showCountryDropdown = ref(false)
+const selectedCountry = ref({ name: '', code: '' })
+
+// Available countries list with phone codes
+const countries = ref([
+  { name: 'United States', code: 'USA', phoneCode: '+1', minDigits: 10, maxDigits: 10, placeholder: '(555) 123-4567' },
+  { name: 'Canada', code: 'CA', phoneCode: '+1', minDigits: 10, maxDigits: 10, placeholder: '(555) 123-4567' },
+  { name: 'United Kingdom', code: 'GB', phoneCode: '+44', minDigits: 10, maxDigits: 11, placeholder: '7911 123456' },
+  { name: 'Australia', code: 'AU', phoneCode: '+61', minDigits: 9, maxDigits: 9, placeholder: '412 345 678' },
+  { name: 'Germany', code: 'DE', phoneCode: '+49', minDigits: 10, maxDigits: 12, placeholder: '1512 3456789' },
+  { name: 'France', code: 'FR', phoneCode: '+33', minDigits: 9, maxDigits: 9, placeholder: '6 12 34 56 78' },
+  { name: 'Spain', code: 'ES', phoneCode: '+34', minDigits: 9, maxDigits: 9, placeholder: '612 34 56 78' },
+  { name: 'Italy', code: 'IT', phoneCode: '+39', minDigits: 9, maxDigits: 11, placeholder: '312 345 6789' },
+  { name: 'Netherlands', code: 'NL', phoneCode: '+31', minDigits: 9, maxDigits: 9, placeholder: '6 12345678' },
+  { name: 'Norway', code: 'NO', phoneCode: '+47', minDigits: 8, maxDigits: 8, placeholder: '12 34 56 78' },
+  { name: 'Ireland', code: 'IE', phoneCode: '+353', minDigits: 9, maxDigits: 9, placeholder: '85 123 4567' },
+  { name: 'New Zealand', code: 'NZ', phoneCode: '+64', minDigits: 8, maxDigits: 10, placeholder: '21 123 4567' },
+  { name: 'Japan', code: 'JP', phoneCode: '+81', minDigits: 10, maxDigits: 11, placeholder: '90 1234 5678' },
+  { name: 'South Korea', code: 'KR', phoneCode: '+82', minDigits: 9, maxDigits: 11, placeholder: '10 1234 5678' },
+  { name: 'Singapore', code: 'SG', phoneCode: '+65', minDigits: 8, maxDigits: 8, placeholder: '9123 4567' },
+  { name: 'China', code: 'CN', phoneCode: '+86', minDigits: 11, maxDigits: 11, placeholder: '138 0013 8000' },
+  { name: 'India', code: 'IN', phoneCode: '+91', minDigits: 10, maxDigits: 10, placeholder: '98765 43210' },
+  { name: 'UAE', code: 'UAE', phoneCode: '+971', minDigits: 9, maxDigits: 9, placeholder: '50 123 4567' },
+  { name: 'Kazakhstan', code: 'KZ', phoneCode: '+7', minDigits: 10, maxDigits: 10, placeholder: '701 123 4567' },
+  { name: 'Poland', code: 'PL', phoneCode: '+48', minDigits: 9, maxDigits: 9, placeholder: '512 345 678' },
+  { name: 'Ukraine', code: 'UA', phoneCode: '+380', minDigits: 9, maxDigits: 9, placeholder: '67 123 4567' },
+  { name: 'Russia', code: 'RU', phoneCode: '+7', minDigits: 10, maxDigits: 10, placeholder: '912 345 6789' },
+  { name: 'Portugal', code: 'PT', phoneCode: '+351', minDigits: 9, maxDigits: 9, placeholder: '912 345 678' },
+  { name: 'Malta', code: 'MT', phoneCode: '+356', minDigits: 8, maxDigits: 8, placeholder: '9696 1234' }
+])
 
 // Track which fields have been touched (user moved away from them)
 const touchedFields = ref({
@@ -280,7 +343,8 @@ const touchedFields = ref({
 // Computed properties for individual field validation
 const isEmailValid = computed(() => {
   const email = formData.value.email.trim()
-  return email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+  // Require at least 2 characters for domain extension (like .com, .ru, etc.)
+  return email && /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)
 })
 
 const isFirstNameValid = computed(() => {
@@ -292,24 +356,34 @@ const isLastNameValid = computed(() => {
 })
 
 const isCountryValid = computed(() => {
-  return formData.value.country.trim().length > 0
+  return selectedCountry.value.name.length > 0
 })
 
 const isPhoneValid = computed(() => {
-  return formData.value.phone.trim().length >= 5
+  if (!selectedCountry.value.name || !formData.value.phone.trim()) {
+    return false
+  }
+
+  // Remove spaces and formatting for digit counting
+  const phoneDigits = formData.value.phone.replace(/\D/g, '')
+  const country = countries.value.find(c => c.name === selectedCountry.value.name)
+
+  if (!country) return false
+
+  return phoneDigits.length >= country.minDigits && phoneDigits.length <= country.maxDigits
 })
 
-// Show filled state only if field is touched and valid
+// Show filled state only if field is touched, valid, and has meaningful content
 const showEmailFilled = computed(() => {
-  return touchedFields.value.email && isEmailValid.value
+  return touchedFields.value.email && isEmailValid.value && formData.value.email.trim().length > 5
 })
 
 const showFirstNameFilled = computed(() => {
-  return touchedFields.value.firstName && isFirstNameValid.value
+  return touchedFields.value.firstName && isFirstNameValid.value && formData.value.firstName.trim().length > 2
 })
 
 const showLastNameFilled = computed(() => {
-  return touchedFields.value.lastName && isLastNameValid.value
+  return touchedFields.value.lastName && isLastNameValid.value && formData.value.lastName.trim().length > 2
 })
 
 const showCountryFilled = computed(() => {
@@ -320,6 +394,42 @@ const showPhoneFilled = computed(() => {
   return touchedFields.value.phone && isPhoneValid.value
 })
 
+// Show error state for invalid fields that are touched and have content
+const showEmailError = computed(() => {
+  const hasContent = formData.value.email.trim().length > 3
+  return touchedFields.value.email && !isEmailValid.value && hasContent
+})
+
+const showFirstNameError = computed(() => {
+  const hasContent = formData.value.firstName.trim().length > 0 && formData.value.firstName.trim().length < 2
+  return touchedFields.value.firstName && hasContent
+})
+
+const showLastNameError = computed(() => {
+  const hasContent = formData.value.lastName.trim().length > 0 && formData.value.lastName.trim().length < 2
+  return touchedFields.value.lastName && hasContent
+})
+
+const showCountryError = computed(() => {
+  return false // Country field doesn't need error state since it's a dropdown
+})
+
+const showPhoneError = computed(() => {
+  if (!touchedFields.value.phone || !formData.value.phone.trim() || !selectedCountry.value.name) {
+    return false
+  }
+
+  const phoneDigits = formData.value.phone.replace(/\D/g, '')
+  const country = countries.value.find(c => c.name === selectedCountry.value.name)
+
+  if (!country) return false
+
+  const hasContent = phoneDigits.length > 0
+  const isInvalid = phoneDigits.length > 0 && (phoneDigits.length < country.minDigits || phoneDigits.length > country.maxDigits)
+
+  return hasContent && isInvalid
+})
+
 const isFormValid = computed(() => {
   return isEmailValid.value &&
          isFirstNameValid.value &&
@@ -328,19 +438,167 @@ const isFormValid = computed(() => {
          isPhoneValid.value
 })
 
+
+// Helper functions for phone field
+const getSelectedCountryCode = () => {
+  if (!selectedCountry.value.name) return 'Code'
+  const country = countries.value.find(c => c.name === selectedCountry.value.name)
+  return country ? country.phoneCode : 'Code'
+}
+
+const getPhonePlaceholder = () => {
+  if (!selectedCountry.value.name) return 'Number'
+  const country = countries.value.find(c => c.name === selectedCountry.value.name)
+  return country ? country.placeholder : 'Number'
+}
+
+const handlePhoneInput = (event) => {
+  // Format phone number as user types (optional)
+  let value = event.target.value.replace(/\D/g, '')
+  event.target.value = value
+  formData.value.phone = value
+}
+
 // Methods
 const handleFieldBlur = (fieldName) => {
-  touchedFields.value[fieldName] = true
+  // Only mark as touched if the field has some meaningful content
+  const fieldValue = formData.value[fieldName]
+  if (fieldValue && fieldValue.trim().length > 0) {
+    touchedFields.value[fieldName] = true
+  }
 }
 
 const toggleCountryDropdown = () => {
-  // Handle country dropdown toggle
-  console.log('Country dropdown clicked')
-  // Set country as touched when clicked
+  // Save current form data before navigation
+  saveFormData()
+
+  // Pass current selected country to CountrySelectView if any
+  if (selectedCountry.value && selectedCountry.value.name) {
+    sessionStorage.setItem('currentCountry', JSON.stringify(selectedCountry.value))
+  }
+  // Navigate to country selection view instead of showing dropdown
+  router.push('/country-select')
+}
+
+const selectCountry = (country) => {
+  selectedCountry.value = country
+  formData.value.country = country.name
+  showCountryDropdown.value = false
   touchedFields.value.country = true
-  // For demo purposes, let's set a country
-  if (!formData.value.country) {
-    formData.value.country = 'United States'
+}
+
+// Close dropdown when clicking outside
+const handleClickOutside = (event) => {
+  if (!event.target.closest('.country-dropdown-container')) {
+    showCountryDropdown.value = false
+  }
+}
+
+// Save form data to prevent loss during navigation
+const saveFormData = () => {
+  const formState = {
+    formData: formData.value,
+    touchedFields: touchedFields.value,
+    selectedCountry: selectedCountry.value
+  }
+  sessionStorage.setItem('registrationFormState', JSON.stringify(formState))
+}
+
+// Restore form data after navigation
+const restoreFormData = () => {
+  const storedState = sessionStorage.getItem('registrationFormState')
+  if (storedState) {
+    try {
+      const formState = JSON.parse(storedState)
+
+      // Restore only if the current form is relatively empty
+      if (!formData.value.email && !formData.value.firstName && !formData.value.lastName) {
+        formData.value = { ...formData.value, ...formState.formData }
+        touchedFields.value = { ...touchedFields.value, ...formState.touchedFields }
+
+        // Don't restore selectedCountry here - it will be handled by handleCountrySelection
+        if (!selectedCountry.value.name && formState.selectedCountry?.name) {
+          selectedCountry.value = formState.selectedCountry
+        }
+      }
+    } catch (error) {
+      console.error('Error restoring form data:', error)
+    }
+  }
+}
+
+// Handle country selection from CountrySelectView
+const handleCountrySelection = () => {
+  const storedCountry = sessionStorage.getItem('selectedCountry')
+  if (storedCountry) {
+    try {
+      const country = JSON.parse(storedCountry)
+
+      // Add a small delay for smooth transition
+      setTimeout(() => {
+        selectedCountry.value = country
+        formData.value.country = country.name
+        touchedFields.value.country = true
+
+        // Add haptic feedback when country is updated
+        if (window.triggerHaptic) {
+          window.triggerHaptic('impact', 'light')
+        }
+      }, 100)
+
+      // Clear the stored data after using it
+      sessionStorage.removeItem('selectedCountry')
+      sessionStorage.removeItem('registrationFormState')
+    } catch (error) {
+      console.error('Error parsing stored country:', error)
+    }
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('click', handleClickOutside)
+  window.addEventListener('focus', handleCountrySelection)
+
+  // Restore form data first
+  restoreFormData()
+
+  // Check if a country was selected from CountrySelectView
+  handleCountrySelection()
+})
+
+onBeforeUnmount(() => {
+  document.removeEventListener('click', handleClickOutside)
+  window.removeEventListener('focus', handleCountrySelection)
+})
+
+// Watch for route changes to detect return from country selection
+watch(() => route.name, (newRouteName) => {
+  if (newRouteName === 'registration') {
+    restoreFormData()
+    handleCountrySelection()
+  }
+}, { immediate: false })
+
+const editField = (fieldName) => {
+  if (fieldName === 'country') {
+    // Save current form data before navigation
+    saveFormData()
+
+    // Pass current selected country to CountrySelectView for editing
+    if (selectedCountry.value && selectedCountry.value.name) {
+      sessionStorage.setItem('currentCountry', JSON.stringify(selectedCountry.value))
+    }
+    // Navigate to country select view for editing
+    router.push('/country-select')
+    return
+  }
+
+  // Reset the touched state for other fields to show the input again
+  touchedFields.value[fieldName] = false
+
+  // Add haptic feedback if available
+  if (window.triggerHaptic) {
+    window.triggerHaptic('impact', 'light')
   }
 }
 
@@ -369,6 +627,20 @@ const handleRegister = () => {
   .w-full.max-w-\[375px\] {
     max-width: 600px;
   }
+}
+
+/* Remove default focus outline and blue square */
+input {
+  outline: none !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: inherit;
 }
 
 /* Prevent zoom on mobile inputs */
@@ -405,4 +677,5 @@ input::placeholder {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
+
 </style>

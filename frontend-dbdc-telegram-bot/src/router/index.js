@@ -14,6 +14,7 @@ import CalculatorView from '../views/CalculatorView.vue'
 import SelectTypePayment from '../views/SelectTypePayment.vue'
 import EmailNotRegisteredView from '../views/EmailNotRegisteredView.vue'
 import RegistrationView from '../views/RegistrationView.vue'
+import CountrySelectView from '../views/CountrySelectView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -92,6 +93,11 @@ const router = createRouter({
       path: '/registration',
       name: 'registration',
       component: RegistrationView,
+    },
+    {
+      path: '/country-select',
+      name: 'country-select',
+      component: CountrySelectView,
     },
 
     // Redirect /home to /wallet as default
