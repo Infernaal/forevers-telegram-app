@@ -3,12 +3,12 @@
     <!-- Main Content -->
     <div class="flex-1 flex flex-col h-full px-4 md:px-6 pt-4 md:pt-6">
       <!-- Title -->
-      <div class="mb-6">
+      <div class="mb-6 flex-shrink-0">
         <h1 class="text-dbd-dark text-lg font-semibold">Select your country</h1>
       </div>
 
       <!-- Search Section -->
-      <div class="mb-6">
+      <div class="mb-6 flex-shrink-0">
         <!-- Search Input -->
         <div class="relative mb-4">
           <div class="w-full h-[50px] rounded-[29px] border border-[#D8D8D8] bg-[#FAFAFA] flex items-center">
