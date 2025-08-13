@@ -383,25 +383,29 @@ const showPhoneFilled = computed(() => {
   return touchedFields.value.phone && isPhoneValid.value
 })
 
-// Show error state for invalid fields that are touched
+// Show error state for invalid fields that are touched and have content
 const showEmailError = computed(() => {
-  return touchedFields.value.email && !isEmailValid.value && formData.value.email.trim().length > 0
+  const hasContent = formData.value.email.trim().length > 3
+  return touchedFields.value.email && !isEmailValid.value && hasContent
 })
 
 const showFirstNameError = computed(() => {
-  return touchedFields.value.firstName && !isFirstNameValid.value && formData.value.firstName.trim().length > 0
+  const hasContent = formData.value.firstName.trim().length > 0 && formData.value.firstName.trim().length < 2
+  return touchedFields.value.firstName && hasContent
 })
 
 const showLastNameError = computed(() => {
-  return touchedFields.value.lastName && !isLastNameValid.value && formData.value.lastName.trim().length > 0
+  const hasContent = formData.value.lastName.trim().length > 0 && formData.value.lastName.trim().length < 2
+  return touchedFields.value.lastName && hasContent
 })
 
 const showCountryError = computed(() => {
-  return touchedFields.value.country && !isCountryValid.value
+  return false // Country field doesn't need error state since it's a dropdown
 })
 
 const showPhoneError = computed(() => {
-  return touchedFields.value.phone && !isPhoneValid.value && formData.value.phone.trim().length > 0
+  const hasContent = formData.value.phone.trim().length > 0 && formData.value.phone.trim().length < 5
+  return touchedFields.value.phone && hasContent
 })
 
 const isFormValid = computed(() => {
