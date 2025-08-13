@@ -82,6 +82,11 @@ const router = createRouter({
       name: 'select-payment',
       component: SelectTypePayment,
     },
+    {
+      path: '/email-not-registered',
+      name: 'email-not-registered',
+      component: EmailNotRegisteredView,
+    },
 
     // Redirect /home to /wallet as default
     {
