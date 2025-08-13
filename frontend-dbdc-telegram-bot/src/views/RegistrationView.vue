@@ -207,12 +207,12 @@
                         <span v-if="!showPhoneError" class="text-red-500 text-xs font-medium ml-1">*</span>
                       </div>
                       <div class="flex items-center w-full mt-1">
-                        <span class="text-sm text-dbd-light-gray font-medium whitespace-nowrap">Country code</span>
+                        <span class="text-sm text-dbd-dark font-medium whitespace-nowrap">{{ getCountryPhoneCode() || 'Country code' }}</span>
                         <div class="w-px h-7 bg-dbd-light-gray mx-2 flex-shrink-0"></div>
                         <input
                           v-model="formData.phone"
                           type="tel"
-                          placeholder="__ - ___ - ___"
+                          :placeholder="getPhonePlaceholder()"
                           required
                           @blur="handleFieldBlur('phone')"
                           class="flex-1 text-base font-medium text-dbd-gray bg-transparent border-none outline-none min-w-0 focus:ring-0"
@@ -302,32 +302,32 @@ const formData = ref({
 const showCountryDropdown = ref(false)
 const selectedCountry = ref({ name: '', code: '' })
 
-// Available countries list
+// Available countries list with phone codes
 const countries = ref([
-  { name: 'United States', code: 'USA' },
-  { name: 'Canada', code: 'CA' },
-  { name: 'United Kingdom', code: 'GB' },
-  { name: 'Australia', code: 'AU' },
-  { name: 'Germany', code: 'DE' },
-  { name: 'France', code: 'FR' },
-  { name: 'Spain', code: 'ES' },
-  { name: 'Italy', code: 'IT' },
-  { name: 'Netherlands', code: 'NL' },
-  { name: 'Norway', code: 'NO' },
-  { name: 'Ireland', code: 'IE' },
-  { name: 'New Zealand', code: 'NZ' },
-  { name: 'Japan', code: 'JP' },
-  { name: 'South Korea', code: 'KR' },
-  { name: 'Singapore', code: 'SG' },
-  { name: 'China', code: 'CN' },
-  { name: 'India', code: 'IN' },
-  { name: 'UAE', code: 'UAE' },
-  { name: 'Kazakhstan', code: 'KZ' },
-  { name: 'Poland', code: 'PL' },
-  { name: 'Ukraine', code: 'UA' },
-  { name: 'Russia', code: 'RU' },
-  { name: 'Portugal', code: 'PT' },
-  { name: 'Malta', code: 'MT' }
+  { name: 'United States', code: 'USA', phoneCode: '+1', minDigits: 10, maxDigits: 10, placeholder: '(555) 123-4567' },
+  { name: 'Canada', code: 'CA', phoneCode: '+1', minDigits: 10, maxDigits: 10, placeholder: '(555) 123-4567' },
+  { name: 'United Kingdom', code: 'GB', phoneCode: '+44', minDigits: 10, maxDigits: 11, placeholder: '7911 123456' },
+  { name: 'Australia', code: 'AU', phoneCode: '+61', minDigits: 9, maxDigits: 9, placeholder: '412 345 678' },
+  { name: 'Germany', code: 'DE', phoneCode: '+49', minDigits: 10, maxDigits: 12, placeholder: '1512 3456789' },
+  { name: 'France', code: 'FR', phoneCode: '+33', minDigits: 9, maxDigits: 9, placeholder: '6 12 34 56 78' },
+  { name: 'Spain', code: 'ES', phoneCode: '+34', minDigits: 9, maxDigits: 9, placeholder: '612 34 56 78' },
+  { name: 'Italy', code: 'IT', phoneCode: '+39', minDigits: 9, maxDigits: 11, placeholder: '312 345 6789' },
+  { name: 'Netherlands', code: 'NL', phoneCode: '+31', minDigits: 9, maxDigits: 9, placeholder: '6 12345678' },
+  { name: 'Norway', code: 'NO', phoneCode: '+47', minDigits: 8, maxDigits: 8, placeholder: '12 34 56 78' },
+  { name: 'Ireland', code: 'IE', phoneCode: '+353', minDigits: 9, maxDigits: 9, placeholder: '85 123 4567' },
+  { name: 'New Zealand', code: 'NZ', phoneCode: '+64', minDigits: 8, maxDigits: 10, placeholder: '21 123 4567' },
+  { name: 'Japan', code: 'JP', phoneCode: '+81', minDigits: 10, maxDigits: 11, placeholder: '90 1234 5678' },
+  { name: 'South Korea', code: 'KR', phoneCode: '+82', minDigits: 9, maxDigits: 11, placeholder: '10 1234 5678' },
+  { name: 'Singapore', code: 'SG', phoneCode: '+65', minDigits: 8, maxDigits: 8, placeholder: '9123 4567' },
+  { name: 'China', code: 'CN', phoneCode: '+86', minDigits: 11, maxDigits: 11, placeholder: '138 0013 8000' },
+  { name: 'India', code: 'IN', phoneCode: '+91', minDigits: 10, maxDigits: 10, placeholder: '98765 43210' },
+  { name: 'UAE', code: 'UAE', phoneCode: '+971', minDigits: 9, maxDigits: 9, placeholder: '50 123 4567' },
+  { name: 'Kazakhstan', code: 'KZ', phoneCode: '+7', minDigits: 10, maxDigits: 10, placeholder: '701 123 4567' },
+  { name: 'Poland', code: 'PL', phoneCode: '+48', minDigits: 9, maxDigits: 9, placeholder: '512 345 678' },
+  { name: 'Ukraine', code: 'UA', phoneCode: '+380', minDigits: 9, maxDigits: 9, placeholder: '67 123 4567' },
+  { name: 'Russia', code: 'RU', phoneCode: '+7', minDigits: 10, maxDigits: 10, placeholder: '912 345 6789' },
+  { name: 'Portugal', code: 'PT', phoneCode: '+351', minDigits: 9, maxDigits: 9, placeholder: '912 345 678' },
+  { name: 'Malta', code: 'MT', phoneCode: '+356', minDigits: 8, maxDigits: 8, placeholder: '9696 1234' }
 ])
 
 // Track which fields have been touched (user moved away from them)
@@ -359,7 +359,17 @@ const isCountryValid = computed(() => {
 })
 
 const isPhoneValid = computed(() => {
-  return formData.value.phone.trim().length >= 5
+  if (!selectedCountry.value.name || !formData.value.phone.trim()) {
+    return false
+  }
+
+  // Remove spaces and formatting for digit counting
+  const phoneDigits = formData.value.phone.replace(/\D/g, '')
+  const country = countries.value.find(c => c.name === selectedCountry.value.name)
+
+  if (!country) return false
+
+  return phoneDigits.length >= country.minDigits && phoneDigits.length <= country.maxDigits
 })
 
 // Show filled state only if field is touched, valid, and has meaningful content
@@ -404,8 +414,19 @@ const showCountryError = computed(() => {
 })
 
 const showPhoneError = computed(() => {
-  const hasContent = formData.value.phone.trim().length > 0 && formData.value.phone.trim().length < 5
-  return touchedFields.value.phone && hasContent
+  if (!touchedFields.value.phone || !formData.value.phone.trim() || !selectedCountry.value.name) {
+    return false
+  }
+
+  const phoneDigits = formData.value.phone.replace(/\D/g, '')
+  const country = countries.value.find(c => c.name === selectedCountry.value.name)
+
+  if (!country) return false
+
+  const hasContent = phoneDigits.length > 0
+  const isInvalid = phoneDigits.length > 0 && (phoneDigits.length < country.minDigits || phoneDigits.length > country.maxDigits)
+
+  return hasContent && isInvalid
 })
 
 const isFormValid = computed(() => {
