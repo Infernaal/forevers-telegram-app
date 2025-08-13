@@ -486,6 +486,20 @@ const handleRegister = () => {
   }
 }
 
+/* Remove default focus outline and blue square */
+input {
+  outline: none !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: inherit;
+}
+
 /* Prevent zoom on mobile inputs */
 @media (max-width: 768px) {
   input, button, select, textarea {
