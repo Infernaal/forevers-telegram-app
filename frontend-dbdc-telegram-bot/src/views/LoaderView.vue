@@ -67,6 +67,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import telegramUserService from '../services/telegramUserService.js'
+import authByEmailService from '../services/authByEmailService.js'
 
 const router = useRouter()
 const route = useRoute()
@@ -123,6 +124,15 @@ const runAction = async () => {
       const res = await telegramUserService.getUserByTelegramId(tgId)
       const target = res.status === 'success' ? '/favorites' : '/account-check'
       return finish(target)
+    }
+    case 'check-email': {
+      // email can be passed as query OR from sessionStorage
+      const email = route.query.email || sessionStorage.getItem('verificationEmail')
+      if (!email) {
+        return finish('/account-check')
+      }
+      const res = await authByEmailService.auth(email)
+      return finish(res?.target || '/account-check')
     }
     default:
       return finish(providedRedirect)

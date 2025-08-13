@@ -372,8 +372,9 @@ const handleContinue = async () => {
         window.triggerHaptic('impact', 'medium')
       }
       
-      // Navigate to next step - first to loader, then to email-not-registered
-      router.push('/loader?redirect=/email-not-registered')
+  // Go to loader with action=check-email. Email is already in sessionStorage.
+  const encodedEmail = encodeURIComponent(email.value)
+  router.push(`/loader?action=check-email&email=${encodedEmail}`)
     } else {
       // Show error
       verificationError.value = true

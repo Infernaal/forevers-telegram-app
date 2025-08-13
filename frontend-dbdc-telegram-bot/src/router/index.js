@@ -15,6 +15,7 @@ import SelectTypePayment from '../views/SelectTypePayment.vue'
 import EmailNotRegisteredView from '../views/EmailNotRegisteredView.vue'
 import RegistrationView from '../views/RegistrationView.vue'
 import CountrySelectView from '../views/CountrySelectView.vue'
+import TelegramMismatchView from '../views/TelegramMismatchView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -98,6 +99,11 @@ const router = createRouter({
       path: '/country-select',
       name: 'country-select',
       component: CountrySelectView,
+    },
+    {
+      path: '/telegram-mismatch',
+      name: 'telegram-mismatch',
+      component: TelegramMismatchView,
     },
 
     // Redirect /home to /wallet as default
