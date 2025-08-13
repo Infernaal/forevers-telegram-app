@@ -14,7 +14,7 @@
             the DBD Capital platform
           </h1>
 
-          <p class="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-medium leading-relaxed text-white opacity-95 px-2 sm:px-4 mt-2 sm:mt-0">
+          <p class="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-medium leading-relaxed text-white opacity-95 px-2 sm:px-4 mt-4 sm:mt-0">
             We recommend you to pass the<br class="hidden sm:block">
             authorisation with an alternative option from the following
           </p>
