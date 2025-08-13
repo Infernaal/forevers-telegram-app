@@ -394,14 +394,14 @@ onBeforeUnmount(() => {
 })
 
 const editField = (fieldName) => {
-  // Reset the touched state for the field to show the input again
-  touchedFields.value[fieldName] = false
-
-  // For country field, also clear the selected country to show the dropdown
   if (fieldName === 'country') {
-    selectedCountry.value = { name: '', code: '' }
-    formData.value.country = ''
+    // Navigate to country select view for editing
+    router.push('/country-select')
+    return
   }
+
+  // Reset the touched state for other fields to show the input again
+  touchedFields.value[fieldName] = false
 
   // Add haptic feedback if available
   if (window.triggerHaptic) {
