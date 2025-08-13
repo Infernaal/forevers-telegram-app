@@ -420,21 +420,7 @@ onBeforeUnmount(() => {
 // Watch for route changes to detect return from country selection
 watch(() => route.name, (newRouteName) => {
   if (newRouteName === 'registration') {
-    // Check if a country was selected when returning to registration
-    const storedCountry = sessionStorage.getItem('selectedCountry')
-    if (storedCountry) {
-      try {
-        const country = JSON.parse(storedCountry)
-        selectedCountry.value = country
-        formData.value.country = country.name
-        touchedFields.value.country = true
-
-        // Clear the stored data after using it
-        sessionStorage.removeItem('selectedCountry')
-      } catch (error) {
-        console.error('Error parsing stored country:', error)
-      }
-    }
+    handleCountrySelection()
   }
 }, { immediate: false })
 
