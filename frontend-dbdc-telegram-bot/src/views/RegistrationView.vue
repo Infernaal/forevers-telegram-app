@@ -373,6 +373,9 @@ const handleFieldBlur = (fieldName) => {
 }
 
 const toggleCountryDropdown = () => {
+  // Save current form data before navigation
+  saveFormData()
+
   // Pass current selected country to CountrySelectView if any
   if (selectedCountry.value && selectedCountry.value.name) {
     sessionStorage.setItem('currentCountry', JSON.stringify(selectedCountry.value))
