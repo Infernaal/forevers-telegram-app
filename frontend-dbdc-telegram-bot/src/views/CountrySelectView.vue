@@ -1,30 +1,7 @@
 <template>
-  <div class="w-full min-h-screen bg-white font-montserrat flex flex-col">
-    <!-- Back Button -->
-    <div class="flex items-center justify-start p-4 md:p-6">
-      <button 
-        @click="goBack"
-        class="w-11 h-11 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors duration-200"
-      >
-        <svg 
-          class="w-6 h-6" 
-          fill="none" 
-          xmlns="http://www.w3.org/2000/svg" 
-          viewBox="0 0 24 24" 
-          stroke="currentColor"
-        >
-          <path 
-            stroke-linecap="round" 
-            stroke-linejoin="round" 
-            stroke-width="1.5" 
-            d="M15 18L9 12L15 6" 
-          />
-        </svg>
-      </button>
-    </div>
-
+  <div class="w-full h-screen bg-white font-montserrat flex flex-col overflow-hidden" style="padding-bottom: max(var(--tg-content-safe-area-inset-bottom, 0px), env(safe-area-inset-bottom, 0px));">
     <!-- Main Content -->
-    <div class="flex-1 px-4 md:px-6 pb-6">
+    <div class="flex-1 flex flex-col h-full px-4 md:px-6 pt-4 md:pt-6">
       <!-- Title -->
       <div class="mb-6">
         <h1 class="text-dbd-dark text-lg font-semibold">Select your country</h1>
