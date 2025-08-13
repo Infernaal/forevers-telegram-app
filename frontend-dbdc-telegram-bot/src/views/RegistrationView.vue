@@ -220,6 +220,16 @@ const handleRegister = () => {
   }
 }
 
+/* Style asterisks in placeholders to be red */
+input::placeholder {
+  color: #7E7E7E;
+}
+
+/* Custom styling for required fields with asterisks */
+.required-field::placeholder {
+  color: #7E7E7E;
+}
+
 /* Performance optimizations */
 * {
   will-change: auto;
