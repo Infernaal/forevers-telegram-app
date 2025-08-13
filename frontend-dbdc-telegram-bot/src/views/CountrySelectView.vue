@@ -52,8 +52,8 @@
               :class="[
                 'flex items-center w-full h-[52px] px-3 gap-3 cursor-pointer transition-all duration-300 ease-in-out hover:bg-gray-50 transform hover:scale-[1.02] active:scale-[0.98]',
                 selectedCountry?.code === country.code
-                  ? 'bg-dbd-light-orange border border-dbd-orange rounded-l-[30px] scale-[1.02]'
-                  : 'rounded-l-[30px]'
+                  ? 'bg-dbd-light-orange border border-dbd-orange rounded-[30px] scale-[1.02]'
+                  : 'rounded-[30px] hover:bg-gray-50'
               ]"
             >
               <!-- Selection Indicator -->
