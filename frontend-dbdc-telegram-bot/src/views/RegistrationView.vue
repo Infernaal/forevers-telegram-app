@@ -406,22 +406,10 @@ const handleCountrySelection = () => {
 
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
+  window.addEventListener('focus', handleCountrySelection)
 
   // Check if a country was selected from CountrySelectView
-  const storedCountry = sessionStorage.getItem('selectedCountry')
-  if (storedCountry) {
-    try {
-      const country = JSON.parse(storedCountry)
-      selectedCountry.value = country
-      formData.value.country = country.name
-      touchedFields.value.country = true
-
-      // Clear the stored data after using it
-      sessionStorage.removeItem('selectedCountry')
-    } catch (error) {
-      console.error('Error parsing stored country:', error)
-    }
-  }
+  handleCountrySelection()
 })
 
 onBeforeUnmount(() => {
