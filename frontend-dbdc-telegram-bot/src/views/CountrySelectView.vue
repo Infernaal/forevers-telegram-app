@@ -159,8 +159,7 @@ const selectCountry = (country) => {
   router.back()
 }
 
-// Set default selection (like in the design - United States)
-selectedCountry.value = countries.value.find(country => country.code === 'USA')
+// No default selection - user must choose a country
 </script>
 
 <style scoped>
