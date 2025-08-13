@@ -159,7 +159,17 @@ const selectCountry = (country) => {
   router.back()
 }
 
-// No default selection - user must choose a country
+// Check if there's a pre-selected country from RegistrationView (for editing)
+const preSelectedCountry = sessionStorage.getItem('currentCountry')
+if (preSelectedCountry) {
+  try {
+    const country = JSON.parse(preSelectedCountry)
+    selectedCountry.value = country
+    sessionStorage.removeItem('currentCountry')
+  } catch (error) {
+    console.error('Error parsing pre-selected country:', error)
+  }
+}
 </script>
 
 <style scoped>
