@@ -462,6 +462,9 @@ onMounted(() => {
   document.addEventListener('click', handleClickOutside)
   window.addEventListener('focus', handleCountrySelection)
 
+  // Restore form data first
+  restoreFormData()
+
   // Check if a country was selected from CountrySelectView
   handleCountrySelection()
 })
