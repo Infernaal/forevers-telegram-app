@@ -40,6 +40,7 @@
                   v-model="verificationCode[index]"
                   @input="handleInput(index, $event)"
                   @keydown="handleKeydown(index, $event)"
+                  @paste="handlePaste(index, $event)"
                   @focus="focusedIndex = index; clearError()"
                   @blur="focusedIndex = -1"
                   type="text"
@@ -213,6 +214,37 @@ const handleKeydown = (index, event) => {
   // Handle Enter key
   if (event.key === 'Enter' && isCodeComplete.value) {
     handleContinue()
+  }
+}
+
+// Distribute pasted digits across inputs starting from current index
+const handlePaste = (startIndex, event) => {
+  event.preventDefault()
+
+  const clipboardData = event.clipboardData || window.clipboardData
+  if (!clipboardData) return
+
+  const raw = clipboardData.getData('text') || ''
+  const digits = raw.replace(/\D/g, '')
+  if (!digits) return
+
+  let i = 0
+  for (let idx = startIndex; idx < 5 && i < digits.length; idx++, i++) {
+    verificationCode.value[idx] = digits[i]
+  }
+
+  // Move focus to next empty input or stay on last filled
+  const nextEmptyIndex = verificationCode.value.findIndex(d => d === '')
+  nextTick(() => {
+    if (nextEmptyIndex !== -1) {
+      focusInput(nextEmptyIndex)
+    } else {
+      focusInput(Math.min(startIndex + i - 1, 4))
+    }
+  })
+
+  if (window.triggerHaptic) {
+    window.triggerHaptic('selection')
   }
 }
 
