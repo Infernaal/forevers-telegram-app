@@ -207,7 +207,7 @@
                         <span v-if="!showPhoneError" class="text-red-500 text-xs font-medium ml-1">*</span>
                       </div>
                       <div class="flex items-center w-full mt-1">
-                        <span class="text-sm text-dbd-dark font-medium whitespace-nowrap mr-2">{{ getSelectedCountryCode() }}</span>
+                        <span class="text-xs text-dbd-dark font-medium whitespace-nowrap" style="min-width: fit-content; max-width: 80px;">{{ getSelectedCountryCode() }}</span>
                         <div class="w-px h-7 bg-dbd-light-gray mx-2 flex-shrink-0"></div>
                         <input
                           v-model="formData.phone"
