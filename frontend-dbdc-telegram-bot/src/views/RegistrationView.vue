@@ -220,11 +220,6 @@
                         />
                       </div>
                     </div>
-                    <div class="w-5 h-5 rounded-full border border-[#CFCFCF] bg-white flex items-center justify-center flex-shrink-0 ml-2">
-                      <svg class="w-3 h-3" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path d="M8 14L12 10L8 6" stroke="#4B4D50" stroke-linecap="round"/>
-                      </svg>
-                    </div>
                   </div>
                   <div v-else class="flex items-center flex-1">
                     <svg class="w-6 h-6 mr-2 flex-shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
