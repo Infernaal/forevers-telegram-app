@@ -23,7 +23,7 @@
         <!-- Action Button -->
         <div class="mt-auto pt-4">
           <button
-            class="w-full h-[52px] sm:h-14 md:h-15 lg:h-16 px-6 sm:px-8 flex items-center justify-center gap-3 rounded-full border-2 border-white bg-transparent text-white font-bold text-sm sm:text-base md:text-lg transition-all duration-200 hover:bg-white/10 active:scale-98 outline-none touch-manipulation"
+            class="w-full h-[52px] sm:h-14 md:h-15 lg:h-16 px-6 sm:px-8 flex items-center justify-center gap-3 rounded-full border border-white bg-transparent text-white font-bold text-sm sm:text-base md:text-lg transition-all duration-200 active:scale-98 outline-none touch-manipulation"
             @click="continueWithTelegram">
             <span>Continue with Telegram</span>
 
