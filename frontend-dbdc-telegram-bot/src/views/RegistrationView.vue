@@ -453,9 +453,9 @@ const getSelectedCountryName = () => {
 }
 
 const getPhonePlaceholder = () => {
-  if (!selectedCountry.value.name) return 'Number'
+  if (!selectedCountry.value.name) return '123 456 789'
   const country = countries.value.find(c => c.name === selectedCountry.value.name)
-  return country ? country.placeholder : 'Number'
+  return country ? country.placeholder : '123 456 789'
 }
 
 const handlePhoneInput = (event) => {
