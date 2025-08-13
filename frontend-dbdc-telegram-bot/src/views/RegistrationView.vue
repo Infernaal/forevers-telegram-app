@@ -314,7 +314,8 @@ const touchedFields = ref({
 // Computed properties for individual field validation
 const isEmailValid = computed(() => {
   const email = formData.value.email.trim()
-  return email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+  // Require at least 2 characters for domain extension (like .com, .ru, etc.)
+  return email && /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)
 })
 
 const isFirstNameValid = computed(() => {
