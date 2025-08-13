@@ -128,7 +128,7 @@
               <div class="relative">
                 <div :class="[
                   'w-full h-[52px] rounded-lg border bg-white flex items-center px-3 cursor-pointer',
-                  formData.country.trim() ? 'border-dbd-dark' : 'border-[#B7B7B7]'
+                  showCountryFilled ? 'border-dbd-dark' : 'border-[#B7B7B7]'
                 ]" @click="toggleCountryDropdown">
                   <div v-if="!formData.country.trim()" class="flex items-center flex-1">
                     <svg class="w-6 h-6 mr-2 flex-shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
