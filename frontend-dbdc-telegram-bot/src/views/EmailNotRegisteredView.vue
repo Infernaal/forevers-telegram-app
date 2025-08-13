@@ -1,9 +1,9 @@
 <template>
   <div class="w-full min-h-screen bg-white font-montserrat overflow-x-hidden flex flex-col">
     <!-- Main Content -->
-    <div class="flex-1 flex items-center justify-center p-4 sm:p-5 md:p-6 lg:p-8">
+    <div class="flex-1 flex items-center justify-center p-3 sm:p-4 md:p-5 lg:p-6">
       <!-- Card Container -->
-      <div class="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl relative rounded-3xl sm:rounded-[2rem] md:rounded-[2.5rem] p-6 sm:p-7 md:p-8 lg:p-10 text-white flex flex-col min-h-[280px] sm:min-h-[320px] md:min-h-[360px] lg:min-h-[400px] shadow-2xl"
+      <div class="w-full max-w-[347px] sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto relative rounded-3xl sm:rounded-[2rem] md:rounded-[2.5rem] p-4 sm:p-6 md:p-8 lg:p-10 text-white flex flex-col min-h-[292px] sm:min-h-[340px] md:min-h-[380px] lg:min-h-[420px] shadow-2xl"
            style="background: linear-gradient(0deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.25) 100%), linear-gradient(90deg, #2019CE 20.91%, #473FFF 68.93%);">
         
         <!-- Main Message -->
