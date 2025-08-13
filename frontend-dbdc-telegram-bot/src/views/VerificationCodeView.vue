@@ -132,6 +132,10 @@ const router = useRouter()
 const verificationCode = ref(['', '', '', '', ''])
 const focusedIndex = ref(-1)
 const inputRefs = ref([])
+// Suppress auto-advance during bulk distribution (OTP/autofill)
+const isBulkFilling = ref(false)
+let bulkFocusIndex = -1
+let bulkFillClearTimer = null
 const timeLeft = ref(59)
 const email = ref('')
 const isLoading = ref(false)
@@ -177,20 +181,37 @@ const distributeDigits = (startIndex, digitsStr) => {
   const digits = (digitsStr || '').replace(/\D/g, '')
   if (!digits) return 0
 
+  isBulkFilling.value = true
+  if (bulkFillClearTimer) {
+    clearTimeout(bulkFillClearTimer)
+    bulkFillClearTimer = null
+  }
+
   let filled = 0
   for (let idx = startIndex; idx < 5 && filled < digits.length; idx++, filled++) {
     verificationCode.value[idx] = digits[filled]
   }
 
-  // Focus next empty input or last filled
+  // Focus next empty input or last filled, and stabilize focus for a short time
   const nextEmptyIndex = verificationCode.value.findIndex(d => d === '')
+  const target = nextEmptyIndex !== -1 ? nextEmptyIndex : Math.min(startIndex + filled - 1, 4)
+  bulkFocusIndex = target
+
+  const ensureFocus = () => {
+    focusInput(bulkFocusIndex)
+  }
+
   nextTick(() => {
-    if (nextEmptyIndex !== -1) {
-      focusInput(nextEmptyIndex)
-    } else {
-      focusInput(Math.min(startIndex + filled - 1, 4))
-    }
+    ensureFocus()
+    setTimeout(ensureFocus, 0)
+    setTimeout(ensureFocus, 50)
   })
+
+  // Clear bulk filling flag shortly after to allow normal typing behavior
+  bulkFillClearTimer = setTimeout(() => {
+    isBulkFilling.value = false
+    bulkFocusIndex = -1
+  }, 150)
 
   if (window.triggerHaptic) {
     window.triggerHaptic('selection')
@@ -205,23 +226,18 @@ const handleInput = (index, event) => {
 
   const inputType = event.inputType || ''
 
-  // If iOS autofill (insertReplacementText) or multi-digit input, distribute
+  // If iOS autofill (insertReplacementText) or multi-digit input, always start from first cell
   if (digitsOnly.length > 1 || inputType === 'insertReplacementText') {
-    // For OTP replacement text, start from the first cell and reset
-    if (inputType === 'insertReplacementText') {
-      verificationCode.value = ['', '', '', '', '']
-      distributeDigits(0, digitsOnly)
-    } else {
-      distributeDigits(index, digitsOnly)
-    }
+    verificationCode.value = ['', '', '', '', '']
+    distributeDigits(0, digitsOnly)
     return
   }
 
-  // Single digit typing behavior (unchanged)
+  // Single digit typing behavior (unchanged), but skip auto-advance during bulk fill
   const digit = digitsOnly
   if (digit.length <= 1) {
     verificationCode.value[index] = digit
-    if (digit && index < 4) {
+    if (digit && index < 4 && !isBulkFilling.value && !isCodeComplete.value) {
       nextTick(() => {
         focusInput(index + 1)
       })
@@ -269,7 +285,9 @@ const handlePaste = (startIndex, event) => {
   if (!clipboardData) return
 
   const raw = clipboardData.getData('text') || ''
-  distributeDigits(startIndex, raw)
+  // Always reset and start from the first cell on paste
+  verificationCode.value = ['', '', '', '', '']
+  distributeDigits(0, raw)
 }
 
 // Handle iOS OTP QuickType autofill and any multi-character replacements
