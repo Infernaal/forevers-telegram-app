@@ -368,6 +368,10 @@ const handleFieldBlur = (fieldName) => {
 }
 
 const toggleCountryDropdown = () => {
+  // Pass current selected country to CountrySelectView if any
+  if (selectedCountry.value && selectedCountry.value.name) {
+    sessionStorage.setItem('currentCountry', JSON.stringify(selectedCountry.value))
+  }
   // Navigate to country selection view instead of showing dropdown
   router.push('/country-select')
 }
