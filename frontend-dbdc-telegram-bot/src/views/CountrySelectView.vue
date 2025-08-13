@@ -84,10 +84,10 @@
           </div>
         </div>
 
-        <!-- Custom Scrollbar -->
-        <div 
+        <!-- Custom Scrollbar Indicator -->
+        <div
           v-if="filteredCountries.length > 8"
-          class="absolute right-0 top-0 w-1.5 h-[95px] bg-[#D9D9D9] rounded-full"
+          class="absolute right-2 top-4 w-1.5 h-24 bg-[#D9D9D9] rounded-full pointer-events-none"
         ></div>
       </div>
     </div>
