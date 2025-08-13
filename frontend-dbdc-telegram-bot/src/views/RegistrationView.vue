@@ -206,24 +206,17 @@
                         <span class="text-xs text-dbd-gray font-medium leading-none whitespace-nowrap">Your Phone #</span>
                         <span v-if="!showPhoneError" class="text-red-500 text-xs font-medium ml-1">*</span>
                       </div>
-                      <div class="w-full mt-1">
-                        <VueTelInput
+                      <div class="flex items-center w-full mt-1">
+                        <span class="text-sm text-dbd-dark font-medium whitespace-nowrap mr-2">{{ getSelectedCountryCode() }}</span>
+                        <div class="w-px h-7 bg-dbd-light-gray mx-2 flex-shrink-0"></div>
+                        <input
                           v-model="formData.phone"
-                          @update:model-value="onPhoneInput"
-                          @blur="onPhoneBlur"
-                          :inputOptions="{
-                            placeholder: 'Enter phone number',
-                            styleClasses: 'vue-tel-input-custom'
-                          }"
-                          :dropdownOptions="{
-                            showDialCodeInSelection: true,
-                            showFlags: true,
-                            showSearchBox: true
-                          }"
-                          mode="international"
-                          :autoDefaultCountry="false"
-                          :validCharactersOnly="true"
-                          styleClasses="vue-tel-input-wrapper"
+                          type="tel"
+                          :placeholder="getPhonePlaceholder()"
+                          required
+                          @input="handlePhoneInput"
+                          @blur="handleFieldBlur('phone')"
+                          class="flex-1 text-base font-medium text-dbd-gray bg-transparent border-none outline-none min-w-0 focus:ring-0"
                         />
                       </div>
                     </div>
