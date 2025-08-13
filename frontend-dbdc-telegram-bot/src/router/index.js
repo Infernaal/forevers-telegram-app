@@ -94,6 +94,11 @@ const router = createRouter({
       name: 'registration',
       component: RegistrationView,
     },
+    {
+      path: '/country-select',
+      name: 'country-select',
+      component: CountrySelectView,
+    },
 
     // Redirect /home to /wallet as default
     {
