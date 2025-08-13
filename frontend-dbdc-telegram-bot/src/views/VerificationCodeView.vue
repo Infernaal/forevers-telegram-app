@@ -45,7 +45,7 @@
                   @focus="focusedIndex = index; clearError()"
                   @blur="focusedIndex = -1"
                   type="text"
-                  maxlength="1"
+                  :maxlength="fieldMaxLength"
                   class="w-full h-full bg-transparent text-center text-white font-bold border-none outline-none"
                   inputmode="numeric"
                   pattern="[0-9]*"
@@ -131,6 +131,7 @@ const router = useRouter()
 const verificationCode = ref(['', '', '', '', ''])
 const focusedIndex = ref(-1)
 const inputRefs = ref([])
+const fieldMaxLength = ref(1)
 const timeLeft = ref(59)
 const email = ref('')
 const isLoading = ref(false)
@@ -205,6 +206,8 @@ const handleInput = (index, event) => {
   // If iOS autofill or manual paste injected multiple digits via input event
   if (digitsOnly.length > 1) {
     distributeDigits(index, digitsOnly)
+  // Restore maxlength after distribution
+  fieldMaxLength.value = 1
     return
   }
 
@@ -274,12 +277,10 @@ const handleBeforeInput = (index, event) => {
   }
 
   const digits = (data || '').replace(/\D/g, '')
-  if (digits.length > 1 || it === 'insertReplacementText') {
-    // Prevent default single-cell insert limited by maxlength
-    event.preventDefault()
-    // Reset and distribute from first cell for full-code autofill
-    verificationCode.value = ['', '', '', '', '']
-    distributeDigits(0, digits || (event.target && event.target.value) || '')
+  if (it === 'insertReplacementText' || digits.length > 1) {
+    // Allow default to place the whole string by lifting maxlength temporarily
+    fieldMaxLength.value = 8
+    // Do not prevent default here; handleInput will split and then restore maxlength
   }
 }
 
