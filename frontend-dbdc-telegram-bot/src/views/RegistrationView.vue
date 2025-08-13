@@ -29,9 +29,9 @@
               <div class="relative">
                 <div :class="[
                   'w-full h-[52px] rounded-lg border bg-white flex items-center px-3',
-                  formData.email.trim() ? 'border-dbd-dark' : 'border-[#B7B7B7]'
+                  showEmailFilled ? 'border-dbd-dark' : 'border-[#B7B7B7]'
                 ]">
-                  <div v-if="!formData.email.trim()" class="flex items-center flex-1">
+                  <div v-if="!showEmailFilled" class="flex items-center flex-1">
                     <svg class="w-6 h-6 mr-2 flex-shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                       <path d="M21.4037 13.3072C21.8438 13.3072 22.2005 12.9775 22.2005 12.5706V7.7461C22.2005 6.12151 20.7706 4.7998 19.013 4.7998H4.98804C3.23045 4.7998 1.80054 6.12151 1.80054 7.7461V16.2535C1.80054 17.8781 3.23045 19.1998 4.98804 19.1998H19.013C20.7706 19.1998 22.2005 17.8781 22.2005 16.2535C22.2005 15.8467 21.8438 15.5169 21.4037 15.5169C20.9635 15.5169 20.6068 15.8467 20.6068 16.2535C20.6068 17.0658 19.8918 17.7267 19.013 17.7267H4.98804C4.10924 17.7267 3.39429 17.0658 3.39429 16.2535V7.90218L10.3173 11.8813C10.8365 12.1797 11.4185 12.3289 12.0005 12.3289C12.5826 12.3289 13.1646 12.1797 13.6837 11.8813L20.6068 7.90218V12.5706C20.6068 12.9775 20.9635 13.3072 21.4037 13.3072ZM12.8421 10.6303C12.323 10.9286 11.678 10.9287 11.159 10.6303L4.05924 6.54961C4.32093 6.37556 4.64176 6.27295 4.98804 6.27295H19.013C19.3593 6.27295 19.6801 6.37559 19.9418 6.54964L12.8421 10.6303Z" fill="#4B4D50"/>
                     </svg>
@@ -40,6 +40,7 @@
                       type="email"
                       placeholder="Email"
                       required
+                      @blur="handleFieldBlur('email')"
                       class="flex-1 text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none"
                     />
                     <span class="text-red-500 text-sm font-medium ml-1"> *</span>
@@ -50,7 +51,7 @@
                     </div>
                     <div class="text-base font-medium text-dbd-dark mt-1">{{ formData.email }}</div>
                   </div>
-                  <div v-if="formData.email.trim()" class="w-5 h-5 rounded-full border border-[#88EF8C] bg-[#B3FFB6] flex items-center justify-center">
+                  <div v-if="showEmailFilled" class="w-5 h-5 rounded-full border border-[#88EF8C] bg-[#B3FFB6] flex items-center justify-center">
                     <svg class="w-2 h-2" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8">
                       <path d="M7.65064 0.0612768C7.28964 -0.158776 6.88699 0.265611 6.65095 0.5171C6.10947 1.11439 5.65128 1.80598 5.13753 2.4347C4.56826 3.1263 4.04064 3.81789 3.45749 4.49379C3.12425 4.87103 2.76325 5.27969 2.5411 5.75124C2.04125 5.20108 1.61083 4.60379 1.05545 4.11656C0.652791 3.77076 -0.0136711 3.51927 0.000213534 4.35233C0.0279828 5.4369 0.874945 6.60004 1.49975 7.33876C1.76356 7.65312 2.11068 7.9832 2.51333 7.99892C2.99929 8.03035 3.49914 7.37019 3.79072 7.00868C4.30447 6.37996 4.72101 5.67262 5.19306 5.02821C5.80399 4.17943 6.4288 3.34635 7.02584 2.48186C7.40072 1.94744 8.58091 0.627101 7.65064 0.0612768ZM0.611114 4.28946C0.59723 4.28946 0.583345 4.28946 0.555576 4.30515C0.500037 4.28946 0.458384 4.27371 0.402845 4.24228C0.444499 4.21084 0.513922 4.22656 0.611114 4.28946Z" fill="#07B80E"/>
                     </svg>
