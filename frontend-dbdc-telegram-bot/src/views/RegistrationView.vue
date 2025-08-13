@@ -446,6 +446,30 @@ const isFormValid = computed(() => {
 })
 
 
+// Phone input handlers
+const onPhoneInput = (phone, phoneObject_) => {
+  formData.value.phone = phone
+  phoneObject.value = phoneObject_
+
+  // Auto-update country selection if phone country differs
+  if (phoneObject_.country && phoneObject_.country.name) {
+    const phoneCountry = countries.value.find(c =>
+      c.code.toLowerCase() === phoneObject_.country.iso2.toLowerCase() ||
+      c.name.toLowerCase().includes(phoneObject_.country.name.toLowerCase())
+    )
+
+    if (phoneCountry && phoneCountry.name !== selectedCountry.value.name) {
+      selectedCountry.value = phoneCountry
+      formData.value.country = phoneCountry.name
+      touchedFields.value.country = true
+    }
+  }
+}
+
+const onPhoneBlur = () => {
+  handleFieldBlur('phone')
+}
+
 // Methods
 const handleFieldBlur = (fieldName) => {
   // Only mark as touched if the field has some meaningful content
