@@ -166,11 +166,11 @@ const formData = ref({
 
 // Computed properties
 const isFormValid = computed(() => {
-  return formData.value.email && 
-         formData.value.firstName && 
-         formData.value.lastName && 
-         formData.value.country && 
-         formData.value.phone
+  return formData.value.email.trim() &&
+         formData.value.firstName.trim() &&
+         formData.value.lastName.trim() &&
+         formData.value.country.trim() &&
+         formData.value.phone.trim()
 })
 
 // Methods
