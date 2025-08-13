@@ -414,6 +414,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   document.removeEventListener('click', handleClickOutside)
+  window.removeEventListener('focus', handleCountrySelection)
 })
 
 // Watch for route changes to detect return from country selection
