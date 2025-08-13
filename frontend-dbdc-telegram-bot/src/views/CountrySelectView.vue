@@ -150,22 +150,18 @@ const filteredCountries = computed(() => {
 })
 
 // Methods
-const goBack = () => {
-  router.back()
-}
-
 const selectCountry = (country) => {
   selectedCountry.value = country
-  
+
   // Add haptic feedback if available
   if (window.triggerHaptic) {
     window.triggerHaptic('impact', 'light')
   }
-  
-  // Emit the selected country to parent or navigate back with the selection
-  emit('select-country', country)
-  
-  // You can also navigate back after a brief delay to show the selection
+
+  // Store selected country in sessionStorage to pass back to Registration
+  sessionStorage.setItem('selectedCountry', JSON.stringify(country))
+
+  // Navigate back after a brief delay to show the selection
   setTimeout(() => {
     router.back()
   }, 300)
