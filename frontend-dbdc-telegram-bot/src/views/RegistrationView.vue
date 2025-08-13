@@ -386,6 +386,24 @@ const handleClickOutside = (event) => {
   }
 }
 
+// Handle country selection from CountrySelectView
+const handleCountrySelection = () => {
+  const storedCountry = sessionStorage.getItem('selectedCountry')
+  if (storedCountry) {
+    try {
+      const country = JSON.parse(storedCountry)
+      selectedCountry.value = country
+      formData.value.country = country.name
+      touchedFields.value.country = true
+
+      // Clear the stored data after using it
+      sessionStorage.removeItem('selectedCountry')
+    } catch (error) {
+      console.error('Error parsing stored country:', error)
+    }
+  }
+}
+
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
 
