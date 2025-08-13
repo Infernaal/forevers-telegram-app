@@ -447,9 +447,9 @@ const getSelectedCountryCode = () => {
 }
 
 const getPhonePlaceholder = () => {
-  if (!selectedCountry.value.name) return 'Enter phone number'
+  if (!selectedCountry.value.name) return 'Phone number'
   const country = countries.value.find(c => c.name === selectedCountry.value.name)
-  return country ? country.placeholder : 'Enter phone number'
+  return country ? country.placeholder : 'Phone number'
 }
 
 const handlePhoneInput = (event) => {
