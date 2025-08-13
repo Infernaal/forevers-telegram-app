@@ -13,6 +13,7 @@ import RentOutTransactionView from '../views/RentOutTransactionView.vue'
 import CalculatorView from '../views/CalculatorView.vue'
 import SelectTypePayment from '../views/SelectTypePayment.vue'
 import EmailNotRegisteredView from '../views/EmailNotRegisteredView.vue'
+import RegistrationView from '../views/RegistrationView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -86,6 +87,11 @@ const router = createRouter({
       path: '/email-not-registered',
       name: 'email-not-registered',
       component: EmailNotRegisteredView,
+    },
+    {
+      path: '/registration',
+      name: 'registration',
+      component: RegistrationView,
     },
 
     // Redirect /home to /wallet as default

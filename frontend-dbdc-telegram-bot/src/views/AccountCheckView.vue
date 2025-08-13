@@ -305,7 +305,7 @@ const handleContinue = async () => {
 const handleTelegramContinue = () => {
   // Handle Telegram authentication
   console.log('Continue with Telegram')
-  router.push('/loader?redirect=/favorites')
+  router.push('/registration')
 }
 
 // Enhanced keyboard detection for both Telegram WebApp and browser

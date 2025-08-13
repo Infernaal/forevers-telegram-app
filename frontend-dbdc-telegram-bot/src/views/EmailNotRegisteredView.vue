@@ -43,10 +43,14 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
 const continueWithTelegram = () => {
   // Handle Telegram authentication flow
   console.log('Continue with Telegram clicked')
-  // Add navigation or authentication logic here
+  router.push('/registration')
 }
 </script>
 
