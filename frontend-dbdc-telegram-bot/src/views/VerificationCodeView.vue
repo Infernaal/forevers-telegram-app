@@ -41,6 +41,7 @@
                   @input="handleInput(index, $event)"
                   @keydown="handleKeydown(index, $event)"
                   @paste="handlePaste(index, $event)"
+                  @beforeinput="handleBeforeInput(index, $event)"
                   @focus="focusedIndex = index; clearError()"
                   @blur="focusedIndex = -1"
                   type="text"
@@ -49,6 +50,7 @@
                   inputmode="numeric"
                   pattern="[0-9]*"
                   autocomplete="one-time-code"
+                  name="one-time-code"
                   autocapitalize="off"
                   autocorrect="off"
                   :style="{
@@ -261,6 +263,26 @@ const handlePaste = (startIndex, event) => {
   distributeDigits(startIndex, raw)
 }
 
+// Handle iOS OTP QuickType autofill and any multi-character replacements
+const handleBeforeInput = (index, event) => {
+  // Possible types: insertReplacementText (iOS QuickType), insertFromPaste, insertText
+  const it = event.inputType || ''
+  let data = event.data || ''
+
+  if (!data && it === 'insertFromPaste' && event.dataTransfer) {
+    data = event.dataTransfer.getData('text') || ''
+  }
+
+  const digits = (data || '').replace(/\D/g, '')
+  if (digits.length > 1 || it === 'insertReplacementText') {
+    // Prevent default single-cell insert limited by maxlength
+    event.preventDefault()
+    // Reset and distribute from first cell for full-code autofill
+    verificationCode.value = ['', '', '', '', '']
+    distributeDigits(0, digits || (event.target && event.target.value) || '')
+  }
+}
+
 const clearError = () => {
   verificationError.value = false
   errorMessage.value = ''
@@ -363,11 +385,28 @@ onMounted(() => {
   nextTick(() => {
     focusInput(0)
   })
+
+  // Capture iOS QuickType OTP autofill reliably
+  const beforeInputListener = (e) => {
+    const target = e.target
+    if (!target) return
+    const idx = inputRefs.value.findIndex(el => el === target)
+    if (idx !== -1) {
+      handleBeforeInput(idx, e)
+    }
+  }
+  // store on window for removal
+  window.__otpBeforeInputListener = beforeInputListener
+  window.addEventListener('beforeinput', beforeInputListener, { capture: true })
 })
 
 onUnmounted(() => {
   if (intervalId) {
     clearInterval(intervalId)
+  }
+  if (window.__otpBeforeInputListener) {
+    window.removeEventListener('beforeinput', window.__otpBeforeInputListener, { capture: true })
+    delete window.__otpBeforeInputListener
   }
 })
 </script>
