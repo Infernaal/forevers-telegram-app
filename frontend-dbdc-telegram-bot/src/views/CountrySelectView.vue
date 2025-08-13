@@ -155,10 +155,8 @@ const selectCountry = (country) => {
   // Store selected country in sessionStorage to pass back to Registration
   sessionStorage.setItem('selectedCountry', JSON.stringify(country))
 
-  // Navigate back after a brief delay to show the selection
-  setTimeout(() => {
-    router.back()
-  }, 300)
+  // Navigate back immediately with smooth transition
+  router.back()
 }
 
 // Set default selection (like in the design - United States)
