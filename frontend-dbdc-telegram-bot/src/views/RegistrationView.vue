@@ -398,6 +398,39 @@ const handleClickOutside = (event) => {
   }
 }
 
+// Save form data to prevent loss during navigation
+const saveFormData = () => {
+  const formState = {
+    formData: formData.value,
+    touchedFields: touchedFields.value,
+    selectedCountry: selectedCountry.value
+  }
+  sessionStorage.setItem('registrationFormState', JSON.stringify(formState))
+}
+
+// Restore form data after navigation
+const restoreFormData = () => {
+  const storedState = sessionStorage.getItem('registrationFormState')
+  if (storedState) {
+    try {
+      const formState = JSON.parse(storedState)
+
+      // Restore only if the current form is relatively empty
+      if (!formData.value.email && !formData.value.firstName && !formData.value.lastName) {
+        formData.value = { ...formData.value, ...formState.formData }
+        touchedFields.value = { ...touchedFields.value, ...formState.touchedFields }
+
+        // Don't restore selectedCountry here - it will be handled by handleCountrySelection
+        if (!selectedCountry.value.name && formState.selectedCountry?.name) {
+          selectedCountry.value = formState.selectedCountry
+        }
+      }
+    } catch (error) {
+      console.error('Error restoring form data:', error)
+    }
+  }
+}
+
 // Handle country selection from CountrySelectView
 const handleCountrySelection = () => {
   const storedCountry = sessionStorage.getItem('selectedCountry')
