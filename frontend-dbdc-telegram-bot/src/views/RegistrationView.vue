@@ -364,7 +364,11 @@ const isFormValid = computed(() => {
 
 // Methods
 const handleFieldBlur = (fieldName) => {
-  touchedFields.value[fieldName] = true
+  // Only mark as touched if the field has some meaningful content
+  const fieldValue = formData.value[fieldName]
+  if (fieldValue && fieldValue.trim().length > 0) {
+    touchedFields.value[fieldName] = true
+  }
 }
 
 const toggleCountryDropdown = () => {
