@@ -247,6 +247,12 @@
                       </svg>
                     </div>
                   </div>
+                  <!-- Fixed right icon position -->
+                  <div class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 rounded-full border border-[#CFCFCF] bg-white flex items-center justify-center">
+                    <svg class="w-3 h-3" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                      <path d="M8 14L12 10L8 6" stroke="#4B4D50" stroke-linecap="round"/>
+                    </svg>
+                  </div>
                 </div>
               </div>
 
