@@ -335,7 +335,7 @@ const isPhoneValid = computed(() => {
 
 // Show filled state only if field is touched, valid, and has meaningful content
 const showEmailFilled = computed(() => {
-  return touchedFields.value.email && isEmailValid.value
+  return touchedFields.value.email && isEmailValid.value && formData.value.email.trim().length > 5
 })
 
 const showFirstNameFilled = computed(() => {
