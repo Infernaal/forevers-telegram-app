@@ -31,15 +31,12 @@
                   <svg class="w-6 h-6 mr-2 flex-shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path d="M21.4037 13.3072C21.8438 13.3072 22.2005 12.9775 22.2005 12.5706V7.7461C22.2005 6.12151 20.7706 4.7998 19.013 4.7998H4.98804C3.23045 4.7998 1.80054 6.12151 1.80054 7.7461V16.2535C1.80054 17.8781 3.23045 19.1998 4.98804 19.1998H19.013C20.7706 19.1998 22.2005 17.8781 22.2005 16.2535C22.2005 15.8467 21.8438 15.5169 21.4037 15.5169C20.9635 15.5169 20.6068 15.8467 20.6068 16.2535C20.6068 17.0658 19.8918 17.7267 19.013 17.7267H4.98804C4.10924 17.7267 3.39429 17.0658 3.39429 16.2535V7.90218L10.3173 11.8813C10.8365 12.1797 11.4185 12.3289 12.0005 12.3289C12.5826 12.3289 13.1646 12.1797 13.6837 11.8813L20.6068 7.90218V12.5706C20.6068 12.9775 20.9635 13.3072 21.4037 13.3072ZM12.8421 10.6303C12.323 10.9286 11.678 10.9287 11.159 10.6303L4.05924 6.54961C4.32093 6.37556 4.64176 6.27295 4.98804 6.27295H19.013C19.3593 6.27295 19.6801 6.37559 19.9418 6.54964L12.8421 10.6303Z" fill="#4B4D50"/>
                   </svg>
-                  <div class="flex-1 text-sm font-medium text-dbd-light-gray">
-                    <span>Email </span><span class="text-red-500">*</span>
-                  </div>
                   <input
                     v-model="formData.email"
                     type="email"
-                    placeholder=""
+                    placeholder="Email *"
                     required
-                    class="absolute inset-0 w-full h-full pl-11 pr-3 text-sm font-medium text-dbd-gray bg-transparent border-none outline-none"
+                    class="flex-1 text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none"
                   />
                 </div>
               </div>
@@ -47,15 +44,12 @@
               <!-- First Name Field -->
               <div class="relative">
                 <div class="w-full h-[52px] rounded-lg border border-[#B7B7B7] bg-white flex items-center px-3">
-                  <div class="flex-1 text-sm font-medium text-dbd-light-gray">
-                    <span>First name </span><span class="text-red-500">*</span>
-                  </div>
                   <input
                     v-model="formData.firstName"
                     type="text"
-                    placeholder=""
+                    placeholder="First name *"
                     required
-                    class="absolute inset-0 w-full h-full pl-3 pr-3 text-sm font-medium text-dbd-gray bg-transparent border-none outline-none"
+                    class="flex-1 text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none"
                   />
                 </div>
               </div>
@@ -63,15 +57,12 @@
               <!-- Last Name Field -->
               <div class="relative">
                 <div class="w-full h-[52px] rounded-lg border border-[#B7B7B7] bg-white flex items-center px-3">
-                  <div class="flex-1 text-sm font-medium text-dbd-light-gray">
-                    <span>Last name </span><span class="text-red-500">*</span>
-                  </div>
                   <input
                     v-model="formData.lastName"
                     type="text"
-                    placeholder=""
+                    placeholder="Last name *"
                     required
-                    class="absolute inset-0 w-full h-full pl-3 pr-3 text-sm font-medium text-dbd-gray bg-transparent border-none outline-none"
+                    class="flex-1 text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none"
                   />
                 </div>
               </div>
