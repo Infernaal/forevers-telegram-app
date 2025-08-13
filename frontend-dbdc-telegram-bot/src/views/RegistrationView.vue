@@ -477,6 +477,7 @@ onBeforeUnmount(() => {
 // Watch for route changes to detect return from country selection
 watch(() => route.name, (newRouteName) => {
   if (newRouteName === 'registration') {
+    restoreFormData()
     handleCountrySelection()
   }
 }, { immediate: false })
