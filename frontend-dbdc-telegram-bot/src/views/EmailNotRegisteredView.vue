@@ -23,14 +23,13 @@
         <!-- Action Button -->
         <div class="mt-auto pt-4">
           <button
-            class="w-full h-[52px] sm:h-14 md:h-15 lg:h-16 px-6 sm:px-8 flex items-center justify-center gap-3 rounded-full border-2 border-white bg-transparent text-white font-bold text-sm sm:text-base md:text-lg transition-all duration-200 active:scale-98 outline-none touch-manipulation"
-            @click="continueWithTelegram">
+            @click="continueWithTelegram"
+            class="w-full h-12 xs:h-14 sm:h-16 bg-gradient-to-r from-dbd-primary to-[#473FFF]
+                   text-white font-bold text-sm xs:text-base rounded-full flex items-center justify-center gap-3
+                   transition-all duration-200 hover:shadow-lg border-2 border-white/20 hover:border-white/40 hover:scale-[1.02]"
+          >
             <span>Continue with Telegram</span>
-
-            <!-- Telegram Icon -->
-            <div class="w-8 h-8 flex-shrink-0">
-              <img src="/telegram-icon.svg" alt="Telegram" class="w-full h-full" />
-            </div>
+            <img src="/telegram-icon.svg" alt="Telegram" class="w-6 h-6" />
           </button>
         </div>
       </div>
