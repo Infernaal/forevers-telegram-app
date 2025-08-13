@@ -445,18 +445,6 @@ const isFormValid = computed(() => {
          isPhoneValid.value
 })
 
-// Helper functions for phone field
-const getCountryPhoneCode = () => {
-  if (!selectedCountry.value.name) return ''
-  const country = countries.value.find(c => c.name === selectedCountry.value.name)
-  return country ? country.phoneCode : ''
-}
-
-const getPhonePlaceholder = () => {
-  if (!selectedCountry.value.name) return '__ - ___ - ___'
-  const country = countries.value.find(c => c.name === selectedCountry.value.name)
-  return country ? country.placeholder : '__ - ___ - ___'
-}
 
 // Methods
 const handleFieldBlur = (fieldName) => {
