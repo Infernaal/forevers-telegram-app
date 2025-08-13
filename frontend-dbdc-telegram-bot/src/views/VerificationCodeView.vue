@@ -48,6 +48,9 @@
                   class="w-full h-full bg-transparent text-center text-white font-bold border-none outline-none"
                   inputmode="numeric"
                   pattern="[0-9]*"
+                  autocomplete="one-time-code"
+                  autocapitalize="off"
+                  autocorrect="off"
                   :style="{
                     fontSize: digit !== '' ? '22px' : '18px'
                   }"
@@ -166,24 +169,54 @@ const focusInput = (index) => {
   }
 }
 
+// Helper: distribute a string of digits across inputs starting from given index
+const distributeDigits = (startIndex, digitsStr) => {
+  const digits = (digitsStr || '').replace(/\D/g, '')
+  if (!digits) return 0
+
+  let filled = 0
+  for (let idx = startIndex; idx < 5 && filled < digits.length; idx++, filled++) {
+    verificationCode.value[idx] = digits[filled]
+  }
+
+  // Focus next empty input or last filled
+  const nextEmptyIndex = verificationCode.value.findIndex(d => d === '')
+  nextTick(() => {
+    if (nextEmptyIndex !== -1) {
+      focusInput(nextEmptyIndex)
+    } else {
+      focusInput(Math.min(startIndex + filled - 1, 4))
+    }
+  })
+
+  if (window.triggerHaptic) {
+    window.triggerHaptic('selection')
+  }
+
+  return filled
+}
+
 const handleInput = (index, event) => {
-  const value = event.target.value
-  
-  // Only allow digits
-  const digit = value.replace(/[^0-9]/g, '')
-  
+  const value = event.target.value || ''
+  const digitsOnly = value.replace(/[^0-9]/g, '')
+
+  // If iOS autofill or manual paste injected multiple digits via input event
+  if (digitsOnly.length > 1) {
+    distributeDigits(index, digitsOnly)
+    return
+  }
+
+  // Single digit typing behavior (unchanged)
+  const digit = digitsOnly
   if (digit.length <= 1) {
     verificationCode.value[index] = digit
-    
-    // Move to next input if digit entered and not last input
     if (digit && index < 4) {
       nextTick(() => {
         focusInput(index + 1)
       })
     }
   }
-  
-  // Trigger haptic feedback
+
   if (window.triggerHaptic && digit) {
     window.triggerHaptic('selection')
   }
@@ -225,27 +258,7 @@ const handlePaste = (startIndex, event) => {
   if (!clipboardData) return
 
   const raw = clipboardData.getData('text') || ''
-  const digits = raw.replace(/\D/g, '')
-  if (!digits) return
-
-  let i = 0
-  for (let idx = startIndex; idx < 5 && i < digits.length; idx++, i++) {
-    verificationCode.value[idx] = digits[i]
-  }
-
-  // Move focus to next empty input or stay on last filled
-  const nextEmptyIndex = verificationCode.value.findIndex(d => d === '')
-  nextTick(() => {
-    if (nextEmptyIndex !== -1) {
-      focusInput(nextEmptyIndex)
-    } else {
-      focusInput(Math.min(startIndex + i - 1, 4))
-    }
-  })
-
-  if (window.triggerHaptic) {
-    window.triggerHaptic('selection')
-  }
+  distributeDigits(startIndex, raw)
 }
 
 const clearError = () => {
