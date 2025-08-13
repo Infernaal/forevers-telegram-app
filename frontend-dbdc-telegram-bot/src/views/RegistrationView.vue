@@ -43,7 +43,7 @@
                       @blur="handleFieldBlur('email')"
                       class="flex-1 text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none focus:ring-0"
                     />
-                    <span class="text-red-500 text-sm font-medium ml-1"> *</span>
+                    <span v-if="!showEmailError" class="text-red-500 text-sm font-medium ml-1"> *</span>
                   </div>
                   <div v-else class="flex flex-col items-start justify-center flex-1 cursor-pointer" @click="editField('email')">
                     <div class="text-xs text-dbd-gray font-medium leading-none">
@@ -84,7 +84,7 @@
                       @blur="handleFieldBlur('firstName')"
                       class="flex-1 text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none focus:ring-0"
                     />
-                    <span class="text-red-500 text-sm font-medium ml-1"> *</span>
+                    <span v-if="!showFirstNameError" class="text-red-500 text-sm font-medium ml-1"> *</span>
                   </div>
                   <div v-else class="flex flex-col items-start justify-center flex-1 cursor-pointer" @click="editField('firstName')">
                     <div class="text-xs text-dbd-gray font-medium leading-none">
@@ -125,7 +125,7 @@
                       @blur="handleFieldBlur('lastName')"
                       class="flex-1 text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none focus:ring-0"
                     />
-                    <span class="text-red-500 text-sm font-medium ml-1"> *</span>
+                    <span v-if="!showLastNameError" class="text-red-500 text-sm font-medium ml-1"> *</span>
                   </div>
                   <div v-else class="flex flex-col items-start justify-center flex-1 cursor-pointer" @click="editField('lastName')">
                     <div class="text-xs text-dbd-gray font-medium leading-none">
@@ -204,7 +204,7 @@
                     <div class="flex flex-col items-start justify-center flex-1 min-w-0">
                       <div class="flex items-center">
                         <span class="text-xs text-dbd-gray font-medium leading-none whitespace-nowrap">Your Phone #</span>
-                        <span class="text-red-500 text-xs font-medium ml-1">*</span>
+                        <span v-if="!showPhoneError" class="text-red-500 text-xs font-medium ml-1">*</span>
                       </div>
                       <div class="flex items-center w-full mt-1">
                         <span class="text-sm text-dbd-light-gray font-medium whitespace-nowrap">Country code</span>
