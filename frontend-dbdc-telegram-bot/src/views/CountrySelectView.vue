@@ -50,7 +50,7 @@
               :key="country.code"
               @click="selectCountry(country)"
               :class="[
-                'flex items-center w-full h-[52px] px-3 gap-3 cursor-pointer transition-all duration-300 ease-in-out hover:bg-gray-50 transform hover:scale-[1.02] active:scale-[0.98]',
+                'flex items-center w-full h-[52px] px-3 gap-3 cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-[1.02] active:scale-[0.98] hover:ml-2 hover:mr-2',
                 selectedCountry?.code === country.code
                   ? 'bg-dbd-light-orange border border-dbd-orange rounded-l-[30px] scale-[1.02] ml-2 mr-2'
                   : 'rounded-l-[30px] hover:bg-gray-50'
