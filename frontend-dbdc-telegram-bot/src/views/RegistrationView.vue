@@ -82,6 +82,7 @@
                   <span class="flex-1 text-sm font-medium text-dbd-light-gray">
                     {{ formData.country || 'Country' }}
                   </span>
+                  <span class="text-red-500 text-sm font-medium mr-2">*</span>
                   <div class="w-5 h-5 rounded-full border border-[#CFCFCF] bg-white flex items-center justify-center">
                     <svg class="w-3 h-3" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                       <path d="M8 14L12 10L8 6" stroke="#4B4D50" stroke-linecap="round"/>
