@@ -8,13 +8,13 @@
         
         <!-- Main Message -->
         <div class="text-center mb-6 sm:mb-8 md:mb-10 lg:mb-12">
-          <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold leading-tight mb-4 sm:mb-5 md:mb-6 lg:mb-8 text-white">
+          <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight mb-4 sm:mb-5 md:mb-6 lg:mb-8 text-white">
             Unfortunately, your email<br class="hidden xs:block">
             is not registered on<br class="hidden xs:block">
             the DBD Capital platform
           </h1>
-          
-          <p class="text-sm sm:text-base md:text-lg lg:text-xl font-medium leading-relaxed text-white opacity-95 px-2 sm:px-4">
+
+          <p class="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-medium leading-relaxed text-white opacity-95 px-2 sm:px-4">
             We recommend you to pass the<br class="hidden sm:block">
             authorisation with an alternative option from the following
           </p>
