@@ -42,10 +42,11 @@
                   @keydown="handleKeydown(index, $event)"
                   @paste="handlePaste(index, $event)"
                   @beforeinput="handleBeforeInput(index, $event)"
+                  @change="handleChange(index, $event)"
                   @focus="focusedIndex = index; clearError()"
                   @blur="focusedIndex = -1"
-                  type="text"
-                  :maxlength="fieldMaxLength"
+                  type="tel"
+                  
                   class="w-full h-full bg-transparent text-center text-white font-bold border-none outline-none"
                   inputmode="numeric"
                   pattern="[0-9]*"
@@ -131,7 +132,6 @@ const router = useRouter()
 const verificationCode = ref(['', '', '', '', ''])
 const focusedIndex = ref(-1)
 const inputRefs = ref([])
-const fieldMaxLength = ref(1)
 const timeLeft = ref(59)
 const email = ref('')
 const isLoading = ref(false)
@@ -203,11 +203,17 @@ const handleInput = (index, event) => {
   const value = event.target.value || ''
   const digitsOnly = value.replace(/[^0-9]/g, '')
 
-  // If iOS autofill or manual paste injected multiple digits via input event
-  if (digitsOnly.length > 1) {
-    distributeDigits(index, digitsOnly)
-  // Restore maxlength after distribution
-  fieldMaxLength.value = 1
+  const inputType = event.inputType || ''
+
+  // If iOS autofill (insertReplacementText) or multi-digit input, distribute
+  if (digitsOnly.length > 1 || inputType === 'insertReplacementText') {
+    // For OTP replacement text, start from the first cell and reset
+    if (inputType === 'insertReplacementText') {
+      verificationCode.value = ['', '', '', '', '']
+      distributeDigits(0, digitsOnly)
+    } else {
+      distributeDigits(index, digitsOnly)
+    }
     return
   }
 
@@ -268,19 +274,27 @@ const handlePaste = (startIndex, event) => {
 
 // Handle iOS OTP QuickType autofill and any multi-character replacements
 const handleBeforeInput = (index, event) => {
-  // Possible types: insertReplacementText (iOS QuickType), insertFromPaste, insertText
   const it = event.inputType || ''
-  let data = event.data || ''
-
-  if (!data && it === 'insertFromPaste' && event.dataTransfer) {
-    data = event.dataTransfer.getData('text') || ''
+  const target = event.target
+  // For iOS QuickType OTP, let default happen, then split the resulting full value
+  if (it === 'insertReplacementText' && target) {
+    setTimeout(() => {
+      const val = (target.value || '').replace(/\D/g, '')
+      if (val.length > 1) {
+        verificationCode.value = ['', '', '', '', '']
+        distributeDigits(0, val)
+      }
+    }, 0)
   }
+}
 
-  const digits = (data || '').replace(/\D/g, '')
-  if (it === 'insertReplacementText' || digits.length > 1) {
-    // Allow default to place the whole string by lifting maxlength temporarily
-    fieldMaxLength.value = 8
-    // Do not prevent default here; handleInput will split and then restore maxlength
+const handleChange = (index, event) => {
+  const val = (event.target && event.target.value) ? String(event.target.value) : ''
+  const digits = val.replace(/\D/g, '')
+  if (digits.length > 1) {
+    // Prefer distributing from first cell on change with multi-digit value
+    verificationCode.value = ['', '', '', '', '']
+    distributeDigits(0, digits)
   }
 }
 
@@ -399,6 +413,21 @@ onMounted(() => {
   // store on window for removal
   window.__otpBeforeInputListener = beforeInputListener
   window.addEventListener('beforeinput', beforeInputListener, { capture: true })
+
+  // Additional safety: capture input events with multi-digit values
+  const inputListener = (e) => {
+    const target = e.target
+    if (!target) return
+    const idx = inputRefs.value.findIndex(el => el === target)
+    if (idx === -1) return
+    const val = (target.value || '').replace(/\D/g, '')
+    if (val.length > 1) {
+      verificationCode.value = ['', '', '', '', '']
+      distributeDigits(0, val)
+    }
+  }
+  window.__otpInputListener = inputListener
+  window.addEventListener('input', inputListener, { capture: true })
 })
 
 onUnmounted(() => {
@@ -408,6 +437,10 @@ onUnmounted(() => {
   if (window.__otpBeforeInputListener) {
     window.removeEventListener('beforeinput', window.__otpBeforeInputListener, { capture: true })
     delete window.__otpBeforeInputListener
+  }
+  if (window.__otpInputListener) {
+    window.removeEventListener('input', window.__otpInputListener, { capture: true })
+    delete window.__otpInputListener
   }
 })
 </script>
