@@ -25,9 +25,10 @@ app = FastAPI(
         "url": "https://dubadu.com",
         "email": "support@dubadu.com",
     },
-    docs_url="/docs",
-    redoc_url="/redoc",
-    openapi_url="/openapi.json",
+    # Переносим пути документации под основной API префикс
+    docs_url="/api/v1/dbdc/docs",
+    redoc_url="/api/v1/dbdc/redoc",
+    openapi_url="/api/v1/dbdc/openapi.json",
     lifespan=lifespan
 )
 
