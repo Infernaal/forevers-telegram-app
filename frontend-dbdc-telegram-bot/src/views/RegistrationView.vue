@@ -380,9 +380,8 @@ const handleFieldBlur = (fieldName) => {
 }
 
 const toggleCountryDropdown = () => {
-  showCountryDropdown.value = !showCountryDropdown.value
-  // Set country as touched when clicked
-  touchedFields.value.country = true
+  // Navigate to country selection view instead of showing dropdown
+  router.push('/country-select')
 }
 
 const selectCountry = (country) => {
