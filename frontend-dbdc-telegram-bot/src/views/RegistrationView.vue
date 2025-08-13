@@ -326,14 +326,24 @@ const isFormValid = computed(() => {
 })
 
 // Methods
+const handleFieldBlur = (fieldName) => {
+  touchedFields.value[fieldName] = true
+}
+
 const toggleCountryDropdown = () => {
   // Handle country dropdown toggle
   console.log('Country dropdown clicked')
+  // Set country as touched when clicked
+  touchedFields.value.country = true
+  // For demo purposes, let's set a country
+  if (!formData.value.country) {
+    formData.value.country = 'United States'
+  }
 }
 
 const handleRegister = () => {
   if (!isFormValid.value) return
-  
+
   // Add haptic feedback if available
   if (window.triggerHaptic) {
     window.triggerHaptic('impact', 'medium')
