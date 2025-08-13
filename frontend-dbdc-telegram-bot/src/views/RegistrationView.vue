@@ -355,6 +355,27 @@ const showPhoneFilled = computed(() => {
   return touchedFields.value.phone && isPhoneValid.value
 })
 
+// Show error state for invalid fields that are touched
+const showEmailError = computed(() => {
+  return touchedFields.value.email && !isEmailValid.value && formData.value.email.trim().length > 0
+})
+
+const showFirstNameError = computed(() => {
+  return touchedFields.value.firstName && !isFirstNameValid.value && formData.value.firstName.trim().length > 0
+})
+
+const showLastNameError = computed(() => {
+  return touchedFields.value.lastName && !isLastNameValid.value && formData.value.lastName.trim().length > 0
+})
+
+const showCountryError = computed(() => {
+  return touchedFields.value.country && !isCountryValid.value
+})
+
+const showPhoneError = computed(() => {
+  return touchedFields.value.phone && !isPhoneValid.value && formData.value.phone.trim().length > 0
+})
+
 const isFormValid = computed(() => {
   return isEmailValid.value &&
          isFirstNameValid.value &&
