@@ -435,6 +435,10 @@ watch(() => route.name, (newRouteName) => {
 
 const editField = (fieldName) => {
   if (fieldName === 'country') {
+    // Pass current selected country to CountrySelectView for editing
+    if (selectedCountry.value && selectedCountry.value.name) {
+      sessionStorage.setItem('currentCountry', JSON.stringify(selectedCountry.value))
+    }
     // Navigate to country select view for editing
     router.push('/country-select')
     return
