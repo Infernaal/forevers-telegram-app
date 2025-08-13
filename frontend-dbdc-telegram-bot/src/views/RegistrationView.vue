@@ -419,6 +419,16 @@ onMounted(() => {
 
   // Check if a country was selected from CountrySelectView
   handleCountrySelection()
+
+  // Set default country to United States if no country is selected
+  if (!selectedCountry.value.name) {
+    const defaultCountry = countries.value.find(country => country.code === 'USA')
+    if (defaultCountry) {
+      selectedCountry.value = defaultCountry
+      formData.value.country = defaultCountry.name
+      touchedFields.value.country = true
+    }
+  }
 })
 
 onBeforeUnmount(() => {
