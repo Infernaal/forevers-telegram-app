@@ -231,8 +231,8 @@
                   :class="[
                     'w-full h-[52px] rounded-full font-bold text-base flex items-center justify-center gap-2',
                     'border transition-all duration-200',
-                    isFormValid 
-                      ? 'bg-dbd-primary text-white border-dbd-primary active:scale-[0.98]' 
+                    isFormValid
+                      ? 'bg-dbd-orange text-white border-dbd-orange active:scale-[0.98]'
                       : 'bg-[#E2E2E2] text-[#989898] border-[#C7C7C7] cursor-not-allowed'
                   ]"
                 >
