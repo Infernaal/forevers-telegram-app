@@ -441,9 +441,9 @@ const isFormValid = computed(() => {
 
 // Helper functions for phone field
 const getSelectedCountryCode = () => {
-  if (!selectedCountry.value.name) return 'Country code'
+  if (!selectedCountry.value.name) return 'Code'
   const country = countries.value.find(c => c.name === selectedCountry.value.name)
-  return country ? country.phoneCode : 'Country code'
+  return country ? country.phoneCode : 'Code'
 }
 
 const getPhonePlaceholder = () => {
