@@ -42,8 +42,8 @@
       </div>
 
       <!-- Countries List -->
-      <div class="relative">
-        <div class="max-h-[400px] md:max-h-[500px] overflow-y-auto scrollbar-custom">
+      <div class="relative flex-1 min-h-0">
+        <div class="h-full overflow-y-auto scrollbar-custom">
           <div class="space-y-2">
             <div
               v-for="country in filteredCountries"
