@@ -131,7 +131,7 @@
               <div class="w-full h-px bg-dbd-off-white opacity-50"></div>
 
               <!-- Country Selector -->
-              <div class="relative country-dropdown-container">
+              <div class="relative">
                 <div :class="[
                   'w-full h-[52px] rounded-lg border bg-white flex items-center px-3 cursor-pointer focus-within:border-dbd-primary focus-within:ring-1 focus-within:ring-dbd-primary/20 transition-all duration-200',
                   showCountryFilled ? 'border-dbd-dark' : 'border-[#B7B7B7]'
@@ -144,15 +144,15 @@
                       Country<span class="text-red-500"> *</span>
                     </span>
                     <div class="w-5 h-5 rounded-full border border-[#CFCFCF] bg-white flex items-center justify-center">
-                      <svg class="w-3 h-3 transition-transform duration-200" :class="{ 'rotate-90': showCountryDropdown }" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                      <svg class="w-3 h-3" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                         <path d="M8 14L12 10L8 6" stroke="#4B4D50" stroke-linecap="round"/>
                       </svg>
                     </div>
                   </div>
-                  <div v-else class="flex items-center flex-1">
+                  <div v-else class="flex items-center flex-1 cursor-pointer" @click="editField('country')">
                     <!-- Country Flag -->
                     <CountryFlag :country="selectedCountry.code" size="small" class="mr-2" />
-                    <div class="flex flex-col items-start justify-center flex-1 cursor-pointer" @click="editField('country')">
+                    <div class="flex flex-col items-start justify-center flex-1">
                       <div class="text-xs text-dbd-gray font-medium leading-none">Country</div>
                       <div class="text-base font-medium text-dbd-dark mt-1">{{ selectedCountry.name }}</div>
                     </div>
@@ -162,23 +162,10 @@
                       </svg>
                     </div>
                     <div class="w-5 h-5 rounded-full border border-[#CFCFCF] bg-white flex items-center justify-center">
-                      <svg class="w-3 h-3 transition-transform duration-200" :class="{ 'rotate-90': showCountryDropdown }" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                      <svg class="w-3 h-3" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                         <path d="M8 14L12 10L8 6" stroke="#4B4D50" stroke-linecap="round"/>
                       </svg>
                     </div>
-                  </div>
-                </div>
-                
-                <!-- Country Dropdown -->
-                <div v-if="showCountryDropdown" class="absolute top-full left-0 right-0 z-50 mt-2 bg-white border border-[#B7B7B7] rounded-lg shadow-xl max-h-64 overflow-y-auto">
-                  <div 
-                    v-for="country in countries" 
-                    :key="country.code"
-                    @click="selectCountry(country)"
-                    class="flex items-center px-3 py-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0"
-                  >
-                    <CountryFlag :country="country.code" size="small" class="mr-3" />
-                    <span class="text-sm font-medium text-dbd-dark">{{ country.name }}</span>
                   </div>
                 </div>
               </div>
