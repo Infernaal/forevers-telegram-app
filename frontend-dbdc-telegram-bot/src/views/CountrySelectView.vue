@@ -164,27 +164,18 @@ selectedCountry.value = countries.value.find(country => country.code === 'USA')
 </script>
 
 <style scoped>
-/* Custom scrollbar */
-.scrollbar-custom {
-  scrollbar-width: thin;
-  scrollbar-color: #D9D9D9 transparent;
+/* Hidden scrollbar */
+.scrollbar-hidden {
+  /* Firefox */
+  scrollbar-width: none;
+  /* Chrome, Safari and Opera */
+  -ms-overflow-style: none;
 }
 
-.scrollbar-custom::-webkit-scrollbar {
-  width: 6px;
-}
-
-.scrollbar-custom::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.scrollbar-custom::-webkit-scrollbar-thumb {
-  background-color: #D9D9D9;
-  border-radius: 30px;
-}
-
-.scrollbar-custom::-webkit-scrollbar-thumb:hover {
-  background-color: #C1C1C1;
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 /* Prevent zoom on mobile inputs */
