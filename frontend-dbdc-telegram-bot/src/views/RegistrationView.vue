@@ -274,13 +274,55 @@ const touchedFields = ref({
   phone: false
 })
 
-// Computed properties
+// Computed properties for individual field validation
+const isEmailValid = computed(() => {
+  const email = formData.value.email.trim()
+  return email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+})
+
+const isFirstNameValid = computed(() => {
+  return formData.value.firstName.trim().length >= 2
+})
+
+const isLastNameValid = computed(() => {
+  return formData.value.lastName.trim().length >= 2
+})
+
+const isCountryValid = computed(() => {
+  return formData.value.country.trim().length > 0
+})
+
+const isPhoneValid = computed(() => {
+  return formData.value.phone.trim().length >= 5
+})
+
+// Show filled state only if field is touched and valid
+const showEmailFilled = computed(() => {
+  return touchedFields.value.email && isEmailValid.value
+})
+
+const showFirstNameFilled = computed(() => {
+  return touchedFields.value.firstName && isFirstNameValid.value
+})
+
+const showLastNameFilled = computed(() => {
+  return touchedFields.value.lastName && isLastNameValid.value
+})
+
+const showCountryFilled = computed(() => {
+  return touchedFields.value.country && isCountryValid.value
+})
+
+const showPhoneFilled = computed(() => {
+  return touchedFields.value.phone && isPhoneValid.value
+})
+
 const isFormValid = computed(() => {
-  return formData.value.email.trim() &&
-         formData.value.firstName.trim() &&
-         formData.value.lastName.trim() &&
-         formData.value.country.trim() &&
-         formData.value.phone.trim()
+  return isEmailValid.value &&
+         isFirstNameValid.value &&
+         isLastNameValid.value &&
+         isCountryValid.value &&
+         isPhoneValid.value
 })
 
 // Methods
