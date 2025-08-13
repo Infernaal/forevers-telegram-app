@@ -333,17 +333,17 @@ const isPhoneValid = computed(() => {
   return formData.value.phone.trim().length >= 5
 })
 
-// Show filled state only if field is touched and valid
+// Show filled state only if field is touched, valid, and has meaningful content
 const showEmailFilled = computed(() => {
   return touchedFields.value.email && isEmailValid.value
 })
 
 const showFirstNameFilled = computed(() => {
-  return touchedFields.value.firstName && isFirstNameValid.value
+  return touchedFields.value.firstName && isFirstNameValid.value && formData.value.firstName.trim().length > 2
 })
 
 const showLastNameFilled = computed(() => {
-  return touchedFields.value.lastName && isLastNameValid.value
+  return touchedFields.value.lastName && isLastNameValid.value && formData.value.lastName.trim().length > 2
 })
 
 const showCountryFilled = computed(() => {
