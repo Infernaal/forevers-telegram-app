@@ -392,9 +392,18 @@ const handleCountrySelection = () => {
   if (storedCountry) {
     try {
       const country = JSON.parse(storedCountry)
-      selectedCountry.value = country
-      formData.value.country = country.name
-      touchedFields.value.country = true
+
+      // Add a small delay for smooth transition
+      setTimeout(() => {
+        selectedCountry.value = country
+        formData.value.country = country.name
+        touchedFields.value.country = true
+
+        // Add haptic feedback when country is updated
+        if (window.triggerHaptic) {
+          window.triggerHaptic('impact', 'light')
+        }
+      }, 100)
 
       // Clear the stored data after using it
       sessionStorage.removeItem('selectedCountry')
