@@ -372,8 +372,8 @@ const handleContinue = async () => {
         window.triggerHaptic('impact', 'medium')
       }
       
-      // Navigate to next step
-      router.push('/favorites')
+      // Navigate to next step - first to loader, then to email-not-registered
+      router.push('/loader?redirect=/email-not-registered')
     } else {
       // Show error
       verificationError.value = true
