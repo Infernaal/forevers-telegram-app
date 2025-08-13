@@ -88,6 +88,11 @@ const router = createRouter({
       name: 'email-not-registered',
       component: EmailNotRegisteredView,
     },
+    {
+      path: '/registration',
+      name: 'registration',
+      component: RegistrationView,
+    },
 
     // Redirect /home to /wallet as default
     {
