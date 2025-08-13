@@ -12,6 +12,7 @@ import RentOutView from '../views/RentOutView.vue'
 import RentOutTransactionView from '../views/RentOutTransactionView.vue'
 import CalculatorView from '../views/CalculatorView.vue'
 import SelectTypePayment from '../views/SelectTypePayment.vue'
+import EmailNotRegisteredView from '../views/EmailNotRegisteredView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
