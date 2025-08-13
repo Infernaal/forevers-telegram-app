@@ -42,8 +42,8 @@
       </div>
 
       <!-- Countries List -->
-      <div class="relative flex-1 min-h-0">
-        <div class="h-full overflow-y-auto scrollbar-custom">
+      <div class="flex-1 min-h-0">
+        <div class="h-full overflow-y-auto scrollbar-hidden">
           <div class="space-y-2">
             <div
               v-for="country in filteredCountries"
@@ -51,16 +51,16 @@
               @click="selectCountry(country)"
               :class="[
                 'flex items-center w-full h-[52px] px-3 gap-3 cursor-pointer transition-all duration-200 hover:bg-gray-50',
-                selectedCountry?.code === country.code 
-                  ? 'bg-dbd-light-orange border border-dbd-orange rounded-l-[30px]' 
+                selectedCountry?.code === country.code
+                  ? 'bg-dbd-light-orange border border-dbd-orange rounded-l-[30px]'
                   : 'rounded-l-[30px]'
               ]"
             >
               <!-- Selection Indicator -->
               <div v-if="selectedCountry?.code === country.code" class="w-6 h-6 flex items-center justify-center">
                 <svg class="w-6 h-6" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <path 
-                    d="M19.3013 4.12255C18.5793 3.68245 17.774 4.53122 17.3019 5.0342C16.2189 6.22877 15.3026 7.61196 14.2751 8.8694C13.1365 10.2526 12.0813 11.6358 10.915 12.9876C10.2485 13.7421 9.52651 14.5594 9.0822 15.5025C8.08251 14.4022 7.22166 13.2076 6.11089 12.2331C5.30558 11.5415 3.97266 11.0385 4.00043 12.7047C4.05597 14.8738 5.74989 17.2001 6.99951 18.6775C7.52712 19.3062 8.22135 19.9664 9.02666 19.9978C9.99859 20.0607 10.9983 18.7404 11.5814 18.0174C12.6089 16.7599 13.442 15.3452 14.3861 14.0564C15.608 12.3589 16.8576 10.6927 18.0517 8.96371C18.8014 7.89488 21.1618 5.2542 19.3013 4.12255ZM5.22223 12.5789C5.19446 12.5789 5.16669 12.5789 5.11115 12.6103C5.00007 12.5789 4.91677 12.5474 4.80569 12.4846C4.889 12.4217 5.02784 12.4531 5.22223 12.5789Z" 
+                  <path
+                    d="M19.3013 4.12255C18.5793 3.68245 17.774 4.53122 17.3019 5.0342C16.2189 6.22877 15.3026 7.61196 14.2751 8.8694C13.1365 10.2526 12.0813 11.6358 10.915 12.9876C10.2485 13.7421 9.52651 14.5594 9.0822 15.5025C8.08251 14.4022 7.22166 13.2076 6.11089 12.2331C5.30558 11.5415 3.97266 11.0385 4.00043 12.7047C4.05597 14.8738 5.74989 17.2001 6.99951 18.6775C7.52712 19.3062 8.22135 19.9664 9.02666 19.9978C9.99859 20.0607 10.9983 18.7404 11.5814 18.0174C12.6089 16.7599 13.442 15.3452 14.3861 14.0564C15.608 12.3589 16.8576 10.6927 18.0517 8.96371C18.8014 7.89488 21.1618 5.2542 19.3013 4.12255ZM5.22223 12.5789C5.19446 12.5789 5.16669 12.5789 5.11115 12.6103C5.00007 12.5789 4.91677 12.5474 4.80569 12.4846C4.889 12.4217 5.02784 12.4531 5.22223 12.5789Z"
                     fill="#FF6319"
                   />
                 </svg>
@@ -70,7 +70,7 @@
               <div class="flex items-center gap-2 flex-1">
                 <CountryFlag :country="country.code" size="small" />
                 <div class="flex flex-col justify-center">
-                  <div 
+                  <div
                     :class="[
                       'text-base font-medium',
                       selectedCountry?.code === country.code ? 'text-dbd-dark' : 'text-[#4D4F53]'
@@ -83,12 +83,6 @@
             </div>
           </div>
         </div>
-
-        <!-- Custom Scrollbar Indicator -->
-        <div
-          v-if="filteredCountries.length > 8"
-          class="absolute right-2 top-4 w-1.5 h-24 bg-[#D9D9D9] rounded-full pointer-events-none"
-        ></div>
       </div>
     </div>
   </div>
