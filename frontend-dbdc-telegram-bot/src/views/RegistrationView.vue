@@ -207,7 +207,7 @@
                         <span v-if="!showPhoneError" class="text-red-500 text-xs font-medium ml-1">*</span>
                       </div>
                       <div class="flex items-center w-full mt-1">
-                        <span class="text-xs text-dbd-dark font-medium whitespace-nowrap" style="min-width: fit-content; max-width: 80px;">{{ getSelectedCountryCode() }}</span>
+                        <span class="text-base text-dbd-dark font-medium whitespace-nowrap" style="min-width: fit-content; max-width: 100px;">{{ getSelectedCountryName() }}</span>
                         <div class="w-px h-7 bg-dbd-light-gray mx-2 flex-shrink-0"></div>
                         <input
                           v-model="formData.phone"
@@ -220,7 +220,7 @@
                         />
                       </div>
                     </div>
-                    <div class="w-5 h-5 rounded-full border border-[#CFCFCF] bg-white flex items-center justify-center flex-shrink-0">
+                    <div class="w-5 h-5 rounded-full border border-[#CFCFCF] bg-white flex items-center justify-center flex-shrink-0 ml-2">
                       <svg class="w-3 h-3" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                         <path d="M8 14L12 10L8 6" stroke="#4B4D50" stroke-linecap="round"/>
                       </svg>
@@ -444,6 +444,12 @@ const getSelectedCountryCode = () => {
   if (!selectedCountry.value.name) return 'Code'
   const country = countries.value.find(c => c.name === selectedCountry.value.name)
   return country ? country.phoneCode : 'Code'
+}
+
+const getSelectedCountryName = () => {
+  if (!selectedCountry.value.name) return 'Country'
+  const country = countries.value.find(c => c.name === selectedCountry.value.name)
+  return country ? country.name : 'Country'
 }
 
 const getPhonePlaceholder = () => {
