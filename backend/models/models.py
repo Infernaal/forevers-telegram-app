@@ -548,6 +548,7 @@ class Users(Base):
     forevers_logs: Mapped[List["ForeversLogs"]] = relationship('ForeversLogs', back_populates='user')
     users_profile_logs: Mapped[List["UsersProfileLogs"]] = relationship('UsersProfileLogs', foreign_keys='[UsersProfileLogs.admin_id]', back_populates='admin')
     users_profile_logs_: Mapped[List["UsersProfileLogs"]] = relationship('UsersProfileLogs', foreign_keys='[UsersProfileLogs.user_id]', back_populates='user')
+    telegram_id: Mapped[Optional[str]] = mapped_column(String(256))  # New Telegram user id column
 
 
 class UsersDocuments(Base):

@@ -1,4 +1,4 @@
-﻿from fastapi import APIRouter, Depends, HTTPException
+﻿from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from db.database import get_db
@@ -37,3 +37,20 @@ async def get_user_info(user_id: int, db: AsyncSession = Depends(get_db)):
             status="failed",
             message="A server error occurred while retrieving user info."
         )
+
+
+@router.get("/by-telegram/{telegram_id}", response_model=UserInfoResponseWrapper, summary="Get user by Telegram ID")
+async def get_user_by_telegram(telegram_id: int, db: AsyncSession = Depends(get_db)):
+    """Lightweight existence check by Telegram ID.
+    Returns only status=success if a user with given telegram id exists, otherwise status=failed.
+    No user data is included to keep response minimal.
+    """
+    try:
+        stmt = select(Users.id).where(Users.telegram_id == str(telegram_id)).limit(1)
+        result = await db.execute(stmt)
+        user_id = result.scalar_one_or_none()
+        if user_id is None:
+            return UserInfoResponseWrapper(status="failed")
+        return UserInfoResponseWrapper(status="success")
+    except Exception:
+        return UserInfoResponseWrapper(status="failed")

@@ -50,8 +50,12 @@
 
     <!-- Bottom Section -->
     <div class="bg-white px-3 sm:px-4 md:px-5 lg:px-6 pt-3 sm:pt-4 md:pt-5 lg:pt-6 pb-[max(var(--tg-content-safe-area-inset-bottom),1rem)] border-t border-black/5">
-      <button @click="handleStart" class="w-full h-12 sm:h-13 md:h-14 lg:h-15 bg-gradient-to-r from-dbd-primary to-[#473FFF] border-0 rounded-full text-white font-bold text-sm sm:text-base md:text-lg lg:text-xl font-montserrat cursor-pointer transition-all duration-200 ease-out shadow-lg hover:shadow-xl active:scale-98 outline-none touch-manipulation">
-        Start
+      <button @click="handleStart" :disabled="isLoading" class="w-full h-12 sm:h-13 md:h-14 lg:h-15 bg-gradient-to-r from-dbd-primary to-[#473FFF] border-0 rounded-full text-white font-bold text-sm sm:text-base md:text-lg lg:text-xl font-montserrat cursor-pointer transition-all duration-200 ease-out shadow-lg hover:shadow-xl active:scale-98 outline-none touch-manipulation disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+        <svg v-if="isLoading" class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <span>{{ isLoading ? 'Checking...' : 'Start' }}</span>
       </button>
     </div>
   </div>
@@ -60,6 +64,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import telegramUserService from '../services/telegramUserService.js'
 
 // Router instance
 const router = useRouter()
@@ -79,9 +84,35 @@ const cardStyle = computed(() => ({
   `
 }))
 
-// Handle start button click
-const handleStart = () => {
-  router.push('/loader')
+const isLoading = ref(false)
+
+// Extract Telegram user id from WebApp initData if available
+const getTelegramUserId = () => {
+  try {
+    if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user) {
+      return window.Telegram.WebApp.initDataUnsafe.user.id
+    }
+  } catch (e) {
+    console.warn('Cannot read Telegram user id', e)
+  }
+  return null
+}
+
+// Handle start button click -> verify user then redirect
+const handleStart = async () => {
+  if (isLoading.value) return
+  isLoading.value = true
+  const tgId = getTelegramUserId()
+  // If no telegram context fallback directly to account-check
+  if (!tgId) {
+    router.push({ path: '/loader', query: { redirect: '/account-check' } })
+    isLoading.value = false
+    return
+  }
+  const result = await telegramUserService.getUserByTelegramId(tgId)
+  const redirectPath = result.status === 'success' ? '/favorites' : '/account-check'
+  router.push({ path: '/loader', query: { redirect: redirectPath } })
+  isLoading.value = false
 }
 
 // Initialize app
