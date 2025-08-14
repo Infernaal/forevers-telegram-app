@@ -2,12 +2,16 @@ import hashlib
 import hmac
 import json
 import time
+import logging
 from typing import Dict, Any, Optional
 from urllib.parse import unquote_plus
 import os
 from dotenv import load_dotenv
 
-# Загрузка .env, если используешь
+# Настраиваем логгер
+logger = logging.getLogger(__name__)
+
+# Загрузка .env
 load_dotenv()
 
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
@@ -18,9 +22,7 @@ class TelegramAuthError(Exception):
 
 
 def parse_init_data(raw: str) -> Dict[str, str]:
-    """Parse the raw init data string from Telegram header or query.
-    Format: key=value&key=value (URL-encoded). Values are percent-decoded.
-    """
+    """Парсит строку initData вида key=value&key=value (URL-encoded)"""
     result: Dict[str, str] = {}
     if not raw:
         return result
@@ -40,27 +42,25 @@ def build_data_check_string(items: Dict[str, str]) -> str:
 
 
 def verify_init_data(raw: str, bot_token: Optional[str] = None, max_age: int | None = 600) -> Dict[str, Any]:
-    """Verify Telegram WebApp init data per official spec.
+    """Проверка Telegram WebApp init data по официальной спецификации."""
+    logger.debug("RAW init_data: %s", raw)
 
-    Steps (https://core.telegram.org/bots/webapps#validating-data-received-via-the-mini-app):
-      1. Parse query-string like data into key/value pairs.
-      2. Construct data_check_string from all fields except hash sorted alphabetically as lines 'key=value'.
-      3. Derive secret key: HMAC_SHA256(key=<bot_token>, data="WebAppData").
-      4. Compute HMAC_SHA256(data_check_string, secret_key) hex digest and constant-time compare with provided hash.
-      5. Optionally validate auth_date is recent (max_age seconds) to mitigate replay (default 10 minutes).
-    Returns dict with user object, auth_date (int), raw map.
-    Raises TelegramAuthError on any validation problem.
-    """
     data_map = parse_init_data(raw)
+    logger.debug("Parsed init_data: %s", data_map)
+
     provided_hash = data_map.get("hash")
     if not provided_hash:
+        logger.warning("Missing hash in init data")
         raise TelegramAuthError("Missing hash in init data")
 
     token = bot_token or BOT_TOKEN
     if not token:
+        logger.error("Bot token not configured")
         raise TelegramAuthError("Bot token not configured")
 
-    # ✅ Correct derivation: bot_token is the HMAC key, "WebAppData" is the message
+    logger.debug("Using BOT_TOKEN: %s", token)
+
+    # Формируем secret_key
     secret_key = hmac.new(
         key=token.encode(),
         msg=b"WebAppData",
@@ -68,32 +68,43 @@ def verify_init_data(raw: str, bot_token: Optional[str] = None, max_age: int | N
     ).digest()
 
     data_check_string = build_data_check_string(data_map)
+    logger.debug("Data check string: %s", data_check_string)
+
     calc_hash = hmac.new(
         secret_key,
         msg=data_check_string.encode(),
         digestmod=hashlib.sha256
     ).hexdigest()
 
+    logger.debug("Provided hash: %s", provided_hash)
+    logger.debug("Calculated hash: %s", calc_hash)
+
     if not hmac.compare_digest(calc_hash, provided_hash):
+        logger.warning("Invalid init data signature: provided != calculated")
         raise TelegramAuthError("Invalid init data signature")
 
-    # Freshness check (optional per spec, enabled by default) to prevent replay
+    # Проверка свежести auth_date
     auth_date_raw = data_map.get("auth_date")
     auth_date_int: Optional[int] = None
     if auth_date_raw and auth_date_raw.isdigit():
         auth_date_int = int(auth_date_raw)
+        logger.debug("Auth date: %s (%s)", auth_date_int, time.ctime(auth_date_int))
         if max_age is not None:
             now = int(time.time())
+            logger.debug("Now: %s (%s)", now, time.ctime(now))
             if now - auth_date_int > max_age:
+                logger.warning("Init data expired")
                 raise TelegramAuthError("Init data expired")
 
-    # Extract user json if present
+    # Разбор user JSON
     user_raw = data_map.get("user")
     user_obj: Dict[str, Any] = {}
     if user_raw:
         try:
             user_obj = json.loads(user_raw)
+            logger.debug("Parsed user object: %s", user_obj)
         except json.JSONDecodeError:
-            pass
+            logger.warning("Failed to decode user JSON: %s", user_raw)
 
     return {"user": user_obj, "auth_date": auth_date_int, "raw": data_map}
+
