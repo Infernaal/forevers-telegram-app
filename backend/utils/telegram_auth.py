@@ -44,10 +44,10 @@ def verify_init_data(raw: str, bot_token: Optional[str] = None, max_age: int | N
 
     Steps (https://core.telegram.org/bots/webapps#validating-data-received-via-the-mini-app):
       1. Parse query-string like data into key/value pairs.
-      2. Construct data_check_string from all fields except `hash` sorted alphabetically as lines 'key=value'.
-      3. Derive secret key: HMAC_SHA256(key="WebAppData", data=<bot_token>).
+      2. Construct data_check_string from all fields except hash sorted alphabetically as lines 'key=value'.
+      3. Derive secret key: HMAC_SHA256(key=<bot_token>, data="WebAppData").
       4. Compute HMAC_SHA256(data_check_string, secret_key) hex digest and constant-time compare with provided hash.
-      5. Optionally validate `auth_date` is recent (max_age seconds) to mitigate replay (default 10 minutes).
+      5. Optionally validate auth_date is recent (max_age seconds) to mitigate replay (default 10 minutes).
     Returns dict with user object, auth_date (int), raw map.
     Raises TelegramAuthError on any validation problem.
     """
@@ -55,19 +55,25 @@ def verify_init_data(raw: str, bot_token: Optional[str] = None, max_age: int | N
     provided_hash = data_map.get("hash")
     if not provided_hash:
         raise TelegramAuthError("Missing hash in init data")
+
     token = bot_token or BOT_TOKEN
     if not token:
         raise TelegramAuthError("Bot token not configured")
 
-    # Derive secret key correctly (previous implementation incorrectly used sha256(token))
+    # ✅ Correct derivation: bot_token is the HMAC key, "WebAppData" is the message
     secret_key = hmac.new(
-        key=b"WebAppData",
-        msg=token.encode(),
+        key=token.encode(),
+        msg=b"WebAppData",
         digestmod=hashlib.sha256,
     ).digest()
 
     data_check_string = build_data_check_string(data_map)
-    calc_hash = hmac.new(secret_key, msg=data_check_string.encode(), digestmod=hashlib.sha256).hexdigest()
+    calc_hash = hmac.new(
+        secret_key,
+        msg=data_check_string.encode(),
+        digestmod=hashlib.sha256
+    ).hexdigest()
+
     if not hmac.compare_digest(calc_hash, provided_hash):
         raise TelegramAuthError("Invalid init data signature")
 
