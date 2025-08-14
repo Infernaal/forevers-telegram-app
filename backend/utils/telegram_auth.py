@@ -61,7 +61,7 @@ def verify_init_data(raw: str, bot_token: Optional[str] = None, max_age: Optiona
     data_check_string = "\n".join(
         f"{k}={raw_map[k]}"
         for k in sorted(raw_map.keys())
-        if k != "hash"
+        if k not in ("hash", "signature")
     )
     logger.info("Data check string (exact): %r", data_check_string)
 
