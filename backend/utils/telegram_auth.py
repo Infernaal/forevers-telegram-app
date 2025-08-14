@@ -59,8 +59,8 @@ def verify_init_data(raw: str, bot_token: Optional[str] = None, max_age: Optiona
 
     # Формируем secret_key (WebAppData + bot_token)
     secret_key = hmac.new(
-        key=b"WebAppData",
-        msg=token.encode(),
+        key=token.encode(),       # bot_token
+        msg=b"WebAppData",        # "WebAppData"
         digestmod=hashlib.sha256
     ).digest()
 
