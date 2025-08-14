@@ -268,21 +268,16 @@ const isTelegramWebApp = () => {
          window.Telegram.WebApp.initData !== ''
 }
 
-// Fetch user info from backend
+// Fetch user info from backend via session
+import telegramUserService from '../services/telegramUserService.js'
 const fetchUserInfo = async () => {
-  try {
-    const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/user/info/96')
-    const result = await response.json()
-    const data = result?.data || {}
+  const result = await telegramUserService.getUserInfo()
+  const data = result?.data || {}
+  if (result.status === 'success' && data) {
     userInfo.value.fullName = data?.full_name || ''
-    // Normalize rank: lower case, spaces instead of underscores
     userInfo.value.rank = data?.rank ? data.rank.toLowerCase().replace(/_/g, ' ') : 'none'
-    userInfo.value.photo =
-      data?.avatar && data.avatar.trim() && data.avatar.trim() !== ','
-        ? data.avatar
-        : '/no-photo.svg'
-  } catch (error) {
-    console.error('Failed to fetch user info:', error)
+    userInfo.value.photo = data?.avatar && data.avatar.trim() && data.avatar.trim() !== ',' ? data.avatar : '/no-photo.svg'
+  } else {
     userInfo.value.photo = '/no-photo.svg'
     userInfo.value.rank = 'none'
     userInfo.value.fullName = ''

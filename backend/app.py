@@ -1,5 +1,7 @@
-﻿from fastapi import FastAPI
+﻿from fastapi import FastAPI, Request
+import logging
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware
 from contextlib import asynccontextmanager
 from db.database import init_db
 import uvicorn
@@ -9,13 +11,20 @@ from routers.user_info import router as user_info_router
 from routers.email_verification import router as email_verification_router
 from fastapi.openapi.utils import get_openapi
 
+from sessions.redis_session import init_redis, close_redis, refresh_session, get_user_id_by_session
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+logger = logging.getLogger("dbdc.app")
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     await init_db()
-    print("Bot is ready")
+    await init_redis()
+    logger.info("Application started and Redis initialized")
     yield
+    await close_redis()
+    logger.info("Application shutdown complete")
 
-# 👇 FastAPI с lifespan
 app = FastAPI(
     title="DBDC Telegram Bot Backend",
     description="Backend для Telegram WebApp, который обрабатывает финансовые данные пользователей, включая баланс forevers.",
@@ -25,14 +34,12 @@ app = FastAPI(
         "url": "https://dubadu.com",
         "email": "support@dubadu.com",
     },
-    # Переносим пути документации под основной API префикс
     docs_url="/api/v1/dbdc/docs",
     redoc_url="/api/v1/dbdc/redoc",
     openapi_url="/api/v1/dbdc/openapi.json",
     lifespan=lifespan
 )
 
-# 👇 CORS-настройки
 origins = [
     "https://web.telegram.org",
     "http://localhost:3000",
@@ -48,6 +55,22 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+class SessionRefreshMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next):
+        session_id = request.cookies.get("session_id")
+        if session_id:
+            try:
+                await refresh_session(session_id)
+                user_id = await get_user_id_by_session(session_id)
+                if user_id:
+                    request.state.user_id = user_id
+            except Exception as e:
+                logger.warning(f"Session refresh failed: {e}")
+        response = await call_next(request)
+        return response
+
+app.add_middleware(SessionRefreshMiddleware)
 
 app.include_router(forevers_user_balance_router, prefix="/api/v1/dbdc")
 app.include_router(forevers_price_router, prefix="/api/v1/dbdc")

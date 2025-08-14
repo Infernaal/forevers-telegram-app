@@ -80,11 +80,12 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-// import { formatCompactNumber } from '../utils/formatNumber.js' // no longer needed for full display
 import BottomNavigation from '../components/BottomNavigation.vue'
 
 const router = useRouter()
 const route = useRoute()
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dbdc-mini.dubadu.com/api/v1/dbdc'
 
 const foreversBalance = ref(0)
 const loyaltyBalance = ref(0)
@@ -92,14 +93,12 @@ const bonusBalance = ref(0)
 
 const fetchWalletData = async () => {
   try {
-    const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/forevers/96')
+    const response = await fetch(`${API_BASE_URL}/forevers/me`, { credentials: 'include' })
     const result = await response.json()
-    // Forevers balance
+    if (result.status !== 'success') return
     foreversBalance.value = parseFloat(result?.forevers_balance?.balance || 0)
-    // Loyalty program
     const loyalty = result?.wallets?.find(w => w.type === 'loyalty_program')
     loyaltyBalance.value = loyalty ? parseFloat(loyalty.amount) : 0
-    // Bonus
     const bonus = result?.wallets?.find(w => w.type === 'bonus')
     bonusBalance.value = bonus ? parseFloat(bonus.amount) : 0
   } catch (error) {

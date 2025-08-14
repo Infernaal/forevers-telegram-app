@@ -211,10 +211,13 @@ const closeSuccessModal = () => {
 const loyaltyFormatted = computed(() => formatUSDPrefix(loyaltyBalance.value))
 const bonusFormatted = computed(() => formatUSDPrefix(bonusBalance.value))
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dbdc-mini.dubadu.com/api/v1/dbdc'
+
 async function fetchWalletData() {
   try {
-    const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/forevers/96')
+    const response = await fetch(`${API_BASE_URL}/forevers/me`, { credentials: 'include' })
     const result = await response.json()
+    if (result.status !== 'success') return
     const loyalty = result?.wallets?.find(w => w.type === 'loyalty_program')
     loyaltyBalance.value = loyalty ? parseFloat(loyalty.amount) : 0
     const bonus = result?.wallets?.find(w => w.type === 'bonus')

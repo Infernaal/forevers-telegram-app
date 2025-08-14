@@ -117,11 +117,12 @@ const runAction = async () => {
 
   switch (action) {
     case 'check-telegram': {
-      const tgId = getTelegramUserId()
-      if (!tgId) {
+      // Exchange initData for session (already done earlier if loader not first view; safe to repeat)
+      const initData = window?.Telegram?.WebApp?.initData || ''
+      if (!initData) {
         return finish('/account-check')
       }
-      const res = await telegramUserService.getUserByTelegramId(tgId)
+      const res = await telegramUserService.authWithInitData(initData)
       const target = res.status === 'success' ? '/favorites' : '/account-check'
       return finish(target)
     }

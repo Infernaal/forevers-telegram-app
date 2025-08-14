@@ -5,11 +5,13 @@ from db.database import get_db
 from models.models import Forevers, UsersWallets
 from schemas.forevers_user_balance import ForeversBalance, ForeversBalanceData, WalletItem
 from utils.calculate_available_forevers import calculate_available_forevers
+from dependencies.current_user import get_current_user_id
 
 router = APIRouter(prefix="/forevers", tags=["Forevers User Stats"])
 
-@router.get("/{user_id}", response_model=ForeversBalance)
-async def get_forevers_balance(user_id: int, db: AsyncSession = Depends(get_db)):
+@router.get("/me", response_model=ForeversBalance)
+async def get_my_forevers_balance(current_user_id: int = Depends(get_current_user_id), db: AsyncSession = Depends(get_db)):
+    user_id = current_user_id
     try:
         stmt = select(Forevers).where(Forevers.user_id == user_id)
         result = await db.execute(stmt)
@@ -21,20 +23,18 @@ async def get_forevers_balance(user_id: int, db: AsyncSession = Depends(get_db))
                 message="No balance data available for the specified user"
             )
 
-        # Bonus
-        bonus_stmt = select(UsersWallets.currency, func.sum(UsersWallets.amount))\
-            .where(UsersWallets.uid == user_id, UsersWallets.wallet_type == 'bonus')\
-            .group_by(UsersWallets.currency)
+        bonus_stmt = (select(UsersWallets.currency, func.sum(UsersWallets.amount))
+            .where(UsersWallets.uid == user_id, UsersWallets.wallet_type == 'bonus')
+            .group_by(UsersWallets.currency))
         bonus_result = await db.execute(bonus_stmt)
         bonus_items = [
             WalletItem(type="bonus", currency=currency, amount=amount)
             for currency, amount in bonus_result.all()
         ]
 
-        # Rent (loyalty_program)
-        rent_stmt = select(UsersWallets.currency, func.sum(UsersWallets.amount))\
-            .where(UsersWallets.uid == user_id, UsersWallets.wallet_type == 'rent')\
-            .group_by(UsersWallets.currency)
+        rent_stmt = (select(UsersWallets.currency, func.sum(UsersWallets.amount))
+            .where(UsersWallets.uid == user_id, UsersWallets.wallet_type == 'rent')
+            .group_by(UsersWallets.currency))
         rent_result = await db.execute(rent_stmt)
         rent_items = [
             WalletItem(type="loyalty_program", currency=currency, amount=amount)
@@ -51,13 +51,11 @@ async def get_forevers_balance(user_id: int, db: AsyncSession = Depends(get_db))
             row.balance_ua
         )
 
-        # Расчёт доступных монет с учётом скидок и ранга
         available_forevers = await calculate_available_forevers(
             user_id=user_id,
             db=db
         )
 
-        # Возвращаем полный ответ
         return ForeversBalance(
             status="success",
             forevers_balance=ForeversBalanceData(

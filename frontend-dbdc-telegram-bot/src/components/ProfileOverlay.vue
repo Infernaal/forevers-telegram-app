@@ -508,21 +508,15 @@ const userInfo = ref({
   avatar: ''
 })
 
-// Fetch user info from API
+// Fetch user info via session (/user/me)
+import telegramUserService from '../services/telegramUserService.js'
 const fetchUserInfo = async () => {
-  try {
-    const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/user/info/96')
-    const result = await response.json()
-    if (result.status === 'success' && result.data) {
-      userInfo.value.fullName = result.data.full_name || ''
-      userInfo.value.rank = result.data.rank || ''
-      userInfo.value.avatar = result.data.avatar && result.data.avatar.trim() !== '' ? result.data.avatar : '/no-photo.svg'
-    } else {
-      userInfo.value.fullName = ''
-      userInfo.value.rank = ''
-      userInfo.value.avatar = '/no-photo.svg'
-    }
-  } catch (err) {
+  const result = await telegramUserService.getUserInfo()
+  if (result.status === 'success' && result.data) {
+    userInfo.value.fullName = result.data.full_name || ''
+    userInfo.value.rank = result.data.rank || ''
+    userInfo.value.avatar = result.data.avatar && result.data.avatar.trim() !== '' ? result.data.avatar : '/no-photo.svg'
+  } else {
     userInfo.value.fullName = ''
     userInfo.value.rank = ''
     userInfo.value.avatar = '/no-photo.svg'

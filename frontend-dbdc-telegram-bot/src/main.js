@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import './assets/tailwind.css'
+import telegramUserService from './services/telegramUserService'
 
 import { Content } from '@builder.io/sdk-vue'
 
@@ -87,6 +88,18 @@ if (window.Telegram && window.Telegram.WebApp) {
     platform: tg.platform,
     version: tg.version
   }
+
+  // Listen for main button / closing event to logout
+  tg.onEvent('backButtonClicked', async () => {
+    await telegramUserService.logout()
+  })
+  tg.onEvent('close', async () => {
+    await telegramUserService.logout()
+  })
+  // Fallback: page visibility / unload
+  window.addEventListener('beforeunload', () => {
+    telegramUserService.logout()
+  })
 }
 
 app.use(router)

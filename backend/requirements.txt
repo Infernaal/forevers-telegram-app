@@ -8,3 +8,4 @@ pydantic-core
 starlette
 aiosmtplib
 email-validator
+redis

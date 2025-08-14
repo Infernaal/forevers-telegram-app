@@ -326,15 +326,17 @@ const balances = ref([]) // Will be populated from backend
 const userBalances = ref({})
 const availableForevers = ref({})
 
+// API base URL
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dbdc-mini.dubadu.com/api/v1/dbdc'
+
 // Fetch user balances and available forevers
 const fetchUserBalances = async () => {
   try {
-    const response = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/forevers/96')
+    const response = await fetch(`${API_BASE_URL}/forevers/me`, { credentials: 'include' })
     const result = await response.json()
+    if (result.status !== 'success') return
     userBalances.value = result?.forevers_balance || {}
     availableForevers.value = result?.available_forevers || {}
-
-    // Set totalBalance from backend
     totalBalance.value = parseFloat(userBalances.value.balance || 0)
   } catch (error) {
     console.error('Failed to fetch user balances:', error)
