@@ -36,14 +36,13 @@ def parse_init_data(raw: str) -> Dict[str, str]:
 
 
 def build_data_check_string(items: Dict[str, str]) -> str:
-    """Формирует строку для проверки подписи."""
-    filtered = {k: v for k, v in items.items() if k != "hash"}
+    """Формирует строку для проверки подписи (по документации Telegram)."""
+    filtered = {k: v for k, v in items.items() if k not in ("hash", "signature")}
     lines = [f"{k}={filtered[k]}" for k in sorted(filtered.keys())]
     return "\n".join(lines)
 
 
 def verify_init_data(raw: str, bot_token: Optional[str] = None, max_age: int | None = 600) -> Dict[str, Any]:
-    """Проверка Telegram WebApp init data по официальной спецификации."""
     logger.info("RAW init_data: %s", raw)
 
     data_map = parse_init_data(raw)
@@ -51,20 +50,18 @@ def verify_init_data(raw: str, bot_token: Optional[str] = None, max_age: int | N
 
     provided_hash = data_map.get("hash")
     if not provided_hash:
-        logger.warning("Missing hash in init data")
         raise TelegramAuthError("Missing hash in init data")
 
     token = bot_token or BOT_TOKEN
     if not token:
-        logger.error("Bot token not configured")
         raise TelegramAuthError("Bot token not configured")
 
     logger.info("Using BOT_TOKEN: %s", token)
 
-    # ✅ Правильное формирование secret_key
+    # ✅ Формируем secret_key по спецификации
     secret_key = hmac.new(
-        key=b"WebAppData",       # фиксированная строка
-        msg=token.encode(),      # токен бота
+        key=token.encode(),
+        msg=b"WebAppData",
         digestmod=hashlib.sha256
     ).digest()
 
@@ -81,30 +78,20 @@ def verify_init_data(raw: str, bot_token: Optional[str] = None, max_age: int | N
     logger.info("Calculated hash: %s", calc_hash)
 
     if not hmac.compare_digest(calc_hash, provided_hash):
-        logger.warning("Invalid init data signature: provided != calculated")
         raise TelegramAuthError("Invalid init data signature")
 
-    # Проверка свежести auth_date
+    # Проверка свежести
     auth_date_raw = data_map.get("auth_date")
-    auth_date_int: Optional[int] = None
-    if auth_date_raw and auth_date_raw.isdigit():
-        auth_date_int = int(auth_date_raw)
-        logger.info("Auth date: %s (%s)", auth_date_int, time.ctime(auth_date_int))
-        if max_age is not None:
-            now = int(time.time())
-            logger.info("Now: %s (%s)", now, time.ctime(now))
-            if now - auth_date_int > max_age:
-                logger.warning("Init data expired")
-                raise TelegramAuthError("Init data expired")
+    auth_date_int = int(auth_date_raw) if auth_date_raw and auth_date_raw.isdigit() else None
+    if auth_date_int and max_age is not None:
+        if int(time.time()) - auth_date_int > max_age:
+            raise TelegramAuthError("Init data expired")
 
-    # Разбор user JSON
-    user_raw = data_map.get("user")
-    user_obj: Dict[str, Any] = {}
-    if user_raw:
+    user_obj = {}
+    if data_map.get("user"):
         try:
-            user_obj = json.loads(user_raw)
-            logger.info("Parsed user object: %s", user_obj)
+            user_obj = json.loads(data_map["user"])
         except json.JSONDecodeError:
-            logger.warning("Failed to decode user JSON: %s", user_raw)
+            pass
 
     return {"user": user_obj, "auth_date": auth_date_int, "raw": data_map}
