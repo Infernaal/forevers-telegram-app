@@ -44,10 +44,10 @@ def build_data_check_string(items: Dict[str, str]) -> str:
 
 def verify_init_data(raw: str, bot_token: Optional[str] = None, max_age: int | None = 600) -> Dict[str, Any]:
     """Проверка Telegram WebApp init data по официальной спецификации."""
-    logger.debug("RAW init_data: %s", raw)
+    logger.info("RAW init_data: %s", raw)
 
     data_map = parse_init_data(raw)
-    logger.debug("Parsed init_data: %s", data_map)
+    logger.info("Parsed init_data: %s", data_map)
 
     provided_hash = data_map.get("hash")
     if not provided_hash:
@@ -59,7 +59,7 @@ def verify_init_data(raw: str, bot_token: Optional[str] = None, max_age: int | N
         logger.error("Bot token not configured")
         raise TelegramAuthError("Bot token not configured")
 
-    logger.debug("Using BOT_TOKEN: %s", token)
+    logger.info("Using BOT_TOKEN: %s", token)
 
     # ✅ Правильное формирование secret_key
     secret_key = hmac.new(
@@ -69,7 +69,7 @@ def verify_init_data(raw: str, bot_token: Optional[str] = None, max_age: int | N
     ).digest()
 
     data_check_string = build_data_check_string(data_map)
-    logger.debug("Data check string: %s", data_check_string)
+    logger.info("Data check string: %s", data_check_string)
 
     calc_hash = hmac.new(
         secret_key,
@@ -77,8 +77,8 @@ def verify_init_data(raw: str, bot_token: Optional[str] = None, max_age: int | N
         digestmod=hashlib.sha256
     ).hexdigest()
 
-    logger.debug("Provided hash: %s", provided_hash)
-    logger.debug("Calculated hash: %s", calc_hash)
+    logger.info("Provided hash: %s", provided_hash)
+    logger.info("Calculated hash: %s", calc_hash)
 
     if not hmac.compare_digest(calc_hash, provided_hash):
         logger.warning("Invalid init data signature: provided != calculated")
@@ -89,10 +89,10 @@ def verify_init_data(raw: str, bot_token: Optional[str] = None, max_age: int | N
     auth_date_int: Optional[int] = None
     if auth_date_raw and auth_date_raw.isdigit():
         auth_date_int = int(auth_date_raw)
-        logger.debug("Auth date: %s (%s)", auth_date_int, time.ctime(auth_date_int))
+        logger.info("Auth date: %s (%s)", auth_date_int, time.ctime(auth_date_int))
         if max_age is not None:
             now = int(time.time())
-            logger.debug("Now: %s (%s)", now, time.ctime(now))
+            logger.info("Now: %s (%s)", now, time.ctime(now))
             if now - auth_date_int > max_age:
                 logger.warning("Init data expired")
                 raise TelegramAuthError("Init data expired")
@@ -103,7 +103,7 @@ def verify_init_data(raw: str, bot_token: Optional[str] = None, max_age: int | N
     if user_raw:
         try:
             user_obj = json.loads(user_raw)
-            logger.debug("Parsed user object: %s", user_obj)
+            logger.info("Parsed user object: %s", user_obj)
         except json.JSONDecodeError:
             logger.warning("Failed to decode user JSON: %s", user_raw)
 
