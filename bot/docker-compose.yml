@@ -4,4 +4,6 @@ services:
   bot:
     build: .
     container_name: dbdc-mini-telegram-bot
+    env_file:
+      - ../.env
     restart: always
