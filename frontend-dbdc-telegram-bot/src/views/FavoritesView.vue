@@ -360,17 +360,38 @@ const fetchBalancesFromBackend = async () => {
     const discountedPriceMap = Object.fromEntries(discountedPrices.map(dp => [dp.type, dp.value]))
 
     // Compose balances array using user balances and available forevers
+    // Helper: parse end_date strings that may be just a date (YYYY-MM-DD) or full ISO.
+    const parseDiscountEnd = (value) => {
+      if (!value) return null
+      // Trim and normalize
+      const v = String(value).trim()
+      // If only date part (no time), treat as end of that day in UTC (23:59:59)
+      if (/^\d{4}-\d{2}-\d{2}$/.test(v)) {
+        return new Date(v + 'T23:59:59Z').getTime()
+      }
+      // Replace space with T if present (e.g. '2025-08-10 23:59:59') and assume UTC
+      const candidate = v.includes(' ') && !v.endsWith('Z') ? v.replace(' ', 'T') + 'Z' : v
+      const ts = Date.parse(candidate)
+      return isNaN(ts) ? null : ts
+    }
+
+    const nowTs = Date.now()
+
     const rawBalances = prices.map(p => {
       const type = p.type
       const discountObj = discountMap[type] || {}
       const discountedPrice = discountedPriceMap[type] || priceMap[type]
       const discount = parseFloat(discountObj.discount || '0')
       const discountEnd = discountObj.end_date || null
+      const discountEndTs = parseDiscountEnd(discountEnd)
+      const discountActive = discount > 0 && discountEndTs !== null && discountEndTs >= nowTs
 
       // Use actual user balance and available amount
       const amount = parseFloat(userBalances.value[`balance_${type.toLowerCase()}`] || 0)
       const usdRate = parseFloat(priceMap[type])
-      const discountPrice = parseFloat(discountedPrice)
+      // If discount expired -> reset discount related values
+      const effectiveDiscount = discountActive ? discount : 0
+      const discountPrice = discountActive ? parseFloat(discountedPrice) : usdRate
 
       // UAE potential worth special case
       let potentialWorth
@@ -404,8 +425,9 @@ const fetchBalancesFromBackend = async () => {
         currentValue,
         potentialWorth,
         availableAmount,
-        discount,
-        discountEnd
+  discount: effectiveDiscount,
+  discountEnd: discountActive ? discountEnd : null,
+  discountExpired: discount > 0 && !discountActive && discountEndTs !== null
       }
     })
 

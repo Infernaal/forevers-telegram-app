@@ -40,6 +40,8 @@
                       type="email"
                       placeholder="Email"
                       required
+                      data-field="email"
+                      @focus="handleFieldFocus('email')"
                       @blur="handleFieldBlur('email')"
                       class="flex-1 text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none focus:ring-0"
                     />
@@ -64,6 +66,8 @@
                     </svg>
                   </div>
                 </div>
+                <!-- Email error message (format or forbidden domain) -->
+                <div v-if="emailErrorMessage" class="mt-1 text-xs font-medium text-red-600">{{ emailErrorMessage }}</div>
               </div>
 
               <!-- First Name Field -->
@@ -81,6 +85,8 @@
                       type="text"
                       placeholder="First name"
                       required
+                      data-field="firstName"
+                      @focus="handleFieldFocus('firstName')"
                       @blur="handleFieldBlur('firstName')"
                       class="flex-1 text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none focus:ring-0"
                     />
@@ -122,6 +128,8 @@
                       type="text"
                       placeholder="Last name"
                       required
+                      data-field="lastName"
+                      @focus="handleFieldFocus('lastName')"
                       @blur="handleFieldBlur('lastName')"
                       class="flex-1 text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none focus:ring-0"
                     />
@@ -195,9 +203,15 @@
               <div class="relative">
                 <div :class="[
                   'w-full h-[52px] rounded-lg border bg-white flex items-center px-3 focus-within:ring-1 transition-all duration-200',
-                  phoneOverLength ? 'border-red-500 focus-within:border-red-500 focus-within:ring-red-300' : (showPhoneFilled ? 'border-dbd-dark focus-within:border-dbd-primary focus-within:ring-dbd-primary/20' : 'border-[#B7B7B7] focus-within:border-dbd-primary focus-within:ring-dbd-primary/20')
+                  phoneOverLength || (showPhoneCollapsed && (showPhoneError || phoneOverLength))
+                    ? 'border-red-500 focus-within:border-red-500 focus-within:ring-red-300'
+                    : (showPhoneFilled
+                        ? 'border-dbd-dark focus-within:border-dbd-primary focus-within:ring-dbd-primary/20'
+                        : (showPhoneCollapsed
+                            ? 'border-dbd-dark focus-within:border-dbd-primary focus-within:ring-dbd-primary/20'
+                            : 'border-[#B7B7B7] focus-within:border-dbd-primary focus-within:ring-dbd-primary/20'))
                 ]">
-                  <div v-if="!showPhoneFilled" class="flex items-center flex-1">
+                  <div v-if="!showPhoneCollapsed" class="flex items-center flex-1">
                     <svg class="w-6 h-6 mr-2 flex-shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                       <path d="M22.4979 18.4211C22.4686 17.6088 22.1303 16.8508 21.5452 16.2866C20.3996 15.1819 19.4397 14.5442 18.5245 14.2797C17.2635 13.9153 16.0954 14.2467 15.0529 15.2648C15.0513 15.2663 15.0498 15.2678 15.0482 15.2694L13.9392 16.3702C13.246 15.9795 11.8983 15.1216 10.4421 13.6654L10.3342 13.5576C8.8778 12.1012 8.01995 10.7532 7.62961 10.0608L8.73047 8.95173C8.73203 8.95018 8.73358 8.94862 8.73514 8.94702C9.75319 7.90464 10.0846 6.73659 9.72017 5.4754C9.45566 4.56021 8.81799 3.60036 7.71328 2.45475C7.14915 1.86974 6.39114 1.53136 5.57883 1.50207C4.76602 1.47274 3.98607 1.75567 3.38117 2.29864L3.35763 2.3198C3.34672 2.32961 3.33605 2.33974 3.32564 2.35011C2.12146 3.5543 1.49023 5.24009 1.50011 7.2253C1.51697 10.5977 3.37043 14.4543 6.45804 17.5419C7.04026 18.1241 7.70196 18.7003 8.42474 19.2545C8.78424 19.5302 9.29915 19.4622 9.57481 19.1027C9.85052 18.7432 9.78252 18.2282 9.42297 17.9526C8.75709 17.442 8.14985 16.9135 7.61812 16.3819C4.82923 13.593 3.15542 10.167 3.1407 7.21713C3.13311 5.68823 3.59302 4.4121 4.47087 3.52509L4.47715 3.51943C5.07339 2.98422 5.97611 3.01679 6.53236 3.59359C8.65611 5.79606 8.50234 6.83585 7.5639 7.79816L6.04329 9.33019C5.80482 9.57046 5.73842 9.93255 5.87611 10.2418C5.91471 10.3285 6.84859 12.3921 9.17438 14.7179L9.28237 14.8258C11.6079 17.1513 13.6715 18.0852 13.7582 18.1238C14.0674 18.2615 14.4296 18.1951 14.6698 17.9566L16.2019 16.436C17.1643 15.4975 18.2041 15.3438 20.4064 17.4676C20.9832 18.0237 21.0158 18.9265 20.4807 19.5227L20.4749 19.5291C19.5951 20.3998 18.3326 20.8594 16.8203 20.8594C16.8079 20.8594 16.7954 20.8594 16.7829 20.8593C15.5741 20.8533 14.1744 20.5219 12.7351 19.9011C12.3192 19.7216 11.8364 19.9134 11.657 20.3294C11.4776 20.7454 11.6693 21.2281 12.0853 21.4075C13.749 22.1252 15.3267 22.4927 16.7747 22.4999C16.7901 22.5 16.8054 22.5 16.8208 22.5C18.786 22.5 20.455 21.8692 21.6499 20.6744C21.6603 20.664 21.6704 20.6533 21.6802 20.6424L21.7014 20.6187C22.2444 20.0139 22.5273 19.2334 22.4979 18.421..." fill="#4B4D50"/>
                     </svg>
@@ -215,13 +229,15 @@
                           :placeholder="getPhonePlaceholder()"
                           required
                           @input="handlePhoneInput"
+                          data-field="phone"
+                          @focus="handleFieldFocus('phone')"
                           @blur="handleFieldBlur('phone')"
                           class="flex-1 text-base font-medium text-dbd-gray bg-transparent border-none outline-none min-w-0 focus:ring-0"
                         />
                       </div>
                     </div>
                   </div>
-                  <div v-else class="flex items-center flex-1 pr-6">
+                  <div v-else class="flex items-center flex-1 pr-2 space-x-2">
                     <svg class="w-6 h-6 mr-2 flex-shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                       <path d="M22.4979 18.4211C22.4686 17.6088 22.1303 16.8508 21.5452 16.2866C20.3996 15.1819 19.4397 14.5442 18.5245 14.2797C17.2635 13.9153 16.0954 14.2467 15.0529 15.2648C15.0513 15.2663 15.0498 15.2678 15.0482 15.2694L13.9392 16.3702C13.246 15.9795 11.8983 15.1216 10.4421 13.6654L10.3342 13.5576C8.8778 12.1012 8.01995 10.7532 7.62961 10.0608L8.73047 8.95173C8.73203 8.95018 8.73358 8.94862 8.73514 8.94702C9.75319 7.90464 10.0846 6.73659 9.72017 5.4754C9.45566 4.56021 8.81799 3.60036 7.71328 2.45475C7.14915 1.86974 6.39114 1.53136 5.57883 1.50207C4.76602 1.47274 3.98607 1.75567 3.38117 2.29864L3.35763 2.3198C3.34672 2.32961 3.33605 2.33974 3.32564 2.35011C2.12146 3.5543 1.49023 5.24009 1.50011 7.2253C1.51697 10.5977 3.37043 14.4543 6.45804 17.5419C7.04026 18.1241 7.70196 18.7003 8.42474 19.2545C8.78424 19.5302 9.29915 19.4622 9.57481 19.1027C9.85052 18.7432 9.78252 18.2282 9.42297 17.9526C8.75709 17.442 8.14985 16.9135 7.61812 16.3819C4.82923 13.593 3.15542 10.167 3.1407 7.21713C3.13311 5.68823 3.59302 4.4121 4.47087 3.52509L4.47715 3.51943C5.07339 2.98422 5.97611 3.01679 6.53236 3.59359C8.65611 5.79606 8.50234 6.83585 7.5639 7.79816L6.04329 9.33019C5.80482 9.57046 5.73842 9.93255 5.87611 10.2418C5.91471 10.3285 6.84859 12.3921 9.17438 14.7179L9.28237 14.8258C11.6079 17.1513 13.6715 18.0852 13.7582 18.1238C14.0674 18.2615 14.4296 18.1951 14.6698 17.9566L16.2019 16.436C17.1643 15.4975 18.2041 15.3438 20.4064 17.4676C20.9832 18.0237 21.0158 18.9265 20.4807 19.5227L20.4749 19.5291C19.5951 20.3998 18.3326 20.8594 16.8203 20.8594C16.8079 20.8594 16.7954 20.8594 16.7829 20.8593C15.5741 20.8533 14.1744 20.5219 12.7351 19.9011C12.3192 19.7216 11.8364 19.9134 11.657 20.3294C11.4776 20.7454 11.6693 21.2281 12.0853 21.4075C13.749 22.1252 15.3267 22.4927 16.7747 22.4999C16.7901 22.5 16.8054 22.5 16.8208 22.5C18.786 22.5 20.455 21.8692 21.6499 20.6744C21.6603 20.664 21.6704 20.6533 21.6802 20.6424L21.7014 20.6187C22.2444 20.0139 22.5273 19.2334 22.4979 18.421..." fill="#4B4D50"/>
                     </svg>
@@ -229,24 +245,22 @@
                       <div class="text-xs text-dbd-gray font-medium leading-none">Your Phone #</div>
                       <div class="text-base font-medium text-dbd-dark mt-1">{{ displayPhoneNumber }}</div>
                     </div>
-                    <!-- Success checkmark (hidden if any hard error like over-length) -->
-                      <div v-if="showPhoneFilled && !phoneOverLength" class="w-5 h-5 rounded-full border border-[#88EF8C] bg-[#B3FFB6] flex items-center justify-center mr-1">
+                    <!-- Success checkmark -->
+                      <div v-if="showPhoneFilled && !phoneOverLength" class="w-5 h-5 rounded-full border border-[#88EF8C] bg-[#B3FFB6] flex items-center justify-center">
                       <svg class="w-2 h-2" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8">
                         <path d="M7.65064 0.0612768C7.28964 -0.158776 6.88699 0.265611 6.65095 0.5171C6.10947 1.11439 5.65128 1.80598 5.13753 2.4347C4.56826 3.1263 4.04064 3.81789 3.45749 4.49379C3.12425 4.87103 2.76325 5.27969 2.5411 5.75124C2.04125 5.20108 1.61083 4.60379 1.05545 4.11656C0.652791 3.77076 -0.0136711 3.51927 0.000213534 4.35233C0.0279828 5.4369 0.874945 6.60004 1.49975 7.33876C1.76356 7.65312 2.11068 7.9832 2.51333 7.99892C2.99929 8.03035 3.49914 7.37019 3.79072 7.00868C4.30447 6.37996 4.72101 5.67262 5.19306 5.02821C5.80399 4.17943 6.4288 3.34635 7.02584 2.48186C7.40072 1.94744 8.58091 0.627101 7.65064 0.0612768ZM0.611114 4.28946C0.59723 4.28946 0.583345 4.28946 0.555576 4.30515C0.500037 4.28946 0.458384 4.27371 0.402845 4.24228C0.444499 4.21084 0.513922 4.22656 0.611114 4.28946Z" fill="#07B80E"/>
                       </svg>
                     </div>
                     <!-- Error cross -->
-                      <div v-else-if="showPhoneError || phoneOverLength" class="w-5 h-5 rounded-full border border-[#EF8888] bg-[#FFB3B3] flex items-center justify-center mr-2">
+                      <div v-else class="w-5 h-5 rounded-full border border-[#EF8888] bg-[#FFB3B3] flex items-center justify-center">
                       <svg class="w-2 h-2" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8">
                         <path d="M6.5 1.5L1.5 6.5M1.5 1.5L6.5 6.5" stroke="#DC2626" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                       </svg>
                     </div>
                   </div>
-                  <!-- Fixed right icon only when collapsed -->
-                  <div v-if="showPhoneFilled" class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 rounded-full border border-[#CFCFCF] bg-white flex items-center justify-center">
-                    <svg class="w-3 h-3" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                      <path d="M8 14L12 10L8 6" stroke="#4B4D50" stroke-linecap="round"/>
-                    </svg>
+                  <!-- Inline arrow, only when valid (keeps vertical centering consistent) -->
+                  <div v-if="showPhoneCollapsed && showPhoneFilled" class="ml-auto w-5 h-5 rounded-full border border-[#CFCFCF] bg-white flex items-center justify-center">
+                    <svg class="w-3 h-3" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M8 14L12 10L8 6" stroke="#4B4D50" stroke-linecap="round"/></svg>
                   </div>
                 </div>
                 <!-- Phone specific error message -->
@@ -299,6 +313,17 @@ const formData = ref({
   phone: ''
 })
 
+// Forbidden email domains (case-insensitive)
+const forbiddenEmailDomains = new Set([
+  'mail.ru','bk.ru','inbox.ru','list.ru',
+  'yandex.ru','ya.ru','yandex.com',
+  'rambler.ru','lenta.ru','autorambler.ru',
+  'myrambler.ru','ro.ru','pochta.ru',
+  'cloud.mail.ru','tut.by','mail.by',
+  'brest.by','minsk.by','gomel.by',
+  'byfly.by','relcom.by','open.by'
+])
+
 // Country dropdown state
 const showCountryDropdown = ref(false)
 const selectedCountry = ref({ name: '', code: '' })
@@ -315,11 +340,35 @@ const touchedFields = ref({
   phone: false
 })
 
-// Computed properties for individual field validation
+// Track current focused field to collapse only after switching to another field
+const currentFocusedField = ref(null)
+
+// Email validation helpers
+const emailLocalPartRegex = /^[A-Za-z0-9._%+\-]+$/ // RFC simplified safe subset
+const emailDomainRegex = /^(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)(?:\.(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?))*\.[A-Za-z]{2,24}$/
+
 const isEmailValid = computed(() => {
-  const email = formData.value.email.trim()
-  // Require at least 2 characters for domain extension (like .com, .ru, etc.)
-  return email && /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)
+  const raw = formData.value.email
+  if (!raw) return false
+  const email = raw.trim()
+  // Basic structure check
+  if (!email || email.length < 6) return false
+  if (email.includes(' ')) return false
+  if (email.endsWith('.') || email.endsWith('-') || email.endsWith('_') || email.endsWith('@') || email.endsWith('\\')) return false
+  if (email.includes('\\')) return false // disallow any backslash
+  const atIndex = email.indexOf('@')
+  if (atIndex <= 0) return false
+  const local = email.slice(0, atIndex)
+  const domain = email.slice(atIndex + 1).toLowerCase()
+  if (!local || !domain) return false
+  if (local.length > 64 || domain.length > 253) return false
+  if (!emailLocalPartRegex.test(local)) return false
+  if (local.startsWith('.') || local.endsWith('.')) return false
+  if (local.includes('..')) return false
+  if (domain.includes('..')) return false
+  if (!emailDomainRegex.test(domain)) return false
+  if (forbiddenEmailDomains.has(domain)) return false
+  return true
 })
 
 const isFirstNameValid = computed(() => {
@@ -364,7 +413,15 @@ const displayPhoneNumber = computed(() => {
 
 // Show filled state only if field is touched, valid, and has meaningful content
 const showEmailFilled = computed(() => {
-  return touchedFields.value.email && isEmailValid.value && formData.value.email.trim().length > 5
+  if (!touchedFields.value.email) return false
+  if (!isEmailValid.value) return false
+  // Additional guard: avoid showing success if user likely still typing domain (no dot after @ yet)
+  const email = formData.value.email.trim()
+  const atIndex = email.indexOf('@')
+  if (atIndex === -1) return false
+  const domain = email.slice(atIndex + 1)
+  if (!domain.includes('.')) return false
+  return true
 })
 
 const showFirstNameFilled = computed(() => {
@@ -379,14 +436,44 @@ const showCountryFilled = computed(() => {
   return touchedFields.value.country && isCountryValid.value
 })
 
+// Phone collapse vs success:
+//  - collapse (showPhoneCollapsed) after user leaves field with any content
+//  - green success only when fully valid
+const showPhoneCollapsed = computed(() => {
+  return touchedFields.value.phone && formData.value.phone.trim().length > 0
+})
 const showPhoneFilled = computed(() => {
-  return touchedFields.value.phone && isPhoneValid.value
+  return showPhoneCollapsed.value && isPhoneValid.value
 })
 
 // Show error state for invalid fields that are touched and have content
 const showEmailError = computed(() => {
   const hasContent = formData.value.email.trim().length > 3
   return touchedFields.value.email && !isEmailValid.value && hasContent
+})
+
+// Detailed email error message (forbidden domain vs format)
+const emailErrorMessage = computed(() => {
+  if (!touchedFields.value.email) return ''
+  const raw = formData.value.email
+  if (!raw) return ''
+  const email = raw.trim()
+  const atIndex = email.indexOf('@')
+  if (email.includes(' ')) return 'Email cannot contain spaces.'
+  if (email.includes('\\')) return 'Backslash \\ not allowed in email.'
+  if (atIndex <= 0) return 'Enter a valid email address.'
+  const local = email.slice(0, atIndex)
+  const domain = email.slice(atIndex + 1).toLowerCase()
+  if (!local || !domain) return 'Enter a valid email address.'
+  if (local.length > 64) return 'Local part is too long.'
+  if (domain.length > 253) return 'Domain part is too long.'
+  if (local.startsWith('.') || local.endsWith('.') || local.includes('..')) return 'Invalid dots in local part.'
+  if (domain.includes('..')) return 'Invalid dots in domain.'
+  if (!emailLocalPartRegex.test(local)) return 'Invalid characters in local part.'
+  if (!emailDomainRegex.test(domain)) return 'Enter a valid email address.'
+  if (forbiddenEmailDomains.has(domain)) return 'This email domain is not allowed. Please use another email.'
+  if (email.endsWith('.') || email.endsWith('-') || email.endsWith('_') || email.endsWith('@')) return 'Email seems incomplete.'
+  return ''
 })
 
 const showFirstNameError = computed(() => {
@@ -472,12 +559,24 @@ const handlePhoneInput = (event) => {
 }
 
 // Methods
+const handleFieldFocus = (fieldName) => {
+  currentFocusedField.value = fieldName
+}
+
 const handleFieldBlur = (fieldName) => {
-  // Only mark as touched if the field has some meaningful content
-  const fieldValue = formData.value[fieldName]
-  if (fieldValue && fieldValue.trim().length > 0) {
-    touchedFields.value[fieldName] = true
-  }
+  // Reset current focused immediately; if another field gains focus it will set it shortly
+  currentFocusedField.value = null
+  // After a small delay decide whether to collapse
+  setTimeout(() => {
+    const nextFocused = currentFocusedField.value
+    const fieldValue = formData.value[fieldName]
+    const hasContent = fieldValue && fieldValue.trim().length > 0
+    if (!hasContent) return
+    // Collapse if: moved to another field OR clicked/tapped outside (no next focus)
+    if ((nextFocused && nextFocused !== fieldName) || !nextFocused) {
+      touchedFields.value[fieldName] = true
+    }
+  }, 50)
 }
 
 const toggleCountryDropdown = () => {
