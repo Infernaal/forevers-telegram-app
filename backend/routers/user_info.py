@@ -83,6 +83,10 @@ async def get_user_by_telegram(
         if not real_tg_id:
             logger.warning("Auth by telegram: user id missing in init data")
             return UserInfoResponseWrapper(status="failed", message="user id missing")
+        # Optional: ensure path telegram_id matches provided user id (defense-in-depth)
+        if real_tg_id != telegram_id:
+            logger.warning("Auth by telegram: path telegram_id mismatch")
+            return UserInfoResponseWrapper(status="failed")
         stmt = select(Users.id).where(Users.telegram_id == str(real_tg_id)).limit(1)
         result = await db.execute(stmt)
         user_id = result.scalar_one_or_none()
@@ -93,11 +97,8 @@ async def get_user_by_telegram(
         session_id = await create_session(int(user_id))
         response.set_cookie(key="session_id", value=session_id, httponly=True, secure=True, samesite="None", max_age=10800)
         return UserInfoResponseWrapper(status="success")
-    except TelegramAuthError:
-        logger.warning("Auth by telegram: init data verification failed")
-        return UserInfoResponseWrapper(status="failed")
-    except Exception as e:
-        logger.exception("Auth by telegram: unexpected error")
+    except TelegramAuthError as e:
+        logger.warning(f"Auth by telegram: init data verification failed: {e}")
         return UserInfoResponseWrapper(status="failed")
 
 

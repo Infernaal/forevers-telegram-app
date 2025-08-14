@@ -9,7 +9,9 @@ class TelegramUserService {
       return { status: 'success', cached: true }
     }
     try {
-      const response = await fetch(`${API_BASE_URL}/user/auth/by-telegram/0`, {
+      let tgId = 0
+      try { tgId = window?.Telegram?.WebApp?.initDataUnsafe?.user?.id || 0 } catch (_) { tgId = 0 }
+      const response = await fetch(`${API_BASE_URL}/user/auth/by-telegram/${tgId}`, {
         headers: { 'X-Telegram-Init-Data': initData },
         credentials: 'include'
       })
