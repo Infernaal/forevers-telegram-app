@@ -41,11 +41,10 @@ def build_data_check_string(items: Dict[str, str]) -> str:
 
 
 def verify_init_data(raw: str, bot_token: Optional[str] = None, max_age: Optional[int] = 600) -> Dict[str, Any]:
-    logger.info("RAW init_data: %s", raw)
+    logger.info("RAW init_data: %r", raw)
 
-    # Оставляем оригинальные значения для подписи
     raw_map = parse_init_data_raw(raw)
-    logger.info("Parsed init_data (raw values): %s", raw_map)
+    logger.info("Parsed init_data: %s", raw_map)
 
     provided_hash = raw_map.get("hash")
     if not provided_hash:
@@ -55,49 +54,40 @@ def verify_init_data(raw: str, bot_token: Optional[str] = None, max_age: Optiona
     if not token:
         raise TelegramAuthError("Bot token not configured")
 
-    logger.info("Using BOT_TOKEN: %s", token)
+    # 1. Генерируем secret_key
+    secret_key = hmac.new(token.encode(), b"WebAppData", hashlib.sha256).digest()
 
-    # Формируем secret_key (WebAppData + bot_token)
-    secret_key = hmac.new(
-        key=b"WebAppData",
-        msg=token.encode(),
-        digestmod=hashlib.sha256
-    ).digest()
+    # 2. Собираем data_check_string
+    data_check_string = "\n".join(
+        f"{k}={raw_map[k]}"
+        for k in sorted(raw_map.keys())
+        if k != "hash"
+    )
+    logger.info("Data check string (exact): %r", data_check_string)
 
-    # Строка для подписи
-    data_check_string = build_data_check_string(raw_map)
-    logger.info("Data check string: %s", data_check_string)
-
-    # Хэш
-    calc_hash = hmac.new(
-        secret_key,
-        msg=data_check_string.encode(),
-        digestmod=hashlib.sha256
-    ).hexdigest()
+    # 3. Вычисляем hash
+    calc_hash = hmac.new(secret_key, data_check_string.encode(), hashlib.sha256).hexdigest()
 
     logger.info("Provided hash: %s", provided_hash)
     logger.info("Calculated hash: %s", calc_hash)
 
-    if not hmac.compare_digest(calc_hash, provided_hash):
+    if calc_hash != provided_hash:
         raise TelegramAuthError("Invalid init data signature")
 
-    # Проверка свежести auth_date
-    auth_date_raw = raw_map.get("auth_date")
-    auth_date_int = int(auth_date_raw) if auth_date_raw and auth_date_raw.isdigit() else None
-    if auth_date_int and max_age is not None:
-        if int(time.time()) - auth_date_int > max_age:
-            raise TelegramAuthError("Init data expired")
+    # 4. Проверка времени
+    auth_date = int(raw_map.get("auth_date", "0"))
+    if max_age and (time.time() - auth_date > max_age):
+        raise TelegramAuthError("Init data expired")
 
-    # Декодирование значений уже после успешной валидации
+    # 5. Декодируем
     from urllib.parse import unquote_plus
     decoded_map = {k: unquote_plus(v) for k, v in raw_map.items()}
 
-    # Преобразуем user в объект
     user_obj = {}
-    if decoded_map.get("user"):
+    if "user" in decoded_map:
         try:
             user_obj = json.loads(decoded_map["user"])
-        except json.JSONDecodeError:
+        except Exception:
             pass
 
-    return {"user": user_obj, "auth_date": auth_date_int, "raw": decoded_map}
+    return {"user": user_obj, "auth_date": auth_date, "raw": decoded_map}
