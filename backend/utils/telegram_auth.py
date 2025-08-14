@@ -22,7 +22,7 @@ class TelegramAuthError(Exception):
 
 
 def parse_init_data(raw: str) -> Dict[str, str]:
-    """Парсит строку initData вида key=value&key=value (URL-encoded)"""
+    """Парсит строку initData вида key=value&key=value (URL-encoded)."""
     result: Dict[str, str] = {}
     if not raw:
         return result
@@ -36,6 +36,7 @@ def parse_init_data(raw: str) -> Dict[str, str]:
 
 
 def build_data_check_string(items: Dict[str, str]) -> str:
+    """Формирует строку для проверки подписи."""
     filtered = {k: v for k, v in items.items() if k != "hash"}
     lines = [f"{k}={filtered[k]}" for k in sorted(filtered.keys())]
     return "\n".join(lines)
@@ -60,11 +61,11 @@ def verify_init_data(raw: str, bot_token: Optional[str] = None, max_age: int | N
 
     logger.debug("Using BOT_TOKEN: %s", token)
 
-    # Формируем secret_key
+    # ✅ Правильное формирование secret_key
     secret_key = hmac.new(
-        key=token.encode(),
-        msg=b"WebAppData",
-        digestmod=hashlib.sha256,
+        key=b"WebAppData",       # фиксированная строка
+        msg=token.encode(),      # токен бота
+        digestmod=hashlib.sha256
     ).digest()
 
     data_check_string = build_data_check_string(data_map)
@@ -107,4 +108,3 @@ def verify_init_data(raw: str, bot_token: Optional[str] = None, max_age: int | N
             logger.warning("Failed to decode user JSON: %s", user_raw)
 
     return {"user": user_obj, "auth_date": auth_date_int, "raw": data_map}
-
