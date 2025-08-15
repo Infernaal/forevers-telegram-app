@@ -4,24 +4,34 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dbdc-mini.dub
 class TelegramUserService {
   // Call ONCE at app bootstrap to exchange Telegram initData for a server session cookie.
   async authWithInitData(initData) {
-    // Skip if we already marked session established in this tab
     if (sessionStorage.getItem('sessionEstablished')) {
       return { status: 'success', cached: true }
     }
     try {
+      // ✅ если забыли передать — возьмём каноничную строку сами
+      const initDataString = typeof initData === 'string'
+        ? initData
+        : (window?.Telegram?.WebApp?.initData || '')
+
+      // ⚠️ tgId только как хинт (на подпись не влияет)
       let tgId = 0
-      try { tgId = window?.Telegram?.WebApp?.initDataUnsafe?.user?.id || 0 } catch (_) { tgId = 0 }
-      const response = await fetch(`${API_BASE_URL}/user/auth/by-telegram/${tgId}`, {
-        headers: { 'X-Telegram-Init-Data': initData },
+      try { tgId = window?.Telegram?.WebApp?.initDataUnsafe?.user?.id || 0 } catch (_) {}
+
+      const res = await fetch(`${API_BASE_URL}/user/auth/by-telegram/${tgId}`, {
+        method: 'GET',                   // лучше явно POST
+        headers: {
+          'X-Telegram-Init-Data': initDataString,
+        },
         credentials: 'include'
       })
-      const data = await response.json()
-      if (data.status === 'success') {
+
+      const data = await res.json().catch(() => ({}))
+      if (res.ok && data?.status === 'success') {
         sessionStorage.setItem('sessionEstablished', '1')
       }
-      return data
+      return data?.status ? data : { status: res.ok ? 'success' : 'failed', code: res.status }
     } catch (e) {
-      return { status: 'failed', message: e.message }
+      return { status: 'failed', message: e?.message || 'Network error' }
     }
   }
 
