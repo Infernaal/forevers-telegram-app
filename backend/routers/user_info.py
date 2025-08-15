@@ -109,7 +109,7 @@ async def get_user_by_telegram(
 
 
 @router.post("/auth/by-email", response_model=AuthByEmailResponse, summary="Auth by email + optional telegram binding (with Telegram signature verification)")
-async def auth_by_email(payload: AuthByEmailRequest, db: AsyncSession = Depends(get_db)):
+async def auth_by_email(payload: AuthByEmailRequest, response: Response, db: AsyncSession = Depends(get_db)):
     """Authenticate existence via email and optional Telegram binding logic.
 
     Rules:
@@ -149,7 +149,8 @@ async def auth_by_email(payload: AuthByEmailRequest, db: AsyncSession = Depends(
 
         # 4. If no telegram id at all -> just success (email exists)
         if not verified_telegram_id:
-            return AuthByEmailResponse(status="success", target="/favorites")
+            # Success WITHOUT telegram id is not allowed per updated rule
+            return AuthByEmailResponse(status="failed", target="/account-check", message="Telegram authorization required")
 
         # 5. Binding / comparison logic
         provided_tg = verified_telegram_id
@@ -160,9 +161,36 @@ async def auth_by_email(payload: AuthByEmailRequest, db: AsyncSession = Depends(
                    .values(telegram_id=provided_tg))
             await db.execute(upd)
             await db.commit()
+            try:
+                await init_redis()
+                session_id = await create_session(int(user.id))
+                response.set_cookie(
+                    key="session_id",
+                    value=session_id,
+                    httponly=True,
+                    secure=True,
+                    samesite="None",
+                    max_age=10800,
+                )
+            except Exception as se:
+                logger.warning(f"Auth by email: session create (bind tg) failed: {se}")
             return AuthByEmailResponse(status="success", target="/favorites")
 
         if user.telegram_id == provided_tg:
+            # Already bound, create session
+            try:
+                await init_redis()
+                session_id = await create_session(int(user.id))
+                response.set_cookie(
+                    key="session_id",
+                    value=session_id,
+                    httponly=True,
+                    secure=True,
+                    samesite="None",
+                    max_age=10800,
+                )
+            except Exception as se:
+                logger.warning(f"Auth by email: session create (matched tg) failed: {se}")
             return AuthByEmailResponse(status="success", target="/favorites")
 
         return AuthByEmailResponse(status="failed", target="/telegram-mismatch", message="Email already linked to another Telegram account")
@@ -194,7 +222,7 @@ async def logout(request: Request, response: Response):
 
 
 @router.post("/register", response_model=RegistrationResponse, summary="Register a new user")
-async def register_user(payload: RegistrationRequest, request: Request, db: AsyncSession = Depends(get_db)):
+async def register_user(payload: RegistrationRequest, request: Request, response: Response, db: AsyncSession = Depends(get_db)):
     """Register a new user replicating legacy PHP logic (simplified).
 
     Steps:
@@ -330,6 +358,21 @@ async def register_user(payload: RegistrationRequest, request: Request, db: Asyn
         db.add(wallet)
 
         await db.commit()
+
+        # Create authenticated session immediately after successful registration
+        try:
+            await init_redis()
+            session_id = await create_session(int(user.id))
+            response.set_cookie(
+                key="session_id",
+                value=session_id,
+                httponly=True,
+                secure=True,
+                samesite="None",
+                max_age=10800,  # 3h
+            )
+        except Exception as se:
+            logger.warning(f"Registration: session creation failed: {se}")
 
         # TODO: optional: send verification email if require_email_verify (future implementation)
 
