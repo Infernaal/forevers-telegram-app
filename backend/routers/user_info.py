@@ -235,45 +235,43 @@ async def register_user(payload: RegistrationRequest, request: Request, response
     Returns status + flags.
     """
     try:
-        # Uniqueness checks
-        existing_q = select(Users.id).where(Users.email == payload.email).limit(1)
-        res = await db.execute(existing_q)
-        if res.scalar_one_or_none():
-            return RegistrationResponse(status="failed", message="Email already registered")
+        logger.info(f"/register attempt email={payload.email} ip={request.client.host if request.client else '?'}")
 
+        # Uniqueness
+        res = await db.execute(select(Users.id).where(Users.email == payload.email).limit(1))
+        if res.scalar_one_or_none():
+            logger.info(f"/register email exists: {payload.email}")
+            return RegistrationResponse(status="failed", message="Email already registered")
         if payload.phone:
-            phone_q = select(Users.id).where(Users.phone_number == payload.phone).limit(1)
-            pres = await db.execute(phone_q)
+            pres = await db.execute(select(Users.id).where(Users.phone_number == payload.phone).limit(1))
             if pres.scalar_one_or_none():
+                logger.info(f"/register phone exists: {payload.phone}")
                 return RegistrationResponse(status="failed", message="Phone already registered")
 
-        # Settings (for default currency & email verify requirement)
-        settings_stmt = select(Settings).limit(1)
-        settings_res = await db.execute(settings_stmt)
-        settings = settings_res.scalar_one_or_none()
+        # Settings
+        settings = (await db.execute(select(Settings).limit(1))).scalar_one_or_none()
         default_currency = settings.default_currency if settings and settings.default_currency else "USD"
         require_email_verify = bool(settings.require_email_verify) if settings and settings.require_email_verify is not None else False
 
-        # Stub password (not provided by payload yet)
-        stub_password = "jug6612020"
-        hashed = bcrypt.hashpw(stub_password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
+        # Password stub
+        hashed = bcrypt.hashpw("jug6612020".encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
         ip_addr = request.client.host if request.client else ""
         signup_time = int(time.time())
         user_token_id = str(uuid.uuid4())
 
-        # Telegram signature verification (optional)
+        # Telegram verify
         telegram_id_verified: str | None = None
         if payload.telegram_init_data:
             try:
-                from utils.telegram_auth import verify_init_data, TelegramAuthError
+                from utils.telegram_auth import verify_init_data
                 parsed = verify_init_data(payload.telegram_init_data)
                 tg_user = parsed.get("user") or {}
                 if tg_user.get("id"):
                     telegram_id_verified = str(tg_user["id"])
+                    logger.info(f"/register telegram verified id={telegram_id_verified} email={payload.email}")
             except Exception as e:
                 logger.warning(f"Registration: telegram init data verification failed: {e}")
 
-        # Qualification & structural data templates
         qualification_data = {
             "current_rank": "None",
             "possible_rank": "BRONZE",
@@ -312,14 +310,10 @@ async def register_user(payload: RegistrationRequest, request: Request, response
             "branches": []
         }
 
-        email_verified = 1
-        status_code = 1
+        email_verified = 0 if require_email_verify else 1
+        status_code = 2 if require_email_verify else 1
         email_hash = None
-
         if require_email_verify:
-            email_verified = 0
-            status_code = 2  # pending / needs verification
-            # 25 char random hash (alnum)
             alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
             email_hash = "".join(secrets.choice(alphabet) for _ in range(25))
 
@@ -344,22 +338,20 @@ async def register_user(payload: RegistrationRequest, request: Request, response
             email_hash=email_hash,
             telegram_id=telegram_id_verified,
         )
-
         db.add(user)
-        await db.flush()  # get user.id
+        await db.flush()
+        logger.info(f"/register created user id={user.id} email={payload.email}")
 
-        wallet = UsersWallets(
+        db.add(UsersWallets(
             uid=user.id,
             amount=0,
             currency=default_currency,
             wallet_type='bonus',
             updated=int(time.time())
-        )
-        db.add(wallet)
-
+        ))
         await db.commit()
+        logger.info(f"/register committed user id={user.id} email={payload.email}")
 
-        # Create authenticated session immediately after successful registration
         try:
             await init_redis()
             session_id = await create_session(int(user.id))
@@ -369,12 +361,10 @@ async def register_user(payload: RegistrationRequest, request: Request, response
                 httponly=True,
                 secure=True,
                 samesite="None",
-                max_age=10800,  # 3h
+                max_age=10800,
             )
         except Exception as se:
             logger.warning(f"Registration: session creation failed: {se}")
-
-        # TODO: optional: send verification email if require_email_verify (future implementation)
 
         return RegistrationResponse(
             status="success",
