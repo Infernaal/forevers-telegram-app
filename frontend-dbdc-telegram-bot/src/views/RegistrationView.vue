@@ -43,6 +43,7 @@
                       data-field="email"
                       @focus="handleFieldFocus('email')"
                       @blur="handleFieldBlur('email')"
+                      @keydown.enter.prevent="handleEnter('email')"
                       class="flex-1 text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none focus:ring-0"
                     />
                     <span v-if="!showEmailError" class="text-red-500 text-sm font-medium ml-1"> *</span>
@@ -88,6 +89,7 @@
                       data-field="firstName"
                       @focus="handleFieldFocus('firstName')"
                       @blur="handleFieldBlur('firstName')"
+                      @keydown.enter.prevent="handleEnter('firstName')"
                       class="flex-1 text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none focus:ring-0"
                     />
                     <span v-if="!showFirstNameError" class="text-red-500 text-sm font-medium ml-1"> *</span>
@@ -131,6 +133,7 @@
                       data-field="lastName"
                       @focus="handleFieldFocus('lastName')"
                       @blur="handleFieldBlur('lastName')"
+                      @keydown.enter.prevent="handleEnter('lastName')"
                       class="flex-1 text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none focus:ring-0"
                     />
                     <span v-if="!showLastNameError" class="text-red-500 text-sm font-medium ml-1"> *</span>
@@ -233,6 +236,7 @@
                           data-field="phone"
                           @focus="handleFieldFocus('phone')"
                           @blur="handleFieldBlur('phone')"
+                          @keydown.enter.prevent="handleEnter('phone')"
                           :disabled="!canEditPhone"
                           class="flex-1 text-base font-medium text-dbd-gray bg-transparent border-none outline-none min-w-0 focus:ring-0 disabled:cursor-not-allowed disabled:text-dbd-light-gray"
                         />
@@ -693,6 +697,60 @@ const handleRegister = () => {
   }
   sessionStorage.setItem('pendingRegistration', JSON.stringify(payload))
   router.push({ path: '/loader', query: { action: 'register', redirect: '/favorites', minDelay: 400 } })
+}
+
+// Ordered navigation for Enter key
+const fieldSequence = ['email', 'firstName', 'lastName', 'country', 'phone']
+const focusField = (name) => {
+  if (name === 'country') {
+    // If country already selected, skip to phone, else open selector
+    if (!selectedCountry.value.code) {
+      toggleCountryDropdown()
+    } else {
+      focusField('phone')
+    }
+    return
+  }
+  if (name === 'phone' && !canEditPhone.value) {
+    // If phone not editable yet, open country selector instead
+    toggleCountryDropdown()
+    return
+  }
+  const el = document.querySelector(`[data-field="${name}"]`)
+  if (el) {
+    el.focus()
+    // Move caret to end
+    try { const v = el.value; el.value = ''; el.value = v } catch (_) {}
+  }
+}
+
+const handleEnter = (current) => {
+  // Mark current as touched if it has content
+  finalizeActiveField()
+  const idx = fieldSequence.indexOf(current)
+  if (idx === -1) return
+  const next = fieldSequence[idx + 1]
+  if (!next) {
+    // Last field -> attempt submit
+    if (current === 'phone' && isFormValid.value) {
+      handleRegister()
+    }
+    return
+  }
+  if (current === 'lastName') {
+    // Jump to country selection or phone
+    focusField('country')
+    return
+  }
+  if (current === 'country') {
+    focusField('phone')
+    return
+  }
+  if (current === 'phone') {
+    if (isFormValid.value) handleRegister()
+    return
+  }
+  focusField(next)
 }
 
 // Helper: mark the currently focused input as touched immediately (needed when user jumps to country selector)
