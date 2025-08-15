@@ -9,3 +9,4 @@ starlette
 aiosmtplib
 email-validator
 redis
+bcrypt

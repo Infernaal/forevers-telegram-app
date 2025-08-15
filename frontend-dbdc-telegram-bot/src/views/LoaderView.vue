@@ -68,6 +68,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import telegramUserService from '../services/telegramUserService.js'
 import authByEmailService from '../services/authByEmailService.js'
+import registrationService from '../services/registrationService.js'
 
 const router = useRouter()
 const route = useRoute()
@@ -132,8 +133,24 @@ const runAction = async () => {
       if (!email) {
         return finish('/account-check')
       }
-      const res = await authByEmailService.auth(email)
+      const initData = window?.Telegram?.WebApp?.initData || null
+      const res = await authByEmailService.auth(email, { initData })
       return finish(res?.target || '/account-check')
+    }
+    case 'register': {
+      // Expect registration form fields in sessionStorage (simple handoff) or query
+      const regRaw = sessionStorage.getItem('pendingRegistration')
+      if (!regRaw) return finish('/registration')
+      let payload
+      try { payload = JSON.parse(regRaw) } catch { return finish('/registration') }
+      const res = await registrationService.register(payload)
+      if (res.status === 'success') {
+        // After success go favorites (or pending email verify -> email-verification)
+        const target = res.email_verification_required ? '/email-verification' : '/favorites'
+        sessionStorage.removeItem('pendingRegistration')
+        return finish(target)
+      }
+      return finish('/registration')
     }
     default:
       return finish(providedRedirect)

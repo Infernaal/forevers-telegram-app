@@ -4,16 +4,23 @@ from fastapi import HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, update
 from db.database import get_db
-from models.models import Users
+from models.models import Users, UsersWallets, Settings
 from schemas.user_info import (
     UserInfoResponse,
     UserInfoResponseWrapper,
     AuthByEmailRequest,
     AuthByEmailResponse,
 )
+from schemas.registration import RegistrationRequest, RegistrationResponse
 from services.get_rank_service import get_user_rank
 from dependencies.current_user import get_current_user_id
 from sessions.redis_session import create_session, delete_session, init_redis, get_user_id_by_session
+import bcrypt
+import time
+import uuid
+import secrets
+from datetime import datetime
+import json
 
 router = APIRouter(prefix="/user", tags=["User Info"])
 logger = logging.getLogger("dbdc.user")
@@ -38,7 +45,6 @@ async def get_my_user_info(current_user_id: int = Depends(get_current_user_id), 
             status="success",
             data=UserInfoResponse(
                 full_name=f"{user.first_name or ''} {user.last_name or ''}".strip(),
-                first_name=user.first_name or "",
                 rank=rank or "None",
                 avatar=f"https://dbdcusa.com/uploads/avatars/{user.avatar}" if user.avatar else ""
             )
@@ -102,7 +108,7 @@ async def get_user_by_telegram(
         return UserInfoResponseWrapper(status="failed")
 
 
-@router.post("/auth/by-email", response_model=AuthByEmailResponse, summary="Auth by email + optional telegram binding")
+@router.post("/auth/by-email", response_model=AuthByEmailResponse, summary="Auth by email + optional telegram binding (with Telegram signature verification)")
 async def auth_by_email(payload: AuthByEmailRequest, db: AsyncSession = Depends(get_db)):
     """Authenticate existence via email and optional Telegram binding logic.
 
@@ -114,17 +120,41 @@ async def auth_by_email(payload: AuthByEmailRequest, db: AsyncSession = Depends(
     If telegram_id is not provided we still only check email existence (success -> favorites else email-not-registered).
     """
     try:
+        # 1. Load user by email
         stmt = select(Users).where(Users.email == payload.email).limit(1)
         res = await db.execute(stmt)
         user: Users | None = res.scalar_one_or_none()
         if user is None:
             return AuthByEmailResponse(status="failed", target="/email-not-registered", message="Email not registered")
 
-        if not payload.telegram_id:
+        # 2. Determine telegram id via verified init data if provided
+        verified_telegram_id: str | None = None
+        if payload.telegram_init_data:
+            try:
+                from utils.telegram_auth import verify_init_data, TelegramAuthError
+                parsed = verify_init_data(payload.telegram_init_data)
+                verified_telegram_id = str(parsed.get("user", {}).get("id")) if parsed.get("user", {}).get("id") else None
+            except Exception as verr:  # broad: treat any verify error as no telegram binding allowed
+                logger.warning(f"Auth by email: telegram init data verify failed: {verr}")
+                # If init data provided but invalid -> force mismatch style failure to prevent silent spoof
+                return AuthByEmailResponse(status="failed", target="/telegram-signature-invalid", message="Invalid Telegram signature")
+
+        # 3. Fallback to plain telegram_id (legacy) only if no signed data provided
+        if not verified_telegram_id and payload.telegram_id:
+            # Accept raw provided id (not verified) for backward compatibility; could tighten later
+            try:
+                verified_telegram_id = str(payload.telegram_id)
+            except Exception:
+                verified_telegram_id = None
+
+        # 4. If no telegram id at all -> just success (email exists)
+        if not verified_telegram_id:
             return AuthByEmailResponse(status="success", target="/favorites")
 
-        provided_tg = str(payload.telegram_id)
+        # 5. Binding / comparison logic
+        provided_tg = verified_telegram_id
         if not user.telegram_id:
+            # Bind new telegram id
             upd = (update(Users)
                    .where(Users.id == user.id)
                    .values(telegram_id=provided_tg))
@@ -136,7 +166,7 @@ async def auth_by_email(payload: AuthByEmailRequest, db: AsyncSession = Depends(
             return AuthByEmailResponse(status="success", target="/favorites")
 
         return AuthByEmailResponse(status="failed", target="/telegram-mismatch", message="Email already linked to another Telegram account")
-    except Exception as e:
+    except Exception:
         logger.exception("Auth by email failed")
         raise HTTPException(status_code=500, detail="Internal error")
 
@@ -161,4 +191,155 @@ async def logout(request: Request, response: Response):
     except Exception as e:
         logger.exception("Logout error (ignored)")
         return {"status": "success"}  # even on error do not block client
+
+
+@router.post("/register", response_model=RegistrationResponse, summary="Register a new user")
+async def register_user(payload: RegistrationRequest, request: Request, db: AsyncSession = Depends(get_db)):
+    """Register a new user replicating legacy PHP logic (simplified).
+
+    Steps:
+    - Ensure email & phone unique.
+    - Hash password (bcrypt like PHP password_hash default).
+    - Prepare qualification_data & structural_data JSON blobs.
+    - Insert user row.
+    - Create default bonus wallet (amount 0, default currency from settings).
+    - If settings.require_email_verify == 1 -> mark status=2 (pending), email_verified=0, generate email_hash.
+    Returns status + flags.
+    """
+    try:
+        # Uniqueness checks
+        existing_q = select(Users.id).where(Users.email == payload.email).limit(1)
+        res = await db.execute(existing_q)
+        if res.scalar_one_or_none():
+            return RegistrationResponse(status="failed", message="Email already registered")
+
+        if payload.phone:
+            phone_q = select(Users.id).where(Users.phone_number == payload.phone).limit(1)
+            pres = await db.execute(phone_q)
+            if pres.scalar_one_or_none():
+                return RegistrationResponse(status="failed", message="Phone already registered")
+
+        # Settings (for default currency & email verify requirement)
+        settings_stmt = select(Settings).limit(1)
+        settings_res = await db.execute(settings_stmt)
+        settings = settings_res.scalar_one_or_none()
+        default_currency = settings.default_currency if settings and settings.default_currency else "USD"
+        require_email_verify = bool(settings.require_email_verify) if settings and settings.require_email_verify is not None else False
+
+        # Stub password (not provided by payload yet)
+        stub_password = "jug6612020"
+        hashed = bcrypt.hashpw(stub_password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
+        ip_addr = request.client.host if request.client else ""
+        signup_time = int(time.time())
+        user_token_id = str(uuid.uuid4())
+
+        # Telegram signature verification (optional)
+        telegram_id_verified: str | None = None
+        if payload.telegram_init_data:
+            try:
+                from utils.telegram_auth import verify_init_data, TelegramAuthError
+                parsed = verify_init_data(payload.telegram_init_data)
+                tg_user = parsed.get("user") or {}
+                if tg_user.get("id"):
+                    telegram_id_verified = str(tg_user["id"])
+            except Exception as e:
+                logger.warning(f"Registration: telegram init data verification failed: {e}")
+
+        # Qualification & structural data templates
+        qualification_data = {
+            "current_rank": "None",
+            "possible_rank": "BRONZE",
+            "current_pct": 0,
+            "pct": 0,
+            "real_nct": 0,
+            "capped_nct": 0,
+            "prev_nct": 0,
+            "prevMonthStart": "",
+            "prevMonthEnd": "",
+            "bonus": 0,
+            "ranks": {
+                "BRONZE": {"PCT": 500, "NCT": 10000, "structure": [], "bonus": 0},
+                "SILVER": {"PCT": 1000, "NCT": 25000, "structure": [], "bonus": 500},
+                "GOLD": {"PCT": 2000, "NCT": 50000, "structure": ["BRONZE"], "bonus": 1000},
+                "DIAMOND": {"PCT": 3000, "NCT": 100000, "structure": ["BRONZE", "SILVER"], "bonus": 2000},
+                "DOUBLE DIAMOND": {"PCT": 5000, "NCT": 500000, "structure": ["SILVER", "GOLD"], "bonus": 5000},
+                "AMBASSADOR": {"PCT": 10000, "NCT": 2000000, "structure": ["BRONZE", "SILVER", "GOLD"], "bonus": 20000},
+                "ROYAL AMBASSADOR": {"PCT": 15000, "NCT": 5000000, "structure": ["DIAMOND", "GOLD", "GOLD"], "bonus": 50000},
+            },
+            "pct_progress_percentage": 0,
+            "nct_progress_percentage": 0,
+            "remaining_pct": 500,
+            "remaining_nct": 10000,
+            "structure_details": [],
+            "referral_structure": [],
+            "current_rank_image": "/assets/images/norank.svg",
+            "next_rank": "",
+            "next_rank_image": "/assets/images/award_bronze.svg"
+        }
+        structural_data = {
+            "current_rank": "None",
+            "bonus_percentage": 0,
+            "total_bonus": 0,
+            "current_month_bonus": 0,
+            "branches": []
+        }
+
+        email_verified = 1
+        status_code = 1
+        email_hash = None
+
+        if require_email_verify:
+            email_verified = 0
+            status_code = 2  # pending / needs verification
+            # 25 char random hash (alnum)
+            alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+            email_hash = "".join(secrets.choice(alphabet) for _ in range(25))
+
+        user = Users(
+            password=hashed,
+            email=payload.email,
+            phone_number=payload.phone,
+            email_verified=email_verified,
+            status=status_code,
+            account_type=0,
+            ip=ip_addr,
+            signup_time=signup_time,
+            first_name=payload.first_name,
+            last_name=payload.last_name,
+            country=payload.country,
+            parent_id=payload.ref,
+            qualification_data=json.dumps(qualification_data, separators=(",", ":")),
+            qualification_data_updated=datetime.utcnow(),
+            structural_data=json.dumps(structural_data, separators=(",", ":")),
+            structural_data_updated=datetime.utcnow(),
+            user_token_id=user_token_id,
+            email_hash=email_hash,
+            telegram_id=telegram_id_verified,
+        )
+
+        db.add(user)
+        await db.flush()  # get user.id
+
+        wallet = UsersWallets(
+            uid=user.id,
+            amount=0,
+            currency=default_currency,
+            wallet_type='bonus',
+            updated=int(time.time())
+        )
+        db.add(wallet)
+
+        await db.commit()
+
+        # TODO: optional: send verification email if require_email_verify (future implementation)
+
+        return RegistrationResponse(
+            status="success",
+            message="Registered successfully" if not require_email_verify else "Registered. Email verification required",
+            email_verification_required=require_email_verify
+        )
+    except Exception:
+        await db.rollback()
+        logger.exception("Registration failed")
+        return RegistrationResponse(status="failed", message="Registration failed due to server error")
 

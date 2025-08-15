@@ -301,7 +301,7 @@ import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import CountryFlag from '@/components/CountryFlag.vue'
 import { fullCountries } from '@/utils/allCountries.js'
-import { parsePhoneNumberFromString, AsYouType } from 'libphonenumber-js'
+import { usePhoneInput } from '@/composables/usePhoneInput.js'
 
 const router = useRouter()
 const route = useRoute()
@@ -385,33 +385,22 @@ const isCountryValid = computed(() => {
   return selectedCountry.value.name.length > 0
 })
 
-const isPhoneValid = computed(() => {
-  if (!selectedCountry.value.code || !formData.value.phone.trim()) return false
-  const iso2 = selectedCountry.value.code.slice(0,2).toUpperCase()
-  const dial = getSelectedCountryCode().replace('+','')
-  try {
-    // Build full international number for parsing
-    const digitsOnly = formData.value.phone.replace(/\D/g,'')
-    const fullIntl = `+${dial}${digitsOnly}`
-    const parsed = parsePhoneNumberFromString(fullIntl)
-    return !!parsed && parsed.country === iso2 && parsed.isValid()
-  } catch {
-    return false
-  }
-})
+// Phone logic composable (must be initialized before any computed uses these refs)
+const {
+  isPhoneValid,
+  displayPhoneNumber,
+  showPhoneCollapsed,
+  showPhoneFilled,
+  canEditPhone,
+  showPhoneError,
+  phoneOverLength,
+  phoneErrorMessage,
+  getSelectedCountryCode,
+  getPhonePlaceholder,
+  handlePhoneInput
+} = usePhoneInput(selectedCountry, formData, touchedFields, countries)
 
-// Formatted phone with country code (international format) when valid
-const displayPhoneNumber = computed(() => {
-  if (!selectedCountry.value.code || !formData.value.phone) return formData.value.phone
-  const dial = getSelectedCountryCode().replace('+','')
-  try {
-    const digitsOnly = formData.value.phone.replace(/\D/g,'')
-    const fullIntl = `+${dial}${digitsOnly}`
-    const parsed = parsePhoneNumberFromString(fullIntl)
-    if (parsed && parsed.isValid()) return parsed.formatInternational()
-  } catch {}
-  return `+${dial} ${formData.value.phone}`.trim()
-})
+// (displayPhoneNumber now provided by composable)
 
 // Show filled state only if field is touched, valid, and has meaningful content
 const showEmailFilled = computed(() => {
@@ -438,18 +427,7 @@ const showCountryFilled = computed(() => {
   return touchedFields.value.country && isCountryValid.value
 })
 
-// Phone collapse vs success:
-//  - collapse (showPhoneCollapsed) after user leaves field with any content
-//  - green success only when fully valid
-const showPhoneCollapsed = computed(() => {
-  return touchedFields.value.phone && formData.value.phone.trim().length > 0
-})
-const showPhoneFilled = computed(() => {
-  return showPhoneCollapsed.value && isPhoneValid.value
-})
-
-// Phone becomes available only after selecting a country
-const canEditPhone = computed(() => !!selectedCountry.value.code)
+// (showPhoneCollapsed, showPhoneFilled, canEditPhone from composable)
 
 // Show error state for invalid fields that are touched and have content
 const showEmailError = computed(() => {
@@ -495,38 +473,9 @@ const showCountryError = computed(() => {
   return false // Country field doesn't need error state since it's a dropdown
 })
 
-const showPhoneError = computed(() => {
-  if (!touchedFields.value.phone || !formData.value.phone.trim() || !selectedCountry.value.code) return false
-  const hasContent = formData.value.phone.replace(/\D/g,'').length > 0
-  const dial = getSelectedCountryCode().replace('+','')
-  try {
-    const fullIntl = `+${dial}${formData.value.phone.replace(/\D/g,'')}`
-    const parsed = parsePhoneNumberFromString(fullIntl)
-    return hasContent && (!parsed || !parsed.isPossible())
-  } catch {
-    return hasContent
-  }
-})
+// (showPhoneError from composable)
 
-// Country specific approximate max national digit lengths (fallback to 15 if unknown)
-const maxNationalLengths = {
-  UA: 9, RU: 10, KZ: 10, US: 10, CA: 10, GB: 10, AU: 9, NZ: 10, DE: 12, FR: 9, ES: 9, IT: 11, NL: 9, NO: 8, IE: 9, JP: 11, KR: 11, SG: 8, CN: 11, IN: 10, AE: 9, PT: 9, MT: 8, PL: 9
-}
-
-const phoneOverLength = computed(() => {
-  if (!selectedCountry.value.code) return false
-  const iso2 = selectedCountry.value.code.slice(0,2).toUpperCase()
-  const digits = formData.value.phone.replace(/\D/g,'')
-  const limit = maxNationalLengths[iso2] || 15
-  return digits.length > limit
-})
-
-// Unified phone error message (production-friendly, English)
-const phoneErrorMessage = computed(() => {
-  if (phoneOverLength.value) return 'Phone number exceeds the maximum length for the selected country.'
-  if (showPhoneError.value) return 'Please enter a valid phone number.'
-  return ''
-})
+// (phoneOverLength & phoneErrorMessage from composable)
 
 const isFormValid = computed(() => {
   return isEmailValid.value &&
@@ -537,36 +486,7 @@ const isFormValid = computed(() => {
 })
 
 
-// Helper functions for phone field
-const getSelectedCountryCode = () => {
-  if (!selectedCountry.value.name) return 'Code'
-  const country = countries.value.find(c => c.name === selectedCountry.value.name)
-  return country ? country.phoneCode : 'Code'
-}
-
-const getSelectedCountryName = () => {
-  if (!selectedCountry.value.name) return 'Country'
-  const country = countries.value.find(c => c.name === selectedCountry.value.name)
-  return country ? country.name : 'Country'
-}
-
-const getPhonePlaceholder = () => {
-  if (!selectedCountry.value.code) return 'Enter phone number'
-  return 'Enter phone number'
-}
-
-const handlePhoneInput = (event) => {
-  if (!canEditPhone.value) {
-    formData.value.phone = ''
-    event.target.value = ''
-    return
-  }
-  // Keep UX simple: store only raw national digits (no live pretty formatting) so nothing "прыгает" и не дублируется.
-  // Formatting (international) уже показывается в свернутом состоянии через displayPhoneNumber.
-  let digits = event.target.value.replace(/\D/g,'').slice(0,15)
-  formData.value.phone = digits
-  event.target.value = digits
-}
+// (phone composable already initialized above)
 
 // Methods
 const handleFieldFocus = (fieldName) => {
@@ -741,16 +661,17 @@ const editField = (fieldName) => {
 
 const handleRegister = () => {
   if (!isFormValid.value) return
-
-  // Add haptic feedback if available
-  if (window.triggerHaptic) {
-    window.triggerHaptic('impact', 'medium')
+  if (window.triggerHaptic) window.triggerHaptic('impact', 'medium')
+  const payload = {
+    first_name: formData.value.firstName.trim(),
+    last_name: formData.value.lastName.trim(),
+    country: selectedCountry.value.code || formData.value.country,
+    email: formData.value.email.trim(),
+    phone: formData.value.phone.trim() || null,
+    ref: null
   }
-
-  // Placeholder: here you'd normally send data to backend
-  console.log('Registration submitted:', formData.value)
-  // Redirect flow: loader -> favorites
-  router.push({ path: '/loader', query: { redirect: '/favorites' } })
+  sessionStorage.setItem('pendingRegistration', JSON.stringify(payload))
+  router.push({ path: '/loader', query: { action: 'register', redirect: '/favorites', minDelay: 400 } })
 }
 
 // Helper: mark the currently focused input as touched immediately (needed when user jumps to country selector)
