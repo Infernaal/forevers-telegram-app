@@ -199,10 +199,11 @@
                 </div>
               </div>
 
-              <!-- Phone Number Field -->
+              <!-- Phone Number Field (disabled until country chosen) -->
               <div class="relative">
                 <div :class="[
                   'w-full h-[52px] rounded-lg border bg-white flex items-center px-3 focus-within:ring-1 transition-all duration-200',
+                  !canEditPhone ? 'opacity-60 cursor-not-allowed' : '',
                   phoneOverLength || (showPhoneCollapsed && (showPhoneError || phoneOverLength))
                     ? 'border-red-500 focus-within:border-red-500 focus-within:ring-red-300'
                     : (showPhoneFilled
@@ -210,7 +211,7 @@
                         : (showPhoneCollapsed
                             ? 'border-dbd-dark focus-within:border-dbd-primary focus-within:ring-dbd-primary/20'
                             : 'border-[#B7B7B7] focus-within:border-dbd-primary focus-within:ring-dbd-primary/20'))
-                ]">
+                ]" :aria-disabled="!canEditPhone">
                   <div v-if="!showPhoneCollapsed" class="flex items-center flex-1">
                     <svg class="w-6 h-6 mr-2 flex-shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                       <path d="M22.4979 18.4211C22.4686 17.6088 22.1303 16.8508 21.5452 16.2866C20.3996 15.1819 19.4397 14.5442 18.5245 14.2797C17.2635 13.9153 16.0954 14.2467 15.0529 15.2648C15.0513 15.2663 15.0498 15.2678 15.0482 15.2694L13.9392 16.3702C13.246 15.9795 11.8983 15.1216 10.4421 13.6654L10.3342 13.5576C8.8778 12.1012 8.01995 10.7532 7.62961 10.0608L8.73047 8.95173C8.73203 8.95018 8.73358 8.94862 8.73514 8.94702C9.75319 7.90464 10.0846 6.73659 9.72017 5.4754C9.45566 4.56021 8.81799 3.60036 7.71328 2.45475C7.14915 1.86974 6.39114 1.53136 5.57883 1.50207C4.76602 1.47274 3.98607 1.75567 3.38117 2.29864L3.35763 2.3198C3.34672 2.32961 3.33605 2.33974 3.32564 2.35011C2.12146 3.5543 1.49023 5.24009 1.50011 7.2253C1.51697 10.5977 3.37043 14.4543 6.45804 17.5419C7.04026 18.1241 7.70196 18.7003 8.42474 19.2545C8.78424 19.5302 9.29915 19.4622 9.57481 19.1027C9.85052 18.7432 9.78252 18.2282 9.42297 17.9526C8.75709 17.442 8.14985 16.9135 7.61812 16.3819C4.82923 13.593 3.15542 10.167 3.1407 7.21713C3.13311 5.68823 3.59302 4.4121 4.47087 3.52509L4.47715 3.51943C5.07339 2.98422 5.97611 3.01679 6.53236 3.59359C8.65611 5.79606 8.50234 6.83585 7.5639 7.79816L6.04329 9.33019C5.80482 9.57046 5.73842 9.93255 5.87611 10.2418C5.91471 10.3285 6.84859 12.3921 9.17438 14.7179L9.28237 14.8258C11.6079 17.1513 13.6715 18.0852 13.7582 18.1238C14.0674 18.2615 14.4296 18.1951 14.6698 17.9566L16.2019 16.436C17.1643 15.4975 18.2041 15.3438 20.4064 17.4676C20.9832 18.0237 21.0158 18.9265 20.4807 19.5227L20.4749 19.5291C19.5951 20.3998 18.3326 20.8594 16.8203 20.8594C16.8079 20.8594 16.7954 20.8594 16.7829 20.8593C15.5741 20.8533 14.1744 20.5219 12.7351 19.9011C12.3192 19.7216 11.8364 19.9134 11.657 20.3294C11.4776 20.7454 11.6693 21.2281 12.0853 21.4075C13.749 22.1252 15.3267 22.4927 16.7747 22.4999C16.7901 22.5 16.8054 22.5 16.8208 22.5C18.786 22.5 20.455 21.8692 21.6499 20.6744C21.6603 20.664 21.6704 20.6533 21.6802 20.6424L21.7014 20.6187C22.2444 20.0139 22.5273 19.2334 22.4979 18.421..." fill="#4B4D50"/>
@@ -221,18 +222,19 @@
                         <span v-if="!showPhoneError" class="text-red-500 text-xs font-medium ml-1">*</span>
                       </div>
                       <div class="flex items-center w-full mt-1">
-                        <span class="text-base text-dbd-dark font-medium whitespace-nowrap" style="min-width: fit-content; max-width: 80px;">{{ getSelectedCountryCode() }}</span>
+                        <span class="text-base text-dbd-dark font-medium whitespace-nowrap" style="min-width: fit-content; max-width: 80px;">{{ canEditPhone ? getSelectedCountryCode() : '' }}</span>
                         <div class="w-px h-7 bg-dbd-light-gray mx-2 flex-shrink-0"></div>
                         <input
                           v-model="formData.phone"
                           type="tel"
-                          :placeholder="getPhonePlaceholder()"
+                          :placeholder="canEditPhone ? getPhonePlaceholder() : 'Select country first'"
                           required
                           @input="handlePhoneInput"
                           data-field="phone"
                           @focus="handleFieldFocus('phone')"
                           @blur="handleFieldBlur('phone')"
-                          class="flex-1 text-base font-medium text-dbd-gray bg-transparent border-none outline-none min-w-0 focus:ring-0"
+                          :disabled="!canEditPhone"
+                          class="flex-1 text-base font-medium text-dbd-gray bg-transparent border-none outline-none min-w-0 focus:ring-0 disabled:cursor-not-allowed disabled:text-dbd-light-gray"
                         />
                       </div>
                     </div>
@@ -446,6 +448,9 @@ const showPhoneFilled = computed(() => {
   return showPhoneCollapsed.value && isPhoneValid.value
 })
 
+// Phone becomes available only after selecting a country
+const canEditPhone = computed(() => !!selectedCountry.value.code)
+
 // Show error state for invalid fields that are touched and have content
 const showEmailError = computed(() => {
   const hasContent = formData.value.email.trim().length > 3
@@ -551,6 +556,11 @@ const getPhonePlaceholder = () => {
 }
 
 const handlePhoneInput = (event) => {
+  if (!canEditPhone.value) {
+    formData.value.phone = ''
+    event.target.value = ''
+    return
+  }
   // Keep UX simple: store only raw national digits (no live pretty formatting) so nothing "прыгает" и не дублируется.
   // Formatting (international) уже показывается в свернутом состоянии через displayPhoneNumber.
   let digits = event.target.value.replace(/\D/g,'').slice(0,15)
@@ -560,6 +570,7 @@ const handlePhoneInput = (event) => {
 
 // Methods
 const handleFieldFocus = (fieldName) => {
+  if (fieldName === 'phone' && !canEditPhone.value) return
   currentFocusedField.value = fieldName
 }
 
@@ -580,6 +591,8 @@ const handleFieldBlur = (fieldName) => {
 }
 
 const toggleCountryDropdown = () => {
+  // Before navigating away, force-touch the currently focused field so its UI collapses properly
+  finalizeActiveField()
   // Save current form data before navigation
   saveFormData()
 
@@ -703,6 +716,8 @@ watch(() => route.name, (newRouteName) => {
 
 const editField = (fieldName) => {
   if (fieldName === 'country') {
+  // Ensure current active field (if any) is finalized before leaving
+  finalizeActiveField()
     // Save current form data before navigation
     saveFormData()
 
@@ -736,6 +751,27 @@ const handleRegister = () => {
   console.log('Registration submitted:', formData.value)
   // Redirect flow: loader -> favorites
   router.push({ path: '/loader', query: { redirect: '/favorites' } })
+}
+
+// Helper: mark the currently focused input as touched immediately (needed when user jumps to country selector)
+const finalizeActiveField = () => {
+  // Use the reactive tracker first
+  if (currentFocusedField.value) {
+    const fieldName = currentFocusedField.value
+    const value = formData.value[fieldName]
+    if (value && value.trim().length > 0) {
+      touchedFields.value[fieldName] = true
+    }
+  } else {
+    // Fallback: inspect DOM activeElement (in case currentFocusedField missed)
+    const el = document.activeElement
+    if (el && el.getAttribute) {
+      const fieldName = el.getAttribute('data-field')
+      if (fieldName && formData.value[fieldName] && formData.value[fieldName].trim().length > 0) {
+        touchedFields.value[fieldName] = true
+      }
+    }
+  }
 }
 </script>
 
