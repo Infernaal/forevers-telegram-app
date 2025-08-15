@@ -96,6 +96,10 @@ const finish = async (target) => {
   if (waitMore > 0) {
     await new Promise(r => setTimeout(r, waitMore))
   }
+  // Mark login/registration success for FavoritesView notification
+  if (target === '/favorites') {
+    try { sessionStorage.setItem('loggedSuccess', '1') } catch (e) { /* ignore */ }
+  }
   isProcessing.value = false
   router.replace(target)
 }

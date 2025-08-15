@@ -416,11 +416,11 @@ const showEmailFilled = computed(() => {
 })
 
 const showFirstNameFilled = computed(() => {
-  return touchedFields.value.firstName && isFirstNameValid.value && formData.value.firstName.trim().length > 2
+  return touchedFields.value.firstName && isFirstNameValid.value
 })
 
 const showLastNameFilled = computed(() => {
-  return touchedFields.value.lastName && isLastNameValid.value && formData.value.lastName.trim().length > 2
+  return touchedFields.value.lastName && isLastNameValid.value
 })
 
 const showCountryFilled = computed(() => {
@@ -513,6 +513,12 @@ const handleFieldBlur = (fieldName) => {
 const toggleCountryDropdown = () => {
   // Before navigating away, force-touch the currently focused field so its UI collapses properly
   finalizeActiveField()
+  // Additionally, explicitly mark currentFocusedField touched if it has content (race-safe)
+  if (currentFocusedField.value) {
+    const fn = currentFocusedField.value
+    const val = formData.value[fn]
+    if (val && val.trim().length > 0) touchedFields.value[fn] = true
+  }
   // Save current form data before navigation
   saveFormData()
 
@@ -557,23 +563,24 @@ const saveFormData = () => {
 // Restore form data after navigation
 const restoreFormData = () => {
   const storedState = sessionStorage.getItem('registrationFormState')
-  if (storedState) {
-    try {
-      const formState = JSON.parse(storedState)
+  if (!storedState) return
+  try {
+    const formState = JSON.parse(storedState)
 
-      // Restore only if the current form is relatively empty
-      if (!formData.value.email && !formData.value.firstName && !formData.value.lastName) {
-        formData.value = { ...formData.value, ...formState.formData }
-        touchedFields.value = { ...touchedFields.value, ...formState.touchedFields }
+    // Always merge saved form values (don't overwrite what user already changed after return)
+    formData.value = { ...formData.value, ...formState.formData }
 
-        // Don't restore selectedCountry here - it will be handled by handleCountrySelection
-        if (!selectedCountry.value.name && formState.selectedCountry?.name) {
-          selectedCountry.value = formState.selectedCountry
-        }
-      }
-    } catch (error) {
-      console.error('Error restoring form data:', error)
+    // Merge touched flags: once true stays true (enables collapse after returning)
+    Object.keys(formState.touchedFields || {}).forEach(k => {
+      if (formState.touchedFields[k]) touchedFields.value[k] = true
+    })
+
+    // Only set selectedCountry if not already chosen (country selection handled separately too)
+    if (!selectedCountry.value.name && formState.selectedCountry?.name) {
+      selectedCountry.value = formState.selectedCountry
     }
+  } catch (error) {
+    console.error('Error restoring form data:', error)
   }
 }
 

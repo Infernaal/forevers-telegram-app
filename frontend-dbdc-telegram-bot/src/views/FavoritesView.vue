@@ -670,6 +670,19 @@ onMounted(async () => {
     fetchBalancesFromBackend(),
     fetchTotalBalance()
   ])
+
+  // Show success notification if arriving right after login/registration
+  try {
+    if (sessionStorage.getItem('loggedSuccess') === '1') {
+      sessionStorage.removeItem('loggedSuccess')
+      successMessage.value = 'Logged successfully'
+      showSuccessNotification.value = true
+      if (successTimeout) clearTimeout(successTimeout)
+      successTimeout = setTimeout(() => {
+        showSuccessNotification.value = false
+      }, 3000)
+    }
+  } catch (e) { /* ignore */ }
 })
 
 // Cleanup
@@ -764,6 +777,7 @@ onBeforeUnmount(() => {
 
 /* Remove input number arrows on mobile */
 .modal-content input[type="number"] {
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: textfield;
 }
