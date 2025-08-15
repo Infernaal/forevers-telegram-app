@@ -2,7 +2,8 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dbdc-mini.dub
 
 class RegistrationService {
   async register(payload) {
-    // payload: { first_name, last_name, country, email, phone, ref }
+  // payload: { first_name, last_name, country, email, phone, ref }
+  // phone: combined string country_dial_code + local_number (digits only, no +), e.g. 380997126420
     let telegramInitData = null
     try { telegramInitData = window?.Telegram?.WebApp?.initData || null } catch (_) {}
     const body = { ...payload }

@@ -662,12 +662,26 @@ const editField = (fieldName) => {
 const handleRegister = () => {
   if (!isFormValid.value) return
   if (window.triggerHaptic) window.triggerHaptic('impact', 'medium')
+
+  // Build full phone: country calling code (without +) + local number, digits only.
+  let fullPhone = null
+  try {
+    const rawCode = typeof getSelectedCountryCode === 'function' ? (getSelectedCountryCode() || '') : ''
+    const dialing = rawCode.replace(/[^0-9]/g, '') // strip + and any non-digits
+    const local = (formData.value.phone || '').replace(/[^0-9]/g, '')
+    if (dialing && local) fullPhone = dialing + local
+    else if (local) fullPhone = local
+  } catch (_) {
+    const local = (formData.value.phone || '').replace(/[^0-9]/g, '')
+    fullPhone = local || null
+  }
+
   const payload = {
     first_name: formData.value.firstName.trim(),
     last_name: formData.value.lastName.trim(),
     country: selectedCountry.value.code || formData.value.country,
     email: formData.value.email.trim(),
-    phone: formData.value.phone.trim() || null,
+    phone: fullPhone,
     ref: null
   }
   sessionStorage.setItem('pendingRegistration', JSON.stringify(payload))
