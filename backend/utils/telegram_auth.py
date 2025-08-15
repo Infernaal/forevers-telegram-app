@@ -1,5 +1,6 @@
 import hashlib
-import hmac, hashlib, urllib.parse
+import hmac, hashlib
+import urllib.parse as up
 import json
 import time
 import logging
@@ -19,6 +20,42 @@ BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 class TelegramAuthError(Exception):
     pass
 
+def calc_hash_variants(raw_map: dict, bot_token: str):
+    secret = hmac.new(bot_token.encode(), b"WebAppData", hashlib.sha256).digest()
+
+    # A) твоя правильная стратегия: DECODED для всех ключей
+    s_dec = "\n".join(f"{k}={up.unquote_plus(raw_map[k])}"
+                      for k in sorted(k for k in raw_map if k not in ("hash","signature")))
+    h_dec = hmac.new(secret, s_dec.encode(), hashlib.sha256).hexdigest()
+
+    # B) decoded для всех, КРОМЕ user (user берём как в raw, без unquote_plus)
+    s_mixed = "\n".join(
+        f"{k}={(raw_map[k] if k=='user' else up.unquote_plus(raw_map[k]))}"
+        for k in sorted(k for k in raw_map if k not in ("hash","signature"))
+    )
+    h_mixed = hmac.new(secret, s_mixed.encode(), hashlib.sha256).hexdigest()
+
+    # C) вообще RAW значения без декодирования
+    s_raw = "\n".join(f"{k}={raw_map[k]}"
+                      for k in sorted(k for k in raw_map if k not in ("hash","signature")))
+    h_raw = hmac.new(secret, s_raw.encode(), hashlib.sha256).hexdigest()
+
+    return {
+        "decoded": (s_dec, h_dec),
+        "raw": (s_raw, h_raw),
+        "mixed_user_raw": (s_mixed, h_mixed),
+    }
+
+def assert_user_url_intact(raw_map: dict):
+    u_raw = raw_map.get("user","")
+    u_dec = up.unquote_plus(u_raw)
+    if "t.me" not in u_dec:
+        logger.error("user JSON decoded lost dot: expected 't.me' in: %r", u_dec)
+    # На всякий: покажем 40 символов вокруг
+    idx = u_dec.find("tme")
+    if idx != -1:
+        frag = u_dec[max(0, idx-20): idx+20]
+        logger.error("suspicious fragment around 'tme': %r", frag)
 
 def parse_init_data_raw(raw: str) -> Dict[str, str]:
     """Парсит initData, сохраняя значения в исходном URL-encoded виде (для подписи)."""
@@ -36,7 +73,7 @@ def parse_init_data_raw(raw: str) -> Dict[str, str]:
 def build_data_check_string(items: Dict[str, str]) -> str:
     """Формирует строку для проверки подписи (по документации Telegram)."""
     filtered = {k: v for k, v in items.items() if k not in ("hash","signature")}
-    lines = [f"{k}={urllib.parse.unquote_plus(filtered[k])}" for k in sorted(filtered)]
+    lines = [f"{k}={up.parse.unquote_plus(filtered[k])}" for k in sorted(filtered)]
     return "\n".join(lines)
 
 
@@ -45,6 +82,15 @@ def verify_init_data(raw: str, bot_token: Optional[str] = None, max_age: Optiona
 
     raw_map = parse_init_data_raw(raw)
     logger.info("Parsed init_data (raw map): %s", raw_map)
+
+    assert_user_url_intact(raw_map)
+
+    variants = calc_hash_variants(raw_map, token)
+    provided = raw_map.get("hash","")
+    for name, (s, h) in variants.items():
+        logger.info("Variant %-14s hash=%s  %s", name, h, "MATCH" if h==provided else "")
+        if h == provided:
+            logger.info("Matched variant: %s", name)
 
     provided_hash = raw_map.get("hash")
     if not provided_hash:
