@@ -73,7 +73,7 @@ def parse_init_data_raw(raw: str) -> Dict[str, str]:
 def build_data_check_string(items: Dict[str, str]) -> str:
     """Формирует строку для проверки подписи (по документации Telegram)."""
     filtered = {k: v for k, v in items.items() if k not in ("hash","signature")}
-    lines = [f"{k}={up.parse.unquote_plus(filtered[k])}" for k in sorted(filtered)]
+    lines = [f"{k}={up.unquote_plus(filtered[k])}" for k in sorted(filtered)]
     return "\n".join(lines)
 
 
