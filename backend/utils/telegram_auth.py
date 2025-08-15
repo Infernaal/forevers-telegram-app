@@ -85,13 +85,6 @@ def verify_init_data(raw: str, bot_token: Optional[str] = None, max_age: Optiona
 
     assert_user_url_intact(raw_map)
 
-    variants = calc_hash_variants(raw_map, token)
-    provided = raw_map.get("hash","")
-    for name, (s, h) in variants.items():
-        logger.info("Variant %-14s hash=%s  %s", name, h, "MATCH" if h==provided else "")
-        if h == provided:
-            logger.info("Matched variant: %s", name)
-
     provided_hash = raw_map.get("hash")
     if not provided_hash:
         raise TelegramAuthError("Missing hash in init data")
@@ -99,6 +92,13 @@ def verify_init_data(raw: str, bot_token: Optional[str] = None, max_age: Optiona
     token = bot_token or BOT_TOKEN
     if not token:
         raise TelegramAuthError("Bot token not configured")
+
+    variants = calc_hash_variants(raw_map, token)
+    provided = raw_map.get("hash","")
+    for name, (s, h) in variants.items():
+        logger.info("Variant %-14s hash=%s  %s", name, h, "MATCH" if h==provided else "")
+        if h == provided:
+            logger.info("Matched variant: %s", name)
 
     # 1) secret_key: HMAC_SHA256("WebAppData", key=bot_token)
     secret_key = hmac.new(token.encode(), b"WebAppData", hashlib.sha256).digest()
