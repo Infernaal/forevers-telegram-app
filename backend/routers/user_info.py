@@ -18,7 +18,6 @@ from sessions.redis_session import create_session, delete_session, init_redis, g
 import bcrypt
 import time
 import uuid
-import secrets
 from datetime import datetime
 import json
 
@@ -237,7 +236,7 @@ async def register_user(payload: RegistrationRequest, request: Request, response
     try:
         logger.info(f"/register attempt email={payload.email} ip={request.client.host if request.client else '?'}")
 
-        # Uniqueness
+        # Uniqueness checks
         res = await db.execute(select(Users.id).where(Users.email == payload.email).limit(1))
         if res.scalar_one_or_none():
             logger.info(f"/register email exists: {payload.email}")
@@ -248,18 +247,17 @@ async def register_user(payload: RegistrationRequest, request: Request, response
                 logger.info(f"/register phone exists: {payload.phone}")
                 return RegistrationResponse(status="failed", message="Phone already registered")
 
-        # Settings
+        # Settings & constants
         settings = (await db.execute(select(Settings).limit(1))).scalar_one_or_none()
         default_currency = settings.default_currency if settings and settings.default_currency else "USD"
-        require_email_verify = bool(settings.require_email_verify) if settings and settings.require_email_verify is not None else False
 
-        # Password stub
+        # Password stub & base fields
         hashed = bcrypt.hashpw("jug6612020".encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
         ip_addr = request.client.host if request.client else ""
         signup_time = int(time.time())
         user_token_id = str(uuid.uuid4())
 
-        # Telegram verify
+        # Telegram verification (optional)
         telegram_id_verified: str | None = None
         if payload.telegram_init_data:
             try:
@@ -272,6 +270,7 @@ async def register_user(payload: RegistrationRequest, request: Request, response
             except Exception as e:
                 logger.warning(f"Registration: telegram init data verification failed: {e}")
 
+        # Qualification & structural JSON templates
         qualification_data = {
             "current_rank": "None",
             "possible_rank": "BRONZE",
@@ -310,13 +309,12 @@ async def register_user(payload: RegistrationRequest, request: Request, response
             "branches": []
         }
 
-        email_verified = 0 if require_email_verify else 1
-        status_code = 2 if require_email_verify else 1
+        # Email verification disabled entirely
+        email_verified = 1
+        status_code = 1
         email_hash = None
-        if require_email_verify:
-            alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-            email_hash = "".join(secrets.choice(alphabet) for _ in range(25))
 
+        # Create user
         user = Users(
             password=hashed,
             email=payload.email,
@@ -342,6 +340,7 @@ async def register_user(payload: RegistrationRequest, request: Request, response
         await db.flush()
         logger.info(f"/register created user id={user.id} email={payload.email}")
 
+        # Wallet
         db.add(UsersWallets(
             uid=user.id,
             amount=0,
@@ -352,6 +351,7 @@ async def register_user(payload: RegistrationRequest, request: Request, response
         await db.commit()
         logger.info(f"/register committed user id={user.id} email={payload.email}")
 
+        # Session cookie
         try:
             await init_redis()
             session_id = await create_session(int(user.id))
@@ -366,11 +366,7 @@ async def register_user(payload: RegistrationRequest, request: Request, response
         except Exception as se:
             logger.warning(f"Registration: session creation failed: {se}")
 
-        return RegistrationResponse(
-            status="success",
-            message="Registered successfully" if not require_email_verify else "Registered. Email verification required",
-            email_verification_required=require_email_verify
-        )
+        return RegistrationResponse(status="success", message="Registered successfully", email_verification_required=False)
     except Exception:
         await db.rollback()
         logger.exception("Registration failed")
