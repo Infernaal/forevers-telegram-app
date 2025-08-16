@@ -15,7 +15,10 @@ import SelectTypePayment from '../views/SelectTypePayment.vue'
 import EmailNotRegisteredView from '../views/EmailNotRegisteredView.vue'
 import RegistrationView from '../views/RegistrationView.vue'
 import CountrySelectView from '../views/CountrySelectView.vue'
-import TelegramMismatchView from '../views/TelegramMismatchView.vue'
+import EmailLinkedOtherAccountView from '../views/EmailLinkedOtherAccountView.vue'
+import EmailAlreadyRegisteredView from '../views/EmailAlreadyRegisteredView.vue'
+import PhoneAlreadyRegisteredView from '../views/PhoneAlreadyRegisteredView.vue'
+import RegistrationErrorView from '../views/RegistrationErrorView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -101,9 +104,24 @@ const router = createRouter({
       component: CountrySelectView,
     },
     {
-      path: '/telegram-mismatch',
-      name: 'telegram-mismatch',
-      component: TelegramMismatchView,
+      path: '/email-linked-other-account',
+      name: 'email-linked-other-account',
+      component: EmailLinkedOtherAccountView,
+    },
+    {
+      path: '/email-already-registered',
+      name: 'email-already-registered',
+      component: EmailAlreadyRegisteredView,
+    },
+    {
+      path: '/phone-already-registered',
+      name: 'phone-already-registered',
+      component: PhoneAlreadyRegisteredView,
+    },
+    {
+      path: '/registration-error',
+      name: 'registration-error',
+      component: RegistrationErrorView,
     },
 
     // Redirect /home to /wallet as default

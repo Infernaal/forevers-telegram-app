@@ -510,6 +510,8 @@ const userInfo = ref({
 
 // Fetch user info via session (/user/me)
 import telegramUserService from '../services/telegramUserService.js'
+import { useApiErrorNotifier } from '../composables/useApiErrorNotifier.js'
+const { showError: showApiError } = useApiErrorNotifier()
 const fetchUserInfo = async () => {
   const result = await telegramUserService.getUserInfo()
   if (result.status === 'success' && result.data) {
@@ -520,6 +522,7 @@ const fetchUserInfo = async () => {
     userInfo.value.fullName = ''
     userInfo.value.rank = ''
     userInfo.value.avatar = '/no-photo.svg'
+    showApiError('user_me', { message: result.message || 'Failed to load profile' })
   }
 }
 

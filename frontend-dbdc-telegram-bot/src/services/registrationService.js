@@ -15,7 +15,7 @@ class RegistrationService {
         body: JSON.stringify(body)
       })
       const data = await res.json().catch(() => ({ status: 'failed', message: 'Invalid JSON' }))
-      if (!res.ok) return { status: 'failed', message: data.message || 'Registration failed' }
+  if (!res.ok) return { status: 'failed', message: data.message || 'Registration failed', target: data.target }
       return data
     } catch (e) {
       return { status: 'failed', message: e.message }

@@ -115,7 +115,7 @@ async def auth_by_email(payload: AuthByEmailRequest, response: Response, db: Asy
     - If email not found -> target = /email-not-registered, status=failed.
     - If found and user.telegram_id is NULL -> set telegram_id (if provided) and target=/favorites.
     - If found and user.telegram_id equals provided -> target=/favorites.
-    - If found and user.telegram_id not null and differs from provided -> target=/telegram-mismatch (new fallback view).
+    - If found and user.telegram_id not null and differs from provided -> target=/email-linked-other-account (fallback view).
     If telegram_id is not provided we still only check email existence (success -> favorites else email-not-registered).
     """
     try:
@@ -192,7 +192,7 @@ async def auth_by_email(payload: AuthByEmailRequest, response: Response, db: Asy
                 logger.warning(f"Auth by email: session create (matched tg) failed: {se}")
             return AuthByEmailResponse(status="success", target="/favorites")
 
-        return AuthByEmailResponse(status="failed", target="/telegram-mismatch", message="Email already linked to another Telegram account")
+        return AuthByEmailResponse(status="failed", target="/email-linked-other-account", message="Email already linked to another Telegram account")
     except Exception:
         logger.exception("Auth by email failed")
         raise HTTPException(status_code=500, detail="Internal error")
@@ -240,12 +240,12 @@ async def register_user(payload: RegistrationRequest, request: Request, response
         res = await db.execute(select(Users.id).where(Users.email == payload.email).limit(1))
         if res.scalar_one_or_none():
             logger.info(f"/register email exists: {payload.email}")
-            return RegistrationResponse(status="failed", message="Email already registered")
+            return RegistrationResponse(status="failed", message="Email already registered", target="/email-already-registered")
         if payload.phone:
             pres = await db.execute(select(Users.id).where(Users.phone_number == payload.phone).limit(1))
             if pres.scalar_one_or_none():
                 logger.info(f"/register phone exists: {payload.phone}")
-                return RegistrationResponse(status="failed", message="Phone already registered")
+                return RegistrationResponse(status="failed", message="Phone already registered", target="/phone-already-registered")
 
         # Settings & constants
         settings = (await db.execute(select(Settings).limit(1))).scalar_one_or_none()
@@ -370,5 +370,5 @@ async def register_user(payload: RegistrationRequest, request: Request, response
     except Exception:
         await db.rollback()
         logger.exception("Registration failed")
-        return RegistrationResponse(status="failed", message="Registration failed due to server error")
+        return RegistrationResponse(status="failed", message="Registration failed due to server error", target="/registration-error")
 

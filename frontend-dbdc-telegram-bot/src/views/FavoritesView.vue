@@ -270,6 +270,7 @@
 
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { useApiErrorNotifier } from '../composables/useApiErrorNotifier.js'
 import { useRouter } from 'vue-router'
 import BottomNavigation from '../components/BottomNavigation.vue'
 import CountryFlag from '../components/CountryFlag.vue'
@@ -329,17 +330,24 @@ const availableForevers = ref({})
 // API base URL
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dbdc-mini.dubadu.com/api/v1/dbdc'
 
+// Api error notifier
+const { showError: showApiError } = useApiErrorNotifier()
+
 // Fetch user balances and available forevers
 const fetchUserBalances = async () => {
   try {
     const response = await fetch(`${API_BASE_URL}/forevers/me`, { credentials: 'include' })
     const result = await response.json()
-    if (result.status !== 'success') return
+    if (result.status !== 'success') {
+      showApiError('forevers_user_balance', { status: response.status, message: result.message || 'Failed to load balances' })
+      return
+    }
     userBalances.value = result?.forevers_balance || {}
     availableForevers.value = result?.available_forevers || {}
     totalBalance.value = parseFloat(userBalances.value.balance || 0)
   } catch (error) {
     console.error('Failed to fetch user balances:', error)
+  showApiError('forevers_user_balance', { error })
   }
 }
 
@@ -347,8 +355,18 @@ const fetchBalancesFromBackend = async () => {
   isLoading.value = true
   try {
     // Fetch prices and discounts
-    const pricesResponse = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/prices/forevers')
-    const pricesResult = await pricesResponse.json()
+    let pricesResult
+    try {
+      const pricesResponse = await fetch('https://dbdc-mini.dubadu.com/api/v1/dbdc/prices/forevers')
+      pricesResult = await pricesResponse.json()
+      if (!pricesResponse.ok || pricesResult.status === 'failed') {
+        showApiError('forevers_prices', { status: pricesResponse.status, message: pricesResult.message || pricesResult.detail })
+      }
+    } catch (e) {
+      console.error('Prices fetch failed', e)
+      showApiError('forevers_prices', { error: e })
+      throw e
+    }
     const prices = pricesResult?.data?.prices || []
     const discounts = pricesResult?.data?.discounts || []
     const discountedPrices = pricesResult?.data?.discounted_prices || []

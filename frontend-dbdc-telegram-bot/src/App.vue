@@ -1,14 +1,17 @@
 <template>
   <div class="telegram-webapp-container">
     <RouterView />
+    <ApiRouteErrorNotification />
   </div>
 </template>
 
 <script>
 import { onMounted } from 'vue'
+import ApiRouteErrorNotification from './components/ApiRouteErrorNotification.vue'
 
 export default {
   name: 'App',
+  components: { ApiRouteErrorNotification },
   setup() {
     onMounted(() => {
       // Telegram WebApp configuration

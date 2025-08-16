@@ -120,6 +120,7 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
+import { useApiErrorNotifier } from '../composables/useApiErrorNotifier.js'
 import { useRouter, useRoute } from 'vue-router'
 import BottomNavigation from '../components/BottomNavigation.vue'
 import CartBottomComponent from '../components/CartBottomComponent.vue'
@@ -212,17 +213,21 @@ const loyaltyFormatted = computed(() => formatUSDPrefix(loyaltyBalance.value))
 const bonusFormatted = computed(() => formatUSDPrefix(bonusBalance.value))
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dbdc-mini.dubadu.com/api/v1/dbdc'
+const { showError: showApiError } = useApiErrorNotifier()
 
 async function fetchWalletData() {
   try {
     const response = await fetch(`${API_BASE_URL}/forevers/me`, { credentials: 'include' })
     const result = await response.json()
-    if (result.status !== 'success') return
+    if (result.status !== 'success') {
+      showApiError('forevers_user_balance', { status: response.status, message: result.message })
+      return
+    }
     const loyalty = result?.wallets?.find(w => w.type === 'loyalty_program')
     loyaltyBalance.value = loyalty ? parseFloat(loyalty.amount) : 0
     const bonus = result?.wallets?.find(w => w.type === 'bonus')
     bonusBalance.value = bonus ? parseFloat(bonus.amount) : 0
-  } catch (e) { console.error('wallet fetch failed', e) }
+  } catch (e) { console.error('wallet fetch failed', e); showApiError('forevers_user_balance', { error: e }) }
 }
 
 // Computed for SuccessModal display

@@ -154,7 +154,8 @@ const runAction = async () => {
         sessionStorage.removeItem('pendingRegistration')
         return finish(target)
       }
-      return finish('/registration')
+  if (res.target) return finish(res.target)
+  return finish('/registration')
     }
     default:
       return finish(providedRedirect)

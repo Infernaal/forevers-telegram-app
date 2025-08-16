@@ -15,4 +15,5 @@ class RegistrationRequest(BaseModel):
 class RegistrationResponse(BaseModel):
     status: str
     message: str
-    email_verification_required: bool = False
+    email_verification_required: bool | None = None
+    target: str | None = None

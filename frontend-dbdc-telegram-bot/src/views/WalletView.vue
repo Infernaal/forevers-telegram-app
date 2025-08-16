@@ -79,6 +79,7 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
+import { useApiErrorNotifier } from '../composables/useApiErrorNotifier.js'
 import { useRouter, useRoute } from 'vue-router'
 import BottomNavigation from '../components/BottomNavigation.vue'
 
@@ -88,6 +89,7 @@ const route = useRoute()
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dbdc-mini.dubadu.com/api/v1/dbdc'
 
 const foreversBalance = ref(0)
+const { showError: showApiError } = useApiErrorNotifier()
 const loyaltyBalance = ref(0)
 const bonusBalance = ref(0)
 
@@ -95,7 +97,10 @@ const fetchWalletData = async () => {
   try {
     const response = await fetch(`${API_BASE_URL}/forevers/me`, { credentials: 'include' })
     const result = await response.json()
-    if (result.status !== 'success') return
+    if (result.status !== 'success') {
+      showApiError('forevers_user_balance', { status: response.status, message: result.message })
+      return
+    }
     foreversBalance.value = parseFloat(result?.forevers_balance?.balance || 0)
     const loyalty = result?.wallets?.find(w => w.type === 'loyalty_program')
     loyaltyBalance.value = loyalty ? parseFloat(loyalty.amount) : 0
@@ -103,6 +108,7 @@ const fetchWalletData = async () => {
     bonusBalance.value = bonus ? parseFloat(bonus.amount) : 0
   } catch (error) {
     console.error('Failed to fetch wallet data:', error)
+    showApiError('forevers_user_balance', { error })
   }
 }
 
