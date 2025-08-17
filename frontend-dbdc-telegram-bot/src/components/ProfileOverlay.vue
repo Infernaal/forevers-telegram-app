@@ -602,7 +602,7 @@ const copyUserID = async () => {
   // Try modern clipboard API first
   if (navigator.clipboard) {
     try {
-      await navigator.clipboard.writeText(String(userInfo.id))
+   await navigator.clipboard.writeText(String(userInfo.value.id))
       copySuccess = true
     } catch (clipboardErr) {
       console.log('Clipboard API failed, trying fallback method')
@@ -613,7 +613,7 @@ const copyUserID = async () => {
   if (!copySuccess) {
     try {
       const textArea = document.createElement('textarea')
-      textArea.value = String(userInfo.id)
+      textArea.value = String(userInfo.value.id)
       textArea.style.position = 'fixed'
       textArea.style.left = '-999999px'
       textArea.style.top = '-999999px'
