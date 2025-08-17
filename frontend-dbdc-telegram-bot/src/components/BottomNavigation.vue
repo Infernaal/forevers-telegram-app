@@ -58,7 +58,11 @@
                   </div>
                   <!-- Rank Badge -->
                   <div class="absolute -top-0.5 -right-0.5 rounded-full w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center overflow-hidden">
-                    <img :src="getRankIcon(userInfo.rank)" :alt="userInfo.rank" class="w-full h-full object-cover" />
+                    <img
+                      :src="getRankIcon(userInfo.rank)"
+                      :alt="userInfo.rank"
+                      :class="['w-full h-full object-cover', userInfo.rank && getRankIcon(userInfo.rank).includes('none.svg') ? 'none-rank-black' : '']"
+                    />
                   </div>
                   <!-- Dropdown Arrow -->
                   <div class="absolute -bottom-0.5 -right-0.5 bg-gray-100 border border-gray-300 rounded-full w-2.5 h-2.5 sm:w-3 sm:h-3 flex items-center justify-center">
@@ -544,5 +548,9 @@ defineExpose({
   .active\:scale-95:active {
     transform: none !important;
   }
+}
+/* Сделать none.svg серой внутри только для BottomNavigation */
+.none-rank-black {
+  filter: invert(0.4) sepia(1) saturate(0) hue-rotate(0deg) brightness(0.7);
 }
 </style>
