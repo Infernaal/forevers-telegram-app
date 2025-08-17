@@ -321,7 +321,7 @@
 
               <div v-if="!showCopySuccess" class="flex items-center gap-1 flex-1 overflow-hidden">
                 <span class="text-[#B7B7B7] text-xs sm:text-sm md:text-base font-normal whitespace-nowrap">ID:</span>
-                <span class="text-white text-xs sm:text-sm md:text-base font-semibold truncate max-w-[80px]">515745</span>
+                <span class="text-white text-xs sm:text-sm md:text-base font-semibold truncate max-w-[80px]">{{ userInfo.id }}</span>
               </div>
 
               <div v-if="showCopySuccess" class="id-copied-content">

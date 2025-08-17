@@ -2,6 +2,7 @@ from pydantic import BaseModel, EmailStr
 from typing import Optional, Union
 
 class UserInfoResponse(BaseModel):
+    id: int
     full_name: str
     rank: str
     avatar: str

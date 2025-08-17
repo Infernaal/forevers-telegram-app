@@ -44,6 +44,7 @@ async def get_my_user_info(current_user_id: int = Depends(get_current_user_id), 
         return UserInfoResponseWrapper(
             status="success",
             data=UserInfoResponse(
+                id=user.id,
                 full_name=f"{user.first_name or ''} {user.last_name or ''}".strip(),
                 rank=rank or "None",
                 avatar=f"https://dbdcusa.com/uploads/avatars/{user.avatar}" if user.avatar else ""
