@@ -517,10 +517,12 @@ const { showError: showApiError } = useApiErrorNotifier()
 const fetchUserInfo = async () => {
   const result = await telegramUserService.getUserInfo()
   if (result.status === 'success' && result.data) {
+    userInfo.value.id = result.data.id || 0
     userInfo.value.fullName = result.data.full_name || ''
     userInfo.value.rank = result.data.rank || ''
     userInfo.value.avatar = result.data.avatar && result.data.avatar.trim() !== '' ? result.data.avatar : '/no-photo.svg'
   } else {
+    userInfo.value.id = 0
     userInfo.value.fullName = ''
     userInfo.value.rank = ''
     userInfo.value.avatar = '/no-photo.svg'
@@ -599,7 +601,7 @@ const copyUserID = async () => {
   // Try modern clipboard API first
   if (navigator.clipboard) {
     try {
-      await navigator.clipboard.writeText('515745')
+      await navigator.clipboard.writeText(String(userInfo.id))
       copySuccess = true
     } catch (clipboardErr) {
       console.log('Clipboard API failed, trying fallback method')
@@ -610,7 +612,7 @@ const copyUserID = async () => {
   if (!copySuccess) {
     try {
       const textArea = document.createElement('textarea')
-      textArea.value = '515745'
+      textArea.value = String(userInfo.id)
       textArea.style.position = 'fixed'
       textArea.style.left = '-999999px'
       textArea.style.top = '-999999px'
