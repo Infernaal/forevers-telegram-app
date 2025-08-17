@@ -9,8 +9,8 @@
     leave-to-class="opacity-0 transform translate-y-2 scale-98"
   >
     <div
-      v-if="isVisible"
-      @click="$emit('close')"
+      v-if="visible"
+      @click="hide"
       class="error-notification-container"
       :style="{ bottom: `max(${props.bottomOffset + 5}px, calc(${props.bottomOffset + 5}px + var(--tg-content-safe-area-inset-bottom)))` }"
     >
