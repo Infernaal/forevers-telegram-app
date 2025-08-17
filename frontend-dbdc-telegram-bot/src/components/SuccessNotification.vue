@@ -193,7 +193,7 @@ defineEmits(['close'])
 @media (max-width: 480px) {
   .success-notification-container {
     position: fixed;
-    z-index: 10002;
+    z-index: 10003;
   }
 }
 
