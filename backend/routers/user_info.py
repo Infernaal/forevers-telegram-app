@@ -4,7 +4,7 @@ from fastapi import HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, update
 from db.database import get_db
-from models.models import Users, UsersWallets, Settings
+from models.models import Users, UsersWallets, Settings, Forevers
 from schemas.user_info import (
     UserInfoResponse,
     UserInfoResponseWrapper,
@@ -20,6 +20,7 @@ import time
 import uuid
 from datetime import datetime
 import json
+import decimal
 
 router = APIRouter(prefix="/user", tags=["User Info"])
 logger = logging.getLogger("dbdc.user")
@@ -340,6 +341,18 @@ async def register_user(payload: RegistrationRequest, request: Request, response
         await db.flush()
         logger.info(f"/register created user id={user.id} email={payload.email}")
 
+        db.add(Forevers(
+            user_id=user.id,
+            exchange_rate=settings.forevers_value,
+            updated_at=datetime.utcnow(),
+            balance_uae=decimal.Decimal("0.00000000"),
+            balance_kz=decimal.Decimal("0.00000000"),
+            balance_de=decimal.Decimal("0.00000000"),
+            balance_pl=decimal.Decimal("0.00000000"),
+            balance_ua=decimal.Decimal("0.00000000")
+        ))
+        await db.flush()
+        
         # Wallet
         db.add(UsersWallets(
             uid=user.id,
