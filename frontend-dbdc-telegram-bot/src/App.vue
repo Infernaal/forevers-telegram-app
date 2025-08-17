@@ -1,18 +1,20 @@
 <template>
   <div class="telegram-webapp-container">
     <RouterView />
-    <ApiRouteErrorNotification />
+    <ApiRouteErrorNotification :bottom-offset="bottomOffset" />
   </div>
 </template>
 
 <script>
 import { onMounted } from 'vue'
 import ApiRouteErrorNotification from './components/ApiRouteErrorNotification.vue'
+import { useBottomOffset } from './composables/useBottomOffset.js'
 
 export default {
   name: 'App',
   components: { ApiRouteErrorNotification },
   setup() {
+    const { bottomOffset } = useBottomOffset()
     onMounted(() => {
       // Telegram WebApp configuration
       if (window.Telegram && window.Telegram.WebApp) {
@@ -47,6 +49,10 @@ export default {
       window.addEventListener('resize', setViewportHeight)
       window.addEventListener('orientationchange', setViewportHeight)
     })
+
+    return {
+      bottomOffset
+    }
   }
 }
 </script>
