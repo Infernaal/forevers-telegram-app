@@ -28,12 +28,14 @@
               
               <!-- Avatar -->
               <div class="flex-shrink-0">
-                <img :src="userInfo.avatar"
-                    alt="User Avatar"
-                    class="w-12 xs:w-14 sm:w-16 md:w-16 lg:w-18 xl:w-20
-                            h-12 xs:h-14 sm:h-16 md:h-16 lg:h-18 xl:h-20
-                            rounded-full object-cover border-2 border-[#7E73D6]
-                            transition-all duration-300 hover:border-[#9A8BE8]" />
+                <img
+                  :src="userInfo.avatar"
+                  alt="User Avatar"
+                  :class="[
+                    'w-12 xs:w-14 sm:w-16 md:w-16 lg:w-18 xl:w-20 h-12 xs:h-14 sm:h-16 md:h-16 lg:h-18 xl:h-20 rounded-full object-cover border-2 border-[#7E73D6] transition-all duration-300 hover:border-[#9A8BE8]',
+                    userInfo.avatar && userInfo.avatar.includes('no-photo.svg') ? 'bg-white' : ''
+                  ]"
+                />
               </div>
 
               <!-- User Info -->
