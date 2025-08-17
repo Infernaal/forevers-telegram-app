@@ -505,6 +505,7 @@ const selectedLanguage = ref(languages.value[0])
 
 // User info state (from API)
 const userInfo = ref({
+  id: 0,
   fullName: '',
   rank: '',
   avatar: ''
