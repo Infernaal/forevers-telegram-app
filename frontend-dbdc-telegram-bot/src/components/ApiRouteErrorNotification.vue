@@ -9,8 +9,8 @@
     leave-to-class="opacity-0 transform translate-y-2 scale-98"
   >
     <div
-      v-if="visible"
-      @click="hide"
+      v-if="isVisible"
+      @click="$emit('close')"
       class="error-notification-container"
       :style="{ bottom: `max(${props.bottomOffset + 5}px, calc(${props.bottomOffset + 5}px + var(--tg-content-safe-area-inset-bottom)))` }"
     >
@@ -51,6 +51,8 @@ const props = defineProps({
     default: 120
   }
 })
+
+defineEmits(['close'])
 </script>
 
 <style scoped>
