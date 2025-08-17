@@ -8,11 +8,13 @@
 <script>
 import { onMounted } from 'vue'
 import ApiRouteErrorNotification from './components/ApiRouteErrorNotification.vue'
+import { useBottomOffset } from './composables/useBottomOffset.js'
 
 export default {
   name: 'App',
   components: { ApiRouteErrorNotification },
   setup() {
+    const { bottomOffset } = useBottomOffset()
     onMounted(() => {
       // Telegram WebApp configuration
       if (window.Telegram && window.Telegram.WebApp) {
