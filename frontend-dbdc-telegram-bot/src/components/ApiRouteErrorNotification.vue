@@ -12,7 +12,7 @@
       v-if="visible"
       @click="hide"
       class="error-notification-container"
-      :style="{ bottom: `max(${props.bottomOffset + 5}px, calc(${props.bottomOffset + 5}px + var(--tg-content-safe-area-inset-bottom)))` }"
+      :style="{ bottom: `max(${props.bottomOffset}px, calc(${props.bottomOffset}px + var(--tg-content-safe-area-inset-bottom)))` }"
     >
       <div class="error-notification-content">
         <!-- Error Icon Circle -->
