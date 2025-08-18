@@ -52,6 +52,10 @@ export default {
       window.addEventListener('resize', setViewportHeight)
       window.addEventListener('orientationchange', setViewportHeight)
     })
+
+    return {
+      bottomOffset
+    }
   }
 }
 </script>
