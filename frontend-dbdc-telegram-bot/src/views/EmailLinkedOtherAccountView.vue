@@ -17,7 +17,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const cardStyle = { background: 'linear-gradient(90deg, #2019CE 20.91%, #473FFF 68.93%)' }
 const goStart = () => router.replace('/')
-const retry = () => router.replace('/loader?action=check-email')
+const retry = () => router.replace('/account-check')
 </script>
 <style scoped>
 * { will-change:auto }
