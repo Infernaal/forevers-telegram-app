@@ -12,7 +12,7 @@
       v-if="visible"
       @click="hide"
       class="error-notification-container"
-      :style="{ bottom: `max(${props.bottomOffset + 5}px, calc(${props.bottomOffset + 5}px + var(--tg-content-safe-area-inset-bottom)))` }"
+      :style="{ bottom: `max(${effectiveBottomOffset + 5}px, calc(${effectiveBottomOffset + 5}px + var(--tg-content-safe-area-inset-bottom)))` }"
     >
       <div class="error-notification-content">
         <!-- Error Icon Circle -->
@@ -32,7 +32,11 @@
 <script setup>
 import { computed } from 'vue'
 import { useApiErrorNotifier } from '../composables/useApiErrorNotifier.js'
+import { useBottomOffset } from '../composables/useBottomNavigation.js'
+
 const { visible, message, hide } = useApiErrorNotifier()
+const { bottomOffset: globalBottomOffset } = useBottomOffset()
+
 const props = defineProps({
   isVisible: {
     type: Boolean,
@@ -50,6 +54,11 @@ const props = defineProps({
     type: Number,
     default: 120
   }
+})
+
+// Используем глобальный bottomOffset если не передан проп
+const effectiveBottomOffset = computed(() => {
+  return props.bottomOffset !== 120 ? props.bottomOffset : globalBottomOffset.value
 })
 </script>
 
