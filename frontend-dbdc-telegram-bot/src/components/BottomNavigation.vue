@@ -411,6 +411,11 @@ function updateBottomOffset() {
       .getPropertyValue('--tg-safe-area-bottom')
   ) || 0
   bottomOffset.value = navH + safe
+
+  // Обновляем bottomOffset в App через inject
+  if (appBottomOffset) {
+    appBottomOffset.value = bottomOffset.value
+  }
 }
 
 // Keyboard detection for Telegram WebApp
