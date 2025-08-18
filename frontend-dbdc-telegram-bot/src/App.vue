@@ -1,7 +1,7 @@
 <template>
   <div class="telegram-webapp-container">
     <RouterView />
-    <ApiRouteErrorNotification :bottom-offset="bottomOffset" />
+    <ApiRouteErrorNotification />
   </div>
 </template>
 
