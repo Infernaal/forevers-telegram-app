@@ -92,7 +92,7 @@ export default {
 
       // События для разных типов устройств
       window.addEventListener('resize', (e) => {
-        // Опре��еляем, скрылась ли клавиатура по изменению высоты
+        // Определяем, скрылась ли клавиатура по изменению высоты
         const heightDiff = screen.height - window.innerHeight
         if (heightDiff < 150) {
           handleKeyboardHide()
@@ -198,9 +198,40 @@ body, html {
   touch-action: pan-y;
   height: 100%;
   width: 100%;
-  
+
   /* 🟢 Telegram theme support */
   background-color: var(--tg-theme-bg-color, #ffffff);
   color: var(--tg-theme-text-color, #000000);
+}
+
+/* Стили для состояния клавиатуры */
+body.keyboard-visible {
+  /* Принудительное обновление фона при показе клавиатуры */
+  background-color: var(--tg-theme-bg-color, #ffffff) !important;
+}
+
+body.keyboard-visible .telegram-webapp-container {
+  /* Предотвращаем серые области */
+  background: var(--tg-theme-bg-color, #ffffff) !important;
+  min-height: 100vh !important;
+  min-height: calc(var(--vh, 1vh) * 100) !important;
+}
+
+/* Дополнительные фиксы для предотвращения серых областей */
+@supports (-webkit-touch-callout: none) {
+  /* iOS specific fixes */
+  body {
+    -webkit-fill-available: 100vh;
+  }
+
+  .telegram-webapp-container {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Фикс для safe area */
+body {
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-bottom: var(--tg-safe-area-inset-bottom, 0px);
 }
 </style>
