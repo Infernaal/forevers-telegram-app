@@ -72,28 +72,6 @@ export default {
         meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover'
         document.head.appendChild(meta)
       }
-        // Принудительно пересчитываем viewport высоту
-        const vh = window.innerHeight * 0.01
-        document.documentElement.style.setProperty('--vh', `${vh}px`)
-
-        // Обновляем CSS переменные Telegram
-        if (window.Telegram?.WebApp) {
-          const safeAreaBottom = window.Telegram.WebApp.safeAreaInset?.bottom || 0
-          document.documentElement.style.setProperty('--tg-safe-area-inset-bottom', `${safeAreaBottom}px`)
-        }
-
-        // Принудительная перерисовка для устранения серых областей
-        requestAnimationFrame(() => {
-          document.body.style.height = `${window.innerHeight}px`
-          document.documentElement.style.height = `${window.innerHeight}px`
-
-          // Еще один кадр для гарантии
-          requestAnimationFrame(() => {
-            document.body.style.height = ''
-            document.documentElement.style.height = ''
-          })
-        })
-      }
 
       // Обработчики для клавиатуры
       const handleKeyboardShow = () => {
