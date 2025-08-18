@@ -235,9 +235,10 @@
 </template>
 
 <script setup>
-import { ref, watch, nextTick, onMounted, onUnmounted, inject } from 'vue'
+import { ref, watch, nextTick, onMounted, onUnmounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useCart } from '../composables/useCart.js'
+import { useBottomOffsetProvider } from '../composables/useBottomNavigation.js'
 import ProfileOverlay from './ProfileOverlay.vue'
 
 // Router
@@ -247,8 +248,8 @@ const route = useRoute()
 // Cart
 const { cartItemsCount } = useCart()
 
-// Inject bottomOffset from App
-const appBottomOffset = inject('bottomOffset')
+// Используем composable для обновления bottomOffset
+const { updateBottomOffset: updateGlobalBottomOffset } = useBottomOffsetProvider()
 
 // Profile menu state
 const isProfileMenuOpen = ref(false)
@@ -410,12 +411,11 @@ function updateBottomOffset() {
     getComputedStyle(document.documentElement)
       .getPropertyValue('--tg-safe-area-bottom')
   ) || 0
-  bottomOffset.value = navH + safe
+  const newOffset = navH + safe
+  bottomOffset.value = newOffset
 
-  // Обновляем bottomOffset в App через inject
-  if (appBottomOffset) {
-    appBottomOffset.value = bottomOffset.value
-  }
+  // Обновляем глобальный bottomOffset через composable
+  updateGlobalBottomOffset(newOffset)
 }
 
 // Keyboard detection for Telegram WebApp
