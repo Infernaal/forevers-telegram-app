@@ -1,0 +1,169 @@
+/* Telegram WebApp Keyboard Fixes */
+
+/* Prevent zoom on input focus (mobile Safari) */
+input[type="text"],
+input[type="email"], 
+input[type="number"],
+input[type="tel"],
+input[type="password"],
+textarea,
+select {
+  font-size: 16px !important; /* Prevents zoom on iOS */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Enhanced input styles for better mobile experience */
+input, textarea, select {
+  /* Prevent zoom and improve touch response */
+  font-size: 16px !important;
+  
+  /* Better mobile touch targets */
+  min-height: 44px;
+  
+  /* Prevent callouts and selections */
+  -webkit-touch-callout: none;
+  -webkit-user-select: text;
+  -khtml-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+  
+  /* Improve focus handling */
+  -webkit-tap-highlight-color: transparent;
+  
+  /* Better scroll behavior in inputs */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Number input specific fixes */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* When keyboard is open - adjust container */
+body.keyboard-open {
+  /* Prevent scrolling issues */
+  position: fixed;
+  width: 100%;
+}
+
+body.keyboard-open .telegram-webapp-container {
+  /* Adjust for keyboard */
+  padding-bottom: var(--keyboard-height, 0px);
+}
+
+/* Input focus styles for keyboard mode */
+body.keyboard-open input:focus,
+body.keyboard-open textarea:focus {
+  /* Ensure focused input is visible */
+  transform: translateZ(0);
+  position: relative;
+  z-index: 999;
+}
+
+/* Specific fixes for modals with inputs when keyboard is open */
+body.keyboard-open .modal-content {
+  /* Adjust modal position when keyboard is open */
+  max-height: calc(var(--tg-viewport-height, 100vh) - var(--keyboard-height, 0px) - 40px);
+  overflow-y: auto;
+  
+  /* Ensure modal content is scrollable */
+  display: flex;
+  flex-direction: column;
+}
+
+body.keyboard-open .modal-content .modal-body {
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Fix for iOS viewport issues */
+@supports (-webkit-touch-callout: none) {
+  /* iOS Safari specific fixes */
+  body.keyboard-open {
+    height: var(--tg-viewport-height, 100vh);
+    overflow: hidden;
+  }
+  
+  body.keyboard-open .telegram-webapp-container {
+    height: var(--tg-viewport-height, 100vh);
+    min-height: var(--tg-viewport-height, 100vh);
+    max-height: var(--tg-viewport-height, 100vh);
+  }
+}
+
+/* Prevent gray areas during keyboard transitions */
+.telegram-webapp-container::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--tg-theme-bg-color, #ffffff);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Enhanced scroll behavior for content areas */
+.view-content {
+  /* Better scrolling for main content areas */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Fix for input containers in forms */
+.form-group,
+.input-group {
+  /* Ensure proper spacing and layout */
+  position: relative;
+  z-index: 1;
+}
+
+/* Animation improvements for keyboard show/hide */
+.telegram-webapp-container,
+.modal-content {
+  transition: height 0.3s ease-out, padding-bottom 0.3s ease-out;
+}
+
+/* Disable transitions during keyboard events to prevent glitches */
+body.keyboard-transitioning .telegram-webapp-container,
+body.keyboard-transitioning .modal-content {
+  transition: none !important;
+}
+
+/* Ensure proper touch handling for interactive elements */
+button,
+.clickable,
+.touchable {
+  /* Better touch response */
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  touch-action: manipulation;
+  
+  /* Prevent accidental text selection */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Fix for bottom navigation when keyboard is open */
+body.keyboard-open .bottom-navigation {
+  /* Hide or adjust bottom navigation */
+  transform: translateY(100%);
+  transition: transform 0.3s ease-out;
+}
+
+/* Restore bottom navigation when keyboard closes */
+body:not(.keyboard-open) .bottom-navigation {
+  transform: translateY(0);
+  transition: transform 0.3s ease-out;
+}
