@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import './assets/tailwind.css'
 import telegramUserService from './services/telegramUserService'
+import { initTelegramViewport } from './utils/telegramViewport.js'
 
 import { Content } from '@builder.io/sdk-vue'
 
@@ -29,15 +30,8 @@ if (window.Telegram && window.Telegram.WebApp) {
   // Disable vertical swipes (prevents accidental page refresh)
   tg.disableVerticalSwipes()
 
-  // Set viewport settings for better mobile experience
-  document.documentElement.style.setProperty('--tg-viewport-height', tg.viewportHeight + 'px')
-  document.documentElement.style.setProperty('--tg-viewport-stable-height', tg.viewportStableHeight + 'px')
-
-  // Handle viewport changes
-  tg.onEvent('viewportChanged', () => {
-    document.documentElement.style.setProperty('--tg-viewport-height', tg.viewportHeight + 'px')
-    document.documentElement.style.setProperty('--tg-viewport-stable-height', tg.viewportStableHeight + 'px')
-  })
+  // Initialize enhanced viewport management
+  const viewportManager = initTelegramViewport()
 
   // Handle theme changes
   tg.onEvent('themeChanged', () => {
@@ -105,4 +99,3 @@ if (window.Telegram && window.Telegram.WebApp) {
 app.use(router)
 
 app.mount('#app')
-
