@@ -1,4 +1,4 @@
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { getTelegramViewport, fixTelegramViewport } from '../utils/telegramViewport.js'
 
 export function useTelegramViewport() {
