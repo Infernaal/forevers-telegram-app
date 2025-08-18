@@ -247,6 +247,9 @@ const route = useRoute()
 // Cart
 const { cartItemsCount } = useCart()
 
+// Inject bottomOffset from App
+const appBottomOffset = inject('bottomOffset')
+
 // Profile menu state
 const isProfileMenuOpen = ref(false)
 const profileButton = ref(null)
