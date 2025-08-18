@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { onMounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 import ApiRouteErrorNotification from './components/ApiRouteErrorNotification.vue'
 import { provideBottomOffset } from './composables/useBottomNavigation.js'
 
@@ -75,7 +75,7 @@ export default {
 
       // Обработчики для клавиатуры
       const handleKeyboardShow = () => {
-        // Добавляем класс для стилизации при показе клавиатуры
+        // Добавляем класс для стилизации ��ри показе клавиатуры
         document.body.classList.add('keyboard-visible')
         setTimeout(handleViewportChange, 100)
       }
@@ -206,7 +206,7 @@ body, html {
 
 /* Стили для состояния клавиатуры */
 body.keyboard-visible {
-  /* Принудительное обновление фона при показе клавиатуры */
+  /* Принудительное обно��ление фона при показе клавиатуры */
   background-color: var(--tg-theme-bg-color, #ffffff) !important;
 }
 
