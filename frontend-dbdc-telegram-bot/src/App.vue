@@ -6,17 +6,16 @@
 </template>
 
 <script>
-import { onMounted, provide, ref, inject } from 'vue'
+import { onMounted } from 'vue'
 import ApiRouteErrorNotification from './components/ApiRouteErrorNotification.vue'
+import { provideBottomOffset } from './composables/useBottomNavigation.js'
 
 export default {
   name: 'App',
   components: { ApiRouteErrorNotification },
   setup() {
-    const bottomOffset = ref(120)
-
-    // Provide bottomOffset для дочерних компонентов
-    provide('bottomOffset', bottomOffset)
+    // Используем composable для управления bottomOffset
+    const { bottomOffset } = provideBottomOffset()
 
     onMounted(() => {
       // Telegram WebApp configuration
