@@ -75,7 +75,7 @@ export default {
 
       // Обработчики для клавиатуры
       const handleKeyboardShow = () => {
-        // Добавляем класс для стилизации ��ри показе клавиатуры
+        // Добавляем класс для стилизации при показе клавиатуры
         document.body.classList.add('keyboard-visible')
         setTimeout(handleViewportChange, 100)
       }
@@ -127,6 +127,14 @@ export default {
 
       // Первичная установка
       handleViewportChange()
+    })
+
+    onUnmounted(() => {
+      // Очистка event listeners
+      if (window.visualViewport) {
+        window.visualViewport.removeEventListener('resize', handleViewportChange)
+        window.visualViewport.removeEventListener('scroll', handleViewportChange)
+      }
     })
 
     return {
@@ -206,7 +214,7 @@ body, html {
 
 /* Стили для состояния клавиатуры */
 body.keyboard-visible {
-  /* Принудительное обно��ление фона при показе клавиатуры */
+  /* Принудительное обновление фона при показе клавиатуры */
   background-color: var(--tg-theme-bg-color, #ffffff) !important;
 }
 
