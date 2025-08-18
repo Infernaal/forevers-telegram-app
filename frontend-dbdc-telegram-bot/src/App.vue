@@ -60,14 +60,16 @@ export default {
 </script>
 
 <style>
-/* Telegram WebApp container with enhanced scroll prevention */
+/* Telegram WebApp container with enhanced viewport handling */
 .telegram-webapp-container {
-  /* Viewport and positioning */
+  /* Enhanced viewport calculations */
   width: 100%;
   height: 100vh;
-  height: calc(var(--vh, 1vh) * 100);
+  height: var(--tg-viewport-height, calc(var(--vh, 1vh) * 100));
   min-height: 100vh;
-  min-height: calc(var(--vh, 1vh) * 100);
+  min-height: var(--tg-viewport-height, calc(var(--vh, 1vh) * 100));
+  max-height: 100vh;
+  max-height: var(--tg-viewport-height, calc(var(--vh, 1vh) * 100));
 
   /* 🟢 Поддержка Telegram темы */
   background: var(--tg-theme-bg-color, #ffffff);
@@ -91,7 +93,11 @@ export default {
   user-select: none;
 
   /* Position and layout */
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   flex-direction: column;
 
@@ -102,6 +108,9 @@ export default {
   /* Prevent content shifting */
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+
+  /* Prevent viewport issues */
+  contain: layout style paint;
 }
 
 /* Fix for content area to allow proper scrolling within views */
@@ -111,9 +120,10 @@ export default {
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
+  position: relative;
 }
 
-/* Additional body and html fixes for mobile */
+/* Enhanced body and html fixes for mobile */
 body, html {
   overflow: hidden;
   overscroll-behavior: none;
@@ -121,9 +131,40 @@ body, html {
   touch-action: pan-y;
   height: 100%;
   width: 100%;
-  
+  margin: 0;
+  padding: 0;
+
   /* 🟢 Telegram theme support */
   background-color: var(--tg-theme-bg-color, #ffffff);
   color: var(--tg-theme-text-color, #000000);
+}
+
+/* Keyboard-specific styles */
+body.keyboard-open .telegram-webapp-container {
+  /* When keyboard is open, use stable height */
+  height: var(--tg-viewport-stable-height, 100vh);
+  min-height: var(--tg-viewport-stable-height, 100vh);
+  max-height: var(--tg-viewport-stable-height, 100vh);
+}
+
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+  .telegram-webapp-container {
+    /* iOS Safari viewport fix */
+    height: -webkit-fill-available;
+    min-height: -webkit-fill-available;
+  }
+
+  body.keyboard-open .telegram-webapp-container {
+    height: var(--tg-viewport-height, -webkit-fill-available);
+    min-height: var(--tg-viewport-height, -webkit-fill-available);
+  }
+}
+
+/* Prevent gray areas and ensure proper background */
+#app {
+  background-color: var(--tg-theme-bg-color, #ffffff);
+  min-height: 100vh;
+  min-height: var(--tg-viewport-height, calc(var(--vh, 1vh) * 100));
 }
 </style>
