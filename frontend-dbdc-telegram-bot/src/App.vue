@@ -28,10 +28,15 @@ export default {
         // Theme support
         const scheme = webapp.colorScheme
         document.body.classList.toggle('tg-dark', scheme === 'dark')
-        
+
         // Set theme colors
         webapp.setHeaderColor('#2019CE')
         webapp.setBackgroundColor('#FAFAFA')
+
+        // Обработчик изменения viewport в Telegram
+        webapp.onEvent('viewportChanged', () => {
+          handleViewportChange()
+        })
       }
 
       // Prevent zoom on mobile
@@ -43,13 +48,85 @@ export default {
         document.head.appendChild(meta)
       }
 
-      // Set viewport height for mobile
-      const setViewportHeight = () => {
-        document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`)
+      // Функция для обновления viewport высоты и устранения серых областей
+      const handleViewportChange = () => {
+        // Принудительно пересчитываем viewport высоту
+        const vh = window.innerHeight * 0.01
+        document.documentElement.style.setProperty('--vh', `${vh}px`)
+
+        // Обновляем CSS переменные Telegram
+        if (window.Telegram?.WebApp) {
+          const safeAreaBottom = window.Telegram.WebApp.safeAreaInset?.bottom || 0
+          document.documentElement.style.setProperty('--tg-safe-area-inset-bottom', `${safeAreaBottom}px`)
+        }
+
+        // Принудительная перерисовка для устранения серых областей
+        requestAnimationFrame(() => {
+          document.body.style.height = `${window.innerHeight}px`
+          document.documentElement.style.height = `${window.innerHeight}px`
+
+          // Еще один кадр для гарантии
+          requestAnimationFrame(() => {
+            document.body.style.height = ''
+            document.documentElement.style.height = ''
+          })
+        })
       }
-      setViewportHeight()
-      window.addEventListener('resize', setViewportHeight)
-      window.addEventListener('orientationchange', setViewportHeight)
+
+      // Обработчики для клавиатуры
+      const handleKeyboardShow = () => {
+        // Добавляем класс для стилизации при показе клавиатуры
+        document.body.classList.add('keyboard-visible')
+        setTimeout(handleViewportChange, 100)
+      }
+
+      const handleKeyboardHide = () => {
+        // Убираем класс и принудительно обновляем layout
+        document.body.classList.remove('keyboard-visible')
+        setTimeout(() => {
+          handleViewportChange()
+          // Дополнительная принудительная перерисовка
+          window.scrollTo(0, 0)
+        }, 100)
+      }
+
+      // События для разных типов устройств
+      window.addEventListener('resize', (e) => {
+        // Опре��еляем, скрылась ли клавиатура по изменению высоты
+        const heightDiff = screen.height - window.innerHeight
+        if (heightDiff < 150) {
+          handleKeyboardHide()
+        } else if (heightDiff > 150) {
+          handleKeyboardShow()
+        }
+        handleViewportChange()
+      })
+
+      window.addEventListener('orientationchange', () => {
+        setTimeout(handleViewportChange, 500)
+      })
+
+      // Visual Viewport API для современных браузеров
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', handleViewportChange)
+        window.visualViewport.addEventListener('scroll', handleViewportChange)
+      }
+
+      // Обработчики для input элементов
+      document.addEventListener('focusin', (e) => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+          setTimeout(handleKeyboardShow, 100)
+        }
+      })
+
+      document.addEventListener('focusout', (e) => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+          setTimeout(handleKeyboardHide, 300)
+        }
+      })
+
+      // Первичная установка
+      handleViewportChange()
     })
 
     return {
