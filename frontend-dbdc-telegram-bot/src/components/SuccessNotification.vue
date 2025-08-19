@@ -65,17 +65,17 @@ defineEmits(['close'])
 
 .success-notification-content {
   display: inline-flex;
-  height: 44px;
+  height: 36px;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   flex-shrink: 0;
   border-radius: 1000px;
   border: 1px solid #129E0F;
   background: #129E0F;
   box-shadow: 4px 8px 12px 0 rgba(7, 184, 14, 0.13);
-  padding: 10px 16px;
-  width: 343px;
+  padding: 8px 14px;
+  width: 320px;
   justify-content: center;
   white-space: nowrap;
   transition: all 0.3s ease;
@@ -95,20 +95,20 @@ defineEmits(['close'])
 }
 
 .check-icon {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   flex-shrink: 0;
 }
 
 .success-message {
   color: #FFF;
   font-family: Montserrat;
-  font-size: 15px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 600;
-  line-height: 22px;
+  line-height: 20px;
   text-align: center;
-  margin-left: 8px;
+  margin-left: 6px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
