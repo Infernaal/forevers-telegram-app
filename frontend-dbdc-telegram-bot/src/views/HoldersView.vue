@@ -90,7 +90,7 @@
               <span class="text-red-500 text-sm">Error loading QR</span>
             </div>
             <!-- QR Code Link -->
-            <div class="absolute left-2 right-2 bottom-3 text-dbd-primary text-xs sm:text-sm font-semibold leading-4 text-center px-2 break-words">
+            <div class="absolute left-3 right-3 bottom-2 text-dbd-primary text-xs font-medium leading-3 text-center px-1 break-words">
               {{ shortenedReferralLink }}
             </div>
           </div>
@@ -670,7 +670,7 @@ const loadReferralData = async () => {
       URL.revokeObjectURL(qrImageUrl.value)
     }
 
-    // QR-код приходит как base64, используем его напрямую
+    // QR-ко�� приходит как base64, используем его напрямую
     qrImageUrl.value = inviteData.qr_code
 
     console.log('Invite data loaded successfully:', {
