@@ -125,8 +125,9 @@ defineEmits(['close'])
   }
 
   .success-notification-content {
-    width: calc(100vw - 32px);
-    max-width: 343px;
+    min-width: 120px;
+    width: fit-content;
+    max-width: calc(100vw - 32px);
     white-space: normal;
     min-height: 44px;
     height: auto;
