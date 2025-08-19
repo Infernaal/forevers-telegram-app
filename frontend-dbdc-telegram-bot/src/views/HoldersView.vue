@@ -326,18 +326,33 @@ const shortenedReferralLink = computed(() => {
   try {
     const url = new URL(referralLink.value)
     // For Telegram WebApp links like https://t.me/dbdc_test_bot/app?startapp=ref_4344_code_52J01Z
-    // Show as "t.me/dbdc_test_bot..."
+    // Show beginning and end with ... in the middle
     if (url.hostname === 't.me') {
-      const pathParts = url.pathname.split('/')
-      if (pathParts.length >= 2) {
-        return `t.me/${pathParts[1]}...`
+      const fullUrl = referralLink.value
+      if (fullUrl.length > 30) {
+        const start = fullUrl.substring(0, 15)
+        const end = fullUrl.substring(fullUrl.length - 8)
+        return `${start}...${end}`
       }
+      return fullUrl
     }
-    // Fallback to domain for other URLs
-    return `${url.hostname}...`
+    // For other URLs, show beginning and end
+    const fullUrl = referralLink.value
+    if (fullUrl.length > 30) {
+      const start = fullUrl.substring(0, 15)
+      const end = fullUrl.substring(fullUrl.length - 8)
+      return `${start}...${end}`
+    }
+    return fullUrl
   } catch {
-    // Если не удается распарсить как URL, просто обрезаем
-    return referralLink.value.length > 20 ? `${referralLink.value.substring(0, 20)}...` : referralLink.value
+    // Если не удается распарсить как URL, сокращаем с началом и концом
+    const fullUrl = referralLink.value
+    if (fullUrl.length > 30) {
+      const start = fullUrl.substring(0, 15)
+      const end = fullUrl.substring(fullUrl.length - 8)
+      return `${start}...${end}`
+    }
+    return fullUrl
   }
 })
 
@@ -527,6 +542,11 @@ const copyLink = async () => {
 }
 
 const copyWebLink = async () => {
+  // Add haptic feedback when copy button is pressed
+  if (window.triggerHaptic) {
+    window.triggerHaptic('impact', 'light')
+  }
+
   let copySuccess = false
 
   // Get the actual full link to copy - backend already provides WebApp format
@@ -570,6 +590,11 @@ const copyWebLink = async () => {
     } catch (fallbackErr) {
       console.error('Fallback copy failed:', fallbackErr)
     }
+  }
+
+  // Add success haptic feedback
+  if (window.triggerHaptic) {
+    window.triggerHaptic('notification', 'success')
   }
 
   // Always show copied state for user feedback
