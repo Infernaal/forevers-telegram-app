@@ -7,6 +7,7 @@ import qrcode
 from io import BytesIO
 import base64
 import logging
+import os
 from dependencies.current_user import get_current_user
 
 logger = logging.getLogger(__name__)
@@ -64,7 +65,7 @@ async def get_invite_data(current_user_id: int = Depends(get_current_user)):
         # Создаем короткую ссылку для отображения
         display_link = f"vm.dubadu/{unique_code}"
 
-        # Создаем полную ссылку для QR-кода и шаринга
+        # Создаем полную ссылку для QR-кода и ��аринга
         # В production замените на ваш реальный домен/бота
         full_link = f"https://t.me/your_bot_name?start={ref_params}"
 
