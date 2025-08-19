@@ -17,3 +17,4 @@ class RegistrationResponse(BaseModel):
     message: str
     email_verification_required: bool | None = None
     target: str | None = None
+    generated_password: str | None = None

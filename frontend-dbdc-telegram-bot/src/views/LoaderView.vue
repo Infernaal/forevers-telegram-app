@@ -149,9 +149,12 @@ const runAction = async () => {
       try { payload = JSON.parse(regRaw) } catch { return finish('/registration') }
       const res = await registrationService.register(payload)
       if (res.status === 'success') {
-        // After success go favorites (or pending email verify -> email-verification)
-        const target = res.email_verification_required ? '/email-verification' : '/favorites'
         sessionStorage.removeItem('pendingRegistration')
+        if (res.generated_password) {
+          sessionStorage.setItem('generatedPassword', res.generated_password)
+          return finish('/generated-password')
+        }
+        const target = res.email_verification_required ? '/email-verification' : '/favorites'
         return finish(target)
       }
   if (res.target) return finish(res.target)

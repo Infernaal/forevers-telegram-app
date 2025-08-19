@@ -5,6 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, update
 from db.database import get_db
 from models.models import Users, UsersWallets, Settings, Forevers
+from utils.generate_password import generate_strong_password
 from schemas.user_info import (
     UserInfoResponse,
     UserInfoResponseWrapper,
@@ -253,8 +254,9 @@ async def register_user(payload: RegistrationRequest, request: Request, response
         settings = (await db.execute(select(Settings).limit(1))).scalar_one_or_none()
         default_currency = settings.default_currency if settings and settings.default_currency else "USD"
 
-        # Password stub & base fields
-        hashed = bcrypt.hashpw("jug6612020".encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
+        # Генерация надёжного пароля
+        generated_password = generate_strong_password(14)
+        hashed = bcrypt.hashpw(generated_password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
         ip_addr = request.client.host if request.client else ""
         signup_time = int(time.time())
         user_token_id = str(uuid.uuid4())
@@ -380,7 +382,12 @@ async def register_user(payload: RegistrationRequest, request: Request, response
         except Exception as se:
             logger.warning(f"Registration: session creation failed: {se}")
 
-        return RegistrationResponse(status="success", message="Registered successfully", email_verification_required=False)
+        return RegistrationResponse(
+            status="success",
+            message="Registered successfully",
+            email_verification_required=False,
+            generated_password=generated_password
+        )
     except Exception:
         await db.rollback()
         logger.exception("Registration failed")
