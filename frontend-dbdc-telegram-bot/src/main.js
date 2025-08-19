@@ -13,6 +13,20 @@ app.component('BuilderComponent', Content)
 if (window.Telegram && window.Telegram.WebApp) {
   const tg = window.Telegram.WebApp
 
+  // Log all available WebApp data for debugging
+  console.log('Telegram WebApp initialized:', {
+    initData: tg.initData,
+    initDataUnsafe: tg.initDataUnsafe,
+    version: tg.version,
+    platform: tg.platform,
+    colorScheme: tg.colorScheme,
+    themeParams: tg.themeParams,
+    isExpanded: tg.isExpanded,
+    viewportHeight: tg.viewportHeight,
+    mainButton: tg.MainButton,
+    startParam: tg.initDataUnsafe?.start_param
+  })
+
   // Initialize the WebApp
   tg.ready()
 
@@ -105,4 +119,3 @@ if (window.Telegram && window.Telegram.WebApp) {
 app.use(router)
 
 app.mount('#app')
-
