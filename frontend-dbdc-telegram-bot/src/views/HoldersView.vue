@@ -324,9 +324,17 @@ const shortenedReferralLink = computed(() => {
   }
 
   try {
-    const url = new URL(referralLink.value.startsWith('http') ? referralLink.value : `https://${referralLink.value}`)
-    const domain = url.hostname
-    return `${domain}...`
+    const url = new URL(referralLink.value)
+    // For Telegram WebApp links like https://t.me/dbdc_test_bot/app?startapp=ref_4344_code_52J01Z
+    // Show as "t.me/dbdc_test_bot..."
+    if (url.hostname === 't.me') {
+      const pathParts = url.pathname.split('/')
+      if (pathParts.length >= 2) {
+        return `t.me/${pathParts[1]}...`
+      }
+    }
+    // Fallback to domain for other URLs
+    return `${url.hostname}...`
   } catch {
     // Если не удается распарсить как URL, просто обрезаем
     return referralLink.value.length > 20 ? `${referralLink.value.substring(0, 20)}...` : referralLink.value
