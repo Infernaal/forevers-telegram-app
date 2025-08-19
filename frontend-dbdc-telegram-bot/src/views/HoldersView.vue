@@ -380,15 +380,24 @@ const shareQRCode = () => {
   }
 }
 
-const telegramFallback = (safetyTimeout = null) => {
+const telegramFallback = async (safetyTimeout = null) => {
+  // Get the full link for Telegram sharing
+  let shareUrl = referralLink.value
+  try {
+    const linkData = await referralService.getFullReferralLink()
+    shareUrl = linkData.full_link
+  } catch (error) {
+    console.warn('Could not get full link for Telegram sharing, using display link:', error)
+  }
+
   // Use Telegram WebApp sharing if available
   if (window.Telegram && window.Telegram.WebApp) {
     const tg = window.Telegram.WebApp
 
     try {
       // Use Telegram's openTelegramLink for sharing (compatible with version 6.0)
-      const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(referralLink.value)}&text=${encodeURIComponent('Join me on DBD Capital Forevers Bot! 🚀')}`
-      tg.openTelegramLink(shareUrl)
+      const telegramShareUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent('Join me on DBD Capital Forevers Bot! 🚀')}`
+      tg.openTelegramLink(telegramShareUrl)
 
       // Set up event listener for when user returns to app
       const handleVisibilityChange = () => {
