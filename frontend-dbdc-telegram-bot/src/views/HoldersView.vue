@@ -597,30 +597,26 @@ const loadReferralData = async () => {
     isLoading.value = true
     loadingError.value = ''
 
-    // Получаем полную реферальную ссылку
-    const linkData = await referralService.getFullReferralLink()
-    referralLink.value = linkData.display_link
-
-    // Генерируем QR-код
-    const qrBlob = await referralService.generateQRCode(linkData.qr_params)
+    // Получаем данные приглашения (ссылку и QR-код) одним запросом
+    const inviteData = await referralService.getInviteData()
+    referralLink.value = inviteData.invite_link
 
     // Освобождаем предыдущий URL если он был
     if (qrImageUrl.value) {
-      referralService.revokeQRImageURL(qrImageUrl.value)
+      URL.revokeObjectURL(qrImageUrl.value)
     }
 
-    // Создаем новый URL для QR-кода
-    qrImageUrl.value = referralService.createQRImageURL(qrBlob)
+    // QR-код приходит как base64, используем его напрямую
+    qrImageUrl.value = inviteData.qr_code
 
-    console.log('Referral data loaded successfully:', {
-      displayLink: linkData.display_link,
-      fullLink: linkData.full_link,
-      userId: linkData.user_id,
-      code: linkData.code
+    console.log('Invite data loaded successfully:', {
+      inviteLink: inviteData.invite_link,
+      userId: inviteData.user_id,
+      code: inviteData.code
     })
   } catch (error) {
-    console.error('Error loading referral data:', error)
-    loadingError.value = 'Failed to load referral data'
+    console.error('Error loading invite data:', error)
+    loadingError.value = 'Failed to load invite data'
     referralLink.value = 'vm.dubadu/error'
   } finally {
     isLoading.value = false
