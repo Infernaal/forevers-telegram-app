@@ -285,6 +285,15 @@
                 <div v-if="phoneErrorMessage" class="mt-1 text-xs font-medium" :class="phoneOverLength ? 'text-red-600' : 'text-red-600'">{{ phoneErrorMessage }}</div>
               </div>
 
+              <!-- Referral Partner (if referral) -->
+              <div v-if="referralContext?.isReferral && referralPartner" class="pt-2">
+                <ReferralPartner
+                  :partner-first-name="referralPartner.firstName"
+                  :partner-last-name="referralPartner.lastName"
+                  :partner-user-id="referralPartner.userId"
+                />
+              </div>
+
               <!-- Register Button -->
               <div class="pt-4">
                 <button
@@ -316,8 +325,11 @@
 import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import CountryFlag from '@/components/CountryFlag.vue'
+import ReferralPartner from '@/components/ReferralPartner.vue'
 import { fullCountries } from '@/utils/allCountries.js'
 import { usePhoneInput } from '@/composables/usePhoneInput.js'
+import { getStoredReferralContext } from '@/utils/telegramWebApp.js'
+import referrerService from '@/services/referrerService.js'
 
 const router = useRouter()
 const route = useRoute()
@@ -360,6 +372,10 @@ const touchedFields = ref({
 
 // Track current focused field to collapse only after switching to another field
 const currentFocusedField = ref(null)
+
+// Referral context
+const referralContext = ref(null)
+const referralPartner = ref(null)
 
 // Email validation helpers
 const emailLocalPartRegex = /^[A-Za-z0-9._%+\-]+$/ // RFC simplified safe subset
@@ -645,7 +661,7 @@ const handleCountrySelection = () => {
   }
 }
 
-onMounted(() => {
+onMounted(async () => {
   document.addEventListener('click', handleClickOutside)
   window.addEventListener('focus', handleCountrySelection)
 
@@ -654,7 +670,41 @@ onMounted(() => {
 
   // Check if a country was selected from CountrySelectView
   handleCountrySelection()
+
+  // Load referral context and partner info if available
+  await loadReferralContext()
 })
+
+// Load referral context and fetch partner information
+const loadReferralContext = async () => {
+  try {
+    const storedContext = getStoredReferralContext()
+    if (storedContext?.isReferral && storedContext.referralInfo?.userId) {
+      referralContext.value = storedContext
+
+      // Fetch referrer information
+      const result = await referrerService.getReferrerInfo(storedContext.referralInfo.userId)
+      if (result.success && result.data) {
+        referralPartner.value = {
+          firstName: result.data.first_name || 'Unknown',
+          lastName: result.data.last_name || 'User',
+          userId: storedContext.referralInfo.userId
+        }
+
+        console.log('Referrer info loaded:', referralPartner.value)
+      } else {
+        // Fallback if we can't fetch referrer info
+        referralPartner.value = {
+          firstName: 'Unknown',
+          lastName: 'User',
+          userId: storedContext.referralInfo.userId
+        }
+      }
+    }
+  } catch (error) {
+    console.error('Error loading referral context:', error)
+  }
+}
 
 onBeforeUnmount(() => {
   document.removeEventListener('click', handleClickOutside)

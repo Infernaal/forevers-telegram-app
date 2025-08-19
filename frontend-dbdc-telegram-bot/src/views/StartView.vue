@@ -64,6 +64,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { getReferralContext, storeReferralContext } from '@/utils/telegramWebApp.js'
 
 // Router instance
 const router = useRouter()
@@ -89,6 +90,14 @@ const isLoading = ref(false)
 const handleStart = () => {
   if (isLoading.value) return
   isLoading.value = true
+
+  // Check for referral context and store it for later use
+  const referralContext = getReferralContext()
+  if (referralContext.isReferral) {
+    storeReferralContext(referralContext)
+    console.log('Referral detected:', referralContext)
+  }
+
   router.push({ path: '/loader', query: { action: 'check-telegram', redirect: '/account-check', minDelay: 300 } })
 }
 

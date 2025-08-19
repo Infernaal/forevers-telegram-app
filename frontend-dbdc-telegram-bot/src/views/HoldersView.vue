@@ -90,7 +90,7 @@
               <span class="text-red-500 text-sm">Error loading QR</span>
             </div>
             <!-- QR Code Link -->
-            <div class="absolute left-2 right-2 bottom-3 text-dbd-primary text-xs sm:text-sm font-semibold leading-4 text-center px-2 break-words">
+            <div class="absolute left-3 right-3 bottom-2 text-dbd-primary text-xs font-medium leading-3 text-center px-1 break-words">
               {{ shortenedReferralLink }}
             </div>
           </div>
@@ -317,14 +317,24 @@ const isAnyModalOpen = computed(() => {
   return showTermsModal.value
 })
 
-// Computed property for full referral link display (no truncation)
+// Computed property for shortened referral link display (for QR code area)
 const shortenedReferralLink = computed(() => {
   if (!referralLink.value || referralLink.value.includes('loading') || referralLink.value.includes('error')) {
     return referralLink.value
   }
 
-  // Return the full link without truncation
-  return referralLink.value
+  // Shorten the link for display under QR code
+  const link = referralLink.value
+  const maxLength = 35 // Adjust length for mobile screens
+
+  if (link.length <= maxLength) {
+    return link
+  }
+
+  // Show beginning and end of URL with ellipsis in middle
+  const start = link.substring(0, 15)
+  const end = link.substring(link.length - 17)
+  return `${start}...${end}`
 })
 
 // Computed property for Telegram Web App link (now backend already provides correct format)
@@ -660,7 +670,7 @@ const loadReferralData = async () => {
       URL.revokeObjectURL(qrImageUrl.value)
     }
 
-    // QR-код приходит как base64, используем его напрямую
+    // QR-ко�� приходит как base64, используем его напрямую
     qrImageUrl.value = inviteData.qr_code
 
     console.log('Invite data loaded successfully:', {

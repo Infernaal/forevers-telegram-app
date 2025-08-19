@@ -69,6 +69,7 @@ import { useRouter, useRoute } from 'vue-router'
 import telegramUserService from '../services/telegramUserService.js'
 import authByEmailService from '../services/authByEmailService.js'
 import registrationService from '../services/registrationService.js'
+import { getStoredReferralContext } from '@/utils/telegramWebApp.js'
 
 const router = useRouter()
 const route = useRoute()
@@ -128,6 +129,14 @@ const runAction = async () => {
         return finish('/account-check')
       }
       const res = await telegramUserService.authWithInitData(initData)
+
+      // Check if this is a referral session and user is not authenticated
+      const referralContext = getStoredReferralContext()
+      if (referralContext?.isReferral && res.status !== 'success') {
+        // For referral users who are not authenticated, redirect to registration
+        return finish('/registration')
+      }
+
       const target = res.status === 'success' ? '/favorites' : '/account-check'
       return finish(target)
     }
