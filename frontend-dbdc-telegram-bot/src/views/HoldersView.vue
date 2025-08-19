@@ -401,7 +401,7 @@ const shareQRCode = async () => {
   if (navigator.share) {
     navigator.share({
       title: 'DBD Capital Forevers Bot',
-      text: 'Join me on DBD Capital Forevers Bot! 🚀',
+      text: 'Join me on DBD Capital Forevers! 🚀',
       url: shareUrl
     }).then(() => {
       // Sharing was successful
