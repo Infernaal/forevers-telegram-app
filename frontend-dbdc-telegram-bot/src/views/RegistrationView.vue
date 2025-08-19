@@ -761,14 +761,22 @@ const handleRegister = () => {
     fullPhone = local || null
   }
 
+  // Get referral info if available
+  let referralUserId = null
+  if (referralContext.value?.isReferral && referralContext.value.referralInfo?.userId) {
+    referralUserId = parseInt(referralContext.value.referralInfo.userId)
+  }
+
   const payload = {
     first_name: formData.value.firstName.trim(),
     last_name: formData.value.lastName.trim(),
     country: selectedCountry.value.code || formData.value.country,
     email: formData.value.email.trim(),
     phone: fullPhone,
-    ref: null
+    ref: referralUserId
   }
+
+  console.log('Registration payload:', payload)
   sessionStorage.setItem('pendingRegistration', JSON.stringify(payload))
   router.push({ path: '/loader', query: { action: 'register', redirect: '/favorites', minDelay: 400 } })
 }
