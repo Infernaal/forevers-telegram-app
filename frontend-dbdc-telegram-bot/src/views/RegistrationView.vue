@@ -845,17 +845,9 @@ input:focus {
   }
 }
 
-/* Style placeholders with red asterisks */
+/* Style placeholders */
 input::placeholder {
   color: #7E7E7E;
-}
-
-/* Make asterisks in placeholders red */
-input[placeholder*="*"]::placeholder {
-  background: linear-gradient(to right, #7E7E7E 0%, #7E7E7E 85%, #DC2626 85%, #DC2626 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 /* Custom styling for required fields with asterisks */
