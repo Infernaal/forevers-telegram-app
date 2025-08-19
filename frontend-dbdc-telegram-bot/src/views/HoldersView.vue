@@ -542,49 +542,51 @@ const copyLink = async () => {
 }
 
 const copyWebLink = async () => {
-  showSuccessMessage('🔧 copyWebLink called')
-
   // Add haptic feedback when copy button is pressed
   if (window.triggerHaptic) {
     window.triggerHaptic('impact', 'light')
   }
 
   let copySuccess = false
-
-  // Get the actual full link to copy - backend already provides WebApp format
   let linkToCopy = telegramWebAppLink.value
-  showSuccessMessage(`📋 Initial link: ${linkToCopy?.substring(0, 50)}...`)
 
   try {
+    // Get fresh data from API
     const inviteData = await referralService.getInviteData()
     linkToCopy = inviteData.invite_link
-    showSuccessMessage(`🔄 Updated link from API: ${linkToCopy?.substring(0, 50)}...`)
   } catch (error) {
-    showSuccessMessage(`❌ API Error: ${error.message}`)
+    console.warn('Could not get fresh invite data, using cached link:', error)
+    // Continue with cached link
   }
 
-  // Add "Join me on.." text as is typical in Telegram apps
+  // Prepare full message with link
   const fullMessageToCopy = `Join me on DBD Capital Forevers! 🚀\n\n${linkToCopy}`
-  showSuccessMessage(`📝 Full message length: ${fullMessageToCopy.length} chars`)
 
-  // Try modern clipboard API first
-  showSuccessMessage(`📋 Clipboard available: ${!!navigator.clipboard}`)
-  if (navigator.clipboard) {
+  // Try Telegram WebApp clipboard API first (if available)
+  if (window.Telegram?.WebApp?.HapticFeedback) {
     try {
-      showSuccessMessage('🔄 Attempting clipboard.writeText...')
+      // Use Telegram WebApp clipboard if available (Telegram Bot API 6.7+)
+      if (window.Telegram.WebApp.platform !== 'unknown' && window.Telegram.WebApp.version >= '6.7') {
+        await window.Telegram.WebApp.writeTextToClipboard?.(fullMessageToCopy)
+        copySuccess = true
+      }
+    } catch (telegramErr) {
+      console.log('Telegram WebApp clipboard failed:', telegramErr)
+    }
+  }
+
+  // Fallback to standard clipboard API
+  if (!copySuccess && navigator.clipboard && window.isSecureContext) {
+    try {
       await navigator.clipboard.writeText(fullMessageToCopy)
       copySuccess = true
-      showSuccessMessage('✅ Clipboard API success!')
     } catch (clipboardErr) {
-      showSuccessMessage(`❌ Clipboard failed: ${clipboardErr.message}`)
+      console.log('Standard clipboard API failed:', clipboardErr)
     }
-  } else {
-    showSuccessMessage('⚠️ Clipboard not available, using fallback')
   }
 
-  // If clipboard API failed or is not available, use fallback
+  // Final fallback to document.execCommand (deprecated but works in older browsers)
   if (!copySuccess) {
-    showSuccessMessage('🔄 Attempting fallback copy...')
     try {
       const textArea = document.createElement('textarea')
       textArea.value = fullMessageToCopy
@@ -592,40 +594,50 @@ const copyWebLink = async () => {
       textArea.style.left = '-999999px'
       textArea.style.top = '-999999px'
       textArea.style.opacity = '0'
+      textArea.readOnly = true
       document.body.appendChild(textArea)
-      textArea.focus()
-      textArea.select()
 
-      showSuccessMessage('📝 TextArea created, attempting execCommand...')
+      // Focus and select on iOS
+      if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
+        textArea.contentEditable = true
+        textArea.readOnly = false
+        const range = document.createRange()
+        range.selectNodeContents(textArea)
+        const selection = window.getSelection()
+        selection.removeAllRanges()
+        selection.addRange(range)
+        textArea.setSelectionRange(0, 999999)
+      } else {
+        textArea.select()
+      }
+
       const successful = document.execCommand('copy')
       document.body.removeChild(textArea)
 
       if (successful) {
         copySuccess = true
-        showSuccessMessage('✅ Fallback copy successful!')
-      } else {
-        showSuccessMessage('❌ execCommand returned false')
       }
     } catch (fallbackErr) {
-      showSuccessMessage(`❌ Fallback error: ${fallbackErr.message}`)
+      console.error('All copy methods failed:', fallbackErr)
     }
   }
 
+  // Provide feedback to user
   if (copySuccess) {
-    showSuccessMessage('✅ Copy completed successfully!')
+    showSuccessMessage('Link copied to clipboard')
     // Add success haptic feedback
     if (window.triggerHaptic) {
       window.triggerHaptic('notification', 'success')
     }
   } else {
-    showSuccessMessage('❌ All copy methods FAILED!')
+    showSuccessMessage('Unable to copy link')
     // Still provide haptic feedback for user interaction
     if (window.triggerHaptic) {
-      window.triggerHaptic('impact', 'light')
+      window.triggerHaptic('impact', 'medium')
     }
   }
 
-  // Always show copied state for user feedback
+  // Always show copied state animation for user feedback
   linkCopied.value = true
   setTimeout(() => {
     linkCopied.value = false
