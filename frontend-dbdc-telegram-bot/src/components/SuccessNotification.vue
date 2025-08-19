@@ -112,8 +112,8 @@ defineEmits(['close'])
   text-align: center;
   margin-left: 8px;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
 }
 
 /* Responsive adjustments */
