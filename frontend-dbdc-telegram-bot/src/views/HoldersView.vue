@@ -90,7 +90,7 @@
               <span class="text-red-500 text-sm">Error loading QR</span>
             </div>
             <!-- QR Code Link -->
-            <div class="absolute left-1/2 bottom-5 transform -translate-x-1/2 text-dbd-primary text-lg sm:text-xl font-semibold leading-6 text-center">
+            <div class="absolute left-1/2 bottom-5 transform -translate-x-1/2 text-dbd-primary text-sm font-semibold leading-6 text-center">
               {{ shortenedReferralLink }}
             </div>
           </div>
