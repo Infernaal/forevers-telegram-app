@@ -24,7 +24,7 @@ class InviteResponse(BaseModel):
 
 
 def generate_unique_code(length: int = 6) -> str:
-    """Генерирует уникальный 6-значный код из букв и цифр"""
+    """Гене��ирует уникальный 6-значный код из букв и цифр"""
     alphabet = string.ascii_uppercase + string.digits
     return ''.join(secrets.choice(alphabet) for _ in range(length))
 
@@ -61,21 +61,13 @@ async def get_invite_data(current_user_id: int = Depends(get_current_user_id)):
         # Генерируем уникальный 6-значный код
         unique_code = generate_unique_code()
 
-        # Формируем параметры реферальной ссылки
-        ref_params = f"ref={current_user_id}&code={unique_code}"
+        # Формируем Telegram WebApp ссылку в правильном формате
+        # Формат: https://t.me/dbdc_test_bot/app?startapp=ref_4344_code_52J01Z
+        telegram_bot_name = os.getenv("TELEGRAM_BOT_NAME", "dbdc_test_bot")
+        telegram_webapp_link = f"https://t.me/{telegram_bot_name}/app?startapp=ref_{current_user_id}_code_{unique_code}"
 
-        # Получаем BASE_URL из переменной окружения или используем значение по умолчанию
-        base_url = os.getenv("BASE_URL", "https://yourdomain.com")
-
-        # Создаем короткую ссылку для отображения с вашим адресом
-        display_link = f"{base_url}?{ref_params}"
-
-        # Создаем полную ссылку для QR-кода и шаринга (Telegram bot)
-        telegram_bot_url = os.getenv("TELEGRAM_BOT_URL", "https://t.me/your_bot_name")
-        full_link = f"{telegram_bot_url}?start={ref_params}"
-
-        # Генерируем QR-код как base64 (используем display_link для QR-кода)
-        qr_code_base64 = generate_qr_code_base64(display_link)
+        # Генерируем QR-код как base64 (используем telegram_webapp_link для QR-кода)
+        qr_code_base64 = generate_qr_code_base64(telegram_webapp_link)
 
         logger.info(f"Generated invite data for user {current_user_id}: {display_link}")
 
