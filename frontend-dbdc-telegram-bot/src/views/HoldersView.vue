@@ -611,13 +611,25 @@ const copyWebLink = async () => {
         console.log('❌ Fallback copy method also failed')
       }
     } catch (fallbackErr) {
-      console.error('Fallback copy failed:', fallbackErr)
+      console.error('❌ Fallback copy failed:', fallbackErr)
     }
   }
 
-  // Add success haptic feedback
-  if (window.triggerHaptic) {
-    window.triggerHaptic('notification', 'success')
+  console.log('=== Final copy result ===')
+  console.log('copySuccess:', copySuccess)
+
+  if (copySuccess) {
+    console.log('✅ Copy operation completed successfully')
+    // Add success haptic feedback
+    if (window.triggerHaptic) {
+      window.triggerHaptic('notification', 'success')
+    }
+  } else {
+    console.log('❌ All copy methods failed')
+    // Still provide haptic feedback for user interaction
+    if (window.triggerHaptic) {
+      window.triggerHaptic('impact', 'light')
+    }
   }
 
   // Always show copied state for user feedback
