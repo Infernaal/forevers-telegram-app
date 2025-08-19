@@ -344,12 +344,21 @@ const shareQRCode = () => {
     window.triggerHaptic('impact', 'light')
   }
 
+  // Get the full link for sharing
+  let shareUrl = referralLink.value
+  try {
+    const linkData = await referralService.getFullReferralLink()
+    shareUrl = linkData.full_link
+  } catch (error) {
+    console.warn('Could not get full link for sharing, using display link:', error)
+  }
+
   // Try standard Web Share API first (works on most platforms including Telegram, Viber, etc.)
   if (navigator.share) {
     navigator.share({
       title: 'DBD Capital Forevers Bot',
       text: 'Join me on DBD Capital Forevers Bot! 🚀',
-      url: referralLink.value
+      url: shareUrl
     }).then(() => {
       // Sharing was successful
       clearTimeout(safetyTimeout)
