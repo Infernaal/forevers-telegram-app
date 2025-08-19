@@ -558,10 +558,13 @@ const copyWebLink = async () => {
     console.warn('Could not get invite data, using cached link:', error)
   }
 
+  // Add "Join to me on.." text as is typical in Telegram apps
+  const fullMessageToCopy = `Join me on DBD Capital Forevers! 🚀\n\n${linkToCopy}`
+
   // Try modern clipboard API first
   if (navigator.clipboard) {
     try {
-      await navigator.clipboard.writeText(linkToCopy)
+      await navigator.clipboard.writeText(fullMessageToCopy)
       copySuccess = true
     } catch (clipboardErr) {
       console.log('Clipboard API failed, trying fallback method')
@@ -572,7 +575,7 @@ const copyWebLink = async () => {
   if (!copySuccess) {
     try {
       const textArea = document.createElement('textarea')
-      textArea.value = linkToCopy
+      textArea.value = fullMessageToCopy
       textArea.style.position = 'fixed'
       textArea.style.left = '-999999px'
       textArea.style.top = '-999999px'
