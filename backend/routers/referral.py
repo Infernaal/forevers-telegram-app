@@ -40,6 +40,32 @@ def generate_unique_code(db: Session, length: int = 6, max_attempts: int = 100) 
 
     raise Exception("Could not generate unique code after maximum attempts")
 
+def get_or_create_user_referral_code(db: Session, user_id: int) -> str:
+    """Получает существующий или создает новый реферальный код для пользователя"""
+    # Проверяем, есть ли уже код для этого пользователя
+    user_code = db.query(UserReferralCode).filter(UserReferralCode.user_id == user_id).first()
+
+    if user_code:
+        return user_code.code
+
+    # Создаем новый код
+    new_code = generate_unique_code(db)
+
+    try:
+        user_referral_code = UserReferralCode(
+            user_id=user_id,
+            code=new_code
+        )
+        db.add(user_referral_code)
+        db.commit()
+        db.refresh(user_referral_code)
+        return user_referral_code.code
+    except IntegrityError:
+        db.rollback()
+        # Если произошла ошибка уникальности, попробуем еще раз
+        return get_or_create_user_referral_code(db, user_id)
+
+
 def generate_qr_code_base64(data: str) -> str:
     """Генерирует QR-код и возвращает его как base64 строку"""
     qr = qrcode.QRCode(
