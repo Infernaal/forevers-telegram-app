@@ -90,7 +90,7 @@
               <span class="text-red-500 text-sm">Error loading QR</span>
             </div>
             <!-- QR Code Link -->
-            <div class="absolute left-1/2 bottom-5 transform -translate-x-1/2 text-dbd-primary text-lg sm:text-xl font-semibold leading-6 text-center">
+            <div class="absolute left-1/2 bottom-5 transform -translate-x-1/2 text-dbd-primary text-xs sm:text-sm font-semibold leading-4 text-center px-2 max-w-[90%] break-all">
               {{ shortenedReferralLink }}
             </div>
           </div>
@@ -239,7 +239,7 @@
 
               <!-- URL text -->
               <div v-if="!linkCopied" class="flex-1 px-4 sm:px-6 py-3.5 overflow-hidden">
-                <span class="text-dbd-off-white text-sm sm:text-lg font-semibold leading-5 underline truncate block max-w-full">
+                <span class="text-dbd-off-white text-xs sm:text-sm font-semibold leading-4 underline break-all max-w-full">
                   {{ shortenedReferralLink }}
                 </span>
               </div>
@@ -317,28 +317,14 @@ const isAnyModalOpen = computed(() => {
   return showTermsModal.value
 })
 
-// Computed property for shortened referral link display
+// Computed property for full referral link display (no truncation)
 const shortenedReferralLink = computed(() => {
   if (!referralLink.value || referralLink.value.includes('loading') || referralLink.value.includes('error')) {
     return referralLink.value
   }
 
-  try {
-    const url = new URL(referralLink.value)
-    // For Telegram WebApp links like https://t.me/dbdc_test_bot/app?startapp=ref_4344_code_52J01Z
-    // Show as "t.me/dbdc_test_bot..."
-    if (url.hostname === 't.me') {
-      const pathParts = url.pathname.split('/')
-      if (pathParts.length >= 2) {
-        return `t.me/${pathParts[1]}...`
-      }
-    }
-    // Fallback to domain for other URLs
-    return `${url.hostname}...`
-  } catch {
-    // Если не удается распарсить как URL, просто обрезаем
-    return referralLink.value.length > 20 ? `${referralLink.value.substring(0, 20)}...` : referralLink.value
-  }
+  // Return the full link without truncation
+  return referralLink.value
 })
 
 // Computed property for Telegram Web App link (now backend already provides correct format)
@@ -386,7 +372,7 @@ const shareQRCode = async () => {
   if (navigator.share) {
     navigator.share({
       title: 'DBD Capital Forevers Bot',
-      text: 'Join me on DBD Capital Forevers Bot! 🚀',
+      text: 'Join me in DBD Capital Forevers! 🚀 Start earning digital assets with this amazing bot.',
       url: shareUrl
     }).then(() => {
       // Sharing was successful
@@ -425,7 +411,8 @@ const telegramFallback = async (safetyTimeout = null) => {
 
     try {
       // Use Telegram's openTelegramLink for sharing (compatible with version 6.0)
-      const telegramShareUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent('Join me on DBD Capital Forevers Bot! 🚀')}`
+      const shareText = 'Join me in DBD Capital Forevers! 🚀 Start earning digital assets with this amazing bot.'
+      const telegramShareUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`
       tg.openTelegramLink(telegramShareUrl)
 
       // Set up event listener for when user returns to app
@@ -482,10 +469,14 @@ const copyLink = async () => {
     console.warn('Could not get invite data, using cached link:', error)
   }
 
+  // Add inviting text with the link
+  const shareText = 'Join me in DBD Capital Forevers! 🚀 Start earning digital assets with this amazing bot.'
+  const fullTextToCopy = `${shareText}\n\n${linkToCopy}`
+
   // Try modern clipboard API first
   if (navigator.clipboard) {
     try {
-      await navigator.clipboard.writeText(linkToCopy)
+      await navigator.clipboard.writeText(fullTextToCopy)
       copySuccess = true
     } catch (clipboardErr) {
       console.log('Clipboard API failed, trying fallback method')
@@ -496,7 +487,7 @@ const copyLink = async () => {
   if (!copySuccess) {
     try {
       const textArea = document.createElement('textarea')
-      textArea.value = linkToCopy
+      textArea.value = fullTextToCopy
       textArea.style.position = 'fixed'
       textArea.style.left = '-999999px'
       textArea.style.top = '-999999px'
@@ -538,45 +529,79 @@ const copyWebLink = async () => {
     console.warn('Could not get invite data, using cached link:', error)
   }
 
-  // Try modern clipboard API first
-  if (navigator.clipboard) {
+  // Add inviting text with the link
+  const shareText = 'Join me in DBD Capital Forevers! 🚀 Start earning digital assets with this amazing bot.'
+  const fullTextToCopy = `${shareText}\n\n${linkToCopy}`
+
+  // Add haptic feedback
+  if (window.triggerHaptic) {
+    window.triggerHaptic('impact', 'light')
+  }
+
+  // Try modern clipboard API first (should work on most mobile browsers)
+  if (navigator.clipboard && navigator.clipboard.writeText) {
     try {
-      await navigator.clipboard.writeText(linkToCopy)
+      await navigator.clipboard.writeText(fullTextToCopy)
       copySuccess = true
+      console.log('Clipboard API copy successful')
     } catch (clipboardErr) {
-      console.log('Clipboard API failed, trying fallback method')
+      console.log('Clipboard API failed:', clipboardErr)
     }
   }
 
-  // If clipboard API failed or is not available, use fallback
+  // If clipboard API failed or is not available, use mobile-optimized fallback
   if (!copySuccess) {
     try {
       const textArea = document.createElement('textarea')
-      textArea.value = linkToCopy
+      textArea.value = fullTextToCopy
       textArea.style.position = 'fixed'
       textArea.style.left = '-999999px'
       textArea.style.top = '-999999px'
       textArea.style.opacity = '0'
+      textArea.style.width = '1px'
+      textArea.style.height = '1px'
+      textArea.readOnly = false
+
       document.body.appendChild(textArea)
+
+      // Focus and select for mobile devices
       textArea.focus()
+      textArea.setSelectionRange(0, fullTextToCopy.length)
       textArea.select()
+
+      // Wait a bit for mobile keyboards
+      await new Promise(resolve => setTimeout(resolve, 100))
 
       const successful = document.execCommand('copy')
       document.body.removeChild(textArea)
 
-      if (!successful) {
-        console.log('Fallback copy method also failed')
+      if (successful) {
+        copySuccess = true
+        console.log('Fallback copy successful')
+      } else {
+        console.log('Fallback copy method failed')
       }
     } catch (fallbackErr) {
       console.error('Fallback copy failed:', fallbackErr)
     }
   }
 
-  // Always show copied state for user feedback
+  // Show visual feedback regardless of copy success for better UX
   linkCopied.value = true
+
+  // Add haptic feedback for success
+  if (window.triggerHaptic) {
+    window.triggerHaptic('notification', copySuccess ? 'success' : 'warning')
+  }
+
   setTimeout(() => {
     linkCopied.value = false
   }, 2500)
+
+  // Show success message if copy worked
+  if (copySuccess) {
+    showSuccessMessage('Link copied to clipboard')
+  }
 }
 
 const openTerms = () => {
