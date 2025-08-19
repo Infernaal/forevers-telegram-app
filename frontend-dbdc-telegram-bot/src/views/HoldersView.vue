@@ -444,10 +444,19 @@ const fallbackShare = () => {
 const copyLink = async () => {
   let copySuccess = false
 
+  // Get the actual full link to copy
+  let linkToCopy = referralLink.value
+  try {
+    const linkData = await referralService.getFullReferralLink()
+    linkToCopy = linkData.full_link
+  } catch (error) {
+    console.warn('Could not get full link, using display link:', error)
+  }
+
   // Try modern clipboard API first
   if (navigator.clipboard) {
     try {
-      await navigator.clipboard.writeText(referralLink.value)
+      await navigator.clipboard.writeText(linkToCopy)
       copySuccess = true
     } catch (clipboardErr) {
       console.log('Clipboard API failed, trying fallback method')
@@ -458,7 +467,7 @@ const copyLink = async () => {
   if (!copySuccess) {
     try {
       const textArea = document.createElement('textarea')
-      textArea.value = referralLink.value
+      textArea.value = linkToCopy
       textArea.style.position = 'fixed'
       textArea.style.left = '-999999px'
       textArea.style.top = '-999999px'
