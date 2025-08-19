@@ -565,95 +565,91 @@ const copyLink = async () => {
 }
 
 const copyWebLink = async () => {
-  // Add haptic feedback
-  if (window.triggerHaptic) {
-    window.triggerHaptic('impact', 'light')
+  // Initial haptic feedback
+  if (window.Telegram?.WebApp?.HapticFeedback) {
+    window.Telegram.WebApp.HapticFeedback.impactOccurred('light')
   }
 
-  let copySuccess = false
   let linkToCopy = telegramWebAppLink.value
 
-  // Always try to get fresh data, but don't fail if we can't
+  // Get fresh invite data
   try {
     const inviteData = await referralService.getInviteData()
     linkToCopy = inviteData.invite_link
   } catch (error) {
-    console.warn('Could not get invite data, using cached link:', error)
+    console.warn('Using cached link:', error.message)
   }
 
-  // Method 1: Try Telegram WebApp clipboard API first
-  if (window.Telegram?.WebApp?.writeTextToClipboard) {
-    try {
-      console.log('Trying Telegram WebApp clipboard API')
-      await window.Telegram.WebApp.writeTextToClipboard(linkToCopy)
-      copySuccess = true
-      console.log('Telegram WebApp clipboard success')
-    } catch (telegramErr) {
-      console.log('Telegram WebApp clipboard failed:', telegramErr)
+  // Unified copy function with fallback chain
+  const performCopy = async (text) => {
+    // 1. Telegram WebApp API (most reliable in Telegram)
+    if (window.Telegram?.WebApp?.writeTextToClipboard) {
+      try {
+        await window.Telegram.WebApp.writeTextToClipboard(text)
+        return true
+      } catch (e) {
+        console.log('Telegram clipboard failed:', e.message)
+      }
     }
-  }
 
-  // Method 2: Try modern Clipboard API (requires HTTPS)
-  if (!copySuccess && navigator.clipboard && window.isSecureContext) {
-    try {
-      console.log('Trying navigator.clipboard API')
-      await navigator.clipboard.writeText(linkToCopy)
-      copySuccess = true
-      console.log('navigator.clipboard success')
-    } catch (clipboardError) {
-      console.log('navigator.clipboard failed:', clipboardError.message || clipboardError)
+    // 2. Modern Clipboard API (HTTPS required)
+    if (navigator.clipboard?.writeText && window.isSecureContext) {
+      try {
+        await navigator.clipboard.writeText(text)
+        return true
+      } catch (e) {
+        console.log('Modern clipboard failed:', e.message)
+      }
     }
-  }
 
-  // Method 3: Try legacy method with execCommand (works everywhere)
-  if (!copySuccess) {
+    // 3. Legacy execCommand method (universal fallback)
     try {
-      console.log('Trying execCommand fallback')
-      const textArea = document.createElement('textarea')
-      textArea.value = linkToCopy
-      textArea.style.position = 'fixed'
-      textArea.style.left = '-999999px'
-      textArea.style.top = '-999999px'
-      textArea.style.opacity = '0'
-      textArea.readOnly = true
-      document.body.appendChild(textArea)
+      const textarea = document.createElement('textarea')
+      textarea.value = text
+      textarea.style.cssText = 'position:fixed;top:-1000px;left:-1000px;opacity:0;pointer-events:none;'
+      textarea.setAttribute('readonly', '')
+      document.body.appendChild(textarea)
 
-      if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
-        textArea.contentEditable = true
-        textArea.readOnly = false
+      // iOS specific handling
+      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+        textarea.contentEditable = 'true'
+        textarea.readOnly = false
         const range = document.createRange()
-        range.selectNodeContents(textArea)
+        range.selectNodeContents(textarea)
         const selection = window.getSelection()
         selection.removeAllRanges()
         selection.addRange(range)
-        textArea.setSelectionRange(0, 999999)
+        textarea.setSelectionRange(0, 999999)
       } else {
-        textArea.select()
+        textarea.select()
+        textarea.setSelectionRange(0, 999999)
       }
 
-      const execResult = document.execCommand('copy')
-      document.body.removeChild(textArea)
-
-      if (execResult) {
-        copySuccess = true
-        console.log('execCommand success')
-      }
-    } catch (fallbackErr) {
-      console.error('execCommand fallback failed:', fallbackErr)
+      const success = document.execCommand('copy')
+      document.body.removeChild(textarea)
+      return success
+    } catch (e) {
+      console.error('Legacy copy failed:', e.message)
+      return false
     }
   }
 
-  // Provide user feedback
-  if (copySuccess) {
-    showSuccessMessage('Link copied to clipboard')
-    if (window.triggerHaptic) {
-      window.triggerHaptic('impact', 'medium')
+  // Execute copy operation
+  const copySuccess = await performCopy(linkToCopy)
+
+  // Haptic feedback based on result
+  if (window.Telegram?.WebApp?.HapticFeedback) {
+    if (copySuccess) {
+      window.Telegram.WebApp.HapticFeedback.notificationOccurred('success')
+    } else {
+      window.Telegram.WebApp.HapticFeedback.notificationOccurred('error')
     }
-  } else {
-    showSuccessMessage('Unable to copy link')
   }
 
-  // Always show visual copied state for user feedback
+  // User feedback
+  showSuccessMessage(copySuccess ? 'Link copied to clipboard' : 'Copy failed, please try again')
+
+  // Visual feedback
   linkCopied.value = true
   setTimeout(() => {
     linkCopied.value = false
