@@ -156,7 +156,9 @@ defineEmits(['close'])
 
 @media (min-width: 431px) and (max-width: 768px) {
   .success-notification-content {
-    width: 400px;
+    min-width: 140px;
+    max-width: min(calc(100vw - 32px), 480px);
+    width: fit-content;
     height: 52px;
     padding: 14px 20px;
   }
@@ -174,7 +176,9 @@ defineEmits(['close'])
 
 @media (min-width: 769px) {
   .success-notification-content {
-    width: 480px;
+    min-width: 160px;
+    max-width: min(calc(100vw - 64px), 600px);
+    width: fit-content;
     height: 60px;
     padding: 18px 24px;
   }
