@@ -41,6 +41,20 @@ async def start(message: Message):
 
     await message.answer(welcome_text, reply_markup=kb)
 
+
+# Handle any text message to always show the app button
+@dp.message()
+async def any_message(message: Message):
+    # For any message, show the app button
+    kb = InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(
+            text="Открыть DBDC Capital Forevers Bot",
+            web_app=WebAppInfo(url="https://dbdc-mini.dubadu.com/")
+        )]
+    ])
+
+    await message.answer("Используйте кнопку ниже, чтобы открыть приложение:", reply_markup=kb)
+
 async def main():
     logger.info("🤖 DBDC Capital Forevers Bot запущен и работает!")
     await dp.start_polling(bot)
