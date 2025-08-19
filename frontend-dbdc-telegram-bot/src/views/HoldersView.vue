@@ -565,7 +565,8 @@ const copyLink = async () => {
 }
 
 const copyWebLink = async () => {
-
+  // Add haptic feedback
+  if (window.triggerHaptic) {
     window.triggerHaptic('impact', 'light')
   }
 
@@ -576,6 +577,19 @@ const copyWebLink = async () => {
   try {
     const inviteData = await referralService.getInviteData()
     linkToCopy = inviteData.invite_link
+  } catch (error) {
+    console.warn('Could not get invite data, using cached link:', error)
+  }
+
+  // Method 1: Try Telegram WebApp clipboard API first
+  if (window.Telegram?.WebApp?.writeTextToClipboard) {
+    try {
+      console.log('Trying Telegram WebApp clipboard API')
+      await window.Telegram.WebApp.writeTextToClipboard(linkToCopy)
+      copySuccess = true
+      console.log('Telegram WebApp clipboard success')
+    } catch (telegramErr) {
+      console.log('Telegram WebApp clipboard failed:', telegramErr)
     }
   }
 
@@ -583,7 +597,7 @@ const copyWebLink = async () => {
   if (!copySuccess && navigator.clipboard && window.isSecureContext) {
     try {
       console.log('Trying navigator.clipboard API')
-      await navigator.clipboard.writeText(textToCopy)
+      await navigator.clipboard.writeText(linkToCopy)
       copySuccess = true
       console.log('navigator.clipboard success')
     } catch (clipboardError) {
@@ -594,16 +608,49 @@ const copyWebLink = async () => {
   // Method 3: Try legacy method with execCommand (works everywhere)
   if (!copySuccess) {
     try {
+      console.log('Trying execCommand fallback')
+      const textArea = document.createElement('textarea')
+      textArea.value = linkToCopy
+      textArea.style.position = 'fixed'
+      textArea.style.left = '-999999px'
+      textArea.style.top = '-999999px'
+      textArea.style.opacity = '0'
+      textArea.readOnly = true
+      document.body.appendChild(textArea)
+
+      if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
+        textArea.contentEditable = true
+        textArea.readOnly = false
+        const range = document.createRange()
+        range.selectNodeContents(textArea)
+        const selection = window.getSelection()
+        selection.removeAllRanges()
+        selection.addRange(range)
+        textArea.setSelectionRange(0, 999999)
+      } else {
+        textArea.select()
+      }
+
+      const execResult = document.execCommand('copy')
+      document.body.removeChild(textArea)
 
       if (execResult) {
         copySuccess = true
+        console.log('execCommand success')
+      }
+    } catch (fallbackErr) {
+      console.error('execCommand fallback failed:', fallbackErr)
     }
   }
 
   // Provide user feedback
   if (copySuccess) {
+    showSuccessMessage('Link copied to clipboard')
+    if (window.triggerHaptic) {
       window.triggerHaptic('impact', 'medium')
     }
+  } else {
+    showSuccessMessage('Unable to copy link')
   }
 
   // Always show visual copied state for user feedback
