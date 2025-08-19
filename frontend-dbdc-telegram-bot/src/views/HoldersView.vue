@@ -611,17 +611,14 @@ const copyWebLink = async () => {
     }
   }
 
-  console.log('=== Final copy result ===')
-  console.log('copySuccess:', copySuccess)
-
   if (copySuccess) {
-    console.log('✅ Copy operation completed successfully')
+    showSuccessMessage('✅ Copy completed successfully!')
     // Add success haptic feedback
     if (window.triggerHaptic) {
       window.triggerHaptic('notification', 'success')
     }
   } else {
-    console.log('❌ All copy methods failed')
+    showSuccessMessage('❌ All copy methods FAILED!')
     // Still provide haptic feedback for user interaction
     if (window.triggerHaptic) {
       window.triggerHaptic('impact', 'light')
