@@ -333,27 +333,9 @@ const shortenedReferralLink = computed(() => {
   }
 })
 
-// Computed property for Telegram Web App link
+// Computed property for Telegram Web App link (now backend already provides correct format)
 const telegramWebAppLink = computed(() => {
-  if (!referralLink.value || referralLink.value.includes('loading') || referralLink.value.includes('error')) {
-    return referralLink.value
-  }
-
-  try {
-    // Извлекаем параметры из обычной ссылки
-    const url = new URL(referralLink.value.startsWith('http') ? referralLink.value : `https://${referralLink.value}`)
-    const ref = url.searchParams.get('ref')
-    const code = url.searchParams.get('code')
-
-    if (ref && code) {
-      // Создаем ссылку для Telegram Web App
-      return `https://t.me/dbdc_test_bot/app?startapp=ref_${ref}_code_${code}`
-    }
-
-    return referralLink.value
-  } catch {
-    return referralLink.value
-  }
+  return referralLink.value
 })
 
 // Success notification
