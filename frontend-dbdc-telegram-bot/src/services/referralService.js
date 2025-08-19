@@ -6,6 +6,7 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dbdc-mini.dubadu.
 class ReferralService {
   /**
    * Получает данные приглашения (ссылку и QR-код) одним запросом
+   * Backend возвращает invite_link в формате Telegram WebApp: https://t.me/dbdc_test_bot/app?startapp=ref_4344_code_52J01Z
    * @returns {Promise<Object>} Объект с invite_link, qr_code, user_id, code
    */
   async getInviteData() {
