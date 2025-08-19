@@ -504,7 +504,7 @@ const copyWebLink = async () => {
   let linkToCopy = referralLink.value
   try {
     const inviteData = await referralService.getInviteData()
-    linkToCopy = `https://t.me/your_bot_name?start=ref=${inviteData.user_id}&code=${inviteData.code}`
+    linkToCopy = inviteData.invite_link // Используем прямо display link
   } catch (error) {
     console.warn('Could not get invite data, using display link:', error)
   }
@@ -591,7 +591,7 @@ const hideSuccessNotification = () => {
   }
 }
 
-// Загрузка реферальных д��нных
+// Загру��ка реферальных д��нных
 const loadReferralData = async () => {
   try {
     isLoading.value = true
@@ -629,8 +629,8 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  // Очистка ресурсов при размонтировании ком��онента
-  // QR-код теперь приходит как base64, не требует освобождения URL
+  // Очистка ресурсов при размонтировании компонента
+  // QR-код теперь приходит как base64, не тр��бует освобождения URL
 })
 </script>
 
