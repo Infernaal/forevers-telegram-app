@@ -90,7 +90,7 @@
               <span class="text-red-500 text-sm">Error loading QR</span>
             </div>
             <!-- QR Code Link -->
-            <div class="absolute left-3 right-3 bottom-4 text-dbd-primary text-md font-medium leading-3 text-center px-1 break-words">
+            <div class="absolute left-3 right-3 bottom-4 text-dbd-primary text-sm font-medium leading-3 text-center px-1 break-words">
               {{ shortenedReferralLink }}
             </div>
           </div>
@@ -339,10 +339,10 @@ const shortenedReferralLink = computed(() => {
     const domainMatch = link.match(/(https?:\/\/[^\/]+\/[^\/]+)/)
     if (domainMatch) {
       const domain = domainMatch[1]
-      return `${domain}/....code=${codeValue}`
+      return `${domain}/...code=${codeValue}`
     }
     // Fallback if domain extraction fails
-    return `..._code=${codeValue}`
+    return `...code=${codeValue}`
   }
 
   // Fallback: show beginning and end if no code parameter found
@@ -391,7 +391,7 @@ const shareQRCode = async () => {
     const shareText = 'Join me in DBD Capital Forevers! 🚀 Start earning digital assets with this amazing bot.'
     navigator.share({
       title: 'DBD Capital Forevers Bot',
-      text: `${shareText}\n\n${shareUrl}`,
+      text: shareText,
       url: shareUrl
     }).then(() => {
       // Sharing was successful
@@ -425,7 +425,8 @@ const telegramFallback = async (safetyTimeout = null) => {
     try {
       // Use Telegram's openTelegramLink for sharing (compatible with version 6.0)
       const shareText = 'Join me in DBD Capital Forevers! 🚀 Start earning digital assets with this amazing bot.'
-      const telegramShareUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`
+      const fullShareText = `${shareText}\n\n${shareUrl}`
+      const telegramShareUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(fullShareText)}`
       tg.openTelegramLink(telegramShareUrl)
 
       // Set up event listener for when user returns to app
@@ -652,7 +653,7 @@ const loadReferralData = async () => {
 
     // Получаем данные приглашения (ссылку и QR-код) одним запросом
     // Все UI компоненты используют кэшированные данные из этого запроса
-    // для обеспечения консистентности реферальных ссылок
+    // для об��спечения консистентности реферальных ссылок
     const inviteData = await referralService.getInviteData()
     referralLink.value = inviteData.invite_link
 
@@ -820,4 +821,3 @@ onUnmounted(() => {
   }
 }
 </style>
-
