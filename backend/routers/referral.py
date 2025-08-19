@@ -17,8 +17,9 @@ logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/referral", tags=["Referral"])
 
 class InviteResponse(BaseModel):
-    invite_link: str
-    qr_code: str  # Base64 encoded QR code image
+    invite_link: str  # Main WebApp link
+    bot_link: str     # Fallback bot link with start parameter
+    qr_code: str      # Base64 encoded QR code image
     user_id: int
     code: str
 
