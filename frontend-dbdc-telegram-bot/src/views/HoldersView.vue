@@ -592,6 +592,11 @@ const copyWebLink = async () => {
     }
   }
 
+  // Add success haptic feedback
+  if (window.triggerHaptic) {
+    window.triggerHaptic('notification', 'success')
+  }
+
   // Always show copied state for user feedback
   linkCopied.value = true
   setTimeout(() => {
