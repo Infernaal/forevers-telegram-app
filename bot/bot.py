@@ -1,4 +1,4 @@
-﻿from aiogram import Bot, Dispatcher, types, F
+from aiogram import Bot, Dispatcher, types, F
 from aiogram.types import WebAppInfo, InlineKeyboardMarkup, InlineKeyboardButton, Message
 from aiogram.filters import Command
 import asyncio
@@ -19,13 +19,27 @@ dp = Dispatcher()
 
 @dp.message(Command("start"))  # ✅ Aiogram 3.x фильтр
 async def start(message: Message):
+    # Extract referral parameter from /start command
+    command_args = message.text.split(maxsplit=1)
+    referral_param = command_args[1] if len(command_args) > 1 else None
+
+    # Build Web App URL with referral parameter
+    web_app_url = "https://dbdc-mini.dubadu.com/"
+    if referral_param and referral_param.startswith('ref_'):
+        web_app_url += f"?startapp={referral_param}"
+
     kb = InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(
             text="Открыть DBDC Capital Forevers Bot",
-            web_app=WebAppInfo(url="https://dbdc-mini.dubadu.com/")
+            web_app=WebAppInfo(url=web_app_url)
         )]
     ])
-    await message.answer("Добро пожаловать в Dubadu!", reply_markup=kb)
+
+    welcome_text = "Добро пожаловать в Dubadu!"
+    if referral_param:
+        welcome_text += f"\n🎁 Вы перешли по реферальной ссылке!"
+
+    await message.answer(welcome_text, reply_markup=kb)
 
 async def main():
     logger.info("🤖 DBDC Capital Forevers Bot запущен и работает!")
