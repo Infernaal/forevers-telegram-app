@@ -565,12 +565,7 @@ const copyLink = async () => {
 }
 
 const copyWebLink = async () => {
-  console.log('copyWebLink called')
 
-  // Immediate haptic feedback
-  if (window.Telegram?.WebApp?.HapticFeedback) {
-    window.Telegram.WebApp.HapticFeedback.impactOccurred('light')
-  } else if (window.triggerHaptic) {
     window.triggerHaptic('impact', 'light')
   }
 
@@ -581,28 +576,6 @@ const copyWebLink = async () => {
   try {
     const inviteData = await referralService.getInviteData()
     linkToCopy = inviteData.invite_link
-    console.log('Got fresh invite link:', linkToCopy)
-  } catch (error) {
-    console.warn('Using cached link due to API error:', error.message)
-    // If we don't have a valid cached link, use a placeholder
-    if (!linkToCopy || linkToCopy.includes('error') || linkToCopy.includes('loading')) {
-      linkToCopy = 'https://t.me/dbdc_test_bot/app'
-    }
-  }
-
-  // Prepare the text to copy
-  const textToCopy = `Join me on DBD Capital Forevers! 🚀\n\n${linkToCopy}`
-  console.log('Text to copy:', textToCopy)
-
-  // Method 1: Try Telegram WebApp clipboard (available from version 6.7)
-  if (window.Telegram?.WebApp?.writeTextToClipboard) {
-    try {
-      console.log('Trying Telegram WebApp clipboard API')
-      await window.Telegram.WebApp.writeTextToClipboard(textToCopy)
-      copySuccess = true
-      console.log('Telegram WebApp clipboard success')
-    } catch (telegramError) {
-      console.log('Telegram WebApp clipboard failed:', telegramError.message || telegramError)
     }
   }
 
@@ -621,106 +594,14 @@ const copyWebLink = async () => {
   // Method 3: Try legacy method with execCommand (works everywhere)
   if (!copySuccess) {
     try {
-      console.log('Trying execCommand fallback')
-
-      // Create a temporary textarea element
-      const textarea = document.createElement('textarea')
-      textarea.value = textToCopy
-
-      // Position it off-screen
-      textarea.style.position = 'fixed'
-      textarea.style.left = '-9999px'
-      textarea.style.top = '-9999px'
-      textarea.style.opacity = '0'
-      textarea.style.pointerEvents = 'none'
-      textarea.setAttribute('readonly', '')
-
-      // Add to DOM
-      document.body.appendChild(textarea)
-
-      // Handle iOS quirks
-      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent)
-      if (isIOS) {
-        // iOS requires content to be editable and uses a different selection method
-        textarea.removeAttribute('readonly')
-        textarea.contentEditable = 'true'
-        textarea.style.position = 'absolute'
-        textarea.style.left = '0px'
-        textarea.style.top = '0px'
-        textarea.style.opacity = '1'
-        textarea.style.color = 'transparent'
-        textarea.style.background = 'transparent'
-        textarea.style.border = 'none'
-        textarea.style.outline = 'none'
-        textarea.style.boxShadow = 'none'
-
-        // Create selection range for iOS
-        const range = document.createRange()
-        range.selectNodeContents(textarea)
-        const selection = window.getSelection()
-        selection.removeAllRanges()
-        selection.addRange(range)
-        textarea.setSelectionRange(0, textarea.value.length)
-      } else {
-        // Standard selection for other platforms
-        textarea.focus()
-        textarea.select()
-      }
-
-      // Execute copy command
-      const execResult = document.execCommand('copy')
-      console.log('execCommand result:', execResult)
-
-      // Clean up
-      document.body.removeChild(textarea)
 
       if (execResult) {
         copySuccess = true
-        console.log('execCommand success')
-      } else {
-        console.log('execCommand returned false')
-      }
-
-    } catch (execError) {
-      console.error('execCommand failed:', execError.message || execError)
-    }
-  }
-
-  // Method 4: Final attempt - try to trigger share on mobile devices
-  if (!copySuccess && navigator.share && /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-    try {
-      console.log('Trying native share as final fallback')
-      await navigator.share({
-        title: 'DBD Capital Forevers',
-        text: textToCopy
-      })
-      // If share dialog opened, consider it a success
-      copySuccess = true
-      console.log('Native share opened')
-    } catch (shareError) {
-      console.log('Native share failed or cancelled:', shareError.message || shareError)
     }
   }
 
   // Provide user feedback
   if (copySuccess) {
-    console.log('Copy operation successful')
-    showSuccessMessage('Link copied to clipboard')
-
-    // Success haptic feedback
-    if (window.Telegram?.WebApp?.HapticFeedback) {
-      window.Telegram.WebApp.HapticFeedback.notificationOccurred('success')
-    } else if (window.triggerHaptic) {
-      window.triggerHaptic('notification', 'success')
-    }
-  } else {
-    console.log('All copy methods failed')
-    showSuccessMessage('Unable to copy link')
-
-    // Error haptic feedback
-    if (window.Telegram?.WebApp?.HapticFeedback) {
-      window.Telegram.WebApp.HapticFeedback.notificationOccurred('error')
-    } else if (window.triggerHaptic) {
       window.triggerHaptic('impact', 'medium')
     }
   }
