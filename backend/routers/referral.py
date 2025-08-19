@@ -72,8 +72,8 @@ async def get_invite_data(current_user_id: int = Depends(get_current_user)):
         telegram_bot_url = os.getenv("TELEGRAM_BOT_URL", "https://t.me/your_bot_name")
         full_link = f"{telegram_bot_url}?start={ref_params}"
 
-        # Генерируем QR-код как base64
-        qr_code_base64 = generate_qr_code_base64(full_link)
+        # Генерируем QR-код как base64 (используем display_link для QR-кода)
+        qr_code_base64 = generate_qr_code_base64(display_link)
 
         logger.info(f"Generated invite data for user {current_user_id}: {display_link}")
 
