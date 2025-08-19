@@ -542,7 +542,7 @@ const copyLink = async () => {
 }
 
 const copyWebLink = async () => {
-  console.log('=== copyWebLink called ===')
+  showSuccessMessage('🔧 copyWebLink called')
 
   // Add haptic feedback when copy button is pressed
   if (window.triggerHaptic) {
@@ -553,20 +553,19 @@ const copyWebLink = async () => {
 
   // Get the actual full link to copy - backend already provides WebApp format
   let linkToCopy = telegramWebAppLink.value
-  console.log('Initial linkToCopy from telegramWebAppLink:', linkToCopy)
+  showSuccessMessage(`📋 Initial link: ${linkToCopy?.substring(0, 50)}...`)
 
   try {
     const inviteData = await referralService.getInviteData()
     linkToCopy = inviteData.invite_link
-    console.log('Updated linkToCopy from API:', linkToCopy)
+    showSuccessMessage(`🔄 Updated link from API: ${linkToCopy?.substring(0, 50)}...`)
   } catch (error) {
-    console.warn('Could not get invite data, using cached link:', error)
+    showSuccessMessage(`❌ API Error: ${error.message}`)
   }
 
   // Add "Join me on.." text as is typical in Telegram apps
   const fullMessageToCopy = `Join me on DBD Capital Forevers! 🚀\n\n${linkToCopy}`
-  console.log('Full message to copy:', fullMessageToCopy)
-  console.log('Full message length:', fullMessageToCopy.length)
+  showSuccessMessage(`📝 Full message length: ${fullMessageToCopy.length} chars`)
 
   // Try modern clipboard API first
   console.log('Checking navigator.clipboard availability:', !!navigator.clipboard)
