@@ -90,7 +90,7 @@
               <span class="text-red-500 text-sm">Error loading QR</span>
             </div>
             <!-- QR Code Link -->
-            <div class="absolute left-1/2 bottom-5 transform -translate-x-1/2 text-dbd-primary text-xs sm:text-sm font-semibold leading-4 text-center px-2 max-w-[90%] break-all">
+            <div class="absolute left-2 right-2 bottom-3 text-dbd-primary text-xs sm:text-sm font-semibold leading-4 text-center px-2 break-words">
               {{ shortenedReferralLink }}
             </div>
           </div>
@@ -239,7 +239,7 @@
 
               <!-- URL text -->
               <div v-if="!linkCopied" class="flex-1 px-4 sm:px-6 py-3.5 overflow-hidden">
-                <span class="text-dbd-off-white text-xs sm:text-sm font-semibold leading-4 underline break-all max-w-full">
+                <span class="text-dbd-off-white text-xs sm:text-sm font-semibold leading-4 underline truncate block">
                   {{ shortenedReferralLink }}
                 </span>
               </div>
