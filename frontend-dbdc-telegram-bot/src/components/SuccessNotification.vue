@@ -75,7 +75,9 @@ defineEmits(['close'])
   background: #4CAF50;
   box-shadow: 4px 8px 12px 0 rgba(7, 184, 14, 0.13);
   padding: 10px 16px;
-  width: 280px;
+  min-width: 120px;
+  max-width: min(calc(100vw - 32px), 400px);
+  width: fit-content;
   justify-content: center;
   white-space: nowrap;
   transition: all 0.3s ease;
@@ -110,8 +112,8 @@ defineEmits(['close'])
   text-align: center;
   margin-left: 8px;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
 }
 
 /* Responsive adjustments */
@@ -123,8 +125,9 @@ defineEmits(['close'])
   }
 
   .success-notification-content {
-    width: calc(100vw - 32px);
-    max-width: 343px;
+    min-width: 120px;
+    width: fit-content;
+    max-width: calc(100vw - 32px);
     white-space: normal;
     min-height: 44px;
     height: auto;
@@ -154,7 +157,9 @@ defineEmits(['close'])
 
 @media (min-width: 431px) and (max-width: 768px) {
   .success-notification-content {
-    width: 400px;
+    min-width: 140px;
+    max-width: min(calc(100vw - 32px), 480px);
+    width: fit-content;
     height: 52px;
     padding: 14px 20px;
   }
@@ -172,7 +177,9 @@ defineEmits(['close'])
 
 @media (min-width: 769px) {
   .success-notification-content {
-    width: 480px;
+    min-width: 160px;
+    max-width: min(calc(100vw - 64px), 600px);
+    width: fit-content;
     height: 60px;
     padding: 18px 24px;
   }

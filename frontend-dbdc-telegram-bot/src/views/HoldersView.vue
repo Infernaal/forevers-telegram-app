@@ -91,7 +91,7 @@
             </div>
             <!-- QR Code Link -->
             <div class="absolute left-1/2 bottom-5 transform -translate-x-1/2 text-dbd-primary text-lg sm:text-xl font-semibold leading-6 text-center">
-              {{ referralLink }}
+              {{ shortenedReferralLink }}
             </div>
           </div>
         </div>
@@ -240,7 +240,7 @@
               <!-- URL text -->
               <div v-if="!linkCopied" class="flex-1 px-4 sm:px-6 py-3.5 overflow-hidden">
                 <span class="text-dbd-off-white text-sm sm:text-lg font-semibold leading-5 underline truncate block max-w-full">
-                  {{ referralLink }}
+                  {{ shortenedReferralLink }}
                 </span>
               </div>
 
@@ -317,6 +317,45 @@ const isAnyModalOpen = computed(() => {
   return showTermsModal.value
 })
 
+// Computed property for shortened referral link display
+const shortenedReferralLink = computed(() => {
+  if (!referralLink.value || referralLink.value.includes('loading') || referralLink.value.includes('error')) {
+    return referralLink.value
+  }
+
+  try {
+    const url = new URL(referralLink.value.startsWith('http') ? referralLink.value : `https://${referralLink.value}`)
+    const domain = url.hostname
+    return `${domain}...`
+  } catch {
+    // Если не удается распарсить как URL, просто обрезаем
+    return referralLink.value.length > 20 ? `${referralLink.value.substring(0, 20)}...` : referralLink.value
+  }
+})
+
+// Computed property for Telegram Web App link
+const telegramWebAppLink = computed(() => {
+  if (!referralLink.value || referralLink.value.includes('loading') || referralLink.value.includes('error')) {
+    return referralLink.value
+  }
+
+  try {
+    // Извлекаем параметры из обычной ссылки
+    const url = new URL(referralLink.value.startsWith('http') ? referralLink.value : `https://${referralLink.value}`)
+    const ref = url.searchParams.get('ref')
+    const code = url.searchParams.get('code')
+
+    if (ref && code) {
+      // Создаем ссылку для Telegram Web App
+      return `https://t.me/dbdc_test_bot/app?startapp=ref_${ref}_code_${code}`
+    }
+
+    return referralLink.value
+  } catch {
+    return referralLink.value
+  }
+})
+
 // Success notification
 const showSuccessNotification = ref(false)
 const successMessage = ref('')
@@ -344,13 +383,22 @@ const shareQRCode = async () => {
     window.triggerHaptic('impact', 'light')
   }
 
-  // Get the full link for sharing
-  let shareUrl = referralLink.value
+  // Get the full link for sharing - using Telegram Web App format
+  let shareUrl = telegramWebAppLink.value
   try {
     const inviteData = await referralService.getInviteData()
-    shareUrl = inviteData.invite_link // Используем прямо display link
+    // Создаем Telegram Web App ссылку из полученных данных
+    const url = new URL(inviteData.invite_link.startsWith('http') ? inviteData.invite_link : `https://${inviteData.invite_link}`)
+    const ref = url.searchParams.get('ref')
+    const code = url.searchParams.get('code')
+
+    if (ref && code) {
+      shareUrl = `https://t.me/dbdc_test_bot/app?startapp=ref_${ref}_code_${code}`
+    } else {
+      shareUrl = inviteData.invite_link
+    }
   } catch (error) {
-    console.warn('Could not get invite data for sharing, using display link:', error)
+    console.warn('Could not get invite data for sharing, using computed link:', error)
   }
 
   // Try standard Web Share API first (works on most platforms including Telegram, Viber, etc.)
@@ -381,13 +429,22 @@ const shareQRCode = async () => {
 }
 
 const telegramFallback = async (safetyTimeout = null) => {
-  // Get the full link for Telegram sharing
-  let shareUrl = referralLink.value
+  // Get the full link for Telegram sharing - using Telegram Web App format
+  let shareUrl = telegramWebAppLink.value
   try {
     const inviteData = await referralService.getInviteData()
-    shareUrl = inviteData.invite_link // Используем прямо display link
+    // Создаем Telegram Web App ссылку из полученных данных
+    const url = new URL(inviteData.invite_link.startsWith('http') ? inviteData.invite_link : `https://${inviteData.invite_link}`)
+    const ref = url.searchParams.get('ref')
+    const code = url.searchParams.get('code')
+
+    if (ref && code) {
+      shareUrl = `https://t.me/dbdc_test_bot/app?startapp=ref_${ref}_code_${code}`
+    } else {
+      shareUrl = inviteData.invite_link
+    }
   } catch (error) {
-    console.warn('Could not get invite data for Telegram sharing, using display link:', error)
+    console.warn('Could not get invite data for Telegram sharing, using computed link:', error)
   }
 
   // Use Telegram WebApp sharing if available
@@ -444,13 +501,22 @@ const fallbackShare = () => {
 const copyLink = async () => {
   let copySuccess = false
 
-  // Get the actual full link to copy
-  let linkToCopy = referralLink.value
+  // Get the actual full link to copy - using Telegram Web App format
+  let linkToCopy = telegramWebAppLink.value
   try {
     const inviteData = await referralService.getInviteData()
-    linkToCopy = inviteData.invite_link // Используем прямо display link
+    // Создаем Telegram Web App ссылку из полученных данных
+    const url = new URL(inviteData.invite_link.startsWith('http') ? inviteData.invite_link : `https://${inviteData.invite_link}`)
+    const ref = url.searchParams.get('ref')
+    const code = url.searchParams.get('code')
+
+    if (ref && code) {
+      linkToCopy = `https://t.me/dbdc_test_bot/app?startapp=ref_${ref}_code_${code}`
+    } else {
+      linkToCopy = inviteData.invite_link
+    }
   } catch (error) {
-    console.warn('Could not get invite data, using display link:', error)
+    console.warn('Could not get invite data, using computed link:', error)
   }
 
   // Try modern clipboard API first
@@ -500,13 +566,22 @@ const copyLink = async () => {
 const copyWebLink = async () => {
   let copySuccess = false
 
-  // Get the actual full link to copy
-  let linkToCopy = referralLink.value
+  // Get the actual full link to copy - using Telegram Web App format
+  let linkToCopy = telegramWebAppLink.value
   try {
     const inviteData = await referralService.getInviteData()
-    linkToCopy = inviteData.invite_link // Используем прямо display link
+    // Создаем Telegram Web App ссылку из полученны�� данных
+    const url = new URL(inviteData.invite_link.startsWith('http') ? inviteData.invite_link : `https://${inviteData.invite_link}`)
+    const ref = url.searchParams.get('ref')
+    const code = url.searchParams.get('code')
+
+    if (ref && code) {
+      linkToCopy = `https://t.me/dbdc_test_bot/app?startapp=ref_${ref}_code_${code}`
+    } else {
+      linkToCopy = inviteData.invite_link
+    }
   } catch (error) {
-    console.warn('Could not get invite data, using display link:', error)
+    console.warn('Could not get invite data, using computed link:', error)
   }
 
   // Try modern clipboard API first
