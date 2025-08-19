@@ -38,7 +38,7 @@
                     <input
                       v-model="formData.email"
                       type="email"
-                      placeholder="Email"
+                      placeholder="Email *"
                       required
                       data-field="email"
                       @focus="handleFieldFocus('email')"
@@ -46,7 +46,6 @@
                       @keydown.enter.prevent="handleEnter('email')"
                       class="flex-1 text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none focus:ring-0"
                     />
-                    <span v-if="!showEmailError" class="text-red-500 text-sm font-medium ml-1"> *</span>
                   </div>
                   <div v-else class="flex flex-col items-start justify-center flex-1 cursor-pointer" @click="editField('email')">
                     <div class="text-xs text-dbd-gray font-medium leading-none">
@@ -84,7 +83,7 @@
                     <input
                       v-model="formData.firstName"
                       type="text"
-                      placeholder="First name"
+                      placeholder="First name *"
                       required
                       data-field="firstName"
                       @focus="handleFieldFocus('firstName')"
@@ -92,7 +91,6 @@
                       @keydown.enter.prevent="handleEnter('firstName')"
                       class="flex-1 text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none focus:ring-0"
                     />
-                    <span v-if="!showFirstNameError" class="text-red-500 text-sm font-medium ml-1"> *</span>
                   </div>
                   <div v-else class="flex flex-col items-start justify-center flex-1 cursor-pointer" @click="editField('firstName')">
                     <div class="text-xs text-dbd-gray font-medium leading-none">
@@ -128,7 +126,7 @@
                     <input
                       v-model="formData.lastName"
                       type="text"
-                      placeholder="Last name"
+                      placeholder="Last name *"
                       required
                       data-field="lastName"
                       @focus="handleFieldFocus('lastName')"
@@ -136,7 +134,6 @@
                       @keydown.enter.prevent="handleEnter('lastName')"
                       class="flex-1 text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none focus:ring-0"
                     />
-                    <span v-if="!showLastNameError" class="text-red-500 text-sm font-medium ml-1"> *</span>
                   </div>
                   <div v-else class="flex flex-col items-start justify-center flex-1 cursor-pointer" @click="editField('lastName')">
                     <div class="text-xs text-dbd-gray font-medium leading-none">
