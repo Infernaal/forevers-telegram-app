@@ -331,7 +331,7 @@ const shortenedReferralLink = computed(() => {
       const fullUrl = referralLink.value
       if (fullUrl.length > 30) {
         const start = fullUrl.substring(0, 15)
-        const end = fullUrl.substring(fullUrl.length - 11)
+        const end = fullUrl.substring(fullUrl.length - 8)
         return `${start}...${end}`
       }
       return fullUrl
@@ -340,7 +340,7 @@ const shortenedReferralLink = computed(() => {
     const fullUrl = referralLink.value
     if (fullUrl.length > 30) {
       const start = fullUrl.substring(0, 15)
-      const end = fullUrl.substring(fullUrl.length - 11)
+      const end = fullUrl.substring(fullUrl.length - 8)
       return `${start}...${end}`
     }
     return fullUrl
@@ -349,7 +349,7 @@ const shortenedReferralLink = computed(() => {
     const fullUrl = referralLink.value
     if (fullUrl.length > 30) {
       const start = fullUrl.substring(0, 15)
-      const end = fullUrl.substring(fullUrl.length - 11)
+      const end = fullUrl.substring(fullUrl.length - 8)
       return `${start}...${end}`
     }
     return fullUrl
