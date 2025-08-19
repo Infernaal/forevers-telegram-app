@@ -524,17 +524,23 @@ const copyWebLink = async () => {
     console.warn('Could not get invite data, using cached link:', error)
   }
 
-  // Try modern clipboard API first
-  if (navigator.clipboard) {
+  // Add haptic feedback
+  if (window.triggerHaptic) {
+    window.triggerHaptic('impact', 'light')
+  }
+
+  // Try modern clipboard API first (should work on most mobile browsers)
+  if (navigator.clipboard && navigator.clipboard.writeText) {
     try {
       await navigator.clipboard.writeText(linkToCopy)
       copySuccess = true
+      console.log('Clipboard API copy successful')
     } catch (clipboardErr) {
-      console.log('Clipboard API failed, trying fallback method')
+      console.log('Clipboard API failed:', clipboardErr)
     }
   }
 
-  // If clipboard API failed or is not available, use fallback
+  // If clipboard API failed or is not available, use mobile-optimized fallback
   if (!copySuccess) {
     try {
       const textArea = document.createElement('textarea')
@@ -543,26 +549,50 @@ const copyWebLink = async () => {
       textArea.style.left = '-999999px'
       textArea.style.top = '-999999px'
       textArea.style.opacity = '0'
+      textArea.style.width = '1px'
+      textArea.style.height = '1px'
+      textArea.readOnly = false
+
       document.body.appendChild(textArea)
+
+      // Focus and select for mobile devices
       textArea.focus()
+      textArea.setSelectionRange(0, linkToCopy.length)
       textArea.select()
+
+      // Wait a bit for mobile keyboards
+      await new Promise(resolve => setTimeout(resolve, 100))
 
       const successful = document.execCommand('copy')
       document.body.removeChild(textArea)
 
-      if (!successful) {
-        console.log('Fallback copy method also failed')
+      if (successful) {
+        copySuccess = true
+        console.log('Fallback copy successful')
+      } else {
+        console.log('Fallback copy method failed')
       }
     } catch (fallbackErr) {
       console.error('Fallback copy failed:', fallbackErr)
     }
   }
 
-  // Always show copied state for user feedback
+  // Show visual feedback regardless of copy success for better UX
   linkCopied.value = true
+
+  // Add haptic feedback for success
+  if (window.triggerHaptic) {
+    window.triggerHaptic('notification', copySuccess ? 'success' : 'warning')
+  }
+
   setTimeout(() => {
     linkCopied.value = false
   }, 2500)
+
+  // Show success message if copy worked
+  if (copySuccess) {
+    showSuccessMessage('Link copied to clipboard')
+  }
 }
 
 const openTerms = () => {
