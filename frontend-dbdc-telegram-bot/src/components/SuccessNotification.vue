@@ -72,17 +72,17 @@ defineEmits(['close'])
   flex-shrink: 0;
   border-radius: 1000px;
   border: 1px solid #129E0F;
-  background: #129E0F;
+  background: #4CAF50;
   box-shadow: 4px 8px 12px 0 rgba(7, 184, 14, 0.13);
   padding: 10px 16px;
-  width: 343px;
+  width: 280px;
   justify-content: center;
   white-space: nowrap;
   transition: all 0.3s ease;
 }
 
 .success-notification-content:hover {
-  background: #0f8a0c;
+  background: #45A049;
   transform: translateY(-1px);
   box-shadow: 4px 12px 16px 0 rgba(7, 184, 14, 0.2);
 }

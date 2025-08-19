@@ -80,16 +80,16 @@ const effectiveBottomOffset = computed(() => {
   flex-shrink: 0;
   border-radius: 1000px;
   border: 1px solid #E53935;
-  background: #E53935;
+  background: #F44336;
   box-shadow: 4px 8px 12px 0 rgba(229, 57, 53, 0.13);
   padding: 10px 16px;
-  width: 343px;
+  width: 280px;
   justify-content: center;
   white-space: nowrap;
   transition: all 0.3s ease;
 }
 .error-notification-content:hover {
-  background: #b71c1c;
+  background: #E53935;
   transform: translateY(-1px);
   box-shadow: 4px 12px 16px 0 rgba(229, 57, 53, 0.2);
 }
