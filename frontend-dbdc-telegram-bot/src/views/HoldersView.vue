@@ -521,22 +521,13 @@ const copyLink = async () => {
 const copyWebLink = async () => {
   let copySuccess = false
 
-  // Get the actual full link to copy - using Telegram Web App format
+  // Get the actual full link to copy - backend already provides WebApp format
   let linkToCopy = telegramWebAppLink.value
   try {
     const inviteData = await referralService.getInviteData()
-    // Создаем Telegram Web App ссылку из полученны�� данных
-    const url = new URL(inviteData.invite_link.startsWith('http') ? inviteData.invite_link : `https://${inviteData.invite_link}`)
-    const ref = url.searchParams.get('ref')
-    const code = url.searchParams.get('code')
-
-    if (ref && code) {
-      linkToCopy = `https://t.me/dbdc_test_bot/app?startapp=ref_${ref}_code_${code}`
-    } else {
-      linkToCopy = inviteData.invite_link
-    }
+    linkToCopy = inviteData.invite_link
   } catch (error) {
-    console.warn('Could not get invite data, using computed link:', error)
+    console.warn('Could not get invite data, using cached link:', error)
   }
 
   // Try modern clipboard API first
