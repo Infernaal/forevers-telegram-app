@@ -487,9 +487,8 @@ const fallbackShare = () => {
 
 const copyLink = async () => {
   let copySuccess = false
-
-  // Get the actual full link to copy - backend already provides WebApp format
   let linkToCopy = telegramWebAppLink.value
+
   try {
     const inviteData = await referralService.getInviteData()
     linkToCopy = inviteData.invite_link
@@ -497,44 +496,68 @@ const copyLink = async () => {
     console.warn('Could not get invite data, using cached link:', error)
   }
 
-  // Try modern clipboard API first
-  if (navigator.clipboard) {
+  const fullMessageToCopy = `Join me on DBD Capital Forevers! 🚀\n\n${linkToCopy}`
+
+  // Try Telegram WebApp clipboard API first
+  if (window.Telegram?.WebApp?.writeTextToClipboard) {
     try {
-      await navigator.clipboard.writeText(`Join me on DBD Capital Forevers! 🚀\n\n${linkToCopy}`)
+      await window.Telegram.WebApp.writeTextToClipboard(fullMessageToCopy)
       copySuccess = true
-    } catch (clipboardErr) {
-      console.log('Clipboard API failed, trying fallback method')
+    } catch (telegramErr) {
+      console.log('Telegram WebApp clipboard failed:', telegramErr)
     }
   }
 
-  // If clipboard API failed or is not available, use fallback
+  // Fallback to standard clipboard API
+  if (!copySuccess && navigator.clipboard && window.isSecureContext) {
+    try {
+      await navigator.clipboard.writeText(fullMessageToCopy)
+      copySuccess = true
+    } catch (clipboardErr) {
+      console.log('Standard clipboard API failed:', clipboardErr)
+    }
+  }
+
+  // Final fallback to document.execCommand
   if (!copySuccess) {
     try {
       const textArea = document.createElement('textarea')
-      textArea.value = `Join me on DBD Capital Forevers! 🚀\n\n${linkToCopy}`
+      textArea.value = fullMessageToCopy
       textArea.style.position = 'fixed'
       textArea.style.left = '-999999px'
       textArea.style.top = '-999999px'
       textArea.style.opacity = '0'
+      textArea.readOnly = true
       document.body.appendChild(textArea)
-      textArea.focus()
-      textArea.select()
 
-      const successful = document.execCommand('copy')
-      document.body.removeChild(textArea)
-
-      if (!successful) {
-        console.log('Fallback copy method also failed')
+      if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
+        textArea.contentEditable = true
+        textArea.readOnly = false
+        const range = document.createRange()
+        range.selectNodeContents(textArea)
+        const selection = window.getSelection()
+        selection.removeAllRanges()
+        selection.addRange(range)
+        textArea.setSelectionRange(0, 999999)
+      } else {
+        textArea.select()
       }
+
+      copySuccess = document.execCommand('copy')
+      document.body.removeChild(textArea)
     } catch (fallbackErr) {
-      console.error('Fallback copy failed:', fallbackErr)
+      console.error('All copy methods failed:', fallbackErr)
     }
   }
 
-  // Show success notification when called from share button
-  showSuccessMessage('Link copied to clipboard')
+  // Show appropriate message
+  if (copySuccess) {
+    showSuccessMessage('Link copied to clipboard')
+  } else {
+    showSuccessMessage('Unable to copy link')
+  }
 
-  // Also show copied state for user feedback
+  // Show copied state for user feedback
   linkCopied.value = true
   setTimeout(() => {
     linkCopied.value = false
