@@ -28,7 +28,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="DBDC Telegram Bot Backend",
-    description="Backend для Telegram WebApp, ��оторый обрабатывает финансовые данные пользователей, включая баланс forevers.",
+    description="Backend для Telegram WebApp, который обрабатывает финансовые данные пользователей, включая баланс forevers.",
     version="1.0.0",
     contact={
         "name": "Dubadu Developers",
@@ -77,3 +77,4 @@ app.include_router(forevers_user_balance_router, prefix="/api/v1/dbdc")
 app.include_router(forevers_price_router, prefix="/api/v1/dbdc")
 app.include_router(user_info_router, prefix="/api/v1/dbdc")
 app.include_router(email_verification_router, prefix="/api/v1/dbdc")
+app.include_router(referral_router, prefix="/api/v1/dbdc")
