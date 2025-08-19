@@ -90,7 +90,10 @@ def generate_qr_code_base64(data: str) -> str:
     return f"data:image/png;base64,{img_base64}"
 
 @router.get("/invite", response_model=InviteResponse)
-async def get_invite_data(current_user_id: int = Depends(get_current_user_id)):
+async def get_invite_data(
+    current_user_id: int = Depends(get_current_user_id),
+    db: Session = Depends(get_db)
+):
     """
     Единый endpoint для получения реферальной ссылки и QR-кода
     Возвращает invite_link и qr_code (base64) в одном ответе
