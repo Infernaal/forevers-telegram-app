@@ -130,6 +130,11 @@ const router = createRouter({
       name: 'debug',
       component: DebugView,
     },
+    {
+      path: '/test-referral',
+      name: 'test-referral',
+      component: TestReferralView,
+    },
 
     // Redirect /home to /wallet as default
     {
