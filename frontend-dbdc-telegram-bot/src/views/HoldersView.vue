@@ -558,8 +558,8 @@ const copyWebLink = async () => {
     console.warn('Could not get invite data, using cached link:', error)
   }
 
-  // Add "Join to me on.." text as is typical in Telegram apps
-  const fullMessageToCopy = `Join me on DBD Capital Forevers! 🚀\n\n${linkToCopy}`
+  // Copy just the link without additional text
+  const fullMessageToCopy = linkToCopy
 
   // Try modern clipboard API first
   if (navigator.clipboard) {
