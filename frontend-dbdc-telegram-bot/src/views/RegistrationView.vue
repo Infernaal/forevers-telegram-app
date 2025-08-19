@@ -13,7 +13,7 @@
             <!-- Header Text -->
             <div class="text-center pt-5 pb-6">
               <h1 class="text-white text-lg sm:text-xl font-bold leading-6 mb-6">
-                We require additional information to continue with your registration.
+                We just need a bit more info to finish your registration.
               </h1>
               <p class="text-white text-sm font-medium leading-6 opacity-90">
                 Please enter additional details about yourself below.
