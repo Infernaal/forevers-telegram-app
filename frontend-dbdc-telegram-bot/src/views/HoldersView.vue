@@ -525,6 +525,10 @@ const copyWebLink = async () => {
     console.warn('Could not get invite data, using cached link:', error)
   }
 
+  // Add inviting text with the link
+  const shareText = 'Join me in DBD Capital Forevers! 🚀 Start earning digital assets with this amazing bot.'
+  const fullTextToCopy = `${shareText}\n\n${linkToCopy}`
+
   // Add haptic feedback
   if (window.triggerHaptic) {
     window.triggerHaptic('impact', 'light')
