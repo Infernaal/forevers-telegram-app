@@ -19,13 +19,6 @@ class InviteResponse(BaseModel):
     user_id: int
     code: str
 
-class ReferralLinkResponse(BaseModel):
-    referral_link: str
-    user_id: int
-    code: str
-
-class QRCodeRequest(BaseModel):
-    referral_link: str
 
 def generate_unique_code(length: int = 6) -> str:
     """Генерирует уникальный 6-значный код из букв и цифр"""
