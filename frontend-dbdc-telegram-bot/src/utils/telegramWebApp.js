@@ -3,32 +3,36 @@
  */
 
 /**
- * Extracts start parameter from Telegram WebApp
+ * Extracts start parameter from Telegram WebApp or URL
  * @returns {string|null} Start parameter or null if not found
  */
 export function getStartParameter() {
   try {
-    if (!window.Telegram || !window.Telegram.WebApp) {
-      return null
+    // Method 1: Telegram WebApp initDataUnsafe
+    if (window.Telegram?.WebApp?.initDataUnsafe?.start_param) {
+      console.log('Found start_param in initDataUnsafe:', window.Telegram.WebApp.initDataUnsafe.start_param)
+      return window.Telegram.WebApp.initDataUnsafe.start_param
     }
 
-    const initDataUnsafe = window.Telegram.WebApp.initDataUnsafe
-    
-    // Check for start_param in initDataUnsafe
-    if (initDataUnsafe?.start_param) {
-      return initDataUnsafe.start_param
+    // Method 2: Telegram WebApp initData string
+    if (window.Telegram?.WebApp?.initData) {
+      const params = new URLSearchParams(window.Telegram.WebApp.initData)
+      const startParam = params.get('start_param')
+      if (startParam) {
+        console.log('Found start_param in initData:', startParam)
+        return startParam
+      }
     }
 
-    // Fallback: parse from initData string
-    const initData = window.Telegram.WebApp.initData
-    if (!initData) {
-      return null
+    // Method 3: URL parameters (fallback for testing/debugging)
+    const urlParams = new URLSearchParams(window.location.search)
+    const urlStartParam = urlParams.get('startapp') || urlParams.get('start_param')
+    if (urlStartParam) {
+      console.log('Found start parameter in URL:', urlStartParam)
+      return urlStartParam
     }
 
-    const params = new URLSearchParams(initData)
-    const startParam = params.get('start_param')
-    
-    return startParam || null
+    return null
   } catch (error) {
     console.error('Error extracting start parameter:', error)
     return null
