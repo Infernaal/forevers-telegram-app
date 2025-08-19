@@ -365,22 +365,13 @@ const shareQRCode = async () => {
     window.triggerHaptic('impact', 'light')
   }
 
-  // Get the full link for sharing - using Telegram Web App format
+  // Get the full link for sharing - backend already provides Telegram WebApp format
   let shareUrl = telegramWebAppLink.value
   try {
     const inviteData = await referralService.getInviteData()
-    // Создаем Telegram Web App ссылку из полученных данных
-    const url = new URL(inviteData.invite_link.startsWith('http') ? inviteData.invite_link : `https://${inviteData.invite_link}`)
-    const ref = url.searchParams.get('ref')
-    const code = url.searchParams.get('code')
-
-    if (ref && code) {
-      shareUrl = `https://t.me/dbdc_test_bot/app?startapp=ref_${ref}_code_${code}`
-    } else {
-      shareUrl = inviteData.invite_link
-    }
+    shareUrl = inviteData.invite_link
   } catch (error) {
-    console.warn('Could not get invite data for sharing, using computed link:', error)
+    console.warn('Could not get invite data for sharing, using cached link:', error)
   }
 
   // Try standard Web Share API first (works on most platforms including Telegram, Viber, etc.)
