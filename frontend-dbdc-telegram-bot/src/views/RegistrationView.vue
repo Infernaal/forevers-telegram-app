@@ -773,7 +773,8 @@ const handleRegister = () => {
     country: selectedCountry.value.code || formData.value.country,
     email: formData.value.email.trim(),
     phone: fullPhone,
-    ref: referralUserId
+    ref: referralUserId,
+    telegram_init_data: window?.Telegram?.WebApp?.initData || null
   }
 
   console.log('Registration payload:', payload)
