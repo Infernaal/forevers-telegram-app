@@ -325,7 +325,7 @@ const bottomNavRef = ref(null)
 let successTimeout = null
 
 // Methods
-const shareQRCode = () => {
+const shareQRCode = async () => {
   if (!termsAccepted.value || isSharing.value) return
 
   console.log('Sharing QR code...')
