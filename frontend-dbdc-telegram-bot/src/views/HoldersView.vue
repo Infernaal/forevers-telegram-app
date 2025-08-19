@@ -503,10 +503,10 @@ const copyWebLink = async () => {
   // Get the actual full link to copy
   let linkToCopy = referralLink.value
   try {
-    const linkData = await referralService.getFullReferralLink()
-    linkToCopy = linkData.full_link
+    const inviteData = await referralService.getInviteData()
+    linkToCopy = `https://t.me/your_bot_name?start=ref=${inviteData.user_id}&code=${inviteData.code}`
   } catch (error) {
-    console.warn('Could not get full link, using display link:', error)
+    console.warn('Could not get invite data, using display link:', error)
   }
 
   // Try modern clipboard API first
