@@ -91,7 +91,7 @@
             </div>
             <!-- QR Code Link -->
             <div class="absolute left-1/2 bottom-5 transform -translate-x-1/2 text-dbd-primary text-lg sm:text-xl font-semibold leading-6 text-center">
-              vm.dubadu/jjhI1uT4S
+              {{ referralLink }}
             </div>
           </div>
         </div>
