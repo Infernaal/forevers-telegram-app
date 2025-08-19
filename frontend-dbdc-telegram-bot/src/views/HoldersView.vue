@@ -323,33 +323,37 @@ const shortenedReferralLink = computed(() => {
     return referralLink.value
   }
 
-  // Shorten the link for display under QR code to fit one line
-  const link = referralLink.value
-  const maxLength = 35 // Adjust length for mobile screens
-
-  if (link.length <= maxLength) {
-    return link
-  }
-
-  // Find the code parameter and show domain + ellipsis + code
-  const codeMatch = link.match(/[?&]code=([^&]+)/)
-  if (codeMatch) {
-    const codeValue = codeMatch[1]
-    // Extract and show meaningful part of URL with bot name
-    const urlMatch = link.match(/(https?:\/\/[^\/]+\/[^\/]+)/)
-    if (urlMatch) {
-      const baseUrl = urlMatch[1] // e.g., https://t.me/dbdc_test_bot
-      // Show base URL with 3 dots and code parameter
-      return `${baseUrl}/...code=${codeValue}`
+  try {
+    const url = new URL(referralLink.value)
+    // For Telegram WebApp links like https://t.me/dbdc_test_bot/app?startapp=ref_4344_code_52J01Z
+    // Show beginning and end with ... in the middle
+    if (url.hostname === 't.me') {
+      const fullUrl = referralLink.value
+      if (fullUrl.length > 30) {
+        const start = fullUrl.substring(0, 15)
+        const end = fullUrl.substring(fullUrl.length - 8)
+        return `${start}...${end}`
+      }
+      return fullUrl
     }
-    // Fallback if domain extraction fails
-    return `...code=${codeValue}`
+    // For other URLs, show beginning and end
+    const fullUrl = referralLink.value
+    if (fullUrl.length > 30) {
+      const start = fullUrl.substring(0, 15)
+      const end = fullUrl.substring(fullUrl.length - 8)
+      return `${start}...${end}`
+    }
+    return fullUrl
+  } catch {
+    // Если не удается распарсить как URL, сокращаем с началом и концом
+    const fullUrl = referralLink.value
+    if (fullUrl.length > 30) {
+      const start = fullUrl.substring(0, 15)
+      const end = fullUrl.substring(fullUrl.length - 8)
+      return `${start}...${end}`
+    }
+    return fullUrl
   }
-
-  // Fallback: show beginning and end if no code parameter found
-  const start = link.substring(0, 15)
-  const end = link.substring(link.length - 17)
-  return `${start}...${end}`
 })
 
 // Computed property for Telegram Web App link (now backend already provides correct format)
