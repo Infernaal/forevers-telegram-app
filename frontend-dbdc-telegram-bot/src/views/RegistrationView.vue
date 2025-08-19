@@ -363,6 +363,10 @@ const touchedFields = ref({
 // Track current focused field to collapse only after switching to another field
 const currentFocusedField = ref(null)
 
+// Referral context
+const referralContext = ref(null)
+const referralPartner = ref(null)
+
 // Email validation helpers
 const emailLocalPartRegex = /^[A-Za-z0-9._%+\-]+$/ // RFC simplified safe subset
 const emailDomainRegex = /^(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)(?:\.(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?))*\.[A-Za-z]{2,24}$/
