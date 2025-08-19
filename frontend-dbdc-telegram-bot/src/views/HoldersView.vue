@@ -429,13 +429,22 @@ const shareQRCode = async () => {
 }
 
 const telegramFallback = async (safetyTimeout = null) => {
-  // Get the full link for Telegram sharing
-  let shareUrl = referralLink.value
+  // Get the full link for Telegram sharing - using Telegram Web App format
+  let shareUrl = telegramWebAppLink.value
   try {
     const inviteData = await referralService.getInviteData()
-    shareUrl = inviteData.invite_link // Используем прямо display link
+    // Создаем Telegram Web App ссылку из полученных данных
+    const url = new URL(inviteData.invite_link.startsWith('http') ? inviteData.invite_link : `https://${inviteData.invite_link}`)
+    const ref = url.searchParams.get('ref')
+    const code = url.searchParams.get('code')
+
+    if (ref && code) {
+      shareUrl = `https://t.me/dbdc_test_bot/app?startapp=ref_${ref}_code_${code}`
+    } else {
+      shareUrl = inviteData.invite_link
+    }
   } catch (error) {
-    console.warn('Could not get invite data for Telegram sharing, using display link:', error)
+    console.warn('Could not get invite data for Telegram sharing, using computed link:', error)
   }
 
   // Use Telegram WebApp sharing if available
