@@ -91,7 +91,7 @@
             </div>
             <!-- QR Code Link -->
             <div class="absolute left-1/2 bottom-5 transform -translate-x-1/2 text-dbd-primary text-lg sm:text-xl font-semibold leading-6 text-center">
-              {{ referralLink }}
+              {{ shortenedReferralLink }}
             </div>
           </div>
         </div>
@@ -240,7 +240,7 @@
               <!-- URL text -->
               <div v-if="!linkCopied" class="flex-1 px-4 sm:px-6 py-3.5 overflow-hidden">
                 <span class="text-dbd-off-white text-sm sm:text-lg font-semibold leading-5 underline truncate block max-w-full">
-                  {{ referralLink }}
+                  {{ shortenedReferralLink }}
                 </span>
               </div>
 
@@ -315,6 +315,22 @@ const loadingError = ref('')
 // Check if any modal is open for blur effect
 const isAnyModalOpen = computed(() => {
   return showTermsModal.value
+})
+
+// Computed property for shortened referral link display
+const shortenedReferralLink = computed(() => {
+  if (!referralLink.value || referralLink.value.includes('loading') || referralLink.value.includes('error')) {
+    return referralLink.value
+  }
+
+  try {
+    const url = new URL(referralLink.value.startsWith('http') ? referralLink.value : `https://${referralLink.value}`)
+    const domain = url.hostname
+    return `${domain}...`
+  } catch {
+    // Если не удается распарсить как URL, просто обрезаем
+    return referralLink.value.length > 20 ? `${referralLink.value.substring(0, 20)}...` : referralLink.value
+  }
 })
 
 // Success notification
