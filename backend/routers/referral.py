@@ -27,10 +27,18 @@ class InviteResponse(BaseModel):
     code: str
 
 
-def generate_unique_code(length: int = 6) -> str:
-    """Генерирует уникальный 6-значный код из букв и цифр"""
+def generate_unique_code(db: Session, length: int = 6, max_attempts: int = 100) -> str:
+    """Генерирует уникальный 6-значный код из букв и цифр, проверяя уникальность в БД"""
     alphabet = string.ascii_uppercase + string.digits
-    return ''.join(secrets.choice(alphabet) for _ in range(length))
+
+    for _ in range(max_attempts):
+        code = ''.join(secrets.choice(alphabet) for _ in range(length))
+        # Проверяем, что код не существует в БД
+        existing_code = db.query(UserReferralCode).filter(UserReferralCode.code == code).first()
+        if not existing_code:
+            return code
+
+    raise Exception("Could not generate unique code after maximum attempts")
 
 def generate_qr_code_base64(data: str) -> str:
     """Генерирует QR-код и возвращает его как base64 строку"""
