@@ -39,13 +39,13 @@
                       <input
                         v-model="formData.email"
                         type="email"
-                        :placeholder="formData.email ? '' : 'Email'"
+                        placeholder=""
                         required
                         data-field="email"
                         @focus="handleFieldFocus('email')"
                         @blur="handleFieldBlur('email')"
                         @keydown.enter.prevent="handleEnter('email')"
-                        class="w-full text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none focus:ring-0"
+                        class="w-full text-sm font-medium text-dbd-gray bg-transparent border-none outline-none focus:ring-0"
                       />
                       <div v-if="!formData.email" class="absolute inset-0 flex items-center pointer-events-none text-sm font-medium text-dbd-light-gray">
                         <span>Email</span><span class="text-red-500 ml-1">*</span>
@@ -89,13 +89,13 @@
                       <input
                         v-model="formData.firstName"
                         type="text"
-                        :placeholder="formData.firstName ? '' : 'First name'"
+                        placeholder=""
                         required
                         data-field="firstName"
                         @focus="handleFieldFocus('firstName')"
                         @blur="handleFieldBlur('firstName')"
                         @keydown.enter.prevent="handleEnter('firstName')"
-                        class="w-full text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none focus:ring-0"
+                        class="w-full text-sm font-medium text-dbd-gray bg-transparent border-none outline-none focus:ring-0"
                       />
                       <div v-if="!formData.firstName" class="absolute inset-0 flex items-center pointer-events-none text-sm font-medium text-dbd-light-gray">
                         <span>First name</span><span class="text-red-500 ml-1">*</span>
@@ -137,13 +137,13 @@
                       <input
                         v-model="formData.lastName"
                         type="text"
-                        :placeholder="formData.lastName ? '' : 'Last name'"
+                        placeholder=""
                         required
                         data-field="lastName"
                         @focus="handleFieldFocus('lastName')"
                         @blur="handleFieldBlur('lastName')"
                         @keydown.enter.prevent="handleEnter('lastName')"
-                        class="w-full text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none focus:ring-0"
+                        class="w-full text-sm font-medium text-dbd-gray bg-transparent border-none outline-none focus:ring-0"
                       />
                       <div v-if="!formData.lastName" class="absolute inset-0 flex items-center pointer-events-none text-sm font-medium text-dbd-light-gray">
                         <span>Last name</span><span class="text-red-500 ml-1">*</span>
