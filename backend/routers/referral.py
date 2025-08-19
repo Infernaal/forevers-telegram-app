@@ -62,12 +62,15 @@ async def get_invite_data(current_user_id: int = Depends(get_current_user)):
         # Формируем параметры реферальной ссылки
         ref_params = f"ref={current_user_id}&code={unique_code}"
 
-        # Создаем короткую ссылку для отображения
-        display_link = f"vm.dubadu/{unique_code}"
+        # Получаем BASE_URL из переменной окружения или используем значение по умолчанию
+        base_url = os.getenv("BASE_URL", "https://yourdomain.com")
 
-        # Создаем полную ссылку для QR-кода и ��аринга
-        # В production замените на ваш реальный домен/бота
-        full_link = f"https://t.me/your_bot_name?start={ref_params}"
+        # Создаем короткую ссылку для отображения с вашим адресом
+        display_link = f"{base_url}?{ref_params}"
+
+        # Создаем полную ссылку для QR-кода и шаринга (Telegram bot)
+        telegram_bot_url = os.getenv("TELEGRAM_BOT_URL", "https://t.me/your_bot_name")
+        full_link = f"{telegram_bot_url}?start={ref_params}"
 
         # Генерируем QR-код как base64
         qr_code_base64 = generate_qr_code_base64(full_link)
