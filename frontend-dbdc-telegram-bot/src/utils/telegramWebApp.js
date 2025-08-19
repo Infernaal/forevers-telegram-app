@@ -26,7 +26,14 @@ export function getStartParameter() {
 
     // Method 3: URL parameters (fallback for testing/debugging)
     const urlParams = new URLSearchParams(window.location.search)
-    const urlStartParam = urlParams.get('startapp') || urlParams.get('start_param')
+    let urlStartParam = urlParams.get('startapp') || urlParams.get('start_param')
+
+    // Method 4: Check URL hash fragment
+    if (!urlStartParam && window.location.hash) {
+      const hashParams = new URLSearchParams(window.location.hash.substring(1))
+      urlStartParam = hashParams.get('startapp') || hashParams.get('start_param')
+    }
+
     if (urlStartParam) {
       console.log('Found start parameter in URL:', urlStartParam)
       return urlStartParam
