@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 load_dotenv()
 logger = logging.getLogger(__name__)
 
-router = APIRouter(tags=["referral"])
+router = APIRouter(prefix="/referral", tags=["Referral"])
 
 class InviteResponse(BaseModel):
     invite_link: str

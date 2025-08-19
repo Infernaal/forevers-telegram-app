@@ -1,4 +1,4 @@
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dbdc-mini.dubadu.com/api/v1/dbdc';
 
 /**
  * Сервис для работы с реферальными ссылками
@@ -10,7 +10,7 @@ class ReferralService {
    */
   async getInviteData() {
     try {
-      const response = await fetch(`${BASE_URL}/api/v1/dbdc/invite`, {
+      const response = await fetch(`${BASE_URL}/referral/invite`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
