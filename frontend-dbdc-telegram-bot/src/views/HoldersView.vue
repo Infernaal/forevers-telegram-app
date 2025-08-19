@@ -544,6 +544,54 @@ const hideSuccessNotification = () => {
     successTimeout = null
   }
 }
+
+// Загрузка реферальных данных
+const loadReferralData = async () => {
+  try {
+    isLoading.value = true
+    loadingError.value = ''
+
+    // Получаем полную реферальную ссылку
+    const linkData = await referralService.getFullReferralLink()
+    referralLink.value = linkData.display_link
+
+    // Генерируем QR-код
+    const qrBlob = await referralService.generateQRCode(linkData.qr_params)
+
+    // Освобождаем предыдущий URL если он был
+    if (qrImageUrl.value) {
+      referralService.revokeQRImageURL(qrImageUrl.value)
+    }
+
+    // Создаем новый URL для QR-кода
+    qrImageUrl.value = referralService.createQRImageURL(qrBlob)
+
+    console.log('Referral data loaded successfully:', {
+      displayLink: linkData.display_link,
+      fullLink: linkData.full_link,
+      userId: linkData.user_id,
+      code: linkData.code
+    })
+  } catch (error) {
+    console.error('Error loading referral data:', error)
+    loadingError.value = 'Failed to load referral data'
+    referralLink.value = 'vm.dubadu/error'
+  } finally {
+    isLoading.value = false
+  }
+}
+
+// Lifecycle hooks
+onMounted(() => {
+  loadReferralData()
+})
+
+onUnmounted(() => {
+  // Освобождаем URL при размонтировании компонента
+  if (qrImageUrl.value) {
+    referralService.revokeQRImageURL(qrImageUrl.value)
+  }
+})
 </script>
 
 <style scoped>
