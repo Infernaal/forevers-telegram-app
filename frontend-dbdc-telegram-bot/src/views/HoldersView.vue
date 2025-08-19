@@ -569,17 +569,24 @@ const copyWebLink = async () => {
   console.log('Full message length:', fullMessageToCopy.length)
 
   // Try modern clipboard API first
+  console.log('Checking navigator.clipboard availability:', !!navigator.clipboard)
   if (navigator.clipboard) {
     try {
+      console.log('Attempting clipboard.writeText...')
       await navigator.clipboard.writeText(fullMessageToCopy)
       copySuccess = true
+      console.log('✅ Clipboard API copy successful!')
     } catch (clipboardErr) {
+      console.error('❌ Clipboard API failed:', clipboardErr)
       console.log('Clipboard API failed, trying fallback method')
     }
+  } else {
+    console.log('Navigator.clipboard not available, using fallback')
   }
 
   // If clipboard API failed or is not available, use fallback
   if (!copySuccess) {
+    console.log('Attempting fallback copy method...')
     try {
       const textArea = document.createElement('textarea')
       textArea.value = fullMessageToCopy
@@ -591,11 +598,17 @@ const copyWebLink = async () => {
       textArea.focus()
       textArea.select()
 
+      console.log('TextArea created and focused, attempting execCommand copy...')
       const successful = document.execCommand('copy')
       document.body.removeChild(textArea)
 
-      if (!successful) {
-        console.log('Fallback copy method also failed')
+      console.log('execCommand copy result:', successful)
+
+      if (successful) {
+        copySuccess = true
+        console.log('✅ Fallback copy method successful!')
+      } else {
+        console.log('❌ Fallback copy method also failed')
       }
     } catch (fallbackErr) {
       console.error('Fallback copy failed:', fallbackErr)
