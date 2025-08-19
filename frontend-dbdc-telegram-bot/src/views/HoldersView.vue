@@ -537,7 +537,7 @@ const copyWebLink = async () => {
   // Try modern clipboard API first (should work on most mobile browsers)
   if (navigator.clipboard && navigator.clipboard.writeText) {
     try {
-      await navigator.clipboard.writeText(linkToCopy)
+      await navigator.clipboard.writeText(fullTextToCopy)
       copySuccess = true
       console.log('Clipboard API copy successful')
     } catch (clipboardErr) {
@@ -549,7 +549,7 @@ const copyWebLink = async () => {
   if (!copySuccess) {
     try {
       const textArea = document.createElement('textarea')
-      textArea.value = linkToCopy
+      textArea.value = fullTextToCopy
       textArea.style.position = 'fixed'
       textArea.style.left = '-999999px'
       textArea.style.top = '-999999px'
