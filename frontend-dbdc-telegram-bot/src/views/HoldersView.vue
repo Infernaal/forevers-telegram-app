@@ -385,7 +385,7 @@ const telegramFallback = async (safetyTimeout = null) => {
   let shareUrl = referralLink.value
   try {
     const inviteData = await referralService.getInviteData()
-    shareUrl = `https://t.me/your_bot_name?start=ref=${inviteData.user_id}&code=${inviteData.code}`
+    shareUrl = inviteData.invite_link // Используем прямо display link
   } catch (error) {
     console.warn('Could not get invite data for Telegram sharing, using display link:', error)
   }
