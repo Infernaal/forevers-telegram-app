@@ -323,7 +323,7 @@ const shortenedReferralLink = computed(() => {
     return referralLink.value
   }
 
-  // Shorten the link for display under QR code
+  // Shorten the link for display under QR code to fit one line
   const link = referralLink.value
   const maxLength = 35 // Adjust length for mobile screens
 
@@ -331,7 +331,21 @@ const shortenedReferralLink = computed(() => {
     return link
   }
 
-  // Show beginning and end of URL with ellipsis in middle
+  // Find the code parameter and show domain + ellipsis + code
+  const codeMatch = link.match(/[?&]code=([^&]+)/)
+  if (codeMatch) {
+    const codeValue = codeMatch[1]
+    // Extract domain part (https://t.me/bot_name)
+    const domainMatch = link.match(/(https?:\/\/[^\/]+\/[^\/]+)/)
+    if (domainMatch) {
+      const domain = domainMatch[1]
+      return `${domain}/....code=${codeValue}`
+    }
+    // Fallback if domain extraction fails
+    return `..._code=${codeValue}`
+  }
+
+  // Fallback: show beginning and end if no code parameter found
   const start = link.substring(0, 15)
   const end = link.substring(link.length - 17)
   return `${start}...${end}`
@@ -374,9 +388,10 @@ const shareQRCode = async () => {
 
   // Try standard Web Share API first (works on most platforms including Telegram, Viber, etc.)
   if (navigator.share) {
+    const shareText = 'Join me in DBD Capital Forevers! 🚀 Start earning digital assets with this amazing bot.'
     navigator.share({
       title: 'DBD Capital Forevers Bot',
-      text: 'Join me in DBD Capital Forevers! 🚀 Start earning digital assets with this amazing bot.',
+      text: `${shareText}\n\n${shareUrl}`,
       url: shareUrl
     }).then(() => {
       // Sharing was successful
@@ -584,10 +599,8 @@ const copyWebLink = async () => {
     linkCopied.value = false
   }, 2500)
 
-  // Show success message if copy worked
-  if (copySuccess) {
-    showSuccessMessage('Link copied to clipboard')
-  }
+  // Visual feedback is shown via linkCopied state only
+  // No success notification popup for web referral link copying
 }
 
 const openTerms = () => {
@@ -807,3 +820,4 @@ onUnmounted(() => {
   }
 }
 </style>
+
