@@ -69,6 +69,7 @@ import { useRouter, useRoute } from 'vue-router'
 import telegramUserService from '../services/telegramUserService.js'
 import authByEmailService from '../services/authByEmailService.js'
 import registrationService from '../services/registrationService.js'
+import { getStoredReferralContext } from '@/utils/telegramWebApp.js'
 
 const router = useRouter()
 const route = useRoute()
