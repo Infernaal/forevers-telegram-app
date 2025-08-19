@@ -542,6 +542,11 @@ const copyLink = async () => {
 }
 
 const copyWebLink = async () => {
+  // Add haptic feedback when copy button is pressed
+  if (window.triggerHaptic) {
+    window.triggerHaptic('impact', 'light')
+  }
+
   let copySuccess = false
 
   // Get the actual full link to copy - backend already provides WebApp format
