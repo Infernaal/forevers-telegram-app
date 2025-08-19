@@ -104,7 +104,7 @@
                   </div>
                   <div v-else class="flex flex-col items-start justify-center flex-1 cursor-pointer" @click="editField('firstName')">
                     <div class="text-xs text-dbd-gray font-medium leading-none">
-                      <span>First name</span><span class="text-red-500">*</span>
+                      <span>First name</span><span class="text-red-500 ml-1">*</span>
                     </div>
                     <div class="text-base font-medium text-dbd-dark mt-1">{{ formData.firstName }}</div>
                   </div>
@@ -152,7 +152,7 @@
                   </div>
                   <div v-else class="flex flex-col items-start justify-center flex-1 cursor-pointer" @click="editField('lastName')">
                     <div class="text-xs text-dbd-gray font-medium leading-none">
-                      <span>Last name</span><span class="text-red-500">*</span>
+                      <span>Last name</span><span class="text-red-500 ml-1">*</span>
                     </div>
                     <div class="text-base font-medium text-dbd-dark mt-1">{{ formData.lastName }}</div>
                   </div>
