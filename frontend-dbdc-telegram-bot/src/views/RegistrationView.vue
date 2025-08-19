@@ -661,7 +661,7 @@ const handleCountrySelection = () => {
   }
 }
 
-onMounted(() => {
+onMounted(async () => {
   document.addEventListener('click', handleClickOutside)
   window.addEventListener('focus', handleCountrySelection)
 
@@ -670,7 +670,41 @@ onMounted(() => {
 
   // Check if a country was selected from CountrySelectView
   handleCountrySelection()
+
+  // Load referral context and partner info if available
+  await loadReferralContext()
 })
+
+// Load referral context and fetch partner information
+const loadReferralContext = async () => {
+  try {
+    const storedContext = getStoredReferralContext()
+    if (storedContext?.isReferral && storedContext.referralInfo?.userId) {
+      referralContext.value = storedContext
+
+      // Fetch referrer information
+      const result = await referrerService.getReferrerInfo(storedContext.referralInfo.userId)
+      if (result.success && result.data) {
+        referralPartner.value = {
+          firstName: result.data.first_name || 'Unknown',
+          lastName: result.data.last_name || 'User',
+          userId: storedContext.referralInfo.userId
+        }
+
+        console.log('Referrer info loaded:', referralPartner.value)
+      } else {
+        // Fallback if we can't fetch referrer info
+        referralPartner.value = {
+          firstName: 'Unknown',
+          lastName: 'User',
+          userId: storedContext.referralInfo.userId
+        }
+      }
+    }
+  } catch (error) {
+    console.error('Error loading referral context:', error)
+  }
+}
 
 onBeforeUnmount(() => {
   document.removeEventListener('click', handleClickOutside)
