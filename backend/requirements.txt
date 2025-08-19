@@ -10,3 +10,4 @@ aiosmtplib
 email-validator
 redis
 bcrypt
+qrcode[pil]
