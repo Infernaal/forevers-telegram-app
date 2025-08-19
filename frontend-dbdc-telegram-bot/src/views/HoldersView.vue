@@ -369,14 +369,8 @@ const shareQRCode = async () => {
     window.triggerHaptic('impact', 'light')
   }
 
-  // Get the full link for sharing - backend already provides Telegram WebApp format
-  let shareUrl = telegramWebAppLink.value
-  try {
-    const inviteData = await referralService.getInviteData()
-    shareUrl = inviteData.invite_link
-  } catch (error) {
-    console.warn('Could not get invite data for sharing, using cached link:', error)
-  }
+  // Use cached referral link from initial page load
+  const shareUrl = referralLink.value
 
   // Try standard Web Share API first (works on most platforms including Telegram, Viber, etc.)
   if (navigator.share) {
@@ -406,14 +400,8 @@ const shareQRCode = async () => {
 }
 
 const telegramFallback = async (safetyTimeout = null) => {
-  // Get the full link for Telegram sharing - backend already provides WebApp format
-  let shareUrl = telegramWebAppLink.value
-  try {
-    const inviteData = await referralService.getInviteData()
-    shareUrl = inviteData.invite_link
-  } catch (error) {
-    console.warn('Could not get invite data for Telegram sharing, using cached link:', error)
-  }
+  // Use cached referral link from initial page load
+  const shareUrl = referralLink.value
 
   // Use Telegram WebApp sharing if available
   if (window.Telegram && window.Telegram.WebApp) {
@@ -470,14 +458,8 @@ const fallbackShare = () => {
 const copyLink = async () => {
   let copySuccess = false
 
-  // Get the actual full link to copy - backend already provides WebApp format
-  let linkToCopy = telegramWebAppLink.value
-  try {
-    const inviteData = await referralService.getInviteData()
-    linkToCopy = inviteData.invite_link
-  } catch (error) {
-    console.warn('Could not get invite data, using cached link:', error)
-  }
+  // Use cached referral link from initial page load
+  const linkToCopy = referralLink.value
 
   // Add inviting text with the link
   const shareText = 'Join me in DBD Capital Forevers! 🚀 Start earning digital assets with this amazing bot.'
@@ -530,14 +512,8 @@ const copyLink = async () => {
 const copyWebLink = async () => {
   let copySuccess = false
 
-  // Get the actual full link to copy - backend already provides WebApp format
-  let linkToCopy = telegramWebAppLink.value
-  try {
-    const inviteData = await referralService.getInviteData()
-    linkToCopy = inviteData.invite_link
-  } catch (error) {
-    console.warn('Could not get invite data, using cached link:', error)
-  }
+  // Use cached referral link from initial page load
+  const linkToCopy = referralLink.value
 
   // Add inviting text with the link
   const shareText = 'Join me in DBD Capital Forevers! 🚀 Start earning digital assets with this amazing bot.'
@@ -662,6 +638,8 @@ const loadReferralData = async () => {
     loadingError.value = ''
 
     // Получаем данные приглашения (ссылку и QR-код) одним запросом
+    // Все UI компоненты используют кэшированные данные из этого запроса
+    // для обеспечения консистентности реферальных ссылок
     const inviteData = await referralService.getInviteData()
     referralLink.value = inviteData.invite_link
 
