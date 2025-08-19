@@ -90,7 +90,7 @@
               <span class="text-red-500 text-sm">Error loading QR</span>
             </div>
             <!-- QR Code Link -->
-            <div class="absolute left-1/2 bottom-5 transform -translate-x-1/2 text-dbd-primary text-sm font-semibold leading-6 text-center">
+            <div class="absolute left-1/2 bottom-4 transform -translate-x-1/2 text-dbd-primary text-sm font-semibold leading-4 text-center px-2 max-w-[90%] break-all">
               {{ shortenedReferralLink }}
             </div>
           </div>
@@ -239,7 +239,7 @@
 
               <!-- URL text -->
               <div v-if="!linkCopied" class="flex-1 px-4 sm:px-6 py-3.5 overflow-hidden">
-                <span class="text-dbd-off-white text-sm sm:text-lg font-semibold leading-5 underline truncate block max-w-full">
+                <span class="text-dbd-off-white text-xs sm:text-sm font-semibold leading-4 underline break-all max-w-full">
                   {{ shortenedReferralLink }}
                 </span>
               </div>
@@ -317,43 +317,14 @@ const isAnyModalOpen = computed(() => {
   return showTermsModal.value
 })
 
-// Computed property for shortened referral link display
+// Computed property for full referral link display (no truncation)
 const shortenedReferralLink = computed(() => {
   if (!referralLink.value || referralLink.value.includes('loading') || referralLink.value.includes('error')) {
     return referralLink.value
   }
 
-  try {
-    const url = new URL(referralLink.value)
-    // For Telegram WebApp links like https://t.me/dbdc_test_bot/app?startapp=ref_4344_code_52J01Z
-    // Show beginning and end with ... in the middle
-    if (url.hostname === 't.me') {
-      const fullUrl = referralLink.value
-      if (fullUrl.length > 30) {
-        const start = fullUrl.substring(0, 15)
-        const end = fullUrl.substring(fullUrl.length - 8)
-        return `${start}...${end}`
-      }
-      return fullUrl
-    }
-    // For other URLs, show beginning and end
-    const fullUrl = referralLink.value
-    if (fullUrl.length > 30) {
-      const start = fullUrl.substring(0, 15)
-      const end = fullUrl.substring(fullUrl.length - 8)
-      return `${start}...${end}`
-    }
-    return fullUrl
-  } catch {
-    // Если не удается распарсить как URL, сокращаем с началом и концом
-    const fullUrl = referralLink.value
-    if (fullUrl.length > 30) {
-      const start = fullUrl.substring(0, 15)
-      const end = fullUrl.substring(fullUrl.length - 8)
-      return `${start}...${end}`
-    }
-    return fullUrl
-  }
+  // Return the full link without truncation
+  return referralLink.value
 })
 
 // Computed property for Telegram Web App link (now backend already provides correct format)
@@ -401,7 +372,7 @@ const shareQRCode = async () => {
   if (navigator.share) {
     navigator.share({
       title: 'DBD Capital Forevers Bot',
-      text: 'Join me on DBD Capital Forevers! 🚀',
+      text: 'Join me in DBD Capital Forevers! 🚀 Start earning digital assets with this amazing bot.',
       url: shareUrl
     }).then(() => {
       // Sharing was successful
@@ -440,7 +411,8 @@ const telegramFallback = async (safetyTimeout = null) => {
 
     try {
       // Use Telegram's openTelegramLink for sharing (compatible with version 6.0)
-      const telegramShareUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent('Join me on DBD Capital Forevers! 🚀')}`
+      const shareText = 'Join me in DBD Capital Forevers! 🚀 Start earning digital assets with this amazing bot.'
+      const telegramShareUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`
       tg.openTelegramLink(telegramShareUrl)
 
       // Set up event listener for when user returns to app
@@ -487,8 +459,9 @@ const fallbackShare = () => {
 
 const copyLink = async () => {
   let copySuccess = false
-  let linkToCopy = telegramWebAppLink.value
 
+  // Get the actual full link to copy - backend already provides WebApp format
+  let linkToCopy = telegramWebAppLink.value
   try {
     const inviteData = await referralService.getInviteData()
     linkToCopy = inviteData.invite_link
@@ -496,68 +469,48 @@ const copyLink = async () => {
     console.warn('Could not get invite data, using cached link:', error)
   }
 
-  const fullMessageToCopy = `Join me on DBD Capital Forevers! 🚀\n\n${linkToCopy}`
+  // Add inviting text with the link
+  const shareText = 'Join me in DBD Capital Forevers! 🚀 Start earning digital assets with this amazing bot.'
+  const fullTextToCopy = `${shareText}\n\n${linkToCopy}`
 
-  // Try Telegram WebApp clipboard API first
-  if (window.Telegram?.WebApp?.writeTextToClipboard) {
+  // Try modern clipboard API first
+  if (navigator.clipboard) {
     try {
-      await window.Telegram.WebApp.writeTextToClipboard(fullMessageToCopy)
-      copySuccess = true
-    } catch (telegramErr) {
-      console.log('Telegram WebApp clipboard failed:', telegramErr)
-    }
-  }
-
-  // Fallback to standard clipboard API
-  if (!copySuccess && navigator.clipboard && window.isSecureContext) {
-    try {
-      await navigator.clipboard.writeText(fullMessageToCopy)
+      await navigator.clipboard.writeText(fullTextToCopy)
       copySuccess = true
     } catch (clipboardErr) {
-      console.log('Standard clipboard API failed:', clipboardErr)
+      console.log('Clipboard API failed, trying fallback method')
     }
   }
 
-  // Final fallback to document.execCommand
+  // If clipboard API failed or is not available, use fallback
   if (!copySuccess) {
     try {
       const textArea = document.createElement('textarea')
-      textArea.value = fullMessageToCopy
+      textArea.value = fullTextToCopy
       textArea.style.position = 'fixed'
       textArea.style.left = '-999999px'
       textArea.style.top = '-999999px'
       textArea.style.opacity = '0'
-      textArea.readOnly = true
       document.body.appendChild(textArea)
+      textArea.focus()
+      textArea.select()
 
-      if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
-        textArea.contentEditable = true
-        textArea.readOnly = false
-        const range = document.createRange()
-        range.selectNodeContents(textArea)
-        const selection = window.getSelection()
-        selection.removeAllRanges()
-        selection.addRange(range)
-        textArea.setSelectionRange(0, 999999)
-      } else {
-        textArea.select()
-      }
-
-      copySuccess = document.execCommand('copy')
+      const successful = document.execCommand('copy')
       document.body.removeChild(textArea)
+
+      if (!successful) {
+        console.log('Fallback copy method also failed')
+      }
     } catch (fallbackErr) {
-      console.error('All copy methods failed:', fallbackErr)
+      console.error('Fallback copy failed:', fallbackErr)
     }
   }
 
-  // Show appropriate message
-  if (copySuccess) {
-    showSuccessMessage('Link copied to clipboard')
-  } else {
-    showSuccessMessage('Unable to copy link')
-  }
+  // Show success notification when called from share button
+  showSuccessMessage('Link copied to clipboard')
 
-  // Show copied state for user feedback
+  // Also show copied state for user feedback
   linkCopied.value = true
   setTimeout(() => {
     linkCopied.value = false
@@ -565,95 +518,90 @@ const copyLink = async () => {
 }
 
 const copyWebLink = async () => {
-  // Initial haptic feedback
-  if (window.Telegram?.WebApp?.HapticFeedback) {
-    window.Telegram.WebApp.HapticFeedback.impactOccurred('light')
-  }
+  let copySuccess = false
 
+  // Get the actual full link to copy - backend already provides WebApp format
   let linkToCopy = telegramWebAppLink.value
-
-  // Get fresh invite data
   try {
     const inviteData = await referralService.getInviteData()
     linkToCopy = inviteData.invite_link
   } catch (error) {
-    console.warn('Using cached link:', error.message)
+    console.warn('Could not get invite data, using cached link:', error)
   }
 
-  // Unified copy function with fallback chain
-  const performCopy = async (text) => {
-    // 1. Telegram WebApp API (most reliable in Telegram)
-    if (window.Telegram?.WebApp?.writeTextToClipboard) {
-      try {
-        await window.Telegram.WebApp.writeTextToClipboard(text)
-        return true
-      } catch (e) {
-        console.log('Telegram clipboard failed:', e.message)
-      }
-    }
+  // Add inviting text with the link
+  const shareText = 'Join me in DBD Capital Forevers! 🚀 Start earning digital assets with this amazing bot.'
+  const fullTextToCopy = `${shareText}\n\n${linkToCopy}`
 
-    // 2. Modern Clipboard API (HTTPS required)
-    if (navigator.clipboard?.writeText && window.isSecureContext) {
-      try {
-        await navigator.clipboard.writeText(text)
-        return true
-      } catch (e) {
-        console.log('Modern clipboard failed:', e.message)
-      }
-    }
+  // Add haptic feedback
+  if (window.triggerHaptic) {
+    window.triggerHaptic('impact', 'light')
+  }
 
-    // 3. Legacy execCommand method (universal fallback)
+  // Try modern clipboard API first (should work on most mobile browsers)
+  if (navigator.clipboard && navigator.clipboard.writeText) {
     try {
-      const textarea = document.createElement('textarea')
-      textarea.value = text
-      textarea.style.cssText = 'position:fixed;top:-1000px;left:-1000px;opacity:0;pointer-events:none;'
-      textarea.setAttribute('readonly', '')
-      document.body.appendChild(textarea)
+      await navigator.clipboard.writeText(fullTextToCopy)
+      copySuccess = true
+      console.log('Clipboard API copy successful')
+    } catch (clipboardErr) {
+      console.log('Clipboard API failed:', clipboardErr)
+    }
+  }
 
-      // iOS specific handling
-      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-        textarea.contentEditable = 'true'
-        textarea.readOnly = false
-        const range = document.createRange()
-        range.selectNodeContents(textarea)
-        const selection = window.getSelection()
-        selection.removeAllRanges()
-        selection.addRange(range)
-        textarea.setSelectionRange(0, 999999)
+  // If clipboard API failed or is not available, use mobile-optimized fallback
+  if (!copySuccess) {
+    try {
+      const textArea = document.createElement('textarea')
+      textArea.value = fullTextToCopy
+      textArea.style.position = 'fixed'
+      textArea.style.left = '-999999px'
+      textArea.style.top = '-999999px'
+      textArea.style.opacity = '0'
+      textArea.style.width = '1px'
+      textArea.style.height = '1px'
+      textArea.readOnly = false
+
+      document.body.appendChild(textArea)
+
+      // Focus and select for mobile devices
+      textArea.focus()
+      textArea.setSelectionRange(0, fullTextToCopy.length)
+      textArea.select()
+
+      // Wait a bit for mobile keyboards
+      await new Promise(resolve => setTimeout(resolve, 100))
+
+      const successful = document.execCommand('copy')
+      document.body.removeChild(textArea)
+
+      if (successful) {
+        copySuccess = true
+        console.log('Fallback copy successful')
       } else {
-        textarea.select()
-        textarea.setSelectionRange(0, 999999)
+        console.log('Fallback copy method failed')
       }
-
-      const success = document.execCommand('copy')
-      document.body.removeChild(textarea)
-      return success
-    } catch (e) {
-      console.error('Legacy copy failed:', e.message)
-      return false
+    } catch (fallbackErr) {
+      console.error('Fallback copy failed:', fallbackErr)
     }
   }
 
-  // Execute copy operation
-  const copySuccess = await performCopy(linkToCopy)
-
-  // Haptic feedback based on result
-  if (window.Telegram?.WebApp?.HapticFeedback) {
-    if (copySuccess) {
-      window.Telegram.WebApp.HapticFeedback.notificationOccurred('success')
-    } else {
-      window.Telegram.WebApp.HapticFeedback.notificationOccurred('error')
-    }
-  }
-
-  // User feedback
-  showSuccessMessage(copySuccess ? 'Link copied to clipboard' : 'Copy failed, please try again')
-
-  // Visual feedback
+  // Show visual feedback regardless of copy success for better UX
   linkCopied.value = true
+
+  // Add haptic feedback for success
+  if (window.triggerHaptic) {
+    window.triggerHaptic('notification', copySuccess ? 'success' : 'warning')
+  }
+
   setTimeout(() => {
     linkCopied.value = false
   }, 2500)
+
+  // Show success message if copy worked
+  if (copySuccess) {
+    showSuccessMessage('Link copied to clipboard')
+  }
 }
 
 const openTerms = () => {
@@ -731,19 +679,6 @@ const loadReferralData = async () => {
 
 // Lifecycle hooks
 onMounted(() => {
-  // Debug Telegram WebApp environment
-  console.log('Telegram WebApp environment check:', {
-    hasTelegram: !!window.Telegram,
-    hasWebApp: !!window.Telegram?.WebApp,
-    hasHapticFeedback: !!window.Telegram?.WebApp?.HapticFeedback,
-    hasClipboard: !!window.Telegram?.WebApp?.writeTextToClipboard,
-    version: window.Telegram?.WebApp?.version,
-    platform: window.Telegram?.WebApp?.platform,
-    isSecureContext: window.isSecureContext,
-    hasNavigatorClipboard: !!navigator.clipboard,
-    userAgent: navigator.userAgent
-  })
-
   loadReferralData()
 })
 
@@ -798,7 +733,6 @@ onUnmounted(() => {
   border: 1px solid #07B80E !important;
   background: #129E0F !important;
   transform: scale(1.02) !important;
-  box-shadow: 0 4px 12px rgba(7, 184, 14, 0.3) !important;
 }
 
 .link-copied-content {
