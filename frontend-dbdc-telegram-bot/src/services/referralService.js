@@ -32,7 +32,7 @@ class ReferralService {
 
   /**
    * Получает полную реферральную ссылку для пользователя (оставлено для совместимости)
-   * @returns {Promise<Object>} Объект с данными реферальной ссылки
+   * @returns {Promise<Object>} Об��ект с данными реферальной ссылки
    * @deprecated Используйте getInviteData() вместо этого метода
    */
   async getFullReferralLink() {
@@ -40,7 +40,7 @@ class ReferralService {
     const inviteData = await this.getInviteData();
     return {
       display_link: inviteData.invite_link,
-      full_link: `https://t.me/your_bot_name?start=ref=${inviteData.user_id}&code=${inviteData.code}`,
+      full_link: inviteData.invite_link, // Теперь display_link это и есть полная ссылка
       qr_params: `?ref=${inviteData.user_id}&code=${inviteData.code}`,
       user_id: inviteData.user_id,
       code: inviteData.code
