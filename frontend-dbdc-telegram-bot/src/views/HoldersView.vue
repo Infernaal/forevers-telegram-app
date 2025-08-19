@@ -401,6 +401,7 @@ const shareQRCode = async () => {
   if (navigator.share) {
     navigator.share({
       title: 'DBD Capital Forevers Bot',
+      text: 'Join me on DBD Capital Forevers! 🚀',
       url: shareUrl
     }).then(() => {
       // Sharing was successful
@@ -439,7 +440,7 @@ const telegramFallback = async (safetyTimeout = null) => {
 
     try {
       // Use Telegram's openTelegramLink for sharing (compatible with version 6.0)
-      const telegramShareUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}`
+      const telegramShareUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent('Join me on DBD Capital Forevers! 🚀')}`
       tg.openTelegramLink(telegramShareUrl)
 
       // Set up event listener for when user returns to app
@@ -499,7 +500,7 @@ const copyLink = async () => {
   // Try modern clipboard API first
   if (navigator.clipboard) {
     try {
-      await navigator.clipboard.writeText(linkToCopy)
+      await navigator.clipboard.writeText(`Join me on DBD Capital Forevers! 🚀\n\n${linkToCopy}`)
       copySuccess = true
     } catch (clipboardErr) {
       console.log('Clipboard API failed, trying fallback method')
@@ -510,7 +511,7 @@ const copyLink = async () => {
   if (!copySuccess) {
     try {
       const textArea = document.createElement('textarea')
-      textArea.value = linkToCopy
+      textArea.value = `Join me on DBD Capital Forevers! 🚀\n\n${linkToCopy}`
       textArea.style.position = 'fixed'
       textArea.style.left = '-999999px'
       textArea.style.top = '-999999px'
@@ -557,8 +558,8 @@ const copyWebLink = async () => {
     console.warn('Could not get invite data, using cached link:', error)
   }
 
-  // Copy just the link without additional text
-  const fullMessageToCopy = linkToCopy
+  // Add "Join me on.." text as is typical in Telegram apps
+  const fullMessageToCopy = `Join me on DBD Capital Forevers! 🚀\n\n${linkToCopy}`
 
   // Try modern clipboard API first
   if (navigator.clipboard) {
@@ -685,7 +686,7 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  // Очистка ресурс��в при размонтировании компонента
+  // Очистка ресурсов при размонтировании компонента
   // QR-код теперь приходит как base64, не тр��бует освобождения URL
 })
 </script>
