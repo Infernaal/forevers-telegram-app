@@ -133,17 +133,22 @@
                     <svg class="w-6 h-6 mr-2 flex-shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                       <path d="M12 12C15.3137 12 18 9.31371 18 6C18 2.68629 15.3137 0 12 0C8.68629 0 6 2.68629 6 6C6 9.31371 8.68629 12 12 12ZM12 15C5.37258 15 0 17.6863 0 21V24H24V21C24 17.6863 18.6274 15 12 15Z" fill="#4B4D50"/>
                     </svg>
-                    <input
-                      v-model="formData.lastName"
-                      type="text"
-                      placeholder="Last name *"
-                      required
-                      data-field="lastName"
-                      @focus="handleFieldFocus('lastName')"
-                      @blur="handleFieldBlur('lastName')"
-                      @keydown.enter.prevent="handleEnter('lastName')"
-                      class="flex-1 text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none focus:ring-0"
-                    />
+                    <div class="flex-1 relative">
+                      <input
+                        v-model="formData.lastName"
+                        type="text"
+                        :placeholder="formData.lastName ? '' : 'Last name'"
+                        required
+                        data-field="lastName"
+                        @focus="handleFieldFocus('lastName')"
+                        @blur="handleFieldBlur('lastName')"
+                        @keydown.enter.prevent="handleEnter('lastName')"
+                        class="w-full text-sm font-medium text-dbd-gray placeholder-dbd-light-gray bg-transparent border-none outline-none focus:ring-0"
+                      />
+                      <div v-if="!formData.lastName" class="absolute inset-0 flex items-center pointer-events-none text-sm font-medium text-dbd-light-gray">
+                        <span>Last name</span><span class="text-red-500 ml-1">*</span>
+                      </div>
+                    </div>
                   </div>
                   <div v-else class="flex flex-col items-start justify-center flex-1 cursor-pointer" @click="editField('lastName')">
                     <div class="text-xs text-dbd-gray font-medium leading-none">
