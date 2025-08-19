@@ -384,10 +384,10 @@ const telegramFallback = async (safetyTimeout = null) => {
   // Get the full link for Telegram sharing
   let shareUrl = referralLink.value
   try {
-    const linkData = await referralService.getFullReferralLink()
-    shareUrl = linkData.full_link
+    const inviteData = await referralService.getInviteData()
+    shareUrl = `https://t.me/your_bot_name?start=ref=${inviteData.user_id}&code=${inviteData.code}`
   } catch (error) {
-    console.warn('Could not get full link for Telegram sharing, using display link:', error)
+    console.warn('Could not get invite data for Telegram sharing, using display link:', error)
   }
 
   // Use Telegram WebApp sharing if available
@@ -591,7 +591,7 @@ const hideSuccessNotification = () => {
   }
 }
 
-// Загрузка реферальных данных
+// Загрузка реферальных д��нных
 const loadReferralData = async () => {
   try {
     isLoading.value = true
