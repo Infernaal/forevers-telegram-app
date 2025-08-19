@@ -320,6 +320,7 @@ import ReferralPartner from '@/components/ReferralPartner.vue'
 import { fullCountries } from '@/utils/allCountries.js'
 import { usePhoneInput } from '@/composables/usePhoneInput.js'
 import { getStoredReferralContext } from '@/utils/telegramWebApp.js'
+import referrerService from '@/services/referrerService.js'
 
 const router = useRouter()
 const route = useRoute()
