@@ -584,7 +584,7 @@ const copyWebLink = async () => {
 
   // If clipboard API failed or is not available, use fallback
   if (!copySuccess) {
-    console.log('Attempting fallback copy method...')
+    showSuccessMessage('🔄 Attempting fallback copy...')
     try {
       const textArea = document.createElement('textarea')
       textArea.value = fullMessageToCopy
@@ -596,20 +596,18 @@ const copyWebLink = async () => {
       textArea.focus()
       textArea.select()
 
-      console.log('TextArea created and focused, attempting execCommand copy...')
+      showSuccessMessage('📝 TextArea created, attempting execCommand...')
       const successful = document.execCommand('copy')
       document.body.removeChild(textArea)
 
-      console.log('execCommand copy result:', successful)
-
       if (successful) {
         copySuccess = true
-        console.log('✅ Fallback copy method successful!')
+        showSuccessMessage('✅ Fallback copy successful!')
       } else {
-        console.log('❌ Fallback copy method also failed')
+        showSuccessMessage('❌ execCommand returned false')
       }
     } catch (fallbackErr) {
-      console.error('❌ Fallback copy failed:', fallbackErr)
+      showSuccessMessage(`❌ Fallback error: ${fallbackErr.message}`)
     }
   }
 
