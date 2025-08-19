@@ -21,7 +21,7 @@
             </div>
 
             <!-- Registration Form -->
-            <div class="space-y-6">
+            <div class="space-y-2">
               <!-- Section Title -->
               <h2 class="text-white text-base font-medium">Complete Registration</h2>
 
