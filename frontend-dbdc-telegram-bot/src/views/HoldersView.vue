@@ -440,7 +440,7 @@ const telegramFallback = async (safetyTimeout = null) => {
 
     try {
       // Use Telegram's openTelegramLink for sharing (compatible with version 6.0)
-      const telegramShareUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent('Join me on DBD Capital Forevers Bot! 🚀')}`
+      const telegramShareUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent('Join me on DBD Capital Forevers! 🚀')}`
       tg.openTelegramLink(telegramShareUrl)
 
       // Set up event listener for when user returns to app
