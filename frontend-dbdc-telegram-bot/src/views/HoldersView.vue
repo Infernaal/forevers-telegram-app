@@ -347,10 +347,10 @@ const shareQRCode = async () => {
   // Get the full link for sharing
   let shareUrl = referralLink.value
   try {
-    const linkData = await referralService.getFullReferralLink()
-    shareUrl = linkData.full_link
+    const inviteData = await referralService.getInviteData()
+    shareUrl = `https://t.me/your_bot_name?start=ref=${inviteData.user_id}&code=${inviteData.code}`
   } catch (error) {
-    console.warn('Could not get full link for sharing, using display link:', error)
+    console.warn('Could not get invite data for sharing, using display link:', error)
   }
 
   // Try standard Web Share API first (works on most platforms including Telegram, Viber, etc.)
@@ -597,11 +597,11 @@ const loadReferralData = async () => {
     isLoading.value = true
     loadingError.value = ''
 
-    // Получаем данные приглашения (ссыл��у и QR-код) одним запросом
+    // Получаем данные приглашения (ссылку и QR-код) одним запросом
     const inviteData = await referralService.getInviteData()
     referralLink.value = inviteData.invite_link
 
-    // Освобождаем предыдущи�� URL если он был
+    // Освобождаем предыдущий URL если он был
     if (qrImageUrl.value) {
       URL.revokeObjectURL(qrImageUrl.value)
     }
