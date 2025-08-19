@@ -285,6 +285,15 @@
                 <div v-if="phoneErrorMessage" class="mt-1 text-xs font-medium" :class="phoneOverLength ? 'text-red-600' : 'text-red-600'">{{ phoneErrorMessage }}</div>
               </div>
 
+              <!-- Referral Partner (if referral) -->
+              <div v-if="referralContext?.isReferral && referralPartner" class="pt-2">
+                <ReferralPartner
+                  :partner-first-name="referralPartner.firstName"
+                  :partner-last-name="referralPartner.lastName"
+                  :partner-user-id="referralPartner.userId"
+                />
+              </div>
+
               <!-- Register Button -->
               <div class="pt-4">
                 <button
