@@ -317,14 +317,24 @@ const isAnyModalOpen = computed(() => {
   return showTermsModal.value
 })
 
-// Computed property for full referral link display (no truncation)
+// Computed property for shortened referral link display (for QR code area)
 const shortenedReferralLink = computed(() => {
   if (!referralLink.value || referralLink.value.includes('loading') || referralLink.value.includes('error')) {
     return referralLink.value
   }
 
-  // Return the full link without truncation
-  return referralLink.value
+  // Shorten the link for display under QR code
+  const link = referralLink.value
+  const maxLength = 35 // Adjust length for mobile screens
+
+  if (link.length <= maxLength) {
+    return link
+  }
+
+  // Show beginning and end of URL with ellipsis in middle
+  const start = link.substring(0, 15)
+  const end = link.substring(link.length - 17)
+  return `${start}...${end}`
 })
 
 // Computed property for Telegram Web App link (now backend already provides correct format)
