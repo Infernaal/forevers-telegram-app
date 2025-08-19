@@ -317,28 +317,14 @@ const isAnyModalOpen = computed(() => {
   return showTermsModal.value
 })
 
-// Computed property for shortened referral link display
+// Computed property for full referral link display (no truncation)
 const shortenedReferralLink = computed(() => {
   if (!referralLink.value || referralLink.value.includes('loading') || referralLink.value.includes('error')) {
     return referralLink.value
   }
 
-  try {
-    const url = new URL(referralLink.value)
-    // For Telegram WebApp links like https://t.me/dbdc_test_bot/app?startapp=ref_4344_code_52J01Z
-    // Show as "t.me/dbdc_test_bot..."
-    if (url.hostname === 't.me') {
-      const pathParts = url.pathname.split('/')
-      if (pathParts.length >= 2) {
-        return `t.me/${pathParts[1]}...`
-      }
-    }
-    // Fallback to domain for other URLs
-    return `${url.hostname}...`
-  } catch {
-    // Если не удается распарсить как URL, просто обрезаем
-    return referralLink.value.length > 20 ? `${referralLink.value.substring(0, 20)}...` : referralLink.value
-  }
+  // Return the full link without truncation
+  return referralLink.value
 })
 
 // Computed property for Telegram Web App link (now backend already provides correct format)
