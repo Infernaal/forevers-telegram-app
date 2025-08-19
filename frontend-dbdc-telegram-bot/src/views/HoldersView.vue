@@ -562,7 +562,7 @@ const copyWebLink = async () => {
 
       // Focus and select for mobile devices
       textArea.focus()
-      textArea.setSelectionRange(0, linkToCopy.length)
+      textArea.setSelectionRange(0, fullTextToCopy.length)
       textArea.select()
 
       // Wait a bit for mobile keyboards
