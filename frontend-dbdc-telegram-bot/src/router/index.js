@@ -19,6 +19,7 @@ import EmailLinkedOtherAccountView from '../views/EmailLinkedOtherAccountView.vu
 import EmailAlreadyRegisteredView from '../views/EmailAlreadyRegisteredView.vue'
 import PhoneAlreadyRegisteredView from '../views/PhoneAlreadyRegisteredView.vue'
 import RegistrationErrorView from '../views/RegistrationErrorView.vue'
+import DebugView from '../views/DebugView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
