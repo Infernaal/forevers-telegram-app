@@ -5,12 +5,19 @@ import secrets
 import string
 import qrcode
 from io import BytesIO
+import base64
 import logging
 from dependencies.current_user import get_current_user
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter(tags=["referral"])
+
+class InviteResponse(BaseModel):
+    invite_link: str
+    qr_code: str  # Base64 encoded QR code image
+    user_id: int
+    code: str
 
 class ReferralLinkResponse(BaseModel):
     referral_link: str
