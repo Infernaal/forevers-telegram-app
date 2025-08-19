@@ -597,11 +597,11 @@ const loadReferralData = async () => {
     isLoading.value = true
     loadingError.value = ''
 
-    // Получаем данные приглашения (ссылку и QR-код) одним запросом
+    // Получаем данные приглашения (ссыл��у и QR-код) одним запросом
     const inviteData = await referralService.getInviteData()
     referralLink.value = inviteData.invite_link
 
-    // Освобождаем предыдущий URL если он был
+    // Освобождаем предыдущи�� URL если он был
     if (qrImageUrl.value) {
       URL.revokeObjectURL(qrImageUrl.value)
     }
@@ -629,10 +629,8 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  // Освобождаем URL при размонтировании компонента
-  if (qrImageUrl.value) {
-    referralService.revokeQRImageURL(qrImageUrl.value)
-  }
+  // Очистка ресурсов при размонтировании компонента
+  // QR-код теперь приходит как base64, не требует освобождения URL
 })
 </script>
 
