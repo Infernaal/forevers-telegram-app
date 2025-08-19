@@ -1,4 +1,4 @@
-﻿from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request
 import logging
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.base import BaseHTTPMiddleware
@@ -9,6 +9,7 @@ from routers.forevers_user_balance import router as forevers_user_balance_router
 from routers.forevers_prices import router as forevers_price_router
 from routers.user_info import router as user_info_router
 from routers.email_verification import router as email_verification_router
+from routers.referral import router as referral_router
 from fastapi.openapi.utils import get_openapi
 
 from sessions.redis_session import init_redis, close_redis, refresh_session, get_user_id_by_session
@@ -27,7 +28,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="DBDC Telegram Bot Backend",
-    description="Backend для Telegram WebApp, который обрабатывает финансовые данные пользователей, включая баланс forevers.",
+    description="Backend для Telegram WebApp, ��оторый обрабатывает финансовые данные пользователей, включая баланс forevers.",
     version="1.0.0",
     contact={
         "name": "Dubadu Developers",
