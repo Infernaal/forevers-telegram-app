@@ -239,7 +239,7 @@
 
               <!-- URL text -->
               <div v-if="!linkCopied" class="flex-1 px-4 sm:px-6 py-3.5 overflow-hidden">
-                <span class="text-dbd-off-white text-sm sm:text-lg font-semibold leading-5 underline truncate block max-w-full">
+                <span class="text-dbd-off-white text-xs sm:text-sm font-semibold leading-4 underline break-all max-w-full">
                   {{ shortenedReferralLink }}
                 </span>
               </div>
