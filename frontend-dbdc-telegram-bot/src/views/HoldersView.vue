@@ -439,7 +439,7 @@ const telegramFallback = async (safetyTimeout = null) => {
 
     try {
       // Use Telegram's openTelegramLink for sharing (compatible with version 6.0)
-      const telegramShareUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent('Join me on DBD Capital Forevers! 🚀')}`
+      const telegramShareUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}`
       tg.openTelegramLink(telegramShareUrl)
 
       // Set up event listener for when user returns to app
@@ -685,7 +685,7 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  // Очистка ресурсов при размонтировании компонента
+  // Очистка ресурс��в при размонтировании компонента
   // QR-код теперь приходит как base64, не тр��бует освобождения URL
 })
 </script>
