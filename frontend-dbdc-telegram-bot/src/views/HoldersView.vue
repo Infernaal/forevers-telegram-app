@@ -448,7 +448,7 @@ const copyLink = async () => {
   let linkToCopy = referralLink.value
   try {
     const inviteData = await referralService.getInviteData()
-    linkToCopy = `https://t.me/your_bot_name?start=ref=${inviteData.user_id}&code=${inviteData.code}`
+    linkToCopy = inviteData.invite_link // Используем прямо display link
   } catch (error) {
     console.warn('Could not get invite data, using display link:', error)
   }
@@ -629,7 +629,7 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  // Очистка ресурсов при размонтировании компонента
+  // Очистка ресурсов при размонтировании ком��онента
   // QR-код теперь приходит как base64, не требует освобождения URL
 })
 </script>
