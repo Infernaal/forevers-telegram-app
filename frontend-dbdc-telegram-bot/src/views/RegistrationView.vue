@@ -316,8 +316,10 @@
 import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import CountryFlag from '@/components/CountryFlag.vue'
+import ReferralPartner from '@/components/ReferralPartner.vue'
 import { fullCountries } from '@/utils/allCountries.js'
 import { usePhoneInput } from '@/composables/usePhoneInput.js'
+import { getStoredReferralContext } from '@/utils/telegramWebApp.js'
 
 const router = useRouter()
 const route = useRoute()
