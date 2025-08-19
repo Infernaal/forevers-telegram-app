@@ -124,6 +124,11 @@ const router = createRouter({
       name: 'registration-error',
       component: RegistrationErrorView,
     },
+    {
+      path: '/debug',
+      name: 'debug',
+      component: DebugView,
+    },
 
     // Redirect /home to /wallet as default
     {
