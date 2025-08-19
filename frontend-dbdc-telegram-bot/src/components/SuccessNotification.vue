@@ -75,7 +75,9 @@ defineEmits(['close'])
   background: #4CAF50;
   box-shadow: 4px 8px 12px 0 rgba(7, 184, 14, 0.13);
   padding: 10px 16px;
-  width: 280px;
+  min-width: 120px;
+  max-width: min(calc(100vw - 32px), 400px);
+  width: fit-content;
   justify-content: center;
   white-space: nowrap;
   transition: all 0.3s ease;
