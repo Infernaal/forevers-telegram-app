@@ -83,8 +83,8 @@ export function parseReferralInfo(startParam) {
 export function getReferralContext() {
   const startParam = getStartParameter()
   const referralInfo = parseReferralInfo(startParam)
-  
-  return {
+
+  const context = {
     hasStartParam: !!startParam,
     startParam,
     isReferral: referralInfo?.isReferral || false,
@@ -92,6 +92,17 @@ export function getReferralContext() {
     telegramInitData: window.Telegram?.WebApp?.initData || null,
     telegramUser: window.Telegram?.WebApp?.initDataUnsafe?.user || null
   }
+
+  // Debug logging
+  console.log('Telegram WebApp referral context:', {
+    hasWebApp: !!window.Telegram?.WebApp,
+    initDataUnsafe: window.Telegram?.WebApp?.initDataUnsafe,
+    startParam: context.startParam,
+    isReferral: context.isReferral,
+    referralInfo: context.referralInfo
+  })
+
+  return context
 }
 
 /**
