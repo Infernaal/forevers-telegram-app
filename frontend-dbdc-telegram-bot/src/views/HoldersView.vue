@@ -500,7 +500,7 @@ const copyLink = async () => {
   // Try modern clipboard API first
   if (navigator.clipboard) {
     try {
-      await navigator.clipboard.writeText(linkToCopy)
+      await navigator.clipboard.writeText(`Join me on DBD Capital Forevers! 🚀\n\n${linkToCopy}`)
       copySuccess = true
     } catch (clipboardErr) {
       console.log('Clipboard API failed, trying fallback method')
@@ -511,7 +511,7 @@ const copyLink = async () => {
   if (!copySuccess) {
     try {
       const textArea = document.createElement('textarea')
-      textArea.value = linkToCopy
+      textArea.value = `Join me on DBD Capital Forevers! 🚀\n\n${linkToCopy}`
       textArea.style.position = 'fixed'
       textArea.style.left = '-999999px'
       textArea.style.top = '-999999px'
@@ -542,6 +542,8 @@ const copyLink = async () => {
 }
 
 const copyWebLink = async () => {
+  showSuccessMessage('🔧 copyWebLink called')
+
   // Add haptic feedback when copy button is pressed
   if (window.triggerHaptic) {
     window.triggerHaptic('impact', 'light')
@@ -551,28 +553,38 @@ const copyWebLink = async () => {
 
   // Get the actual full link to copy - backend already provides WebApp format
   let linkToCopy = telegramWebAppLink.value
+  showSuccessMessage(`📋 Initial link: ${linkToCopy?.substring(0, 50)}...`)
+
   try {
     const inviteData = await referralService.getInviteData()
     linkToCopy = inviteData.invite_link
+    showSuccessMessage(`🔄 Updated link from API: ${linkToCopy?.substring(0, 50)}...`)
   } catch (error) {
-    console.warn('Could not get invite data, using cached link:', error)
+    showSuccessMessage(`❌ API Error: ${error.message}`)
   }
 
-  // Add "Join to me on.." text as is typical in Telegram apps
+  // Add "Join me on.." text as is typical in Telegram apps
   const fullMessageToCopy = `Join me on DBD Capital Forevers! 🚀\n\n${linkToCopy}`
+  showSuccessMessage(`📝 Full message length: ${fullMessageToCopy.length} chars`)
 
   // Try modern clipboard API first
+  showSuccessMessage(`📋 Clipboard available: ${!!navigator.clipboard}`)
   if (navigator.clipboard) {
     try {
+      showSuccessMessage('🔄 Attempting clipboard.writeText...')
       await navigator.clipboard.writeText(fullMessageToCopy)
       copySuccess = true
+      showSuccessMessage('✅ Clipboard API success!')
     } catch (clipboardErr) {
-      console.log('Clipboard API failed, trying fallback method')
+      showSuccessMessage(`❌ Clipboard failed: ${clipboardErr.message}`)
     }
+  } else {
+    showSuccessMessage('⚠️ Clipboard not available, using fallback')
   }
 
   // If clipboard API failed or is not available, use fallback
   if (!copySuccess) {
+    showSuccessMessage('🔄 Attempting fallback copy...')
     try {
       const textArea = document.createElement('textarea')
       textArea.value = fullMessageToCopy
@@ -584,20 +596,33 @@ const copyWebLink = async () => {
       textArea.focus()
       textArea.select()
 
+      showSuccessMessage('📝 TextArea created, attempting execCommand...')
       const successful = document.execCommand('copy')
       document.body.removeChild(textArea)
 
-      if (!successful) {
-        console.log('Fallback copy method also failed')
+      if (successful) {
+        copySuccess = true
+        showSuccessMessage('✅ Fallback copy successful!')
+      } else {
+        showSuccessMessage('❌ execCommand returned false')
       }
     } catch (fallbackErr) {
-      console.error('Fallback copy failed:', fallbackErr)
+      showSuccessMessage(`❌ Fallback error: ${fallbackErr.message}`)
     }
   }
 
-  // Add success haptic feedback
-  if (window.triggerHaptic) {
-    window.triggerHaptic('notification', 'success')
+  if (copySuccess) {
+    showSuccessMessage('✅ Copy completed successfully!')
+    // Add success haptic feedback
+    if (window.triggerHaptic) {
+      window.triggerHaptic('notification', 'success')
+    }
+  } else {
+    showSuccessMessage('❌ All copy methods FAILED!')
+    // Still provide haptic feedback for user interaction
+    if (window.triggerHaptic) {
+      window.triggerHaptic('impact', 'light')
+    }
   }
 
   // Always show copied state for user feedback
