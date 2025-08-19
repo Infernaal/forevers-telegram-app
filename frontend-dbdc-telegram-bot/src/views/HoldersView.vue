@@ -773,7 +773,7 @@ const hideSuccessNotification = () => {
   }
 }
 
-// Загру��ка реферальных д���нных
+// Загру��ка реферальных д��нных
 const loadReferralData = async () => {
   try {
     isLoading.value = true
@@ -807,6 +807,19 @@ const loadReferralData = async () => {
 
 // Lifecycle hooks
 onMounted(() => {
+  // Debug Telegram WebApp environment
+  console.log('Telegram WebApp environment check:', {
+    hasTelegram: !!window.Telegram,
+    hasWebApp: !!window.Telegram?.WebApp,
+    hasHapticFeedback: !!window.Telegram?.WebApp?.HapticFeedback,
+    hasClipboard: !!window.Telegram?.WebApp?.writeTextToClipboard,
+    version: window.Telegram?.WebApp?.version,
+    platform: window.Telegram?.WebApp?.platform,
+    isSecureContext: window.isSecureContext,
+    hasNavigatorClipboard: !!navigator.clipboard,
+    userAgent: navigator.userAgent
+  })
+
   loadReferralData()
 })
 
