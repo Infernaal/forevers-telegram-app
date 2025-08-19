@@ -372,7 +372,7 @@ const shareQRCode = async () => {
   if (navigator.share) {
     navigator.share({
       title: 'DBD Capital Forevers Bot',
-      text: 'Join me on DBD Capital Forevers Bot! 🚀',
+      text: 'Join me in DBD Capital Forevers! 🚀 Start earning digital assets with this amazing bot.',
       url: shareUrl
     }).then(() => {
       // Sharing was successful
@@ -675,7 +675,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   // Очистка ресурсов при размонтировании компонента
-  // QR-код теперь приходит как base64, не тр��бует освобождения URL
+  // QR-код теперь приходи�� как base64, не тр��бует освобождения URL
 })
 </script>
 
