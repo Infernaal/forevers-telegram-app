@@ -90,7 +90,7 @@
               <span class="text-red-500 text-sm">Error loading QR</span>
             </div>
             <!-- QR Code Link -->
-            <div class="absolute left-1/2 bottom-5 transform -translate-x-1/2 text-dbd-primary text-lg sm:text-xl font-semibold leading-6 text-center">
+            <div class="absolute left-1/2 bottom-5 transform -translate-x-1/2 text-dbd-primary text-sm font-semibold leading-6 text-center">
               {{ shortenedReferralLink }}
             </div>
           </div>
@@ -401,7 +401,7 @@ const shareQRCode = async () => {
   if (navigator.share) {
     navigator.share({
       title: 'DBD Capital Forevers Bot',
-      text: 'Join me on DBD Capital Forevers Bot! 🚀',
+      text: 'Join me on DBD Capital Forevers! 🚀',
       url: shareUrl
     }).then(() => {
       // Sharing was successful
@@ -440,7 +440,7 @@ const telegramFallback = async (safetyTimeout = null) => {
 
     try {
       // Use Telegram's openTelegramLink for sharing (compatible with version 6.0)
-      const telegramShareUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent('Join me on DBD Capital Forevers Bot! 🚀')}`
+      const telegramShareUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent('Join me on DBD Capital Forevers! 🚀')}`
       tg.openTelegramLink(telegramShareUrl)
 
       // Set up event listener for when user returns to app
@@ -558,10 +558,13 @@ const copyWebLink = async () => {
     console.warn('Could not get invite data, using cached link:', error)
   }
 
+  // Add "Join to me on.." text as is typical in Telegram apps
+  const fullMessageToCopy = `Join me on DBD Capital Forevers! 🚀\n\n${linkToCopy}`
+
   // Try modern clipboard API first
   if (navigator.clipboard) {
     try {
-      await navigator.clipboard.writeText(linkToCopy)
+      await navigator.clipboard.writeText(fullMessageToCopy)
       copySuccess = true
     } catch (clipboardErr) {
       console.log('Clipboard API failed, trying fallback method')
@@ -572,7 +575,7 @@ const copyWebLink = async () => {
   if (!copySuccess) {
     try {
       const textArea = document.createElement('textarea')
-      textArea.value = linkToCopy
+      textArea.value = fullMessageToCopy
       textArea.style.position = 'fixed'
       textArea.style.left = '-999999px'
       textArea.style.top = '-999999px'
