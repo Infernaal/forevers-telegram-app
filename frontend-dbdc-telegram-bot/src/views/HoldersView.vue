@@ -189,13 +189,7 @@
         <!-- Step Descriptions -->
         <div class="grid grid-cols-5 gap-0 text-center">
           <!-- Description under D1 -->
-          <div class="flex flex-col items-center gap-1">
-            <div class="flex items-center gap-1.5 justify-center">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <path d="M18 16.08C17.24 16.08 16.56 16.38 16.04 16.85L8.91 12.7C8.96 12.47 9 12.24 9 12C9 11.76 8.96 11.53 8.91 11.3L15.96 7.19C16.5 7.69 17.21 8 18 8C19.66 8 21 6.66 21 5C21 3.34 19.66 2 18 2C16.34 2 15 3.34 15 5C15 5.24 15.04 5.47 15.09 5.7L8.04 9.81C7.5 9.31 6.79 9 6 9C4.34 9 3 10.34 3 12C3 13.66 4.34 15 6 15C6.79 15 7.5 14.69 8.04 14.19L15.16 18.34C15.11 18.55 15.08 18.77 15.08 19C15.08 20.61 16.39 21.92 18 21.92C19.61 21.92 20.92 20.61 20.92 19C20.92 17.39 19.61 16.08 18 16.08Z" fill="#7E7E7E"/>
-              </svg>
-              <span class="text-dbd-gray text-base font-medium leading-6">1</span>
-            </div>
+          <div class="flex flex-col items-center">
             <span class="text-dbd-gray text-xs font-medium leading-4">Share your link</span>
           </div>
 
@@ -203,13 +197,7 @@
           <div></div>
 
           <!-- Description under D2 -->
-          <div class="flex flex-col items-center gap-1">
-            <div class="flex items-center gap-1.5 justify-center">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM17 13H11V7H13V11H17V13Z" fill="#7E7E7E"/>
-              </svg>
-              <span class="text-dbd-gray text-sm font-medium leading-6">2</span>
-            </div>
+          <div class="flex flex-col items-center">
             <span class="text-dbd-gray text-xs font-medium leading-4">Wait for joining</span>
           </div>
 
@@ -217,13 +205,7 @@
           <div></div>
 
           <!-- Description under D3 -->
-          <div class="flex flex-col items-center gap-1">
-            <div class="flex items-center gap-1.5 justify-center">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                <path d="M12 2L15.09 8.26L22 9L17 13.74L18.18 20.74L12 17.77L5.82 20.74L7 13.74L2 9L8.91 8.26L12 2Z" fill="#7E7E7E"/>
-              </svg>
-              <span class="text-dbd-gray text-sm font-medium leading-6">3</span>
-            </div>
+          <div class="flex flex-col items-center">
             <span class="text-dbd-gray text-xs font-medium leading-4">Get rewards</span>
           </div>
         </div>
