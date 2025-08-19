@@ -568,19 +568,18 @@ const copyWebLink = async () => {
   showSuccessMessage(`📝 Full message length: ${fullMessageToCopy.length} chars`)
 
   // Try modern clipboard API first
-  console.log('Checking navigator.clipboard availability:', !!navigator.clipboard)
+  showSuccessMessage(`📋 Clipboard available: ${!!navigator.clipboard}`)
   if (navigator.clipboard) {
     try {
-      console.log('Attempting clipboard.writeText...')
+      showSuccessMessage('🔄 Attempting clipboard.writeText...')
       await navigator.clipboard.writeText(fullMessageToCopy)
       copySuccess = true
-      console.log('✅ Clipboard API copy successful!')
+      showSuccessMessage('✅ Clipboard API success!')
     } catch (clipboardErr) {
-      console.error('❌ Clipboard API failed:', clipboardErr)
-      console.log('Clipboard API failed, trying fallback method')
+      showSuccessMessage(`❌ Clipboard failed: ${clipboardErr.message}`)
     }
   } else {
-    console.log('Navigator.clipboard not available, using fallback')
+    showSuccessMessage('⚠️ Clipboard not available, using fallback')
   }
 
   // If clipboard API failed or is not available, use fallback
