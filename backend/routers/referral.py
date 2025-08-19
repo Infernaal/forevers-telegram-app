@@ -24,7 +24,7 @@ class InviteResponse(BaseModel):
 
 
 def generate_unique_code(length: int = 6) -> str:
-    """Гене��ирует уникальный 6-значный код из букв и цифр"""
+    """Генерирует уникальный 6-значный код из букв и цифр"""
     alphabet = string.ascii_uppercase + string.digits
     return ''.join(secrets.choice(alphabet) for _ in range(length))
 
@@ -69,10 +69,10 @@ async def get_invite_data(current_user_id: int = Depends(get_current_user_id)):
         # Генерируем QR-код как base64 (используем telegram_webapp_link для QR-кода)
         qr_code_base64 = generate_qr_code_base64(telegram_webapp_link)
 
-        logger.info(f"Generated invite data for user {current_user_id}: {display_link}")
+        logger.info(f"Generated invite data for user {current_user_id}: {telegram_webapp_link}")
 
         return InviteResponse(
-            invite_link=display_link,
+            invite_link=telegram_webapp_link,
             qr_code=qr_code_base64,
             user_id=current_user_id,
             code=unique_code
