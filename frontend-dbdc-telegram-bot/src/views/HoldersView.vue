@@ -773,7 +773,7 @@ const hideSuccessNotification = () => {
   }
 }
 
-// Загру��ка реферальных д��нных
+// Загру��ка реферальных д���нных
 const loadReferralData = async () => {
   try {
     isLoading.value = true
@@ -861,6 +861,7 @@ onUnmounted(() => {
   border: 1px solid #07B80E !important;
   background: #129E0F !important;
   transform: scale(1.02) !important;
+  box-shadow: 0 4px 12px rgba(7, 184, 14, 0.3) !important;
 }
 
 .link-copied-content {
