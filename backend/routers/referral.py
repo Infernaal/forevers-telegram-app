@@ -9,7 +9,9 @@ import base64
 import logging
 import os
 from dependencies.current_user import get_current_user
+from dotenv import load_dotenv
 
+load_dotenv()
 logger = logging.getLogger(__name__)
 
 router = APIRouter(tags=["referral"])
