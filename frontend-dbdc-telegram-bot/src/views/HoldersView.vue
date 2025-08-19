@@ -335,11 +335,12 @@ const shortenedReferralLink = computed(() => {
   const codeMatch = link.match(/[?&]code=([^&]+)/)
   if (codeMatch) {
     const codeValue = codeMatch[1]
-    // Extract domain part (https://t.me/bot_name)
-    const domainMatch = link.match(/(https?:\/\/[^\/]+\/[^\/]+)/)
-    if (domainMatch) {
-      const domain = domainMatch[1]
-      return `${domain}/...code=${codeValue}`
+    // Extract and show meaningful part of URL with bot name
+    const urlMatch = link.match(/(https?:\/\/[^\/]+\/[^\/]+)/)
+    if (urlMatch) {
+      const baseUrl = urlMatch[1] // e.g., https://t.me/dbdc_test_bot
+      // Show base URL with 3 dots and code parameter
+      return `${baseUrl}/...code=${codeValue}`
     }
     // Fallback if domain extraction fails
     return `...code=${codeValue}`
@@ -389,10 +390,10 @@ const shareQRCode = async () => {
   // Try standard Web Share API first (works on most platforms including Telegram, Viber, etc.)
   if (navigator.share) {
     const shareText = 'Join me in DBD Capital Forevers! 🚀 Start earning digital assets with this amazing bot.'
+    const fullText = `${shareText}\n\n${shareUrl}`
     navigator.share({
       title: 'DBD Capital Forevers Bot',
-      text: shareText,
-      url: shareUrl
+      text: fullText
     }).then(() => {
       // Sharing was successful
       clearTimeout(safetyTimeout)
@@ -645,7 +646,7 @@ const hideSuccessNotification = () => {
   }
 }
 
-// Загру��ка реферальных д��нных
+// Загру��ка реферальных д��нны��
 const loadReferralData = async () => {
   try {
     isLoading.value = true
