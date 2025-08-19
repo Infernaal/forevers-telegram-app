@@ -542,8 +542,6 @@ const copyLink = async () => {
 }
 
 const copyWebLink = async () => {
-  showSuccessMessage('🔧 copyWebLink called')
-
   // Add haptic feedback when copy button is pressed
   if (window.triggerHaptic) {
     window.triggerHaptic('impact', 'light')
@@ -553,38 +551,29 @@ const copyWebLink = async () => {
 
   // Get the actual full link to copy - backend already provides WebApp format
   let linkToCopy = telegramWebAppLink.value
-  showSuccessMessage(`📋 Initial link: ${linkToCopy?.substring(0, 50)}...`)
 
   try {
     const inviteData = await referralService.getInviteData()
     linkToCopy = inviteData.invite_link
-    showSuccessMessage(`🔄 Updated link from API: ${linkToCopy?.substring(0, 50)}...`)
   } catch (error) {
-    showSuccessMessage(`❌ API Error: ${error.message}`)
+    console.warn('Could not get fresh invite data, using cached link:', error)
   }
 
   // Add "Join me on.." text as is typical in Telegram apps
   const fullMessageToCopy = `Join me on DBD Capital Forevers! 🚀\n\n${linkToCopy}`
-  showSuccessMessage(`📝 Full message length: ${fullMessageToCopy.length} chars`)
 
   // Try modern clipboard API first
-  showSuccessMessage(`📋 Clipboard available: ${!!navigator.clipboard}`)
-  if (navigator.clipboard) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
     try {
-      showSuccessMessage('🔄 Attempting clipboard.writeText...')
       await navigator.clipboard.writeText(fullMessageToCopy)
       copySuccess = true
-      showSuccessMessage('✅ Clipboard API success!')
     } catch (clipboardErr) {
-      showSuccessMessage(`❌ Clipboard failed: ${clipboardErr.message}`)
+      console.log('Clipboard API failed, trying fallback method:', clipboardErr)
     }
-  } else {
-    showSuccessMessage('⚠️ Clipboard not available, using fallback')
   }
 
   // If clipboard API failed or is not available, use fallback
   if (!copySuccess) {
-    showSuccessMessage('🔄 Attempting fallback copy...')
     try {
       const textArea = document.createElement('textarea')
       textArea.value = fullMessageToCopy
@@ -592,36 +581,34 @@ const copyWebLink = async () => {
       textArea.style.left = '-999999px'
       textArea.style.top = '-999999px'
       textArea.style.opacity = '0'
+      textArea.style.pointerEvents = 'none'
       document.body.appendChild(textArea)
       textArea.focus()
       textArea.select()
+      textArea.setSelectionRange(0, 99999) // For mobile devices
 
-      showSuccessMessage('📝 TextArea created, attempting execCommand...')
       const successful = document.execCommand('copy')
       document.body.removeChild(textArea)
 
       if (successful) {
         copySuccess = true
-        showSuccessMessage('✅ Fallback copy successful!')
-      } else {
-        showSuccessMessage('❌ execCommand returned false')
       }
     } catch (fallbackErr) {
-      showSuccessMessage(`❌ Fallback error: ${fallbackErr.message}`)
+      console.error('Fallback copy failed:', fallbackErr)
     }
   }
 
   if (copySuccess) {
-    showSuccessMessage('✅ Copy completed successfully!')
+    showSuccessMessage('✅ Link copied to clipboard!')
     // Add success haptic feedback
     if (window.triggerHaptic) {
       window.triggerHaptic('notification', 'success')
     }
   } else {
-    showSuccessMessage('❌ All copy methods FAILED!')
+    showSuccessMessage('❌ Unable to copy link. Please try again.')
     // Still provide haptic feedback for user interaction
     if (window.triggerHaptic) {
-      window.triggerHaptic('impact', 'light')
+      window.triggerHaptic('impact', 'medium')
     }
   }
 
