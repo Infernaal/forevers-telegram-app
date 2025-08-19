@@ -286,17 +286,21 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import BottomNavigation from '../components/BottomNavigation.vue'
 import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
 import SuccessNotification from '../components/SuccessNotification.vue'
 import TermsCheckbox from '../components/TermsCheckbox.vue'
+import referralService from '../services/referralService.js'
 
 // Reactive data
 const termsAccepted = ref(false)
 const linkCopied = ref(false)
-const referralLink = ref('vm.dubadu/jjhI1uT4S')
+const referralLink = ref('vm.dubadu/loading...')
+const qrImageUrl = ref('')
 const showTermsModal = ref(false)
+const isLoading = ref(true)
+const loadingError = ref('')
 
 // Check if any modal is open for blur effect
 const isAnyModalOpen = computed(() => {
