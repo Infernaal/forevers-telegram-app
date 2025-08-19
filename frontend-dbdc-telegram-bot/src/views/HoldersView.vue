@@ -74,14 +74,24 @@
         <div class="absolute left-1/2 top-6 transform -translate-x-1/2 w-56 h-56 z-10">
           <div class="w-full h-full rounded-2xl border border-gray-200 bg-dbd-off-white shadow-lg relative">
             <!-- QR Code Image -->
-            <img 
-              src="https://api.builder.io/api/v1/image/assets/TEMP/d0e1d46df412099f6abe582c7574e9c4a57f8399?width=280" 
-              alt="QR Code" 
+            <div v-if="isLoading" class="absolute left-1/2 top-5 transform -translate-x-1/2 w-36 h-36 aspect-square flex items-center justify-center bg-gray-200 rounded-lg">
+              <svg class="animate-spin h-8 w-8 text-gray-400" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" />
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+              </svg>
+            </div>
+            <img
+              v-else-if="qrImageUrl && !loadingError"
+              :src="qrImageUrl"
+              alt="QR Code"
               class="absolute left-1/2 top-5 transform -translate-x-1/2 w-36 h-36 aspect-square object-contain"
             />
+            <div v-else class="absolute left-1/2 top-5 transform -translate-x-1/2 w-36 h-36 aspect-square flex items-center justify-center bg-red-100 rounded-lg">
+              <span class="text-red-500 text-sm">Error loading QR</span>
+            </div>
             <!-- QR Code Link -->
             <div class="absolute left-1/2 bottom-5 transform -translate-x-1/2 text-dbd-primary text-lg sm:text-xl font-semibold leading-6 text-center">
-              vm.dubadu/jjhI1uT4S
+              {{ referralLink }}
             </div>
           </div>
         </div>
@@ -230,7 +240,7 @@
               <!-- URL text -->
               <div v-if="!linkCopied" class="flex-1 px-4 sm:px-6 py-3.5 overflow-hidden">
                 <span class="text-dbd-off-white text-sm sm:text-lg font-semibold leading-5 underline truncate block max-w-full">
-                  vm.dubadu/jjhI1uT4S
+                  {{ referralLink }}
                 </span>
               </div>
 
@@ -286,17 +296,21 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import BottomNavigation from '../components/BottomNavigation.vue'
 import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
 import SuccessNotification from '../components/SuccessNotification.vue'
 import TermsCheckbox from '../components/TermsCheckbox.vue'
+import referralService from '../services/referralService.js'
 
 // Reactive data
 const termsAccepted = ref(false)
 const linkCopied = ref(false)
-const referralLink = ref('vm.dubadu/jjhI1uT4S')
+const referralLink = ref('vm.dubadu/loading...')
+const qrImageUrl = ref('')
 const showTermsModal = ref(false)
+const isLoading = ref(true)
+const loadingError = ref('')
 
 // Check if any modal is open for blur effect
 const isAnyModalOpen = computed(() => {
@@ -311,7 +325,7 @@ const bottomNavRef = ref(null)
 let successTimeout = null
 
 // Methods
-const shareQRCode = () => {
+const shareQRCode = async () => {
   if (!termsAccepted.value || isSharing.value) return
 
   console.log('Sharing QR code...')
@@ -330,12 +344,21 @@ const shareQRCode = () => {
     window.triggerHaptic('impact', 'light')
   }
 
+  // Get the full link for sharing
+  let shareUrl = referralLink.value
+  try {
+    const inviteData = await referralService.getInviteData()
+    shareUrl = inviteData.invite_link // Используем прямо display link
+  } catch (error) {
+    console.warn('Could not get invite data for sharing, using display link:', error)
+  }
+
   // Try standard Web Share API first (works on most platforms including Telegram, Viber, etc.)
   if (navigator.share) {
     navigator.share({
       title: 'DBD Capital Forevers Bot',
       text: 'Join me on DBD Capital Forevers Bot! 🚀',
-      url: referralLink.value
+      url: shareUrl
     }).then(() => {
       // Sharing was successful
       clearTimeout(safetyTimeout)
@@ -357,15 +380,24 @@ const shareQRCode = () => {
   }
 }
 
-const telegramFallback = (safetyTimeout = null) => {
+const telegramFallback = async (safetyTimeout = null) => {
+  // Get the full link for Telegram sharing
+  let shareUrl = referralLink.value
+  try {
+    const inviteData = await referralService.getInviteData()
+    shareUrl = inviteData.invite_link // Используем прямо display link
+  } catch (error) {
+    console.warn('Could not get invite data for Telegram sharing, using display link:', error)
+  }
+
   // Use Telegram WebApp sharing if available
   if (window.Telegram && window.Telegram.WebApp) {
     const tg = window.Telegram.WebApp
 
     try {
       // Use Telegram's openTelegramLink for sharing (compatible with version 6.0)
-      const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(referralLink.value)}&text=${encodeURIComponent('Join me on DBD Capital Forevers Bot! 🚀')}`
-      tg.openTelegramLink(shareUrl)
+      const telegramShareUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent('Join me on DBD Capital Forevers Bot! 🚀')}`
+      tg.openTelegramLink(telegramShareUrl)
 
       // Set up event listener for when user returns to app
       const handleVisibilityChange = () => {
@@ -412,10 +444,19 @@ const fallbackShare = () => {
 const copyLink = async () => {
   let copySuccess = false
 
+  // Get the actual full link to copy
+  let linkToCopy = referralLink.value
+  try {
+    const inviteData = await referralService.getInviteData()
+    linkToCopy = inviteData.invite_link // Используем прямо display link
+  } catch (error) {
+    console.warn('Could not get invite data, using display link:', error)
+  }
+
   // Try modern clipboard API first
   if (navigator.clipboard) {
     try {
-      await navigator.clipboard.writeText(referralLink.value)
+      await navigator.clipboard.writeText(linkToCopy)
       copySuccess = true
     } catch (clipboardErr) {
       console.log('Clipboard API failed, trying fallback method')
@@ -426,7 +467,7 @@ const copyLink = async () => {
   if (!copySuccess) {
     try {
       const textArea = document.createElement('textarea')
-      textArea.value = referralLink.value
+      textArea.value = linkToCopy
       textArea.style.position = 'fixed'
       textArea.style.left = '-999999px'
       textArea.style.top = '-999999px'
@@ -459,10 +500,19 @@ const copyLink = async () => {
 const copyWebLink = async () => {
   let copySuccess = false
 
+  // Get the actual full link to copy
+  let linkToCopy = referralLink.value
+  try {
+    const inviteData = await referralService.getInviteData()
+    linkToCopy = inviteData.invite_link // Используем прямо display link
+  } catch (error) {
+    console.warn('Could not get invite data, using display link:', error)
+  }
+
   // Try modern clipboard API first
   if (navigator.clipboard) {
     try {
-      await navigator.clipboard.writeText(referralLink.value)
+      await navigator.clipboard.writeText(linkToCopy)
       copySuccess = true
     } catch (clipboardErr) {
       console.log('Clipboard API failed, trying fallback method')
@@ -473,7 +523,7 @@ const copyWebLink = async () => {
   if (!copySuccess) {
     try {
       const textArea = document.createElement('textarea')
-      textArea.value = referralLink.value
+      textArea.value = linkToCopy
       textArea.style.position = 'fixed'
       textArea.style.left = '-999999px'
       textArea.style.top = '-999999px'
@@ -540,6 +590,48 @@ const hideSuccessNotification = () => {
     successTimeout = null
   }
 }
+
+// Загру��ка реферальных д��нных
+const loadReferralData = async () => {
+  try {
+    isLoading.value = true
+    loadingError.value = ''
+
+    // Получаем данные приглашения (ссылку и QR-код) одним запросом
+    const inviteData = await referralService.getInviteData()
+    referralLink.value = inviteData.invite_link
+
+    // Освобождаем предыдущий URL если он был
+    if (qrImageUrl.value) {
+      URL.revokeObjectURL(qrImageUrl.value)
+    }
+
+    // QR-код приходит как base64, используем его напрямую
+    qrImageUrl.value = inviteData.qr_code
+
+    console.log('Invite data loaded successfully:', {
+      inviteLink: inviteData.invite_link,
+      userId: inviteData.user_id,
+      code: inviteData.code
+    })
+  } catch (error) {
+    console.error('Error loading invite data:', error)
+    loadingError.value = 'Failed to load invite data'
+    referralLink.value = 'vm.dubadu/error'
+  } finally {
+    isLoading.value = false
+  }
+}
+
+// Lifecycle hooks
+onMounted(() => {
+  loadReferralData()
+})
+
+onUnmounted(() => {
+  // Очистка ресурсов при размонтировании компонента
+  // QR-код теперь приходит как base64, не тр��бует освобождения URL
+})
 </script>
 
 <style scoped>
