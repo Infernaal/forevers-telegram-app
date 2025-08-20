@@ -82,7 +82,7 @@ const goFavorites = () => router.replace('/favorites')
   font-weight: 600;
   color: #fff;
   letter-spacing: 0.04em;
-  text-align: center;
+  text-align: left;
   line-height: 1.8rem;
   background: none;
   width: 100%;
