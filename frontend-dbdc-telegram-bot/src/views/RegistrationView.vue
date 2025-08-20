@@ -760,25 +760,46 @@ const handleEnter = (current) => {
   focusField(next)
 }
 
-// Helper: mark the currently focused input as touched immediately (needed when user jumps to country selector)
-const finalizeActiveField = () => {
-  // Use the reactive tracker first
+// Enhanced helper: mark all fields with content as touched before navigation
+const finalizeAllActiveFields = () => {
+  // Method 1: Use the reactive tracker first
   if (currentFocusedField.value) {
     const fieldName = currentFocusedField.value
     const value = formData.value[fieldName]
     if (value && value.trim().length > 0) {
       touchedFields.value[fieldName] = true
     }
-  } else {
-    // Fallback: inspect DOM activeElement (in case currentFocusedField missed)
-    const el = document.activeElement
-    if (el && el.getAttribute) {
-      const fieldName = el.getAttribute('data-field')
+  }
+
+  // Method 2: Check DOM activeElement (in case currentFocusedField missed)
+  const activeEl = document.activeElement
+  if (activeEl && activeEl.getAttribute && activeEl.getAttribute('data-field')) {
+    const fieldName = activeEl.getAttribute('data-field')
+    const fieldValue = formData.value[fieldName]
+    if (fieldValue && fieldValue.trim().length > 0) {
+      touchedFields.value[fieldName] = true
+    }
+  }
+
+  // Method 3: Force finalize all fields with content (comprehensive fallback)
+  const fieldsToCheck = ['email', 'firstName', 'lastName', 'phone']
+  fieldsToCheck.forEach(fieldName => {
+    const value = formData.value[fieldName]
+    if (value && value.trim().length > 0) {
+      touchedFields.value[fieldName] = true
+    }
+  })
+
+  // Method 4: Also check any input that currently has DOM focus by querying all inputs
+  const allInputs = document.querySelectorAll('input[data-field]')
+  allInputs.forEach(input => {
+    if (document.activeElement === input) {
+      const fieldName = input.getAttribute('data-field')
       if (fieldName && formData.value[fieldName] && formData.value[fieldName].trim().length > 0) {
         touchedFields.value[fieldName] = true
       }
     }
-  }
+  })
 }
 </script>
 
