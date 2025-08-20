@@ -92,6 +92,14 @@ const handleStart = () => {
   router.push({ path: '/loader', query: { action: 'check-telegram', redirect: '/account-check', minDelay: 300 } })
 }
 
+// Temporary test function for referral
+const testReferral = () => {
+  localStorage.setItem('referral_user_id', '4344')
+  localStorage.setItem('referral_code', '52J01Z')
+  localStorage.setItem('is_referral_user', 'true')
+  router.push('/registration')
+}
+
 // Initialize app
 onMounted(() => {
   // Prevent zoom on mobile
