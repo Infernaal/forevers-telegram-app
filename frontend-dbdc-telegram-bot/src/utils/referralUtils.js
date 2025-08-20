@@ -30,7 +30,7 @@ export function getTelegramStartParam() {
 
 /**
  * Parse referral code from start parameter
- * Expected format: "ref_USERID" or "code_USERID" or just "USERID"
+ * Expected format: "ref_4344_code_MJ4KSD" where ref can be 1-3+ digits and code is always 6 characters
  * @param {string} startParam - The start parameter from Telegram
  * @returns {Object|null} Parsed referral info or null
  */
@@ -41,7 +41,23 @@ export function parseReferralCode(startParam) {
 
   const param = startParam.trim()
 
-  // Check if it starts with "ref_" or "code_"
+  // New format: ref_USERID_code_CODE (e.g., ref_4344_code_MJ4KSD)
+  const newFormatMatch = param.match(/^ref_(\d+)_code_([A-Z0-9]{6})$/)
+  if (newFormatMatch) {
+    const userId = newFormatMatch[1]
+    const code = newFormatMatch[2]
+    return {
+      type: 'ref_code',
+      userId: userId,
+      code: code,
+      isReferral: true,
+      username: null, // Will be populated if available
+      firstName: null,
+      lastName: null
+    }
+  }
+
+  // Legacy format: Check if it starts with "ref_" or "code_"
   if (param.startsWith('ref_')) {
     const userId = param.substring(4) // Remove "ref_" prefix
     if (userId && !isNaN(parseInt(userId))) {
@@ -140,26 +156,37 @@ export function clearReferralInfo() {
 /**
  * Enrich referral info with additional user data if available
  * @param {Object} referralInfo - Basic referral info
- * @returns {Object} Enhanced referral info
+ * @returns {Promise<Object>} Enhanced referral info
  */
-export function enrichReferralInfo(referralInfo) {
+export async function enrichReferralInfo(referralInfo) {
   if (!referralInfo) return null
 
   try {
-    // Try to get referrer info from Telegram WebApp if available
-    // This might not always be available depending on how the link was shared
-    const webApp = window?.Telegram?.WebApp
-    if (webApp && webApp.initDataUnsafe) {
-      // Note: Telegram WebApp typically doesn't provide referrer user info
-      // This is more for demonstration and future enhancement
-      const initData = webApp.initDataUnsafe
+    // Fetch referrer information from backend
+    if (referralInfo.userId) {
+      const referrerData = await getReferrerInfo(referralInfo.userId)
+      if (referrerData) {
+        // Update referral info with fetched data
+        referralInfo.firstName = referrerData.first_name
+        referralInfo.lastName = referrerData.last_name
+        referralInfo.email = referrerData.email
 
-      // For now, we can try to construct a username-like display
-      // In a real app, you'd probably fetch this from your backend API
-      if (referralInfo.userId) {
-        // Example: create a display name based on user ID
-        const shortId = referralInfo.userId.slice(-6)
-        referralInfo.username = `vm.dubadu/${shortId}`
+        // Create username-like display using code if available
+        if (referralInfo.code) {
+          referralInfo.username = `vm.dubadu/${referralInfo.code}`
+        } else {
+          // Fallback to user ID based username
+          const shortId = referralInfo.userId.slice(-6)
+          referralInfo.username = `vm.dubadu/${shortId}`
+        }
+      } else {
+        // Fallback if API call fails
+        if (referralInfo.code) {
+          referralInfo.username = `vm.dubadu/${referralInfo.code}`
+        } else {
+          const shortId = referralInfo.userId.slice(-6)
+          referralInfo.username = `vm.dubadu/${shortId}`
+        }
       }
     }
   } catch (error) {
@@ -168,6 +195,9 @@ export function enrichReferralInfo(referralInfo) {
 
   return referralInfo
 }
+
+// Import referrer info service
+import { getReferrerInfo } from '@/services/referralInfoService.js'
 
 /**
  * Generate referral link (helper function)

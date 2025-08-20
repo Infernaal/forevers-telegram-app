@@ -10,6 +10,9 @@ import logging
 import os
 from dependencies.current_user import get_current_user_id
 from dotenv import load_dotenv
+from sqlalchemy.orm import Session
+from db.database import get_db
+from models.models import Users
 
 load_dotenv()
 logger = logging.getLogger(__name__)
@@ -21,6 +24,12 @@ class InviteResponse(BaseModel):
     qr_code: str  # Base64 encoded QR code image
     user_id: int
     code: str
+
+class ReferrerInfoResponse(BaseModel):
+    user_id: int
+    first_name: str
+    last_name: str
+    email: str
 
 
 def generate_unique_code(length: int = 6) -> str:
@@ -80,3 +89,26 @@ async def get_invite_data(current_user_id: int = Depends(get_current_user_id)):
     except Exception as e:
         logger.error(f"Error generating invite data for user {current_user_id}: {str(e)}")
         raise HTTPException(status_code=500, detail="Failed to generate invite data")
+
+@router.get("/referrer/{ref_id}", response_model=ReferrerInfoResponse)
+async def get_referrer_info(ref_id: int, db: Session = Depends(get_db)):
+    """
+    Get referrer information by referral ID
+    """
+    try:
+        user = db.query(Users).filter(Users.id == ref_id).first()
+
+        if not user:
+            raise HTTPException(status_code=404, detail="Referrer not found")
+
+        return ReferrerInfoResponse(
+            user_id=user.id,
+            first_name=user.first_name or "",
+            last_name=user.last_name or "",
+            email=user.email or ""
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error getting referrer info for ref_id {ref_id}: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to get referrer information")
