@@ -51,7 +51,6 @@ export function parseReferralCode(startParam) {
       userId: userId,
       code: code,
       isReferral: true,
-      username: null, // Will be populated if available
       firstName: null,
       lastName: null
     }
@@ -65,7 +64,6 @@ export function parseReferralCode(startParam) {
         type: 'ref',
         userId: userId,
         isReferral: true,
-        username: null, // Will be populated if available
         firstName: null,
         lastName: null
       }
@@ -79,7 +77,6 @@ export function parseReferralCode(startParam) {
         type: 'code',
         userId: userId,
         isReferral: true,
-        username: null, // Will be populated if available
         firstName: null,
         lastName: null
       }
@@ -92,7 +89,6 @@ export function parseReferralCode(startParam) {
       type: 'direct',
       userId: param,
       isReferral: true,
-      username: null, // Will be populated if available
       firstName: null,
       lastName: null
     }
@@ -170,23 +166,6 @@ export async function enrichReferralInfo(referralInfo) {
         referralInfo.firstName = referrerData.first_name
         referralInfo.lastName = referrerData.last_name
         referralInfo.email = referrerData.email
-
-        // Create username-like display using code if available
-        if (referralInfo.code) {
-          referralInfo.username = `vm.dubadu/${referralInfo.code}`
-        } else {
-          // Fallback to user ID based username
-          const shortId = referralInfo.userId.slice(-6)
-          referralInfo.username = `vm.dubadu/${shortId}`
-        }
-      } else {
-        // Fallback if API call fails
-        if (referralInfo.code) {
-          referralInfo.username = `vm.dubadu/${referralInfo.code}`
-        } else {
-          const shortId = referralInfo.userId.slice(-6)
-          referralInfo.username = `vm.dubadu/${shortId}`
-        }
       }
     }
   } catch (error) {
