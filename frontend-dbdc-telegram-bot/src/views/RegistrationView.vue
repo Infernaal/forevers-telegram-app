@@ -677,13 +677,15 @@ const handleCountrySelection = () => {
   }
 }
 
-onMounted(() => {
+onMounted(async () => {
   document.addEventListener('click', handleClickOutside)
   window.addEventListener('focus', handleCountrySelection)
 
   // Initialize referral info if user came through referral link
   const storedReferralInfo = getStoredReferralInfo()
-  referralInfo.value = enrichReferralInfo(storedReferralInfo)
+  if (storedReferralInfo) {
+    referralInfo.value = await enrichReferralInfo(storedReferralInfo)
+  }
 
   // Restore form data first
   restoreFormData()
