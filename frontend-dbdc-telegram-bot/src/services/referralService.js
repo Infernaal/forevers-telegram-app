@@ -1,7 +1,7 @@
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dbdc-mini.dubadu.com/api/v1/dbdc';
 
 /**
- * Сервис для работы с реферальными ссылками
+ * Сервис для работы с реферальной системой
  */
 class ReferralService {
   /**
@@ -32,8 +32,8 @@ class ReferralService {
   }
 
   /**
-   * Получает полную реферральную ссылку для пользователя (оставлено для совместимости)
-   * @returns {Promise<Object>} Об��ект с данными реферальной ссылки
+   * Получает полную реферальную ссылку для пользователя (оставлено для совместимости)
+   * @returns {Promise<Object>} Объект с данными реферальной ссылки
    * @deprecated Используйте getInviteData() вместо этого метода
    */
   async getFullReferralLink() {
@@ -48,6 +48,39 @@ class ReferralService {
     };
   }
 
+  /**
+   * Получает информацию о реферере по ID пользователя
+   * @param {string|number} refId - ID пользователя-реферера
+   * @returns {Promise<Object|null>} Информация о реферере или null
+   */
+  async getReferrerInfo(refId) {
+    if (!refId || isNaN(parseInt(refId))) {
+      return null;
+    }
+
+    try {
+      const response = await fetch(`${BASE_URL}/referral/referrer/${refId}`);
+      
+      if (!response.ok) {
+        if (response.status === 404) {
+          console.warn(`Referrer with ID ${refId} not found`);
+          return null;
+        }
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching referrer info:', error);
+      return null;
+    }
+  }
 }
 
-export default new ReferralService();
+const referralService = new ReferralService();
+
+// Экспорт для обратной совместимости
+export const getReferrerInfo = (refId) => referralService.getReferrerInfo(refId);
+
+export default referralService;
