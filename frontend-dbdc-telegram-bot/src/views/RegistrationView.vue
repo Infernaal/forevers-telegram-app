@@ -315,11 +315,6 @@
                       User ID: {{ referralInfo.userId }}
                     </div>
                   </div>
-
-                  <!-- Partner link/username (if available) -->
-                  <div v-if="referralInfo.username" class="absolute right-3 top-[27px] text-dbd-primary text-sm font-semibold leading-4 underline">
-                    {{ referralInfo.username }}
-                  </div>
                 </div>
               </div>
 
