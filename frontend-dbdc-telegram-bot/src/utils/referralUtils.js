@@ -137,7 +137,7 @@ export async function enrichReferralInfo(referralInfo) {
 }
 
 // Import referrer info service
-import { getReferrerInfo } from '@/services/referralInfoService.js'
+import { getReferrerInfo } from '@/services/referralService.js'
 
 /**
  * Generate referral link (helper function)
