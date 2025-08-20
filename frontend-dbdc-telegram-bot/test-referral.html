@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Referral Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #2019CE;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px 0;
+            width: 100%;
+        }
+        button:hover {
+            background: #1a15a8;
+        }
+        .info {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border-left: 4px solid #2019CE;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Test Referral Data</h2>
+        <p>Use these buttons to test referral functionality:</p>
+        
+        <button onclick="setReferralData()">Set Test Referral Data</button>
+        <button onclick="clearReferralData()">Clear Referral Data</button>
+        <button onclick="goToRegistration()">Go to Registration</button>
+        
+        <div class="info">
+            <h4>Current Referral Data:</h4>
+            <div id="currentData">Loading...</div>
+        </div>
+        
+        <div class="info">
+            <h4>Instructions:</h4>
+            <ol>
+                <li>Click "Set Test Referral Data" to simulate arriving via referral link</li>
+                <li>Click "Go to Registration" to see the "Your partner" block</li>
+                <li>Use "Clear Referral Data" to test normal registration</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        function setReferralData() {
+            localStorage.setItem('referral_user_id', '4344');
+            localStorage.setItem('referral_code', '52J01Z');
+            localStorage.setItem('is_referral_user', 'true');
+            updateDisplay();
+            alert('Referral data set! Now go to registration to see the partner block.');
+        }
+        
+        function clearReferralData() {
+            localStorage.removeItem('referral_user_id');
+            localStorage.removeItem('referral_code');
+            localStorage.removeItem('is_referral_user');
+            updateDisplay();
+            alert('Referral data cleared!');
+        }
+        
+        function goToRegistration() {
+            window.location.href = '/registration';
+        }
+        
+        function updateDisplay() {
+            const userId = localStorage.getItem('referral_user_id');
+            const code = localStorage.getItem('referral_code');
+            const isReferral = localStorage.getItem('is_referral_user');
+            
+            const dataDiv = document.getElementById('currentData');
+            if (isReferral === 'true' && userId) {
+                dataDiv.innerHTML = `
+                    <strong>Referral User ID:</strong> ${userId}<br>
+                    <strong>Referral Code:</strong> ${code}<br>
+                    <strong>Is Referral:</strong> ${isReferral}
+                `;
+            } else {
+                dataDiv.innerHTML = '<em>No referral data found</em>';
+            }
+        }
+        
+        // Update display on page load
+        updateDisplay();
+        
+        // Auto-refresh display every 2 seconds
+        setInterval(updateDisplay, 2000);
+    </script>
+</body>
+</html>
