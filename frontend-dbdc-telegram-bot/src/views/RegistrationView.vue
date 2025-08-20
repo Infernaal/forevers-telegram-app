@@ -663,6 +663,24 @@ const handleCountrySelection = () => {
   }
 }
 
+// Load referral data from localStorage
+const loadReferralData = () => {
+  try {
+    const storedUserId = localStorage.getItem('referral_user_id')
+    const storedCode = localStorage.getItem('referral_code')
+    const storedIsReferral = localStorage.getItem('is_referral_user') === 'true'
+
+    if (storedIsReferral && storedUserId) {
+      referralUserId.value = storedUserId
+      referralCode.value = storedCode
+      isReferralUser.value = true
+      console.log('Referral data loaded:', { userId: storedUserId, code: storedCode })
+    }
+  } catch (error) {
+    console.error('Error loading referral data:', error)
+  }
+}
+
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
   window.addEventListener('focus', handleCountrySelection)
