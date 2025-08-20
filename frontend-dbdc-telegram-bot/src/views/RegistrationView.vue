@@ -847,12 +847,26 @@ input {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  /* Fix vertical alignment for Telegram Web App */
+  vertical-align: middle;
+  line-height: 1.2;
+  height: auto;
+  /* Prevent text jumping on focus */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  /* Center text vertically */
+  display: flex;
+  align-items: center;
 }
 
 input:focus {
   outline: none !important;
   box-shadow: none !important;
   border-color: inherit;
+  /* Maintain vertical alignment on focus */
+  vertical-align: middle;
+  line-height: 1.2;
 }
 
 /* Prevent zoom on mobile inputs */
