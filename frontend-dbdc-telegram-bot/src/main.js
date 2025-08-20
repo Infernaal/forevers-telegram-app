@@ -79,6 +79,23 @@ if (window.Telegram && window.Telegram.WebApp) {
     // Adjust viewport for keyboard
     const keyboardHeight = Math.max(0, window.innerHeight - tg.viewportHeight)
     document.documentElement.style.setProperty('--keyboard-height', keyboardHeight + 'px')
+
+    // Prevent cursor jumping when keyboard opens/closes
+    if (keyboardHeight > 100) {
+      // Keyboard is open - add class to body
+      document.body.classList.add('keyboard-open')
+      // Prevent viewport shifting by maintaining scroll position
+      const activeInput = document.activeElement
+      if (activeInput && activeInput.tagName === 'INPUT') {
+        // Small delay to ensure smooth transition
+        setTimeout(() => {
+          activeInput.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        }, 150)
+      }
+    } else {
+      // Keyboard is closed
+      document.body.classList.remove('keyboard-open')
+    }
   })
   
   // Add to global for easy access
@@ -105,4 +122,3 @@ if (window.Telegram && window.Telegram.WebApp) {
 app.use(router)
 
 app.mount('#app')
-
