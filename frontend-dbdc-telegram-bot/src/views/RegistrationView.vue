@@ -705,13 +705,18 @@ const handleRegister = () => {
     fullPhone = local || null
   }
 
+  // Получаем реферальную информацию, если она есть
+  const referralUserId = localStorage.getItem('referral_user_id')
+  const referralCode = localStorage.getItem('referral_code')
+  const isReferralUser = localStorage.getItem('is_referral_user') === 'true'
+
   const payload = {
     first_name: formData.value.firstName.trim(),
     last_name: formData.value.lastName.trim(),
     country: selectedCountry.value.code || formData.value.country,
     email: formData.value.email.trim(),
     phone: fullPhone,
-    ref: null
+    ref: (isReferralUser && referralUserId) ? referralUserId : null
   }
   sessionStorage.setItem('pendingRegistration', JSON.stringify(payload))
   router.push({ path: '/loader', query: { action: 'register', redirect: '/favorites', minDelay: 400 } })
