@@ -19,7 +19,7 @@
           </span>
         </div>
         <!-- Copied State -->
-        <div v-if="copied" class="flex-1 px-4 sm:px-6 py-3.5 overflow-hidden flex items-center justify-start">
+        <div v-if="copied" class="flex-1 px-4 sm:px-6 py-3.5 overflow-hidden flex items-center justify-center">
           <div class="link-copied-content flex items-center gap-2">
             <span class="link-copied-text text-white font-bold">Copied</span>
             <div class="link-copied-icon">
