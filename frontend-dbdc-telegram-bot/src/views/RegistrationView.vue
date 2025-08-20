@@ -26,22 +26,26 @@
               <h2 class="text-white text-base font-medium">Complete Registration</h2>
 
               <!-- Your Partner Field (only shown for referral users) -->
-              <div v-if="referralInfo && referralInfo.isReferral" class="relative">
-                <div class="w-full h-[52px] rounded-lg border border-[#88EF8C] bg-[#B3FFB6] flex items-center px-3">
-                  <div class="flex items-center flex-1">
-                    <svg class="w-6 h-6 mr-2 flex-shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <path d="M12 12C15.3137 12 18 9.31371 18 6C18 2.68629 15.3137 0 12 0C8.68629 0 6 2.68629 6 6C6 9.31371 8.68629 12 12 12ZM12 15C5.37258 15 0 17.6863 0 21V24H24V21C24 17.6863 18.6274 15 12 15Z" fill="#07B80E"/>
-                    </svg>
-                    <div class="flex flex-col items-start justify-center flex-1">
-                      <div class="text-xs text-[#07B80E] font-medium leading-none">Your Partner</div>
-                      <div class="text-base font-medium text-[#07B80E] mt-1">User ID: {{ referralInfo.userId }}</div>
-                    </div>
-                    <!-- Success checkmark -->
-                    <div class="w-5 h-5 rounded-full border border-[#88EF8C] bg-[#B3FFB6] flex items-center justify-center">
-                      <svg class="w-2 h-2" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8">
-                        <path d="M7.65064 0.0612768C7.28964 -0.158776 6.88699 0.265611 6.65095 0.5171C6.10947 1.11439 5.65128 1.80598 5.13753 2.4347C4.56826 3.1263 4.04064 3.81789 3.45749 4.49379C3.12425 4.87103 2.76325 5.27969 2.5411 5.75124C2.04125 5.20108 1.61083 4.60379 1.05545 4.11656C0.652791 3.77076 -0.0136711 3.51927 0.000213534 4.35233C0.0279828 5.4369 0.874945 6.60004 1.49975 7.33876C1.76356 7.65312 2.11068 7.9832 2.51333 7.99892C2.99929 8.03035 3.49914 7.37019 3.79072 7.00868C4.30447 6.37996 4.72101 5.67262 5.19306 5.02821C5.80399 4.17943 6.4288 3.34635 7.02584 2.48186C7.40072 1.94744 8.58091 0.627101 7.65064 0.0612768ZM0.611114 4.28946C0.59723 4.28946 0.583345 4.28946 0.555576 4.30515C0.500037 4.28946 0.458384 4.27371 0.402845 4.24228C0.444499 4.21084 0.513922 4.22656 0.611114 4.28946Z" fill="#07B80E"/>
+              <div v-if="referralInfo && referralInfo.isReferral" class="relative mb-2">
+                <div class="w-full h-12 rounded-lg bg-white bg-opacity-50 relative">
+                  <!-- Partner icon and label -->
+                  <div class="absolute left-3 top-3 flex items-center gap-2">
+                    <div class="w-6 h-6 flex items-center justify-center">
+                      <svg class="w-[18px] h-[22px]" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.2511 12.4974C15.4932 12.4974 16.5 13.5045 16.5 14.7467V15.3222C16.5 16.2166 16.1805 17.0816 15.5989 17.7611C14.0295 19.5949 11.6422 20.5 8.49673 20.5C5.35076 20.5 2.96466 19.5946 1.39831 17.7601C0.818531 17.081 0.5 16.2174 0.5 15.3245V14.7467C0.5 13.5045 1.50689 12.4974 2.74896 12.4974H14.2511ZM14.2511 13.9977H2.74896C2.33534 13.9977 2.00005 14.333 2.00005 14.7467V15.3245C2.00005 15.8602 2.19117 16.3784 2.53904 16.7858C3.79239 18.2538 5.75834 18.9997 8.49673 18.9997C11.2351 18.9997 13.2028 18.2537 14.4593 16.7855C14.8082 16.3779 14.9999 15.8589 14.9999 15.3222V14.7467C14.9999 14.333 14.6647 13.9977 14.2511 13.9977ZM8.49673 0.5C11.2582 0.5 13.4969 2.73897 13.4969 5.50088C13.4969 8.2628 11.2582 10.5017 8.49673 10.5017C5.73521 10.5017 3.49656 8.2628 3.49656 5.50088C3.49656 2.73897 5.73521 0.5 8.49673 0.5ZM8.49673 2.00026C6.56366 2.00026 4.99661 3.56755 4.99661 5.50088C4.99661 7.43422 6.56366 9.00148 8.49673 9.00148C10.4298 9.00148 11.9968 7.43422 11.9968 5.50088C11.9968 3.56755 10.4298 2.00026 8.49673 2.00026Z" fill="white"/>
                       </svg>
                     </div>
+                    <span class="text-white text-sm font-medium leading-[18px]">Your partner</span>
+                  </div>
+
+                  <!-- Partner name -->
+                  <div class="absolute right-3 top-1 text-white text-base font-medium leading-5">
+                    User ID: {{ referralInfo.userId }}
+                  </div>
+
+                  <!-- Partner link/username (if available) -->
+                  <div v-if="referralInfo.username" class="absolute right-3 top-[27px] text-dbd-primary text-sm font-semibold leading-4 underline">
+                    {{ referralInfo.username }}
                   </div>
                 </div>
               </div>
