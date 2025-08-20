@@ -667,6 +667,9 @@ onMounted(() => {
   document.addEventListener('click', handleClickOutside)
   window.addEventListener('focus', handleCountrySelection)
 
+  // Load referral data if available
+  loadReferralData()
+
   // Restore form data first
   restoreFormData()
 
