@@ -93,6 +93,26 @@ body {
     -webkit-backface-visibility: hidden;
 }
 
+/* Telegram WebApp keyboard handling */
+body.keyboard-open {
+    /* Prevent cursor jumping when keyboard opens */
+    position: static;
+    height: auto;
+    overflow: visible;
+    overflow-y: auto;
+}
+
+/* Input focus improvements for Telegram WebApp */
+input:focus {
+    /* Prevent cursor position jumping */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    /* Smooth transition */
+    transition: none;
+    /* Prevent zoom */
+    font-size: 16px;
+}
+
 /* Telegram WebApp specific styles with scroll fixes */
 .tg-webapp {
     background: var(--tg-theme-bg-color, #ffffff);
