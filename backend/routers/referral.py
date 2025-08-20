@@ -25,6 +25,12 @@ class InviteResponse(BaseModel):
     user_id: int
     code: str
 
+class ReferrerInfoResponse(BaseModel):
+    user_id: int
+    first_name: str
+    last_name: str
+    email: str
+
 
 def generate_unique_code(length: int = 6) -> str:
     """Генерирует уникальный 6-значный код из букв и цифр"""
