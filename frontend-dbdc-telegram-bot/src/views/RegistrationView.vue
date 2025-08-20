@@ -46,6 +46,7 @@
                         @blur="handleFieldBlur('email')"
                         @keydown.enter.prevent="handleEnter('email')"
                         class="w-full text-sm font-medium text-dbd-gray bg-transparent border-none outline-none focus:ring-0"
+                        style="line-height: 1.2; padding: 0; margin: 0; vertical-align: middle;"
                       />
                       <div v-if="!formData.email && currentFocusedField !== 'email'" class="absolute inset-0 flex items-center pointer-events-none text-sm font-medium text-dbd-light-gray">
                         <span>Email</span><span class="text-red-500 ml-1">*</span>
@@ -96,6 +97,7 @@
                         @blur="handleFieldBlur('firstName')"
                         @keydown.enter.prevent="handleEnter('firstName')"
                         class="w-full text-sm font-medium text-dbd-gray bg-transparent border-none outline-none focus:ring-0"
+                        style="line-height: 1.2; padding: 0; margin: 0; vertical-align: middle;"
                       />
                       <div v-if="!formData.firstName && currentFocusedField !== 'firstName'" class="absolute inset-0 flex items-center pointer-events-none text-sm font-medium text-dbd-light-gray">
                         <span>First name</span><span class="text-red-500 ml-1">*</span>
@@ -144,6 +146,7 @@
                         @blur="handleFieldBlur('lastName')"
                         @keydown.enter.prevent="handleEnter('lastName')"
                         class="w-full text-sm font-medium text-dbd-gray bg-transparent border-none outline-none focus:ring-0"
+                        style="line-height: 1.2; padding: 0; margin: 0; vertical-align: middle;"
                       />
                       <div v-if="!formData.lastName && currentFocusedField !== 'lastName'" class="absolute inset-0 flex items-center pointer-events-none text-sm font-medium text-dbd-light-gray">
                         <span>Last name</span><span class="text-red-500 ml-1">*</span>
@@ -251,6 +254,7 @@
                           @keydown.enter.prevent="handleEnter('phone')"
                           :disabled="!canEditPhone"
                           class="flex-1 text-base font-medium text-dbd-gray bg-transparent border-none outline-none min-w-0 focus:ring-0 disabled:cursor-not-allowed disabled:text-dbd-light-gray"
+                          style="line-height: 1.2; padding: 0; margin: 0; vertical-align: middle;"
                         />
                       </div>
                     </div>
@@ -843,12 +847,26 @@ input {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  /* Fix vertical alignment for Telegram Web App */
+  vertical-align: middle;
+  line-height: 1.2;
+  height: auto;
+  /* Prevent text jumping on focus */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  /* Center text vertically */
+  display: flex;
+  align-items: center;
 }
 
 input:focus {
   outline: none !important;
   box-shadow: none !important;
   border-color: inherit;
+  /* Maintain vertical alignment on focus */
+  vertical-align: middle;
+  line-height: 1.2;
 }
 
 /* Prevent zoom on mobile inputs */
@@ -919,7 +937,27 @@ input::placeholder {
     /* Prevent zoom and viewport shift */
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
+    /* Ensure vertical alignment is maintained */
+    vertical-align: middle;
+    line-height: 1.2;
   }
+}
+
+/* Fix input field containers to properly center content */
+.flex.items-center {
+  align-items: center !important;
+}
+
+.flex.items-center input {
+  height: auto;
+  line-height: 1.2;
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+  display: inline-block;
+  /* Remove any inherited flex properties that might interfere */
+  flex: 1;
+  align-self: center;
 }
 
 /* Handle Telegram WebApp viewport changes */
