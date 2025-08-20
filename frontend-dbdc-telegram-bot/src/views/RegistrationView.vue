@@ -350,6 +350,11 @@ const forbiddenEmailDomains = new Set([
 const showCountryDropdown = ref(false)
 const selectedCountry = ref({ name: '', code: '' })
 
+// Referral data
+const referralUserId = ref(null)
+const referralCode = ref(null)
+const isReferralUser = ref(false)
+
 // Available countries list with phone codes (full automatic dataset)
 const countries = ref(fullCountries)
 
