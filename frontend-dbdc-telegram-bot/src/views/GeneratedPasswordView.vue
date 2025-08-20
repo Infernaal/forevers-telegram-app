@@ -96,14 +96,9 @@ const goFavorites = () => router.replace('/favorites')
 }
 
 .link-copied-content {
-  width: 100%;
-  height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 8px;
-  padding: 6px;
-  box-sizing: border-box;
   animation: fadeInScale 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
