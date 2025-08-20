@@ -193,7 +193,7 @@
                       </svg>
                     </div>
                   </div>
-                  <div v-else class="flex items-center flex-1 cursor-pointer" @mousedown="handleCountryMouseDown" @click="editField('country')">`
+                  <div v-else class="flex items-center flex-1 cursor-pointer" @mousedown="handleCountryMouseDown" @click="editField('country')">
                     <!-- Country Flag -->
                     <CountryFlag :country="selectedCountry.code" size="small" class="mr-2" />
                     <div class="flex flex-col items-start justify-center flex-1">
