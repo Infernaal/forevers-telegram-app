@@ -13,8 +13,8 @@
       <div class="relative w-full max-w-sm h-13 sm:h-14 md:h-16 rounded-full border border-blue-600 border-opacity-60 bg-white bg-opacity-10 flex items-center transition-all duration-400 ease-out overflow-hidden mb-6"
         :class="{ 'link-copied-state': copied }">
         <!-- Пароль -->
-        <div v-if="!copied" class="flex-1 px-4 sm:px-6 py-3.5 overflow-hidden flex items-center justify-center">
-          <span class="password-text block font-mono select-all w-full text-center">
+        <div v-if="!copied" class="flex-1 px-4 sm:px-6 py-3.5 overflow-hidden flex items-center justify-start">
+          <span class="password-text block font-mono select-all w-full text-left">
             {{ password }}
           </span>
         </div>
