@@ -41,7 +41,7 @@ export function parseReferralCode(startParam) {
 
   const param = startParam.trim()
 
-  // New format: ref_USERID_code_CODE (e.g., ref_4344_code_MJ4KSD)
+  // Only new format: ref_USERID_code_CODE (e.g., ref_4344_code_MJ4KSD)
   const newFormatMatch = param.match(/^ref_(\d+)_code_([A-Z0-9]{6})$/)
   if (newFormatMatch) {
     const userId = newFormatMatch[1]
@@ -50,44 +50,6 @@ export function parseReferralCode(startParam) {
       type: 'ref_code',
       userId: userId,
       code: code,
-      isReferral: true,
-      firstName: null,
-      lastName: null
-    }
-  }
-
-  // Legacy format: Check if it starts with "ref_" or "code_"
-  if (param.startsWith('ref_')) {
-    const userId = param.substring(4) // Remove "ref_" prefix
-    if (userId && !isNaN(parseInt(userId))) {
-      return {
-        type: 'ref',
-        userId: userId,
-        isReferral: true,
-        firstName: null,
-        lastName: null
-      }
-    }
-  }
-
-  if (param.startsWith('code_')) {
-    const userId = param.substring(5) // Remove "code_" prefix
-    if (userId && !isNaN(parseInt(userId))) {
-      return {
-        type: 'code',
-        userId: userId,
-        isReferral: true,
-        firstName: null,
-        lastName: null
-      }
-    }
-  }
-
-  // Fallback: check if it's just a numeric user ID
-  if (!isNaN(parseInt(param))) {
-    return {
-      type: 'direct',
-      userId: param,
       isReferral: true,
       firstName: null,
       lastName: null
@@ -165,7 +127,6 @@ export async function enrichReferralInfo(referralInfo) {
         // Update referral info with fetched data
         referralInfo.firstName = referrerData.first_name
         referralInfo.lastName = referrerData.last_name
-        referralInfo.email = referrerData.email
       }
     }
   } catch (error) {

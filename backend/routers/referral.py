@@ -30,7 +30,6 @@ class ReferrerInfoResponse(BaseModel):
     user_id: int
     first_name: str
     last_name: str
-    email: str
 
 
 def generate_unique_code(length: int = 6) -> str:
@@ -108,8 +107,7 @@ async def get_referrer_info(ref_id: int, db: AsyncSession = Depends(get_db)):
         return ReferrerInfoResponse(
             user_id=user.id,
             first_name=user.first_name or "",
-            last_name=user.last_name or "",
-            email=user.email or ""
+            last_name=user.last_name or ""
         )
     except HTTPException:
         raise
