@@ -393,11 +393,9 @@ const shareQRCode = async () => {
 
   // Try standard Web Share API first (works on most platforms including Telegram, Viber, etc.)
   if (navigator.share) {
-    const shareText = 'Join me in DBD Capital Forevers! 🚀 Start earning digital assets with this amazing bot.'
-    const fullText = `${shareText}\n\n${shareUrl}`
     navigator.share({
       title: 'DBD Capital Forevers Bot',
-      text: fullText
+      text: shareUrl
     }).then(() => {
       // Sharing was successful
       clearTimeout(safetyTimeout)
@@ -429,9 +427,7 @@ const telegramFallback = async (safetyTimeout = null) => {
 
     try {
       // Use Telegram's openTelegramLink for sharing (compatible with version 6.0)
-      const shareText = 'Join me in DBD Capital Forevers! 🚀 Start earning digital assets with this amazing bot.'
-      const fullShareText = `${shareText}\n\n${shareUrl}`
-      const telegramShareUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(fullShareText)}`
+  const telegramShareUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareUrl)}`
       tg.openTelegramLink(telegramShareUrl)
 
       // Set up event listener for when user returns to app
@@ -482,9 +478,8 @@ const copyLink = async () => {
   // Use cached referral link from initial page load
   const linkToCopy = referralLink.value
 
-  // Add inviting text with the link
-  const shareText = 'Join me in DBD Capital Forevers! 🚀 Start earning digital assets with this amazing bot.'
-  const fullTextToCopy = `${shareText}\n\n${linkToCopy}`
+  // Копируем только ссылку
+  const fullTextToCopy = linkToCopy
 
   // Try modern clipboard API first
   if (navigator.clipboard) {
@@ -536,9 +531,8 @@ const copyWebLink = async () => {
   // Use cached referral link from initial page load
   const linkToCopy = referralLink.value
 
-  // Add inviting text with the link
-  const shareText = 'Join me in DBD Capital Forevers! 🚀 Start earning digital assets with this amazing bot.'
-  const fullTextToCopy = `${shareText}\n\n${linkToCopy}`
+  // Копируем только ссылку
+  const fullTextToCopy = linkToCopy
 
   // Add haptic feedback
   if (window.triggerHaptic) {
