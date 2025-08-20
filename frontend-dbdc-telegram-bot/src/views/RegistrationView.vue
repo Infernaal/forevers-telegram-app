@@ -807,6 +807,19 @@ const finalizeAllActiveFields = () => {
       }
     }
   })
+
+  // Method 5: Force Vue reactivity update
+  setTimeout(() => {
+    // Re-check after a tick to ensure any delayed updates are captured
+    const currentActive = document.activeElement
+    if (currentActive && currentActive.getAttribute && currentActive.getAttribute('data-field')) {
+      const fieldName = currentActive.getAttribute('data-field')
+      const fieldValue = formData.value[fieldName]
+      if (fieldValue && fieldValue.trim().length > 0) {
+        touchedFields.value[fieldName] = true
+      }
+    }
+  }, 0)
 }
 </script>
 
