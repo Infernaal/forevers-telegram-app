@@ -86,11 +86,24 @@ const cardStyle = computed(() => ({
 
 const isLoading = ref(false)
 
-// Handle start: immediately show loader; loader itself выполняет проверку (action=check-telegram)
+// Handle start: check for referral and redirect appropriately
 const handleStart = () => {
   if (isLoading.value) return
   isLoading.value = true
-  router.push({ path: '/loader', query: { action: 'check-telegram', redirect: '/account-check', minDelay: 300 } })
+
+  // Check if user came through referral link
+  const referralInfo = getReferralInfo()
+
+  if (referralInfo && referralInfo.isReferral) {
+    // Store referral info for later use in registration
+    storeReferralInfo(referralInfo)
+
+    // Redirect to registration directly for referral users
+    router.push({ path: '/loader', query: { action: 'check-telegram', redirect: '/registration', minDelay: 300, isReferral: 'true' } })
+  } else {
+    // Normal flow for non-referral users
+    router.push({ path: '/loader', query: { action: 'check-telegram', redirect: '/account-check', minDelay: 300 } })
+  }
 }
 
 // Initialize app
