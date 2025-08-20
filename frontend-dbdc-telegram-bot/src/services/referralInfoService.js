@@ -1,6 +1,7 @@
 /**
  * Service for fetching referral information from the backend API
  */
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dbdc-mini.dubadu.com/api/v1/dbdc'
 
 /**
  * Fetch referrer information by user ID
@@ -13,7 +14,7 @@ export async function getReferrerInfo(refId) {
   }
 
   try {
-    const response = await fetch(`/api/v1/dbdc/referral/referrer/${refId}`)
+    const response = await fetch(`${API_BASE_URL}/referral/referrer/${refId}`)
     
     if (!response.ok) {
       if (response.status === 404) {
