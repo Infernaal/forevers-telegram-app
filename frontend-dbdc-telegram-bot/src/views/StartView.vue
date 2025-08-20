@@ -64,6 +64,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { getReferralInfo, storeReferralInfo } from '@/utils/referralUtils.js'
 
 // Router instance
 const router = useRouter()
