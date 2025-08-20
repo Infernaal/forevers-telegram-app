@@ -102,7 +102,42 @@ onMounted(() => {
     meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'
     document.head.appendChild(meta)
   }
+
+  // Обработка реферального параметра startapp
+  handleReferralParam()
 })
+
+// Handle referral parameter from Telegram WebApp startapp
+const handleReferralParam = () => {
+  try {
+    // Получаем startapp параметр из Telegram WebApp
+    const startParam = window?.Telegram?.WebApp?.initDataUnsafe?.start_param || null
+
+    if (startParam) {
+      console.log('Detected startapp parameter:', startParam)
+
+      // Парсим параметр в формате: ref_{user_id}_code_{code}
+      const match = startParam.match(/^ref_(\d+)_code_([A-Z0-9]+)$/)
+      if (match) {
+        const referralUserId = match[1]
+        const referralCode = match[2]
+
+        console.log('Parsed referral data:', { referralUserId, referralCode })
+
+        // Сохраняем реферальную информацию в localStorage для дальнейшего использования
+        localStorage.setItem('referral_user_id', referralUserId)
+        localStorage.setItem('referral_code', referralCode)
+        localStorage.setItem('is_referral_user', 'true')
+
+        console.log('Referral data saved to localStorage')
+      } else {
+        console.log('Invalid startapp parameter format:', startParam)
+      }
+    }
+  } catch (error) {
+    console.error('Error handling referral parameter:', error)
+  }
+}
 </script>
 
 <style scoped>
