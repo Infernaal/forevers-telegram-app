@@ -11,8 +11,8 @@
           <!-- Content -->
           <div class="relative p-4 pb-8">
             <!-- Header Text -->
-            <div class="text-center pt-5 pb-6">
-              <h1 class="text-white text-lg sm:text-xl font-bold leading-6 mb-6">
+            <div class="text-center pt-5 pb-4">
+              <h1 class="text-white text-lg sm:text-xl font-bold leading-6 mb-3">
                 We just need a bit more info to finish your registration.
               </h1>
               <p class="text-white text-sm font-medium leading-6 opacity-90">
@@ -23,7 +23,7 @@
             <!-- Registration Form -->
             <div class="space-y-2">
               <!-- Section Title -->
-              <h2 class="text-white text-base font-medium">Complete Registration</h2>
+              <h2 class="text-white text-base font-medium mb-2">Complete Registration</h2>
 
 
               <!-- Email Field -->
