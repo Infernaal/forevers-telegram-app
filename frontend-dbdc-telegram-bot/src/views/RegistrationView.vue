@@ -733,7 +733,7 @@ const focusField = (name) => {
 
 const handleEnter = (current) => {
   // Mark current as touched if it has content
-  finalizeActiveField()
+  finalizeAllActiveFields()
   const idx = fieldSequence.indexOf(current)
   if (idx === -1) return
   const next = fieldSequence[idx + 1]
