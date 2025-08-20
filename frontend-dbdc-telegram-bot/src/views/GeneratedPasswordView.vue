@@ -20,7 +20,7 @@
         </div>
         <!-- Copied State -->
         <div v-if="copied" class="link-copied-content flex items-center gap-2 px-4">
-          <span class="link-copied-text text-dbd-primary font-bold">Скопировано!</span>
+          <span class="link-copied-text text-dbd-primary font-bold">Copied</span>
           <div class="link-copied-icon">
             <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="14" cy="14" r="14" fill="white"/>
@@ -69,4 +69,93 @@ const goFavorites = () => router.replace('/favorites')
 </script>
 <style scoped>
 * { will-change:auto }
+/* Стили для блока копирования пароля, взяты из HoldersView.vue */
+.link-copied-state {
+  border: 1px solid #07B80E !important;
+  background: #129E0F !important;
+  transform: scale(1.02) !important;
+}
+
+.link-copied-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 6px;
+  box-sizing: border-box;
+  animation: fadeInScale 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.link-copied-text {
+  color: #FFF;
+  font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 22px;
+  text-align: center;
+  animation: slideInLeft 0.3s ease-out 0.1s both;
+}
+
+.link-copied-icon {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: bounceIn 0.5s ease-out 0.2s both;
+}
+
+.link-tick-svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(-10deg);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.1) rotate(5deg);
+  }
+  80% {
+    transform: scale(0.95) rotate(-2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
 </style>
