@@ -739,7 +739,7 @@ const handleRegister = () => {
     country: selectedCountry.value.code || formData.value.country,
     email: formData.value.email.trim(),
     phone: fullPhone,
-    ref: null
+    ref: referralInfo.value ? referralInfo.value.userId : null
   }
   sessionStorage.setItem('pendingRegistration', JSON.stringify(payload))
   router.push({ path: '/loader', query: { action: 'register', redirect: '/favorites', minDelay: 400 } })
