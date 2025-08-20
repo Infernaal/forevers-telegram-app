@@ -13,21 +13,23 @@
       <div class="relative w-full max-w-sm h-13 sm:h-14 md:h-16 rounded-full border border-blue-600 border-opacity-60 bg-white bg-opacity-10 flex items-center transition-all duration-400 ease-out overflow-hidden mb-6"
         :class="{ 'link-copied-state': copied }">
         <!-- Пароль -->
-        <div v-if="!copied" class="flex-1 px-4 sm:px-6 py-3.5 overflow-hidden flex items-center justify-center">
-          <span class="password-text block font-mono select-all w-full text-center">
+        <div v-if="!copied" class="flex-1 px-4 sm:px-6 py-3.5 overflow-hidden flex items-center justify-start">
+          <span class="password-text block font-mono select-all w-full text-left">
             {{ password }}
           </span>
         </div>
         <!-- Copied State -->
-        <div v-if="copied" class="link-copied-content flex items-center gap-2 px-4">
-          <span class="link-copied-text text-dbd-primary font-bold">Copied</span>
-          <div class="link-copied-icon">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="14" cy="14" r="14" fill="white"/>
-            </svg>
-            <svg class="link-tick-svg" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M11.3242 0.926106C10.7978 0.642629 10.2106 1.18934 9.86633 1.51331C9.07667 2.28275 8.40848 3.17368 7.65925 3.98362C6.82907 4.87455 6.05963 5.76548 5.20919 6.6362C4.72323 7.12216 4.19677 7.64862 3.8728 8.25607C3.14385 7.54734 2.51615 6.7779 1.70621 6.15023C1.11901 5.70477 0.147086 5.38079 0.167334 6.45396C0.207831 7.85113 1.44299 9.34952 2.35416 10.3012C2.73888 10.7061 3.24509 11.1313 3.8323 11.1516C4.54099 11.1921 5.26994 10.3417 5.69515 9.87594C6.44438 9.06601 7.05183 8.15479 7.74024 7.32464C8.63118 6.23123 9.54236 5.15803 10.413 4.04436C10.9597 3.35592 12.6809 1.65502 11.3242 0.926106ZM1.05823 6.37297C1.03798 6.37297 1.01773 6.37297 0.977238 6.39318C0.896244 6.37297 0.835499 6.35268 0.754505 6.31219C0.815251 6.27169 0.916493 6.29194 1.05823 6.37297Z" fill="#07B80E"/>
-            </svg>
+        <div v-if="copied" class="flex-1 px-4 sm:px-6 py-3.5 overflow-hidden flex items-center justify-start">
+          <div class="link-copied-content flex items-center gap-2">
+            <span class="link-copied-text text-white font-bold">Copied</span>
+            <div class="link-copied-icon">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="14" cy="14" r="14" fill="white"/>
+              </svg>
+              <svg class="link-tick-svg" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.3242 0.926106C10.7978 0.642629 10.2106 1.18934 9.86633 1.51331C9.07667 2.28275 8.40848 3.17368 7.65925 3.98362C6.82907 4.87455 6.05963 5.76548 5.20919 6.6362C4.72323 7.12216 4.19677 7.64862 3.8728 8.25607C3.14385 7.54734 2.51615 6.7779 1.70621 6.15023C1.11901 5.70477 0.147086 5.38079 0.167334 6.45396C0.207831 7.85113 1.44299 9.34952 2.35416 10.3012C2.73888 10.7061 3.24509 11.1313 3.8323 11.1516C4.54099 11.1921 5.26994 10.3417 5.69515 9.87594C6.44438 9.06601 7.05183 8.15479 7.74024 7.32464C8.63118 6.23123 9.54236 5.15803 10.413 4.04436C10.9597 3.35592 12.6809 1.65502 11.3242 0.926106ZM1.05823 6.37297C1.03798 6.37297 1.01773 6.37297 0.977238 6.39318C0.896244 6.37297 0.835499 6.35268 0.754505 6.31219C0.815251 6.27169 0.916493 6.29194 1.05823 6.37297Z" fill="#07B80E"/>
+              </svg>
+            </div>
           </div>
         </div>
         <!-- Copy Button -->
@@ -82,7 +84,7 @@ const goFavorites = () => router.replace('/favorites')
   font-weight: 600;
   color: #fff;
   letter-spacing: 0.04em;
-  text-align: center;
+  text-align: left;
   line-height: 1.8rem;
   background: none;
   width: 100%;
@@ -94,14 +96,9 @@ const goFavorites = () => router.replace('/favorites')
 }
 
 .link-copied-content {
-  width: 100%;
-  height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 8px;
-  padding: 6px;
-  box-sizing: border-box;
   animation: fadeInScale 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
