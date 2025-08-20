@@ -89,7 +89,6 @@ export function parseReferralCode(startParam) {
       type: 'direct',
       userId: param,
       isReferral: true,
-      username: null, // Will be populated if available
       firstName: null,
       lastName: null
     }
