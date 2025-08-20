@@ -19,6 +19,7 @@ import EmailLinkedOtherAccountView from '../views/EmailLinkedOtherAccountView.vu
 import EmailAlreadyRegisteredView from '../views/EmailAlreadyRegisteredView.vue'
 import PhoneAlreadyRegisteredView from '../views/PhoneAlreadyRegisteredView.vue'
 import RegistrationErrorView from '../views/RegistrationErrorView.vue'
+import GeneratedPasswordView from '../views/GeneratedPasswordView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -123,7 +124,11 @@ const router = createRouter({
       name: 'registration-error',
       component: RegistrationErrorView,
     },
-
+    {
+      path: '/generated-password',
+      name: 'generated-password',
+      component: GeneratedPasswordView,
+    },
     // Redirect /home to /wallet as default
     {
       path: '/home',
