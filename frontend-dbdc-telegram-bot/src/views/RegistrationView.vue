@@ -354,6 +354,9 @@ const selectedCountry = ref({ name: '', code: '' })
 // Available countries list with phone codes (full automatic dataset)
 const countries = ref(fullCountries)
 
+// Referral info
+const referralInfo = ref(null)
+
 // Track which fields have been touched (user moved away from them)
 const touchedFields = ref({
   email: false,
