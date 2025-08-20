@@ -30,7 +30,7 @@ export function getTelegramStartParam() {
 
 /**
  * Parse referral code from start parameter
- * Expected format: "ref_USERID" or "code_USERID" or just "USERID"
+ * Expected format: "ref_4344_code_MJ4KSD" where ref can be 1-3+ digits and code is always 6 characters
  * @param {string} startParam - The start parameter from Telegram
  * @returns {Object|null} Parsed referral info or null
  */
@@ -41,7 +41,23 @@ export function parseReferralCode(startParam) {
 
   const param = startParam.trim()
 
-  // Check if it starts with "ref_" or "code_"
+  // New format: ref_USERID_code_CODE (e.g., ref_4344_code_MJ4KSD)
+  const newFormatMatch = param.match(/^ref_(\d+)_code_([A-Z0-9]{6})$/)
+  if (newFormatMatch) {
+    const userId = newFormatMatch[1]
+    const code = newFormatMatch[2]
+    return {
+      type: 'ref_code',
+      userId: userId,
+      code: code,
+      isReferral: true,
+      username: null, // Will be populated if available
+      firstName: null,
+      lastName: null
+    }
+  }
+
+  // Legacy format: Check if it starts with "ref_" or "code_"
   if (param.startsWith('ref_')) {
     const userId = param.substring(4) // Remove "ref_" prefix
     if (userId && !isNaN(parseInt(userId))) {
