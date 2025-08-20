@@ -41,7 +41,7 @@
           </svg>
         </button>
       </div>
-      <button @click="goFavorites" class="w-full h-12 rounded-full bg-gradient-to-r from-dbd-primary to-[#473FFF] font-bold text-white hover:opacity-90 active:scale-[0.97] transition">
+      <button @click="goFavorites" class="continue-button w-full h-12 rounded-full bg-gradient-to-r from-dbd-primary to-[#473FFF] font-bold text-white hover:opacity-90 active:scale-[0.97] transition">
         Continue
       </button>
     </div>
@@ -86,6 +86,12 @@ const goFavorites = () => router.replace('/favorites')
   padding: 6px;
   box-sizing: border-box;
   animation: fadeInScale 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.continue-button {
+  border: 2px solid #FFFFFF !important;
+  transform: scale(1);
+  will-change: transform, border-color, color, background-color;
 }
 
 .link-copied-text {
