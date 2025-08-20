@@ -527,26 +527,9 @@ const handleFieldBlur = (fieldName) => {
 }
 
 const toggleCountryDropdown = () => {
-  // Before navigating away, force-touch the currently focused field so its UI collapses properly
-  // Check DOM activeElement directly since currentFocusedField might be null due to blur
-  const activeEl = document.activeElement
-  if (activeEl && activeEl.getAttribute && activeEl.getAttribute('data-field')) {
-    const fieldName = activeEl.getAttribute('data-field')
-    const fieldValue = formData.value[fieldName]
-    if (fieldValue && fieldValue.trim().length > 0) {
-      touchedFields.value[fieldName] = true
-    }
-  }
+  // Enhanced field finalization before navigation
+  finalizeAllActiveFields()
 
-  // Also try the reactive tracker as fallback
-  finalizeActiveField()
-
-  // Additionally, explicitly mark currentFocusedField touched if it has content (race-safe)
-  if (currentFocusedField.value) {
-    const fn = currentFocusedField.value
-    const val = formData.value[fn]
-    if (val && val.trim().length > 0) touchedFields.value[fn] = true
-  }
   // Save current form data before navigation
   saveFormData()
 
