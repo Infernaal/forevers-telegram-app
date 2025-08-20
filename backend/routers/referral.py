@@ -64,7 +64,7 @@ async def get_invite_data(current_user_id: int = Depends(get_current_user_id)):
         # Формируем Telegram WebApp ссылку в правильном формате
         # Формат: https://t.me/dbdc_test_bot/app?startapp=ref_4344_code_52J01Z
         telegram_bot_name = os.getenv("TELEGRAM_BOT_NAME", "dbdc_test_bot")
-        telegram_webapp_link = f"https://t.me/{telegram_bot_name}/dbdc_frvr?startapp=ref_{current_user_id}_code_{unique_code}"
+        telegram_webapp_link = f"https://t.me/{telegram_bot_name}/?startapp=ref_{current_user_id}_code_{unique_code}"
 
         # Генерируем QR-код как base64 (используем telegram_webapp_link для QR-кода)
         qr_code_base64 = generate_qr_code_base64(telegram_webapp_link)
