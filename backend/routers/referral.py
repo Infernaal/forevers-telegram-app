@@ -11,6 +11,7 @@ import os
 from dependencies.current_user import get_current_user_id
 from dotenv import load_dotenv
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
 from db.database import get_db
 from models.models import Users
 
@@ -96,7 +97,10 @@ async def get_referrer_info(ref_id: int, db: AsyncSession = Depends(get_db)):
     Get referrer information by referral ID
     """
     try:
-        user = db.query(Users).filter(Users.id == ref_id).first()
+        result = await db.execute(
+            select(Users).where(Users.id == ref_id)
+        )
+        user = result.scalar_one_or_none()
 
         if not user:
             raise HTTPException(status_code=404, detail="Referrer not found")
