@@ -164,7 +164,7 @@ export async function enrichReferralInfo(referralInfo) {
   try {
     // Fetch referrer information from backend
     if (referralInfo.userId) {
-      const referrerData = await fetchReferrerInfo(referralInfo.userId)
+      const referrerData = await getReferrerInfo(referralInfo.userId)
       if (referrerData) {
         // Update referral info with fetched data
         referralInfo.firstName = referrerData.first_name
