@@ -526,6 +526,13 @@ const handleFieldBlur = (fieldName) => {
   }, 50)
 }
 
+// Handle mousedown on country field to finalize active fields immediately
+const handleCountryMouseDown = () => {
+  // Finalize all fields with content immediately on mousedown
+  // This ensures that even fast clicks will properly mark fields as touched
+  finalizeAllActiveFields()
+}
+
 const toggleCountryDropdown = () => {
   // Enhanced field finalization before navigation
   finalizeAllActiveFields()
