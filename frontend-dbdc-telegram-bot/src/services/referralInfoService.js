@@ -13,7 +13,7 @@ export async function getReferrerInfo(refId) {
   }
 
   try {
-    const response = await fetch(`/api/referral/referrer/${refId}`)
+    const response = await fetch(`/api/v1/dbdc/referral/referrer/${refId}`)
     
     if (!response.ok) {
       if (response.status === 404) {
