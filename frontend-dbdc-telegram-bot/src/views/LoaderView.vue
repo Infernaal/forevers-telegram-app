@@ -125,10 +125,20 @@ const runAction = async () => {
       // Exchange initData for session (already done earlier if loader not first view; safe to repeat)
       const initData = window?.Telegram?.WebApp?.initData || ''
       if (!initData) {
-        return finish('/account-check')
+        // Check if this is a referral user
+        const isReferral = route.query.isReferral === 'true'
+        return finish(isReferral ? '/registration' : '/account-check')
       }
       const res = await telegramUserService.authWithInitData(initData)
-      const target = res.status === 'success' ? '/favorites' : '/account-check'
+
+      // If user is already registered, go to favorites
+      if (res.status === 'success') {
+        return finish('/favorites')
+      }
+
+      // If authentication failed, check if this is a referral user
+      const isReferral = route.query.isReferral === 'true'
+      const target = isReferral ? '/registration' : '/account-check'
       return finish(target)
     }
     case 'check-email': {
