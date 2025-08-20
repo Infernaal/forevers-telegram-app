@@ -156,26 +156,37 @@ export function clearReferralInfo() {
 /**
  * Enrich referral info with additional user data if available
  * @param {Object} referralInfo - Basic referral info
- * @returns {Object} Enhanced referral info
+ * @returns {Promise<Object>} Enhanced referral info
  */
-export function enrichReferralInfo(referralInfo) {
+export async function enrichReferralInfo(referralInfo) {
   if (!referralInfo) return null
 
   try {
-    // Try to get referrer info from Telegram WebApp if available
-    // This might not always be available depending on how the link was shared
-    const webApp = window?.Telegram?.WebApp
-    if (webApp && webApp.initDataUnsafe) {
-      // Note: Telegram WebApp typically doesn't provide referrer user info
-      // This is more for demonstration and future enhancement
-      const initData = webApp.initDataUnsafe
+    // Fetch referrer information from backend
+    if (referralInfo.userId) {
+      const referrerData = await fetchReferrerInfo(referralInfo.userId)
+      if (referrerData) {
+        // Update referral info with fetched data
+        referralInfo.firstName = referrerData.first_name
+        referralInfo.lastName = referrerData.last_name
+        referralInfo.email = referrerData.email
 
-      // For now, we can try to construct a username-like display
-      // In a real app, you'd probably fetch this from your backend API
-      if (referralInfo.userId) {
-        // Example: create a display name based on user ID
-        const shortId = referralInfo.userId.slice(-6)
-        referralInfo.username = `vm.dubadu/${shortId}`
+        // Create username-like display using code if available
+        if (referralInfo.code) {
+          referralInfo.username = `vm.dubadu/${referralInfo.code}`
+        } else {
+          // Fallback to user ID based username
+          const shortId = referralInfo.userId.slice(-6)
+          referralInfo.username = `vm.dubadu/${shortId}`
+        }
+      } else {
+        // Fallback if API call fails
+        if (referralInfo.code) {
+          referralInfo.username = `vm.dubadu/${referralInfo.code}`
+        } else {
+          const shortId = referralInfo.userId.slice(-6)
+          referralInfo.username = `vm.dubadu/${shortId}`
+        }
       }
     }
   } catch (error) {
