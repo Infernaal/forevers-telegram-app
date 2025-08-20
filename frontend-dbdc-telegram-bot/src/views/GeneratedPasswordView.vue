@@ -78,16 +78,19 @@ const goFavorites = () => router.replace('/favorites')
 }
 
 .password-text {
-  font-size: 1.5rem;
+  font-size: 1.15rem;
   font-weight: 600;
   color: #fff;
   letter-spacing: 0.04em;
   text-align: center;
-  line-height: 2.2rem;
+  line-height: 1.8rem;
   background: none;
   width: 100%;
   user-select: all;
   text-shadow: 0 1px 6px rgba(32,25,206,0.12);
+  white-space: nowrap;
+  overflow-x: auto;
+  text-overflow: ellipsis;
 }
 
 .link-copied-content {
