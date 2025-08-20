@@ -937,7 +937,27 @@ input::placeholder {
     /* Prevent zoom and viewport shift */
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
+    /* Ensure vertical alignment is maintained */
+    vertical-align: middle;
+    line-height: 1.2;
   }
+}
+
+/* Fix input field containers to properly center content */
+.flex.items-center {
+  align-items: center !important;
+}
+
+.flex.items-center input {
+  height: auto;
+  line-height: 1.2;
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+  display: inline-block;
+  /* Remove any inherited flex properties that might interfere */
+  flex: 1;
+  align-self: center;
 }
 
 /* Handle Telegram WebApp viewport changes */
