@@ -186,6 +186,34 @@ export function enrichReferralInfo(referralInfo) {
 }
 
 /**
+ * Fetch referrer information from backend
+ * @param {string} refId - The referrer user ID
+ * @returns {Promise<Object|null>} Referrer info or null
+ */
+export async function fetchReferrerInfo(refId) {
+  if (!refId || isNaN(parseInt(refId))) {
+    return null
+  }
+
+  try {
+    const response = await fetch(`/api/referral/referrer/${refId}`)
+    if (!response.ok) {
+      if (response.status === 404) {
+        console.warn(`Referrer with ID ${refId} not found`)
+        return null
+      }
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
+    const data = await response.json()
+    return data
+  } catch (error) {
+    console.error('Error fetching referrer info:', error)
+    return null
+  }
+}
+
+/**
  * Generate referral link (helper function)
  * @param {string} userId - The user ID to create referral for
  * @param {string} botUsername - Telegram bot username
