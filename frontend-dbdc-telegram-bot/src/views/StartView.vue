@@ -57,11 +57,6 @@
         </svg>
         <span>{{ isLoading ? 'Checking...' : 'Start' }}</span>
       </button>
-
-      <!-- Temporary test button for referral -->
-      <button @click="testReferral" class="w-full h-12 bg-dbd-orange border-0 rounded-full text-white font-bold text-sm font-montserrat cursor-pointer mt-3 transition-all duration-200 ease-out shadow-lg hover:shadow-xl active:scale-98 outline-none touch-manipulation">
-        Test Referral (Demo)
-      </button>
     </div>
   </div>
 </template>
