@@ -13,8 +13,8 @@
       <div class="relative w-full max-w-sm h-13 sm:h-14 md:h-16 rounded-full border border-blue-600 border-opacity-60 bg-white bg-opacity-10 flex items-center transition-all duration-400 ease-out overflow-hidden mb-6"
         :class="{ 'link-copied-state': copied }">
         <!-- Пароль -->
-        <div v-if="!copied" class="flex-1 px-4 sm:px-6 py-3.5 overflow-hidden">
-          <span class="text-dbd-off-white text-xs sm:text-sm font-semibold leading-4 underline truncate block font-mono select-all">
+        <div v-if="!copied" class="flex-1 px-4 sm:px-6 py-3.5 overflow-hidden flex items-center justify-center">
+          <span class="password-text block font-mono select-all w-full text-center">
             {{ password }}
           </span>
         </div>
@@ -164,4 +164,17 @@ const goFavorites = () => router.replace('/favorites')
     transform: scale(1) rotate(0deg);
   }
 }
-</style>
+/* Стили для блока копирования пароля, взяты из HoldersView.vue */
+.password-text {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.04em;
+  text-align: center;
+  line-height: 2.2rem;
+  background: none;
+  width: 100%;
+  user-select: all;
+  text-shadow: 0 1px 6px rgba(32,25,206,0.12);
+}
+/* ...existing styles... */
