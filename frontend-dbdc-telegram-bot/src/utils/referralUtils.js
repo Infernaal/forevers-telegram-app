@@ -138,6 +138,38 @@ export function clearReferralInfo() {
 }
 
 /**
+ * Enrich referral info with additional user data if available
+ * @param {Object} referralInfo - Basic referral info
+ * @returns {Object} Enhanced referral info
+ */
+export function enrichReferralInfo(referralInfo) {
+  if (!referralInfo) return null
+
+  try {
+    // Try to get referrer info from Telegram WebApp if available
+    // This might not always be available depending on how the link was shared
+    const webApp = window?.Telegram?.WebApp
+    if (webApp && webApp.initDataUnsafe) {
+      // Note: Telegram WebApp typically doesn't provide referrer user info
+      // This is more for demonstration and future enhancement
+      const initData = webApp.initDataUnsafe
+
+      // For now, we can try to construct a username-like display
+      // In a real app, you'd probably fetch this from your backend API
+      if (referralInfo.userId) {
+        // Example: create a display name based on user ID
+        const shortId = referralInfo.userId.slice(-6)
+        referralInfo.username = `vm.dubadu/${shortId}`
+      }
+    }
+  } catch (error) {
+    console.warn('Could not enrich referral info:', error)
+  }
+
+  return referralInfo
+}
+
+/**
  * Generate referral link (helper function)
  * @param {string} userId - The user ID to create referral for
  * @param {string} botUsername - Telegram bot username
