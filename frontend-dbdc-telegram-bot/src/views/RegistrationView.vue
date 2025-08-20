@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full min-h-screen bg-white font-montserrat flex flex-col scroll-hide" style="padding-bottom: max(var(--tg-content-safe-area-inset-bottom, 0px), 1rem);">
+  <div class="w-full min-h-screen bg-white font-montserrat flex flex-col scroll-hide telegram-webapp-container" style="padding-bottom: max(var(--tg-content-safe-area-inset-bottom, 0px), 1rem);">
     <!-- Main Content -->
-    <div class="flex-1 flex items-center justify-center p-4 sm:p-6 md:p-8">
+    <div class="flex-1 flex items-start justify-center p-4 sm:p-6 md:p-8 pt-8">
       <div class="w-full max-w-[375px] mx-auto">
         <!-- Main Registration Card -->
         <div class="w-full rounded-3xl bg-gradient-to-r from-dbd-primary to-[#473FFF] relative overflow-hidden">
@@ -179,7 +179,7 @@
                 <div :class="[
                   'w-full h-[52px] rounded-lg border bg-white flex items-center px-3 cursor-pointer focus-within:border-dbd-primary focus-within:ring-1 focus-within:ring-dbd-primary/20 transition-all duration-200',
                   showCountryFilled ? 'border-dbd-dark' : 'border-[#B7B7B7]'
-                ]" @click="toggleCountryDropdown">
+                ]" @mousedown="handleCountryMouseDown" @click="toggleCountryDropdown">
                   <div v-if="!showCountryFilled" class="flex items-center flex-1">
                     <svg class="w-6 h-6 mr-2 flex-shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                       <path d="M20.4375 12.75C20.8517 12.75 21.1875 12.4142 21.1875 12C21.1875 11.5858 20.8517 11.25 20.4375 11.25L20.4375 12L20.4375 12.75ZM21 12H20.25C20.25 16.5563 16.5563 20.25 12 20.25V21V21.75C17.3848 21.75 21.75 17.3848 21.75 12H21ZM12 21V20.25C7.44365 20.25 3.75 16.5563 3.75 12H3H2.25C2.25 17.3848 6.61522 21.75 12 21.75V21ZM3 12H3.75C3.75 7.44365 7.44365 3.75 12 3.75V3V2.25C6.61522 2.25 2.25 6.61522 2.25 12H3ZM12 3V3.75C16.5563 3.75 20.25 7.44365 20.25 12H21H21.75C21.75 6.61522 17.3848 2.25 12 2.25V3ZM12 21V20.25C11.7045 20.25 11.3639 20.1163 10.9886 19.7535C10.6098 19.3873 10.2344 18.8211 9.90289 18.0633C9.24079 16.55 8.8125 14.4069 8.8125 12H8.0625H7.3125C7.3125 14.5637 7.76565 16.9206 8.52865 18.6646C8.90966 19.5355 9.38272 20.2873 9.94605 20.8319C10.513 21.3801 11.2082 21.75 12 21.75V21ZM8.0625 12H8.8125C8.8125 9.59314 9.24079 7.45001 9.90289 5.93665C10.2344 5.17886 10.6098 4.61271 10.9886 4.24648C11.3639 3.88373 11.7045 3.75 12 3.75V3V2.25C11.2082 2.25 10.513 2.61995 9.94605 3.16805C9.38272 3.71267 8.90966 4.46454 8.52865 5.33542C7.76565 7.07943 7.3125 9.4363 7.3125 12H8.0625ZM12 21V21.75C12.7918 21.75 13.487 21.3801 14.054 20.8319C14.6173 20.2873 15.0903 19.5355 15.4714 18.6646C16.2344 16.9206 16.6875 14.5637 16.6875 12H15.9375H15.1875C15.1875 14.4069 14.7592 16.55 14.0971 18.0633C13.7656 18.8211 13.3902 19.3873 13.0114 19.7535C12.6361 20.1163 12.2955 20.25 12 20.25V21ZM15.9375 12H16.6875C16.6875 9.4363 16.2344 7.07943 15.4714 5.33542C15.0903 4.46454 14.6173 3.71267 14.054 3.16805C13.487 2.61995 12.7918 2.25 12 2.25V3V3.75C12.2955 3.75 12.6361 3.88373 13.0114 4.24648C13.3902 4.61271 13.7656 5.17886 14.0971 5.93665C14.7592 7.45001 15.1875 9.59314 15.1875 12H15.9375ZM3 12L3 12.75L20.4375 12.75L20.4375 12L20.4375 11.25L3 11.25L3 12Z" fill="#4B4D50"/>
@@ -193,7 +193,7 @@
                       </svg>
                     </div>
                   </div>
-                  <div v-else class="flex items-center flex-1 cursor-pointer" @click="editField('country')">
+                  <div v-else class="flex items-center flex-1 cursor-pointer" @mousedown="handleCountryMouseDown" @click="editField('country')">
                     <!-- Country Flag -->
                     <CountryFlag :country="selectedCountry.code" size="small" class="mr-2" />
                     <div class="flex flex-col items-start justify-center flex-1">
@@ -526,27 +526,17 @@ const handleFieldBlur = (fieldName) => {
   }, 50)
 }
 
+// Handle mousedown on country field to finalize active fields immediately
+const handleCountryMouseDown = () => {
+  // Finalize all fields with content immediately on mousedown
+  // This ensures that even fast clicks will properly mark fields as touched
+  finalizeAllActiveFields()
+}
+
 const toggleCountryDropdown = () => {
-  // Before navigating away, force-touch the currently focused field so its UI collapses properly
-  // Check DOM activeElement directly since currentFocusedField might be null due to blur
-  const activeEl = document.activeElement
-  if (activeEl && activeEl.getAttribute && activeEl.getAttribute('data-field')) {
-    const fieldName = activeEl.getAttribute('data-field')
-    const fieldValue = formData.value[fieldName]
-    if (fieldValue && fieldValue.trim().length > 0) {
-      touchedFields.value[fieldName] = true
-    }
-  }
+  // Enhanced field finalization before navigation
+  finalizeAllActiveFields()
 
-  // Also try the reactive tracker as fallback
-  finalizeActiveField()
-
-  // Additionally, explicitly mark currentFocusedField touched if it has content (race-safe)
-  if (currentFocusedField.value) {
-    const fn = currentFocusedField.value
-    const val = formData.value[fn]
-    if (val && val.trim().length > 0) touchedFields.value[fn] = true
-  }
   // Save current form data before navigation
   saveFormData()
 
@@ -671,8 +661,8 @@ watch(() => route.name, (newRouteName) => {
 
 const editField = (fieldName) => {
   if (fieldName === 'country') {
-  // Ensure current active field (if any) is finalized before leaving
-  finalizeActiveField()
+    // Ensure current active field (if any) is finalized before leaving
+    finalizeAllActiveFields()
     // Save current form data before navigation
     saveFormData()
 
@@ -750,7 +740,7 @@ const focusField = (name) => {
 
 const handleEnter = (current) => {
   // Mark current as touched if it has content
-  finalizeActiveField()
+  finalizeAllActiveFields()
   const idx = fieldSequence.indexOf(current)
   if (idx === -1) return
   const next = fieldSequence[idx + 1]
@@ -777,25 +767,59 @@ const handleEnter = (current) => {
   focusField(next)
 }
 
-// Helper: mark the currently focused input as touched immediately (needed when user jumps to country selector)
-const finalizeActiveField = () => {
-  // Use the reactive tracker first
+// Enhanced helper: mark all fields with content as touched before navigation
+const finalizeAllActiveFields = () => {
+  // Method 1: Use the reactive tracker first
   if (currentFocusedField.value) {
     const fieldName = currentFocusedField.value
     const value = formData.value[fieldName]
     if (value && value.trim().length > 0) {
       touchedFields.value[fieldName] = true
     }
-  } else {
-    // Fallback: inspect DOM activeElement (in case currentFocusedField missed)
-    const el = document.activeElement
-    if (el && el.getAttribute) {
-      const fieldName = el.getAttribute('data-field')
+  }
+
+  // Method 2: Check DOM activeElement (in case currentFocusedField missed)
+  const activeEl = document.activeElement
+  if (activeEl && activeEl.getAttribute && activeEl.getAttribute('data-field')) {
+    const fieldName = activeEl.getAttribute('data-field')
+    const fieldValue = formData.value[fieldName]
+    if (fieldValue && fieldValue.trim().length > 0) {
+      touchedFields.value[fieldName] = true
+    }
+  }
+
+  // Method 3: Force finalize all fields with content (comprehensive fallback)
+  const fieldsToCheck = ['email', 'firstName', 'lastName', 'phone']
+  fieldsToCheck.forEach(fieldName => {
+    const value = formData.value[fieldName]
+    if (value && value.trim().length > 0) {
+      touchedFields.value[fieldName] = true
+    }
+  })
+
+  // Method 4: Also check any input that currently has DOM focus by querying all inputs
+  const allInputs = document.querySelectorAll('input[data-field]')
+  allInputs.forEach(input => {
+    if (document.activeElement === input) {
+      const fieldName = input.getAttribute('data-field')
       if (fieldName && formData.value[fieldName] && formData.value[fieldName].trim().length > 0) {
         touchedFields.value[fieldName] = true
       }
     }
-  }
+  })
+
+  // Method 5: Force Vue reactivity update
+  setTimeout(() => {
+    // Re-check after a tick to ensure any delayed updates are captured
+    const currentActive = document.activeElement
+    if (currentActive && currentActive.getAttribute && currentActive.getAttribute('data-field')) {
+      const fieldName = currentActive.getAttribute('data-field')
+      const fieldValue = formData.value[fieldName]
+      if (fieldValue && fieldValue.trim().length > 0) {
+        touchedFields.value[fieldName] = true
+      }
+    }
+  }, 0)
 }
 </script>
 
@@ -872,5 +896,36 @@ input::placeholder {
 }
 .scroll-hide::-webkit-scrollbar { /* Chrome/Safari */
   display: none;
+}
+
+/* Telegram WebApp specific fixes */
+.telegram-webapp-container {
+  /* Prevent viewport jumping */
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh; /* Use dynamic viewport height */
+}
+
+/* Telegram WebApp input focus fixes */
+@media screen and (max-width: 768px) {
+  .telegram-webapp-container {
+    /* Prevent content shift when keyboard opens */
+    padding-bottom: env(keyboard-inset-height, 0px);
+  }
+
+  /* Smooth transition when keyboard appears */
+  input:focus {
+    /* Prevent zoom and viewport shift */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+}
+
+/* Handle Telegram WebApp viewport changes */
+@supports (height: 100dvh) {
+  .telegram-webapp-container {
+    min-height: 100dvh;
+  }
 }
 </style>
