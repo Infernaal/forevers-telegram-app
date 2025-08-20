@@ -654,8 +654,8 @@ watch(() => route.name, (newRouteName) => {
 
 const editField = (fieldName) => {
   if (fieldName === 'country') {
-  // Ensure current active field (if any) is finalized before leaving
-  finalizeActiveField()
+    // Ensure current active field (if any) is finalized before leaving
+    finalizeAllActiveFields()
     // Save current form data before navigation
     saveFormData()
 
