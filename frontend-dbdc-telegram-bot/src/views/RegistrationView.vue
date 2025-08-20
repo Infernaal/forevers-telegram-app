@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full min-h-screen bg-white font-montserrat flex flex-col scroll-hide" style="padding-bottom: max(var(--tg-content-safe-area-inset-bottom, 0px), 1rem);">
+  <div class="w-full min-h-screen bg-white font-montserrat flex flex-col scroll-hide telegram-webapp-container" style="padding-bottom: max(var(--tg-content-safe-area-inset-bottom, 0px), 1rem);">
     <!-- Main Content -->
-    <div class="flex-1 flex items-center justify-center p-4 sm:p-6 md:p-8">
+    <div class="flex-1 flex items-start justify-center p-4 sm:p-6 md:p-8 pt-8">
       <div class="w-full max-w-[375px] mx-auto">
         <!-- Main Registration Card -->
         <div class="w-full rounded-3xl bg-gradient-to-r from-dbd-primary to-[#473FFF] relative overflow-hidden">
