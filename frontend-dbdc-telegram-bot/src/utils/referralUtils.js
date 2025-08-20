@@ -40,7 +40,7 @@ export function parseReferralCode(startParam) {
   }
 
   const param = startParam.trim()
-  
+
   // Check if it starts with "ref_" or "code_"
   if (param.startsWith('ref_')) {
     const userId = param.substring(4) // Remove "ref_" prefix
@@ -48,18 +48,24 @@ export function parseReferralCode(startParam) {
       return {
         type: 'ref',
         userId: userId,
-        isReferral: true
+        isReferral: true,
+        username: null, // Will be populated if available
+        firstName: null,
+        lastName: null
       }
     }
   }
-  
+
   if (param.startsWith('code_')) {
     const userId = param.substring(5) // Remove "code_" prefix
     if (userId && !isNaN(parseInt(userId))) {
       return {
         type: 'code',
         userId: userId,
-        isReferral: true
+        isReferral: true,
+        username: null, // Will be populated if available
+        firstName: null,
+        lastName: null
       }
     }
   }
@@ -69,7 +75,10 @@ export function parseReferralCode(startParam) {
     return {
       type: 'direct',
       userId: param,
-      isReferral: true
+      isReferral: true,
+      username: null, // Will be populated if available
+      firstName: null,
+      lastName: null
     }
   }
 
