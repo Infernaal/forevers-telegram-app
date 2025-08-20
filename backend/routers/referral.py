@@ -10,7 +10,7 @@ import logging
 import os
 from dependencies.current_user import get_current_user_id
 from dotenv import load_dotenv
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 from db.database import get_db
 from models.models import Users
 
@@ -91,7 +91,7 @@ async def get_invite_data(current_user_id: int = Depends(get_current_user_id)):
         raise HTTPException(status_code=500, detail="Failed to generate invite data")
 
 @router.get("/referrer/{ref_id}", response_model=ReferrerInfoResponse)
-async def get_referrer_info(ref_id: int, db: Session = Depends(get_db)):
+async def get_referrer_info(ref_id: int, db: AsyncSession = Depends(get_db)):
     """
     Get referrer information by referral ID
     """
