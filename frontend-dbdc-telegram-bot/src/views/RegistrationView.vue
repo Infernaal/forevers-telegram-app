@@ -668,6 +668,9 @@ onMounted(() => {
   document.addEventListener('click', handleClickOutside)
   window.addEventListener('focus', handleCountrySelection)
 
+  // Initialize referral info if user came through referral link
+  referralInfo.value = getStoredReferralInfo()
+
   // Restore form data first
   restoreFormData()
 
