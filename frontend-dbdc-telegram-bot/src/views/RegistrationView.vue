@@ -873,4 +873,35 @@ input::placeholder {
 .scroll-hide::-webkit-scrollbar { /* Chrome/Safari */
   display: none;
 }
+
+/* Telegram WebApp specific fixes */
+.telegram-webapp-container {
+  /* Prevent viewport jumping */
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh; /* Use dynamic viewport height */
+}
+
+/* Telegram WebApp input focus fixes */
+@media screen and (max-width: 768px) {
+  .telegram-webapp-container {
+    /* Prevent content shift when keyboard opens */
+    padding-bottom: env(keyboard-inset-height, 0px);
+  }
+
+  /* Smooth transition when keyboard appears */
+  input:focus {
+    /* Prevent zoom and viewport shift */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+}
+
+/* Handle Telegram WebApp viewport changes */
+@supports (height: 100dvh) {
+  .telegram-webapp-container {
+    min-height: 100dvh;
+  }
+}
 </style>
