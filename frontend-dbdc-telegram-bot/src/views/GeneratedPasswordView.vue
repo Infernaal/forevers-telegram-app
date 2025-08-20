@@ -67,6 +67,7 @@ const copyPassword = async () => {
 }
 const goFavorites = () => router.replace('/favorites')
 </script>
+
 <style scoped>
 * { will-change:auto }
 /* Стили для блока копирования пароля, взяты из HoldersView.vue */
@@ -74,6 +75,19 @@ const goFavorites = () => router.replace('/favorites')
   border: 1px solid #07B80E !important;
   background: #129E0F !important;
   transform: scale(1.02) !important;
+}
+
+.password-text {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.04em;
+  text-align: center;
+  line-height: 2.2rem;
+  background: none;
+  width: 100%;
+  user-select: all;
+  text-shadow: 0 1px 6px rgba(32,25,206,0.12);
 }
 
 .link-copied-content {
@@ -164,17 +178,4 @@ const goFavorites = () => router.replace('/favorites')
     transform: scale(1) rotate(0deg);
   }
 }
-/* Стили для блока копирования пароля, взяты из HoldersView.vue */
-.password-text {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #fff;
-  letter-spacing: 0.04em;
-  text-align: center;
-  line-height: 2.2rem;
-  background: none;
-  width: 100%;
-  user-select: all;
-  text-shadow: 0 1px 6px rgba(32,25,206,0.12);
-}
-/* ...existing styles... */
+</style>
