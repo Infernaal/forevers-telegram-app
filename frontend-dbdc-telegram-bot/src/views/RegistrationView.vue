@@ -673,7 +673,8 @@ onMounted(() => {
   window.addEventListener('focus', handleCountrySelection)
 
   // Initialize referral info if user came through referral link
-  referralInfo.value = getStoredReferralInfo()
+  const storedReferralInfo = getStoredReferralInfo()
+  referralInfo.value = enrichReferralInfo(storedReferralInfo)
 
   // Restore form data first
   restoreFormData()
