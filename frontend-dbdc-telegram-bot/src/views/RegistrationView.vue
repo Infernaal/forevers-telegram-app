@@ -347,7 +347,7 @@ import { useRouter, useRoute } from 'vue-router'
 import CountryFlag from '@/components/CountryFlag.vue'
 import { fullCountries } from '@/utils/allCountries.js'
 import { usePhoneInput } from '@/composables/usePhoneInput.js'
-import { getStoredReferralInfo } from '@/utils/referralUtils.js'
+import { getStoredReferralInfo, enrichReferralInfo } from '@/utils/referralUtils.js'
 
 const router = useRouter()
 const route = useRoute()
