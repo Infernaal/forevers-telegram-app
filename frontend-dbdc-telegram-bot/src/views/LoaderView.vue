@@ -150,6 +150,10 @@ const runAction = async () => {
       const res = await registrationService.register(payload)
       if (res.status === 'success') {
         sessionStorage.removeItem('pendingRegistration')
+        // Очищаем реферальную информацию после успешной регистрации
+        localStorage.removeItem('referral_user_id')
+        localStorage.removeItem('referral_code')
+        localStorage.removeItem('is_referral_user')
         if (res.generated_password) {
           sessionStorage.setItem('generatedPassword', res.generated_password)
           return finish('/generated-password')
