@@ -10,6 +10,9 @@ import logging
 import os
 from dependencies.current_user import get_current_user_id
 from dotenv import load_dotenv
+from sqlalchemy.orm import Session
+from db.database import get_db
+from models.models import Users
 
 load_dotenv()
 logger = logging.getLogger(__name__)
