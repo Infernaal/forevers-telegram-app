@@ -948,11 +948,27 @@ input::placeholder {
 /* Hidden vertical scrollbar while allowing scroll */
 .scroll-hide {
   overflow-y: auto;
+  overflow-x: hidden;
   -ms-overflow-style: none; /* IE/Edge */
   scrollbar-width: none; /* Firefox */
+  /* Additional cross-browser support */
+  -webkit-overflow-scrolling: touch; /* iOS smooth scrolling */
 }
-.scroll-hide::-webkit-scrollbar { /* Chrome/Safari */
+
+/* Hide scrollbar for webkit browsers (Chrome, Safari, newer Edge) */
+.scroll-hide::-webkit-scrollbar {
   display: none;
+  width: 0;
+  height: 0;
+  background: transparent;
+}
+
+.scroll-hide::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-hide::-webkit-scrollbar-thumb {
+  background: transparent;
 }
 
 /* Telegram WebApp specific fixes */
