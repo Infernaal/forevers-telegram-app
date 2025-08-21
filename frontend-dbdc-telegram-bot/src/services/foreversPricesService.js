@@ -43,14 +43,14 @@ class ForeversPricesService {
   // Convert API prices to currency format for the calculator
   formatPricesForCalculator(prices) {
     const currencies = []
-    
+
     // Map of API types to currency display info
     const typeMapping = {
       'forevers_value': { code: 'UAE', name: 'United Arab Emirates', country: 'uae' },
-      'forevers_kazakhstan_value': { code: 'KZ', name: 'Kazakhstan', country: 'kz' },
-      'forevers_germany_value': { code: 'DE', name: 'Germany', country: 'germany' },
-      'forevers_poland_value': { code: 'PL', name: 'Poland', country: 'poland' },
-      'forevers_ukraine_value': { code: 'UA', name: 'Ukraine', country: 'ukraine' }
+      'forevers_KZ_value': { code: 'KZ', name: 'Kazakhstan', country: 'kz' },
+      'forevers_DE_value': { code: 'DE', name: 'Germany', country: 'germany' },
+      'forevers_PL_value': { code: 'PL', name: 'Poland', country: 'poland' },
+      'forevers_UA_value': { code: 'UA', name: 'Ukraine', country: 'ukraine' }
     }
 
     prices.forEach(priceItem => {
