@@ -24,6 +24,11 @@
                 type="number"
                 placeholder="50"
                 class="bg-transparent outline-none text-dbd-gray font-medium flex-1 min-w-0 text-base"
+                @input="handleNumericInput"
+                @keydown="handleKeyDown"
+                @paste="handlePaste"
+                min="1"
+                step="1"
               />
             </div>
 
@@ -318,6 +323,50 @@ const selectCurrency = (currency) => {
 
 const navigateToFavorites = () => {
   router.push('/favorites')
+}
+
+// Handle numeric input validation
+const handleNumericInput = (event) => {
+  const value = event.target.value
+  // Remove any non-numeric characters
+  const numericValue = value.replace(/[^0-9]/g, '')
+
+  // Update the input value if it changed
+  if (value !== numericValue) {
+    event.target.value = numericValue
+    monthlyIncome.value = numericValue ? parseInt(numericValue) : 0
+  }
+}
+
+// Block non-numeric keys
+const handleKeyDown = (event) => {
+  // Allow: backspace, delete, tab, escape, enter
+  if ([8, 9, 27, 13, 46].indexOf(event.keyCode) !== -1 ||
+    // Allow: Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X
+    (event.keyCode === 65 && event.ctrlKey === true) ||
+    (event.keyCode === 67 && event.ctrlKey === true) ||
+    (event.keyCode === 86 && event.ctrlKey === true) ||
+    (event.keyCode === 88 && event.ctrlKey === true) ||
+    // Allow: home, end, left, right
+    (event.keyCode >= 35 && event.keyCode <= 39)) {
+    return
+  }
+  // Ensure that it is a number and stop the keypress
+  if ((event.shiftKey || (event.keyCode < 48 || event.keyCode > 57)) && (event.keyCode < 96 || event.keyCode > 105)) {
+    event.preventDefault()
+  }
+}
+
+// Handle paste events
+const handlePaste = (event) => {
+  event.preventDefault()
+  const paste = (event.clipboardData || window.clipboardData).getData('text')
+  const numericValue = paste.replace(/[^0-9]/g, '')
+
+  if (numericValue) {
+    event.target.value = numericValue
+    monthlyIncome.value = parseInt(numericValue)
+  }
 }
 
 // Convert API prices to currency format for the calculator
