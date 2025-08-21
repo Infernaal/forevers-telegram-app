@@ -246,7 +246,6 @@ import { useRouter } from 'vue-router'
 import BottomNavigation from '../components/BottomNavigation.vue'
 import CountryFlag from '../components/CountryFlag.vue'
 import InfoTooltip from '../components/InfoTooltip.vue'
-import foreversPricesService from '../services/foreversPricesService.js'
 import { useApiErrorNotifier } from '../composables/useApiErrorNotifier.js'
 
 // Router
@@ -254,6 +253,9 @@ const router = useRouter()
 
 // API Error Notifier
 const { showError } = useApiErrorNotifier()
+
+// API base URL
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dbdc-mini.dubadu.com/api/v1/dbdc'
 
 // Reactive data
 const monthlyIncome = ref(50)
@@ -310,14 +312,74 @@ const navigateToFavorites = () => {
   router.push('/favorites')
 }
 
+// Convert API prices to currency format for the calculator
+const formatPricesForCalculator = (prices) => {
+  const formattedCurrencies = []
+
+  // Map of API types to currency display info
+  const typeMapping = {
+    'forevers_value': { code: 'UAE', name: 'United Arab Emirates', country: 'uae' },
+    'forevers_KZ_value': { code: 'KZ', name: 'Kazakhstan', country: 'kz' },
+    'forevers_DE_value': { code: 'DE', name: 'Germany', country: 'germany' },
+    'forevers_PL_value': { code: 'PL', name: 'Poland', country: 'poland' },
+    'forevers_UA_value': { code: 'UA', name: 'Ukraine', country: 'ukraine' }
+  }
+
+  prices.forEach(priceItem => {
+    const mapping = typeMapping[priceItem.type]
+    if (mapping) {
+      formattedCurrencies.push({
+        ...mapping,
+        rate: priceItem.value.toString()
+      })
+    }
+  })
+
+  // If no UAE found, add default (fallback)
+  if (!formattedCurrencies.find(c => c.code === 'UAE')) {
+    formattedCurrencies.unshift({
+      code: 'UAE',
+      name: 'United Arab Emirates',
+      country: 'uae',
+      rate: '9'
+    })
+  }
+
+  return formattedCurrencies
+}
+
+// Use fallback currencies
+const useFallbackCurrencies = () => {
+  currencies.value = [
+    { code: 'UAE', name: 'United Arab Emirates', country: 'uae', rate: '9' },
+    { code: 'KZ', name: 'Kazakhstan', country: 'kz', rate: '8' },
+    { code: 'DE', name: 'Germany', country: 'germany', rate: '4' },
+    { code: 'PL', name: 'Poland', country: 'poland', rate: '4' },
+    { code: 'UA', name: 'Ukraine', country: 'ukraine', rate: '4' }
+  ]
+}
+
 // Load forevers prices from API
 const loadForeversPrices = async () => {
   isLoadingPrices.value = true
   try {
-    const result = await foreversPricesService.getForeversPrices()
+    const response = await fetch(`${API_BASE_URL}/prices/forevers`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include'
+    })
 
-    if (result.status === 'success') {
-      const formattedCurrencies = foreversPricesService.formatPricesForCalculator(result.prices)
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+    }
+
+    const data = await response.json()
+
+    if (data.status === 'success' && data.data) {
+      const prices = data.data.discounted_prices || data.data.prices || []
+      const formattedCurrencies = formatPricesForCalculator(prices)
       currencies.value = formattedCurrencies
 
       // Set UAE as default if available
@@ -327,25 +389,13 @@ const loadForeversPrices = async () => {
       }
     } else {
       // Show error and use fallback data
-      showError('forevers_prices', { message: result.message })
-      currencies.value = [
-        { code: 'UAE', name: 'United Arab Emirates', country: 'uae', rate: '9' },
-        { code: 'KZ', name: 'Kazakhstan', country: 'kz', rate: '8' },
-        { code: 'DE', name: 'Germany', country: 'germany', rate: '4' },
-        { code: 'PL', name: 'Poland', country: 'poland', rate: '4' },
-        { code: 'UA', name: 'Ukraine', country: 'ukraine', rate: '4' }
-      ]
+      showError('forevers_prices', { message: data.message || 'Failed to get prices' })
+      useFallbackCurrencies()
     }
   } catch (error) {
-    showError('forevers_prices', { message: error.message })
-    // Use fallback currencies
-    currencies.value = [
-      { code: 'UAE', name: 'United Arab Emirates', country: 'uae', rate: '9' },
-      { code: 'KZ', name: 'Kazakhstan', country: 'kz', rate: '8' },
-      { code: 'DE', name: 'Germany', country: 'germany', rate: '4' },
-      { code: 'PL', name: 'Poland', country: 'poland', rate: '4' },
-      { code: 'UA', name: 'Ukraine', country: 'ukraine', rate: '4' }
-    ]
+    console.error('ForeversPrices Error:', error)
+    showError('forevers_prices', { message: error.message || 'Network error while fetching prices' })
+    useFallbackCurrencies()
   } finally {
     isLoadingPrices.value = false
   }
