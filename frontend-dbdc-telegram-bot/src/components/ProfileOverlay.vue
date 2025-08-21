@@ -489,18 +489,8 @@ const showLanguageDropdown = ref(false)
 const createLanguages = () => {
   const languageMapping = [
     { code: 'ENG', name: 'English', countryCode: 'GB' },
-    { code: 'ESP', name: 'Español', countryCode: 'ES' },
-    { code: 'FRA', name: 'Français', countryCode: 'FR' },
-    { code: 'DEU', name: 'Deutsch', countryCode: 'DE' },
-    { code: 'ITA', name: 'Italiano', countryCode: 'IT' },
     { code: 'RUS', name: 'Русский', countryCode: 'RU' },
-    { code: 'UKR', name: 'Українська', countryCode: 'UA' },
-    { code: 'CHN', name: '中文', countryCode: 'CN' },
-    { code: 'JPN', name: '日本語', countryCode: 'JP' },
-    { code: 'KOR', name: '한국어', countryCode: 'KR' },
-    { code: 'ARA', name: 'العربية', countryCode: 'AE' },
-    { code: 'POR', name: 'Português', countryCode: 'PT' },
-    { code: 'NLD', name: 'Nederlands', countryCode: 'NL' }
+    { code: 'UA', name: 'Українська', countryCode: 'UA' }
   ]
 
   return languageMapping.map(lang => {
