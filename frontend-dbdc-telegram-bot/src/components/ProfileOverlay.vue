@@ -485,22 +485,37 @@ const router = useRouter()
 const showCopySuccess = ref(false)
 const showLanguageDropdown = ref(false)
 
+// Create language list using allCountries for proper country codes
+const createLanguages = () => {
+  const languageMapping = [
+    { code: 'ENG', name: 'English', countryCode: 'GB' },
+    { code: 'ESP', name: 'Español', countryCode: 'ES' },
+    { code: 'FRA', name: 'Français', countryCode: 'FR' },
+    { code: 'DEU', name: 'Deutsch', countryCode: 'DE' },
+    { code: 'ITA', name: 'Italiano', countryCode: 'IT' },
+    { code: 'RUS', name: 'Русский', countryCode: 'RU' },
+    { code: 'UKR', name: 'Українська', countryCode: 'UA' },
+    { code: 'CHN', name: '中文', countryCode: 'CN' },
+    { code: 'JPN', name: '日本語', countryCode: 'JP' },
+    { code: 'KOR', name: '한국어', countryCode: 'KR' },
+    { code: 'ARA', name: 'العربية', countryCode: 'AE' },
+    { code: 'POR', name: 'Português', countryCode: 'PT' },
+    { code: 'NLD', name: 'Nederlands', countryCode: 'NL' }
+  ]
+
+  return languageMapping.map(lang => {
+    const country = findCountry(lang.countryCode)
+    return {
+      code: lang.code,
+      name: lang.name,
+      country: country ? country.code.toLowerCase() : lang.countryCode.toLowerCase(),
+      countryName: country ? country.name : lang.countryCode
+    }
+  }).filter(lang => lang.country)
+}
+
 // Language state
-const languages = ref([
-  { code: 'ENG', name: 'English', country: 'uk' },
-  { code: 'ESP', name: 'Español', country: 'spain' },
-  { code: 'FRA', name: 'Fran��ais', country: 'france' },
-  { code: 'DEU', name: 'Deutsch', country: 'germany' },
-  { code: 'ITA', name: 'Italiano', country: 'italy' },
-  { code: 'RUS', name: 'Русский', country: 'russia' },
-  { code: 'UKR', name: 'Українська', country: 'ukraine' },
-  { code: 'CHN', name: '中��', country: 'china' },
-  { code: 'JPN', name: '日本語', country: 'japan' },
-  { code: 'KOR', name: '한국어', country: 'south korea' },
-  { code: 'ARA', name: 'العربية', country: 'uae' },
-  { code: 'POR', name: 'Português', country: 'portugal' },
-  { code: 'NLD', name: 'Nederlands', country: 'netherlands' }
-])
+const languages = ref(createLanguages())
 
 const selectedLanguage = ref(languages.value[0])
 
