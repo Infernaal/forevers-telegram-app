@@ -193,17 +193,17 @@
         <!-- Investment Promotion Section -->
         <div class="bg-dbd-light-blue border border-purple-200 rounded-xl p-4 mt-6">
           <h3 class="text-center text-xl font-bold mb-3 leading-tight">
-            <span class="text-dbd-primary">Forevers UAE</span>: A Smarter
+            <span class="text-dbd-primary">Forevers {{ selectedCurrency.code }}</span>: A Smarter
             <br><span class="text-red-500">Investment</span> Opportunity
           </h3>
-          
+
           <!-- Placeholder for logo/icon -->
           <div class="w-22 h-22 mx-auto my-4 bg-gray-200 rounded-full"></div>
-          
+
           <p class="text-center text-dbd-dark mb-4 text-base leading-relaxed">
-            Forevers UAE offers a unique <span class="text-red-500">investment</span> opportunity with higher earning potential and lower entry thresholds compared to traditional options like bank deposits or real estate.
+            Forevers {{ selectedCurrency.code }} offers a unique <span class="text-red-500">investment</span> opportunity with higher earning potential and lower entry thresholds compared to traditional options like bank deposits or real estate.
           </p>
-          
+
           <button @click="navigateToFavorites" class="w-full bg-gradient-to-r from-dbd-primary to-purple-600 text-white font-bold py-3 px-6 rounded-full hover:from-purple-700 hover:to-purple-800 transition-all duration-300">
             <span class="text-red-500">Invested</span> Now
           </button>
