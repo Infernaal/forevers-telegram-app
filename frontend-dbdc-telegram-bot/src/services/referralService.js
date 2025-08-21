@@ -21,6 +21,10 @@ class ReferralService {
       });
 
       if (!response.ok) {
+        // Clear session cache if auth error
+        if (response.status === 401 || response.status === 403) {
+          telegramUserService.clearSession()
+        }
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
