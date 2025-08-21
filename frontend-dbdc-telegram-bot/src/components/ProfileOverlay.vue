@@ -449,6 +449,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import CountryFlag from './CountryFlag.vue'
+import { findCountry } from '../utils/allCountries.js'
 
 // Props
 const props = defineProps({
