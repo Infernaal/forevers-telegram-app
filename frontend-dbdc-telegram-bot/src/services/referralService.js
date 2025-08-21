@@ -1,4 +1,5 @@
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dbdc-mini.dubadu.com/api/v1/dbdc';
+import telegramUserService from './telegramUserService.js'
 
 /**
  * Сервис для работы с реферальной системой
