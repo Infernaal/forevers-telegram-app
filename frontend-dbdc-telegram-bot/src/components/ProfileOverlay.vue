@@ -490,7 +490,7 @@ const createLanguages = () => {
   const languageMapping = [
     { code: 'ENG', name: 'English', countryCode: 'GB' },
     { code: 'RUS', name: 'Русский', countryCode: 'RU' },
-    { code: 'UA', name: 'Українська', countryCode: 'UA' }
+    { code: 'UKR', name: 'Українська', countryCode: 'UA' }
   ]
 
   return languageMapping.map(lang => {
