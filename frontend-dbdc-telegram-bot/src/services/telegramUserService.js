@@ -87,7 +87,7 @@ class TelegramUserService {
         credentials: 'include'
       })
     } catch (_) { /* ignore */ }
-    sessionStorage.removeItem('sessionEstablished')
+    this.clearSession()
   }
 }
 
