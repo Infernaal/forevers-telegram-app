@@ -247,6 +247,7 @@ import BottomNavigation from '../components/BottomNavigation.vue'
 import CountryFlag from '../components/CountryFlag.vue'
 import InfoTooltip from '../components/InfoTooltip.vue'
 import { useApiErrorNotifier } from '../composables/useApiErrorNotifier.js'
+import { findCountry } from '../utils/allCountries.js'
 
 // Router
 const router = useRouter()
@@ -313,37 +314,63 @@ const navigateToFavorites = () => {
 }
 
 // Convert API prices to currency format for the calculator
-const formatPricesForCalculator = (prices) => {
+const formatPricesForCalculator = (prices, discounts, discountedPrices) => {
   const formattedCurrencies = []
 
-  // Map of API types to currency display info
-  const typeMapping = {
-    'forevers_value': { code: 'UAE', name: 'United Arab Emirates', country: 'uae' },
-    'forevers_KZ_value': { code: 'KZ', name: 'Kazakhstan', country: 'kz' },
-    'forevers_DE_value': { code: 'DE', name: 'Germany', country: 'germany' },
-    'forevers_PL_value': { code: 'PL', name: 'Poland', country: 'poland' },
-    'forevers_UA_value': { code: 'UA', name: 'Ukraine', country: 'ukraine' }
+  // Create maps for easy lookup
+  const priceMap = Object.fromEntries(prices.map(p => [p.type, p.value]))
+  const discountMap = Object.fromEntries(discounts.map(d => [d.type, d]))
+  const discountedPriceMap = Object.fromEntries(discountedPrices.map(dp => [dp.type, dp.value]))
+
+  // Check if discount is active (current date between start and end)
+  const isDiscountActive = (discount) => {
+    if (!discount || !discount.discount || parseFloat(discount.discount) === 0) return false
+
+    const now = new Date()
+    const startDate = new Date(discount.start_date + 'T00:00:00Z')
+    const endDate = new Date(discount.end_date + 'T23:59:59Z')
+
+    return now >= startDate && now <= endDate
   }
 
   prices.forEach(priceItem => {
-    const mapping = typeMapping[priceItem.type]
-    if (mapping) {
+    const countryCode = priceItem.type
+    const discount = discountMap[countryCode]
+    const hasActiveDiscount = isDiscountActive(discount)
+
+    // Use discounted price if available and discount is active, otherwise use regular price
+    const finalPrice = hasActiveDiscount && discountedPriceMap[countryCode]
+      ? discountedPriceMap[countryCode]
+      : priceItem.value
+
+    // Map UAE to AE for allCountries lookup (UAE is not a standard country code)
+    const lookupCode = countryCode === 'UAE' ? 'AE' : countryCode
+    const countryData = findCountry(lookupCode)
+
+    if (countryData) {
       formattedCurrencies.push({
-        ...mapping,
-        rate: priceItem.value.toString()
+        code: countryCode, // Keep original code (UAE, KZ, etc.)
+        name: countryData.name,
+        country: countryData.code.toLowerCase(), // For flag component
+        rate: finalPrice.toString()
+      })
+    } else {
+      // Fallback for unknown countries
+      formattedCurrencies.push({
+        code: countryCode,
+        name: countryCode,
+        country: countryCode.toLowerCase(),
+        rate: finalPrice.toString()
       })
     }
   })
 
-  // If no UAE found, add default (fallback)
-  if (!formattedCurrencies.find(c => c.code === 'UAE')) {
-    formattedCurrencies.unshift({
-      code: 'UAE',
-      name: 'United Arab Emirates',
-      country: 'uae',
-      rate: '9'
-    })
-  }
+  // Sort to put UAE first if available
+  formattedCurrencies.sort((a, b) => {
+    if (a.code === 'UAE') return -1
+    if (b.code === 'UAE') return 1
+    return a.name.localeCompare(b.name)
+  })
 
   return formattedCurrencies
 }
@@ -378,8 +405,11 @@ const loadForeversPrices = async () => {
     const data = await response.json()
 
     if (data.status === 'success' && data.data) {
-      const prices = data.data.discounted_prices || data.data.prices || []
-      const formattedCurrencies = formatPricesForCalculator(prices)
+      const prices = data.data.prices || []
+      const discounts = data.data.discounts || []
+      const discountedPrices = data.data.discounted_prices || []
+
+      const formattedCurrencies = formatPricesForCalculator(prices, discounts, discountedPrices)
       currencies.value = formattedCurrencies
 
       // Set UAE as default if available
