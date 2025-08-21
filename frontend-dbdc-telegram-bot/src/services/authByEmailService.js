@@ -16,6 +16,12 @@ class AuthByEmailService {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, telegram_id: telegramId, telegram_init_data: telegramInitData })
       })
+
+      // Clear session cache if auth error
+      if (response.status === 401 || response.status === 403) {
+        telegramUserService.clearSession()
+      }
+
       if (!response.ok) throw new Error('Network error')
       return await response.json()
     } catch (e) {
