@@ -87,7 +87,7 @@
               <div class="flex-1">
                 <div class="text-sm text-dbd-gray">
                   <span class="text-red-500 font-medium">Invested</span>
-                  <span> in Forevers UAE</span>
+                  <span> in Forevers {{ selectedCurrency.code }}</span>
                 </div>
               </div>
               <div class="text-right">
@@ -275,28 +275,35 @@ const selectedCurrency = ref({
 // Currency options - will be populated from API
 const currencies = ref([])
 
-// Computed values
+// Helper function to format numbers with spaces (like PHP numberWithSpaces)
+const formatNumber = (number) => {
+  return number.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+}
+
+// Computed values based on PHP formulas
 const calculatedInvestment = computed(() => {
-  const investment = monthlyIncome.value * parseFloat(selectedCurrency.value.rate) * 12
-  return investment.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+  // PHP: ((monthIncome / 0.85) * productPrice) * 12
+  const productPrice = parseFloat(selectedCurrency.value.rate)
+  const investment = ((monthlyIncome.value / 0.85) * productPrice) * 12
+  return formatNumber(investment)
 })
 
 const bankDepositReturn = computed(() => {
-  const annualIncome = monthlyIncome.value * 12
-  const return5Years = annualIncome * 5 * 1.035
-  return return5Years.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+  // PHP: monthIncome / 0.00291
+  const deposit = monthlyIncome.value / 0.00291
+  return formatNumber(deposit)
 })
 
 const residentialReturn = computed(() => {
-  const annualIncome = monthlyIncome.value * 12
-  const return5Years = annualIncome * 5 * 1.05
-  return return5Years.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+  // PHP: monthIncome / 0.00416
+  const residential = monthlyIncome.value / 0.00416
+  return formatNumber(residential)
 })
 
 const commercialReturn = computed(() => {
-  const annualIncome = monthlyIncome.value * 12
-  const return5Years = annualIncome * 5 * 1.08
-  return return5Years.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+  // PHP: monthIncome / 0.0066
+  const commercial = monthlyIncome.value / 0.0066
+  return formatNumber(commercial)
 })
 
 // Methods
