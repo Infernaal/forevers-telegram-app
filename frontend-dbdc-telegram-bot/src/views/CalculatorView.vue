@@ -31,16 +31,26 @@
             <div class="relative w-[180px] sm:flex-shrink-0 sm:min-w-[140px] sm:w-auto">
               <button
                 @click="toggleCurrencyDropdown"
-                class="flex items-center bg-white border border-gray-200 rounded-full px-3 py-2 h-11 gap-2 hover:bg-gray-50 transition-colors w-full text-sm justify-between"
+                :disabled="isLoadingPrices"
+                class="flex items-center bg-white border border-gray-200 rounded-full px-3 py-2 h-11 gap-2 hover:bg-gray-50 transition-colors w-full text-sm justify-between disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <div class="flex items-center gap-1 whitespace-nowrap">
-                  <CountryFlag :country="selectedCurrency.country" size="medium" class="w-5 h-5 flex-shrink-0" />
-                  <svg class="w-3 h-3 text-dbd-dark flex-shrink-0" viewBox="0 0 14 14" fill="currentColor">
-                    <path d="M12.8602 1.40015H4.3802C4.00686 1.40015 3.7402 1.66681 3.7402 2.04015V4.65348H1.3402C0.966862 4.70681 0.700195 4.97348 0.700195 5.34681C0.700195 5.72015 0.966862 5.98681 1.3402 5.98681H3.7402V11.9601C3.7402 12.3335 4.00686 12.6001 4.3802 12.6001C4.75353 12.6001 5.0202 12.3335 5.0202 11.9601V9.18681H7.7402C8.11353 9.18681 8.3802 8.92015 8.3802 8.54681C8.3802 8.17348 8.11353 7.90681 7.7402 7.90681H5.0202V5.93348H10.1935C10.5669 5.93348 10.8335 5.66681 10.8335 5.29348C10.8335 4.92015 10.5669 4.65348 10.1935 4.65348H5.0202V2.68015H12.8069C13.1802 2.68015 13.4469 2.41348 13.4469 2.04015C13.4469 1.66681 13.2335 1.40015 12.8602 1.40015Z"/>
-                  </svg>
-                  <span class="text-xs font-medium text-dbd-dark">{{ selectedCurrency.code }}</span>
-                  <span class="text-gray-400 text-xs">/</span>
-                  <span class="text-xs font-medium text-dbd-primary">{{ selectedCurrency.rate }} USD</span>
+                  <template v-if="isLoadingPrices">
+                    <div class="w-5 h-5 bg-gray-200 rounded animate-pulse flex-shrink-0"></div>
+                    <div class="w-3 h-3 bg-gray-200 rounded animate-pulse flex-shrink-0"></div>
+                    <div class="w-8 h-3 bg-gray-200 rounded animate-pulse"></div>
+                    <span class="text-gray-400 text-xs">/</span>
+                    <div class="w-12 h-3 bg-gray-200 rounded animate-pulse"></div>
+                  </template>
+                  <template v-else>
+                    <CountryFlag :country="selectedCurrency.country" size="medium" class="w-5 h-5 flex-shrink-0" />
+                    <svg class="w-3 h-3 text-dbd-dark flex-shrink-0" viewBox="0 0 14 14" fill="currentColor">
+                      <path d="M12.8602 1.40015H4.3802C4.00686 1.40015 3.7402 1.66681 3.7402 2.04015V4.65348H1.3402C0.966862 4.70681 0.700195 4.97348 0.700195 5.34681C0.700195 5.72015 0.966862 5.98681 1.3402 5.98681H3.7402V11.9601C3.7402 12.3335 4.00686 12.6001 4.3802 12.6001C4.75353 12.6001 5.0202 12.3335 5.0202 11.9601V9.18681H7.7402C8.11353 9.18681 8.3802 8.92015 8.3802 8.54681C8.3802 8.17348 8.11353 7.90681 7.7402 7.90681H5.0202V5.93348H10.1935C10.5669 5.93348 10.8335 5.66681 10.8335 5.29348C10.8335 4.92015 10.5669 4.65348 10.1935 4.65348H5.0202V2.68015H12.8069C13.1802 2.68015 13.4469 2.41348 13.4469 2.04015C13.4469 1.66681 13.2335 1.40015 12.8602 1.40015Z"/>
+                    </svg>
+                    <span class="text-xs font-medium text-dbd-dark">{{ selectedCurrency.code }}</span>
+                    <span class="text-gray-400 text-xs">/</span>
+                    <span class="text-xs font-medium text-dbd-primary">{{ selectedCurrency.rate }} USD</span>
+                  </template>
                 </div>
                 <svg class="w-4 h-4 text-gray-400 ml-1 flex-shrink-0" :class="{ 'rotate-180': showCurrencyDropdown }" viewBox="0 0 16 16" fill="none">
                   <circle cx="8" cy="8" r="7.6" fill="white" stroke="#CFCFCF" stroke-width="0.8"/>
@@ -49,7 +59,10 @@
               </button>
 
               <!-- Currency Dropdown -->
-              <div v-if="showCurrencyDropdown" class="absolute top-full mt-1 right-0 w-64 bg-gradient-to-r from-purple-800 via-purple-900 to-purple-900 rounded-xl shadow-xl border border-purple-600 z-50 p-2 max-h-80 overflow-y-auto scrollbar-hide">
+              <div v-if="showCurrencyDropdown && !isLoadingPrices" class="absolute top-full mt-1 right-0 w-64 bg-gradient-to-r from-purple-800 via-purple-900 to-purple-900 rounded-xl shadow-xl border border-purple-600 z-50 p-2 max-h-80 overflow-y-auto scrollbar-hide">
+                <div v-if="currencies.length === 0" class="p-4 text-center text-white text-sm">
+                  No currencies available
+                </div>
                 <div v-for="currency in currencies" :key="currency.code"
                      @click="selectCurrency(currency)"
                      class="flex items-center justify-between p-2 rounded-lg hover:bg-white/10 cursor-pointer transition-colors">
@@ -74,7 +87,7 @@
               <div class="flex-1">
                 <div class="text-sm text-dbd-gray">
                   <span class="text-red-500 font-medium">Invested</span>
-                  <span> in Forevers UAE</span>
+                  <span> in Forevers {{ selectedCurrency.code }}</span>
                 </div>
               </div>
               <div class="text-right">
@@ -180,17 +193,17 @@
         <!-- Investment Promotion Section -->
         <div class="bg-dbd-light-blue border border-purple-200 rounded-xl p-4 mt-6">
           <h3 class="text-center text-xl font-bold mb-3 leading-tight">
-            <span class="text-dbd-primary">Forevers UAE</span>: A Smarter
+            <span class="text-dbd-primary">Forevers {{ selectedCurrency.code }}</span>: A Smarter
             <br><span class="text-red-500">Investment</span> Opportunity
           </h3>
-          
+
           <!-- Placeholder for logo/icon -->
           <div class="w-22 h-22 mx-auto my-4 bg-gray-200 rounded-full"></div>
-          
+
           <p class="text-center text-dbd-dark mb-4 text-base leading-relaxed">
-            Forevers UAE offers a unique <span class="text-red-500">investment</span> opportunity with higher earning potential and lower entry thresholds compared to traditional options like bank deposits or real estate.
+            Forevers {{ selectedCurrency.code }} offers a unique <span class="text-red-500">investment</span> opportunity with higher earning potential and lower entry thresholds compared to traditional options like bank deposits or real estate.
           </p>
-          
+
           <button @click="navigateToFavorites" class="w-full bg-gradient-to-r from-dbd-primary to-purple-600 text-white font-bold py-3 px-6 rounded-full hover:from-purple-700 hover:to-purple-800 transition-all duration-300">
             <span class="text-red-500">Invested</span> Now
           </button>
@@ -233,9 +246,17 @@ import { useRouter } from 'vue-router'
 import BottomNavigation from '../components/BottomNavigation.vue'
 import CountryFlag from '../components/CountryFlag.vue'
 import InfoTooltip from '../components/InfoTooltip.vue'
+import { useApiErrorNotifier } from '../composables/useApiErrorNotifier.js'
+import { findCountry } from '../utils/allCountries.js'
 
 // Router
 const router = useRouter()
+
+// API Error Notifier
+const { showError } = useApiErrorNotifier()
+
+// API base URL
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dbdc-mini.dubadu.com/api/v1/dbdc'
 
 // Reactive data
 const monthlyIncome = ref(50)
@@ -243,6 +264,7 @@ const showCurrencyDropdown = ref(false)
 const showBankDepositTooltip = ref(false)
 const showResidentialTooltip = ref(false)
 const showCommercialTooltip = ref(false)
+const isLoadingPrices = ref(true)
 const selectedCurrency = ref({
   code: 'UAE',
   name: 'United Arab Emirates',
@@ -250,37 +272,38 @@ const selectedCurrency = ref({
   rate: '9'
 })
 
-// Currency options
-const currencies = ref([
-  { code: 'UAE', name: 'United Arab Emirates', country: 'uae', rate: '9' },
-  { code: 'KZ', name: 'Kazakhstan', country: 'kz', rate: '8' },
-  { code: 'DE', name: 'Germany', country: 'germany', rate: '4' },
-  { code: 'PL', name: 'Poland', country: 'poland', rate: '4' },
-  { code: 'UA', name: 'Ukraine', country: 'ukraine', rate: '4' }
-])
+// Currency options - will be populated from API
+const currencies = ref([])
 
-// Computed values
+// Helper function to format numbers with spaces (like PHP numberWithSpaces)
+const formatNumber = (number) => {
+  return number.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+}
+
+// Computed values based on PHP formulas
 const calculatedInvestment = computed(() => {
-  const investment = monthlyIncome.value * parseFloat(selectedCurrency.value.rate) * 12
-  return investment.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+  // PHP: ((monthIncome / 0.85) * productPrice) * 12
+  const productPrice = parseFloat(selectedCurrency.value.rate)
+  const investment = ((monthlyIncome.value / 0.85) * productPrice) * 12
+  return formatNumber(investment)
 })
 
 const bankDepositReturn = computed(() => {
-  const annualIncome = monthlyIncome.value * 12
-  const return5Years = annualIncome * 5 * 1.035
-  return return5Years.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+  // PHP: monthIncome / 0.00291
+  const deposit = monthlyIncome.value / 0.00291
+  return formatNumber(deposit)
 })
 
 const residentialReturn = computed(() => {
-  const annualIncome = monthlyIncome.value * 12
-  const return5Years = annualIncome * 5 * 1.05
-  return return5Years.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+  // PHP: monthIncome / 0.00416
+  const residential = monthlyIncome.value / 0.00416
+  return formatNumber(residential)
 })
 
 const commercialReturn = computed(() => {
-  const annualIncome = monthlyIncome.value * 12
-  const return5Years = annualIncome * 5 * 1.08
-  return return5Years.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+  // PHP: monthIncome / 0.0066
+  const commercial = monthlyIncome.value / 0.0066
+  return formatNumber(commercial)
 })
 
 // Methods
@@ -297,6 +320,124 @@ const navigateToFavorites = () => {
   router.push('/favorites')
 }
 
+// Convert API prices to currency format for the calculator
+const formatPricesForCalculator = (prices, discounts, discountedPrices) => {
+  const formattedCurrencies = []
+
+  // Create maps for easy lookup
+  const priceMap = Object.fromEntries(prices.map(p => [p.type, p.value]))
+  const discountMap = Object.fromEntries(discounts.map(d => [d.type, d]))
+  const discountedPriceMap = Object.fromEntries(discountedPrices.map(dp => [dp.type, dp.value]))
+
+  // Check if discount is active (current date between start and end)
+  const isDiscountActive = (discount) => {
+    if (!discount || !discount.discount || parseFloat(discount.discount) === 0) return false
+
+    const now = new Date()
+    const startDate = new Date(discount.start_date + 'T00:00:00Z')
+    const endDate = new Date(discount.end_date + 'T23:59:59Z')
+
+    return now >= startDate && now <= endDate
+  }
+
+  prices.forEach(priceItem => {
+    const countryCode = priceItem.type
+    const discount = discountMap[countryCode]
+    const hasActiveDiscount = isDiscountActive(discount)
+
+    // Use discounted price if available and discount is active, otherwise use regular price
+    const finalPrice = hasActiveDiscount && discountedPriceMap[countryCode]
+      ? discountedPriceMap[countryCode]
+      : priceItem.value
+
+    // Map UAE to AE for allCountries lookup (UAE is not a standard country code)
+    const lookupCode = countryCode === 'UAE' ? 'AE' : countryCode
+    const countryData = findCountry(lookupCode)
+
+    if (countryData) {
+      formattedCurrencies.push({
+        code: countryCode, // Keep original code (UAE, KZ, etc.)
+        name: countryData.name,
+        country: countryData.code.toLowerCase(), // For flag component
+        rate: finalPrice.toString()
+      })
+    } else {
+      // Fallback for unknown countries
+      formattedCurrencies.push({
+        code: countryCode,
+        name: countryCode,
+        country: countryCode.toLowerCase(),
+        rate: finalPrice.toString()
+      })
+    }
+  })
+
+  // Sort to put UAE first if available
+  formattedCurrencies.sort((a, b) => {
+    if (a.code === 'UAE') return -1
+    if (b.code === 'UAE') return 1
+    return a.name.localeCompare(b.name)
+  })
+
+  return formattedCurrencies
+}
+
+// Use fallback currencies
+const useFallbackCurrencies = () => {
+  currencies.value = [
+    { code: 'UAE', name: 'United Arab Emirates', country: 'uae', rate: '9' },
+    { code: 'KZ', name: 'Kazakhstan', country: 'kz', rate: '8' },
+    { code: 'DE', name: 'Germany', country: 'germany', rate: '4' },
+    { code: 'PL', name: 'Poland', country: 'poland', rate: '4' },
+    { code: 'UA', name: 'Ukraine', country: 'ukraine', rate: '4' }
+  ]
+}
+
+// Load forevers prices from API
+const loadForeversPrices = async () => {
+  isLoadingPrices.value = true
+  try {
+    const response = await fetch(`${API_BASE_URL}/prices/forevers`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include'
+    })
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+    }
+
+    const data = await response.json()
+
+    if (data.status === 'success' && data.data) {
+      const prices = data.data.prices || []
+      const discounts = data.data.discounts || []
+      const discountedPrices = data.data.discounted_prices || []
+
+      const formattedCurrencies = formatPricesForCalculator(prices, discounts, discountedPrices)
+      currencies.value = formattedCurrencies
+
+      // Set UAE as default if available
+      const uaeCurrency = formattedCurrencies.find(c => c.code === 'UAE')
+      if (uaeCurrency) {
+        selectedCurrency.value = uaeCurrency
+      }
+    } else {
+      // Show error and use fallback data
+      showError('forevers_prices', { message: data.message || 'Failed to get prices' })
+      useFallbackCurrencies()
+    }
+  } catch (error) {
+    console.error('ForeversPrices Error:', error)
+    showError('forevers_prices', { message: error.message || 'Network error while fetching prices' })
+    useFallbackCurrencies()
+  } finally {
+    isLoadingPrices.value = false
+  }
+}
+
 // Close dropdown when clicking outside
 const handleClickOutside = (event) => {
   if (!event.target.closest('.relative')) {
@@ -306,6 +447,7 @@ const handleClickOutside = (event) => {
 
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
+  loadForeversPrices()
 })
 
 onUnmounted(() => {
