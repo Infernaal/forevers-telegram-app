@@ -1,4 +1,5 @@
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dbdc-mini.dubadu.com/api/v1/dbdc';
+import telegramUserService from './telegramUserService.js'
 
 /**
  * Сервис для работы с реферальной системой
@@ -20,6 +21,10 @@ class ReferralService {
       });
 
       if (!response.ok) {
+        // Clear session cache if auth error
+        if (response.status === 401 || response.status === 403) {
+          telegramUserService.clearSession()
+        }
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 

@@ -1,4 +1,5 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dbdc-mini.dubadu.com/api/v1/dbdc'
+import telegramUserService from './telegramUserService.js'
 
 class AuthByEmailService {
   async auth(email, options = {}) {
@@ -15,6 +16,12 @@ class AuthByEmailService {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, telegram_id: telegramId, telegram_init_data: telegramInitData })
       })
+
+      // Clear session cache if auth error
+      if (response.status === 401 || response.status === 403) {
+        telegramUserService.clearSession()
+      }
+
       if (!response.ok) throw new Error('Network error')
       return await response.json()
     } catch (e) {
