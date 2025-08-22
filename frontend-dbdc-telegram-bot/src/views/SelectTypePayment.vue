@@ -354,6 +354,8 @@ const closeTermsModal = () => {
 const closeSuccessModal = () => {
   showSuccessModal.value = false
   clearCart() // empty cart after success
+  // Clear purchase details from sessionStorage
+  sessionStorage.removeItem('purchaseDetails')
   router.push({ name: 'wallet', query: { loyalty: loyaltyBalance.value, bonus: bonusBalance.value } })
 }
 
@@ -430,10 +432,17 @@ watch(termsAccepted, (newVal, oldVal) => {
 onMounted(() => {
   console.log('🚀 SelectTypePayment mounted')
 
-  // Attempt to retrieve purchase details (note: params may not persist without dynamic segments)
-  if (route.params.purchaseDetails) {
-    purchaseDetails.value = route.params.purchaseDetails
-    console.log('Purchase details received:', purchaseDetails.value)
+  // Retrieve purchase details from sessionStorage
+  try {
+    const savedPurchaseDetails = sessionStorage.getItem('purchaseDetails')
+    if (savedPurchaseDetails) {
+      purchaseDetails.value = JSON.parse(savedPurchaseDetails)
+      console.log('✅ Purchase details loaded from sessionStorage:', purchaseDetails.value)
+    } else {
+      console.log('⚠️ No purchase details found in sessionStorage')
+    }
+  } catch (error) {
+    console.error('❌ Error parsing purchase details from sessionStorage:', error)
   }
 
   // Parse USD total (for potential future logic)
