@@ -293,7 +293,7 @@ const executeActualPurchase = async () => {
       await fetchWalletData()
 
       // Set success message
-      const paymentMethodName = selectedPayment.value === 'loyalty' ? 'Loyalty Program' : 'Bonus Reward'
+      const paymentMethodName = getPaymentMethodDisplayName(selectedPayment.value)
       successMessage.value = `Forevers purchased successfully using ${paymentMethodName} wallet!`
 
       // Show success modal
