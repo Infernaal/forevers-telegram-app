@@ -231,6 +231,13 @@ const handlePurchase = async () => {
   }
 
   // Only show confirmation modal for bonus and loyalty payments
+  console.log('💳 Payment type check:', {
+    selectedPayment: selectedPayment.value,
+    isBonus: selectedPayment.value === 'bonus',
+    isLoyalty: selectedPayment.value === 'loyalty',
+    willShowConfirmModal: selectedPayment.value === 'bonus' || selectedPayment.value === 'loyalty'
+  })
+
   if (selectedPayment.value === 'bonus' || selectedPayment.value === 'loyalty') {
     // Prepare confirmation modal data
     const totalForevers = foreversAmount.value || 0
