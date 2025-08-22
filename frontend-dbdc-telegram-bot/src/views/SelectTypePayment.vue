@@ -25,7 +25,7 @@
           </div>
           <div class="text-center">
             <h3 class="text-lg font-semibold text-dbd-dark">{{ loyaltyFormatted }}</h3>
-            <p class="text-dbd-light-gray text-base">Loyalty Program</p>
+            <p class="text-dbd-light-gray text-base">Loyalty</p>
           </div>
         </div>
 
