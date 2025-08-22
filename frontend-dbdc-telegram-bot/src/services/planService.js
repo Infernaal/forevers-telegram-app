@@ -1,6 +1,5 @@
 import { ForeversPurchaseService } from './foreversPurchaseService.js'
 import DepositsService from './depositsService.js'
-import UaeDepositsService from './uaeDepositsService.js' // Keep for backward compatibility
 
 // Plan tier definitions with USD thresholds based on UAE deposits
 export const PLAN_TIERS = [
