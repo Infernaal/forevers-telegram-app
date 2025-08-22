@@ -6,35 +6,36 @@ from typing import Dict, Optional, Union
 from sqlalchemy.ext.asyncio import AsyncSession
 from datetime import date
 from utils.get_total_deposit_amount_by_type import get_total_deposit_amount_by_type
+from utils.get_user_deposits import get_available_deposit_types
 
 async def calculate_available_forevers(
     user_id: int,
     db: AsyncSession
 ) -> Dict[str, Optional[int]]:
-    # Получаем ранг
+    # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
     rank = await get_user_rank(user_id, db)
 
-    # Получаем базовые цены
+    # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
     base_price_items = await extract_base_prices(db)
     if base_price_items is None:
         return {region: 0 for region in ["UAE", "KZ", "DE", "PL", "UA"]}
 
-    # Применяем скидки
+    # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     discounted_prices, _ = await apply_discounts(db, base_price_items)
 
-    # Преобразуем в словарь {type: rate}
+    # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ {type: rate}
     final_rates: Dict[str, Decimal] = {
         item.type: item.value for item in discounted_prices
     }
 
-    # Получаем total_amounts из базы
+    # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ total_amounts пїЅпїЅ пїЅпїЅпїЅпїЅ
     region_types = ["UAE", "KZ", "DE", "PL", "UA"]
     total_amounts: Dict[str, Decimal] = {
         region: await get_total_deposit_amount_by_type(user_id, region, db)
         for region in region_types
     }
 
-    # Расчёт max_volumes
+    # пїЅпїЅпїЅпїЅпїЅпїЅ max_volumes
     multiplier = Decimal("1.0") if rank != "None" else Decimal("0.5")
     total_all = total_amounts["UAE"] + total_amounts["KZ"] + total_amounts["DE"]
     max_allowed_pl_ua = total_all * multiplier
@@ -47,7 +48,7 @@ async def calculate_available_forevers(
         "UA": max(Decimal(0), max_allowed_pl_ua - total_amounts["UA"]),
     }
 
-    # Расчёт доступных монет
+    # пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     available_forever_coins: Dict[str, Optional[int]] = {}
 
     for region in region_types:
@@ -55,7 +56,7 @@ async def calculate_available_forevers(
         rate = final_rates.get(region, Decimal(0))
 
         if max_volume is None:
-            available_forever_coins[region] = None  # безлимит
+            available_forever_coins[region] = None  # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         elif rate > 0:
             available_forever_coins[region] = int((max_volume / rate).to_integral_value(ROUND_FLOOR))
         else:
