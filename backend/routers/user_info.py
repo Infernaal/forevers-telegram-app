@@ -374,14 +374,17 @@ async def register_user(payload: RegistrationRequest, request: Request, response
             ))
             await db.flush()
 
-            # Wallet
-            db.add(UsersWallets(
-                uid=user.id,
-                amount=0,
-                currency=default_currency,
-                wallet_type='bonus',
-                updated=int(time.time())
-            ))
+            wallet_enum = UsersWallets.__table__.columns['wallet_type'].type.enums
+            for wallet_type in wallet_enum:
+                if wallet_type == 'deals':
+                    continue
+                db.add(UsersWallets(
+                    uid=user.id,
+                    amount=0,
+                    currency=default_currency,
+                    wallet_type=wallet_type,
+                    updated=int(time.time())
+                ))
             await db.commit()
             logger.info(f"/register committed user id={user.id} email={payload.email}")
         except Exception as e:
