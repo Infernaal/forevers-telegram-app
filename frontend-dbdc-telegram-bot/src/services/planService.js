@@ -1,37 +1,45 @@
 import { ForeversPurchaseService } from './foreversPurchaseService.js'
 import UaeDepositsService from './uaeDepositsService.js'
 
-// Plan tier definitions with forevers requirements
+// Plan tier definitions with USD thresholds based on UAE deposits
 export const PLAN_TIERS = [
+  {
+    id: 'none',
+    name: 'None',
+    icon: '/plan-none.svg',
+    minForevers: 0,
+    maxForevers: 49.99,
+    color: '#8C4CD1'
+  },
   {
     id: 'start',
     name: 'Start',
     icon: '/plan-start.svg',
-    minForevers: 0,
-    maxForevers: 100,
+    minForevers: 50,
+    maxForevers: 99.99,
     color: '#8C4CD1'
   },
   {
     id: 'business',
     name: 'Business',
     icon: '/plan-business.svg',
-    minForevers: 101,
-    maxForevers: 500,
+    minForevers: 100,
+    maxForevers: 499.99,
     color: '#FF6800'
   },
   {
     id: 'business-plus',
     name: 'Business+',
     icon: '/plan-business-+.svg',
-    minForevers: 501,
-    maxForevers: 1000,
+    minForevers: 500,
+    maxForevers: 999.99,
     color: '#2019CE'
   },
   {
     id: 'premium',
     name: 'Premium',
     icon: '/plan-premium.svg',
-    minForevers: 1001,
+    minForevers: 1000,
     maxForevers: null, // Unlimited
     color: '#07B80E'
   }
