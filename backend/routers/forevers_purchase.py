@@ -78,25 +78,3 @@ async def purchase_forevers(
             status="failed",
             message=f"An unexpected error occurred: {str(e)}"
         )
-
-
-@router.get("/rates")
-async def get_forevers_rates(db: AsyncSession = Depends(get_db)):
-    """
-    Get current exchange rates for all Forevers types.
-    
-    Returns:
-        Dictionary with current rates for UAE, KZ, DE, PL, UA forevers
-    """
-    try:
-        rates = await ForeversPurchaseService.get_forevers_rates(db)
-        return {
-            "status": "success",
-            "rates": {k: float(v) for k, v in rates.items()},
-            "message": "Rates retrieved successfully"
-        }
-    except Exception as e:
-        return {
-            "status": "failed",
-            "message": f"Failed to retrieve rates: {str(e)}"
-        }
