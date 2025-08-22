@@ -23,7 +23,6 @@ export class UaeDepositsService {
       const data = await response.json()
       return data
     } catch (error) {
-      console.error('UAE Deposits Service Error:', error)
       return {
         status: 'failed',
         message: 'Failed to fetch UAE deposits data'
