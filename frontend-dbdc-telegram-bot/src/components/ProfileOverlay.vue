@@ -264,43 +264,75 @@
             </div>
           </div>
 
-          <!-- Start Section -->
-          <div class="relative flex-shrink-0 z-[1] mb-3 sm:mb-4 md:mb-3 lg:mb-3">
+          <!-- Plan Section -->
+          <div class="relative flex-shrink-0 z-[1] mb-3 sm:mb-4 md:mb-3 lg:mb-3" v-if="planInfo.currentPlan">
             <div class="w-full
               bg-[#F1E7FF] border border-[#DCCCF1]
               rounded-2xl
               px-4 py-3 sm:px-5 sm:py-4 md:px-5 md:py-3 lg:px-5 lg:py-3
               relative overflow-hidden">
-              <!-- Background gradient -->
-              <div class="absolute left-0 top-0
-                w-[100px] sm:w-[140px] md:w-[160px] lg:w-[180px]
-                h-full bg-gradient-to-r from-[#8C4CD1] to-[#C497FF]
-                opacity-40 rounded-l-2xl"></div>
-              
+              <!-- Dynamic Progress Background Gradient -->
+              <div class="absolute left-0 top-0 h-full rounded-l-2xl transition-all duration-500 ease-out"
+                   :style="{
+                     width: `${Math.max(100, (planInfo.progress / 100) * 300)}px`,
+                     background: `linear-gradient(to right, ${planInfo.currentPlan.color}CC, ${planInfo.currentPlan.color}66)`,
+                     opacity: 0.4
+                   }"></div>
+
               <div class="flex items-center justify-between relative z-[1] w-full gap-3 sm:gap-4">
                 <div class="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
                   <div class="flex-shrink-0 w-7 sm:w-8 md:w-9 lg:w-10 xl:w-11 h-7 sm:h-8 md:h-9 lg:h-10 xl:h-11">
-                    <img src="/plan-star.svg" alt="Start" class="w-full h-full object-contain" />
+                    <img :src="planInfo.currentPlan.icon" :alt="planInfo.currentPlan.name" class="w-full h-full object-contain" />
                   </div>
-                  <div class="text-dbd-dark text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold truncate">Start</div>
+                  <div class="text-dbd-dark text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold truncate">
+                    {{ planInfo.currentPlan.name }}
+                  </div>
                 </div>
-                <button class="bg-gradient-to-r from-dbd-primary to-[#473FFF]
-                     text-white text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-bold
-                     px-4 sm:px-5 md:px-6 lg:px-7 xl:px-8
-                     h-8 sm:h-9 md:h-10 lg:h-11 xl:h-12
-                     rounded-full
-                     flex items-center justify-center
-                     hover:-translate-y-0.5 hover:shadow-md
-                     transition-all duration-300
-                     flex-shrink-0"
+                <button v-if="!planInfo.isMaxLevel"
+                        class="bg-gradient-to-r from-dbd-primary to-[#473FFF]
+                               text-white text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-bold
+                               px-4 sm:px-5 md:px-6 lg:px-7 xl:px-8
+                               h-8 sm:h-9 md:h-10 lg:h-11 xl:h-12
+                               rounded-full
+                               flex items-center justify-center
+                               hover:-translate-y-0.5 hover:shadow-md
+                               transition-all duration-300
+                               flex-shrink-0"
                         @click="handleUpgrade">
                   Upgrade
                 </button>
+                <div v-else class="flex items-center gap-2 text-green-600">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  <span class="text-sm font-semibold">Max Level</span>
+                </div>
               </div>
               <div class="mt-2 sm:mt-2.5 md:mt-2.5 lg:mt-3 relative z-[1]">
                 <div class="text-dbd-gray text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-normal">
-                  buy <span class="text-[#8C4CD1] font-bold">123</span> more Forevers to upgrade
+                  <span v-if="planInfo.isMaxLevel" class="text-green-600 font-bold">
+                    🎉 You've reached max level
+                  </span>
+                  <span v-else-if="planInfo.foreversToNext > 0">
+                    buy <span class="font-bold" :style="{ color: planInfo.currentPlan.color }">{{ planInfo.foreversToNext }}</span> more Forevers to upgrade
+                  </span>
+                  <span v-else class="text-green-600 font-bold">
+                    Ready to upgrade!
+                  </span>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Loading Plan Section -->
+          <div v-else class="relative flex-shrink-0 z-[1] mb-3 sm:mb-4 md:mb-3 lg:mb-3">
+            <div class="w-full
+              bg-[#F1E7FF] border border-[#DCCCF1]
+              rounded-2xl
+              px-4 py-3 sm:px-5 sm:py-4 md:px-5 md:py-3 lg:px-5 lg:py-3
+              relative overflow-hidden">
+              <div class="flex items-center justify-center py-4">
+                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-dbd-primary"></div>
               </div>
             </div>
           </div>
@@ -450,6 +482,8 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import CountryFlag from './CountryFlag.vue'
 import { findCountry } from '../utils/allCountries.js'
+import planService from '../services/planService.js'
+import telegramUserService from '../services/telegramUserService.js'
 
 // Props
 const props = defineProps({
@@ -517,10 +551,21 @@ const userInfo = ref({
   avatar: ''
 })
 
-// Fetch user info via session (/user/me)
-import telegramUserService from '../services/telegramUserService.js'
+// Error handling
 import { useApiErrorNotifier } from '../composables/useApiErrorNotifier.js'
 const { showError: showApiError } = useApiErrorNotifier()
+
+// Plan state
+const planInfo = ref({
+  currentPlan: null,
+  nextPlan: null,
+  totalForevers: 0,
+  progress: 0,
+  foreversToNext: 0,
+  upgradeInfo: null,
+  isMaxLevel: false
+})
+const isLoadingPlan = ref(false)
 const fetchUserInfo = async () => {
   const result = await telegramUserService.getUserInfo()
   if (result.status === 'success' && result.data) {
@@ -528,12 +573,38 @@ const fetchUserInfo = async () => {
     userInfo.value.fullName = result.data.full_name || ''
     userInfo.value.rank = result.data.rank || ''
     userInfo.value.avatar = result.data.avatar && result.data.avatar.trim() !== '' ? result.data.avatar : '/no-photo.svg'
+
+    // Fetch plan information
+    await fetchPlanInfo()
   } else {
     userInfo.value.id = 0
     userInfo.value.fullName = ''
     userInfo.value.rank = ''
     userInfo.value.avatar = '/no-photo.svg'
     showApiError('user_me', { message: result.message || 'Failed to load profile' })
+  }
+}
+
+const fetchPlanInfo = async () => {
+  try {
+    isLoadingPlan.value = true
+    const balanceResult = await telegramUserService.getUserBalance()
+
+    if (balanceResult.status === 'success' && balanceResult.forevers_balance) {
+      const planData = await planService.getUserPlanInfo(balanceResult.forevers_balance)
+      planInfo.value = planData
+    } else {
+      // Default to start plan if no balance data
+      const defaultPlanData = await planService.getUserPlanInfo(null)
+      planInfo.value = defaultPlanData
+    }
+  } catch (error) {
+    console.error('Failed to fetch plan info:', error)
+    // Set default plan on error
+    const defaultPlanData = await planService.getUserPlanInfo(null)
+    planInfo.value = defaultPlanData
+  } finally {
+    isLoadingPlan.value = false
   }
 }
 
@@ -598,8 +669,10 @@ const handleMenuClick = (menuItem) => {
 }
 
 const handleUpgrade = () => {
-  console.log('Upgrade clicked')
-  // Handle upgrade
+  console.log('Upgrade clicked', planInfo.value)
+  // Navigate to calculator for purchasing forevers
+  emit('close')
+  router.push('/calculator')
 }
 
 const copyUserID = async () => {

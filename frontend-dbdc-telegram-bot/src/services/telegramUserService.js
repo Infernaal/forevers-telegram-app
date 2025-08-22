@@ -85,6 +85,23 @@ class TelegramUserService {
     }
   }
 
+  // Get user's forevers balance and available limits
+  async getUserBalance() {
+    try {
+      const response = await fetch(`${API_BASE_URL}/forevers/me`, { credentials: 'include' })
+      if (!response.ok) {
+        // If unauthorized (401) or forbidden (403), clear session cache
+        if (response.status === 401 || response.status === 403) {
+          this.clearSession()
+        }
+        throw new Error('Network error')
+      }
+      return await response.json()
+    } catch (e) {
+      return { status: 'failed', message: e.message }
+    }
+  }
+
   // Handle authorization errors globally - clear session cache for auth errors
   handleAuthError(response) {
     if (response && (response.status === 401 || response.status === 403)) {
