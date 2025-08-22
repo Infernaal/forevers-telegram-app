@@ -156,7 +156,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, watch } from 'vue'
 import { useApiErrorNotifier } from '../composables/useApiErrorNotifier.js'
 import { useRouter, useRoute } from 'vue-router'
 import BottomNavigation from '../components/BottomNavigation.vue'
@@ -237,7 +237,21 @@ const handleBack = () => {
 }
 
 const handlePurchase = async () => {
-  if (!selectedPayment.value || !termsAccepted.value) return
+  console.log('🛒 Purchase clicked - Debug info:', {
+    selectedPayment: selectedPayment.value,
+    termsAccepted: termsAccepted.value,
+    foreversAmount: foreversAmount.value,
+    numericTotal: numericTotal.value,
+    purchaseDetails: purchaseDetails.value
+  })
+
+  if (!selectedPayment.value || !termsAccepted.value) {
+    console.log('❌ Purchase blocked:', {
+      hasSelectedPayment: !!selectedPayment.value,
+      hasTermsAccepted: termsAccepted.value
+    })
+    return
+  }
 
   // Only show confirmation modal for bonus and loyalty payments
   if (selectedPayment.value === 'bonus' || selectedPayment.value === 'loyalty') {
@@ -247,10 +261,12 @@ const handlePurchase = async () => {
 
     confirmModalData.value = {
       amount: totalForevers,
-      price: numericTotal.toFixed(2),
+      price: numericTotal.value.toFixed(2),
       walletType: selectedPayment.value,
       foreversType: firstCountryCode
     }
+
+    console.log('✅ Showing confirmation modal:', confirmModalData.value)
 
     // Show confirmation modal
     showConfirmModal.value = true
@@ -260,6 +276,7 @@ const handlePurchase = async () => {
     if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
       foreversAmount.value = purchaseDetails.value.foreversAmount
     }
+    console.log('ℹ️ Showing success modal directly for payment method:', selectedPayment.value)
     showSuccessModal.value = true
   }
 }
@@ -397,7 +414,22 @@ const uniqueCountries = computed(() => {
   }, [])
 })
 
+// Add watchers for debugging
+watch(showConfirmModal, (newVal, oldVal) => {
+  console.log('🔄 ConfirmModal visibility changed:', { from: oldVal, to: newVal })
+})
+
+watch(selectedPayment, (newVal, oldVal) => {
+  console.log('💳 Payment method changed:', { from: oldVal, to: newVal })
+})
+
+watch(termsAccepted, (newVal, oldVal) => {
+  console.log('📋 Terms acceptance changed:', { from: oldVal, to: newVal })
+})
+
 onMounted(() => {
+  console.log('🚀 SelectTypePayment mounted')
+
   // Attempt to retrieve purchase details (note: params may not persist without dynamic segments)
   if (route.params.purchaseDetails) {
     purchaseDetails.value = route.params.purchaseDetails
@@ -430,6 +462,14 @@ onMounted(() => {
     console.log('Forevers types:', types)
     console.log('Prices per type:', prices)
   }
+
+  console.log('🔧 Initial state:', {
+    selectedPayment: selectedPayment.value,
+    termsAccepted: termsAccepted.value,
+    foreversAmount: foreversAmount.value,
+    totalAmount: totalAmount.value,
+    showConfirmModal: showConfirmModal.value
+  })
 
   fetchWalletData()
 })
