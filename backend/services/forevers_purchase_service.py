@@ -24,40 +24,59 @@ class ForeversPurchaseService:
         forevers_amount: int,
         final_rate: Decimal,
         usd_amount: Decimal,
+        user_id: int,
         db: AsyncSession
     ) -> Tuple[bool, str]:
-        """Validate purchase data"""
-        
+        """Validate purchase data with security checks"""
+
+        # Log validation attempt for audit
+        logger.info(f"Validating purchase: user_id={user_id}, wallet_type={wallet_type}, "
+                   f"forever_type={forever_type}, amount={forevers_amount}, rate={final_rate}, usd={usd_amount}")
+
         # Validate wallet type
         if wallet_type not in ['bonus', 'rent']:
+            logger.warning(f"Invalid wallet type attempt: user_id={user_id}, wallet_type={wallet_type}")
             return False, "Invalid wallet type selected."
-        
+
         # Validate forever type (basic validation - just check it's not empty)
         if not forever_type or not forever_type.strip():
             return False, "Forever type is required."
-        
+
         # Validate forevers amount
         if forevers_amount <= 0:
             return False, "Please enter a valid amount of Forevers (greater than 0)."
-        
-        # Validate rate and amount consistency (security check)
+
+        # Security check: validate amount is not suspiciously high
+        max_forevers_per_transaction = 1000000  # Adjust as needed
+        if forevers_amount > max_forevers_per_transaction:
+            logger.warning(f"Suspicious high amount attempt: user_id={user_id}, amount={forevers_amount}")
+            return False, f"Amount too high: {forevers_amount}. Maximum allowed per transaction: {max_forevers_per_transaction}"
+
+        # Validate rate and amount consistency (CRITICAL SECURITY CHECK)
         # Recalculate the expected USD amount on backend to prevent tampering
         expected_usd = round(Decimal(forevers_amount) * final_rate, 2)
         actual_usd = round(usd_amount, 2)
 
         # Check if amounts match (allow small floating point differences)
         if abs(actual_usd - expected_usd) > Decimal('0.01'):
+            logger.error(f"SECURITY ALERT - Amount mismatch: user_id={user_id}, "
+                        f"expected=${expected_usd}, received=${actual_usd}, "
+                        f"calculation={forevers_amount}×{final_rate}=${expected_usd}")
             return False, f"Security validation failed: USD amount mismatch. Expected: ${expected_usd}, Received: ${actual_usd}. Calculation: {forevers_amount} × {final_rate} = ${expected_usd}"
 
         # Additional validation: ensure final_rate is positive and reasonable
         if final_rate <= 0:
+            logger.warning(f"Invalid rate attempt: user_id={user_id}, rate={final_rate}")
             return False, "Invalid exchange rate: must be greater than 0."
 
         # Additional validation: ensure final_rate is not suspiciously high (anti-fraud)
         max_reasonable_rate = Decimal('1000.00')  # Adjust this limit as needed
         if final_rate > max_reasonable_rate:
+            logger.warning(f"Suspicious high rate attempt: user_id={user_id}, rate={final_rate}")
             return False, f"Exchange rate too high: ${final_rate}. Maximum allowed: ${max_reasonable_rate}"
 
+        # Log successful validation
+        logger.info(f"Purchase validation passed: user_id={user_id}, expected_usd=${expected_usd}")
         return True, "Valid"
     
     @staticmethod
