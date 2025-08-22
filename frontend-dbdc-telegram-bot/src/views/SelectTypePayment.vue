@@ -198,6 +198,9 @@ const bonusBalance = ref(0)
 // cart composable (for clearing cart after success)
 const { clearCart } = useCart()
 
+// API error notifier
+const { showError: showApiError } = useApiErrorNotifier()
+
 // Computed properties
 const isAnyModalOpen = computed(() => {
   return showTermsModal.value || showSuccessModal.value
