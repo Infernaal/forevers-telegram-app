@@ -196,6 +196,7 @@ const showTermsModal = ref(false)
 const showSuccessModal = ref(false)
 const loyaltyBalance = ref(0)
 const bonusBalance = ref(0)
+const successMessage = ref('Payment completed successfully')
 
 // cart composable (for clearing cart after success)
 const { clearCart } = useCart()
