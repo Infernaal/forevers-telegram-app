@@ -50,6 +50,12 @@ async def purchase_forevers(
             forwarded_for = request.headers.get('X-Forwarded-For')
             real_ip = request.headers.get('X-Real-IP')
             client_ip = forwarded_for or real_ip or client_ip
+
+        # Log purchase attempt for security audit
+        logger.info(f"Purchase attempt: user_id={current_user_id}, ip={client_ip}, "
+                   f"wallet_type={purchase_data.wallet_type}, forever_type={purchase_data.forever_type}, "
+                   f"amount={purchase_data.forevers_amount}, rate={purchase_data.final_rate}, "
+                   f"usd={purchase_data.usd_amount}")
         
         # Process the purchase
         success, result_data, message = await ForeversPurchaseService.process_purchase(
