@@ -37,9 +37,6 @@ engine = create_async_engine(
     pool_pre_ping=True,  # Проверять соединение перед использованием
     connect_args={
         "connect_timeout": 60,
-        "read_timeout": 60,
-        "write_timeout": 60,
-        "autocommit": False,
     }
 )
 async_session = async_sessionmaker(bind=engine, expire_on_commit=False)
