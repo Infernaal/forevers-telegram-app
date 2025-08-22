@@ -38,16 +38,25 @@ async def calculate_available_forevers(
 
     # ������ max_volumes
     multiplier = Decimal("1.0") if rank != "None" else Decimal("0.5")
-    total_all = total_amounts["UAE"] + total_amounts["KZ"] + total_amounts["DE"]
-    max_allowed_pl_ua = total_all * multiplier
 
-    max_volumes = {
-        "UAE": None,
-        "KZ": None,
-        "DE": None,
-        "PL": max(Decimal(0), max_allowed_pl_ua - total_amounts["PL"]),
-        "UA": max(Decimal(0), max_allowed_pl_ua - total_amounts["UA"]),
-    }
+    # �������� ��������� ���� ��� ������� ��������� ��������
+    base_types = ["UAE", "KZ", "DE"]  # ������� ���� ��� �������
+    restricted_types = ["PL", "UA"]   # ������������ ����
+
+    # ��������� ����� ������� �����
+    total_base = sum(total_amounts.get(region, Decimal(0)) for region in base_types if region in total_amounts)
+    max_allowed_restricted = total_base * multiplier
+
+    max_volumes = {}
+    for region in region_types:
+        if region in base_types:
+            max_volumes[region] = None  # ��������
+        elif region in restricted_types:
+            current_amount = total_amounts.get(region, Decimal(0))
+            max_volumes[region] = max(Decimal(0), max_allowed_restricted - current_amount)
+        else:
+            # ����� ���� - ��������� ��� �����������
+            max_volumes[region] = None
 
     # ������ ��������� �����
     available_forever_coins: Dict[str, Optional[int]] = {}
