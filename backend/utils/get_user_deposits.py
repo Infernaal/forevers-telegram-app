@@ -4,6 +4,64 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from models.models import Deposits
 from typing import List, Dict
 
+async def get_user_deposits_list(user_id: int, db: AsyncSession) -> List[Dict]:
+    """
+    Get detailed list of user deposits with all fields
+    
+    Args:
+        user_id: User ID to get deposits for
+        db: Database session
+        
+    Returns:
+        List[Dict]: List of deposit items with detailed information
+    """
+    stmt = (
+        select(
+            Deposits.txid,
+            Deposits.processed_on,
+            Deposits.amount,
+            Deposits.rate_at_deposit,
+            Deposits.type
+        )
+        .where(
+            Deposits.uid == user_id,
+            Deposits.status == 1,
+            Deposits.consider_pct_nct == 'YES'
+        )
+        .order_by(Deposits.processed_on.desc())  # Most recent first
+    )
+    
+    result = await db.execute(stmt)
+    deposits = []
+    
+    for row in result.all():
+        txid, processed_on, amount, rate_at_deposit, deposit_type = row
+        
+        # Convert string amount to Decimal
+        amount_decimal = Decimal(amount) if amount else Decimal('0')
+        rate_decimal = rate_at_deposit if rate_at_deposit else Decimal('0')
+        
+        # Calculate forevers: amount / rate_at_deposit
+        forevers = amount_decimal / rate_decimal if rate_decimal > 0 else Decimal('0')
+        
+        # TODO: These fields will be added to DB later
+        # For now, set as 0 (activated_forevers, activated_loyalty)
+        access = Decimal('0')  # Will be populated from activated_forevers field
+        participation = Decimal('0')  # Will be populated from activated_loyalty field
+        
+        deposits.append({
+            'txid': txid,
+            'processed_on': processed_on,
+            'forevers': forevers,
+            'price': rate_decimal,
+            'type': deposit_type,
+            'paid': amount_decimal,
+            'access': access,
+            'participation': participation
+        })
+    
+    return deposits
+
 async def get_user_deposits_by_type(user_id: int, db: AsyncSession) -> List[Dict]:
     """
     Get user deposits grouped by type with both total amount and USD value
