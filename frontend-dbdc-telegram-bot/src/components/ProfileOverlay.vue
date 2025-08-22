@@ -682,7 +682,7 @@ const copyUserID = async () => {
    await navigator.clipboard.writeText(String(userInfo.value.id))
       copySuccess = true
     } catch (clipboardErr) {
-      console.log('Clipboard API failed, trying fallback method')
+      // Fallback to document.execCommand if clipboard API fails
     }
   }
 
