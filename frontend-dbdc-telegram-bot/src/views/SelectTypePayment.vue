@@ -239,6 +239,7 @@ onMounted(() => {
   // Attempt to retrieve purchase details (note: params may not persist without dynamic segments)
   if (route.params.purchaseDetails) {
     purchaseDetails.value = route.params.purchaseDetails
+    console.log('Purchase details received:', purchaseDetails.value)
   }
 
   // Parse USD total (for potential future logic)
@@ -252,6 +253,20 @@ onMounted(() => {
   const incomingForevers = route.query.foreversAmount || purchaseDetails.value?.foreversAmount
   if (incomingForevers !== undefined) {
     foreversAmount.value = parseLocaleAmount(incomingForevers)
+  }
+
+  // Log detailed Forevers information if available
+  if (purchaseDetails.value?.foreversDetails) {
+    console.log('Forevers Details:', purchaseDetails.value.foreversDetails)
+    console.log('Purchase Summary:', purchaseDetails.value.purchaseSummary)
+  }
+
+  // Log query parameters for Forevers types and prices
+  if (route.query.foreversTypes) {
+    const types = route.query.foreversTypes.split(',')
+    const prices = route.query.pricesPerType ? route.query.pricesPerType.split(',') : []
+    console.log('Forevers types:', types)
+    console.log('Prices per type:', prices)
   }
 
   fetchWalletData()
