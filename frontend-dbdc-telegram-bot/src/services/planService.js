@@ -9,7 +9,7 @@ export const PLAN_TIERS = [
     icon: '/plan-none.svg',
     minForevers: 0,
     maxForevers: 49.99,
-    color: '#939393ff'
+    color: '#393636ff'
   },
   {
     id: 'start',
