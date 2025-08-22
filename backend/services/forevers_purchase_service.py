@@ -2,6 +2,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, update
 from decimal import Decimal
 import time
+import logging
 from datetime import datetime
 from typing import Tuple, Optional
 
@@ -10,6 +11,8 @@ from models.models import (
     ForeversExchangeStats, Forevers
 )
 from utils.random_hash import random_hash
+
+logger = logging.getLogger(__name__)
 
 
 class ForeversPurchaseService:
