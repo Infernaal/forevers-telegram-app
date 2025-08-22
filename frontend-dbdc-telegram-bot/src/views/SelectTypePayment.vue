@@ -266,6 +266,11 @@ const handlePurchase = async () => {
     if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
       foreversAmount.value = purchaseDetails.value.foreversAmount
     }
+
+    // Set success message for non-wallet payments
+    const paymentMethodName = getPaymentMethodDisplayName(selectedPayment.value)
+    successMessage.value = `Forevers purchased successfully using ${paymentMethodName} wallet!`
+
     console.log('ℹ️ Showing success modal directly for payment method:', selectedPayment.value)
     showSuccessModal.value = true
   }
