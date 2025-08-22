@@ -13,32 +13,7 @@ from utils.random_hash import random_hash
 
 
 class ForeversPurchaseService:
-    
-    @staticmethod
-    async def get_forevers_rates(db: AsyncSession) -> dict:
-        """Get current forevers rates from settings"""
-        stmt = select(Settings).limit(1)
-        result = await db.execute(stmt)
-        settings = result.scalar_one_or_none()
-        
-        if not settings:
-            # Default rates if no settings found
-            return {
-                'UAE': Decimal('4.00'),
-                'KZ': Decimal('10.00'),
-                'DE': Decimal('10.00'),
-                'PL': Decimal('1.25'),
-                'UA': Decimal('0.75')
-            }
-        
-        return {
-            'UAE': settings.forevers_value,
-            'KZ': settings.forevers_kz_value,
-            'DE': settings.forevers_de_value,
-            'PL': settings.forevers_pl_value,
-            'UA': settings.forevers_ua_value
-        }
-    
+
     @staticmethod
     async def validate_purchase_data(
         wallet_type: str,
