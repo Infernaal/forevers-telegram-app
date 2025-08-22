@@ -154,6 +154,7 @@ import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
 import SuccessModal from '../components/SuccessModal.vue'
 import { useCart } from '../composables/useCart.js'
 import { formatUSDPrefix } from '../utils/formatNumber.js'
+import { ForeversPurchaseService } from '../services/foreversPurchaseService.js'
 
 const router = useRouter()
 const route = useRoute()
