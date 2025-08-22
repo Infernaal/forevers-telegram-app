@@ -3,6 +3,33 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dbdc-mini.dub
 export class ForeversPurchaseService {
 
   /**
+   * Get current forevers prices from API
+   * @returns {Promise<Object>} Prices response from API
+   */
+  static async getForeversPrices() {
+    try {
+      const response = await fetch(`${API_BASE_URL}/prices/forevers`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Cache-Control': 'no-cache'
+        }
+      })
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
+      const data = await response.json()
+      console.log('Prices API response:', data)
+      return data
+    } catch (error) {
+      console.error('Error fetching forevers prices:', error)
+      throw error
+    }
+  }
+
+  /**
    * Purchase Forevers using bonus or loyalty wallet
    * @param {Object} purchaseData - Purchase details
    * @param {string} purchaseData.wallet_type - "bonus" or "rent" 
@@ -184,4 +211,5 @@ export class ForeversPurchaseService {
     }
   }
 }
+
 
