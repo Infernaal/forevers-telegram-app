@@ -25,7 +25,7 @@
           </div>
           <div class="text-center">
             <h3 class="text-lg font-semibold text-dbd-dark">{{ loyaltyFormatted }}</h3>
-            <p class="text-dbd-light-gray text-base">Loyalty Program</p>
+            <p class="text-dbd-light-gray text-base">Loyalty</p>
           </div>
         </div>
 
@@ -49,7 +49,7 @@
           </div>
           <div class="text-center">
             <h3 class="text-lg font-semibold text-dbd-dark">{{ bonusFormatted }}</h3>
-            <p class="text-dbd-light-gray text-base">Bonus Reward</p>
+            <p class="text-dbd-light-gray text-base">Bonus</p>
           </div>
         </div>
 
@@ -72,7 +72,7 @@
           </div>
           <div class="text-center">
             <h3 class="text-lg font-semibold text-dbd-dark">USDT</h3>
-            <p class="text-dbd-light-gray text-base">Crypto Wallet</p>
+            <p class="text-dbd-light-gray text-base">Crypto</p>
           </div>
         </div>
       </div>
@@ -209,6 +209,20 @@ const isAnyModalOpen = computed(() => {
 // Methods
 const selectPayment = (paymentType) => { selectedPayment.value = paymentType }
 
+const getPaymentMethodDisplayName = (paymentMethod) => {
+  switch (paymentMethod) {
+    case 'loyalty':
+      return 'Loyalty'
+    case 'bonus':
+      return 'Bonus'
+    case 'usdt':
+    case 'crypto':
+      return 'Crypto'
+    default:
+      return 'Unknown'
+  }
+}
+
 const handleBack = () => {
   router.go(-1)
 }
@@ -231,6 +245,13 @@ const handlePurchase = async () => {
   }
 
   // Only show confirmation modal for bonus and loyalty payments
+  console.log('💳 Payment type check:', {
+    selectedPayment: selectedPayment.value,
+    isBonus: selectedPayment.value === 'bonus',
+    isLoyalty: selectedPayment.value === 'loyalty',
+    willShowConfirmModal: selectedPayment.value === 'bonus' || selectedPayment.value === 'loyalty'
+  })
+
   if (selectedPayment.value === 'bonus' || selectedPayment.value === 'loyalty') {
     // Prepare confirmation modal data
     const totalForevers = foreversAmount.value || 0
@@ -250,9 +271,20 @@ const handlePurchase = async () => {
   } else {
     // For other payment methods (like USDT), show success modal directly
     // This preserves existing behavior for non-wallet payments
+    console.log('⚠️ WARNING: Showing success modal directly without API call for payment method:', {
+      selectedPayment: selectedPayment.value,
+      foreversAmount: foreversAmount.value,
+      purchaseDetails: purchaseDetails.value
+    })
+
     if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
       foreversAmount.value = purchaseDetails.value.foreversAmount
     }
+
+    // Set success message for non-wallet payments
+    const paymentMethodName = getPaymentMethodDisplayName(selectedPayment.value)
+    successMessage.value = `Forevers purchased successfully using ${paymentMethodName} wallet!`
+
     console.log('ℹ️ Showing success modal directly for payment method:', selectedPayment.value)
     showSuccessModal.value = true
   }
@@ -280,7 +312,7 @@ const executeActualPurchase = async () => {
       await fetchWalletData()
 
       // Set success message
-      const paymentMethodName = selectedPayment.value === 'loyalty' ? 'Loyalty Program' : 'Bonus Reward'
+      const paymentMethodName = getPaymentMethodDisplayName(selectedPayment.value)
       successMessage.value = `Forevers purchased successfully using ${paymentMethodName} wallet!`
 
       // Show success modal
@@ -293,6 +325,14 @@ const executeActualPurchase = async () => {
         ? result.errors.map(e => e.error).join(', ')
         : 'Purchase failed. Please try again.'
 
+      console.error('Purchase failed:', {
+        errors: result.errors,
+        totalProcessed: result.totalProcessed,
+        totalFailed: result.totalFailed,
+        selectedPayment: selectedPayment.value,
+        purchaseDetails: purchaseDetails.value
+      })
+
       // Close confirmation modal
       showConfirmModal.value = false
 
@@ -302,14 +342,21 @@ const executeActualPurchase = async () => {
       })
     }
   } catch (error) {
-    console.error('Purchase error:', error)
+    console.error('Purchase error:', {
+      error: error.message,
+      stack: error.stack,
+      selectedPayment: selectedPayment.value,
+      purchaseDetails: purchaseDetails.value,
+      foreversAmount: foreversAmount.value,
+      numericTotal: numericTotal.value
+    })
 
     // Close confirmation modal
     showConfirmModal.value = false
 
     showApiError('forevers_purchase', {
       status: 500,
-      message: 'An unexpected error occurred during purchase. Please try again.'
+      message: error.message || 'An unexpected error occurred during purchase. Please try again.'
     })
   } finally {
     isProcessingPurchase.value = false

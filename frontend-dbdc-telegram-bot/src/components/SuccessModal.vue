@@ -16,11 +16,10 @@
       <!-- Modal Content -->
       <div
         @click.stop
-        class="relative bg-white rounded-[20px] shadow-xl font-montserrat w-full max-w-[347px] mx-auto"
-        style="height: 396px;"
+        class="relative bg-white rounded-[20px] shadow-xl font-montserrat w-full max-w-[347px] mx-auto flex flex-col items-center p-6 min-h-[396px]"
       >
         <!-- Success Icon -->
-        <div class="absolute left-[142px] top-8 w-16 h-16">
+        <div class="flex justify-center mt-2 mb-6">
           <div class="w-16 h-16 rounded-r-full border-2 border-[#88EF8C] bg-[#B3FFB6] flex items-center justify-center">
             <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clip-path="url(#clip0_success_tick)">
@@ -36,16 +35,15 @@
         </div>
 
         <!-- Content -->
-        <div class="absolute left-6 top-[122px] w-[300px] h-[178px] flex flex-col items-center gap-5">
+        <div class="flex flex-col items-center gap-5 flex-1 w-full max-w-[300px]">
           <!-- Title -->
           <h2 class="text-[30px] font-bold text-[#292727] text-center leading-9">
             Congratulations!
           </h2>
 
           <!-- Reward Box -->
-          <div class="w-[300px] h-20 relative">
-            <div class="absolute left-[49px] top-0 w-[202px] h-20 rounded-xl border border-[#FF6800] bg-[#FFE8D8]"></div>
-            <div class="absolute left-[81px] top-3 w-[138px] h-[54px] flex flex-col justify-center items-center gap-0.5">
+          <div class="w-full flex justify-center">
+            <div class="w-[202px] h-20 rounded-xl border border-[#FF6800] bg-[#FFE8D8] flex flex-col justify-center items-center gap-0.5 px-4">
               <div class="text-base font-medium text-[#4B4D50] text-center">
                 You just received
               </div>
@@ -62,7 +60,7 @@
           </div>
 
           <!-- Success Message -->
-          <div class="text-base font-medium text-[#4B4D50] text-center mt-2">
+          <div class="text-base font-medium text-[#4B4D50] text-center">
             {{ message || 'Funds have been successfully' }}
           </div>
         </div>
@@ -70,7 +68,7 @@
         <!-- OK Button -->
         <button
           @click="handleConfirm"
-          class="absolute left-6 top-80 w-[300px] h-11 px-12 flex justify-center items-center rounded-full bg-gradient-to-r from-[#2019CE] to-[#473FFF] hover:opacity-90 transition-all"
+          class="w-full max-w-[300px] h-11 px-12 flex justify-center items-center rounded-full bg-gradient-to-r from-[#2019CE] to-[#473FFF] hover:opacity-90 transition-all mt-6"
         >
           <span class="text-white text-sm font-bold">{{ confirmText || 'Ok' }}</span>
         </button>
@@ -182,11 +180,6 @@ onUnmounted(() => {
 <style scoped>
 /* Modal responsive sizing for Telegram WebApp */
 @media (max-width: 375px) {
-  .fixed.inset-0 {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
   .max-w-\[347px\] {
     max-width: calc(100vw - 32px) !important;
     min-width: 280px;
@@ -194,36 +187,9 @@ onUnmounted(() => {
 }
 
 @media (max-width: 320px) {
-  .fixed.inset-0 {
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-
   .max-w-\[347px\] {
     max-width: calc(100vw - 24px) !important;
     min-width: 260px;
-  }
-}
-
-@media (min-width: 376px) and (max-width: 768px) {
-  .fixed.inset-0 {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  .max-w-\[347px\] {
-    max-width: 347px !important;
-  }
-}
-
-@media (min-width: 769px) {
-  .fixed.inset-0 {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-
-  .max-w-\[347px\] {
-    max-width: 347px !important;
   }
 }
 
@@ -267,6 +233,25 @@ button:active {
   text-rendering: optimizeLegibility;
 }
 
+/* Ensure proper content spacing */
+.flex-1 {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Better gap spacing on smaller screens */
+@media (max-width: 375px) {
+  .gap-5 {
+    gap: 1rem !important;
+  }
+
+  .gap-6 {
+    gap: 1.25rem !important;
+  }
+}
+
 /* Button touch feedback */
 button {
   touch-action: manipulation;
@@ -277,19 +262,50 @@ button {
 /* Responsive text sizes for small screens */
 @media (max-width: 375px) {
   .text-[30px] {
-    font-size: 26px;
+    font-size: 26px !important;
+    line-height: 1.2;
   }
-  
+
   .text-2xl {
-    font-size: 20px;
+    font-size: 20px !important;
   }
-  
+
   .text-base {
-    font-size: 15px;
+    font-size: 14px !important;
   }
-  
+
   .text-sm {
-    font-size: 13px;
+    font-size: 13px !important;
+  }
+
+  /* Reduce padding on small screens */
+  .p-6 {
+    padding: 1rem !important;
+  }
+
+  /* Adjust reward box width on small screens */
+  .w-\[202px\] {
+    width: 180px !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .text-[30px] {
+    font-size: 24px !important;
+    line-height: 1.2;
+  }
+
+  .text-2xl {
+    font-size: 18px !important;
+  }
+
+  .text-base {
+    font-size: 13px !important;
+  }
+
+  /* Further reduce on very small screens */
+  .w-\[202px\] {
+    width: 160px !important;
   }
 }
 
