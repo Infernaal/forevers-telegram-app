@@ -180,22 +180,20 @@ const handlePurchase = () => {
     }
   }
 
+  // Save purchase details to sessionStorage for reliable data transfer
+  sessionStorage.setItem('purchaseDetails', JSON.stringify(purchaseDetails))
+
   // Navigate to payment selection page with purchase details
   const localeString = cartTotal.value.toLocaleString()
   router.push({
     name: 'select-payment',
-    params: {
-      purchaseDetails: purchaseDetails,
-      totalAmount: localeString
-    },
-  // Provide both USD total (for payment) and raw forevers amount explicitly via query
-  query: {
-    total: cartTotal.value,
-    totalRaw: localeString,
-    foreversAmount: totalForeversAmount.value,
-    foreversTypes: cartItems.value.map(item => item.code).join(','),
-    pricesPerType: cartItems.value.map(item => `${item.code}:${item.usdRate}`).join(',')
-  }
+    query: {
+      total: cartTotal.value,
+      totalRaw: localeString,
+      foreversAmount: totalForeversAmount.value,
+      foreversTypes: cartItems.value.map(item => item.code).join(','),
+      pricesPerType: cartItems.value.map(item => `${item.code}:${item.usdRate}`).join(',')
+    }
   })
 }
 
