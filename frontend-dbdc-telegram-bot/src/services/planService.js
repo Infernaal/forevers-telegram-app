@@ -66,7 +66,7 @@ class PlanService {
    * Calculate the most affordable forevers needed for a plan
    * Uses UAE pricing as base (cheapest option typically)
    */
-  async calculateForeversNeeded(targetForevers) {
+  async calculateForeversNeeded(targetAmount) {
     const prices = await this.getForeversPricing()
     if (!prices || prices.length === 0) {
       return { error: 'Unable to fetch pricing' }
