@@ -37,11 +37,24 @@ class ForeversPurchaseService:
         if forevers_amount <= 0:
             return False, "Please enter a valid amount of Forevers (greater than 0)."
         
-        # Validate rate and amount consistency
-        expected_usd = round(forevers_amount * final_rate, 2)
-        if abs(float(usd_amount) - float(expected_usd)) > 0.01:  # Allow small floating point differences
-            return False, "USD amount doesn't match the calculated amount."
-        
+        # Validate rate and amount consistency (security check)
+        # Recalculate the expected USD amount on backend to prevent tampering
+        expected_usd = round(Decimal(forevers_amount) * final_rate, 2)
+        actual_usd = round(usd_amount, 2)
+
+        # Check if amounts match (allow small floating point differences)
+        if abs(actual_usd - expected_usd) > Decimal('0.01'):
+            return False, f"Security validation failed: USD amount mismatch. Expected: ${expected_usd}, Received: ${actual_usd}. Calculation: {forevers_amount} × {final_rate} = ${expected_usd}"
+
+        # Additional validation: ensure final_rate is positive and reasonable
+        if final_rate <= 0:
+            return False, "Invalid exchange rate: must be greater than 0."
+
+        # Additional validation: ensure final_rate is not suspiciously high (anti-fraud)
+        max_reasonable_rate = Decimal('1000.00')  # Adjust this limit as needed
+        if final_rate > max_reasonable_rate:
+            return False, f"Exchange rate too high: ${final_rate}. Maximum allowed: ${max_reasonable_rate}"
+
         return True, "Valid"
     
     @staticmethod
