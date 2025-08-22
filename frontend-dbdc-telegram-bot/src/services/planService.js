@@ -9,8 +9,8 @@ export const PLAN_TIERS = [
     icon: '/plan-none.svg',
     minForevers: 0,
     maxForevers: 49.99,
-    color: '#5f5f5fff',
-    progressColor: '#a5a5a5'
+    color: '#5f5f5f',
+    progressColor: '#a6a6a6' // светлее серого
   },
   {
     id: 'start',
@@ -19,7 +19,7 @@ export const PLAN_TIERS = [
     minForevers: 50,
     maxForevers: 99.99,
     color: '#8C4CD1',
-    progressColor: '#EFE7FA'
+    progressColor: '#CBB6E8' // светло-фиолетовый
   },
   {
     id: 'business',
@@ -27,8 +27,8 @@ export const PLAN_TIERS = [
     icon: '/plan-business.svg',
     minForevers: 100,
     maxForevers: 499.99,
-    color: '#2ca7ffff',
-    progressColor: '#63B3ED'
+    color: '#2ca7ff',
+    progressColor: '#99d4ff' // светло-голубой
   },
   {
     id: 'business-plus',
@@ -36,19 +36,20 @@ export const PLAN_TIERS = [
     icon: '/plan-business-+.svg',
     minForevers: 500,
     maxForevers: 999.99,
-    color: '#ff7a21ff',
-    progressColor: '#FFF7ED'
+    color: '#ff7a21',
+    progressColor: '#ffb98f' // светло-оранжевый
   },
   {
     id: 'premium',
     name: 'Premium',
     icon: '/plan-premium.svg',
     minForevers: 1000,
-    maxForevers: null, // Unlimited
+    maxForevers: null,
     color: '#07B80E',
-    progressColor: '#E7FCEB'
+    progressColor: '#8ee492' // светло-зелёный
   }
 ]
+
 
 class PlanService {
   /**
