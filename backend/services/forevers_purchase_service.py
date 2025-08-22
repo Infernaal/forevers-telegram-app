@@ -7,7 +7,7 @@ from typing import Tuple, Optional
 
 from models.models import (
     UsersWallets, Deposits, Transactions, Activity,
-    ForeversExchangeStats, Forevers, Settings
+    ForeversExchangeStats, Forevers
 )
 from utils.random_hash import random_hash
 
