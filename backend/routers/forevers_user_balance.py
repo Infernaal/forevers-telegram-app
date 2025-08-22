@@ -4,7 +4,9 @@ from sqlalchemy import select, func
 from db.database import get_db
 from models.models import Forevers, UsersWallets
 from schemas.forevers_user_balance import ForeversBalance, ForeversBalanceData, WalletItem
+from schemas.uae_deposits import UAEDepositsResponse, UAEDepositsData
 from utils.calculate_available_forevers import calculate_available_forevers
+from utils.get_uae_deposits_total import get_uae_deposits_total
 from dependencies.current_user import get_current_user_id
 
 router = APIRouter(prefix="/forevers", tags=["Forevers User Stats"])
@@ -77,4 +79,3 @@ async def get_my_forevers_balance(current_user_id: int = Depends(get_current_use
             status="failed",
             message="An error occurred while loading the data. Please try again later"
         )
-
