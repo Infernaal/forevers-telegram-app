@@ -233,6 +233,25 @@ button:active {
   text-rendering: optimizeLegibility;
 }
 
+/* Ensure proper content spacing */
+.flex-1 {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Better gap spacing on smaller screens */
+@media (max-width: 375px) {
+  .gap-5 {
+    gap: 1rem !important;
+  }
+
+  .gap-6 {
+    gap: 1.25rem !important;
+  }
+}
+
 /* Button touch feedback */
 button {
   touch-action: manipulation;
