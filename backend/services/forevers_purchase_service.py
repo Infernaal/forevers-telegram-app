@@ -29,9 +29,9 @@ class ForeversPurchaseService:
         if wallet_type not in ['bonus', 'rent']:
             return False, "Invalid wallet type selected."
         
-        # Validate forever type
-        if forever_type not in ['UAE', 'KZ', 'DE', 'PL', 'UA']:
-            return False, "Invalid Forever type selected."
+        # Validate forever type (basic validation - just check it's not empty)
+        if not forever_type or not forever_type.strip():
+            return False, "Forever type is required."
         
         # Validate forevers amount
         if forevers_amount <= 0:
