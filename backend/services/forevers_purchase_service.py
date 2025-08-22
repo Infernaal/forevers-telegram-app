@@ -255,4 +255,5 @@ class ForeversPurchaseService:
             
         except Exception as e:
             await db.rollback()
+            logger.error(f"Purchase transaction failed for user {user_id}: {str(e)}", exc_info=True)
             return False, {}, f"An error occurred during purchase: {str(e)}"
