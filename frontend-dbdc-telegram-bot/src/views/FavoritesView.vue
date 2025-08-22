@@ -457,6 +457,13 @@ const fetchBalancesFromBackend = async () => {
       }
     })
 
+    // Sort to put UAE first, then alphabetically by country name
+    rawBalances.sort((a, b) => {
+      if (a.code === 'UAE') return -1
+      if (b.code === 'UAE') return 1
+      return a.country.localeCompare(b.country)
+    })
+
     balances.value = rawBalances
 
     // totalWorth сейчас считается так:
