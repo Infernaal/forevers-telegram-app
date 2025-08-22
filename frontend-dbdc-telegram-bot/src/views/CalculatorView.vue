@@ -325,42 +325,39 @@ const navigateToFavorites = () => {
   router.push('/favorites')
 }
 
-// Handle numeric input validation
+// Handle numeric input validation - only allow digits 0-9
 const handleNumericInput = (event) => {
   const value = event.target.value
-  // Remove any non-numeric characters
+  // Remove any non-digit characters (only 0-9 allowed)
   const numericValue = value.replace(/[^0-9]/g, '')
 
-  // Update the input value if it changed
-  if (value !== numericValue) {
-    event.target.value = numericValue
-    monthlyIncome.value = numericValue ? parseInt(numericValue) : 0
-  }
+  // Always update the input value to ensure it only contains digits
+  event.target.value = numericValue
+  monthlyIncome.value = numericValue ? parseInt(numericValue) : 0
 }
 
-// Block non-numeric keys
+// Block all non-numeric keys except control keys
 const handleKeyDown = (event) => {
-  // Allow: backspace, delete, tab, escape, enter
-  if ([8, 9, 27, 13, 46].indexOf(event.keyCode) !== -1 ||
-    // Allow: Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X
-    (event.keyCode === 65 && event.ctrlKey === true) ||
-    (event.keyCode === 67 && event.ctrlKey === true) ||
-    (event.keyCode === 86 && event.ctrlKey === true) ||
-    (event.keyCode === 88 && event.ctrlKey === true) ||
-    // Allow: home, end, left, right
-    (event.keyCode >= 35 && event.keyCode <= 39)) {
-    return
-  }
-  // Ensure that it is a number and stop the keypress
-  if ((event.shiftKey || (event.keyCode < 48 || event.keyCode > 57)) && (event.keyCode < 96 || event.keyCode > 105)) {
+  // Allow: backspace, delete, tab, escape, enter, arrow keys
+  const allowedKeys = [8, 9, 27, 13, 46, 35, 36, 37, 38, 39, 40]
+
+  // Allow: Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X, Ctrl+Z
+  const isCtrlKey = event.ctrlKey && [65, 67, 86, 88, 90].includes(event.keyCode)
+
+  // Allow only digit keys (0-9) from main keyboard and numpad
+  const isDigitKey = (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)
+
+  // If it's not an allowed control key or digit key, prevent it
+  if (!allowedKeys.includes(event.keyCode) && !isCtrlKey && !isDigitKey) {
     event.preventDefault()
   }
 }
 
-// Handle paste events
+// Handle paste events - only allow digits
 const handlePaste = (event) => {
   event.preventDefault()
   const paste = (event.clipboardData || window.clipboardData).getData('text')
+  // Only extract digits from pasted content
   const numericValue = paste.replace(/[^0-9]/g, '')
 
   if (numericValue) {

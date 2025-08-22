@@ -1,9 +1,9 @@
-﻿from fastapi import APIRouter, Depends, Request, Response, Header
+from fastapi import APIRouter, Depends, Request, Response, Header
 import logging
-from fastapi import HTTPException
+from fastapi import HTTPException, APIRouter, Depends, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, update
-from db.database import get_db
+from db.database import get_db, execute_with_retry
 from models.models import Users, UsersWallets, Settings, Forevers
 from utils.generate_password import generate_strong_password
 from schemas.user_info import (
@@ -31,8 +31,12 @@ logger = logging.getLogger("dbdc.user")
 async def get_my_user_info(current_user_id: int = Depends(get_current_user_id), db: AsyncSession = Depends(get_db)):
     try:
         stmt = select(Users).where(Users.id == current_user_id)
-        result = await db.execute(stmt)
-        user = result.scalar_one_or_none()
+        try:
+            result = await execute_with_retry(db, stmt)
+            user = result.scalar_one_or_none()
+        except Exception as e:
+            logger.error(f"Database error in get_user_info: {e}")
+            raise HTTPException(status_code=500, detail="Database connection error")
 
         if user is None:
             return UserInfoResponseWrapper(
@@ -96,8 +100,12 @@ async def get_user_by_telegram(
             logger.warning("Auth by telegram: path telegram_id mismatch")
             return UserInfoResponseWrapper(status="failed")
         stmt = select(Users.id).where(Users.telegram_id == str(real_tg_id)).limit(1)
-        result = await db.execute(stmt)
-        user_id = result.scalar_one_or_none()
+        try:
+            result = await execute_with_retry(db, stmt)
+            user_id = result.scalar_one_or_none()
+        except Exception as e:
+            logger.error(f"Database error in get_user_by_telegram: {e}")
+            return UserInfoResponseWrapper(status="failed", message="Database connection error")
         if user_id is None:
             logger.info(f"Auth by telegram: telegram_id={real_tg_id} not found")
             return UserInfoResponseWrapper(status="failed")
@@ -124,8 +132,12 @@ async def auth_by_email(payload: AuthByEmailRequest, response: Response, db: Asy
     try:
         # 1. Load user by email
         stmt = select(Users).where(Users.email == payload.email).limit(1)
-        res = await db.execute(stmt)
-        user: Users | None = res.scalar_one_or_none()
+        try:
+            res = await execute_with_retry(db, stmt)
+            user: Users | None = res.scalar_one_or_none()
+        except Exception as e:
+            logger.error(f"Database error in auth_by_email: {e}")
+            return AuthByEmailResponse(status="failed", message="Database connection error")
         if user is None:
             return AuthByEmailResponse(status="failed", target="/email-not-registered", message="Email not registered")
 
@@ -161,8 +173,13 @@ async def auth_by_email(payload: AuthByEmailRequest, response: Response, db: Asy
             upd = (update(Users)
                    .where(Users.id == user.id)
                    .values(telegram_id=provided_tg))
-            await db.execute(upd)
-            await db.commit()
+            try:
+                await db.execute(upd)
+                await db.commit()
+            except Exception as e:
+                logger.error(f"Database error updating telegram_id: {e}")
+                await db.rollback()
+                return AuthByEmailResponse(status="failed", message="Database connection error")
             try:
                 await init_redis()
                 session_id = await create_session(int(user.id))
@@ -240,18 +257,18 @@ async def register_user(payload: RegistrationRequest, request: Request, response
         logger.info(f"/register attempt email={payload.email} ip={request.client.host if request.client else '?'}")
 
         # Uniqueness checks
-        res = await db.execute(select(Users.id).where(Users.email == payload.email).limit(1))
+        res = await execute_with_retry(db, select(Users.id).where(Users.email == payload.email).limit(1))
         if res.scalar_one_or_none():
             logger.info(f"/register email exists: {payload.email}")
             return RegistrationResponse(status="failed", message="Email already registered", target="/email-already-registered")
         if payload.phone:
-            pres = await db.execute(select(Users.id).where(Users.phone_number == payload.phone).limit(1))
+            pres = await execute_with_retry(db, select(Users.id).where(Users.phone_number == payload.phone).limit(1))
             if pres.scalar_one_or_none():
                 logger.info(f"/register phone exists: {payload.phone}")
                 return RegistrationResponse(status="failed", message="Phone already registered", target="/phone-already-registered")
 
         # Settings & constants
-        settings = (await db.execute(select(Settings).limit(1))).scalar_one_or_none()
+        settings = (await execute_with_retry(db, select(Settings).limit(1))).scalar_one_or_none()
         default_currency = settings.default_currency if settings and settings.default_currency else "USD"
 
         # Генерация надёжного пароля
@@ -319,53 +336,58 @@ async def register_user(payload: RegistrationRequest, request: Request, response
         email_hash = None
 
         # Create user
-        user = Users(
-            password=hashed,
-            email=payload.email,
-            phone_number=payload.phone,
-            email_verified=email_verified,
-            status=status_code,
-            account_type=0,
-            ip=ip_addr,
-            signup_time=signup_time,
-            first_name=payload.first_name,
-            last_name=payload.last_name,
-            country=payload.country,
-            parent_id=payload.ref,
-            qualification_data=json.dumps(qualification_data, separators=(",", ":")),
-            qualification_data_updated=datetime.utcnow(),
-            structural_data=json.dumps(structural_data, separators=(",", ":")),
-            structural_data_updated=datetime.utcnow(),
-            user_token_id=user_token_id,
-            email_hash=email_hash,
-            telegram_id=telegram_id_verified,
-        )
-        db.add(user)
-        await db.flush()
-        logger.info(f"/register created user id={user.id} email={payload.email}")
+        try:
+            user = Users(
+                password=hashed,
+                email=payload.email,
+                phone_number=payload.phone,
+                email_verified=email_verified,
+                status=status_code,
+                account_type=0,
+                ip=ip_addr,
+                signup_time=signup_time,
+                first_name=payload.first_name,
+                last_name=payload.last_name,
+                country=payload.country,
+                parent_id=payload.ref,
+                qualification_data=json.dumps(qualification_data, separators=(",", ":")),
+                qualification_data_updated=datetime.utcnow(),
+                structural_data=json.dumps(structural_data, separators=(",", ":")),
+                structural_data_updated=datetime.utcnow(),
+                user_token_id=user_token_id,
+                email_hash=email_hash,
+                telegram_id=telegram_id_verified,
+            )
+            db.add(user)
+            await db.flush()
+            logger.info(f"/register created user id={user.id} email={payload.email}")
 
-        db.add(Forevers(
-            user_id=user.id,
-            exchange_rate=settings.forevers_value,
-            updated_at=datetime.utcnow(),
-            balance_uae=decimal.Decimal("0.00000000"),
-            balance_kz=decimal.Decimal("0.00000000"),
-            balance_de=decimal.Decimal("0.00000000"),
-            balance_pl=decimal.Decimal("0.00000000"),
-            balance_ua=decimal.Decimal("0.00000000")
-        ))
-        await db.flush()
-        
-        # Wallet
-        db.add(UsersWallets(
-            uid=user.id,
-            amount=0,
-            currency=default_currency,
-            wallet_type='bonus',
-            updated=int(time.time())
-        ))
-        await db.commit()
-        logger.info(f"/register committed user id={user.id} email={payload.email}")
+            db.add(Forevers(
+                user_id=user.id,
+                exchange_rate=settings.forevers_value,
+                updated_at=datetime.utcnow(),
+                balance_uae=decimal.Decimal("0.00000000"),
+                balance_kz=decimal.Decimal("0.00000000"),
+                balance_de=decimal.Decimal("0.00000000"),
+                balance_pl=decimal.Decimal("0.00000000"),
+                balance_ua=decimal.Decimal("0.00000000")
+            ))
+            await db.flush()
+
+            # Wallet
+            db.add(UsersWallets(
+                uid=user.id,
+                amount=0,
+                currency=default_currency,
+                wallet_type='bonus',
+                updated=int(time.time())
+            ))
+            await db.commit()
+            logger.info(f"/register committed user id={user.id} email={payload.email}")
+        except Exception as e:
+            logger.error(f"Database error in user registration: {e}")
+            await db.rollback()
+            return RegistrationResponse(status="failed", message="Database connection error", target="/registration-error")
 
         # Session cookie
         try:
@@ -392,4 +414,3 @@ async def register_user(payload: RegistrationRequest, request: Request, response
         await db.rollback()
         logger.exception("Registration failed")
         return RegistrationResponse(status="failed", message="Registration failed due to server error", target="/registration-error")
-
