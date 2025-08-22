@@ -48,7 +48,13 @@
 
             <button
               @click="openEnterAmountModal(balance)"
-              class="w-16 h-11 border border-blue-700 bg-purple-50 rounded-full flex items-center justify-center hover:bg-purple-100 transition-colors"
+              :disabled="balance.availableAmount === 0"
+              :class="[
+                'w-16 h-11 border rounded-full flex items-center justify-center transition-colors',
+                balance.availableAmount === 0
+                  ? 'border-gray-300 bg-gray-100 cursor-not-allowed opacity-50'
+                  : 'border-blue-700 bg-purple-50 hover:bg-purple-100'
+              ]"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" class="text-blue-700">
                 <path d="M18 13H6C5.4 13 5 12.6 5 12C5 11.4 5.4 11 6 11H18C18.6 11 19 11.4 19 12C19 12.6 18.6 13 18 13Z" fill="currentColor"/>
@@ -119,7 +125,7 @@
                     </svg>
                   </button>
                   <!-- Desktop: dot separator and F icon + amount in same left group -->
-                  <template v-if="balance.availableAmount">
+                  <template v-if="balance.availableAmount !== null && balance.availableAmount !== undefined">
                     <span class="w-1.5 h-1.5 bg-gray-400 rounded-full hidden sm:block"></span>
                     <div class="hidden sm:flex items-center gap-1">
                       <svg width="14" height="14" viewBox="0 0 14 14" class="text-black">
@@ -134,7 +140,7 @@
                 </div>
                 <!-- Mobile: F icon + amount row -->
                 <div class="flex items-center gap-1 sm:hidden pl-1 -mt-2">
-                  <template v-if="balance.availableAmount">
+                  <template v-if="balance.availableAmount !== null && balance.availableAmount !== undefined">
                     <svg width="14" height="14" viewBox="0 0 14 14" class="text-black">
                       <path d="M12.86 1.4H4.38C4.007 1.4 3.74 1.667 3.74 2.04V4.654H1.34C0.967 4.707 0.7 4.974 0.7 5.347C0.7 5.72 0.967 5.987 1.34 5.987H3.74V11.96C3.74 12.334 4.007 12.6 4.38 12.6C4.754 12.6 5.02 12.334 5.02 11.96V9.187H7.74C8.114 9.187 8.38 8.92 8.38 8.547C8.38 8.174 8.114 7.907 7.74 7.907H5.02V5.934H10.194C10.567 5.934 10.834 5.667 10.834 5.294C10.834 4.92 10.567 4.654 10.194 4.654H5.02V2.68H12.807C13.18 2.68 13.447 2.414 13.447 2.04C13.447 1.667 13.234 1.4 12.86 1.4Z" fill="currentColor"/>
                     </svg>
@@ -178,7 +184,7 @@
           <div v-else class="bg-green-100 rounded-xl p-2 sm:p-3 flex items-center justify-between mb-3">
             <div class="flex items-center gap-2">
               <span class="text-sm text-gray-600 font-medium">Available</span>
-              <template v-if="balance.availableAmount">
+              <template v-if="balance.availableAmount !== null && balance.availableAmount !== undefined">
                 <span class="w-1.5 h-1.5 bg-gray-400 rounded-full"></span>
                 <div class="flex items-center gap-1">
                   <svg width="14" height="14" viewBox="0 0 14 14" class="text-black">
