@@ -119,7 +119,6 @@
       <CartBottomComponent
         :total-amount="numericTotal"
         :disabled="!selectedPayment || !termsAccepted || isProcessingPurchase"
-        :loading="isProcessingPurchase"
         @back="handleBack"
         @purchase="handlePurchase"
       />
