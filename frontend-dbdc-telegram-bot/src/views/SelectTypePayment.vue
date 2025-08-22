@@ -219,8 +219,9 @@ const handlePurchase = async () => {
 
   // Only process bonus and loyalty payments through API
   if (selectedPayment.value === 'bonus' || selectedPayment.value === 'loyalty') {
+    isProcessingPurchase.value = true
+
     try {
-      // Show loading state (could add loading indicator here)
       const result = await ForeversPurchaseService.processMultiplePurchases(
         purchaseDetails.value,
         selectedPayment.value
@@ -231,7 +232,14 @@ const handlePurchase = async () => {
         if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
           foreversAmount.value = purchaseDetails.value.foreversAmount
         }
+
+        // Update wallet data after successful purchase
+        await fetchWalletData()
+
+        // Show success modal
         showSuccessModal.value = true
+
+        console.log('Purchase completed successfully:', result)
       } else {
         // Handle errors
         const errorMessage = result.errors.length > 0
@@ -249,6 +257,8 @@ const handlePurchase = async () => {
         status: 500,
         message: 'An unexpected error occurred during purchase. Please try again.'
       })
+    } finally {
+      isProcessingPurchase.value = false
     }
   } else {
     // For other payment methods (like USDT), show success modal directly
