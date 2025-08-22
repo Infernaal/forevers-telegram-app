@@ -1,33 +1,6 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dbdc-mini.dubadu.com/api/v1/dbdc'
 
 export class ForeversPurchaseService {
-  
-  /**
-   * Get current exchange rates for all Forevers types
-   * @returns {Promise<Object>} Response with rates data
-   */
-  static async getRates() {
-    try {
-      const response = await fetch(`${API_BASE_URL}/forevers/rates`, {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      })
-
-      const data = await response.json()
-      
-      if (!response.ok) {
-        throw new Error(data.message || `HTTP error! status: ${response.status}`)
-      }
-
-      return data
-    } catch (error) {
-      console.error('Error fetching forevers rates:', error)
-      throw error
-    }
-  }
 
   /**
    * Purchase Forevers using bonus or loyalty wallet
