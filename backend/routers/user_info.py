@@ -336,53 +336,58 @@ async def register_user(payload: RegistrationRequest, request: Request, response
         email_hash = None
 
         # Create user
-        user = Users(
-            password=hashed,
-            email=payload.email,
-            phone_number=payload.phone,
-            email_verified=email_verified,
-            status=status_code,
-            account_type=0,
-            ip=ip_addr,
-            signup_time=signup_time,
-            first_name=payload.first_name,
-            last_name=payload.last_name,
-            country=payload.country,
-            parent_id=payload.ref,
-            qualification_data=json.dumps(qualification_data, separators=(",", ":")),
-            qualification_data_updated=datetime.utcnow(),
-            structural_data=json.dumps(structural_data, separators=(",", ":")),
-            structural_data_updated=datetime.utcnow(),
-            user_token_id=user_token_id,
-            email_hash=email_hash,
-            telegram_id=telegram_id_verified,
-        )
-        db.add(user)
-        await db.flush()
-        logger.info(f"/register created user id={user.id} email={payload.email}")
+        try:
+            user = Users(
+                password=hashed,
+                email=payload.email,
+                phone_number=payload.phone,
+                email_verified=email_verified,
+                status=status_code,
+                account_type=0,
+                ip=ip_addr,
+                signup_time=signup_time,
+                first_name=payload.first_name,
+                last_name=payload.last_name,
+                country=payload.country,
+                parent_id=payload.ref,
+                qualification_data=json.dumps(qualification_data, separators=(",", ":")),
+                qualification_data_updated=datetime.utcnow(),
+                structural_data=json.dumps(structural_data, separators=(",", ":")),
+                structural_data_updated=datetime.utcnow(),
+                user_token_id=user_token_id,
+                email_hash=email_hash,
+                telegram_id=telegram_id_verified,
+            )
+            db.add(user)
+            await db.flush()
+            logger.info(f"/register created user id={user.id} email={payload.email}")
 
-        db.add(Forevers(
-            user_id=user.id,
-            exchange_rate=settings.forevers_value,
-            updated_at=datetime.utcnow(),
-            balance_uae=decimal.Decimal("0.00000000"),
-            balance_kz=decimal.Decimal("0.00000000"),
-            balance_de=decimal.Decimal("0.00000000"),
-            balance_pl=decimal.Decimal("0.00000000"),
-            balance_ua=decimal.Decimal("0.00000000")
-        ))
-        await db.flush()
-        
-        # Wallet
-        db.add(UsersWallets(
-            uid=user.id,
-            amount=0,
-            currency=default_currency,
-            wallet_type='bonus',
-            updated=int(time.time())
-        ))
-        await db.commit()
-        logger.info(f"/register committed user id={user.id} email={payload.email}")
+            db.add(Forevers(
+                user_id=user.id,
+                exchange_rate=settings.forevers_value,
+                updated_at=datetime.utcnow(),
+                balance_uae=decimal.Decimal("0.00000000"),
+                balance_kz=decimal.Decimal("0.00000000"),
+                balance_de=decimal.Decimal("0.00000000"),
+                balance_pl=decimal.Decimal("0.00000000"),
+                balance_ua=decimal.Decimal("0.00000000")
+            ))
+            await db.flush()
+
+            # Wallet
+            db.add(UsersWallets(
+                uid=user.id,
+                amount=0,
+                currency=default_currency,
+                wallet_type='bonus',
+                updated=int(time.time())
+            ))
+            await db.commit()
+            logger.info(f"/register committed user id={user.id} email={payload.email}")
+        except Exception as e:
+            logger.error(f"Database error in user registration: {e}")
+            await db.rollback()
+            return RegistrationResponse(status="failed", message="Database connection error", target="/registration-error")
 
         # Session cookie
         try:
