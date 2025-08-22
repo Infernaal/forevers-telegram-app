@@ -660,8 +660,6 @@ onUnmounted(() => {
 
 // Methods
 const handleMenuClick = (menuItem) => {
-  console.log(`Menu clicked: ${menuItem}`)
-
   if (menuItem === 'calculator') {
     emit('close')
     router.push('/calculator')
@@ -670,7 +668,6 @@ const handleMenuClick = (menuItem) => {
 }
 
 const handleUpgrade = () => {
-  console.log('Upgrade clicked', planInfo.value)
   // Navigate to calculator for purchasing forevers
   emit('close')
   router.push('/calculator')
