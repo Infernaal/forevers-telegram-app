@@ -260,6 +260,36 @@ const foreversAmountDisplay = computed(() => {
   return foreversAmount.value ? foreversAmount.value.toLocaleString() : '0'
 })
 
+// Computed properties for Forevers details
+const foreversTypes = computed(() => {
+  return purchaseDetails.value?.foreversDetails?.map(detail => detail.code) || []
+})
+
+const totalForeversTypes = computed(() => {
+  return foreversTypes.value.length
+})
+
+const averagePricePerForevers = computed(() => {
+  return purchaseDetails.value?.purchaseSummary?.averagePrice?.toFixed(2) || '0.00'
+})
+
+// Get unique country codes and their details
+const uniqueCountries = computed(() => {
+  if (!purchaseDetails.value?.foreversDetails) return []
+  return purchaseDetails.value.foreversDetails.reduce((acc, detail) => {
+    if (!acc.find(item => item.code === detail.code)) {
+      acc.push({
+        code: detail.code,
+        country: detail.country,
+        totalAmount: detail.amount,
+        pricePerUnit: detail.usdRate,
+        totalCost: detail.totalCost
+      })
+    }
+    return acc
+  }, [])
+})
+
 onMounted(() => {
   // Attempt to retrieve purchase details (note: params may not persist without dynamic segments)
   if (route.params.purchaseDetails) {
