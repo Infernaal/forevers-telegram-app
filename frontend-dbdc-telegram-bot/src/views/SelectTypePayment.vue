@@ -257,6 +257,12 @@ const handlePurchase = async () => {
   } else {
     // For other payment methods (like USDT), show success modal directly
     // This preserves existing behavior for non-wallet payments
+    console.log('⚠️ WARNING: Showing success modal directly without API call for payment method:', {
+      selectedPayment: selectedPayment.value,
+      foreversAmount: foreversAmount.value,
+      purchaseDetails: purchaseDetails.value
+    })
+
     if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
       foreversAmount.value = purchaseDetails.value.foreversAmount
     }
