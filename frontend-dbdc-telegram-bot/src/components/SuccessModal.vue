@@ -275,19 +275,50 @@ button {
 /* Responsive text sizes for small screens */
 @media (max-width: 375px) {
   .text-[30px] {
-    font-size: 26px;
+    font-size: 26px !important;
+    line-height: 1.2;
   }
-  
+
   .text-2xl {
-    font-size: 20px;
+    font-size: 20px !important;
   }
-  
+
   .text-base {
-    font-size: 15px;
+    font-size: 14px !important;
   }
-  
+
   .text-sm {
-    font-size: 13px;
+    font-size: 13px !important;
+  }
+
+  /* Reduce padding on small screens */
+  .p-6 {
+    padding: 1rem !important;
+  }
+
+  /* Adjust reward box width on small screens */
+  .w-\[202px\] {
+    width: 180px !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .text-[30px] {
+    font-size: 24px !important;
+    line-height: 1.2;
+  }
+
+  .text-2xl {
+    font-size: 18px !important;
+  }
+
+  .text-base {
+    font-size: 13px !important;
+  }
+
+  /* Further reduce on very small screens */
+  .w-\[202px\] {
+    width: 160px !important;
   }
 }
 
