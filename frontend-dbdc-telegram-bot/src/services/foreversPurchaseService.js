@@ -25,6 +25,13 @@ export class ForeversPurchaseService {
 
       const data = await response.json()
 
+      // Log the response for debugging
+      console.log('Purchase API response:', {
+        status: response.status,
+        ok: response.ok,
+        data: data
+      })
+
       if (!response.ok) {
         // Handle specific error messages from backend
         let errorMessage = data.message || data.detail || `HTTP error! status: ${response.status}`
@@ -48,7 +55,7 @@ export class ForeversPurchaseService {
       }
 
       // Check if API returned success but with error status in response body
-      if (data.status === 'error' || data.success === false) {
+      if (data.status === 'failed' || data.success === false) {
         throw new Error(data.message || data.error || 'Purchase failed')
       }
 
@@ -140,8 +147,10 @@ export class ForeversPurchaseService {
       for (const request of apiRequests) {
         try {
           const result = await this.purchaseForevers(request)
+          console.log('Purchase result for', request.forever_type, ':', result)
           results.push(result)
         } catch (error) {
+          console.error('Purchase error for', request.forever_type, ':', error.message)
           errors.push({
             forever_type: request.forever_type,
             error: error.message
@@ -149,8 +158,16 @@ export class ForeversPurchaseService {
         }
       }
 
+      const isSuccess = errors.length === 0 && results.length > 0
+      console.log('Final purchase result:', {
+        success: isSuccess,
+        totalResults: results.length,
+        totalErrors: errors.length,
+        errors: errors
+      })
+
       return {
-        success: errors.length === 0,
+        success: isSuccess,
         results,
         errors,
         totalProcessed: results.length,
@@ -167,3 +184,4 @@ export class ForeversPurchaseService {
     }
   }
 }
+
