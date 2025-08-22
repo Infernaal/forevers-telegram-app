@@ -7,6 +7,7 @@ from db.database import init_db
 import uvicorn
 from routers.forevers_user_balance import router as forevers_user_balance_router
 from routers.forevers_prices import router as forevers_price_router
+from routers.forevers_purchase import router as forevers_purchase_router
 from routers.user_info import router as user_info_router
 from routers.email_verification import router as email_verification_router
 from routers.referral import router as referral_router
