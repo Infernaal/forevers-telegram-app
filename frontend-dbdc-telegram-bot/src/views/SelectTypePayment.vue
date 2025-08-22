@@ -293,6 +293,14 @@ const executeActualPurchase = async () => {
         ? result.errors.map(e => e.error).join(', ')
         : 'Purchase failed. Please try again.'
 
+      console.error('Purchase failed:', {
+        errors: result.errors,
+        totalProcessed: result.totalProcessed,
+        totalFailed: result.totalFailed,
+        selectedPayment: selectedPayment.value,
+        purchaseDetails: purchaseDetails.value
+      })
+
       // Close confirmation modal
       showConfirmModal.value = false
 
