@@ -122,11 +122,12 @@ class ForeversPurchaseService:
         """Process the forevers purchase transaction"""
         
         try:
-            # Validate inputs
+            # Validate inputs with security checks
             is_valid, error_msg = await ForeversPurchaseService.validate_purchase_data(
-                wallet_type, forever_type, forevers_amount, final_rate, usd_amount, db
+                wallet_type, forever_type, forevers_amount, final_rate, usd_amount, user_id, db
             )
             if not is_valid:
+                logger.warning(f"Purchase validation failed for user {user_id}: {error_msg}")
                 return False, {}, error_msg
             
             # Check wallet balance
