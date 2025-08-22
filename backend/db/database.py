@@ -1,4 +1,4 @@
-﻿import os
+import os
 from dotenv import load_dotenv
 from sqlalchemy.ext.asyncio import (
     AsyncAttrs,
@@ -20,8 +20,22 @@ DB_NAME = os.getenv("MYSQL_DATABASE")
 
 DATABASE_URL = f"mysql+aiomysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
-# ⚙️ Создание async-движка и async-сессии
-engine = create_async_engine(DATABASE_URL, echo=True)
+# ⚙️ Создание async-движка с настройками переподключения
+engine = create_async_engine(
+    DATABASE_URL,
+    echo=True,
+    pool_size=20,
+    max_overflow=30,
+    pool_timeout=30,
+    pool_recycle=3600,  # Переподключаться каждый час
+    pool_pre_ping=True,  # Проверять соединение перед ис��ользованием
+    connect_args={
+        "connect_timeout": 60,
+        "read_timeout": 60,
+        "write_timeout": 60,
+        "autocommit": False,
+    }
+)
 async_session = async_sessionmaker(bind=engine, expire_on_commit=False)
 
 # 📦 Базовый класс для моделей
