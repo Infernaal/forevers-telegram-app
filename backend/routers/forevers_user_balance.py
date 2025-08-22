@@ -4,9 +4,9 @@ from sqlalchemy import select, func
 from db.database import get_db
 from models.models import Forevers, UsersWallets
 from schemas.forevers_user_balance import ForeversBalance, ForeversBalanceData, WalletItem
-from schemas.deposits import UserDepositsResponse, UserDepositsData, DepositByType
+from schemas.deposits import UserDepositsResponse, UserDepositsData, DepositItem, UserDepositsSummaryResponse, UserDepositsSummaryData, DepositByType
 from utils.calculate_available_forevers import calculate_available_forevers
-from utils.get_user_deposits import get_user_deposits_by_type, get_user_deposits_total_usd
+from utils.get_user_deposits import get_user_deposits_list, get_user_deposits_by_type, get_user_deposits_total_usd
 from dependencies.current_user import get_current_user_id
 
 router = APIRouter(prefix="/forevers", tags=["Forevers User Stats"])
