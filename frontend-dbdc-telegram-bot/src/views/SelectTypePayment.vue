@@ -209,6 +209,20 @@ const isAnyModalOpen = computed(() => {
 // Methods
 const selectPayment = (paymentType) => { selectedPayment.value = paymentType }
 
+const getPaymentMethodDisplayName = (paymentMethod) => {
+  switch (paymentMethod) {
+    case 'loyalty':
+      return 'Loyalty'
+    case 'bonus':
+      return 'Bonus'
+    case 'usdt':
+    case 'crypto':
+      return 'Crypto'
+    default:
+      return 'Unknown'
+  }
+}
+
 const handleBack = () => {
   router.go(-1)
 }
