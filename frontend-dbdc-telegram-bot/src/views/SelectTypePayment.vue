@@ -131,6 +131,19 @@
       @agree="closeTermsModal"
     />
 
+    <!-- Confirm Exchange Modal -->
+    <ConfirmExchangeModal
+      :is-visible="showConfirmModal"
+      :amount="confirmModalData.amount"
+      :price="confirmModalData.price"
+      :wallet-type="confirmModalData.walletType"
+      :forevers-type="confirmModalData.foreversType"
+      :is-processing="isProcessingPurchase"
+      @close="closeConfirmModal"
+      @decline="closeConfirmModal"
+      @agree="executeActualPurchase"
+    />
+
     <!-- Success Modal -->
     <SuccessModal
       :is-visible="showSuccessModal"
@@ -152,6 +165,7 @@ import CountryFlag from '../components/CountryFlag.vue'
 import TermsCheckbox from '../components/TermsCheckbox.vue'
 import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
 import SuccessModal from '../components/SuccessModal.vue'
+import ConfirmExchangeModal from '../components/ConfirmExchangeModal.vue'
 import { useCart } from '../composables/useCart.js'
 import { formatUSDPrefix } from '../utils/formatNumber.js'
 import { ForeversPurchaseService } from '../services/foreversPurchaseService.js'
@@ -193,6 +207,13 @@ const numericTotal = computed(() => parseLocaleAmount(totalAmount.value))
 const purchaseDetails = ref(null)
 const showTermsModal = ref(false)
 const showSuccessModal = ref(false)
+const showConfirmModal = ref(false)
+const confirmModalData = ref({
+  amount: 0,
+  price: '0.00',
+  walletType: 'bonus',
+  foreversType: 'UAE'
+})
 const loyaltyBalance = ref(0)
 const bonusBalance = ref(0)
 const successMessage = ref('Payment completed successfully')
@@ -205,7 +226,7 @@ const { showError: showApiError } = useApiErrorNotifier()
 
 // Computed properties
 const isAnyModalOpen = computed(() => {
-  return showTermsModal.value || showSuccessModal.value
+  return showTermsModal.value || showSuccessModal.value || showConfirmModal.value
 })
 
 // Methods
@@ -218,53 +239,21 @@ const handleBack = () => {
 const handlePurchase = async () => {
   if (!selectedPayment.value || !termsAccepted.value) return
 
-  // Only process bonus and loyalty payments through API
+  // Only show confirmation modal for bonus and loyalty payments
   if (selectedPayment.value === 'bonus' || selectedPayment.value === 'loyalty') {
-    isProcessingPurchase.value = true
+    // Prepare confirmation modal data
+    const totalForevers = foreversAmount.value || 0
+    const firstCountryCode = purchaseDetails.value?.foreversDetails?.[0]?.code || 'UAE'
 
-    try {
-      const result = await ForeversPurchaseService.processMultiplePurchases(
-        purchaseDetails.value,
-        selectedPayment.value
-      )
-
-      if (result.success) {
-        // Ensure forevers amount is available before showing success
-        if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
-          foreversAmount.value = purchaseDetails.value.foreversAmount
-        }
-
-        // Update wallet data after successful purchase
-        await fetchWalletData()
-
-        // Set success message
-        const paymentMethodName = selectedPayment.value === 'loyalty' ? 'Loyalty Program' : 'Bonus Reward'
-        successMessage.value = `Forevers purchased successfully using ${paymentMethodName} wallet!`
-
-        // Show success modal
-        showSuccessModal.value = true
-
-        console.log('Purchase completed successfully:', result)
-      } else {
-        // Handle errors
-        const errorMessage = result.errors.length > 0
-          ? result.errors.map(e => e.error).join(', ')
-          : 'Purchase failed. Please try again.'
-
-        showApiError('forevers_purchase', {
-          status: 400,
-          message: errorMessage
-        })
-      }
-    } catch (error) {
-      console.error('Purchase error:', error)
-      showApiError('forevers_purchase', {
-        status: 500,
-        message: 'An unexpected error occurred during purchase. Please try again.'
-      })
-    } finally {
-      isProcessingPurchase.value = false
+    confirmModalData.value = {
+      amount: totalForevers,
+      price: numericTotal.toFixed(2),
+      walletType: selectedPayment.value,
+      foreversType: firstCountryCode
     }
+
+    // Show confirmation modal
+    showConfirmModal.value = true
   } else {
     // For other payment methods (like USDT), show success modal directly
     // This preserves existing behavior for non-wallet payments
@@ -273,6 +262,68 @@ const handlePurchase = async () => {
     }
     showSuccessModal.value = true
   }
+}
+
+const executeActualPurchase = async () => {
+  isProcessingPurchase.value = true
+
+  try {
+    const result = await ForeversPurchaseService.processMultiplePurchases(
+      purchaseDetails.value,
+      selectedPayment.value
+    )
+
+    if (result.success) {
+      // Close confirmation modal first
+      showConfirmModal.value = false
+
+      // Ensure forevers amount is available before showing success
+      if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
+        foreversAmount.value = purchaseDetails.value.foreversAmount
+      }
+
+      // Update wallet data after successful purchase
+      await fetchWalletData()
+
+      // Set success message
+      const paymentMethodName = selectedPayment.value === 'loyalty' ? 'Loyalty Program' : 'Bonus Reward'
+      successMessage.value = `Forevers purchased successfully using ${paymentMethodName} wallet!`
+
+      // Show success modal
+      showSuccessModal.value = true
+
+      console.log('Purchase completed successfully:', result)
+    } else {
+      // Handle errors
+      const errorMessage = result.errors.length > 0
+        ? result.errors.map(e => e.error).join(', ')
+        : 'Purchase failed. Please try again.'
+
+      // Close confirmation modal
+      showConfirmModal.value = false
+
+      showApiError('forevers_purchase', {
+        status: 400,
+        message: errorMessage
+      })
+    }
+  } catch (error) {
+    console.error('Purchase error:', error)
+
+    // Close confirmation modal
+    showConfirmModal.value = false
+
+    showApiError('forevers_purchase', {
+      status: 500,
+      message: 'An unexpected error occurred during purchase. Please try again.'
+    })
+  } finally {
+    isProcessingPurchase.value = false
+  }
+}
+
+const closeConfirmModal = () => {
+  showConfirmModal.value = false
 }
 
 const openTerms = () => {
