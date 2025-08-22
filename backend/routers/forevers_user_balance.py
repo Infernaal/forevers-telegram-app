@@ -105,3 +105,40 @@ async def get_uae_deposits_total_endpoint(current_user_id: int = Depends(get_cur
             status="failed",
             message="An error occurred while loading UAE deposits data. Please try again later"
         )
+
+
+@router.get("/deposits", response_model=UserDepositsResponse)
+async def get_user_deposits_endpoint(current_user_id: int = Depends(get_current_user_id), db: AsyncSession = Depends(get_db)):
+    """
+    Get all user deposits grouped by type.
+    Returns deposits by type with both original amounts and USD values.
+    Can be filtered on frontend for specific types (UAE, KZ, DE, PL, UA).
+    """
+    try:
+        deposits_by_type = await get_user_deposits_by_type(current_user_id, db)
+        total_usd_value = await get_user_deposits_total_usd(current_user_id, db)
+
+        # Convert to response format
+        deposit_items = [
+            DepositByType(
+                type=deposit['type'],
+                total_amount=deposit['total_amount'],
+                total_usd_value=deposit['total_usd_value']
+            )
+            for deposit in deposits_by_type
+        ]
+
+        return UserDepositsResponse(
+            status="success",
+            data=UserDepositsData(
+                user_id=current_user_id,
+                deposits_by_type=deposit_items,
+                total_usd_value=total_usd_value
+            ),
+            message="User deposits retrieved successfully"
+        )
+    except Exception as e:
+        return UserDepositsResponse(
+            status="failed",
+            message="An error occurred while loading deposits data. Please try again later"
+        )
