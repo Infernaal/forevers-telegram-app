@@ -562,6 +562,7 @@ const planInfo = ref({
   totalForevers: 0,
   progress: 0,
   foreversToNext: 0,
+  foreversUaeNeeded: 0,
   upgradeInfo: null,
   isMaxLevel: false
 })
