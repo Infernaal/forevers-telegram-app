@@ -669,8 +669,10 @@ const handleMenuClick = (menuItem) => {
 }
 
 const handleUpgrade = () => {
-  console.log('Upgrade clicked')
-  // Handle upgrade
+  console.log('Upgrade clicked', planInfo.value)
+  // Navigate to calculator for purchasing forevers
+  emit('close')
+  router.push('/calculator')
 }
 
 const copyUserID = async () => {
