@@ -292,9 +292,11 @@ const handleAddToCart = () => {
 
   if (amount > maxAllowed) {
     inputError.value = true
-    errorMessage.value = maxAllowed === 50000
-      ? `Maximum amount allowed is ${maxAllowed.toLocaleString()}`
-      : `Amount cannot exceed available balance (${maxAllowed.toLocaleString()})`
+    errorMessage.value = maxAllowed === 0
+      ? 'This item is not available for purchase'
+      : maxAllowed === 50000
+        ? `Maximum amount allowed is ${maxAllowed.toLocaleString()}`
+        : `Amount cannot exceed available balance (${maxAllowed.toLocaleString()})`
     return
   }
 
