@@ -5,7 +5,7 @@ from decimal import Decimal
 
 class ForeversPurchaseRequest(BaseModel):
     wallet_type: Literal["bonus", "rent"] = Field(..., description="Type of wallet to use for purchase")
-    forever_type: Literal["UAE", "KZ", "DE", "PL", "UA"] = Field(..., description="Type of forevers to purchase")
+    forever_type: str = Field(..., min_length=2, max_length=10, description="Type of forevers to purchase (expandable)")
     forevers_amount: int = Field(..., gt=0, description="Amount of forevers to purchase")
     final_rate: Decimal = Field(..., gt=0, description="Exchange rate for forevers")
     usd_amount: Decimal = Field(..., gt=0, description="USD amount for purchase")
