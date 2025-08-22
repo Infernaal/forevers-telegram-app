@@ -703,7 +703,7 @@ const copyUserID = async () => {
       document.body.removeChild(textArea)
 
       if (!successful) {
-        console.log('Fallback copy method also failed')
+        // Fallback copy failed
       }
     } catch (fallbackErr) {
       console.error('Fallback copy failed:', fallbackErr)
