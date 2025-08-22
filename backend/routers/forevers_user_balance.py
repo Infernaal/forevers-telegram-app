@@ -85,9 +85,49 @@ async def get_my_forevers_balance(current_user_id: int = Depends(get_current_use
 @router.get("/deposits", response_model=UserDepositsResponse)
 async def get_user_deposits_endpoint(current_user_id: int = Depends(get_current_user_id), db: AsyncSession = Depends(get_db)):
     """
-    Get all user deposits grouped by type.
-    Returns deposits by type with both original amounts and USD values.
+    Get detailed list of all user deposits.
+    Returns array of deposits with all fields: txid, processed_on, forevers, price, type, paid, access, participation.
     Can be filtered on frontend for specific types (UAE, KZ, DE, PL, UA).
+    """
+    try:
+        deposits_list = await get_user_deposits_list(current_user_id, db)
+
+        # Convert to response format
+        deposit_items = [
+            DepositItem(
+                txid=deposit['txid'],
+                processed_on=deposit['processed_on'],
+                forevers=deposit['forevers'],
+                price=deposit['price'],
+                type=deposit['type'],
+                paid=deposit['paid'],
+                access=deposit['access'],
+                participation=deposit['participation']
+            )
+            for deposit in deposits_list
+        ]
+
+        return UserDepositsResponse(
+            status="success",
+            data=UserDepositsData(
+                user_id=current_user_id,
+                deposits=deposit_items,
+                total_count=len(deposit_items)
+            ),
+            message="User deposits retrieved successfully"
+        )
+    except Exception as e:
+        return UserDepositsResponse(
+            status="failed",
+            message="An error occurred while loading deposits data. Please try again later"
+        )
+
+
+@router.get("/deposits/summary", response_model=UserDepositsSummaryResponse)
+async def get_user_deposits_summary_endpoint(current_user_id: int = Depends(get_current_user_id), db: AsyncSession = Depends(get_db)):
+    """
+    Get user deposits grouped by type (legacy format).
+    Returns deposits by type with both original amounts and USD values.
     """
     try:
         deposits_by_type = await get_user_deposits_by_type(current_user_id, db)
@@ -103,17 +143,17 @@ async def get_user_deposits_endpoint(current_user_id: int = Depends(get_current_
             for deposit in deposits_by_type
         ]
 
-        return UserDepositsResponse(
+        return UserDepositsSummaryResponse(
             status="success",
-            data=UserDepositsData(
+            data=UserDepositsSummaryData(
                 user_id=current_user_id,
                 deposits_by_type=deposit_items,
                 total_usd_value=total_usd_value
             ),
-            message="User deposits retrieved successfully"
+            message="User deposits summary retrieved successfully"
         )
     except Exception as e:
-        return UserDepositsResponse(
+        return UserDepositsSummaryResponse(
             status="failed",
-            message="An error occurred while loading deposits data. Please try again later"
+            message="An error occurred while loading deposits summary data. Please try again later"
         )
