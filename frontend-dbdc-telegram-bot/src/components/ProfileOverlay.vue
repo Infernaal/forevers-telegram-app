@@ -592,10 +592,12 @@ const fetchPlanInfo = async () => {
 
     if (balanceResult.status === 'success' && balanceResult.forevers_balance) {
       const planData = await planService.getUserPlanInfo(balanceResult.forevers_balance)
+      console.log('Plan data calculated:', planData)
       planInfo.value = planData
     } else {
       // Default to start plan if no balance data
       const defaultPlanData = await planService.getUserPlanInfo(null)
+      console.log('Default plan data:', defaultPlanData)
       planInfo.value = defaultPlanData
     }
   } catch (error) {
