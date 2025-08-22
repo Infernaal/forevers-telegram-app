@@ -276,7 +276,7 @@
                    :class="planInfo.isMaxLevel ? 'rounded-2xl' : 'rounded-l-2xl'"
                    :style="{
                      width: planInfo.isMaxLevel ? '100%' : `${Math.max(100, (planInfo.progress / 100) * 300)}px`,
-                     background: `linear-gradient(to right, ${planInfo.currentPlan.color}CC, ${planInfo.currentPlan.color}66)`,
+                     background: `linear-gradient(to right, ${planInfo.currentPlan.progressColor || planInfo.currentPlan.color}CC, ${planInfo.currentPlan.progressColor || planInfo.currentPlan.color}66)`,
                      opacity: 0.4
                    }"></div>
 
