@@ -78,10 +78,10 @@ class PlanService {
       return { error: 'UAE pricing not available' }
     }
 
-    const totalCost = targetForevers * parseFloat(uaePrice.value)
+    const foreversNeeded = targetAmount / parseFloat(uaePrice.value)
     return {
-      forevers: targetForevers,
-      costUSD: totalCost,
+      forevers: Math.ceil(foreversNeeded),
+      costUSD: targetAmount,
       rateUSD: parseFloat(uaePrice.value),
       region: 'UAE'
     }
