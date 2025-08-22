@@ -88,12 +88,12 @@ class PlanService {
   }
 
   /**
-   * Determine user's current plan based on total forevers balance
+   * Determine user's current plan based on total UAE deposits
    */
-  getCurrentPlan(totalForevers) {
+  getCurrentPlan(totalAmount) {
     for (let i = PLAN_TIERS.length - 1; i >= 0; i--) {
       const tier = PLAN_TIERS[i]
-      if (totalForevers >= tier.minForevers) {
+      if (totalAmount >= tier.minForevers) {
         return {
           ...tier,
           isMaxLevel: tier.id === 'premium'
@@ -101,7 +101,7 @@ class PlanService {
       }
     }
     return {
-      ...PLAN_TIERS[0],
+      ...PLAN_TIERS[0], // Default to 'none' plan
       isMaxLevel: false
     }
   }
