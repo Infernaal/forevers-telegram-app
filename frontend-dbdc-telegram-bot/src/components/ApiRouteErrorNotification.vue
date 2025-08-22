@@ -99,9 +99,8 @@ const effectiveBottomOffset = computed(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  align-self: flex-start;
+  align-self: center;
   flex-shrink: 0;
-  margin-top: 1px;
 }
 .error-icon {
   width: 20px;
@@ -148,8 +147,8 @@ const effectiveBottomOffset = computed(() => {
   }
   .error-notification-container .error-icon-container {
     flex-shrink: 0;
-    align-self: flex-start;
-    margin-top: 2px;
+    align-self: center;
   }
 }
 </style>
+
