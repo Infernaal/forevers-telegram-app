@@ -81,29 +81,6 @@ async def get_my_forevers_balance(current_user_id: int = Depends(get_current_use
         )
 
 
-@router.get("/uae-deposits", response_model=UAEDepositsResponse)
-async def get_uae_deposits_total_endpoint(current_user_id: int = Depends(get_current_user_id), db: AsyncSession = Depends(get_db)):
-    """
-    Get total UAE deposits amount for plan calculation.
-    Uses formula: rate_at_deposit * amount for UAE deposits only.
-    """
-    try:
-        total_uae_deposits = await get_uae_deposits_total(current_user_id, db)
-
-        return UAEDepositsResponse(
-            status="success",
-            data=UAEDepositsData(
-                user_id=current_user_id,
-                total_uae_deposits=total_uae_deposits
-            ),
-            message="UAE deposits total retrieved successfully"
-        )
-    except Exception as e:
-        return UAEDepositsResponse(
-            status="failed",
-            message="An error occurred while loading UAE deposits data. Please try again later"
-        )
-
 
 @router.get("/deposits", response_model=UserDepositsResponse)
 async def get_user_deposits_endpoint(current_user_id: int = Depends(get_current_user_id), db: AsyncSession = Depends(get_db)):
