@@ -148,8 +148,8 @@ class PlanService {
    * Get complete plan information for user based on UAE deposits
    */
   async getUserPlanInfo(userBalance = null) {
-    // Get UAE deposits total instead of forevers balance
-    const uaeDepositsResponse = await UaeDepositsService.getUserUaeDeposits()
+    // Use new universal deposits service to get UAE deposits
+    const uaeDepositsResponse = await DepositsService.getUaeDeposits()
 
     let totalUaeDeposits = 0
     if (uaeDepositsResponse.status === 'success' && uaeDepositsResponse.data) {
@@ -183,6 +183,51 @@ class PlanService {
       progress,
       foreversToNext, // USD amount needed
       foreversUaeNeeded, // Number of UAE forevers to buy
+      upgradeInfo,
+      isMaxLevel: currentPlan.isMaxLevel
+    }
+  }
+
+  /**
+   * Get plan information based on specific deposit types
+   * @param {string|string[]} depositTypes - Deposit types to consider
+   * @param {number} userBalance - Optional user balance
+   */
+  async getUserPlanInfoByTypes(depositTypes = ['UAE'], userBalance = null) {
+    // Get deposits for specific types
+    const depositsResponse = await DepositsService.getDepositsByType(depositTypes)
+
+    let totalDeposits = 0
+    if (depositsResponse.status === 'success' && depositsResponse.data) {
+      totalDeposits = depositsResponse.data.total_usd_value
+    }
+
+    // Convert deposits to equivalent forevers for plan calculation
+    const equivalentForevers = totalDeposits
+
+    const currentPlan = this.getCurrentPlan(equivalentForevers)
+    const nextPlan = this.getNextPlan(currentPlan.id)
+    const progress = this.calculateProgress(equivalentForevers, currentPlan, nextPlan)
+    const foreversToNext = this.getForeversToNextLevel(equivalentForevers, nextPlan)
+
+    let upgradeInfo = null
+    let foreversNeeded = 0
+    if (foreversToNext > 0) {
+      upgradeInfo = await this.calculateForeversNeeded(foreversToNext)
+      if (upgradeInfo && !upgradeInfo.error) {
+        foreversNeeded = upgradeInfo.forevers
+      }
+    }
+
+    return {
+      currentPlan,
+      nextPlan,
+      totalForevers: equivalentForevers,
+      totalDeposits,
+      depositTypes: Array.isArray(depositTypes) ? depositTypes : [depositTypes],
+      progress,
+      foreversToNext, // USD amount needed
+      foreversNeeded, // Number of forevers to buy
       upgradeInfo,
       isMaxLevel: currentPlan.isMaxLevel
     }
