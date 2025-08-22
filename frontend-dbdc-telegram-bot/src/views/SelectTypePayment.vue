@@ -136,7 +136,7 @@
     <SuccessModal
       :is-visible="showSuccessModal"
       :amount="foreversAmountDisplay"
-      :message="'Payment completed successfully'"
+      :message="successMessage"
       @close="closeSuccessModal"
       @confirm="closeSuccessModal"
     />
