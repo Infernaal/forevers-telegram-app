@@ -276,19 +276,16 @@ const handleAddToCart = () => {
   }
 
   // Check available balance
-  const availableText = props.selectedBalance?.availableText
   const availableAmount = props.selectedBalance?.availableAmount
   let maxAllowed
 
-  console.log('handleAddToCart validation:', { availableText, availableAmount, amount })
+  console.log('handleAddToCart validation:', { availableAmount, amount })
 
-  // Check if it's "without restrictions" or unlimited
-  if (availableText && availableText.includes('without restrictions')) {
-    maxAllowed = 50000 // 50k limit for unrestricted items
-  } else if (availableAmount && !isNaN(Number(availableAmount))) {
+  // Check available amount
+  if (availableAmount !== null && availableAmount !== undefined) {
     maxAllowed = Number(availableAmount) // Use actual available amount
   } else {
-    maxAllowed = 50000 // Default to 50k if unclear
+    maxAllowed = 50000 // Default to 50k for unlimited/without restrictions
   }
 
   console.log('handleAddToCart maxAllowed:', maxAllowed)
