@@ -17,8 +17,12 @@ async def calculate_available_forevers(
 
     # �������� ������� ����
     base_price_items = await extract_base_prices(db)
+
+    # �������� ��������� ���� ��������� ������������
+    region_types = await get_available_deposit_types(db)
+
     if base_price_items is None:
-        return {region: 0 for region in ["UAE", "KZ", "DE", "PL", "UA"]}
+        return {region: 0 for region in region_types}
 
     # ��������� ������
     discounted_prices, _ = await apply_discounts(db, base_price_items)
@@ -27,9 +31,6 @@ async def calculate_available_forevers(
     final_rates: Dict[str, Decimal] = {
         item.type: item.value for item in discounted_prices
     }
-
-    # �������� total_amounts �� ����
-    region_types = ["UAE", "KZ", "DE", "PL", "UA"]
     total_amounts: Dict[str, Decimal] = {
         region: await get_total_deposit_amount_by_type(user_id, region, db)
         for region in region_types
