@@ -120,27 +120,27 @@ class PlanService {
   /**
    * Calculate progress to next level
    */
-  calculateProgress(totalForevers, currentPlan, nextPlan) {
+  calculateProgress(totalAmount, currentPlan, nextPlan) {
     if (!nextPlan) {
       return 100 // Max level reached
     }
 
     const currentMin = currentPlan.minForevers
     const nextMin = nextPlan.minForevers
-    const progress = ((totalForevers - currentMin) / (nextMin - currentMin)) * 100
-    
+    const progress = ((totalAmount - currentMin) / (nextMin - currentMin)) * 100
+
     return Math.min(Math.max(progress, 0), 100)
   }
 
   /**
-   * Calculate forevers needed to reach next level
+   * Calculate USD amount needed to reach next level
    */
-  getForeversToNextLevel(totalForevers, nextPlan) {
+  getForeversToNextLevel(totalAmount, nextPlan) {
     if (!nextPlan) {
       return 0 // Already at max level
     }
-    
-    const needed = nextPlan.minForevers - totalForevers
+
+    const needed = nextPlan.minForevers - totalAmount
     return Math.max(needed, 0)
   }
 
