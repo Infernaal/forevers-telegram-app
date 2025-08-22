@@ -272,9 +272,10 @@
               px-4 py-3 sm:px-5 sm:py-4 md:px-5 md:py-3 lg:px-5 lg:py-3
               relative overflow-hidden">
               <!-- Dynamic Progress Background Gradient -->
-              <div class="absolute left-0 top-0 h-full rounded-l-2xl transition-all duration-500 ease-out"
+              <div class="absolute left-0 top-0 h-full transition-all duration-500 ease-out"
+                   :class="planInfo.isMaxLevel ? 'rounded-2xl' : 'rounded-l-2xl'"
                    :style="{
-                     width: `${Math.max(100, (planInfo.progress / 100) * 300)}px`,
+                     width: planInfo.isMaxLevel ? '100%' : `${Math.max(100, (planInfo.progress / 100) * 300)}px`,
                      background: `linear-gradient(to right, ${planInfo.currentPlan.color}CC, ${planInfo.currentPlan.color}66)`,
                      opacity: 0.4
                    }"></div>
