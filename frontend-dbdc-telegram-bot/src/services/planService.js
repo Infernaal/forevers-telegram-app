@@ -137,21 +137,25 @@ class PlanService {
   }
 
   /**
-   * Get complete plan information for user
+   * Get complete plan information for user based on UAE deposits
    */
-  async getUserPlanInfo(userBalance) {
-    const totalForevers = userBalance ? (
-      parseFloat(userBalance.balance_uae || 0) +
-      parseFloat(userBalance.balance_kz || 0) +
-      parseFloat(userBalance.balance_de || 0) +
-      parseFloat(userBalance.balance_pl || 0) +
-      parseFloat(userBalance.balance_ua || 0)
-    ) : 0
+  async getUserPlanInfo(userBalance = null) {
+    // Get UAE deposits total instead of forevers balance
+    const uaeDepositsResponse = await UaeDepositsService.getUserUaeDeposits()
 
-    const currentPlan = this.getCurrentPlan(totalForevers)
+    let totalUaeDeposits = 0
+    if (uaeDepositsResponse.status === 'success' && uaeDepositsResponse.data) {
+      totalUaeDeposits = parseFloat(uaeDepositsResponse.data.total_uae_deposits || 0)
+    }
+
+    // Convert UAE deposits to equivalent forevers for plan calculation
+    // Assuming 1 forevers = 1 USD (adjust if different)
+    const equivalentForevers = totalUaeDeposits
+
+    const currentPlan = this.getCurrentPlan(equivalentForevers)
     const nextPlan = this.getNextPlan(currentPlan.id)
-    const progress = this.calculateProgress(totalForevers, currentPlan, nextPlan)
-    const foreversToNext = this.getForeversToNextLevel(totalForevers, nextPlan)
+    const progress = this.calculateProgress(equivalentForevers, currentPlan, nextPlan)
+    const foreversToNext = this.getForeversToNextLevel(equivalentForevers, nextPlan)
 
     let upgradeInfo = null
     if (foreversToNext > 0) {
@@ -161,7 +165,8 @@ class PlanService {
     return {
       currentPlan,
       nextPlan,
-      totalForevers,
+      totalForevers: equivalentForevers,
+      totalUaeDeposits,
       progress,
       foreversToNext,
       upgradeInfo,
