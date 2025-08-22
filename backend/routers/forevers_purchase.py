@@ -70,6 +70,7 @@ async def purchase_forevers(
         )
         
         if success:
+            logger.info(f"Purchase successful: user_id={current_user_id}, txid={result_data.get('txid')}")
             return ForeversPurchaseResponse(
                 status="success",
                 message=message,
@@ -77,6 +78,7 @@ async def purchase_forevers(
                 data=result_data
             )
         else:
+            logger.warning(f"Purchase failed: user_id={current_user_id}, ip={client_ip}, reason={message}")
             return ForeversPurchaseResponse(
                 status="failed",
                 message=message
