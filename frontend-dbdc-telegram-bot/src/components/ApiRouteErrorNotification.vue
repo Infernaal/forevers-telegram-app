@@ -83,10 +83,10 @@ const effectiveBottomOffset = computed(() => {
   border: 1px solid #E53935;
   background: #F44336;
   box-shadow: 4px 8px 12px 0 rgba(229, 57, 53, 0.13);
-  padding: 10px 16px;
-  min-width: 120px;
-  max-width: min(calc(100vw - 32px), 400px);
-  width: fit-content;
+  padding: 12px 16px;
+  min-width: 200px;
+  max-width: calc(100vw - 32px);
+  width: calc(100vw - 48px);
   justify-content: center;
   transition: all 0.3s ease;
 }
@@ -114,7 +114,7 @@ const effectiveBottomOffset = computed(() => {
   font-size: 15px;
   font-style: normal;
   font-weight: 600;
-  line-height: 20px;
+  line-height: 22px;
   text-align: center;
   margin-left: 8px;
   white-space: normal;
@@ -130,18 +130,18 @@ const effectiveBottomOffset = computed(() => {
     transform: none;
   }
   .error-notification-content {
-    min-width: 120px;
-    width: fit-content;
+    min-width: 200px;
+    width: calc(100vw - 48px);
     max-width: calc(100vw - 32px);
     min-height: 44px;
     height: auto;
     align-items: center;
-    padding: 10px 16px;
+    padding: 12px 16px;
     flex-direction: row;
   }
   .error-notification-container .error-message {
     margin-left: 8px;
-    line-height: 18px;
+    line-height: 20px;
     font-size: 13px;
     text-align: center;
     flex: 1;
