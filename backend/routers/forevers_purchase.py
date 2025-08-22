@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, Request
 from sqlalchemy.ext.asyncio import AsyncSession
+import logging
 
 from db.database import get_db
 from dependencies.current_user import get_current_user_id
@@ -9,6 +10,8 @@ from schemas.forevers_purchase import (
     ForeversPurchaseData
 )
 from services.forevers_purchase_service import ForeversPurchaseService
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/forevers", tags=["Forevers Purchase"])
 
