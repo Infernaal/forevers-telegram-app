@@ -31,8 +31,12 @@ logger = logging.getLogger("dbdc.user")
 async def get_my_user_info(current_user_id: int = Depends(get_current_user_id), db: AsyncSession = Depends(get_db)):
     try:
         stmt = select(Users).where(Users.id == current_user_id)
-        result = await db.execute(stmt)
-        user = result.scalar_one_or_none()
+        try:
+            result = await execute_with_retry(db, stmt)
+            user = result.scalar_one_or_none()
+        except Exception as e:
+            logger.error(f"Database error in get_user_info: {e}")
+            raise HTTPException(status_code=500, detail="Database connection error")
 
         if user is None:
             return UserInfoResponseWrapper(
@@ -128,8 +132,12 @@ async def auth_by_email(payload: AuthByEmailRequest, response: Response, db: Asy
     try:
         # 1. Load user by email
         stmt = select(Users).where(Users.email == payload.email).limit(1)
-        res = await db.execute(stmt)
-        user: Users | None = res.scalar_one_or_none()
+        try:
+            res = await execute_with_retry(db, stmt)
+            user: Users | None = res.scalar_one_or_none()
+        except Exception as e:
+            logger.error(f"Database error in auth_by_email: {e}")
+            return AuthByEmailResponse(status="failed", message="Database connection error")
         if user is None:
             return AuthByEmailResponse(status="failed", target="/email-not-registered", message="Email not registered")
 
@@ -165,8 +173,13 @@ async def auth_by_email(payload: AuthByEmailRequest, response: Response, db: Asy
             upd = (update(Users)
                    .where(Users.id == user.id)
                    .values(telegram_id=provided_tg))
-            await db.execute(upd)
-            await db.commit()
+            try:
+                await db.execute(upd)
+                await db.commit()
+            except Exception as e:
+                logger.error(f"Database error updating telegram_id: {e}")
+                await db.rollback()
+                return AuthByEmailResponse(status="failed", message="Database connection error")
             try:
                 await init_redis()
                 session_id = await create_session(int(user.id))
@@ -244,18 +257,18 @@ async def register_user(payload: RegistrationRequest, request: Request, response
         logger.info(f"/register attempt email={payload.email} ip={request.client.host if request.client else '?'}")
 
         # Uniqueness checks
-        res = await db.execute(select(Users.id).where(Users.email == payload.email).limit(1))
+        res = await execute_with_retry(db, select(Users.id).where(Users.email == payload.email).limit(1))
         if res.scalar_one_or_none():
             logger.info(f"/register email exists: {payload.email}")
             return RegistrationResponse(status="failed", message="Email already registered", target="/email-already-registered")
         if payload.phone:
-            pres = await db.execute(select(Users.id).where(Users.phone_number == payload.phone).limit(1))
+            pres = await execute_with_retry(db, select(Users.id).where(Users.phone_number == payload.phone).limit(1))
             if pres.scalar_one_or_none():
                 logger.info(f"/register phone exists: {payload.phone}")
                 return RegistrationResponse(status="failed", message="Phone already registered", target="/phone-already-registered")
 
         # Settings & constants
-        settings = (await db.execute(select(Settings).limit(1))).scalar_one_or_none()
+        settings = (await execute_with_retry(db, select(Settings).limit(1))).scalar_one_or_none()
         default_currency = settings.default_currency if settings and settings.default_currency else "USD"
 
         # Генерация надёжного пароля
