@@ -118,7 +118,8 @@
     <div class="fixed left-0 right-0 z-[9999]" style="bottom: 89px;">
       <CartBottomComponent
         :total-amount="numericTotal"
-        :disabled="!selectedPayment || !termsAccepted"
+        :disabled="!selectedPayment || !termsAccepted || isProcessingPurchase"
+        :loading="isProcessingPurchase"
         @back="handleBack"
         @purchase="handlePurchase"
       />
