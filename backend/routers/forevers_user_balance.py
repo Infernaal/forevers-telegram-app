@@ -105,3 +105,28 @@ async def get_uae_deposits_total_endpoint(current_user_id: int = Depends(get_cur
             status="failed",
             message="An error occurred while loading UAE deposits data. Please try again later"
         )
+
+
+@router.get("/deposits", response_model=DepositsResponse)
+async def get_user_deposits_endpoint(current_user_id: int = Depends(get_current_user_id), db: AsyncSession = Depends(get_db)):
+    """
+    Get all user deposits with detailed information.
+    Returns array with txid, processed_on, forevers, price, type, paid, access, participation.
+    """
+    try:
+        deposits = await get_user_deposits(current_user_id, db)
+
+        return DepositsResponse(
+            status="success",
+            data=DepositsData(
+                user_id=current_user_id,
+                deposits=deposits,
+                total_count=len(deposits)
+            ),
+            message="User deposits retrieved successfully"
+        )
+    except Exception as e:
+        return DepositsResponse(
+            status="failed",
+            message="An error occurred while loading deposits data. Please try again later"
+        )
