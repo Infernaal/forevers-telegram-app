@@ -73,7 +73,8 @@ const effectiveBottomOffset = computed(() => {
 }
 .error-notification-content {
   display: inline-flex;
-  height: 44px;
+  min-height: 44px;
+  height: auto;
   flex-direction: row;
   align-items: center;
   gap: 10px;
@@ -87,7 +88,6 @@ const effectiveBottomOffset = computed(() => {
   max-width: min(calc(100vw - 32px), 400px);
   width: fit-content;
   justify-content: center;
-  white-space: nowrap;
   transition: all 0.3s ease;
 }
 .error-notification-content:hover {
@@ -99,7 +99,9 @@ const effectiveBottomOffset = computed(() => {
   display: flex;
   justify-content: center;
   align-items: center;
+  align-self: flex-start;
   flex-shrink: 0;
+  margin-top: 1px;
 }
 .error-icon {
   width: 20px;
@@ -112,10 +114,12 @@ const effectiveBottomOffset = computed(() => {
   font-size: 15px;
   font-style: normal;
   font-weight: 600;
-  line-height: 22px;
+  line-height: 20px;
   text-align: center;
   margin-left: 8px;
-  white-space: nowrap;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
   flex: 1;
   min-width: 0;
 }
@@ -129,7 +133,6 @@ const effectiveBottomOffset = computed(() => {
     min-width: 120px;
     width: fit-content;
     max-width: calc(100vw - 32px);
-    white-space: normal;
     min-height: 44px;
     height: auto;
     align-items: center;
@@ -137,11 +140,8 @@ const effectiveBottomOffset = computed(() => {
     flex-direction: row;
   }
   .error-notification-container .error-message {
-    white-space: normal;
-    overflow: visible;
-    text-overflow: unset;
     margin-left: 8px;
-    line-height: 16px;
+    line-height: 18px;
     font-size: 13px;
     text-align: center;
     flex: 1;
@@ -149,7 +149,7 @@ const effectiveBottomOffset = computed(() => {
   .error-notification-container .error-icon-container {
     flex-shrink: 0;
     align-self: flex-start;
-    margin-top: 1px;
+    margin-top: 2px;
   }
 }
 </style>
