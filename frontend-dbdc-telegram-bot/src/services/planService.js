@@ -1,4 +1,4 @@
-import { foreversPurchaseService } from './foreversPurchaseService.js'
+import { ForeversPurchaseService } from './foreversPurchaseService.js'
 
 // Plan tier definitions with forevers requirements
 export const PLAN_TIERS = [
@@ -42,7 +42,7 @@ class PlanService {
    */
   async getForeversPricing() {
     try {
-      const response = await foreversPurchaseService.getForeversPrices()
+      const response = await ForeversPurchaseService.getForeversPrices()
       if (response.status === 'success' && response.data) {
         return response.data.discounted_prices || response.data.prices
       }
