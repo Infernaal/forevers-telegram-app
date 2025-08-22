@@ -57,7 +57,6 @@ class PlanService {
       }
       return []
     } catch (error) {
-      console.error('Failed to fetch forevers pricing:', error)
       return []
     }
   }
