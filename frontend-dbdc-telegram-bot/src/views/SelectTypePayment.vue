@@ -49,7 +49,7 @@
           </div>
           <div class="text-center">
             <h3 class="text-lg font-semibold text-dbd-dark">{{ bonusFormatted }}</h3>
-            <p class="text-dbd-light-gray text-base">Bonus Reward</p>
+            <p class="text-dbd-light-gray text-base">Bonus</p>
           </div>
         </div>
 
