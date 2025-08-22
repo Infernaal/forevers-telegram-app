@@ -96,8 +96,12 @@ async def get_user_by_telegram(
             logger.warning("Auth by telegram: path telegram_id mismatch")
             return UserInfoResponseWrapper(status="failed")
         stmt = select(Users.id).where(Users.telegram_id == str(real_tg_id)).limit(1)
-        result = await db.execute(stmt)
-        user_id = result.scalar_one_or_none()
+        try:
+            result = await execute_with_retry(db, stmt)
+            user_id = result.scalar_one_or_none()
+        except Exception as e:
+            logger.error(f"Database error in get_user_by_telegram: {e}")
+            return UserInfoResponseWrapper(status="failed", message="Database connection error")
         if user_id is None:
             logger.info(f"Auth by telegram: telegram_id={real_tg_id} not found")
             return UserInfoResponseWrapper(status="failed")
