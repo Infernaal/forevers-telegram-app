@@ -236,7 +236,12 @@ class ForeversPurchaseService:
             
             # Commit all changes
             await db.commit()
-            
+
+            # Log successful transaction
+            logger.info(f"Purchase transaction completed successfully: user_id={user_id}, txid={txid}, "
+                       f"forevers={forevers_amount} {forever_type}, usd=${usd_amount}, "
+                       f"new_balance=${new_wallet_amount}, stats_id={exchange_stats.id}")
+
             return True, {
                 'txid': txid,
                 'wallet_type': wallet_type,
