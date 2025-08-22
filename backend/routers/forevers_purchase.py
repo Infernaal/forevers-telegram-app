@@ -85,6 +85,7 @@ async def purchase_forevers(
             )
             
     except Exception as e:
+        logger.error(f"Unexpected error in purchase endpoint: user_id={current_user_id}, error={str(e)}", exc_info=True)
         return ForeversPurchaseResponse(
             status="failed",
             message=f"An unexpected error occurred: {str(e)}"
