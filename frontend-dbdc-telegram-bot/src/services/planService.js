@@ -9,8 +9,8 @@ export const PLAN_TIERS = [
     icon: '/plan-none.svg',
     minForevers: 0,
     maxForevers: 49.99,
-    color: '#a2a2a2ff',
-    progressColor: '#E0E0E0'
+    color: '#5f5f5fff',
+    progressColor: '#a5a5a5'
   },
   {
     id: 'start',
@@ -19,7 +19,7 @@ export const PLAN_TIERS = [
     minForevers: 50,
     maxForevers: 99.99,
     color: '#8C4CD1',
-    progressColor: '#E3D6F7'
+    progressColor: '#EFE7FA'
   },
   {
     id: 'business',
@@ -27,8 +27,8 @@ export const PLAN_TIERS = [
     icon: '/plan-business.svg',
     minForevers: 100,
     maxForevers: 499.99,
-    color: '#63B3ED',
-    progressColor: '#BEE3F8'
+    color: '#2ca7ffff',
+    progressColor: '#63B3ED'
   },
   {
     id: 'business-plus',
@@ -36,8 +36,8 @@ export const PLAN_TIERS = [
     icon: '/plan-business-+.svg',
     minForevers: 500,
     maxForevers: 999.99,
-    color: '#ff9046ff',
-    progressColor: '#FFD6B3'
+    color: '#ff7a21ff',
+    progressColor: '#FFF7ED'
   },
   {
     id: 'premium',
@@ -46,7 +46,7 @@ export const PLAN_TIERS = [
     minForevers: 1000,
     maxForevers: null, // Unlimited
     color: '#07B80E',
-    progressColor: '#B7F7C1'
+    progressColor: '#E7FCEB'
   }
 ]
 
