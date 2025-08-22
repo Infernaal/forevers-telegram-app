@@ -279,7 +279,6 @@ const loyaltyFormatted = computed(() => formatUSDPrefix(loyaltyBalance.value))
 const bonusFormatted = computed(() => formatUSDPrefix(bonusBalance.value))
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dbdc-mini.dubadu.com/api/v1/dbdc'
-const { showError: showApiError } = useApiErrorNotifier()
 
 async function fetchWalletData() {
   try {
