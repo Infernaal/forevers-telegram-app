@@ -414,7 +414,22 @@ const uniqueCountries = computed(() => {
   }, [])
 })
 
+// Add watchers for debugging
+watch(showConfirmModal, (newVal, oldVal) => {
+  console.log('🔄 ConfirmModal visibility changed:', { from: oldVal, to: newVal })
+})
+
+watch(selectedPayment, (newVal, oldVal) => {
+  console.log('💳 Payment method changed:', { from: oldVal, to: newVal })
+})
+
+watch(termsAccepted, (newVal, oldVal) => {
+  console.log('📋 Terms acceptance changed:', { from: oldVal, to: newVal })
+})
+
 onMounted(() => {
+  console.log('🚀 SelectTypePayment mounted')
+
   // Attempt to retrieve purchase details (note: params may not persist without dynamic segments)
   if (route.params.purchaseDetails) {
     purchaseDetails.value = route.params.purchaseDetails
@@ -447,6 +462,14 @@ onMounted(() => {
     console.log('Forevers types:', types)
     console.log('Prices per type:', prices)
   }
+
+  console.log('🔧 Initial state:', {
+    selectedPayment: selectedPayment.value,
+    termsAccepted: termsAccepted.value,
+    foreversAmount: foreversAmount.value,
+    totalAmount: totalAmount.value,
+    showConfirmModal: showConfirmModal.value
+  })
 
   fetchWalletData()
 })
