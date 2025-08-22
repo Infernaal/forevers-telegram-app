@@ -1,9 +1,9 @@
-﻿from fastapi import APIRouter, Depends, Request, Response, Header
+from fastapi import APIRouter, Depends, Request, Response, Header
 import logging
 from fastapi import HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, update
-from db.database import get_db
+from db.database import get_db, execute_with_retry
 from models.models import Users, UsersWallets, Settings, Forevers
 from utils.generate_password import generate_strong_password
 from schemas.user_info import (
@@ -392,4 +392,3 @@ async def register_user(payload: RegistrationRequest, request: Request, response
         await db.rollback()
         logger.exception("Registration failed")
         return RegistrationResponse(status="failed", message="Registration failed due to server error", target="/registration-error")
-
