@@ -3,6 +3,30 @@
     <!-- Content Container -->
     <div class="flex-1 bg-gray-100 rounded-t-2xl p-4 pt-8 pb-40">
 
+      <!-- Purchase Summary -->
+      <div v-if="purchaseDetails?.foreversDetails" class="bg-white rounded-xl p-4 mb-6 border border-gray-200">
+        <h3 class="text-lg font-semibold text-dbd-dark mb-3">Purchase Details</h3>
+        <div class="space-y-2">
+          <div v-for="detail in purchaseDetails.foreversDetails" :key="detail.code"
+               class="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
+            <div class="flex items-center gap-2">
+              <CountryFlag :country="detail.code" class="w-5 h-5" />
+              <span class="font-medium text-dbd-dark">{{ detail.displayName }}</span>
+              <span class="text-dbd-light-gray text-sm">({{ detail.amount.toLocaleString() }})</span>
+            </div>
+            <div class="text-right">
+              <div class="text-dbd-dark font-semibold">${{ detail.totalCost.toLocaleString() }}</div>
+              <div class="text-dbd-light-gray text-sm">{{ detail.pricePerUnit }} each</div>
+            </div>
+          </div>
+          <!-- Total -->
+          <div class="flex justify-between items-center pt-2 border-t border-gray-200 font-semibold">
+            <span class="text-dbd-dark">Total: {{ foreversAmountDisplay }} Forevers</span>
+            <span class="text-dbd-primary">${{ numericTotal.toLocaleString() }}</span>
+          </div>
+        </div>
+      </div>
+
       <!-- Payment Methods Grid -->
       <div class="grid grid-cols-2 gap-3 mb-8">
         <!-- Loyalty Program -->
