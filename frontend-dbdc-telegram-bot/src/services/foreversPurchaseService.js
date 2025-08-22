@@ -57,7 +57,7 @@ export class ForeversPurchaseService {
 
     // Validate each forevers item
     for (const detail of purchaseDetails.foreversDetails) {
-      if (!detail.code || !['UA', 'DE', 'KZ', 'PL', 'UAE'].includes(detail.code)) {
+      if (!detail.code || typeof detail.code !== 'string' || detail.code.trim().length === 0) {
         return { valid: false, error: `Invalid forever type: ${detail.code}` }
       }
       
