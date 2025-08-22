@@ -1,4 +1,5 @@
 import { ForeversPurchaseService } from './foreversPurchaseService.js'
+import UaeDepositsService from './uaeDepositsService.js'
 
 // Plan tier definitions with forevers requirements
 export const PLAN_TIERS = [
