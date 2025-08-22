@@ -237,7 +237,21 @@ const handleBack = () => {
 }
 
 const handlePurchase = async () => {
-  if (!selectedPayment.value || !termsAccepted.value) return
+  console.log('🛒 Purchase clicked - Debug info:', {
+    selectedPayment: selectedPayment.value,
+    termsAccepted: termsAccepted.value,
+    foreversAmount: foreversAmount.value,
+    numericTotal: numericTotal.value,
+    purchaseDetails: purchaseDetails.value
+  })
+
+  if (!selectedPayment.value || !termsAccepted.value) {
+    console.log('❌ Purchase blocked:', {
+      hasSelectedPayment: !!selectedPayment.value,
+      hasTermsAccepted: termsAccepted.value
+    })
+    return
+  }
 
   // Only show confirmation modal for bonus and loyalty payments
   if (selectedPayment.value === 'bonus' || selectedPayment.value === 'loyalty') {
@@ -247,10 +261,12 @@ const handlePurchase = async () => {
 
     confirmModalData.value = {
       amount: totalForevers,
-      price: numericTotal.toFixed(2),
+      price: numericTotal.value.toFixed(2),
       walletType: selectedPayment.value,
       foreversType: firstCountryCode
     }
+
+    console.log('✅ Showing confirmation modal:', confirmModalData.value)
 
     // Show confirmation modal
     showConfirmModal.value = true
@@ -260,6 +276,7 @@ const handlePurchase = async () => {
     if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
       foreversAmount.value = purchaseDetails.value.foreversAmount
     }
+    console.log('ℹ️ Showing success modal directly for payment method:', selectedPayment.value)
     showSuccessModal.value = true
   }
 }
