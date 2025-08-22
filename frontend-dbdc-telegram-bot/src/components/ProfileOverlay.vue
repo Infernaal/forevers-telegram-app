@@ -313,8 +313,8 @@
                   <span v-if="planInfo.isMaxLevel" class="text-green-600 font-bold">
                     🎉 You've reached max level
                   </span>
-                  <span v-else-if="planInfo.foreversToNext > 0">
-                    buy <span class="font-bold" :style="{ color: planInfo.currentPlan.color }">{{ planInfo.foreversToNext }}</span> more Forevers to upgrade
+                  <span v-else-if="planInfo.foreversUaeNeeded > 0">
+                    buy <span class="font-bold" :style="{ color: planInfo.currentPlan.color }">{{ planInfo.foreversUaeNeeded }}</span> more Forevers UAE to upgrade
                   </span>
                   <span v-else class="text-green-600 font-bold">
                     Ready to upgrade!
