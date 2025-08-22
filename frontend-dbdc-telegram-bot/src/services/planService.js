@@ -199,8 +199,10 @@ class PlanService {
     const depositsResponse = await DepositsService.getDepositsByType(depositTypes)
 
     let totalDeposits = 0
+    let depositsArray = []
     if (depositsResponse.status === 'success' && depositsResponse.data) {
-      totalDeposits = depositsResponse.data.total_usd_value
+      depositsArray = depositsResponse.data.deposits || []
+      totalDeposits = DepositsService.calculateTotalUsdValue(depositsArray)
     }
 
     // Convert deposits to equivalent forevers for plan calculation
@@ -225,6 +227,7 @@ class PlanService {
       nextPlan,
       totalForevers: equivalentForevers,
       totalDeposits,
+      depositsArray, // Detailed deposits array
       depositTypes: Array.isArray(depositTypes) ? depositTypes : [depositTypes],
       progress,
       foreversToNext, // USD amount needed
