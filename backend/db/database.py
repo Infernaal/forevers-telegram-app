@@ -7,7 +7,13 @@ from sqlalchemy.ext.asyncio import (
     AsyncSession,
 )
 from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy.exc import OperationalError, DisconnectionError
 from typing import AsyncGenerator
+import asyncio
+import logging
+from functools import wraps
+
+logger = logging.getLogger(__name__)
 
 # 🔐 Загрузка переменных окружения
 load_dotenv()
@@ -28,7 +34,7 @@ engine = create_async_engine(
     max_overflow=30,
     pool_timeout=30,
     pool_recycle=3600,  # Переподключаться каждый час
-    pool_pre_ping=True,  # Проверять соединение перед ис��ользованием
+    pool_pre_ping=True,  # Проверять соединение перед использован��ем
     connect_args={
         "connect_timeout": 60,
         "read_timeout": 60,
