@@ -89,19 +89,19 @@ async def get_user_deposits_list(user_id: int, db: AsyncSession) -> List[Dict]:
 async def get_user_deposits_by_type(user_id: int, db: AsyncSession) -> List[Dict]:
     """
     Get user deposits grouped by type with both total amount and USD value
-    
+
     Args:
         user_id: User ID to get deposits for
         db: Database session
-        
+
     Returns:
         List[Dict]: List of deposits by type with amounts and USD values
     """
-    # Get all available deposit types
-    available_types = ['UAE', 'KZ', 'DE', 'PL', 'UA']
-    
+    # Get all available deposit types dynamically from database
+    available_types = await get_available_deposit_types(db)
+
     deposits_by_type = []
-    
+
     for deposit_type in available_types:
         # Get total amount for this type
         amount_stmt = (
