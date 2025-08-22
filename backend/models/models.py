@@ -1,7 +1,8 @@
 from typing import List, Optional
+
 from sqlalchemy import CheckConstraint, DECIMAL, Date, DateTime, Enum, ForeignKeyConstraint, Index, Integer, SmallInteger, String, TIMESTAMP, Text, text
 from sqlalchemy.dialects.mysql import LONGTEXT, TINYINT
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 import datetime
 import decimal
 from db.database import Base
@@ -122,12 +123,18 @@ class Currency(Base):
 
 class Deposits(Base):
     __tablename__ = 'deposits'
+    __table_args__ = (
+        Index('idx_deposits_uid_method_status', 'uid', 'method', 'status'),
+    )
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     processed: Mapped[int] = mapped_column(TINYINT(1), server_default=text("'0'"))
     ip_address: Mapped[str] = mapped_column(String(45), server_default=text("''"))
     is_exchange: Mapped[int] = mapped_column(TINYINT(1), server_default=text("'0'"), comment='0 = real deposit, 1 = bonus exchange')
     consider_pct_nct: Mapped[str] = mapped_column(Enum('YES', 'NO'), server_default=text("'YES'"))
+    activated_forevers: Mapped[int] = mapped_column(TINYINT(1), server_default=text("'0'"))
+    activated_loyalty: Mapped[int] = mapped_column(TINYINT(1), server_default=text("'0'"))
+    forevers_processed: Mapped[int] = mapped_column(TINYINT(1), server_default=text("'0'"))
     uid: Mapped[Optional[int]] = mapped_column(Integer)
     txid: Mapped[Optional[str]] = mapped_column(String(255))
     method: Mapped[Optional[int]] = mapped_column(Integer)
@@ -145,10 +152,17 @@ class Deposits(Base):
     invoice_path: Mapped[Optional[str]] = mapped_column(String(255))
     vat_rate: Mapped[Optional[decimal.Decimal]] = mapped_column(DECIMAL(5, 2), server_default=text("'0.00'"))
     vat_amount: Mapped[Optional[decimal.Decimal]] = mapped_column(DECIMAL(10, 2), server_default=text("'0.00'"))
+    rate_nbu: Mapped[Optional[decimal.Decimal]] = mapped_column(DECIMAL(10, 2))
     bonus_eligible: Mapped[Optional[str]] = mapped_column(Enum('YES', 'NO'), server_default=text("'YES'"))
     type: Mapped[Optional[str]] = mapped_column(Enum('UAE', 'KZ', 'DE', 'PL', 'UA'), server_default=text("'UAE'"))
     paypal_order_id: Mapped[Optional[str]] = mapped_column(String(255))
     stripe_payment_intent_id: Mapped[Optional[str]] = mapped_column(String(255))
+    total_to_refund: Mapped[Optional[decimal.Decimal]] = mapped_column(DECIMAL(10, 2))
+    payment_data: Mapped[Optional[str]] = mapped_column(Text)
+
+    loyalty_activation_history: Mapped[List['LoyaltyActivationHistory']] = relationship('LoyaltyActivationHistory', back_populates='deposit')
+    notifications_log: Mapped[List['NotificationsLog']] = relationship('NotificationsLog', back_populates='deposit')
+    stats: Mapped[List['Stats']] = relationship('Stats', back_populates='deposit')
 
 
 class Discounts(Base):
@@ -223,8 +237,8 @@ class Gateways(Base):
     process_type: Mapped[Optional[int]] = mapped_column(Integer)
     process_time: Mapped[Optional[int]] = mapped_column(Integer)
 
-    gateway_mappings: Mapped[List["GatewayMappings"]] = relationship('GatewayMappings', foreign_keys='[GatewayMappings.deposit_gateway_id]', back_populates='deposit_gateway')
-    gateway_mappings_: Mapped[List["GatewayMappings"]] = relationship('GatewayMappings', foreign_keys='[GatewayMappings.withdrawal_gateway_id]', back_populates='withdrawal_gateway')
+    gateway_mappings: Mapped[List['GatewayMappings']] = relationship('GatewayMappings', foreign_keys='[GatewayMappings.deposit_gateway_id]', back_populates='deposit_gateway')
+    gateway_mappings_: Mapped[List['GatewayMappings']] = relationship('GatewayMappings', foreign_keys='[GatewayMappings.withdrawal_gateway_id]', back_populates='withdrawal_gateway')
 
 
 class GatewaysFields(Base):
@@ -338,8 +352,8 @@ class Settings(Base):
     __tablename__ = 'settings'
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    maintenance_mode: Mapped[int] = mapped_column(Integer, server_default=text("'0'"), comment='0 - т√ъы■ўхэ, 1 - тъы■ўхэ')
-    deposits_show_fee: Mapped[int] = mapped_column(Integer, server_default=text("'0'"), comment='0 - ёъЁ√Є№ ъюыюэъш Fee ш Net Amount, 1 - яюърчрЄ№')
+    maintenance_mode: Mapped[int] = mapped_column(Integer, server_default=text("'0'"), comment='0 - выключен, 1 - включен')
+    deposits_show_fee: Mapped[int] = mapped_column(Integer, server_default=text("'0'"), comment='0 - скрыть колонки Fee и Net Amount, 1 - показать')
     title: Mapped[Optional[str]] = mapped_column(String(255))
     description: Mapped[Optional[str]] = mapped_column(String(255))
     keywords: Mapped[Optional[str]] = mapped_column(String(255))
@@ -385,6 +399,11 @@ class Settings(Base):
     forevers_de_value: Mapped[Optional[decimal.Decimal]] = mapped_column(DECIMAL(10, 2), server_default=text("'10.00'"))
     forevers_pl_value: Mapped[Optional[decimal.Decimal]] = mapped_column(DECIMAL(10, 2), server_default=text("'1.25'"))
     forevers_ua_value: Mapped[Optional[decimal.Decimal]] = mapped_column(DECIMAL(10, 2), server_default=text("'0.75'"))
+    loyalty_available_type_uae_date: Mapped[Optional[int]] = mapped_column(Integer)
+    loyalty_available_type_de_date: Mapped[Optional[int]] = mapped_column(Integer)
+    loyalty_available_type_pl_date: Mapped[Optional[int]] = mapped_column(Integer)
+    loyalty_available_type_ua_date: Mapped[Optional[int]] = mapped_column(Integer)
+    loyalty_available_type_kz_date: Mapped[Optional[int]] = mapped_column(Integer)
 
 
 class Support(Base):
@@ -540,15 +559,19 @@ class Users(Base):
     rank_modal_shown: Mapped[Optional[int]] = mapped_column(Integer)
     partner_deal_ref_link: Mapped[Optional[int]] = mapped_column(TINYINT(1), server_default=text("'0'"))
     partner_deal_ref_link_date: Mapped[Optional[datetime.datetime]] = mapped_column(DateTime)
+    telegram_id: Mapped[Optional[str]] = mapped_column(String(255))
 
-    admin_activity: Mapped[List["AdminActivity"]] = relationship('AdminActivity', back_populates='admin')
-    bonus_logs: Mapped[List["BonusLogs"]] = relationship('BonusLogs', back_populates='users')
-    forevers: Mapped[List["Forevers"]] = relationship('Forevers', back_populates='user')
-    forevers_exchange_stats: Mapped[List["ForeversExchangeStats"]] = relationship('ForeversExchangeStats', back_populates='user')
-    forevers_logs: Mapped[List["ForeversLogs"]] = relationship('ForeversLogs', back_populates='user')
-    users_profile_logs: Mapped[List["UsersProfileLogs"]] = relationship('UsersProfileLogs', foreign_keys='[UsersProfileLogs.admin_id]', back_populates='admin')
-    users_profile_logs_: Mapped[List["UsersProfileLogs"]] = relationship('UsersProfileLogs', foreign_keys='[UsersProfileLogs.user_id]', back_populates='user')
-    telegram_id: Mapped[Optional[str]] = mapped_column(String(256))  # New Telegram user id column
+    admin_activity: Mapped[List['AdminActivity']] = relationship('AdminActivity', back_populates='admin')
+    bonus_logs: Mapped[List['BonusLogs']] = relationship('BonusLogs', back_populates='users')
+    customer_payment_profiles: Mapped[List['CustomerPaymentProfiles']] = relationship('CustomerPaymentProfiles', back_populates='users')
+    forevers: Mapped[List['Forevers']] = relationship('Forevers', back_populates='user')
+    forevers_exchange_stats: Mapped[List['ForeversExchangeStats']] = relationship('ForeversExchangeStats', back_populates='user')
+    forevers_logs: Mapped[List['ForeversLogs']] = relationship('ForeversLogs', back_populates='user')
+    loyalty_activation_history: Mapped[List['LoyaltyActivationHistory']] = relationship('LoyaltyActivationHistory', back_populates='users')
+    notifications_log: Mapped[List['NotificationsLog']] = relationship('NotificationsLog', back_populates='users')
+    stats: Mapped[List['Stats']] = relationship('Stats', back_populates='users')
+    users_profile_logs: Mapped[List['UsersProfileLogs']] = relationship('UsersProfileLogs', foreign_keys='[UsersProfileLogs.admin_id]', back_populates='admin')
+    users_profile_logs_: Mapped[List['UsersProfileLogs']] = relationship('UsersProfileLogs', foreign_keys='[UsersProfileLogs.user_id]', back_populates='user')
 
 
 class UsersDocuments(Base):
@@ -690,6 +713,24 @@ class BonusLogs(Base):
     users: Mapped["Users"] = relationship('Users', back_populates='bonus_logs')
 
 
+class CustomerPaymentProfiles(Base):
+    __tablename__ = 'customer_payment_profiles'
+    __table_args__ = (
+        ForeignKeyConstraint(['uid'], ['users.id'], ondelete='CASCADE', name='fk_uid'),
+        Index('idx_uid', 'uid')
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    uid: Mapped[int] = mapped_column(Integer)
+    customer_profile_id: Mapped[str] = mapped_column(String(50))
+    payment_profile_id: Mapped[str] = mapped_column(String(50))
+    created_at: Mapped[int] = mapped_column(Integer)
+    encrypted_card_data: Mapped[Optional[str]] = mapped_column(Text)
+    is_default: Mapped[Optional[int]] = mapped_column(TINYINT(1), server_default=text("'0'"))
+
+    users: Mapped["Users"] = relationship('Users', back_populates='customer_payment_profiles')
+
+
 class Forevers(Base):
     __tablename__ = 'forevers'
     __table_args__ = (
@@ -769,6 +810,64 @@ class GatewayMappings(Base):
 
     deposit_gateway: Mapped["Gateways"] = relationship('Gateways', foreign_keys=[deposit_gateway_id], back_populates='gateway_mappings')
     withdrawal_gateway: Mapped["Gateways"] = relationship('Gateways', foreign_keys=[withdrawal_gateway_id], back_populates='gateway_mappings_')
+
+
+class LoyaltyActivationHistory(Base):
+    __tablename__ = 'loyalty_activation_history'
+    __table_args__ = (
+        ForeignKeyConstraint(['deposit_id'], ['deposits.id'], name='lah_ibfk_2'),
+        ForeignKeyConstraint(['uid'], ['users.id'], name='lah_ibfk_1'),
+        Index('idx_uid_deposit', 'uid', 'deposit_id'),
+        Index('lah_ibfk_2', 'deposit_id')
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    uid: Mapped[int] = mapped_column(Integer)
+    deposit_id: Mapped[int] = mapped_column(Integer)
+    loyalty_activation_date: Mapped[int] = mapped_column(Integer, comment='UNIX TIMESTAMP for Loyalty activation')
+    created_at: Mapped[int] = mapped_column(Integer, comment='UNIX TIMESTAMP when record was created')
+
+    deposit: Mapped["Deposits"] = relationship('Deposits', back_populates='loyalty_activation_history')
+    users: Mapped["Users"] = relationship('Users', back_populates='loyalty_activation_history')
+
+
+class NotificationsLog(Base):
+    __tablename__ = 'notifications_log'
+    __table_args__ = (
+        ForeignKeyConstraint(['deposit_id'], ['deposits.id'], ondelete='SET NULL', name='nl_ibfk_2'),
+        ForeignKeyConstraint(['uid'], ['users.id'], name='nl_ibfk_1'),
+        Index('idx_uid_type', 'uid', 'notification_type'),
+        Index('nl_ibfk_2', 'deposit_id')
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    uid: Mapped[int] = mapped_column(Integer)
+    notification_type: Mapped[str] = mapped_column(String(50), comment='Type of notification, e.g., expired_loyalty')
+    sent_at: Mapped[int] = mapped_column(Integer, comment='UNIX TIMESTAMP when notification was sent')
+    deposit_id: Mapped[Optional[int]] = mapped_column(Integer, comment='Optional reference to deposit_id')
+
+    deposit: Mapped[Optional["Deposits"]] = relationship('Deposits', back_populates='notifications_log')
+    users: Mapped["Users"] = relationship('Users', back_populates='notifications_log')
+
+
+class Stats(Base):
+    __tablename__ = 'stats'
+    __table_args__ = (
+        ForeignKeyConstraint(['deposit_id'], ['deposits.id'], name='stats_ibfk_2'),
+        ForeignKeyConstraint(['uid'], ['users.id'], name='stats_ibfk_1'),
+        Index('deposit_id_unique', 'deposit_id', unique=True),
+        Index('uid', 'uid')
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    uid: Mapped[int] = mapped_column(Integer)
+    deposit_id: Mapped[int] = mapped_column(Integer)
+    created_at: Mapped[int] = mapped_column(Integer, comment='UNIX TIMESTAMP when record was created')
+    forevers_activation_date: Mapped[Optional[int]] = mapped_column(Integer, comment='UNIX TIMESTAMP for Forevers activation')
+    forevers_reactivate_date: Mapped[Optional[int]] = mapped_column(Integer)
+
+    deposit: Mapped["Deposits"] = relationship('Deposits', back_populates='stats')
+    users: Mapped["Users"] = relationship('Users', back_populates='stats')
 
 
 class UsersProfileLogs(Base):
