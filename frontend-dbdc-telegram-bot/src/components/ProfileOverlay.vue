@@ -280,7 +280,7 @@
               <div class="flex items-center justify-between relative z-[1] w-full gap-3 sm:gap-4">
                 <div class="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
                   <div class="flex-shrink-0 w-7 sm:w-8 md:w-9 lg:w-10 xl:w-11 h-7 sm:h-8 md:h-9 lg:h-10 xl:h-11">
-                    <img src="/plan-star.svg" alt="Start" class="w-full h-full object-contain" />
+                    <img src="/plan-start.svg" alt="Start" class="w-full h-full object-contain" />
                   </div>
                   <div class="text-dbd-dark text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold truncate">Start</div>
                 </div>
