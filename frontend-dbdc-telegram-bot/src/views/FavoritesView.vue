@@ -481,6 +481,11 @@ const handleRentOut = () => {
 }
 
 const openEnterAmountModal = (balance) => {
+  // Prevent modal opening for items with 0 available amount
+  if (balance.availableAmount === 0) {
+    return
+  }
+
   // Передаем в selectedBalance цену для модального окна: discountPrice если есть скидка, иначе usdRate
   const modalPrice = balance.discount && balance.discount > 0 ? balance.discountPrice : balance.usdRate
   selectedBalance.value = { ...balance, modalPrice }
