@@ -4,6 +4,30 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from models.models import Deposits
 from typing import List, Dict
 
+async def get_available_deposit_types(db: AsyncSession) -> List[str]:
+    """
+    Get all available deposit types from database
+
+    Args:
+        db: Database session
+
+    Returns:
+        List[str]: List of unique deposit types
+    """
+    stmt = (
+        select(distinct(Deposits.type))
+        .where(
+            Deposits.type.isnot(None),
+            Deposits.status == 1,
+            Deposits.consider_pct_nct == 'YES'
+        )
+        .order_by(Deposits.type)
+    )
+
+    result = await db.execute(stmt)
+    types = [row[0] for row in result.all() if row[0]]
+    return types
+
 async def get_user_deposits_list(user_id: int, db: AsyncSession) -> List[Dict]:
     """
     Get detailed list of user deposits with all fields
