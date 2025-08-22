@@ -140,9 +140,20 @@ class ForeversPurchaseService:
             # Generate transaction IDs
             txid = f'EXCH{random_hash(12)}'
             reference_number = f'EXCH{random_hash(8).upper()}'
-            
+
             current_time = int(time.time())
             current_datetime = datetime.now()
+
+            # Final security check: re-verify calculation before database operations
+            final_verification_usd = round(Decimal(forevers_amount) * final_rate, 2)
+            if abs(usd_amount - final_verification_usd) > Decimal('0.01'):
+                logger.critical(f"CRITICAL SECURITY BREACH: Final verification failed for user {user_id}. "
+                               f"Transaction blocked. Expected: {final_verification_usd}, Got: {usd_amount}")
+                return False, {}, "Transaction blocked: Final security verification failed"
+
+            # Log transaction initiation
+            logger.info(f"Initiating purchase transaction: user_id={user_id}, txid={txid}, "
+                       f"amount={forevers_amount} {forever_type}, usd=${usd_amount}, wallet={wallet_type}")
             
             # Update wallet balance
             new_wallet_amount = wallet_data['amount'] - usd_amount
