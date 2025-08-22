@@ -1,5 +1,5 @@
 import { ForeversPurchaseService } from './foreversPurchaseService.js'
-import UaeDepositsService from './uaeDepositsService.js'
+import DepositsService from './depositsService.js'
 
 // Plan tier definitions with USD thresholds based on UAE deposits
 export const PLAN_TIERS = [
@@ -147,13 +147,8 @@ class PlanService {
    * Get complete plan information for user based on UAE deposits
    */
   async getUserPlanInfo(userBalance = null) {
-    // Get UAE deposits total instead of forevers balance
-    const uaeDepositsResponse = await UaeDepositsService.getUserUaeDeposits()
-
-    let totalUaeDeposits = 0
-    if (uaeDepositsResponse.status === 'success' && uaeDepositsResponse.data) {
-      totalUaeDeposits = parseFloat(uaeDepositsResponse.data.total_uae_deposits || 0)
-    }
+    // Get UAE deposits total using new deposits service
+    const totalUaeDeposits = await DepositsService.getUaeTotalForPlan()
 
     // Convert UAE deposits to equivalent forevers for plan calculation
     // Assuming 1 forevers = 1 USD (adjust if different)

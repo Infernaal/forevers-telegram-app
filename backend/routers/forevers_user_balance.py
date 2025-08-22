@@ -4,9 +4,9 @@ from sqlalchemy import select, func
 from db.database import get_db
 from models.models import Forevers, UsersWallets
 from schemas.forevers_user_balance import ForeversBalance, ForeversBalanceData, WalletItem
-from schemas.uae_deposits import UAEDepositsResponse, UAEDepositsData
+from schemas.deposits import DepositsResponse, DepositsData
 from utils.calculate_available_forevers import calculate_available_forevers
-from utils.get_uae_deposits_total import get_uae_deposits_total
+from utils.get_user_deposits import get_user_deposits
 from dependencies.current_user import get_current_user_id
 
 router = APIRouter(prefix="/forevers", tags=["Forevers User Stats"])
@@ -81,25 +81,26 @@ async def get_my_forevers_balance(current_user_id: int = Depends(get_current_use
         )
 
 
-@router.get("/uae-deposits", response_model=UAEDepositsResponse)
-async def get_uae_deposits_total_endpoint(current_user_id: int = Depends(get_current_user_id), db: AsyncSession = Depends(get_db)):
+@router.get("/deposits", response_model=DepositsResponse)
+async def get_user_deposits_endpoint(current_user_id: int = Depends(get_current_user_id), db: AsyncSession = Depends(get_db)):
     """
-    Get total UAE deposits amount for plan calculation.
-    Uses formula: rate_at_deposit * amount for UAE deposits only.
+    Get all user deposits with detailed information.
+    Returns array with txid, processed_on, forevers, price, type, paid, access, participation.
     """
     try:
-        total_uae_deposits = await get_uae_deposits_total(current_user_id, db)
+        deposits = await get_user_deposits(current_user_id, db)
 
-        return UAEDepositsResponse(
+        return DepositsResponse(
             status="success",
-            data=UAEDepositsData(
+            data=DepositsData(
                 user_id=current_user_id,
-                total_uae_deposits=total_uae_deposits
+                deposits=deposits,
+                total_count=len(deposits)
             ),
-            message="UAE deposits total retrieved successfully"
+            message="User deposits retrieved successfully"
         )
     except Exception as e:
-        return UAEDepositsResponse(
+        return DepositsResponse(
             status="failed",
-            message="An error occurred while loading UAE deposits data. Please try again later"
+            message="An error occurred while loading deposits data. Please try again later"
         )
