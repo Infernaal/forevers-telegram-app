@@ -72,7 +72,7 @@
           </div>
           <div class="text-center">
             <h3 class="text-lg font-semibold text-dbd-dark">USDT</h3>
-            <p class="text-dbd-light-gray text-base">Crypto Wallet</p>
+            <p class="text-dbd-light-gray text-base">Crypto</p>
           </div>
         </div>
       </div>
