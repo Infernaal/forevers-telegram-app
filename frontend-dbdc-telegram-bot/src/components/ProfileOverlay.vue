@@ -724,7 +724,6 @@ const toggleLanguageDropdown = () => {
 const selectLanguage = (language) => {
   selectedLanguage.value = language
   showLanguageDropdown.value = false
-  console.log('Language selected:', language)
 }
 
 // Get rank icon from public folder
