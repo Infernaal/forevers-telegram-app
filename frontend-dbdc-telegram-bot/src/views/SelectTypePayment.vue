@@ -164,6 +164,7 @@ const selectedPayment = ref('bonus') // default
 const termsAccepted = ref(false)
 const totalAmount = ref('0') // USD total (locale string)
 const foreversAmount = ref(0) // numeric forevers amount
+const isProcessingPurchase = ref(false) // loading state for purchase
 
 // Robust locale-aware parser: handles forms like "26,106.00", "187,5", "1 234,56"
 function parseLocaleAmount(val) {
