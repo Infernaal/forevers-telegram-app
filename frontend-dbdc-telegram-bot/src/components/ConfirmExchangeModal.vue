@@ -154,11 +154,21 @@ const handleKeyDown = (event) => {
 }
 
 // Watch for visibility changes
-watch(() => props.isVisible, (newVal) => {
+watch(() => props.isVisible, (newVal, oldVal) => {
+  console.log('🔄 ConfirmExchangeModal visibility changed:', { from: oldVal, to: newVal, props: props })
+
   if (newVal) {
+    console.log('📱 Modal opened with data:', {
+      amount: props.amount,
+      price: props.price,
+      walletType: props.walletType,
+      foreversType: props.foreversType,
+      isProcessing: props.isProcessing
+    })
     document.addEventListener('keydown', handleKeyDown)
     document.body.style.overflow = 'hidden'
   } else {
+    console.log('❌ Modal closed')
     document.removeEventListener('keydown', handleKeyDown)
     document.body.style.overflow = ''
   }
