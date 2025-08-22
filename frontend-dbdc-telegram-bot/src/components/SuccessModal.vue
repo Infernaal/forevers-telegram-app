@@ -180,11 +180,6 @@ onUnmounted(() => {
 <style scoped>
 /* Modal responsive sizing for Telegram WebApp */
 @media (max-width: 375px) {
-  .fixed.inset-0 {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
   .max-w-\[347px\] {
     max-width: calc(100vw - 32px) !important;
     min-width: 280px;
@@ -192,36 +187,9 @@ onUnmounted(() => {
 }
 
 @media (max-width: 320px) {
-  .fixed.inset-0 {
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-
   .max-w-\[347px\] {
     max-width: calc(100vw - 24px) !important;
     min-width: 260px;
-  }
-}
-
-@media (min-width: 376px) and (max-width: 768px) {
-  .fixed.inset-0 {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  .max-w-\[347px\] {
-    max-width: 347px !important;
-  }
-}
-
-@media (min-width: 769px) {
-  .fixed.inset-0 {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-
-  .max-w-\[347px\] {
-    max-width: 347px !important;
   }
 }
 
