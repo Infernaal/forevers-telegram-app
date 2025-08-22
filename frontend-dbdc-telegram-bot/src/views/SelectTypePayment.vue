@@ -228,30 +228,11 @@ const handleBack = () => {
 }
 
 const handlePurchase = async () => {
-  console.log('🛒 Purchase clicked - Debug info:', {
-    selectedPayment: selectedPayment.value,
-    termsAccepted: termsAccepted.value,
-    foreversAmount: foreversAmount.value,
-    numericTotal: numericTotal.value,
-    purchaseDetails: purchaseDetails.value
-  })
-
   if (!selectedPayment.value || !termsAccepted.value) {
-    console.log('❌ Purchase blocked:', {
-      hasSelectedPayment: !!selectedPayment.value,
-      hasTermsAccepted: termsAccepted.value
-    })
     return
   }
 
   // Only show confirmation modal for bonus and loyalty payments
-  console.log('💳 Payment type check:', {
-    selectedPayment: selectedPayment.value,
-    isBonus: selectedPayment.value === 'bonus',
-    isLoyalty: selectedPayment.value === 'loyalty',
-    willShowConfirmModal: selectedPayment.value === 'bonus' || selectedPayment.value === 'loyalty'
-  })
-
   if (selectedPayment.value === 'bonus' || selectedPayment.value === 'loyalty') {
     // Prepare confirmation modal data
     const totalForevers = foreversAmount.value || 0
@@ -264,19 +245,11 @@ const handlePurchase = async () => {
       foreversType: firstCountryCode
     }
 
-    console.log('✅ Showing confirmation modal:', confirmModalData.value)
-
     // Show confirmation modal
     showConfirmModal.value = true
   } else {
     // For other payment methods (like USDT), show success modal directly
     // This preserves existing behavior for non-wallet payments
-    console.log('⚠️ WARNING: Showing success modal directly without API call for payment method:', {
-      selectedPayment: selectedPayment.value,
-      foreversAmount: foreversAmount.value,
-      purchaseDetails: purchaseDetails.value
-    })
-
     if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
       foreversAmount.value = purchaseDetails.value.foreversAmount
     }
@@ -285,7 +258,6 @@ const handlePurchase = async () => {
     const paymentMethodName = getPaymentMethodDisplayName(selectedPayment.value)
     successMessage.value = `Forevers purchased successfully using ${paymentMethodName} wallet!`
 
-    console.log('ℹ️ Showing success modal directly for payment method:', selectedPayment.value)
     showSuccessModal.value = true
   }
 }
@@ -318,20 +290,11 @@ const executeActualPurchase = async () => {
       // Show success modal
       showSuccessModal.value = true
 
-      console.log('Purchase completed successfully:', result)
     } else {
       // Handle errors
       const errorMessage = result.errors.length > 0
         ? result.errors.map(e => e.error).join(', ')
         : 'Purchase failed. Please try again.'
-
-      console.error('Purchase failed:', {
-        errors: result.errors,
-        totalProcessed: result.totalProcessed,
-        totalFailed: result.totalFailed,
-        selectedPayment: selectedPayment.value,
-        purchaseDetails: purchaseDetails.value
-      })
 
       // Close confirmation modal
       showConfirmModal.value = false
@@ -342,15 +305,6 @@ const executeActualPurchase = async () => {
       })
     }
   } catch (error) {
-    console.error('Purchase error:', {
-      error: error.message,
-      stack: error.stack,
-      selectedPayment: selectedPayment.value,
-      purchaseDetails: purchaseDetails.value,
-      foreversAmount: foreversAmount.value,
-      numericTotal: numericTotal.value
-    })
-
     // Close confirmation modal
     showConfirmModal.value = false
 
@@ -402,7 +356,7 @@ async function fetchWalletData() {
     loyaltyBalance.value = loyalty ? parseFloat(loyalty.amount) : 0
     const bonus = result?.wallets?.find(w => w.type === 'bonus')
     bonusBalance.value = bonus ? parseFloat(bonus.amount) : 0
-  } catch (e) { console.error('wallet fetch failed', e); showApiError('forevers_user_balance', { error: e }) }
+  } catch (e) { showApiError('forevers_user_balance', { error: e }) }
 }
 
 // Computed for SuccessModal display
@@ -441,32 +395,18 @@ const uniqueCountries = computed(() => {
 })
 
 // Add watchers for debugging
-watch(showConfirmModal, (newVal, oldVal) => {
-  console.log('🔄 ConfirmModal visibility changed:', { from: oldVal, to: newVal })
-})
 
-watch(selectedPayment, (newVal, oldVal) => {
-  console.log('💳 Payment method changed:', { from: oldVal, to: newVal })
-})
 
-watch(termsAccepted, (newVal, oldVal) => {
-  console.log('📋 Terms acceptance changed:', { from: oldVal, to: newVal })
-})
 
 onMounted(() => {
-  console.log('🚀 SelectTypePayment mounted')
-
   // Retrieve purchase details from sessionStorage
   try {
     const savedPurchaseDetails = sessionStorage.getItem('purchaseDetails')
     if (savedPurchaseDetails) {
       purchaseDetails.value = JSON.parse(savedPurchaseDetails)
-      console.log('✅ Purchase details loaded from sessionStorage:', purchaseDetails.value)
-    } else {
-      console.log('⚠️ No purchase details found in sessionStorage')
     }
   } catch (error) {
-    console.error('❌ Error parsing purchase details from sessionStorage:', error)
+    // Silently handle error
   }
 
   // Parse USD total (for potential future logic)
@@ -483,26 +423,13 @@ onMounted(() => {
   }
 
   // Log detailed Forevers information if available
-  if (purchaseDetails.value?.foreversDetails) {
-    console.log('Forevers Details:', purchaseDetails.value.foreversDetails)
-    console.log('Purchase Summary:', purchaseDetails.value.purchaseSummary)
-  }
 
   // Log query parameters for Forevers types and prices
   if (route.query.foreversTypes) {
     const types = route.query.foreversTypes.split(',')
     const prices = route.query.pricesPerType ? route.query.pricesPerType.split(',') : []
-    console.log('Forevers types:', types)
-    console.log('Prices per type:', prices)
   }
 
-  console.log('�� Initial state:', {
-    selectedPayment: selectedPayment.value,
-    termsAccepted: termsAccepted.value,
-    foreversAmount: foreversAmount.value,
-    totalAmount: totalAmount.value,
-    showConfirmModal: showConfirmModal.value
-  })
 
   fetchWalletData()
 })
