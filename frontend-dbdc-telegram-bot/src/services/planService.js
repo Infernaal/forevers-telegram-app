@@ -147,12 +147,13 @@ class PlanService {
    * Get complete plan information for user based on UAE deposits
    */
   async getUserPlanInfo(userBalance = null) {
-    // Use new universal deposits service to get UAE deposits
-    const uaeDepositsResponse = await DepositsService.getUaeDeposits()
+    // Get UAE deposits using new detailed deposits service
+    const uaeDepositsResponse = await DepositsService.getDepositsByType('UAE')
 
     let totalUaeDeposits = 0
     if (uaeDepositsResponse.status === 'success' && uaeDepositsResponse.data) {
-      totalUaeDeposits = parseFloat(uaeDepositsResponse.data.total_uae_deposits || 0)
+      // Sum up USD value from UAE deposits array
+      totalUaeDeposits = DepositsService.calculateTotalUsdValue(uaeDepositsResponse.data.deposits)
     }
 
     // Convert UAE deposits to equivalent forevers for plan calculation
@@ -179,6 +180,7 @@ class PlanService {
       nextPlan,
       totalForevers: equivalentForevers,
       totalUaeDeposits,
+      uaeDepositsArray: uaeDepositsResponse.data?.deposits || [], // Detailed array for ProfileOverlay
       progress,
       foreversToNext, // USD amount needed
       foreversUaeNeeded, // Number of UAE forevers to buy
