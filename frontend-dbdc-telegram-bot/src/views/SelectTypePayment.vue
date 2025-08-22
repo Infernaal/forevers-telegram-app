@@ -310,14 +310,21 @@ const executeActualPurchase = async () => {
       })
     }
   } catch (error) {
-    console.error('Purchase error:', error)
+    console.error('Purchase error:', {
+      error: error.message,
+      stack: error.stack,
+      selectedPayment: selectedPayment.value,
+      purchaseDetails: purchaseDetails.value,
+      foreversAmount: foreversAmount.value,
+      numericTotal: numericTotal.value
+    })
 
     // Close confirmation modal
     showConfirmModal.value = false
 
     showApiError('forevers_purchase', {
       status: 500,
-      message: 'An unexpected error occurred during purchase. Please try again.'
+      message: error.message || 'An unexpected error occurred during purchase. Please try again.'
     })
   } finally {
     isProcessingPurchase.value = false
