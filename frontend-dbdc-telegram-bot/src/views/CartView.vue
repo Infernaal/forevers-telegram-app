@@ -154,12 +154,30 @@ const handlePurchase = () => {
   // Handle the purchase logic
   console.log('Purchase initiated, total amount:', cartTotal.value)
 
+  // Create detailed forevers info for each item
+  const foreversDetails = cartItems.value.map(item => ({
+    code: item.code,
+    country: item.country,
+    amount: item.foreversAmount,
+    usdRate: item.usdRate,
+    totalCost: item.foreversAmount * item.usdRate,
+    displayName: `${item.code} Forevers`,
+    pricePerUnit: `$${item.usdRate.toFixed(2)}`
+  }))
+
   // Store purchase details for the payment selection page
   const purchaseDetails = {
     paymentMethod: 'cart',
     amount: cartTotal.value,
     foreversAmount: totalForeversAmount.value,
-    cartItems: [...cartItems.value]
+    cartItems: [...cartItems.value],
+    foreversDetails: foreversDetails,
+    purchaseSummary: {
+      totalItems: cartItems.value.length,
+      totalForevers: totalForeversAmount.value,
+      totalUSD: cartTotal.value,
+      averagePrice: cartTotal.value / totalForeversAmount.value
+    }
   }
 
   // Navigate to payment selection page with purchase details
@@ -171,7 +189,13 @@ const handlePurchase = () => {
       totalAmount: localeString
     },
   // Provide both USD total (for payment) and raw forevers amount explicitly via query
-  query: { total: cartTotal.value, totalRaw: localeString, foreversAmount: totalForeversAmount.value }
+  query: {
+    total: cartTotal.value,
+    totalRaw: localeString,
+    foreversAmount: totalForeversAmount.value,
+    foreversTypes: cartItems.value.map(item => item.code).join(','),
+    pricesPerType: cartItems.value.map(item => `${item.code}:${item.usdRate}`).join(',')
+  }
   })
 }
 

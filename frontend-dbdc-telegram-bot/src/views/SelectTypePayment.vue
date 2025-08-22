@@ -3,6 +3,30 @@
     <!-- Content Container -->
     <div class="flex-1 bg-gray-100 rounded-t-2xl p-4 pt-8 pb-40">
 
+      <!-- Purchase Summary -->
+      <div v-if="purchaseDetails?.foreversDetails" class="bg-white rounded-xl p-4 mb-6 border border-gray-200">
+        <h3 class="text-lg font-semibold text-dbd-dark mb-3">Purchase Details</h3>
+        <div class="space-y-2">
+          <div v-for="detail in purchaseDetails.foreversDetails" :key="detail.code"
+               class="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
+            <div class="flex items-center gap-2">
+              <CountryFlag :country="detail.code" class="w-5 h-5" />
+              <span class="font-medium text-dbd-dark">{{ detail.displayName }}</span>
+              <span class="text-dbd-light-gray text-sm">({{ detail.amount.toLocaleString() }})</span>
+            </div>
+            <div class="text-right">
+              <div class="text-dbd-dark font-semibold">${{ detail.totalCost.toLocaleString() }}</div>
+              <div class="text-dbd-light-gray text-sm">{{ detail.pricePerUnit }} each</div>
+            </div>
+          </div>
+          <!-- Total -->
+          <div class="flex justify-between items-center pt-2 border-t border-gray-200 font-semibold">
+            <span class="text-dbd-dark">Total: {{ foreversAmountDisplay }} Forevers</span>
+            <span class="text-dbd-primary">${{ numericTotal.toLocaleString() }}</span>
+          </div>
+        </div>
+      </div>
+
       <!-- Payment Methods Grid -->
       <div class="grid grid-cols-2 gap-3 mb-8">
         <!-- Loyalty Program -->
@@ -94,7 +118,7 @@
     <div class="fixed left-0 right-0 z-[9999]" style="bottom: 89px;">
       <CartBottomComponent
         :total-amount="numericTotal"
-        :disabled="!selectedPayment || !termsAccepted"
+        :disabled="!selectedPayment || !termsAccepted || isProcessingPurchase"
         @back="handleBack"
         @purchase="handlePurchase"
       />
@@ -111,7 +135,7 @@
     <SuccessModal
       :is-visible="showSuccessModal"
       :amount="foreversAmountDisplay"
-      :message="'Payment completed successfully'"
+      :message="successMessage"
       @close="closeSuccessModal"
       @confirm="closeSuccessModal"
     />
@@ -124,11 +148,13 @@ import { useApiErrorNotifier } from '../composables/useApiErrorNotifier.js'
 import { useRouter, useRoute } from 'vue-router'
 import BottomNavigation from '../components/BottomNavigation.vue'
 import CartBottomComponent from '../components/CartBottomComponent.vue'
+import CountryFlag from '../components/CountryFlag.vue'
 import TermsCheckbox from '../components/TermsCheckbox.vue'
 import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
 import SuccessModal from '../components/SuccessModal.vue'
 import { useCart } from '../composables/useCart.js'
 import { formatUSDPrefix } from '../utils/formatNumber.js'
+import { ForeversPurchaseService } from '../services/foreversPurchaseService.js'
 
 const router = useRouter()
 const route = useRoute()
@@ -138,6 +164,7 @@ const selectedPayment = ref('bonus') // default
 const termsAccepted = ref(false)
 const totalAmount = ref('0') // USD total (locale string)
 const foreversAmount = ref(0) // numeric forevers amount
+const isProcessingPurchase = ref(false) // loading state for purchase
 
 // Robust locale-aware parser: handles forms like "26,106.00", "187,5", "1 234,56"
 function parseLocaleAmount(val) {
@@ -168,9 +195,13 @@ const showTermsModal = ref(false)
 const showSuccessModal = ref(false)
 const loyaltyBalance = ref(0)
 const bonusBalance = ref(0)
+const successMessage = ref('Payment completed successfully')
 
 // cart composable (for clearing cart after success)
 const { clearCart } = useCart()
+
+// API error notifier
+const { showError: showApiError } = useApiErrorNotifier()
 
 // Computed properties
 const isAnyModalOpen = computed(() => {
@@ -184,13 +215,64 @@ const handleBack = () => {
   router.go(-1)
 }
 
-const handlePurchase = () => {
+const handlePurchase = async () => {
   if (!selectedPayment.value || !termsAccepted.value) return
-  // Ensure forevers amount is available before showing success
-  if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
-    foreversAmount.value = purchaseDetails.value.foreversAmount
+
+  // Only process bonus and loyalty payments through API
+  if (selectedPayment.value === 'bonus' || selectedPayment.value === 'loyalty') {
+    isProcessingPurchase.value = true
+
+    try {
+      const result = await ForeversPurchaseService.processMultiplePurchases(
+        purchaseDetails.value,
+        selectedPayment.value
+      )
+
+      if (result.success) {
+        // Ensure forevers amount is available before showing success
+        if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
+          foreversAmount.value = purchaseDetails.value.foreversAmount
+        }
+
+        // Update wallet data after successful purchase
+        await fetchWalletData()
+
+        // Set success message
+        const paymentMethodName = selectedPayment.value === 'loyalty' ? 'Loyalty Program' : 'Bonus Reward'
+        successMessage.value = `Forevers purchased successfully using ${paymentMethodName} wallet!`
+
+        // Show success modal
+        showSuccessModal.value = true
+
+        console.log('Purchase completed successfully:', result)
+      } else {
+        // Handle errors
+        const errorMessage = result.errors.length > 0
+          ? result.errors.map(e => e.error).join(', ')
+          : 'Purchase failed. Please try again.'
+
+        showApiError('forevers_purchase', {
+          status: 400,
+          message: errorMessage
+        })
+      }
+    } catch (error) {
+      console.error('Purchase error:', error)
+      showApiError('forevers_purchase', {
+        status: 500,
+        message: 'An unexpected error occurred during purchase. Please try again.'
+      })
+    } finally {
+      isProcessingPurchase.value = false
+    }
+  } else {
+    // For other payment methods (like USDT), show success modal directly
+    // This preserves existing behavior for non-wallet payments
+    if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
+      foreversAmount.value = purchaseDetails.value.foreversAmount
+    }
+    showSuccessModal.value = true
   }
-  showSuccessModal.value = true
 }
 
 const openTerms = () => {
@@ -213,7 +295,6 @@ const loyaltyFormatted = computed(() => formatUSDPrefix(loyaltyBalance.value))
 const bonusFormatted = computed(() => formatUSDPrefix(bonusBalance.value))
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dbdc-mini.dubadu.com/api/v1/dbdc'
-const { showError: showApiError } = useApiErrorNotifier()
 
 async function fetchWalletData() {
   try {
@@ -235,10 +316,41 @@ const foreversAmountDisplay = computed(() => {
   return foreversAmount.value ? foreversAmount.value.toLocaleString() : '0'
 })
 
+// Computed properties for Forevers details
+const foreversTypes = computed(() => {
+  return purchaseDetails.value?.foreversDetails?.map(detail => detail.code) || []
+})
+
+const totalForeversTypes = computed(() => {
+  return foreversTypes.value.length
+})
+
+const averagePricePerForevers = computed(() => {
+  return purchaseDetails.value?.purchaseSummary?.averagePrice?.toFixed(2) || '0.00'
+})
+
+// Get unique country codes and their details
+const uniqueCountries = computed(() => {
+  if (!purchaseDetails.value?.foreversDetails) return []
+  return purchaseDetails.value.foreversDetails.reduce((acc, detail) => {
+    if (!acc.find(item => item.code === detail.code)) {
+      acc.push({
+        code: detail.code,
+        country: detail.country,
+        totalAmount: detail.amount,
+        pricePerUnit: detail.usdRate,
+        totalCost: detail.totalCost
+      })
+    }
+    return acc
+  }, [])
+})
+
 onMounted(() => {
   // Attempt to retrieve purchase details (note: params may not persist without dynamic segments)
   if (route.params.purchaseDetails) {
     purchaseDetails.value = route.params.purchaseDetails
+    console.log('Purchase details received:', purchaseDetails.value)
   }
 
   // Parse USD total (for potential future logic)
@@ -252,6 +364,20 @@ onMounted(() => {
   const incomingForevers = route.query.foreversAmount || purchaseDetails.value?.foreversAmount
   if (incomingForevers !== undefined) {
     foreversAmount.value = parseLocaleAmount(incomingForevers)
+  }
+
+  // Log detailed Forevers information if available
+  if (purchaseDetails.value?.foreversDetails) {
+    console.log('Forevers Details:', purchaseDetails.value.foreversDetails)
+    console.log('Purchase Summary:', purchaseDetails.value.purchaseSummary)
+  }
+
+  // Log query parameters for Forevers types and prices
+  if (route.query.foreversTypes) {
+    const types = route.query.foreversTypes.split(',')
+    const prices = route.query.pricesPerType ? route.query.pricesPerType.split(',') : []
+    console.log('Forevers types:', types)
+    console.log('Prices per type:', prices)
   }
 
   fetchWalletData()
