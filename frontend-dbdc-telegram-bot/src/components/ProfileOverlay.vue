@@ -313,8 +313,8 @@
                   <span v-if="planInfo.isMaxLevel" class="text-green-600 font-bold">
                     🎉 You've reached max level
                   </span>
-                  <span v-else-if="planInfo.foreversToNext > 0">
-                    buy <span class="font-bold" :style="{ color: planInfo.currentPlan.color }">{{ planInfo.foreversToNext }}</span> more Forevers to upgrade
+                  <span v-else-if="planInfo.foreversUaeNeeded > 0">
+                    buy <span class="font-bold" :style="{ color: planInfo.currentPlan.color }">{{ planInfo.foreversUaeNeeded }}</span> more Forevers UAE to upgrade
                   </span>
                   <span v-else class="text-green-600 font-bold">
                     Ready to upgrade!
@@ -562,6 +562,7 @@ const planInfo = ref({
   totalForevers: 0,
   progress: 0,
   foreversToNext: 0,
+  foreversUaeNeeded: 0,
   upgradeInfo: null,
   isMaxLevel: false
 })
@@ -659,8 +660,6 @@ onUnmounted(() => {
 
 // Methods
 const handleMenuClick = (menuItem) => {
-  console.log(`Menu clicked: ${menuItem}`)
-
   if (menuItem === 'calculator') {
     emit('close')
     router.push('/calculator')
@@ -669,7 +668,6 @@ const handleMenuClick = (menuItem) => {
 }
 
 const handleUpgrade = () => {
-  console.log('Upgrade clicked', planInfo.value)
   // Navigate to calculator for purchasing forevers
   emit('close')
   router.push('/calculator')
@@ -684,7 +682,7 @@ const copyUserID = async () => {
    await navigator.clipboard.writeText(String(userInfo.value.id))
       copySuccess = true
     } catch (clipboardErr) {
-      console.log('Clipboard API failed, trying fallback method')
+      // Fallback to document.execCommand if clipboard API fails
     }
   }
 
@@ -705,7 +703,7 @@ const copyUserID = async () => {
       document.body.removeChild(textArea)
 
       if (!successful) {
-        console.log('Fallback copy method also failed')
+        // Fallback copy failed
       }
     } catch (fallbackErr) {
       console.error('Fallback copy failed:', fallbackErr)
@@ -726,7 +724,6 @@ const toggleLanguageDropdown = () => {
 const selectLanguage = (language) => {
   selectedLanguage.value = language
   showLanguageDropdown.value = false
-  console.log('Language selected:', language)
 }
 
 // Get rank icon from public folder
