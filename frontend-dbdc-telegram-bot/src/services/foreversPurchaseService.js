@@ -24,9 +24,32 @@ export class ForeversPurchaseService {
       })
 
       const data = await response.json()
-      
+
       if (!response.ok) {
-        throw new Error(data.message || `HTTP error! status: ${response.status}`)
+        // Handle specific error messages from backend
+        let errorMessage = data.message || data.detail || `HTTP error! status: ${response.status}`
+
+        // Handle common error cases
+        if (response.status === 400) {
+          if (data.message?.includes('insufficient') || data.message?.includes('balance')) {
+            errorMessage = 'Insufficient balance. Please check your wallet balance.'
+          } else if (data.message?.includes('invalid')) {
+            errorMessage = 'Invalid purchase parameters. Please try again.'
+          }
+        } else if (response.status === 401) {
+          errorMessage = 'Authentication failed. Please log in again.'
+        } else if (response.status === 403) {
+          errorMessage = 'Access denied. You do not have permission to make this purchase.'
+        } else if (response.status >= 500) {
+          errorMessage = 'Server error. Please try again later.'
+        }
+
+        throw new Error(errorMessage)
+      }
+
+      // Check if API returned success but with error status in response body
+      if (data.status === 'error' || data.success === false) {
+        throw new Error(data.message || data.error || 'Purchase failed')
       }
 
       return data
