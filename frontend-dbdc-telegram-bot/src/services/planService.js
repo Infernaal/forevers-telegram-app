@@ -166,8 +166,13 @@ class PlanService {
     const foreversToNext = this.getForeversToNextLevel(equivalentForevers, nextPlan)
 
     let upgradeInfo = null
+    let foreversUaeNeeded = 0
     if (foreversToNext > 0) {
       upgradeInfo = await this.calculateForeversNeeded(foreversToNext)
+      // Calculate how many UAE forevers need to be purchased
+      if (upgradeInfo && !upgradeInfo.error) {
+        foreversUaeNeeded = upgradeInfo.forevers
+      }
     }
 
     return {
@@ -176,7 +181,8 @@ class PlanService {
       totalForevers: equivalentForevers,
       totalUaeDeposits,
       progress,
-      foreversToNext,
+      foreversToNext, // USD amount needed
+      foreversUaeNeeded, // Number of UAE forevers to buy
       upgradeInfo,
       isMaxLevel: currentPlan.isMaxLevel
     }
