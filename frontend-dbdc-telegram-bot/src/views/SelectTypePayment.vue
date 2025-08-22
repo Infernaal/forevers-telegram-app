@@ -210,13 +210,50 @@ const handleBack = () => {
   router.go(-1)
 }
 
-const handlePurchase = () => {
+const handlePurchase = async () => {
   if (!selectedPayment.value || !termsAccepted.value) return
-  // Ensure forevers amount is available before showing success
-  if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
-    foreversAmount.value = purchaseDetails.value.foreversAmount
+
+  // Only process bonus and loyalty payments through API
+  if (selectedPayment.value === 'bonus' || selectedPayment.value === 'loyalty') {
+    try {
+      // Show loading state (could add loading indicator here)
+      const result = await ForeversPurchaseService.processMultiplePurchases(
+        purchaseDetails.value,
+        selectedPayment.value
+      )
+
+      if (result.success) {
+        // Ensure forevers amount is available before showing success
+        if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
+          foreversAmount.value = purchaseDetails.value.foreversAmount
+        }
+        showSuccessModal.value = true
+      } else {
+        // Handle errors
+        const errorMessage = result.errors.length > 0
+          ? result.errors.map(e => e.error).join(', ')
+          : 'Purchase failed. Please try again.'
+
+        showApiError('forevers_purchase', {
+          status: 400,
+          message: errorMessage
+        })
+      }
+    } catch (error) {
+      console.error('Purchase error:', error)
+      showApiError('forevers_purchase', {
+        status: 500,
+        message: 'An unexpected error occurred during purchase. Please try again.'
+      })
+    }
+  } else {
+    // For other payment methods (like USDT), show success modal directly
+    // This preserves existing behavior for non-wallet payments
+    if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
+      foreversAmount.value = purchaseDetails.value.foreversAmount
+    }
+    showSuccessModal.value = true
   }
-  showSuccessModal.value = true
 }
 
 const openTerms = () => {
