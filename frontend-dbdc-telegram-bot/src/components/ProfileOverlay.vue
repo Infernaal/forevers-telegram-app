@@ -450,6 +450,8 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import CountryFlag from './CountryFlag.vue'
 import { findCountry } from '../utils/allCountries.js'
+import planService from '../services/planService.js'
+import telegramUserService from '../services/telegramUserService.js'
 
 // Props
 const props = defineProps({
@@ -517,10 +519,21 @@ const userInfo = ref({
   avatar: ''
 })
 
-// Fetch user info via session (/user/me)
-import telegramUserService from '../services/telegramUserService.js'
+// Error handling
 import { useApiErrorNotifier } from '../composables/useApiErrorNotifier.js'
 const { showError: showApiError } = useApiErrorNotifier()
+
+// Plan state
+const planInfo = ref({
+  currentPlan: null,
+  nextPlan: null,
+  totalForevers: 0,
+  progress: 0,
+  foreversToNext: 0,
+  upgradeInfo: null,
+  isMaxLevel: false
+})
+const isLoadingPlan = ref(false)
 const fetchUserInfo = async () => {
   const result = await telegramUserService.getUserInfo()
   if (result.status === 'success' && result.data) {
@@ -528,12 +541,38 @@ const fetchUserInfo = async () => {
     userInfo.value.fullName = result.data.full_name || ''
     userInfo.value.rank = result.data.rank || ''
     userInfo.value.avatar = result.data.avatar && result.data.avatar.trim() !== '' ? result.data.avatar : '/no-photo.svg'
+
+    // Fetch plan information
+    await fetchPlanInfo()
   } else {
     userInfo.value.id = 0
     userInfo.value.fullName = ''
     userInfo.value.rank = ''
     userInfo.value.avatar = '/no-photo.svg'
     showApiError('user_me', { message: result.message || 'Failed to load profile' })
+  }
+}
+
+const fetchPlanInfo = async () => {
+  try {
+    isLoadingPlan.value = true
+    const balanceResult = await telegramUserService.getUserBalance()
+
+    if (balanceResult.status === 'success' && balanceResult.forevers_balance) {
+      const planData = await planService.getUserPlanInfo(balanceResult.forevers_balance)
+      planInfo.value = planData
+    } else {
+      // Default to start plan if no balance data
+      const defaultPlanData = await planService.getUserPlanInfo(null)
+      planInfo.value = defaultPlanData
+    }
+  } catch (error) {
+    console.error('Failed to fetch plan info:', error)
+    // Set default plan on error
+    const defaultPlanData = await planService.getUserPlanInfo(null)
+    planInfo.value = defaultPlanData
+  } finally {
+    isLoadingPlan.value = false
   }
 }
 
