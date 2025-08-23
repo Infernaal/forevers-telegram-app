@@ -10,7 +10,7 @@ export const PLAN_TIERS = [
     minForevers: 0,
     maxForevers: 49.99,
     color: '#5f5f5f',
-    progressColor: '#a6a6a6' // светлее серого
+    progressColor: '#bfbfbf' // чуть ярче и теплее серый
   },
   {
     id: 'start',
@@ -19,7 +19,7 @@ export const PLAN_TIERS = [
     minForevers: 50,
     maxForevers: 99.99,
     color: '#8C4CD1',
-    progressColor: '#CBB6E8' // светло-фиолетовый
+    progressColor: '#d3aaff' // яркий светло-фиолетовый
   },
   {
     id: 'business',
@@ -28,7 +28,7 @@ export const PLAN_TIERS = [
     minForevers: 100,
     maxForevers: 499.99,
     color: '#2ca7ff',
-    progressColor: '#99d4ff' // светло-голубой
+    progressColor: '#a8e0ff' // яркий светло-голубой
   },
   {
     id: 'business-plus',
@@ -37,7 +37,7 @@ export const PLAN_TIERS = [
     minForevers: 500,
     maxForevers: 999.99,
     color: '#ff7a21',
-    progressColor: '#ffb98f' // светло-оранжевый
+    progressColor: '#ffc59e' // яркий светло-оранжевый
   },
   {
     id: 'premium',
@@ -46,10 +46,9 @@ export const PLAN_TIERS = [
     minForevers: 1000,
     maxForevers: null,
     color: '#07B80E',
-    progressColor: '#8ee492' // светло-зелёный
+    progressColor: '#9fffa4' // яркий светло-зелёный
   }
 ]
-
 
 class PlanService {
   /**
