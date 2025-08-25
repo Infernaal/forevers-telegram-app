@@ -16,9 +16,23 @@ class TonConnectService {
    * Initialize TON Connect with Telegram WebApp specific configuration
    */
   async initialize() {
-    if (this.isInitialized) return
+    if (this.isInitialized) {
+      console.log('✅ TON Connect already initialized')
+      return
+    }
 
     try {
+      console.log('🚀 Initializing TON Connect UI...')
+
+      // Check if root element exists, create if not
+      let rootElement = document.getElementById('ton-connect-root')
+      if (!rootElement) {
+        console.log('⚠️ Creating TON Connect root element')
+        rootElement = document.createElement('div')
+        rootElement.id = 'ton-connect-root'
+        document.body.appendChild(rootElement)
+      }
+
       // Initialize TON Connect UI for Telegram WebApp
       this.tonConnectUI = new TonConnectUI({
         manifestUrl: 'https://dbdc-mini.dubadu.com/tonconnect-manifest.json',
@@ -35,7 +49,7 @@ class TonConnectService {
             },
             [TonConnectUI.THEME.DARK]: {
               connectButton: {
-                background: '#2019CE', 
+                background: '#2019CE',
                 foreground: '#FFFFFF'
               }
             }
@@ -46,9 +60,19 @@ class TonConnectService {
 
       // Setup connection status listener
       this.tonConnectUI.onStatusChange(wallet => {
+        console.log('🔄 TON wallet status changed:', wallet)
         this.wallet = wallet
         this.isConnected = !!wallet
-        console.log('TON wallet connection status changed:', wallet)
+
+        if (wallet) {
+          console.log('✅ Wallet connected:', {
+            address: wallet.account?.address,
+            publicKey: wallet.account?.publicKey,
+            chain: wallet.account?.chain
+          })
+        } else {
+          console.log('❌ Wallet disconnected')
+        }
       })
 
       // Initialize base TON Connect for transactions
@@ -56,10 +80,21 @@ class TonConnectService {
         manifestUrl: 'https://dbdc-mini.dubadu.com/tonconnect-manifest.json'
       })
 
+      // Wait a bit for UI to initialize
+      await new Promise(resolve => setTimeout(resolve, 100))
+
       this.isInitialized = true
-      console.log('TON Connect initialized successfully')
+      console.log('✅ TON Connect initialized successfully')
+
+      // Check if there's already a restored connection
+      if (this.tonConnectUI.wallet) {
+        this.wallet = this.tonConnectUI.wallet
+        this.isConnected = true
+        console.log('🔄 Restored previous connection:', this.wallet)
+      }
+
     } catch (error) {
-      console.error('Failed to initialize TON Connect:', error)
+      console.error('❌ Failed to initialize TON Connect:', error)
       throw error
     }
   }
