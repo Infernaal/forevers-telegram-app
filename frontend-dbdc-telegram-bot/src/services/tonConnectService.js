@@ -258,32 +258,53 @@ class TonConnectService {
    * Create payment request for Forevers purchase
    */
   async createPaymentRequest(purchaseDetails, tonPrice) {
+    console.log('📄 TON Service: Creating payment request...')
+    console.log('📄 Purchase details:', purchaseDetails)
+    console.log('💰 TON price:', tonPrice)
+
     if (!this.isConnected) {
       throw new Error('Wallet not connected')
     }
 
+    if (!this.wallet?.account?.address) {
+      throw new Error('Wallet address not available')
+    }
+
+    if (!purchaseDetails) {
+      throw new Error('Purchase details are required')
+    }
+
     try {
+      const requestBody = {
+        wallet_address: this.wallet.account.address,
+        purchase_details: purchaseDetails,
+        ton_price: tonPrice
+      }
+
+      console.log('📡 TON Service: Sending request to backend:', requestBody)
+
       const response = await fetch(`${API_BASE_URL}/ton/create-payment`, {
         method: 'POST',
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          wallet_address: this.wallet.account.address,
-          purchase_details: purchaseDetails,
-          ton_price: tonPrice
-        })
+        body: JSON.stringify(requestBody)
       })
 
+      console.log('📡 TON Service: Response status:', response.status)
+
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
+        const errorText = await response.text()
+        console.error('❌ TON Service: Backend error:', errorText)
+        throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`)
       }
 
       const data = await response.json()
+      console.log('✅ TON Service: Payment request created:', data)
       return data
     } catch (error) {
-      console.error('Failed to create TON payment request:', error)
+      console.error('❌ TON Service: Failed to create TON payment request:', error)
       throw error
     }
   }
