@@ -283,17 +283,16 @@ class TONPaymentService:
             
             # Create Transaction record
             transaction = Transactions(
-                user_id=user_id,
                 txid=txid,
-                type='deposit',
-                amount=usd_amount,
-                coin='TON',
-                hash=transaction_hash,
-                network='TON',
-                status='confirmed',
-                ip_address=ip_address,
-                created_at=current_time,
-                updated_at=current_time
+                type=1,  # Deposit type
+                sender=user_id,
+                description=f'TON deposit for {forever_type} Forevers',
+                amount=str(usd_amount),
+                currency='USD',
+                deposit_via=8,  # Crypto gateway ID
+                status=1,  # Confirmed status
+                created=int(current_time.timestamp()),
+                updated=int(current_time.timestamp())
             )
             db.add(transaction)
             
