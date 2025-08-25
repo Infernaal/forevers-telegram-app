@@ -110,12 +110,43 @@ class TonConnectService {
       await this.initialize()
     }
 
+    // If already connected, return true
+    if (this.isConnected && this.wallet) {
+      console.log('✅ TON Service: Wallet already connected')
+      return true
+    }
+
     try {
       console.log('📱 TON Service: Opening TON Connect UI modal...')
-      // This will open TON Connect's native modal
-      await this.tonConnectUI.connectWallet()
-      console.log('🔗 TON Service: Wallet connection result:', this.isConnected)
+
+      // Create a promise that resolves when wallet is connected
+      const connectionPromise = new Promise((resolve, reject) => {
+        // Set a timeout for connection
+        const timeout = setTimeout(() => {
+          reject(new Error('Wallet connection timeout'))
+        }, 30000) // 30 seconds timeout
+
+        // Listen for status change
+        const unsubscribe = this.tonConnectUI.onStatusChange(wallet => {
+          if (wallet) {
+            clearTimeout(timeout)
+            unsubscribe()
+            resolve(wallet)
+          }
+        })
+
+        // Trigger the connection
+        this.tonConnectUI.connectWallet().catch(error => {
+          clearTimeout(timeout)
+          unsubscribe()
+          reject(error)
+        })
+      })
+
+      await connectionPromise
+      console.log('✅ TON Service: Wallet connected successfully:', this.isConnected)
       return this.isConnected
+
     } catch (error) {
       console.error('❌ TON Service: Failed to connect TON wallet:', error)
       throw error
