@@ -174,11 +174,23 @@ class TonConnectService {
    * Get current wallet info
    */
   getWallet() {
+    // Double-check connection status from tonConnectUI
+    const uiConnected = this.tonConnectUI?.connected || false
+    const uiWallet = this.tonConnectUI?.wallet || null
+
+    // Update our internal state if there's a mismatch
+    if (uiConnected !== this.isConnected || uiWallet !== this.wallet) {
+      console.log('🔄 Syncing wallet state:', { uiConnected, uiWallet })
+      this.isConnected = uiConnected
+      this.wallet = uiWallet
+    }
+
     return {
       wallet: this.wallet,
       isConnected: this.isConnected,
       address: this.wallet?.account?.address || null,
-      publicKey: this.wallet?.account?.publicKey || null
+      publicKey: this.wallet?.account?.publicKey || null,
+      chain: this.wallet?.account?.chain || null
     }
   }
 
