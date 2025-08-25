@@ -11,6 +11,7 @@ from routers.forevers_purchase import router as forevers_purchase_router
 from routers.user_info import router as user_info_router
 from routers.email_verification import router as email_verification_router
 from routers.referral import router as referral_router
+from routers.ton_payment import router as ton_payment_router
 from fastapi.openapi.utils import get_openapi
 
 from sessions.redis_session import init_redis, close_redis, refresh_session, get_user_id_by_session
