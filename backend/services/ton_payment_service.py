@@ -490,14 +490,28 @@ class TONPaymentService:
         db: AsyncSession
     ) -> Tuple[bool, str]:
         """Cancel pending TON payment"""
-        
+
         try:
-            # Update payment status to cancelled (simplified)
             logger.info(f"Cancelling TON payment: payment_id={payment_id}, user_id={user_id}")
-            
-            # In production, update the TONPayments table
+
+            # Find and update payment status
+            result = await db.execute(
+                update(TONPayments).where(
+                    and_(
+                        TONPayments.payment_id == payment_id,
+                        TONPayments.user_id == user_id,
+                        TONPayments.status.in_(['created', 'pending'])
+                    )
+                ).values(status='expired')
+            )
+
+            if result.rowcount == 0:
+                return False, "Payment not found or cannot be cancelled"
+
+            await db.commit()
             return True, "Payment cancelled successfully"
-            
+
         except Exception as e:
+            await db.rollback()
             logger.error(f"Error cancelling payment: payment_id={payment_id}, error={str(e)}")
             return False, f"Failed to cancel payment: {str(e)}"
