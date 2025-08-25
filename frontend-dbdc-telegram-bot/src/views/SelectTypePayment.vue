@@ -53,7 +53,7 @@
           </div>
         </div>
 
-        <!-- USDT Crypto Wallet -->
+        <!-- USDT/TON Crypto Wallet -->
         <div
           class="bg-white border rounded-xl p-4 flex flex-col items-center gap-2 cursor-pointer transition-all col-span-1 relative"
           :class="selectedPayment === 'usdt' ? 'border-green-500 bg-green-50' : 'border-gray-200'"
@@ -72,30 +72,7 @@
           </div>
           <div class="text-center">
             <h3 class="text-lg font-semibold text-dbd-dark">USDT</h3>
-            <p class="text-dbd-light-gray text-base">Crypto</p>
-          </div>
-        </div>
-
-        <!-- TON Wallet -->
-        <div
-          class="bg-white border rounded-xl p-4 flex flex-col items-center gap-2 cursor-pointer transition-all col-span-1 relative"
-          :class="selectedPayment === 'ton' ? 'border-green-500 bg-green-50' : 'border-gray-200'"
-          @click="selectPayment('ton')"
-        >
-          <!-- Selected Checkmark -->
-          <div v-if="selectedPayment === 'ton'" class="absolute top-3 right-3 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center">
-            <svg width="8" height="8" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8.80292 1.37621C8.42688 1.17372 8.00745 1.56423 7.76157 1.79564C7.19753 2.34524 6.72025 2.98162 6.18509 3.56015C5.5921 4.19653 5.0425 4.8329 4.43505 5.45484C4.08793 5.80196 3.71189 6.178 3.48048 6.6119C2.9598 6.10566 2.51145 5.55606 1.93292 5.10773C1.51349 4.78954 0.819255 4.55813 0.833719 5.32468C0.862645 6.32266 1.7449 7.39293 2.39574 8.07268C2.67054 8.36194 3.03212 8.66567 3.45155 8.68013C3.95776 8.70906 4.47843 8.1016 4.78216 7.76895C5.31732 7.19042 5.75122 6.53956 6.24294 5.94659C6.87932 5.16558 7.53016 4.39901 8.15208 3.60354C8.54258 3.11179 9.77195 1.89686 8.80292 1.37621ZM1.47007 5.26682C1.45561 5.26682 1.44115 5.26682 1.41222 5.28126C1.35437 5.26682 1.31098 5.25234 1.25313 5.22341C1.29652 5.19448 1.36883 5.20895 1.47007 5.26682Z" fill="white"/>
-            </svg>
-          </div>
-          <div class="w-10 h-10 bg-gray-100 border border-gray-200 rounded-full flex items-center justify-center">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zm4.95 7.4l-4.5 5.6c-.15.19-.38.3-.61.3-.24 0-.47-.11-.61-.3l-4.5-5.6c-.2-.25-.2-.6 0-.85L9.39 1.4c.15-.19.38-.3.61-.3s.47.11.61.3l4.67 5.15c.2.25.2.6 0 .85z" fill="#0088CC"/>
-            </svg>
-          </div>
-          <div class="text-center">
-            <h3 class="text-lg font-semibold text-dbd-dark">TON</h3>
-            <p class="text-dbd-light-gray text-base">{{ tonWalletStatus }}</p>
+            <p class="text-dbd-light-gray text-base">{{ usdtWalletStatus }}</p>
           </div>
         </div>
       </div>
