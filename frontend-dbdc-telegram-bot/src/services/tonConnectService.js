@@ -68,16 +68,21 @@ class TonConnectService {
    * Connect wallet using TON Connect UI modal
    */
   async connectWallet() {
+    console.log('🔗 TON Service: Starting wallet connection...')
+
     if (!this.isInitialized) {
+      console.log('⚠️ TON Service: Not initialized, initializing...')
       await this.initialize()
     }
 
     try {
+      console.log('📱 TON Service: Opening TON Connect UI modal...')
       // This will open TON Connect's native modal
       await this.tonConnectUI.connectWallet()
+      console.log('🔗 TON Service: Wallet connection result:', this.isConnected)
       return this.isConnected
     } catch (error) {
-      console.error('Failed to connect TON wallet:', error)
+      console.error('❌ TON Service: Failed to connect TON wallet:', error)
       throw error
     }
   }
@@ -209,21 +214,31 @@ class TonConnectService {
    * Execute Forevers purchase with TON
    */
   async purchaseWithTON(purchaseDetails) {
+    console.log('🚀 TON Service: Starting purchaseWithTON')
+    console.log('📄 TON Service: Purchase details:', purchaseDetails)
+    console.log('🔗 TON Service: Wallet connected:', this.isConnected)
+    console.log('💳 TON Service: Wallet info:', this.wallet)
+
     if (!this.isConnected) {
       throw new Error('Wallet not connected')
     }
 
     try {
+      console.log('👥 TON Service: Step 1 - Creating payment request...')
       // Step 1: Get current TON price and create payment request
       const paymentRequest = await this.createPaymentRequest(purchaseDetails)
-      
+      console.log('📅 TON Service: Payment request created:', paymentRequest)
+
+      console.log('💸 TON Service: Step 2 - Sending TON transaction...')
       // Step 2: Send TON transaction
       const txResult = await this.sendPayment(
         paymentRequest.recipient_address,
         paymentRequest.amount_ton,
         paymentRequest.memo
       )
+      console.log('📨 TON Service: Transaction sent:', txResult)
 
+      console.log('✅ TON Service: Step 3 - Confirming payment on backend...')
       // Step 3: Confirm payment on backend
       const confirmResponse = await fetch(`${API_BASE_URL}/ton/confirm-payment`, {
         method: 'POST',
@@ -243,6 +258,8 @@ class TonConnectService {
       }
 
       const confirmData = await confirmResponse.json()
+      console.log('🎉 TON Service: Payment confirmed:', confirmData)
+
       return {
         success: true,
         transaction_hash: txResult.boc,
@@ -250,7 +267,7 @@ class TonConnectService {
         data: confirmData
       }
     } catch (error) {
-      console.error('Failed to purchase with TON:', error)
+      console.error('❌ TON Service: Failed to purchase with TON:', error)
       throw error
     }
   }
