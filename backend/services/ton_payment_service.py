@@ -131,16 +131,37 @@ class TONPaymentService:
             if not is_valid:
                 return False, {}, "Transaction verification failed"
             
-            # Get stored payment details (simplified - you'll need to implement this)
-            # For now, we'll simulate this
+            # Get stored payment details from database
+            payment_result = await db.execute(
+                select(TONPayments).where(
+                    and_(
+                        TONPayments.payment_id == payment_id,
+                        TONPayments.user_id == user_id,
+                        TONPayments.status.in_(['created', 'pending'])
+                    )
+                )
+            )
+            payment_record = payment_result.scalar_one_or_none()
+
+            if not payment_record:
+                return False, {}, "Payment not found or already processed"
+
+            # Check if payment has expired
+            if datetime.utcnow() > payment_record.expires_at:
+                # Update status to expired
+                await db.execute(
+                    update(TONPayments).where(TONPayments.id == payment_record.id)
+                    .values(status='expired')
+                )
+                await db.commit()
+                return False, {}, "Payment has expired"
+
+            # Parse purchase details
+            purchase_details_data = json.loads(payment_record.purchase_details)
             payment_details = {
-                'purchase_details': {
-                    'foreversDetails': [
-                        {'code': 'UAE', 'amount': 100, 'usdRate': 0.5, 'totalCost': 50}
-                    ]
-                },
-                'amount_usd': Decimal('50'),
-                'amount_ton': Decimal(str(tx_data.get('amount_ton', 0)))
+                'purchase_details': purchase_details_data,
+                'amount_usd': payment_record.amount_usd,
+                'amount_ton': payment_record.amount_ton
             }
             
             # Process Forevers purchase using existing logic
