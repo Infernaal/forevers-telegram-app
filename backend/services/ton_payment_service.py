@@ -326,14 +326,16 @@ class TONPaymentService:
             
             result = {
                 'txid': txid,
+                'deposit_id': deposit_id,
                 'forever_type': forever_type,
                 'forevers_amount': forevers_amount,
                 'usd_amount': usd_amount,
-                'transaction_hash': transaction_hash
+                'transaction_hash': transaction_hash,
+                'exchange_stats_id': exchange_stats.id
             }
-            
-            logger.info(f"Forevers purchase processed: user_id={user_id}, "
-                       f"forever_type={forever_type}, amount={forevers_amount}")
+
+            logger.info(f"TON Forevers purchase processed: user_id={user_id}, "
+                       f"forever_type={forever_type}, amount={forevers_amount}, txid={txid}")
             
             return True, result
             
