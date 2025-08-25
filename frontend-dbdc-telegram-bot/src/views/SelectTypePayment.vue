@@ -327,11 +327,17 @@ const closeTermsModal = () => {
 }
 
 const handleTONPurchase = async () => {
+  console.log('🔄 Starting TON purchase flow')
+  console.log('📄 Purchase details:', purchaseDetails.value)
+  console.log('💰 Numeric total:', numericTotal.value)
+  console.log('🔗 Wallet connected:', usdtWalletConnected.value)
+
   isProcessingPurchase.value = true
 
   try {
     // Check if wallet is connected
     if (!usdtWalletConnected.value) {
+      console.log('⚠️ Wallet not connected, initiating connection...')
       // Connect wallet using TON Connect UI
       await tonConnectService.connectWallet()
       await checkUSDTWalletStatus()
@@ -339,12 +345,21 @@ const handleTONPurchase = async () => {
       if (!usdtWalletConnected.value) {
         throw new Error('Failed to connect wallet')
       }
+      console.log('✅ Wallet connected successfully')
     }
 
+    // Validate purchase details before proceeding
+    if (!purchaseDetails.value) {
+      throw new Error('Purchase details are missing')
+    }
+
+    console.log('🚀 Executing TON purchase...')
     // Execute TON purchase
     const result = await tonConnectService.purchaseWithTON(purchaseDetails.value)
+    console.log('📊 TON purchase result:', result)
 
     if (result.success) {
+      console.log('🎉 TON purchase successful!')
       // Ensure forevers amount is available
       if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
         foreversAmount.value = purchaseDetails.value.foreversAmount
@@ -359,16 +374,24 @@ const handleTONPurchase = async () => {
       // Show success modal
       showSuccessModal.value = true
     } else {
+      console.log('❌ TON purchase failed:', result)
       throw new Error('Purchase failed')
     }
   } catch (error) {
-    console.error('Purchase error:', error)
+    console.error('❌ Purchase error:', error)
+    console.error('📋 Error details:', {
+      message: error.message,
+      stack: error.stack,
+      purchaseDetails: purchaseDetails.value,
+      walletConnected: usdtWalletConnected.value
+    })
     showApiError('usdt_purchase', {
       status: 500,
       message: error.message || 'Purchase failed. Please try again.'
     })
   } finally {
     isProcessingPurchase.value = false
+    console.log('🏁 TON purchase flow completed')
   }
 }
 
