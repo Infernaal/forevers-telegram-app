@@ -484,27 +484,37 @@ const uniqueCountries = computed(() => {
 
 
 onMounted(() => {
+  console.log('🔄 Mounting SelectTypePayment component')
+
   // Retrieve purchase details from sessionStorage
   try {
     const savedPurchaseDetails = sessionStorage.getItem('purchaseDetails')
+    console.log('📋 Raw saved purchase details:', savedPurchaseDetails)
     if (savedPurchaseDetails) {
       purchaseDetails.value = JSON.parse(savedPurchaseDetails)
+      console.log('📄 Parsed purchase details:', purchaseDetails.value)
+    } else {
+      console.log('⚠️ No purchase details found in sessionStorage')
     }
   } catch (error) {
-    // Silently handle error
+    console.error('❌ Error parsing purchase details:', error)
   }
 
   // Parse USD total (for potential future logic)
   const incomingTotal = route.params.totalAmount || route.query.totalRaw || route.query.total || purchaseDetails.value?.amount
+  console.log('💰 Incoming total:', incomingTotal)
   if (incomingTotal !== undefined) {
     const num = parseLocaleAmount(incomingTotal)
     totalAmount.value = num.toLocaleString(undefined, { maximumFractionDigits: 6 })
+    console.log('💵 Total amount set to:', totalAmount.value)
   }
 
   // Prefer explicit forevers amount from query, then purchaseDetails
   const incomingForevers = route.query.foreversAmount || purchaseDetails.value?.foreversAmount
+  console.log('🔢 Incoming forevers:', incomingForevers)
   if (incomingForevers !== undefined) {
     foreversAmount.value = parseLocaleAmount(incomingForevers)
+    console.log('🔢 Forevers amount set to:', foreversAmount.value)
   }
 
   // Log detailed Forevers information if available
@@ -519,10 +529,12 @@ onMounted(() => {
   fetchWalletData()
 
   // Initialize TON Connect and check wallet status
+  console.log('🚀 Initializing TON Connect service...')
   tonConnectService.initialize().then(() => {
+    console.log('✅ TON Connect service initialized')
     checkUSDTWalletStatus()
   }).catch(error => {
-    console.error('Failed to initialize TON Connect:', error)
+    console.error('❌ Failed to initialize TON Connect:', error)
   })
 })
 </script>
