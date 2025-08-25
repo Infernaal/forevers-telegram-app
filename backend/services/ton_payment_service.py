@@ -75,24 +75,25 @@ class TONPaymentService:
             # Calculate expiry time
             expires_at = datetime.utcnow() + timedelta(minutes=TONPaymentService.PAYMENT_EXPIRY_MINUTES)
             
-            # Create payment record in database (you'll need to create a TONPayments table)
-            payment_data = {
-                'payment_id': payment_id,
-                'user_id': user_id,
-                'wallet_address': wallet_address,
-                'recipient_address': TONPaymentService.COMPANY_TON_ADDRESS,
-                'amount_ton': ton_amount,
-                'amount_usd': total_usd,
-                'ton_price': ton_price,
-                'purchase_details': json.dumps(purchase_details),
-                'status': 'created',
-                'memo': memo,
-                'ip_address': ip_address,
-                'created_at': datetime.utcnow(),
-                'expires_at': expires_at
-            }
-            
-            # Store payment record (simplified - you'll need to create TONPayments table)
+            # Create payment record in database
+            ton_payment = TONPayments(
+                payment_id=payment_id,
+                user_id=user_id,
+                wallet_address=wallet_address,
+                recipient_address=TONPaymentService.COMPANY_TON_ADDRESS,
+                amount_ton=ton_amount,
+                amount_usd=total_usd,
+                ton_price=ton_price,
+                purchase_details=json.dumps(purchase_details),
+                status='created',
+                memo=memo,
+                ip_address=ip_address,
+                expires_at=expires_at
+            )
+
+            db.add(ton_payment)
+            await db.commit()
+
             logger.info(f"TON payment created: payment_id={payment_id}, amount_ton={ton_amount}, amount_usd={total_usd}")
             
             return True, {
