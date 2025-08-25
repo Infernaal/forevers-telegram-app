@@ -341,7 +341,7 @@ class TONPaymentService:
             
         except Exception as e:
             await db.rollback()
-            logger.error(f"Error processing forevers purchase: user_id={user_id}, "
+            logger.error(f"Error processing TON forevers purchase: user_id={user_id}, "
                         f"forever_type={forever_type}, error={str(e)}", exc_info=True)
             return False, {}
     
