@@ -298,18 +298,18 @@ class TONPaymentService:
             
             # Create Activity record
             activity = Activity(
-                user_id=user_id,
-                type='forevers_purchase',
-                description=f'Purchased {forevers_amount} {forever_type} Forevers with TON',
-                metadata=json.dumps({
-                    'forever_type': forever_type,
-                    'forevers_amount': forevers_amount,
-                    'usd_amount': float(usd_amount),
-                    'payment_method': 'TON',
-                    'transaction_hash': transaction_hash
-                }),
-                ip_address=ip_address,
-                created_at=current_time
+                txid=txid,
+                type=1,  # Deposit activity type
+                uid=user_id,
+                u_field_1=f'Purchased {forevers_amount} {forever_type} Forevers with TON',
+                u_field_2=transaction_hash,
+                u_field_3=forever_type,
+                amount=str(usd_amount),
+                currency='USD',
+                deposit_via=8,  # Crypto gateway ID
+                status=1,  # Confirmed status
+                created=int(current_time.timestamp()),
+                updated=int(current_time.timestamp())
             )
             db.add(activity)
             
