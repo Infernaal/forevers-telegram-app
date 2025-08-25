@@ -523,30 +523,14 @@ onMounted(() => {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* Responsive adjustments for payment grid */
-.grid-cols-2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
-}
-
-/* Create 2x2 grid layout */
-.grid-cols-2 > div:nth-child(3) {
-  grid-column: 1;
-}
-
-.grid-cols-2 > div:nth-child(4) {
-  grid-column: 2;
-}
-
+/* Responsive adjustments */
 @media (min-width: 768px) {
   .grid-cols-2 {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
-  .grid-cols-2 > div:nth-child(3),
-  .grid-cols-2 > div:nth-child(4) {
-    grid-column: auto;
+  .col-span-1:last-child {
+    grid-column: span 1;
   }
 }
 
