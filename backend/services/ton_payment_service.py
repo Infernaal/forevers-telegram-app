@@ -12,7 +12,7 @@ from typing import Tuple, Optional, Dict, Any, List
 
 from models.models import (
     UsersWallets, Deposits, Transactions, Activity,
-    ForeversExchangeStats, Forevers
+    ForeversExchangeStats, Forevers, TONPayments
 )
 from utils.random_hash import random_hash
 
