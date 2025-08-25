@@ -53,7 +53,7 @@
           </div>
         </div>
 
-        <!-- USDT Crypto Wallet -->
+        <!-- USDT/TON Crypto Wallet -->
         <div
           class="bg-white border rounded-xl p-4 flex flex-col items-center gap-2 cursor-pointer transition-all col-span-1 relative"
           :class="selectedPayment === 'usdt' ? 'border-green-500 bg-green-50' : 'border-gray-200'"
@@ -72,7 +72,7 @@
           </div>
           <div class="text-center">
             <h3 class="text-lg font-semibold text-dbd-dark">USDT</h3>
-            <p class="text-dbd-light-gray text-base">Crypto</p>
+            <p class="text-dbd-light-gray text-base">{{ usdtWalletStatus }}</p>
           </div>
         </div>
       </div>
@@ -146,6 +146,7 @@ import ConfirmExchangeModal from '../components/ConfirmExchangeModal.vue'
 import { useCart } from '../composables/useCart.js'
 import { formatUSDPrefix } from '../utils/formatNumber.js'
 import { ForeversPurchaseService } from '../services/foreversPurchaseService.js'
+import { tonConnectService } from '../services/tonConnectService.js'
 
 const router = useRouter()
 const route = useRoute()
@@ -194,6 +195,8 @@ const confirmModalData = ref({
 const loyaltyBalance = ref(0)
 const bonusBalance = ref(0)
 const successMessage = ref('Payment completed successfully')
+const usdtWalletConnected = ref(false)
+const usdtWalletAddress = ref('')
 
 // cart composable (for clearing cart after success)
 const { clearCart } = useCart()
@@ -217,7 +220,7 @@ const getPaymentMethodDisplayName = (paymentMethod) => {
       return 'Bonus'
     case 'usdt':
     case 'crypto':
-      return 'Crypto'
+      return 'TON'
     default:
       return 'Unknown'
   }
@@ -229,6 +232,12 @@ const handleBack = () => {
 
 const handlePurchase = async () => {
   if (!selectedPayment.value || !termsAccepted.value) {
+    return
+  }
+
+  // Handle USDT/TON payment
+  if (selectedPayment.value === 'usdt') {
+    await handleTONPurchase()
     return
   }
 
@@ -247,18 +256,6 @@ const handlePurchase = async () => {
 
     // Show confirmation modal
     showConfirmModal.value = true
-  } else {
-    // For other payment methods (like USDT), show success modal directly
-    // This preserves existing behavior for non-wallet payments
-    if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
-      foreversAmount.value = purchaseDetails.value.foreversAmount
-    }
-
-    // Set success message for non-wallet payments
-    const paymentMethodName = getPaymentMethodDisplayName(selectedPayment.value)
-    successMessage.value = `Forevers purchased successfully using ${paymentMethodName} wallet!`
-
-    showSuccessModal.value = true
   }
 }
 
@@ -329,6 +326,64 @@ const closeTermsModal = () => {
   showTermsModal.value = false
 }
 
+const handleTONPurchase = async () => {
+  isProcessingPurchase.value = true
+
+  try {
+    // Check if wallet is connected
+    if (!usdtWalletConnected.value) {
+      // Connect wallet using TON Connect UI
+      await tonConnectService.connectWallet()
+      await checkUSDTWalletStatus()
+
+      if (!usdtWalletConnected.value) {
+        throw new Error('Failed to connect wallet')
+      }
+    }
+
+    // Execute TON purchase
+    const result = await tonConnectService.purchaseWithTON(purchaseDetails.value)
+
+    if (result.success) {
+      // Ensure forevers amount is available
+      if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
+        foreversAmount.value = purchaseDetails.value.foreversAmount
+      }
+
+      // Update wallet data after successful purchase
+      await fetchWalletData()
+
+      // Set success message
+      successMessage.value = `Forevers purchased successfully using TON wallet!`
+
+      // Show success modal
+      showSuccessModal.value = true
+    } else {
+      throw new Error('Purchase failed')
+    }
+  } catch (error) {
+    console.error('Purchase error:', error)
+    showApiError('usdt_purchase', {
+      status: 500,
+      message: error.message || 'Purchase failed. Please try again.'
+    })
+  } finally {
+    isProcessingPurchase.value = false
+  }
+}
+
+const checkUSDTWalletStatus = async () => {
+  try {
+    const walletInfo = tonConnectService.getWallet()
+    usdtWalletConnected.value = walletInfo.isConnected
+    usdtWalletAddress.value = walletInfo.address || ''
+  } catch (error) {
+    console.error('Failed to check wallet status:', error)
+    usdtWalletConnected.value = false
+    usdtWalletAddress.value = ''
+  }
+}
+
 const closeSuccessModal = () => {
   showSuccessModal.value = false
   clearCart() // empty cart after success
@@ -362,6 +417,13 @@ async function fetchWalletData() {
 // Computed for SuccessModal display
 const foreversAmountDisplay = computed(() => {
   return foreversAmount.value ? foreversAmount.value.toLocaleString() : '0'
+})
+
+const usdtWalletStatus = computed(() => {
+  if (usdtWalletConnected.value) {
+    return 'Connected'
+  }
+  return 'Connect Wallet'
 })
 
 // Computed properties for Forevers details
@@ -432,6 +494,13 @@ onMounted(() => {
 
 
   fetchWalletData()
+
+  // Initialize TON Connect and check wallet status
+  tonConnectService.initialize().then(() => {
+    checkUSDTWalletStatus()
+  }).catch(error => {
+    console.error('Failed to initialize TON Connect:', error)
+  })
 })
 </script>
 
@@ -445,7 +514,7 @@ onMounted(() => {
   .grid-cols-2 {
     grid-template-columns: repeat(3, 1fr);
   }
-  
+
   .col-span-1:last-child {
     grid-column: span 1;
   }

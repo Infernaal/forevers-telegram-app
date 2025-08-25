@@ -2,6 +2,8 @@
   <div class="telegram-webapp-container">
     <RouterView />
     <ApiRouteErrorNotification />
+    <!-- TON Connect UI container -->
+    <div id="ton-connect-root"></div>
   </div>
 </template>
 
