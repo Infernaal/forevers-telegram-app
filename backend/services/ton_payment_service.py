@@ -245,87 +245,81 @@ class TONPaymentService:
         """Process individual Forevers purchase from TON payment"""
         
         try:
-            # Generate transaction ID
-            txid = random_hash(32)
-            current_time = datetime.utcnow()
-            
-            # Get or create Forevers record
-            forevers_result = await db.execute(
-                select(Forevers).where(Forevers.country_code == forever_type)
-            )
-            forevers_record = forevers_result.scalar_one_or_none()
-            
-            if not forevers_record:
-                # Create new Forevers record
-                forevers_record = Forevers(
-                    country_code=forever_type,
-                    country_name=forever_type,  # Simplified
-                    price_usd=usd_amount / forevers_amount
-                )
-                db.add(forevers_record)
-                await db.flush()
-            
-            # Create Deposit record
+            # Generate transaction IDs using the same pattern as forevers_purchase_service
+            txid = f'TON{random_hash(12)}'
+            reference_number = f'TON{random_hash(8).upper()}'
+
+            current_time = int(time.time())
+            current_datetime = datetime.utcnow()
+
+            # Create deposit record using forevers_purchase_service pattern
             deposit = Deposits(
                 uid=user_id,
                 txid=txid,
                 method=8,  # Crypto gateway ID
                 amount=str(usd_amount),
                 currency='USD',
-                status=1,  # Confirmed status
+                requested_on=current_time,
+                processed_on=current_time,
+                reference_number=reference_number,
+                status=1,  # Confirmed
                 gateway_txid=transaction_hash,
+                type=forever_type,
                 ip_address=ip_address,
-                processed=1,
-                requested_on=int(current_time.timestamp()),
-                processed_on=int(current_time.timestamp())
+                processed=1
             )
             db.add(deposit)
-            
-            # Create Transaction record
+            await db.flush()  # Get the ID without committing
+
+            deposit_id = deposit.id
+
+            # Create transaction record using forevers_purchase_service pattern
+            description = f"Forevers {forever_type} purchased with TON (User ID: {user_id})"
             transaction = Transactions(
                 txid=txid,
                 type=1,  # Deposit type
                 sender=user_id,
-                description=f'TON deposit for {forever_type} Forevers',
+                recipient=deposit_id,
+                description=description,
+                deposit_via=8,  # Crypto gateway ID
                 amount=str(usd_amount),
                 currency='USD',
-                deposit_via=8,  # Crypto gateway ID
-                status=1,  # Confirmed status
-                created=int(current_time.timestamp()),
-                updated=int(current_time.timestamp())
+                fee='',
+                status=1,  # Confirmed
+                created=current_time
             )
             db.add(transaction)
-            
-            # Create Activity record
+
+            # Create activity record using forevers_purchase_service pattern
             activity = Activity(
                 txid=txid,
                 type=1,  # Deposit activity type
                 uid=user_id,
-                u_field_1=f'Purchased {forevers_amount} {forever_type} Forevers with TON',
+                deposit_via=8,  # Crypto gateway ID
+                u_field_1=str(deposit_id),
                 u_field_2=transaction_hash,
                 u_field_3=forever_type,
                 amount=str(usd_amount),
                 currency='USD',
-                deposit_via=8,  # Crypto gateway ID
-                status=1,  # Confirmed status
-                created=int(current_time.timestamp()),
-                updated=int(current_time.timestamp())
+                status=1,  # Confirmed
+                created=current_time
             )
             db.add(activity)
-            
-            # Create Exchange Stats record
+
+            # Create exchange stats record
             exchange_stats = ForeversExchangeStats(
                 user_id=user_id,
-                txid=txid,
-                wallet_type='bonus',  # Default wallet type
-                forever_type=forever_type,
-                forevers_amount=forevers_amount,
+                wallet_type='bonus',  # Using bonus as default for crypto purchases
+                forevers_amount=Decimal(forevers_amount),
                 usd_amount=usd_amount,
-                exchange_rate=usd_amount / forevers_amount,
-                date_exchanged=current_time,
-                ip_address=ip_address
+                exchange_rate=usd_amount / Decimal(forevers_amount),
+                txid=txid,
+                date_exchanged=current_datetime,
+                ip_address=ip_address,
+                forever_type=forever_type
             )
             db.add(exchange_stats)
+            await db.flush()
             
             # Commit all changes
             await db.commit()
