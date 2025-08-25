@@ -317,13 +317,13 @@ class TONPaymentService:
             exchange_stats = ForeversExchangeStats(
                 user_id=user_id,
                 txid=txid,
+                wallet_type='bonus',  # Default wallet type
                 forever_type=forever_type,
                 forevers_amount=forevers_amount,
                 usd_amount=usd_amount,
-                rate=usd_amount / forevers_amount,
-                source='TON',
-                ip_address=ip_address,
-                created_at=current_time
+                exchange_rate=usd_amount / forevers_amount,
+                date_exchanged=current_time,
+                ip_address=ip_address
             )
             db.add(exchange_stats)
             
