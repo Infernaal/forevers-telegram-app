@@ -269,6 +269,7 @@ class TONPaymentService:
             deposit = Deposits(
                 user_id=user_id,
                 txid=txid,
+                method=8,  # Crypto gateway ID
                 coin='TON',
                 deposit_amount=usd_amount,
                 deposit_address=TONPaymentService.COMPANY_TON_ADDRESS,
