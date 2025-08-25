@@ -396,12 +396,15 @@ const handleTONPurchase = async () => {
 }
 
 const checkUSDTWalletStatus = async () => {
+  console.log('🔍 Checking USDT wallet status...')
   try {
     const walletInfo = tonConnectService.getWallet()
+    console.log('💳 Wallet info received:', walletInfo)
     usdtWalletConnected.value = walletInfo.isConnected
     usdtWalletAddress.value = walletInfo.address || ''
+    console.log('🔗 Wallet status updated - Connected:', usdtWalletConnected.value, 'Address:', usdtWalletAddress.value)
   } catch (error) {
-    console.error('Failed to check wallet status:', error)
+    console.error('❌ Failed to check wallet status:', error)
     usdtWalletConnected.value = false
     usdtWalletAddress.value = ''
   }
