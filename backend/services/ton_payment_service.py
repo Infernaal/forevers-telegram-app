@@ -242,7 +242,7 @@ class TONPaymentService:
         ip_address: str,
         db: AsyncSession
     ) -> Tuple[bool, Dict[str, Any]]:
-        """Process individual Forevers purchase from TON payment"""
+        """Process individual Forevers purchase from TON payment using forevers_purchase_service logic"""
         
         try:
             # Generate transaction IDs using the same pattern as forevers_purchase_service
