@@ -188,8 +188,27 @@ class TONPaymentService:
                     logger.error(f"Failed to process forevers purchase for {detail['code']}")
             
             if not purchase_results:
+                # Update payment status to failed
+                await db.execute(
+                    update(TONPayments).where(TONPayments.id == payment_record.id)
+                    .values(status='failed')
+                )
+                await db.commit()
                 return False, {}, "Failed to process any Forevers purchases"
-            
+
+            # Update payment status to confirmed
+            await db.execute(
+                update(TONPayments).where(TONPayments.id == payment_record.id)
+                .values(
+                    status='confirmed',
+                    transaction_hash=transaction_hash,
+                    confirmed_at=datetime.utcnow(),
+                    confirmations=tx_data.get('confirmations', 1),
+                    block_height=tx_data.get('block_height')
+                )
+            )
+            await db.commit()
+
             # Create main transaction record
             txid = random_hash(32)
             
