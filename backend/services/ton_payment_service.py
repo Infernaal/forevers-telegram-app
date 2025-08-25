@@ -68,8 +68,8 @@ class TONPaymentService:
             # Calculate required TON amount (add 5% buffer for price fluctuations)
             ton_amount = (total_usd / ton_price) * Decimal('1.05')
             
-            # Generate payment ID with gateway ID 8 and memo
-            payment_id = f"8_{str(uuid.uuid4())}"
+            # Generate payment ID and memo
+            payment_id = str(uuid.uuid4())
             memo = f"FOREVERS_{payment_id[:8]}"
             
             # Calculate expiry time
