@@ -903,6 +903,7 @@ class TONPayments(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     payment_id: Mapped[str] = mapped_column(String(255), unique=True)
     user_id: Mapped[int] = mapped_column(Integer)
+    gateway_id: Mapped[int] = mapped_column(Integer, server_default=text("'8'"))
     wallet_address: Mapped[str] = mapped_column(String(255))
     recipient_address: Mapped[str] = mapped_column(String(255))
     amount_ton: Mapped[decimal.Decimal] = mapped_column(DECIMAL(20, 8))
