@@ -889,3 +889,33 @@ class UsersProfileLogs(Base):
 
     admin: Mapped[Optional["Users"]] = relationship('Users', foreign_keys=[admin_id], back_populates='users_profile_logs')
     user: Mapped["Users"] = relationship('Users', foreign_keys=[user_id], back_populates='users_profile_logs_')
+
+
+class TONPayments(Base):
+    __tablename__ = 'ton_payments'
+    __table_args__ = (
+        Index('payment_id', 'payment_id', unique=True),
+        Index('user_id', 'user_id'),
+        Index('transaction_hash', 'transaction_hash'),
+        Index('status_created_at', 'status', 'created_at'),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    payment_id: Mapped[str] = mapped_column(String(255), unique=True)
+    user_id: Mapped[int] = mapped_column(Integer)
+    wallet_address: Mapped[str] = mapped_column(String(255))
+    recipient_address: Mapped[str] = mapped_column(String(255))
+    amount_ton: Mapped[decimal.Decimal] = mapped_column(DECIMAL(20, 8))
+    amount_usd: Mapped[decimal.Decimal] = mapped_column(DECIMAL(16, 2))
+    ton_price: Mapped[decimal.Decimal] = mapped_column(DECIMAL(16, 8))
+    purchase_details: Mapped[str] = mapped_column(Text)
+    transaction_hash: Mapped[Optional[str]] = mapped_column(String(255))
+    status: Mapped[str] = mapped_column(Enum('created', 'pending', 'confirmed', 'failed', 'expired'), server_default=text("'created'"))
+    memo: Mapped[Optional[str]] = mapped_column(String(255))
+    ip_address: Mapped[Optional[str]] = mapped_column(String(45))
+    block_height: Mapped[Optional[int]] = mapped_column(Integer)
+    confirmations: Mapped[Optional[int]] = mapped_column(Integer, server_default=text("'0'"))
+    created_at: Mapped[datetime.datetime] = mapped_column(TIMESTAMP, server_default=text('CURRENT_TIMESTAMP'))
+    updated_at: Mapped[datetime.datetime] = mapped_column(TIMESTAMP, server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))
+    expires_at: Mapped[datetime.datetime] = mapped_column(TIMESTAMP)
+    confirmed_at: Mapped[Optional[datetime.datetime]] = mapped_column(TIMESTAMP)
