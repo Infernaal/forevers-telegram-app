@@ -195,8 +195,8 @@ const confirmModalData = ref({
 const loyaltyBalance = ref(0)
 const bonusBalance = ref(0)
 const successMessage = ref('Payment completed successfully')
-const tonWalletConnected = ref(false)
-const tonWalletAddress = ref('')
+const usdtWalletConnected = ref(false)
+const usdtWalletAddress = ref('')
 
 // cart composable (for clearing cart after success)
 const { clearCart } = useCart()
@@ -220,8 +220,6 @@ const getPaymentMethodDisplayName = (paymentMethod) => {
       return 'Bonus'
     case 'usdt':
     case 'crypto':
-      return 'Crypto'
-    case 'ton':
       return 'TON'
     default:
       return 'Unknown'
@@ -237,8 +235,8 @@ const handlePurchase = async () => {
     return
   }
 
-  // Handle TON payment
-  if (selectedPayment.value === 'ton') {
+  // Handle USDT/TON payment
+  if (selectedPayment.value === 'usdt') {
     await handleTONPurchase()
     return
   }
@@ -258,18 +256,6 @@ const handlePurchase = async () => {
 
     // Show confirmation modal
     showConfirmModal.value = true
-  } else {
-    // For other payment methods (like USDT), show success modal directly
-    // This preserves existing behavior for non-wallet payments
-    if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
-      foreversAmount.value = purchaseDetails.value.foreversAmount
-    }
-
-    // Set success message for non-wallet payments
-    const paymentMethodName = getPaymentMethodDisplayName(selectedPayment.value)
-    successMessage.value = `Forevers purchased successfully using ${paymentMethodName} wallet!`
-
-    showSuccessModal.value = true
   }
 }
 
@@ -345,13 +331,13 @@ const handleTONPurchase = async () => {
 
   try {
     // Check if wallet is connected
-    if (!tonWalletConnected.value) {
+    if (!usdtWalletConnected.value) {
       // Connect wallet using TON Connect UI
       await tonConnectService.connectWallet()
-      await checkTONWalletStatus()
+      await checkUSDTWalletStatus()
 
-      if (!tonWalletConnected.value) {
-        throw new Error('Failed to connect TON wallet')
+      if (!usdtWalletConnected.value) {
+        throw new Error('Failed to connect wallet')
       }
     }
 
@@ -373,28 +359,28 @@ const handleTONPurchase = async () => {
       // Show success modal
       showSuccessModal.value = true
     } else {
-      throw new Error('TON purchase failed')
+      throw new Error('Purchase failed')
     }
   } catch (error) {
-    console.error('TON purchase error:', error)
-    showApiError('ton_purchase', {
+    console.error('Purchase error:', error)
+    showApiError('usdt_purchase', {
       status: 500,
-      message: error.message || 'TON purchase failed. Please try again.'
+      message: error.message || 'Purchase failed. Please try again.'
     })
   } finally {
     isProcessingPurchase.value = false
   }
 }
 
-const checkTONWalletStatus = async () => {
+const checkUSDTWalletStatus = async () => {
   try {
     const walletInfo = tonConnectService.getWallet()
-    tonWalletConnected.value = walletInfo.isConnected
-    tonWalletAddress.value = walletInfo.address || ''
+    usdtWalletConnected.value = walletInfo.isConnected
+    usdtWalletAddress.value = walletInfo.address || ''
   } catch (error) {
-    console.error('Failed to check TON wallet status:', error)
-    tonWalletConnected.value = false
-    tonWalletAddress.value = ''
+    console.error('Failed to check wallet status:', error)
+    usdtWalletConnected.value = false
+    usdtWalletAddress.value = ''
   }
 }
 
@@ -433,8 +419,8 @@ const foreversAmountDisplay = computed(() => {
   return foreversAmount.value ? foreversAmount.value.toLocaleString() : '0'
 })
 
-const tonWalletStatus = computed(() => {
-  if (tonWalletConnected.value) {
+const usdtWalletStatus = computed(() => {
+  if (usdtWalletConnected.value) {
     return 'Connected'
   }
   return 'Connect Wallet'
@@ -511,7 +497,7 @@ onMounted(() => {
 
   // Initialize TON Connect and check wallet status
   tonConnectService.initialize().then(() => {
-    checkTONWalletStatus()
+    checkUSDTWalletStatus()
   }).catch(error => {
     console.error('Failed to initialize TON Connect:', error)
   })
