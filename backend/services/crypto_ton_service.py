@@ -79,7 +79,7 @@ class CryptoTonService:
                 txid=txid,
                 method=GATEWAY_ID,
                 amount=str(forevers_amount),
-                currency='FOREVERS',
+                currency='USD',
                 requested_on=now,
                 processed_on=0,
                 reference_number=txid,
