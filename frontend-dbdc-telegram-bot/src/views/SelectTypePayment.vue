@@ -96,6 +96,7 @@
       <CartBottomComponent
         :total-amount="numericTotal"
         :disabled="!selectedPayment || !termsAccepted || isProcessingPurchase"
+        :action-label="primaryActionLabel"
         @back="handleBack"
         @purchase="handlePurchase"
       />
@@ -229,7 +230,12 @@ const handleBack = () => {
   router.go(-1)
 }
 
-const { ensureConnected, getAddress, sendTransaction } = useTonConnect()
+const { ensureConnected, getAddress, sendTransaction, isConnected } = useTonConnect()
+
+const primaryActionLabel = computed(() => {
+  if (selectedPayment.value === 'crypto' && !isConnected.value) return 'Connect Wallet'
+  return 'Buy Forevers'
+})
 
 const handlePurchase = async () => {
   if (!selectedPayment.value || !termsAccepted.value) {
@@ -257,10 +263,13 @@ const handlePurchase = async () => {
       const items = (purchaseDetails.value?.foreversDetails || []).map(d => ({ code: d.code, amount: d.amount, usdRate: d.usdRate, totalCost: d.totalCost }))
       if (items.length === 0) throw new Error('No items to purchase')
 
-      const initRes = await CryptoPaymentService.initiate({ foreversDetails: items, tonAddress: '' })
-
+      // ensure wallet connection first
       await ensureConnected()
       const fromAddr = getAddress()
+      if (!fromAddr) throw new Error('Wallet is not connected')
+
+      // initiate order with address so backend can bind it
+      const initRes = await CryptoPaymentService.initiate({ foreversDetails: items, tonAddress: fromAddr })
 
       await sendTransaction(initRes.to_address, initRes.amount_nano, initRes.valid_until)
 
