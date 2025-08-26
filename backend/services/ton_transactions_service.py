@@ -114,7 +114,7 @@ class TonTransactionService:
             deposit = Deposits(
                 uid=user_id,
                 txid=txid,
-                method=999,  # TON gateway ID (create new gateway or use existing)
+                method=8,  # Crypto gateway ID
                 amount=str(usd_amount),
                 currency='USD',
                 requested_on=current_time,
@@ -140,7 +140,7 @@ class TonTransactionService:
                 sender=0,  # External sender (blockchain)
                 recipient=user_id,
                 description=description,
-                deposit_via=999,  # TON gateway
+                deposit_via=8,  # Crypto gateway
                 amount=str(usd_amount),
                 currency='USD',
                 fee='',
@@ -154,7 +154,7 @@ class TonTransactionService:
                 txid=txid,
                 type=1,  # Deposit activity
                 uid=user_id,
-                deposit_via=999,
+                deposit_via=8,
                 u_field_1=str(deposit_id),
                 u_field_2=wallet_address,
                 u_field_3=str(ton_amount),
