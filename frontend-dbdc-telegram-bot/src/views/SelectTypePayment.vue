@@ -155,6 +155,7 @@ const route = useRoute()
 
 // TON Connect
 const { ensureConnected, getAddress, sendTransaction, isConnected } = useTonConnect()
+const tonConnected = ref(isConnected())
 
 // Reactive data
 const selectedPayment = ref('bonus') // default
@@ -234,7 +235,7 @@ const handleBack = () => {
 }
 
 const primaryCtaText = computed(() => {
-  if (selectedPayment.value === 'crypto' && !isConnected()) return 'Connect Wallet'
+  if (selectedPayment.value === 'crypto' && !tonConnected.value) return 'Connect Wallet'
   return 'Buy Forevers'
 })
 
@@ -266,6 +267,7 @@ const handlePurchase = async () => {
 
       // 1) Ensure wallet is connected (will show TON Connect UI if not)
       await ensureConnected()
+      tonConnected.value = isConnected()
       const fromAddr = getAddress()
       if (!fromAddr) throw new Error('Wallet address not available after connection')
 
