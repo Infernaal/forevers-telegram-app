@@ -15,7 +15,7 @@ export const TonCryptoService = {
     return data
   },
   async verifyTonPurchase(payload) {
-    const res = await fetch(`${API_BASE_URL}/crypto/ton/verify`, {
+    const res = await fetch(`${API_BASE_URL}/forevers/crypto/verify`, {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
