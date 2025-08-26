@@ -95,7 +95,7 @@
     <div class="fixed left-0 right-0 z-[9999]" style="bottom: 89px;">
       <CartBottomComponent
         :total-amount="numericTotal"
-        :disabled="!selectedPayment || !termsAccepted || isProcessingPurchase"
+        :disabled="!selectedPayment || !termsAccepted || isProcessingPurchase || isConnectingWallet"
         :action-label="primaryActionLabel"
         @back="handleBack"
         @purchase="handlePurchase"
@@ -231,9 +231,13 @@ const handleBack = () => {
 }
 
 const { ensureConnected, getAddress, getChain, sendTransaction, isConnected } = useTonConnect()
+const isConnectingWallet = ref(false)
 
 const primaryActionLabel = computed(() => {
-  if (selectedPayment.value === 'crypto' && !isConnected.value) return 'Connect Wallet'
+  if (selectedPayment.value === 'crypto') {
+    if (isConnectingWallet.value) return 'Connecting...'
+    if (!isConnected.value) return 'Connect Wallet'
+  }
   return 'Buy Forevers'
 })
 
@@ -258,38 +262,7 @@ const handlePurchase = async () => {
     // Show confirmation modal
     showConfirmModal.value = true
   } else if (selectedPayment.value === 'crypto') {
-    try {
-      // If wallet not connected yet, only prompt connection and exit early
-      if (!isConnected.value) {
-        await ensureConnected()
-        return
-      }
-
-      isProcessingPurchase.value = true
-      const items = (purchaseDetails.value?.foreversDetails || []).map(d => ({ code: d.code, amount: d.amount, usdRate: d.usdRate, totalCost: d.totalCost }))
-      if (items.length === 0) throw new Error('No items to purchase')
-
-      const fromAddr = getAddress()
-      if (!fromAddr) throw new Error('Wallet is not connected')
-
-      // initiate order with address and network chain so backend selects the right network
-      const chain = getChain()
-      const initRes = await CryptoPaymentService.initiate({ foreversDetails: items, tonAddress: fromAddr, chain })
-
-      await sendTransaction(initRes.to_address, initRes.amount_nano, initRes.valid_until)
-
-      await CryptoPaymentService.confirm({ order_id: initRes.order_id, fromAddress: fromAddr })
-
-      if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
-        foreversAmount.value = purchaseDetails.value.foreversAmount
-      }
-      successMessage.value = 'Forevers purchased successfully using Crypto wallet!'
-      showSuccessModal.value = true
-    } catch (e) {
-      showApiError('forevers_purchase', { status: 400, message: e.message || 'Crypto payment failed' })
-    } finally {
-      isProcessingPurchase.value = false
-    }
+    await handleCryptoPurchase()
   } else {
     // For other payment methods (like USDT), show success modal directly
     // This preserves existing behavior for non-wallet payments
@@ -370,6 +343,104 @@ const openTerms = () => {
 
 const closeTermsModal = () => {
   showTermsModal.value = false
+}
+
+const handleCryptoPurchase = async () => {
+  try {
+    // If wallet not connected yet, only prompt connection and exit early
+    if (!isConnected.value) {
+      isConnectingWallet.value = true
+      try {
+        await ensureConnected()
+        // After successful connection, don't proceed with purchase automatically
+        // User needs to click button again
+        return
+      } catch (connectError) {
+        showApiError('ton_connect', {
+          status: 400,
+          message: connectError.message || 'Failed to connect wallet. Please try again.'
+        })
+        return
+      } finally {
+        isConnectingWallet.value = false
+      }
+    }
+
+    // Wallet is connected, proceed with purchase
+    isProcessingPurchase.value = true
+    const items = (purchaseDetails.value?.foreversDetails || []).map(d => ({
+      code: d.code,
+      amount: d.amount,
+      usdRate: d.usdRate,
+      totalCost: d.totalCost
+    }))
+
+    if (items.length === 0) {
+      throw new Error('No items to purchase')
+    }
+
+    const fromAddr = getAddress()
+    if (!fromAddr) {
+      throw new Error('Wallet address not found. Please reconnect your wallet.')
+    }
+
+    // Get wallet chain/network for backend
+    const chain = getChain()
+    if (!chain) {
+      throw new Error('Unable to determine wallet network. Please ensure your wallet is properly connected.')
+    }
+
+    // Initiate order with address and network chain
+    const initRes = await CryptoPaymentService.initiate({
+      foreversDetails: items,
+      tonAddress: fromAddr,
+      chain
+    })
+
+    if (!initRes.to_address || !initRes.amount_nano) {
+      throw new Error('Invalid payment details received from server')
+    }
+
+    // Send transaction
+    await sendTransaction(initRes.to_address, initRes.amount_nano, initRes.valid_until)
+
+    // Confirm transaction
+    await CryptoPaymentService.confirm({
+      order_id: initRes.order_id,
+      fromAddress: fromAddr
+    })
+
+    // Success
+    if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
+      foreversAmount.value = purchaseDetails.value.foreversAmount
+    }
+
+    successMessage.value = 'Forevers purchased successfully using Crypto wallet!'
+    showSuccessModal.value = true
+
+  } catch (error) {
+    console.error('Crypto purchase error:', error)
+
+    let errorMessage = 'Crypto payment failed. Please try again.'
+
+    // Handle specific error types
+    if (error.message?.includes('Network is not supported')) {
+      errorMessage = 'The selected network is not supported. Please switch to a supported network in your wallet.'
+    } else if (error.message?.includes('User rejected')) {
+      errorMessage = 'Transaction was cancelled by user.'
+    } else if (error.message?.includes('insufficient funds')) {
+      errorMessage = 'Insufficient funds in your wallet.'
+    } else if (error.message) {
+      errorMessage = error.message
+    }
+
+    showApiError('forevers_purchase', {
+      status: 400,
+      message: errorMessage
+    })
+  } finally {
+    isProcessingPurchase.value = false
+  }
 }
 
 const closeSuccessModal = () => {
