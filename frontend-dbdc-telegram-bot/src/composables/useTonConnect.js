@@ -10,17 +10,7 @@ export function useTonConnect() {
   if (!ui) {
     try {
       ui = new TonConnectUI({
-        manifestUrl: '/tonconnect-manifest.json',
-        // Explicitly support both mainnet and testnet
-        walletsList: {
-          includeWallets: [
-            {
-              name: 'Tonkeeper',
-              universalLink: 'https://app.tonkeeper.com/ton-connect',
-              bridgeUrl: 'https://bridge.tonapi.io/bridge'
-            }
-          ]
-        }
+        manifestUrl: '/tonconnect-manifest.json'
       })
 
       // track status
