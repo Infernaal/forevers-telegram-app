@@ -95,7 +95,7 @@ export function useTonConnect() {
   }
 
   return {
-    tonConnectUI: tonConnectUI.value,
+    tonConnectUI,
     isConnected,
     wallet,
     isLoading,
