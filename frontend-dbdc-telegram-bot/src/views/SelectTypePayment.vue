@@ -146,6 +146,8 @@ import ConfirmExchangeModal from '../components/ConfirmExchangeModal.vue'
 import { useCart } from '../composables/useCart.js'
 import { formatUSDPrefix } from '../utils/formatNumber.js'
 import { ForeversPurchaseService } from '../services/foreversPurchaseService.js'
+import { CryptoPaymentService } from '../services/cryptoPaymentService.js'
+import { useTonConnect } from '../composables/useTonConnect.js'
 
 const router = useRouter()
 const route = useRoute()
@@ -227,6 +229,8 @@ const handleBack = () => {
   router.go(-1)
 }
 
+const { ensureConnected, getAddress, sendTransaction } = useTonConnect()
+
 const handlePurchase = async () => {
   if (!selectedPayment.value || !termsAccepted.value) {
     return
@@ -247,6 +251,31 @@ const handlePurchase = async () => {
 
     // Show confirmation modal
     showConfirmModal.value = true
+  } else if (selectedPayment.value === 'crypto') {
+    try {
+      isProcessingPurchase.value = true
+      const items = (purchaseDetails.value?.foreversDetails || []).map(d => ({ code: d.code, amount: d.amount, usdRate: d.usdRate, totalCost: d.totalCost }))
+      if (items.length === 0) throw new Error('No items to purchase')
+
+      const initRes = await CryptoPaymentService.initiate({ foreversDetails: items, tonAddress: '' })
+
+      await ensureConnected()
+      const fromAddr = getAddress()
+
+      await sendTransaction(initRes.to_address, initRes.amount_nano, initRes.valid_until)
+
+      await CryptoPaymentService.confirm({ order_id: initRes.order_id, fromAddress: fromAddr })
+
+      if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
+        foreversAmount.value = purchaseDetails.value.foreversAmount
+      }
+      successMessage.value = 'Forevers purchased successfully using Crypto wallet!'
+      showSuccessModal.value = true
+    } catch (e) {
+      showApiError('forevers_purchase', { status: 400, message: e.message || 'Crypto payment failed' })
+    } finally {
+      isProcessingPurchase.value = false
+    }
   } else {
     // For other payment methods (like USDT), show success modal directly
     // This preserves existing behavior for non-wallet payments
