@@ -2,7 +2,9 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dbdc-mini.dub
 
 export const CryptoPaymentService = {
   async initiate(order) {
-    const res = await fetch(`${API_BASE_URL}/forevers/crypto/initiate`, {
+    const url = new URL(`${API_BASE_URL}/forevers/crypto/initiate`)
+    if (order?.chain) url.searchParams.set('chain', order.chain)
+    const res = await fetch(url.toString(), {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
