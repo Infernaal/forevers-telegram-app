@@ -11,7 +11,7 @@ from routers.forevers_purchase import router as forevers_purchase_router
 from routers.user_info import router as user_info_router
 from routers.email_verification import router as email_verification_router
 from routers.referral import router as referral_router
-from routers.ton_transactions import router as ton_transactions_router
+from routers.crypto_transactions import router as crypto_transactions_router
 from fastapi.openapi.utils import get_openapi
 
 from sessions.redis_session import init_redis, close_redis, refresh_session, get_user_id_by_session
@@ -81,4 +81,4 @@ app.include_router(forevers_purchase_router, prefix="/api/v1/dbdc")
 app.include_router(user_info_router, prefix="/api/v1/dbdc")
 app.include_router(email_verification_router, prefix="/api/v1/dbdc")
 app.include_router(referral_router, prefix="/api/v1/dbdc")
-app.include_router(ton_transactions_router, prefix="/api/v1/dbdc")
+app.include_router(crypto_transactions_router, prefix="/api/v1/dbdc")
