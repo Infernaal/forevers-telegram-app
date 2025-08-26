@@ -348,6 +348,64 @@ const closeSuccessModal = () => {
   router.push({ name: 'wallet', query: { loyalty: loyaltyBalance.value, bonus: bonusBalance.value } })
 }
 
+const handleTonPayment = async () => {
+  try {
+    // If wallet not connected, connect first
+    if (!isTonConnected.value) {
+      const connected = await connectTonWallet()
+      if (!connected) {
+        showApiError('ton_connect', {
+          status: 400,
+          message: 'Failed to connect TON wallet. Please try again.'
+        })
+        return
+      }
+    }
+
+    // Start processing
+    isProcessingPurchase.value = true
+
+    // Prepare payment data
+    const paymentData = {
+      usd_amount: numericTotal.value,
+      wallet_address: getWalletAddress(),
+      forevers_details: purchaseDetails.value?.foreversDetails || []
+    }
+
+    // Process TON payment
+    const result = await TonConnectService.processTonPayment(paymentData, {
+      sendTransaction: sendTonTransaction
+    })
+
+    if (result.success) {
+      // Ensure forevers amount is available before showing success
+      if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
+        foreversAmount.value = purchaseDetails.value.foreversAmount
+      }
+
+      // Update wallet data after successful purchase
+      await fetchWalletData()
+
+      // Set success message
+      successMessage.value = `Forevers purchased successfully using TON wallet! Transaction: ${result.transaction_hash.substring(0, 10)}...`
+
+      // Show success modal
+      showSuccessModal.value = true
+    } else {
+      throw new Error('TON payment verification failed')
+    }
+
+  } catch (error) {
+    console.error('TON payment error:', error)
+    showApiError('ton_payment', {
+      status: 500,
+      message: error.message || 'TON payment failed. Please try again.'
+    })
+  } finally {
+    isProcessingPurchase.value = false
+  }
+}
+
 // Get purchase details from route params if available
 // Formatters for loyalty & bonus
 const loyaltyFormatted = computed(() => formatUSDPrefix(loyaltyBalance.value))
