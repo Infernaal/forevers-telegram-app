@@ -249,6 +249,12 @@ const handlePurchase = async () => {
     return
   }
 
+  // Handle TON/USDT crypto payments
+  if (selectedPayment.value === 'usdt') {
+    await handleTonPayment()
+    return
+  }
+
   // Only show confirmation modal for bonus and loyalty payments
   if (selectedPayment.value === 'bonus' || selectedPayment.value === 'loyalty') {
     // Prepare confirmation modal data
@@ -264,18 +270,6 @@ const handlePurchase = async () => {
 
     // Show confirmation modal
     showConfirmModal.value = true
-  } else {
-    // For other payment methods (like USDT), show success modal directly
-    // This preserves existing behavior for non-wallet payments
-    if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
-      foreversAmount.value = purchaseDetails.value.foreversAmount
-    }
-
-    // Set success message for non-wallet payments
-    const paymentMethodName = getPaymentMethodDisplayName(selectedPayment.value)
-    successMessage.value = `Forevers purchased successfully using ${paymentMethodName} wallet!`
-
-    showSuccessModal.value = true
   }
 }
 
