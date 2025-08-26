@@ -95,7 +95,8 @@
     <div class="fixed left-0 right-0 z-[9999]" style="bottom: 89px;">
       <CartBottomComponent
         :total-amount="numericTotal"
-        :disabled="!selectedPayment || !termsAccepted || isProcessingPurchase"
+        :disabled="!selectedPayment || !termsAccepted || isProcessingPurchase || isTonLoading"
+        :button-text="buttonText"
         @back="handleBack"
         @purchase="handlePurchase"
       />
@@ -378,6 +379,20 @@ async function fetchWalletData() {
 // Computed for SuccessModal display
 const foreversAmountDisplay = computed(() => {
   return foreversAmount.value ? foreversAmount.value.toLocaleString() : '0'
+})
+
+// Computed for button text based on payment method and wallet connection
+const buttonText = computed(() => {
+  if (selectedPayment.value === 'usdt') {
+    if (isTonLoading.value) {
+      return 'Connecting...'
+    }
+    if (!isTonConnected.value) {
+      return 'Connect Wallet'
+    }
+    return 'Buy Forevers'
+  }
+  return 'Buy Forevers'
 })
 
 // Computed properties for Forevers details
