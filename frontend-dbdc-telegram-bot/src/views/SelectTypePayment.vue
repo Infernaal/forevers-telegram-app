@@ -259,12 +259,16 @@ const handlePurchase = async () => {
     showConfirmModal.value = true
   } else if (selectedPayment.value === 'crypto') {
     try {
+      // If wallet not connected yet, only prompt connection and exit early
+      if (!isConnected.value) {
+        await ensureConnected()
+        return
+      }
+
       isProcessingPurchase.value = true
       const items = (purchaseDetails.value?.foreversDetails || []).map(d => ({ code: d.code, amount: d.amount, usdRate: d.usdRate, totalCost: d.totalCost }))
       if (items.length === 0) throw new Error('No items to purchase')
 
-      // ensure wallet connection first
-      await ensureConnected()
       const fromAddr = getAddress()
       if (!fromAddr) throw new Error('Wallet is not connected')
 
