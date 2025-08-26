@@ -96,6 +96,7 @@
       <CartBottomComponent
         :total-amount="numericTotal"
         :disabled="!selectedPayment || !termsAccepted || isProcessingPurchase"
+        :primary-label="primaryButtonLabel"
         @back="handleBack"
         @purchase="handlePurchase"
       />
@@ -208,6 +209,20 @@ const isAnyModalOpen = computed(() => {
   return showTermsModal.value || showSuccessModal.value || showConfirmModal.value
 })
 
+// TonConnect state
+const ton = {
+  ui: null,
+  connected: ref(false),
+  walletAddress: ref('')
+}
+
+const primaryButtonLabel = computed(() => {
+  if (selectedPayment.value === 'usdt') {
+    return ton.connected.value ? 'Buy Forevers' : 'Connect Wallet'
+  }
+  return 'Buy Forevers'
+})
+
 // Methods
 const selectPayment = (paymentType) => { selectedPayment.value = paymentType }
 
@@ -231,6 +246,68 @@ const handleBack = () => {
 
 const handlePurchase = async () => {
   if (!selectedPayment.value || !termsAccepted.value) {
+    return
+  }
+
+  // TON crypto flow
+  if (selectedPayment.value === 'usdt') {
+    try {
+      if (!ton.ui) {
+        ton.ui = new TonConnectUI({
+          manifestUrl: '/tonconnect-manifest.json',
+          walletsList: { includeWallets: [], excludeWallets: [], override: null },
+          uiPreferences: { theme: window.Telegram?.WebApp?.colorScheme === 'dark' ? 'DARK' : 'LIGHT' }
+        })
+      }
+
+      if (!ton.connected.value) {
+        await ton.ui.openModal()
+        return
+      }
+
+      isProcessingPurchase.value = true
+
+      const firstCountryCode = purchaseDetails.value?.foreversDetails?.[0]?.code || 'UAE'
+      const finalRate = parseFloat(purchaseDetails.value?.purchaseSummary?.averagePrice || numericTotal.value / (foreversAmount.value || 1))
+      const initRes = await TonCryptoService.initTonPurchase({
+        forever_type: firstCountryCode,
+        forevers_amount: parseInt(foreversAmount.value || purchaseDetails.value?.foreversAmount || 0),
+        final_rate: parseFloat(finalRate),
+        usd_amount: parseFloat(numericTotal.value)
+      })
+
+      const toAddress = initRes.data.to_address
+      const amountNano = String(initRes.data.amount_nano)
+      const txRef = initRes.data.txid
+
+      await ton.ui.sendTransaction({
+        validUntil: Math.floor(Date.now() / 1000) + 600,
+        messages: [{ address: toAddress, amount: amountNano }]
+      })
+
+      // Poll verification until success or timeout
+      const start = Date.now()
+      let verified = null
+      while (Date.now() - start < 120000) {
+        const vr = await TonCryptoService.verifyTonPurchase({ txid: txRef, wallet_address: ton.walletAddress.value })
+        if (vr.status === 'success' && vr.data?.confirmed) {
+          verified = vr
+          break
+        }
+        await new Promise(r => setTimeout(r, 3000))
+      }
+
+      if (verified) {
+        showSuccessModal.value = true
+        successMessage.value = 'Forevers purchased successfully using Crypto wallet!'
+      } else {
+        showApiError('ton_verify', { status: 408, message: 'Transaction not confirmed yet. It may take more time.' })
+      }
+    } catch (e) {
+      showApiError('ton_flow', { status: 400, message: e?.message || 'TON payment failed' })
+    } finally {
+      isProcessingPurchase.value = false
+    }
     return
   }
 
@@ -407,8 +484,14 @@ onMounted(() => {
     if (savedPurchaseDetails) {
       purchaseDetails.value = JSON.parse(savedPurchaseDetails)
     }
-  } catch (error) {
-    // Silently handle error
+  } catch (error) {}
+
+  if (!ton.ui) {
+    ton.ui = new TonConnectUI({ manifestUrl: '/tonconnect-manifest.json' })
+    ton.ui.onStatusChange(wallet => {
+      ton.connected.value = !!wallet?.account?.address
+      ton.walletAddress.value = wallet?.account?.address || ''
+    })
   }
 
   // Parse USD total (for potential future logic)
@@ -423,15 +506,6 @@ onMounted(() => {
   if (incomingForevers !== undefined) {
     foreversAmount.value = parseLocaleAmount(incomingForevers)
   }
-
-  // Log detailed Forevers information if available
-
-  // Log query parameters for Forevers types and prices
-  if (route.query.foreversTypes) {
-    const types = route.query.foreversTypes.split(',')
-    const prices = route.query.pricesPerType ? route.query.pricesPerType.split(',') : []
-  }
-
 
   fetchWalletData()
 })
