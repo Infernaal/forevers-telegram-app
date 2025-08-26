@@ -59,5 +59,7 @@ export function useTonConnect() {
     return { boc }
   }
 
-  return { connector: ui, isConnected, ensureConnected, getAddress, sendTransaction }
+  const getChain = () => ui?.account?.chain || null
+
+  return { connector: ui, isConnected, ensureConnected, getAddress, getChain, sendTransaction }
 }
