@@ -1,34 +1,59 @@
-import { TonConnect } from '@tonconnect/sdk'
+import { ref } from 'vue'
+import { TonConnectUI } from '@tonconnect/ui'
 
-let connector
+let ui
+const connectedRef = ref(false)
+const addressRef = ref(null)
 
 export function useTonConnect() {
-  if (!connector) {
-    connector = new TonConnect({ manifestUrl: '/tonconnect-manifest.json' })
+  if (!ui) {
+    ui = new TonConnectUI({ manifestUrl: '/tonconnect-manifest.json' })
+
+    // track status
+    ui.onStatusChange(wallet => {
+      connectedRef.value = !!wallet
+      addressRef.value = wallet?.address || null
+    })
+
+    // try to restore session silently
+    setTimeout(() => {
+      try {
+        if (ui.account) {
+          connectedRef.value = true
+          addressRef.value = ui.account.address || null
+        }
+      } catch (_) {}
+    }, 0)
   }
 
-  const isConnected = () => !!connector.account
+  const isConnected = connectedRef
 
   const ensureConnected = async () => {
-    if (!connector.account) {
-      await connector.restoreConnection()
+    if (!ui.account) {
+      await ui.openModal()
+      // wait for connection once modal is open
+      await new Promise(resolve => {
+        const unsub = ui.onStatusChange(wallet => {
+          if (wallet) {
+            unsub()
+            resolve(wallet)
+          }
+        })
+      })
     }
-    if (!connector.account) {
-      await connector.connect() // will open wallet selection
-    }
-    return connector.account
+    return ui.account
   }
 
-  const getAddress = () => connector?.account?.address || null
+  const getAddress = () => addressRef.value || ui?.account?.address || null
 
   const sendTransaction = async (to, amountNano, validUntil) => {
     const tx = {
       validUntil,
       messages: [{ address: to, amount: amountNano.toString() }]
     }
-    const boc = await connector.sendTransaction(tx)
+    const boc = await ui.sendTransaction(tx)
     return { boc }
   }
 
-  return { connector, isConnected, ensureConnected, getAddress, sendTransaction }
+  return { connector: ui, isConnected, ensureConnected, getAddress, sendTransaction }
 }
