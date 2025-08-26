@@ -152,12 +152,26 @@ import { TonConnectService } from '../services/tonConnectService.js'
 const router = useRouter()
 const route = useRoute()
 
+// TON Connect setup
+const {
+  isConnected: isTonConnected,
+  wallet: tonWallet,
+  isLoading: isTonLoading,
+  initTonConnect,
+  connectWallet: connectTonWallet,
+  disconnectWallet: disconnectTonWallet,
+  sendTransaction: sendTonTransaction,
+  getWalletAddress,
+  cleanup: cleanupTonConnect
+} = useTonConnect()
+
 // Reactive data
 const selectedPayment = ref('bonus') // default
 const termsAccepted = ref(false)
 const totalAmount = ref('0') // USD total (locale string)
 const foreversAmount = ref(0) // numeric forevers amount
 const isProcessingPurchase = ref(false) // loading state for purchase
+const tonConversionData = ref(null) // TON conversion rate data
 
 // Robust locale-aware parser: handles forms like "26,106.00", "187,5", "1 234,56"
 function parseLocaleAmount(val) {
