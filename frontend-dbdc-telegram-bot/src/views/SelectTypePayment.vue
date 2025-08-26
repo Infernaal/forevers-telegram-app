@@ -96,6 +96,7 @@
       <CartBottomComponent
         :total-amount="numericTotal"
         :disabled="!selectedPayment || !termsAccepted || isProcessingPurchase"
+        :cta-text="primaryCtaText"
         @back="handleBack"
         @purchase="handlePurchase"
       />
@@ -151,6 +152,9 @@ import { useTonConnect } from '../composables/useTonConnect.js'
 
 const router = useRouter()
 const route = useRoute()
+
+// TON Connect
+const { ensureConnected, getAddress, sendTransaction, isConnected } = useTonConnect()
 
 // Reactive data
 const selectedPayment = ref('bonus') // default
@@ -229,7 +233,10 @@ const handleBack = () => {
   router.go(-1)
 }
 
-const { ensureConnected, getAddress, sendTransaction } = useTonConnect()
+const primaryCtaText = computed(() => {
+  if (selectedPayment.value === 'crypto' && !isConnected()) return 'Connect Wallet'
+  return 'Buy Forevers'
+})
 
 const handlePurchase = async () => {
   if (!selectedPayment.value || !termsAccepted.value) {
@@ -257,13 +264,18 @@ const handlePurchase = async () => {
       const items = (purchaseDetails.value?.foreversDetails || []).map(d => ({ code: d.code, amount: d.amount, usdRate: d.usdRate, totalCost: d.totalCost }))
       if (items.length === 0) throw new Error('No items to purchase')
 
-      const initRes = await CryptoPaymentService.initiate({ foreversDetails: items, tonAddress: '' })
-
+      // 1) Ensure wallet is connected (will show TON Connect UI if not)
       await ensureConnected()
       const fromAddr = getAddress()
+      if (!fromAddr) throw new Error('Wallet address not available after connection')
 
+      // 2) Initiate order only after wallet is connected
+      const initRes = await CryptoPaymentService.initiate({ foreversDetails: items, tonAddress: fromAddr })
+
+      // 3) Send on-chain transaction
       await sendTransaction(initRes.to_address, initRes.amount_nano, initRes.valid_until)
 
+      // 4) Confirm order ONLY AFTER successful transaction
       await CryptoPaymentService.confirm({ order_id: initRes.order_id, fromAddress: fromAddr })
 
       if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
