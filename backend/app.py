@@ -77,6 +77,8 @@ app.add_middleware(SessionRefreshMiddleware)
 app.include_router(forevers_user_balance_router, prefix="/api/v1/dbdc")
 app.include_router(forevers_price_router, prefix="/api/v1/dbdc")
 app.include_router(forevers_purchase_router, prefix="/api/v1/dbdc")
+from routers.crypto_ton import router as crypto_ton_router
+app.include_router(crypto_ton_router, prefix="/api/v1/dbdc")
 app.include_router(user_info_router, prefix="/api/v1/dbdc")
 app.include_router(email_verification_router, prefix="/api/v1/dbdc")
 app.include_router(referral_router, prefix="/api/v1/dbdc")
