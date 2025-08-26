@@ -1,5 +1,4 @@
 import { ref } from 'vue'
-import { ref } from 'vue'
 import { TonConnectUI } from '@tonconnect/ui'
 
 let ui
