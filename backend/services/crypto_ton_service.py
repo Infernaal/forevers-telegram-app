@@ -110,7 +110,7 @@ class CryptoTonService:
     def _find_matching_tx(to_addr: str, from_addr: str, amount_nano: int, since_unix: int) -> Optional[dict]:
         try:
             data = CryptoTonService._http_get_json(
-                f"{TESTNET_TONCENTER}/getTransactions",
+                f"{TONCENTER_BASE}/getTransactions",
                 {"address": to_addr, "limit": 25}
             )
             if not data.get('ok'):
