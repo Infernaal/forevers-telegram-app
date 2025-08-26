@@ -184,19 +184,6 @@ class CryptoTonService:
             )
             db.add(activity)
 
-            exchange_stats = ForeversExchangeStats(
-                user_id=user_id,
-                wallet_type='deposit',
-                forevers_amount=Decimal(0),  # optional as per schema; business rule could record purchased forevers count
-                usd_amount=usd_amount,
-                exchange_rate=Decimal(str(deposit.rate_at_deposit)),
-                txid=txid,
-                date_exchanged=datetime.now(),
-                ip_address=deposit.ip_address,
-                forever_type=deposit.type
-            )
-            db.add(exchange_stats)
-
             await db.commit()
 
             return True, {
