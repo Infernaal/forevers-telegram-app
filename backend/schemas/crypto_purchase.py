@@ -11,7 +11,7 @@ class CryptoForeversItem(BaseModel):
 
 
 class CryptoInitiateRequest(BaseModel):
-    forevers_details: conlist(CryptoForeversItem, min_items=1) = Field(..., alias='foreversDetails')
+    forevers_details: conlist(CryptoForeversItem, min_length=1) = Field(..., alias='foreversDetails')
     ton_address: str = Field(..., alias='tonAddress')
     slippage_percent: Optional[float] = Field(2.0, alias='slippagePercent')
 
