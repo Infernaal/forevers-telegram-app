@@ -481,7 +481,10 @@ const uniqueCountries = computed(() => {
 
 
 
-onMounted(() => {
+onMounted(async () => {
+  // Initialize TON Connect
+  await initTonConnect()
+
   // Retrieve purchase details from sessionStorage
   try {
     const savedPurchaseDetails = sessionStorage.getItem('purchaseDetails')
@@ -513,8 +516,12 @@ onMounted(() => {
     const prices = route.query.pricesPerType ? route.query.pricesPerType.split(',') : []
   }
 
-
   fetchWalletData()
+})
+
+onUnmounted(() => {
+  // Cleanup TON Connect
+  cleanupTonConnect()
 })
 </script>
 
