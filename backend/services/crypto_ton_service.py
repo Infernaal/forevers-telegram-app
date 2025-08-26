@@ -8,12 +8,14 @@ import urllib.request
 import urllib.parse
 import logging
 from typing import Tuple, Optional
+import os
 
-from models.models import Deposits, Transactions, Activity, ForeversExchangeStats
+from models.models import Deposits, Transactions, Activity
 
 logger = logging.getLogger(__name__)
 
-TESTNET_TONCENTER = "https://testnet.toncenter.com/api/v2"
+TONCENTER_BASE = os.getenv("TONCENTER_BASE_URL", "https://testnet.toncenter.com/api/v2")
+TONCENTER_API_KEY = os.getenv("TONCENTER_API_KEY")
 RECEIVER_ADDRESS = "0QBgEwEKpmG4yPvn7-_VqljYE2s88oI6v7R2Vu_E8TvHjMGG"  # Provided testnet address
 GATEWAY_ID = 8
 
@@ -22,8 +24,13 @@ class CryptoTonService:
     def _http_get_json(url: str, params: Optional[dict] = None) -> dict:
         if params:
             url = f"{url}?{urllib.parse.urlencode(params)}"
-        req = urllib.request.Request(url, headers={'User-Agent': 'DBDC-Bot/1.0'})
-        with urllib.request.urlopen(req, timeout=10) as resp:
+        headers = {
+            'User-Agent': 'DBDC-Bot/1.0'
+        }
+        if TONCENTER_API_KEY:
+            headers['X-API-Key'] = TONCENTER_API_KEY
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=15) as resp:
             return json.loads(resp.read().decode('utf-8'))
 
     @staticmethod
