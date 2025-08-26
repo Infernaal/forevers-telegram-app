@@ -272,8 +272,9 @@ const handlePurchase = async () => {
       const fromAddr = getAddress()
       if (!fromAddr) throw new Error('Wallet is not connected')
 
-      // initiate order with address so backend can bind it
-      const initRes = await CryptoPaymentService.initiate({ foreversDetails: items, tonAddress: fromAddr })
+      // initiate order with address and network chain so backend selects the right network
+      const chain = getChain()
+      const initRes = await CryptoPaymentService.initiate({ foreversDetails: items, tonAddress: fromAddr, chain })
 
       await sendTransaction(initRes.to_address, initRes.amount_nano, initRes.valid_until)
 
