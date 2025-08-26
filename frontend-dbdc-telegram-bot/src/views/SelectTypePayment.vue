@@ -146,6 +146,8 @@ import ConfirmExchangeModal from '../components/ConfirmExchangeModal.vue'
 import { useCart } from '../composables/useCart.js'
 import { formatUSDPrefix } from '../utils/formatNumber.js'
 import { ForeversPurchaseService } from '../services/foreversPurchaseService.js'
+import { TonCryptoService } from '../services/tonCryptoService.js'
+import { TonConnectUI } from '@tonconnect/ui'
 
 const router = useRouter()
 const route = useRoute()
