@@ -133,7 +133,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed, watch } from 'vue'
+import { ref, onMounted, computed, watch, onUnmounted } from 'vue'
 import { useApiErrorNotifier } from '../composables/useApiErrorNotifier.js'
 import { useRouter, useRoute } from 'vue-router'
 import BottomNavigation from '../components/BottomNavigation.vue'
@@ -146,6 +146,8 @@ import ConfirmExchangeModal from '../components/ConfirmExchangeModal.vue'
 import { useCart } from '../composables/useCart.js'
 import { formatUSDPrefix } from '../utils/formatNumber.js'
 import { ForeversPurchaseService } from '../services/foreversPurchaseService.js'
+import { useTonConnect } from '../composables/useTonConnect.js'
+import { TonConnectService } from '../services/tonConnectService.js'
 
 const router = useRouter()
 const route = useRoute()
