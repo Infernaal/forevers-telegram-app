@@ -230,7 +230,7 @@ const handleBack = () => {
   router.go(-1)
 }
 
-const { ensureConnected, getAddress, sendTransaction, isConnected } = useTonConnect()
+const { ensureConnected, getAddress, getChain, sendTransaction, isConnected } = useTonConnect()
 
 const primaryActionLabel = computed(() => {
   if (selectedPayment.value === 'crypto' && !isConnected.value) return 'Connect Wallet'
