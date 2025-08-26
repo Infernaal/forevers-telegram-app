@@ -5,6 +5,7 @@ aiomysql
 python-dotenv
 pydantic
 pydantic-core
+httpx
 starlette
 aiosmtplib
 email-validator

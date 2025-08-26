@@ -56,11 +56,11 @@
         <!-- USDT Crypto Wallet -->
         <div
           class="bg-white border rounded-xl p-4 flex flex-col items-center gap-2 cursor-pointer transition-all col-span-1 relative"
-          :class="selectedPayment === 'usdt' ? 'border-green-500 bg-green-50' : 'border-gray-200'"
-          @click="selectPayment('usdt')"
+          :class="selectedPayment === 'crypto' ? 'border-green-500 bg-green-50' : 'border-gray-200'"
+          @click="selectPayment('crypto')"
         >
           <!-- Selected Checkmark -->
-          <div v-if="selectedPayment === 'usdt'" class="absolute top-3 right-3 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center">
+          <div v-if="selectedPayment === 'crypto'" class="absolute top-3 right-3 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center">
             <svg width="8" height="8" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M8.80292 1.37621C8.42688 1.17372 8.00745 1.56423 7.76157 1.79564C7.19753 2.34524 6.72025 2.98162 6.18509 3.56015C5.5921 4.19653 5.0425 4.8329 4.43505 5.45484C4.08793 5.80196 3.71189 6.178 3.48048 6.6119C2.9598 6.10566 2.51145 5.55606 1.93292 5.10773C1.51349 4.78954 0.819255 4.55813 0.833719 5.32468C0.862645 6.32266 1.7449 7.39293 2.39574 8.07268C2.67054 8.36194 3.03212 8.66567 3.45155 8.68013C3.95776 8.70906 4.47843 8.1016 4.78216 7.76895C5.31732 7.19042 5.75122 6.53956 6.24294 5.94659C6.87932 5.16558 7.53016 4.39901 8.15208 3.60354C8.54258 3.11179 9.77195 1.89686 8.80292 1.37621ZM1.47007 5.26682C1.45561 5.26682 1.44115 5.26682 1.41222 5.28126C1.35437 5.26682 1.31098 5.25234 1.25313 5.22341C1.29652 5.19448 1.36883 5.20895 1.47007 5.26682Z" fill="white"/>
             </svg>
@@ -146,6 +146,8 @@ import ConfirmExchangeModal from '../components/ConfirmExchangeModal.vue'
 import { useCart } from '../composables/useCart.js'
 import { formatUSDPrefix } from '../utils/formatNumber.js'
 import { ForeversPurchaseService } from '../services/foreversPurchaseService.js'
+import { CryptoPaymentService } from '../services/cryptoPaymentService.js'
+import { useTonConnect } from '../composables/useTonConnect.js'
 
 const router = useRouter()
 const route = useRoute()
@@ -227,6 +229,8 @@ const handleBack = () => {
   router.go(-1)
 }
 
+const { ensureConnected, getAddress, sendTransaction } = useTonConnect()
+
 const handlePurchase = async () => {
   if (!selectedPayment.value || !termsAccepted.value) {
     return
@@ -247,6 +251,31 @@ const handlePurchase = async () => {
 
     // Show confirmation modal
     showConfirmModal.value = true
+  } else if (selectedPayment.value === 'crypto') {
+    try {
+      isProcessingPurchase.value = true
+      const items = (purchaseDetails.value?.foreversDetails || []).map(d => ({ code: d.code, amount: d.amount, usdRate: d.usdRate, totalCost: d.totalCost }))
+      if (items.length === 0) throw new Error('No items to purchase')
+
+      const initRes = await CryptoPaymentService.initiate({ foreversDetails: items, tonAddress: '' })
+
+      await ensureConnected()
+      const fromAddr = getAddress()
+
+      await sendTransaction(initRes.to_address, initRes.amount_nano, initRes.valid_until)
+
+      await CryptoPaymentService.confirm({ order_id: initRes.order_id, fromAddress: fromAddr })
+
+      if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
+        foreversAmount.value = purchaseDetails.value.foreversAmount
+      }
+      successMessage.value = 'Forevers purchased successfully using Crypto wallet!'
+      showSuccessModal.value = true
+    } catch (e) {
+      showApiError('forevers_purchase', { status: 400, message: e.message || 'Crypto payment failed' })
+    } finally {
+      isProcessingPurchase.value = false
+    }
   } else {
     // For other payment methods (like USDT), show success modal directly
     // This preserves existing behavior for non-wallet payments

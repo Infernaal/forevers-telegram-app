@@ -14,7 +14,8 @@
     "libphonenumber-js": "^1.12.11",
     "vue": "^3.5.17",
     "vue-router": "^4.5.1",
-    "world-countries": "^5.1.0"
+    "world-countries": "^5.1.0",
+    "@tonconnect/sdk": "^3.0.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.0",
