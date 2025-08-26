@@ -7,7 +7,7 @@ from dependencies.current_user import get_current_user_id
 from schemas.crypto_ton import TonInitRequest, TonInitResponse, TonVerifyRequest, TonVerifyResponse
 from services.crypto_ton_service import CryptoTonService
 
-router = APIRouter(prefix="/crypto/ton", tags=["TON Crypto"])
+router = APIRouter(prefix="/forevers/crypto", tags=["TON Crypto"])
 
 @router.post("/init", response_model=TonInitResponse)
 async def init_ton_purchase(
