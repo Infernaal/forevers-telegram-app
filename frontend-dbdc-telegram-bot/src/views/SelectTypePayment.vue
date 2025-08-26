@@ -372,8 +372,8 @@ const handleTonPayment = async () => {
       forevers_details: purchaseDetails.value?.foreversDetails || []
     }
 
-    // Process TON payment
-    const result = await TonConnectService.processTonPayment(paymentData, {
+    // Process crypto payment
+    const result = await TonConnectService.processCryptoPayment(paymentData, {
       sendTransaction: sendTonTransaction
     })
 
