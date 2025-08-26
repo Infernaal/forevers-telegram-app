@@ -9,18 +9,23 @@ const isLoading = ref(false)
 export function useTonConnect() {
   const initTonConnect = async () => {
     try {
+      console.log('🔗 Initializing TON Connect...')
       tonConnectUI.value = new TonConnectUI({
         manifestUrl: 'https://dbdc-mini.dubadu.com/tonconnect-manifest.json'
       })
+      console.log('✅ TON Connect UI created')
 
       // Listen for wallet connection status changes
       tonConnectUI.value.onStatusChange((walletInfo) => {
+        console.log('🔄 TON Connect status change:', walletInfo)
         if (walletInfo) {
           isConnected.value = true
           wallet.value = walletInfo
+          console.log('✅ Wallet connected:', walletInfo.device?.appName)
         } else {
           isConnected.value = false
           wallet.value = null
+          console.log('❌ Wallet disconnected')
         }
       })
 
@@ -28,22 +33,29 @@ export function useTonConnect() {
       if (tonConnectUI.value.wallet) {
         isConnected.value = true
         wallet.value = tonConnectUI.value.wallet
+        console.log('🔄 Restored existing wallet connection')
       }
 
+      console.log('✅ TON Connect initialized successfully')
     } catch (error) {
-      console.error('Failed to initialize TON Connect:', error)
+      console.error('❌ Failed to initialize TON Connect:', error)
     }
   }
 
   const connectWallet = async () => {
-    if (!tonConnectUI.value) return false
-    
+    if (!tonConnectUI.value) {
+      console.error('❌ TON Connect UI not initialized')
+      return false
+    }
+
     try {
+      console.log('🔗 Attempting to connect wallet...')
       isLoading.value = true
       await tonConnectUI.value.connectWallet()
+      console.log('✅ Wallet connection initiated')
       return true
     } catch (error) {
-      console.error('Failed to connect wallet:', error)
+      console.error('❌ Failed to connect wallet:', error)
       return false
     } finally {
       isLoading.value = false
