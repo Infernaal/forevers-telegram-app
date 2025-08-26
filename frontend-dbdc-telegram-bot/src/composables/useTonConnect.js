@@ -4,7 +4,7 @@ let connector
 
 export function useTonConnect() {
   if (!connector) {
-    connector = new TonConnect({ manifestUrl: '/tonconnect-manifest.json' })
+    connector = new TonConnect({ manifestUrl: '../tonconnect-manifest.json' })
   }
 
   const isConnected = () => !!connector.account
