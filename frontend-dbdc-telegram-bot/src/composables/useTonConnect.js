@@ -47,8 +47,12 @@ export function useTonConnect() {
   const getAddress = () => addressRef.value || ui?.account?.address || null
 
   const sendTransaction = async (to, amountNano, validUntil) => {
+    const account = ui.account
     const tx = {
-      validUntil,
+      // use provided validUntil or default to +10 minutes
+      validUntil: validUntil || Math.floor(Date.now() / 1000) + 600,
+      // ensure we send on the same network as the connected wallet
+      network: account?.chain,
       messages: [{ address: to, amount: amountNano.toString() }]
     }
     const boc = await ui.sendTransaction(tx)
