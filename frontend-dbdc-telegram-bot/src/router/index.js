@@ -20,6 +20,7 @@ import EmailAlreadyRegisteredView from '../views/EmailAlreadyRegisteredView.vue'
 import PhoneAlreadyRegisteredView from '../views/PhoneAlreadyRegisteredView.vue'
 import RegistrationErrorView from '../views/RegistrationErrorView.vue'
 import GeneratedPasswordView from '../views/GeneratedPasswordView.vue'
+import TonTestView from '../views/TonTestView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -128,6 +129,11 @@ const router = createRouter({
       path: '/generated-password',
       name: 'generated-password',
       component: GeneratedPasswordView,
+    },
+    {
+      path: '/ton-test',
+      name: 'ton-test',
+      component: TonTestView,
     },
     // Redirect /home to /wallet as default
     {
