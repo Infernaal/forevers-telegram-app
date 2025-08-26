@@ -78,8 +78,8 @@ class CryptoTonService:
                 uid=user_id,
                 txid=txid,
                 method=GATEWAY_ID,
-                amount=str(usd_amount_q),
-                currency='USD',
+                amount=str(forevers_amount),
+                currency='FOREVERS',
                 requested_on=now,
                 processed_on=0,
                 reference_number=txid,
@@ -147,7 +147,8 @@ class CryptoTonService:
                 return True, {'confirmed': True, 'already_confirmed': True}, "Already confirmed"
 
             # Determine expected amount and init time
-            usd_amount = Decimal(str(deposit.amount))
+            forevers_amount = Decimal(str(deposit.amount))
+            usd_amount = (forevers_amount * Decimal(str(deposit.rate_at_deposit))).quantize(Decimal('0.01'))
             rate_usd_per_ton = CryptoTonService._fetch_ton_usd_rate()
             ton_amount = (usd_amount / rate_usd_per_ton).quantize(Decimal('0.000000001'))
             amount_nano = int((ton_amount * Decimal(1_000_000_000)).to_integral_value())
@@ -170,8 +171,8 @@ class CryptoTonService:
                 recipient=deposit.id,
                 description=f"Forevers {deposit.type} purchased via TON (User ID: {user_id})",
                 deposit_via=GATEWAY_ID,
-                amount=str(usd_amount),
-                currency='USD',
+                amount=str(forevers_amount),
+                currency='FOREVERS',
                 fee='',
                 status=1,
                 created=now
@@ -184,8 +185,8 @@ class CryptoTonService:
                 uid=user_id,
                 deposit_via=GATEWAY_ID,
                 u_field_1=str(deposit.id),
-                amount=str(usd_amount),
-                currency='USD',
+                amount=str(forevers_amount),
+                currency='FOREVERS',
                 status=3,
                 created=now
             )
