@@ -1,5 +1,7 @@
 {
-  "url": "http://localhost:5173",
-  "name": "DBDC Forevers Dev",
-  "iconUrl": "/dbd-logo.svg"
+  "url": "https://dbdc-mini.dubadu.com",
+  "name": "DBDC Forevers",
+  "iconUrl": "/dbd-logo.svg",
+  "privacyPolicyUrl": "https://dbdcusa.com/uploads/docs/04_ENG_DBD_Capital_Privacy_Policy.docx.pdf",
+  "termsOfUseUrl": "https://dbd.capital/uploads/docs/DBDC_Terms_and_Conditions_of_Website_Use_ENG.pdf"
 }
