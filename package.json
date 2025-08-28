@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "@builder.io/sdk-vue": "^4.2.3"
+  },
+  "devDependencies": {
+    "vite": "^7.1.3"
   }
 }

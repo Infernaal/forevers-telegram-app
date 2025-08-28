@@ -95,7 +95,9 @@
     <div class="fixed left-0 right-0 z-[9999]" style="bottom: 89px;">
       <CartBottomComponent
         :total-amount="numericTotal"
-        :disabled="!selectedPayment || !termsAccepted || isProcessingPurchase"
+        :disabled="isBuyButtonDisabled"
+        :button-text="buyButtonText"
+        :loading="isConnectingWallet || isProcessingPurchase"
         @back="handleBack"
         @purchase="handlePurchase"
       />
@@ -129,11 +131,22 @@
       @close="closeSuccessModal"
       @confirm="closeSuccessModal"
     />
+
+    <!-- Crypto Transaction Modal -->
+    <CryptoTransactionModal
+      :is-visible="showCryptoModal"
+      :status="cryptoModalStatus"
+      :transaction-data="cryptoTransactionData"
+      :polling-attempts="cryptoPollingAttempts"
+      :custom-message="cryptoCustomMessage"
+      :is-processing="isProcessingPurchase"
+      @close="closeCryptoModal"
+    />
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, computed, watch } from 'vue'
+import { ref, onMounted, computed, watch, onUnmounted } from 'vue'
 import { useApiErrorNotifier } from '../composables/useApiErrorNotifier.js'
 import { useRouter, useRoute } from 'vue-router'
 import BottomNavigation from '../components/BottomNavigation.vue'
@@ -143,9 +156,11 @@ import TermsCheckbox from '../components/TermsCheckbox.vue'
 import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
 import SuccessModal from '../components/SuccessModal.vue'
 import ConfirmExchangeModal from '../components/ConfirmExchangeModal.vue'
+import CryptoTransactionModal from '../components/CryptoTransactionModal.vue'
 import { useCart } from '../composables/useCart.js'
 import { formatUSDPrefix } from '../utils/formatNumber.js'
 import { ForeversPurchaseService } from '../services/foreversPurchaseService.js'
+import { tonConnectService } from '../services/tonConnectService.js'
 
 const router = useRouter()
 const route = useRoute()
@@ -156,6 +171,16 @@ const termsAccepted = ref(false)
 const totalAmount = ref('0') // USD total (locale string)
 const foreversAmount = ref(0) // numeric forevers amount
 const isProcessingPurchase = ref(false) // loading state for purchase
+
+// Ton Connect related state
+const isWalletConnected = ref(false)
+const walletAddress = ref('')
+const isConnectingWallet = ref(false)
+const showCryptoModal = ref(false)
+const cryptoModalStatus = ref('processing')
+const cryptoTransactionData = ref({})
+const cryptoPollingAttempts = ref(0)
+const cryptoCustomMessage = ref('')
 
 // Robust locale-aware parser: handles forms like "26,106.00", "187,5", "1 234,56"
 function parseLocaleAmount(val) {
@@ -203,7 +228,32 @@ const { showError: showApiError } = useApiErrorNotifier()
 
 // Computed properties
 const isAnyModalOpen = computed(() => {
-  return showTermsModal.value || showSuccessModal.value || showConfirmModal.value
+  return showTermsModal.value || showSuccessModal.value || showConfirmModal.value || showCryptoModal.value
+})
+
+// Check if buy button should be disabled
+const isBuyButtonDisabled = computed(() => {
+  if (!selectedPayment.value || !termsAccepted.value || isProcessingPurchase.value) {
+    return true
+  }
+
+  // For crypto payments, require wallet connection
+  if (selectedPayment.value === 'usdt' && !isWalletConnected.value) {
+    return true
+  }
+
+  return false
+})
+
+// Get button text based on payment method and wallet status
+const buyButtonText = computed(() => {
+  if (selectedPayment.value === 'usdt') {
+    if (isConnectingWallet.value) {
+      return 'Connecting...'
+    }
+    return isWalletConnected.value ? 'Buy Forevers' : 'Connect Wallet'
+  }
+  return 'Buy Forevers'
 })
 
 // Methods
@@ -232,6 +282,12 @@ const handlePurchase = async () => {
     return
   }
 
+  // Handle crypto payment
+  if (selectedPayment.value === 'usdt') {
+    await handleCryptoPurchase()
+    return
+  }
+
   // Only show confirmation modal for bonus and loyalty payments
   if (selectedPayment.value === 'bonus' || selectedPayment.value === 'loyalty') {
     // Prepare confirmation modal data
@@ -247,18 +303,111 @@ const handlePurchase = async () => {
 
     // Show confirmation modal
     showConfirmModal.value = true
-  } else {
-    // For other payment methods (like USDT), show success modal directly
-    // This preserves existing behavior for non-wallet payments
-    if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
-      foreversAmount.value = purchaseDetails.value.foreversAmount
+  }
+}
+
+// Handle crypto purchase flow
+const handleCryptoPurchase = async () => {
+  try {
+    isProcessingPurchase.value = true
+
+    // Check if wallet is connected
+    if (!isWalletConnected.value) {
+      await connectTonWallet()
+      if (!isWalletConnected.value) {
+        return // User cancelled or connection failed
+      }
     }
 
-    // Set success message for non-wallet payments
-    const paymentMethodName = getPaymentMethodDisplayName(selectedPayment.value)
-    successMessage.value = `Forevers purchased successfully using ${paymentMethodName} wallet!`
+    // Prepare crypto purchase
+    const amountUsd = numericTotal.value
+    const rateAsDeposit = purchaseDetails.value?.purchaseSummary?.averagePrice || null
 
-    showSuccessModal.value = true
+    console.log('Starting crypto purchase:', { amountUsd, rateAsDeposit })
+
+    // Complete crypto purchase flow
+    const result = await tonConnectService.completeCryptoPurchase(amountUsd, rateAsDeposit)
+
+    if (result.success) {
+      // Show verification modal
+      cryptoTransactionData.value = result.initData
+      cryptoModalStatus.value = 'processing'
+      cryptoPollingAttempts.value = 0
+      showCryptoModal.value = true
+
+      // Start polling for verification
+      tonConnectService.startTransactionPolling(
+        result.requestId,
+        (statusResult, attempts) => {
+          cryptoPollingAttempts.value = attempts
+
+          if (statusResult.transaction_status === 'success') {
+            cryptoModalStatus.value = 'success'
+            cryptoCustomMessage.value = 'Your crypto payment has been verified! Forevers will be credited to your account.'
+          } else if (statusResult.transaction_status === 'failed' || statusResult.transaction_status === 'invalid') {
+            cryptoModalStatus.value = 'failed'
+            cryptoCustomMessage.value = statusResult.message || 'Transaction verification failed.'
+          }
+        }
+      )
+    }
+  } catch (error) {
+    console.error('Crypto purchase error:', error)
+    showApiError('crypto_purchase', {
+      status: 400,
+      message: error.message || 'Crypto purchase failed. Please try again.'
+    })
+  } finally {
+    isProcessingPurchase.value = false
+  }
+}
+
+// Connect TON wallet
+const connectTonWallet = async () => {
+  try {
+    isConnectingWallet.value = true
+
+    // Initialize and connect
+    await tonConnectService.init()
+    const wallet = await tonConnectService.connectWallet()
+
+    if (wallet) {
+      isWalletConnected.value = true
+      walletAddress.value = tonConnectService.getWalletAddress()
+      console.log('Wallet connected:', walletAddress.value)
+    }
+  } catch (error) {
+    console.error('Wallet connection error:', error)
+    showApiError('wallet_connection', {
+      status: 400,
+      message: error.message || 'Failed to connect wallet. Please try again.'
+    })
+  } finally {
+    isConnectingWallet.value = false
+  }
+}
+
+// Disconnect TON wallet
+const disconnectTonWallet = async () => {
+  try {
+    await tonConnectService.disconnectWallet()
+    isWalletConnected.value = false
+    walletAddress.value = ''
+    console.log('Wallet disconnected')
+  } catch (error) {
+    console.error('Wallet disconnection error:', error)
+  }
+}
+
+// Close crypto modal
+const closeCryptoModal = () => {
+  showCryptoModal.value = false
+
+  // If transaction was successful, navigate to wallet view
+  if (cryptoModalStatus.value === 'success') {
+    clearCart()
+    sessionStorage.removeItem('purchaseDetails')
+    router.push({ name: 'wallet', query: { loyalty: loyaltyBalance.value, bonus: bonusBalance.value } })
   }
 }
 
@@ -432,6 +581,44 @@ onMounted(() => {
 
 
   fetchWalletData()
+
+  // Initialize TonConnect
+  initializeTonConnect()
+})
+
+// Initialize TonConnect and check connection status
+const initializeTonConnect = async () => {
+  try {
+    await tonConnectService.init()
+
+    // Check if wallet is already connected
+    if (tonConnectService.isWalletConnected()) {
+      isWalletConnected.value = true
+      walletAddress.value = tonConnectService.getWalletAddress()
+      console.log('Wallet already connected:', walletAddress.value)
+    }
+
+    // Listen for wallet connection changes
+    tonConnectService.onStatusChange((wallet) => {
+      if (wallet) {
+        isWalletConnected.value = true
+        walletAddress.value = wallet.account?.address || ''
+      } else {
+        isWalletConnected.value = false
+        walletAddress.value = ''
+      }
+    })
+  } catch (error) {
+    console.error('TonConnect initialization error:', error)
+  }
+}
+
+// Cleanup on component unmount
+onUnmounted(() => {
+  // Remove TonConnect event listeners
+  if (tonConnectService.tonConnect) {
+    tonConnectService.off()
+  }
 })
 </script>
 
