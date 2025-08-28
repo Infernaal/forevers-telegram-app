@@ -11,3 +11,4 @@ email-validator
 redis
 bcrypt
 qrcode[pil]
+httpx
