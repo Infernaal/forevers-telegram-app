@@ -149,6 +149,7 @@ import { formatUSDPrefix } from '../utils/formatNumber.js'
 import { ForeversPurchaseService } from '../services/foreversPurchaseService.js'
 import { useTonConnect } from '../composables/useTonConnect.js'
 import cryptoService from '../services/cryptoService.js'
+import { mapTonConnectError } from '../utils/tonErrors.js'
 
 const router = useRouter()
 const route = useRoute()
@@ -253,7 +254,8 @@ const handlePurchase = async () => {
         try {
           await tonConnect()
         } catch (e) {
-          showApiError('crypto_init', { status: 400, message: 'Wallet connection canceled' })
+          const msg = mapTonConnectError(e)
+          showApiError('crypto_init', { status: 400, message: msg })
           return
         }
       }
@@ -325,7 +327,8 @@ const startTonPurchase = async () => {
     if (verifyId) query.id = String(verifyId)
     router.push({ path: '/loader', query })
   } catch (error) {
-    showApiError('crypto_init', { status: 400, message: error?.message || 'Failed to start crypto payment' })
+    const msg = mapTonConnectError(error)
+    showApiError('crypto_init', { status: 400, message: msg })
   } finally {
     isProcessingPurchase.value = false
   }
