@@ -152,6 +152,9 @@ import { CryptoService } from '../services/cryptoService.js'
 const router = useRouter()
 const route = useRoute()
 
+// TON Connect
+const { connect: connectTon, sendTransaction, isConnected: tonConnected } = useTonConnect()
+
 // Reactive data
 const selectedPayment = ref('bonus') // default
 const termsAccepted = ref(false)
