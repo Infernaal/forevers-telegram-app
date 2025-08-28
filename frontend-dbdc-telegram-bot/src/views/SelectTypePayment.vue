@@ -233,15 +233,11 @@ const isAnyModalOpen = computed(() => {
 
 // Check if buy button should be disabled
 const isBuyButtonDisabled = computed(() => {
+  // Disable only when payment not selected, terms not accepted, or processing
   if (!selectedPayment.value || !termsAccepted.value || isProcessingPurchase.value) {
     return true
   }
-
-  // For crypto payments, require wallet connection
-  if (selectedPayment.value === 'usdt' && !isWalletConnected.value) {
-    return true
-  }
-
+  // Allow clicking even if wallet not connected (will trigger connect flow)
   return false
 })
 
