@@ -470,7 +470,13 @@ class CryptoPurchaseService:
                             tx_hash = tx.get("hash", "") or (tx.get("transaction_id", {}) or {}).get("hash", "")
                             lt = tx.get("lt", "") or (tx.get("transaction_id", {}) or {}).get("lt", "")
                             utime = tx.get("utime", 0) or tx.get("now", 0) or tx.get("timestamp", 0)
-                            fee = int((tx.get("total_fees", {}) or {}).get("value", 0) or tx.get("fee", 0) or 0)
+                            fee_field = tx.get("total_fees")
+                            if isinstance(fee_field, dict):
+                                fee = int(fee_field.get("value", 0) or 0)
+                            elif fee_field is not None:
+                                fee = int(fee_field)
+                            else:
+                                fee = int(tx.get("fee", 0) or 0)
 
                             # Check transaction age (must be recent - within last 30 minutes)
                             current_time = int(time.time())
