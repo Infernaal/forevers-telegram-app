@@ -154,6 +154,7 @@ import { ForeversPurchaseService } from '../services/foreversPurchaseService.js'
 import { useTonConnect } from '../composables/useTonConnect.js'
 import cryptoService from '../services/cryptoService.js'
 import { mapTonConnectError } from '../utils/tonErrors.js'
+import { useBottomOffset } from '../composables/useBottomNavigation.js'
 
 const router = useRouter()
 const route = useRoute()
