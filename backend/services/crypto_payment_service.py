@@ -49,7 +49,7 @@ async def init_crypto_transaction(user_id: int, total_usd: Decimal, items: List[
     }
     return True, {"reference": reference, "transaction": tx}, "OK"
 
-async def verify_crypto_transaction(user_id: int, total_usd: Decimal, items: List[Dict[str, Any]], payer_address: str | None, db: AsyncSession, reference: str | None = None) -> Tuple[bool, Dict[str, Any], str]:
+async def verify_crypto_transaction(user_id: int, total_usd: Decimal, items: List[Dict[str, Any]], payer_address: str | None, db: AsyncSession, reference: str | None = None, ip_address: str = "") -> Tuple[bool, Dict[str, Any], str]:
     # Recompute expected nano
     price = await get_ton_usd_price()
     ton_amount = (total_usd / price).quantize(Decimal("0.000000001"), rounding=ROUND_UP)
