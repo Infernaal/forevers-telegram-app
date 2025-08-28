@@ -12,6 +12,20 @@ const walletInfo = ref(null)
 const MANIFEST_URL = `${window.location.origin}/tonconnect-manifest.json`
 const REQUIRED_CHAIN = import.meta.env.VITE_TON_NETWORK || 'ton-testnet'
 
+function applyAccountState(acc, wallet) {
+  const hasAddress = !!acc && typeof acc.address === 'string' && acc.address.length > 0
+  const chainOk = !!acc && (!REQUIRED_CHAIN || acc.chain === REQUIRED_CHAIN)
+  if (hasAddress && chainOk) {
+    connected.value = true
+    account.value = acc
+    walletInfo.value = wallet || null
+  } else {
+    connected.value = false
+    account.value = null
+    walletInfo.value = wallet || null
+  }
+}
+
 function ensureInstance() {
   if (!tonConnectUIRef.instance) {
     tonConnectUIRef.instance = new TonConnectUI({
@@ -22,17 +36,15 @@ function ensureInstance() {
     // Sync initial restored connection
     tonConnectUIRef.instance.connectionRestored.then(() => {
       const acc = tonConnectUIRef.instance.account
-      connected.value = !!acc
-      account.value = acc || null
-      walletInfo.value = tonConnectUIRef.instance.wallet || null
+      const wallet = tonConnectUIRef.instance.wallet || null
+      applyAccountState(acc, wallet)
     })
 
     // Keep reactive state in sync on any status change (connect/disconnect/network change)
     tonConnectUIRef.instance.onStatusChange(() => {
       const acc = tonConnectUIRef.instance.account
-      connected.value = !!acc
-      account.value = acc || null
-      walletInfo.value = tonConnectUIRef.instance.wallet || null
+      const wallet = tonConnectUIRef.instance.wallet || null
+      applyAccountState(acc, wallet)
     })
   }
   return tonConnectUIRef.instance
@@ -46,11 +58,9 @@ export function useTonConnect() {
   async function connect() {
     const ui = getUI()
 
-    // If already connected, return immediately
-    if (ui.account) {
-      connected.value = true
-      account.value = ui.account
-      walletInfo.value = ui.wallet
+    // If already connected to a valid account, return immediately
+    if (ui.account && ui.account.address && (!REQUIRED_CHAIN || ui.account.chain === REQUIRED_CHAIN)) {
+      applyAccountState(ui.account, ui.wallet)
       return ui.account
     }
 
@@ -58,10 +68,8 @@ export function useTonConnect() {
     return await new Promise((resolve) => {
       const unsubscribe = ui.onStatusChange(() => {
         const acc = ui.account
-        if (acc) {
-          connected.value = true
-          account.value = acc
-          walletInfo.value = ui.wallet
+        if (acc && acc.address) {
+          applyAccountState(acc, ui.wallet)
           unsubscribe()
           resolve(acc)
         }
@@ -90,9 +98,14 @@ export function useTonConnect() {
 
   async function ensureConnected() {
     const ui = getUI()
-    if (!ui.account) {
+    if (!ui.account || !ui.account.address) {
       const acc = await connect()
-      if (!acc) throw new Error('Wallet not connected')
+      if (!acc || !acc.address) throw new Error('Wallet not connected')
+    }
+    // Enforce chain after connection
+    if (REQUIRED_CHAIN && ui.account && ui.account.chain !== REQUIRED_CHAIN) {
+      await disconnect()
+      throw new Error('Wrong wallet network')
     }
     return ui.account
   }
@@ -105,7 +118,7 @@ export function useTonConnect() {
 
   async function sendTransaction(tx) {
     const ui = getUI()
-    if (!ui.account) {
+    if (!ui.account || !ui.account.address) {
       await ensureConnected()
     }
     return await ui.sendTransaction(tx)
