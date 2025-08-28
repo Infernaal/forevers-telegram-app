@@ -238,10 +238,13 @@ const handlePurchase = async () => {
 
   if (selectedPayment.value === 'usdt') {
     try {
+      // If wallet is not connected yet, just open the connect modal and exit.
+      // User will press the button again to proceed with purchase after connecting.
       if (!tonConnected.value) {
         await connectTon()
+        return
       }
-      if (!tonConnected.value) return
+      // Require terms acceptance before any crypto flow
       if (!termsAccepted.value) return
       await handleCryptoPurchaseFlow()
     } catch (e) {
