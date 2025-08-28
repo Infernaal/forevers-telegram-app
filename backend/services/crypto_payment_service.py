@@ -10,6 +10,8 @@ from models.models import Deposits, Transactions, Activity
 from utils.random_hash import random_hash
 from .ton_price_service import get_ton_usd_price
 from .toncenter_service import TonCenter
+from .forevers_prices_service import extract_base_prices
+from .discount_service import apply_discounts
 
 logger = logging.getLogger(__name__)
 
