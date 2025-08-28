@@ -1,8 +1,13 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dbdc-mini.dubadu.com/api/v1/dbdc'
 
 class CryptoService {
-  async initTonPurchase(usdAmount, walletAddress) {
-    const body = { usd_amount: Number(usdAmount), wallet_address: walletAddress }
+  async initTonPurchase(usdAmount, walletAddress, options = {}) {
+    const body = {
+      usd_amount: Number(usdAmount),
+      wallet_address: walletAddress,
+      ...(options.foreversPrice != null ? { forevers_price: Number(options.foreversPrice) } : {}),
+      ...(options.foreversType ? { forevers_type: String(options.foreversType) } : {})
+    }
     const res = await fetch(`${API_BASE_URL}/forevers/crypto/init`, {
       method: 'POST',
       credentials: 'include',
