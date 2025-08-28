@@ -162,13 +162,18 @@ export class TonConnectService {
       }
 
       // Prepare transaction for TonConnect
+      // Only pass payload if it's a valid base64 BOC; otherwise omit (plain text is invalid)
+      const maybePayload = (typeof transactionData.payload === 'string' && /^[A-Za-z0-9+/]+={0,2}$/.test(transactionData.payload))
+        ? transactionData.payload
+        : undefined
+
       const transaction = {
         validUntil: Math.floor(Date.now() / 1000) + 300, // 5 minutes
         messages: [
           {
             address: transactionData.to,
             amount: this.tonToNanoton(transactionData.amount_ton),
-            payload: transactionData.payload || undefined
+            payload: maybePayload
           }
         ]
       }
@@ -347,3 +352,4 @@ export class TonConnectService {
 
 // Singleton instance
 export const tonConnectService = new TonConnectService()
+
