@@ -361,60 +361,140 @@ class CryptoPurchaseService:
         transaction_id: Optional[str]
     ) -> Tuple[bool, Dict[str, Any]]:
         """
-        Verify transaction on TON blockchain
-        
-        TODO: Implement actual blockchain verification using TON APIs
-        For now, this is a placeholder that simulates verification
-        
+        Verify transaction on TON testnet blockchain using TONCenter API
+
         Args:
             user_wallet: Sender wallet address
-            receiver_wallet: Receiver wallet address  
+            receiver_wallet: Receiver wallet address
             expected_amount_ton: Expected amount in TON
             transaction_id: Transaction hash/ID if available
-            
+
         Returns:
             Tuple of (is_verified, blockchain_data)
         """
-        
-        # PLACEHOLDER IMPLEMENTATION
-        # In a real implementation, you would:
-        # 1. Use TON blockchain APIs (like toncenter.com API or ton.org APIs)
-        # 2. Query for transactions from user_wallet to receiver_wallet
-        # 3. Check amounts and other details match
-        # 4. Verify transaction is confirmed
-        
-        # For demonstration, we'll return a simulated response
-        # In production, replace this with actual blockchain verification
-        
+
         try:
-            # Simulate API call delay
-            import asyncio
-            await asyncio.sleep(0.1)
-            
-            # Simulate verification result (80% success rate for demo)
-            import random
-            is_verified = random.random() > 0.2  # 80% success rate
-            
-            if is_verified:
-                blockchain_data = {
-                    "transaction_hash": f"demo_hash_{random.randint(1000, 9999)}",
-                    "block_number": random.randint(1000000, 2000000),
-                    "confirmations": random.randint(10, 50),
-                    "gas_used": random.randint(20000, 50000),
-                    "verified_amount": expected_amount_ton,
-                    "verified_at": int(time.time())
-                }
-            else:
-                blockchain_data = {
+            # TONCenter testnet API endpoint
+            base_url = "https://testnet.toncenter.com/api/v2"
+
+            # Convert expected amount to nanotons for comparison
+            expected_amount_nanotons = int(float(expected_amount_ton) * 1000000000)
+
+            # Allow some tolerance for gas fees (±1% of expected amount)
+            tolerance = max(10000000, int(expected_amount_nanotons * 0.01))  # 0.01 TON minimum tolerance
+            min_amount = expected_amount_nanotons - tolerance
+            max_amount = expected_amount_nanotons + tolerance
+
+            logger.info(f"Verifying transaction: from={user_wallet[:10]}... to={receiver_wallet[:10]}... "
+                       f"expected={expected_amount_ton} TON ({expected_amount_nanotons} nanotons)")
+
+            async with httpx.AsyncClient(timeout=30.0) as client:
+                # Get transactions for the receiver wallet
+                response = await client.get(
+                    f"{base_url}/getTransactions",
+                    params={
+                        "address": receiver_wallet,
+                        "limit": 50,  # Check last 50 transactions
+                        "to_lt": 0,
+                        "archival": True
+                    }
+                )
+
+                if response.status_code != 200:
+                    logger.error(f"TONCenter API error: {response.status_code} - {response.text}")
+                    return False, {"error": f"API request failed: {response.status_code}"}
+
+                data = response.json()
+
+                if not data.get("ok"):
+                    logger.error(f"TONCenter API response not ok: {data}")
+                    return False, {"error": "API response not ok"}
+
+                transactions = data.get("result", [])
+                logger.info(f"Found {len(transactions)} recent transactions for receiver wallet")
+
+                # Look for matching transaction
+                for tx in transactions:
+                    try:
+                        # Get transaction details
+                        in_msg = tx.get("in_msg", {})
+                        if not in_msg:
+                            continue
+
+                        # Check if this is an incoming message
+                        source = in_msg.get("source", "")
+                        destination = in_msg.get("destination", "")
+                        value = int(in_msg.get("value", "0"))
+
+                        # Check if transaction matches our criteria
+                        if (source == user_wallet and
+                            destination == receiver_wallet and
+                            min_amount <= value <= max_amount):
+
+                            # Get additional transaction info
+                            tx_hash = tx.get("transaction_id", {}).get("hash", "")
+                            lt = tx.get("transaction_id", {}).get("lt", "")
+                            utime = tx.get("utime", 0)
+                            fee = int(tx.get("fee", "0"))
+
+                            # Check transaction age (must be recent - within last 30 minutes)
+                            current_time = int(time.time())
+                            max_age = 1800  # 30 minutes
+
+                            if current_time - utime > max_age:
+                                logger.info(f"Transaction too old: {current_time - utime} seconds")
+                                continue
+
+                            # Transaction found and verified!
+                            blockchain_data = {
+                                "transaction_hash": tx_hash,
+                                "logical_time": lt,
+                                "utime": utime,
+                                "source_address": source,
+                                "destination_address": destination,
+                                "value_nanotons": value,
+                                "value_tons": value / 1000000000,
+                                "fee_nanotons": fee,
+                                "fee_tons": fee / 1000000000,
+                                "expected_nanotons": expected_amount_nanotons,
+                                "expected_tons": float(expected_amount_ton),
+                                "tolerance_nanotons": tolerance,
+                                "verified_at": current_time,
+                                "age_seconds": current_time - utime,
+                                "api_source": "toncenter_testnet"
+                            }
+
+                            logger.info(f"Transaction verified successfully: "
+                                       f"hash={tx_hash[:16]}..., value={value} nanotons, "
+                                       f"expected={expected_amount_nanotons}±{tolerance} nanotons")
+
+                            return True, blockchain_data
+
+                    except (ValueError, KeyError, TypeError) as e:
+                        logger.warning(f"Error parsing transaction: {e}")
+                        continue
+
+                # No matching transaction found
+                logger.info(f"No matching transaction found. Checked {len(transactions)} transactions.")
+                return False, {
                     "verification_failed": True,
-                    "reason": "Transaction not found or invalid"
+                    "reason": "No matching transaction found",
+                    "searched_transactions": len(transactions),
+                    "expected_amount_nanotons": expected_amount_nanotons,
+                    "tolerance": tolerance,
+                    "source_wallet": user_wallet,
+                    "destination_wallet": receiver_wallet,
+                    "api_source": "toncenter_testnet"
                 }
-            
-            logger.info(f"Blockchain verification result: verified={is_verified}, "
-                       f"from={user_wallet[:10]}..., to={receiver_wallet[:10]}...")
-            
-            return is_verified, blockchain_data
-            
+
+        except httpx.TimeoutException:
+            logger.error("Timeout while verifying transaction on blockchain")
+            return False, {"error": "Blockchain API timeout"}
+
+        except httpx.RequestError as e:
+            logger.error(f"Network error while verifying transaction: {e}")
+            return False, {"error": f"Network error: {str(e)}"}
+
         except Exception as e:
-            logger.error(f"Error in blockchain verification: {e}")
-            return False, {"error": str(e)}
+            logger.error(f"Unexpected error in blockchain verification: {e}", exc_info=True)
+            return False, {"error": f"Verification error: {str(e)}"}
