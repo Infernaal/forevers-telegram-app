@@ -346,6 +346,61 @@ const closeTermsModal = () => {
   showTermsModal.value = false
 }
 
+async function handleCryptoPurchaseFlow() {
+  isProcessingPurchase.value = true
+  try {
+    if (!purchaseDetails.value?.foreversDetails?.length) {
+      throw new Error('No items to purchase')
+    }
+
+    const items = purchaseDetails.value.foreversDetails.map((d) => ({
+      code: d.code,
+      amount: Number(d.amount),
+      usdRate: Number(d.usdRate),
+      totalCost: Number(d.totalCost)
+    }))
+
+    const initResp = await CryptoService.initCryptoTransaction({
+      total_usd: Number(numericTotal.value.toFixed(2)),
+      items
+    })
+
+    const tx = {
+      validUntil: initResp.transaction.validUntil,
+      messages: [
+        {
+          address: initResp.transaction.to,
+          amount: String(initResp.transaction.amount),
+          payload: initResp.transaction.payload || undefined
+        }
+      ]
+    }
+
+    const result = await sendTransaction(tx)
+
+    const verify = await CryptoService.verifyCryptoTransaction({
+      boc: result?.boc,
+      total_usd: Number(numericTotal.value.toFixed(2)),
+      items
+    })
+
+    if (verify.status === 'success') {
+      if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
+        foreversAmount.value = purchaseDetails.value.foreversAmount
+      }
+      await fetchWalletData()
+      successMessage.value = 'Forevers purchased successfully using Crypto wallet!'
+      showSuccessModal.value = true
+    } else {
+      showApiError('crypto_verify', { message: verify.message || 'Verification failed' })
+    }
+  } catch (e) {
+    showApiError('crypto_flow', { message: e?.message || 'Crypto purchase failed' })
+  } finally {
+    isProcessingPurchase.value = false
+  }
+}
+
 const closeSuccessModal = () => {
   showSuccessModal.value = false
   clearCart() // empty cart after success
