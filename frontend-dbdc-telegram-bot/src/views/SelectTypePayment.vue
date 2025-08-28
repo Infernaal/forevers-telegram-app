@@ -1,7 +1,7 @@
 <template>
   <div class="w-full min-h-screen bg-white font-montserrat flex flex-col">
     <!-- Content Container -->
-    <div class="flex-1 bg-gray-100 rounded-t-2xl p-4 pt-8 pb-40">
+    <div class="flex-1 bg-gray-100 rounded-t-2xl p-4 pt-8" :style="{ paddingBottom: `${bottomOffset + 180}px` }">
 
 
       <!-- Payment Methods Grid -->
