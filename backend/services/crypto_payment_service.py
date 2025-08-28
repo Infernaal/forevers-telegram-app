@@ -81,37 +81,47 @@ async def verify_crypto_transaction(user_id: int, total_usd: Decimal, items: Lis
     if not matched:
         return False, {}, "Matching on-chain transaction not found yet"
 
-    # Mark deposit processed (create if not exists)
+    # Create records AFTER verify only
     now = int(time.time())
-    if not deposit:
-        # Create deposit if not created via init (fallback)
-        txid = f"TON{random_hash(12)}"
-        deposit = Deposits(
-            uid=user_id,
-            txid=txid,
-            method=GATEWAY_ID,
-            amount=str(total_usd),
-            currency='USD',
-            requested_on=now,
-            processed_on=now,
-            reference_number=reference or f"TON{random_hash(8).upper()}",
-            status=1,
-            is_exchange=0,
-            ip_address='',
-            gateway_txid=str(matched.get('transaction_id', {}).get('hash')),
-            payment_data=json.dumps({"items": items, "verified_value": TonCenter.extract_value_nano(matched)})
-        )
-        db.add(deposit)
-        await db.flush()
-    else:
-        await db.execute(update(Deposits).where(Deposits.id == deposit.id).values(
-            processed_on=now,
-            status=1,
-            gateway_txid=str(matched.get('transaction_id', {}).get('hash'))
-        ))
 
-    # Create transaction and activity logs
-    txid = deposit.txid
+    paid_nano = TonCenter.extract_value_nano(matched)
+    paid_ton = Decimal(paid_nano) / NANO
+    usd_paid = (paid_ton * price).quantize(Decimal("0.01"), rounding=ROUND_UP)
+
+    total_forevers = sum(Decimal(str(i.get("amount", 0))) for i in items)
+    if total_forevers <= 0:
+        return False, {}, "Invalid forevers amount"
+    usd_per_forever = (usd_paid / total_forevers).quantize(Decimal("0.00000001"), rounding=ROUND_UP)
+
+    txid = f"TON{random_hash(12)}"
+    first_type = str(items[0].get("code", "UAE")) if items else "UAE"
+
+    deposit = Deposits(
+        uid=user_id,
+        txid=txid,
+        method=GATEWAY_ID,
+        amount=str(total_forevers),  # store forevers amount
+        currency='FOREVERS',
+        requested_on=now,
+        processed_on=now,
+        reference_number=reference or f"TON{random_hash(8).upper()}",
+        status=1,
+        is_exchange=0,
+        ip_address=ip_address or '',
+        gateway_txid=str(matched.get('transaction_id', {}).get('hash')),
+        payment_data=json.dumps({
+            "items": items,
+            "paid_nano": paid_nano,
+            "paid_ton": str(paid_ton),
+            "usd_paid": str(usd_paid),
+            "usd_per_forever": str(usd_per_forever)
+        }),
+        rate_at_deposit=usd_per_forever,
+        type=first_type
+    )
+    db.add(deposit)
+    await db.flush()
+
     description = f"Forevers purchased via TON crypto (User ID: {user_id})"
     transaction = Transactions(
         txid=txid,
@@ -120,7 +130,7 @@ async def verify_crypto_transaction(user_id: int, total_usd: Decimal, items: Lis
         recipient=deposit.id,
         description=description,
         deposit_via=GATEWAY_ID,
-        amount=str(total_usd),
+        amount=str(usd_paid),  # record price (USD) in transaction
         currency='USD',
         fee='',
         status=1,
@@ -134,7 +144,7 @@ async def verify_crypto_transaction(user_id: int, total_usd: Decimal, items: Lis
         uid=user_id,
         deposit_via=GATEWAY_ID,
         u_field_1=str(deposit.id),
-        amount=str(total_usd),
+        amount=str(usd_paid),
         currency='USD',
         status=3,
         created=now
