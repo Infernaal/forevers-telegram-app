@@ -29,16 +29,23 @@ async def crypto_init(
 @router.post("/verify", response_model=CryptoVerifyResponse)
 async def crypto_verify(
     data: CryptoVerifyRequest,
+    request: Request,
     current_user_id: int = Depends(get_current_user_id),
     db: AsyncSession = Depends(get_db)
 ):
+    client_ip = request.client.host if hasattr(request, 'client') and request.client else ''
+    forwarded_for = request.headers.get('X-Forwarded-For') if hasattr(request, 'headers') else None
+    real_ip = request.headers.get('X-Real-IP') if hasattr(request, 'headers') else None
+    ip = forwarded_for or real_ip or client_ip
+
     ok, payload, msg = await verify_crypto_transaction(
         user_id=current_user_id,
         total_usd=Decimal(str(data.total_usd)),
         items=[i.model_dump() for i in data.items],
         payer_address=data.address,
         db=db,
-        reference=data.reference
+        reference=data.reference,
+        ip_address=ip
     )
     if not ok:
         return CryptoVerifyResponse(status="failed", message=msg)
