@@ -107,7 +107,7 @@ class CryptoPurchaseService:
         Data is persisted temporarily in Redis until verification.
         """
         try:
-            await init_redis()
+            client = await init_redis()
 
             # Validate receiver wallet is the fixed address
             if receiver_wallet != FIXED_RECEIVER_WALLET:
@@ -203,7 +203,7 @@ class CryptoPurchaseService:
         Creates DB records only when verification is successful.
         """
         try:
-            await init_redis()
+            client = await init_redis()
 
             # Load init data from Redis
             raw = await redis_client.get(_redis_key(request_id))
