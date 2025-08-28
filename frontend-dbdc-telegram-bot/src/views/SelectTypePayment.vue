@@ -424,15 +424,9 @@ async function handleCryptoPurchaseFlow() {
     if (raw.includes('matching on-chain transaction not found')) {
       try {
         await new Promise(r => setTimeout(r, 3000))
-        const items = purchaseDetails.value.foreversDetails.map((d) => ({
-          code: d.code,
-          amount: Number(d.amount),
-          usdRate: Number(d.usdRate),
-          totalCost: Number(d.totalCost)
-        }))
         const retry = await CryptoService.verifyCryptoTransaction({
           boc: undefined,
-          reference: initResp.reference,
+          reference: initResp?.reference,
           address: userAddress.value || undefined,
           total_usd: Number(numericTotal.value.toFixed(2)),
           items
