@@ -377,11 +377,12 @@ class CryptoPurchaseService:
             # TONCenter testnet API endpoint
             base_url = "https://testnet.toncenter.com/api/v2"
 
-            # Convert expected amount to nanotons for comparison
+            # Convert expected amount to nanotons for comparison (1 TON = 1,000,000,000 nanotons)
             expected_amount_nanotons = int(float(expected_amount_ton) * 1000000000)
 
-            # Allow some tolerance for gas fees (±1% of expected amount)
-            tolerance = max(10000000, int(expected_amount_nanotons * 0.01))  # 0.01 TON minimum tolerance
+            # Allow some tolerance for gas fees and rounding differences
+            # Tolerance: minimum 0.01 TON or 1% of expected amount, whichever is larger
+            tolerance = max(10000000, int(expected_amount_nanotons * 0.01))  # 0.01 TON = 10,000,000 nanotons
             min_amount = expected_amount_nanotons - tolerance
             max_amount = expected_amount_nanotons + tolerance
 
