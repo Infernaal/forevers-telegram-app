@@ -468,7 +468,18 @@ const uniqueCountries = computed(() => {
 
 // Add watchers for debugging
 
+const primaryButtonText = computed(() => {
+  if (selectedPayment.value === 'usdt' && !tonConnected.value) return 'Connect Wallet'
+  return 'Buy Forevers'
+})
 
+const isCartDisabled = computed(() => {
+  if (!selectedPayment.value || isProcessingPurchase.value) return true
+  if (selectedPayment.value === 'usdt') {
+    return tonConnected.value ? !termsAccepted.value : false
+  }
+  return !termsAccepted.value
+})
 
 onMounted(() => {
   // Retrieve purchase details from sessionStorage
