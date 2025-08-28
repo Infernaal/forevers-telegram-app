@@ -130,11 +130,14 @@
       @close="closeSuccessModal"
       @confirm="closeSuccessModal"
     />
+
+    <!-- Crypto verification modal -->
+    <CryptoVerificationModal :is-visible="showCryptoVerifyModal" />
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, computed, watch } from 'vue'
+import { ref, onMounted, computed, watch, onUnmounted } from 'vue'
 import { useApiErrorNotifier } from '../composables/useApiErrorNotifier.js'
 import { useRouter, useRoute } from 'vue-router'
 import BottomNavigation from '../components/BottomNavigation.vue'
