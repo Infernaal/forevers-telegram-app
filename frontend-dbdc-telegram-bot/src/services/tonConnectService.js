@@ -44,7 +44,8 @@ export class TonConnectService {
    * Check if wallet is connected
    */
   isWalletConnected() {
-    return Boolean(this.tonConnect?.wallet)
+    const addr = this.tonConnect?.wallet?.account?.address
+    return typeof addr === 'string' && addr.length > 0
   }
 
   /**
@@ -324,4 +325,3 @@ export class TonConnectService {
 
 // Singleton instance
 export const tonConnectService = new TonConnectService()
-
