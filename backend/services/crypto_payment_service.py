@@ -80,28 +80,36 @@ async def verify_crypto_transaction(user_id: int, total_usd: Decimal, items: Lis
     hint_ton_amount = (total_usd / price).quantize(Decimal("0.000000001"), rounding=ROUND_UP)
     expected_nano = int((hint_ton_amount * NANO).to_integral_value(rounding=ROUND_UP))
 
-    # Load deposit by reference if provided
-    deposit = None
+    # Load deposit by reference if provided (reserved for future use)
     if reference:
-        result = await db.execute(select(Deposits).where(Deposits.uid == user_id, Deposits.reference_number == reference))
-        deposit = result.scalar_one_or_none()
+        _ = await db.execute(select(Deposits.id).where(Deposits.uid == user_id, Deposits.reference_number == reference))
 
-    # Fetch recent txs to our recipient
-    txs = await TonCenter.get_transactions(RECIPIENT_ADDRESS, limit=25)
-
+    # Try a few times to let indexers catch up
     matched = None
-    for tx in txs:
-        to_addr = TonCenter.extract_incoming_to_address(tx)
-        if not to_addr:
-            continue
-        if payer_address:
-            src = TonCenter.extract_source_address(tx)
-            if not src or src != payer_address:
-                continue
-        value = TonCenter.extract_value_nano(tx)
-        if value >= expected_nano:
-            matched = tx
-            break
+    attempts = 3
+    for _try in range(attempts):
+      # Fetch recent txs to our recipient
+      txs = await TonCenter.get_transactions(RECIPIENT_ADDRESS, limit=30)
+
+      for tx in txs:
+          to_addr = TonCenter.extract_incoming_to_address(tx)
+          if not to_addr:
+              continue
+          if payer_address:
+              src = TonCenter.extract_source_address(tx)
+              if not src or src != payer_address:
+                  continue
+          value = TonCenter.extract_value_nano(tx)
+          # Accept values that are close or higher than expected (±2%)
+          lower_bound = int(expected_nano * 0.98)
+          upper_bound = int(expected_nano * 1.05)
+          if lower_bound <= value <= upper_bound or value >= expected_nano:
+              matched = tx
+              break
+      if matched:
+          break
+      # brief wait before next attempt
+      await asyncio.sleep(2)
 
     if not matched:
         return False, {}, "Matching on-chain transaction not found yet"
@@ -124,8 +132,9 @@ async def verify_crypto_transaction(user_id: int, total_usd: Decimal, items: Lis
     if abs(server_items_total - client_items_total) > Decimal("0.01"):
         return False, {}, "Client totals mismatch server calculation"
 
-    # Validate paid amount close to server total (allow slippage ~ $0.50)
-    if abs(server_items_total - usd_paid) > Decimal("0.50"):
+    # Validate paid amount with dynamic tolerance (max of $0.50 or 2% of total)
+    tolerance = max(Decimal("0.50"), (server_items_total * Decimal("0.02")).quantize(Decimal("0.01"), rounding=ROUND_UP))
+    if abs(server_items_total - usd_paid) > tolerance:
         return False, {}, "Paid amount does not match expected total"
 
     txid = f"TON{random_hash(12)}"
