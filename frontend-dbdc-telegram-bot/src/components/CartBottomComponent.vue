@@ -19,7 +19,7 @@
         <span class="text-dbd-gray font-medium text-sm sm:text-base md:text-base lg:text-lg">Back</span>
       </button>
 
-      <!-- Buy Forevers Button -->
+      <!-- Primary Action Button -->
       <button
         @click="!disabled ? $emit('purchase') : null"
         :disabled="disabled"
@@ -30,7 +30,7 @@
         }"
         :style="disabled ? 'background: #9CA3AF' : 'background: linear-gradient(90deg, #2019CE 0%, #473FFF 100%)'"
       >
-        Buy Forevers
+        {{ buttonText }}
       </button>
     </div>
   </div>
