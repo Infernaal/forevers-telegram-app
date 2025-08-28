@@ -245,7 +245,7 @@ const isBuyButtonDisabled = computed(() => {
 const buyButtonText = computed(() => {
   if (selectedPayment.value === 'usdt') {
     if (isConnectingWallet.value) return 'Connecting...'
-    return isWalletConnected.value ? 'Pay with TON' : 'Connect Wallet'
+    return isWalletConnected.value ? 'Buy Forevers' : 'Connect Wallet'
   }
   return 'Buy Forevers'
 })
