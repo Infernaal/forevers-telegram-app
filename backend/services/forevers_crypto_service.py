@@ -128,10 +128,7 @@ class ForeversCryptoService:
                 amt, tx_hash, source = ForeversCryptoService._extract_incoming_amount_and_hash(tx)
                 if not amt or not tx_hash:
                     continue
-                # Match by sender and close amount
-                if source and source != exp.get("wallet_address"):
-                    continue
-                # amount must be close to expected (within 1%)
+                # Match by close amount only (any sender allowed)
                 diff = abs(amt - expected_ton_now)
                 if expected_ton_now > 0 and (diff / expected_ton_now) <= Decimal('0.01'):
                     found_tx = {"hash": tx_hash, "amount_ton": float(amt), "source": source, "ts": tx.get("utime")}
