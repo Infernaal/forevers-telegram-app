@@ -401,13 +401,26 @@ class CryptoPurchaseService:
                         f"expected={expected_amount_ton} TON ({expected_amount_nanotons} nanotons)")
 
             async with httpx.AsyncClient(timeout=30.0) as client:
-                # Get transactions for the receiver wallet via TonAPI
                 headers = {}
                 token = os.getenv("TONAPI_TOKEN")
                 if token:
                     headers["Authorization"] = f"Bearer {token}"
+
+                # Normalize addresses to raw (workchain:hex)
+                try:
+                    rcv = await client.get(f"{base_url}/v2/blockchain/accounts/{receiver_wallet}", headers=headers)
+                    receiver_raw = rcv.json().get("address", receiver_wallet) if rcv.status_code == 200 else receiver_wallet
+                except Exception:
+                    receiver_raw = receiver_wallet
+                try:
+                    usr = await client.get(f"{base_url}/v2/blockchain/accounts/{user_wallet}", headers=headers)
+                    user_raw = usr.json().get("address", user_wallet) if usr.status_code == 200 else user_wallet
+                except Exception:
+                    user_raw = user_wallet
+
+                # Get transactions for the receiver wallet via TonAPI
                 response = await client.get(
-                    f"{base_url}/v2/blockchain/accounts/{receiver_wallet}/transactions",
+                    f"{base_url}/v2/blockchain/accounts/{receiver_raw}/transactions",
                     params={
                         "limit": 50
                     },
@@ -439,27 +452,18 @@ class CryptoPurchaseService:
                             }
 
                         # Resolve fields from TonAPI structure variants
-                        source = (
-                            (in_msg.get("source_addr", {}) or {}).get("address")
-                            or in_msg.get("source")
-                            or (tx.get("in_msg", {}) or {}).get("source")
-                            or ""
-                        )
-                        destination = (
-                            (in_msg.get("destination_addr", {}) or {}).get("address")
-                            or in_msg.get("destination")
-                            or (tx.get("in_msg", {}) or {}).get("destination")
-                            or receiver_wallet
-                        )
+                        src_obj = in_msg.get("source") or {}
+                        dst_obj = in_msg.get("destination") or {}
+                        source = (src_obj.get("address") if isinstance(src_obj, dict) else src_obj) or ""
+                        destination = (dst_obj.get("address") if isinstance(dst_obj, dict) else dst_obj) or ""
                         raw_value = in_msg.get("value") or (tx.get("in_msg", {}) or {}).get("value") or 0
                         try:
                             value = int(raw_value)
                         except Exception:
                             value = int(float(raw_value)) if raw_value else 0
 
-                        # Check if transaction matches our criteria
-                        if (source == user_wallet and
-                            destination == receiver_wallet and
+                        # Check if transaction matches our criteria (destination already filtered by endpoint)
+                        if (source == user_raw and
                             min_amount <= value <= max_amount):
 
                             # Get additional transaction info
@@ -482,7 +486,7 @@ class CryptoPurchaseService:
                                 "logical_time": lt,
                                 "utime": utime,
                                 "source_address": source,
-                                "destination_address": destination,
+                                "destination_address": destination or receiver_raw,
                                 "value_nanotons": value,
                                 "value_tons": value / 1000000000,
                                 "fee_nanotons": fee,
@@ -513,8 +517,8 @@ class CryptoPurchaseService:
                     "searched_transactions": len(transactions),
                     "expected_amount_nanotons": expected_amount_nanotons,
                     "tolerance": tolerance,
-                    "source_wallet": user_wallet,
-                    "destination_wallet": receiver_wallet,
+                    "source_wallet": user_raw,
+                    "destination_wallet": receiver_raw,
                     "api_source": "tonapi_testnet"
                 }
 
