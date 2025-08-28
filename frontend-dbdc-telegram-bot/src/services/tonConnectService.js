@@ -8,6 +8,8 @@ const FIXED_RECEIVER_WALLET = '0QBgEwEKpmG4yPvn7-_VqljYE2s88oI6v7R2Vu_E8TvHjMGG'
 /**
  * TonConnect service for handling TON cryptocurrency transactions
  */
+import { TonConnectUI } from '@tonconnect/ui'
+
 export class TonConnectService {
   constructor() {
     this.tonConnect = null
@@ -15,7 +17,7 @@ export class TonConnectService {
   }
 
   /**
-   * Initialize TonConnect for TON testnet
+   * Initialize TonConnect UI (works in Telegram WebApp and browser)
    */
   async init() {
     if (this.isInitialized) {
@@ -23,15 +25,14 @@ export class TonConnectService {
     }
 
     try {
-      // Initialize TonConnect for testnet
-      this.tonConnect = new TonConnect({
-        manifestUrl: `${window.location.origin}/tonconnect-manifest.json`,
-        // Configure for testnet
-        network: 'testnet'
+      // Use absolute path to public manifest; UI auto-detects Telegram environment
+      const manifestUrl = `${window.location.origin}/tonconnect-manifest.json`
+      this.tonConnect = new TonConnectUI({
+        manifestUrl,
       })
 
       this.isInitialized = true
-      console.log('TonConnect initialized successfully for testnet')
+      console.log('TonConnect UI initialized')
       return this.tonConnect
     } catch (error) {
       console.error('Failed to initialize TonConnect:', error)
@@ -43,7 +44,7 @@ export class TonConnectService {
    * Check if wallet is connected
    */
   isWalletConnected() {
-    return this.tonConnect?.connected || false
+    return Boolean(this.tonConnect?.wallet)
   }
 
   /**
@@ -73,15 +74,10 @@ export class TonConnectService {
         await this.init()
       }
 
-      // Get available wallets
-      const wallets = await this.tonConnect.getWallets()
-      console.log('Available wallets:', wallets)
-
-      // Connect to wallet
-      await this.tonConnect.connectWallet()
-      
+      // Optionally show picker modal and connect
+      const wallet = await this.tonConnect.connectWallet()
       console.log('Wallet connected successfully')
-      return this.getWallet()
+      return wallet
     } catch (error) {
       console.error('Failed to connect wallet:', error)
       throw new Error('Failed to connect to TON wallet. Please try again.')
@@ -320,11 +316,12 @@ export class TonConnectService {
    * Unsubscribe from wallet connection changes
    */
   off(callback) {
-    if (this.tonConnect) {
-      this.tonConnect.off('statusChange', callback)
+    if (this.tonConnect && callback) {
+      this.tonConnect.offStatusChange(callback)
     }
   }
 }
 
 // Singleton instance
 export const tonConnectService = new TonConnectService()
+
