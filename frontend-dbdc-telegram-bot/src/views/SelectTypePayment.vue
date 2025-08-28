@@ -95,7 +95,7 @@
     <div class="fixed left-0 right-0 z-[9999]" style="bottom: 89px;">
       <CartBottomComponent
         :total-amount="numericTotal"
-        :disabled="!selectedPayment || !termsAccepted || isProcessingPurchase"
+        :disabled="actionDisabled"
         :action-label="actionButtonLabel"
         @back="handleBack"
         @purchase="handlePurchase"
@@ -232,6 +232,17 @@ const actionButtonLabel = computed(() => {
   return 'Buy Forevers'
 })
 
+const actionDisabled = computed(() => {
+  if (!selectedPayment.value) return true
+  if (selectedPayment.value === 'crypto') {
+    // Allow connecting wallet even if terms not accepted
+    if (!tonConnected.value) return isProcessingPurchase.value
+    // Once wallet is connected, require terms to proceed to purchase
+    return !termsAccepted.value || isProcessingPurchase.value
+  }
+  return !termsAccepted.value || isProcessingPurchase.value
+})
+
 const getPaymentMethodDisplayName = (paymentMethod) => {
   switch (paymentMethod) {
     case 'loyalty':
@@ -251,7 +262,7 @@ const handleBack = () => {
 }
 
 const handlePurchase = async () => {
-  if (!selectedPayment.value || !termsAccepted.value) {
+  if (!selectedPayment.value) {
     return
   }
 
@@ -275,6 +286,10 @@ const handlePurchase = async () => {
       }
       if (!tonConnected.value) {
         showApiError('crypto_init', { status: 400, message: 'Wallet not connected' })
+        return
+      }
+      // If terms are not accepted yet, stop here after connecting wallet
+      if (!termsAccepted.value) {
         return
       }
       await startTonPurchase()
