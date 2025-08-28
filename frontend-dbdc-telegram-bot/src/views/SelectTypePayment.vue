@@ -293,6 +293,111 @@ const handlePurchase = async () => {
   }
 }
 
+// Handle crypto purchase flow
+const handleCryptoPurchase = async () => {
+  try {
+    isProcessingPurchase.value = true
+
+    // Check if wallet is connected
+    if (!isWalletConnected.value) {
+      await connectTonWallet()
+      if (!isWalletConnected.value) {
+        return // User cancelled or connection failed
+      }
+    }
+
+    // Prepare crypto purchase
+    const amountUsd = numericTotal.value
+    const rateAsDeposit = purchaseDetails.value?.purchaseSummary?.averagePrice || null
+
+    console.log('Starting crypto purchase:', { amountUsd, rateAsDeposit })
+
+    // Complete crypto purchase flow
+    const result = await tonConnectService.completeCryptoPurchase(amountUsd, rateAsDeposit)
+
+    if (result.success) {
+      // Show verification modal
+      cryptoTransactionData.value = result.initData
+      cryptoModalStatus.value = 'processing'
+      cryptoPollingAttempts.value = 0
+      showCryptoModal.value = true
+
+      // Start polling for verification
+      tonConnectService.startTransactionPolling(
+        result.requestId,
+        (statusResult, attempts) => {
+          cryptoPollingAttempts.value = attempts
+
+          if (statusResult.transaction_status === 'success') {
+            cryptoModalStatus.value = 'success'
+            cryptoCustomMessage.value = 'Your crypto payment has been verified! Forevers will be credited to your account.'
+          } else if (statusResult.transaction_status === 'failed' || statusResult.transaction_status === 'invalid') {
+            cryptoModalStatus.value = 'failed'
+            cryptoCustomMessage.value = statusResult.message || 'Transaction verification failed.'
+          }
+        }
+      )
+    }
+  } catch (error) {
+    console.error('Crypto purchase error:', error)
+    showApiError('crypto_purchase', {
+      status: 400,
+      message: error.message || 'Crypto purchase failed. Please try again.'
+    })
+  } finally {
+    isProcessingPurchase.value = false
+  }
+}
+
+// Connect TON wallet
+const connectTonWallet = async () => {
+  try {
+    isConnectingWallet.value = true
+
+    // Initialize and connect
+    await tonConnectService.init()
+    const wallet = await tonConnectService.connectWallet()
+
+    if (wallet) {
+      isWalletConnected.value = true
+      walletAddress.value = tonConnectService.getWalletAddress()
+      console.log('Wallet connected:', walletAddress.value)
+    }
+  } catch (error) {
+    console.error('Wallet connection error:', error)
+    showApiError('wallet_connection', {
+      status: 400,
+      message: error.message || 'Failed to connect wallet. Please try again.'
+    })
+  } finally {
+    isConnectingWallet.value = false
+  }
+}
+
+// Disconnect TON wallet
+const disconnectTonWallet = async () => {
+  try {
+    await tonConnectService.disconnectWallet()
+    isWalletConnected.value = false
+    walletAddress.value = ''
+    console.log('Wallet disconnected')
+  } catch (error) {
+    console.error('Wallet disconnection error:', error)
+  }
+}
+
+// Close crypto modal
+const closeCryptoModal = () => {
+  showCryptoModal.value = false
+
+  // If transaction was successful, navigate to wallet view
+  if (cryptoModalStatus.value === 'success') {
+    clearCart()
+    sessionStorage.removeItem('purchaseDetails')
+    router.push({ name: 'wallet', query: { loyalty: loyaltyBalance.value, bonus: bonusBalance.value } })
+  }
+}
+
 const executeActualPurchase = async () => {
   isProcessingPurchase.value = true
 
