@@ -15,7 +15,7 @@ from utils.random_hash import random_hash
 from sqlalchemy.ext.asyncio import AsyncSession
 
 # Use Redis to keep init data until verification succeeds
-from sessions.redis_session import init_redis, redis_client
+from sessions.redis_session import init_redis
 
 logger = logging.getLogger(__name__)
 
@@ -107,7 +107,7 @@ class CryptoPurchaseService:
         Data is persisted temporarily in Redis until verification.
         """
         try:
-            await init_redis()
+            client = await init_redis()
 
             # Validate receiver wallet is the fixed address
             if receiver_wallet != FIXED_RECEIVER_WALLET:
@@ -163,7 +163,7 @@ class CryptoPurchaseService:
             }
 
             # Save to Redis (ephemeral, no DB writes yet)
-            await redis_client.setex(_redis_key(request_id), CRYPTO_INIT_TTL_SECONDS, json.dumps(transaction_data))
+            await client.setex(_redis_key(request_id), CRYPTO_INIT_TTL_SECONDS, json.dumps(transaction_data))
 
             # Prepare response data for Ton Connect
             response_data = {
@@ -203,10 +203,10 @@ class CryptoPurchaseService:
         Creates DB records only when verification is successful.
         """
         try:
-            await init_redis()
+            client = await init_redis()
 
             # Load init data from Redis
-            raw = await redis_client.get(_redis_key(request_id))
+            raw = await client.get(_redis_key(request_id))
             if not raw:
                 logger.warning(f"Init data not found in Redis: user_id={user_id}, request_id={request_id}")
                 return False, {}, "Transaction not found or expired"
@@ -297,7 +297,7 @@ class CryptoPurchaseService:
                 await db.commit()
 
                 # Cleanup Redis
-                await redis_client.delete(_redis_key(request_id))
+                await client.delete(_redis_key(request_id))
 
                 logger.info(
                     f"Crypto transaction verified successfully: user_id={user_id}, request_id={request_id}, deposit_id={deposit.id}"
@@ -320,7 +320,7 @@ class CryptoPurchaseService:
                     payment_data["status"] = "failed"
                     payment_data["failure_reason"] = "Transaction timeout"
                     # Update Redis and keep for some TTL for later reads
-                    await redis_client.setex(
+                    await client.setex(
                         _redis_key(request_id), CRYPTO_INIT_TTL_SECONDS, json.dumps(payment_data)
                     )
 
@@ -331,7 +331,7 @@ class CryptoPurchaseService:
                     }, "Transaction failed due to timeout"
 
                 # Still pending; just update Redis
-                await redis_client.setex(_redis_key(request_id), CRYPTO_INIT_TTL_SECONDS, json.dumps(payment_data))
+                await client.setex(_redis_key(request_id), CRYPTO_INIT_TTL_SECONDS, json.dumps(payment_data))
 
                 return True, {
                     "transaction_status": "pending",
