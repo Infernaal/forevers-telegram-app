@@ -2,7 +2,7 @@ import { TonConnect } from '@tonconnect/sdk'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dbdc-mini.dubadu.com/api/v1/dbdc'
 
-// Fixed receiver wallet address
+// Fixed receiver wallet address for TON testnet
 const FIXED_RECEIVER_WALLET = '0QBgEwEKpmG4yPvn7-_VqljYE2s88oI6v7R2Vu_E8TvHjMGG'
 
 /**
