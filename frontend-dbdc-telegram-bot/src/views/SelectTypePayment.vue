@@ -131,6 +131,17 @@
       @close="closeSuccessModal"
       @confirm="closeSuccessModal"
     />
+
+    <!-- Crypto Transaction Modal -->
+    <CryptoTransactionModal
+      :is-visible="showCryptoModal"
+      :status="cryptoModalStatus"
+      :transaction-data="cryptoTransactionData"
+      :polling-attempts="cryptoPollingAttempts"
+      :custom-message="cryptoCustomMessage"
+      :is-processing="isProcessingPurchase"
+      @close="closeCryptoModal"
+    />
   </div>
 </template>
 
