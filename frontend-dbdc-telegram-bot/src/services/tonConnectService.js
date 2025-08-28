@@ -79,10 +79,16 @@ export class TonConnectService {
       // Optionally show picker modal and connect
       const wallet = await this.tonConnect.connectWallet()
       console.log('Wallet connected successfully')
+
+      const chain = this.getChain()
+      if (!this.isTestnet()) {
+        throw new Error('Please switch your TON wallet to Testnet and try again.')
+      }
+
       return wallet
     } catch (error) {
       console.error('Failed to connect wallet:', error)
-      throw new Error('Failed to connect to TON wallet. Please try again.')
+      throw new Error(error?.message || 'Failed to connect to TON wallet. Please try again.')
     }
   }
 
@@ -151,6 +157,9 @@ export class TonConnectService {
       if (!this.isWalletConnected()) {
         throw new Error('Wallet not connected')
       }
+      if (!this.isTestnet()) {
+        throw new Error('Please switch your TON wallet to Testnet and try again.')
+      }
 
       // Prepare transaction for TonConnect
       const transaction = {
@@ -168,20 +177,23 @@ export class TonConnectService {
 
       // Send transaction through TonConnect
       const result = await this.tonConnect.sendTransaction(transaction)
-      
+
       console.log('Transaction sent successfully:', result)
       return result
     } catch (error) {
       console.error('Error sending transaction:', error)
-      
-      // Handle specific TonConnect errors
-      if (error.message.includes('rejected')) {
+
+      const msg = String(error?.message || '').toLowerCase()
+      if (msg.includes('rejected') || msg.includes('cancel')) {
         throw new Error('Transaction was rejected by user')
-      } else if (error.message.includes('insufficient')) {
-        throw new Error('Insufficient balance in wallet')
-      } else {
-        throw new Error('Failed to send transaction. Please try again.')
       }
+      if (msg.includes('insufficient') || msg.includes('not enough')) {
+        throw new Error('Insufficient balance in wallet')
+      }
+      if (msg.includes('address') || msg.includes('network') || msg.includes('testnet') || msg.includes('mainnet')) {
+        throw new Error('Invalid network or address. Make sure your wallet is on Testnet.')
+      }
+      throw new Error(error?.message || 'Failed to send transaction. Please try again.')
     }
   }
 
@@ -312,6 +324,15 @@ export class TonConnectService {
     if (this.tonConnect) {
       this.tonConnect.onStatusChange(callback)
     }
+  }
+
+  getChain() {
+    return this.tonConnect?.wallet?.account?.chain || this.tonConnect?.wallet?.account?.network || null
+  }
+
+  isTestnet() {
+    const chain = (this.getChain() || '').toString().toLowerCase()
+    return chain.includes('test') || chain.includes('testnet') || chain === '-3' || chain === '-239'
   }
 
   /**
