@@ -113,13 +113,20 @@ async def verify_crypto_transaction(user_id: int, total_usd: Decimal, items: Lis
     paid_ton = Decimal(paid_nano) / NANO
     usd_paid = (paid_ton * price).quantize(Decimal("0.01"), rounding=ROUND_UP)
 
-    # Single on-chain tx, but create per-item records in DB
-    items_total = sum(Decimal(str(i.get("totalCost", 0))) for i in items)
-    if items_total <= 0:
-        return False, {}, "Invalid items total"
-    # Log discrepancy if any
-    if abs(items_total - usd_paid) > Decimal("1.00"):
-        logger.warning(f"USD paid on-chain ({usd_paid}) differs from items total ({items_total}) by > $1.00")
+    # Server-side recompute to prevent tampering
+    price_map = await _get_price_map(db)
+    server_items_total = _calc_items_total_usd(items, price_map)
+
+    # Optional: compare client-sent sum of totalCost
+    client_items_total = sum(Decimal(str(i.get("totalCost", 0))) for i in items)
+
+    # Validate totals
+    if abs(server_items_total - client_items_total) > Decimal("0.01"):
+        return False, {}, "Client totals mismatch server calculation"
+
+    # Validate paid amount close to server total (allow slippage ~ $0.50)
+    if abs(server_items_total - usd_paid) > Decimal("0.50"):
+        return False, {}, "Paid amount does not match expected total"
 
     txid = f"TON{random_hash(12)}"
     chain_hash = str(matched.get('transaction_id', {}).get('hash'))
@@ -127,10 +134,10 @@ async def verify_crypto_transaction(user_id: int, total_usd: Decimal, items: Lis
     first_deposit_id = None
 
     for i in items:
-        item_usd = Decimal(str(i.get("totalCost", 0)))
-        rate = Decimal(str(i.get("usdRate", 0)))
         code = str(i.get("code", "UAE"))
         forevers_amount = Decimal(str(i.get("amount", 0)))
+        server_rate = price_map[code]
+        item_usd = (forevers_amount * server_rate).quantize(Decimal('0.01'), rounding=ROUND_UP)
 
         deposit = Deposits(
             uid=user_id,
@@ -147,11 +154,11 @@ async def verify_crypto_transaction(user_id: int, total_usd: Decimal, items: Lis
             gateway_txid=chain_hash,
             payment_data=json.dumps({
                 "forevers_amount": str(forevers_amount),
-                "usd_rate": str(rate),
+                "usd_rate": str(server_rate),
                 "paid_nano": int(paid_nano),
                 "paid_ton": str(paid_ton)
             }),
-            rate_at_deposit=rate,
+            rate_at_deposit=server_rate,
             type=code
         )
         db.add(deposit)
