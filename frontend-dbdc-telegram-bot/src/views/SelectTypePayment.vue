@@ -161,6 +161,9 @@ const route = useRoute()
 
 // Reactive data
 const selectedPayment = ref('bonus') // default
+
+// Bottom offset from BottomNavigation to avoid overlap on iOS/Android
+const { bottomOffset } = useBottomOffset()
 const termsAccepted = ref(false)
 const totalAmount = ref('0') // USD total (locale string)
 const foreversAmount = ref(0) // numeric forevers amount
