@@ -15,7 +15,7 @@ from utils.random_hash import random_hash
 
 logger = logging.getLogger(__name__)
 
-# Fixed receiver wallet address as specified in requirements
+# Fixed receiver wallet address for TON testnet as specified in requirements
 FIXED_RECEIVER_WALLET = "0QBgEwEKpmG4yPvn7-_VqljYE2s88oI6v7R2Vu_E8TvHjMGG"
 
 class CryptoPurchaseService:
