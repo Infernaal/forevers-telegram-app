@@ -37,14 +37,39 @@ export function useTonConnect() {
 
   async function connect() {
     const ui = getUI()
-    await ui.openModal()
-    const acc = ui.account
-    if (acc) {
+
+    // If already connected, return immediately
+    if (ui.account) {
       connected.value = true
-      account.value = acc
+      account.value = ui.account
       walletInfo.value = ui.wallet
+      return ui.account
     }
-    return acc
+
+    // Wait for actual connection after opening the modal
+    return await new Promise((resolve) => {
+      const unsubscribe = ui.onStatusChange(() => {
+        const acc = ui.account
+        if (acc) {
+          connected.value = true
+          account.value = acc
+          walletInfo.value = ui.wallet
+          unsubscribe()
+          resolve(acc)
+        }
+      })
+
+      ui.openModal().catch(() => {
+        try { unsubscribe() } catch {}
+        resolve(null)
+      })
+
+      // Safety timeout in case modal was closed without connecting
+      setTimeout(() => {
+        try { unsubscribe() } catch {}
+        resolve(null)
+      }, 120000)
+    })
   }
 
   async function disconnect() {
