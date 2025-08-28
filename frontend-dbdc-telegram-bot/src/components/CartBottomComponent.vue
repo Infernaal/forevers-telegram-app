@@ -56,6 +56,14 @@ const props = defineProps({
   disabled: {
     type: Boolean,
     default: false
+  },
+  buttonText: {
+    type: String,
+    default: 'Buy Forevers'
+  },
+  loading: {
+    type: Boolean,
+    default: false
   }
 })
 
