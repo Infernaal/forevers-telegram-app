@@ -242,10 +242,10 @@ const isBuyButtonDisabled = computed(() => {
 })
 
 // Get button text based on payment method
-// Always show "Connect Wallet" for Crypto to guide user, even if already connected
 const buyButtonText = computed(() => {
   if (selectedPayment.value === 'usdt') {
-    return isConnectingWallet.value ? 'Connecting...' : 'Connect Wallet'
+    if (isConnectingWallet.value) return 'Connecting...'
+    return isWalletConnected.value ? 'Pay with TON' : 'Connect Wallet'
   }
   return 'Buy Forevers'
 })
@@ -278,6 +278,10 @@ const handlePurchase = async () => {
 
   // Handle crypto payment
   if (selectedPayment.value === 'usdt') {
+    if (!isWalletConnected.value) {
+      await connectTonWallet()
+      return
+    }
     await handleCryptoPurchase()
     return
   }
