@@ -419,6 +419,36 @@ async function handleCryptoPurchaseFlow() {
     }
   } catch (e) {
     const raw = (e?.message || '').toLowerCase()
+    if (raw.includes('matching on-chain transaction not found')) {
+      try {
+        await new Promise(r => setTimeout(r, 3000))
+        const items = purchaseDetails.value.foreversDetails.map((d) => ({
+          code: d.code,
+          amount: Number(d.amount),
+          usdRate: Number(d.usdRate),
+          totalCost: Number(d.totalCost)
+        }))
+        const retry = await CryptoService.verifyCryptoTransaction({
+          boc: undefined,
+          reference: initResp.reference,
+          address: userAddress.value || undefined,
+          total_usd: Number(numericTotal.value.toFixed(2)),
+          items
+        })
+        if (retry.status === 'success') {
+          if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
+            foreversAmount.value = purchaseDetails.value.foreversAmount
+          }
+          await fetchWalletData()
+          successMessage.value = 'Forevers purchased successfully using Crypto wallet!'
+          showSuccessModal.value = true
+          return
+        }
+      } catch (re) {
+        // fallthrough to error mapping below
+      }
+    }
+
     if (raw.includes('network is not supported') || raw.includes('wrong network') || raw.includes('testnet') || raw.includes('mainnet')) {
       showApiError('crypto_flow', { message: 'Wrong wallet network. Please switch your TON wallet to the correct network and try again.' })
     } else if (raw.includes('insufficient') || raw.includes('not enough') || raw.includes('low balance') || raw.includes('lack of funds') || raw.includes('недостаточно')) {
