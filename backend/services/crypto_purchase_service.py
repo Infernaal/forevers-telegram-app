@@ -25,26 +25,27 @@ class CryptoPurchaseService:
     async def get_ton_usd_rate() -> Decimal:
         """
         Get current TON to USD exchange rate from external API
-        Returns rate for 1 TON in USD
+        Returns rate for 1 TON in USD (mainnet rate used for testnet as well)
         """
         try:
-            # Using CoinGecko API for TON price (testnet and mainnet have similar pricing)
+            # Using CoinGecko API for TON price
+            # Note: Using mainnet price for testnet calculations as testnet TON has no real value
             async with httpx.AsyncClient() as client:
                 response = await client.get(
                     "https://api.coingecko.com/api/v3/simple/price?ids=the-open-network&vs_currencies=usd",
                     timeout=10.0
                 )
-                
+
                 if response.status_code == 200:
                     data = response.json()
                     rate = Decimal(str(data["the-open-network"]["usd"]))
-                    logger.info(f"Fetched TON/USD rate: {rate}")
+                    logger.info(f"Fetched TON/USD rate from CoinGecko: {rate}")
                     return rate
                 else:
                     logger.warning(f"Failed to fetch TON price, status: {response.status_code}")
         except Exception as e:
-            logger.error(f"Error fetching TON price: {e}")
-        
+            logger.error(f"Error fetching TON price from CoinGecko: {e}")
+
         # Fallback rate if API fails (update this periodically)
         fallback_rate = Decimal("2.50")  # Approximate TON price in USD
         logger.warning(f"Using fallback TON/USD rate: {fallback_rate}")
