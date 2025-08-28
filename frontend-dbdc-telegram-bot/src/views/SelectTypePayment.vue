@@ -262,7 +262,7 @@ const handleBack = () => {
 }
 
 const handlePurchase = async () => {
-  if (!selectedPayment.value || !termsAccepted.value) {
+  if (!selectedPayment.value) {
     return
   }
 
@@ -286,6 +286,10 @@ const handlePurchase = async () => {
       }
       if (!tonConnected.value) {
         showApiError('crypto_init', { status: 400, message: 'Wallet not connected' })
+        return
+      }
+      // If terms are not accepted yet, stop here after connecting wallet
+      if (!termsAccepted.value) {
         return
       }
       await startTonPurchase()
