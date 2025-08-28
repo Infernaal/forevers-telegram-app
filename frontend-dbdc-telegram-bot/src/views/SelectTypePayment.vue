@@ -238,14 +238,14 @@ const handlePurchase = async () => {
 
   if (selectedPayment.value === 'usdt') {
     try {
+      // Require terms acceptance before connecting or transacting
+      if (!termsAccepted.value) return
+
       // If wallet is not connected yet, just open the connect modal and exit.
-      // User will press the button again to proceed with purchase after connecting.
       if (!tonConnected.value) {
         await connectTon()
         return
       }
-      // Require terms acceptance before any crypto flow
-      if (!termsAccepted.value) return
       await handleCryptoPurchaseFlow()
     } catch (e) {
       showApiError('crypto_connect', { message: e?.message || 'Failed to connect wallet' })
@@ -487,7 +487,8 @@ const primaryButtonText = computed(() => {
 const isCartDisabled = computed(() => {
   if (!selectedPayment.value || isProcessingPurchase.value) return true
   if (selectedPayment.value === 'usdt') {
-    return tonConnected.value ? !termsAccepted.value : false
+    // Disable the button (Connect Wallet or Buy) until terms are accepted
+    return !termsAccepted.value
   }
   return !termsAccepted.value
 })
