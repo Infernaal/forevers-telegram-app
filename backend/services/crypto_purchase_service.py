@@ -258,20 +258,19 @@ class CryptoPurchaseService:
                     "last_updated": payment_data.get("last_verified", "unknown")
                 }, f"Transaction status: {current_status}"
             
-            # TODO: Implement actual blockchain verification
-            # For now, we'll simulate verification logic
-            # In a real implementation, you would:
-            # 1. Query TON blockchain APIs to find the transaction
-            # 2. Verify the transaction details match our records
-            # 3. Check that the correct amount was sent to the correct address
-            
-            # Simulated verification (replace with actual blockchain verification)
+            # Perform real blockchain verification on TON testnet
+            logger.info(f"Starting blockchain verification for request_id={request_id}, "
+                       f"user_id={user_id}, deposit_id={deposit.id}")
+
             is_verified, blockchain_data = await CryptoPurchaseService._verify_on_blockchain(
                 payment_data.get("user_wallet"),
                 payment_data.get("receiver_wallet"),
                 payment_data.get("amount_ton"),
                 payment_data.get("transaction_id")
             )
+
+            logger.info(f"Blockchain verification result: is_verified={is_verified}, "
+                       f"request_id={request_id}")
             
             current_time = int(time.time())
             payment_data["last_verified"] = current_time
