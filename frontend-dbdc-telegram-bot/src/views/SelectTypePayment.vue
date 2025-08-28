@@ -238,11 +238,14 @@ const handlePurchase = async () => {
 
   if (selectedPayment.value === 'usdt') {
     try {
+      // Require terms acceptance before connecting or transacting
+      if (!termsAccepted.value) return
+
+      // If wallet is not connected yet, just open the connect modal and exit.
       if (!tonConnected.value) {
         await connectTon()
+        return
       }
-      if (!tonConnected.value) return
-      if (!termsAccepted.value) return
       await handleCryptoPurchaseFlow()
     } catch (e) {
       showApiError('crypto_connect', { message: e?.message || 'Failed to connect wallet' })
@@ -398,7 +401,12 @@ async function handleCryptoPurchaseFlow() {
       showApiError('crypto_verify', { message: verify.message || 'Verification failed' })
     }
   } catch (e) {
-    showApiError('crypto_flow', { message: e?.message || 'Crypto purchase failed' })
+    const msg = e?.message || ''
+    if (msg.includes('Network is not supported')) {
+      showApiError('crypto_flow', { message: 'Your wallet network does not match the app network. Please switch the wallet network (e.g., Mainnet/Testnet) and try again.' })
+    } else {
+      showApiError('crypto_flow', { message: msg || 'Crypto purchase failed' })
+    }
   } finally {
     isProcessingPurchase.value = false
   }
@@ -479,7 +487,8 @@ const primaryButtonText = computed(() => {
 const isCartDisabled = computed(() => {
   if (!selectedPayment.value || isProcessingPurchase.value) return true
   if (selectedPayment.value === 'usdt') {
-    return tonConnected.value ? !termsAccepted.value : false
+    // Disable the button (Connect Wallet or Buy) until terms are accepted
+    return !termsAccepted.value
   }
   return !termsAccepted.value
 })
