@@ -1,5 +1,5 @@
 {
-  "url": "https://dbdc-mini.dubadu.com/",
-  "name": "Forevers Telegram App",
-  "iconUrl": "https://dbdc-mini.dubadu.com/dbd-logo.svg"
+  "url": "http://localhost:5173",
+  "name": "Forevers (Testnet)",
+  "iconUrl": "/dbd-logo.svg"
 }
