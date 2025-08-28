@@ -169,6 +169,6 @@ async def verify_crypto_transaction(user_id: int, total_usd: Decimal, items: Lis
         "tx_hash": matched.get('transaction_id', {}).get('hash'),
         "tx_lt": matched.get('transaction_id', {}).get('lt'),
         "tx_utime": matched.get('utime'),
-        "deposit_id": deposit.id,
+        "deposit_id": first_deposit_id,
         "txid": txid
     }, "Verified"
