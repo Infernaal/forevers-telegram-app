@@ -24,7 +24,7 @@ async def crypto_init(
     )
     if not ok:
         return CryptoInitResponse(status="failed", reference="", txid="", transaction={"to":"","amount":0,"payload":None,"validUntil":0})
-    return CryptoInitResponse(status="success", reference=payload["reference"], txid=payload["txid"], transaction=payload["transaction"]) 
+    return CryptoInitResponse(status="success", reference=payload["reference"], txid="", transaction=payload["transaction"]) 
 
 @router.post("/verify", response_model=CryptoVerifyResponse)
 async def crypto_verify(
