@@ -402,6 +402,7 @@ async function handleCryptoPurchaseFlow() {
     const verify = await CryptoService.verifyCryptoTransaction({
       boc: result?.boc,
       reference: initResp.reference,
+      address: userAddress.value || undefined,
       total_usd: Number(numericTotal.value.toFixed(2)),
       items
     })
