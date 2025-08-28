@@ -80,3 +80,7 @@ app.include_router(forevers_purchase_router, prefix="/api/v1/dbdc")
 app.include_router(user_info_router, prefix="/api/v1/dbdc")
 app.include_router(email_verification_router, prefix="/api/v1/dbdc")
 app.include_router(referral_router, prefix="/api/v1/dbdc")
+
+# Crypto payments
+from routers.forevers_crypto import router as forevers_crypto_router
+app.include_router(forevers_crypto_router, prefix="/api/v1/dbdc")

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@builder.io/sdk-vue": "^4.2.3",
+    "@tonconnect/ui": "^2.0.4",
     "google-libphonenumber": "^3.2.42",
     "libphonenumber-js": "^1.12.11",
     "vue": "^3.5.17",

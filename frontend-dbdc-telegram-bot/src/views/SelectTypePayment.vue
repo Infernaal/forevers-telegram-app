@@ -95,7 +95,8 @@
     <div class="fixed left-0 right-0 z-[9999]" style="bottom: 89px;">
       <CartBottomComponent
         :total-amount="numericTotal"
-        :disabled="!selectedPayment || !termsAccepted || isProcessingPurchase"
+        :disabled="isCartDisabled"
+        :button-text="primaryButtonText"
         @back="handleBack"
         @purchase="handlePurchase"
       />
@@ -146,9 +147,14 @@ import ConfirmExchangeModal from '../components/ConfirmExchangeModal.vue'
 import { useCart } from '../composables/useCart.js'
 import { formatUSDPrefix } from '../utils/formatNumber.js'
 import { ForeversPurchaseService } from '../services/foreversPurchaseService.js'
+import { useTonConnect } from '../composables/useTonConnect.js'
+import { CryptoService } from '../services/cryptoService.js'
 
 const router = useRouter()
 const route = useRoute()
+
+// TON Connect
+const { connect: connectTon, sendTransaction, isConnected: tonConnected, userAddress } = useTonConnect()
 
 // Reactive data
 const selectedPayment = ref('bonus') // default
@@ -228,7 +234,19 @@ const handleBack = () => {
 }
 
 const handlePurchase = async () => {
-  if (!selectedPayment.value || !termsAccepted.value) {
+  if (!selectedPayment.value) return
+
+  if (selectedPayment.value === 'usdt') {
+    try {
+      if (!tonConnected.value) {
+        await connectTon()
+      }
+      if (!tonConnected.value) return
+      if (!termsAccepted.value) return
+      await handleCryptoPurchaseFlow()
+    } catch (e) {
+      showApiError('crypto_connect', { message: e?.message || 'Failed to connect wallet' })
+    }
     return
   }
 
@@ -329,6 +347,63 @@ const closeTermsModal = () => {
   showTermsModal.value = false
 }
 
+async function handleCryptoPurchaseFlow() {
+  isProcessingPurchase.value = true
+  try {
+    if (!purchaseDetails.value?.foreversDetails?.length) {
+      throw new Error('No items to purchase')
+    }
+
+    const items = purchaseDetails.value.foreversDetails.map((d) => ({
+      code: d.code,
+      amount: Number(d.amount),
+      usdRate: Number(d.usdRate),
+      totalCost: Number(d.totalCost)
+    }))
+
+    const initResp = await CryptoService.initCryptoTransaction({
+      total_usd: Number(numericTotal.value.toFixed(2)),
+      items
+    })
+
+    const tx = {
+      validUntil: initResp.transaction.validUntil,
+      messages: [
+        {
+          address: initResp.transaction.to,
+          amount: String(initResp.transaction.amount),
+          payload: initResp.transaction.payload || undefined
+        }
+      ]
+    }
+
+    const result = await sendTransaction(tx)
+
+    const verify = await CryptoService.verifyCryptoTransaction({
+      boc: result?.boc,
+      address: userAddress?.value || null,
+      reference: initResp.reference,
+      total_usd: Number(numericTotal.value.toFixed(2)),
+      items
+    })
+
+    if (verify.status === 'success') {
+      if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
+        foreversAmount.value = purchaseDetails.value.foreversAmount
+      }
+      await fetchWalletData()
+      successMessage.value = 'Forevers purchased successfully using Crypto wallet!'
+      showSuccessModal.value = true
+    } else {
+      showApiError('crypto_verify', { message: verify.message || 'Verification failed' })
+    }
+  } catch (e) {
+    showApiError('crypto_flow', { message: e?.message || 'Crypto purchase failed' })
+  } finally {
+    isProcessingPurchase.value = false
+  }
+}
+
 const closeSuccessModal = () => {
   showSuccessModal.value = false
   clearCart() // empty cart after success
@@ -396,7 +471,18 @@ const uniqueCountries = computed(() => {
 
 // Add watchers for debugging
 
+const primaryButtonText = computed(() => {
+  if (selectedPayment.value === 'usdt' && !tonConnected.value) return 'Connect Wallet'
+  return 'Buy Forevers'
+})
 
+const isCartDisabled = computed(() => {
+  if (!selectedPayment.value || isProcessingPurchase.value) return true
+  if (selectedPayment.value === 'usdt') {
+    return tonConnected.value ? !termsAccepted.value : false
+  }
+  return !termsAccepted.value
+})
 
 onMounted(() => {
   // Retrieve purchase details from sessionStorage
