@@ -72,7 +72,7 @@ async def init_crypto_transaction(user_id: int, total_usd: Decimal, items: List[
         "payload": None,
         "validUntil": valid_until
     }
-    return True, {"reference": reference, "transaction": tx}, "OK"}
+    return True, {"reference": reference, "transaction": tx}, "OK"
 
 async def verify_crypto_transaction(user_id: int, total_usd: Decimal, items: List[Dict[str, Any]], payer_address: str | None, db: AsyncSession, reference: str | None = None, ip_address: str = "") -> Tuple[bool, Dict[str, Any], str]:
     # Determine expected nano from provided USD as hint
