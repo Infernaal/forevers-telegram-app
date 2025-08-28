@@ -9,7 +9,7 @@ from typing import Tuple, Optional, Dict, Any
 import httpx
 import os
 
-from models.models import Deposits, Transactions, Settings
+from models.models import Deposits, Transactions, Settings, Activity
 from services.forevers_purchase_service import ForeversPurchaseService
 from utils.random_hash import random_hash
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -293,6 +293,20 @@ class CryptoPurchaseService:
                     created=current_time
                 )
                 db.add(transaction)
+
+                # Create activity record (gateway id 8)
+                activity = Activity(
+                    txid=deposit.txid,
+                    type=1,
+                    uid=user_id,
+                    deposit_via=8,
+                    u_field_1=str(deposit.id),
+                    amount=str(deposit.amount),
+                    currency='USD',
+                    status=3,
+                    created=current_time
+                )
+                db.add(activity)
 
                 await db.commit()
 
