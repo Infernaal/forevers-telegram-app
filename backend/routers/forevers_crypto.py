@@ -15,7 +15,11 @@ async def init_crypto_payment(
     current_user_id: int = Depends(get_current_user_id)
 ):
     ok, data, msg = await ForeversCryptoService.init_payment(
-        current_user_id, Decimal(str(payload.usd_amount)), payload.wallet_address
+        current_user_id,
+        Decimal(str(payload.usd_amount)),
+        payload.wallet_address,
+        Decimal(str(payload.forevers_price)) if getattr(payload, "forevers_price", None) is not None else None,
+        getattr(payload, "forevers_type", None)
     )
     if not ok:
         raise HTTPException(status_code=400, detail=msg)
