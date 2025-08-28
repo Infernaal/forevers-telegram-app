@@ -154,7 +154,7 @@ const router = useRouter()
 const route = useRoute()
 
 // TON Connect
-const { connect: connectTon, sendTransaction, isConnected: tonConnected } = useTonConnect()
+const { connect: connectTon, sendTransaction, isConnected: tonConnected, userAddress } = useTonConnect()
 
 // Reactive data
 const selectedPayment = ref('bonus') // default
