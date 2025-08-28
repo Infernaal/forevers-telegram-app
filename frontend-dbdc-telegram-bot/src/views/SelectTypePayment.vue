@@ -359,6 +359,8 @@ const closeTermsModal = () => {
 
 async function handleCryptoPurchaseFlow() {
   isProcessingPurchase.value = true
+  let initResp = null
+  let items = []
   try {
     // Ensure wallet is connected (re-opens modal if session was cleared)
     await ensureConnected()
@@ -373,14 +375,14 @@ async function handleCryptoPurchaseFlow() {
       throw new Error('No items to purchase')
     }
 
-    const items = purchaseDetails.value.foreversDetails.map((d) => ({
+    items = purchaseDetails.value.foreversDetails.map((d) => ({
       code: d.code,
       amount: Number(d.amount),
       usdRate: Number(d.usdRate),
       totalCost: Number(d.totalCost)
     }))
 
-    const initResp = await CryptoService.initCryptoTransaction({
+    initResp = await CryptoService.initCryptoTransaction({
       total_usd: Number(numericTotal.value.toFixed(2)),
       items
     })
