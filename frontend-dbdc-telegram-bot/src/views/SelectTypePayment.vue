@@ -253,6 +253,7 @@ const handlePurchase = async () => {
         return
       }
 
+      // Wallet is connected and network is correct - proceed directly to purchase
       await handleCryptoPurchaseFlow()
     } catch (e) {
       showApiError('crypto_connect', { message: e?.message || 'Failed to connect wallet' })
@@ -528,17 +529,27 @@ const uniqueCountries = computed(() => {
 // Add watchers for debugging
 
 const primaryButtonText = computed(() => {
-  if (selectedPayment.value === 'usdt' && !tonConnected.value) return 'Connect Wallet'
+  if (selectedPayment.value === 'usdt') {
+    if (!tonConnected.value || !userAddress.value) {
+      return 'Connect Wallet'
+    }
+    return 'Buy Forevers'
+  }
   return 'Buy Forevers'
 })
 
 const isCartDisabled = computed(() => {
   if (!selectedPayment.value || isProcessingPurchase.value) return true
+
+  // Always require terms acceptance
+  if (!termsAccepted.value) return true
+
+  // For USDT payments, don't disable if wallet is connected - allow immediate purchase
   if (selectedPayment.value === 'usdt') {
-    // Disable the button (Connect Wallet or Buy) until terms are accepted
-    return !termsAccepted.value
+    return false // Let handlePurchase manage the wallet connection flow
   }
-  return !termsAccepted.value
+
+  return false
 })
 
 onMounted(() => {
