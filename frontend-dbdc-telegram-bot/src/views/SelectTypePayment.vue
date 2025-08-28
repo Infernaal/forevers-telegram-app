@@ -232,6 +232,17 @@ const actionButtonLabel = computed(() => {
   return 'Buy Forevers'
 })
 
+const actionDisabled = computed(() => {
+  if (!selectedPayment.value) return true
+  if (selectedPayment.value === 'crypto') {
+    // Allow connecting wallet even if terms not accepted
+    if (!tonConnected.value) return isProcessingPurchase.value
+    // Once wallet is connected, require terms to proceed to purchase
+    return !termsAccepted.value || isProcessingPurchase.value
+  }
+  return !termsAccepted.value || isProcessingPurchase.value
+})
+
 const getPaymentMethodDisplayName = (paymentMethod) => {
   switch (paymentMethod) {
     case 'loyalty':
