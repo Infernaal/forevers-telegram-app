@@ -50,10 +50,10 @@ async def init_crypto_transaction(user_id: int, total_usd: Decimal, items: List[
     return True, {"reference": reference, "transaction": tx}, "OK"
 
 async def verify_crypto_transaction(user_id: int, total_usd: Decimal, items: List[Dict[str, Any]], payer_address: str | None, db: AsyncSession, reference: str | None = None, ip_address: str = "") -> Tuple[bool, Dict[str, Any], str]:
-    # Recompute expected nano
+    # Determine expected nano from provided USD as hint
     price = await get_ton_usd_price()
-    ton_amount = (total_usd / price).quantize(Decimal("0.000000001"), rounding=ROUND_UP)
-    expected_nano = int((ton_amount * NANO).to_integral_value(rounding=ROUND_UP))
+    hint_ton_amount = (total_usd / price).quantize(Decimal("0.000000001"), rounding=ROUND_UP)
+    expected_nano = int((hint_ton_amount * NANO).to_integral_value(rounding=ROUND_UP))
 
     # Load deposit by reference if provided
     deposit = None
