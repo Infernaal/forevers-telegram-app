@@ -371,8 +371,8 @@ class CryptoPurchaseService:
         """
 
         try:
-            # TONCenter testnet API endpoint
-            base_url = "https://testnet.toncenter.com/api/v2"
+            # TonAPI testnet endpoint (no fallback)
+            base_url = "https://testnet.tonapi.io"
 
             # Convert expected amount to nanotons for comparison (1 TON = 1,000,000,000 nanotons)
             expected_amount_nanotons = int(float(expected_amount_ton) * 1000000000)
@@ -387,42 +387,61 @@ class CryptoPurchaseService:
                         f"expected={expected_amount_ton} TON ({expected_amount_nanotons} nanotons)")
 
             async with httpx.AsyncClient(timeout=30.0) as client:
-                # Get transactions for the receiver wallet
+                # Get transactions for the receiver wallet via TonAPI
+                headers = {}
+                token = os.getenv("TONAPI_TOKEN")
+                if token:
+                    headers["Authorization"] = f"Bearer {token}"
                 response = await client.get(
-                    f"{base_url}/getTransactions",
+                    f"{base_url}/v2/blockchain/accounts/{receiver_wallet}/transactions",
                     params={
-                        "address": receiver_wallet,
-                        "limit": 50,  # Check last 50 transactions
-                        "to_lt": 0,
-                        "archival": True
-                    }
+                        "limit": 50
+                    },
+                    headers=headers
                 )
 
                 if response.status_code != 200:
-                    logger.error(f"TONCenter API error: {response.status_code} - {response.text}")
+                    logger.error(f"TonAPI error: {response.status_code} - {response.text}")
                     return False, {"error": f"API request failed: {response.status_code}"}
 
                 data = response.json()
 
-                if not data.get("ok"):
-                    logger.error(f"TONCenter API response not ok: {data}")
-                    return False, {"error": "API response not ok"}
-
-                transactions = data.get("result", [])
-                logger.info(f"Found {len(transactions)} recent transactions for receiver wallet")
+                # TonAPI returns list in 'transactions'
+                transactions = data.get("transactions", []) or data.get("result", [])
+                logger.info(f"TonAPI: found {len(transactions)} recent transactions for receiver wallet")
 
                 # Look for matching transaction
                 for tx in transactions:
                     try:
                         # Get transaction details
-                        in_msg = tx.get("in_msg", {})
+                        # TonAPI transaction schema
+                        in_msg = tx.get("in_msg") or tx.get("in_msg_value") or tx.get("in_msg_data") or {}
                         if not in_msg:
-                            continue
+                            # TonAPI also exposes 'in_msg' fields at top-level sometimes
+                            in_msg = {
+                                "source": tx.get("in_msg", {}).get("source") if isinstance(tx.get("in_msg"), dict) else None,
+                                "destination": tx.get("in_msg", {}).get("destination") if isinstance(tx.get("in_msg"), dict) else None,
+                                "value": (tx.get("in_msg", {}) or {}).get("value") if isinstance(tx.get("in_msg"), dict) else None
+                            }
 
-                        # Check if this is an incoming message
-                        source = in_msg.get("source", "")
-                        destination = in_msg.get("destination", "")
-                        value = int(in_msg.get("value", "0"))
+                        # Resolve fields from TonAPI structure variants
+                        source = (
+                            (in_msg.get("source_addr", {}) or {}).get("address")
+                            or in_msg.get("source")
+                            or (tx.get("in_msg", {}) or {}).get("source")
+                            or ""
+                        )
+                        destination = (
+                            (in_msg.get("destination_addr", {}) or {}).get("address")
+                            or in_msg.get("destination")
+                            or (tx.get("in_msg", {}) or {}).get("destination")
+                            or receiver_wallet
+                        )
+                        raw_value = in_msg.get("value") or (tx.get("in_msg", {}) or {}).get("value") or 0
+                        try:
+                            value = int(raw_value)
+                        except Exception:
+                            value = int(float(raw_value)) if raw_value else 0
 
                         # Check if transaction matches our criteria
                         if (source == user_wallet and
@@ -430,10 +449,10 @@ class CryptoPurchaseService:
                             min_amount <= value <= max_amount):
 
                             # Get additional transaction info
-                            tx_hash = tx.get("transaction_id", {}).get("hash", "")
-                            lt = tx.get("transaction_id", {}).get("lt", "")
-                            utime = tx.get("utime", 0)
-                            fee = int(tx.get("fee", "0"))
+                            tx_hash = tx.get("hash", "") or (tx.get("transaction_id", {}) or {}).get("hash", "")
+                            lt = tx.get("lt", "") or (tx.get("transaction_id", {}) or {}).get("lt", "")
+                            utime = tx.get("utime", 0) or tx.get("now", 0) or tx.get("timestamp", 0)
+                            fee = int((tx.get("total_fees", {}) or {}).get("value", 0) or tx.get("fee", 0) or 0)
 
                             # Check transaction age (must be recent - within last 30 minutes)
                             current_time = int(time.time())
@@ -459,7 +478,7 @@ class CryptoPurchaseService:
                                 "tolerance_nanotons": tolerance,
                                 "verified_at": current_time,
                                 "age_seconds": current_time - utime,
-                                "api_source": "toncenter_testnet"
+                                "api_source": "tonapi_testnet"
                             }
 
                             logger.info(f"Transaction verified successfully: "
@@ -473,7 +492,7 @@ class CryptoPurchaseService:
                         continue
 
                 # No matching transaction found
-                logger.info(f"No matching transaction found. Checked {len(transactions)} transactions.")
+                logger.info(f"TonAPI: no matching transaction found. Checked {len(transactions)} transactions.")
                 return False, {
                     "verification_failed": True,
                     "reason": "No matching transaction found",
@@ -482,7 +501,7 @@ class CryptoPurchaseService:
                     "tolerance": tolerance,
                     "source_wallet": user_wallet,
                     "destination_wallet": receiver_wallet,
-                    "api_source": "toncenter_testnet"
+                    "api_source": "tonapi_testnet"
                 }
 
         except httpx.TimeoutException:
