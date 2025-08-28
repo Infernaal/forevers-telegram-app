@@ -352,3 +352,4 @@ export class TonConnectService {
 
 // Singleton instance
 export const tonConnectService = new TonConnectService()
+
