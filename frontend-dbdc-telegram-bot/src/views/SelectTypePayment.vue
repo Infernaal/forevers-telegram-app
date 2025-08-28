@@ -233,7 +233,19 @@ const handleBack = () => {
 }
 
 const handlePurchase = async () => {
-  if (!selectedPayment.value || !termsAccepted.value) {
+  if (!selectedPayment.value) return
+
+  if (selectedPayment.value === 'usdt') {
+    try {
+      if (!tonConnected.value) {
+        await connectTon()
+      }
+      if (!tonConnected.value) return
+      if (!termsAccepted.value) return
+      await handleCryptoPurchaseFlow()
+    } catch (e) {
+      showApiError('crypto_connect', { message: e?.message || 'Failed to connect wallet' })
+    }
     return
   }
 
