@@ -38,33 +38,8 @@ async def init_crypto_transaction(user_id: int, total_usd: Decimal, items: List[
     now = int(time.time())
     valid_until = now + VALIDITY_SECONDS
 
-    # Create pending deposit
-    txid = f"TON{random_hash(12)}"
+    # Only prepare client transaction; no DB writes at init
     reference = f"TON{random_hash(8).upper()}"
-
-    deposit = Deposits(
-        uid=user_id,
-        txid=txid,
-        method=GATEWAY_ID,
-        amount=str(total_usd),
-        currency='USD',
-        requested_on=now,
-        processed_on=0,
-        reference_number=reference,
-        status=0,
-        is_exchange=0,
-        ip_address='',
-        payment_data=json.dumps({
-            "items": items,
-            "expected_nano": nano_amount,
-            "recipient": RECIPIENT_ADDRESS,
-            "valid_until": valid_until,
-            "network": TON_NETWORK
-        })
-    )
-    db.add(deposit)
-    await db.flush()
-    await db.commit()
 
     tx = {
         "to": RECIPIENT_ADDRESS,
@@ -72,7 +47,7 @@ async def init_crypto_transaction(user_id: int, total_usd: Decimal, items: List[
         "payload": None,
         "validUntil": valid_until
     }
-    return True, {"reference": reference, "txid": txid, "transaction": tx}, "OK"
+    return True, {"reference": reference, "transaction": tx}, "OK"
 
 async def verify_crypto_transaction(user_id: int, total_usd: Decimal, items: List[Dict[str, Any]], payer_address: str | None, db: AsyncSession, reference: str | None = None) -> Tuple[bool, Dict[str, Any], str]:
     # Recompute expected nano
