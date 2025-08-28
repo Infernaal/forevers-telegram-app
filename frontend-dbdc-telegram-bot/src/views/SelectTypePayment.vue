@@ -233,12 +233,12 @@ const isAnyModalOpen = computed(() => {
 
 // Check if buy button should be disabled
 const isBuyButtonDisabled = computed(() => {
-  if (isProcessingPurchase.value) return true
-  if (!selectedPayment.value) return true
-  // Permit clicking for Crypto even if terms are not accepted (to open TonConnect)
-  if (selectedPayment.value === 'usdt') return false
-  // For non-crypto methods, require terms
-  return !termsAccepted.value
+  // Disable only when payment not selected, terms not accepted, or processing
+  if (!selectedPayment.value || !termsAccepted.value || isProcessingPurchase.value) {
+    return true
+  }
+  // Allow clicking even if wallet not connected (will trigger connect flow)
+  return false
 })
 
 // Get button text based on payment method
@@ -272,18 +272,11 @@ const handleBack = () => {
 }
 
 const handlePurchase = async () => {
-  if (!selectedPayment.value) return
-
-  // If crypto selected and terms are not accepted yet, only open TonConnect
-  if (selectedPayment.value === 'usdt' && !termsAccepted.value) {
-    await connectTonWallet()
+  if (!selectedPayment.value || !termsAccepted.value) {
     return
   }
 
-  // For all flows beyond this point, require terms
-  if (!termsAccepted.value) return
-
-  // Handle crypto payment (proceed with purchase)
+  // Handle crypto payment
   if (selectedPayment.value === 'usdt') {
     await handleCryptoPurchase()
     return
