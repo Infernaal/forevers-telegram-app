@@ -10,7 +10,7 @@ const account = ref(null)
 const walletInfo = ref(null)
 
 const MANIFEST_URL = `${window.location.origin}/tonconnect-manifest.json`
-const REQUIRED_CHAIN = import.meta.env.VITE_TON_NETWORK || '-239'
+const REQUIRED_CHAIN = import.meta.env.VITE_TON_NETWORK || 'ton-testnet'
 
 function ensureInstance() {
   if (!tonConnectUIRef.instance) {
