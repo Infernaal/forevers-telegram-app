@@ -143,9 +143,11 @@ import TermsCheckbox from '../components/TermsCheckbox.vue'
 import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
 import SuccessModal from '../components/SuccessModal.vue'
 import ConfirmExchangeModal from '../components/ConfirmExchangeModal.vue'
+import CryptoTransactionModal from '../components/CryptoTransactionModal.vue'
 import { useCart } from '../composables/useCart.js'
 import { formatUSDPrefix } from '../utils/formatNumber.js'
 import { ForeversPurchaseService } from '../services/foreversPurchaseService.js'
+import { tonConnectService } from '../services/tonConnectService.js'
 
 const router = useRouter()
 const route = useRoute()
