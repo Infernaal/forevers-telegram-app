@@ -45,6 +45,7 @@ async def crypto_verify(
         payer_address=data.address,
         db=db,
         reference=data.reference,
+        valid_until=data.valid_until,
         ip_address=ip
     )
     if not ok:

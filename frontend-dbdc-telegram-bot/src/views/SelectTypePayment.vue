@@ -154,7 +154,7 @@ const router = useRouter()
 const route = useRoute()
 
 // TON Connect
-const { connect: connectTon, sendTransaction, isConnected: tonConnected, userAddress } = useTonConnect()
+const { connect: connectTon, ensureConnected, sendTransaction, isConnected: tonConnected, userAddress, tonChain, getRequiredChain } = useTonConnect()
 
 // Reactive data
 const selectedPayment = ref('bonus') // default
@@ -238,14 +238,21 @@ const handlePurchase = async () => {
 
   if (selectedPayment.value === 'usdt') {
     try {
-      // Require terms acceptance before connecting or transacting
       if (!termsAccepted.value) return
 
-      // If wallet is not connected yet, just open the connect modal and exit.
-      if (!tonConnected.value) {
+      // If wallet is not connected yet, open connect modal and exit (user tries again to proceed)
+      if (!tonConnected.value || !userAddress.value) {
         await connectTon()
         return
       }
+
+      // Network guard before proceeding
+      const required = getRequiredChain()
+      if (tonChain.value && tonChain.value !== required) {
+        showApiError('crypto_flow', { message: 'Wrong wallet network. Please switch your TON wallet to the correct network and try again.' })
+        return
+      }
+
       await handleCryptoPurchaseFlow()
     } catch (e) {
       showApiError('crypto_connect', { message: e?.message || 'Failed to connect wallet' })
@@ -352,19 +359,30 @@ const closeTermsModal = () => {
 
 async function handleCryptoPurchaseFlow() {
   isProcessingPurchase.value = true
+  let initResp = null
+  let items = []
   try {
+    // Ensure wallet is connected (re-opens modal if session was cleared)
+    await ensureConnected()
+
+    // Network guard
+    const required = getRequiredChain()
+    if (tonChain.value && tonChain.value !== required) {
+      throw new Error('Wrong network: please switch your TON wallet to the correct network and try again.')
+    }
+
     if (!purchaseDetails.value?.foreversDetails?.length) {
       throw new Error('No items to purchase')
     }
 
-    const items = purchaseDetails.value.foreversDetails.map((d) => ({
+    items = purchaseDetails.value.foreversDetails.map((d) => ({
       code: d.code,
       amount: Number(d.amount),
       usdRate: Number(d.usdRate),
       totalCost: Number(d.totalCost)
     }))
 
-    const initResp = await CryptoService.initCryptoTransaction({
+    initResp = await CryptoService.initCryptoTransaction({
       total_usd: Number(numericTotal.value.toFixed(2)),
       items
     })
@@ -380,11 +398,14 @@ async function handleCryptoPurchaseFlow() {
       ]
     }
 
+    // Attempt to send transaction
     const result = await sendTransaction(tx)
 
     const verify = await CryptoService.verifyCryptoTransaction({
       boc: result?.boc,
       reference: initResp.reference,
+      address: userAddress.value || undefined,
+      valid_until: initResp.transaction?.validUntil,
       total_usd: Number(numericTotal.value.toFixed(2)),
       items
     })
@@ -400,11 +421,39 @@ async function handleCryptoPurchaseFlow() {
       showApiError('crypto_verify', { message: verify.message || 'Verification failed' })
     }
   } catch (e) {
-    const msg = e?.message || ''
-    if (msg.includes('Network is not supported')) {
-      showApiError('crypto_flow', { message: 'Your wallet network does not match the app network. Please switch the wallet network (e.g., Mainnet/Testnet) and try again.' })
+    const raw = (e?.message || '').toLowerCase()
+    if (raw.includes('matching on-chain transaction not found')) {
+      try {
+        await new Promise(r => setTimeout(r, 3000))
+        const retry = await CryptoService.verifyCryptoTransaction({
+          boc: undefined,
+          reference: initResp?.reference,
+          address: userAddress.value || undefined,
+          total_usd: Number(numericTotal.value.toFixed(2)),
+          items
+        })
+        if (retry.status === 'success') {
+          if (foreversAmount.value === 0 && purchaseDetails.value?.foreversAmount) {
+            foreversAmount.value = purchaseDetails.value.foreversAmount
+          }
+          await fetchWalletData()
+          successMessage.value = 'Forevers purchased successfully using Crypto wallet!'
+          showSuccessModal.value = true
+          return
+        }
+      } catch (re) {
+        // fallthrough to error mapping below
+      }
+    }
+
+    if (raw.includes('network is not supported') || raw.includes('wrong network') || raw.includes('testnet') || raw.includes('mainnet')) {
+      showApiError('crypto_flow', { message: 'Wrong wallet network. Please switch your TON wallet to the correct network and try again.' })
+    } else if (raw.includes('insufficient') || raw.includes('not enough') || raw.includes('low balance') || raw.includes('lack of funds') || raw.includes('недостаточно')) {
+      showApiError('crypto_flow', { message: 'Insufficient funds in your TON wallet to complete this transaction.' })
+    } else if (raw.includes('user reject') || raw.includes('rejected')) {
+      showApiError('crypto_flow', { message: 'Transaction was cancelled by the user.' })
     } else {
-      showApiError('crypto_flow', { message: msg || 'Crypto purchase failed' })
+      showApiError('crypto_flow', { message: e?.message || 'Crypto purchase failed' })
     }
   } finally {
     isProcessingPurchase.value = false

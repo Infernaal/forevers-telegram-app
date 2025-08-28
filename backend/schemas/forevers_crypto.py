@@ -29,6 +29,7 @@ class CryptoVerifyRequest(BaseModel):
     address: Optional[str] = None  # payer wallet address
     boc: Optional[str] = None
     reference: Optional[str] = None
+    valid_until: Optional[int] = None
 
 class CryptoVerifyResponse(BaseModel):
     status: str

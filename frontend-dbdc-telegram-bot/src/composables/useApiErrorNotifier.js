@@ -15,7 +15,10 @@ const ROUTE_MAP = {
   forevers_prices: 'Failed to load prices',
   forevers_user_balance: 'Failed to load balances',
   user_me: 'Failed to load profile',
-  forevers_purchase: 'Purchase failed. Please check your balance and try again.'
+  forevers_purchase: 'Purchase failed. Please check your balance and try again.',
+  crypto_connect: 'Failed to connect wallet',
+  crypto_flow: 'Crypto transaction failed',
+  crypto_verify: 'Failed to verify transaction'
 }
 
 function buildMessage(routeKey, opts) {
