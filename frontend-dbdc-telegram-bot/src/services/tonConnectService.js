@@ -227,7 +227,7 @@ export class TonConnectService {
         attempts++
         console.log(`Polling attempt ${attempts}/${maxAttempts} for request ${requestId}`)
         
-        const result = await this.getTransactionStatus(requestId)
+        const result = await this.verifyTransaction(requestId)
         
         if (onStatusUpdate) {
           onStatusUpdate(result, attempts)
