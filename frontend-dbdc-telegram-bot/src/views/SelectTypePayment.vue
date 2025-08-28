@@ -405,6 +405,7 @@ async function handleCryptoPurchaseFlow() {
       boc: result?.boc,
       reference: initResp.reference,
       address: userAddress.value || undefined,
+      valid_until: initResp.transaction?.validUntil,
       total_usd: Number(numericTotal.value.toFixed(2)),
       items
     })
