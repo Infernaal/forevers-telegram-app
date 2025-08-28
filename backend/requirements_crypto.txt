@@ -1,2 +1,0 @@
-# Additional dependencies needed for TON cryptocurrency integration
-httpx>=0.24.0  # For external API calls (TON price, blockchain verification)
