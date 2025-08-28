@@ -88,68 +88,80 @@ async def verify_crypto_transaction(user_id: int, total_usd: Decimal, items: Lis
     paid_ton = Decimal(paid_nano) / NANO
     usd_paid = (paid_ton * price).quantize(Decimal("0.01"), rounding=ROUND_UP)
 
-    total_forevers = sum(Decimal(str(i.get("amount", 0))) for i in items)
-    if total_forevers <= 0:
-        return False, {}, "Invalid forevers amount"
-    usd_per_forever = (usd_paid / total_forevers).quantize(Decimal("0.00000001"), rounding=ROUND_UP)
+    # Single on-chain tx, but create per-item records in DB
+    items_total = sum(Decimal(str(i.get("totalCost", 0))) for i in items)
+    if items_total <= 0:
+        return False, {}, "Invalid items total"
+    # Log discrepancy if any
+    if abs(items_total - usd_paid) > Decimal("1.00"):
+        logger.warning(f"USD paid on-chain ({usd_paid}) differs from items total ({items_total}) by > $1.00")
 
     txid = f"TON{random_hash(12)}"
-    first_type = str(items[0].get("code", "UAE")) if items else "UAE"
+    chain_hash = str(matched.get('transaction_id', {}).get('hash'))
 
-    deposit = Deposits(
-        uid=user_id,
-        txid=txid,
-        method=GATEWAY_ID,
-        amount=str(total_forevers),  # store forevers amount
-        currency='FOREVERS',
-        requested_on=now,
-        processed_on=now,
-        reference_number=reference or f"TON{random_hash(8).upper()}",
-        status=1,
-        is_exchange=0,
-        ip_address=ip_address or '',
-        gateway_txid=str(matched.get('transaction_id', {}).get('hash')),
-        payment_data=json.dumps({
-            "items": items,
-            "paid_nano": paid_nano,
-            "paid_ton": str(paid_ton),
-            "usd_paid": str(usd_paid),
-            "usd_per_forever": str(usd_per_forever)
-        }),
-        rate_at_deposit=usd_per_forever,
-        type=first_type
-    )
-    db.add(deposit)
-    await db.flush()
+    first_deposit_id = None
 
-    description = f"Forevers purchased via TON crypto (User ID: {user_id})"
-    transaction = Transactions(
-        txid=txid,
-        type=3,
-        sender=user_id,
-        recipient=deposit.id,
-        description=description,
-        deposit_via=GATEWAY_ID,
-        amount=str(usd_paid),  # record price (USD) in transaction
-        currency='USD',
-        fee='',
-        status=1,
-        created=now
-    )
-    db.add(transaction)
+    for i in items:
+        item_usd = Decimal(str(i.get("totalCost", 0)))
+        rate = Decimal(str(i.get("usdRate", 0)))
+        code = str(i.get("code", "UAE"))
+        forevers_amount = Decimal(str(i.get("amount", 0)))
 
-    activity = Activity(
-        txid=txid,
-        type=3,
-        uid=user_id,
-        deposit_via=GATEWAY_ID,
-        u_field_1=str(deposit.id),
-        amount=str(usd_paid),
-        currency='USD',
-        status=3,
-        created=now
-    )
-    db.add(activity)
+        deposit = Deposits(
+            uid=user_id,
+            txid=txid,
+            method=GATEWAY_ID,
+            amount=str(item_usd),
+            currency='USD',
+            requested_on=now,
+            processed_on=now,
+            reference_number=reference or f"TON{random_hash(8).upper()}",
+            status=1,
+            is_exchange=0,
+            ip_address=ip_address or '',
+            gateway_txid=chain_hash,
+            payment_data=json.dumps({
+                "forevers_amount": str(forevers_amount),
+                "usd_rate": str(rate),
+                "paid_nano": int(paid_nano),
+                "paid_ton": str(paid_ton)
+            }),
+            rate_at_deposit=rate,
+            type=code
+        )
+        db.add(deposit)
+        await db.flush()
+        if first_deposit_id is None:
+            first_deposit_id = deposit.id
+
+        description = f"Forevers {code} purchased via TON crypto (User ID: {user_id})"
+        transaction = Transactions(
+            txid=txid,
+            type=3,
+            sender=user_id,
+            recipient=deposit.id,
+            description=description,
+            deposit_via=GATEWAY_ID,
+            amount=str(item_usd),
+            currency='USD',
+            fee='',
+            status=1,
+            created=now
+        )
+        db.add(transaction)
+
+        activity = Activity(
+            txid=txid,
+            type=3,
+            uid=user_id,
+            deposit_via=GATEWAY_ID,
+            u_field_1=str(deposit.id),
+            amount=str(item_usd),
+            currency='USD',
+            status=3,
+            created=now
+        )
+        db.add(activity)
 
     await db.commit()
 
