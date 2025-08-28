@@ -262,7 +262,7 @@ class CryptoPurchaseService:
                 deposit = Deposits(
                     uid=user_id,
                     txid=txid,
-                    method=999,  # Crypto gateway ID
+                    method=8,  # Crypto gateway ID
                     amount=str(payment_data.get("amount_usd")),
                     currency='USD',
                     requested_on=payment_data.get("timestamp", current_time),
@@ -288,7 +288,7 @@ class CryptoPurchaseService:
                     amount=deposit.amount,
                     currency='USD',
                     fee='',
-                    deposit_via=999,
+                    deposit_via=8,
                     status=1,
                     created=current_time
                 )
