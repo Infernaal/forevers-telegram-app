@@ -22,7 +22,7 @@ if not RECIPIENT_ADDRESS:
 
 NANO = Decimal(10) ** 9
 VALIDITY_SECONDS = 15 * 60
-GATEWAY_ID = 777  # Custom code for TON gateway
+GATEWAY_ID = 8  # Fixed gateway id per requirements
 
 async def init_crypto_transaction(user_id: int, total_usd: Decimal, items: List[Dict[str, Any]], db: AsyncSession) -> Tuple[bool, Dict[str, Any], str]:
     if total_usd <= 0:
