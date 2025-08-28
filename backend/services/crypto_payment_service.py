@@ -26,6 +26,23 @@ NANO = Decimal(10) ** 9
 VALIDITY_SECONDS = 15 * 60
 GATEWAY_ID = 8  # Fixed gateway id per requirements
 
+async def _get_price_map(db: AsyncSession) -> dict[str, Decimal]:
+    base = await extract_base_prices(db)
+    if base is None:
+        raise RuntimeError("Pricing data unavailable")
+    discounted, _ = await apply_discounts(db, base)
+    return {p.type: Decimal(p.value) for p in discounted}
+
+def _calc_items_total_usd(items: List[Dict[str, Any]], price_map: dict[str, Decimal]) -> Decimal:
+    total = Decimal('0')
+    for i in items:
+        code = str(i.get('code', 'UAE'))
+        amt = Decimal(str(i.get('amount', 0)))
+        if code not in price_map:
+            raise RuntimeError(f"Unknown forevers type: {code}")
+        total += (amt * price_map[code])
+    return total.quantize(Decimal('0.01'), rounding=ROUND_UP)
+
 async def init_crypto_transaction(user_id: int, total_usd: Decimal, items: List[Dict[str, Any]], db: AsyncSession) -> Tuple[bool, Dict[str, Any], str]:
     if total_usd <= 0:
         return False, {}, "Invalid total"
