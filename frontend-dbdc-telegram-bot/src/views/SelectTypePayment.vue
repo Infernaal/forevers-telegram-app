@@ -215,7 +215,32 @@ const { showError: showApiError } = useApiErrorNotifier()
 
 // Computed properties
 const isAnyModalOpen = computed(() => {
-  return showTermsModal.value || showSuccessModal.value || showConfirmModal.value
+  return showTermsModal.value || showSuccessModal.value || showConfirmModal.value || showCryptoModal.value
+})
+
+// Check if buy button should be disabled
+const isBuyButtonDisabled = computed(() => {
+  if (!selectedPayment.value || !termsAccepted.value || isProcessingPurchase.value) {
+    return true
+  }
+
+  // For crypto payments, require wallet connection
+  if (selectedPayment.value === 'usdt' && !isWalletConnected.value) {
+    return true
+  }
+
+  return false
+})
+
+// Get button text based on payment method and wallet status
+const buyButtonText = computed(() => {
+  if (selectedPayment.value === 'usdt') {
+    if (isConnectingWallet.value) {
+      return 'Connecting...'
+    }
+    return isWalletConnected.value ? 'Buy Forevers' : 'Connect Wallet'
+  }
+  return 'Buy Forevers'
 })
 
 // Methods
