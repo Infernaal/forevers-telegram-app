@@ -15,7 +15,7 @@ export class TonConnectService {
   }
 
   /**
-   * Initialize TonConnect
+   * Initialize TonConnect for TON testnet
    */
   async init() {
     if (this.isInitialized) {
@@ -25,11 +25,13 @@ export class TonConnectService {
     try {
       // Initialize TonConnect for testnet
       this.tonConnect = new TonConnect({
-        manifestUrl: `${window.location.origin}/tonconnect-manifest.json`
+        manifestUrl: `${window.location.origin}/tonconnect-manifest.json`,
+        // Configure for testnet
+        network: 'testnet'
       })
 
       this.isInitialized = true
-      console.log('TonConnect initialized successfully')
+      console.log('TonConnect initialized successfully for testnet')
       return this.tonConnect
     } catch (error) {
       console.error('Failed to initialize TonConnect:', error)
