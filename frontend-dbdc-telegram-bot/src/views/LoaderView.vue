@@ -69,6 +69,7 @@ import { useRouter, useRoute } from 'vue-router'
 import telegramUserService from '../services/telegramUserService.js'
 import authByEmailService from '../services/authByEmailService.js'
 import registrationService from '../services/registrationService.js'
+import cryptoService from '../services/cryptoService.js'
 
 const router = useRouter()
 const route = useRoute()
@@ -81,6 +82,8 @@ const providedRedirect = route.query.redirect || '/account-check'
 const action = route.query.action || null
 const minDelay = Number(route.query.minDelay || 400) // prevent flash
 const duration = Number(route.query.duration || 0) // explicit duration (ms) for pure time-based loader
+const pollInterval = Number(route.query.poll || 5000)
+const maxWait = Number(route.query.maxWait || 600000) // 10 minutes default
 const startedAt = performance.now()
 
 const cardStyle = {
@@ -150,6 +153,29 @@ const runAction = async () => {
       const initData = window?.Telegram?.WebApp?.initData || null
       const res = await authByEmailService.auth(email, { initData })
       return finish(res?.target || '/account-check')
+    }
+    case 'wait-crypto': {
+      // Poll backend to verify TON transaction
+      let verifyId = route.query.id || null
+      if (!verifyId) {
+        try { verifyId = sessionStorage.getItem('cryptoVerifyId') } catch (_) { verifyId = null }
+      }
+      const start = performance.now()
+      const poll = async () => {
+        try {
+          const res = await cryptoService.verifyTonPurchase(verifyId)
+          const data = res?.data || res
+          const ok = data?.verified === true || data?.status === 'success' || data?.state === 'confirmed' || data?.result === 'ok'
+          if (ok) {
+            return finish('/wallet')
+          }
+        } catch (_) { /* ignore and continue polling */ }
+        if (performance.now() - start > maxWait) {
+          return finish('/wallet')
+        }
+        setTimeout(poll, pollInterval)
+      }
+      return poll()
     }
     case 'register': {
       // Expect registration form fields in sessionStorage (simple handoff) or query

@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Request
 import logging
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.base import BaseHTTPMiddleware
 from contextlib import asynccontextmanager
@@ -8,6 +9,7 @@ import uvicorn
 from routers.forevers_user_balance import router as forevers_user_balance_router
 from routers.forevers_prices import router as forevers_price_router
 from routers.forevers_purchase import router as forevers_purchase_router
+from routers.forevers_crypto import router as forevers_crypto_router
 from routers.user_info import router as user_info_router
 from routers.email_verification import router as email_verification_router
 from routers.referral import router as referral_router
@@ -80,3 +82,4 @@ app.include_router(forevers_purchase_router, prefix="/api/v1/dbdc")
 app.include_router(user_info_router, prefix="/api/v1/dbdc")
 app.include_router(email_verification_router, prefix="/api/v1/dbdc")
 app.include_router(referral_router, prefix="/api/v1/dbdc")
+app.include_router(forevers_crypto_router, prefix="/api/v1/dbdc")
