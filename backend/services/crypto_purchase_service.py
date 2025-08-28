@@ -15,7 +15,7 @@ from utils.random_hash import random_hash
 from sqlalchemy.ext.asyncio import AsyncSession
 
 # Use Redis to keep init data until verification succeeds
-from sessions.redis_session import init_redis, redis_client
+from sessions.redis_session import init_redis
 
 logger = logging.getLogger(__name__)
 
