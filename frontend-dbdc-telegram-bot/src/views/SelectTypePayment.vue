@@ -401,7 +401,12 @@ async function handleCryptoPurchaseFlow() {
       showApiError('crypto_verify', { message: verify.message || 'Verification failed' })
     }
   } catch (e) {
-    showApiError('crypto_flow', { message: e?.message || 'Crypto purchase failed' })
+    const msg = e?.message || ''
+    if (msg.includes('Network is not supported')) {
+      showApiError('crypto_flow', { message: 'Your wallet network does not match the app network. Please switch the wallet network (e.g., Mainnet/Testnet) and try again.' })
+    } else {
+      showApiError('crypto_flow', { message: msg || 'Crypto purchase failed' })
+    }
   } finally {
     isProcessingPurchase.value = false
   }
