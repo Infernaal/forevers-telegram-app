@@ -215,28 +215,6 @@ export class TonConnectService {
     }
   }
 
-  /**
-   * Get transaction status
-   */
-  async getTransactionStatus(requestId) {
-    try {
-      const response = await fetch(`${API_BASE_URL}/forevers/crypto/status/${requestId}`, {
-        method: 'GET',
-        credentials: 'include'
-      })
-
-      const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.message || `HTTP error! status: ${response.status}`)
-      }
-
-      return data
-    } catch (error) {
-      console.error('Error getting transaction status:', error)
-      throw error
-    }
-  }
 
   /**
    * Start polling for transaction verification
