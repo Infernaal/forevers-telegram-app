@@ -92,7 +92,7 @@
     </div>
 
     <!-- Cart Bottom Component -->
-    <div class="fixed left-0 right-0 z-[9999]" style="bottom: 89px;">
+    <div class="fixed left-0 right-0 z-[9999]" :style="{ bottom: `${bottomOffset}px` }">
       <CartBottomComponent
         :total-amount="numericTotal"
         :disabled="actionDisabled"
