@@ -66,7 +66,7 @@ async def init_crypto_transaction(user_id: int, total_usd: Decimal, items: List[
     now = int(time.time())
     valid_until = now + VALIDITY_SECONDS
 
-    reference = f"TON{random_hash(8).upper()}"
+    reference = f"CRPT{random_hash(8).upper()}"
 
     tx = {
         "to": RECIPIENT_ADDRESS,
@@ -76,7 +76,7 @@ async def init_crypto_transaction(user_id: int, total_usd: Decimal, items: List[
     }
     return True, {"reference": reference, "transaction": tx}, "OK"
 
-async def verify_crypto_transaction(user_id: int, total_usd: Decimal, items: List[Dict[str, Any]], payer_address: str | None, db: AsyncSession, reference: str | None = None, ip_address: str = "") -> Tuple[bool, Dict[str, Any], str]:
+async def verify_crypto_transaction(user_id: int, total_usd: Decimal, items: List[Dict[str, Any]], payer_address: str | None, db: AsyncSession, reference: str | None = None, valid_until: int | None = None, ip_address: str = "") -> Tuple[bool, Dict[str, Any], str]:
     # Determine expected nano from provided USD as hint
     price = await get_ton_usd_price()
     hint_ton_amount = (total_usd / price).quantize(Decimal("0.000000001"), rounding=ROUND_UP)
@@ -91,8 +91,9 @@ async def verify_crypto_transaction(user_id: int, total_usd: Decimal, items: Lis
     attempts = 3
     for _try in range(attempts):
       # Fetch recent txs to our recipient
-      txs = await TonCenter.get_transactions(RECIPIENT_ADDRESS, limit=30)
+      txs = await TonCenter.get_transactions(RECIPIENT_ADDRESS, limit=50)
 
+      candidates: List[Tuple[int, Dict[str, Any]]] = []
       for tx in txs:
           to_addr = TonCenter.extract_incoming_to_address(tx)
           if not to_addr:
@@ -106,9 +107,11 @@ async def verify_crypto_transaction(user_id: int, total_usd: Decimal, items: Lis
           lower_bound = int(expected_nano * 0.98)
           upper_bound = int(expected_nano * 1.05)
           if lower_bound <= value <= upper_bound or value >= expected_nano:
-              matched = tx
-              break
-      if matched:
+              diff = abs(value - expected_nano)
+              candidates.append((diff, tx))
+      if candidates:
+          candidates.sort(key=lambda x: x[0])
+          matched = candidates[0][1]
           break
       # brief wait before next attempt
       await asyncio.sleep(2)
@@ -122,6 +125,7 @@ async def verify_crypto_transaction(user_id: int, total_usd: Decimal, items: Lis
     paid_nano = TonCenter.extract_value_nano(matched)
     paid_ton = Decimal(paid_nano) / NANO
     usd_paid = (paid_ton * price).quantize(Decimal("0.01"), rounding=ROUND_UP)
+    server_valid_until = valid_until if valid_until else (now + VALIDITY_SECONDS)
 
     # Server-side recompute to prevent tampering
     price_map = await _get_price_map(db)
@@ -139,7 +143,7 @@ async def verify_crypto_transaction(user_id: int, total_usd: Decimal, items: Lis
     if abs(server_items_total - usd_paid) > tolerance:
         return False, {}, "Paid amount does not match expected total"
 
-    txid = f"TON{random_hash(12)}"
+    txid = f"CRPT{random_hash(8).upper()}"
     chain_hash = str(matched.get('transaction_id', {}).get('hash'))
 
     first_deposit_id = None
@@ -164,6 +168,14 @@ async def verify_crypto_transaction(user_id: int, total_usd: Decimal, items: Lis
             ip_address=ip_address or '',
             gateway_txid=chain_hash,
             payment_data=json.dumps({
+                "order_id": reference or f"CRPT{random_hash(8).upper()}",
+                "group_txid": txid,
+                "receiver": RECIPIENT_ADDRESS,
+                "ton_price_usd": str(price),
+                "usd_total": str(server_items_total),
+                "expected_amount_nano": expected_nano,
+                "slippage_percent": 2.0,
+                "valid_until": server_valid_until,
                 "forevers_amount": str(forevers_amount),
                 "usd_rate": str(server_rate),
                 "paid_nano": int(paid_nano),
