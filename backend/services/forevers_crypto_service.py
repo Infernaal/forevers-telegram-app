@@ -21,7 +21,7 @@ TONAPI_BASE = "https://testnet.tonapi.io"
 
 class ForeversCryptoService:
     @staticmethod
-    async def init_payment(user_id: int, usd_amount: Decimal, wallet_address: str) -> Tuple[bool, Dict[str, Any], str]:
+    async def init_payment(user_id: int, usd_amount: Decimal, wallet_address: str, forevers_price: Optional[Decimal] = None, forevers_type: Optional[str] = None) -> Tuple[bool, Dict[str, Any], str]:
         try:
             if usd_amount <= 0:
                 return False, {}, "Invalid amount"
@@ -52,6 +52,8 @@ class ForeversCryptoService:
                 "total_ton": float(total_ton),
                 "receiver": TON_TESTNET_RECEIVER,
                 "wallet_address": wallet_address,
+                "forevers_price": float(forevers_price) if forevers_price is not None else None,
+                "forevers_type": forevers_type or None,
                 "created_at": int(time.time())
             }
             await redis.set(cache_key, json.dumps(cache_value), ex=1800)  # 30 min
@@ -62,6 +64,8 @@ class ForeversCryptoService:
                 "amount_ton": float(amount_ton),
                 "network_fee_ton": float(network_fee_ton),
                 "total_ton": float(total_ton),
+                "forevers_price": float(forevers_price) if forevers_price is not None else None,
+                "forevers_type": forevers_type or None,
                 "ton_connect_tx": {
                     "validUntil": valid_until,
                     "messages": [
@@ -137,6 +141,28 @@ class ForeversCryptoService:
             if not found_tx:
                 return False, {"reason": "not_found"}, "Transaction not found or amount mismatch"
 
+            # Resolve price per 1 Forevers to store in rate_at_deposit
+            resolved_type = (exp.get("forevers_type") or "UAE").upper()
+            resolved_price = exp.get("forevers_price")
+            try:
+                if resolved_price is None:
+                    from services.forevers_prices_service import extract_base_prices
+                    from services.discount_service import apply_discounts
+                    base_prices = await extract_base_prices(db)
+                    if base_prices:
+                        discounted_prices, discounts = await apply_discounts(db, base_prices)
+                        match = next((p for p in discounted_prices if str(p.type).upper() == resolved_type), None)
+                        if match:
+                            resolved_price = float(match.value)
+                        else:
+                            fallback = next((p for p in base_prices if str(p.type).upper() == resolved_type), None) or (base_prices[0] if base_prices else None)
+                            if fallback:
+                                resolved_price = float(fallback.value)
+                if resolved_price is None:
+                    resolved_price = float(Decimal(exp["usd_amount"]))
+            except Exception:
+                resolved_price = float(Decimal(exp["usd_amount"]))
+
             # Persist deposit and transaction records
             now = int(time.time())
             txid = f"TON{random_hash(12)}"
@@ -152,7 +178,8 @@ class ForeversCryptoService:
                 processed_on=now,
                 reference_number=verify_id,
                 status=1,
-                rate_at_deposit=Decimal(str(usd_per_ton_now)),
+                type=resolved_type if resolved_type in {"UAE","KZ","DE","PL","UA"} else "UAE",
+                rate_at_deposit=Decimal(str(resolved_price)).quantize(Decimal('0.01')),
                 payment_data=json.dumps([
                     {
                         "transaction_id": found_tx["hash"],
