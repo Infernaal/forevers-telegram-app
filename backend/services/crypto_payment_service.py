@@ -44,20 +44,26 @@ def _calc_items_total_usd(items: List[Dict[str, Any]], price_map: dict[str, Deci
     return total.quantize(Decimal('0.01'), rounding=ROUND_UP)
 
 async def init_crypto_transaction(user_id: int, total_usd: Decimal, items: List[Dict[str, Any]], db: AsyncSession) -> Tuple[bool, Dict[str, Any], str]:
-    if total_usd <= 0:
-        return False, {}, "Invalid total"
     if not RECIPIENT_ADDRESS:
         return False, {}, "TON recipient address is not configured"
 
+    # Compute payable total on backend
+    price_map = await _get_price_map(db)
+    server_total = _calc_items_total_usd(items, price_map)
+
+    # Optional: compare client-provided total to server
+    if total_usd and abs(server_total - total_usd) > Decimal('0.01'):
+        # Prefer server value regardless
+        logger.warning(f"Client total_usd {total_usd} != server_total {server_total}, using server value")
+
+    # Convert USD->TON using external rate
     price = await get_ton_usd_price()  # USD per TON
-    # TON amount = USD / price
-    ton_amount = (total_usd / price).quantize(Decimal("0.000000001"), rounding=ROUND_UP)
+    ton_amount = (server_total / price).quantize(Decimal("0.000000001"), rounding=ROUND_UP)
     nano_amount = int((ton_amount * NANO).to_integral_value(rounding=ROUND_UP))
 
     now = int(time.time())
     valid_until = now + VALIDITY_SECONDS
 
-    # Only prepare client transaction; no DB writes at init
     reference = f"TON{random_hash(8).upper()}"
 
     tx = {
@@ -66,7 +72,7 @@ async def init_crypto_transaction(user_id: int, total_usd: Decimal, items: List[
         "payload": None,
         "validUntil": valid_until
     }
-    return True, {"reference": reference, "transaction": tx}, "OK"
+    return True, {"reference": reference, "transaction": tx}, "OK"}
 
 async def verify_crypto_transaction(user_id: int, total_usd: Decimal, items: List[Dict[str, Any]], payer_address: str | None, db: AsyncSession, reference: str | None = None, ip_address: str = "") -> Tuple[bool, Dict[str, Any], str]:
     # Determine expected nano from provided USD as hint
