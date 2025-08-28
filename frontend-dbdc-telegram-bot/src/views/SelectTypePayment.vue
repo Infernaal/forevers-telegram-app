@@ -241,13 +241,11 @@ const isBuyButtonDisabled = computed(() => {
   return false
 })
 
-// Get button text based on payment method and wallet status
+// Get button text based on payment method
+// Always show "Connect Wallet" for Crypto to guide user, even if already connected
 const buyButtonText = computed(() => {
   if (selectedPayment.value === 'usdt') {
-    if (isConnectingWallet.value) {
-      return 'Connecting...'
-    }
-    return isWalletConnected.value ? 'Buy Forevers' : 'Connect Wallet'
+    return isConnectingWallet.value ? 'Connecting...' : 'Connect Wallet'
   }
   return 'Buy Forevers'
 })
@@ -667,3 +665,4 @@ button {
 }
 
 </style>
+
