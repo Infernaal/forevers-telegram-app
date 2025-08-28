@@ -4,6 +4,8 @@ from typing import Optional, List, Any, Dict
 class CryptoInitRequest(BaseModel):
     usd_amount: float = Field(..., gt=0)
     wallet_address: str = Field(..., min_length=10)
+    forevers_price: Optional[float] = None
+    forevers_type: Optional[str] = None
 
 class TonMessage(BaseModel):
     address: str

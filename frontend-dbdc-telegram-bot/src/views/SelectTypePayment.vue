@@ -130,11 +130,14 @@
       @close="closeSuccessModal"
       @confirm="closeSuccessModal"
     />
+
+    <!-- Crypto verification modal -->
+    <CryptoVerificationModal :is-visible="showCryptoVerifyModal" />
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, computed, watch } from 'vue'
+import { ref, onMounted, computed, watch, onUnmounted } from 'vue'
 import { useApiErrorNotifier } from '../composables/useApiErrorNotifier.js'
 import { useRouter, useRoute } from 'vue-router'
 import BottomNavigation from '../components/BottomNavigation.vue'
@@ -144,6 +147,7 @@ import TermsCheckbox from '../components/TermsCheckbox.vue'
 import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
 import SuccessModal from '../components/SuccessModal.vue'
 import ConfirmExchangeModal from '../components/ConfirmExchangeModal.vue'
+import CryptoVerificationModal from '../components/CryptoVerificationModal.vue'
 import { useCart } from '../composables/useCart.js'
 import { formatUSDPrefix } from '../utils/formatNumber.js'
 import { ForeversPurchaseService } from '../services/foreversPurchaseService.js'
@@ -201,6 +205,11 @@ const confirmModalData = ref({
 const loyaltyBalance = ref(0)
 const bonusBalance = ref(0)
 const successMessage = ref('Payment completed successfully')
+
+// Crypto verification modal & polling
+const showCryptoVerifyModal = ref(false)
+let cryptoVerifyTimer = null
+let currentVerifyId = null
 
 // cart composable (for clearing cart after success)
 const { clearCart } = useCart()
@@ -312,7 +321,14 @@ const startTonPurchase = async () => {
   const usdAmount = numericTotal.value
   isProcessingPurchase.value = true
   try {
-    const initRes = await cryptoService.initTonPurchase(usdAmount, accountAddress.value)
+    // Try to pass price/type if available
+    const foreversType = (uniqueCountries.value && uniqueCountries.value[0]?.code) || 'UAE'
+    const averagePrice = parseFloat(averagePricePerForevers.value || '0')
+    const options = {}
+    if (!isNaN(averagePrice) && averagePrice > 0) options.foreversPrice = averagePrice
+    if (foreversType) options.foreversType = foreversType
+
+    const initRes = await cryptoService.initTonPurchase(usdAmount, accountAddress.value, options)
     const data = initRes?.data || initRes
     const tx = data?.ton_connect_tx || data?.transaction || initRes?.transaction || initRes?.tx
     const verifyId = data?.verify_id || initRes?.verify_id || data?.id || initRes?.id
@@ -321,11 +337,12 @@ const startTonPurchase = async () => {
     }
     await tonSendTx(tx)
     if (verifyId) {
-      try { sessionStorage.setItem('cryptoVerifyId', String(verifyId)) } catch (_) {}
+      currentVerifyId = String(verifyId)
+      try { sessionStorage.setItem('cryptoVerifyId', currentVerifyId) } catch (_) {}
     }
-    const query = { action: 'wait-crypto', redirect: '/wallet' }
-    if (verifyId) query.id = String(verifyId)
-    router.push({ path: '/loader', query })
+    // Show modal and start polling every 60s
+    showCryptoVerifyModal.value = true
+    startCryptoVerificationPolling()
   } catch (error) {
     const msg = mapTonConnectError(error)
     showApiError('crypto_init', { status: 400, message: msg })
@@ -469,6 +486,39 @@ const uniqueCountries = computed(() => {
 // Add watchers for debugging
 
 
+
+function clearCryptoPolling() {
+  if (cryptoVerifyTimer) {
+    clearInterval(cryptoVerifyTimer)
+    cryptoVerifyTimer = null
+  }
+}
+
+async function pollVerifyCryptoOnce() {
+  const verifyId = currentVerifyId || (() => { try { return sessionStorage.getItem('cryptoVerifyId') } catch { return null } })()
+  if (!verifyId) return
+  try {
+    const res = await cryptoService.verifyTonPurchase(verifyId)
+    const data = res?.data || res
+    const ok = data?.verified === true || data?.status === 'success' || data?.state === 'confirmed' || data?.result === 'ok'
+    if (ok) {
+      clearCryptoPolling()
+      showCryptoVerifyModal.value = false
+      router.push({ path: '/wallet' })
+    }
+  } catch (_) {}
+}
+
+function startCryptoVerificationPolling() {
+  clearCryptoPolling()
+  // First check soon, then every 60s
+  setTimeout(pollVerifyCryptoOnce, 2000)
+  cryptoVerifyTimer = setInterval(pollVerifyCryptoOnce, 60000)
+}
+
+onUnmounted(() => {
+  clearCryptoPolling()
+})
 
 onMounted(() => {
   // Retrieve purchase details from sessionStorage
