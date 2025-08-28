@@ -581,6 +581,44 @@ onMounted(() => {
 
 
   fetchWalletData()
+
+  // Initialize TonConnect
+  initializeTonConnect()
+})
+
+// Initialize TonConnect and check connection status
+const initializeTonConnect = async () => {
+  try {
+    await tonConnectService.init()
+
+    // Check if wallet is already connected
+    if (tonConnectService.isWalletConnected()) {
+      isWalletConnected.value = true
+      walletAddress.value = tonConnectService.getWalletAddress()
+      console.log('Wallet already connected:', walletAddress.value)
+    }
+
+    // Listen for wallet connection changes
+    tonConnectService.onStatusChange((wallet) => {
+      if (wallet) {
+        isWalletConnected.value = true
+        walletAddress.value = wallet.account?.address || ''
+      } else {
+        isWalletConnected.value = false
+        walletAddress.value = ''
+      }
+    })
+  } catch (error) {
+    console.error('TonConnect initialization error:', error)
+  }
+}
+
+// Cleanup on component unmount
+onUnmounted(() => {
+  // Remove TonConnect event listeners
+  if (tonConnectService.tonConnect) {
+    tonConnectService.off()
+  }
 })
 </script>
 
