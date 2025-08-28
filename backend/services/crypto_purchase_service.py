@@ -1,0 +1,420 @@
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select, update
+from decimal import Decimal, ROUND_HALF_UP
+import time
+import logging
+import json
+import uuid
+from datetime import datetime
+from typing import Tuple, Optional, Dict, Any
+import httpx
+
+from models.models import Deposits, Transactions, Settings
+from services.forevers_purchase_service import ForeversPurchaseService
+from utils.random_hash import random_hash
+
+logger = logging.getLogger(__name__)
+
+# Fixed receiver wallet address as specified in requirements
+FIXED_RECEIVER_WALLET = "0QBgEwEKpmG4yPvn7-_VqljYE2s88oI6v7R2Vu_E8TvHjMGG"
+
+class CryptoPurchaseService:
+    """Service for handling TON cryptocurrency purchases"""
+    
+    @staticmethod
+    async def get_ton_usd_rate() -> Decimal:
+        """
+        Get current TON to USD exchange rate from external API
+        Returns rate for 1 TON in USD
+        """
+        try:
+            # Using CoinGecko API for TON price (testnet and mainnet have similar pricing)
+            async with httpx.AsyncClient() as client:
+                response = await client.get(
+                    "https://api.coingecko.com/api/v3/simple/price?ids=the-open-network&vs_currencies=usd",
+                    timeout=10.0
+                )
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    rate = Decimal(str(data["the-open-network"]["usd"]))
+                    logger.info(f"Fetched TON/USD rate: {rate}")
+                    return rate
+                else:
+                    logger.warning(f"Failed to fetch TON price, status: {response.status_code}")
+        except Exception as e:
+            logger.error(f"Error fetching TON price: {e}")
+        
+        # Fallback rate if API fails (update this periodically)
+        fallback_rate = Decimal("2.50")  # Approximate TON price in USD
+        logger.warning(f"Using fallback TON/USD rate: {fallback_rate}")
+        return fallback_rate
+
+    @staticmethod
+    async def get_network_fee_estimate() -> Decimal:
+        """
+        Get estimated network fee for TON transaction
+        Returns fee in TON
+        """
+        # Standard TON transaction fee (approximately 0.01-0.02 TON)
+        return Decimal("0.015")
+
+    @staticmethod
+    async def get_forevers_rate(db: AsyncSession, rate_as_deposit: Optional[Decimal] = None) -> Decimal:
+        """
+        Get the rate for 1 Forever in USD
+        If rate_as_deposit is provided, use it, otherwise get from Settings
+        """
+        if rate_as_deposit is not None:
+            return rate_as_deposit
+        
+        try:
+            stmt = select(Settings).limit(1)
+            result = await db.execute(stmt)
+            settings = result.scalar_one_or_none()
+            
+            if settings and settings.forevers_value:
+                return settings.forevers_value
+            else:
+                # Fallback value if no settings found
+                return Decimal("4.00")
+        except Exception as e:
+            logger.error(f"Error fetching forevers rate: {e}")
+            return Decimal("4.00")
+
+    @staticmethod
+    async def init_crypto_purchase(
+        user_id: int,
+        amount_usd: Decimal,
+        user_wallet: str,
+        receiver_wallet: str,
+        rate_as_deposit: Optional[Decimal],
+        db: AsyncSession
+    ) -> Tuple[bool, Dict[str, Any], str]:
+        """
+        Initialize a crypto purchase transaction
+        
+        Args:
+            user_id: ID of the user making the purchase
+            amount_usd: Amount in USD to purchase
+            user_wallet: User's wallet address (sender)
+            receiver_wallet: Receiver wallet address (should be fixed)
+            rate_as_deposit: Rate per Forever if provided
+            db: Database session
+            
+        Returns:
+            Tuple of (success, data, message)
+        """
+        try:
+            # Validate receiver wallet is the fixed address
+            if receiver_wallet != FIXED_RECEIVER_WALLET:
+                logger.warning(f"Invalid receiver wallet attempt: user_id={user_id}, wallet={receiver_wallet}")
+                return False, {}, f"Invalid receiver wallet. Must use: {FIXED_RECEIVER_WALLET}"
+            
+            # Validate user wallet format (basic validation)
+            if not user_wallet or len(user_wallet) < 10:
+                return False, {}, "Invalid user wallet address format"
+            
+            # Validate amount
+            if amount_usd <= 0:
+                return False, {}, "Amount must be greater than 0"
+            
+            # Security check: validate amount is not suspiciously high
+            max_usd_per_transaction = Decimal("50000.00")  # $50,000 limit
+            if amount_usd > max_usd_per_transaction:
+                logger.warning(f"Suspicious high amount attempt: user_id={user_id}, amount_usd={amount_usd}")
+                return False, {}, f"Amount too high: ${amount_usd}. Maximum allowed: ${max_usd_per_transaction}"
+            
+            # Get current rates
+            ton_usd_rate = await CryptoPurchaseService.get_ton_usd_rate()
+            forevers_rate = await CryptoPurchaseService.get_forevers_rate(db, rate_as_deposit)
+            network_fee = await CryptoPurchaseService.get_network_fee_estimate()
+            
+            # Convert USD to TON (without network fee)
+            amount_ton = (amount_usd / ton_usd_rate).quantize(Decimal('0.000000001'), rounding=ROUND_HALF_UP)
+            
+            # Calculate network fee in USD for reference
+            network_fee_usd = (network_fee * ton_usd_rate).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+            
+            # Generate unique request ID and transaction ID
+            request_id = f"CRYPTO_{uuid.uuid4().hex[:16].upper()}"
+            txid = f"CRYPTO{random_hash(12)}"
+            
+            current_time = int(time.time())
+            
+            # Prepare transaction data
+            transaction_data = {
+                "request_id": request_id,
+                "transaction_id": None,  # Will be filled when transaction is sent
+                "user_wallet": user_wallet,
+                "receiver_wallet": receiver_wallet,
+                "amount_usd": str(amount_usd),
+                "amount_ton": str(amount_ton),
+                "ton_usd_rate": str(ton_usd_rate),
+                "forevers_rate": str(forevers_rate),
+                "network_fee_estimate": str(network_fee),
+                "network_fee_usd": str(network_fee_usd),
+                "status": "pending",
+                "timestamp": current_time,
+                "created_at": datetime.now().isoformat()
+            }
+            
+            # Create deposit record with pending status
+            deposit = Deposits(
+                uid=user_id,
+                txid=txid,
+                method=999,  # Crypto gateway ID
+                amount=str(amount_usd),
+                currency='USD',
+                requested_on=current_time,
+                processed_on=0,
+                status=0,  # Pending
+                rate_at_deposit=forevers_rate,
+                is_exchange=0,  # Real deposit, not exchange
+                type='UAE',  # Default type
+                payment_data=json.dumps(transaction_data),
+                ip_address="0.0.0.0"  # Will be updated when transaction is verified
+            )
+            
+            db.add(deposit)
+            await db.flush()  # Get the deposit ID
+            
+            # Update transaction data with deposit ID
+            transaction_data["deposit_id"] = deposit.id
+            deposit.payment_data = json.dumps(transaction_data)
+            
+            await db.commit()
+            
+            # Prepare response data for Ton Connect
+            response_data = {
+                "to": receiver_wallet,
+                "amount_ton": str(amount_ton),
+                "amount_usd": str(amount_usd),
+                "ton_usd_rate": str(ton_usd_rate),
+                "network_fee": str(network_fee),
+                "network_fee_usd": str(network_fee_usd),
+                "request_id": request_id,
+                "deposit_id": deposit.id,
+                "forevers_rate": str(forevers_rate),
+                "payload": f"Forever purchase - {request_id}"  # Optional memo for transaction
+            }
+            
+            logger.info(f"Crypto purchase initialized: user_id={user_id}, request_id={request_id}, "
+                       f"amount_usd=${amount_usd}, amount_ton={amount_ton}, deposit_id={deposit.id}")
+            
+            return True, response_data, "Crypto purchase initialized successfully"
+            
+        except Exception as e:
+            await db.rollback()
+            logger.error(f"Error initializing crypto purchase: user_id={user_id}, error={str(e)}", exc_info=True)
+            return False, {}, f"Failed to initialize crypto purchase: {str(e)}"
+
+    @staticmethod
+    async def verify_crypto_transaction(
+        user_id: int,
+        request_id: str,
+        db: AsyncSession
+    ) -> Tuple[bool, Dict[str, Any], str]:
+        """
+        Verify a crypto transaction and update deposit status
+        
+        Args:
+            user_id: ID of the user
+            request_id: Request ID from init response
+            db: Database session
+            
+        Returns:
+            Tuple of (success, data, message)
+        """
+        try:
+            # Find the deposit by request_id
+            stmt = select(Deposits).where(
+                Deposits.uid == user_id,
+                Deposits.payment_data.like(f'%"{request_id}"%')
+            )
+            result = await db.execute(stmt)
+            deposit = result.scalar_one_or_none()
+            
+            if not deposit:
+                logger.warning(f"Deposit not found for verification: user_id={user_id}, request_id={request_id}")
+                return False, {}, "Transaction not found or access denied"
+            
+            # Parse payment data
+            try:
+                payment_data = json.loads(deposit.payment_data or '{}')
+            except json.JSONDecodeError:
+                logger.error(f"Invalid payment data JSON: deposit_id={deposit.id}")
+                return False, {}, "Invalid transaction data"
+            
+            current_status = payment_data.get("status", "pending")
+            
+            # If already processed, return current status
+            if current_status in ["success", "failed", "invalid"]:
+                return True, {
+                    "transaction_status": current_status,
+                    "deposit_id": deposit.id,
+                    "request_id": request_id,
+                    "last_updated": payment_data.get("last_verified", "unknown")
+                }, f"Transaction status: {current_status}"
+            
+            # TODO: Implement actual blockchain verification
+            # For now, we'll simulate verification logic
+            # In a real implementation, you would:
+            # 1. Query TON blockchain APIs to find the transaction
+            # 2. Verify the transaction details match our records
+            # 3. Check that the correct amount was sent to the correct address
+            
+            # Simulated verification (replace with actual blockchain verification)
+            is_verified, blockchain_data = await CryptoPurchaseService._verify_on_blockchain(
+                payment_data.get("user_wallet"),
+                payment_data.get("receiver_wallet"),
+                payment_data.get("amount_ton"),
+                payment_data.get("transaction_id")
+            )
+            
+            current_time = int(time.time())
+            payment_data["last_verified"] = current_time
+            payment_data["verification_count"] = payment_data.get("verification_count", 0) + 1
+            
+            if is_verified:
+                # Transaction verified successfully
+                payment_data["status"] = "success"
+                payment_data["verified_at"] = current_time
+                payment_data["blockchain_data"] = blockchain_data
+                
+                # Update deposit status
+                deposit.status = 1  # Success
+                deposit.processed_on = current_time
+                deposit.payment_data = json.dumps(payment_data)
+                
+                # Create transaction record
+                description = f"Crypto purchase - {request_id}"
+                transaction = Transactions(
+                    txid=deposit.txid,
+                    type=1,  # Deposit
+                    sender=0,  # External
+                    recipient=user_id,
+                    description=description,
+                    amount=deposit.amount,
+                    currency='USD',
+                    fee='',
+                    deposit_via=999,  # Crypto gateway
+                    status=1,
+                    created=current_time
+                )
+                db.add(transaction)
+                
+                await db.commit()
+                
+                logger.info(f"Crypto transaction verified successfully: user_id={user_id}, "
+                           f"request_id={request_id}, deposit_id={deposit.id}")
+                
+                return True, {
+                    "transaction_status": "success",
+                    "deposit_id": deposit.id,
+                    "request_id": request_id,
+                    "amount_usd": payment_data.get("amount_usd"),
+                    "verified_at": current_time
+                }, "Transaction verified and processed successfully"
+                
+            else:
+                # Check if transaction has timed out (e.g., after 1 hour)
+                time_since_creation = current_time - payment_data.get("timestamp", current_time)
+                timeout_seconds = 3600  # 1 hour
+                
+                if time_since_creation > timeout_seconds:
+                    payment_data["status"] = "failed"
+                    payment_data["failure_reason"] = "Transaction timeout"
+                    deposit.status = 2  # Failed
+                    deposit.payment_data = json.dumps(payment_data)
+                    await db.commit()
+                    
+                    return True, {
+                        "transaction_status": "failed",
+                        "deposit_id": deposit.id,
+                        "request_id": request_id,
+                        "failure_reason": "Transaction timeout"
+                    }, "Transaction failed due to timeout"
+                
+                # Still pending
+                deposit.payment_data = json.dumps(payment_data)
+                await db.commit()
+                
+                return True, {
+                    "transaction_status": "pending",
+                    "deposit_id": deposit.id,
+                    "request_id": request_id,
+                    "verification_count": payment_data.get("verification_count", 0)
+                }, "Transaction still pending verification"
+                
+        except Exception as e:
+            await db.rollback()
+            logger.error(f"Error verifying crypto transaction: user_id={user_id}, "
+                        f"request_id={request_id}, error={str(e)}", exc_info=True)
+            return False, {}, f"Failed to verify transaction: {str(e)}"
+
+    @staticmethod
+    async def _verify_on_blockchain(
+        user_wallet: str,
+        receiver_wallet: str,
+        expected_amount_ton: str,
+        transaction_id: Optional[str]
+    ) -> Tuple[bool, Dict[str, Any]]:
+        """
+        Verify transaction on TON blockchain
+        
+        TODO: Implement actual blockchain verification using TON APIs
+        For now, this is a placeholder that simulates verification
+        
+        Args:
+            user_wallet: Sender wallet address
+            receiver_wallet: Receiver wallet address  
+            expected_amount_ton: Expected amount in TON
+            transaction_id: Transaction hash/ID if available
+            
+        Returns:
+            Tuple of (is_verified, blockchain_data)
+        """
+        
+        # PLACEHOLDER IMPLEMENTATION
+        # In a real implementation, you would:
+        # 1. Use TON blockchain APIs (like toncenter.com API or ton.org APIs)
+        # 2. Query for transactions from user_wallet to receiver_wallet
+        # 3. Check amounts and other details match
+        # 4. Verify transaction is confirmed
+        
+        # For demonstration, we'll return a simulated response
+        # In production, replace this with actual blockchain verification
+        
+        try:
+            # Simulate API call delay
+            import asyncio
+            await asyncio.sleep(0.1)
+            
+            # Simulate verification result (80% success rate for demo)
+            import random
+            is_verified = random.random() > 0.2  # 80% success rate
+            
+            if is_verified:
+                blockchain_data = {
+                    "transaction_hash": f"demo_hash_{random.randint(1000, 9999)}",
+                    "block_number": random.randint(1000000, 2000000),
+                    "confirmations": random.randint(10, 50),
+                    "gas_used": random.randint(20000, 50000),
+                    "verified_amount": expected_amount_ton,
+                    "verified_at": int(time.time())
+                }
+            else:
+                blockchain_data = {
+                    "verification_failed": True,
+                    "reason": "Transaction not found or invalid"
+                }
+            
+            logger.info(f"Blockchain verification result: verified={is_verified}, "
+                       f"from={user_wallet[:10]}..., to={receiver_wallet[:10]}...")
+            
+            return is_verified, blockchain_data
+            
+        except Exception as e:
+            logger.error(f"Error in blockchain verification: {e}")
+            return False, {"error": str(e)}
