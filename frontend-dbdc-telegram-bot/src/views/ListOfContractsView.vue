@@ -352,7 +352,9 @@ const userInfo = ref(null)
 const showActivateModal = ref(false)
 const showActivateSuccessModal = ref(false)
 const activatedAtMs = ref(Date.now())
+const showLoyaltyModal = ref(false)
 let pendingActivation = null
+let pendingLoyalty = null
 
 // Export & selection
 const selectedContracts = ref([])
