@@ -20,6 +20,7 @@ import EmailAlreadyRegisteredView from '../views/EmailAlreadyRegisteredView.vue'
 import PhoneAlreadyRegisteredView from '../views/PhoneAlreadyRegisteredView.vue'
 import RegistrationErrorView from '../views/RegistrationErrorView.vue'
 import GeneratedPasswordView from '../views/GeneratedPasswordView.vue'
+import ListOfContractsView from '../views/ListOfContractsView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -78,6 +79,11 @@ const router = createRouter({
       path: '/rent-out-transactions',
       name: 'rent-out-transactions',
       component: RentOutTransactionView,
+    },
+    {
+      path: '/contracts',
+      name: 'contracts',
+      component: ListOfContractsView,
     },
     {
       path: '/calculator',

@@ -1,0 +1,396 @@
+<template>
+  <div class="w-full mx-auto bg-gray-100 min-h-screen relative font-montserrat">
+    <!-- Header (Rent Out style with Export) -->
+    <div class="header-section sticky top-0 bg-gray-100 z-40 pb-2">
+      <div class="h-12"></div>
+      <div class="flex justify-between items-center px-4 py-3">
+        <!-- Back -->
+        <button @click="goBack" class="w-11 h-11 flex items-center justify-center rounded-full bg-dbd-off-white border border-gray-200 hover:bg-gray-100 transition-colors">
+          <div class="w-5 h-5 relative">
+            <div class="absolute w-4 h-0.5 bg-dbd-dark rounded-full rotate-45 top-2.5 left-0.5"></div>
+            <div class="absolute w-4 h-0.5 bg-dbd-dark rounded-full -rotate-45 top-2.5 left-0.5"></div>
+          </div>
+        </button>
+
+        <!-- Title -->
+        <div class="flex-1 text-center">
+          <h1 class="text-2xl font-semibold text-dbd-dark leading-tight">List of<br />Contracts</h1>
+        </div>
+
+        <!-- Export -->
+        <div class="relative">
+          <button
+            @click="toggleExportMenu"
+            :disabled="selectedContracts.length === 0"
+            :class="[
+              'export-btn w-32 h-13 flex items-center justify-center gap-3 rounded-full px-4 py-2.5 transition-colors',
+              selectedContracts.length === 0
+                ? 'bg-gray-300 border border-gray-300 cursor-not-allowed'
+                : 'bg-white border border-gray-200 hover:bg-gray-50'
+            ]"
+          >
+            <span :class="selectedContracts.length === 0 ? 'text-gray-500' : 'text-dbd-gray'" class="font-medium text-sm">Export</span>
+            <svg width="32" height="32" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24.4294 12.4709H20.4441V14.7762H24.4294C25.6145 14.7762 26.5339 15.3663 26.5339 15.8742V26.0964C26.5339 26.6043 25.6145 27.1945 24.4294 27.1945H9.3657C8.18061 27.1945 7.26115 26.6043 7.26115 26.0964V15.8746C7.26115 15.3667 8.18061 14.7766 9.3657 14.7766H13.3502V12.4713H9.3657C6.85955 12.4713 4.89648 13.9663 4.89648 15.8746V26.0968C4.89648 28.0055 6.85955 29.5001 9.3657 29.5001H24.4298C26.9355 29.5001 28.899 28.0051 28.899 26.0968V15.8746C28.8986 13.9659 26.9355 12.4709 24.4294 12.4709Z" fill="#FF6800"/>
+              <path d="M13.3976 9.24579C13.7002 9.24579 14.0025 9.13322 14.2335 8.90807L15.7138 7.465V12.4704V14.7757V19.1917C15.7138 19.8283 16.243 20.3443 16.8961 20.3443C17.5491 20.3443 18.0784 19.8283 18.0784 19.1917V14.7757V12.4704V7.387L19.6387 8.90807C19.8696 9.13322 20.1723 9.24579 20.4746 9.24579C20.7769 9.24579 21.0796 9.13322 21.3105 8.90807C21.7724 8.45817 21.7724 7.72818 21.3105 7.27827L17.7805 3.83695C17.5495 3.6118 17.2472 3.5 16.945 3.5C16.9418 3.5 16.939 3.5 16.9359 3.5C16.9327 3.5 16.93 3.5 16.9268 3.5C16.6245 3.5 16.3223 3.6118 16.0913 3.83695L12.5613 7.27827C12.0994 7.72818 12.0994 8.45817 12.5613 8.90807C12.7926 9.13322 13.0949 9.24579 13.3976 9.24579Z" fill="#FF6800"/>
+            </svg>
+          </button>
+
+          <div v-if="showExportMenu" class="export-dropdown">
+            <div class="export-dropdown-arrow"></div>
+            <div class="export-dropdown-container">
+              <button @click="exportData('csv')" class="export-option">
+                <div class="export-option-icon">
+                  <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 1L2 6H5.75C6.44038 6 7 5.44037 7 4.75V1Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 10H18V18H2V10Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M17 10V2.22727C17 1.54945 16.4404 1 15.75 1H7L2 5.90909V10" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 18V19.5484C2 20.3501 2.55963 21 3.25 21H15.75C16.4404 21 17 20.3501 17 19.5484V18" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <span class="export-option-text">CSV</span>
+              </button>
+              <button @click="exportData('pdf')" class="export-option">
+                <div class="export-option-icon">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 11v4h1a2 2 0 000-4H5.5zM10 15v-4h1.6c.77 0 1.4.63 1.4 1.4v1.2c0 .77-.63 1.4-1.4 1.4H10zM3 2h9l5 5v11a2 2 0 01-2 2H3a2 2 0 01-2-2V4a2 2 0 012-2z" fill="white"/></svg>
+                </div>
+                <span class="export-option-text">PDF</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="bg-gray-100 px-4 pb-32">
+      <!-- Empty -->
+      <div v-if="contracts.length === 0" class="flex flex-col items-center justify-center text-center" style="min-height: calc(100vh - 200px);">
+        <h2 class="text-xl font-bold text-dbd-dark mb-4 leading-tight max-w-60">No contracts yet</h2>
+        <p class="text-base font-medium text-dbd-gray leading-relaxed max-w-72">Your contracts will appear here once you make a purchase.</p>
+      </div>
+
+      <!-- List -->
+      <div v-else class="space-y-2 pt-4">
+        <div
+          v-for="(c, idx) in contracts"
+          :key="idx"
+          class="transaction-card bg-dbd-off-white rounded-3xl border border-gray-200 p-3 hover:bg-gray-50 transition-colors cursor-pointer"
+          @click="openDetails(c)"
+        >
+          <!-- First row: checkbox + ID + Date -->
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <!-- Checkbox -->
+              <div
+                @click.stop="toggleSelection(idx)"
+                :class="[
+                  'w-6 h-6 border-2 rounded flex items-center justify-center cursor-pointer transition-colors',
+                  selectedContracts.includes(idx)
+                    ? 'bg-green-500 border-green-500'
+                    : 'border-gray-400 bg-dbd-off-white hover:border-gray-500'
+                ]"
+              >
+                <svg v-if="selectedContracts.includes(idx)" width="14" height="10" viewBox="0 0 14 10" fill="none">
+                  <path d="M1 5L5 9L13 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span class="text-sm font-medium text-dbd-gray">Contract ID</span>
+              <span class="text-sm font-semibold text-dbd-dark break-all">{{ c.txid }}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-medium text-dbd-dark">{{ formatDate(c.processed_on).date }}</span>
+              <span class="text-sm font-medium text-dbd-gray">{{ formatDate(c.processed_on).time }}</span>
+            </div>
+          </div>
+
+          <!-- Grid like table (mobile-friendly) -->
+          <div class="grid grid-cols-2 gap-2 sm:grid-cols-4">
+            <div class="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-3 py-2">
+              <span class="text-sm text-dbd-gray">Forevers</span>
+              <span class="text-sm font-medium text-dbd-dark">ℱ {{ toFixed(c.forevers, 2) }}</span>
+            </div>
+            <div class="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-3 py-2">
+              <span class="text-sm text-dbd-gray">Price</span>
+              <span class="text-sm font-medium text-dbd-blue">${{ toFixed(c.price, 2) }}</span>
+            </div>
+            <div class="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-3 py-2">
+              <span class="text-sm text-dbd-gray">Type</span>
+              <div class="flex items-center gap-2">
+                <CountryFlag :country="c.type" size="small" />
+                <span class="text-sm font-medium text-dbd-dark">{{ c.type }}</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-3 py-2">
+              <span class="text-sm text-dbd-gray">Paid</span>
+              <span class="text-sm font-medium text-dbd-dark">${{ toFixed(c.paid, 2) }}</span>
+            </div>
+          </div>
+
+          <!-- Actions row -->
+          <div class="flex items-center gap-2 mt-3">
+            <button
+              class="px-4 h-9 rounded-full text-sm font-semibold"
+              :class="c.access ? 'bg-green-100 text-green-700' : 'bg-green-600 text-white'"
+              @click.stop="onActivateAccess(c)"
+            >
+              {{ c.access ? 'Activated' : 'Activate' }}
+            </button>
+            <button
+              class="px-4 h-9 rounded-full text-sm font-semibold"
+              :class="c.participation ? 'bg-gray-200 text-gray-700' : 'bg-gray-300 text-gray-700'"
+              :disabled="c.participation"
+              @click.stop="onActivateParticipation(c)"
+            >
+              {{ c.participation ? 'Activated' : 'Activate' }}
+            </button>
+            <div class="ml-auto text-xs text-dbd-gray">Tap card to view details</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <BottomNavigation />
+
+    <!-- Contract Details Modal (bottom sheet) -->
+    <div v-if="showDetails" class="fixed inset-0 z-[10001] flex items-end justify-center bg-black bg-opacity-20 backdrop-blur-sm">
+      <div class="w-full bg-white rounded-t-3xl shadow-xl animate-slide-up">
+        <div class="flex items-center justify-between p-4 border-b">
+          <h2 class="text-base font-medium text-dbd-dark">Contract Details</h2>
+          <button @click="closeDetails" class="w-11 h-11 flex items-center justify-center rounded-full bg-dbd-off-white border border-gray-200">
+            <div class="w-5 h-5 relative">
+              <div class="absolute w-4 h-0.5 bg-dbd-dark rounded-full rotate-45 top-2.5 left-0.5"></div>
+              <div class="absolute w-4 h-0.5 bg-dbd-dark rounded-full -rotate-45 top-2.5 left-0.5"></div>
+            </div>
+          </button>
+        </div>
+        <div v-if="selected" class="p-4 space-y-4 max-h-96 overflow-y-auto">
+          <!-- Contract ID -->
+          <div class="flex justify-between items-center">
+            <div class="flex items-center gap-2">
+              <div class="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M14.168 3.75448C15.1859 3.82121 15.9909 4.66789 15.9909 5.70304V15.8918C15.9909 16.9706 15.1165 17.845 14.0378 17.845H5.96484C4.88607 17.845 4.01172 16.9706 4.01172 15.8918V5.70304C4.01172 4.66789 4.81673 3.82121 5.83464 3.75448" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              <span class="text-sm font-medium text-dbd-gray">Contract ID</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-medium text-dbd-dark break-all">{{ selected.txid }}</span>
+              <button @click="copy(selected.txid)" class="px-3 py-1 rounded-full border border-dbd-blue text-dbd-blue text-sm bg-white">Copy</button>
+            </div>
+          </div>
+          <div class="h-px bg-gray-200"></div>
+
+          <!-- Full Name -->
+          <div v-if="userFullName" class="flex justify-between items-center">
+            <div class="flex items-center gap-2">
+              <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 10a4 4 0 100-8 4 4 0 000 8zM2 18a8 8 0 1116 0H2z" fill="#4B4D50"/></svg>
+              </div>
+              <span class="text-sm font-medium text-dbd-gray">Full Name</span>
+            </div>
+            <span class="text-sm font-medium text-dbd-dark">{{ userFullName }}</span>
+          </div>
+          <div class="h-px bg-gray-200" v-if="userFullName"></div>
+
+          <!-- Date -->
+          <div class="flex justify-between items-center">
+            <div class="flex items-center gap-2">
+              <div class="w-10 h-10 bg-dbd-light-orange rounded-full flex items-center justify-center">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M15.5 3.25H4.5A2.5 2.5 0 002 5.75v9.75A2.5 2.5 0 004.5 18h11a2.5 2.5 0 002.5-2.5V5.75A2.5 2.5 0 0015.5 3.25Z" fill="#4B4D50"/></svg>
+              </div>
+              <span class="text-sm font-medium text-dbd-gray">Date</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-medium text-dbd-dark">{{ formatDate(selected.processed_on).date }}</span>
+              <span class="text-sm font-medium text-dbd-gray">{{ formatDate(selected.processed_on).time }}</span>
+            </div>
+          </div>
+          <div class="h-px bg-gray-200"></div>
+
+          <!-- Amounts -->
+          <div class="flex justify-between items-center">
+            <div class="flex items-center gap-2">
+              <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#4B4D50"/><path d="M10 5v10M7 8h6M7 12h6" stroke="#4B4D50"/></svg>
+              </div>
+              <span class="text-sm font-medium text-dbd-gray">Contract Amount</span>
+            </div>
+            <span class="text-sm font-medium text-dbd-dark">${{ toFixed(selected.paid, 2) }}</span>
+          </div>
+          <div class="h-px bg-gray-200"></div>
+
+          <div class="flex justify-between items-center">
+            <div class="flex items-center gap-2">
+              <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12" stroke="#4B4D50"/><path d="M10 4v12" stroke="#4B4D50"/></svg>
+              </div>
+              <span class="text-sm font-medium text-dbd-gray">Forevers Amount</span>
+            </div>
+            <span class="text-sm font-medium text-dbd-dark">{{ toFixed(selected.forevers, 2) }}</span>
+          </div>
+          <div class="h-px bg-gray-200"></div>
+
+          <div class="flex justify-between items-center">
+            <div class="flex items-center gap-2">
+              <div class="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 10h16" stroke="#4B4D50"/><path d="M10 2v16" stroke="#4B4D50"/></svg>
+              </div>
+              <span class="text-sm font-medium text-dbd-gray">Rate at Deposit</span>
+            </div>
+            <span class="text-sm font-medium text-dbd-dark">${{ toFixed(selected.price, 2) }}</span>
+          </div>
+          <div class="h-px bg-gray-200"></div>
+
+          <div class="flex justify-between items-center">
+            <div class="flex items-center gap-2">
+              <CountryFlag :country="selected.type" size="small" />
+              <span class="text-sm font-medium text-dbd-gray">Forevers Type</span>
+            </div>
+            <span class="text-sm font-medium text-dbd-dark">{{ selected.type }}</span>
+          </div>
+
+          <!-- Activate buttons -->
+          <div class="mt-2 grid grid-cols-2 gap-2">
+            <button class="h-10 rounded-full text-sm font-semibold" :class="selected.access ? 'bg-green-100 text-green-700' : 'bg-green-600 text-white'" @click="onActivateAccess(selected)">{{ selected.access ? 'Activated' : 'Activate Access' }}</button>
+            <button class="h-10 rounded-full text-sm font-semibold" :class="selected.participation ? 'bg-gray-200 text-gray-700' : 'bg-gray-300 text-gray-700'" :disabled="selected.participation" @click="onActivateParticipation(selected)">{{ selected.participation ? 'Activated' : 'Activate Loyalty' }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref, onMounted, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import BottomNavigation from '../components/BottomNavigation.vue'
+import CountryFlag from '../components/CountryFlag.vue'
+import DepositsService from '../services/depositsService.js'
+import telegramUserService from '../services/telegramUserService.js'
+
+const router = useRouter()
+const contracts = ref([])
+const showDetails = ref(false)
+const selected = ref(null)
+const userInfo = ref(null)
+
+// Export & selection
+const selectedContracts = ref([])
+const showExportMenu = ref(false)
+
+const goBack = () => router.push('/wallet')
+
+const fetchContracts = async () => {
+  const res = await DepositsService.getUserDeposits()
+  if (res.status === 'success') {
+    contracts.value = (res.data?.deposits || []).slice().sort((a,b) => new Date(b.processed_on||0) - new Date(a.processed_on||0))
+  } else {
+    contracts.value = []
+  }
+}
+
+const fetchUser = async () => {
+  const res = await telegramUserService.getUserInfo()
+  if (res.status === 'success') userInfo.value = res.data
+}
+
+const toggleSelection = (index) => {
+  const i = selectedContracts.value.indexOf(index)
+  if (i > -1) {
+    selectedContracts.value.splice(i, 1)
+    if (selectedContracts.value.length === 0) showExportMenu.value = false
+  } else {
+    selectedContracts.value.push(index)
+  }
+}
+
+const toggleExportMenu = () => {
+  if (selectedContracts.value.length > 0) showExportMenu.value = !showExportMenu.value
+}
+
+const exportData = (format) => {
+  const data = selectedContracts.value.map(i => contracts.value[i])
+  if (format === 'csv') exportToCSV(data)
+  if (format === 'pdf') exportToPDF(data)
+  showExportMenu.value = false
+}
+
+const exportToCSV = (data) => {
+  const headers = ['Contract ID','Date','Time','Forevers','Price','Type','Paid','Access','Participation']
+  const csvContent = [
+    headers.join(','),
+    ...data.map(d => [
+      d.txid,
+      formatDate(d.processed_on).date,
+      formatDate(d.processed_on).time,
+      d.forevers,
+      d.price,
+      d.type,
+      d.paid,
+      d.access ? 'yes' : 'no',
+      d.participation ? 'yes' : 'no'
+    ].join(','))
+  ].join('\n')
+  const blob = new Blob([csvContent], { type: 'text/csv' })
+  const url = window.URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = 'contracts.csv'
+  a.click()
+  window.URL.revokeObjectURL(url)
+}
+
+const exportToPDF = (data) => {
+  console.log('Export PDF', data)
+  alert('PDF export would be generated here')
+}
+
+const openDetails = (c) => { selected.value = c; showDetails.value = true }
+const closeDetails = () => { showDetails.value = false; selected.value = null }
+
+const formatDate = (d) => {
+  const dt = new Date(d || Date.now())
+  const pad = (n) => String(n).padStart(2, '0')
+  return { date: `${pad(dt.getDate())}.${pad(dt.getMonth()+1)}.${dt.getFullYear()}`, time: `${pad(dt.getHours())}:${pad(dt.getMinutes())}:${pad(dt.getSeconds())}` }
+}
+
+const toFixed = (v, n=2) => {
+  const num = typeof v === 'number' ? v : parseFloat(v || 0)
+  return num.toLocaleString(undefined, { minimumFractionDigits: n, maximumFractionDigits: n })
+}
+
+const userFullName = computed(() => userInfo.value?.full_name || '')
+
+const copy = async (text) => {
+  try {
+    if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(text)
+    else {
+      const ta = document.createElement('textarea'); ta.value = text; ta.style.position='fixed'; ta.style.left='-9999px'; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta)
+    }
+  } catch (_) {}
+}
+
+const onActivateAccess = (c) => { console.log('Activate access clicked for', c.txid) }
+const onActivateParticipation = (c) => { console.log('Activate loyalty clicked for', c.txid) }
+
+onMounted(() => { fetchContracts(); fetchUser() })
+</script>
+
+<style scoped>
+@keyframes slide-up { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.animate-slide-up { animation: slide-up 0.3s ease-out; }
+
+/* Card hover like Rent Out */
+.transaction-card { box-shadow: 2px 4px 12px rgba(0,0,0,0.04); transition: all .2s ease-in-out; }
+.transaction-card:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+
+/* Export dropdown styles copied to match Rent Out */
+.export-dropdown { position: absolute; right: 0; top: 100%; margin-top: 8px; z-index: 50; }
+.export-dropdown-arrow { position: absolute; top: -8px; right: 40px; width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 8px solid #3A33D3; z-index: 10; }
+.export-dropdown-container { width: 164px; padding: 12px; background-color: #3A33D3; border-radius: 10px; border: 1px solid #3A33D3; box-shadow: 2px 3px 6px 0 #3A33D3; display: flex; flex-direction: column; gap: 8px; }
+.export-option { width: 140px; height: 52px; background: #3A33D3; border: 1px solid #3A33D3; border-radius: 100px; display: flex; align-items: center; gap: 12px; padding: 6px; cursor: pointer; transition: all .2s ease; }
+.export-option:hover { background: #2A1FB5; }
+.export-option-icon { width: 40px; height: 40px; background: rgba(64,64,64,.24); border: 1px solid white; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.export-option-text { font-family: Montserrat, -apple-system, Roboto, Helvetica, sans-serif; font-weight: 400; font-size: 16px; color: #FAFAFA; line-height: 26px; }
+</style>
