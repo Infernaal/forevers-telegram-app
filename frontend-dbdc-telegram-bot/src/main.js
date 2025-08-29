@@ -121,6 +121,9 @@ if (window.Telegram && window.Telegram.WebApp) {
   // Fallback: page visibility / unload
   window.addEventListener('beforeunload', () => {
     telegramUserService.logout()
+    // Очищаем ресурсы composable
+    const { cleanup } = useUserInfo()
+    cleanup()
   })
 }
 
