@@ -217,44 +217,154 @@ const buttonText = computed(() => {
 </script>
 
 <style scoped>
-/* Additional styles for smooth animations */
-.modal-enter-active,
-.modal-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.modal-enter-from,
-.modal-leave-to {
-  opacity: 0;
-}
-
-/* Ensure modal is above everything else */
-.z-\[10000\] {
-  z-index: 10000;
-}
-
-/* Telegram WebApp safe area adjustments */
-@supports (padding: max(0px)) {
-  .fixed.inset-0 {
-    padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
+/* Modal responsive sizing for Telegram WebApp */
+@media (max-width: 375px) {
+  .max-w-\[347px\] {
+    max-width: calc(100vw - 32px) !important;
+    min-width: 280px;
   }
 }
 
-/* Touch optimizations for mobile */
-button {
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
+@media (max-width: 320px) {
+  .max-w-\[347px\] {
+    max-width: calc(100vw - 24px) !important;
+    min-width: 260px;
+  }
 }
 
-/* Prevent text selection on status elements */
-.text-center > * {
+/* Modal animations */
+.modal-enter-active {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-leave-active {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+.modal-enter-from {
+  opacity: 0;
+  transform: scale(0.9) translateY(20px);
+}
+
+.modal-leave-to {
+  opacity: 0;
+  transform: scale(0.9) translateY(20px);
+}
+
+/* Touch-friendly button states */
+button:active {
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
+}
+
+/* Telegram WebApp optimizations */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
+}
+
+/* Typography optimization for Telegram */
+.modal-content {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-feature-settings: 'kern' 1;
+  text-rendering: optimizeLegibility;
+}
+
+/* Ensure proper content spacing */
+.flex-1 {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Better gap spacing on smaller screens */
+@media (max-width: 375px) {
+  .gap-5 {
+    gap: 1rem !important;
+  }
+
+  .gap-6 {
+    gap: 1.25rem !important;
+  }
+}
+
+/* Button touch feedback */
+button {
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Responsive text sizes for small screens */
+@media (max-width: 375px) {
+  .text-\[30px\] {
+    font-size: 26px !important;
+    line-height: 1.2;
+  }
+
+  .text-xl {
+    font-size: 18px !important;
+  }
+
+  .text-lg {
+    font-size: 16px !important;
+  }
+
+  .text-base {
+    font-size: 14px !important;
+  }
+
+  .text-sm {
+    font-size: 13px !important;
+  }
+
+  /* Reduce padding on small screens */
+  .p-6 {
+    padding: 1rem !important;
+  }
+
+  /* Adjust transaction details box width on small screens */
+  .max-w-\[280px\] {
+    max-width: 240px !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .text-\[30px\] {
+    font-size: 24px !important;
+    line-height: 1.2;
+  }
+
+  .text-xl {
+    font-size: 16px !important;
+  }
+
+  .text-lg {
+    font-size: 15px !important;
+  }
+
+  .text-base {
+    font-size: 13px !important;
+  }
+
+  /* Further reduce on very small screens */
+  .max-w-\[280px\] {
+    max-width: 200px !important;
+  }
+}
+
+/* Improved backdrop blur for better visibility */
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Better modal shadows */
+.shadow-xl {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 /* Smooth progress bar animation */
