@@ -142,25 +142,30 @@
             </div>
           </div>
 
-          <!-- Actions row -->
-          <div class="flex items-center gap-2 mt-3">
+          <!-- Access (vertical label-value with action) -->
+          <div class="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-3 py-2 mt-2">
+            <span class="text-sm text-dbd-gray">Access</span>
             <button
-              class="px-4 h-9 rounded-full text-sm font-semibold"
+              class="px-3 h-8 rounded-full text-xs font-semibold"
               :class="c.access ? 'bg-green-100 text-green-700' : 'bg-green-600 text-white'"
               @click.stop="onActivateAccess(c)"
             >
               {{ c.access ? 'Activated' : 'Activate Access' }}
             </button>
+          </div>
+          <!-- Participation (vertical label-value with action) -->
+          <div class="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-3 py-2 mt-2">
+            <span class="text-sm text-dbd-gray">Participation</span>
             <button
-              class="px-4 h-9 rounded-full text-sm font-semibold"
-              :class="c.participation ? 'bg-gray-200 text-gray-700' : 'bg-gray-300 text-gray-700'"
-              :disabled="c.participation"
-              @click.stop="onActivateParticipation(c)"
+              class="px-3 h-8 rounded-full text-xs font-semibold"
+              :class="(c.participation || !c.access) ? 'bg-gray-300 text-gray-700 cursor-not-allowed' : 'bg-gray-300 text-gray-700'"
+              :disabled="c.participation || !c.access"
+              @click.stop="openLoyaltyModal(c)"
             >
               {{ c.participation ? 'Activated' : 'Activate Loyalty' }}
             </button>
-            <div class="ml-auto text-xs text-dbd-gray">Tap card to view details</div>
           </div>
+          <div class="mt-2 text-xs text-dbd-gray">Tap card to view details</div>
         </div>
       </div>
     </div>
@@ -309,6 +314,22 @@
         </div>
       </div>
     </div>
+    <!-- Activate Access Modal -->
+    <ActivateAccessModal
+      :is-visible="showActivateModal"
+      @cancel="showActivateModal = false"
+      @confirm="confirmActivateAccess"
+    />
+    <ActivateAccessSuccessModal
+      :is-visible="showActivateSuccessModal"
+      :activated-at-ms="activatedAtMs"
+      @close="showActivateSuccessModal = false"
+    />
+    <ActivateLoyaltyModal
+      :is-visible="showLoyaltyModal"
+      @cancel="showLoyaltyModal = false"
+      @confirm="confirmActivateLoyalty"
+    />
   </div>
 </template>
 
@@ -317,14 +338,25 @@ import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import BottomNavigation from '../components/BottomNavigation.vue'
 import CountryFlag from '../components/CountryFlag.vue'
+import ActivateAccessModal from '../components/ActivateAccessModal.vue'
+import ActivateAccessSuccessModal from '../components/ActivateAccessSuccessModal.vue'
+import ActivateLoyaltyModal from '../components/ActivateLoyaltyModal.vue'
 import DepositsService from '../services/depositsService.js'
 import telegramUserService from '../services/telegramUserService.js'
+import { useApiErrorNotifier } from '../composables/useApiErrorNotifier.js'
 
 const router = useRouter()
 const contracts = ref([])
 const showDetails = ref(false)
 const selected = ref(null)
 const userInfo = ref(null)
+const showActivateModal = ref(false)
+const showActivateSuccessModal = ref(false)
+const activatedAtMs = ref(Date.now())
+const showLoyaltyModal = ref(false)
+const { showError: showApiError } = useApiErrorNotifier()
+let pendingActivation = null
+let pendingLoyalty = null
 
 // Export & selection
 const selectedContracts = ref([])
@@ -333,7 +365,7 @@ const showExportMenu = ref(false)
 const goBack = () => router.push('/wallet')
 
 const fetchContracts = async () => {
-  const res = await DepositsService.getUserDeposits()
+  const res = await DepositsService.getUserContractsForList()
   if (res.status === 'success') {
     contracts.value = (res.data?.deposits || []).slice().sort((a,b) => new Date(b.processed_on||0) - new Date(a.processed_on||0))
   } else {
@@ -422,7 +454,42 @@ const copy = async (text) => {
   } catch (_) {}
 }
 
-const onActivateAccess = (c) => { console.log('Activate access clicked for', c.txid) }
+const onActivateAccess = (c) => {
+  pendingActivation = c
+  showActivateModal.value = true
+}
+
+const confirmActivateAccess = async () => {
+  const c = pendingActivation
+  showActivateModal.value = false
+  if (!c) return
+  const depositId = c?._raw?.id
+  const txid = c?.txid
+  if (!depositId || !txid) return
+  const res = await DepositsService.activateForevers(depositId, txid)
+  if (res.status === 'success') {
+    await fetchContracts()
+    activatedAtMs.value = Date.now()
+    showActivateSuccessModal.value = true
+  }
+  pendingActivation = null
+}
+const openLoyaltyModal = (c) => { pendingLoyalty = c; showLoyaltyModal.value = true }
+const confirmActivateLoyalty = async () => {
+  showLoyaltyModal.value = false
+  const c = pendingLoyalty
+  pendingLoyalty = null
+  if (!c) return
+  const depositId = c?._raw?.id
+  const txid = c?.txid
+  if (!depositId || !txid) return
+  const res = await DepositsService.activateLoyalty(depositId, txid)
+  if (res.status === 'success') {
+    await fetchContracts()
+  } else {
+    showApiError('forevers_user_balance', { status: 400, message: res.message || 'Failed to activate loyalty program' })
+  }
+}
 const onActivateParticipation = (c) => { console.log('Activate loyalty clicked for', c.txid) }
 
 onMounted(() => { fetchContracts(); fetchUser() })

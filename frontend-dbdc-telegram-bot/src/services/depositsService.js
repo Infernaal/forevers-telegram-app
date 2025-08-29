@@ -31,6 +31,62 @@ export class DepositsService {
   }
 
   /**
+   * Get full deposits history for current user (raw)
+   * @returns {Promise<Object>} Raw response from deposits-history endpoint
+   */
+  static async getUserDepositsHistory() {
+    try {
+      const response = await fetch(`${BASE_URL}/forevers/deposits-history`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include'
+      })
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+      const data = await response.json()
+      return data
+    } catch (_) {
+      return { status: 'failed', message: 'Failed to fetch deposits history' }
+    }
+  }
+
+  /**
+   * Normalize a deposits-history item to ListOfContracts shape
+   */
+  static normalizeHistoryItem(it) {
+    const amountNum = parseFloat(it?.amount || 0)
+    const rate = parseFloat(it?.rate_at_deposit || 0)
+    const forevers = rate > 0 ? amountNum / rate : 0
+    const ms = it?.requested_on ? Number(it.requested_on) * 1000 : null
+    return {
+      txid: it?.txid || '',
+      processed_on: ms ? new Date(ms).toISOString() : null,
+      forevers,
+      price: rate || 0,
+      type: it?.type || '',
+      paid: amountNum || 0,
+      access: (it?.activated_forevers || 0) === 1,
+      participation: (it?.activated_loyalty || 0) === 1,
+      _raw: it
+    }
+  }
+
+  /**
+   * Get contracts list normalized for ListOfContracts view
+   */
+  static async getUserContractsForList() {
+    const res = await this.getUserDepositsHistory()
+    if (res.status === 'success') {
+      const deposits = (res.data?.deposits || []).map(this.normalizeHistoryItem)
+      return {
+        status: 'success',
+        data: { user_id: res.data?.user_id, deposits, total_count: deposits.length },
+        message: res.message || 'Deposits history normalized'
+      }
+    }
+    return res
+  }
+
+  /**
    * Get deposits filtered by type
    * @param {string} type - Deposit type ('UAE', 'KZ', 'DE', 'PL', 'UA')
    * @returns {Promise<Object>} Response with filtered deposits
@@ -78,6 +134,42 @@ export class DepositsService {
    */
   static async getUaeTotalForPlan() {
     return await this.getTotalByType('UAE')
+  }
+
+  /**
+   * Activate Forevers access for a contract
+   */
+  static async activateForevers(depositId, txid) {
+    try {
+      const response = await fetch(`${BASE_URL}/forevers/activate-forevers`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ deposit_id: depositId, txid })
+      })
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+      return await response.json()
+    } catch (_) {
+      return { status: 'failed', message: 'Failed to activate forevers' }
+    }
+  }
+
+  /**
+   * Activate Loyalty program for a contract
+   */
+  static async activateLoyalty(depositId, txid) {
+    try {
+      const response = await fetch(`${BASE_URL}/forevers/activate-loyalty`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ deposit_id: depositId, txid })
+      })
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+      return await response.json()
+    } catch (error) {
+      return { status: 'failed', message: 'Failed to activate loyalty program' }
+    }
   }
 }
 
