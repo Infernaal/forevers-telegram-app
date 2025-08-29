@@ -1,10 +1,10 @@
 <template>
   <div
     v-if="isVisible"
-    class="fixed inset-0 z-[10000] flex items-center justify-center p-4 bg-black bg-opacity-50"
+    class="fixed inset-0 z-[10000] flex items-center justify-center px-[2.5%] py-4 bg-black bg-opacity-50"
     @click.self="$emit('close')"
   >
-    <div class="bg-white rounded-2xl p-6 w-full max-w-sm mx-auto relative">
+    <div class="bg-white rounded-2xl p-6 w-full max-w-md mx-auto relative">
       <!-- Close button -->
       <button
         @click="$emit('close')"
