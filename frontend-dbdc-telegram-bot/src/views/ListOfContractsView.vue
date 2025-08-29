@@ -329,7 +329,7 @@
               </div>
               <div class="flex items-center">
                 <template v-if="getAccessState(selected).kind === 'button'">
-                  <button class="px-3 py-2 rounded-full text-sm font-semibold bg-green-600 text-white hover:opacity-90 transition-all" @click.stop="onActivateAccess(selected)">Activate Access</button>
+                  <button class="px-3 py-2 rounded-full text-sm font-semibold bg-gray-300 text-gray-700 cursor-not-allowed" disabled aria-disabled="true">Activate Access</button><span class="ml-2 text-xs text-dbd-gray">Available in List</span>
                 </template>
                 <template v-else-if="getAccessState(selected).kind === 'activated_from'">
                   <span class="text-sm font-medium text-dbd-dark">Activated from {{ formatDateTime(getAccessState(selected).date) }}</span>
@@ -354,10 +354,10 @@
               </div>
               <div class="flex items-center">
                 <template v-if="getLoyaltyState(selected).kind === 'expired'">
-                  <button class="px-3 py-2 rounded-full text-sm font-semibold bg-green-600 text-white hover:opacity-90 transition-all" @click.stop="openLoyaltyModal(selected)">Expired</button>
+                  <button class="px-3 py-2 rounded-full text-sm font-semibold bg-gray-300 text-gray-700 cursor-not-allowed" disabled aria-disabled="true">Expired</button><span class="ml-2 text-xs text-dbd-gray">Manage in List</span>
                 </template>
                 <template v-else-if="getLoyaltyState(selected).kind === 'activate'">
-                  <button class="px-3 py-2 rounded-full text-sm font-semibold bg-green-600 text-white hover:opacity-90 transition-all" @click.stop="openLoyaltyModal(selected)">Activate Loyalty</button>
+                  <button class="px-3 py-2 rounded-full text-sm font-semibold bg-gray-300 text-gray-700 cursor-not-allowed" disabled aria-disabled="true">Activate Loyalty</button><span class="ml-2 text-xs text-dbd-gray">Available in List</span>
                 </template>
                 <template v-else-if="getLoyaltyState(selected).kind === 'activated_from'">
                   <span class="text-sm font-medium text-dbd-dark">Activated from {{ formatDateTime(getLoyaltyState(selected).date) }}</span>
@@ -626,3 +626,4 @@ onMounted(() => { fetchContracts(); fetchUser() })
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 .scrollbar-hide::-webkit-scrollbar { width: 0; height: 0; }
 </style>
+
