@@ -332,10 +332,7 @@
                   <span class="px-3 py-1.5 rounded-full text-xs font-semibold bg-dbd-light-blue text-dbd-primary">Not activated</span>
                 </template>
                 <template v-else-if="getAccessState(selected).kind === 'activated_from'">
-                  <div class="flex items-center gap-2">
-                    <span class="px-3 py-1.5 rounded-full text-xs font-semibold bg-green-100 text-green-700">Activated</span>
-                    <span class="text-sm font-medium text-dbd-dark">from {{ formatDateTime(getAccessState(selected).date) }}</span>
-                  </div>
+                  <span class="text-sm font-medium text-dbd-dark">Activated from {{ formatDateTime(getAccessState(selected).date) }}</span>
                 </template>
                 <template v-else>
                   <span class="px-3 py-1.5 rounded-full text-xs font-semibold bg-gray-100 text-dbd-gray">Not available</span>
@@ -363,10 +360,7 @@
                   <span class="px-3 py-1.5 rounded-full text-xs font-semibold bg-dbd-light-blue text-dbd-primary">Not activated</span>
                 </template>
                 <template v-else-if="getLoyaltyState(selected).kind === 'activated_from'">
-                  <div class="flex items-center gap-2">
-                    <span class="px-3 py-1.5 rounded-full text-xs font-semibold bg-green-100 text-green-700">Activated</span>
-                    <span class="text-sm font-medium text-dbd-dark">from {{ formatDateTime(getLoyaltyState(selected).date) }}</span>
-                  </div>
+                  <span class="text-sm font-medium text-dbd-dark">Activated from {{ formatDateTime(getLoyaltyState(selected).date) }}</span>
                 </template>
                 <template v-else-if="getLoyaltyState(selected).kind === 'available_on'">
                   <span class="px-3 py-1.5 rounded-full text-xs font-semibold bg-gray-100 text-dbd-gray">Available on {{ formatDateTime(getLoyaltyState(selected).date).split(' ')[0] }}</span>
@@ -632,5 +626,4 @@ onMounted(() => { fetchContracts(); fetchUser() })
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 .scrollbar-hide::-webkit-scrollbar { width: 0; height: 0; }
 </style>
-
 
