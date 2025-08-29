@@ -72,19 +72,19 @@
             {{ modalTitle }}
           </h2>
 
-          <!-- Transaction Details (if available) -->
+          <!-- Transaction Details (only show when not processing) -->
           <div
-            v-if="transactionData && (transactionData.amount_usd || transactionData.amount_ton)"
+            v-if="transactionData && (transactionData.amount_usd || transactionData.amount_ton) && status !== 'processing'"
             class="w-full flex justify-center"
           >
-            <div class="w-full max-w-[280px] rounded-xl border border-[#FF6800] bg-[#FFE8D8] flex flex-col justify-center items-center gap-2 px-4 py-3">
-              <div v-if="transactionData.amount_usd" class="flex items-center gap-1">
-                <span class="text-base font-medium text-[#4B4D50]">Amount:</span>
-                <span class="text-xl font-bold text-[#FF6800]">${{ transactionData.amount_usd }}</span>
+            <div class="w-full max-w-[280px] rounded-xl border border-[#FF6800] bg-[#FFE8D8] flex flex-col justify-center items-center gap-1 px-4 py-3">
+              <div v-if="transactionData.amount_usd" class="text-center">
+                <div class="text-base font-medium text-[#4B4D50] mb-1">Amount</div>
+                <div class="text-2xl font-bold text-[#FF6800]">${{ transactionData.amount_usd }}</div>
               </div>
-              <div v-if="transactionData.amount_ton" class="flex items-center gap-1">
-                <span class="text-base font-medium text-[#4B4D50]">TON Amount:</span>
-                <span class="text-lg font-bold text-[#FF6800]">{{ transactionData.amount_ton }} TON</span>
+              <div v-if="transactionData.amount_ton" class="text-center">
+                <div class="text-base font-medium text-[#4B4D50] mb-0.5">TON Amount</div>
+                <div class="text-lg font-bold text-[#FF6800]">{{ transactionData.amount_ton }} TON</div>
               </div>
             </div>
           </div>
