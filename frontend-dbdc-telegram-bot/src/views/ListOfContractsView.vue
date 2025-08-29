@@ -325,6 +325,11 @@
       :activated-at-ms="activatedAtMs"
       @close="showActivateSuccessModal = false"
     />
+    <ActivateLoyaltyModal
+      :is-visible="showLoyaltyModal"
+      @cancel="showLoyaltyModal = false"
+      @confirm="confirmActivateLoyalty"
+    />
   </div>
 </template>
 
