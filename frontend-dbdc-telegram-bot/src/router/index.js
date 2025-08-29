@@ -81,6 +81,11 @@ const router = createRouter({
       component: RentOutTransactionView,
     },
     {
+      path: '/contracts',
+      name: 'contracts',
+      component: ListOfContractsView,
+    },
+    {
       path: '/calculator',
       name: 'calculator',
       component: CalculatorView,
