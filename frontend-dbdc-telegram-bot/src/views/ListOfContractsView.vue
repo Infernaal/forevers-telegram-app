@@ -300,55 +300,37 @@
             </div>
           </div>
 
-          <!-- Actions rows styled like other blocks with better icons and labels -->
-          <div class="mt-2 space-y-0 divide-y divide-gray-200">
-            <!-- Access row -->
-            <div class="flex justify-between items-center py-2">
-              <div class="flex items-center gap-2">
-                <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center">
-                  <!-- Shield check icon -->
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3Z" stroke="#4B4D50" stroke-width="1.5"/><path d="M9 12l2 2 4-4" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </div>
-                <span class="text-sm font-medium text-dbd-gray">Access</span>
-              </div>
-              <div class="flex items-center">
-                <template v-if="getAccessState(selected).kind === 'button'">
-                  <button class="px-3 h-8 rounded-full text-xs font-semibold bg-green-600 text-white" @click.stop="onActivateAccess(selected)">Activate Access</button>
-                </template>
-                <template v-else-if="getAccessState(selected).kind === 'activated_from'">
-                  <span class="text-sm font-medium text-dbd-dark">Activated from {{ formatDateTime(getAccessState(selected).date) }}</span>
-                </template>
-                <template v-else>
-                  <span class="text-sm text-dbd-gray">Not available</span>
-                </template>
-              </div>
+          <!-- Access and Participation unified with other label-value blocks -->
+          <div class="space-y-2 mt-2">
+            <div class="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-3 py-2">
+              <span class="text-sm text-dbd-gray">Access</span>
+              <template v-if="getAccessState(selected).kind === 'button'">
+                <button class="px-3 h-8 rounded-full text-xs font-semibold bg-green-600 text-white" @click.stop="onActivateAccess(selected)">Activate Access</button>
+              </template>
+              <template v-else-if="getAccessState(selected).kind === 'activated_from'">
+                <span class="text-sm font-medium text-dbd-dark">Activated from {{ formatDateTime(getAccessState(selected).date) }}</span>
+              </template>
+              <template v-else>
+                <span class="text-xs text-dbd-gray">Not available</span>
+              </template>
             </div>
-            <!-- Participation row -->
-            <div class="flex justify-between items-center py-2">
-              <div class="flex items-center gap-2">
-                <div class="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center">
-                  <!-- Sparkles icon -->
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2 2-5Z" stroke="#4B4D50" stroke-width="1.5" stroke-linejoin="round"/><path d="M18 5l.8 2 .2.8 2 .8-2 .8-.2.8L18 13l-.8-2-.2-.8-2-.8 2-.8.2-.8L18 5Z" stroke="#4B4D50" stroke-width="1.2"/></svg>
-                </div>
-                <span class="text-sm font-medium text-dbd-gray">Participation</span>
-              </div>
-              <div class="flex items-center">
-                <template v-if="getLoyaltyState(selected).kind === 'expired'">
-                  <button class="px-3 h-8 rounded-full text-xs font-semibold bg-green-600 text-white" @click.stop="openLoyaltyModal(selected)">Expired</button>
-                </template>
-                <template v-else-if="getLoyaltyState(selected).kind === 'activate'">
-                  <button class="px-3 h-8 rounded-full text-xs font-semibold bg-green-600 text-white" @click.stop="openLoyaltyModal(selected)">Activate Loyalty</button>
-                </template>
-                <template v-else-if="getLoyaltyState(selected).kind === 'activated_from'">
-                  <span class="text-sm font-medium text-dbd-dark">Activated from {{ formatDateTime(getLoyaltyState(selected).date) }}</span>
-                </template>
-                <template v-else-if="getLoyaltyState(selected).kind === 'available_on'">
-                  <span class="text-sm text-dbd-gray">Available on {{ formatDateTime(getLoyaltyState(selected).date).split(' ')[0] }}</span>
-                </template>
-                <template v-else>
-                  <span class="text-sm text-dbd-gray">Not available</span>
-                </template>
-              </div>
+            <div class="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-3 py-2">
+              <span class="text-sm text-dbd-gray">Participation</span>
+              <template v-if="getLoyaltyState(selected).kind === 'expired'">
+                <button class="px-3 h-8 rounded-full text-xs font-semibold bg-green-600 text-white" @click.stop="openLoyaltyModal(selected)">Expired</button>
+              </template>
+              <template v-else-if="getLoyaltyState(selected).kind === 'activate'">
+                <button class="px-3 h-8 rounded-full text-xs font-semibold bg-green-600 text-white" @click.stop="openLoyaltyModal(selected)">Activate Loyalty</button>
+              </template>
+              <template v-else-if="getLoyaltyState(selected).kind === 'activated_from'">
+                <span class="text-sm font-medium text-dbd-dark">Activated from {{ formatDateTime(getLoyaltyState(selected).date) }}</span>
+              </template>
+              <template v-else-if="getLoyaltyState(selected).kind === 'available_on'">
+                <span class="text-sm text-dbd-gray">Available on {{ formatDateTime(getLoyaltyState(selected).date).split(' ')[0] }}</span>
+              </template>
+              <template v-else>
+                <span class="text-sm text-dbd-gray">Not available</span>
+              </template>
             </div>
           </div>
         </div>
@@ -487,7 +469,7 @@ const toMs = (val) => {
 const formatDate = (d) => {
   const dt = new Date(toMs(d))
   const pad = (n) => String(n).padStart(2, '0')
-  return { date: `${pad(dt.getDate())}.${pad(dt.getMonth()+1)}.${dt.getFullYear()}`, time: `${pad(dt.getHours())}:${pad(dt.getMinutes())}:${pad(dt.getSeconds())}` }
+  return { date: `${pad(dt.getUTCDate())}.${pad(dt.getUTCMonth()+1)}.${dt.getUTCFullYear()}`, time: `${pad(dt.getUTCHours())}:${pad(dt.getUTCMinutes())}:${pad(dt.getUTCSeconds())}` }
 }
 
 const toFixed = (v, n=2) => {
@@ -503,7 +485,7 @@ const formatDateTime = (ts) => {
   const ms = toMs(ts)
   const dt = new Date(ms)
   const pad = (n) => String(n).padStart(2, '0')
-  return `${pad(dt.getDate())}.${pad(dt.getMonth()+1)}.${dt.getFullYear()} ${pad(dt.getHours())}:${pad(dt.getMinutes())}`
+  return `${pad(dt.getUTCDate())}.${pad(dt.getUTCMonth()+1)}.${dt.getUTCFullYear()} ${pad(dt.getUTCHours())}:${pad(dt.getUTCMinutes())}`
 }
 
 const getAccessState = (c) => {
