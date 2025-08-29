@@ -29,7 +29,7 @@
         <div class="h-px bg-[#E5E7EB] my-2"></div>
 
         <div class="text-[#4B4D50] space-y-3">
-          <p class="leading-relaxed">Your payment has been successfully processed.</p>
+          <p class="leading-relaxed font-semibold">Your payment has been successfully processed.</p>
           <p class="leading-relaxed">
             Your purchased <span class="font-semibold">Dubadu Forevers</span> are now in your account.
           </p>
