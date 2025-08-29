@@ -44,13 +44,13 @@
           <div class="flex items-center gap-3">
             <button
               @click="navigateToTransactions"
-              class="flex-1 text-sm font-bold text-[#4B4D50] bg-white border border-gray-300 rounded-full py-3 px-6 hover:bg-gray-50 active:scale-[0.98] shadow-md"
+              class="flex-1 h-12 flex items-center justify-center whitespace-nowrap leading-none text-sm font-bold text-[#4B4D50] bg-white border border-gray-300 rounded-full px-6 hover:bg-gray-50 active:scale-[0.98] shadow-md"
             >
               Rent Out History
             </button>
             <button
               @click="navigateToContracts"
-              class="flex-1 text-sm font-bold text-[#4B4D50] bg-white border border-gray-300 rounded-full py-3 px-6 hover:bg-gray-50 active:scale-[0.98] shadow-md"
+              class="flex-1 h-12 flex items-center justify-center whitespace-nowrap leading-none text-sm font-bold text-[#4B4D50] bg-white border border-gray-300 rounded-full px-6 hover:bg-gray-50 active:scale-[0.98] shadow-md"
             >
               All Contracts
             </button>
