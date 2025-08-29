@@ -354,6 +354,7 @@ const showActivateModal = ref(false)
 const showActivateSuccessModal = ref(false)
 const activatedAtMs = ref(Date.now())
 const showLoyaltyModal = ref(false)
+const { showError: showApiError } = useApiErrorNotifier()
 let pendingActivation = null
 let pendingLoyalty = null
 
