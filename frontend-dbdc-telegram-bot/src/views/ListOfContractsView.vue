@@ -262,17 +262,21 @@
           </div>
           <div class="h-px bg-gray-200"></div>
 
-          <!-- Amounts & Type with consistent separators -->
+          <!-- Amounts, Type, Access & Participation unified list -->
           <div class="space-y-0 divide-y divide-gray-200">
+            <!-- Contract Amount -->
             <div class="flex justify-between items-center py-2">
               <div class="flex items-center gap-2">
                 <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center">
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="8" stroke="#4B4D50" stroke-width="1.5"/><path d="M10 4v12M6.5 8.5h5" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 3v14M6 6.5h4.5a3 3 0 010 6H6" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
                 </div>
                 <span class="text-sm font-medium text-dbd-gray">Contract Amount</span>
               </div>
               <span class="text-sm font-medium text-dbd-dark">${{ toFixed(selected.paid, 2) }}</span>
             </div>
+            <!-- Forevers Amount -->
             <div class="flex justify-between items-center py-2">
               <div class="flex items-center gap-2">
                 <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center">
@@ -282,6 +286,7 @@
               </div>
               <span class="text-sm font-medium text-dbd-dark">{{ toFixed(selected.forevers, 2) }}</span>
             </div>
+            <!-- Rate at Deposit -->
             <div class="flex justify-between items-center py-2">
               <div class="flex items-center gap-2">
                 <div class="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center">
@@ -291,6 +296,7 @@
               </div>
               <span class="text-sm font-medium text-dbd-dark">${{ toFixed(selected.price, 2) }}</span>
             </div>
+            <!-- Forevers Type -->
             <div class="flex justify-between items-center py-2">
               <div class="flex items-center gap-2">
                 <CountryFlag :country="selected.type" size="small" />
@@ -298,41 +304,54 @@
               </div>
               <span class="text-sm font-medium text-dbd-dark">{{ selected.type }}</span>
             </div>
+            <!-- Access -->
+            <div class="flex justify-between items-center py-2">
+              <div class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3Z" stroke="#4B4D50" stroke-width="1.5"/><path d="M9 12l2 2 4-4" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <span class="text-sm font-medium text-dbd-gray">Access</span>
+              </div>
+              <div class="flex items-center">
+                <template v-if="getAccessState(selected).kind === 'button'">
+                  <button class="px-3 py-1 rounded-full border border-dbd-blue text-dbd-blue text-sm bg-white" @click.stop="onActivateAccess(selected)">Activate Access</button>
+                </template>
+                <template v-else-if="getAccessState(selected).kind === 'activated_from'">
+                  <span class="text-sm font-medium text-dbd-dark">Activated from {{ formatDateTime(getAccessState(selected).date) }}</span>
+                </template>
+                <template v-else>
+                  <span class="text-sm text-dbd-gray">Not available</span>
+                </template>
+              </div>
+            </div>
+            <!-- Participation -->
+            <div class="flex justify-between items-center py-2">
+              <div class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2 2-5Z" stroke="#4B4D50" stroke-width="1.5" stroke-linejoin="round"/><path d="M18 5l.8 2 .2.8 2 .8-2 .8-.2.8L18 13l-.8-2-.2-.8-2-.8 2-.8.2-.8L18 5Z" stroke="#4B4D50" stroke-width="1.2"/></svg>
+                </div>
+                <span class="text-sm font-medium text-dbd-gray">Participation</span>
+              </div>
+              <div class="flex items-center">
+                <template v-if="getLoyaltyState(selected).kind === 'expired'">
+                  <button class="px-3 py-1 rounded-full border border-dbd-blue text-dbd-blue text-sm bg-white" @click.stop="openLoyaltyModal(selected)">Expired</button>
+                </template>
+                <template v-else-if="getLoyaltyState(selected).kind === 'activate'">
+                  <button class="px-3 py-1 rounded-full border border-dbd-blue text-dbd-blue text-sm bg-white" @click.stop="openLoyaltyModal(selected)">Activate Loyalty</button>
+                </template>
+                <template v-else-if="getLoyaltyState(selected).kind === 'activated_from'">
+                  <span class="text-sm font-medium text-dbd-dark">Activated from {{ formatDateTime(getLoyaltyState(selected).date) }}</span>
+                </template>
+                <template v-else-if="getLoyaltyState(selected).kind === 'available_on'">
+                  <span class="text-sm text-dbd-gray">Available on {{ formatDateTime(getLoyaltyState(selected).date).split(' ')[0] }}</span>
+                </template>
+                <template v-else>
+                  <span class="text-sm text-dbd-gray">Not available</span>
+                </template>
+              </div>
+            </div>
           </div>
 
-          <!-- Access and Participation unified with other label-value blocks -->
-          <div class="space-y-2 mt-2">
-            <div class="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-3 py-2">
-              <span class="text-sm text-dbd-gray">Access</span>
-              <template v-if="getAccessState(selected).kind === 'button'">
-                <button class="px-3 h-8 rounded-full text-xs font-semibold bg-green-600 text-white" @click.stop="onActivateAccess(selected)">Activate Access</button>
-              </template>
-              <template v-else-if="getAccessState(selected).kind === 'activated_from'">
-                <span class="text-sm font-medium text-dbd-dark">Activated from {{ formatDateTime(getAccessState(selected).date) }}</span>
-              </template>
-              <template v-else>
-                <span class="text-xs text-dbd-gray">Not available</span>
-              </template>
-            </div>
-            <div class="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-3 py-2">
-              <span class="text-sm text-dbd-gray">Participation</span>
-              <template v-if="getLoyaltyState(selected).kind === 'expired'">
-                <button class="px-3 h-8 rounded-full text-xs font-semibold bg-green-600 text-white" @click.stop="openLoyaltyModal(selected)">Expired</button>
-              </template>
-              <template v-else-if="getLoyaltyState(selected).kind === 'activate'">
-                <button class="px-3 h-8 rounded-full text-xs font-semibold bg-green-600 text-white" @click.stop="openLoyaltyModal(selected)">Activate Loyalty</button>
-              </template>
-              <template v-else-if="getLoyaltyState(selected).kind === 'activated_from'">
-                <span class="text-sm font-medium text-dbd-dark">Activated from {{ formatDateTime(getLoyaltyState(selected).date) }}</span>
-              </template>
-              <template v-else-if="getLoyaltyState(selected).kind === 'available_on'">
-                <span class="text-sm text-dbd-gray">Available on {{ formatDateTime(getLoyaltyState(selected).date).split(' ')[0] }}</span>
-              </template>
-              <template v-else>
-                <span class="text-sm text-dbd-gray">Not available</span>
-              </template>
-            </div>
-          </div>
         </div>
       </div>
     </div>
