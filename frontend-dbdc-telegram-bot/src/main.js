@@ -123,7 +123,6 @@ if (window.Telegram && window.Telegram.WebApp) {
   window.addEventListener('beforeunload', () => {
     telegramUserService.logout()
     // Очищаем ресурсы composable
-    const { cleanup } = useUserInfo()
     cleanup()
   })
 }
