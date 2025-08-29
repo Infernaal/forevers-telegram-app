@@ -298,7 +298,7 @@ onMounted(async () => {
     window.visualViewport.addEventListener('resize', handleKeyboardDetection)
   }
 
-  // Инициализируем данные пользователя с кеширо��анием
+  // Инициализируем данные пользователя с кешированием
   await initializeUserInfo()
 })
 
@@ -435,19 +435,6 @@ const handleKeyboardDetection = () => {
   }
 }
   
-onMounted(() => {
-  window.addEventListener('resize', handleResize)
-  updateProfileButtonPosition()
-  updateBottomOffset()
-  window.addEventListener('resize', updateBottomOffset)
-  window.Telegram?.WebApp?.onEvent('viewportChanged', updateBottomOffset)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('resize', handleResize)
-  window.removeEventListener('resize', updateBottomOffset)
-  window.Telegram?.WebApp?.offEvent('viewportChanged', updateBottomOffset)
-})
 
 
 // Export bottomOffset for use in parent components
