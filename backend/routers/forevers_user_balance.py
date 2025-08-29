@@ -254,3 +254,92 @@ async def activate_forevers(payload: ActivateForeversRequest, current_user_id: i
         return ActivateForeversResponse(status="failed", message="Not found or already activated")
     except Exception:
         return ActivateForeversResponse(status="failed", message="Activation failed. Please try again later")
+
+
+@router.post("/activate-loyalty", response_model=ActivateLoyaltyResponse)
+async def activate_loyalty(payload: ActivateLoyaltyRequest, current_user_id: int = Depends(get_current_user_id), db: AsyncSession = Depends(get_db)):
+    try:
+        import time
+        now = int(time.time())
+
+        # 1) Check deposit existence and active status
+        dep_stmt = (
+            select(Deposits.id, Deposits.type, Deposits.activated_forevers, Deposits.activated_loyalty)
+            .where(
+                Deposits.id == payload.deposit_id,
+                Deposits.txid == payload.txid,
+                Deposits.uid == current_user_id,
+                Deposits.status == 1
+            )
+        )
+        dep_row = (await db.execute(dep_stmt)).first()
+        if not dep_row:
+            return ActivateLoyaltyResponse(status="failed", message="Deposit not found or not active")
+
+        dep_id, dep_type, activated_forevers, activated_loyalty = dep_row
+
+        # 2) Check isExpired (loyalty 1 year passed)
+        lah_stmt = (
+            select(func.max(LoyaltyActivationHistory.loyalty_activation_date))
+            .where(LoyaltyActivationHistory.deposit_id == dep_id)
+        )
+        last_loyalty_ts = (await db.execute(lah_stmt)).scalar()
+        is_expired = False
+        if last_loyalty_ts is not None:
+            is_expired = (now - int(last_loyalty_ts)) >= (365 * 24 * 60 * 60)
+
+        # 3) If not UAE and not expired — check settings availability date
+        if dep_type != 'UAE' and not is_expired:
+            type_map = {
+                'KZ': Settings.loyalty_available_type_kz_date,
+                'DE': Settings.loyalty_available_type_de_date,
+                'PL': Settings.loyalty_available_type_pl_date,
+                'UA': Settings.loyalty_available_type_ua_date,
+                'UAE': Settings.loyalty_available_type_uae_date,
+            }
+            field_col = type_map.get(dep_type)
+            if field_col is not None:
+                avail_stmt = select(field_col).where(Settings.id == 1)
+                avail_ts = (await db.execute(avail_stmt)).scalar()
+                if avail_ts is not None and int(avail_ts) > now:
+                    return ActivateLoyaltyResponse(status="failed", message="Loyalty program not available yet")
+
+        # 4) Pre checks
+        if not is_expired and (activated_forevers or 0) != 1:
+            return ActivateLoyaltyResponse(status="failed", message="Forevers must be activated first")
+        if not is_expired and (activated_loyalty or 0) == 1:
+            return ActivateLoyaltyResponse(status="failed", message="Loyalty program already activated")
+
+        # 5) Transaction: update deposits, upsert stats, insert history
+        async with db.begin():
+            upd = (
+                update(Deposits)
+                .where(Deposits.id == dep_id, Deposits.uid == current_user_id)
+                .values(activated_loyalty=1)
+            )
+            result = await db.execute(upd)
+            if (result.rowcount or 0) == 0:
+                return ActivateLoyaltyResponse(status="failed", message="Failed to update deposits")
+
+            ins = mysql_insert(Stats).values(
+                uid=current_user_id,
+                deposit_id=dep_id,
+                forevers_reactivate_date=now,
+                created_at=now
+            )
+            ondup = ins.on_duplicate_key_update(
+                forevers_reactivate_date=ins.inserted.forevers_reactivate_date
+            )
+            await db.execute(ondup)
+
+            lah_ins = mysql_insert(LoyaltyActivationHistory).values(
+                uid=current_user_id,
+                deposit_id=dep_id,
+                loyalty_activation_date=now,
+                created_at=now
+            )
+            await db.execute(lah_ins)
+
+        return ActivateLoyaltyResponse(status="success", message="Loyalty program activated")
+    except Exception:
+        return ActivateLoyaltyResponse(status="failed", message="Activation failed. Please try again later")
