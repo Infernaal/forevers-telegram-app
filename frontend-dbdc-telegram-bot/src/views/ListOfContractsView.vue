@@ -335,6 +335,7 @@ import BottomNavigation from '../components/BottomNavigation.vue'
 import CountryFlag from '../components/CountryFlag.vue'
 import ActivateAccessModal from '../components/ActivateAccessModal.vue'
 import ActivateAccessSuccessModal from '../components/ActivateAccessSuccessModal.vue'
+import ActivateLoyaltyModal from '../components/ActivateLoyaltyModal.vue'
 import DepositsService from '../services/depositsService.js'
 import telegramUserService from '../services/telegramUserService.js'
 
