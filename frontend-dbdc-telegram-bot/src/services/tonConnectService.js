@@ -214,7 +214,7 @@ export class TonConnectService {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          request_id: requestId
+          txid: requestId
         })
       })
 
@@ -298,7 +298,7 @@ export class TonConnectService {
       // Step 3: Return data for polling
       return {
         success: true,
-        requestId: initData.request_id,
+        requestId: initData.txid,
         transactionResult: txResult,
         initData: initData
       }
@@ -352,4 +352,3 @@ export class TonConnectService {
 
 // Singleton instance
 export const tonConnectService = new TonConnectService()
-
