@@ -457,7 +457,11 @@ const confirmActivateAccess = async () => {
   const txid = c?.txid
   if (!depositId || !txid) return
   const res = await DepositsService.activateForevers(depositId, txid)
-  if (res.status === 'success') await fetchContracts()
+  if (res.status === 'success') {
+    await fetchContracts()
+    activatedAtMs.value = Date.now()
+    showActivateSuccessModal.value = true
+  }
   pendingActivation = null
 }
 const onActivateParticipation = (c) => { console.log('Activate loyalty clicked for', c.txid) }
