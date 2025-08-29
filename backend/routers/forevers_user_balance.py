@@ -240,31 +240,32 @@ async def activate_forevers(payload: ActivateForeversRequest, current_user_id: i
     try:
         import time
         now = int(time.time())
-        async with db.begin():
-            upd = (
-                update(Deposits)
-                .where(
-                    Deposits.id == payload.deposit_id,
-                    Deposits.txid == payload.txid,
-                    Deposits.uid == current_user_id,
-                    Deposits.activated_forevers == 0
-                )
-                .values(activated_forevers=1)
+        affected = 0
+        upd = (
+            update(Deposits)
+            .where(
+                Deposits.id == payload.deposit_id,
+                Deposits.txid == payload.txid,
+                Deposits.uid == current_user_id,
+                Deposits.activated_forevers == 0
             )
-            result = await db.execute(upd)
-            affected = result.rowcount or 0
+            .values(activated_forevers=1)
+        )
+        result = await db.execute(upd)
+        affected = result.rowcount or 0
 
-            if affected > 0:
-                ins = mysql_insert(Stats).values(
-                    uid=current_user_id,
-                    deposit_id=payload.deposit_id,
-                    forevers_activation_date=now,
-                    created_at=now
-                )
-                ondup = ins.on_duplicate_key_update(
-                    forevers_activation_date=ins.inserted.forevers_activation_date
-                )
-                await db.execute(ondup)
+        if affected > 0:
+            ins = mysql_insert(Stats).values(
+                uid=current_user_id,
+                deposit_id=payload.deposit_id,
+                forevers_activation_date=now,
+                created_at=now
+            )
+            ondup = ins.on_duplicate_key_update(
+                forevers_activation_date=ins.inserted.forevers_activation_date
+            )
+            await db.execute(ondup)
+        await db.commit()
         if affected > 0:
             return ActivateForeversResponse(status="success", message="Forevers access activated")
         return ActivateForeversResponse(status="failed", message="Not found or already activated")
@@ -332,34 +333,36 @@ async def activate_loyalty(payload: ActivateLoyaltyRequest, current_user_id: int
             return ActivateLoyaltyResponse(status="failed", message="Loyalty program already activated")
 
         # 5) Transaction: update deposits, upsert stats, insert history
-        async with db.begin():
-            upd = (
-                update(Deposits)
-                .where(Deposits.id == dep_id, Deposits.uid == current_user_id)
-                .values(activated_loyalty=1)
-            )
-            result = await db.execute(upd)
-            if (result.rowcount or 0) == 0:
-                return ActivateLoyaltyResponse(status="failed", message="Failed to update deposits")
+        upd = (
+            update(Deposits)
+            .where(Deposits.id == dep_id, Deposits.uid == current_user_id)
+            .values(activated_loyalty=1)
+        )
+        result = await db.execute(upd)
+        if (result.rowcount or 0) == 0:
+            await db.rollback()
+            return ActivateLoyaltyResponse(status="failed", message="Failed to update deposits")
 
-            ins = mysql_insert(Stats).values(
-                uid=current_user_id,
-                deposit_id=dep_id,
-                forevers_reactivate_date=now,
-                created_at=now
-            )
-            ondup = ins.on_duplicate_key_update(
-                forevers_reactivate_date=ins.inserted.forevers_reactivate_date
-            )
-            await db.execute(ondup)
+        ins = mysql_insert(Stats).values(
+            uid=current_user_id,
+            deposit_id=dep_id,
+            forevers_reactivate_date=now,
+            created_at=now
+        )
+        ondup = ins.on_duplicate_key_update(
+            forevers_reactivate_date=ins.inserted.forevers_reactivate_date
+        )
+        await db.execute(ondup)
 
-            lah_ins = mysql_insert(LoyaltyActivationHistory).values(
-                uid=current_user_id,
-                deposit_id=dep_id,
-                loyalty_activation_date=now,
-                created_at=now
-            )
-            await db.execute(lah_ins)
+        lah_ins = mysql_insert(LoyaltyActivationHistory).values(
+            uid=current_user_id,
+            deposit_id=dep_id,
+            loyalty_activation_date=now,
+            created_at=now
+        )
+        await db.execute(lah_ins)
+
+        await db.commit()
 
         return ActivateLoyaltyResponse(status="success", message="Loyalty program activated")
     except Exception as e:
@@ -369,4 +372,3 @@ async def activate_loyalty(payload: ActivateLoyaltyRequest, current_user_id: int
             pass
         logger.exception("activate_loyalty failed")
         return ActivateLoyaltyResponse(status="failed", message=f"Activation failed. Please try again later. Reason: {e}")
-
