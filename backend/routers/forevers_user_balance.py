@@ -126,7 +126,7 @@ async def get_user_deposits_history(current_user_id: int = Depends(get_current_u
             (
                 and_(
                     Deposits.activated_loyalty == 1,
-                    lah_subq.c.loyalty_activation_date.is_not(None),
+                    lah_subq.c.loyalty_activation_date.isnot(None),
                     (literal(current_time) - lah_subq.c.loyalty_activation_date) >= (365 * 24 * 60 * 60)
                 ),
                 1
