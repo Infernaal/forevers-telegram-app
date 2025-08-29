@@ -314,6 +314,12 @@
         </div>
       </div>
     </div>
+    <!-- Activate Access Modal -->
+    <ActivateAccessModal
+      :is-visible="showActivateModal"
+      @cancel="showActivateModal = false"
+      @confirm="confirmActivateAccess"
+    />
   </div>
 </template>
 
