@@ -145,29 +145,36 @@
           <!-- Access (vertical label-value with action) -->
           <div class="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-3 py-2 mt-2">
             <span class="text-sm text-dbd-gray">Access</span>
-            <button
-              class="px-3 h-8 rounded-full text-xs font-semibold"
-              :class="c.access ? 'bg-green-100 text-green-700' : 'bg-green-600 text-white'"
-              @click.stop="onActivateAccess(c)"
-            >
-              {{ c.access ? 'Activated' : 'Activate Access' }}
-            </button>
+            <template v-if="getAccessState(c).kind === 'button'">
+              <button class="px-3 h-8 rounded-full text-xs font-semibold bg-green-600 text-white" @click.stop="onActivateAccess(c)">Activate Access</button>
+            </template>
+            <template v-else-if="getAccessState(c).kind === 'activated_from'">
+              <div class="text-xs text-dbd-gray">Activated from:<br><span class="font-semibold text-dbd-dark">{{ formatDateTime(getAccessState(c).date) }}</span></div>
+            </template>
+            <template v-else>
+              <span class="text-xs text-dbd-gray">Not available</span>
+            </template>
           </div>
           <!-- Participation (vertical label-value with action) -->
           <div class="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-3 py-2 mt-2">
             <span class="text-sm text-dbd-gray">Participation</span>
-            <button
-              class="px-3 h-8 rounded-full text-xs font-semibold"
-              :class="c.participation
-                ? 'bg-green-100 text-green-700 cursor-default'
-                : (!c.access
-                    ? 'bg-green-600 text-white opacity-60 cursor-not-allowed'
-                    : 'bg-green-600 text-white')"
-              :disabled="c.participation || !c.access"
-              @click.stop="openLoyaltyModal(c)"
-            >
-              {{ c.participation ? 'Activated' : 'Activate Loyalty' }}
-            </button>
+            <template v-if="getLoyaltyState(c).kind === 'expired'">
+              <button class="px-3 h-8 rounded-full text-xs font-semibold bg-green-600 text-white" @click.stop="openLoyaltyModal(c)">Expired</button>
+            </template>
+            <template v-else-if="getLoyaltyState(c).kind === 'activate'">
+              <button class="px-3 h-8 rounded-full text-xs font-semibold bg-green-600 text-white" @click.stop="openLoyaltyModal(c)">Activate Loyalty</button>
+            </template>
+            <template v-else-if="getLoyaltyState(c).kind === 'activated_from'">
+              <div class="text-xs text-dbd-gray">Activated from:<br><span class="font-semibold text-dbd-dark">{{ formatDateTime(getLoyaltyState(c).date) }}</span></div>
+            </template>
+            <template v-else-if="getLoyaltyState(c).kind === 'available_on'">
+              <button class="px-3 h-8 rounded-full text-xs font-semibold bg-gray-300 text-gray-700 cursor-not-allowed" disabled>
+                Available on {{ formatDateTime(getLoyaltyState(c).date).split(' ')[0] }}
+              </button>
+            </template>
+            <template v-else>
+              <button class="px-3 h-8 rounded-full text-xs font-semibold bg-gray-300 text-gray-700 cursor-not-allowed" disabled>Activate</button>
+            </template>
           </div>
           <div class="mt-2 text-xs text-dbd-gray">Tap card to view details</div>
         </div>
@@ -310,10 +317,42 @@
             <span class="text-sm font-medium text-dbd-dark">{{ selected.type }}</span>
           </div>
 
-          <!-- Activate buttons -->
-          <div class="mt-2 grid grid-cols-2 gap-2">
-            <button class="h-10 rounded-full text-sm font-semibold" :class="selected.access ? 'bg-green-100 text-green-700' : 'bg-green-600 text-white'" @click="onActivateAccess(selected)">{{ selected.access ? 'Activated' : 'Activate Access' }}</button>
-            <button class="h-10 rounded-full text-sm font-semibold" :class="selected.participation ? 'bg-gray-200 text-gray-700' : 'bg-gray-300 text-gray-700'" :disabled="selected.participation" @click="onActivateParticipation(selected)">{{ selected.participation ? 'Activated' : 'Activate Loyalty' }}</button>
+          <!-- Actions as vertical label-value rows -->
+          <div class="mt-2 space-y-2">
+            <!-- Access row -->
+            <div class="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-3 py-2">
+              <span class="text-sm text-dbd-gray">Access</span>
+              <template v-if="getAccessState(selected).kind === 'button'">
+                <button class="px-3 h-8 rounded-full text-xs font-semibold bg-green-600 text-white" @click.stop="onActivateAccess(selected)">Activate Access</button>
+              </template>
+              <template v-else-if="getAccessState(selected).kind === 'activated_from'">
+                <div class="text-xs text-dbd-gray">Activated from:<br><span class="font-semibold text-dbd-dark">{{ formatDateTime(getAccessState(selected).date) }}</span></div>
+              </template>
+              <template v-else>
+                <span class="text-xs text-dbd-gray">Not available</span>
+              </template>
+            </div>
+            <!-- Participation row -->
+            <div class="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-3 py-2">
+              <span class="text-sm text-dbd-gray">Participation</span>
+              <template v-if="getLoyaltyState(selected).kind === 'expired'">
+                <button class="px-3 h-8 rounded-full text-xs font-semibold bg-green-600 text-white" @click.stop="openLoyaltyModal(selected)">Expired</button>
+              </template>
+              <template v-else-if="getLoyaltyState(selected).kind === 'activate'">
+                <button class="px-3 h-8 rounded-full text-xs font-semibold bg-green-600 text-white" @click.stop="openLoyaltyModal(selected)">Activate Loyalty</button>
+              </template>
+              <template v-else-if="getLoyaltyState(selected).kind === 'activated_from'">
+                <div class="text-xs text-dbd-gray">Activated from:<br><span class="font-semibold text-dbd-dark">{{ formatDateTime(getLoyaltyState(selected).date) }}</span></div>
+              </template>
+              <template v-else-if="getLoyaltyState(selected).kind === 'available_on'">
+                <button class="px-3 h-8 rounded-full text-xs font-semibold bg-gray-300 text-gray-700 cursor-not-allowed" disabled>
+                  Available on {{ formatDateTime(getLoyaltyState(selected).date).split(' ')[0] }}
+                </button>
+              </template>
+              <template v-else>
+                <button class="px-3 h-8 rounded-full text-xs font-semibold bg-gray-300 text-gray-700 cursor-not-allowed" disabled>Activate</button>
+              </template>
+            </div>
           </div>
         </div>
       </div>
@@ -451,6 +490,34 @@ const toFixed = (v, n=2) => {
 
 const userFullName = computed(() => userInfo.value?.full_name || '')
 
+const nowSec = () => Math.floor(Date.now() / 1000)
+const formatDateTime = (ts) => {
+  if (!ts) return ''
+  const dt = new Date(Number(ts) * 1000)
+  const pad = (n) => String(n).padStart(2, '0')
+  return `${pad(dt.getDate())}.${pad(dt.getMonth()+1)}.${dt.getFullYear()} ${pad(dt.getHours())}:${pad(dt.getMinutes())}`
+}
+
+const getAccessState = (c) => {
+  const r = c?._raw || {}
+  if (r.status === 1 && r.activated_forevers === 0) return { kind: 'button' }
+  if (r.activated_forevers === 1 && r.forevers_activation_date) return { kind: 'activated_from', date: r.forevers_activation_date }
+  return { kind: 'not_available' }
+}
+
+const getLoyaltyState = (c) => {
+  const r = c?._raw || {}
+  const isExpired = r.is_expired === 1
+  const isAvailableBase = r.activated_forevers === 1 && r.status === 1 && r.activated_loyalty === 0
+  const availDate = Number(r.loyalty_available_date || 0)
+  if (isExpired) return { kind: 'expired' }
+  if (isAvailableBase && (r.type === 'UAE' || (availDate && availDate <= nowSec()))) return { kind: 'activate' }
+  if (r.activated_loyalty === 1 && r.loyalty_activation_date) return { kind: 'activated_from', date: r.loyalty_activation_date }
+  if (r.type !== 'UAE' && availDate > 0) return { kind: 'available_on', date: availDate }
+  if (r.status === 1 && r.activated_loyalty === 0) return { kind: 'disabled' }
+  return { kind: 'disabled' }
+}
+
 const copy = async (text) => {
   try {
     if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(text)
@@ -530,5 +597,4 @@ onMounted(() => { fetchContracts(); fetchUser() })
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 .scrollbar-hide::-webkit-scrollbar { width: 0; height: 0; }
 </style>
-
 
