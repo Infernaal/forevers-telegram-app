@@ -261,7 +261,7 @@ export class TonConnectService {
 
         // Continue polling if still pending and haven't exceeded max attempts
         if (attempts < maxAttempts && result.transaction_status === 'pending') {
-          setTimeout(poll, 15000) // Poll every 60 seconds
+          setTimeout(poll, 60000) // Poll every 60 seconds
         } else if (attempts >= maxAttempts) {
           console.log('Transaction polling timeout')
           return { success: false, result: { transaction_status: 'timeout', message: 'Transaction verification timeout' } }
