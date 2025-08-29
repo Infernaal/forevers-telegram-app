@@ -10,7 +10,8 @@ import { Content } from '@builder.io/sdk-vue'
 const app = createApp(App)
 
 // Предварительно инициализируем данные пользователя для кеширования
-const { initializeUserInfo } = useUserInfo()
+const userInfoComposable = useUserInfo()
+const { initializeUserInfo, cleanup } = userInfoComposable
 initializeUserInfo()
 
 app.component('BuilderComponent', Content)
