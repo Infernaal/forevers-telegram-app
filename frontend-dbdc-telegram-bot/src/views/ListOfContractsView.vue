@@ -284,7 +284,7 @@
             <div class="flex justify-between items-center">
               <div class="flex items-center gap-2">
                 <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center">
-                  <svg class="text-dbd-dark" width="20" height="20" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M30.6666 7.38069V1.33325H7.1291V9.01136H1.33325V15.0588H7.1291V30.1075H13.894V22.7276H19.6153V16.6801H13.894V15.0588H25.1316V9.01136H13.894V7.38069H30.6666Z" fill="currentColor"/></svg>
+                  <svg class="text-dbd-primary" width="20" height="20" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M30.6666 7.38069V1.33325H7.1291V9.01136H1.33325V15.0588H7.1291V30.1075H13.894V22.7276H19.6153V16.6801H13.894V15.0588H25.1316V9.01136H13.894V7.38069H30.6666Z" fill="currentColor"/></svg>
                 </div>
                 <span class="text-sm font-medium text-dbd-gray">Forevers Amount</span>
               </div>
