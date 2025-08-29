@@ -6,7 +6,10 @@
       <div class="flex justify-between items-center px-4 py-3">
         <!-- Back -->
         <button @click="goBack" class="w-11 h-11 flex items-center justify-center rounded-full bg-dbd-off-white border border-gray-200 hover:bg-gray-100 transition-colors">
-          <img src="https://img.icons8.com/ios-glyphs/30/4B4D50/macos-close.png" alt="Close" class="w-5 h-5" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
+          <div class="w-5 h-5 relative">
+            <div class="absolute w-4 h-0.5 bg-dbd-dark rounded-full rotate-45 top-2.5 left-0.5"></div>
+            <div class="absolute w-4 h-0.5 bg-dbd-dark rounded-full -rotate-45 top-2.5 left-0.5"></div>
+          </div>
         </button>
 
         <!-- Title -->
@@ -153,7 +156,10 @@
         <div class="flex items-center justify-between p-4 border-b">
           <h2 class="text-base font-medium text-dbd-dark">Contract Details</h2>
           <button @click="closeDetails" class="w-11 h-11 flex items-center justify-center rounded-full bg-dbd-off-white border border-gray-200">
-            <img src="https://img.icons8.com/ios-glyphs/30/4B4D50/macos-close.png" alt="Close" class="w-5 h-5" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
+            <div class="w-5 h-5 relative">
+            <div class="absolute w-4 h-0.5 bg-dbd-dark rounded-full rotate-45 top-2.5 left-0.5"></div>
+            <div class="absolute w-4 h-0.5 bg-dbd-dark rounded-full -rotate-45 top-2.5 left-0.5"></div>
+          </div>
           </button>
         </div>
         <div v-if="selected" class="p-4 space-y-4 max-h-96 overflow-y-auto">
