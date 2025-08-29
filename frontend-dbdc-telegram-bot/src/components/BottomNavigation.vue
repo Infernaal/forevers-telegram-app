@@ -298,7 +298,7 @@ onMounted(async () => {
     window.visualViewport.addEventListener('resize', handleKeyboardDetection)
   }
 
-  // Инициализируем данные пользователя с кешированием
+  // Инициализируем данные пользователя с кеширо��анием
   await initializeUserInfo()
 })
 
@@ -449,15 +449,6 @@ onUnmounted(() => {
   window.Telegram?.WebApp?.offEvent('viewportChanged', updateBottomOffset)
 })
 
-// Get rank icon from public folder
-const getRankIcon = (rank) => {
-  const availableRanks = [
-    'none', 'bronze', 'silver', 'gold', 'diamond', 'double diamond', 'ambassador', 'royal ambassador'
-  ]
-  const normalizedRank = (rank || '').toLowerCase().replace(/_/g, ' ')
-  const validRank = availableRanks.includes(normalizedRank) ? normalizedRank.replace(/ /g, '-') : 'none'
-  return `/${validRank}.svg`
-}
 
 // Export bottomOffset for use in parent components
 defineExpose({
