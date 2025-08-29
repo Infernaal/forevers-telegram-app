@@ -142,25 +142,30 @@
             </div>
           </div>
 
-          <!-- Actions row -->
-          <div class="flex items-center gap-2 mt-3">
+          <!-- Access (vertical label-value with action) -->
+          <div class="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-3 py-2 mt-2">
+            <span class="text-sm text-dbd-gray">Access</span>
             <button
-              class="px-4 h-9 rounded-full text-sm font-semibold"
+              class="px-3 h-8 rounded-full text-xs font-semibold"
               :class="c.access ? 'bg-green-100 text-green-700' : 'bg-green-600 text-white'"
               @click.stop="onActivateAccess(c)"
             >
               {{ c.access ? 'Activated' : 'Activate Access' }}
             </button>
+          </div>
+          <!-- Participation (vertical label-value with action) -->
+          <div class="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-3 py-2 mt-2">
+            <span class="text-sm text-dbd-gray">Participation</span>
             <button
-              class="px-4 h-9 rounded-full text-sm font-semibold"
+              class="px-3 h-8 rounded-full text-xs font-semibold"
               :class="c.participation ? 'bg-gray-200 text-gray-700' : 'bg-gray-300 text-gray-700'"
               :disabled="c.participation"
               @click.stop="onActivateParticipation(c)"
             >
               {{ c.participation ? 'Activated' : 'Activate Loyalty' }}
             </button>
-            <div class="ml-auto text-xs text-dbd-gray">Tap card to view details</div>
           </div>
+          <div class="mt-2 text-xs text-dbd-gray">Tap card to view details</div>
         </div>
       </div>
     </div>
