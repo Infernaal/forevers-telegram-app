@@ -343,6 +343,7 @@ import ActivateAccessSuccessModal from '../components/ActivateAccessSuccessModal
 import ActivateLoyaltyModal from '../components/ActivateLoyaltyModal.vue'
 import DepositsService from '../services/depositsService.js'
 import telegramUserService from '../services/telegramUserService.js'
+import { useApiErrorNotifier } from '../composables/useApiErrorNotifier.js'
 
 const router = useRouter()
 const contracts = ref([])
