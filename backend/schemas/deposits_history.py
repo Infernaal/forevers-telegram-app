@@ -5,13 +5,13 @@ from decimal import Decimal
 class DepositsHistoryItem(BaseModel):
     id: int
     txid: Optional[str]
-    amount: Optional[Decimal]
+    amount: Optional[str]
     rate_at_deposit: Optional[Decimal]
     requested_on: Optional[int]
     deal_status: Optional[int]
     status: Optional[int]
-    activated_forevers: int
-    activated_loyalty: int
+    activated_forevers: Optional[int]
+    activated_loyalty: Optional[int]
     type: Optional[str]
     forevers_activation_date: Optional[int]
     forevers_reactivate_date: Optional[int]
