@@ -66,7 +66,7 @@
         </div>
 
         <!-- Content -->
-        <div class="flex flex-col items-center gap-5 flex-1 w-full max-w-[300px]">
+        <div class="flex flex-col items-center gap-5 flex-1 w-full max-w-[340px]">
           <!-- Title -->
           <h2 class="text-[30px] font-bold text-[#292727] text-center leading-9">
             {{ modalTitle }}
@@ -77,7 +77,7 @@
             v-if="transactionData && (transactionData.amount_usd || transactionData.amount_ton || transactionData.txid) && status !== 'processing'"
             class="w-full flex justify-center"
           >
-            <div class="w-full max-w-[280px] rounded-xl border border-[#FF6800] bg-[#FFE8D8] flex flex-col gap-2 px-4 py-3">
+            <div class="w-full max-w-[320px] rounded-xl border border-[#FF6800] bg-[#FFE8D8] flex flex-col gap-2 px-4 py-3">
               <div v-if="transactionData.amount_usd" class="flex justify-between items-center">
                 <span class="text-base font-medium text-[#4B4D50]">Amount:</span>
                 <span class="text-xl font-bold text-[#FF6800]">${{ transactionData.amount_usd }}</span>
@@ -88,7 +88,7 @@
               </div>
               <div v-if="transactionData.txid" class="flex justify-between items-center">
                 <span class="text-base font-medium text-[#4B4D50]">Transaction ID:</span>
-                <span class="font-mono text-xs text-[#7E7E7E] break-all text-right">{{ transactionData.txid }}</span>
+                <span class="font-mono text-[10px] text-[#7E7E7E] break-all text-right">{{ transactionData.txid }}</span>
               </div>
             </div>
           </div>
@@ -116,7 +116,7 @@
         <!-- Action Button -->
         <button
           @click="handleClose"
-          class="w-full max-w-[300px] h-11 px-12 flex justify-center items-center rounded-full bg-gradient-to-r from-[#2019CE] to-[#473FFF] hover:opacity-90 transition-all mt-6"
+          class="w-full max-w-[340px] h-11 px-12 flex justify-center items-center rounded-full bg-gradient-to-r from-[#2019CE] to-[#473FFF] hover:opacity-90 transition-all mt-6"
         >
           <span class="text-white text-sm font-bold">
             {{ buttonText }}
@@ -124,7 +124,7 @@
         </button>
 
         <!-- Additional Information -->
-        <div v-if="status === 'processing'" class="mt-3 text-xs text-[#7E7E7E] text-center max-w-[280px]">
+        <div v-if="status === 'processing'" class="mt-3 text-xs text-[#7E7E7E] text-center max-w-[320px]">
           We're checking the blockchain for your transaction. This usually takes 1-2 minutes.
         </div>
       </div>
@@ -329,8 +329,8 @@ button {
   }
 
   /* Adjust transaction details box width on small screens */
-  .max-w-\[280px\] {
-    max-width: 240px !important;
+  .max-w-\[320px\] {
+    max-width: 280px !important;
   }
 }
 
@@ -353,8 +353,8 @@ button {
   }
 
   /* Further reduce on very small screens */
-  .max-w-\[280px\] {
-    max-width: 200px !important;
+  .max-w-\[320px\] {
+    max-width: 240px !important;
   }
 }
 
@@ -376,4 +376,3 @@ button {
   transition-duration: 300ms;
 }
 </style>
-
