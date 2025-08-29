@@ -68,8 +68,8 @@ async def init_crypto_purchase(
 
         if success:
             logger.info(f"Crypto purchase init successful: user_id={current_user_id}, "
-                       f"request_id={result_data.get('request_id')}, "
-                       f"deposit_id={result_data.get('deposit_id')}")
+                       f"txid={result_data.get('txid')}, "
+                       f"reference_number={result_data.get('reference_number')}")
             
             return CryptoInitResponse(
                 status="success",
@@ -106,14 +106,14 @@ async def verify_crypto_transaction(
     Verify a crypto transaction and update deposit status
     
     This endpoint:
-    1. Finds the pending deposit by request_id
+    1. Finds the pending deposit by txid
     2. Verifies the transaction on TON blockchain
     3. Updates deposit status based on verification result
     4. Creates transaction records if successful
     5. Handles idempotent operations
     
     Args:
-        verify_data: Verification request with request_id
+        verify_data: Verification request with txid
         request: FastAPI request object to get client IP
         current_user_id: ID of the authenticated user
         db: Database session
@@ -131,12 +131,12 @@ async def verify_crypto_transaction(
 
         # Log verification attempt
         logger.info(f"Crypto transaction verify: user_id={current_user_id}, "
-                   f"ip={client_ip}, request_id={verify_data.request_id}")
+                   f"ip={client_ip}, txid={verify_data.txid}")
 
         # Process the verification
         success, result_data, message = await CryptoPurchaseService.verify_crypto_transaction(
             user_id=current_user_id,
-            request_id=verify_data.request_id,
+            txid=verify_data.txid,
             db=db
         )
 
@@ -144,7 +144,7 @@ async def verify_crypto_transaction(
             transaction_status = result_data.get("transaction_status", "unknown")
             
             logger.info(f"Crypto transaction verify result: user_id={current_user_id}, "
-                       f"request_id={verify_data.request_id}, status={transaction_status}")
+                       f"txid={verify_data.txid}, status={transaction_status}")
             
             return CryptoVerifyResponse(
                 status="success",
@@ -154,7 +154,7 @@ async def verify_crypto_transaction(
             )
         else:
             logger.warning(f"Crypto transaction verify failed: user_id={current_user_id}, "
-                          f"request_id={verify_data.request_id}, reason={message}")
+                          f"txid={verify_data.txid}, reason={message}")
             
             return CryptoVerifyResponse(
                 status="failed",
@@ -164,7 +164,7 @@ async def verify_crypto_transaction(
 
     except Exception as e:
         logger.error(f"Unexpected error in crypto verify endpoint: "
-                    f"user_id={current_user_id}, request_id={verify_data.request_id}, "
+                    f"user_id={current_user_id}, txid={verify_data.txid}, "
                     f"error={str(e)}", exc_info=True)
         
         return CryptoVerifyResponse(
