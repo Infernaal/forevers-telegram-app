@@ -82,9 +82,9 @@
               <span class="text-gray-500">TON Amount:</span>
               <span class="font-medium">{{ transactionData.amount_ton }} TON</span>
             </div>
-            <div v-if="transactionData.request_id" class="flex justify-between">
-              <span class="text-gray-500">Request ID:</span>
-              <span class="font-mono text-xs break-all">{{ transactionData.request_id }}</span>
+            <div v-if="transactionData.txid" class="flex justify-between">
+              <span class="text-gray-500">Transaction ID:</span>
+              <span class="font-mono text-xs break-all">{{ transactionData.txid }}</span>
             </div>
             <div v-if="pollingAttempts > 0" class="flex justify-between">
               <span class="text-gray-500">Verification Attempts:</span>
