@@ -24,8 +24,8 @@ FIXED_RECEIVER_WALLET = "0QBgEwEKpmG4yPvn7-_VqljYE2s88oI6v7R2Vu_E8TvHjMGG"
 CRYPTO_INIT_TTL_SECONDS = int(os.getenv("CRYPTO_INIT_TTL_SECONDS", "7200"))  # 2 hours
 
 
-def _redis_key(request_id: str) -> str:
-    return f"crypto:init:{request_id}"
+def _redis_key(txid: str) -> str:
+    return f"crypto:init:{txid}"
 
 
 class CryptoPurchaseService:
@@ -139,13 +139,15 @@ class CryptoPurchaseService:
             # Calculate network fee in USD for reference
             network_fee_usd = (network_fee * ton_usd_rate).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
 
-            # Generate unique request ID
-            request_id = f"CRYPTO_{uuid.uuid4().hex[:16].upper()}"
+            # Generate unique transaction ID and reference number
+            txid = f"CRPT{random_hash(8)}"
+            reference_number = f"CRPT{random_hash(8).upper()}"
             current_time = int(time.time())
 
             # Prepare transaction data to keep in Redis until success
             transaction_data = {
-                "request_id": request_id,
+                "txid": txid,
+                "reference_number": reference_number,
                 "transaction_id": None,
                 "user_id": user_id,
                 "user_wallet": user_wallet,
@@ -163,7 +165,7 @@ class CryptoPurchaseService:
             }
 
             # Save to Redis (ephemeral, no DB writes yet)
-            await client.setex(_redis_key(request_id), CRYPTO_INIT_TTL_SECONDS, json.dumps(transaction_data))
+            await client.setex(_redis_key(txid), CRYPTO_INIT_TTL_SECONDS, json.dumps(transaction_data))
 
             # Prepare response data for Ton Connect
             response_data = {
@@ -173,14 +175,15 @@ class CryptoPurchaseService:
                 "ton_usd_rate": str(ton_usd_rate),
                 "network_fee": str(network_fee),
                 "network_fee_usd": str(network_fee_usd),
-                "request_id": request_id,
+                "txid": txid,
+                "reference_number": reference_number,
                 "forevers_rate": str(forevers_rate),
-                "payload": f"Forever purchase - {request_id}"
+                "payload": f"Forever purchase - {txid}"
             }
 
             logger.info(
-                f"Crypto purchase initialized (no DB write): user_id={user_id}, request_id={request_id}, "
-                f"amount_usd=${amount_usd}, amount_ton={amount_ton}"
+                f"Crypto purchase initialized (no DB write): user_id={user_id}, txid={txid}, "
+                f"reference_number={reference_number}, amount_usd=${amount_usd}, amount_ton={amount_ton}"
             )
 
             return True, response_data, "Crypto purchase initialized successfully"
@@ -195,7 +198,7 @@ class CryptoPurchaseService:
     @staticmethod
     async def verify_crypto_transaction(
         user_id: int,
-        request_id: str,
+        txid: str,
         db: AsyncSession
     ) -> Tuple[bool, Dict[str, Any], str]:
         """
@@ -206,15 +209,15 @@ class CryptoPurchaseService:
             client = await init_redis()
 
             # Load init data from Redis
-            raw = await client.get(_redis_key(request_id))
+            raw = await client.get(_redis_key(txid))
             if not raw:
-                logger.warning(f"Init data not found in Redis: user_id={user_id}, request_id={request_id}")
+                logger.warning(f"Init data not found in Redis: user_id={user_id}, txid={txid}")
                 return False, {}, "Transaction not found or expired"
 
             try:
                 payment_data = json.loads(raw)
             except json.JSONDecodeError:
-                logger.error(f"Invalid Redis JSON for request_id={request_id}")
+                logger.error(f"Invalid Redis JSON for txid={txid}")
                 return False, {}, "Invalid transaction data"
 
             if payment_data.get("user_id") != user_id:
@@ -227,13 +230,13 @@ class CryptoPurchaseService:
             if current_status in ["success", "failed", "invalid"]:
                 return True, {
                     "transaction_status": current_status,
-                    "request_id": request_id,
+                    "txid": txid,
                     "last_updated": payment_data.get("last_verified", "unknown")
                 }, f"Transaction status: {current_status}"
 
             # Perform real blockchain verification on TON testnet
             logger.info(
-                f"Starting blockchain verification for request_id={request_id}, user_id={user_id}"
+                f"Starting blockchain verification for txid={txid}, user_id={user_id}"
             )
 
             is_verified, blockchain_data = await CryptoPurchaseService._verify_on_blockchain(
@@ -244,7 +247,7 @@ class CryptoPurchaseService:
             )
 
             logger.info(
-                f"Blockchain verification result: is_verified={is_verified}, request_id={request_id}"
+                f"Blockchain verification result: is_verified={is_verified}, txid={txid}"
             )
 
             current_time = int(time.time())
@@ -258,10 +261,10 @@ class CryptoPurchaseService:
                 payment_data["blockchain_data"] = blockchain_data
 
                 # Create deposit
-                txid = f"CRYPTO{random_hash(12)}"
+                deposit_txid = payment_data.get("txid", txid)
                 deposit = Deposits(
                     uid=user_id,
-                    txid=txid,
+                    txid=deposit_txid,
                     method=8,  # Crypto gateway ID
                     amount=str(payment_data.get("amount_usd")),
                     currency='USD',
@@ -269,6 +272,7 @@ class CryptoPurchaseService:
                     processed_on=current_time,
                     status=1,  # Success
                     rate_at_deposit=Decimal(str(payment_data.get("forevers_rate", "0"))),
+                    reference_number=payment_data.get("reference_number"),
                     is_exchange=0,
                     type='UAE',
                     payment_data=json.dumps(payment_data),
@@ -278,7 +282,7 @@ class CryptoPurchaseService:
                 await db.flush()
 
                 # Create transaction record
-                description = f"Crypto purchase - {request_id}"
+                description = f"Crypto purchase - {txid}"
                 transaction = Transactions(
                     txid=deposit.txid,
                     type=1,
@@ -311,16 +315,17 @@ class CryptoPurchaseService:
                 await db.commit()
 
                 # Cleanup Redis
-                await client.delete(_redis_key(request_id))
+                await client.delete(_redis_key(txid))
 
                 logger.info(
-                    f"Crypto transaction verified successfully: user_id={user_id}, request_id={request_id}, deposit_id={deposit.id}"
+                    f"Crypto transaction verified successfully: user_id={user_id}, txid={txid}, deposit_id={deposit.id}"
                 )
 
                 return True, {
                     "transaction_status": "success",
                     "deposit_id": deposit.id,
-                    "request_id": request_id,
+                    "txid": txid,
+                    "reference_number": payment_data.get("reference_number"),
                     "amount_usd": payment_data.get("amount_usd"),
                     "verified_at": current_time
                 }, "Transaction verified and processed successfully"
@@ -335,21 +340,21 @@ class CryptoPurchaseService:
                     payment_data["failure_reason"] = "Transaction timeout"
                     # Update Redis and keep for some TTL for later reads
                     await client.setex(
-                        _redis_key(request_id), CRYPTO_INIT_TTL_SECONDS, json.dumps(payment_data)
+                        _redis_key(txid), CRYPTO_INIT_TTL_SECONDS, json.dumps(payment_data)
                     )
 
                     return True, {
                         "transaction_status": "failed",
-                        "request_id": request_id,
+                        "txid": txid,
                         "failure_reason": "Transaction timeout"
                     }, "Transaction failed due to timeout"
 
                 # Still pending; just update Redis
-                await client.setex(_redis_key(request_id), CRYPTO_INIT_TTL_SECONDS, json.dumps(payment_data))
+                await client.setex(_redis_key(txid), CRYPTO_INIT_TTL_SECONDS, json.dumps(payment_data))
 
                 return True, {
                     "transaction_status": "pending",
-                    "request_id": request_id,
+                    "txid": txid,
                     "verification_count": payment_data.get("verification_count", 0)
                 }, "Transaction still pending verification"
 
@@ -359,7 +364,7 @@ class CryptoPurchaseService:
             except Exception:
                 pass
             logger.error(
-                f"Error verifying crypto transaction: user_id={user_id}, request_id={request_id}, error={str(e)}",
+                f"Error verifying crypto transaction: user_id={user_id}, txid={txid}, error={str(e)}",
                 exc_info=True
             )
             return False, {}, f"Failed to verify transaction: {str(e)}"
