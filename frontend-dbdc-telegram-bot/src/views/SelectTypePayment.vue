@@ -59,6 +59,13 @@
           :class="selectedPayment === 'usdt' ? 'border-green-500 bg-green-50' : 'border-gray-200'"
           @click="selectPayment('usdt')"
         >
+          <!-- Connected Wallet Indicator -->
+          <div v-if="isWalletConnected" class="absolute top-3 left-3 flex items-center">
+            <span class="relative flex h-3 w-3">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+            </span>
+          </div>
           <!-- Selected Checkmark -->
           <div v-if="selectedPayment === 'usdt'" class="absolute top-3 right-3 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center">
             <svg width="8" height="8" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">

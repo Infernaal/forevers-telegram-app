@@ -80,15 +80,15 @@
             <div class="w-full max-w-[320px] rounded-xl border border-[#FF6800] bg-[#FFE8D8] flex flex-col gap-2 px-4 py-3">
               <div v-if="transactionData.amount_usd" class="flex justify-between items-center">
                 <span class="text-base font-medium text-[#4B4D50]">Amount:</span>
-                <span class="text-xl font-bold text-[#FF6800]">${{ transactionData.amount_usd }}</span>
+                <span class="text-base font-medium text-[#FF6800]">${{ transactionData.amount_usd }}</span>
               </div>
               <div v-if="transactionData.amount_ton" class="flex justify-between items-center">
                 <span class="text-base font-medium text-[#4B4D50]">TON Amount:</span>
-                <span class="text-lg font-bold text-[#FF6800]">{{ transactionData.amount_ton }} TON</span>
+                <span class="text-base font-medium text-[#FF6800]">{{ transactionData.amount_ton }} TON</span>
               </div>
               <div v-if="transactionData.txid" class="flex justify-between items-center">
                 <span class="text-base font-medium text-[#4B4D50]">Transaction ID:</span>
-                <span class="font-mono text-[10px] text-[#7E7E7E] break-all text-right">{{ transactionData.txid }}</span>
+                <span class="text-base font-medium text-[#FF6800] break-all text-right">{{ transactionData.txid }}</span>
               </div>
             </div>
           </div>
