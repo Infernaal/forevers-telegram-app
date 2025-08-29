@@ -16,7 +16,7 @@
     >
       <div
         @click.stop
-        class="relative bg-white rounded-[20px] shadow-xl font-montserrat w-full max-w-[480px] mx-auto transition-all duration-300 p-6"
+        class="relative bg-white rounded-[20px] shadow-xl font-montserrat w-full max-w-[360px] mx-auto transition-all duration-300 p-5"
       >
         <div class="flex items-start justify-between mb-2">
           <h2 class="text-xl font-semibold text-dbd-dark">Loyalty Program Activation</h2>
@@ -28,7 +28,7 @@
           </button>
         </div>
 
-        <div class="text-[15px] text-[#292727] leading-7">
+        <div class="text-[15px] text-[#292727] leading-7 max-h-[55vh] overflow-y-auto hide-scrollbar pr-1">
           <p class="mb-4">
             By activating my participation in the Loyalty Program, I confirm my voluntary, informed, and explicit consent to the transfer of my personal data from DBD Capital LLC to DUBADU PORTAL LLC for the proper provision of services within the Loyalty Program.
           </p>
@@ -105,4 +105,7 @@ watch(() => props.isVisible, (v) => {
 .modal-leave-active { transition: all 0.25s cubic-bezier(0.4,0,0.2,1); }
 .modal-enter-from,
 .modal-leave-to { opacity: 0; transform: scale(0.96) translateY(8px); }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.hide-scrollbar::-webkit-scrollbar { display: none; }
 </style>
+
