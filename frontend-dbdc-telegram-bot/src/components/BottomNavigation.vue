@@ -273,7 +273,7 @@ const isTelegramWebApp = () => {
          window.Telegram.WebApp.initData !== ''
 }
 
-onMounted(() => {
+onMounted(async () => {
   // Set initial viewport height
   if (isTelegramWebApp() && window.Telegram?.WebApp?.viewportHeight) {
     initialViewportHeight.value = window.Telegram.WebApp.viewportHeight
@@ -298,13 +298,17 @@ onMounted(() => {
     window.visualViewport.addEventListener('resize', handleKeyboardDetection)
   }
 
-  fetchUserInfo()
+  // Инициализируем данные пользователя с кешированием
+  await initializeUserInfo()
 })
 
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize)
   window.removeEventListener('resize', updateBottomOffset)
   window.Telegram?.WebApp?.offEvent('viewportChanged', updateBottomOffset)
+
+  // Очищаем ресурсы composable
+  cleanup()
 })
 
 // Computed active tab based on current route
