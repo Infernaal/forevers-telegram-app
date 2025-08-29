@@ -436,14 +436,21 @@ const copy = async (text) => {
   } catch (_) {}
 }
 
-const onActivateAccess = async (c) => {
+const onActivateAccess = (c) => {
+  pendingActivation = c
+  showActivateModal.value = true
+}
+
+const confirmActivateAccess = async () => {
+  const c = pendingActivation
+  showActivateModal.value = false
+  if (!c) return
   const depositId = c?._raw?.id
   const txid = c?.txid
   if (!depositId || !txid) return
   const res = await DepositsService.activateForevers(depositId, txid)
-  if (res.status === 'success') {
-    await fetchContracts()
-  }
+  if (res.status === 'success') await fetchContracts()
+  pendingActivation = null
 }
 const onActivateParticipation = (c) => { console.log('Activate loyalty clicked for', c.txid) }
 
