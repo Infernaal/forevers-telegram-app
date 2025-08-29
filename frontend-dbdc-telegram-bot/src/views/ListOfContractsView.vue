@@ -323,6 +323,7 @@
     <ActivateAccessSuccessModal
       :is-visible="showActivateSuccessModal"
       :activated-at-ms="activatedAtMs"
+      :title="successTitle"
       @close="showActivateSuccessModal = false"
     />
     <ActivateLoyaltyModal
@@ -353,6 +354,7 @@ const userInfo = ref(null)
 const showActivateModal = ref(false)
 const showActivateSuccessModal = ref(false)
 const activatedAtMs = ref(Date.now())
+const successTitle = ref('Activate Access')
 const showLoyaltyModal = ref(false)
 const { showError: showApiError } = useApiErrorNotifier()
 let pendingActivation = null
@@ -470,6 +472,7 @@ const confirmActivateAccess = async () => {
   if (res.status === 'success') {
     await fetchContracts()
     activatedAtMs.value = Date.now()
+    successTitle.value = 'Activate Access'
     showActivateSuccessModal.value = true
   }
   pendingActivation = null
@@ -486,6 +489,9 @@ const confirmActivateLoyalty = async () => {
   const res = await DepositsService.activateLoyalty(depositId, txid)
   if (res.status === 'success') {
     await fetchContracts()
+    activatedAtMs.value = Date.now()
+    successTitle.value = 'Loyalty Program Activation'
+    showActivateSuccessModal.value = true
   } else {
     showApiError('forevers_user_balance', { status: 400, message: res.message || 'Failed to activate loyalty program' })
   }
