@@ -175,7 +175,7 @@ const emit = defineEmits(['close'])
 const modalTitle = computed(() => {
   switch (props.status) {
     case 'processing':
-      return 'Transaction Processing'
+      return 'Processing...'
     case 'success':
       return 'Payment Successful!'
     case 'failed':
@@ -192,13 +192,26 @@ const modalMessage = computed(() => {
 
   switch (props.status) {
     case 'processing':
-      return 'We are checking your transaction. Please wait while we verify the payment on the blockchain. This process typically takes 1-2 minutes.'
+      return 'We are verifying your payment on the blockchain.'
     case 'success':
-      return 'Your crypto payment has been verified and processed successfully. Your Forevers will be credited to your account.'
+      return 'Your crypto payment has been verified and processed successfully.'
     case 'failed':
-      return 'Your transaction could not be verified or has failed. Please check your wallet and try again.'
+      return 'Transaction could not be verified. Please check your wallet and try again.'
     default:
       return 'Processing your transaction...'
+  }
+})
+
+const buttonText = computed(() => {
+  switch (props.status) {
+    case 'processing':
+      return 'Continue in Background'
+    case 'success':
+      return 'Continue'
+    case 'failed':
+      return 'Try Again'
+    default:
+      return 'Ok'
   }
 })
 </script>
