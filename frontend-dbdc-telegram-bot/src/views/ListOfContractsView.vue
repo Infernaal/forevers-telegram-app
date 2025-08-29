@@ -333,7 +333,7 @@ const showExportMenu = ref(false)
 const goBack = () => router.push('/wallet')
 
 const fetchContracts = async () => {
-  const res = await DepositsService.getUserDeposits()
+  const res = await DepositsService.getUserContractsForList()
   if (res.status === 'success') {
     contracts.value = (res.data?.deposits || []).slice().sort((a,b) => new Date(b.processed_on||0) - new Date(a.processed_on||0))
   } else {
