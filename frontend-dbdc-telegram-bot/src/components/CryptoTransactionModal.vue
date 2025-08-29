@@ -1,10 +1,10 @@
 <template>
   <div
     v-if="isVisible"
-    class="fixed inset-0 z-[10000] flex items-center justify-center p-4 bg-black bg-opacity-50"
+    class="fixed inset-0 z-[10000] flex items-center justify-center px-[2.5%] py-4 bg-black bg-opacity-50"
     @click.self="$emit('close')"
   >
-    <div class="bg-white rounded-2xl p-6 w-full max-w-sm mx-auto relative">
+    <div class="bg-white rounded-2xl p-6 w-full max-w-md mx-auto relative">
       <!-- Close button -->
       <button
         @click="$emit('close')"
@@ -82,9 +82,9 @@
               <span class="text-gray-500">TON Amount:</span>
               <span class="font-medium">{{ transactionData.amount_ton }} TON</span>
             </div>
-            <div v-if="transactionData.request_id" class="flex justify-between">
-              <span class="text-gray-500">Request ID:</span>
-              <span class="font-mono text-xs break-all">{{ transactionData.request_id }}</span>
+            <div v-if="transactionData.txid" class="flex justify-between">
+              <span class="text-gray-500">Transaction ID:</span>
+              <span class="font-mono text-xs break-all">{{ transactionData.txid }}</span>
             </div>
             <div v-if="pollingAttempts > 0" class="flex justify-between">
               <span class="text-gray-500">Verification Attempts:</span>

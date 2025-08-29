@@ -21,7 +21,7 @@ class CryptoInitResponse(BaseModel):
 
 class CryptoVerifyRequest(BaseModel):
     """Request model for verifying crypto transaction"""
-    request_id: str = Field(..., description="Request ID from init response")
+    txid: str = Field(..., description="Transaction ID from init response")
 
 
 class CryptoVerifyResponse(BaseModel):

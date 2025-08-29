@@ -115,7 +115,7 @@ This system implements real TON cryptocurrency payments using TON testnet for te
 4. **Wallet connection**: Verify TonConnect configuration
 
 ### Logs
-- All operations logged with user_id and request_id
+- All operations logged with user_id and txid
 - Blockchain verification details in application logs
 - Transaction status updates tracked
 
