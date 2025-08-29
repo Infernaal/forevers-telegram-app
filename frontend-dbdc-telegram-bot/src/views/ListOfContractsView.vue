@@ -475,10 +475,20 @@ const confirmActivateAccess = async () => {
   pendingActivation = null
 }
 const openLoyaltyModal = (c) => { pendingLoyalty = c; showLoyaltyModal.value = true }
-const confirmActivateLoyalty = () => {
+const confirmActivateLoyalty = async () => {
   showLoyaltyModal.value = false
-  onActivateParticipation(pendingLoyalty)
+  const c = pendingLoyalty
   pendingLoyalty = null
+  if (!c) return
+  const depositId = c?._raw?.id
+  const txid = c?.txid
+  if (!depositId || !txid) return
+  const res = await DepositsService.activateLoyalty(depositId, txid)
+  if (res.status === 'success') {
+    await fetchContracts()
+  } else {
+    showApiError('forevers_user_balance', { status: 400, message: res.message || 'Failed to activate loyalty program' })
+  }
 }
 const onActivateParticipation = (c) => { console.log('Activate loyalty clicked for', c.txid) }
 
