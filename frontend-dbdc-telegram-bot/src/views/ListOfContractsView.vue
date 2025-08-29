@@ -262,68 +262,52 @@
           </div>
           <div class="h-px bg-gray-200"></div>
 
-          <!-- Amounts -->
-          <div class="flex justify-between items-center">
-            <div class="flex items-center gap-2">
-              <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <mask id="mask0_amt" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="1" y="1" width="18" height="18">
-    <path d="M1.66797 1.66675H18.3346V18.3334H1.66797V1.66675Z" fill="white"/>
-  </mask>
-  <g mask="url(#mask0_amt)">
-    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.66797 10.0001C1.66797 5.39771 5.39893 1.66675 10.0013 1.66675C14.6037 1.66675 18.3346 5.39771 18.3346 10.0001C18.3346 14.6025 14.6037 18.3334 10.0013 18.3334C5.39893 18.3334 1.66797 14.6025 1.66797 10.0001ZM10.0013 3.05564C6.166 3.05564 3.05686 6.16478 3.05686 10.0001C3.05686 13.8354 6.166 16.9445 10.0013 16.9445C13.8366 16.9445 16.9457 13.8354 16.9457 10.0001C16.9457 6.16478 13.8366 3.05564 10.0013 3.05564ZM10.6957 5.48362C11.9036 5.62415 13.0909 6.30076 13.4528 7.74825C13.67 8.61712 12.3226 8.95398 12.1054 8.08511C11.9407 7.42662 11.4047 7.00437 10.6957 6.87983V9.2914C14.2044 9.41453 14.1444 13.6943 10.6957 14.4477C10.6957 15.7081 9.30686 15.7737 9.30686 14.5165C8.09901 14.3759 6.91169 13.6993 6.54982 12.2518C6.33259 11.3829 7.68001 11.0461 7.89723 11.9149C8.06186 12.5734 8.59786 12.9957 9.30686 13.1202V10.6606C5.51793 10.5417 6.03766 6.26661 9.30686 5.55244C9.30686 4.34379 10.6957 4.16055 10.6957 5.48362ZM9.30686 9.27017C7.42061 9.20597 7.70982 7.49672 9.30686 6.98585V9.27017ZM10.6957 13.0142V10.682C12.5887 10.7551 12.2913 12.5039 10.6957 13.0142Z" fill="#4B4D50"/>
-  </g>
-</svg>
-              </div>
-              <span class="text-sm font-medium text-dbd-gray">Contract Amount</span>
-            </div>
-            <span class="text-sm font-medium text-dbd-dark">${{ toFixed(selected.paid, 2) }}</span>
-          </div>
-          <div class="h-px bg-gray-200"></div>
-
-          <div class="flex justify-between items-center">
-            <div class="flex items-center gap-2">
-              <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center">
-                <svg class="text-dbd-dark" width="20" height="20" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-  <path d="M30.6666 7.38069V1.33325H7.1291V9.01136H1.33325V15.0588H7.1291V30.1075H13.894V22.7276H19.6153V16.6801H13.894V15.0588H25.1316V9.01136H13.894V7.38069H30.6666Z" fill="currentColor"/>
-</svg>
-              </div>
-              <span class="text-sm font-medium text-dbd-gray">Forevers Amount</span>
-            </div>
-            <span class="text-sm font-medium text-dbd-dark">{{ toFixed(selected.forevers, 2) }}</span>
-          </div>
-          <div class="h-px bg-gray-200"></div>
-
-          <div class="flex justify-between items-center">
-            <div class="flex items-center gap-2">
-              <div class="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M3.5 13L7.5 9L10 11L15.5 5.5" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M15.5 5.5V9.5M15.5 5.5H11.5" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M3 16.5H17" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round"/>
-</svg>
-              </div>
-              <span class="text-sm font-medium text-dbd-gray">Rate at Deposit</span>
-            </div>
-            <span class="text-sm font-medium text-dbd-dark">${{ toFixed(selected.price, 2) }}</span>
-          </div>
-          <div class="h-px bg-gray-200"></div>
-
-          <div class="flex justify-between items-center">
-            <div class="flex items-center gap-2">
-              <CountryFlag :country="selected.type" size="small" />
-              <span class="text-sm font-medium text-dbd-gray">Forevers Type</span>
-            </div>
-            <span class="text-sm font-medium text-dbd-dark">{{ selected.type }}</span>
-          </div>
-
-          <!-- Actions rows styled like other blocks -->
-          <div class="mt-2 space-y-4">
-            <!-- Access row -->
-            <div class="flex justify-between items-center">
+          <!-- Amounts & Type with consistent separators -->
+          <div class="space-y-0 divide-y divide-gray-200">
+            <div class="flex justify-between items-center py-2">
               <div class="flex items-center gap-2">
                 <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center">
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 2L4 6v8l6 4 6-4V6l-6-4Z" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="8" stroke="#4B4D50" stroke-width="1.5"/><path d="M10 4v12M6.5 8.5h5" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </div>
+                <span class="text-sm font-medium text-dbd-gray">Contract Amount</span>
+              </div>
+              <span class="text-sm font-medium text-dbd-dark">${{ toFixed(selected.paid, 2) }}</span>
+            </div>
+            <div class="flex justify-between items-center py-2">
+              <div class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center">
+                  <svg class="text-dbd-dark" width="20" height="20" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M30.6666 7.38069V1.33325H7.1291V9.01136H1.33325V15.0588H7.1291V30.1075H13.894V22.7276H19.6153V16.6801H13.894V15.0588H25.1316V9.01136H13.894V7.38069H30.6666Z" fill="currentColor"/></svg>
+                </div>
+                <span class="text-sm font-medium text-dbd-gray">Forevers Amount</span>
+              </div>
+              <span class="text-sm font-medium text-dbd-dark">{{ toFixed(selected.forevers, 2) }}</span>
+            </div>
+            <div class="flex justify-between items-center py-2">
+              <div class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.5 13L7.5 9L10 11L15.5 5.5" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 16.5H17" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </div>
+                <span class="text-sm font-medium text-dbd-gray">Rate at Deposit</span>
+              </div>
+              <span class="text-sm font-medium text-dbd-dark">${{ toFixed(selected.price, 2) }}</span>
+            </div>
+            <div class="flex justify-between items-center py-2">
+              <div class="flex items-center gap-2">
+                <CountryFlag :country="selected.type" size="small" />
+                <span class="text-sm font-medium text-dbd-gray">Forevers Type</span>
+              </div>
+              <span class="text-sm font-medium text-dbd-dark">{{ selected.type }}</span>
+            </div>
+          </div>
+
+          <!-- Actions rows styled like other blocks with better icons and labels -->
+          <div class="mt-2 space-y-0 divide-y divide-gray-200">
+            <!-- Access row -->
+            <div class="flex justify-between items-center py-2">
+              <div class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center">
+                  <!-- Shield check icon -->
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3Z" stroke="#4B4D50" stroke-width="1.5"/><path d="M9 12l2 2 4-4" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </div>
                 <span class="text-sm font-medium text-dbd-gray">Access</span>
               </div>
@@ -332,19 +316,19 @@
                   <button class="px-3 h-8 rounded-full text-xs font-semibold bg-green-600 text-white" @click.stop="onActivateAccess(selected)">Activate Access</button>
                 </template>
                 <template v-else-if="getAccessState(selected).kind === 'activated_from'">
-                  <span class="text-sm font-medium text-dbd-dark">{{ formatDateTime(getAccessState(selected).date) }}</span>
+                  <span class="text-sm font-medium text-dbd-dark">Activated from {{ formatDateTime(getAccessState(selected).date) }}</span>
                 </template>
                 <template v-else>
                   <span class="text-sm text-dbd-gray">Not available</span>
                 </template>
               </div>
             </div>
-            <div class="h-px bg-gray-200"></div>
             <!-- Participation row -->
-            <div class="flex justify-between items-center">
+            <div class="flex justify-between items-center py-2">
               <div class="flex items-center gap-2">
                 <div class="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center">
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 3v14M3 10h14" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  <!-- Sparkles icon -->
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2 2-5Z" stroke="#4B4D50" stroke-width="1.5" stroke-linejoin="round"/><path d="M18 5l.8 2 .2.8 2 .8-2 .8-.2.8L18 13l-.8-2-.2-.8-2-.8 2-.8.2-.8L18 5Z" stroke="#4B4D50" stroke-width="1.2"/></svg>
                 </div>
                 <span class="text-sm font-medium text-dbd-gray">Participation</span>
               </div>
@@ -356,7 +340,7 @@
                   <button class="px-3 h-8 rounded-full text-xs font-semibold bg-green-600 text-white" @click.stop="openLoyaltyModal(selected)">Activate Loyalty</button>
                 </template>
                 <template v-else-if="getLoyaltyState(selected).kind === 'activated_from'">
-                  <span class="text-sm font-medium text-dbd-dark">{{ formatDateTime(getLoyaltyState(selected).date) }}</span>
+                  <span class="text-sm font-medium text-dbd-dark">Activated from {{ formatDateTime(getLoyaltyState(selected).date) }}</span>
                 </template>
                 <template v-else-if="getLoyaltyState(selected).kind === 'available_on'">
                   <span class="text-sm text-dbd-gray">Available on {{ formatDateTime(getLoyaltyState(selected).date).split(' ')[0] }}</span>
