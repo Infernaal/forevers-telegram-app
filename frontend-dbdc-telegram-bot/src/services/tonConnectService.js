@@ -16,6 +16,37 @@ export class TonConnectService {
     this.isInitialized = false
   }
 
+  // Map raw TonConnect/Wallet errors to concise, user-friendly messages
+  normalizeTonError(err) {
+    const raw = typeof err === 'string' ? err : (err?.message || err?.toString?.() || '')
+    const cleaned = raw.replace(/\[.*?TON_CONNECT.*?\]_?\s*/i, '').trim()
+    const msg = cleaned.toLowerCase()
+
+    // Common categories
+    if (/(reject|declin|cancel|user.*(reject|cancel))/i.test(cleaned)) {
+      return 'Request was cancelled in the wallet.'
+    }
+    if (/(insufficient|not enough|no enough|lack|balance)/i.test(cleaned)) {
+      return 'Insufficient funds in the wallet.'
+    }
+    if (/(badrequest|contains errors|invalid (tx|transaction)|malformed|unknown message)/i.test(cleaned)) {
+      return 'Wallet rejected the transaction request.'
+    }
+    if (/(network|address|testnet|mainnet|chain)/i.test(cleaned)) {
+      return 'Wrong network or address. Please switch wallet to Testnet.'
+    }
+    if (/(connect|pair).*fail|unable to connect|no wallet/i.test(cleaned)) {
+      return 'Failed to connect to wallet. Please try again.'
+    }
+
+    // Default fallbacks for our own thrown messages
+    if (/transaction was rejected by user/i.test(cleaned)) return 'Request was cancelled in the wallet.'
+    if (/insufficient balance/i.test(cleaned)) return 'Insufficient funds in the wallet.'
+
+    // If nothing matched, show a safe generic
+    return cleaned || 'Something went wrong with the wallet request.'
+  }
+
   /**
    * Initialize TonConnect UI (works in Telegram WebApp and browser)
    */
@@ -82,13 +113,13 @@ export class TonConnectService {
 
       const chain = this.getChain()
       if (!this.isTestnet()) {
-        throw new Error('Please switch your TON wallet to Testnet and try again.')
+        throw new Error('Wrong network or address. Please switch wallet to Testnet.')
       }
 
       return wallet
     } catch (error) {
       console.error('Failed to connect wallet:', error)
-      throw new Error(error?.message || 'Failed to connect to TON wallet. Please try again.')
+      throw new Error(this.normalizeTonError(error))
     }
   }
 
@@ -155,20 +186,19 @@ export class TonConnectService {
   async sendTransaction(transactionData) {
     try {
       if (!this.isWalletConnected()) {
-        throw new Error('Wallet not connected')
+        throw new Error('Failed to connect to wallet. Please try again.')
       }
       if (!this.isTestnet()) {
-        throw new Error('Please switch your TON wallet to Testnet and try again.')
+        throw new Error('Wrong network or address. Please switch wallet to Testnet.')
       }
 
       // Prepare transaction for TonConnect
-      // Only pass payload if it's a valid base64 BOC; otherwise omit (plain text is invalid)
       const maybePayload = (typeof transactionData.payload === 'string' && /^[A-Za-z0-9+/]+={0,2}$/.test(transactionData.payload))
         ? transactionData.payload
         : undefined
 
       const transaction = {
-        validUntil: Math.floor(Date.now() / 1000) + 300, // 5 minutes
+        validUntil: Math.floor(Date.now() / 1000) + 300,
         messages: [
           {
             address: transactionData.to,
@@ -179,26 +209,12 @@ export class TonConnectService {
       }
 
       console.log('Sending transaction:', transaction)
-
-      // Send transaction through TonConnect
       const result = await this.tonConnect.sendTransaction(transaction)
-
       console.log('Transaction sent successfully:', result)
       return result
     } catch (error) {
       console.error('Error sending transaction:', error)
-
-      const msg = String(error?.message || '').toLowerCase()
-      if (msg.includes('rejected') || msg.includes('cancel')) {
-        throw new Error('Transaction was rejected by user')
-      }
-      if (msg.includes('insufficient') || msg.includes('not enough')) {
-        throw new Error('Insufficient balance in wallet')
-      }
-      if (msg.includes('address') || msg.includes('network') || msg.includes('testnet') || msg.includes('mainnet')) {
-        throw new Error('Invalid network or address. Make sure your wallet is on Testnet.')
-      }
-      throw new Error(error?.message || 'Failed to send transaction. Please try again.')
+      throw new Error(this.normalizeTonError(error))
     }
   }
 
@@ -287,15 +303,12 @@ export class TonConnectService {
    */
   async completeCryptoPurchase(amountUsd, rateAsDeposit = null) {
     try {
-      // Step 1: Initialize purchase
       console.log('Step 1: Initializing crypto purchase...')
       const initData = await this.initCryptoPurchase(amountUsd, rateAsDeposit)
 
-      // Step 2: Send transaction
       console.log('Step 2: Sending transaction...')
       const txResult = await this.sendTransaction(initData)
 
-      // Step 3: Return data for polling
       return {
         success: true,
         requestId: initData.txid,
@@ -304,7 +317,7 @@ export class TonConnectService {
       }
     } catch (error) {
       console.error('Complete crypto purchase failed:', error)
-      throw error
+      throw new Error(this.normalizeTonError(error))
     }
   }
 
