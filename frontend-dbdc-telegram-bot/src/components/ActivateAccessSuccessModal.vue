@@ -19,7 +19,7 @@
         class="relative bg-white rounded-[20px] shadow-xl font-montserrat w-full max-w-[360px] mx-auto transition-all duration-300 p-6 text-center"
       >
         <div class="flex items-start justify-between mb-2">
-          <h2 class="text-xl font-semibold text-dbd-dark">Activate Access</h2>
+          <h2 class="text-xl font-semibold text-dbd-dark">{{ title }}</h2>
           <button @click="close" class="w-8 h-8 rounded-full bg-dbd-off-white border border-gray-200 flex items-center justify-center">
             <div class="w-4 h-4 relative">
               <div class="absolute w-3.5 h-0.5 bg-dbd-dark rounded-full rotate-45 top-2 left-0.5"></div>
@@ -68,7 +68,8 @@ import { ref, watch, computed } from 'vue'
 
 const props = defineProps({
   isVisible: { type: Boolean, default: false },
-  activatedAtMs: { type: Number, default: () => Date.now() }
+  activatedAtMs: { type: Number, default: () => Date.now() },
+  title: { type: String, default: 'Activate Access' }
 })
 
 const emit = defineEmits(['close'])
