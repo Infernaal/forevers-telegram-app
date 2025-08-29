@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, func, case, and_, or_, literal
+from sqlalchemy import select, func, case, and_, or_, literal, update
+from sqlalchemy.dialects.mysql import insert as mysql_insert
 from db.database import get_db
 from models.models import Forevers, UsersWallets, Deposits, Stats, LoyaltyActivationHistory
 from schemas.forevers_user_balance import ForeversBalance, ForeversBalanceData, WalletItem
