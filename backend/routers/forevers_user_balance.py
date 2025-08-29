@@ -8,6 +8,7 @@ from schemas.forevers_user_balance import ForeversBalance, ForeversBalanceData, 
 from schemas.deposits import DepositsResponse, DepositsData
 from schemas.deposits_history import DepositsHistoryResponse, DepositsHistoryData, DepositsHistoryItem
 from schemas.activate_forevers import ActivateForeversRequest, ActivateForeversResponse
+from schemas.activate_loyalty import ActivateLoyaltyRequest, ActivateLoyaltyResponse
 from utils.calculate_available_forevers import calculate_available_forevers
 from utils.get_user_deposits import get_user_deposits
 from dependencies.current_user import get_current_user_id
