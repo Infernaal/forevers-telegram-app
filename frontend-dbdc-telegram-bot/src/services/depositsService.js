@@ -135,6 +135,24 @@ export class DepositsService {
   static async getUaeTotalForPlan() {
     return await this.getTotalByType('UAE')
   }
+
+  /**
+   * Activate Forevers access for a contract
+   */
+  static async activateForevers(depositId, txid) {
+    try {
+      const response = await fetch(`${BASE_URL}/forevers/activate-forevers`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ deposit_id: depositId, txid })
+      })
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+      return await response.json()
+    } catch (_) {
+      return { status: 'failed', message: 'Failed to activate forevers' }
+    }
+  }
 }
 
 export default DepositsService
