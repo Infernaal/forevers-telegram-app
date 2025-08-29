@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, func, case, and_, or_, literal, update
 from sqlalchemy.dialects.mysql import insert as mysql_insert
 from db.database import get_db
-from models.models import Forevers, UsersWallets, Deposits, Stats, LoyaltyActivationHistory
+from models.models import Forevers, UsersWallets, Deposits, Stats, LoyaltyActivationHistory, Settings
 from schemas.forevers_user_balance import ForeversBalance, ForeversBalanceData, WalletItem
 from schemas.deposits import DepositsResponse, DepositsData
 from schemas.deposits_history import DepositsHistoryResponse, DepositsHistoryData, DepositsHistoryItem
