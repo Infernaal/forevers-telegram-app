@@ -148,6 +148,16 @@ async def get_user_deposits_history(current_user_id: int = Depends(get_current_u
             else_=0
         ).label("is_not_fully_activated")
 
+        # Settings join to compute loyalty availability per type
+        loyalty_available_expr = case(
+            (Deposits.type == 'UAE', Settings.loyalty_available_type_uae_date),
+            (Deposits.type == 'KZ', Settings.loyalty_available_type_kz_date),
+            (Deposits.type == 'DE', Settings.loyalty_available_type_de_date),
+            (Deposits.type == 'PL', Settings.loyalty_available_type_pl_date),
+            (Deposits.type == 'UA', Settings.loyalty_available_type_ua_date),
+            else_=literal(None)
+        ).label("loyalty_available_date")
+
         stmt = (
             select(
                 Deposits.id,
@@ -163,12 +173,14 @@ async def get_user_deposits_history(current_user_id: int = Depends(get_current_u
                 Stats.forevers_activation_date,
                 Stats.forevers_reactivate_date,
                 lah_subq.c.loyalty_activation_date,
+                loyalty_available_expr,
                 is_expired_expr,
                 is_not_fully_activated_expr
             )
             .select_from(Deposits)
             .outerjoin(Stats, Stats.deposit_id == Deposits.id)
             .outerjoin(lah_subq, lah_subq.c.deposit_id == Deposits.id)
+            .outerjoin(Settings, Settings.id == literal(1))
             .where(
                 Deposits.uid == current_user_id,
                 Deposits.status.in_([1, 4, 5])
@@ -198,6 +210,7 @@ async def get_user_deposits_history(current_user_id: int = Depends(get_current_u
                 forevers_activation_date=row.forevers_activation_date,
                 forevers_reactivate_date=row.forevers_reactivate_date,
                 loyalty_activation_date=row.loyalty_activation_date,
+                loyalty_available_date=row.loyalty_available_date,
                 is_expired=row.is_expired,
                 is_not_fully_activated=row.is_not_fully_activated
             ) for row in rows
