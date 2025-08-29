@@ -158,8 +158,8 @@
             <span class="text-sm text-dbd-gray">Participation</span>
             <button
               class="px-3 h-8 rounded-full text-xs font-semibold"
-              :class="c.participation ? 'bg-gray-200 text-gray-700' : 'bg-gray-300 text-gray-700'"
-              :disabled="c.participation"
+              :class="(c.participation || !c.access) ? 'bg-gray-300 text-gray-700 cursor-not-allowed' : 'bg-gray-300 text-gray-700'"
+              :disabled="c.participation || !c.access"
               @click.stop="openLoyaltyModal(c)"
             >
               {{ c.participation ? 'Activated' : 'Activate Loyalty' }}
