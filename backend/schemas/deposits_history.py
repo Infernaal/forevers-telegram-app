@@ -16,6 +16,7 @@ class DepositsHistoryItem(BaseModel):
     forevers_activation_date: Optional[int]
     forevers_reactivate_date: Optional[int]
     loyalty_activation_date: Optional[int]
+    loyalty_available_date: Optional[int]
     is_expired: int
     is_not_fully_activated: int
 
