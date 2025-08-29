@@ -172,6 +172,15 @@ const props = defineProps({
 
 const emit = defineEmits(['close'])
 
+// Methods
+const handleClose = () => {
+  // Haptic feedback for modal close
+  if (window.triggerHaptic) {
+    window.triggerHaptic('impact', 'light')
+  }
+  emit('close')
+}
+
 const modalTitle = computed(() => {
   switch (props.status) {
     case 'processing':
