@@ -344,6 +344,8 @@ const showDetails = ref(false)
 const selected = ref(null)
 const userInfo = ref(null)
 const showActivateModal = ref(false)
+const showActivateSuccessModal = ref(false)
+const activatedAtMs = ref(Date.now())
 let pendingActivation = null
 
 // Export & selection
