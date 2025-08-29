@@ -3,10 +3,15 @@ import App from './App.vue'
 import router from './router'
 import './assets/tailwind.css'
 import telegramUserService from './services/telegramUserService'
+import { useUserInfo } from './composables/useUserInfo'
 
 import { Content } from '@builder.io/sdk-vue'
 
 const app = createApp(App)
+
+// Предварительно инициализируем данные пользователя для кеширования
+const { initializeUserInfo } = useUserInfo()
+initializeUserInfo()
 
 app.component('BuilderComponent', Content)
 
