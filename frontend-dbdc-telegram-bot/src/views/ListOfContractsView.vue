@@ -329,13 +329,16 @@
               </div>
               <div class="flex items-center">
                 <template v-if="getAccessState(selected).kind === 'button'">
-                  <button class="px-3 py-2 rounded-full text-sm font-semibold bg-gray-300 text-gray-700 cursor-not-allowed" disabled aria-disabled="true">Activate Access</button><span class="ml-2 text-xs text-dbd-gray">Available in List</span>
+                  <span class="px-3 py-1.5 rounded-full text-xs font-semibold bg-dbd-light-blue text-dbd-primary">Not activated</span>
                 </template>
                 <template v-else-if="getAccessState(selected).kind === 'activated_from'">
-                  <span class="text-sm font-medium text-dbd-dark">Activated from {{ formatDateTime(getAccessState(selected).date) }}</span>
+                  <div class="flex items-center gap-2">
+                    <span class="px-3 py-1.5 rounded-full text-xs font-semibold bg-green-100 text-green-700">Activated</span>
+                    <span class="text-sm font-medium text-dbd-dark">from {{ formatDateTime(getAccessState(selected).date) }}</span>
+                  </div>
                 </template>
                 <template v-else>
-                  <span class="text-sm text-dbd-gray">Not available</span>
+                  <span class="px-3 py-1.5 rounded-full text-xs font-semibold bg-gray-100 text-dbd-gray">Not available</span>
                 </template>
               </div>
             </div>
@@ -354,19 +357,22 @@
               </div>
               <div class="flex items-center">
                 <template v-if="getLoyaltyState(selected).kind === 'expired'">
-                  <button class="px-3 py-2 rounded-full text-sm font-semibold bg-gray-300 text-gray-700 cursor-not-allowed" disabled aria-disabled="true">Expired</button><span class="ml-2 text-xs text-dbd-gray">Manage in List</span>
+                  <span class="px-3 py-1.5 rounded-full text-xs font-semibold bg-red-100 text-red-700">Expired</span>
                 </template>
                 <template v-else-if="getLoyaltyState(selected).kind === 'activate'">
-                  <button class="px-3 py-2 rounded-full text-sm font-semibold bg-gray-300 text-gray-700 cursor-not-allowed" disabled aria-disabled="true">Activate Loyalty</button><span class="ml-2 text-xs text-dbd-gray">Available in List</span>
+                  <span class="px-3 py-1.5 rounded-full text-xs font-semibold bg-dbd-light-blue text-dbd-primary">Not activated</span>
                 </template>
                 <template v-else-if="getLoyaltyState(selected).kind === 'activated_from'">
-                  <span class="text-sm font-medium text-dbd-dark">Activated from {{ formatDateTime(getLoyaltyState(selected).date) }}</span>
+                  <div class="flex items-center gap-2">
+                    <span class="px-3 py-1.5 rounded-full text-xs font-semibold bg-green-100 text-green-700">Activated</span>
+                    <span class="text-sm font-medium text-dbd-dark">from {{ formatDateTime(getLoyaltyState(selected).date) }}</span>
+                  </div>
                 </template>
                 <template v-else-if="getLoyaltyState(selected).kind === 'available_on'">
-                  <span class="text-sm text-dbd-gray">Available on {{ formatDateTime(getLoyaltyState(selected).date).split(' ')[0] }}</span>
+                  <span class="px-3 py-1.5 rounded-full text-xs font-semibold bg-gray-100 text-dbd-gray">Available on {{ formatDateTime(getLoyaltyState(selected).date).split(' ')[0] }}</span>
                 </template>
                 <template v-else>
-                  <span class="text-sm text-dbd-gray">Not available</span>
+                  <span class="px-3 py-1.5 rounded-full text-xs font-semibold bg-gray-100 text-dbd-gray">Not available</span>
                 </template>
               </div>
             </div>
@@ -626,4 +632,5 @@ onMounted(() => { fetchContracts(); fetchUser() })
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 .scrollbar-hide::-webkit-scrollbar { width: 0; height: 0; }
 </style>
+
 
