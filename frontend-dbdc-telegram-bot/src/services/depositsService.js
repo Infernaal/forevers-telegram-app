@@ -153,6 +153,24 @@ export class DepositsService {
       return { status: 'failed', message: 'Failed to activate forevers' }
     }
   }
+
+  /**
+   * Activate Loyalty program for a contract
+   */
+  static async activateLoyalty(depositId, txid) {
+    try {
+      const response = await fetch(`${BASE_URL}/forevers/activate-loyalty`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ deposit_id: depositId, txid })
+      })
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+      return await response.json()
+    } catch (error) {
+      return { status: 'failed', message: 'Failed to activate loyalty program' }
+    }
+  }
 }
 
 export default DepositsService
