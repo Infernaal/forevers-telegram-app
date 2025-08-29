@@ -19,11 +19,17 @@ export class TonConnectService {
   // Map raw TonConnect/Wallet errors to concise, user-friendly messages
   normalizeTonError(err) {
     const raw = typeof err === 'string' ? err : (err?.message || err?.toString?.() || '')
-    const cleaned = raw.replace(/\[.*?TON_CONNECT.*?\]_?\s*/i, '').trim()
-    const msg = cleaned.toLowerCase()
+    // Strip SDK prefixes
+    let cleaned = raw
+      .replace(/\[.*?TON_CONNECT.*?\]_?\s*/i, '')
+      .replace(/TonConnectUIError:?\s*/i, '')
+      .trim()
 
     // Common categories
     if (/(reject|declin|cancel|user.*(reject|cancel))/i.test(cleaned)) {
+      return 'Request was cancelled in the wallet.'
+    }
+    if (/(not sent|closed|dismissed|closed by user)/i.test(cleaned)) {
       return 'Request was cancelled in the wallet.'
     }
     if (/(insufficient|not enough|no enough|lack|balance)/i.test(cleaned)) {
