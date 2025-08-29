@@ -12,6 +12,9 @@ from schemas.activate_loyalty import ActivateLoyaltyRequest, ActivateLoyaltyResp
 from utils.calculate_available_forevers import calculate_available_forevers
 from utils.get_user_deposits import get_user_deposits
 from dependencies.current_user import get_current_user_id
+import logging
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/forevers", tags=["Forevers User Stats"])
 
@@ -265,8 +268,13 @@ async def activate_forevers(payload: ActivateForeversRequest, current_user_id: i
         if affected > 0:
             return ActivateForeversResponse(status="success", message="Forevers access activated")
         return ActivateForeversResponse(status="failed", message="Not found or already activated")
-    except Exception:
-        return ActivateForeversResponse(status="failed", message="Activation failed. Please try again later")
+    except Exception as e:
+        try:
+            await db.rollback()
+        except Exception:
+            pass
+        logger.exception("activate_forevers failed")
+        return ActivateForeversResponse(status="failed", message=f"Activation failed. Please try again later. Reason: {e}")
 
 
 @router.post("/activate-loyalty", response_model=ActivateLoyaltyResponse)
@@ -354,5 +362,11 @@ async def activate_loyalty(payload: ActivateLoyaltyRequest, current_user_id: int
             await db.execute(lah_ins)
 
         return ActivateLoyaltyResponse(status="success", message="Loyalty program activated")
-    except Exception:
-        return ActivateLoyaltyResponse(status="failed", message="Activation failed. Please try again later")
+    except Exception as e:
+        try:
+            await db.rollback()
+        except Exception:
+            pass
+        logger.exception("activate_loyalty failed")
+        return ActivateLoyaltyResponse(status="failed", message=f"Activation failed. Please try again later. Reason: {e}")
+
