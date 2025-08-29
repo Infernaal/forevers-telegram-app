@@ -216,3 +216,40 @@ async def get_user_deposits_history(current_user_id: int = Depends(get_current_u
             status="failed",
             message="An error occurred while loading deposits history data. Please try again later"
         )
+
+
+@router.post("/activate-forevers", response_model=ActivateForeversResponse)
+async def activate_forevers(payload: ActivateForeversRequest, current_user_id: int = Depends(get_current_user_id), db: AsyncSession = Depends(get_db)):
+    try:
+        import time
+        now = int(time.time())
+        async with db.begin():
+            upd = (
+                update(Deposits)
+                .where(
+                    Deposits.id == payload.deposit_id,
+                    Deposits.txid == payload.txid,
+                    Deposits.uid == current_user_id,
+                    Deposits.activated_forevers == 0
+                )
+                .values(activated_forevers=1)
+            )
+            result = await db.execute(upd)
+            affected = result.rowcount or 0
+
+            if affected > 0:
+                ins = mysql_insert(Stats).values(
+                    uid=current_user_id,
+                    deposit_id=payload.deposit_id,
+                    forevers_activation_date=now,
+                    created_at=now
+                )
+                ondup = ins.on_duplicate_key_update(
+                    forevers_activation_date=ins.inserted.forevers_activation_date
+                )
+                await db.execute(ondup)
+        if affected > 0:
+            return ActivateForeversResponse(status="success", message="Forevers access activated")
+        return ActivateForeversResponse(status="failed", message="Not found or already activated")
+    except Exception:
+        return ActivateForeversResponse(status="failed", message="Activation failed. Please try again later")
