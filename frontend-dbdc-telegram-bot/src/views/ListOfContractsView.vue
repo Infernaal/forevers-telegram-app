@@ -427,7 +427,15 @@ const copy = async (text) => {
   } catch (_) {}
 }
 
-const onActivateAccess = (c) => { console.log('Activate access clicked for', c.txid) }
+const onActivateAccess = async (c) => {
+  const depositId = c?._raw?.id
+  const txid = c?.txid
+  if (!depositId || !txid) return
+  const res = await DepositsService.activateForevers(depositId, txid)
+  if (res.status === 'success') {
+    await fetchContracts()
+  }
+}
 const onActivateParticipation = (c) => { console.log('Activate loyalty clicked for', c.txid) }
 
 onMounted(() => { fetchContracts(); fetchUser() })
