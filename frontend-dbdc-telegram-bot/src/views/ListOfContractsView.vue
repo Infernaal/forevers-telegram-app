@@ -104,15 +104,15 @@
             </div>
           </div>
 
-          <!-- Grid like table (mobile-friendly) -->
-          <div class="grid grid-cols-2 gap-2 sm:grid-cols-4">
+          <!-- Label-value stack (vertical) -->
+          <div class="space-y-2">
             <div class="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-3 py-2">
               <span class="text-sm text-dbd-gray">Forevers</span>
               <span class="text-sm font-medium text-dbd-dark">ℱ {{ toFixed(c.forevers, 2) }}</span>
             </div>
             <div class="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-3 py-2">
               <span class="text-sm text-dbd-gray">Price</span>
-              <span class="text-sm font-medium text-dbd-blue">${{ toFixed(c.price, 2) }}</span>
+              <span class="text-sm font-medium text-dbd-dark">${{ toFixed(c.price, 2) }}</span>
             </div>
             <div class="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-3 py-2">
               <span class="text-sm text-dbd-gray">Type</span>
@@ -134,7 +134,7 @@
               :class="c.access ? 'bg-green-100 text-green-700' : 'bg-green-600 text-white'"
               @click.stop="onActivateAccess(c)"
             >
-              {{ c.access ? 'Activated' : 'Activate' }}
+              {{ c.access ? 'Activated' : 'Activate Access' }}
             </button>
             <button
               class="px-4 h-9 rounded-full text-sm font-semibold"
@@ -142,7 +142,7 @@
               :disabled="c.participation"
               @click.stop="onActivateParticipation(c)"
             >
-              {{ c.participation ? 'Activated' : 'Activate' }}
+              {{ c.participation ? 'Activated' : 'Activate Loyalty' }}
             </button>
             <div class="ml-auto text-xs text-dbd-gray">Tap card to view details</div>
           </div>
@@ -160,9 +160,9 @@
           <h2 class="text-base font-medium text-dbd-dark">Contract Details</h2>
           <button @click="closeDetails" class="w-11 h-11 flex items-center justify-center rounded-full bg-dbd-off-white border border-gray-200">
             <div class="w-5 h-5 relative">
-              <div class="absolute w-4 h-0.5 bg-dbd-dark rounded-full rotate-45 top-2.5 left-0.5"></div>
-              <div class="absolute w-4 h-0.5 bg-dbd-dark rounded-full -rotate-45 top-2.5 left-0.5"></div>
-            </div>
+            <div class="absolute w-4 h-0.5 bg-dbd-dark rounded-full rotate-45 top-2.5 left-0.5"></div>
+            <div class="absolute w-4 h-0.5 bg-dbd-dark rounded-full -rotate-45 top-2.5 left-0.5"></div>
+          </div>
           </button>
         </div>
         <div v-if="selected" class="p-4 space-y-4 max-h-96 overflow-y-auto">
@@ -170,7 +170,7 @@
           <div class="flex justify-between items-center">
             <div class="flex items-center gap-2">
               <div class="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M14.168 3.75448C15.1859 3.82121 15.9909 4.66789 15.9909 5.70304V15.8918C15.9909 16.9706 15.1165 17.845 14.0378 17.845H5.96484C4.88607 17.845 4.01172 16.9706 4.01172 15.8918V5.70304C4.01172 4.66789 4.81673 3.82121 5.83464 3.75448" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <img src="https://img.icons8.com/ios-glyphs/20/4B4D50/key.png" alt="ID" class="w-5 h-5" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
               </div>
               <span class="text-sm font-medium text-dbd-gray">Contract ID</span>
             </div>
@@ -185,7 +185,7 @@
           <div v-if="userFullName" class="flex justify-between items-center">
             <div class="flex items-center gap-2">
               <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 10a4 4 0 100-8 4 4 0 000 8zM2 18a8 8 0 1116 0H2z" fill="#4B4D50"/></svg>
+                <img src="https://img.icons8.com/ios-glyphs/20/4B4D50/user.png" alt="User" class="w-5 h-5" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
               </div>
               <span class="text-sm font-medium text-dbd-gray">Full Name</span>
             </div>
@@ -197,7 +197,7 @@
           <div class="flex justify-between items-center">
             <div class="flex items-center gap-2">
               <div class="w-10 h-10 bg-dbd-light-orange rounded-full flex items-center justify-center">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M15.5 3.25H4.5A2.5 2.5 0 002 5.75v9.75A2.5 2.5 0 004.5 18h11a2.5 2.5 0 002.5-2.5V5.75A2.5 2.5 0 0015.5 3.25Z" fill="#4B4D50"/></svg>
+                <img src="https://img.icons8.com/ios-glyphs/20/4B4D50/calendar--v1.png" alt="Date" class="w-5 h-5" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
               </div>
               <span class="text-sm font-medium text-dbd-gray">Date</span>
             </div>
@@ -212,7 +212,7 @@
           <div class="flex justify-between items-center">
             <div class="flex items-center gap-2">
               <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#4B4D50"/><path d="M10 5v10M7 8h6M7 12h6" stroke="#4B4D50"/></svg>
+                <img src="https://img.icons8.com/ios-glyphs/20/4B4D50/money-bag.png" alt="Amount" class="w-5 h-5" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
               </div>
               <span class="text-sm font-medium text-dbd-gray">Contract Amount</span>
             </div>
@@ -223,7 +223,7 @@
           <div class="flex justify-between items-center">
             <div class="flex items-center gap-2">
               <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12" stroke="#4B4D50"/><path d="M10 4v12" stroke="#4B4D50"/></svg>
+                <img src="https://img.icons8.com/ios-glyphs/20/4B4D50/stack-of-coins.png" alt="Forevers" class="w-5 h-5" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
               </div>
               <span class="text-sm font-medium text-dbd-gray">Forevers Amount</span>
             </div>
@@ -234,7 +234,7 @@
           <div class="flex justify-between items-center">
             <div class="flex items-center gap-2">
               <div class="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 10h16" stroke="#4B4D50"/><path d="M10 2v16" stroke="#4B4D50"/></svg>
+                <img src="https://img.icons8.com/ios-glyphs/20/4B4D50/combo-chart--v1.png" alt="Rate" class="w-5 h-5" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
               </div>
               <span class="text-sm font-medium text-dbd-gray">Rate at Deposit</span>
             </div>
