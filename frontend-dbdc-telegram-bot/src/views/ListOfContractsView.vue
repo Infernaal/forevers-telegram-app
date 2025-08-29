@@ -317,41 +317,54 @@
             <span class="text-sm font-medium text-dbd-dark">{{ selected.type }}</span>
           </div>
 
-          <!-- Actions as vertical label-value rows -->
-          <div class="mt-2 space-y-2">
+          <!-- Actions rows styled like other blocks -->
+          <div class="mt-2 space-y-4">
             <!-- Access row -->
-            <div class="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-3 py-2">
-              <span class="text-sm text-dbd-gray">Access</span>
-              <template v-if="getAccessState(selected).kind === 'button'">
-                <button class="px-3 h-8 rounded-full text-xs font-semibold bg-green-600 text-white" @click.stop="onActivateAccess(selected)">Activate Access</button>
-              </template>
-              <template v-else-if="getAccessState(selected).kind === 'activated_from'">
-                <div class="text-xs text-dbd-gray">Activated from:<br><span class="font-semibold text-dbd-dark">{{ formatDateTime(getAccessState(selected).date) }}</span></div>
-              </template>
-              <template v-else>
-                <span class="text-xs text-dbd-gray">Not available</span>
-              </template>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 2L4 6v8l6 4 6-4V6l-6-4Z" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <span class="text-sm font-medium text-dbd-gray">Access</span>
+              </div>
+              <div class="flex items-center">
+                <template v-if="getAccessState(selected).kind === 'button'">
+                  <button class="px-3 h-8 rounded-full text-xs font-semibold bg-green-600 text-white" @click.stop="onActivateAccess(selected)">Activate Access</button>
+                </template>
+                <template v-else-if="getAccessState(selected).kind === 'activated_from'">
+                  <span class="text-sm font-medium text-dbd-dark">{{ formatDateTime(getAccessState(selected).date) }}</span>
+                </template>
+                <template v-else>
+                  <span class="text-sm text-dbd-gray">Not available</span>
+                </template>
+              </div>
             </div>
+            <div class="h-px bg-gray-200"></div>
             <!-- Participation row -->
-            <div class="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-3 py-2">
-              <span class="text-sm text-dbd-gray">Participation</span>
-              <template v-if="getLoyaltyState(selected).kind === 'expired'">
-                <button class="px-3 h-8 rounded-full text-xs font-semibold bg-green-600 text-white" @click.stop="openLoyaltyModal(selected)">Expired</button>
-              </template>
-              <template v-else-if="getLoyaltyState(selected).kind === 'activate'">
-                <button class="px-3 h-8 rounded-full text-xs font-semibold bg-green-600 text-white" @click.stop="openLoyaltyModal(selected)">Activate Loyalty</button>
-              </template>
-              <template v-else-if="getLoyaltyState(selected).kind === 'activated_from'">
-                <div class="text-xs text-dbd-gray">Activated from:<br><span class="font-semibold text-dbd-dark">{{ formatDateTime(getLoyaltyState(selected).date) }}</span></div>
-              </template>
-              <template v-else-if="getLoyaltyState(selected).kind === 'available_on'">
-                <button class="px-3 h-8 rounded-full text-xs font-semibold bg-gray-300 text-gray-700 cursor-not-allowed" disabled>
-                  Available on {{ formatDateTime(getLoyaltyState(selected).date).split(' ')[0] }}
-                </button>
-              </template>
-              <template v-else>
-                <button class="px-3 h-8 rounded-full text-xs font-semibold bg-gray-300 text-gray-700 cursor-not-allowed" disabled>Activate</button>
-              </template>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 3v14M3 10h14" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </div>
+                <span class="text-sm font-medium text-dbd-gray">Participation</span>
+              </div>
+              <div class="flex items-center">
+                <template v-if="getLoyaltyState(selected).kind === 'expired'">
+                  <button class="px-3 h-8 rounded-full text-xs font-semibold bg-green-600 text-white" @click.stop="openLoyaltyModal(selected)">Expired</button>
+                </template>
+                <template v-else-if="getLoyaltyState(selected).kind === 'activate'">
+                  <button class="px-3 h-8 rounded-full text-xs font-semibold bg-green-600 text-white" @click.stop="openLoyaltyModal(selected)">Activate Loyalty</button>
+                </template>
+                <template v-else-if="getLoyaltyState(selected).kind === 'activated_from'">
+                  <span class="text-sm font-medium text-dbd-dark">{{ formatDateTime(getLoyaltyState(selected).date) }}</span>
+                </template>
+                <template v-else-if="getLoyaltyState(selected).kind === 'available_on'">
+                  <span class="text-sm text-dbd-gray">Available on {{ formatDateTime(getLoyaltyState(selected).date).split(' ')[0] }}</span>
+                </template>
+                <template v-else>
+                  <span class="text-sm text-dbd-gray">Not available</span>
+                </template>
+              </div>
             </div>
           </div>
         </div>
@@ -412,7 +425,9 @@ const goBack = () => router.push('/wallet')
 const fetchContracts = async () => {
   const res = await DepositsService.getUserContractsForList()
   if (res.status === 'success') {
-    contracts.value = (res.data?.deposits || []).slice().sort((a,b) => new Date(b.processed_on||0) - new Date(a.processed_on||0))
+    contracts.value = (res.data?.deposits || [])
+      .slice()
+      .sort((a, b) => toMs(b.processed_on || 0) - toMs(a.processed_on || 0))
   } else {
     contracts.value = []
   }
@@ -477,8 +492,16 @@ const exportToPDF = (data) => {
 const openDetails = (c) => { selected.value = c; showDetails.value = true }
 const closeDetails = () => { showDetails.value = false; selected.value = null }
 
+const toMs = (val) => {
+  if (!val) return Date.now()
+  const n = Number(val)
+  if (!Number.isNaN(n)) return n < 1e12 ? n * 1000 : n
+  const d = new Date(val)
+  return isNaN(d.getTime()) ? Date.now() : d.getTime()
+}
+
 const formatDate = (d) => {
-  const dt = new Date(d || Date.now())
+  const dt = new Date(toMs(d))
   const pad = (n) => String(n).padStart(2, '0')
   return { date: `${pad(dt.getDate())}.${pad(dt.getMonth()+1)}.${dt.getFullYear()}`, time: `${pad(dt.getHours())}:${pad(dt.getMinutes())}:${pad(dt.getSeconds())}` }
 }
@@ -597,4 +620,3 @@ onMounted(() => { fetchContracts(); fetchUser() })
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 .scrollbar-hide::-webkit-scrollbar { width: 0; height: 0; }
 </style>
-
