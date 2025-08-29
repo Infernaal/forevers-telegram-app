@@ -158,7 +158,11 @@
             <span class="text-sm text-dbd-gray">Participation</span>
             <button
               class="px-3 h-8 rounded-full text-xs font-semibold"
-              :class="(c.participation || !c.access) ? 'bg-gray-300 text-gray-700 cursor-not-allowed' : 'bg-gray-300 text-gray-700'"
+              :class="c.participation
+                ? 'bg-green-100 text-green-700 cursor-default'
+                : (!c.access
+                    ? 'bg-green-600 text-white opacity-60 cursor-not-allowed'
+                    : 'bg-green-600 text-white')"
               :disabled="c.participation || !c.access"
               @click.stop="openLoyaltyModal(c)"
             >
@@ -477,7 +481,11 @@ const confirmActivateAccess = async () => {
   }
   pendingActivation = null
 }
-const openLoyaltyModal = (c) => { pendingLoyalty = c; showLoyaltyModal.value = true }
+const openLoyaltyModal = (c) => {
+  if (!c?.access || c?.participation) return
+  pendingLoyalty = c
+  showLoyaltyModal.value = true
+}
 const confirmActivateLoyalty = async () => {
   showLoyaltyModal.value = false
   const c = pendingLoyalty
@@ -522,4 +530,5 @@ onMounted(() => { fetchContracts(); fetchUser() })
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 .scrollbar-hide::-webkit-scrollbar { width: 0; height: 0; }
 </style>
+
 
