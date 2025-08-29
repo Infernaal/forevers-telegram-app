@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import './assets/tailwind.css'
 import telegramUserService from './services/telegramUserService'
-import { useUserInfo } from './composables/useUserInfo'
+import { useUserInfo } from './composables/useUserInfo.js'
 
 import { Content } from '@builder.io/sdk-vue'
 
