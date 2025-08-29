@@ -122,7 +122,7 @@
 
         <!-- Action Button -->
         <button
-          @click="$emit('close')"
+          @click="handleClose"
           class="w-full max-w-[300px] h-11 px-12 flex justify-center items-center rounded-full bg-gradient-to-r from-[#2019CE] to-[#473FFF] hover:opacity-90 transition-all mt-6"
         >
           <span class="text-white text-sm font-bold">
