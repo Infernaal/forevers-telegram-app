@@ -11,8 +11,8 @@
     <div v-if="isVisible" class="fixed inset-0 z-[99999] flex items-center justify-center bg-black bg-opacity-20 backdrop-blur-md px-4" @click.self="emit('later')">
       <div @click.stop class="relative bg-white rounded-[20px] shadow-xl font-montserrat w-full max-w-[360px] mx-auto p-6">
         <!-- Header -->
-        <div class="flex items-start justify-between mb-4">
-          <div class="flex items-start gap-3 pr-8">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-3 pr-8">
             <div class="w-8 h-8 aspect-square shrink-0 bg-[#B3FFB6] border-2 border-[#88EF8C] rounded-full flex items-center justify-center">
               <svg class="w-4 h-4" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M26.4264 2.07621C25.183 1.40975 23.7961 2.69507 22.9831 3.45674C21.118 5.26571 19.5397 7.36031 17.7701 9.26449C15.8093 11.3591 13.992 13.4537 11.9833 15.5007C10.8355 16.6433 9.5921 17.881 8.8269 19.3091C7.10521 17.6429 5.62264 15.8339 3.70964 14.3582C2.32272 13.3109 0.0271294 12.5493 0.0749543 15.0723C0.170604 18.3571 3.08792 21.8798 5.24004 24.1172C6.14871 25.0692 7.34433 26.0689 8.73125 26.1165C10.4051 26.2118 12.1268 24.2124 13.1311 23.1175C14.9007 21.2133 16.3355 19.071 17.9614 17.1193C20.0657 14.5487 22.2179 12.0255 24.2743 9.4073C25.5656 7.78875 29.6307 3.78989 26.4264 2.07621ZM2.17917 14.8819C2.13134 14.8819 2.08352 14.8819 1.98787 14.9294C1.79657 14.8819 1.6531 14.8342 1.4618 14.739C1.60527 14.6438 1.8444 14.6914 2.17917 14.8819Z" fill="#07B80E"/>
@@ -86,4 +86,3 @@ const formattedDate = computed(() => {
 .modal-leave-active { transition: all 0.2s cubic-bezier(0.4, 0, 0.6, 1); }
 .modal-enter-from, .modal-leave-to { opacity: 0; transform: scale(0.95) translateY(10px); }
 </style>
-
