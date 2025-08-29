@@ -149,6 +149,15 @@
       :is-processing="isProcessingPurchase"
       @close="closeCryptoModal"
     />
+
+    <!-- Post-Payment Activation Prompt Modal -->
+    <PaymentActivationModal
+      :is-visible="showActivationModal"
+      :deposit-id="activationDepositId"
+      :date="activationDate"
+      @proceed="handleActivationProceed"
+      @later="handleActivationLater"
+    />
   </div>
 </template>
 
@@ -164,10 +173,12 @@ import TermsAndConditionsModal from '../components/TermsAndConditionsModal.vue'
 import SuccessModal from '../components/SuccessModal.vue'
 import ConfirmExchangeModal from '../components/ConfirmExchangeModal.vue'
 import CryptoTransactionModal from '../components/CryptoTransactionModal.vue'
+import PaymentActivationModal from '../components/PaymentActivationModal.vue'
 import { useCart } from '../composables/useCart.js'
 import { formatUSDPrefix } from '../utils/formatNumber.js'
 import { ForeversPurchaseService } from '../services/foreversPurchaseService.js'
 import { tonConnectService } from '../services/tonConnectService.js'
+import DepositsService from '../services/depositsService.js'
 
 const router = useRouter()
 const route = useRoute()
@@ -217,6 +228,9 @@ const purchaseDetails = ref(null)
 const showTermsModal = ref(false)
 const showSuccessModal = ref(false)
 const showConfirmModal = ref(false)
+const showActivationModal = ref(false)
+const activationDepositId = ref('')
+const activationDate = ref(null)
 const confirmModalData = ref({
   amount: 0,
   price: '0.00',
@@ -235,7 +249,7 @@ const { showError: showApiError } = useApiErrorNotifier()
 
 // Computed properties
 const isAnyModalOpen = computed(() => {
-  return showTermsModal.value || showSuccessModal.value || showConfirmModal.value || showCryptoModal.value
+  return showTermsModal.value || showSuccessModal.value || showConfirmModal.value || showCryptoModal.value || showActivationModal.value
 })
 
 // Check if buy button should be disabled
@@ -405,14 +419,15 @@ const disconnectTonWallet = async () => {
 }
 
 // Close crypto modal
-const closeCryptoModal = () => {
+const closeCryptoModal = async () => {
   showCryptoModal.value = false
 
-  // If transaction was successful, navigate to wallet view
+  // If transaction was successful, show activation prompt
   if (cryptoModalStatus.value === 'success') {
     clearCart()
     sessionStorage.removeItem('purchaseDetails')
-    router.push({ name: 'wallet', query: { loyalty: loyaltyBalance.value, bonus: bonusBalance.value } })
+    await fetchLatestDepositInfo()
+    showActivationModal.value = true
   }
 }
 
@@ -483,12 +498,12 @@ const closeTermsModal = () => {
   showTermsModal.value = false
 }
 
-const closeSuccessModal = () => {
+const closeSuccessModal = async () => {
   showSuccessModal.value = false
-  clearCart() // empty cart after success
-  // Clear purchase details from sessionStorage
+  clearCart()
   sessionStorage.removeItem('purchaseDetails')
-  router.push({ name: 'wallet', query: { loyalty: loyaltyBalance.value, bonus: bonusBalance.value } })
+  await fetchLatestDepositInfo()
+  showActivationModal.value = true
 }
 
 // Get purchase details from route params if available
@@ -551,6 +566,35 @@ const uniqueCountries = computed(() => {
 // Add watchers for debugging
 
 
+
+async function fetchLatestDepositInfo() {
+  try {
+    const res = await DepositsService.getUserDeposits()
+    const list = res?.data?.deposits || []
+    if (list.length > 0) {
+      const sorted = list.slice().sort((a, b) => new Date(b.processed_on || 0) - new Date(a.processed_on || 0))
+      const latest = sorted[0]
+      activationDepositId.value = latest?.txid || ''
+      activationDate.value = latest?.processed_on || new Date().toISOString()
+    } else {
+      activationDepositId.value = ''
+      activationDate.value = new Date().toISOString()
+    }
+  } catch (e) {
+    activationDepositId.value = ''
+    activationDate.value = new Date().toISOString()
+  }
+}
+
+const handleActivationProceed = () => {
+  showActivationModal.value = false
+  router.push({ name: 'rent-out' })
+}
+
+const handleActivationLater = () => {
+  showActivationModal.value = false
+  router.push({ name: 'wallet', query: { loyalty: loyaltyBalance.value, bonus: bonusBalance.value } })
+}
 
 onMounted(() => {
   // Retrieve purchase details from sessionStorage
