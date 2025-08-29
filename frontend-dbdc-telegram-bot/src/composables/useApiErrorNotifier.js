@@ -15,7 +15,9 @@ const ROUTE_MAP = {
   forevers_prices: 'Failed to load prices',
   forevers_user_balance: 'Failed to load balances',
   user_me: 'Failed to load profile',
-  forevers_purchase: 'Purchase failed. Please check your balance and try again.'
+  forevers_purchase: 'Purchase failed. Please check your balance and try again.',
+  wallet_connection: 'Failed to connect to wallet. Please try again.',
+  crypto_purchase: 'Payment could not be processed via wallet.'
 }
 
 function buildMessage(routeKey, opts) {
@@ -50,3 +52,4 @@ export function useApiErrorNotifier() {
 export function scheduleRetry(fn, delay = 3000) {
   return setTimeout(fn, delay)
 }
+
