@@ -33,7 +33,8 @@
             By choosing to activate access to the digital product, you agree that the service of providing access to the specified Dubadu Forevers has been delivered in full, on time, and in accordance with the terms of your order.
           </p>
           <p>
-            You confirm that you have no claims regarding the quality or scope of the service provided and that you give your unconditional consent to the terms of the Refund Policy.
+            You confirm that you have no claims regarding the quality or scope of the service provided and that you give your unconditional consent to the terms of the
+            <a href="https://2-dbd-dev.dubadu.com/uploads/docs/08_ENG_Refund_Policy.pdf" target="_blank" rel="noopener noreferrer" class="text-[#2019CE] underline">Refund Policy</a>.
           </p>
         </div>
 
