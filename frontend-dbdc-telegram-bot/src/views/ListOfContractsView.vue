@@ -160,7 +160,7 @@
               class="px-3 h-8 rounded-full text-xs font-semibold"
               :class="c.participation ? 'bg-gray-200 text-gray-700' : 'bg-gray-300 text-gray-700'"
               :disabled="c.participation"
-              @click.stop="onActivateParticipation(c)"
+              @click.stop="openLoyaltyModal(c)"
             >
               {{ c.participation ? 'Activated' : 'Activate Loyalty' }}
             </button>
