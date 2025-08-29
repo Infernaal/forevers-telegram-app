@@ -515,8 +515,9 @@ const userFullName = computed(() => userInfo.value?.full_name || '')
 
 const nowSec = () => Math.floor(Date.now() / 1000)
 const formatDateTime = (ts) => {
-  if (!ts) return ''
-  const dt = new Date(Number(ts) * 1000)
+  if (!ts && ts !== 0) return ''
+  const ms = toMs(ts)
+  const dt = new Date(ms)
   const pad = (n) => String(n).padStart(2, '0')
   return `${pad(dt.getDate())}.${pad(dt.getMonth()+1)}.${dt.getFullYear()} ${pad(dt.getHours())}:${pad(dt.getMinutes())}`
 }
