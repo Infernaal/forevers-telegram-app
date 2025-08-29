@@ -472,6 +472,12 @@ const confirmActivateAccess = async () => {
   }
   pendingActivation = null
 }
+const openLoyaltyModal = (c) => { pendingLoyalty = c; showLoyaltyModal.value = true }
+const confirmActivateLoyalty = () => {
+  showLoyaltyModal.value = false
+  onActivateParticipation(pendingLoyalty)
+  pendingLoyalty = null
+}
 const onActivateParticipation = (c) => { console.log('Activate loyalty clicked for', c.txid) }
 
 onMounted(() => { fetchContracts(); fetchUser() })
