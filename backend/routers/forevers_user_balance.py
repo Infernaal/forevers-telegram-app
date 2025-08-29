@@ -105,3 +105,112 @@ async def get_user_deposits_endpoint(current_user_id: int = Depends(get_current_
             status="failed",
             message="An error occurred while loading deposits data. Please try again later"
         )
+
+
+@router.get("/deposits-history", response_model=DepositsHistoryResponse)
+async def get_user_deposits_history(current_user_id: int = Depends(get_current_user_id), db: AsyncSession = Depends(get_db)):
+    try:
+        import time
+        current_time = int(time.time())
+
+        lah_subq = (
+            select(
+                LoyaltyActivationHistory.deposit_id.label("deposit_id"),
+                func.max(LoyaltyActivationHistory.loyalty_activation_date).label("loyalty_activation_date")
+            )
+            .group_by(LoyaltyActivationHistory.deposit_id)
+            .subquery()
+        )
+
+        is_expired_expr = case(
+            (
+                and_(
+                    Deposits.activated_loyalty == 1,
+                    lah_subq.c.loyalty_activation_date.is_not(None),
+                    (literal(current_time) - lah_subq.c.loyalty_activation_date) >= (365 * 24 * 60 * 60)
+                ),
+                1
+            ),
+            else_=0
+        ).label("is_expired")
+
+        is_not_fully_activated_expr = case(
+            (
+                or_(
+                    Deposits.activated_forevers == 0,
+                    and_(Deposits.activated_forevers == 1, Deposits.activated_loyalty == 0)
+                ),
+                1
+            ),
+            else_=0
+        ).label("is_not_fully_activated")
+
+        stmt = (
+            select(
+                Deposits.id,
+                Deposits.txid,
+                Deposits.amount,
+                Deposits.rate_at_deposit,
+                Deposits.requested_on,
+                Deposits.deal_status,
+                Deposits.status,
+                Deposits.activated_forevers,
+                Deposits.activated_loyalty,
+                Deposits.type,
+                Stats.forevers_activation_date,
+                Stats.forevers_reactivate_date,
+                lah_subq.c.loyalty_activation_date,
+                is_expired_expr,
+                is_not_fully_activated_expr
+            )
+            .select_from(Deposits)
+            .outerjoin(Stats, Stats.deposit_id == Deposits.id)
+            .outerjoin(lah_subq, lah_subq.c.deposit_id == Deposits.id)
+            .where(
+                Deposits.uid == current_user_id,
+                Deposits.status.in_([1, 4, 5])
+            )
+            .order_by(
+                is_expired_expr.desc(),
+                is_not_fully_activated_expr.desc(),
+                Deposits.requested_on.desc()
+            )
+        )
+
+        result = await db.execute(stmt)
+        rows = result.all()
+
+        deposits = [
+            DepositsHistoryItem(
+                id=row.id,
+                txid=row.txid,
+                amount=row.amount,
+                rate_at_deposit=row.rate_at_deposit,
+                requested_on=row.requested_on,
+                deal_status=row.deal_status,
+                status=row.status,
+                activated_forevers=row.activated_forevers,
+                activated_loyalty=row.activated_loyalty,
+                type=row.type,
+                forevers_activation_date=row.forevers_activation_date,
+                forevers_reactivate_date=row.forevers_reactivate_date,
+                loyalty_activation_date=row.loyalty_activation_date,
+                is_expired=row.is_expired,
+                is_not_fully_activated=row.is_not_fully_activated
+            ) for row in rows
+        ]
+
+        return DepositsHistoryResponse(
+            status="success",
+            data=DepositsHistoryData(
+                user_id=current_user_id,
+                deposits=deposits,
+                total_count=len(deposits)
+            ),
+            message="User deposits history retrieved successfully"
+        )
+    except Exception:
+        return DepositsHistoryResponse(
+            status="failed",
+            message="An error occurred while loading deposits history data. Please try again later"
+        )
