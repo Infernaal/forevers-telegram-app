@@ -86,10 +86,6 @@
               <span class="text-gray-500">Transaction ID:</span>
               <span class="font-mono text-xs break-all">{{ transactionData.txid }}</span>
             </div>
-            <div v-if="pollingAttempts > 0" class="flex justify-between">
-              <span class="text-gray-500">Verification Attempts:</span>
-              <span class="font-medium">{{ pollingAttempts }}</span>
-            </div>
           </div>
         </div>
 
@@ -128,7 +124,7 @@
 
         <!-- Additional Information -->
         <div v-if="status === 'processing'" class="mt-4 text-xs text-gray-500">
-          We're checking the blockchain for your transaction. This usually takes 5-10 minutes.
+          We're checking the blockchain for your transaction. This usually takes 1-2 minutes.
         </div>
       </div>
     </div>
@@ -188,7 +184,7 @@ const modalMessage = computed(() => {
 
   switch (props.status) {
     case 'processing':
-      return 'We are checking your transaction. Please wait while we verify the payment on the blockchain. This process typically takes 5-10 minutes.'
+      return 'We are checking your transaction. Please wait while we verify the payment on the blockchain. This process typically takes 1-2 minutes.'
     case 'success':
       return 'Your crypto payment has been verified and processed successfully. Your Forevers will be credited to your account.'
     case 'failed':
