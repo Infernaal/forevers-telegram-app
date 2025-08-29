@@ -320,6 +320,11 @@
       @cancel="showActivateModal = false"
       @confirm="confirmActivateAccess"
     />
+    <ActivateAccessSuccessModal
+      :is-visible="showActivateSuccessModal"
+      :activated-at-ms="activatedAtMs"
+      @close="showActivateSuccessModal = false"
+    />
   </div>
 </template>
 
