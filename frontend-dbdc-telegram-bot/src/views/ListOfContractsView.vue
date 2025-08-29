@@ -337,6 +337,8 @@ const contracts = ref([])
 const showDetails = ref(false)
 const selected = ref(null)
 const userInfo = ref(null)
+const showActivateModal = ref(false)
+let pendingActivation = null
 
 // Export & selection
 const selectedContracts = ref([])
