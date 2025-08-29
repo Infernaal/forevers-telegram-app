@@ -588,7 +588,7 @@ async function fetchLatestDepositInfo() {
 
 const handleActivationProceed = () => {
   showActivationModal.value = false
-  router.push({ name: 'rent-out' })
+  router.push({ name: 'contracts' })
 }
 
 const handleActivationLater = () => {
@@ -720,3 +720,4 @@ button {
 }
 
 </style>
+
