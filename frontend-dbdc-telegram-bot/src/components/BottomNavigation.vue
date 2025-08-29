@@ -256,12 +256,9 @@ const isProfileMenuOpen = ref(false)
 const profileButton = ref(null)
 const profileButtonPosition = ref({ left: 0, width: 0 })
 
-// User info state
-const userInfo = ref({
-  fullName: '',
-  rank: '',
-  photo: ''
-})
+// Используем composable для управления данными пользователя
+import { useUserInfo } from '../composables/useUserInfo.js'
+const { userInfo, getRankIcon, initializeUserInfo, cleanup } = useUserInfo()
 
 // Keyboard detection state
 const keyboardVisible = ref(false)
@@ -276,23 +273,7 @@ const isTelegramWebApp = () => {
          window.Telegram.WebApp.initData !== ''
 }
 
-// Fetch user info from backend via session
-import telegramUserService from '../services/telegramUserService.js'
-const fetchUserInfo = async () => {
-  const result = await telegramUserService.getUserInfo()
-  const data = result?.data || {}
-  if (result.status === 'success' && data) {
-    userInfo.value.fullName = data?.full_name || ''
-    userInfo.value.rank = data?.rank ? data.rank.toLowerCase().replace(/_/g, ' ') : 'none'
-    userInfo.value.photo = data?.avatar && data.avatar.trim() && data.avatar.trim() !== ',' ? data.avatar : '/no-photo.svg'
-  } else {
-    userInfo.value.photo = '/no-photo.svg'
-    userInfo.value.rank = 'none'
-    userInfo.value.fullName = ''
-  }
-}
-
-onMounted(() => {
+onMounted(async () => {
   // Set initial viewport height
   if (isTelegramWebApp() && window.Telegram?.WebApp?.viewportHeight) {
     initialViewportHeight.value = window.Telegram.WebApp.viewportHeight
@@ -317,13 +298,17 @@ onMounted(() => {
     window.visualViewport.addEventListener('resize', handleKeyboardDetection)
   }
 
-  fetchUserInfo()
+  // Инициализируем данные пользователя с кешированием
+  await initializeUserInfo()
 })
 
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize)
   window.removeEventListener('resize', updateBottomOffset)
   window.Telegram?.WebApp?.offEvent('viewportChanged', updateBottomOffset)
+
+  // Очищаем ресурсы composable
+  cleanup()
 })
 
 // Computed active tab based on current route
@@ -450,29 +435,7 @@ const handleKeyboardDetection = () => {
   }
 }
   
-onMounted(() => {
-  window.addEventListener('resize', handleResize)
-  updateProfileButtonPosition()
-  updateBottomOffset()
-  window.addEventListener('resize', updateBottomOffset)
-  window.Telegram?.WebApp?.onEvent('viewportChanged', updateBottomOffset)
-})
 
-onUnmounted(() => {
-  window.removeEventListener('resize', handleResize)
-  window.removeEventListener('resize', updateBottomOffset)
-  window.Telegram?.WebApp?.offEvent('viewportChanged', updateBottomOffset)
-})
-
-// Get rank icon from public folder
-const getRankIcon = (rank) => {
-  const availableRanks = [
-    'none', 'bronze', 'silver', 'gold', 'diamond', 'double diamond', 'ambassador', 'royal ambassador'
-  ]
-  const normalizedRank = (rank || '').toLowerCase().replace(/_/g, ' ')
-  const validRank = availableRanks.includes(normalizedRank) ? normalizedRank.replace(/ /g, '-') : 'none'
-  return `/${validRank}.svg`
-}
 
 // Export bottomOffset for use in parent components
 defineExpose({

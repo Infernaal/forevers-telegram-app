@@ -3,10 +3,16 @@ import App from './App.vue'
 import router from './router'
 import './assets/tailwind.css'
 import telegramUserService from './services/telegramUserService'
+import { useUserInfo } from './composables/useUserInfo.js'
 
 import { Content } from '@builder.io/sdk-vue'
 
 const app = createApp(App)
+
+// Предварительно инициализируем данные пользователя для кеширования
+const userInfoComposable = useUserInfo()
+const { initializeUserInfo, cleanup } = userInfoComposable
+initializeUserInfo()
 
 app.component('BuilderComponent', Content)
 
@@ -116,6 +122,8 @@ if (window.Telegram && window.Telegram.WebApp) {
   // Fallback: page visibility / unload
   window.addEventListener('beforeunload', () => {
     telegramUserService.logout()
+    // Очищаем ресурсы composable
+    cleanup()
   })
 }
 
