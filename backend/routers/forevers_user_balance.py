@@ -5,6 +5,7 @@ from db.database import get_db
 from models.models import Forevers, UsersWallets, Deposits, Stats, LoyaltyActivationHistory
 from schemas.forevers_user_balance import ForeversBalance, ForeversBalanceData, WalletItem
 from schemas.deposits import DepositsResponse, DepositsData
+from schemas.deposits_history import DepositsHistoryResponse, DepositsHistoryData, DepositsHistoryItem
 from utils.calculate_available_forevers import calculate_available_forevers
 from utils.get_user_deposits import get_user_deposits
 from dependencies.current_user import get_current_user_id
