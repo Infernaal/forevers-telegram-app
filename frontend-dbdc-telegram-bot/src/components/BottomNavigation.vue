@@ -256,12 +256,9 @@ const isProfileMenuOpen = ref(false)
 const profileButton = ref(null)
 const profileButtonPosition = ref({ left: 0, width: 0 })
 
-// User info state
-const userInfo = ref({
-  fullName: '',
-  rank: '',
-  photo: ''
-})
+// Используем composable для управления данными пользователя
+import { useUserInfo } from '../composables/useUserInfo.js'
+const { userInfo, getRankIcon, initializeUserInfo, cleanup } = useUserInfo()
 
 // Keyboard detection state
 const keyboardVisible = ref(false)
@@ -274,22 +271,6 @@ const isTelegramWebApp = () => {
          window.Telegram &&
          window.Telegram.WebApp &&
          window.Telegram.WebApp.initData !== ''
-}
-
-// Fetch user info from backend via session
-import telegramUserService from '../services/telegramUserService.js'
-const fetchUserInfo = async () => {
-  const result = await telegramUserService.getUserInfo()
-  const data = result?.data || {}
-  if (result.status === 'success' && data) {
-    userInfo.value.fullName = data?.full_name || ''
-    userInfo.value.rank = data?.rank ? data.rank.toLowerCase().replace(/_/g, ' ') : 'none'
-    userInfo.value.photo = data?.avatar && data.avatar.trim() && data.avatar.trim() !== ',' ? data.avatar : '/no-photo.svg'
-  } else {
-    userInfo.value.photo = '/no-photo.svg'
-    userInfo.value.rank = 'none'
-    userInfo.value.fullName = ''
-  }
 }
 
 onMounted(() => {
