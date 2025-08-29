@@ -20,15 +20,16 @@
             </div>
             <div>
               <h2 class="text-lg font-extrabold text-[#292727] leading-tight">Congratulations!</h2>
-              <p class="text-base font-semibold text-[#292727] leading-snug">Your payment has been successfully processed</p>
             </div>
           </div>
           <button class="w-8 h-8 flex items-center justify-center text-[#7E7E7E] hover:text-[#4B4D50]" @click="emit('later')">
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
           </button>
         </div>
+        <div class="h-px bg-[#E5E7EB] my-2"></div>
 
         <div class="text-[#4B4D50] space-y-3">
+          <p class="leading-relaxed">Your payment has been successfully processed.</p>
           <p class="leading-relaxed">
             Your purchased <span class="font-semibold">Dubadu Forevers</span> are now in your account.
           </p>
@@ -85,3 +86,4 @@ const formattedDate = computed(() => {
 .modal-leave-active { transition: all 0.2s cubic-bezier(0.4, 0, 0.6, 1); }
 .modal-enter-from, .modal-leave-to { opacity: 0; transform: scale(0.95) translateY(10px); }
 </style>
+
