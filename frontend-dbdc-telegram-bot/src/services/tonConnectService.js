@@ -29,7 +29,7 @@ export class TonConnectService {
       const manifestUrl = `${window.location.origin}/tonconnect-manifest.json`
       this.tonConnect = new TonConnectUI({
         manifestUrl,
-        restoreConnection: false
+        restoreConnection: true
       })
 
       this.isInitialized = true
