@@ -121,7 +121,7 @@
             <div class="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-3 py-2">
               <span class="text-sm text-dbd-gray">Forevers</span>
               <div class="flex items-center gap-1">
-                <svg class="text-dbd-dark w-4 h-4" viewBox="0 0 32 32"><path d="M30.6666 7.38069V1.33325H7.1291V9.01136H1.33325V15.0588H7.1291V30.1075H13.894V22.7276H19.6153V16.6801H13.894V15.0588H25.1316V9.01136H13.894V7.38069H30.6666Z" fill="currentColor"/></svg>
+                <svg class="text-dbd-primary w-4 h-4" viewBox="0 0 32 32"><path d="M30.6666 7.38069V1.33325H7.1291V9.01136H1.33325V15.0588H7.1291V30.1075H13.894V22.7276H19.6153V16.6801H13.894V15.0588H25.1316V9.01136H13.894V7.38069H30.6666Z" fill="currentColor"/></svg>
                 <span class="text-sm font-medium text-dbd-dark">{{ toFixed(c.forevers, 2) }}</span>
               </div>
             </div>
@@ -329,7 +329,7 @@
               </div>
               <div class="flex items-center">
                 <template v-if="getAccessState(selected).kind === 'button'">
-                  <button class="px-3 py-2 bg-white border border-dbd-blue rounded-full hover:opacity-90 transition-all text-sm text-dbd-blue" @click.stop="onActivateAccess(selected)">Activate Access</button>
+                  <button class="px-3 py-2 rounded-full text-sm font-semibold bg-green-600 text-white hover:opacity-90 transition-all" @click.stop="onActivateAccess(selected)">Activate Access</button>
                 </template>
                 <template v-else-if="getAccessState(selected).kind === 'activated_from'">
                   <span class="text-sm font-medium text-dbd-dark">Activated from {{ formatDateTime(getAccessState(selected).date) }}</span>
@@ -354,10 +354,10 @@
               </div>
               <div class="flex items-center">
                 <template v-if="getLoyaltyState(selected).kind === 'expired'">
-                  <button class="px-3 py-2 bg-white border border-dbd-blue rounded-full hover:opacity-90 transition-all text-sm text-dbd-blue" @click.stop="openLoyaltyModal(selected)">Expired</button>
+                  <button class="px-3 py-2 rounded-full text-sm font-semibold bg-green-600 text-white hover:opacity-90 transition-all" @click.stop="openLoyaltyModal(selected)">Expired</button>
                 </template>
                 <template v-else-if="getLoyaltyState(selected).kind === 'activate'">
-                  <button class="px-3 py-2 bg-white border border-dbd-blue rounded-full hover:opacity-90 transition-all text-sm text-dbd-blue" @click.stop="openLoyaltyModal(selected)">Activate Loyalty</button>
+                  <button class="px-3 py-2 rounded-full text-sm font-semibold bg-green-600 text-white hover:opacity-90 transition-all" @click.stop="openLoyaltyModal(selected)">Activate Loyalty</button>
                 </template>
                 <template v-else-if="getLoyaltyState(selected).kind === 'activated_from'">
                   <span class="text-sm font-medium text-dbd-dark">Activated from {{ formatDateTime(getLoyaltyState(selected).date) }}</span>
@@ -626,4 +626,3 @@ onMounted(() => { fetchContracts(); fetchUser() })
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 .scrollbar-hide::-webkit-scrollbar { width: 0; height: 0; }
 </style>
-
