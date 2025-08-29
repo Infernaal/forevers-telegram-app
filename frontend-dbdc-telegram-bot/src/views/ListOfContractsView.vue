@@ -185,7 +185,22 @@
           <div class="flex justify-between items-center">
             <div class="flex items-center gap-2">
               <div class="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center">
-                <img src="https://img.icons8.com/ios-glyphs/20/4B4D50/key.png" alt="ID" class="w-5 h-5" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#clip0_id)">
+    <path d="M11.043 13.5537H13.9076" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M11.043 9.73828H13.9076" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M6.09375 9.47806L6.61458 10.5176L7.91667 8.9583" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M6.09375 12.6009L7.39583 14.4238" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.39583 12.6009L6.09375 14.4238" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M14.168 3.75448C15.1859 3.82121 15.9909 4.66789 15.9909 5.70304V15.8918C15.9909 16.9706 15.1165 17.845 14.0378 17.845H5.96484C4.88607 17.845 4.01172 16.9706 4.01172 15.8918V5.70304C4.01172 4.66789 4.81673 3.82121 5.83464 3.75448" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M6.8125 5.3125H13.1927C13.732 5.3125 14.1693 4.87526 14.1693 4.33594V3.13151C14.1693 2.59219 13.732 2.15495 13.1927 2.15495H6.8125C6.27318 2.15495 5.83594 2.59219 5.83594 3.13151V4.33594C5.83594 4.87526 6.27318 5.3125 6.8125 5.3125Z" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <defs>
+    <clipPath id="clip0_id">
+      <rect width="20" height="20" fill="white"/>
+    </clipPath>
+  </defs>
+</svg>
               </div>
               <span class="text-sm font-medium text-dbd-gray">Contract ID</span>
             </div>
@@ -200,7 +215,10 @@
           <div v-if="userFullName" class="flex justify-between items-center">
             <div class="flex items-center gap-2">
               <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center">
-                <img src="https://img.icons8.com/ios-glyphs/20/4B4D50/user.png" alt="User" class="w-5 h-5" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M10 10.5C12.0711 10.5 13.75 8.82107 13.75 6.75C13.75 4.67893 12.0711 3 10 3C7.92893 3 6.25 4.67893 6.25 6.75C6.25 8.82107 7.92893 10.5 10 10.5Z" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M4 16.75C4.93401 14.7447 7.29077 13.5 10 13.5C12.7092 13.5 15.066 14.7447 16 16.75" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
               </div>
               <span class="text-sm font-medium text-dbd-gray">Full Name</span>
             </div>
@@ -212,7 +230,12 @@
           <div class="flex justify-between items-center">
             <div class="flex items-center gap-2">
               <div class="w-10 h-10 bg-dbd-light-orange rounded-full flex items-center justify-center">
-                <img src="https://img.icons8.com/ios-glyphs/20/4B4D50/calendar--v1.png" alt="Date" class="w-5 h-5" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M14.0625 9.1875C14.4077 9.1875 14.6875 8.90768 14.6875 8.5625C14.6875 8.21732 14.4077 7.9375 14.0625 7.9375C13.7173 7.9375 13.4375 8.21732 13.4375 8.5625C13.4375 8.90768 13.7173 9.1875 14.0625 9.1875Z" fill="#4B4D50"/>
+  <path d="M15.5 3.25H14.6875V2.625C14.6875 2.27981 14.4077 2 14.0625 2C13.7173 2 13.4375 2.27981 13.4375 2.625V3.25H10.5938V2.625C10.5938 2.27981 10.3139 2 9.96875 2C9.62356 2 9.34375 2.27981 9.34375 2.625V3.25H6.53125V2.625C6.53125 2.27981 6.25144 2 5.90625 2C5.56106 2 5.28125 2.27981 5.28125 2.625V3.25H4.5C3.1215 3.25 2 4.3715 2 5.75V15.5C2 16.8785 3.1215 18 4.5 18H9.28125C9.62644 18 9.90625 17.7202 9.90625 17.375C9.90625 17.0298 9.62644 16.75 9.28125 16.75H4.5C3.81075 16.75 3.25 16.1892 3.25 15.5V5.75C3.25 5.06075 3.81075 4.5 4.5 4.5H5.28125V5.125C5.28125 5.47019 5.56106 5.75 5.90625 5.75C6.25144 5.75 6.53125 5.47019 6.53125 5.125V4.5H9.34375V5.125C9.34375 5.47019 9.62356 5.75 9.96875 5.75C10.3139 5.75 10.5938 5.47019 10.5938 5.125V4.5H13.4375V5.125C13.4375 5.47019 13.7173 5.75 14.0625 5.75C14.4077 5.75 14.6875 5.47019 14.6875 5.125V4.5H15.5C16.1892 4.5 16.75 5.06075 16.75 5.75V9.3125C16.75 9.65769 17.0298 9.9375 17.375 9.9375C17.7202 9.9375 18 9.65769 18 9.3125V5.75C18 4.3715 16.8785 3.25 15.5 3.25Z" fill="#4B4D50"/>
+  <path d="M14.2188 10.4375C12.1337 10.4375 10.4375 12.1337 10.4375 14.2188C10.4375 16.3038 12.1337 18 14.2188 18C16.3038 18 18 16.3038 18 14.2188C18 12.1337 16.3038 10.4375 14.2188 10.4375ZM14.2188 16.75C12.823 16.75 11.6875 15.6145 11.6875 14.2188C11.6875 12.823 12.823 11.6875 14.2188 11.6875C15.6145 11.6875 16.75 12.823 16.75 14.2188C16.75 15.6145 15.6145 16.75 14.2188 16.75Z" fill="#4B4D50"/>
+  <path d="M15.125 13.5938H14.8438V12.9375C14.8438 12.5923 14.5639 12.3125 14.2188 12.3125C13.8736 12.3125 13.5938 12.5923 13.5938 12.9375V14.2188C13.5938 14.5639 13.8736 14.8438 14.2188 14.8438H15.125C15.4702 14.8438 15.75 14.5639 15.75 14.2188C15.75 13.8736 15.4702 13.5938 15.125 13.5938Z" fill="#4B4D50"/>
+</svg>
               </div>
               <span class="text-sm font-medium text-dbd-gray">Date</span>
             </div>
@@ -227,7 +250,14 @@
           <div class="flex justify-between items-center">
             <div class="flex items-center gap-2">
               <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center">
-                <img src="https://img.icons8.com/ios-glyphs/20/4B4D50/money-bag.png" alt="Amount" class="w-5 h-5" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <mask id="mask0_amt" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="1" y="1" width="18" height="18">
+    <path d="M1.66797 1.66675H18.3346V18.3334H1.66797V1.66675Z" fill="white"/>
+  </mask>
+  <g mask="url(#mask0_amt)">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.66797 10.0001C1.66797 5.39771 5.39893 1.66675 10.0013 1.66675C14.6037 1.66675 18.3346 5.39771 18.3346 10.0001C18.3346 14.6025 14.6037 18.3334 10.0013 18.3334C5.39893 18.3334 1.66797 14.6025 1.66797 10.0001ZM10.0013 3.05564C6.166 3.05564 3.05686 6.16478 3.05686 10.0001C3.05686 13.8354 6.166 16.9445 10.0013 16.9445C13.8366 16.9445 16.9457 13.8354 16.9457 10.0001C16.9457 6.16478 13.8366 3.05564 10.0013 3.05564ZM10.6957 5.48362C11.9036 5.62415 13.0909 6.30076 13.4528 7.74825C13.67 8.61712 12.3226 8.95398 12.1054 8.08511C11.9407 7.42662 11.4047 7.00437 10.6957 6.87983V9.2914C14.2044 9.41453 14.1444 13.6943 10.6957 14.4477C10.6957 15.7081 9.30686 15.7737 9.30686 14.5165C8.09901 14.3759 6.91169 13.6993 6.54982 12.2518C6.33259 11.3829 7.68001 11.0461 7.89723 11.9149C8.06186 12.5734 8.59786 12.9957 9.30686 13.1202V10.6606C5.51793 10.5417 6.03766 6.26661 9.30686 5.55244C9.30686 4.34379 10.6957 4.16055 10.6957 5.48362ZM9.30686 9.27017C7.42061 9.20597 7.70982 7.49672 9.30686 6.98585V9.27017ZM10.6957 13.0142V10.682C12.5887 10.7551 12.2913 12.5039 10.6957 13.0142Z" fill="#4B4D50"/>
+  </g>
+</svg>
               </div>
               <span class="text-sm font-medium text-dbd-gray">Contract Amount</span>
             </div>
@@ -238,7 +268,9 @@
           <div class="flex justify-between items-center">
             <div class="flex items-center gap-2">
               <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center">
-                <img src="https://img.icons8.com/ios-glyphs/20/4B4D50/stack-of-coins.png" alt="Forevers" class="w-5 h-5" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
+                <svg class="text-dbd-dark" width="20" height="20" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <path d="M30.6666 7.38069V1.33325H7.1291V9.01136H1.33325V15.0588H7.1291V30.1075H13.894V22.7276H19.6153V16.6801H13.894V15.0588H25.1316V9.01136H13.894V7.38069H30.6666Z" fill="currentColor"/>
+</svg>
               </div>
               <span class="text-sm font-medium text-dbd-gray">Forevers Amount</span>
             </div>
@@ -249,7 +281,11 @@
           <div class="flex justify-between items-center">
             <div class="flex items-center gap-2">
               <div class="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center">
-                <img src="https://img.icons8.com/ios-glyphs/20/4B4D50/combo-chart--v1.png" alt="Rate" class="w-5 h-5" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M3.5 13L7.5 9L10 11L15.5 5.5" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M15.5 5.5V9.5M15.5 5.5H11.5" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M3 16.5H17" stroke="#4B4D50" stroke-width="1.5" stroke-linecap="round"/>
+</svg>
               </div>
               <span class="text-sm font-medium text-dbd-gray">Rate at Deposit</span>
             </div>
