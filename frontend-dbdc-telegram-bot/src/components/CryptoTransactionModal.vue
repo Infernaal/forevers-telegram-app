@@ -74,29 +74,22 @@
 
           <!-- Transaction Details (only show when not processing) -->
           <div
-            v-if="transactionData && (transactionData.amount_usd || transactionData.amount_ton) && status !== 'processing'"
+            v-if="transactionData && (transactionData.amount_usd || transactionData.amount_ton || transactionData.txid) && status !== 'processing'"
             class="w-full flex justify-center"
           >
-            <div class="w-full max-w-[280px] rounded-xl border border-[#FF6800] bg-[#FFE8D8] flex flex-col justify-center items-center gap-1 px-4 py-3">
-              <div v-if="transactionData.amount_usd" class="text-center">
-                <div class="text-base font-medium text-[#4B4D50] mb-1">Amount</div>
-                <div class="text-2xl font-bold text-[#FF6800]">${{ transactionData.amount_usd }}</div>
+            <div class="w-full max-w-[280px] rounded-xl border border-[#FF6800] bg-[#FFE8D8] flex flex-col gap-2 px-4 py-3">
+              <div v-if="transactionData.amount_usd" class="flex justify-between items-center">
+                <span class="text-base font-medium text-[#4B4D50]">Amount:</span>
+                <span class="text-xl font-bold text-[#FF6800]">${{ transactionData.amount_usd }}</span>
               </div>
-              <div v-if="transactionData.amount_ton" class="text-center">
-                <div class="text-base font-medium text-[#4B4D50] mb-0.5">TON Amount</div>
-                <div class="text-lg font-bold text-[#FF6800]">{{ transactionData.amount_ton }} TON</div>
+              <div v-if="transactionData.amount_ton" class="flex justify-between items-center">
+                <span class="text-base font-medium text-[#4B4D50]">TON Amount:</span>
+                <span class="text-lg font-bold text-[#FF6800]">{{ transactionData.amount_ton }} TON</span>
               </div>
-            </div>
-          </div>
-
-          <!-- Transaction ID (if available) -->
-          <div
-            v-if="transactionData && transactionData.txid && status !== 'processing'"
-            class="w-full bg-[#FAFAFA] rounded-lg p-3"
-          >
-            <div class="text-sm">
-              <div class="text-[#4B4D50] font-medium mb-1">Transaction ID:</div>
-              <div class="font-mono text-xs text-[#7E7E7E] break-all">{{ transactionData.txid }}</div>
+              <div v-if="transactionData.txid" class="flex justify-between items-center">
+                <span class="text-base font-medium text-[#4B4D50]">Transaction ID:</span>
+                <span class="font-mono text-xs text-[#7E7E7E] break-all text-right">{{ transactionData.txid }}</span>
+              </div>
             </div>
           </div>
 
@@ -383,3 +376,4 @@ button {
   transition-duration: 300ms;
 }
 </style>
+
